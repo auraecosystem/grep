@@ -219,10 +219,8 @@ GEAcompile (char const *pattern, size_t size, reg_syntax_t syntax_bits)
   char const *motif = pattern;
 
   check_utf8 ();
-#if 0
   if (match_icase)
     syntax_bits |= RE_ICASE;
-#endif
   re_set_syntax (syntax_bits);
   dfasyntax (syntax_bits, match_icase, eolbyte);
 

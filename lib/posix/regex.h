@@ -166,6 +166,10 @@ typedef unsigned long int reg_syntax_t;
    treated as 'a\{1'.  */
 #define RE_INVALID_INTERVAL_ORD (RE_DEBUG << 1)
 
+/* If this bit is set, then ignore case when matching.
+   If not set, then case is significant.  */
+#define RE_ICASE (RE_INVALID_INTERVAL_ORD << 1)
+
 /* This global variable defines the particular regexp syntax to use (for
    some interfaces).  When a regexp is compiled, the syntax used is
    stored in the pattern buffer, so changing this does not affect
