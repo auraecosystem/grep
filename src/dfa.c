@@ -700,6 +700,20 @@ parse_bracket_exp_mb ()
 	  REALLOC_IF_NECESSARY(work_mbc->chars, wchar_t, chars_al,
 			       work_mbc->nchars + 1);
 	  work_mbc->chars[work_mbc->nchars++] = (wchar_t)wc;
+	  if (case_fold && (iswlower((wint_t) wc) || iswupper((wint_t) wc)))
+	    {
+		wint_t altcase;
+
+		altcase = wc;		/* keeps compiler happy */
+		if (iswlower((wint_t) wc))
+		  altcase = towupper((wint_t) wc);
+		else if (iswupper((wint_t) wc))
+		  altcase = towlower((wint_t) wc);
+
+		REALLOC_IF_NECESSARY(work_mbc->chars, wchar_t, chars_al,
+			       work_mbc->nchars + 1);
+		work_mbc->chars[work_mbc->nchars++] = (wchar_t) altcase;
+	    }
 	}
     }
   while ((wc = wc1) != L']');
