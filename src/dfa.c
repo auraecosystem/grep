@@ -595,6 +595,17 @@ parse_bracket_exp_mb ()
 		/* build character class.  */
 		{
 		  wctype_t wt;
+		  /* NOTE:
+		   * when case_fold, character class [:upper:] and [:lower:]
+		   * should be treated as [:alpha:], this is the same way
+		   * of glibc/posix/regcomp.c:build_charclass().
+		   * reported by Bug#276202
+		   * - fixed by Fumitoshi UKAI
+		   */
+		  if (case_fold 
+		      && (strcmp (str, "upper") == 0 || strcmp (str, "lower") == 0)) 
+		      strcpy (str, "alpha");
+
 		  /* Query the character class as wctype_t.  */
 		  wt = wctype (str);
 
