@@ -274,6 +274,12 @@ static char const short_options[] =
 #endif
 ;
 
+/* Default for `file_list' if no files are given on the command line. */
+static char *stdin_argv[] =
+{
+  "-", NULL
+};
+
 /* Non-boolean long options that have no corresponding short equivalents.  */
 enum
 {
@@ -534,7 +540,16 @@ fillbuf (size_t save, struct stats const *stats)
 	 for byte sentinels fore and aft.  */
       newalloc = newsize + pagesize + 1;
 
-      newbuf = bufalloc < newalloc ? xmalloc (bufalloc = newalloc) : buffer;
+      newbuf = bufalloc < newalloc ? malloc (bufalloc = newalloc) : buffer;
+      if (newbuf == NULL)
+	{
+	  int saved_errno = errno;
+	  free (buffer);
+	  bufalloc = ALIGN_TO (INITIAL_BUFSIZE, pagesize) + pagesize + 1;
+	  buffer = xmalloc (bufalloc);
+	  errno = saved_errno;
+	  return 0;
+	}
       readbuf = ALIGN_TO (newbuf + 1 + save, pagesize);
       bufbeg = readbuf - save;
       memmove (bufbeg, buffer + saved_offset, save);
@@ -1832,6 +1847,7 @@ main (int argc, char **argv)
   FILE *fp;
   extern char *optarg;
   extern int optind;
+  char **file_list;
 
   initialize_main (&argc, &argv);
   program_name = argv[0];
@@ -2254,29 +2270,29 @@ There is NO WARRANTY, to the extent permitted by law.\n"),
   if (max_count == 0)
     exit (1);
 
-  if (optind < argc)
+  file_list = (optind == argc ? stdin_argv : &argv[optind]);
+
+  status = 1;
+  while (1)
     {
-	status = 1;
-	do
+      char *file = *file_list++;
+
+      if (file == NULL)
+	break;
+
+      if ((included_patterns || excluded_patterns)
+	  && !isdir (file))
 	{
-	  char *file = argv[optind];
-	  if ((included_patterns || excluded_patterns)
-	      && !isdir (file))
-	    {
-	      if (included_patterns &&
-		  ! excluded_filename (included_patterns, file, 0))
-		continue;
-	      if (excluded_patterns &&
-		  excluded_filename (excluded_patterns, file, 0))
-		continue;
-	    }
-	  status &= grepfile (strcmp (file, "-") == 0 ? (char *) NULL : file,
-			      &stats_base);
+	  if (included_patterns &&
+	      ! excluded_filename (included_patterns, file, 0))
+	    continue;
+	  if (excluded_patterns &&
+	      excluded_filename (excluded_patterns, file, 0))
+	    continue;
 	}
-	while ( ++optind < argc);
+      status &= grepfile (strcmp (file, "-") == 0
+			  ? (char *) NULL : file, &stats_base);
     }
-  else
-    status = grepfile ((char *) NULL, &stats_base);
 
   /* We register via atexit() to test stdout.  */
   exit (errseen ? 2 : status);
