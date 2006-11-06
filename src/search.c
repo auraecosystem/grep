@@ -41,6 +41,9 @@
 #include "error.h"
 #include "xalloc.h"
 #ifdef HAVE_LIBPCRE
+# ifdef HAVE_DYNAMIC_LIBPCRE
+#  include <dlfcn.h>
+# endif
 # include <pcre.h>
 #endif
 
@@ -83,6 +86,50 @@ static struct patterns
 
 struct patterns *patterns;
 size_t pcount;
+
+#ifdef HAVE_DYNAMIC_LIBPCRE
+
+# define pcre_compile dl_pcre_compile
+# define pcre_study dl_pcre_study
+# define pcre_exec dl_pcre_exec
+# define pcre_maketables dl_pcre_maketables
+
+static pcre *(*pcre_compile)(const char *pattern, int options,
+			        const char **errptr, int *erroffset,
+			        const unsigned char *tableptr);
+static pcre_extra *(*pcre_study)(const pcre *code, int options,
+				    const char **errptr);
+static int (*pcre_exec)(const pcre *code, const pcre_extra *extra,
+			   const char *subject, int length, int startoffset,
+			   int options, int *ovector, int ovecsize);
+static const unsigned char *(*pcre_maketables)(void);
+
+static int
+map_pcre(void)
+{
+  void *library;
+
+  if (pcre_maketables)
+    return 1;
+
+  if (!(library = dlopen("libpcre.so.3", RTLD_NOW)))
+    return 0;
+
+  if (!(pcre_compile = dlsym(library, "pcre_compile")))
+    return 0;
+  if (!(pcre_study = dlsym(library, "pcre_study")))
+    return 0;
+  if (!(pcre_exec = dlsym(library, "pcre_exec")))
+    return 0;
+  if (!(pcre_maketables = dlsym(library, "pcre_maketables")))
+    return 0;
+
+  return 1;
+}
+
+#else
+#define map_pcre() (1)
+#endif /* HAVE_DYNAMIC_LIBPCRE */
 
 void
 dfaerror (char const *mesg)
@@ -626,6 +673,9 @@ COMPILE_FCT(Pcompile)
   char *n = re;
   char const *p;
   char const *pnul;
+
+  if (!map_pcre ())
+    error (2, 0, _("The -P option is not supported: libpcre.so.3 is not available"));
 
   /* FIXME: Remove these restrictions.  */
   if (eolbyte != '\n')
