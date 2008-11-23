@@ -549,7 +549,7 @@ EXECUTE_FCT(EGexecute)
 			      }
 			    else
 			      s = last_char;
-			    mr = mbtowc (&pwc, s, match - s);
+			    mr = mbrtowc (&pwc, s, match - s, &mbs);
 			    if (mr <= 0)
 			      {
 				memset (&mbs, '\0', sizeof (mbstate_t));
@@ -578,8 +578,8 @@ EXECUTE_FCT(EGexecute)
 				wchar_t nwc;
 				int mr;
 
-				mr = mbtowc (&nwc, buf + start + len,
-					     end - buf - start - len - 1);
+				mr = mbrtowc (&nwc, buf + start + len,
+					      end - buf - start - len - 1, &mbs);
 				if (mr <= 0)
 				  {
 				    memset (&mbs, '\0', sizeof (mbstate_t));
@@ -988,7 +988,7 @@ EXECUTE_FCT(Fexecute)
 			}
 		      else
 			s = last_char;
-		      mr = mbtowc (&pwc, s, beg - s);
+		      mr = mbrtowc (&pwc, s, beg - s, &mbs);
 		      if (mr <= 0)
 			memset (&mbs, '\0', sizeof (mbstate_t));
 		      else if ((iswalnum (pwc) || pwc == L'_')
@@ -1006,7 +1006,7 @@ EXECUTE_FCT(Fexecute)
 		  wchar_t nwc;
 		  int mr;
 
-		  mr = mbtowc (&nwc, beg + len, buf + size - beg - len);
+		  mr = mbrtowc (&nwc, beg + len, buf + size - beg - len, &mbs);
 		  if (mr <= 0)
 		    {
 		      memset (&mbs, '\0', sizeof (mbstate_t));
