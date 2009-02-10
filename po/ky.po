@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grep 2.5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-03 22:01+0200\n"
+"POT-Creation-Date: 2009-02-03 14:51-0400\n"
 "PO-Revision-Date: 2007-09-01 17:27+0100\n"
 "Last-Translator: Azilet Beishenaliev <aziletb@gmail.com>\n"
 "Language-Team: Kirghiz <i18n-team-ky-kyrgyz@lists.sourceforge.net>\n"
@@ -19,19 +19,19 @@ msgstr ""
 "X-Poedit-Country: KYRGYZSTAN\n"
 
 # Памятты эмне дейбиз яя? ;)
-#: src/dfa.c:183 src/dfa.c:194 src/dfa.c:205 src/search.c:704
+#: src/dfa.c:184 src/dfa.c:195 src/dfa.c:206 src/search.c:704 lib/regex.c:1344
 msgid "Memory exhausted"
 msgstr "Память жетпей калды"
 
-#: src/dfa.c:536 src/dfa.c:539 src/dfa.c:557 src/dfa.c:568 src/dfa.c:592
-#: src/dfa.c:651 src/dfa.c:656 src/dfa.c:669 src/dfa.c:670 src/dfa.c:1048
-#: src/dfa.c:1051 src/dfa.c:1075 src/dfa.c:1079 src/dfa.c:1080 src/dfa.c:1083
-#: src/dfa.c:1095 src/dfa.c:1096
+#: src/dfa.c:537 src/dfa.c:540 src/dfa.c:558 src/dfa.c:569 src/dfa.c:593
+#: src/dfa.c:652 src/dfa.c:657 src/dfa.c:670 src/dfa.c:671 src/dfa.c:1049
+#: src/dfa.c:1052 src/dfa.c:1076 src/dfa.c:1080 src/dfa.c:1081 src/dfa.c:1084
+#: src/dfa.c:1096 src/dfa.c:1097
 msgid "Unbalanced ["
 msgstr "[ - мунун уйкашы жок"
 
 # escape - кыргызча???
-#: src/dfa.c:788
+#: src/dfa.c:789
 msgid "Unfinished \\ escape"
 msgstr "Бүтпөй калган эскейп \\"
 
@@ -39,30 +39,32 @@ msgstr "Бүтпөй калган эскейп \\"
 #. {M} - exact count
 #. {M,} - minimum count, maximum is infinity
 #. {M,N} - M through N
-#: src/dfa.c:921 src/dfa.c:927 src/dfa.c:937 src/dfa.c:945 src/dfa.c:960
+#: src/dfa.c:922 src/dfa.c:928 src/dfa.c:938 src/dfa.c:946 src/dfa.c:961
 msgid "unfinished repeat count"
 msgstr "кайталоо саны толук эмес жазылды"
 
-#: src/dfa.c:934 src/dfa.c:951 src/dfa.c:959 src/dfa.c:963
+#: src/dfa.c:935 src/dfa.c:952 src/dfa.c:960 src/dfa.c:964
 msgid "malformed repeat count"
 msgstr "кайталоо саны туура эмес жазылды"
 
-#: src/dfa.c:1305
+#: src/dfa.c:1306
 msgid "Unbalanced ("
 msgstr "( - мунун уйкашы жок"
 
 # кайсы синтаксис? грептин шаблонубу?
-#: src/dfa.c:1430
+#: src/dfa.c:1431
 msgid "No syntax specified"
 msgstr "Синтаксис аталган жок"
 
-#: src/dfa.c:1438
+#: src/dfa.c:1439
 msgid "Unbalanced )"
 msgstr ") - мунун уйкашы жок"
 
 # Памятты эмне дейбиз яя? ;)
-#: src/dfa.c:3008 src/kwset.c:177 src/kwset.c:185 src/kwset.c:408
-#: src/search.c:68 src/search.c:225 lib/obstack.c:471
+#. If XALLOC_FAIL_FUNC is NULL, or does return, display this message
+#. before exiting when memory is exhausted.  Goes through gettext.
+#: src/dfa.c:3007 src/kwset.c:178 src/kwset.c:186 src/kwset.c:409
+#: src/search.c:68 src/search.c:225 lib/obstack.c:471 lib/xmalloc.c:66
 msgid "memory exhausted"
 msgstr "память жетпей калды"
 
@@ -124,7 +126,8 @@ msgstr "ШАБЛОН ар сапта бир сөз болгон жыйын.\n"
 #: src/grep.c:1421
 #, c-format
 msgid "PATTERN is, by default, a basic regular expression (BRE).\n"
-msgstr "ШАБЛОН, алдынала тандалгандай, негизги түрдөгү регулярдуу выражение (BRE)\n"
+msgstr ""
+"ШАБЛОН, алдынала тандалгандай, негизги түрдөгү регулярдуу выражение (BRE)\n"
 
 # выражение дегендин кыргызчасын жазыш керек
 #: src/grep.c:1424
@@ -143,7 +146,8 @@ msgstr ""
 #, c-format
 msgid ""
 "  -E, --extended-regexp     PATTERN is an extended regular expression (ERE)\n"
-"  -F, --fixed-strings       PATTERN is a set of newline-separated fixed strings\n"
+"  -F, --fixed-strings       PATTERN is a set of newline-separated fixed "
+"strings\n"
 "  -G, --basic-regexp        PATTERN is a basic regular expression (BRE)\n"
 "  -P, --perl-regexp         PATTERN is a Perl regular expression\n"
 msgstr ""
@@ -168,7 +172,8 @@ msgstr ""
 "  -i, --ignore-case         тамгалардын чоң-кичинеси айырмаланбайт\n"
 "  -w, --word-regexp         ШАБЛОН толук сөздөр менен гана уйкаштырылат\n"
 "  -x, --line-regexp         ШАБЛОН толук сап менен гана уйкаштырылат\n"
-"  -z, --null-data           дата(данный) саптары 0 байты(EOL эмес) менен бүтөт\n"
+"  -z, --null-data           дата(данный) саптары 0 байты(EOL эмес) менен "
+"бүтөт\n"
 
 #: src/grep.c:1443
 #, c-format
@@ -214,7 +219,8 @@ msgid ""
 "                            ACTION is `read' or `skip'\n"
 "  -R, -r, --recursive       equivalent to --directories=recurse\n"
 "      --include=FILE_PATTERN  search only files that match FILE_PATTERN\n"
-"      --exclude=FILE_PATTERN  skip files and directories matching FILE_PATTERN\n"
+"      --exclude=FILE_PATTERN  skip files and directories matching "
+"FILE_PATTERN\n"
 "      --exclude-from=FILE   skip files matching any file pattern from FILE\n"
 "      --exclude-dir=PATTERN directories that match PATTERN will be skipped.\n"
 "  -L, --files-without-match print only names of FILEs containing no match\n"
@@ -231,23 +237,31 @@ msgstr ""
 "      --line-buffered       табылган ар саптан улам жыйынтык көрсөтүлөт\n"
 "  -H, --with-filename       ар уйкаш үчүн файлдын аты көрсөтүлөт\n"
 "  -h, --no-filename         жыйынтыкта файлдын аты көрсөтүлбөйт\n"
-"      --label=ТАМГА         стандарт кирүүдөн келгендерди ТАМГА файлынан деп көрсөтөт\n"
-"  -o, --only-matching       сапта ШАБЛОН менен уйкаш болгон жер эле көрсөтүлөт\n"
+"      --label=ТАМГА         стандарт кирүүдөн келгендерди ТАМГА файлынан деп "
+"көрсөтөт\n"
+"  -o, --only-matching       сапта ШАБЛОН менен уйкаш болгон жер эле "
+"көрсөтүлөт\n"
 "  -q, --quiet, --silent     жазылатурган баардык жыйынтык көрсөтүлбөйт\n"
 "      --binary-files=ТҮР   бинариктердин түрүн ТҮР катары алат\n"
-"                            ТҮР - 'binary', 'text', же 'without-match' боло алат\n"
+"                            ТҮР - 'binary', 'text', же 'without-match' боло "
+"алат\n"
 "  -a, --text                --binary-files=text менен бирдей\n"
 "  -I                        --binary-files=without-match менен бирдей\n"
 "  -d, --directories=ACTION  папкаларды кандай иштетерин билдирет\n"
 "                            ACTION - 'read', 'recurse', же 'skip' боло алат\n"
-"  -D, --devices=ACTION      аспаптарды, FIFO жана сокеттерди кандай иштетерин билдирет\n"
+"  -D, --devices=ACTION      аспаптарды, FIFO жана сокеттерди кандай "
+"иштетерин билдирет\n"
 "                            ACTION - 'read' же 'skip' боло алат\n"
 "  -R, -r, --recursive       --directories=recurse менен бирдей\n"
-"      --include=ФАЙЛ_ШАБЛОНУ      ФАЙЛ_ШАБЛОНУ менен уйкашкан файлдар гана каралат\n"
-"      --exclude=ФАЙЛ_ШАБЛОНУ      ФАЙЛ_ШАБЛОНУ менен уйкашкан файл жана папкалар каралбайт\n"
-"      --exclude-from=ФАЙЛ   ФАЙЛдын ичиндеги шаблондор менен уйкашкан файлдар каралбайт\n"
+"      --include=ФАЙЛ_ШАБЛОНУ      ФАЙЛ_ШАБЛОНУ менен уйкашкан файлдар гана "
+"каралат\n"
+"      --exclude=ФАЙЛ_ШАБЛОНУ      ФАЙЛ_ШАБЛОНУ менен уйкашкан файл жана "
+"папкалар каралбайт\n"
+"      --exclude-from=ФАЙЛ   ФАЙЛдын ичиндеги шаблондор менен уйкашкан "
+"файлдар каралбайт\n"
 "      --exclude-dir=ШАБЛОН ШАБЛОН менен уйкашкан папкалар каралбайт\n"
-"  -L, --files-without-match эч уйкаш табылбаган файлдардын аты гана көрсөтүлөт\n"
+"  -L, --files-without-match эч уйкаш табылбаган файлдардын аты гана "
+"көрсөтүлөт\n"
 "  -l, --files-with-matches  уйкаш табылган файлдардын аты гана жазылат\n"
 "  -c, --count               ар файлда табылган уйкаш саны гана жазылат\n"
 "  -T, --initial-tab         табтарды түздөйт (керек болсо)\n"
@@ -273,24 +287,29 @@ msgstr ""
 "Контексти менен жыйынтык чыгаруу:\n"
 "  -B, --before-context=N    уйкаш болгон саптан мурунку N сап да көрсөтүлөт\n"
 "  -A, --after-context=N     уйкаш болгон саптан кийинки N сап да көрсөтүлөт\n"
-"  -C, --context=N           уйкаш болгон саптан мурунку жана кийинки N сап да көрсөтүлөт\n"
+"  -C, --context=N           уйкаш болгон саптан мурунку жана кийинки N сап "
+"да көрсөтүлөт\n"
 "  -N                        --context=NUM менен бирдей\n"
 "      --color[=УЧУР],\n"
 "      --colour[=УЧУР]       уйкаш сөз кайсы учурда айырмаландырылат\n"
-"                            УЧУР - `always'(ардайым), `never'(эч качан) же `auto'(авто) боло алат.\n"
+"                            УЧУР - `always'(ардайым), `never'(эч качан) же "
+"`auto'(авто) боло алат.\n"
 "  -U, --binary              катар соңунда (EOL) CR тамгасы алынбайт (MSDOS)\n"
-"  -u, --unix-byte-offsets   орундарды CR жок болгондой кылып көрсөтөт (MSDOS)\n"
+"  -u, --unix-byte-offsets   орундарды CR жок болгондой кылып көрсөтөт "
+"(MSDOS)\n"
 "\n"
 
 #: src/grep.c:1495
 #, c-format
 msgid "Invocation as `egrep' is deprecated; use `grep -E' instead.\n"
-msgstr "`egrep' деген колдонулбай калды; анын ордуна `grep -E' деп колдонунуз.\n"
+msgstr ""
+"`egrep' деген колдонулбай калды; анын ордуна `grep -E' деп колдонунуз.\n"
 
 #: src/grep.c:1498
 #, c-format
 msgid "Invocation as `fgrep' is deprecated; use `grep -F' instead.\n"
-msgstr "`fgrep' деген колдонулбай калды; анын ордуна `grep -F' деп колдонунуз.\n"
+msgstr ""
+"`fgrep' деген колдонулбай калды; анын ордуна `grep -F' деп колдонунуз.\n"
 
 #: src/grep.c:1501
 #, c-format
@@ -304,82 +323,105 @@ msgstr ""
 #: src/grep.c:1505
 #, c-format
 msgid ""
-"With no FILE, or when FILE is -, read standard input.  If less than two FILEs\n"
-"are given, assume -h.  Exit status is 0 if any line was selected, 1 otherwise;\n"
+"With no FILE, or when FILE is -, read standard input.  If less than two "
+"FILEs\n"
+"are given, assume -h.  Exit status is 0 if any line was selected, 1 "
+"otherwise;\n"
 "if any error occurs and -q was not given, the exit status is 2.\n"
-msgstr "ФАЙЛ жазылбаса же ФАЙЛ - (тире) болсо, стандарт кирүү колдонулат. Экиден аз ФАЙЛ берилген болсо -h опциясы бар болот. Эгер сап тандалган болсо бүтүрүү статусу 0 болот, башка учурда 1; эгерде ката чыкса жана -q опциясы берилбеген болсо бүтүрүү статусу 2 болот.\n"
+msgstr ""
+"ФАЙЛ жазылбаса же ФАЙЛ - (тире) болсо, стандарт кирүү колдонулат. Экиден аз "
+"ФАЙЛ берилген болсо -h опциясы бар болот. Эгер сап тандалган болсо бүтүрүү "
+"статусу 0 болот, башка учурда 1; эгерде ката чыкса жана -q опциясы "
+"берилбеген болсо бүтүрүү статусу 2 болот.\n"
 
 #: src/grep.c:1509
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "\n"
-"Report bugs to <%s>.\n"
+"Report bugs to: %s\n"
 msgstr ""
 "\n"
 "Каталарды бул жерге жибергиле <%s>.\n"
 
-#: src/grep.c:1522
+#: src/grep.c:1510
+#, c-format
+msgid "GNU Grep home page: <%s>\n"
+msgstr ""
+
+#: src/grep.c:1512
+msgid "General help using GNU software: <http://www.gnu.org/gethelp/>\n"
+msgstr ""
+
+#: src/grep.c:1527
 msgid "conflicting matchers specified"
 msgstr "уйкаштыруучуларда конфликттер табылды"
 
 # kandai koldpnulat bilbeim.
-#: src/grep.c:1715
+#: src/grep.c:1721
 #, c-format
-msgid "In GREP_COLORS=\"%s\", the \"%s\" capacity needs a value (\"=...\"); skipped."
-msgstr "GREP_COLORS=\"%s\" дегенде, \"%s\" көлөмүнө маани жазылыш керек (\"=...\"); колдонулбайт."
+msgid ""
+"In GREP_COLORS=\"%s\", the \"%s\" capacity needs a value (\"=...\"); skipped."
+msgstr ""
+"GREP_COLORS=\"%s\" дегенде, \"%s\" көлөмүнө маани жазылыш керек (\"=...\"); "
+"колдонулбайт."
 
 # kandai koldpnulat bilbeim.
-#: src/grep.c:1719
+#: src/grep.c:1725
 #, c-format
-msgid "In GREP_COLORS=\"%s\", the \"%s\" capacity is boolean and cannot take a value (\"=%s\"); skipped."
-msgstr "GREP_COLORS=\"%s\" дегенде, \"%s\" көлөмү булев түрүндө жана маани алалбайт (\"=%s\"); колдонулбайт."
+msgid ""
+"In GREP_COLORS=\"%s\", the \"%s\" capacity is boolean and cannot take a "
+"value (\"=%s\"); skipped."
+msgstr ""
+"GREP_COLORS=\"%s\" дегенде, \"%s\" көлөмү булев түрүндө жана маани алалбайт "
+"(\"=%s\"); колдонулбайт."
 
 # kandai koldpnulat bilbeim.
-#: src/grep.c:1727
+#: src/grep.c:1734
 #, c-format
 msgid "In GREP_COLORS=\"%s\", the \"%s\" capacity %s."
 msgstr "GREP_COLORS=\"%s\" дегенде, \"%s\" көлөмү %s."
 
-#: src/grep.c:1750
+#: src/grep.c:1757
 #, c-format
-msgid "Stopped processing of ill-formed GREP_COLORS=\"%s\" at remaining substring \"%s\"."
-msgstr "Туура эмес жазылган GREP_COLORS=\"%s\", \"%s\" катарында ишке алынуусу токтоду."
+msgid ""
+"Stopped processing of ill-formed GREP_COLORS=\"%s\" at remaining substring "
+"\"%s\"."
+msgstr ""
+"Туура эмес жазылган GREP_COLORS=\"%s\", \"%s\" катарында ишке алынуусу "
+"токтоду."
 
-#: src/grep.c:1883
+#: src/grep.c:1890
 msgid "unknown devices method"
 msgstr "аспап методу белгисиз"
 
-#: src/grep.c:1956
+#: src/grep.c:1964
 msgid "unknown directories method"
 msgstr "папка методу белгисиз"
 
-#: src/grep.c:2023
+#: src/grep.c:2032
 msgid "invalid max count"
 msgstr "максимум сан жарабайт"
 
-#: src/grep.c:2078
+#: src/grep.c:2087
 msgid "unknown binary-files type"
 msgstr "белгисиз файл түрү"
 
-# FSF котормосу ;)
-#: src/grep.c:2182
-#, c-format
-msgid "Copyright (C) 1988, 1992-2002, 2004, 2005  Free Software Foundation, Inc.\n"
-msgstr "Укуктары сакталган (C) 1988, 1992-2002, 2004, 2005 Эркин Программа Фонду (FSF)\n"
-
-#: src/grep.c:2184
+#: src/grep.c:2191
 #, c-format
 msgid ""
-"This is free software; see the source for copying conditions.  There is NO\n"
-"warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n"
+"Copyright (C) %s Free Software Foundation, Inc.\n"
+"License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl."
+"html>\n"
+"This is free software: you are free to change and redistribute it.\n"
+"There is NO WARRANTY, to the extent permitted by law.\n"
 msgstr ""
-"Бул эркин колдонулуучу программа; копиясын алуу үчүн коддордо жазылган\n"
-"шарттарды караңыз. Бул программанын эч убадасы ЖОК; керек болсо СООДА же\n"
-"БИР МАКСАТКА ЫҢГАЙЛУУ болуусуна да убада жок.\n"
 
 #: src/search.c:619
-msgid "Support for the -P option is not compiled into this --disable-perl-regexp binary"
-msgstr "Бул --disable-perl-regexp опциясы менен жасалган, -P опциясы кошулуу эмес"
+msgid ""
+"Support for the -P option is not compiled into this --disable-perl-regexp "
+"binary"
+msgstr ""
+"Бул --disable-perl-regexp опциясы менен жасалган, -P опциясы кошулуу эмес"
 
 #: src/search.c:632
 msgid "The -P and -z options cannot be combined"
@@ -389,9 +431,13 @@ msgstr "-P жана -z опциялары чогуу колдонулбайт"
 msgid "The -P option only supports a single pattern"
 msgstr "-P опциясы бир гана шаблон ала алат"
 
-#: lib/error.c:117
+#: src/system.h:52 lib/error.c:117
 msgid "Unknown system error"
 msgstr "Белгисиз система катасы"
+
+#: lib/closeout.c:108
+msgid "write error"
+msgstr ""
 
 #: lib/getopt.c:675
 #, c-format
@@ -473,3 +519,89 @@ msgstr "\""
 #: lib/quotearg.c:260
 msgid "'"
 msgstr "\""
+
+#: lib/regex.c:1308
+msgid "Success"
+msgstr ""
+
+#: lib/regex.c:1311
+msgid "No match"
+msgstr ""
+
+#: lib/regex.c:1314
+msgid "Invalid regular expression"
+msgstr ""
+
+#: lib/regex.c:1317
+msgid "Invalid collation character"
+msgstr ""
+
+#: lib/regex.c:1320
+msgid "Invalid character class name"
+msgstr ""
+
+#: lib/regex.c:1323
+msgid "Trailing backslash"
+msgstr ""
+
+#: lib/regex.c:1326
+msgid "Invalid back reference"
+msgstr ""
+
+#: lib/regex.c:1329
+msgid "Unmatched [ or [^"
+msgstr ""
+
+#: lib/regex.c:1332
+msgid "Unmatched ( or \\("
+msgstr ""
+
+#: lib/regex.c:1335
+msgid "Unmatched \\{"
+msgstr ""
+
+#: lib/regex.c:1338
+msgid "Invalid content of \\{\\}"
+msgstr ""
+
+#: lib/regex.c:1341
+msgid "Invalid range end"
+msgstr ""
+
+#: lib/regex.c:1347
+msgid "Invalid preceding regular expression"
+msgstr ""
+
+#: lib/regex.c:1350
+msgid "Premature end of regular expression"
+msgstr ""
+
+#: lib/regex.c:1353
+msgid "Regular expression too big"
+msgstr ""
+
+#: lib/regex.c:1356
+msgid "Unmatched ) or \\)"
+msgstr ""
+
+#: lib/regex.c:7583
+msgid "No previous regular expression"
+msgstr ""
+
+# FSF котормосу ;)
+#~ msgid ""
+#~ "Copyright (C) 1988, 1992-2002, 2004, 2005  Free Software Foundation, "
+#~ "Inc.\n"
+#~ msgstr ""
+#~ "Укуктары сакталган (C) 1988, 1992-2002, 2004, 2005 Эркин Программа Фонду "
+#~ "(FSF)\n"
+
+#~ msgid ""
+#~ "This is free software; see the source for copying conditions.  There is "
+#~ "NO\n"
+#~ "warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR "
+#~ "PURPOSE.\n"
+#~ msgstr ""
+#~ "Бул эркин колдонулуучу программа; копиясын алуу үчүн коддордо жазылган\n"
+#~ "шарттарды караңыз. Бул программанын эч убадасы ЖОК; керек болсо СООДА же\n"
+#~ "БИР МАКСАТКА ЫҢГАЙЛУУ болуусуна да убада жок.\n"
