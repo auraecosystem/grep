@@ -1,0 +1,11 @@
+--- a/po/ca.po.orig	2008-08-21 23:15:50.627573195 +0200
++++ b/po/ca.po	2008-08-21 23:15:57.987724711 +0200
+@@ -75,7 +75,7 @@
+ #: src/grep.c:878
+ #, c-format
+ msgid "Binary file %s matches\n"
+-msgstr "Concidència en el fitxer binari %s\n"
++msgstr "Coincidència en el fitxer binari %s\n"
+ 
+ #: src/grep.c:892
+ msgid "(standard input)"

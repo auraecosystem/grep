@@ -1,0 +1,49 @@
+http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=446270
+
+Get mbtowc to look at the character before and after the match to check
+if the match is a whole word. But when a binary file is being grepped,
+mbtowc gets passed random junk rather than a valid UTF-8 character. As
+a consequence, its internal state gets messed up, and you get nonsense
+for the following matches. The fix is to use mbrtowc so you can reset
+its state.
+
+--- a/src/search.c
++++ b/src/search.c
+@@ -502,7 +502,7 @@
+ 			      }
+ 			    else
+ 			      s = last_char;
+-			    mr = mbtowc (&pwc, s, match - s);
++			    mr = mbrtowc (&pwc, s, match - s, &mbs);
+ 			    if (mr <= 0)
+ 			      {
+ 				memset (&mbs, '\0', sizeof (mbstate_t));
+@@ -531,8 +531,8 @@
+ 				wchar_t nwc;
+ 				int mr;
+ 
+-				mr = mbtowc (&nwc, buf + start + len,
+-					     end - buf - start - len - 1);
++				mr = mbrtowc (&nwc, buf + start + len,
++					      end - buf - start - len - 1, &mbs);
+ 				if (mr <= 0)
+ 				  {
+ 				    memset (&mbs, '\0', sizeof (mbstate_t));
+@@ -941,7 +941,7 @@
+ 			}
+ 		      else
+ 			s = last_char;
+-		      mr = mbtowc (&pwc, s, beg - s);
++		      mr = mbrtowc (&pwc, s, beg - s, &mbs);
+ 		      if (mr <= 0)
+ 			memset (&mbs, '\0', sizeof (mbstate_t));
+ 		      else if ((iswalnum (pwc) || pwc == L'_')
+@@ -959,7 +959,7 @@
+ 		  wchar_t nwc;
+ 		  int mr;
+ 
+-		  mr = mbtowc (&nwc, beg + len, buf + size - beg - len);
++		  mr = mbrtowc (&nwc, beg + len, buf + size - beg - len, &mbs);
+ 		  if (mr <= 0)
+ 		    {
+ 		      memset (&mbs, '\0', sizeof (mbstate_t));
