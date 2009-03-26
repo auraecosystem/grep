@@ -1,0 +1,88 @@
+--- grep-2.5.1a/src/search.c	2001-04-19 04:42:14.000000000 +0100
++++ grep-2.5.1a-dlopen-pcre/src/search.c	2006-11-06 00:58:36.000000000 +0000
+@@ -37,6 +37,7 @@
+ #include "error.h"
+ #include "xalloc.h"
+ #ifdef HAVE_LIBPCRE
++# include <dlfcn.h>
+ # include <pcre.h>
+ #endif
+ 
+@@ -83,6 +84,35 @@
+ static void Pcompile PARAMS ((char const *, size_t ));
+ static size_t Pexecute PARAMS ((char const *, size_t, size_t *, int));
+ 
++
++static pcre *(*dl_pcre_compile)(const char *pattern, int options, const char **errptr, int *erroffset, const unsigned char *tableptr); 
++static pcre_extra *(*dl_pcre_study)(const pcre *code, int options, const char **errptr);
++static int (*dl_pcre_exec)(const pcre *code, const pcre_extra *extra, const char *subject, int length, int startoffset, int options, int *ovector, int ovecsize);
++static const unsigned char *(*dl_pcre_maketables)(void);
++
++static int map_pcre(void)
++{
++  static int library_mapped = 0;
++  void *library;
++
++  if (library_mapped) return 0;
++
++  library = dlopen("libpcre.so",RTLD_NOW);
++
++  if (!(dl_pcre_compile = dlsym(library,"pcre_compile"))) 
++    return -1;
++  if (!(dl_pcre_study = dlsym(library,"pcre_study"))) 
++    return -1;
++  if (!(dl_pcre_exec = dlsym(library,"pcre_exec"))) 
++    return -1;
++  if (!(dl_pcre_maketables = dlsym(library,"pcre_maketables"))) 
++    return -1;
++
++  library_mapped++;
++  return 0;
++}
++
++
+ void
+ dfaerror (char const *mesg)
+ {
+@@ -614,6 +644,11 @@
+   char const *p;
+   char const *pnul;
+ 
++  if (map_pcre()) {
++    error (2, 0, _("The -P option is not supported"));
++  }
++
++
+   /* FIXME: Remove this restriction.  */
+   if (eolbyte != '\n')
+     error (2, 0, _("The -P and -z options cannot be combined"));
+@@ -652,11 +687,11 @@
+   if (match_lines)
+     strcpy (n, ")$");
+ 
+-  cre = pcre_compile (re, flags, &ep, &e, pcre_maketables ());
++  cre = dl_pcre_compile (re, flags, &ep, &e, dl_pcre_maketables ());
+   if (!cre)
+     error (2, 0, ep);
+ 
+-  extra = pcre_study (cre, 0, &ep);
++  extra = dl_pcre_study (cre, 0, &ep);
+   if (ep)
+     error (2, 0, ep);
+ 
+@@ -675,7 +710,14 @@
+      is just for performance improvement in pcre_exec.  */
+   int sub[300];
+ 
+-  int e = pcre_exec (cre, extra, buf, size, 0, 0,
++  int e;
++
++  if (map_pcre()) {
++	abort();
++	return -1;
++  }
++
++  e = dl_pcre_exec (cre, extra, buf, size, 0, 0,
+ 		     sub, sizeof sub / sizeof *sub);
+ 
+   if (e <= 0)

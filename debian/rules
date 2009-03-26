@@ -20,7 +20,13 @@ include /usr/share/quilt/quilt.make
 config.status: patch configure
 	dh_testdir
 	cp -f /usr/share/misc/config.sub /usr/share/misc/config.guess .
-	./configure $(CROSS) --prefix=/usr --exec-prefix=/ --mandir=\$${prefix}/share/man --infodir=\$${prefix}/share/info --disable-perl-regexp CFLAGS="$(CFLAGS)" LDFLAGS="-Wl,-z,defs" --without-included-regex
+	./configure $(CROSS) --prefix=/usr \
+				--exec-prefix=/ \
+				--mandir=\$${prefix}/share/man \
+				--infodir=\$${prefix}/share/info \
+				--without-included-regex \
+				CFLAGS="$(CFLAGS)" \
+				LDFLAGS="-Wl,-z,defs,-dl" 
 
 build: build-stamp
 

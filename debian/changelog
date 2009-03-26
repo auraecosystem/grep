@@ -1,9 +1,11 @@
-grep (2.5.4-4) UNRELEASED; urgency=low
+grep (2.5.4-4~1) experimental; urgency=low
 
   * NOT RELEASE YET
-  * Now maintaining with git. Added Vcs-* fields in control file.
+  * Using dyamic linking to enable Perl RE. Thanks to Reuben Thomas
+    <rrt@sc3d.org> (Closes:397262)
+  * Maintaining with git now. Added Vcs-* fields in control file.
 
- -- Santiago Ruano Rincón <santiago@debian.org>  Fri, 13 Mar 2009 11:40:08 +0100
+ -- Santiago Ruano Rincón <santiago@debian.org>  Thu, 26 Mar 2009 21:20:43 +0100
 
 grep (2.5.4-3) unstable; urgency=low
 
