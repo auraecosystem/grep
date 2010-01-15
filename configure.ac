@@ -153,11 +153,9 @@ jm_FUNC_REALLOC
 
 # support for pcre
 if test x"$testpcre" = x"yes"; then
-	if pcre-config --cflags >/dev/null 2>&1; then
-		CPPFLAGS="$CPPFLAGS `pcre-config --cflags`"
-		LIBS="$LIBS `pcre-config --libs`"
-	fi
+	CPPFLAGS="$CPPFLAGS -DHAVE_DYNAMIC_LIBPCRE"
 	AC_CHECK_LIB(pcre, pcre_exec)
+	LIBS=$(printf '%s\n' "$LIBS" | sed 's/-lpcre/-ldl/')
 fi
 
 AC_CONFIG_FILES([Makefile
