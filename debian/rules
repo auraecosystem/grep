@@ -8,7 +8,7 @@ conf_opts := --exec-prefix=/ \
 	    CFLAGS="$(CFLAGS)" \
 	    LDFLAGS="$(LDFLAGS)"
 
-clean build install:
+clean build install binary-indep binary-arch binary:
 	dh $@
 
 override_dh_auto_configure: configure
@@ -22,25 +22,4 @@ override_dh_auto_clean:
 	if test -e Makefile; then $(MAKE) distclean; fi
 	rm -f config.guess config.sub
 
-binary-indep: install
-
-binary-arch: install
-	dh_testdir
-	dh_testroot
-	dh_installchangelogs ChangeLog
-	dh_installdocs README NEWS TODO AUTHORS THANKS
-	dh_installexamples
-	dh_installman
-	dh_install
-	dh_link
-	dh_strip
-	dh_compress
-	dh_fixperms
-	dh_installdeb
-	dh_shlibdeps
-	dh_gencontrol
-	dh_md5sums
-	dh_builddeb
-
-binary: binary-indep binary-arch
-.PHONY: build clean binary-indep binary-arch binary install 
+.PHONY: build clean install binary-indep binary-arch binary
