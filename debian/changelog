@@ -1,6 +1,7 @@
 grep (2.5.4-5) experimental; urgency=low
 
   * debian/rules: Allow clean as non-root.
+  * debian/rules: Run the test suite at build time.
 
   * Refresh patches and document them.
   * Use dpkg source format 3.0 (quilt) to ensure they are applied
@@ -19,7 +20,7 @@ grep (2.5.4-5) experimental; urgency=low
   * debian/rules: Run autotools and makeinfo at build time.
   * Build-Depends: autoconf, automake, gettext, cvs, texinfo.
 
- -- Jonathan Nieder <jrnieder@gmail.com>  Fri, 15 Jan 2010 03:48:50 -0600
+ -- Jonathan Nieder <jrnieder@gmail.com>  Fri, 15 Jan 2010 04:22:22 -0600
 
 grep (2.5.4-4) unstable; urgency=low
 

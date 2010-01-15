@@ -19,9 +19,6 @@ override_dh_auto_configure: configure.ac
 	autoreconf -fi
 	dh_auto_configure -- $(conf_opts)
 
-# disable test suite for now
-override_dh_auto_test: ;
-
 CFLAGS= -O3 -ldl
 LDFLAGS= -Wl,-z,defs
 
