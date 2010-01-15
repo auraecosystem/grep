@@ -19,7 +19,7 @@ else
 conf_opts += --build $(DEB_BUILD_GNU_TYPE)
 endif
 
-build:
+clean build:
 	dh $@
 
 override_dh_auto_configure: configure
@@ -29,11 +29,9 @@ override_dh_auto_configure: configure
 # disable test suite for now
 override_dh_auto_test: ;
 
-clean:
-	dh_testdir
-	[ ! -f Makefile ] || $(MAKE) distclean
-	rm -f config.sub config.guess
-	dh_clean 
+override_dh_auto_clean:
+	if test -e Makefile; then $(MAKE) distclean; fi
+	rm -f config.guess config.sub
 
 install: build
 	dh_testdir
