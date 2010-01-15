@@ -1,0 +1,69 @@
+From: Tim Waugh <twaugh@redhat.com>
+Date: Mon, 5 Jan 2004 07:09:24 -0500
+Subject: -i doesn't work together with -o
+
+The -o option causes patterns to be always matched
+case-sensitively, regardless of -i.
+
+Now, if the pattern contains uppercase chars the text is not
+matched, and if the text contains uppercase chars they are
+coerced to lowercase in the output!  (in a UTF-8 locale)
+
+However, this seems to tickle a glibc bug [1], so make use of
+RE_ICASE instead.
+
+This fixes
+    echo Y | LC_ALL=en_US.UTF-8 grep -i '[y]'
+The expected output is:
+    Y
+
+Without this patch, it works on non UTF-8 environment, but fails on UTF-8
+environment.
+
+The definition of RE_ICASE comes from the glibc (/usr/include/regex.h)
+
+Maybe lib/posix/regex.h should be removed to enforce the usage of the
+glibc's regex.h
+
+[1] <https://bugzilla.redhat.com/show_bug.cgi?id=112869>
+
+Bug-Red-Hat: https://bugzilla.redhat.com/show_bug.cgi?id=111489
+Bug-Debian: http://bugs.debian.org/181378
+---
+ lib/posix/regex.h |    4 ++++
+ src/search.c      |    2 --
+ 2 files changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/lib/posix/regex.h b/lib/posix/regex.h
+index 5493597..74e5b0c 100644
+--- a/lib/posix/regex.h
++++ b/lib/posix/regex.h
+@@ -166,6 +166,10 @@ typedef unsigned long int reg_syntax_t;
+    treated as 'a\{1'.  */
+ #define RE_INVALID_INTERVAL_ORD (RE_DEBUG << 1)
+ 
++/* If this bit is set, then ignore case when matching.
++   If not set, then case is significant.  */
++#define RE_ICASE (RE_INVALID_INTERVAL_ORD << 1)
++
+ /* This global variable defines the particular regexp syntax to use (for
+    some interfaces).  When a regexp is compiled, the syntax used is
+    stored in the pattern buffer, so changing this does not affect
+diff --git a/src/search.c b/src/search.c
+index f6ff4f7..163e9b2 100644
+--- a/src/search.c
++++ b/src/search.c
+@@ -219,10 +219,8 @@ GEAcompile (char const *pattern, size_t size, reg_syntax_t syntax_bits)
+   char const *motif = pattern;
+ 
+   check_utf8 ();
+-#if 0
+   if (match_icase)
+     syntax_bits |= RE_ICASE;
+-#endif
+   re_set_syntax (syntax_bits);
+   dfasyntax (syntax_bits, match_icase, eolbyte);
+ 
+-- 
+1.6.6
+

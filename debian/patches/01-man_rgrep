@@ -1,0 +1,53 @@
+From: Martin Michlmayr <tbm@cyrius.com>
+Date: Mon, 12 Aug 2002 23:02:28 +0200
+Subject: man grep only mentions egrep and fgrep
+
+The manpage should mention all grep variants, like rgrep.
+
+Reported-by: Goswin Brederlow <goswin.brederlow@student.uni-tuebingen.de>
+Bug-Debian: http://bugs.debian.org/127438
+---
+ doc/grep.1 |   12 ++++++++----
+ 1 files changed, 8 insertions(+), 4 deletions(-)
+
+diff --git a/doc/grep.1 b/doc/grep.1
+index 950b82c..2aaf290 100644
+--- a/doc/grep.1
++++ b/doc/grep.1
+@@ -26,7 +26,7 @@
+ .hy 0
+ .
+ .SH NAME
+-grep, egrep, fgrep \- print lines matching a pattern
++grep, egrep, fgrep, rgrep \- print lines matching a pattern
+ .
+ .SH SYNOPSIS
+ .B grep
+@@ -57,10 +57,11 @@ By default,
+ .B grep
+ prints the matching lines.
+ .PP
+-In addition, two variant programs
+-.B egrep
+-and
++In addition, three variant programs
++.B egrep,
+ .B fgrep
++and
++.B rgrep
+ are available.
+ .B egrep
+ is the same as
+@@ -68,6 +69,9 @@ is the same as
+ .B fgrep
+ is the same as
+ .BR "grep\ \-F" .
++.B rgrep
++is the same as
++.BR "grep\ \-r" .
+ Direct invocation as either
+ .B egrep
+ or
+-- 
+1.6.6
+

@@ -1,4 +1,41 @@
---- a/src/search.c.orig
+From: Tim Waugh <twaugh@redhat.com>
+Date: Tue, 8 Mar 2005 12:08:24 +0000
+Subject: Go faster in multibyte locales
+
+The full story behind this patch is that grep-2.5.1a does not
+handle UTF-8 gracefully at all. The basic plan with handling
+UTF-8 in 2.5.1a is:
+
+ * whenever a buffer is parsed, go through the entire buffer
+   deciding how many bytes make up each character
+ * use this information when necessary
+
+This patch changes that to:
+
+ * when information about how many bytes make up a character is
+   needed, work it out on demand
+
+On the face of it, this is a small obvious improvement. In fact
+it is much better than that, because the original scheme would
+calculate character lengths several times for each buffer: in
+fact, one full pass for every single potential match!
+
+More precisely, this reduces the multibyte processing (mbrtowc
+etc) considerably by only using it when necessary.  For the
+special case of UTF-8, without using the built-in DFA, this can
+be never as far as grep is concerned; of course the system
+re_search() function has to be aware of multibyte handling.
+
+Bug-Red-Hat: https://bugzilla.redhat.com/show_bug.cgi?id=69900
+Benchmarks: http://thread.gmane.org/gmane.comp.gnu.grep.bugs/100
+Bug-Debian: http://bugs.debian.org/181378
+---
+ src/search.c |  650 +++++++++++++++++++++++++++++++++++++++++++++++-----------
+ 1 files changed, 531 insertions(+), 119 deletions(-)
+
+diff --git a/src/search.c b/src/search.c
+index 0596ea9..b493452 100644
+--- a/src/search.c
 +++ b/src/search.c
 @@ -18,10 +18,15 @@
  
@@ -16,8 +53,8 @@
  #include <sys/types.h>
  
  #include "mbsupport.h"
-@@ -43,6 +48,9 @@
- #ifdef HAVE_LIBPCRE
+@@ -46,6 +51,9 @@
+ # endif
  # include <pcre.h>
  #endif
 +#ifdef HAVE_LANGINFO_CODESET
@@ -26,7 +63,7 @@
  
  #define NCHAR (UCHAR_MAX + 1)
  
-@@ -68,6 +76,19 @@
+@@ -71,6 +79,19 @@ kwsinit (void)
      error (2, 0, _("memory exhausted"));
  }
  
@@ -46,7 +83,7 @@
  #ifndef FGREP_PROGRAM
  /* DFA compiled regexp. */
  static struct dfa dfa;
-@@ -134,49 +155,6 @@
+@@ -181,49 +202,6 @@ kwsmusts (void)
  }
  #endif /* !FGREP_PROGRAM */
  
@@ -96,7 +133,7 @@
  #if defined(GREP_PROGRAM) || defined(EGREP_PROGRAM)
  #ifdef EGREP_PROGRAM
  COMPILE_FCT(Ecompile)
-@@ -193,6 +171,7 @@
+@@ -240,6 +218,7 @@ GEAcompile (char const *pattern, size_t size, reg_syntax_t syntax_bits)
    size_t total = size;
    char const *motif = pattern;
  
@@ -104,8 +141,7 @@
  #if 0
    if (match_icase)
      syntax_bits |= RE_ICASE;
-#@@ -303,47 +282,78 @@ hunk6
-@@ -303,20 +282,9 @@ hunk6
+@@ -350,20 +329,9 @@ EXECUTE_FCT(EGexecute)
    struct kwsmatch kwsm;
    size_t i, ret_val;
  #ifdef MBS_SUPPORT
@@ -129,7 +165,7 @@
  #endif /* MBS_SUPPORT */
  
    buflim = buf + size;
-@@ -329,21 +282,63 @@ hunk6
+@@ -376,21 +344,63 @@ EXECUTE_FCT(EGexecute)
  	  if (kwset)
  	    {
  	      /* Find a possible match using the KWset matcher. */
@@ -197,7 +233,7 @@
  		goto success;
  	      if (dfaexec (&dfa, beg, end - beg, &backref) == (size_t) -1)
  		continue;
-@@ -351,13 +363,47 @@
+@@ -398,13 +408,47 @@ EXECUTE_FCT(EGexecute)
  	  else
  	    {
  	      /* No good fixed strings; start with DFA. */
@@ -245,7 +281,7 @@
  	      while (beg > buf && beg[-1] != eol)
  		--beg;
  	    }
-@@ -475,24 +521,144 @@
+@@ -522,24 +566,144 @@ EXECUTE_FCT(EGexecute)
    *match_size = len;
    ret_val = beg - buf;
   out:
@@ -399,7 +435,7 @@
    kwsinit ();
    beg = pattern;
    do
-@@ -511,6 +677,76 @@
+@@ -558,6 +722,76 @@ COMPILE_FCT(Fcompile)
      error (2, 0, err);
  }
  
@@ -476,7 +512,7 @@
  EXECUTE_FCT(Fexecute)
  {
    register char const *beg, *try, *end;
-@@ -519,69 +755,256 @@
+@@ -566,69 +800,256 @@ EXECUTE_FCT(Fexecute)
    struct kwsmatch kwsmatch;
    size_t ret_val;
  #ifdef MBS_SUPPORT
@@ -579,8 +615,6 @@
 -	      goto success_in_beg_and_len;
 -	  } /* for (try) */
 -      else
--	goto success;
--    } /* for (beg in buf) */
 +	{
 +	  while (len)
 +	    {
@@ -621,10 +655,7 @@
 +		{
 +		  wchar_t nwc;
 +		  int mr;
- 
-- failure:
--  ret_val = -1;
--  goto out;
++
 +		  mr = mbtowc (&nwc, beg + len, buf + size - beg - len);
 +		  if (mr <= 0)
 +		    {
@@ -710,7 +741,8 @@
 +	    }
 +	}
 +       else
-+	goto success;
+ 	goto success;
+-    } /* for (beg in buf) */
 +next_char:;
 +#ifdef MBS_SUPPORT
 +      /* Advance to next character.  For MB_CUR_MAX == 1 case this is handled
@@ -737,7 +769,10 @@
 +	  else
 +	    {
 +	      size_t l = mbrlen (beg, buf + size - beg, &mbs);
-+
+ 
+- failure:
+-  ret_val = -1;
+-  goto out;
 +	      last_char = beg;
 +	      if (l + 2 >= 2)
 +		beg += l - 1;
@@ -774,7 +809,7 @@
    end = memchr (beg + len, eol, (buf + size) - (beg + len));
    end++;
    while (buf < beg && beg[-1] != eol)
-@@ -591,15 +1016,6 @@
+@@ -638,15 +1059,6 @@ EXECUTE_FCT(Fexecute)
    *match_size = len;
    ret_val = beg - buf;
   out:
@@ -790,3 +825,6 @@
    return ret_val;
  }
  #endif /* defined(GREP_PROGRAM) || defined(FGREP_PROGRAM) */
+-- 
+1.6.6
+

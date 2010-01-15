@@ -1,0 +1,59 @@
+From: Fumitoshi UKAI <ukai@debian.or.jp>
+Date: Wed, 13 Oct 2004 01:00:56 +0900
+Subject: fix [:upper:] and [:lower:] with grep -i in multibyte locales
+
+On all locales that mb_cur_max > 1, such as CJK or UTF-8 locales,
+[:upper:] and/or [:lower:] don't work as expected if --ignore-case
+
+For example,
+ % echo aaa | LANG=C grep --ignore-case '[[:upper:]]'
+ aaa
+ # correct, a matches [:upper:] when --ignore-case
+
+ % echo aaa | LANG=en_US.UTF-8 grep --ignore-case '[[:upper:]]'
+ %
+ # wrong, a doesn't match [:upper:] when --ignore-case
+
+As I checked the source code, I found this chunks in
+posix/regcomp.c:build_charclass() in glibc
+(same code in gawk)
+
+  /* In case of REG_ICASE "upper" and "lower" match the both of
+     upper and lower cases.  */
+  if ((syntax & RE_ICASE)
+      && (strcmp (name, "upper") == 0 || strcmp (name, "lower") == 0))
+    name = "alpha";
+
+However, dfa.c doesn't do it the same way. So, this patch fixes this
+problem:
+
+Bug-Debian: http://bugs.debian.org/276202
+---
+ src/dfa.c |   11 +++++++++++
+ 1 files changed, 11 insertions(+), 0 deletions(-)
+
+diff --git a/src/dfa.c b/src/dfa.c
+index 7e26a9c..3184dd1 100644
+--- a/src/dfa.c
++++ b/src/dfa.c
+@@ -595,6 +595,17 @@ parse_bracket_exp_mb ()
+ 		/* build character class.  */
+ 		{
+ 		  wctype_t wt;
++		  /* NOTE:
++		   * when case_fold, character class [:upper:] and [:lower:]
++		   * should be treated as [:alpha:], this is the same way
++		   * of glibc/posix/regcomp.c:build_charclass().
++		   * reported by Bug#276202
++		   * - fixed by Fumitoshi UKAI
++		   */
++		  if (case_fold 
++		      && (strcmp (str, "upper") == 0 || strcmp (str, "lower") == 0)) 
++		      strcpy (str, "alpha");
++
+ 		  /* Query the character class as wctype_t.  */
+ 		  wt = wctype (str);
+ 
+-- 
+1.6.6
+

@@ -1,0 +1,102 @@
+From: Peter De Wachter <pdewacht@gmail.com>
+Date: Sun, 23 Nov 2008 17:36:48 +0100
+Subject: grep -w in UTF-8 locale sometimes reports non-matches
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+The root cause of this bug is the use of mbtowc in 64-egf-speedup.patch
+and 67-w.patch. These patches try to use mbtowc to look at the
+character before and after the match to check if the match is a
+whole word. But when a binary file is being grepped, mbtowc gets
+passed random junk rather than a valid UTF-8 character. As a
+consequence, its internal state gets messed up, and you get
+nonsense for the following matches. The fix is to use mbrtowc so
+you can reset its state. A patch is attached.
+
+65-dfa-optional.patch is a red herring. I guess that patch just
+exposes the bug because it causes grep to use a different code
+path. But you get the same bug with grep -F, which is not touched
+by that patch.
+
+minimal test case:
+
+echo -e '\344RC' > 0.bin
+cat > 1.txt << EOF
+RC
+is not
+ARCH
+EOF
+
+Testing this with
+
+    LC_CTYPE=POSIX grep -w RC 0.bin 1.txt
+
+yields the correct result
+
+    0.bin:�RC
+    1.txt:RC
+
+while
+
+    LC_CTYPE=en_US.UTF-8 grep -w RC 0.bin 1.txt
+
+produces the invalid
+
+    0.bin:�RC
+    1.txt:RC
+    1.txt:ARCH
+
+Reported-by: arno renevier <arenevier@fdn.fr>
+Testcase-by: Andreas Beckmann <debian@abeckmann.de>
+Reviewed-by: Nicolas François <nicolas.francois@centraliens.net>
+Bug-Debian: http://bugs.debian.org/446270
+---
+ src/search.c |   10 +++++-----
+ 1 files changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/src/search.c b/src/search.c
+index eabcf40..4660e59 100644
+--- a/src/search.c
++++ b/src/search.c
+@@ -549,7 +549,7 @@ EXECUTE_FCT(EGexecute)
+ 			      }
+ 			    else
+ 			      s = last_char;
+-			    mr = mbtowc (&pwc, s, match - s);
++			    mr = mbrtowc (&pwc, s, match - s, &mbs);
+ 			    if (mr <= 0)
+ 			      {
+ 				memset (&mbs, '\0', sizeof (mbstate_t));
+@@ -578,8 +578,8 @@ EXECUTE_FCT(EGexecute)
+ 				wchar_t nwc;
+ 				int mr;
+ 
+-				mr = mbtowc (&nwc, buf + start + len,
+-					     end - buf - start - len - 1);
++				mr = mbrtowc (&nwc, buf + start + len,
++					      end - buf - start - len - 1, &mbs);
+ 				if (mr <= 0)
+ 				  {
+ 				    memset (&mbs, '\0', sizeof (mbstate_t));
+@@ -988,7 +988,7 @@ EXECUTE_FCT(Fexecute)
+ 			}
+ 		      else
+ 			s = last_char;
+-		      mr = mbtowc (&pwc, s, beg - s);
++		      mr = mbrtowc (&pwc, s, beg - s, &mbs);
+ 		      if (mr <= 0)
+ 			memset (&mbs, '\0', sizeof (mbstate_t));
+ 		      else if ((iswalnum (pwc) || pwc == L'_')
+@@ -1006,7 +1006,7 @@ EXECUTE_FCT(Fexecute)
+ 		  wchar_t nwc;
+ 		  int mr;
+ 
+-		  mr = mbtowc (&nwc, beg + len, buf + size - beg - len);
++		  mr = mbrtowc (&nwc, beg + len, buf + size - beg - len, &mbs);
+ 		  if (mr <= 0)
+ 		    {
+ 		      memset (&mbs, '\0', sizeof (mbstate_t));
+-- 
+1.6.6
+

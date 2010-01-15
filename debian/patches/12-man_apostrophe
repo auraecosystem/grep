@@ -1,0 +1,41 @@
+From: Andrew Moise <chops@demiurgestudios.com>
+Date: Thu, 8 Jan 2004 21:40:00 -0500
+Subject: grep.1: use \(aq instead of '
+
+grep's man page uses - instead of \- and ' instead of \(aq in
+several places where these characters are intended to be used in
+commands or (in one case) an email address.  On a UTF-8
+configured system, this means that groff will get overfancy and
+replace these characters with "better" ones which won't work when
+pasted into a shell.
+
+Bug-Debian: http://bugs.debian.org/226881
+---
+ doc/grep.1 |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/doc/grep.1 b/doc/grep.1
+index 2aaf290..5948df4 100644
+--- a/doc/grep.1
++++ b/doc/grep.1
+@@ -823,7 +823,7 @@ attempts to support traditional usage by assuming that
+ is not special if it would be the start of an invalid interval
+ specification.
+ For example, the command
+-.B "grep\ \-E\ '{1'"
++.B "grep\ \-E\ \(aq{1\(aq"
+ searches for the two-character string
+ .B {1
+ instead of reporting a syntax error in the regular expression.
+@@ -863,7 +863,7 @@ to be placed in front of any explicit options.
+ For example, if
+ .B GREP_OPTIONS
+ is
+-.BR "'\-\^\-binary-files=without-match \-\^\-directories=skip'" ,
++.BR "\(aq\-\^\-binary-files=without-match \-\^\-directories=skip\(aq" ,
+ .B grep
+ behaves as if the two options
+ .B \-\^\-binary\-files=without-match
+-- 
+1.6.6
+

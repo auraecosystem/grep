@@ -1,0 +1,143 @@
+From: Jim Meyering <jim@meyering.net>
+Date: Thu, 3 Apr 2003 17:19:28 +0200
+Subject: very large file with no newline causes trouble
+
+grep doesn't deal well with very large files containing no line terminator.
+I ran grep in a directory where I thought it'd find matches and complete
+in a fraction of a second.  I was surprised to see it appear to hang and
+finally exit with only this error: `grep: memory exhausted'.  The failure
+was due to the presence of a file I'd created like this:
+
+  dd bs=1 seek=1T of=big < /dev/null
+
+So, even though that file occupies no disk blocks, grep thinks
+it has to search a terabyte of data, and blithely tries to read
+the first line (the entire file) into memory.
+
+Of course this problem isn't unique to grep.
+Any program that tries to read a line into memory at a time
+is likely to meet the same fate.  But grep is a little different
+from other tools in that one may well use it to search an entire
+hierarchy for a file containing a particular string.  The mere
+presence of a very large file should not cause such a search to fail.
+
+Below, I've included a patch that makes grep report the error,
+free the allocated memory, and continue with any remaining files.
+
+Test like this:
+
+  $ (ulimit -v 10000; echo a|./grep a big -)
+  grep: big: Cannot allocate memory
+  (standard input):a
+  [Exit 2]
+
+2003-04-03  Jim Meyering  <jim@meyering.net>
+
+	When grep runs out of memory, don't abort the entire command,
+	but rather just the affected command line argument(s).
+	* src/grep.c (stdin_argv): New global.
+	(fillbuf): Use malloc, not xmalloc, and handle malloc failure.
+	(main): Rearrange main loop so that there is only one grepfile call.
+
+Bug-Debian: http://bugs.debian.org/185208
+Cc: bug-grep@gnu.org
+Cc: bug-gnu-utils@gnu.org
+---
+ src/grep.c |   56 ++++++++++++++++++++++++++++++++++++--------------------
+ 1 files changed, 36 insertions(+), 20 deletions(-)
+
+diff --git a/src/grep.c b/src/grep.c
+index bb1b1a0..dea7f2c 100644
+--- a/src/grep.c
++++ b/src/grep.c
+@@ -274,6 +274,12 @@ static char const short_options[] =
+ #endif
+ ;
+ 
++/* Default for `file_list' if no files are given on the command line. */
++static char *stdin_argv[] =
++{
++  "-", NULL
++};
++
+ /* Non-boolean long options that have no corresponding short equivalents.  */
+ enum
+ {
+@@ -534,7 +540,16 @@ fillbuf (size_t save, struct stats const *stats)
+ 	 for byte sentinels fore and aft.  */
+       newalloc = newsize + pagesize + 1;
+ 
+-      newbuf = bufalloc < newalloc ? xmalloc (bufalloc = newalloc) : buffer;
++      newbuf = bufalloc < newalloc ? malloc (bufalloc = newalloc) : buffer;
++      if (newbuf == NULL)
++	{
++	  int saved_errno = errno;
++	  free (buffer);
++	  bufalloc = ALIGN_TO (INITIAL_BUFSIZE, pagesize) + pagesize + 1;
++	  buffer = xmalloc (bufalloc);
++	  errno = saved_errno;
++	  return 0;
++	}
+       readbuf = ALIGN_TO (newbuf + 1 + save, pagesize);
+       bufbeg = readbuf - save;
+       memmove (bufbeg, buffer + saved_offset, save);
+@@ -1832,6 +1847,7 @@ main (int argc, char **argv)
+   FILE *fp;
+   extern char *optarg;
+   extern int optind;
++  char **file_list;
+ 
+   initialize_main (&argc, &argv);
+   program_name = argv[0];
+@@ -2254,29 +2270,29 @@ There is NO WARRANTY, to the extent permitted by law.\n"),
+   if (max_count == 0)
+     exit (1);
+ 
+-  if (optind < argc)
++  file_list = (optind == argc ? stdin_argv : &argv[optind]);
++
++  status = 1;
++  while (1)
+     {
+-	status = 1;
+-	do
++      char *file = *file_list++;
++
++      if (file == NULL)
++	break;
++
++      if ((included_patterns || excluded_patterns)
++	  && !isdir (file))
+ 	{
+-	  char *file = argv[optind];
+-	  if ((included_patterns || excluded_patterns)
+-	      && !isdir (file))
+-	    {
+-	      if (included_patterns &&
+-		  ! excluded_filename (included_patterns, file, 0))
+-		continue;
+-	      if (excluded_patterns &&
+-		  excluded_filename (excluded_patterns, file, 0))
+-		continue;
+-	    }
+-	  status &= grepfile (strcmp (file, "-") == 0 ? (char *) NULL : file,
+-			      &stats_base);
++	  if (included_patterns &&
++	      ! excluded_filename (included_patterns, file, 0))
++	    continue;
++	  if (excluded_patterns &&
++	      excluded_filename (excluded_patterns, file, 0))
++	    continue;
+ 	}
+-	while ( ++optind < argc);
++      status &= grepfile (strcmp (file, "-") == 0
++			  ? (char *) NULL : file, &stats_base);
+     }
+-  else
+-    status = grepfile ((char *) NULL, &stats_base);
+ 
+   /* We register via atexit() to test stdout.  */
+   exit (errseen ? 2 : status);
+-- 
+1.6.6
+

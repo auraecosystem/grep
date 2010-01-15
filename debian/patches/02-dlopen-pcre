@@ -1,11 +1,33 @@
-http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=397262
+From: Reuben Thomas <rrt@sc3d.org>
+Date: Mon, 6 Nov 2006 01:16:30 +0000
+Subject: dlopen PCRE so we can have -P (perl regex)
 
-Patch by Reuben Thomas <rrt@sc3d.org>
-Modified by Aníbal Monsalve Salazar <anibal@debian.org>
-Modified by Marco d'Itri <md@Linux.IT>
+As we discussed a while ago, I've made a patch for grep to use PCRE
+via dlopen.
 
---- a/configure	2009-02-10 15:35:29.000000000 +1100
-+++ b/configure	2009-03-28 15:21:33.000000000 +1100
+In order to build grep correctly, you must configure so that PCRE is
+selected, but change -lpcre into -ldl.  I'm not sure how best to do
+that. Doing it hackily (i.e. patching configure directly) would be
+easy (for someone who understands how the Debian packages are built).
+
+Bug-Debian: http://bugs.debian.org/397262
+Modified-by: AnÃ­bal Monsalve Salazar <anibal@debian.org>
+  - fix libpcre filename to not require libpcre3-dev at run time
+  - patch configure script to use libdl
+Modified-by: Marco d'Itri <md@Linux.IT>
+  - introduce a HAVE_DYNAMIC_LIBPCRE macro which can be used to cleanly
+    enable or disable the feature and use #defines to reduce the scope of
+    changes
+  - other fixes and cleanups
+---
+ configure    |    9 +++------
+ src/search.c |   50 ++++++++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 53 insertions(+), 6 deletions(-)
+
+diff --git a/configure b/configure
+index 1342891..31d9a8e 100755
+--- a/configure
++++ b/configure
 @@ -10623,10 +10623,7 @@ _ACEOF
  
  # support for pcre
@@ -28,7 +50,7 @@ Modified by Marco d'Itri <md@Linux.IT>
  { echo "$as_me:$LINENO: result: $ac_cv_lib_pcre_pcre_exec" >&5
  echo "${ECHO_T}$ac_cv_lib_pcre_pcre_exec" >&6; }
  if test $ac_cv_lib_pcre_pcre_exec = yes; then
-@@ -10694,7 +10691,7 @@ if test $ac_cv_lib_pcre_pcre_exec = yes;
+@@ -10694,7 +10691,7 @@ if test $ac_cv_lib_pcre_pcre_exec = yes; then
  #define HAVE_LIBPCRE 1
  _ACEOF
  
@@ -37,8 +59,10 @@ Modified by Marco d'Itri <md@Linux.IT>
  
  fi
  
---- a/src/search.c	2009-01-31 16:39:54.000000000 +1100
-+++ b/src/search.c	2009-03-28 15:21:33.000000000 +1100
+diff --git a/src/search.c b/src/search.c
+index b011cc7..0596ea9 100644
+--- a/src/search.c
++++ b/src/search.c
 @@ -41,6 +41,9 @@
  #include "error.h"
  #include "xalloc.h"
@@ -49,7 +73,7 @@ Modified by Marco d'Itri <md@Linux.IT>
  # include <pcre.h>
  #endif
  
-@@ -84,6 +87,50 @@
+@@ -84,6 +87,50 @@ static struct patterns
  struct patterns *patterns;
  size_t pcount;
  
@@ -100,7 +124,7 @@ Modified by Marco d'Itri <md@Linux.IT>
  void
  dfaerror (char const *mesg)
  {
-@@ -627,6 +674,9 @@
+@@ -627,6 +674,9 @@ COMPILE_FCT(Pcompile)
    char const *p;
    char const *pnul;
  
@@ -110,3 +134,6 @@ Modified by Marco d'Itri <md@Linux.IT>
    /* FIXME: Remove these restrictions.  */
    if (eolbyte != '\n')
      error (2, 0, _("The -P and -z options cannot be combined"));
+-- 
+1.6.6
+

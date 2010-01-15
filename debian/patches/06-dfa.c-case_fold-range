@@ -1,6 +1,30 @@
---- a/src/dfa.c.orig	2004-10-20 02:13:43.000000000 +0900
-+++ b/src/dfa.c	2004-10-20 02:14:14.000000000 +0900
-@@ -658,6 +658,29 @@
+From: Fumitoshi UKAI <ukai@debian.or.jp>
+Date: Wed, 13 Oct 2004 02:32:24 +0900
+Subject: fix character ranges with grep -i in multibyte locales
+
+On all locales that mb_cur_max > 1, such as CJK or UTF-8 locales,
+[a-z] doesn't match with Z as expected if --ignore-case
+
+For example,
+ % echo Z | LANG=C grep --ignore-case '[a-z]'
+ Z
+
+ % echo Z | LANG=en_US.UTF-8 grep --ignore-case '[a-z]'
+ %
+ # wrong, Z should match [a-z] when --ignore-case
+
+Note that [a-z] will match with A, that is not because --ignore-case works,
+but because collation order in UTF-8 is "a A b B .. z".
+That is, [a-z] won't match with Z even if --ignore-case.
+---
+ src/dfa.c |   23 +++++++++++++++++++++++
+ 1 files changed, 23 insertions(+), 0 deletions(-)
+
+diff --git a/src/dfa.c b/src/dfa.c
+index da0206b..1349d63 100644
+--- a/src/dfa.c
++++ b/src/dfa.c
+@@ -693,6 +693,29 @@ parse_bracket_exp_mb ()
  	  REALLOC_IF_NECESSARY(work_mbc->range_ends, wchar_t,
  			       range_ends_al, work_mbc->nranges + 1);
  	  work_mbc->range_ends[work_mbc->nranges++] = (wchar_t)wc2;
@@ -30,3 +54,6 @@
  	}
        else if (wc != WEOF)
  	/* build normal characters.  */
+-- 
+1.6.6
+
