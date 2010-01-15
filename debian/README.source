@@ -1,0 +1,21 @@
+GNU grep sources for Debian
+===========================
+
+GNU grep's official distribution point is a CVS server, but upstream
+helpfully supplies a git repository as well.  That is what we use.
+It can be found at <git://git.sv.gnu.org/grep>.
+
+With each new upstream version, debian/generated.list is regenerated
+from upstream's .cvsignore files.  The commands to do this follow:
+
+	# commit id of the release
+	cid=$(git rev-parse upstream/master)
+
+	git ls-tree -r "$cid" |
+	grep cvsignore |
+	awk '{ print $4 }' |
+	while read filename
+	do
+		git show "$cid:$filename" |
+		sed "s,^,${filename%.cvsignore},"
+	done > debian/generated.list
