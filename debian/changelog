@@ -10,7 +10,7 @@ grep (2.5.4-5) experimental; urgency=low
   * Simplify debian/rules by using the new dh command.
   * Build-Depends: debhelper (>= 7.0.50)
 
- -- Jonathan Nieder <jrnieder@gmail.com>  Fri, 15 Jan 2010 02:26:45 -0600
+ -- Jonathan Nieder <jrnieder@gmail.com>  Fri, 15 Jan 2010 02:27:57 -0600
 
 grep (2.5.4-4) unstable; urgency=low
 

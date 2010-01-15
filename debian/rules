@@ -1,15 +1,9 @@
 #!/usr/bin/make -f
 
-CFLAGS= -O3 -ldl
-LDFLAGS= -Wl,-z,defs
-
-conf_opts := --exec-prefix=/ \
-	    --without-included-regex \
-	    CFLAGS="$(CFLAGS)" \
-	    LDFLAGS="$(LDFLAGS)"
-
 clean build install binary-indep binary-arch binary:
 	dh $@
+
+.PHONY: build clean install binary-indep binary-arch binary
 
 override_dh_auto_configure: configure
 	cp -f /usr/share/misc/config.sub /usr/share/misc/config.guess .
@@ -22,4 +16,10 @@ override_dh_auto_clean:
 	if test -e Makefile; then $(MAKE) distclean; fi
 	rm -f config.guess config.sub
 
-.PHONY: build clean install binary-indep binary-arch binary
+CFLAGS= -O3 -ldl
+LDFLAGS= -Wl,-z,defs
+
+conf_opts := --exec-prefix=/ \
+	    --without-included-regex \
+	    CFLAGS="$(CFLAGS)" \
+	    LDFLAGS="$(LDFLAGS)"
