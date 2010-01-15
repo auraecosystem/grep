@@ -1,21 +1,17 @@
 GNU grep sources for Debian
-===========================
+---------------------------
 
-GNU grep's official distribution point is a CVS server, but upstream
-helpfully supplies a git repository as well.  That is what we use.
-It can be found at <git://git.sv.gnu.org/grep>.
+GNU grep’s official distribution point is a CVS server, but the FSF
+helpfully supplies a Git repository as well.  This Debian package is
+developed in a public Git repository (see the Vcs-Git field of
+debian/control) based on the repository at <git://git.sv.gnu.org/grep>.
+To build from a git checkout:
 
-With each new upstream version, debian/generated.list is regenerated
-from upstream's .cvsignore files.  The commands to do this follow:
+	uscan
+	debian/autogen.sh
+	debuild -I -i
 
-	# commit id of the release
-	cid=$(git rev-parse upstream/master)
+To build a released version, no special instructions apply.
+“dpkg-buildpackage” and “apt-get -b grep” should work as usual.
 
-	git ls-tree -r "$cid" |
-	grep cvsignore |
-	awk '{ print $4 }' |
-	while read filename
-	do
-		git show "$cid:$filename" |
-		sed "s,^,${filename%.cvsignore},"
-	done > debian/generated.list
+ -- Jonathan Nieder <jrnieder@gmail.com>  Fri, 15 Jan 2010 04:08:57 -0600

@@ -13,8 +13,9 @@ override_dh_auto_clean:
 	rm -f src/ansi2knr.[c1]
 	rm -f doc/texinfo.tex doc/mdate-sh
 	xargs -d "\n" rm -fr < debian/generated.list
+	rm -f debian/conf-tmp
 
-override_dh_auto_configure:
+override_dh_auto_configure: configure.ac
 	autoreconf -fi
 	dh_auto_configure -- $(conf_opts)
 
@@ -28,3 +29,18 @@ conf_opts := --exec-prefix=/ \
 	    --without-included-regex \
 	    CFLAGS="$(CFLAGS)" \
 	    LDFLAGS="$(LDFLAGS)"
+
+# Generate configure.ac with ALL_LINGUAS matching the languages
+# we have.
+#
+# From autogen.sh.
+configure.ac: configure.ac.in
+	set -e; ALL_LINGUAS=""; \
+	for i in po/*.po; do \
+		ALL_LINGUAS="$$ALL_LINGUAS `basename $$i .po`"; \
+	done; \
+	: Eliminate leading whitespace; \
+	ALL_LINGUAS="`echo $$ALL_LINGUAS |cut -b1-`"; \
+	sed -e "s,@ALL_LINGUAS@,$$ALL_LINGUAS," configure.ac.in >debian/conf-tmp
+	cmp -s debian/conf-tmp configure.ac || \
+	mv debian/conf-tmp configure.ac
