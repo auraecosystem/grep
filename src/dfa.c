@@ -595,6 +595,17 @@ parse_bracket_exp_mb ()
 		/* build character class.  */
 		{
 		  wctype_t wt;
+		  /* NOTE:
+		   * when case_fold, character class [:upper:] and [:lower:]
+		   * should be treated as [:alpha:], this is the same way
+		   * of glibc/posix/regcomp.c:build_charclass().
+		   * reported by Bug#276202
+		   * - fixed by Fumitoshi UKAI
+		   */
+		  if (case_fold 
+		      && (strcmp (str, "upper") == 0 || strcmp (str, "lower") == 0)) 
+		      strcpy (str, "alpha");
+
 		  /* Query the character class as wctype_t.  */
 		  wt = wctype (str);
 
@@ -682,6 +693,29 @@ parse_bracket_exp_mb ()
 	  REALLOC_IF_NECESSARY(work_mbc->range_ends, wchar_t,
 			       range_ends_al, work_mbc->nranges + 1);
 	  work_mbc->range_ends[work_mbc->nranges++] = (wchar_t)wc2;
+	  if (case_fold 
+	      && (iswlower((wint_t)wc) || iswupper((wint_t)wc))
+	      && (iswlower((wint_t)wc2) || iswupper((wint_t)wc2))) {
+	    wint_t altcase;
+	    altcase = wc;
+	    if (iswlower((wint_t)wc))
+	      altcase = towupper((wint_t)wc);
+	    else
+	      altcase = towlower((wint_t)wc);
+	    REALLOC_IF_NECESSARY(work_mbc->range_sts, wchar_t,
+				 range_sts_al, work_mbc->nranges + 1);
+	    work_mbc->range_sts[work_mbc->nranges] = (wchar_t)altcase;
+	    
+	    altcase = wc2;
+	    if (iswlower((wint_t)wc2))
+	      altcase = towupper((wint_t)wc2);
+	    else
+	      altcase = towlower((wint_t)wc2);
+	    REALLOC_IF_NECESSARY(work_mbc->range_ends, wchar_t,
+				 range_ends_al, work_mbc->nranges + 1);
+	    work_mbc->range_ends[work_mbc->nranges++] = (wchar_t)altcase;
+	    
+	  }
 	}
       else if (wc != WEOF)
 	/* build normal characters.  */
@@ -689,6 +723,20 @@ parse_bracket_exp_mb ()
 	  REALLOC_IF_NECESSARY(work_mbc->chars, wchar_t, chars_al,
 			       work_mbc->nchars + 1);
 	  work_mbc->chars[work_mbc->nchars++] = (wchar_t)wc;
+	  if (case_fold && (iswlower((wint_t) wc) || iswupper((wint_t) wc)))
+	    {
+		wint_t altcase;
+
+		altcase = wc;		/* keeps compiler happy */
+		if (iswlower((wint_t) wc))
+		  altcase = towupper((wint_t) wc);
+		else if (iswupper((wint_t) wc))
+		  altcase = towlower((wint_t) wc);
+
+		REALLOC_IF_NECESSARY(work_mbc->chars, wchar_t, chars_al,
+			       work_mbc->nchars + 1);
+		work_mbc->chars[work_mbc->nchars++] = (wchar_t) altcase;
+	    }
 	}
     }
   while ((wc = wc1) != L']');

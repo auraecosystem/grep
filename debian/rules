@@ -16,9 +16,7 @@ endif
 CFLAGS= -O3 -ldl
 LDFLAGS= -Wl,-z,defs
 
-include /usr/share/quilt/quilt.make
-
-config.status: patch configure
+config.status: configure
 	dh_testdir
 	cp -f /usr/share/misc/config.sub /usr/share/misc/config.guess .
 	./configure $(CROSS) \
@@ -37,7 +35,7 @@ build-stamp:  config.status
 	$(MAKE)
 	touch $@
 
-clean: unpatch
+clean:
 	dh_testdir
 	rm -f build-stamp 
 	[ ! -f Makefile ] || $(MAKE) distclean

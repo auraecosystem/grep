@@ -74,7 +74,7 @@ msgstr "escrivint eixida"
 #: src/grep.c:1209
 #, c-format
 msgid "Binary file %s matches\n"
-msgstr "Concidència en el fitxer binari %s\n"
+msgstr "Coincidència en el fitxer binari %s\n"
 
 #: src/grep.c:1223
 msgid "(standard input)"

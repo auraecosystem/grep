@@ -10623,10 +10623,7 @@ _ACEOF
 
 # support for pcre
 if test x"$testpcre" = x"yes"; then
-	if pcre-config --cflags >/dev/null 2>&1; then
-		CPPFLAGS="$CPPFLAGS `pcre-config --cflags`"
-		LIBS="$LIBS `pcre-config --libs`"
-	fi
+  CPPFLAGS="$CPPFLAGS -DHAVE_DYNAMIC_LIBPCRE"
 
 { echo "$as_me:$LINENO: checking for pcre_exec in -lpcre" >&5
 echo $ECHO_N "checking for pcre_exec in -lpcre... $ECHO_C" >&6; }
@@ -10685,8 +10682,8 @@ fi
 
 rm -f core conftest.err conftest.$ac_objext conftest_ipa8_conftest.oo \
       conftest$ac_exeext conftest.$ac_ext
-LIBS=$ac_check_lib_save_LIBS
 fi
+LIBS=$ac_check_lib_save_LIBS
 { echo "$as_me:$LINENO: result: $ac_cv_lib_pcre_pcre_exec" >&5
 echo "${ECHO_T}$ac_cv_lib_pcre_pcre_exec" >&6; }
 if test $ac_cv_lib_pcre_pcre_exec = yes; then
@@ -10694,7 +10691,7 @@ if test $ac_cv_lib_pcre_pcre_exec = yes; then
 #define HAVE_LIBPCRE 1
 _ACEOF
 
-  LIBS="-lpcre $LIBS"
+  LIBS="-ldl $LIBS"
 
 fi
 
