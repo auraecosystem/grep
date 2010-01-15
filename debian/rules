@@ -12,6 +12,7 @@ override_dh_auto_clean:
 	rm -f INSTALL depcomp install-sh stamp-h
 	rm -f src/ansi2knr.[c1]
 	rm -f doc/texinfo.tex doc/mdate-sh
+	rm -f tests/yesno.txt
 	xargs -d "\n" rm -fr < debian/generated.list
 	rm -f debian/conf-tmp
 
