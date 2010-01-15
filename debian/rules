@@ -5,16 +5,21 @@ clean build install binary-indep binary-arch binary:
 
 .PHONY: build clean install binary-indep binary-arch binary
 
-override_dh_auto_configure: configure
-	cp -f /usr/share/misc/config.sub /usr/share/misc/config.guess .
+override_dh_auto_clean:
+	find . -name '*.[oa]' -delete
+	rm -f po/*.gmo
+	rm -f config.guess config.sub
+	rm -f INSTALL depcomp install-sh stamp-h
+	rm -f src/ansi2knr.[c1]
+	rm -f doc/texinfo.tex doc/mdate-sh
+	xargs -d "\n" rm -fr < debian/generated.list
+
+override_dh_auto_configure:
+	autoreconf -fi
 	dh_auto_configure -- $(conf_opts)
 
 # disable test suite for now
 override_dh_auto_test: ;
-
-override_dh_auto_clean:
-	if test -e Makefile; then $(MAKE) distclean; fi
-	rm -f config.guess config.sub
 
 CFLAGS= -O3 -ldl
 LDFLAGS= -Wl,-z,defs
