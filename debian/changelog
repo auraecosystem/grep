@@ -7,11 +7,11 @@ grep (2.5.4-5) experimental; urgency=low
     at unpack time.
   * Remove built-time dependency on quilt.
 
-  * debian/rules: Simplify build and clean targets by using the new
-    dh command.
+  * debian/rules: Simplify build, clean, and install targets by using
+    the new dh command.
   * Build-Depends: debhelper (>= 7.0.50)
 
- -- Jonathan Nieder <jrnieder@gmail.com>  Fri, 15 Jan 2010 02:18:31 -0600
+ -- Jonathan Nieder <jrnieder@gmail.com>  Fri, 15 Jan 2010 02:21:50 -0600
 
 grep (2.5.4-4) unstable; urgency=low
 

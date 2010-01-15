@@ -8,7 +8,7 @@ conf_opts := --exec-prefix=/ \
 	    CFLAGS="$(CFLAGS)" \
 	    LDFLAGS="$(LDFLAGS)"
 
-clean build:
+clean build install:
 	dh $@
 
 override_dh_auto_configure: configure
@@ -21,13 +21,6 @@ override_dh_auto_test: ;
 override_dh_auto_clean:
 	if test -e Makefile; then $(MAKE) distclean; fi
 	rm -f config.guess config.sub
-
-install: build
-	dh_testdir
-	dh_testroot
-	dh_prep  
-	dh_installdirs
-	$(MAKE) DESTDIR=$(CURDIR)/debian/grep install
 
 binary-indep: install
 
