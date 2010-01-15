@@ -11,3 +11,5 @@
 11-grep-w-false-positives
 12-man_apostrophe
 13-catalan
+14-dlopen-pcre-autoconf
+15-autoreconf

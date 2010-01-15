@@ -1,0 +1,33 @@
+From: Jonathan Nieder <jrnieder@gmail.com>
+Date: Fri, 15 Jan 2010 02:39:01 -0600
+Subject: kluge: tell configure.ac we want to dynamically load libpcre
+
+Do not yet add an option to ./configure; instead, unconditionally
+do whatever it takes to make ./configure look like the outcome of
+commit 8c3fd84 (dlopen PCRE so we can have -P (perl regex),
+2006-11-06).
+---
+ configure.ac |    6 ++----
+ 1 files changed, 2 insertions(+), 4 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index e7ba9c3..fc5522f 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -153,11 +153,9 @@ jm_FUNC_REALLOC
+ 
+ # support for pcre
+ if test x"$testpcre" = x"yes"; then
+-	if pcre-config --cflags >/dev/null 2>&1; then
+-		CPPFLAGS="$CPPFLAGS `pcre-config --cflags`"
+-		LIBS="$LIBS `pcre-config --libs`"
+-	fi
++	CPPFLAGS="$CPPFLAGS -DHAVE_DYNAMIC_LIBPCRE"
+ 	AC_CHECK_LIB(pcre, pcre_exec)
++	LIBS=$(printf '%s\n' "$LIBS" | sed 's/-lpcre/-ldl/')
+ fi
+ 
+ AC_CONFIG_FILES([Makefile
+-- 
+1.6.6
+

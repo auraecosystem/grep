@@ -10,7 +10,14 @@ grep (2.5.4-5) experimental; urgency=low
   * Simplify debian/rules by using the new dh command.
   * Build-Depends: debhelper (>= 7.0.50)
 
- -- Jonathan Nieder <jrnieder@gmail.com>  Fri, 15 Jan 2010 02:27:57 -0600
+  * configure.ac: Pass -DHAVE_DYNAMIC_LIBPCRE to gcc; use -ldl
+    instead of -lpcre.  We were already patching 'configure'
+    directly to do these things; this way, we can regenerate
+    the configure script as needed.
+  * Makefile.am: Set ACLOCAL_AMFLAGS = -I m4.  Without this,
+    autoreconf does not work.
+
+ -- Jonathan Nieder <jrnieder@gmail.com>  Fri, 15 Jan 2010 03:45:04 -0600
 
 grep (2.5.4-4) unstable; urgency=low
 
