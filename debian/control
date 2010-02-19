@@ -3,8 +3,8 @@ Section: utils
 Priority: required
 Maintainer: Anibal Monsalve Salazar <anibal@debian.org>
 Uploaders: Santiago Ruano Rincón <santiago@debian.org>
-Standards-Version: 3.8.0
-Build-Depends: autotools-dev, debhelper (>= 7), gettext, quilt
+Standards-Version: 3.8.1
+Build-Depends: autotools-dev, debhelper (>= 7), gettext, libpcre3-dev (>= 7.7), quilt
 Homepage: http://www.gnu.org/software/grep/
 Vcs-Git: git://git.debian.org/collab-maint/grep.git
 Vcs-Browser: http://git.debian.org/?p=collab-maint/grep.git
@@ -15,6 +15,7 @@ Essential: yes
 Pre-Depends: ${shlibs:Depends}
 Conflicts: rgrep
 Provides: rgrep
+Suggests: libpcre3 (>= 7.7)
 Description: GNU grep, egrep and fgrep
  'grep' is a utility to search for text in files; it can be used from the
  command line or in scripts.  Even if you don't want to use it, other packages

@@ -1,4 +1,5 @@
 02-man_rgrep.patch
+03-dlopen-pcre.patch
 55-bigfile.patch
 60-dfa.c-case_fold.patch
 61-dfa.c-case_fold-charclass.patch

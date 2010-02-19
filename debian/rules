@@ -13,20 +13,22 @@ else
 CROSS= --build $(DEB_BUILD_GNU_TYPE)
 endif
 
-CFLAGS= -O3
+CFLAGS= -O3 -ldl
+LDFLAGS= -Wl,-z,defs
 
 include /usr/share/quilt/quilt.make
 
 config.status: patch configure
 	dh_testdir
 	cp -f /usr/share/misc/config.sub /usr/share/misc/config.guess .
-	./configure $(CROSS) --prefix=/usr \
-				--exec-prefix=/ \
-				--mandir=\$${prefix}/share/man \
-				--infodir=\$${prefix}/share/info \
-				--without-included-regex \
-				CFLAGS="$(CFLAGS)" \
-				LDFLAGS="-Wl,-z,defs,-dl" 
+	./configure $(CROSS) \
+	    --prefix=/usr \
+	    --exec-prefix=/ \
+	    --mandir=\$${prefix}/share/man \
+	    --infodir=\$${prefix}/share/info \
+	    --without-included-regex \
+	    CFLAGS="$(CFLAGS)" \
+	    LDFLAGS="$(LDFLAGS)"
 
 build: build-stamp
 

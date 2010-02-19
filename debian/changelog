@@ -1,11 +1,16 @@
-grep (2.5.4-4~1) experimental; urgency=low
+grep (2.5.4-4) unstable; urgency=low
 
-  * NOT RELEASE YET
-  * Using dyamic linking to enable Perl RE. Thanks to Reuben Thomas
-    <rrt@sc3d.org> (Closes:397262)
+  [ Santiago Ruano Rincón ]
   * Maintaining with git now. Added Vcs-* fields in control file.
 
- -- Santiago Ruano Rincón <santiago@debian.org>  Thu, 26 Mar 2009 21:20:43 +0100
+  [ Anibal Monsalve Salazar ]
+  * dlopen PCRE so we can have -P; 03-dlopen-pcre.patch by Reuben Thomas
+    closes: #238237, #318680, #364998, #397262, #441373, #443103
+    - Remove --disable-perl-regexp as configure option
+  * Suggests libpcre3
+  * Standards version is 3.8.1
+
+ -- Anibal Monsalve Salazar <anibal@debian.org>  Sat, 28 Mar 2009 19:13:49 +1100
 
 grep (2.5.4-3) unstable; urgency=low
 

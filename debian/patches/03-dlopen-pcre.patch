@@ -1,0 +1,112 @@
+http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=397262
+
+Patch by Reuben Thomas <rrt@sc3d.org>
+Modified by Aníbal Monsalve Salazar <anibal@debian.org>
+Modified by Marco d'Itri <md@Linux.IT>
+
+--- a/configure	2009-02-10 15:35:29.000000000 +1100
++++ b/configure	2009-03-28 15:21:33.000000000 +1100
+@@ -10623,10 +10623,7 @@ _ACEOF
+ 
+ # support for pcre
+ if test x"$testpcre" = x"yes"; then
+-	if pcre-config --cflags >/dev/null 2>&1; then
+-		CPPFLAGS="$CPPFLAGS `pcre-config --cflags`"
+-		LIBS="$LIBS `pcre-config --libs`"
+-	fi
++  CPPFLAGS="$CPPFLAGS -DHAVE_DYNAMIC_LIBPCRE"
+ 
+ { echo "$as_me:$LINENO: checking for pcre_exec in -lpcre" >&5
+ echo $ECHO_N "checking for pcre_exec in -lpcre... $ECHO_C" >&6; }
+@@ -10685,8 +10682,8 @@ fi
+ 
+ rm -f core conftest.err conftest.$ac_objext conftest_ipa8_conftest.oo \
+       conftest$ac_exeext conftest.$ac_ext
+-LIBS=$ac_check_lib_save_LIBS
+ fi
++LIBS=$ac_check_lib_save_LIBS
+ { echo "$as_me:$LINENO: result: $ac_cv_lib_pcre_pcre_exec" >&5
+ echo "${ECHO_T}$ac_cv_lib_pcre_pcre_exec" >&6; }
+ if test $ac_cv_lib_pcre_pcre_exec = yes; then
+@@ -10694,7 +10691,7 @@ if test $ac_cv_lib_pcre_pcre_exec = yes;
+ #define HAVE_LIBPCRE 1
+ _ACEOF
+ 
+-  LIBS="-lpcre $LIBS"
++  LIBS="-ldl $LIBS"
+ 
+ fi
+ 
+--- a/src/search.c	2009-01-31 16:39:54.000000000 +1100
++++ b/src/search.c	2009-03-28 15:21:33.000000000 +1100
+@@ -41,6 +41,9 @@
+ #include "error.h"
+ #include "xalloc.h"
+ #ifdef HAVE_LIBPCRE
++# ifdef HAVE_DYNAMIC_LIBPCRE
++#  include <dlfcn.h>
++# endif
+ # include <pcre.h>
+ #endif
+ 
+@@ -84,6 +87,50 @@
+ struct patterns *patterns;
+ size_t pcount;
+ 
++#ifdef HAVE_DYNAMIC_LIBPCRE
++
++# define pcre_compile dl_pcre_compile
++# define pcre_study dl_pcre_study
++# define pcre_exec dl_pcre_exec
++# define pcre_maketables dl_pcre_maketables
++
++static pcre *(*pcre_compile)(const char *pattern, int options,
++			        const char **errptr, int *erroffset,
++			        const unsigned char *tableptr);
++static pcre_extra *(*pcre_study)(const pcre *code, int options,
++				    const char **errptr);
++static int (*pcre_exec)(const pcre *code, const pcre_extra *extra,
++			   const char *subject, int length, int startoffset,
++			   int options, int *ovector, int ovecsize);
++static const unsigned char *(*pcre_maketables)(void);
++
++static int
++map_pcre(void)
++{
++  void *library;
++
++  if (pcre_maketables)
++    return 1;
++
++  if (!(library = dlopen("libpcre.so.3", RTLD_NOW)))
++    return 0;
++
++  if (!(pcre_compile = dlsym(library, "pcre_compile")))
++    return 0;
++  if (!(pcre_study = dlsym(library, "pcre_study")))
++    return 0;
++  if (!(pcre_exec = dlsym(library, "pcre_exec")))
++    return 0;
++  if (!(pcre_maketables = dlsym(library, "pcre_maketables")))
++    return 0;
++
++  return 1;
++}
++
++#else
++#define map_pcre() (1)
++#endif /* HAVE_DYNAMIC_LIBPCRE */
++
+ void
+ dfaerror (char const *mesg)
+ {
+@@ -627,6 +674,9 @@
+   char const *p;
+   char const *pnul;
+ 
++  if (!map_pcre ())
++    error (2, 0, _("The -P option is not supported: libpcre.so.3 is not available"));
++
+   /* FIXME: Remove these restrictions.  */
+   if (eolbyte != '\n')
+     error (2, 0, _("The -P and -z options cannot be combined"));
