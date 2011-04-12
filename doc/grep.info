@@ -1,9 +1,9 @@
-This is grep.info, produced by makeinfo version 4.11 from grep.texi.
+This is grep.info, produced by makeinfo version 4.13 from grep.texi.
 
 This manual is for `grep', a pattern matching engine.
 
-   Copyright (C) 1999, 2000, 2001, 2002, 2005, 2008, 2009 Free Software
-Foundation, Inc.
+   Copyright (C) 1999-2002, 2005, 2008-2010 Free Software Foundation,
+Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -25,12 +25,12 @@ grep
 
 `grep' prints lines that match a pattern.
 
-   This manual is for version 2.5.4 of GNU Grep.
+   This manual is for version 2.7 of GNU Grep.
 
    This manual is for `grep', a pattern matching engine.
 
-   Copyright (C) 1999, 2000, 2001, 2002, 2005, 2008, 2009 Free Software
-Foundation, Inc.
+   Copyright (C) 1999-2002, 2005, 2008-2010 Free Software Foundation,
+Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -305,10 +305,10 @@ these options were specified.
 
 `--label=LABEL'
      Display input actually coming from standard input as input coming
-     from file LABEL.  This is especially useful for tools like `zgrep';
-     e.g.:
+     from file LABEL.  This is especially useful when implementing
+     tools like `zgrep'; e.g.:
 
-          gzip -cd foo.gz | grep --label=foo something
+          gzip -cd foo.gz | grep --label=foo -H something
 
 `-n'
 `--line-number'
@@ -371,14 +371,24 @@ their use.
 `--context=NUM'
      Print NUM lines of leading and trailing output context.
 
+`--group-separator=STRING'
+     When `-A', `-B' or `-C' are in use, print STRING instead of `--'
+     around disjoint groups of lines.
+
+`--no-group-separator'
+     When `-A', `-B' or `-C' are in use, print disjoint groups of lines
+     adjacent to each other.
+
 
    Matching lines normally use `:' as a separator between prefix fields
 and actual line content.  Context (i.e., non-matching) lines use `-'
 instead.  When no context is specified, matching lines are simply
 output one right after another.  When nonzero context is specified,
 lines that are adjacent in the input form a group and are output one
-right after another, but disjoint groups of lines are separated by a
-`--' without any prefix and on a line of its own.  Each group may
+right after another, while a separator appears by default between
+disjoint groups on a line of its own and without any prefix.  The
+default separator is `--', however whether to include it and its
+appearance can be changed with the options above.  Each group may
 contain several matching lines when they are close enough to each other
 that two otherwise adjacent but divided groups connect and can just
 merge into a single contiguous one.
@@ -465,11 +475,10 @@ File: grep.info,  Node: Other Options,  Prev: File and Directory Selection,  Up:
      penalty.
 
 `--mmap'
-     If possible, use the `mmap' system call to read input, instead of
-     the default `read' system call.  In some situations, `--mmap'
-     yields better performance.  However, `--mmap' can cause undefined
-     behavior (including core dumps) if an input file shrinks while
-     `grep' is operating, or if an I/O error occurs.
+     This option is ignored for backwards compatibility.  It used to
+     read input with the `mmap' system call, instead of the default
+     `read' system call.  On modern systems, `--mmap' rarely if ever
+     yields better performance.
 
 `-U'
 `--binary'
@@ -661,11 +670,9 @@ was not compiled with national language support (NLS).
      behaves more like other GNU programs.  POSIX.2 requires that
      options that follow file names must be treated as file names; by
      default, such options are permuted to the front of the operand list
-     and are treated as options.  Also, POSIX.2 requires that
-     unrecognized options be diagnosed as "illegal", but since they are
-     not really against the law the default is to diagnose them as
-     "invalid".  `POSIXLY_CORRECT' also disables
-     `_N_GNU_nonoption_argv_flags_', described below.
+     and are treated as options.  Also, `POSIXLY_CORRECT' disables
+     special handling of an invalid bracket expression.  *Note
+     invalid-bracket-expr::.
 
 `_N_GNU_nonoption_argv_flags_'
      (Here `N' is `grep''s numeric process ID.)  If the Ith character
@@ -743,12 +750,15 @@ File: grep.info,  Node: Regular Expressions,  Next: Usage,  Prev: Invoking,  Up:
 A "regular expression" is a pattern that describes a set of strings.
 Regular expressions are constructed analogously to arithmetic
 expressions, by using various operators to combine smaller expressions.
-`grep' understands two different versions of regular expression syntax:
-"basic"(BRE) and "extended"(ERE).  In GNU `grep', there is no
-difference in available functionality using either syntax.  In other
-implementations, basic regular expressions are less powerful.  The
-following description applies to extended regular expressions;
-differences for basic regular expressions are summarized afterwards.
+`grep' understands three different versions of regular expression
+syntax: "basic," (BRE) "extended" (ERE) and "perl".  In GNU `grep',
+there is no difference in available functionality between basic and
+extended syntaxes.  In other implementations, basic regular expressions
+are less powerful.  The following description applies to extended
+regular expressions; differences for basic regular expressions are
+summarized afterwards.  Perl regular expressions give additional
+functionality, and are documented in pcresyntax(3) and pcrepattern(3),
+but may not be available on every system.
 
 * Menu:
 
@@ -872,7 +882,8 @@ which is the default if no `LC_CTYPE' locale is specified.
 
 `[:space:]'
      Space characters: tab, newline, vertical tab, form feed, carriage
-     return, and space.
+     return, and space.  *Note Usage::, for more discussion of matching
+     newlines.
 
 `[:upper:]'
      Upper-case letters: `A B C D E F G H I J K L M N O P Q R S T U V W
@@ -887,6 +898,12 @@ the former is independent of locale and character set.  (Note that the
 brackets in these class names are part of the symbolic names, and must
 be included in addition to the brackets delimiting the bracket
 expression.)
+
+   If you mistakenly omit the outer brackets, and search for say,
+`[:upper:]', GNU `grep' prints a diagnostic and exits with status 2, on
+the assumption that you did not intend to search for the nominally
+equivalent regular expression: `[:epru]'.  Set the `POSIXLY_CORRECT'
+environment variable to disable this feature.
 
    Most meta-characters lose their special meaning inside bracket
 expressions.
@@ -950,6 +967,12 @@ a special meaning:
 
 ``\W''
      Match non-word constituent, it is a synonym for `[^[:alnum:]]'.
+
+``\s''
+     Match whitespace, it is a synonym for `[[:space:]]'.
+
+``\S''
+     Match non-whitespace, it is a synonym for `[^[:space:]]'.
 
 
    For example, `\brat\b' matches the separate word `rat', `\Brat\B'
@@ -1156,10 +1179,32 @@ match.  *Note Invoking::, for more details about how to invoke `grep'.
      match, as there is no `aa' in the input, so the `\1' in the second
      alternate has nothing to refer back to, meaning it will never
      match anything.  (The second alternate in this example can only
-     match if the first alternate has matched - making the second one
+     match if the first alternate has matched--making the second one
      superfluous.)
 
- 14. What do `grep', `fgrep', and `egrep' stand for?
+ 14. How can I match across lines?
+
+     Standard grep cannot do this, as it is fundamentally line-based.
+     Therefore, merely using the `[:space:]' character class does not
+     match newlines in the way you might expect.  However, if your grep
+     is compiled with Perl patterns enabled, the Perl `s' modifier
+     (which makes `.' match newlines) can be used:
+
+          printf 'foo\nbar\n' | grep -P '(?s)foo.*?bar'
+
+     With the GNU `grep' option `-z' (*note File and Directory
+     Selection::), the input is terminated by null bytes.  Thus, you
+     can match newlines in the input, but the output will be the whole
+     file, so this is really only useful to determine if the pattern is
+     present:
+
+          printf 'foo\nbar\n' | grep -z -q 'foo[[:space:]]\+bar'
+
+     Failing either of those options, you need to transform the input
+     before giving it to `grep', or turn to `awk', `sed', `perl', or
+     many other utilities that are designed to operate across lines.
+
+ 15. What do `grep', `fgrep', and `egrep' stand for?
 
      The name `grep' comes from the way line editing was done on Unix.
      For example, `ed' uses the following syntax to print a list of
@@ -1230,7 +1275,8 @@ File: grep.info,  Node: GNU Free Documentation License,  Up: Copying
 
                      Version 1.3, 3 November 2008
 
-     Copyright (C) 2000, 2001, 2002, 2007, 2008 Free Software Foundation, Inc.
+     Copyright (C) 2000-2002, 2007-2008, 2010 Free Software Foundation,
+     Inc.
      `http://fsf.org/'
 
      Everyone is permitted to copy and distribute verbatim copies
@@ -1726,7 +1772,7 @@ Index
 * --basic-regexp:                        grep Programs.       (line  14)
 * --before-context:                      Context Line Control.
                                                               (line  17)
-* --binary:                              Other Options.       (line  19)
+* --binary:                              Other Options.       (line  18)
 * --binary-files:                        File and Directory Selection.
                                                               (line  12)
 * --byte-offset:                         Output Line Prefix Control.
@@ -1756,6 +1802,8 @@ Index
 * --files-without-match:                 General Output Control.
                                                               (line  29)
 * --fixed-strings:                       grep Programs.       (line  24)
+* --group-separator:                     Context Line Control.
+                                                              (line  25)
 * --help:                                Generic Program Information.
                                                               (line   7)
 * --ignore-case:                         Matching Control.    (line  21)
@@ -1779,7 +1827,7 @@ Index
                                                               (line  88)
 * --null:                                Output Line Prefix Control.
                                                               (line  63)
-* --null-data:                           Other Options.       (line  33)
+* --null-data:                           Other Options.       (line  32)
 * --only-matching:                       General Output Control.
                                                               (line  75)
 * --perl-regexp:                         grep Programs.       (line  30)
@@ -1846,7 +1894,7 @@ Index
                                                               (line  88)
 * -T:                                    Output Line Prefix Control.
                                                               (line  43)
-* -U:                                    Other Options.       (line  19)
+* -U:                                    Other Options.       (line  18)
 * -u:                                    Output Line Prefix Control.
                                                               (line  53)
 * -v:                                    Matching Control.    (line  27)
@@ -1855,7 +1903,7 @@ Index
 * -w:                                    Matching Control.    (line  32)
 * -x:                                    Matching Control.    (line  41)
 * -y:                                    Matching Control.    (line  21)
-* -z:                                    Other Options.       (line  33)
+* -z:                                    Other Options.       (line  32)
 * -Z:                                    Output Line Prefix Control.
                                                               (line  63)
 * .:                                     Fundamental Structure.
@@ -1863,7 +1911,7 @@ Index
 * ?:                                     Fundamental Structure.
                                                               (line  18)
 * _N_GNU_nonoption_argv_flags_ environment variable: Environment Variables.
-                                                              (line 175)
+                                                              (line 173)
 * after context:                         Context Line Control.
                                                               (line  13)
 * alnum character class:                 Character Classes and Bracket Expressions.
@@ -1886,7 +1934,7 @@ Index
                                                               (line  17)
 * binary files:                          File and Directory Selection.
                                                               (line   8)
-* binary files, MS-DOS/MS-Windows:       Other Options.       (line  19)
+* binary files, MS-DOS/MS-Windows:       Other Options.       (line  18)
 * blank character class:                 Character Classes and Bracket Expressions.
                                                               (line  35)
 * blank characters:                      Character Classes and Bracket Expressions.
@@ -1970,8 +2018,10 @@ Index
                                                               (line  40)
 * GREP_OPTIONS environment variable:     Environment Variables.
                                                               (line  19)
+* group separator:                       Context Line Control.
+                                                              (line  25)
 * hexadecimal digits:                    Character Classes and Bracket Expressions.
-                                                              (line  68)
+                                                              (line  69)
 * highlight markers:                     Environment Variables.
                                                               (line  29)
 * highlight, color, colour:              General Output Control.
@@ -2030,7 +2080,7 @@ Index
                                                               (line 159)
 * ms GREP_COLORS capability:             Environment Variables.
                                                               (line  79)
-* MS-DOS/MS-Windows binary files:        Other Options.       (line  19)
+* MS-DOS/MS-Windows binary files:        Other Options.       (line  18)
 * MS-DOS/MS-Windows byte offsets:        Output Line Prefix Control.
                                                               (line  53)
 * mt GREP_COLORS capability:             Environment Variables.
@@ -2099,9 +2149,9 @@ Index
 * translation of message language:       Environment Variables.
                                                               (line 159)
 * upper character class:                 Character Classes and Bracket Expressions.
-                                                              (line  64)
+                                                              (line  65)
 * upper-case letters:                    Character Classes and Bracket Expressions.
-                                                              (line  64)
+                                                              (line  65)
 * usage summary, printing:               Generic Program Information.
                                                               (line   7)
 * usage, examples:                       Usage.               (line   6)
@@ -2114,12 +2164,12 @@ Index
 * with filename prefix:                  Output Line Prefix Control.
                                                               (line  20)
 * xdigit character class:                Character Classes and Bracket Expressions.
-                                                              (line  68)
+                                                              (line  69)
 * xdigit class:                          Character Classes and Bracket Expressions.
-                                                              (line  68)
+                                                              (line  69)
 * zero-terminated file names:            Output Line Prefix Control.
                                                               (line  63)
-* zero-terminated lines:                 Other Options.       (line  33)
+* zero-terminated lines:                 Other Options.       (line  32)
 * {,M}:                                  Fundamental Structure.
                                                               (line  33)
 * {N,M}:                                 Fundamental Structure.
@@ -2132,31 +2182,32 @@ Index
 
 
 Tag Table:
-Node: Top778
-Node: Introduction1894
-Node: Invoking2626
-Node: Command-line Options3371
-Node: Generic Program Information4248
-Node: Matching Control4707
-Node: General Output Control6156
-Node: Output Line Prefix Control10037
-Node: Context Line Control12955
-Node: File and Directory Selection14319
-Node: Other Options17261
-Node: Environment Variables18842
-Node: Exit Status27678
-Node: grep Programs28319
-Node: Regular Expressions29600
-Node: Fundamental Structure30548
-Node: Character Classes and Bracket Expressions32187
-Node: The Backslash Character and Special Expressions35982
-Node: Anchoring36858
-Node: Back-references and Subexpressions37185
-Node: Basic vs Extended37895
-Node: Usage38892
-Node: Reporting Bugs44738
-Node: Copying45400
-Node: GNU Free Documentation License46483
-Node: Index71602
+Node: Top764
+Node: Introduction1864
+Node: Invoking2596
+Node: Command-line Options3341
+Node: Generic Program Information4218
+Node: Matching Control4677
+Node: General Output Control6126
+Node: Output Line Prefix Control10007
+Node: Context Line Control12942
+Node: File and Directory Selection14695
+Node: Other Options17637
+Node: Environment Variables19126
+Node: Exit Status27817
+Node: grep Programs28458
+Node: Regular Expressions29739
+Node: Fundamental Structure30870
+Node: Character Classes and Bracket Expressions32509
+Ref: invalid-bracket-expr35511
+Node: The Backslash Character and Special Expressions36688
+Node: Anchoring37701
+Node: Back-references and Subexpressions38028
+Node: Basic vs Extended38738
+Node: Usage39735
+Node: Reporting Bugs46569
+Node: Copying47231
+Node: GNU Free Documentation License48314
+Node: Index73436
 
 End Tag Table

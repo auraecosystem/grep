@@ -1,6 +1,5 @@
 /* dosbuf.c
-   Copyright (C) 1992, 1997, 1998, 1999, 2000, 2001, 2002, 2004,
-   2005, 2006, 2007, 2008, 2009 Free Software Foundation, Inc.
+   Copyright (C) 1992, 1997-2002, 2004-2010 Free Software Foundation, Inc.
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -29,6 +28,8 @@
 
 */
 
+#include <config.h>
+
 typedef enum {
   UNKNOWN, DOS_BINARY, DOS_TEXT, UNIX_TEXT
 } File_type;
@@ -50,10 +51,10 @@ static int       inp_map_idx = 0, out_map_idx = 1;
 
 /* Guess DOS file type by looking at its contents.  */
 static inline File_type
-guess_type (char *buf, register size_t buflen)
+guess_type (char *buf, size_t buflen)
 {
   int crlf_seen = 0;
-  register char *bp = buf;
+  char *bp = buf;
 
   while (buflen--)
     {
@@ -76,7 +77,7 @@ guess_type (char *buf, register size_t buflen)
    Return the count of characters left in the buffer.
    Build table to map character positions when reporting byte counts.  */
 static inline int
-undossify_input (register char *buf, size_t buflen)
+undossify_input (char *buf, size_t buflen)
 {
   int chars_left = 0;
 
@@ -123,10 +124,9 @@ undossify_input (register char *buf, size_t buflen)
                   if (inp_map_idx >= dos_pos_map_size - 1)
                     {
                       dos_pos_map_size = inp_map_idx ? inp_map_idx * 2 : 1000;
-                      dos_pos_map =
-                        (struct dos_map *)xrealloc((char *)dos_pos_map,
-						   dos_pos_map_size *
-						   sizeof(struct dos_map));
+                      dos_pos_map = xrealloc((char *)dos_pos_map,
+                                             dos_pos_map_size *
+                                             sizeof(struct dos_map));
                     }
 
                   if (!inp_map_idx)

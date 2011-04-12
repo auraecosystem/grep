@@ -1,5 +1,4 @@
-# Copyright 1997, 1998, 2005, 2006, 2007, 2008, 2009 Free Software
-# Foundation, Inc.
+# Copyright 1997-1998, 2005-2010 Free Software Foundation, Inc.
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -14,22 +13,15 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-AUTOMAKE_OPTIONS = ../src/ansi2knr
 
-SUBDIRS = posix
+include gnulib.mk
 
-noinst_LIBRARIES = libgreputils.a
+INCLUDES = -I.. -I$(srcdir)
 
-INCLUDES = -I.. -I$(srcdir) -I../intl
-DEFS = -DLIBDIR=\"$(libdir)\" @DEFS@
+AM_CFLAGS += $(GNULIB_WARN_CFLAGS) $(WERROR_CFLAGS)
 
-libgreputils_a_SOURCES = \
-  closeout.c error.c exclude.c hard-locale.c \
-  isdir.c obstack.c quotearg.c savedir.c xmalloc.c xstrtol.c  xstrtoumax.c
+libgreputils_a_SOURCES += \
+  savedir.c savedir.h
 
-libgreputils_a_LIBADD = @LIBOBJS@ @ALLOCA@
-noinst_HEADERS = \
-  closeout.h error.h exclude.h fnmatch.h getopt.h \
-  hard-locale.h obstack.h quotearg.h regex.h savedir.h xalloc.h xstrtol.h
-
-EXTRA_DIST = strtol.c malloc.c realloc.c
+libgreputils_a_LIBADD += $(LIBOBJS) $(ALLOCA)
+libgreputils_a_DEPENDENCIES += $(LIBOBJS) $(ALLOCA)

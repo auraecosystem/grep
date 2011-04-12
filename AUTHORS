@@ -1,6 +1,5 @@
-  Copyright (C) 1992, 1997, 1998, 1999, 2000, 2001, 2002, 2004,
-  2005, 2006, 2007, 2008, 2009 Free Software Foundation, Inc.
-  
+  Copyright (C) 1992, 1997-2002, 2004-2010 Free Software Foundation, Inc.
+
   Copying and distribution of this file, with or without modification,
   are permitted in any medium without royalty provided the copyright
   notice and this notice are preserved.
@@ -47,9 +46,15 @@ send me email.
 
 Alain Magloire maintained GNU grep until version 2.5e.
 
-Bernhard "Bero" Rosenkr‰nzer <bero@arklinux.org> maintained GNU grep until
+Bernhard "Bero" Rosenkr√§nzer <bero@arklinux.org> maintained GNU grep until
 version 2.5.1, ie. from Sep 2001 till 2003.
 
 Stepan Kasal <kasal@ucw.cz> maintained GNU grep since Feb 2004.
 
 Tony Abou-Assaleh <taa@acm.org> maintains GNU grep since Oct 2007.
+
+Jim Meyering <jim@meyering.net> and Paolo Bonzini <bonzini@gnu.org> maintain GNU grep since Nov 2009.
+
+;; Local Variables:
+;; coding: utf-8
+;; End:

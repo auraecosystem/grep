@@ -1,7 +1,7 @@
 # Process this file with automake to create Makefile.in
 # Makefile.am for grep/doc.
 #
-# Copyright 2008, 2009 Free Software Foundation, Inc.
+# Copyright 2008-2010 Free Software Foundation, Inc.
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -16,21 +16,20 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-AUTOMAKE_OPTIONS=no-dependencies
-
 info_TEXINFOS = grep.texi
 grep_TEXINFOS = fdl.texi
 
 man_MANS = grep.1 fgrep.1 egrep.1
 
-EXTRA_DIST = grep.1 egrep.man fgrep.man
+EXTRA_DIST = grep.in.1
+CLEANFILES = grep.1 egrep.1 fgrep.1
 
-CLEANFILES = egrep.1 fgrep.1
+grep.1: grep.in.1
+	$(AM_V_GEN)rm -f $@ $@-t
+	$(AM_V_at)sed 's/@''VERSION@/$(VERSION)/' \
+	  < $(srcdir)/grep.in.1 > $@-t && chmod 444 $@-t && mv $@-t $@
 
-fgrep.1: fgrep.man
-	inst=`echo "grep" | sed '$(transform)'`.1; \
-sed -e "s%@grep@%$$inst%g" $(srcdir)/fgrep.man > $@
-
-egrep.1: egrep.man
-	inst=`echo "grep" | sed '$(transform)'`.1; \
-sed -e "s%@grep@%$$inst%g" $(srcdir)/egrep.man > $@
+egrep.1 fgrep.1: Makefile.am
+	$(AM_V_GEN)rm -f $@ $@-t
+	$(AM_V_at)inst=`echo grep | sed '$(transform)'`.1 \
+	  && echo ".so man1/$$inst" > $@-t && chmod 444 $@-t && mv $@-t $@

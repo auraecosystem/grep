@@ -1,6 +1,5 @@
 ## Process this file with automake to create Makefile.in
-# Copyright 1997, 1998, 2005, 2006, 2007, 2008, 2009 Free Software
-# Foundation, Inc.
+# Copyright 1997-1998, 2005-2010 Free Software Foundation, Inc.
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -15,21 +14,32 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-AUTOMAKE_OPTIONS = ansi2knr
-
 LN = ln
 
+AM_CFLAGS = $(WARN_CFLAGS) $(WERROR_CFLAGS)
+
+# Tell the linker to omit references to unused shared libraries.
+AM_LDFLAGS = $(IGNORE_UNUSED_LIBRARIES_CFLAGS)
+
 bin_PROGRAMS = grep egrep fgrep
-grep_SOURCES  =  grep.c  search.c kwset.c dfa.c
-egrep_SOURCES = egrep.c esearch.c kwset.c dfa.c
-fgrep_SOURCES = fgrep.c fsearch.c kwset.c
-noinst_HEADERS = grep.h dfa.h kwset.h getpagesize.h system.h mbsupport.h
+grep_SOURCES  = grep.c
+egrep_SOURCES = egrep.c
+fgrep_SOURCES = fgrep.c
+noinst_HEADERS = grep.h dfa.h kwset.h search.h system.h mbsupport.h
 
-LDADD = @INTLLIBS@ ../lib/libgreputils.a
-datadir = $(prefix)/@DATADIRNAME@
+noinst_LIBRARIES = libgrep.a
+libgrep_a_SOURCES = kwset.c dfa.c searchutils.c dfasearch.c kwsearch.c \
+	pcresearch.c main.c
+
+# Sometimes, the expansion of $(LIBINTL) includes -lc which may
+# include modules defining variables like `optind', so libgreputils.a
+# must precede $(LIBINTL) in order to ensure we use GNU getopt.
+# But libgreputils.a must also follow $(LIBINTL), since libintl uses
+# replacement functions defined in libgreputils.a.
+LDADD = libgrep.a ../lib/libgreputils.a $(LIBINTL) ../lib/libgreputils.a
+
+grep_LDADD = $(LDADD) $(LIB_PCRE)
 localedir = $(datadir)/locale
-INCLUDES = -I../intl -I$(top_srcdir)/lib -DLOCALEDIR=\"$(localedir)\"
+AM_CPPFLAGS = -I$(top_builddir)/lib -I$(top_srcdir)/lib
 
-EXTRA_DIST = \
-             dosbuf.c \
-             vms_fab.c vms_fab.h
+EXTRA_DIST = dosbuf.c

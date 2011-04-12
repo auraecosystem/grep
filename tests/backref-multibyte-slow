@@ -1,0 +1,20 @@
+#!/bin/sh
+# This was approximately quadratic up to grep-2.6.3
+. "${srcdir=.}/init.sh"; path_prepend_ ../src
+
+require_en_utf8_locale_
+require_timeout_
+
+fail=0
+
+# Create a 13000-line input
+$AWK 'BEGIN {for (i=0; i<13000; i++) print "aba"}' /dev/null > in || fail=1
+
+for LOC in en_US.UTF-8; do
+  out=out-$LOC
+  LC_ALL=$LOC timeout 5s grep -E '^([a-z]).\1$' in > $out 2>&1
+  test $? = 0 || fail=1
+  compare $out in || fail=1
+done
+
+Exit $fail

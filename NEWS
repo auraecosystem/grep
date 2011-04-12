@@ -1,11 +1,143 @@
-  Copyright (C) 1992, 1997, 1998, 1999, 2000, 2001, 2002, 2004,
-  2005, 2006, 2007, 2008, 2009 Free Software Foundation, Inc.
-  
-  Copying and distribution of this file, with or without modification,
-  are permitted in any medium without royalty provided the copyright
-  notice and this notice are preserved.
+GNU grep NEWS                                    -*- outline -*-
 
-Version 2.5.4
+* Noteworthy changes in release 2.7 (2010-09-16) [stable]
+
+** Bug fixes
+
+  grep --include=FILE works once again, rather than working like --exclude=FILE
+  [bug introduced in grep-2.6]
+
+  Searching with grep -Fw for an empty string would not match an
+  empty line. [bug present since "the beginning"]
+
+  X{0,0} is implemented correctly.  It used to be a synonym of X{0,1}.
+  [bug present since "the beginning"]
+
+  In multibyte locales, regular expressions including backreferences
+  no longer exhibit quadratic complexity (i.e., they are orders
+  of magnitude faster). [bug present since multi-byte character set
+  support was introduced in 2.5.2]
+
+  In UTF-8 locales, regular expressions including "." can be orders
+  of magnitude faster.  For example, "grep ." is now twice as fast
+  as "grep -v ^$", instead of being immensely slower.  It remains
+  slow in other multibyte locales. [bug present since multi-byte
+  character set support was introduced in 2.5.2]
+
+  --mmap was meant to be ignored in 2.6.x, but it was instead
+  removed by mistake.  [bug introduced in 2.6]
+
+** New features
+
+  grep now diagnoses (and fails with exit status 2) commonly mistyped
+  regular expression like [:space:], [:digit:], etc.  Before, those were
+  silently interpreted as [ac:eps] and [dgit:] respectively.  Virtually
+  all who make that class of mistake should have used [[:space:]] or
+  [[:digit:]].  This new behavior is disabled when the POSIXLY_CORRECT
+  environment variable is set.
+
+  On systems using glibc, grep can support equivalence classes.  However,
+  whether they actually work depends on glibc's locale definitions.
+
+* Noteworthy changes in release 2.6.3 (2010-04-02) [stable]
+
+** Bug fixes
+
+  Searching with grep -F for an empty string in a multibyte locale
+  would hang grep. [bug introduced in 2.6.2]
+
+  PCRE support is once again detected on systems with <pcre/pcre.h>
+  [bug introduced in 2.6.2]
+
+
+* Noteworthy changes in release 2.6.2 (2010-03-29) [stable]
+
+** Bug fixes
+
+  grep -F no longer mistakenly reports a match when searching
+  for an incomplete prefix of a multibyte character.
+  [bug present since "the beginning"]
+
+  grep -F no longer goes into an infinite loop when it finds a match for an
+  incomplete (non-prefix of a) multibyte character.  [bug introduced in 2.6]
+
+  Using any of the --include or --exclude* options would cause a NULL
+  dereference.  [bugs introduced in 2.6]
+
+** Build-related
+
+  configure no longer relies on pkg-config to detect PCRE support.
+
+
+* Noteworthy changes in release 2.6.1 (2010-03-25) [stable]
+
+** Bug fixes
+
+  Character classes could cause a segmentation fault if they included a
+  multibyte character.  [bug introduced in 2.6]
+
+  Character ranges would not work in single-byte character sets other
+  than C (for example, ISO-8859-1 or KOI8-R) and some multi-byte locales.
+  For example, this should print "1", but would find no match:
+    $ echo 1 | env -i LC_COLLATE=en_US.UTF-8 grep '[0-9]'
+  [bug introduced in 2.6]
+
+  The output of grep was incorrect for whole-word (-w) matches if the
+  patterns included a back-reference. [bug introduced in grep-2.5.2]
+
+** Portability
+
+  Avoid a link failure on Solaris 8.
+
+
+* Noteworthy changes in release 2.6 (2010-03-23) [stable]
+
+** Speed improvements
+
+  grep is much faster on multibyte character sets, especially (but not
+  limited to) UTF-8 character sets.  The speed improvement is also very
+  pronounced with case-insensitive matches.
+
+** Bug fixes
+
+  Character classes would malfunction in multi-byte locales when using grep -i.
+  Examples which would print nothing for LC_ALL=en_US.UTF-8 include:
+  - for ranges, echo Z | grep -i '[a-z]'
+  - for single characters, echo Y | grep -i '[y]'
+  - for character types, echo Y | grep -i '[[:lower:]]'
+
+  grep -i -o would fail to report some matches; grep -i --color, while not
+  missing any line containing a match, would fail to color some matches.
+
+  grep would fail to report a match in a multibyte character set other than
+  UTF-8, if another match occurred earlier in the line but started in the
+  middle of a multibyte character.
+
+  Various bugs in grep -P, caused by expressions such as [^b] or \S matching
+  newlines, were fixed.  grep -P also supports the special sequences \Z and
+  \z, and can be combined with the command-line option -z to perform searches
+  on NUL-separated records.
+
+  grep would mistakenly exit with status 1 upon error, rather than 2,
+  as it is documented to do.
+
+  Using options like -1 -2 or -1 -v -2 results in two lines of
+  context (the last value that appears on the command line) instead
+  twelve (the concatenation of all the values).  This is consistent
+  with the behavior of options -A/-B/-C.
+
+  Two new command-line options, --group-separator=ARGUMENT and
+  --no-group-separator, enable further customization of the output
+  when -A, -B or -C is being used.
+
+** Other changes
+
+  egrep accepts the -E option and fgrep accepts the -F option.  If egrep
+  and fgrep are given another of the -E/-F/-G options, they print a more
+  meaningful error message.
+
+* Noteworthy changes in release 2.5.4 (2009-02-10) [stable]
+
   - This is a bugfix release. No new features.
 
 Version 2.5.3
@@ -98,7 +230,7 @@ Version 2.4.1
     --binary-files='binary' (the default) outputs a 1-line summary of matches.
     --binary-files='without-match' assumes binary files do not match.
     --binary-files='text' treats binary files as text
-	(equivalent to the -a or --text option).
+        (equivalent to the -a or --text option).
 
   - New option -I; equivalent to --binary-files='without-match'.
 
@@ -251,3 +383,17 @@ will now have their bravery amply "rewarded", for the interface
 to that file has been completely changed.  Some changes were
 necessary to track the evolution of the regex package, and since
 I was changing it anyway I decided to do a general cleanup.
+
+========================================================================
+Copyright (C) 1992, 1997-2002, 2004-2010 Free Software Foundation, Inc.
+
+  Copying and distribution of this file, with or without modification,
+  are permitted in any medium without royalty provided the copyright
+  notice and this notice are preserved.
+
+Permission is granted to copy, distribute and/or modify this document
+under the terms of the GNU Free Documentation License, Version 1.3 or
+any later version published by the Free Software Foundation; with no
+Invariant Sections, with no Front-Cover Texts, and with no Back-Cover
+Texts.  A copy of the license is included in the ``GNU Free
+Documentation License'' file as part of this distribution.

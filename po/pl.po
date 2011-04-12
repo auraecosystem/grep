@@ -1,129 +1,504 @@
 # Polish translation of the GNU grep messages
-# Copyright (C) 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2005, 2007, 2008, 2009 Free Software Foundation, Inc.
+# Copyright (C) 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2005, 2007, 2008, 2009, 2010 Free Software Foundation, Inc.
 # This file is distributed under the same license as the grep package.
-# Rafał Maszkowski <rzm@icm.edu.pl>, 1996-2002, 2005, 2007-2009.
-#
-# my „smart" mutt needs this line
-#
+# Rafał Maszkowski <rzm@icm.edu.pl>, 1996-2002, 2005, 2007-2010.
 msgid ""
 msgstr ""
-"Project-Id-Version: GNU grep 2.5.4-pre6\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-03 14:51-0400\n"
-"PO-Revision-Date: 2009-02-02 13:30+0100\n"
+"Project-Id-Version: GNU grep 2.6\n"
+"Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
+"POT-Creation-Date: 2010-09-16 18:30+0200\n"
+"PO-Revision-Date: 2010-03-24 16:30+0100\n"
 "Last-Translator: Rafał Maszkowski <rzm@icm.edu.pl>\n"
 "Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
+"Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8-bit\n"
 
-#: src/dfa.c:184 src/dfa.c:195 src/dfa.c:206 src/search.c:704 lib/regex.c:1344
-msgid "Memory exhausted"
-msgstr "Pamięć wyczerpana"
+#: lib/argmatch.c:133
+#, fuzzy, c-format
+msgid "invalid argument %s for %s"
+msgstr "błędny argument %s%s `%s'"
 
-#: src/dfa.c:537 src/dfa.c:540 src/dfa.c:558 src/dfa.c:569 src/dfa.c:593
-#: src/dfa.c:652 src/dfa.c:657 src/dfa.c:670 src/dfa.c:671 src/dfa.c:1049
-#: src/dfa.c:1052 src/dfa.c:1076 src/dfa.c:1080 src/dfa.c:1081 src/dfa.c:1084
-#: src/dfa.c:1096 src/dfa.c:1097
-msgid "Unbalanced ["
-msgstr "[ nie do pary"
+#: lib/argmatch.c:134
+#, c-format
+msgid "ambiguous argument %s for %s"
+msgstr ""
 
-#: src/dfa.c:789
-msgid "Unfinished \\ escape"
-msgstr "Niedokończona sekwencja \\"
+#: lib/argmatch.c:153
+#, fuzzy, c-format
+msgid "Valid arguments are:"
+msgstr "błędny argument %s%s `%s'"
 
-#. Cases:
-#. {M} - exact count
-#. {M,} - minimum count, maximum is infinity
-#. {M,N} - M through N
-#: src/dfa.c:922 src/dfa.c:928 src/dfa.c:938 src/dfa.c:946 src/dfa.c:961
-msgid "unfinished repeat count"
-msgstr "niedokończona specyfikacja liczby powtórzeń"
+#: lib/closeout.c:112
+msgid "write error"
+msgstr "błąd zapisu"
 
-#: src/dfa.c:935 src/dfa.c:952 src/dfa.c:960 src/dfa.c:964
-msgid "malformed repeat count"
-msgstr "źle sformatowana specyfikacja liczby powtórzeń"
+#: lib/error.c:181
+msgid "Unknown system error"
+msgstr "Nieznany błąd systemowy"
 
-#: src/dfa.c:1306
-msgid "Unbalanced ("
-msgstr "( nie do pary"
+#: lib/getopt.c:527 lib/getopt.c:543
+#, c-format
+msgid "%s: option '%s' is ambiguous\n"
+msgstr "%s: opcja '%s' jest niejednoznaczna\n"
 
-#: src/dfa.c:1431
-msgid "No syntax specified"
-msgstr "Brak specyfikacji składni"
+#: lib/getopt.c:576 lib/getopt.c:580
+#, c-format
+msgid "%s: option '--%s' doesn't allow an argument\n"
+msgstr "%s: opcja '--%s' nie może mieć argumentu\n"
 
-#: src/dfa.c:1439
-msgid "Unbalanced )"
-msgstr ") nie do pary"
+#: lib/getopt.c:589 lib/getopt.c:594
+#, c-format
+msgid "%s: option '%c%s' doesn't allow an argument\n"
+msgstr "%s: opcja '%c%s' nie może mieć argumentu\n"
 
-#. If XALLOC_FAIL_FUNC is NULL, or does return, display this message
-#. before exiting when memory is exhausted.  Goes through gettext.
-#: src/dfa.c:3007 src/kwset.c:178 src/kwset.c:186 src/kwset.c:409
-#: src/search.c:68 src/search.c:225 lib/obstack.c:471 lib/xmalloc.c:66
+#: lib/getopt.c:637 lib/getopt.c:656
+#, fuzzy, c-format
+msgid "%s: option '--%s' requires an argument\n"
+msgstr "%s: opcja '%s' wymaga argumentu\n"
+
+#: lib/getopt.c:694 lib/getopt.c:697
+#, c-format
+msgid "%s: unrecognized option '--%s'\n"
+msgstr "%s: nierozpoznana opcja '--%s'\n"
+
+#: lib/getopt.c:705 lib/getopt.c:708
+#, c-format
+msgid "%s: unrecognized option '%c%s'\n"
+msgstr "%s: nierozpoznana opcja '%c%s'\n"
+
+#: lib/getopt.c:757 lib/getopt.c:760
+#, c-format
+msgid "%s: invalid option -- '%c'\n"
+msgstr "%s: błędna opcja -- '%c'\n"
+
+#: lib/getopt.c:810 lib/getopt.c:827 lib/getopt.c:1035 lib/getopt.c:1053
+#, c-format
+msgid "%s: option requires an argument -- '%c'\n"
+msgstr "%s: opcja wymaga argumentu -- '%c'\n"
+
+#: lib/getopt.c:883 lib/getopt.c:899
+#, c-format
+msgid "%s: option '-W %s' is ambiguous\n"
+msgstr "%s: opcja '-W %s' jest niejednoznaczna\n"
+
+#: lib/getopt.c:923 lib/getopt.c:941
+#, c-format
+msgid "%s: option '-W %s' doesn't allow an argument\n"
+msgstr "%s: opcja '-W %s' nie może mieć argumentu\n"
+
+#: lib/getopt.c:962 lib/getopt.c:980
+#, fuzzy, c-format
+msgid "%s: option '-W %s' requires an argument\n"
+msgstr "%s: opcja '%s' wymaga argumentu\n"
+
+#: lib/obstack.c:423 lib/obstack.c:425 lib/xalloc-die.c:34 src/dfasearch.c:167
+#: src/kwset.c:178 src/kwset.c:186 src/kwset.c:409 src/pcresearch.c:149
+#, c-format
 msgid "memory exhausted"
 msgstr "pamięć wyczerpana"
 
-#: src/grep.c:404
+#. TRANSLATORS:
+#. Get translations for open and closing quotation marks.
+#.
+#. The message catalog should translate "`" to a left
+#. quotation mark suitable for the locale, and similarly for
+#. "'".  If the catalog has no translation,
+#. locale_quoting_style quotes `like this', and
+#. clocale_quoting_style quotes "like this".
+#.
+#. For example, an American English Unicode locale should
+#. translate "`" to U+201C (LEFT DOUBLE QUOTATION MARK), and
+#. should translate "'" to U+201D (RIGHT DOUBLE QUOTATION
+#. MARK).  A British English Unicode locale should instead
+#. translate these to U+2018 (LEFT SINGLE QUOTATION MARK)
+#. and U+2019 (RIGHT SINGLE QUOTATION MARK), respectively.
+#.
+#. If you don't know what to put here, please see
+#. <http://en.wikipedia.org/wiki/Quotation_mark#Glyphs>
+#. and use glyphs suitable for your language.
+#: lib/quotearg.c:272
+msgid "`"
+msgstr "„"
+
+#: lib/quotearg.c:273
+msgid "'"
+msgstr "\""
+
+#: lib/regcomp.c:134
+msgid "Success"
+msgstr "Udane"
+
+#: lib/regcomp.c:137
+msgid "No match"
+msgstr "Nie pasuje"
+
+#: lib/regcomp.c:140
+msgid "Invalid regular expression"
+msgstr "Błędne wyrażenie regularne"
+
+#: lib/regcomp.c:143
+msgid "Invalid collation character"
+msgstr "Znak błędny dla bieżącego uporządkowania"
+
+#: lib/regcomp.c:146
+msgid "Invalid character class name"
+msgstr "Błędna nazwa klasy znaków"
+
+#: lib/regcomp.c:149
+msgid "Trailing backslash"
+msgstr "Końcowy ukośnik odwrotny"
+
+#: lib/regcomp.c:152
+msgid "Invalid back reference"
+msgstr "Błędne odwołanie"
+
+#: lib/regcomp.c:155
+msgid "Unmatched [ or [^"
+msgstr "Nie pasujący [ albo [^"
+
+#: lib/regcomp.c:158
+msgid "Unmatched ( or \\("
+msgstr "Nie pasujący ( albo \\("
+
+#: lib/regcomp.c:161
+msgid "Unmatched \\{"
+msgstr "Nie pasujący \\{"
+
+#: lib/regcomp.c:164
+msgid "Invalid content of \\{\\}"
+msgstr "Błędna zawartość \\{\\}"
+
+#: lib/regcomp.c:167
+msgid "Invalid range end"
+msgstr "Błędny koniec zakresu"
+
+#: lib/regcomp.c:170
+msgid "Memory exhausted"
+msgstr "Pamięć wyczerpana"
+
+#: lib/regcomp.c:173
+msgid "Invalid preceding regular expression"
+msgstr "Błędne poprzedzające wyrażenie regularne"
+
+#: lib/regcomp.c:176
+msgid "Premature end of regular expression"
+msgstr "Przedwczesny koniec wyrażenia regularnego"
+
+#: lib/regcomp.c:179
+msgid "Regular expression too big"
+msgstr "Za duże wyrażenie regularne"
+
+#: lib/regcomp.c:182
+msgid "Unmatched ) or \\)"
+msgstr "Nie pasujący ) albo \\)"
+
+#: lib/regcomp.c:703
+msgid "No previous regular expression"
+msgstr "Brak poprzedniego wyrażenia regularnego"
+
+#: lib/version-etc.c:74
+#, c-format
+msgid "Packaged by %s (%s)\n"
+msgstr ""
+
+#: lib/version-etc.c:77
+#, c-format
+msgid "Packaged by %s\n"
+msgstr ""
+
+#. TRANSLATORS: Translate "(C)" to the copyright symbol
+#. (C-in-a-circle), if this symbol is available in the user's
+#. locale.  Otherwise, do not translate "(C)"; leave it as-is.
+#: lib/version-etc.c:84
+msgid "(C)"
+msgstr ""
+
+#: lib/version-etc.c:86
+#, fuzzy
+msgid ""
+"\n"
+"License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl."
+"html>.\n"
+"This is free software: you are free to change and redistribute it.\n"
+"There is NO WARRANTY, to the extent permitted by law.\n"
+"\n"
+msgstr ""
+"Copyright (C) %s Free Software Foundation, Inc.\n"
+"Licencja GPLv3+: GNU GPL wersja 3 albo późniejsza  <http://gnu.org/licenses/"
+"gpl.html>\n"
+"To jest wolne oprogramowanie: możesz je modyfikować i rozpowszechniać.\n"
+"Autorzy NIE DAJĄ GWARANCJI w granicach dozwolonych prawem.\n"
+
+#. TRANSLATORS: %s denotes an author name.
+#: lib/version-etc.c:102
+#, c-format
+msgid "Written by %s.\n"
+msgstr ""
+
+#. TRANSLATORS: Each %s denotes an author name.
+#: lib/version-etc.c:106
+#, c-format
+msgid "Written by %s and %s.\n"
+msgstr ""
+
+#. TRANSLATORS: Each %s denotes an author name.
+#: lib/version-etc.c:110
+#, c-format
+msgid "Written by %s, %s, and %s.\n"
+msgstr ""
+
+#. TRANSLATORS: Each %s denotes an author name.
+#. You can use line breaks, estimating that each author name occupies
+#. ca. 16 screen columns and that a screen line has ca. 80 columns.
+#: lib/version-etc.c:117
+#, c-format
+msgid ""
+"Written by %s, %s, %s,\n"
+"and %s.\n"
+msgstr ""
+
+#. TRANSLATORS: Each %s denotes an author name.
+#. You can use line breaks, estimating that each author name occupies
+#. ca. 16 screen columns and that a screen line has ca. 80 columns.
+#: lib/version-etc.c:124
+#, c-format
+msgid ""
+"Written by %s, %s, %s,\n"
+"%s, and %s.\n"
+msgstr ""
+
+#. TRANSLATORS: Each %s denotes an author name.
+#. You can use line breaks, estimating that each author name occupies
+#. ca. 16 screen columns and that a screen line has ca. 80 columns.
+#: lib/version-etc.c:131
+#, c-format
+msgid ""
+"Written by %s, %s, %s,\n"
+"%s, %s, and %s.\n"
+msgstr ""
+
+#. TRANSLATORS: Each %s denotes an author name.
+#. You can use line breaks, estimating that each author name occupies
+#. ca. 16 screen columns and that a screen line has ca. 80 columns.
+#: lib/version-etc.c:139
+#, c-format
+msgid ""
+"Written by %s, %s, %s,\n"
+"%s, %s, %s, and %s.\n"
+msgstr ""
+
+#. TRANSLATORS: Each %s denotes an author name.
+#. You can use line breaks, estimating that each author name occupies
+#. ca. 16 screen columns and that a screen line has ca. 80 columns.
+#: lib/version-etc.c:147
+#, c-format
+msgid ""
+"Written by %s, %s, %s,\n"
+"%s, %s, %s, %s,\n"
+"and %s.\n"
+msgstr ""
+
+#. TRANSLATORS: Each %s denotes an author name.
+#. You can use line breaks, estimating that each author name occupies
+#. ca. 16 screen columns and that a screen line has ca. 80 columns.
+#: lib/version-etc.c:156
+#, c-format
+msgid ""
+"Written by %s, %s, %s,\n"
+"%s, %s, %s, %s,\n"
+"%s, and %s.\n"
+msgstr ""
+
+#. TRANSLATORS: Each %s denotes an author name.
+#. You can use line breaks, estimating that each author name occupies
+#. ca. 16 screen columns and that a screen line has ca. 80 columns.
+#: lib/version-etc.c:167
+#, c-format
+msgid ""
+"Written by %s, %s, %s,\n"
+"%s, %s, %s, %s,\n"
+"%s, %s, and others.\n"
+msgstr ""
+
+#. TRANSLATORS: The placeholder indicates the bug-reporting address
+#. for this package.  Please add _another line_ saying
+#. "Report translation bugs to <...>\n" with the address for translation
+#. bugs (typically your translation team's web or email address).
+#: lib/version-etc.c:245 src/main.c:1474
+#, c-format
+msgid ""
+"\n"
+"Report bugs to: %s\n"
+msgstr ""
+"\n"
+"Raporty o błędach należy wysyłać do %s\n"
+
+#: lib/version-etc.c:247
+#, fuzzy, c-format
+msgid "Report %s bugs to: %s\n"
+msgstr ""
+"\n"
+"Raporty o błędach należy wysyłać do %s\n"
+
+#: lib/version-etc.c:251
+#, fuzzy, c-format
+msgid "%s home page: <%s>\n"
+msgstr "Strona domowa Grepa GNU: %s\n"
+
+#: lib/version-etc.c:253
+#, c-format
+msgid "%s home page: <http://www.gnu.org/software/%s/>\n"
+msgstr ""
+
+#: lib/version-etc.c:256 src/main.c:1477
+msgid "General help using GNU software: <http://www.gnu.org/gethelp/>\n"
+msgstr "Pomoc w używaniu oprogramowania GNU: http://www.gnu.org/gethelp/\n"
+
+#: lib/xstrtol-error.c:63
+#, c-format
+msgid "invalid %s%s argument `%s'"
+msgstr "błędny argument %s%s `%s'"
+
+#: lib/xstrtol-error.c:68
+#, c-format
+msgid "invalid suffix in %s%s argument `%s'"
+msgstr "błędny przyrostek w argumencie %s%s `%s'"
+
+#: lib/xstrtol-error.c:72
+#, c-format
+msgid "%s%s argument `%s' too large"
+msgstr "argument %s%s `%s' jest za duży"
+
+#: src/dfa.c:791 src/dfa.c:794 src/dfa.c:814 src/dfa.c:827 src/dfa.c:839
+#: src/dfa.c:905 src/dfa.c:914 src/dfa.c:917 src/dfa.c:922 src/dfa.c:936
+#: src/dfa.c:989
+msgid "unbalanced ["
+msgstr "[ nie do pary"
+
+#: src/dfa.c:850
+msgid "invalid character class"
+msgstr "błędna nazwa klasy znaków"
+
+#: src/dfa.c:1035
+msgid "character class syntax is [[:space:]], not [:space:]"
+msgstr ""
+
+#: src/dfa.c:1103
+msgid "unfinished \\ escape"
+msgstr "niedokończona sekwencja \\"
+
+#: src/dfa.c:1236 src/dfa.c:1242 src/dfa.c:1252 src/dfa.c:1260 src/dfa.c:1275
+msgid "unfinished repeat count"
+msgstr "niedokończona specyfikacja liczby powtórzeń"
+
+#: src/dfa.c:1249 src/dfa.c:1266 src/dfa.c:1274 src/dfa.c:1278
+msgid "malformed repeat count"
+msgstr "źle sformatowana specyfikacja liczby powtórzeń"
+
+#: src/dfa.c:1623
+msgid "unbalanced ("
+msgstr "( nie do pary"
+
+#: src/dfa.c:1756
+msgid "no syntax specified"
+msgstr "brak specyfikacji składni"
+
+#: src/dfa.c:1764
+msgid "unbalanced )"
+msgstr ") nie do pary"
+
+#: src/egrep.c:16
+msgid "PATTERN is an extended regular expression (ERE).\n"
+msgstr "WZORZEC jest rozszerzonym wyrażeniem regularnym (ERE).\n"
+
+#: src/egrep.c:18
+msgid "Invocation as `egrep' is deprecated; use `grep -E' instead.\n"
+msgstr "Wywołanie jako `egrep' jest przestarzałe, używał `grep -E'.\n"
+
+#: src/fgrep.c:10
+msgid "PATTERN is a set of newline-separated fixed strings.\n"
+msgstr "WZORZEC jest zbiorem łańcuchów znaków w kolejnych liniach.\n"
+
+#: src/fgrep.c:12
+msgid "Invocation as `fgrep' is deprecated; use `grep -F' instead.\n"
+msgstr "Wywołanie jako `fgrep' jest przestarzałe, używał `grep -F'.\n"
+
+#: src/grep.c:32
+msgid "PATTERN is, by default, a basic regular expression (BRE).\n"
+msgstr "WZORZEC domyślnie jest podstawowym wyrażeniem regularnym (BRE).\n"
+
+#: src/grep.c:34
+msgid ""
+"`egrep' means `grep -E'.  `fgrep' means `grep -F'.\n"
+"Direct invocation as either `egrep' or `fgrep' is deprecated.\n"
+msgstr ""
+"`egrep' oznacza `grep -E'. `fgrep' oznacza `grep -F'.\n"
+"Używanie nazw `egrep' i `fgrep' jest przestarzałe.\n"
+
+#. This is a proper name. See the gettext manual, section Names.
+#: src/main.c:59
+msgid "Mike Haertel"
+msgstr ""
+
+#: src/main.c:60
+msgid "others, see <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
+msgstr ""
+
+#: src/main.c:418
 msgid "invalid context length argument"
 msgstr "błędny argument długości kontekstowej"
 
-#: src/grep.c:665
+#: src/main.c:473
+#, c-format
+msgid "lseek failed"
+msgstr "błąd lseek"
+
+#: src/main.c:620
+#, c-format
 msgid "input is too large to count"
 msgstr "danych wejściowych jest zbyt dużo do policzenia"
 
-#: src/grep.c:927
+#: src/main.c:862
+#, c-format
 msgid "writing output"
 msgstr "zapisuję wyniki"
 
-#: src/grep.c:1209
+#: src/main.c:1185
 #, c-format
 msgid "Binary file %s matches\n"
 msgstr "Plik binarny %s pasuje do wzorca\n"
 
-#: src/grep.c:1223
+#: src/main.c:1199
 msgid "(standard input)"
 msgstr "(standardowe wejście)"
 
-#: src/grep.c:1355
-#, c-format
-msgid "warning: %s: %s\n"
+#: src/main.c:1330
+#, fuzzy, c-format
+msgid "warning: %s: %s"
 msgstr "uwaga: %s: %s\n"
 
-#: src/grep.c:1356
+#: src/main.c:1331
 msgid "recursive directory loop"
 msgstr "nieskończona pętla przeglądania katalogów"
 
-#: src/grep.c:1404 src/grep.c:1411
+#: src/main.c:1379 src/main.c:1386
 #, c-format
 msgid "Usage: %s [OPTION]... PATTERN [FILE]...\n"
 msgstr "Składnia: %s [OPCJA]... WZORZEC [PLIK] ...\n"
 
-#: src/grep.c:1406
+#: src/main.c:1381
 #, c-format
 msgid "Try `%s --help' for more information.\n"
 msgstr "Napisz `%s --help' żeby dowiedzieć się więcej.\n"
 
-#: src/grep.c:1412
+#: src/main.c:1387
 #, c-format
 msgid "Search for PATTERN in each FILE or standard input.\n"
 msgstr "Szukanie WZORCA w każdym PLIKU lub na standardowym wejściu\n"
 
-#: src/grep.c:1415
-#, c-format
-msgid "PATTERN is an extended regular expression (ERE).\n"
-msgstr "WZORZEC jest rozszerzonym wyrażeniem regularnym (ERE).\n"
-
-#: src/grep.c:1418
-#, c-format
-msgid "PATTERN is a set of newline-separated fixed strings.\n"
-msgstr "WZORZEC jest zbiorem łańcuchów znaków w kolejnych liniach.\n"
-
-#: src/grep.c:1421
-#, c-format
-msgid "PATTERN is, by default, a basic regular expression (BRE).\n"
-msgstr "WZORZEC domyślnie jest podstawowym wyrażeniem regularnym (BRE).\n"
-
-#: src/grep.c:1424
+#: src/main.c:1390
 #, c-format
 msgid ""
 "Example: %s -i 'hello world' menu.h main.c\n"
@@ -134,7 +509,7 @@ msgstr ""
 "\n"
 "Wybór i interpretacja wyrażeń regularnych:\n"
 
-#: src/grep.c:1429
+#: src/main.c:1395
 #, c-format
 msgid ""
 "  -E, --extended-regexp     PATTERN is an extended regular expression (ERE)\n"
@@ -148,7 +523,7 @@ msgstr ""
 "  -G, --basic-regexp        WZORZEC jest podstawowym wyr. regularnym (BRE)\n"
 "  -P, --perl-regexp         WZORZEC jest wyrażeniem regularnym perla\n"
 
-#: src/grep.c:1436
+#: src/main.c:1401
 #, c-format
 msgid ""
 "  -e, --regexp=PATTERN      use PATTERN for matching\n"
@@ -166,7 +541,7 @@ msgstr ""
 "  -z, --null-data           linie są zakończone bajtem 0, nie znakiem\n"
 "                            nowej linii\n"
 
-#: src/grep.c:1443
+#: src/main.c:1408
 #, c-format
 msgid ""
 "\n"
@@ -175,17 +550,17 @@ msgid ""
 "  -v, --invert-match        select non-matching lines\n"
 "  -V, --version             print version information and exit\n"
 "      --help                display this help and exit\n"
-"      --mmap                use memory-mapped input if possible\n"
+"      --mmap                ignored for backwards compatibility\n"
 msgstr ""
 "\n"
 "Różne:\n"
 "  -s, --no-messages         bez komunikatów o błędach\n"
-"  -v, --revert-match        wybierz linie nie pasujące\n"
+"  -v, --invert-match        wybierz linie nie pasujące\n"
 "  -V, --version             wypisz informację o wersji i zakończ\n"
 "      --help                wyświetl tę informację i zakończ\n"
 "      --mmap                jeżeli możliwe mapuj pliki w pamięci\n"
 
-#: src/grep.c:1451
+#: src/main.c:1416
 #, c-format
 msgid ""
 "\n"
@@ -197,27 +572,6 @@ msgid ""
 "  -H, --with-filename       print the filename for each match\n"
 "  -h, --no-filename         suppress the prefixing filename on output\n"
 "      --label=LABEL         print LABEL as filename for standard input\n"
-"  -o, --only-matching       show only the part of a line matching PATTERN\n"
-"  -q, --quiet, --silent     suppress all normal output\n"
-"      --binary-files=TYPE   assume that binary files are TYPE;\n"
-"                            TYPE is `binary', `text', or `without-match'\n"
-"  -a, --text                equivalent to --binary-files=text\n"
-"  -I                        equivalent to --binary-files=without-match\n"
-"  -d, --directories=ACTION  how to handle directories;\n"
-"                            ACTION is `read', `recurse', or `skip'\n"
-"  -D, --devices=ACTION      how to handle devices, FIFOs and sockets;\n"
-"                            ACTION is `read' or `skip'\n"
-"  -R, -r, --recursive       equivalent to --directories=recurse\n"
-"      --include=FILE_PATTERN  search only files that match FILE_PATTERN\n"
-"      --exclude=FILE_PATTERN  skip files and directories matching "
-"FILE_PATTERN\n"
-"      --exclude-from=FILE   skip files matching any file pattern from FILE\n"
-"      --exclude-dir=PATTERN directories that match PATTERN will be skipped.\n"
-"  -L, --files-without-match print only names of FILEs containing no match\n"
-"  -l, --files-with-matches  print only names of FILEs containing matches\n"
-"  -c, --count               print only a count of matching lines per FILE\n"
-"  -T, --initial-tab         make tabs line up (if needed)\n"
-"  -Z, --null                print 0 byte after FILE name\n"
 msgstr ""
 "\n"
 "Sterowanie danymi wyjściowymi:\n"
@@ -228,11 +582,32 @@ msgstr ""
 "  -H, --with-filename       wypisanie nazwy pliku dla każdej linii\n"
 "  -h, --no-filename         bez nazwy pliku w liniach wyjściowych\n"
 "      --label=ETYKIETA      w wyniku ETYKIETA zastępuje nazwe pliku\n"
+
+#: src/main.c:1427
+#, c-format
+msgid ""
+"  -o, --only-matching       show only the part of a line matching PATTERN\n"
+"  -q, --quiet, --silent     suppress all normal output\n"
+"      --binary-files=TYPE   assume that binary files are TYPE;\n"
+"                            TYPE is `binary', `text', or `without-match'\n"
+"  -a, --text                equivalent to --binary-files=text\n"
+msgstr ""
 "  -o, --only-matching       pokazanie tylko kawałka, który pasuje do WZORCA\n"
 "  -q, --quiet, --silent     wyłączenie wypisywanie wyniku\n"
 "      --binary-files=TYP    założenie, że pliki binarne są typu TYP\n"
 "                            TYP to 'binary', 'text' lub 'without-match'.\n"
 "  -a, --text                równoważne --binary-files=text\n"
+
+#: src/main.c:1434
+#, c-format
+msgid ""
+"  -I                        equivalent to --binary-files=without-match\n"
+"  -d, --directories=ACTION  how to handle directories;\n"
+"                            ACTION is `read', `recurse', or `skip'\n"
+"  -D, --devices=ACTION      how to handle devices, FIFOs and sockets;\n"
+"                            ACTION is `read' or `skip'\n"
+"  -R, -r, --recursive       equivalent to --directories=recurse\n"
+msgstr ""
 "  -I                        równoważne --binary-files=without-match\n"
 "  -d, --directories=DZIAŁANIE  jak się obchodzić z katalogami,\n"
 "                            DZIAŁANIE to `read' (czytanie), `recurse'\n"
@@ -242,17 +617,39 @@ msgstr ""
 "                            DZIAŁANIE to 'read' (czytaj) albo "
 "'skip' (pomiń)\n"
 "  -R, -r, --recursive       równoważne --directories=recurse .\n"
+
+#: src/main.c:1442
+#, c-format
+msgid ""
+"      --include=FILE_PATTERN  search only files that match FILE_PATTERN\n"
+"      --exclude=FILE_PATTERN  skip files and directories matching "
+"FILE_PATTERN\n"
+"      --exclude-from=FILE   skip files matching any file pattern from FILE\n"
+"      --exclude-dir=PATTERN  directories that match PATTERN will be "
+"skipped.\n"
+msgstr ""
 "      --include=WZORZEC     przeszukiwane będą pliki pasujące do WZORCA\n"
 "      --exclude=WZORZEC     pliki pasujące do WZORCA będą pominięte\n"
 "      --exclude-from=PLIK   pominięcie plików pasujących do WZORCÓW w PLIKU\n"
-"  -L, --files-without-match wypisanie tylko nazw PLIKÓW bez trafień\n"
+"      --exclude-dir=WZORZEC  katalogi pasujące do WZORCA będą pominięte\n"
+
+#: src/main.c:1448
+#, c-format
+msgid ""
+"  -L, --files-without-match  print only names of FILEs containing no match\n"
+"  -l, --files-with-matches  print only names of FILEs containing matches\n"
+"  -c, --count               print only a count of matching lines per FILE\n"
+"  -T, --initial-tab         make tabs line up (if needed)\n"
+"  -Z, --null                print 0 byte after FILE name\n"
+msgstr ""
+"  -L, --files-without-match  wypisanie tylko nazw PLIKÓW bez trafień\n"
 "  -l, --files-with-matches  wypisanie tylko nazw PLIKÓW z trafieniami\n"
-"  -c, --count               wypisanie tylko ilości pasujących linii w "
+"  -c, --count               wypisanie tylko liczby pasujących linii w "
 "PLIKACH\n"
-"  -T, --initial-tab         wyrównanie linii\n"
+"  -T, --initial-tab         wyrównanie linii przez TAB (jeżeli potrzebne)\n"
 "  -Z, --null                wypisanie bajtu 0 po każdej nazwie PLIKU\n"
 
-#: src/grep.c:1481
+#: src/main.c:1454
 #, c-format
 msgid ""
 "\n"
@@ -260,6 +657,16 @@ msgid ""
 "  -B, --before-context=NUM  print NUM lines of leading context\n"
 "  -A, --after-context=NUM   print NUM lines of trailing context\n"
 "  -C, --context=NUM         print NUM lines of output context\n"
+msgstr ""
+"\n"
+"Sterowanie kontekstem:\n"
+"  -B, --before-context=ILE  wypisanie ILU linii kontekstu przed\n"
+"  -A, --after-context=ILE   wypisanie ILU linii kontekstu po\n"
+"  -C, --context=ILE         wypisanie ILU linii kontekstu\n"
+
+#: src/main.c:1461
+#, c-format
+msgid ""
 "  -NUM                      same as --context=NUM\n"
 "      --color[=WHEN],\n"
 "      --colour[=WHEN]       use markers to highlight the matching strings;\n"
@@ -268,11 +675,6 @@ msgid ""
 "  -u, --unix-byte-offsets   report offsets as if CRs were not there (MSDOS)\n"
 "\n"
 msgstr ""
-"\n"
-"Sterowanie kontekstem:\n"
-"  -B, --before-context=ILE  wypisanie ILU linii kontekstu przed\n"
-"  -A, --after-context=ILE   wypisanie ILU linii kontekstu po\n"
-"  -C, --context=ILE         wypisanie ILU linii kontekstu\n"
 "  -ILE                      to samo co --context=ILE\n"
 "      --color[=KIEDY],\n"
 "      --colour[=KIEDY]      oznaczanie pasujących znaków,\n"
@@ -283,26 +685,7 @@ msgstr ""
 "(MSDOS)\n"
 "\n"
 
-#: src/grep.c:1495
-#, c-format
-msgid "Invocation as `egrep' is deprecated; use `grep -E' instead.\n"
-msgstr "Wywołanie jako `egrep' jest przestarzałe, używał `grep -E'.\n"
-
-#: src/grep.c:1498
-#, c-format
-msgid "Invocation as `fgrep' is deprecated; use `grep -F' instead.\n"
-msgstr "Wywołanie jako `fgrep' jest przestarzałe, używał `grep -F'.\n"
-
-#: src/grep.c:1501
-#, c-format
-msgid ""
-"`egrep' means `grep -E'.  `fgrep' means `grep -F'.\n"
-"Direct invocation as either `egrep' or `fgrep' is deprecated.\n"
-msgstr ""
-"`egrep' oznacza `grep -E'. `fgrep' oznacza `grep -F'.\n"
-"Używanie nazw `egrep' i `fgrep' jest przestarzałe.\n"
-
-#: src/grep.c:1505
+#: src/main.c:1470
 #, c-format
 msgid ""
 "With no FILE, or when FILE is -, read standard input.  If less than two "
@@ -315,23 +698,15 @@ msgstr ""
 "Jeżeli podano mniej niż dwa PLIKI, zakłada -h. Zakończenie z kodem 0\n"
 "jeżeli WZORZEC pasuje, z 1, jeżeli nie, z 2, jeżeli są problemy.\n"
 
-#: src/grep.c:1509
-#, fuzzy, c-format
-msgid ""
-"\n"
-"Report bugs to: %s\n"
-msgstr ""
-"\n"
-"Raporty o błędach należy wysyłać do %s\n"
-
-#: src/grep.c:1510
+#: src/main.c:1475
 #, c-format
 msgid "GNU Grep home page: <%s>\n"
-msgstr "Strona domowa GNU Grepa: %s\n"
+msgstr "Strona domowa Grepa GNU: %s\n"
 
-#: src/grep.c:1512
-msgid "General help using GNU software: <http://www.gnu.org/gethelp/>\n"
-msgstr "Pomoc w używaniu oprogramowania GNU: http://www.gnu.org/gethelp/\n"
+#: src/main.c:1507
+#, c-format
+msgid "%s can only use the %s pattern syntax"
+msgstr "%s może użyć tylko składni wzorców %s"
 
 #  viendo los fuentes , hay varias opciones
 #  que hay sin documentar. O quiza es que getopt() lo he entendido mal
@@ -341,241 +716,77 @@ msgstr "Pomoc w używaniu oprogramowania GNU: http://www.gnu.org/gethelp/\n"
 #  grep --help ->
 #  usage: grep [-[[AB] ]<num>] [-[CEFGVchilnqsvwx]] [-[ef]] <expr> [<files...>]
 #  La opción -X es a la que corresponde esta línea.
-#: src/grep.c:1527
+#: src/main.c:1510
+#, c-format
 msgid "conflicting matchers specified"
 msgstr "podane sprzeczne wzorce"
 
-#: src/grep.c:1721
+#: src/main.c:1524
 #, c-format
+msgid "invalid matcher %s"
+msgstr "błędna dopasowanie %s"
+
+#: src/main.c:1713
+#, fuzzy, c-format
 msgid ""
-"In GREP_COLORS=\"%s\", the \"%s\" capacity needs a value (\"=...\"); skipped."
+"in GREP_COLORS=\"%s\", the \"%s\" capacity needs a value (\"=...\"); skipped"
 msgstr ""
 "W GREP_COLORS=\"%s\", własność \"%s\" musi mieć wartość (\"=...\"); "
 "pominięta."
 
-#: src/grep.c:1725
-#, c-format
+#: src/main.c:1717
+#, fuzzy, c-format
 msgid ""
-"In GREP_COLORS=\"%s\", the \"%s\" capacity is boolean and cannot take a "
-"value (\"=%s\"); skipped."
+"in GREP_COLORS=\"%s\", the \"%s\" capacity is boolean and cannot take a "
+"value (\"=%s\"); skipped"
 msgstr ""
 "W GREP_COLORS=\"%s\", własność \"%s\" jest binarna i nie może mieć podanej "
 "wartości (\"=%s\"); pominięta."
 
-#: src/grep.c:1734
-#, c-format
-msgid "In GREP_COLORS=\"%s\", the \"%s\" capacity %s."
+#: src/main.c:1726
+#, fuzzy, c-format
+msgid "in GREP_COLORS=\"%s\", the \"%s\" capacity %s"
 msgstr "W GREP_COLORS=\"%s\", własność \"%s\" to %s."
 
-#: src/grep.c:1757
-#, c-format
+#: src/main.c:1749
+#, fuzzy, c-format
 msgid ""
-"Stopped processing of ill-formed GREP_COLORS=\"%s\" at remaining substring "
-"\"%s\"."
+"stopped processing of ill-formed GREP_COLORS=\"%s\" at remaining substring "
+"\"%s\""
 msgstr ""
 "Zaprzestano przetwarzanie źle sformatowanych GREP_COLORS=\"%s\" na znakach: "
 "\"%s\"."
 
-#: src/grep.c:1890
+#: src/main.c:1820
+#, c-format
 msgid "unknown devices method"
 msgstr "nieznany sposób przeglądania urządzeń"
 
-#: src/grep.c:1964
-msgid "unknown directories method"
-msgstr "nieznany sposób przeglądania katalogów"
-
-#: src/grep.c:2032
+#: src/main.c:1954
+#, c-format
 msgid "invalid max count"
 msgstr "błędna maksymalna liczba powtórzeń"
 
-#: src/grep.c:2087
+#: src/main.c:2009
+#, c-format
 msgid "unknown binary-files type"
 msgstr "nieznany typ pliku binarnego"
 
-#: src/grep.c:2191
-#, c-format
+#: src/pcresearch.c:42
 msgid ""
-"Copyright (C) %s Free Software Foundation, Inc.\n"
-"License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl."
-"html>\n"
-"This is free software: you are free to change and redistribute it.\n"
-"There is NO WARRANTY, to the extent permitted by law.\n"
-msgstr ""
-"Copyright (C) %s Free Software Foundation, Inc.\n"
-"Licencja GPLv3+: GNU GPL wersja 3 albo późniejsza  <http://gnu.org/licenses/"
-"gpl.html>\n"
-"To jest wolne oprogramowanie: możesz je modyfikować i rozpowszechniać.\n"
-"Autorzy NIE DAJĄ GWARANCJI w granicach dozwolonych prawem.\n"
-
-#: src/search.c:619
-msgid ""
-"Support for the -P option is not compiled into this --disable-perl-regexp "
+"support for the -P option is not compiled into this --disable-perl-regexp "
 "binary"
 msgstr ""
-"Program skompilowany bez opcji -P poprzez włączenie --disable-perl-regexp"
+"program skompilowany bez opcji -P poprzez włączenie --disable-perl-regexp"
 
-#: src/search.c:632
-msgid "The -P and -z options cannot be combined"
-msgstr "Opcje -P i -z nie mogą występować razem"
-
-#: src/search.c:634
-msgid "The -P option only supports a single pattern"
-msgstr "Opcja -P może być użyta tylko do pojedynczego wzorca"
-
-#: src/system.h:52 lib/error.c:117
-msgid "Unknown system error"
-msgstr "Nieznany błąd systemowy"
-
-#: lib/closeout.c:108
-msgid "write error"
-msgstr "błąd zapisu"
-
-#: lib/getopt.c:675
+#: src/pcresearch.c:56
 #, c-format
-msgid "%s: option `%s' is ambiguous\n"
-msgstr "%s: opcja `%s' jest niejednoznaczna\n"
+msgid "the -P option only supports a single pattern"
+msgstr "opcja -P może być użyta tylko do pojedynczego wzorca"
 
-#: lib/getopt.c:700
-#, c-format
-msgid "%s: option `--%s' doesn't allow an argument\n"
-msgstr "%s: opcja `--%s' nie może mieć argumentu\n"
+#, fuzzy
+#~ msgid "warning: %s"
+#~ msgstr "uwaga: %s: %s\n"
 
-#: lib/getopt.c:705
-#, c-format
-msgid "%s: option `%c%s' doesn't allow an argument\n"
-msgstr "%s: opcja `%c%s' nie może mieć argumentu\n"
-
-#: lib/getopt.c:723 lib/getopt.c:896
-#, c-format
-msgid "%s: option `%s' requires an argument\n"
-msgstr "%s: opcja `%s' wymaga argumentu\n"
-
-#. --option
-#: lib/getopt.c:752
-#, c-format
-msgid "%s: unrecognized option `--%s'\n"
-msgstr "%s: nierozpoznana opcja `--%s'\n"
-
-#. +option or -option
-#: lib/getopt.c:756
-#, c-format
-msgid "%s: unrecognized option `%c%s'\n"
-msgstr "%s: nierozpoznana opcja `%c%s'\n"
-
-# should ther be a space between -- and %c? - rzm 970731
-#. 1003.2 specifies the format of this message.
-#: lib/getopt.c:782
-#, c-format
-msgid "%s: illegal option -- %c\n"
-msgstr "%s: nielegalna opcja -- %c\n"
-
-#: lib/getopt.c:785
-#, c-format
-msgid "%s: invalid option -- %c\n"
-msgstr "%s: błędna opcja -- %c\n"
-
-#. 1003.2 specifies the format of this message.
-#: lib/getopt.c:815 lib/getopt.c:945
-#, c-format
-msgid "%s: option requires an argument -- %c\n"
-msgstr "%s: opcja wymaga argumentu -- %c\n"
-
-#: lib/getopt.c:862
-#, c-format
-msgid "%s: option `-W %s' is ambiguous\n"
-msgstr "%s: opcja `-W %s' jest niejednoznaczna\n"
-
-#: lib/getopt.c:880
-#, c-format
-msgid "%s: option `-W %s' doesn't allow an argument\n"
-msgstr "%s: opcja `-W %s' nie może mieć argumentu\n"
-
-#. Get translations for open and closing quotation marks.
-#.
-#. The message catalog should translate "`" to a left
-#. quotation mark suitable for the locale, and similarly for
-#. "'".  If the catalog has no translation,
-#. locale_quoting_style quotes `like this', and
-#. clocale_quoting_style quotes "like this".
-#.
-#. For example, an American English Unicode locale should
-#. translate "`" to U+201C (LEFT DOUBLE QUOTATION MARK), and
-#. should translate "'" to U+201D (RIGHT DOUBLE QUOTATION
-#. MARK).  A British English Unicode locale should instead
-#. translate these to U+2018 (LEFT SINGLE QUOTATION MARK) and
-#. U+2019 (RIGHT SINGLE QUOTATION MARK), respectively.
-#: lib/quotearg.c:259
-msgid "`"
-msgstr "\""
-
-#: lib/quotearg.c:260
-msgid "'"
-msgstr "\""
-
-#: lib/regex.c:1308
-msgid "Success"
-msgstr "Udane"
-
-#: lib/regex.c:1311
-msgid "No match"
-msgstr "Nie pasuje"
-
-#: lib/regex.c:1314
-msgid "Invalid regular expression"
-msgstr "Błędne wyrażenie regularne"
-
-#: lib/regex.c:1317
-msgid "Invalid collation character"
-msgstr "Błędny znak dla uporządkowania"
-
-#: lib/regex.c:1320
-msgid "Invalid character class name"
-msgstr "Błędna nazwa klasy znaków"
-
-#: lib/regex.c:1323
-msgid "Trailing backslash"
-msgstr "Końcowy ukośnik odwrotny"
-
-#: lib/regex.c:1326
-msgid "Invalid back reference"
-msgstr "Błędne odwołanie"
-
-#: lib/regex.c:1329
-msgid "Unmatched [ or [^"
-msgstr "Nie pasujący [ albo [^"
-
-#: lib/regex.c:1332
-msgid "Unmatched ( or \\("
-msgstr "Nie pasujący ( albo \\("
-
-#: lib/regex.c:1335
-msgid "Unmatched \\{"
-msgstr "Nie pasujący \\{"
-
-#: lib/regex.c:1338
-msgid "Invalid content of \\{\\}"
-msgstr "Błędna zawartość \\{\\}"
-
-#: lib/regex.c:1341
-msgid "Invalid range end"
-msgstr "Błędny koniec zakresu"
-
-#: lib/regex.c:1347
-msgid "Invalid preceding regular expression"
-msgstr "Błędne poprzedzające wyrażenie regularne"
-
-#: lib/regex.c:1350
-msgid "Premature end of regular expression"
-msgstr "Przedwczesny koniec wyrażenia regularnego"
-
-#: lib/regex.c:1353
-msgid "Regular expression too big"
-msgstr "Za duże wyrażenie regularne"
-
-#: lib/regex.c:1356
-msgid "Unmatched ) or \\)"
-msgstr "Nie pasujący ) albo \\)"
-
-#: lib/regex.c:7583
-msgid "No previous regular expression"
-msgstr "Brak poprzedniego wyrażenia regularnego"
+#~ msgid "unknown directories method"
+#~ msgstr "nieznany sposób przeglądania katalogów"

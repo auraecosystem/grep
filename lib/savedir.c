@@ -1,6 +1,5 @@
 /* savedir.c -- save the list of files in a directory in a string
-   Copyright (C) 1990, 1997, 1998, 1999, 2000, 2001, 2009
-   Free Software Foundation, Inc.
+   Copyright (C) 1990, 1997-2001, 2009-2010 Free Software Foundation, Inc.
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -18,32 +17,12 @@
 
 /* Written by David MacKenzie <djm@gnu.ai.mit.edu>. */
 
-#if HAVE_CONFIG_H
-# include <config.h>
-#endif
+#include <config.h>
 
 #include <sys/types.h>
-
-#if HAVE_UNISTD_H
-# include <unistd.h>
-#endif
-
-#if HAVE_DIRENT_H
-# include <dirent.h>
-# define NAMLEN(dirent) strlen((dirent)->d_name)
-#else
-# define dirent direct
-# define NAMLEN(dirent) (dirent)->d_namlen
-# if HAVE_SYS_NDIR_H
-#  include <sys/ndir.h>
-# endif
-# if HAVE_SYS_DIR_H
-#  include <sys/dir.h>
-# endif
-# if HAVE_NDIR_H
-#  include <ndir.h>
-# endif
-#endif
+#include <unistd.h>
+#include <dirent.h>
+#include <stddef.h>
 
 #ifdef CLOSEDIR_VOID
 /* Fake a return value. */
@@ -52,47 +31,39 @@
 # define CLOSEDIR(d) closedir (d)
 #endif
 
-#ifdef STDC_HEADERS
-# include <stdlib.h>
-# include <string.h>
-#else
-char *malloc ();
-char *realloc ();
-#endif
-#ifndef NULL
-# define NULL 0
-#endif
-
-#ifndef stpcpy
-char *stpcpy ();
-#endif
-
+#include <stdlib.h>
+#include <string.h>
 #include <fnmatch.h>
 #include "savedir.h"
+#include "xalloc.h"
 
-extern int isdir (const char *path);
+static char *path;
+static size_t pathlen;
 
-char *path;
-size_t pathlen;
+extern int isdir (const char *name);
 
 static int
 isdir1 (const char *dir, const char *file)
 {
-  int status;
-  int slash;
   size_t dirlen = strlen (dir);
   size_t filelen = strlen (file);
+
+  while (dirlen && dir[dirlen - 1] == '/')
+    dirlen--;
+
   if ((dirlen + filelen + 2) > pathlen)
     {
-      path = calloc (dirlen + 1 + filelen + 1, sizeof (*path));
-      pathlen = dirlen + filelen + 2;
+      pathlen *= 2;
+      if ((dirlen + filelen + 2) > pathlen)
+        pathlen = dirlen + filelen + 2;
+
+      path = xrealloc (path, pathlen);
     }
-  strcpy (path, dir);
-  slash = (path[dirlen] != '/');
+
+  memcpy (path, dir, dirlen);
   path[dirlen] = '/';
-  strcpy (path + dirlen + slash , file);
-  status  = isdir (path);
-  return status;
+  strcpy (path + dirlen + 1, file);
+  return isdir (path);
 }
 
 /* Return a freshly allocated string containing the filenames
@@ -103,7 +74,7 @@ isdir1 (const char *dir, const char *file)
    Return NULL if DIR cannot be opened or if out of memory. */
 char *
 savedir (const char *dir, off_t name_size, struct exclude *included_patterns,
-	 struct exclude *excluded_patterns, struct exclude *excluded_directory_patterns )
+         struct exclude *excluded_patterns, struct exclude *excluded_directory_patterns )
 {
   DIR *dirp;
   struct dirent *dp;
@@ -129,56 +100,59 @@ savedir (const char *dir, off_t name_size, struct exclude *included_patterns,
 
   while ((dp = readdir (dirp)) != NULL)
     {
-      /* Skip "." and ".." (some NFS filesystems' directories lack them). */
+      /* Skip "." and ".." (some NFS file systems' directories lack them). */
       if (dp->d_name[0] != '.'
-	  || (dp->d_name[1] != '\0'
-	      && (dp->d_name[1] != '.' || dp->d_name[2] != '\0')))
-	{
-	  off_t size_needed = (namep - name_space) + NAMLEN (dp) + 2;
+          || (dp->d_name[1] != '\0'
+              && (dp->d_name[1] != '.' || dp->d_name[2] != '\0')))
+        {
+          size_t namlen = strlen (dp->d_name);
+          size_t size_needed = (namep - name_space) + namlen + 2;
 
-	  if ((included_patterns || excluded_patterns)
-	      && !isdir1 (dir, dp->d_name))
-	    {
-	      if (included_patterns
-		  && !excluded_filename (included_patterns, dp->d_name, 0))
-		continue;
-	      if (excluded_patterns
-		  && excluded_filename (excluded_patterns, dp->d_name, 0))
-		continue;
-	    }
-	     
-	  if ( excluded_directory_patterns
-	      && isdir1 (dir, dp->d_name) )
-	    {
-	      if (excluded_directory_patterns
-		  && excluded_filename (excluded_directory_patterns, dp->d_name, 0))
-		continue;
-	    }
+          if ((included_patterns || excluded_patterns)
+              && !isdir1 (dir, dp->d_name))
+            {
+              if (included_patterns
+                  && excluded_file_name (included_patterns, dp->d_name))
+                continue;
+              if (excluded_patterns
+                  && excluded_file_name (excluded_patterns, dp->d_name))
+                continue;
+            }
 
-	  if (size_needed > name_size)
-	    {
-	      char *new_name_space;
+          if ( excluded_directory_patterns
+              && isdir1 (dir, dp->d_name) )
+            {
+              if (excluded_directory_patterns
+                  && excluded_file_name (excluded_directory_patterns, dp->d_name))
+                continue;
+            }
 
-	      while (size_needed > name_size)
-		name_size += 1024;
+          if (size_needed > name_size)
+            {
+              char *new_name_space;
 
-	      new_name_space = realloc (name_space, name_size);
-	      if (new_name_space == NULL)
-		{
-		  closedir (dirp);
-		  return NULL;
-		}
-	      namep += new_name_space - name_space;
-	      name_space = new_name_space;
-	    }
-	  namep = stpcpy (namep, dp->d_name) + 1;
-	}
+              while (size_needed > name_size)
+                name_size += 1024;
+
+              new_name_space = realloc (name_space, name_size);
+              if (new_name_space == NULL)
+                {
+                  closedir (dirp);
+                  goto fail;
+                }
+              namep = new_name_space + (namep - name_space);
+              name_space = new_name_space;
+            }
+          strcpy (namep, dp->d_name);
+          namep += namlen + 1;
+        }
     }
   *namep = '\0';
   if (CLOSEDIR (dirp))
     {
+     fail:
       free (name_space);
-      return NULL;
+      name_space = NULL;
     }
   if (path)
     {

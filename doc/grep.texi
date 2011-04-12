@@ -16,8 +16,8 @@
 @copying
 This manual is for @command{grep}, a pattern matching engine.
 
-Copyright @copyright{} 1999, 2000, 2001, 2002, 2005, 2008, 2009 Free
-Software Foundation, Inc.
+Copyright @copyright{} 1999-2002, 2005, 2008-2010 Free Software Foundation,
+Inc.
 
 @quotation
 Permission is granted to copy, distribute and/or modify this document
@@ -414,12 +414,12 @@ This is the default when there is only one file
 @opindex --label
 @cindex changing name of standard input
 Display input actually coming from standard input
-as input coming from file @var{LABEL}.
-This is especially useful for tools like @command{zgrep};
-e.g.:
+as input coming from file @var{LABEL}.  This is
+especially useful when implementing tools like
+@command{zgrep}; e.g.:
 
 @example
-gzip -cd foo.gz | grep --label=foo something
+gzip -cd foo.gz | grep --label=foo -H something
 @end example
 
 @item -n
@@ -513,6 +513,19 @@ Print @var{num} lines of leading context before matching lines.
 @cindex context
 Print @var{num} lines of leading and trailing output context.
 
+@item --group-separator=@var{string}
+@opindex --group-separator
+@cindex group separator
+When @option{-A}, @option{-B} or @option{-C} are in use,
+print @var{string} instead of @samp{--} around disjoint groups
+of lines.
+
+@item --no-group-separator
+@opindex --group-separator
+@cindex group separator
+When @option{-A}, @option{-B} or @option{-C} are in use,
+print disjoint groups of lines adjacent to each other.
+
 @end table
 
 Matching lines normally use @samp{:} as a separator
@@ -522,11 +535,12 @@ When no context is specified,
 matching lines are simply output one right after another.
 When nonzero context is specified,
 lines that are adjacent in the input form a group
-and are output one right after another,
-but disjoint groups of lines are separated by a @samp{--}
-without any prefix and on a line of its own.
-Each group may contain several matching lines
-when they are close enough to each other
+and are output one right after another, while
+a separator appears by default between disjoint groups on a line
+of its own and without any prefix.  The default separator
+is @samp{--}, however whether to include it and its appearance
+can be changed with the options above.  Each group may contain
+several matching lines when they are close enough to each other
 that two otherwise adjacent but divided groups connect
 and can just merge into a single contiguous one.
 
@@ -653,12 +667,10 @@ This can cause a performance penalty.
 @item --mmap
 @opindex --mmap
 @cindex memory mapped input
-If possible, use the @code{mmap} system call to read input,
-instead of the default @code{read} system call.
-In some situations, @samp{--mmap} yields better performance.
-However, @samp{--mmap} can cause undefined behavior (including core dumps)
-if an input file shrinks while @command{grep} is operating,
-or if an I/O error occurs.
+This option is ignored for backwards compatibility.  It used to read
+input with the @code{mmap} system call, instead of the default @code{read}
+system call.  On modern systems, @samp{--mmap} rarely if ever yields
+better performance.
 
 @item -U
 @itemx --binary
@@ -923,12 +935,8 @@ follow file names must be treated as file names;
 by default,
 such options are permuted to the front of the operand list
 and are treated as options.
-Also,
-@sc{posix.2} requires that unrecognized options be diagnosed as ``illegal'',
-but since they are not really against the law the default
-is to diagnose them as ``invalid''.
-@code{POSIXLY_CORRECT} also disables @code{_@var{N}_GNU_nonoption_argv_flags_},
-described below.
+Also, @code{POSIXLY_CORRECT} disables special handling of an
+invalid bracket expression.  @xref{invalid-bracket-expr}.
 
 @item _@var{N}_GNU_nonoption_argv_flags_
 @vindex _@var{N}_GNU_nonoption_argv_flags_ @r{environment variable}
@@ -1031,13 +1039,17 @@ A @dfn{regular expression} is a pattern that describes a set of strings.
 Regular expressions are constructed analogously to arithmetic expressions,
 by using various operators to combine smaller expressions.
 @command{grep} understands
-two different versions of regular expression syntax:
-``basic''(BRE) and ``extended''(ERE).
+three different versions of regular expression syntax:
+``basic,'' (BRE) ``extended'' (ERE) and ``perl''.
 In @sc{gnu} @command{grep},
-there is no difference in available functionality using either syntax.
+there is no difference in available functionality between basic and
+extended syntaxes.
 In other implementations, basic regular expressions are less powerful.
 The following description applies to extended regular expressions;
 differences for basic regular expressions are summarized afterwards.
+Perl regular expressions give additional functionality, and are
+documented in pcresyntax(3) and pcrepattern(3), but may not be
+available on every system.
 
 @menu
 * Fundamental Structure::
@@ -1230,6 +1242,7 @@ Punctuation characters:
 @cindex whitespace characters
 Space characters:
 tab, newline, vertical tab, form feed, carriage return, and space.
+@xref{Usage}, for more discussion of matching newlines.
 
 @item [:upper:]
 @opindex upper @r{character class}
@@ -1251,6 +1264,13 @@ encoding, whereas the former is independent of locale and character set.
 (Note that the brackets in these class names are
 part of the symbolic names, and must be included in addition to
 the brackets delimiting the bracket expression.)
+
+@anchor{invalid-bracket-expr}
+If you mistakenly omit the outer brackets, and search for say, @samp{[:upper:]},
+GNU @command{grep} prints a diagnostic and exits with status 2, on
+the assumption that you did not intend to search for the nominally
+equivalent regular expression: @samp{[:epru]}.
+Set the @code{POSIXLY_CORRECT} environment variable to disable this feature.
 
 Most meta-characters lose their special meaning inside bracket expressions.
 
@@ -1316,6 +1336,12 @@ Match word constituent, it is a synonym for @samp{[[:alnum:]]}.
 
 @item @samp{\W}
 Match non-word constituent, it is a synonym for @samp{[^[:alnum:]]}.
+
+@item @samp{\s}
+Match whitespace, it is a synonym for @samp{[[:space:]]}.
+
+@item @samp{\S}
+Match non-whitespace, it is a synonym for @samp{[^[:space:]]}.
 
 @end table
 
@@ -1604,7 +1630,35 @@ This gives no output, because the first alternate @samp{(a)\1} does not match,
 as there is no @samp{aa} in the input, so the @samp{\1} in the second alternate
 has nothing to refer back to, meaning it will never match anything.
 (The second alternate in this example can only match
-if the first alternate has matched -- making the second one superfluous.)
+if the first alternate has matched---making the second one superfluous.)
+
+@item
+How can I match across lines?
+
+Standard grep cannot do this, as it is fundamentally line-based.
+Therefore, merely using the @code{[:space:]} character class does not
+match newlines in the way you might expect.  However, if your grep is
+compiled with Perl patterns enabled, the Perl @samp{s}
+modifier (which makes @code{.} match newlines) can be used:
+
+@example
+printf 'foo\nbar\n' | grep -P '(?s)foo.*?bar'
+@end example
+
+With the GNU @command{grep} option @code{-z} (@pxref{File and
+Directory Selection}), the input is terminated by null bytes.  Thus,
+you can match newlines in the input, but the output will be the whole
+file, so this is really only useful to determine if the pattern is
+present:
+
+@example
+printf 'foo\nbar\n' | grep -z -q 'foo[[:space:]]\+bar'
+@end example
+
+Failing either of those options, you need to transform the input
+before giving it to @command{grep}, or turn to @command{awk},
+@command{sed}, @command{perl}, or many other utilities that are
+designed to operate across lines.
 
 @item
 What do @command{grep}, @command{fgrep}, and @command{egrep} stand for?

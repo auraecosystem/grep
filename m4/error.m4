@@ -1,11 +1,22 @@
-#serial 1
+#serial 12
 
-dnl FIXME: put these prerequisite-only *.m4 files in a separate
-dnl directory -- otherwise, they'll conflict with existing files.
+# Copyright (C) 1996-1998, 2001-2004, 2009-2010 Free Software Foundation, Inc.
+#
+# This file is free software; the Free Software Foundation
+# gives unlimited permission to copy and/or distribute it,
+# with or without modifications, as long as this notice is preserved.
 
-dnl These are the prerequisite macros for GNU's error.c file.
-AC_DEFUN([jm_PREREQ_ERROR],
+AC_DEFUN([gl_ERROR],
 [
-  AC_CHECK_FUNCS(strerror strerror_r vprintf doprnt)
-  AC_HEADER_STDC
+  AC_FUNC_ERROR_AT_LINE
+  dnl Note: AC_FUNC_ERROR_AT_LINE does AC_LIBSOURCES([error.h, error.c]).
+  gl_PREREQ_ERROR
+])
+
+# Prerequisites of lib/error.c.
+AC_DEFUN([gl_PREREQ_ERROR],
+[
+  AC_REQUIRE([AC_FUNC_STRERROR_R])
+  AC_REQUIRE([AC_C_INLINE])
+  :
 ])
