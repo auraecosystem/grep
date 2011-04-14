@@ -1,16 +1,11 @@
-grep (2.7-1) UNRELEASED; urgency=low
+grep (2.7-1~1) UNRELEASED-experimental; urgency=low
 
+  * NOT RELEASE YET
   * New upstream version, 2.7
-    - Updated patches/03-dlopen-pcre.patch
+    - Updated: 03-397262-dlopen-pcre.patch
+    - Not longer needed: 05-kwset.c.patch
 
  -- Santiago Ruano Rincón <santiago@nomada>  Thu, 07 Apr 2011 10:18:47 +0200
-
-grep (2.6.3-3.1) unstable; urgency=low
-
-  * Non-maintainer upload.
-  * - i
-
- -- Santiago Ruano Rincón <santiago@nomada>  Thu, 07 Apr 2011 10:18:45 +0200
 
 grep (2.6.3-3) unstable; urgency=high
 
