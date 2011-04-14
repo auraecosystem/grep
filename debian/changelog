@@ -2,8 +2,11 @@ grep (2.7-1~1) UNRELEASED-experimental; urgency=low
 
   * NOT RELEASE YET
   * New upstream version, 2.7
-    - Updated: 03-397262-dlopen-pcre.patch
-    - Not longer needed: 05-kwset.c.patch
+    - Updated: 
+      03-397262-dlopen-pcre.patch
+    - Not longer needed: 
+      05-kwset.c.patch
+      06-578709-ignore-MMAP_OPTION.patch
 
  -- Santiago Ruano Rincón <santiago@nomada>  Thu, 07 Apr 2011 10:18:47 +0200
 
