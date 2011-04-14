@@ -7,6 +7,9 @@ grep (2.7-1~1) UNRELEASED-experimental; urgency=low
     - Not longer needed: 
       05-kwset.c.patch
       06-578709-ignore-MMAP_OPTION.patch
+  * Merging with Ubuntu:
+    - Don't pass -ldl in CFLAGS, but in LIBS instead.
+    - Verbose build by default.
 
  -- Santiago Ruano Rincón <santiago@nomada>  Thu, 07 Apr 2011 10:18:47 +0200
 
