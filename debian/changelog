@@ -2,16 +2,18 @@ grep (2.7-1~1) UNRELEASED-experimental; urgency=low
 
   * NOT RELEASE YET
   * New upstream version, 2.7
-    - Updated: 
+    - Updated patches: 
       03-397262-dlopen-pcre.patch
-    - Not longer needed: 
+      55-185208-bigfile.patch
+      80-495993-catalan_translation.patch
+    - Not longer needed, now included in upstream: 
       05-kwset.c.patch
       06-578709-ignore-MMAP_OPTION.patch
   * Merging with Ubuntu:
     - Don't pass -ldl in CFLAGS, but in LIBS instead.
     - Verbose build by default.
 
- -- Santiago Ruano Rincón <santiago@nomada>  Thu, 07 Apr 2011 10:18:47 +0200
+ -- Santiago Ruano Rincón <santiago@debian.org>  Thu, 07 Apr 2011 10:18:47 +0200
 
 grep (2.6.3-3) unstable; urgency=high
 
