@@ -1,6 +1,5 @@
-grep (2.7-1~1) UNRELEASED-experimental; urgency=low
+grep (2.7-1) experimental; urgency=low
 
-  * NOT RELEASE YET
   * New upstream version, 2.7
     - Updated patches: 
       03-397262-dlopen-pcre.patch
@@ -15,7 +14,7 @@ grep (2.7-1~1) UNRELEASED-experimental; urgency=low
   * Bump Standars-Version to 3.9.1, no changes needed
   * Vcs-Git and Vcs-Browser fileds included again
 
- -- Santiago Ruano Rincón <santiago@debian.org>  Thu, 07 Apr 2011 10:18:47 +0200
+ -- Santiago Ruano Rincón <santiago@debian.org>  Mon, 18 Apr 2011 18:23:03 +0200
 
 grep (2.6.3-3) unstable; urgency=high
 
