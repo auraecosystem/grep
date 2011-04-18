@@ -12,6 +12,8 @@ grep (2.7-1~1) UNRELEASED-experimental; urgency=low
   * Merging with Ubuntu:
     - Don't pass -ldl in CFLAGS, but in LIBS instead.
     - Verbose build by default.
+  * Bump Standars-Version to 3.9.1, no changes needed
+  * Vcs-Git and Vcs-Browser fileds included again
 
  -- Santiago Ruano Rincón <santiago@debian.org>  Thu, 07 Apr 2011 10:18:47 +0200
 
