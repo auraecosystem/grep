@@ -1,10 +1,9 @@
-grep (2.7-2~1) UNRELEASED-experimental; urgency=low
+grep (2.7-2) experimental; urgency=low
 
-  * NOT RELEASE YET.
   * Adding 90-dfasearch-hurd.patch to avoid error 
     when compiling on hurd.
 
- -- Santiago Ruano Rincón <santiago@debian.org>  Tue, 19 Apr 2011 14:32:38 +0200
+ -- Santiago Ruano Rincón <santiago@debian.org>  Tue, 19 Apr 2011 21:17:27 +0200
 
 grep (2.7-1) experimental; urgency=low
 
@@ -17,7 +16,7 @@ grep (2.7-1) experimental; urgency=low
       05-kwset.c.patch
       06-578709-ignore-MMAP_OPTION.patch
   * Merging with Ubuntu:
-    - Don't pass -ldl in CFLAGS, but in LIBS instead.
+    - Don't pass -ldl in CFLAGS, but in LIBS instead. (Closes: #596266)
     - Verbose build by default.
   * Bump Standars-Version to 3.9.1, no changes needed
   * Vcs-Git and Vcs-Browser fileds included again
