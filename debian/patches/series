@@ -4,3 +4,4 @@
 70-man_apostrophe.patch
 80-495993-catalan_translation.patch
 04-446854-grep.1.patch
+90-dfasearch-hurd.patch
