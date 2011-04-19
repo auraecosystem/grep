@@ -1,3 +1,11 @@
+grep (2.7-2~1) UNRELEASED-experimental; urgency=low
+
+  * NOT RELEASE YET.
+  * Adding 90-dfasearch-hurd.patch to avoid error 
+    when compiling on hurd.
+
+ -- Santiago Ruano Rincón <santiago@debian.org>  Tue, 19 Apr 2011 14:32:38 +0200
+
 grep (2.7-1) experimental; urgency=low
 
   * New upstream version, 2.7
