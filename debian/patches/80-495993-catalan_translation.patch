@@ -1,0 +1,13 @@
+http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=495993
+
+--- a/po/ca.po	2011-04-15 16:51:35.000000000 +0200
++++ b/po/ca.po	2011-04-15 16:52:06.000000000 +0200
+@@ -460,7 +460,7 @@
+ #: src/main.c:1185
+ #, c-format
+ msgid "Binary file %s matches\n"
+-msgstr "Concidència en el fitxer binari %s\n"
++msgstr "Coincidència en el fitxer binari %s\n"
+ 
+ #: src/main.c:1199
+ msgid "(standard input)"
