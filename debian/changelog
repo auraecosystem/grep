@@ -1,6 +1,9 @@
-grep (2.8-1~1) UNRELEASED; urgency=low
+grep (2.8-1~1) experimental; urgency=low
 
   * New upstream version: 2.8
+  * Removing, since not longer needed:
+    - 80-495993-catalan_translation.patch
+    - 90-dfasearch-hurd.patch
   * Really applying 55-185208-bigfile.patch
 
  -- Santiago Ruano Rincón <santiago@debian.org>  Sun, 29 May 2011 11:04:28 +0200
