@@ -1,6 +1,8 @@
 grep (2.8-2~1) UNRELEASED; urgency=low
 
   * Not released yet 
+  * Applying patch to improve reference acronyms in man page. Thanks to 
+    Chris Butler. (Closes: #587930)
 
  -- Santiago Ruano Rincón <santiago@debian.org>  Tue, 31 May 2011 13:37:49 +0200
 
