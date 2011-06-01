@@ -1,0 +1,38 @@
+--- a/src/main.c	2011-06-01 18:55:32.000000000 +0200
++++ b/src/main.c	2011-06-01 19:12:03.000000000 +0200
+@@ -1267,7 +1267,7 @@
+     status = count + 2;
+   else
+     {
+-      if (count_matches)
++      if (count_matches && (count || (count_matches == 1)))
+         {
+           if (out_file)
+             {
+@@ -2088,14 +2088,23 @@
+       }
+ 
+   /* POSIX.2 says that -q overrides -l, which in turn overrides the
+-     other output options.  */
++     other output options.  We violate this slightly by allowing -c
++     and -l to coexist (print 'file:count' but skip if count==0).  */
+   if (exit_on_match)
+-    list_files = 0;
+-  if (exit_on_match | list_files)
+     {
++      list_files = 0;
+       count_matches = 0;
+       done_on_match = 1;
+     }
++  else if (list_files && count_matches)
++    {
++      list_files = 0;
++      count_matches = 2;
++      done_on_match = 0;
++    }
++  else if (list_files)
++    done_on_match = 1;
++
+   out_quiet = count_matches | done_on_match;
+ 
+   if (out_after < 0)
