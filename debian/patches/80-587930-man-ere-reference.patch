@@ -1,0 +1,20 @@
+--- a/doc/grep.in.1
++++ b/doc/grep.in.1
+@@ -118,7 +118,7 @@
+ .BR \-P ", " \-\^\-perl\-regexp
+ Interpret
+ .I PATTERN
+-as a Perl regular expression.
++as a Perl regular expression (PCRE, see below).
+ This is highly experimental and
+ .B "grep \-P"
+ may warn of unimplemented features.
+@@ -602,7 +602,7 @@
+ .PP
+ .B grep
+ understands three different versions of regular expression syntax:
+-\*(lqbasic,\*(rq \*(lqextended\*(rq and \*(lqperl.\*(rq In
++\*(lqbasic\*(rq (BRE), \*(lqextended\*(rq (ERE) and \*(lqperl\*(rq (PRCE). In
+ .RB "\s-1GNU\s0\ " grep ,
+ there is no difference in available functionality between basic and
+ extended syntaxes.

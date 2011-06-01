@@ -1,6 +1,17 @@
-grep (2.8-1~1) UNRELEASED; urgency=low
+grep (2.8-2) unstable; urgency=low
+
+  * Applying patch to improve reference acronyms in man page. Thanks to 
+    Chris Butler. (Closes: #587930)
+  * Bump Standars-Version to 3.9.2. No changes needed
+
+ -- Santiago Ruano Rincón <santiago@debian.org>  Tue, 31 May 2011 19:05:48 +0200
+
+grep (2.8-1) experimental; urgency=low
 
   * New upstream version: 2.8
+  * Removing, since not longer needed:
+    - 80-495993-catalan_translation.patch
+    - 90-dfasearch-hurd.patch
   * Really applying 55-185208-bigfile.patch
 
  -- Santiago Ruano Rincón <santiago@debian.org>  Sun, 29 May 2011 11:04:28 +0200
