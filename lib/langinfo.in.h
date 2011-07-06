@@ -22,7 +22,7 @@
  * <http://www.opengroup.org/onlinepubs/9699919799/basedefs/langinfo.h.html>
  */
 
-#ifndef _GL_LANGINFO_H
+#ifndef _@GUARD_PREFIX@_LANGINFO_H
 
 #if __GNUC__ >= 3
 @PRAGMA_SYSTEM_HEADER@
@@ -34,8 +34,8 @@
 # @INCLUDE_NEXT@ @NEXT_LANGINFO_H@
 #endif
 
-#ifndef _GL_LANGINFO_H
-#define _GL_LANGINFO_H
+#ifndef _@GUARD_PREFIX@_LANGINFO_H
+#define _@GUARD_PREFIX@_LANGINFO_H
 
 
 #if !@HAVE_LANGINFO_H@
@@ -175,5 +175,5 @@ _GL_WARN_ON_USE (nl_langinfo, "nl_langinfo is not portable - "
 #endif
 
 
-#endif /* _GL_LANGINFO_H */
-#endif /* _GL_LANGINFO_H */
+#endif /* _@GUARD_PREFIX@_LANGINFO_H */
+#endif /* _@GUARD_PREFIX@_LANGINFO_H */

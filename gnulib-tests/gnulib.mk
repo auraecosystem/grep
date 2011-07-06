@@ -254,7 +254,8 @@ if GL_GENERATE_FLOAT_H
 float.h: float.in.h $(top_builddir)/config.status
 	$(AM_V_GEN)rm -f $@-t $@ && \
 	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */' && \
-	  sed -e 's|@''INCLUDE_NEXT''@|$(INCLUDE_NEXT)|g' \
+	  sed -e 's|@''GUARD_PREFIX''@|GL|g' \
+	      -e 's|@''INCLUDE_NEXT''@|$(INCLUDE_NEXT)|g' \
 	      -e 's|@''PRAGMA_SYSTEM_HEADER''@|@PRAGMA_SYSTEM_HEADER@|g' \
 	      -e 's|@''PRAGMA_COLUMNS''@|@PRAGMA_COLUMNS@|g' \
 	      -e 's|@''NEXT_FLOAT_H''@|$(NEXT_FLOAT_H)|g' \
@@ -267,9 +268,19 @@ float.h: $(top_builddir)/config.status
 endif
 MOSTLYCLEANFILES += float.h float.h-t
 
-EXTRA_DIST += float.in.h
+EXTRA_DIST += float.c float.in.h
+
+EXTRA_libtests_a_SOURCES += float.c
 
 ## end   gnulib module float
+
+## begin gnulib module float-tests
+
+TESTS += test-float
+check_PROGRAMS += test-float
+EXTRA_DIST += test-float.c macros.h
+
+## end   gnulib module float-tests
 
 ## begin gnulib module fnmatch-tests
 
@@ -287,6 +298,30 @@ MOSTLYCLEANFILES += test-fpending.t
 EXTRA_DIST += test-fpending.c test-fpending.sh macros.h
 
 ## end   gnulib module fpending-tests
+
+## begin gnulib module fpucw
+
+
+EXTRA_DIST += fpucw.h
+
+## end   gnulib module fpucw
+
+## begin gnulib module getcwd-lgpl
+
+
+EXTRA_DIST += getcwd-lgpl.c
+
+EXTRA_libtests_a_SOURCES += getcwd-lgpl.c
+
+## end   gnulib module getcwd-lgpl
+
+## begin gnulib module getcwd-lgpl-tests
+
+TESTS += test-getcwd-lgpl
+check_PROGRAMS += test-getcwd-lgpl
+EXTRA_DIST += test-getcwd-lgpl.c signature.h macros.h
+
+## end   gnulib module getcwd-lgpl-tests
 
 ## begin gnulib module getopt-posix-tests
 
@@ -336,6 +371,14 @@ check_PROGRAMS += test-ignore-value
 EXTRA_DIST += test-ignore-value.c
 
 ## end   gnulib module ignore-value-tests
+
+## begin gnulib module intprops-tests
+
+TESTS += test-intprops
+check_PROGRAMS += test-intprops
+EXTRA_DIST += test-intprops.c macros.h
+
+## end   gnulib module intprops-tests
 
 ## begin gnulib module inttostr
 
@@ -412,7 +455,7 @@ EXTRA_DIST += localename.h
 
 TESTS += test-localename
 check_PROGRAMS += test-localename
-test_localename_LDADD = $(LDADD) @INTL_MACOSX_LIBS@
+test_localename_LDADD = $(LDADD) @INTL_MACOSX_LIBS@ $(LIBTHREAD)
 
 EXTRA_DIST += test-localename.c macros.h
 
@@ -561,13 +604,6 @@ EXTRA_DIST += test-open.h test-open.c signature.h macros.h
 
 ## end   gnulib module open-tests
 
-## begin gnulib module pathmax
-
-
-EXTRA_DIST += pathmax.h
-
-## end   gnulib module pathmax
-
 ## begin gnulib module putenv
 
 
@@ -705,62 +741,63 @@ BUILT_SOURCES += stdio.h
 stdio.h: stdio.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(ARG_NONNULL_H) $(WARN_ON_USE_H)
 	$(AM_V_GEN)rm -f $@-t $@ && \
 	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */' && \
-	  sed -e 's|@''INCLUDE_NEXT''@|$(INCLUDE_NEXT)|g' \
+	  sed -e 's|@''GUARD_PREFIX''@|GL|g' \
+	      -e 's|@''INCLUDE_NEXT''@|$(INCLUDE_NEXT)|g' \
 	      -e 's|@''PRAGMA_SYSTEM_HEADER''@|@PRAGMA_SYSTEM_HEADER@|g' \
 	      -e 's|@''PRAGMA_COLUMNS''@|@PRAGMA_COLUMNS@|g' \
 	      -e 's|@''NEXT_STDIO_H''@|$(NEXT_STDIO_H)|g' \
-	      -e 's|@''GNULIB_DPRINTF''@|$(GNULIB_DPRINTF)|g' \
-	      -e 's|@''GNULIB_FCLOSE''@|$(GNULIB_FCLOSE)|g' \
-	      -e 's|@''GNULIB_FFLUSH''@|$(GNULIB_FFLUSH)|g' \
-	      -e 's|@''GNULIB_FGETC''@|$(GNULIB_FGETC)|g' \
-	      -e 's|@''GNULIB_FGETS''@|$(GNULIB_FGETS)|g' \
-	      -e 's|@''GNULIB_FOPEN''@|$(GNULIB_FOPEN)|g' \
-	      -e 's|@''GNULIB_FPRINTF''@|$(GNULIB_FPRINTF)|g' \
-	      -e 's|@''GNULIB_FPRINTF_POSIX''@|$(GNULIB_FPRINTF_POSIX)|g' \
-	      -e 's|@''GNULIB_FPURGE''@|$(GNULIB_FPURGE)|g' \
-	      -e 's|@''GNULIB_FPUTC''@|$(GNULIB_FPUTC)|g' \
-	      -e 's|@''GNULIB_FPUTS''@|$(GNULIB_FPUTS)|g' \
-	      -e 's|@''GNULIB_FREAD''@|$(GNULIB_FREAD)|g' \
-	      -e 's|@''GNULIB_FREOPEN''@|$(GNULIB_FREOPEN)|g' \
-	      -e 's|@''GNULIB_FSCANF''@|$(GNULIB_FSCANF)|g' \
-	      -e 's|@''GNULIB_FSEEK''@|$(GNULIB_FSEEK)|g' \
-	      -e 's|@''GNULIB_FSEEKO''@|$(GNULIB_FSEEKO)|g' \
-	      -e 's|@''GNULIB_FTELL''@|$(GNULIB_FTELL)|g' \
-	      -e 's|@''GNULIB_FTELLO''@|$(GNULIB_FTELLO)|g' \
-	      -e 's|@''GNULIB_FWRITE''@|$(GNULIB_FWRITE)|g' \
-	      -e 's|@''GNULIB_GETC''@|$(GNULIB_GETC)|g' \
-	      -e 's|@''GNULIB_GETCHAR''@|$(GNULIB_GETCHAR)|g' \
-	      -e 's|@''GNULIB_GETDELIM''@|$(GNULIB_GETDELIM)|g' \
-	      -e 's|@''GNULIB_GETLINE''@|$(GNULIB_GETLINE)|g' \
-	      -e 's|@''GNULIB_GETS''@|$(GNULIB_GETS)|g' \
-	      -e 's|@''GNULIB_OBSTACK_PRINTF''@|$(GNULIB_OBSTACK_PRINTF)|g' \
-	      -e 's|@''GNULIB_OBSTACK_PRINTF_POSIX''@|$(GNULIB_OBSTACK_PRINTF_POSIX)|g' \
-	      -e 's|@''GNULIB_PERROR''@|$(GNULIB_PERROR)|g' \
-	      -e 's|@''GNULIB_POPEN''@|$(GNULIB_POPEN)|g' \
-	      -e 's|@''GNULIB_PRINTF''@|$(GNULIB_PRINTF)|g' \
-	      -e 's|@''GNULIB_PRINTF_POSIX''@|$(GNULIB_PRINTF_POSIX)|g' \
-	      -e 's|@''GNULIB_PUTC''@|$(GNULIB_PUTC)|g' \
-	      -e 's|@''GNULIB_PUTCHAR''@|$(GNULIB_PUTCHAR)|g' \
-	      -e 's|@''GNULIB_PUTS''@|$(GNULIB_PUTS)|g' \
-	      -e 's|@''GNULIB_REMOVE''@|$(GNULIB_REMOVE)|g' \
-	      -e 's|@''GNULIB_RENAME''@|$(GNULIB_RENAME)|g' \
-	      -e 's|@''GNULIB_RENAMEAT''@|$(GNULIB_RENAMEAT)|g' \
-	      -e 's|@''GNULIB_SCANF''@|$(GNULIB_SCANF)|g' \
-	      -e 's|@''GNULIB_SNPRINTF''@|$(GNULIB_SNPRINTF)|g' \
-	      -e 's|@''GNULIB_SPRINTF_POSIX''@|$(GNULIB_SPRINTF_POSIX)|g' \
-	      -e 's|@''GNULIB_STDIO_H_NONBLOCKING''@|$(GNULIB_STDIO_H_NONBLOCKING)|g' \
-	      -e 's|@''GNULIB_STDIO_H_SIGPIPE''@|$(GNULIB_STDIO_H_SIGPIPE)|g' \
-	      -e 's|@''GNULIB_TMPFILE''@|$(GNULIB_TMPFILE)|g' \
-	      -e 's|@''GNULIB_VASPRINTF''@|$(GNULIB_VASPRINTF)|g' \
-	      -e 's|@''GNULIB_VDPRINTF''@|$(GNULIB_VDPRINTF)|g' \
-	      -e 's|@''GNULIB_VFPRINTF''@|$(GNULIB_VFPRINTF)|g' \
-	      -e 's|@''GNULIB_VFPRINTF_POSIX''@|$(GNULIB_VFPRINTF_POSIX)|g' \
-	      -e 's|@''GNULIB_VFSCANF''@|$(GNULIB_VFSCANF)|g' \
-	      -e 's|@''GNULIB_VSCANF''@|$(GNULIB_VSCANF)|g' \
-	      -e 's|@''GNULIB_VPRINTF''@|$(GNULIB_VPRINTF)|g' \
-	      -e 's|@''GNULIB_VPRINTF_POSIX''@|$(GNULIB_VPRINTF_POSIX)|g' \
-	      -e 's|@''GNULIB_VSNPRINTF''@|$(GNULIB_VSNPRINTF)|g' \
-	      -e 's|@''GNULIB_VSPRINTF_POSIX''@|$(GNULIB_VSPRINTF_POSIX)|g' \
+	      -e 's/@''GNULIB_DPRINTF''@/$(GNULIB_DPRINTF)/g' \
+	      -e 's/@''GNULIB_FCLOSE''@/$(GNULIB_FCLOSE)/g' \
+	      -e 's/@''GNULIB_FFLUSH''@/$(GNULIB_FFLUSH)/g' \
+	      -e 's/@''GNULIB_FGETC''@/$(GNULIB_FGETC)/g' \
+	      -e 's/@''GNULIB_FGETS''@/$(GNULIB_FGETS)/g' \
+	      -e 's/@''GNULIB_FOPEN''@/$(GNULIB_FOPEN)/g' \
+	      -e 's/@''GNULIB_FPRINTF''@/$(GNULIB_FPRINTF)/g' \
+	      -e 's/@''GNULIB_FPRINTF_POSIX''@/$(GNULIB_FPRINTF_POSIX)/g' \
+	      -e 's/@''GNULIB_FPURGE''@/$(GNULIB_FPURGE)/g' \
+	      -e 's/@''GNULIB_FPUTC''@/$(GNULIB_FPUTC)/g' \
+	      -e 's/@''GNULIB_FPUTS''@/$(GNULIB_FPUTS)/g' \
+	      -e 's/@''GNULIB_FREAD''@/$(GNULIB_FREAD)/g' \
+	      -e 's/@''GNULIB_FREOPEN''@/$(GNULIB_FREOPEN)/g' \
+	      -e 's/@''GNULIB_FSCANF''@/$(GNULIB_FSCANF)/g' \
+	      -e 's/@''GNULIB_FSEEK''@/$(GNULIB_FSEEK)/g' \
+	      -e 's/@''GNULIB_FSEEKO''@/$(GNULIB_FSEEKO)/g' \
+	      -e 's/@''GNULIB_FTELL''@/$(GNULIB_FTELL)/g' \
+	      -e 's/@''GNULIB_FTELLO''@/$(GNULIB_FTELLO)/g' \
+	      -e 's/@''GNULIB_FWRITE''@/$(GNULIB_FWRITE)/g' \
+	      -e 's/@''GNULIB_GETC''@/$(GNULIB_GETC)/g' \
+	      -e 's/@''GNULIB_GETCHAR''@/$(GNULIB_GETCHAR)/g' \
+	      -e 's/@''GNULIB_GETDELIM''@/$(GNULIB_GETDELIM)/g' \
+	      -e 's/@''GNULIB_GETLINE''@/$(GNULIB_GETLINE)/g' \
+	      -e 's/@''GNULIB_GETS''@/$(GNULIB_GETS)/g' \
+	      -e 's/@''GNULIB_OBSTACK_PRINTF''@/$(GNULIB_OBSTACK_PRINTF)/g' \
+	      -e 's/@''GNULIB_OBSTACK_PRINTF_POSIX''@/$(GNULIB_OBSTACK_PRINTF_POSIX)/g' \
+	      -e 's/@''GNULIB_PERROR''@/$(GNULIB_PERROR)/g' \
+	      -e 's/@''GNULIB_POPEN''@/$(GNULIB_POPEN)/g' \
+	      -e 's/@''GNULIB_PRINTF''@/$(GNULIB_PRINTF)/g' \
+	      -e 's/@''GNULIB_PRINTF_POSIX''@/$(GNULIB_PRINTF_POSIX)/g' \
+	      -e 's/@''GNULIB_PUTC''@/$(GNULIB_PUTC)/g' \
+	      -e 's/@''GNULIB_PUTCHAR''@/$(GNULIB_PUTCHAR)/g' \
+	      -e 's/@''GNULIB_PUTS''@/$(GNULIB_PUTS)/g' \
+	      -e 's/@''GNULIB_REMOVE''@/$(GNULIB_REMOVE)/g' \
+	      -e 's/@''GNULIB_RENAME''@/$(GNULIB_RENAME)/g' \
+	      -e 's/@''GNULIB_RENAMEAT''@/$(GNULIB_RENAMEAT)/g' \
+	      -e 's/@''GNULIB_SCANF''@/$(GNULIB_SCANF)/g' \
+	      -e 's/@''GNULIB_SNPRINTF''@/$(GNULIB_SNPRINTF)/g' \
+	      -e 's/@''GNULIB_SPRINTF_POSIX''@/$(GNULIB_SPRINTF_POSIX)/g' \
+	      -e 's/@''GNULIB_STDIO_H_NONBLOCKING''@/$(GNULIB_STDIO_H_NONBLOCKING)/g' \
+	      -e 's/@''GNULIB_STDIO_H_SIGPIPE''@/$(GNULIB_STDIO_H_SIGPIPE)/g' \
+	      -e 's/@''GNULIB_TMPFILE''@/$(GNULIB_TMPFILE)/g' \
+	      -e 's/@''GNULIB_VASPRINTF''@/$(GNULIB_VASPRINTF)/g' \
+	      -e 's/@''GNULIB_VDPRINTF''@/$(GNULIB_VDPRINTF)/g' \
+	      -e 's/@''GNULIB_VFPRINTF''@/$(GNULIB_VFPRINTF)/g' \
+	      -e 's/@''GNULIB_VFPRINTF_POSIX''@/$(GNULIB_VFPRINTF_POSIX)/g' \
+	      -e 's/@''GNULIB_VFSCANF''@/$(GNULIB_VFSCANF)/g' \
+	      -e 's/@''GNULIB_VSCANF''@/$(GNULIB_VSCANF)/g' \
+	      -e 's/@''GNULIB_VPRINTF''@/$(GNULIB_VPRINTF)/g' \
+	      -e 's/@''GNULIB_VPRINTF_POSIX''@/$(GNULIB_VPRINTF_POSIX)/g' \
+	      -e 's/@''GNULIB_VSNPRINTF''@/$(GNULIB_VSNPRINTF)/g' \
+	      -e 's/@''GNULIB_VSPRINTF_POSIX''@/$(GNULIB_VSPRINTF_POSIX)/g' \
 	      < $(srcdir)/stdio.in.h | \
 	  sed -e 's|@''HAVE_DECL_FPURGE''@|$(HAVE_DECL_FPURGE)|g' \
 	      -e 's|@''HAVE_DECL_FSEEKO''@|$(HAVE_DECL_FSEEKO)|g' \
@@ -924,6 +961,26 @@ EXTRA_DIST += test-unistd.c
 
 ## end   gnulib module unistd-tests
 
+## begin gnulib module unistr/u8-mbtoucr-tests
+
+TESTS += test-u8-mbtoucr
+check_PROGRAMS += test-u8-mbtoucr
+test_u8_mbtoucr_SOURCES = unistr/test-u8-mbtoucr.c
+test_u8_mbtoucr_LDADD = $(LDADD) $(LIBUNISTRING)
+EXTRA_DIST += unistr/test-u8-mbtoucr.c macros.h
+
+## end   gnulib module unistr/u8-mbtoucr-tests
+
+## begin gnulib module unistr/u8-uctomb-tests
+
+TESTS += test-u8-uctomb
+check_PROGRAMS += test-u8-uctomb
+test_u8_uctomb_SOURCES = unistr/test-u8-uctomb.c
+test_u8_uctomb_LDADD = $(LDADD) $(LIBUNISTRING)
+EXTRA_DIST += unistr/test-u8-uctomb.c macros.h
+
+## end   gnulib module unistr/u8-uctomb-tests
+
 ## begin gnulib module uniwidth/width-tests
 
 TESTS += test-uc_width uniwidth/test-uc_width2.sh
@@ -952,6 +1009,31 @@ check_PROGRAMS += test-unsetenv
 EXTRA_DIST += test-unsetenv.c signature.h macros.h
 
 ## end   gnulib module unsetenv-tests
+
+## begin gnulib module unused-parameter
+
+# The BUILT_SOURCES created by this Makefile snippet are not used via #include
+# statements but through direct file reference. Therefore this snippet must be
+# present in all Makefile.am that need it. This is ensured by the applicability
+# 'all' defined above.
+
+BUILT_SOURCES += unused-parameter.h
+# The unused-parameter.h that gets inserted into generated .h files is the same
+# as build-aux/unused-parameter.h, except that it has the copyright header cut
+# off.
+unused-parameter.h: $(top_srcdir)/build-aux/unused-parameter.h
+	$(AM_V_GEN)rm -f $@-t $@ && \
+	sed -n -e '/GL_UNUSED_PARAMETER/,$$p' \
+	  < $(top_srcdir)/build-aux/unused-parameter.h \
+	  > $@-t && \
+	mv $@-t $@
+MOSTLYCLEANFILES += unused-parameter.h unused-parameter.h-t
+
+UNUSED_PARAMETER_H=unused-parameter.h
+
+EXTRA_DIST += $(top_srcdir)/build-aux/unused-parameter.h
+
+## end   gnulib module unused-parameter
 
 ## begin gnulib module update-copyright-tests
 

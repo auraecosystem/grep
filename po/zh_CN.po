@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grep 2.7.30-pre1\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2011-05-13 22:17+0200\n"
+"POT-Creation-Date: 2011-06-21 20:06+0200\n"
 "PO-Revision-Date: 2011-04-28 20:31+0800\n"
 "Last-Translator: Ji ZhengYu <zhengyuji@gmail.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
@@ -35,67 +35,67 @@ msgstr "有效参数是:"
 msgid "write error"
 msgstr "写错误"
 
-#: lib/error.c:181
+#: lib/error.c:185
 msgid "Unknown system error"
 msgstr "未知的系统错误"
 
-#: lib/getopt.c:527 lib/getopt.c:543
-#, c-format
-msgid "%s: option '%s' is ambiguous\n"
+#: lib/getopt.c:547 lib/getopt.c:576
+#, fuzzy, c-format
+msgid "%s: option '%s' is ambiguous; possibilities:"
 msgstr "%s: 选项‘%s’有歧义\n"
 
-#: lib/getopt.c:576 lib/getopt.c:580
+#: lib/getopt.c:624 lib/getopt.c:628
 #, c-format
 msgid "%s: option '--%s' doesn't allow an argument\n"
 msgstr "%s: 选项 ‘--%s’不允许带参数\n"
 
-#: lib/getopt.c:589 lib/getopt.c:594
+#: lib/getopt.c:637 lib/getopt.c:642
 #, c-format
 msgid "%s: option '%c%s' doesn't allow an argument\n"
 msgstr "%s: 选项 ‘%c%s’不允许带参数\n"
 
-#: lib/getopt.c:637 lib/getopt.c:656
+#: lib/getopt.c:685 lib/getopt.c:704
 #, c-format
 msgid "%s: option '--%s' requires an argument\n"
 msgstr "%s: 选项 ‘--%s’必须带参数\n"
 
-#: lib/getopt.c:694 lib/getopt.c:697
+#: lib/getopt.c:742 lib/getopt.c:745
 #, c-format
 msgid "%s: unrecognized option '--%s'\n"
 msgstr "%s: 未知选项 ‘--%s’\n"
 
-#: lib/getopt.c:705 lib/getopt.c:708
+#: lib/getopt.c:753 lib/getopt.c:756
 #, c-format
 msgid "%s: unrecognized option '%c%s'\n"
 msgstr "%s: 未知选项 ‘%c%s’\n"
 
-#: lib/getopt.c:757 lib/getopt.c:760
+#: lib/getopt.c:805 lib/getopt.c:808
 #, c-format
 msgid "%s: invalid option -- '%c'\n"
 msgstr "%s: 无效选项 -- %c\n"
 
-#: lib/getopt.c:810 lib/getopt.c:827 lib/getopt.c:1035 lib/getopt.c:1053
+#: lib/getopt.c:858 lib/getopt.c:875 lib/getopt.c:1083 lib/getopt.c:1101
 #, c-format
 msgid "%s: option requires an argument -- '%c'\n"
 msgstr "%s: 选项必须带有一个参数 -- %c\n"
 
-#: lib/getopt.c:883 lib/getopt.c:899
+#: lib/getopt.c:931 lib/getopt.c:947
 #, c-format
 msgid "%s: option '-W %s' is ambiguous\n"
 msgstr "%s: 选项 ‘-W %s’有歧义\n"
 
-#: lib/getopt.c:923 lib/getopt.c:941
+#: lib/getopt.c:971 lib/getopt.c:989
 #, c-format
 msgid "%s: option '-W %s' doesn't allow an argument\n"
 msgstr "%s: 选项 ‘-W %s’不允许带参数\n"
 
-#: lib/getopt.c:962 lib/getopt.c:980
+#: lib/getopt.c:1010 lib/getopt.c:1028
 #, c-format
 msgid "%s: option '-W %s' requires an argument\n"
 msgstr "%s: 选项 ‘-W %s’必须带参数\n"
 
-#: lib/obstack.c:421 lib/obstack.c:423 lib/xalloc-die.c:34 src/dfasearch.c:167
-#: src/kwset.c:178 src/kwset.c:186 src/kwset.c:409 src/pcresearch.c:149
+#: lib/obstack.c:421 lib/obstack.c:423 lib/xalloc-die.c:34 src/kwset.c:178
+#: src/kwset.c:186 src/kwset.c:409 src/pcresearch.c:155
 #, c-format
 msgid "memory exhausted"
 msgstr "内存耗尽"
@@ -387,41 +387,41 @@ msgstr "%s%s 参数‘%s’的后缀无效"
 msgid "%s%s argument `%s' too large"
 msgstr "%s%s 参数‘%s’过多"
 
-#: src/dfa.c:784 src/dfa.c:787 src/dfa.c:807 src/dfa.c:820 src/dfa.c:832
-#: src/dfa.c:898 src/dfa.c:907 src/dfa.c:910 src/dfa.c:915 src/dfa.c:929
-#: src/dfa.c:994
+#: src/dfa.c:799 src/dfa.c:802 src/dfa.c:822 src/dfa.c:835 src/dfa.c:847
+#: src/dfa.c:913 src/dfa.c:922 src/dfa.c:925 src/dfa.c:930 src/dfa.c:944
+#: src/dfa.c:1009
 msgid "unbalanced ["
 msgstr "有未匹配的 ["
 
-#: src/dfa.c:843
+#: src/dfa.c:858
 msgid "invalid character class"
 msgstr "无效的字符类名"
 
-#: src/dfa.c:1040
+#: src/dfa.c:1051
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr "字符类的语法是 [[:space:]],而非 [:space:]"
 
-#: src/dfa.c:1108
+#: src/dfa.c:1112
 msgid "unfinished \\ escape"
 msgstr "未做好 \\ 转义"
 
-#: src/dfa.c:1241 src/dfa.c:1247 src/dfa.c:1257 src/dfa.c:1265 src/dfa.c:1280
+#: src/dfa.c:1245 src/dfa.c:1251 src/dfa.c:1261 src/dfa.c:1269 src/dfa.c:1284
 msgid "unfinished repeat count"
 msgstr "未定义重复次数"
 
-#: src/dfa.c:1254 src/dfa.c:1271 src/dfa.c:1279 src/dfa.c:1283
+#: src/dfa.c:1258 src/dfa.c:1275 src/dfa.c:1283 src/dfa.c:1287
 msgid "malformed repeat count"
 msgstr "重复次数定义地不完整"
 
-#: src/dfa.c:1626
+#: src/dfa.c:1676
 msgid "unbalanced ("
 msgstr "有未匹配的 ("
 
-#: src/dfa.c:1759
+#: src/dfa.c:1809
 msgid "no syntax specified"
 msgstr "未指定语法"
 
-#: src/dfa.c:1767
+#: src/dfa.c:1817
 msgid "unbalanced )"
 msgstr "有未匹配的 )"
 
@@ -727,14 +727,14 @@ msgstr "指定了互相冲突的比较程序"
 msgid "invalid matcher %s"
 msgstr "无效的比较 %s"
 
-#: src/main.c:1713
+#: src/main.c:1710
 #, c-format
 msgid ""
 "in GREP_COLORS=\"%s\", the \"%s\" capacity needs a value (\"=...\"); skipped"
 msgstr ""
 "在 GREP_COLORS=\"%s\"中， \"%s\" 需要指定一个值(\"=...\")；已忽略此参数。"
 
-#: src/main.c:1717
+#: src/main.c:1714
 #, c-format
 msgid ""
 "in GREP_COLORS=\"%s\", the \"%s\" capacity is boolean and cannot take a "
@@ -743,29 +743,29 @@ msgstr ""
 "在 GREP_COLORS=\"%s\"中，\"%s\" 要的是一个 boolean(布尔值) 不是一个数值(\"=%s"
 "\")；已忽略此参数。"
 
-#: src/main.c:1726
+#: src/main.c:1723
 #, c-format
 msgid "in GREP_COLORS=\"%s\", the \"%s\" capacity %s"
 msgstr "在 GREP_COLORS=\"%s\"中，\"%s\" 是 %s。"
 
-#: src/main.c:1749
+#: src/main.c:1746
 #, c-format
 msgid ""
 "stopped processing of ill-formed GREP_COLORS=\"%s\" at remaining substring "
 "\"%s\""
 msgstr "在余下的子串 \"%2$s\" 中停止处理格式有误的 GREP_COLORS=\"%1$s\"。"
 
-#: src/main.c:1821
+#: src/main.c:1818
 #, c-format
 msgid "unknown devices method"
 msgstr "未知的设备处理方法"
 
-#: src/main.c:1955
+#: src/main.c:1952
 #, c-format
 msgid "invalid max count"
 msgstr "无效的最大计数"
 
-#: src/main.c:2010
+#: src/main.c:2007
 #, c-format
 msgid "unknown binary-files type"
 msgstr "未知的二进制文件类型"
@@ -780,6 +780,15 @@ msgstr "-P 选项的支持未编译入 --disable-perl-regexp binary"
 #, c-format
 msgid "the -P option only supports a single pattern"
 msgstr "-P 选项仅支持单一匹配字词"
+
+#: src/pcresearch.c:159
+#, c-format
+msgid "exceeded PCRE's backtracking limit"
+msgstr ""
+
+#, fuzzy
+#~ msgid "%s: option '%s' is ambiguous\n"
+#~ msgstr "%s: 选项 ‘-W %s’有歧义\n"
 
 #~ msgid "unknown directories method"
 #~ msgstr "未知的目录处理方法"
