@@ -1,5 +1,25 @@
 GNU grep NEWS                                    -*- outline -*-
 
+* Noteworthy changes in release 2.9 (2011-06-21) [stable]
+
+** Bug fixes
+
+  grep no longer clobbers heap for an ERE like '(^| )*( |$)'
+  [bug introduced in grep-2.6]
+
+  grep is faster on regular expressions that match multibyte characters
+  in brackets (such as '[áéíóú]').
+
+  echo c|grep '[c]' would fail for any c in 0x80..0xff, with a uni-byte
+  encoding for which the byte-to-wide-char mapping is nontrivial.  For
+  example, the ISO-88591 locales are not affected, but ru_RU.KOI8-R is.
+  [bug introduced in grep-2.6]
+
+  grep -P no longer aborts when PCRE's backtracking limit is exceeded
+  Before, echo aaaaaaaaaaaaaab |grep -P '((a+)*)+$' would abort.  Now,
+  it diagnoses the problem and exits with status 2.
+
+
 * Noteworthy changes in release 2.8 (2011-05-13) [stable]
 
 ** Bug fixes

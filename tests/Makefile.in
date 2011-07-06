@@ -56,24 +56,24 @@ subdir = tests
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/00gnulib.m4 \
-	$(top_srcdir)/m4/alloca.m4 $(top_srcdir)/m4/argmatch.m4 \
-	$(top_srcdir)/m4/btowc.m4 $(top_srcdir)/m4/close-stream.m4 \
-	$(top_srcdir)/m4/closeout.m4 $(top_srcdir)/m4/codeset.m4 \
-	$(top_srcdir)/m4/configmake.m4 $(top_srcdir)/m4/ctype.m4 \
-	$(top_srcdir)/m4/dirent_h.m4 $(top_srcdir)/m4/dirname.m4 \
+	$(top_srcdir)/m4/alloca.m4 $(top_srcdir)/m4/btowc.m4 \
+	$(top_srcdir)/m4/close-stream.m4 $(top_srcdir)/m4/closeout.m4 \
+	$(top_srcdir)/m4/codeset.m4 $(top_srcdir)/m4/configmake.m4 \
+	$(top_srcdir)/m4/ctype.m4 $(top_srcdir)/m4/dirent_h.m4 \
+	$(top_srcdir)/m4/dirname.m4 \
 	$(top_srcdir)/m4/double-slash-root.m4 $(top_srcdir)/m4/dup2.m4 \
 	$(top_srcdir)/m4/eealloc.m4 $(top_srcdir)/m4/environ.m4 \
 	$(top_srcdir)/m4/errno_h.m4 $(top_srcdir)/m4/error.m4 \
-	$(top_srcdir)/m4/exclude.m4 $(top_srcdir)/m4/extensions.m4 \
-	$(top_srcdir)/m4/fcntl-o.m4 $(top_srcdir)/m4/fcntl_h.m4 \
-	$(top_srcdir)/m4/float_h.m4 $(top_srcdir)/m4/fnmatch.m4 \
-	$(top_srcdir)/m4/fpending.m4 $(top_srcdir)/m4/getopt.m4 \
-	$(top_srcdir)/m4/getpagesize.m4 $(top_srcdir)/m4/gettext.m4 \
-	$(top_srcdir)/m4/glibc21.m4 $(top_srcdir)/m4/gnulib-common.m4 \
+	$(top_srcdir)/m4/extensions.m4 $(top_srcdir)/m4/fcntl-o.m4 \
+	$(top_srcdir)/m4/fcntl_h.m4 $(top_srcdir)/m4/float_h.m4 \
+	$(top_srcdir)/m4/fnmatch.m4 $(top_srcdir)/m4/fpending.m4 \
+	$(top_srcdir)/m4/fpieee.m4 $(top_srcdir)/m4/getcwd.m4 \
+	$(top_srcdir)/m4/getopt.m4 $(top_srcdir)/m4/getpagesize.m4 \
+	$(top_srcdir)/m4/gettext.m4 $(top_srcdir)/m4/glibc21.m4 \
+	$(top_srcdir)/m4/gnulib-common.m4 \
 	$(top_srcdir)/m4/gnulib-comp.m4 \
-	$(top_srcdir)/m4/hard-locale.m4 $(top_srcdir)/m4/hash.m4 \
-	$(top_srcdir)/m4/iconv.m4 $(top_srcdir)/m4/iconv_h.m4 \
-	$(top_srcdir)/m4/iconv_open.m4 \
+	$(top_srcdir)/m4/hard-locale.m4 $(top_srcdir)/m4/iconv.m4 \
+	$(top_srcdir)/m4/iconv_h.m4 $(top_srcdir)/m4/iconv_open.m4 \
 	$(top_srcdir)/m4/include_next.m4 $(top_srcdir)/m4/inline.m4 \
 	$(top_srcdir)/m4/intlmacosx.m4 $(top_srcdir)/m4/intmax_t.m4 \
 	$(top_srcdir)/m4/inttostr.m4 $(top_srcdir)/m4/inttypes-pri.m4 \
@@ -99,36 +99,35 @@ am__aclocal_m4_deps = $(top_srcdir)/m4/00gnulib.m4 \
 	$(top_srcdir)/m4/mmap-anon.m4 $(top_srcdir)/m4/mode_t.m4 \
 	$(top_srcdir)/m4/multiarch.m4 $(top_srcdir)/m4/nl_langinfo.m4 \
 	$(top_srcdir)/m4/nls.m4 $(top_srcdir)/m4/onceonly.m4 \
-	$(top_srcdir)/m4/open.m4 $(top_srcdir)/m4/pathmax.m4 \
-	$(top_srcdir)/m4/pcre.m4 $(top_srcdir)/m4/po.m4 \
-	$(top_srcdir)/m4/printf.m4 $(top_srcdir)/m4/progtest.m4 \
-	$(top_srcdir)/m4/putenv.m4 $(top_srcdir)/m4/quote.m4 \
-	$(top_srcdir)/m4/quotearg.m4 $(top_srcdir)/m4/realloc.m4 \
-	$(top_srcdir)/m4/regex.m4 $(top_srcdir)/m4/setenv.m4 \
-	$(top_srcdir)/m4/setlocale.m4 $(top_srcdir)/m4/size_max.m4 \
-	$(top_srcdir)/m4/snprintf.m4 $(top_srcdir)/m4/ssize_t.m4 \
-	$(top_srcdir)/m4/stat.m4 $(top_srcdir)/m4/stdarg.m4 \
-	$(top_srcdir)/m4/stdbool.m4 $(top_srcdir)/m4/stddef_h.m4 \
-	$(top_srcdir)/m4/stdint.m4 $(top_srcdir)/m4/stdint_h.m4 \
-	$(top_srcdir)/m4/stdio_h.m4 $(top_srcdir)/m4/stdlib_h.m4 \
-	$(top_srcdir)/m4/stpcpy.m4 $(top_srcdir)/m4/strerror.m4 \
+	$(top_srcdir)/m4/open.m4 $(top_srcdir)/m4/pcre.m4 \
+	$(top_srcdir)/m4/po.m4 $(top_srcdir)/m4/printf.m4 \
+	$(top_srcdir)/m4/progtest.m4 $(top_srcdir)/m4/putenv.m4 \
+	$(top_srcdir)/m4/quote.m4 $(top_srcdir)/m4/quotearg.m4 \
+	$(top_srcdir)/m4/realloc.m4 $(top_srcdir)/m4/regex.m4 \
+	$(top_srcdir)/m4/setenv.m4 $(top_srcdir)/m4/setlocale.m4 \
+	$(top_srcdir)/m4/size_max.m4 $(top_srcdir)/m4/snprintf.m4 \
+	$(top_srcdir)/m4/ssize_t.m4 $(top_srcdir)/m4/stat.m4 \
+	$(top_srcdir)/m4/stdarg.m4 $(top_srcdir)/m4/stdbool.m4 \
+	$(top_srcdir)/m4/stddef_h.m4 $(top_srcdir)/m4/stdint.m4 \
+	$(top_srcdir)/m4/stdint_h.m4 $(top_srcdir)/m4/stdio_h.m4 \
+	$(top_srcdir)/m4/stdlib_h.m4 $(top_srcdir)/m4/stpcpy.m4 \
+	$(top_srcdir)/m4/strerror.m4 $(top_srcdir)/m4/strerror_r.m4 \
 	$(top_srcdir)/m4/string_h.m4 $(top_srcdir)/m4/strndup.m4 \
-	$(top_srcdir)/m4/strnlen.m4 $(top_srcdir)/m4/strtoul.m4 \
-	$(top_srcdir)/m4/strtoull.m4 $(top_srcdir)/m4/strtoumax.m4 \
-	$(top_srcdir)/m4/symlink.m4 $(top_srcdir)/m4/sys_stat_h.m4 \
-	$(top_srcdir)/m4/thread.m4 $(top_srcdir)/m4/threadlib.m4 \
-	$(top_srcdir)/m4/time_h.m4 $(top_srcdir)/m4/unistd_h.m4 \
-	$(top_srcdir)/m4/unlocked-io.m4 $(top_srcdir)/m4/vasnprintf.m4 \
-	$(top_srcdir)/m4/version-etc.m4 \
+	$(top_srcdir)/m4/strnlen.m4 $(top_srcdir)/m4/strtoull.m4 \
+	$(top_srcdir)/m4/strtoumax.m4 $(top_srcdir)/m4/symlink.m4 \
+	$(top_srcdir)/m4/sys_socket_h.m4 \
+	$(top_srcdir)/m4/sys_stat_h.m4 $(top_srcdir)/m4/thread.m4 \
+	$(top_srcdir)/m4/threadlib.m4 $(top_srcdir)/m4/time_h.m4 \
+	$(top_srcdir)/m4/unistd_h.m4 $(top_srcdir)/m4/unlocked-io.m4 \
+	$(top_srcdir)/m4/vasnprintf.m4 $(top_srcdir)/m4/version-etc.m4 \
 	$(top_srcdir)/m4/warn-on-use.m4 $(top_srcdir)/m4/warnings.m4 \
 	$(top_srcdir)/m4/wchar_h.m4 $(top_srcdir)/m4/wchar_t.m4 \
 	$(top_srcdir)/m4/wcrtomb.m4 $(top_srcdir)/m4/wctob.m4 \
-	$(top_srcdir)/m4/wctomb.m4 $(top_srcdir)/m4/wctype.m4 \
-	$(top_srcdir)/m4/wctype_h.m4 $(top_srcdir)/m4/wcwidth.m4 \
-	$(top_srcdir)/m4/wint_t.m4 $(top_srcdir)/m4/xalloc.m4 \
-	$(top_srcdir)/m4/xsize.m4 $(top_srcdir)/m4/xstrndup.m4 \
-	$(top_srcdir)/m4/xstrtol.m4 $(top_srcdir)/m4/yield.m4 \
-	$(top_srcdir)/configure.ac
+	$(top_srcdir)/m4/wctomb.m4 $(top_srcdir)/m4/wctype_h.m4 \
+	$(top_srcdir)/m4/wcwidth.m4 $(top_srcdir)/m4/wint_t.m4 \
+	$(top_srcdir)/m4/xalloc.m4 $(top_srcdir)/m4/xsize.m4 \
+	$(top_srcdir)/m4/xstrndup.m4 $(top_srcdir)/m4/xstrtol.m4 \
+	$(top_srcdir)/m4/yield.m4 $(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 mkinstalldirs = $(install_sh) -d
@@ -750,6 +749,7 @@ HAVE_WCSXFRM = @HAVE_WCSXFRM@
 HAVE_WCTRANS_T = @HAVE_WCTRANS_T@
 HAVE_WCTYPE_H = @HAVE_WCTYPE_H@
 HAVE_WCTYPE_T = @HAVE_WCTYPE_T@
+HAVE_WINSOCK2_H = @HAVE_WINSOCK2_H@
 HAVE_WINT_T = @HAVE_WINT_T@
 HAVE_WMEMCHR = @HAVE_WMEMCHR@
 HAVE_WMEMCMP = @HAVE_WMEMCMP@
@@ -784,6 +784,7 @@ LIBPTH_PREFIX = @LIBPTH_PREFIX@
 LIBS = @LIBS@
 LIBTESTS_LIBDEPS = @LIBTESTS_LIBDEPS@
 LIBTHREAD = @LIBTHREAD@
+LIBUNISTRING_UNISTR_H = @LIBUNISTRING_UNISTR_H@
 LIBUNISTRING_UNITYPES_H = @LIBUNISTRING_UNITYPES_H@
 LIBUNISTRING_UNIWIDTH_H = @LIBUNISTRING_UNIWIDTH_H@
 LIB_PCRE = @LIB_PCRE@
@@ -1084,6 +1085,7 @@ TESTS = \
   backref					\
   backref-multibyte-slow			\
   backref-word					\
+  bogus-wctob					\
   bre						\
   case-fold-backref				\
   case-fold-backslash-w				\
@@ -1091,6 +1093,7 @@ TESTS = \
   case-fold-char-range				\
   case-fold-char-type				\
   char-class-multibyte				\
+  dfa-heap-overrun				\
   dfaexec-multibyte				\
   empty						\
   equiv-classes                                 \
@@ -1109,9 +1112,11 @@ TESTS = \
   inconsistent-range                            \
   khadafy					\
   max-count-vs-context				\
+  unibyte-bracket-expr				\
   high-bit-range				\
   options					\
   pcre						\
+  pcre-abort					\
   pcre-z					\
   prefix-of-multibyte				\
   reversed-range-endpoints			\
@@ -1146,22 +1151,6 @@ MALLOC_PERTURB_ = 1
 TESTS_ENVIRONMENT = \
   tmp__=$$TMPDIR; test -d "$$tmp__" || tmp__=.;	\
   TMPDIR=$$tmp__; export TMPDIR;		\
-  exec 9>&2;					\
-  shell_or_perl_() {				\
-    if grep '^\#!/usr/bin/perl' "$$1" > /dev/null; then			\
-      if $(PERL) -e 'use warnings' > /dev/null 2>&1; then		\
-	grep '^\#!/usr/bin/perl -T' "$$1" > /dev/null && T_=T || T_=;	\
-        $(PERL) -w$$T_ -I$(srcdir) -MCoreutils				\
-	      -M"CuTmpdir qw($$f)" -- "$$1";	\
-      else					\
-	echo 1>&2 "$$tst: configure did not find a usable version of Perl," \
-	  "so skipping this test";		\
-	(exit 77);				\
-      fi;					\
-    else					\
-      $(SHELL) "$$1";				\
-    fi;						\
-  };						\
   export					\
   VERSION='$(VERSION)'                          \
   LOCALE_FR='$(LOCALE_FR)'                      \
@@ -1184,7 +1173,7 @@ TESTS_ENVIRONMENT = \
   PERL='$(PERL)'				\
   SHELL='$(SHELL)'				\
   PATH='$(abs_top_builddir)/src$(PATH_SEPARATOR)'"$$PATH" \
-  ; shell_or_perl_
+  ; $(SHELL) 9>&2
 
 VERBOSE = yes
 all: all-am
@@ -1446,6 +1435,8 @@ backref-multibyte-slow.log: backref-multibyte-slow
 	@p='backref-multibyte-slow'; $(am__check_pre) $(LOG_COMPILE) "$$tst" $(am__check_post)
 backref-word.log: backref-word
 	@p='backref-word'; $(am__check_pre) $(LOG_COMPILE) "$$tst" $(am__check_post)
+bogus-wctob.log: bogus-wctob
+	@p='bogus-wctob'; $(am__check_pre) $(LOG_COMPILE) "$$tst" $(am__check_post)
 bre.log: bre
 	@p='bre'; $(am__check_pre) $(LOG_COMPILE) "$$tst" $(am__check_post)
 case-fold-backref.log: case-fold-backref
@@ -1460,6 +1451,8 @@ case-fold-char-type.log: case-fold-char-type
 	@p='case-fold-char-type'; $(am__check_pre) $(LOG_COMPILE) "$$tst" $(am__check_post)
 char-class-multibyte.log: char-class-multibyte
 	@p='char-class-multibyte'; $(am__check_pre) $(LOG_COMPILE) "$$tst" $(am__check_post)
+dfa-heap-overrun.log: dfa-heap-overrun
+	@p='dfa-heap-overrun'; $(am__check_pre) $(LOG_COMPILE) "$$tst" $(am__check_post)
 dfaexec-multibyte.log: dfaexec-multibyte
 	@p='dfaexec-multibyte'; $(am__check_pre) $(LOG_COMPILE) "$$tst" $(am__check_post)
 empty.log: empty
@@ -1496,12 +1489,16 @@ khadafy.log: khadafy
 	@p='khadafy'; $(am__check_pre) $(LOG_COMPILE) "$$tst" $(am__check_post)
 max-count-vs-context.log: max-count-vs-context
 	@p='max-count-vs-context'; $(am__check_pre) $(LOG_COMPILE) "$$tst" $(am__check_post)
+unibyte-bracket-expr.log: unibyte-bracket-expr
+	@p='unibyte-bracket-expr'; $(am__check_pre) $(LOG_COMPILE) "$$tst" $(am__check_post)
 high-bit-range.log: high-bit-range
 	@p='high-bit-range'; $(am__check_pre) $(LOG_COMPILE) "$$tst" $(am__check_post)
 options.log: options
 	@p='options'; $(am__check_pre) $(LOG_COMPILE) "$$tst" $(am__check_post)
 pcre.log: pcre
 	@p='pcre'; $(am__check_pre) $(LOG_COMPILE) "$$tst" $(am__check_post)
+pcre-abort.log: pcre-abort
+	@p='pcre-abort'; $(am__check_pre) $(LOG_COMPILE) "$$tst" $(am__check_post)
 pcre-z.log: pcre-z
 	@p='pcre-z'; $(am__check_pre) $(LOG_COMPILE) "$$tst" $(am__check_post)
 prefix-of-multibyte.log: prefix-of-multibyte
@@ -1686,6 +1683,17 @@ uninstall-am:
 	mostlyclean-compile mostlyclean-generic pdf pdf-am ps ps-am \
 	recheck recheck-html tags uninstall uninstall-am
 
+
+check: check_executable_TESTS
+.PHONY: check_executable_TESTS
+check_executable_TESTS: Makefile
+	$(AM_V_GEN)fail=0;						\
+        cd $(srcdir) && for i in $(TESTS); do				\
+	  test -x $$i || { fail=1; echo $$i >&2; };			\
+	done;								\
+	test $$fail = 1							\
+          && { echo the above test scripts are not executable >&2; exit 1; } \
+          || :
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

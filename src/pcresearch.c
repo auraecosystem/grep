@@ -44,7 +44,7 @@ Pcompile (char const *pattern, size_t size)
 #else
   int e;
   char const *ep;
-  char *re = xmalloc (4 * size + 7);
+  char *re = xnmalloc (4, size + 7);
   int flags = PCRE_MULTILINE | (match_icase ? PCRE_CASELESS : 0);
   char const *patlim = pattern + size;
   char *n = re;
@@ -101,13 +101,19 @@ Pcompile (char const *pattern, size_t size)
 #endif
 }
 
-size_t
+/* Pexecute is a no-return function when building --without-pcre.  */
+#if !HAVE_LIBPCRE
+# define WITHOUT_PCRE_NORETURN _GL_ATTRIBUTE_NORETURN
+#else
+# define WITHOUT_PCRE_NORETURN /* empty */
+#endif
+
+size_t WITHOUT_PCRE_NORETURN
 Pexecute (char const *buf, size_t size, size_t *match_size,
           char const *start_ptr)
 {
 #if !HAVE_LIBPCRE
   abort ();
-  return -1;
 #else
   /* This array must have at least two elements; everything after that
      is just for performance improvement in pcre_exec.  */
@@ -147,6 +153,10 @@ Pexecute (char const *buf, size_t size, size_t *match_size,
 
         case PCRE_ERROR_NOMEMORY:
           error (EXIT_TROUBLE, 0, _("memory exhausted"));
+
+        case PCRE_ERROR_MATCHLIMIT:
+          error (EXIT_TROUBLE, 0,
+                 _("exceeded PCRE's backtracking limit"));
 
         default:
           abort ();

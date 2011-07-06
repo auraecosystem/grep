@@ -1,9 +1,7 @@
 #!/bin/sh
 # Test Perl regex with NUL-separated input
 . "${srcdir=.}/init.sh"; path_prepend_ ../src
-
-echo a | grep -P a >/dev/null 2>err || skip_ 'PCRE not available.'
-compare err /dev/null || fail_ 'PCRE available, but stderr not empty.'
+require_pcre_
 
 REGEX=a
 
@@ -13,7 +11,8 @@ grep -z "$REGEX" in > exp 2>err || fail_ 'Cannot do BRE (grep -z) match.'
 compare err /dev/null || fail_ 'stderr not empty on grep -z.'
 
 # Sanity check the output
-test "$(grep -cz "$REGEX" in)" 2>err = 3 || fail_ 'Incorrect BRE (grep -cz) match.'
+test "$(grep -cz $REGEX in 2>err)" = 3 \
+    || fail_ 'Incorrect BRE (grep -cz) match.'
 compare err /dev/null || fail_ 'stderr not empty on grep -cz.'
 
 fail=0

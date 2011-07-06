@@ -38,6 +38,7 @@ TESTS =						\
   backref					\
   backref-multibyte-slow			\
   backref-word					\
+  bogus-wctob					\
   bre						\
   case-fold-backref				\
   case-fold-backslash-w				\
@@ -45,6 +46,7 @@ TESTS =						\
   case-fold-char-range				\
   case-fold-char-type				\
   char-class-multibyte				\
+  dfa-heap-overrun				\
   dfaexec-multibyte				\
   empty						\
   equiv-classes                                 \
@@ -63,9 +65,11 @@ TESTS =						\
   inconsistent-range                            \
   khadafy					\
   max-count-vs-context				\
+  unibyte-bracket-expr				\
   high-bit-range				\
   options					\
   pcre						\
+  pcre-abort					\
   pcre-z					\
   prefix-of-multibyte				\
   reversed-range-endpoints			\
@@ -100,22 +104,6 @@ MALLOC_PERTURB_ = 1
 TESTS_ENVIRONMENT =				\
   tmp__=$$TMPDIR; test -d "$$tmp__" || tmp__=.;	\
   TMPDIR=$$tmp__; export TMPDIR;		\
-  exec 9>&2;					\
-  shell_or_perl_() {				\
-    if grep '^\#!/usr/bin/perl' "$$1" > /dev/null; then			\
-      if $(PERL) -e 'use warnings' > /dev/null 2>&1; then		\
-	grep '^\#!/usr/bin/perl -T' "$$1" > /dev/null && T_=T || T_=;	\
-        $(PERL) -w$$T_ -I$(srcdir) -MCoreutils				\
-	      -M"CuTmpdir qw($$f)" -- "$$1";	\
-      else					\
-	echo 1>&2 "$$tst: configure did not find a usable version of Perl," \
-	  "so skipping this test";		\
-	(exit 77);				\
-      fi;					\
-    else					\
-      $(SHELL) "$$1";				\
-    fi;						\
-  };						\
   export					\
   VERSION='$(VERSION)'                          \
   LOCALE_FR='$(LOCALE_FR)'                      \
@@ -138,6 +126,17 @@ TESTS_ENVIRONMENT =				\
   PERL='$(PERL)'				\
   SHELL='$(SHELL)'				\
   PATH='$(abs_top_builddir)/src$(PATH_SEPARATOR)'"$$PATH" \
-  ; shell_or_perl_
+  ; $(SHELL) 9>&2
 
 VERBOSE = yes
+
+check: check_executable_TESTS
+.PHONY: check_executable_TESTS
+check_executable_TESTS: Makefile
+	$(AM_V_GEN)fail=0;						\
+        cd $(srcdir) && for i in $(TESTS); do				\
+	  test -x $$i || { fail=1; echo $$i >&2; };			\
+	done;								\
+	test $$fail = 1							\
+          && { echo the above test scripts are not executable >&2; exit 1; } \
+          || :

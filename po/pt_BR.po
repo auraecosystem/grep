@@ -1,110 +1,108 @@
-# translation of grep-2.5.4-pre4.po to Brazilian Portuguese
+# translation of grep-2.8.po to Brazilian Portuguese
 # This file is distributed under the same license as the grep package.
 # grep: translation to Brazilian Portuguese (pt_BR)
-# Copyright (C) 2002, 2007, 2008, 2009 Free Software Foundation, Inc.
-# based on the previous translation to pt_BR (v2.4f) by
-# based on the translation to Spanish (es) by
+# Copyright (C) 2002, 2007, 2008, 2009, 2011 Free Software Foundation, Inc.
 #
-# Alexandre Folle de Menezes <afmenez@terra.com.br>, 2002.
+# Enrique Melero Gómez <melero@eurolands.com>, 1996.
 # Rodrigo Stulzer Lopes <rodrigo@conectiva.com.br>, 1997.
-# Enrique Melero Gï¿½mez <melero@eurolands.com>, 1996.
 # Santiago Vila Doncel <sanvila@unex.es>, 1997, 1998, 1999, 2000, 2001, 2002.
-# Rodolfo Ribeiro Gomes <rodolforg@gmail.com>, 2007, 2008, 2009.
+# Alexandre Folle de Menezes <afmenez@terra.com.br>, 2002.
+# Rodolfo Ribeiro Gomes <rodolforg@gmail.com>, 2007, 2008, 2009, 2011.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: grep-2.5.4-pre4\n"
+"Project-Id-Version: GNU grep-2.8\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2011-05-13 22:17+0200\n"
-"PO-Revision-Date: 2009-01-23 19:26-0200\n"
+"POT-Creation-Date: 2011-06-21 20:06+0200\n"
+"PO-Revision-Date: 2011-06-19 17:04-0300\n"
 "Last-Translator: Rodolfo Ribeiro Gomes <rodolforg@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <ldp-br@bazar.conectiva.com.br>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.4\n"
-"Plural-Forms:  nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: lib/argmatch.c:133
-#, fuzzy, c-format
+#, c-format
 msgid "invalid argument %s for %s"
-msgstr "Nome inválido de categoria de caracteres"
+msgstr "%s é um argumento inválido para %s"
 
 #: lib/argmatch.c:134
 #, c-format
 msgid "ambiguous argument %s for %s"
-msgstr ""
+msgstr "%s é um argumento ambíguo para %s"
 
 #: lib/argmatch.c:153
 #, c-format
 msgid "Valid arguments are:"
-msgstr ""
+msgstr "Os argumentos válidos são:"
 
 #: lib/closeout.c:112
 msgid "write error"
 msgstr "erro de escrita"
 
-#: lib/error.c:181
+#: lib/error.c:185
 msgid "Unknown system error"
 msgstr "Erro desconhecido de sistema"
 
-#: lib/getopt.c:527 lib/getopt.c:543
+#: lib/getopt.c:547 lib/getopt.c:576
 #, fuzzy, c-format
-msgid "%s: option '%s' is ambiguous\n"
-msgstr "%s: opção \"%s\" é ambígua\n"
+msgid "%s: option '%s' is ambiguous; possibilities:"
+msgstr "%s: a opção \"%s\" é ambígua\n"
 
-#: lib/getopt.c:576 lib/getopt.c:580
-#, fuzzy, c-format
+#: lib/getopt.c:624 lib/getopt.c:628
+#, c-format
 msgid "%s: option '--%s' doesn't allow an argument\n"
-msgstr "%s: opção \"--%s\" não aceita argumentos\n"
+msgstr "%s: a opção \"--%s\" não aceita argumentos\n"
 
-#: lib/getopt.c:589 lib/getopt.c:594
-#, fuzzy, c-format
+#: lib/getopt.c:637 lib/getopt.c:642
+#, c-format
 msgid "%s: option '%c%s' doesn't allow an argument\n"
-msgstr "%s: opção \"%c%s\" não aceita argumentos\n"
+msgstr "%s: a opção \"%c%s\" não aceita argumentos\n"
 
-#: lib/getopt.c:637 lib/getopt.c:656
-#, fuzzy, c-format
+#: lib/getopt.c:685 lib/getopt.c:704
+#, c-format
 msgid "%s: option '--%s' requires an argument\n"
-msgstr "%s: opção \"%s\" requer um argumento\n"
+msgstr "%s: a opção \"%s\" requer um argumento\n"
 
-#: lib/getopt.c:694 lib/getopt.c:697
-#, fuzzy, c-format
+#: lib/getopt.c:742 lib/getopt.c:745
+#, c-format
 msgid "%s: unrecognized option '--%s'\n"
-msgstr "%s: opção \"--%s\" desconhecida\n"
+msgstr "%s: a opção \"--%s\" é desconhecida\n"
 
-#: lib/getopt.c:705 lib/getopt.c:708
-#, fuzzy, c-format
+#: lib/getopt.c:753 lib/getopt.c:756
+#, c-format
 msgid "%s: unrecognized option '%c%s'\n"
-msgstr "%s: opção \"%c%s\" desconhecida\n"
+msgstr "%s: a opção \"%c%s\" é desconhecida\n"
 
-#: lib/getopt.c:757 lib/getopt.c:760
-#, fuzzy, c-format
+#: lib/getopt.c:805 lib/getopt.c:808
+#, c-format
 msgid "%s: invalid option -- '%c'\n"
-msgstr "%s: opção inválida -- %c\n"
+msgstr "%s: a opção é inválida -- \"%c\"\n"
 
-#: lib/getopt.c:810 lib/getopt.c:827 lib/getopt.c:1035 lib/getopt.c:1053
-#, fuzzy, c-format
+#: lib/getopt.c:858 lib/getopt.c:875 lib/getopt.c:1083 lib/getopt.c:1101
+#, c-format
 msgid "%s: option requires an argument -- '%c'\n"
-msgstr "%s: opção exige um argumento -- %c\n"
+msgstr "%s: a opção exige um argumento -- \"%c\"\n"
 
-#: lib/getopt.c:883 lib/getopt.c:899
-#, fuzzy, c-format
+#: lib/getopt.c:931 lib/getopt.c:947
+#, c-format
 msgid "%s: option '-W %s' is ambiguous\n"
-msgstr "%s: opção \"-W %s\" é ambígua\n"
+msgstr "%s: a opção \"-W %s\" é ambígua\n"
 
-#: lib/getopt.c:923 lib/getopt.c:941
-#, fuzzy, c-format
+#: lib/getopt.c:971 lib/getopt.c:989
+#, c-format
 msgid "%s: option '-W %s' doesn't allow an argument\n"
-msgstr "%s: opção \"-W %s\" não aceita argumentos\n"
+msgstr "%s: a opção \"-W %s\" não aceita argumentos\n"
 
-#: lib/getopt.c:962 lib/getopt.c:980
-#, fuzzy, c-format
+#: lib/getopt.c:1010 lib/getopt.c:1028
+#, c-format
 msgid "%s: option '-W %s' requires an argument\n"
-msgstr "%s: opção \"%s\" requer um argumento\n"
+msgstr "%s: a opção \"-W %s\" requer um argumento\n"
 
-#: lib/obstack.c:421 lib/obstack.c:423 lib/xalloc-die.c:34 src/dfasearch.c:167
-#: src/kwset.c:178 src/kwset.c:186 src/kwset.c:409 src/pcresearch.c:149
+#: lib/obstack.c:421 lib/obstack.c:423 lib/xalloc-die.c:34 src/kwset.c:178
+#: src/kwset.c:186 src/kwset.c:409 src/pcresearch.c:155
 #, c-format
 msgid "memory exhausted"
 msgstr "memória esgotada"
@@ -211,22 +209,21 @@ msgstr "Nenhuma expressão regular anterior"
 #: lib/version-etc.c:74
 #, c-format
 msgid "Packaged by %s (%s)\n"
-msgstr ""
+msgstr "Empacotado por %s (%s)\n"
 
 #: lib/version-etc.c:77
 #, c-format
 msgid "Packaged by %s\n"
-msgstr ""
+msgstr "Empacotado por %s\n"
 
 #. TRANSLATORS: Translate "(C)" to the copyright symbol
 #. (C-in-a-circle), if this symbol is available in the user's
 #. locale.  Otherwise, do not translate "(C)"; leave it as-is.
 #: lib/version-etc.c:84
 msgid "(C)"
-msgstr ""
+msgstr "(C)"
 
 #: lib/version-etc.c:86
-#, fuzzy
 msgid ""
 "\n"
 "License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl."
@@ -235,29 +232,30 @@ msgid ""
 "There is NO WARRANTY, to the extent permitted by law.\n"
 "\n"
 msgstr ""
-"Copyright (C) %s Free Software Foundation, Inc.\n"
+"\n"
 "Licença GPLv3+: GNU GPL versão 3 ou superior <http://gnu.org/licenses/gpl."
-"html>\n"
+"html>.\n"
 "Este é um software livre: você é livre para alterá-lo e redistribuí-lo.\n"
 "NÃO HÁ GARANTIAS, na máxima extensão permitida por lei.\n"
+"\n"
 
 #. TRANSLATORS: %s denotes an author name.
 #: lib/version-etc.c:102
 #, c-format
 msgid "Written by %s.\n"
-msgstr ""
+msgstr "Escrito por %s.\n"
 
 #. TRANSLATORS: Each %s denotes an author name.
 #: lib/version-etc.c:106
 #, c-format
 msgid "Written by %s and %s.\n"
-msgstr ""
+msgstr "Escrito por %s e %s.\n"
 
 #. TRANSLATORS: Each %s denotes an author name.
 #: lib/version-etc.c:110
 #, c-format
 msgid "Written by %s, %s, and %s.\n"
-msgstr ""
+msgstr "Escrito por %s, %s e %s.\n"
 
 #. TRANSLATORS: Each %s denotes an author name.
 #. You can use line breaks, estimating that each author name occupies
@@ -268,6 +266,8 @@ msgid ""
 "Written by %s, %s, %s,\n"
 "and %s.\n"
 msgstr ""
+"Escrito por %s, %s, %s\n"
+"e %s.\n"
 
 #. TRANSLATORS: Each %s denotes an author name.
 #. You can use line breaks, estimating that each author name occupies
@@ -278,6 +278,8 @@ msgid ""
 "Written by %s, %s, %s,\n"
 "%s, and %s.\n"
 msgstr ""
+"Escrito por %s, %s, %s,\n"
+"%s e %s.\n"
 
 #. TRANSLATORS: Each %s denotes an author name.
 #. You can use line breaks, estimating that each author name occupies
@@ -288,6 +290,8 @@ msgid ""
 "Written by %s, %s, %s,\n"
 "%s, %s, and %s.\n"
 msgstr ""
+"Escrito por %s, %s, %s,\n"
+"%s, %s e %s.\n"
 
 #. TRANSLATORS: Each %s denotes an author name.
 #. You can use line breaks, estimating that each author name occupies
@@ -298,6 +302,8 @@ msgid ""
 "Written by %s, %s, %s,\n"
 "%s, %s, %s, and %s.\n"
 msgstr ""
+"Escrito por %s, %s, %s,\n"
+"%s, %s, %s e %s.\n"
 
 #. TRANSLATORS: Each %s denotes an author name.
 #. You can use line breaks, estimating that each author name occupies
@@ -309,6 +315,9 @@ msgid ""
 "%s, %s, %s, %s,\n"
 "and %s.\n"
 msgstr ""
+"Escrito por %s, %s, %s,\n"
+"%s, %s, %s, %s\n"
+"e %s.\n"
 
 #. TRANSLATORS: Each %s denotes an author name.
 #. You can use line breaks, estimating that each author name occupies
@@ -320,6 +329,9 @@ msgid ""
 "%s, %s, %s, %s,\n"
 "%s, and %s.\n"
 msgstr ""
+"Escrito por %s, %s, %s,\n"
+"%s, %s, %s, %s,\n"
+"%s e %s.\n"
 
 #. TRANSLATORS: Each %s denotes an author name.
 #. You can use line breaks, estimating that each author name occupies
@@ -331,97 +343,92 @@ msgid ""
 "%s, %s, %s, %s,\n"
 "%s, %s, and others.\n"
 msgstr ""
+"Escrito por %s, %s, %s,\n"
+"%s, %s, %s, %s,\n"
+"%s, %s e outros.\n"
 
 #. TRANSLATORS: The placeholder indicates the bug-reporting address
 #. for this package.  Please add _another line_ saying
 #. "Report translation bugs to <...>\n" with the address for translation
 #. bugs (typically your translation team's web or email address).
 #: lib/version-etc.c:245 src/main.c:1474
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "Report bugs to: %s\n"
 msgstr ""
 "\n"
-"Relate problemas para <%s>.\n"
+"Relate os problemas para: %s\n"
 
 #: lib/version-etc.c:247
-#, fuzzy, c-format
+#, c-format
 msgid "Report %s bugs to: %s\n"
-msgstr ""
-"\n"
-"Relate problemas para <%s>.\n"
+msgstr "Relate os problemas de %s para: %s\n"
 
 #: lib/version-etc.c:251
 #, c-format
 msgid "%s home page: <%s>\n"
-msgstr ""
+msgstr "página de %s: <%s>\n"
 
 #: lib/version-etc.c:253
 #, c-format
 msgid "%s home page: <http://www.gnu.org/software/%s/>\n"
-msgstr ""
+msgstr "página de %s: <http://www.gnu.org/software/%s/>\n"
 
 #: lib/version-etc.c:256 src/main.c:1477
 msgid "General help using GNU software: <http://www.gnu.org/gethelp/>\n"
-msgstr ""
+msgstr "Ajuda geral sobre uso de software GNU: <http://www.gnu.org/gethelp/>\n"
 
 #: lib/xstrtol-error.c:63
 #, c-format
 msgid "invalid %s%s argument `%s'"
-msgstr ""
+msgstr "argumento inválido para %s%s: \"%s\""
 
 #: lib/xstrtol-error.c:68
 #, c-format
 msgid "invalid suffix in %s%s argument `%s'"
-msgstr ""
+msgstr "sufixo inválido no argumento para %s%s: \"%s\""
 
 #: lib/xstrtol-error.c:72
 #, c-format
 msgid "%s%s argument `%s' too large"
-msgstr ""
+msgstr "%s%s: argumento \"%s\" é grande demais"
 
-#: src/dfa.c:784 src/dfa.c:787 src/dfa.c:807 src/dfa.c:820 src/dfa.c:832
-#: src/dfa.c:898 src/dfa.c:907 src/dfa.c:910 src/dfa.c:915 src/dfa.c:929
-#: src/dfa.c:994
-#, fuzzy
+#: src/dfa.c:799 src/dfa.c:802 src/dfa.c:822 src/dfa.c:835 src/dfa.c:847
+#: src/dfa.c:913 src/dfa.c:922 src/dfa.c:925 src/dfa.c:930 src/dfa.c:944
+#: src/dfa.c:1009
 msgid "unbalanced ["
 msgstr "[ sem correspondente"
 
-#: src/dfa.c:843
-#, fuzzy
+#: src/dfa.c:858
 msgid "invalid character class"
-msgstr "Nome inválido de categoria de caracteres"
+msgstr "categoria de caracteres inválida"
 
-#: src/dfa.c:1040
+#: src/dfa.c:1051
 msgid "character class syntax is [[:space:]], not [:space:]"
-msgstr ""
+msgstr "a sintaxe de categoria de caracteres é [[:space:]], e não [:space:]"
 
-#: src/dfa.c:1108
-#, fuzzy
+#: src/dfa.c:1112
 msgid "unfinished \\ escape"
-msgstr "Escape \\ não terminado"
+msgstr "escape \\ não terminado"
 
-#: src/dfa.c:1241 src/dfa.c:1247 src/dfa.c:1257 src/dfa.c:1265 src/dfa.c:1280
+#: src/dfa.c:1245 src/dfa.c:1251 src/dfa.c:1261 src/dfa.c:1269 src/dfa.c:1284
 msgid "unfinished repeat count"
 msgstr "contador de repetição não terminado"
 
-#: src/dfa.c:1254 src/dfa.c:1271 src/dfa.c:1279 src/dfa.c:1283
+#: src/dfa.c:1258 src/dfa.c:1275 src/dfa.c:1283 src/dfa.c:1287
 msgid "malformed repeat count"
 msgstr "contador de repetição mal formulado"
 
-#: src/dfa.c:1626
-#, fuzzy
+#: src/dfa.c:1676
 msgid "unbalanced ("
 msgstr "( sem correspondente"
 
-#: src/dfa.c:1759
-#, fuzzy
+#: src/dfa.c:1809
 msgid "no syntax specified"
-msgstr "Nenhuma sintaxe especificada"
+msgstr "nenhuma sintaxe especificada"
 
-#: src/dfa.c:1767
-#, fuzzy
+#: src/dfa.c:1817
 msgid "unbalanced )"
 msgstr ") sem correspondente"
 
@@ -457,11 +464,11 @@ msgstr ""
 #. This is a proper name. See the gettext manual, section Names.
 #: src/main.c:59
 msgid "Mike Haertel"
-msgstr ""
+msgstr "Mike Haertel"
 
 #: src/main.c:60
 msgid "others, see <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
-msgstr ""
+msgstr "outros, veja <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
 
 #: src/main.c:418
 msgid "invalid context length argument"
@@ -470,7 +477,7 @@ msgstr "argumento inválido para comprimento do contexto"
 #: src/main.c:473
 #, c-format
 msgid "lseek failed"
-msgstr ""
+msgstr "a movimentação pelo arquivo (lseek) falhou"
 
 #: src/main.c:620
 #, c-format
@@ -492,9 +499,9 @@ msgid "(standard input)"
 msgstr "(entrada padrão)"
 
 #: src/main.c:1330
-#, fuzzy, c-format
+#, c-format
 msgid "warning: %s: %s"
-msgstr "aviso: %s: %s\n"
+msgstr "aviso: %s: %s"
 
 #: src/main.c:1331
 msgid "recursive directory loop"
@@ -561,7 +568,7 @@ msgstr ""
 "                              caractere de nova linha\n"
 
 #: src/main.c:1408
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "Miscellaneous:\n"
@@ -577,7 +584,7 @@ msgstr ""
 "  -v, --invert-match        seleciona somente linhas não coincidentes\n"
 "  -V, --version             mostra informações sobre versão e sai\n"
 "      --help                exibe esta ajuda e sai\n"
-"      --mmap                usa entrada mapeada em memória se possível\n"
+"      --mmap                ignorada por razões de retrocompatibilidade\n"
 
 #: src/main.c:1416
 #, c-format
@@ -592,6 +599,15 @@ msgid ""
 "  -h, --no-filename         suppress the prefixing filename on output\n"
 "      --label=LABEL         print LABEL as filename for standard input\n"
 msgstr ""
+"\n"
+"Controle de saída:\n"
+"  -m, --max-count=NÚM       interrompe depois de NÚM ocorrências\n"
+"  -b, --byte-offset         emite a posição em bytes junto com a saída\n"
+"  -n, --line-number         emite o número da linha junto com a saída\n"
+"      --line-buffered       libera a saída a cada linha\n"
+"  -H, --with-filename       emite o nome do arquivo para cada ocorrência\n"
+"  -h, --no-filename         inibe o nome de arquivo na saída\n"
+"      --label=RÓTULO        emite RÓTULO como o nome da entrada padrão\n"
 
 #: src/main.c:1427
 #, c-format
@@ -602,6 +618,14 @@ msgid ""
 "                            TYPE is `binary', `text', or `without-match'\n"
 "  -a, --text                equivalent to --binary-files=text\n"
 msgstr ""
+"  -o, --only-matching       mostra apenas a parte da linha que coincide com\n"
+"                              o PADRÃO\n"
+"  -q, --quiet, --silent     inibe todas as mensagens normais de saída\n"
+"      --binary-files=TIPO   assume que arquivos binários são TIPO\n"
+"                             TIPO pode ser \\\"binary\\\" (binário), \\\"text"
+"\\\" (texto),\n"
+"                             ou \\\"without-match\\\" (nunca coincide)\n"
+"  -a, --text                equivalente a --binary-files=text\n"
 
 #: src/main.c:1434
 #, c-format
@@ -613,6 +637,15 @@ msgid ""
 "                            ACTION is `read' or `skip'\n"
 "  -R, -r, --recursive       equivalent to --directories=recurse\n"
 msgstr ""
+"  -I                        equivalente a --binary-files=without-match\n"
+"  -d, --directories=AÇÃO    como tratar diretórios;\n"
+"                             AÇÃO pode ser \\\"read\\\" (ler), \\\"recurse\\"
+"\" (recursivo),\n"
+"                             ou \\\"skip\\\" (ignorar)\n"
+"  -D, --devices=AÇÃO        como tratar dispositivos, FIFOs e soquetes;\n"
+"                             AÇÃO pode ser \\\"read\\\" (ler) ou \\\"skip\\"
+"\" (ignorar)\n"
+"  -R, -r, --recursive       equivalente a --directories=recurse\n"
 
 #: src/main.c:1442
 #, c-format
@@ -624,6 +657,14 @@ msgid ""
 "      --exclude-dir=PATTERN  directories that match PATTERN will be "
 "skipped.\n"
 msgstr ""
+"      --include=PADRÃO_ARQ  busca apenas em arquivos que casam com "
+"PADRÃO_ARQ\n"
+"      --exclude=PADRÃO_ARQ  ignora arquivos e diretórios que casam com\n"
+"                              PADRÃO_ARQ\n"
+"      --exclude-from=ARQUI  ignora arquivos que casam com algum padrão "
+"escrito\n"
+"                              em ARQUIvo\n"
+"      --exclude-dir=PADRÃO  diretórios que casam com PADRÃO serão ignorados\n"
 
 #: src/main.c:1448
 #, c-format
@@ -634,6 +675,17 @@ msgid ""
 "  -T, --initial-tab         make tabs line up (if needed)\n"
 "  -Z, --null                print 0 byte after FILE name\n"
 msgstr ""
+"  -L, --files-without-match emite os nomes somente dos ARQUIVOs que não "
+"casam\n"
+"                              com o padrão\n"
+"  -l, --files-with-matches  emite os nomes somente dos ARQUIVOs que casam "
+"com\n"
+"                              o padrão\n"
+"  -c, --count               emite a contagem de linhas por ARQUIVO que "
+"casam\n"
+"                              com o padrão\n"
+"  -T, --initial-tab         alinha por tabulação (se necessário)\n"
+"  -Z, --null                emite byte 0 depois do nome do ARQUIVO\n"
 
 #: src/main.c:1454
 #, c-format
@@ -644,9 +696,14 @@ msgid ""
 "  -A, --after-context=NUM   print NUM lines of trailing context\n"
 "  -C, --context=NUM         print NUM lines of output context\n"
 msgstr ""
+"\n"
+"Controle de contexto:\n"
+"  -B, --before-context=NÚM  emite NÚM linhas de contexto anteriores\n"
+"  -A, --after-context=NÚM   emite NÚM linhas de contexto posteriores\n"
+"  -C, --context=NÚM         emite NÚM linhas de contexto de saída\n"
 
 #: src/main.c:1461
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "  -NUM                      same as --context=NUM\n"
 "      --color[=WHEN],\n"
@@ -656,11 +713,6 @@ msgid ""
 "  -u, --unix-byte-offsets   report offsets as if CRs were not there (MSDOS)\n"
 "\n"
 msgstr ""
-"\n"
-"Controle de contexto:\n"
-"  -B, --before-context=NÚM  mostra NÚM linhas de contexto anteriores\n"
-"  -A, --after-context=NÚM   mostra NÚM linhas de contexto posteriores\n"
-"  -C, --context=[NÚM]       mostra NÚM linhas de contexto de saída\n"
 "  -NÚM                      o mesmo que --context=NÚM\n"
 "      --color[=QUANDO],\n"
 "      --colour[=QUANDO]     usa marcadores para destacar o texto "
@@ -694,12 +746,12 @@ msgstr ""
 #: src/main.c:1475
 #, c-format
 msgid "GNU Grep home page: <%s>\n"
-msgstr ""
+msgstr "Página do GNU Grep: <%s>\n"
 
 #: src/main.c:1507
 #, c-format
 msgid "%s can only use the %s pattern syntax"
-msgstr ""
+msgstr "%s só pode usar a sintaxe de padrão %s"
 
 #: src/main.c:1510
 #, c-format
@@ -707,80 +759,73 @@ msgid "conflicting matchers specified"
 msgstr "especificou-se padrões de busca conflitantes"
 
 #: src/main.c:1524
-#, fuzzy, c-format
+#, c-format
 msgid "invalid matcher %s"
-msgstr "Nome inválido de categoria de caracteres"
+msgstr "comparador inválido %s"
 
-#: src/main.c:1713
-#, fuzzy, c-format
+#: src/main.c:1710
+#, c-format
 msgid ""
 "in GREP_COLORS=\"%s\", the \"%s\" capacity needs a value (\"=...\"); skipped"
 msgstr ""
-"Em GREP_COLORS=\"%s\", o recurso \"%s\" precisa de um valor (\"=...\"); "
-"ignorado."
+"em GREP_COLORS=\"%s\", o recurso \"%s\" precisa de um valor (\"=...\"); "
+"ignorado"
 
-#: src/main.c:1717
-#, fuzzy, c-format
+#: src/main.c:1714
+#, c-format
 msgid ""
 "in GREP_COLORS=\"%s\", the \"%s\" capacity is boolean and cannot take a "
 "value (\"=%s\"); skipped"
 msgstr ""
-"Em GREP_COLORS=\"%s\", o recurso \"%s\" é booleano e não pode assumir um "
-"valor (\"=%s\"); ignorado."
+"em GREP_COLORS=\"%s\", o recurso \"%s\" é booleano e não pode assumir um "
+"valor (\"=%s\"); ignorado"
 
-#: src/main.c:1726
-#, fuzzy, c-format
+#: src/main.c:1723
+#, c-format
 msgid "in GREP_COLORS=\"%s\", the \"%s\" capacity %s"
-msgstr "Em GREP_COLORS=\"%s\", o recurso \"%s\" %s."
+msgstr "em GREP_COLORS=\"%s\", o recurso \"%s\" %s."
 
-#: src/main.c:1749
-#, fuzzy, c-format
+#: src/main.c:1746
+#, c-format
 msgid ""
 "stopped processing of ill-formed GREP_COLORS=\"%s\" at remaining substring "
 "\"%s\""
 msgstr ""
-"Interrompido o processamento da variável mal formatada GREP_COLORS\"%s\" no "
-"trecho restante \"%s\"."
+"interrompido o processamento da variável mal formatada GREP_COLORS=\"%s\" no "
+"trecho de texto restante \"%s\""
 
-#: src/main.c:1821
+#: src/main.c:1818
 #, c-format
 msgid "unknown devices method"
 msgstr "método desconhecido de dispositivos"
 
-#: src/main.c:1955
+#: src/main.c:1952
 #, c-format
 msgid "invalid max count"
 msgstr "valor máximo inválido"
 
-#: src/main.c:2010
+#: src/main.c:2007
 #, c-format
 msgid "unknown binary-files type"
 msgstr "tipo de arquivo binário desconhecido"
 
 #: src/pcresearch.c:42
-#, fuzzy
 msgid ""
 "support for the -P option is not compiled into this --disable-perl-regexp "
 "binary"
 msgstr ""
-"Suporte à opção -P não foi compilada neste binário --disable-perl-regexp"
+"o suporte à opção -P não foi compilado neste binário --disable-perl-regexp"
 
 #: src/pcresearch.c:56
-#, fuzzy, c-format
+#, c-format
 msgid "the -P option only supports a single pattern"
-msgstr "Só há suporte a apenas um único padrão com a opção -P"
+msgstr "a opção -P só oferece suporte a apenas um único padrão"
 
-#, fuzzy
-#~ msgid "warning: %s"
-#~ msgstr "aviso: %s: %s\n"
+#: src/pcresearch.c:159
+#, c-format
+msgid "exceeded PCRE's backtracking limit"
+msgstr ""
 
-#~ msgid "unknown directories method"
-#~ msgstr "método desconhecido de diretórios"
-
-#~ msgid "The -P and -z options cannot be combined"
-#~ msgstr "As opções -P e -z não podem ser combinadas"
-
-#, fuzzy
 #~ msgid ""
 #~ "\n"
 #~ "Output control:\n"
@@ -808,9 +853,9 @@ msgstr "Só há suporte a apenas um único padrão com a opção -P"
 #~ "FILE_PATTERN\n"
 #~ "      --exclude-from=FILE   skip files matching any file pattern from "
 #~ "FILE\n"
-#~ "      --exclude-dir=PATTERN  directories that match PATTERN will be "
+#~ "      --exclude-dir=PATTERN directories that match PATTERN will be "
 #~ "skipped.\n"
-#~ "  -L, --files-without-match  print only names of FILEs containing no "
+#~ "  -L, --files-without-match print only names of FILEs containing no "
 #~ "match\n"
 #~ "  -l, --files-with-matches  print only names of FILEs containing matches\n"
 #~ "  -c, --count               print only a count of matching lines per "
@@ -865,6 +910,12 @@ msgstr "Só há suporte a apenas um único padrão com a opção -P"
 #~ "                              com o padrão\n"
 #~ "  -T, --initial-tab         alinha por tabulação (se necessário)\n"
 #~ "  -Z, --null                emite byte 0 depois do nome do ARQUIVO\n"
+
+#~ msgid "unknown directories method"
+#~ msgstr "método desconhecido de diretórios"
+
+#~ msgid "The -P and -z options cannot be combined"
+#~ msgstr "As opções -P e -z não podem ser combinadas"
 
 #~ msgid "%s: illegal option -- %c\n"
 #~ msgstr "%s: opção ilegal -- %c\n"

@@ -1,4 +1,215 @@
+2011-06-21  Jim Meyering  <meyering@redhat.com>
+
+	version 2.9
+	* NEWS: Record release date.
+
+	build: avoid a warning when building with --disable-perl-regexp...
+	and --enable-gcc-warnings.
+	* src/pcresearch.c (WITHOUT_PCRE_NORETURN): Define.
+	Remove the unreachable return statement.
+	Reported by Eric Blake.
+
+	tests: ensure that each test script is executable
+	This adds a rule run at "make check" time to ensure that
+	test scripts are consistently executable.
+	This change is not required for "make check", but makes it easier
+	for people to run scripts manually, but that is discouraged because
+	doing so makes it easy to omit important variable settings that
+	are normally provided via TESTS_ENVIRONMENT.
+	This change also makes each of the existing TESTS executable.
+	* tests/Makefile.am (check_executable_TESTS): New rule.
+	(check): Depend on it.
+	* tests/{all_scripts}: chmod 755.
+	Prompted by a report from Eric Blake.
+
+	maint: update bootstrap from gnulib
+	* bootstrap: Update from gnulib.
+
+	maint: update po/POTFILES.in
+	* po/POTFILES.in: Remove dfasearch.c, now that it no longer
+	contains a translatable diagnostic.
+
+	tests: include-exclude: avoid false positive failure on FreeBSD
+	* tests/include-exclude: Avoid false-positive failure due to
+	matching "a" in a directory on FreeBSD, when searching a directory
+	without "-r".  Search for '^aaa$' rather than just 'a'.
+	Adjust test inputs and expected output files accordingly.
+
+	dfa: remove some useless casts
+	* src/dfa.c (icatalloc): Change type of "old" parameter
+	from "char const *" to "char *".
+	Don't cast-away const on realloc argument.
+	Remove now-unnecessary const-discarding cast.
+	Don't (void)-cast strcpy result.
+	* src/dosbuf.c (undossify_input): Remove anachronistic
+	cast-to-"char *" of realloc argument.
+
+	dfa: more heap-allocation-related overflow protection
+	* src/dfa.c (enlist): Use xnrealloc, not realloc.
+	Also, remove unnecessary cast-to-(char *).
+	(dfamust): Use xnmalloc, not malloc.  Before, this code would
+	return upon malloc failure (xnmalloc exits upon failure), but
+	later, via the *ALLOC macros, it could already exit, so this
+	new potential exit point is nothing new.  The same applies
+	to enlist, since it is called only through dfamust.
+
+	tests: update init.sh; simplify TESTS_ENVIRONMENT
+	* tests/init.sh: Update from coreutils.
+	* tests/Makefile.am (TESTS_ENVIRONMENT): Remove shell_or_perl_
+	function.  Instead, just use $(SHELL), since grep has no test
+	that starts with #!/usr/bin/perl.
+
+	build: update gnulib submodule to latest
+
+	build: avoid configure/gnulib-related errors
+	* bootstrap.conf: Remove now-unnecessary code to exclude
+	gettext/intl-related m4 tests.
+
+2011-06-19  Jim Meyering  <meyering@redhat.com>
+
+	maint: tighten up superfluous code
+	* src/main.c (parse_grep_colors): Use xstrdup in place of xmalloc,
+	a useless test, strlen, and strcpy.
+
+2011-06-19  Paul Eggert  <eggert@cs.ucla.edu>
+
+	dfa: avoid possibility of overflow
+	* src/dfa.c (REALLOC_IF_NECESSARY, CALLOC, MALLOC, REALLOC):
+	Use functions from xalloc.h to avoid overflow.
+	* src/dfasearch.c (GEAcompile): Use xnrealloc rather than realloc.
+	* src/pcresearch.c (Pcompile): Use xnmalloc, not xmalloc.
+
+2011-06-18  Jim Meyering  <meyering@redhat.com>
+
+	build: update gnulib submodule to latest
+
+	dfa: correct two uses of btowc
+	* src/dfa.c (setbit_c, setbit_case_fold_c): Compare the btowc
+	return value against WEOF, not EOF.  Suggested by Eli Zaretskii.
+	On a system like MinGW with unsigned wint_t, comparing a btowc
+	return value against EOF (-1) would always be false.
+
+2011-06-17  Jim Meyering  <meyering@redhat.com>
+
+	dfa: don't overrun a malloc'd buffer for certain regexps
+	* src/dfa.c (dfaanalyze): Allocate space for twice as many
+	positions as there are leaves.  Before this change, for some
+	regular expressions, DFA analysis would have inserted far more
+	"positions" than dfa->nleaves (up to double).
+	Reported by Raymond Russell in http://savannah.gnu.org/bugs/?33547
+	* tests/dfa-heap-overrun: Trigger the overrun.
+	* tests/Makefile.am (TESTS): Add it.
+	* NEWS (Bug fixes): Mention it.
+
+2011-06-08  Jim Meyering  <meyering@redhat.com>
+
+	tests: don't ignore sjis-mb test failure
+	I made changes that caused grep to segfault during "make check" --
+	as seen in dmesg output -- yet no test failed(!), and there was no
+	trace of the segfault in the logs.
+	* tests/sjis-mb (test_grep_reject): Ensure that output is empty.
+	Don't ignore test failure.
+
+2011-06-07  Paolo Bonzini  <bonzini@gnu.org>
+
+	dfa: optimize wide characters in a bracket expression
+	* src/dfa.c (addtok): Compile characters to an alternation.  Handle the
+	case when nothing else remains in the MBCSET.
+
+	dfa: refactor to prepare for upcoming optimizations
+	* src/dfa.c (parse_bracket_exp): Move optimization of MBCSET from here...
+	(addtok): ... to here.
+
+	dfa: correct handling of single-byte character ranges
+	This provides a better fix for the unibyte-bracket-expr and high-bit-range
+	testcases, and fixes the latent bug tested by bogus-wctob.
+
+	* src/dfa.c (setbit_case_fold): Remove, replace with...
+	(setbit_wc, setbit_c, setbit_case_fold_c): ... these.
+	(parse_bracket_exp): Use setbit_case_fold_c when iterating over
+	single-byte sequences.  Use setbit_wc for multi-byte character sets,
+	and setbit_case_fold_c for single-byte character sets.
+	(lex): Use setbit_case_fold_c for single-byte character sets.
+
+	tests: exercise latent bug in character ranges
+	* tests/bogus-wctob: New.
+	* Makefile.am (TESTS): Add it.
+
+2011-06-07  Jim Meyering  <meyering@redhat.com>
+
+	tests: exercise a uni-byte [...] bug: requires ru_RU.KOI8-R
+	* tests/unibyte-bracket-expr: New file.
+	* tests/Makefile.am (TESTS): Add it.
+	* init.cfg (require_ru_RU_koi8_r): New function.
+
+	fix the [...] bug also for relatively unusual uni-byte encodings
+	* src/dfa.c (setbit_case_fold): Also handle uni-byte locales
+	like the one mentioned in the original report: see 2011-05-07
+	commit d98338eb.  Re-reported by Santiago Ruano Rincón.
+	Note that most uni-byte locales are not affected.
+	* NEWS (Bug fixes): Mention it.
+
+	tests: use skip_test_, not skip_
+	Use skip_test_, not skip_.  The former prints its message both to
+	the log file and to FD 9 (redirected to tty via tests/Makefile.am),
+	while skip_ prints only to stderr, which goes to the log file.
+	* tests/init.cfg (skip_test_): New function.
+	Use skip_test_ in place of skip_ everywhere.
+	* tests/fmbtest: s/skip_/skip_test_/
+	* tests/sjis-mb: Likewise.
+	* tests/euc-mb: Likewise.
+
+	tests: fmbtest: factor
+	* tests/fmbtest: Factor out locale-name duplication.
+
+	tests: fix skip-inducing typo in fmbtest
+	* tests/fmbtest: Fix locale name typo (s/cz_CZ/cs_CZ/)
+	that would cause this test to be skipped every time.
+
+2011-06-07  Paolo Bonzini  <bonzini@gnu.org>
+
+	gnulib: adjust included modules
+	* bootstrap.conf (gnulib_modules): Drop strtoul, rename wctype to
+	wctype-h.
+
+2011-05-21  Jim Meyering  <meyering@redhat.com>
+
+	grep -P: don't abort upon exceeding PCRE's backtracking limit
+	* src/pcresearch.c (Pexecute): Handle PCRE_ERROR_MATCHLIMIT.
+	* tests/Makefile.am (XFAIL_TESTS): Remove pcre-abort.
+	* tests/pcre-abort: Expect failure, no output, and increase
+	the length of the input string, in case the backtracking limit
+	is ever raised.  Adjust comment.
+	* NEWS (Bug fixes): Mention it.
+
+	tests: show how to make grep -P abort
+	* tests/pcre-abort: New file.
+	Minimal testcase by Paolo Bonzini, derived from a report
+	by www.beaver@list.ru.
+	* tests/Makefile.am (TESTS): Add it.
+	(XFAIL_TESTS): Add it here, too, since this test always fails, for now.
+
+	tests: fix oddities in pcre-z
+	* tests/pcre-z: Redirect stderr inside $(), not outside.
+	Remove double quotes around $REGEX (which is just 'a') within
+	double-quoted "$(...)".  Split a long line.
+
+	tests: factor out a new require_pcre_ function
+	* tests/init.cfg (require_pcre_): New function, factored out of...
+	* tests/pcre-z: ...here.  Use the function.
+	* tests/pcre: Likewise.
+
+	tests: clean up pcre
+	* tests/pcre: Skip (don't pass) the test when PCRE support is disabled.
+	Don't redirect so much to /dev/null, now that all test output goes to
+	pcre.log.  Remove unnecessary braces and diagnostic about failing test.
+
 2011-05-13  Jim Meyering  <meyering@redhat.com>
+
+	post-release administrivia
+	* NEWS: Add header line for next release.
+	* .prev-version: Record previous version.
+	* cfg.mk (old_NEWS_hash): Auto-update.
 
 	version 2.8
 	* NEWS: Record release date.
