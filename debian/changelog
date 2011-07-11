@@ -1,3 +1,13 @@
+grep (2.9-1~1) UNRELEASED; urgency=low
+
+  * NOT RELEASED YET
+  * 60-76011-main.c.patch: `grep -lc' does not show files with no occurrences. 
+    Thanks to Peter Samuelson. (Closes: #76011)
+  * New upstream release.
+    - Fixes locales and brackets-related bug (Closes: #624387)
+
+ -- Santiago Ruano Rincón <santiago@debian.org>  Wed, 01 Jun 2011 19:49:05 +0200
+
 grep (2.8-2) unstable; urgency=low
 
   * Applying patch to improve reference acronyms in man page. Thanks to 
