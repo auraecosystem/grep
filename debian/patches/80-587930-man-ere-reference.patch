@@ -18,3 +18,23 @@
  .RB "\s-1GNU\s0\ " grep ,
  there is no difference in available functionality between basic and
  extended syntaxes.
+--- a/doc/grep.info	2011-07-12 18:42:55.000000000 -0400
++++ b/doc/grep.info	2011-07-12 18:47:23.000000000 -0400
+@@ -730,7 +730,7 @@
+ 
+ `-P'
+ `--perl-regexp'
+-     Interpret the pattern as a Perl regular expression.  This is
++     Interpret the pattern as a Perl regular expression (PCRE). This is
+      highly experimental and `grep -P' may warn of unimplemented
+      features.
+ 
+@@ -751,7 +751,7 @@
+ Regular expressions are constructed analogously to arithmetic
+ expressions, by using various operators to combine smaller expressions.
+ `grep' understands three different versions of regular expression
+-syntax: "basic," (BRE) "extended" (ERE) and "perl".  In GNU `grep',
++syntax: "basic," (BRE) "extended" (ERE) and "perl" (PERL).  In GNU `grep',
+ there is no difference in available functionality between basic and
+ extended syntaxes.  In other implementations, basic regular expressions
+ are less powerful.  The following description applies to extended
