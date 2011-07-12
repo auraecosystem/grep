@@ -5,6 +5,7 @@ grep (2.9-1~1) UNRELEASED; urgency=low
     Thanks to Peter Samuelson. (Closes: #76011)
   * New upstream release.
     - Fixes locales and brackets-related bug (Closes: #624387)
+  * Updating 80-587930-man-ere-reference.patch to add changes in info page
 
  -- Santiago Ruano Rincón <santiago@debian.org>  Wed, 01 Jun 2011 19:49:05 +0200
 
