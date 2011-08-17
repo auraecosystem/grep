@@ -1,3 +1,11 @@
+grep (2.9-2) unstable; urgency=low
+
+  * Removed 60-76011-main.c.patch introduced in the last revision. It
+    introduces a bug and needs further discusion. See:
+    https://savannah.gnu.org/patch/?7577
+
+ -- Santiago Ruano Rincón <santiago@debian.org>  Thu, 18 Aug 2011 00:31:57 +0200
+
 grep (2.9-1) unstable; urgency=low
 
   * 60-76011-main.c.patch: `grep -lc' does not show files with no occurrences. 
