@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  grep 2.5g\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2011-06-21 20:06+0200\n"
+"POT-Creation-Date: 2012-04-23 16:08+0200\n"
 "PO-Revision-Date: 2004-12-01 01:01+0800\n"
 "Last-Translator: Yuan-Chen Cheng <ycheng@sinica.edu.tw>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -26,15 +26,15 @@ msgid "ambiguous argument %s for %s"
 msgstr ""
 
 #: lib/argmatch.c:153
-#, c-format
 msgid "Valid arguments are:"
 msgstr ""
 
-#: lib/closeout.c:112
+#: lib/closeout.c:112 src/main.c:894
+#, c-format
 msgid "write error"
 msgstr ""
 
-#: lib/error.c:185
+#: lib/error.c:188
 msgid "Unknown system error"
 msgstr "未知的系統錯誤"
 
@@ -73,128 +73,140 @@ msgstr "%s: 無法辨識的選項 `%c%s'\n"
 msgid "%s: invalid option -- '%c'\n"
 msgstr "%s: 無效的選項 -- %c\n"
 
-#: lib/getopt.c:858 lib/getopt.c:875 lib/getopt.c:1083 lib/getopt.c:1101
+#: lib/getopt.c:861 lib/getopt.c:878 lib/getopt.c:1088 lib/getopt.c:1106
 #, fuzzy, c-format
 msgid "%s: option requires an argument -- '%c'\n"
 msgstr "%s: 選項需要一個參數 -- %c\n"
 
-#: lib/getopt.c:931 lib/getopt.c:947
+#: lib/getopt.c:934 lib/getopt.c:950
 #, fuzzy, c-format
 msgid "%s: option '-W %s' is ambiguous\n"
 msgstr "%s: 選項 `-W %s' 是模糊的\n"
 
-#: lib/getopt.c:971 lib/getopt.c:989
+#: lib/getopt.c:974 lib/getopt.c:992
 #, fuzzy, c-format
 msgid "%s: option '-W %s' doesn't allow an argument\n"
 msgstr "%s: xxxx `-W %s' 並不需要參數\n"
 
-#: lib/getopt.c:1010 lib/getopt.c:1028
+#: lib/getopt.c:1013 lib/getopt.c:1031
 #, fuzzy, c-format
 msgid "%s: option '-W %s' requires an argument\n"
 msgstr "%s: 選項 `%s' 之後需要一個參數\n"
 
-#: lib/obstack.c:421 lib/obstack.c:423 lib/xalloc-die.c:34 src/kwset.c:178
-#: src/kwset.c:186 src/kwset.c:409 src/pcresearch.c:155
+#: lib/obstack.c:413 lib/obstack.c:415 lib/xalloc-die.c:34 src/kwset.c:178
+#: src/kwset.c:186 src/kwset.c:409 src/pcresearch.c:153
 #, c-format
 msgid "memory exhausted"
 msgstr "記憶體用盡"
 
+#: lib/openat-die.c:38
+#, c-format
+msgid "unable to record current working directory"
+msgstr ""
+
+#: lib/openat-die.c:57
+#, c-format
+msgid "failed to return to initial working directory"
+msgstr ""
+
 #. TRANSLATORS:
 #. Get translations for open and closing quotation marks.
-#.
 #. The message catalog should translate "`" to a left
 #. quotation mark suitable for the locale, and similarly for
-#. "'".  If the catalog has no translation,
-#. locale_quoting_style quotes `like this', and
-#. clocale_quoting_style quotes "like this".
+#. "'".  For example, a French Unicode local should translate
+#. these to U+00AB (LEFT-POINTING DOUBLE ANGLE
+#. QUOTATION MARK), and U+00BB (RIGHT-POINTING DOUBLE ANGLE
+#. QUOTATION MARK), respectively.
 #.
-#. For example, an American English Unicode locale should
-#. translate "`" to U+201C (LEFT DOUBLE QUOTATION MARK), and
-#. should translate "'" to U+201D (RIGHT DOUBLE QUOTATION
-#. MARK).  A British English Unicode locale should instead
-#. translate these to U+2018 (LEFT SINGLE QUOTATION MARK)
-#. and U+2019 (RIGHT SINGLE QUOTATION MARK), respectively.
+#. If the catalog has no translation, we will try to
+#. use Unicode U+2018 (LEFT SINGLE QUOTATION MARK) and
+#. Unicode U+2019 (RIGHT SINGLE QUOTATION MARK).  If the
+#. current locale is not Unicode, locale_quoting_style
+#. will quote 'like this', and clocale_quoting_style will
+#. quote "like this".  You should always include translations
+#. for "`" and "'" even if U+2018 and U+2019 are appropriate
+#. for your locale.
 #.
 #. If you don't know what to put here, please see
-#. <http://en.wikipedia.org/wiki/Quotation_mark#Glyphs>
+#. <http://en.wikipedia.org/wiki/Quotation_marks_in_other_languages>
 #. and use glyphs suitable for your language.
-#: lib/quotearg.c:271
+#: lib/quotearg.c:312
 msgid "`"
 msgstr "`"
 
-#: lib/quotearg.c:272
+#: lib/quotearg.c:313
 msgid "'"
 msgstr "'"
 
-#: lib/regcomp.c:133
+#: lib/regcomp.c:130
 msgid "Success"
 msgstr ""
 
-#: lib/regcomp.c:136
+#: lib/regcomp.c:133
 msgid "No match"
 msgstr ""
 
-#: lib/regcomp.c:139
+#: lib/regcomp.c:136
 msgid "Invalid regular expression"
 msgstr ""
 
-#: lib/regcomp.c:142
+#: lib/regcomp.c:139
 msgid "Invalid collation character"
 msgstr ""
 
-#: lib/regcomp.c:145
+#: lib/regcomp.c:142
 msgid "Invalid character class name"
 msgstr ""
 
-#: lib/regcomp.c:148
+#: lib/regcomp.c:145
 msgid "Trailing backslash"
 msgstr ""
 
-#: lib/regcomp.c:151
+#: lib/regcomp.c:148
 msgid "Invalid back reference"
 msgstr ""
 
-#: lib/regcomp.c:154
+#: lib/regcomp.c:151
 msgid "Unmatched [ or [^"
 msgstr ""
 
-#: lib/regcomp.c:157
+#: lib/regcomp.c:154
 msgid "Unmatched ( or \\("
 msgstr ""
 
-#: lib/regcomp.c:160
+#: lib/regcomp.c:157
 msgid "Unmatched \\{"
 msgstr ""
 
-#: lib/regcomp.c:163
+#: lib/regcomp.c:160 src/dfa.c:1373
 msgid "Invalid content of \\{\\}"
 msgstr ""
 
-#: lib/regcomp.c:166
+#: lib/regcomp.c:163
 msgid "Invalid range end"
 msgstr ""
 
-#: lib/regcomp.c:169
+#: lib/regcomp.c:166
 msgid "Memory exhausted"
 msgstr "記憶體用盡"
 
-#: lib/regcomp.c:172
+#: lib/regcomp.c:169
 msgid "Invalid preceding regular expression"
 msgstr ""
 
-#: lib/regcomp.c:175
+#: lib/regcomp.c:172
 msgid "Premature end of regular expression"
 msgstr ""
 
-#: lib/regcomp.c:178
+#: lib/regcomp.c:175 src/dfa.c:1376
 msgid "Regular expression too big"
 msgstr ""
 
-#: lib/regcomp.c:181
+#: lib/regcomp.c:178
 msgid "Unmatched ) or \\)"
 msgstr ""
 
-#: lib/regcomp.c:702
+#: lib/regcomp.c:703
 msgid "No previous regular expression"
 msgstr ""
 
@@ -320,7 +332,7 @@ msgstr ""
 #. for this package.  Please add _another line_ saying
 #. "Report translation bugs to <...>\n" with the address for translation
 #. bugs (typically your translation team's web or email address).
-#: lib/version-etc.c:245 src/main.c:1474
+#: lib/version-etc.c:245 src/main.c:1572
 #, c-format
 msgid ""
 "\n"
@@ -342,64 +354,56 @@ msgstr ""
 msgid "%s home page: <http://www.gnu.org/software/%s/>\n"
 msgstr ""
 
-#: lib/version-etc.c:256 src/main.c:1477
+#: lib/version-etc.c:256 src/main.c:1575
 msgid "General help using GNU software: <http://www.gnu.org/gethelp/>\n"
 msgstr ""
 
 #: lib/xstrtol-error.c:63
-#, c-format
-msgid "invalid %s%s argument `%s'"
-msgstr ""
+#, fuzzy, c-format
+msgid "invalid %s%s argument '%s'"
+msgstr "無效的最大計次"
 
 #: lib/xstrtol-error.c:68
-#, c-format
-msgid "invalid suffix in %s%s argument `%s'"
-msgstr ""
+#, fuzzy, c-format
+msgid "invalid suffix in %s%s argument '%s'"
+msgstr "無效的最大計次"
 
 #: lib/xstrtol-error.c:72
 #, c-format
-msgid "%s%s argument `%s' too large"
+msgid "%s%s argument '%s' too large"
 msgstr ""
 
-#: src/dfa.c:799 src/dfa.c:802 src/dfa.c:822 src/dfa.c:835 src/dfa.c:847
-#: src/dfa.c:913 src/dfa.c:922 src/dfa.c:925 src/dfa.c:930 src/dfa.c:944
-#: src/dfa.c:1009
+#: src/dfa.c:953 src/dfa.c:956 src/dfa.c:976 src/dfa.c:986 src/dfa.c:998
+#: src/dfa.c:1049 src/dfa.c:1058 src/dfa.c:1061 src/dfa.c:1066 src/dfa.c:1079
+#: src/dfa.c:1137
 #, fuzzy
 msgid "unbalanced ["
 msgstr "未成對的 ["
 
-#: src/dfa.c:858
+#: src/dfa.c:1007
 msgid "invalid character class"
 msgstr ""
 
-#: src/dfa.c:1051
+#: src/dfa.c:1174
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr ""
 
-#: src/dfa.c:1112
+#: src/dfa.c:1226
 #, fuzzy
 msgid "unfinished \\ escape"
 msgstr "未正確結束的 \\ 逸出"
 
-#: src/dfa.c:1245 src/dfa.c:1251 src/dfa.c:1261 src/dfa.c:1269 src/dfa.c:1284
-msgid "unfinished repeat count"
-msgstr "未完成的重複計次"
-
-#: src/dfa.c:1258 src/dfa.c:1275 src/dfa.c:1283 src/dfa.c:1287
-msgid "malformed repeat count"
-msgstr "格式錯誤的重複次數"
-
-#: src/dfa.c:1676
+#: src/dfa.c:1761
 #, fuzzy
 msgid "unbalanced ("
 msgstr "未配對的 ("
 
-#: src/dfa.c:1809
+#: src/dfa.c:1891
 #, fuzzy
 msgid "no syntax specified"
 msgstr "並未指定語法"
 
-#: src/dfa.c:1817
+#: src/dfa.c:1899
 #, fuzzy
 msgid "unbalanced )"
 msgstr "未配對的 )"
@@ -409,7 +413,7 @@ msgid "PATTERN is an extended regular expression (ERE).\n"
 msgstr ""
 
 #: src/egrep.c:18
-msgid "Invocation as `egrep' is deprecated; use `grep -E' instead.\n"
+msgid "Invocation as 'egrep' is deprecated; use 'grep -E' instead.\n"
 msgstr ""
 
 #: src/fgrep.c:10
@@ -417,7 +421,7 @@ msgid "PATTERN is a set of newline-separated fixed strings.\n"
 msgstr ""
 
 #: src/fgrep.c:12
-msgid "Invocation as `fgrep' is deprecated; use `grep -F' instead.\n"
+msgid "Invocation as 'fgrep' is deprecated; use 'grep -F' instead.\n"
 msgstr ""
 
 #: src/grep.c:32
@@ -426,72 +430,71 @@ msgstr ""
 
 #: src/grep.c:34
 msgid ""
-"`egrep' means `grep -E'.  `fgrep' means `grep -F'.\n"
-"Direct invocation as either `egrep' or `fgrep' is deprecated.\n"
+"'egrep' means 'grep -E'.  'fgrep' means 'grep -F'.\n"
+"Direct invocation as either 'egrep' or 'fgrep' is deprecated.\n"
 msgstr ""
 
 #. This is a proper name. See the gettext manual, section Names.
-#: src/main.c:59
+#: src/main.c:58
 msgid "Mike Haertel"
 msgstr ""
 
-#: src/main.c:60
+#: src/main.c:59
 msgid "others, see <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
 msgstr ""
 
-#: src/main.c:418
+#: src/main.c:448
 msgid "invalid context length argument"
 msgstr "無效的長度引數"
 
-#: src/main.c:473
-#, c-format
+#: src/main.c:503
 msgid "lseek failed"
 msgstr ""
 
-#: src/main.c:620
+#: src/main.c:650
 #, c-format
 msgid "input is too large to count"
 msgstr "輸入過長無法計數"
 
-#: src/main.c:862
-#, c-format
-msgid "writing output"
-msgstr "正在輸出"
-
-#: src/main.c:1185
+#: src/main.c:1205
 #, c-format
 msgid "Binary file %s matches\n"
 msgstr "二進位格式檔案 %s 符合\n"
 
-#: src/main.c:1199
-msgid "(standard input)"
-msgstr "(標準輸入)"
-
-#: src/main.c:1330
+#: src/main.c:1256
 #, fuzzy, c-format
 msgid "warning: %s: %s"
 msgstr "警告: %s: %s\n"
 
-#: src/main.c:1331
+#: src/main.c:1257
 msgid "recursive directory loop"
 msgstr "遞迴的目錄結構"
 
-#: src/main.c:1379 src/main.c:1386
+#: src/main.c:1400
+#, c-format
+msgid "input file %s is also the output"
+msgstr ""
+
+#: src/main.c:1458
+msgid "(standard input)"
+msgstr "(標準輸入)"
+
+#: src/main.c:1474 src/main.c:1481
 #, c-format
 msgid "Usage: %s [OPTION]... PATTERN [FILE]...\n"
 msgstr "用法: %s [選項]... 樣板 [檔案]...\n"
 
-#: src/main.c:1381
-#, c-format
-msgid "Try `%s --help' for more information.\n"
+#: src/main.c:1476
+#, fuzzy, c-format
+msgid "Try '%s --help' for more information.\n"
 msgstr "請使用 `%s --help' 以閱讀更多的資訊.\n"
 
-#: src/main.c:1387
+#: src/main.c:1482
 #, c-format
 msgid "Search for PATTERN in each FILE or standard input.\n"
 msgstr ""
 
-#: src/main.c:1390
+#: src/main.c:1485
 #, fuzzy, c-format
 msgid ""
 "Example: %s -i 'hello world' menu.h main.c\n"
@@ -503,7 +506,7 @@ msgstr ""
 "\n"
 "正規選項以及解譯:\n"
 
-#: src/main.c:1395
+#: src/main.c:1490
 #, fuzzy, c-format
 msgid ""
 "  -E, --extended-regexp     PATTERN is an extended regular expression (ERE)\n"
@@ -517,7 +520,7 @@ msgstr ""
 "  -G, --basic-regexp        PATTERN 是一個基本的正規表示式\n"
 "  -P, --perl-regexp         PATTERN 是一個 Perl 的正規表示式\n"
 
-#: src/main.c:1401
+#: src/main.c:1496
 #, fuzzy, c-format
 msgid ""
 "  -e, --regexp=PATTERN      use PATTERN for matching\n"
@@ -534,7 +537,7 @@ msgstr ""
 "  -x, --line-regexp         以樣板(PATTERN)找尋時, 指配對一整行而非片段\n"
 "  -z, --null-data           每行資料以 0 這個位元結束, 而非換行符號\n"
 
-#: src/main.c:1408
+#: src/main.c:1503
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -543,7 +546,7 @@ msgid ""
 "  -v, --invert-match        select non-matching lines\n"
 "  -V, --version             print version information and exit\n"
 "      --help                display this help and exit\n"
-"      --mmap                ignored for backwards compatibility\n"
+"      --mmap                deprecated no-op; evokes a warning\n"
 msgstr ""
 "\n"
 "其他參數:\n"
@@ -553,7 +556,7 @@ msgstr ""
 "      --help                顯示此使用方法後結束\n"
 "      --mmap                如果允許, 輸入檔案使用記憶體對應法\n"
 
-#: src/main.c:1416
+#: src/main.c:1511
 #, c-format
 msgid ""
 "\n"
@@ -562,12 +565,13 @@ msgid ""
 "  -b, --byte-offset         print the byte offset with output lines\n"
 "  -n, --line-number         print line number with output lines\n"
 "      --line-buffered       flush output on every line\n"
-"  -H, --with-filename       print the filename for each match\n"
-"  -h, --no-filename         suppress the prefixing filename on output\n"
-"      --label=LABEL         print LABEL as filename for standard input\n"
+"  -H, --with-filename       print the file name for each match\n"
+"  -h, --no-filename         suppress the file name prefix on output\n"
+"      --label=LABEL         use LABEL as the standard input file name "
+"prefix\n"
 msgstr ""
 
-#: src/main.c:1427
+#: src/main.c:1522
 #, c-format
 msgid ""
 "  -o, --only-matching       show only the part of a line matching PATTERN\n"
@@ -577,7 +581,7 @@ msgid ""
 "  -a, --text                equivalent to --binary-files=text\n"
 msgstr ""
 
-#: src/main.c:1434
+#: src/main.c:1529
 #, c-format
 msgid ""
 "  -I                        equivalent to --binary-files=without-match\n"
@@ -585,10 +589,11 @@ msgid ""
 "                            ACTION is `read', `recurse', or `skip'\n"
 "  -D, --devices=ACTION      how to handle devices, FIFOs and sockets;\n"
 "                            ACTION is `read' or `skip'\n"
-"  -R, -r, --recursive       equivalent to --directories=recurse\n"
+"  -r, --recursive           like --directories=recurse\n"
+"  -R, --dereference-recursive  likewise, but follow all symlinks\n"
 msgstr ""
 
-#: src/main.c:1442
+#: src/main.c:1538
 #, c-format
 msgid ""
 "      --include=FILE_PATTERN  search only files that match FILE_PATTERN\n"
@@ -599,7 +604,7 @@ msgid ""
 "skipped.\n"
 msgstr ""
 
-#: src/main.c:1448
+#: src/main.c:1544
 #, c-format
 msgid ""
 "  -L, --files-without-match  print only names of FILEs containing no match\n"
@@ -609,7 +614,7 @@ msgid ""
 "  -Z, --null                print 0 byte after FILE name\n"
 msgstr ""
 
-#: src/main.c:1454
+#: src/main.c:1550
 #, c-format
 msgid ""
 "\n"
@@ -619,15 +624,17 @@ msgid ""
 "  -C, --context=NUM         print NUM lines of output context\n"
 msgstr ""
 
-#: src/main.c:1461
+#: src/main.c:1557
 #, fuzzy, c-format
 msgid ""
 "  -NUM                      same as --context=NUM\n"
 "      --color[=WHEN],\n"
 "      --colour[=WHEN]       use markers to highlight the matching strings;\n"
 "                            WHEN is `always', `never', or `auto'\n"
-"  -U, --binary              do not strip CR characters at EOL (MSDOS)\n"
-"  -u, --unix-byte-offsets   report offsets as if CRs were not there (MSDOS)\n"
+"  -U, --binary              do not strip CR characters at EOL (MSDOS/"
+"Windows)\n"
+"  -u, --unix-byte-offsets   report offsets as if CRs were not there\n"
+"                            (MSDOS/Windows)\n"
 "\n"
 msgstr ""
 "\n"
@@ -647,75 +654,55 @@ msgstr ""
 "少於兩格, 則設定為 -h 參數有輸入. 假設有找到資料, 程式回傳狀態為 0, 否則\n"
 "傳回 1, 如果程式執行中出現錯誤, 則傳回 2.\n"
 
-#: src/main.c:1470
+#: src/main.c:1567
 #, c-format
 msgid ""
-"With no FILE, or when FILE is -, read standard input.  If less than two "
-"FILEs\n"
-"are given, assume -h.  Exit status is 0 if any line was selected, 1 "
-"otherwise;\n"
-"if any error occurs and -q was not given, the exit status is 2.\n"
+"When FILE is -, read standard input.  With no FILE, read . if a command-"
+"line\n"
+"-r is given, - otherwise.  If fewer than two FILEs are given, assume -h.\n"
+"Exit status is 0 if any line is selected, 1 otherwise;\n"
+"if any error occurs and -q is not given, the exit status is 2.\n"
 msgstr ""
 
-#: src/main.c:1475
+#: src/main.c:1573
 #, c-format
 msgid "GNU Grep home page: <%s>\n"
 msgstr ""
 
-#: src/main.c:1507
+#: src/main.c:1605
 #, c-format
 msgid "%s can only use the %s pattern syntax"
 msgstr ""
 
-#: src/main.c:1510
+#: src/main.c:1608
 #, c-format
 msgid "conflicting matchers specified"
 msgstr "指定了互相衝突的樣板"
 
-#: src/main.c:1524
+#: src/main.c:1622
 #, fuzzy, c-format
 msgid "invalid matcher %s"
 msgstr "無效的最大計次"
 
-#: src/main.c:1710
-#, c-format
-msgid ""
-"in GREP_COLORS=\"%s\", the \"%s\" capacity needs a value (\"=...\"); skipped"
-msgstr ""
-
-#: src/main.c:1714
-#, c-format
-msgid ""
-"in GREP_COLORS=\"%s\", the \"%s\" capacity is boolean and cannot take a "
-"value (\"=%s\"); skipped"
-msgstr ""
-
-#: src/main.c:1723
-#, c-format
-msgid "in GREP_COLORS=\"%s\", the \"%s\" capacity %s"
-msgstr ""
-
-#: src/main.c:1746
-#, c-format
-msgid ""
-"stopped processing of ill-formed GREP_COLORS=\"%s\" at remaining substring "
-"\"%s\""
-msgstr ""
-
-#: src/main.c:1818
+#: src/main.c:1870
 #, c-format
 msgid "unknown devices method"
 msgstr "未知的裝置方法"
 
-#: src/main.c:1952
+#: src/main.c:1999
 #, c-format
 msgid "invalid max count"
 msgstr "無效的最大計次"
 
-#: src/main.c:2007
+#: src/main.c:2056
 #, c-format
 msgid "unknown binary-files type"
 msgstr "未知的二進位檔案型態"
+
+#: src/main.c:2119
+#, c-format
+msgid "the --mmap option has been a no-op since 2010"
+msgstr ""
 
 #: src/pcresearch.c:42
 msgid ""
@@ -728,10 +715,29 @@ msgstr ""
 msgid "the -P option only supports a single pattern"
 msgstr "並不支援參數 -P"
 
-#: src/pcresearch.c:159
+#: src/pcresearch.c:110
+#, c-format
+msgid "internal error"
+msgstr ""
+
+#: src/pcresearch.c:138
+#, c-format
+msgid "exceeded PCRE's line length limit"
+msgstr ""
+
+#: src/pcresearch.c:157
 #, c-format
 msgid "exceeded PCRE's backtracking limit"
 msgstr ""
+
+#~ msgid "unfinished repeat count"
+#~ msgstr "未完成的重複計次"
+
+#~ msgid "malformed repeat count"
+#~ msgstr "格式錯誤的重複次數"
+
+#~ msgid "writing output"
+#~ msgstr "正在輸出"
 
 #, fuzzy
 #~ msgid "%s: option '%s' is ambiguous\n"

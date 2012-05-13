@@ -1,7 +1,5 @@
-/* -*- buffer-read-only: t -*- vi: set ro: */
-/* DO NOT EDIT! GENERATED AUTOMATICALLY! */
 /* Test suite for exclude.
-   Copyright (C) 2009-2011 Free Software Foundation, Inc.
+   Copyright (C) 2009-2012 Free Software Foundation, Inc.
    This file is part of the GNUlib Library.
 
    This program is free software: you can redistribute it and/or modify
@@ -66,13 +64,7 @@ ARGMATCH_VERIFY (exclude_keywords, exclude_flags);
    thus must link with a definition of that function.  Provide it here.  */
 #ifdef ARGMATCH_DIE_DECL
 
-# if __GNUC__ > 2 || (__GNUC__ == 2 && __GNUC_MINOR__ >= 8)
-#  define _GL_ATTRIBUTE_NORETURN __attribute__ ((__noreturn__))
-# else
-#  define _GL_ATTRIBUTE_NORETURN /* empty */
-# endif
-
-ARGMATCH_DIE_DECL _GL_ATTRIBUTE_NORETURN;
+_Noreturn ARGMATCH_DIE_DECL;
 ARGMATCH_DIE_DECL { exit (1); }
 
 #endif
@@ -112,6 +104,15 @@ main (int argc, char **argv)
             exclude_options &= ~flag;
           else
             exclude_options |= flag;
+
+          /* Skip this test if invoked with -leading-dir on a system that
+             lacks support for FNM_LEADING_DIR. */
+          if (strcmp (s, "leading_dir") == 0 && FNM_LEADING_DIR == 0)
+            exit (77);
+
+          /* Likewise for -casefold and FNM_CASEFOLD.  */
+          if (strcmp (s, "casefold") == 0 && FNM_CASEFOLD == 0)
+            exit (77);
         }
       else if (add_exclude_file (add_exclude, exclude, opt,
                                  exclude_options, '\n') != 0)

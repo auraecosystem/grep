@@ -1,4 +1,4 @@
-# Copyright 1997-1998, 2005-2011 Free Software Foundation, Inc.
+# Copyright 1997-1998, 2005-2012 Free Software Foundation, Inc.
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -41,10 +41,8 @@ LIB_OBJS_core =  \
       $(libdir)/error.$(OBJEXT) \
       $(libdir)/exclude.$(OBJEXT) \
       $(libdir)/hard-locale.$(OBJEXT) \
-      $(libdir)/isdir.$(OBJEXT) \
       $(libdir)/quotearg.$(OBJEXT) \
       $(libdir)/regex.$(OBJEXT) \
-      $(libdir)/savedir.$(OBJEXT) \
       $(libdir)/strtoumax.$(OBJEXT) \
       $(libdir)/xmalloc.$(OBJEXT) \
       $(libdir)/xstrtol.$(OBJEXT) \
@@ -108,7 +106,7 @@ DEFS_ansi_c = -DPROTOTYPES
 # DEFS_wchar =  -Dwchar_t=int -Dmbstate_t=int
 DEFS_wchar =  -DHAVE_WCHAR_H
 
-# Is strtol() and strtoul()  declarared ?
+# Are strtol() and strtoul() declared?
 #DEFS_strtol = -DHAVE_DECL_STRTOULL=0 -DHAVE_DECL_STRTOUL=0
 DEFS_strtol = -DHAVE_DECL_STRTOULL=1 -DHAVE_DECL_STRTOUL=1
 

@@ -1,3 +1,59 @@
+grep (2.12-2) unstable; urgency=low
+
+  * Updated debian/watch to match .tar.xz files 
+  * Added 90-672240-exclude.patch so that --exclude excludes again 
+    (Closes: #672240)
+
+ -- Santiago Ruano Rincón <santiago@debian.org>  Sun, 13 May 2012 14:08:01 +0200
+
+grep (2.12-1) unstable; urgency=low
+
+  * New upstream version 2.12
+    Merged upstream:
+      82-669084-stdin-exemption.patch
+      81-668585-excluded_file_name.patch
+
+ -- Anibal Monsalve Salazar <anibal@debian.org>  Tue, 08 May 2012 11:41:50 +1000
+
+grep (2.11-3) unstable; urgency=low
+
+  * --devices=ACTION (-D) no longer affects stdin 
+    Add 82-669084-stdin-exemption.patch
+    Closes: #669084
+
+ -- Anibal Monsalve Salazar <anibal@debian.org>  Tue, 17 Apr 2012 22:49:08 +1000
+
+grep (2.11-2) unstable; urgency=low
+
+  * Don't segfault with -r --exclude-dir and no file operand
+    Add 81-668585-excluded_file_name.patch
+    Patch by Allan McRae
+    Closes: #668585
+
+ -- Anibal Monsalve Salazar <anibal@debian.org>  Fri, 13 Apr 2012 18:29:01 +1000
+
+grep (2.11-1) unstable; urgency=low
+
+  * New upstream version 2.11
+    Closes: #668534
+    Fix "input file == output file detection and -q"
+    Closes: #651617
+  * Enable hardened build flags
+    Patch by Moritz Muehlenhoff
+    Closes: #655502
+  * Drop 55-185208-bigfile.patch as it doesn't work
+  * Standards Version is 3.9.3
+
+ -- Anibal Monsalve Salazar <anibal@debian.org>  Fri, 13 Apr 2012 09:20:46 +1000
+
+grep (2.10-1) unstable; urgency=low
+
+  * New upstream version 2.10
+  * Fix unneeded-build-dep-on-quilt
+  * Fix debian-rules-missing-recommended-target
+
+ -- Anibal Monsalve Salazar <anibal@debian.org>  Sun, 04 Dec 2011 21:17:33 +1100
+
 grep (2.9-2) unstable; urgency=low
 
   * Removed 60-76011-main.c.patch introduced in the last revision. It

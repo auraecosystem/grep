@@ -13,25 +13,28 @@ else
 CROSS= --build $(DEB_BUILD_GNU_TYPE)
 endif
 
-CFLAGS= -O3 -g
-LDFLAGS= -Wl,-z,defs
+CFLAGS = `dpkg-buildflags --get CFLAGS`
+CFLAGS += -O3
+LDFLAGS = `dpkg-buildflags --get LDFLAGS`
+LDFLAGS += -Wl,-z,defs
+CPPFLAGS = `dpkg-buildflags --get CPPFLAGS`
+
 LIBS= -Wl,--no-as-needed -ldl -Wl,--as-needed
 
-include /usr/share/quilt/quilt.make
-
-config.status: patch configure
+config.status: configure
 	dh_testdir
 	cp -f /usr/share/misc/config.sub /usr/share/misc/config.guess .
-	./configure $(CROSS) --prefix=/usr --exec-prefix=/ --mandir=\$${prefix}/share/man --infodir=\$${prefix}/share/info --without-included-regex CFLAGS="$(CFLAGS)" LDFLAGS="$(LDFLAGS)" LIBS="$(LIBS)"
+	./configure $(CROSS) --prefix=/usr --exec-prefix=/ --mandir=\$${prefix}/share/man --infodir=\$${prefix}/share/info --without-included-regex CFLAGS="$(CFLAGS)" CPPFLAGS="$(CPPFLAGS)" LDFLAGS="$(LDFLAGS)" LIBS="$(LIBS)"
 
-build: build-stamp
-
-build-stamp:  config.status 
+build: build-arch build-indep
+build-arch: build-stamp
+build-indep: build-stamp
+build-stamp: config.status 
 	dh_testdir
 	$(MAKE) V=1
 	touch $@
 
-clean: unpatch
+clean: 
 	dh_testdir
 	dh_testroot
 	rm -f build-stamp 

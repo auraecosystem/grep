@@ -676,11 +676,10 @@ and
 .BR [:xdigit:].
 For example,
 .B [[:alnum:]]
-means
-.BR [0\-9A\-Za\-z] ,
-except the latter form depends upon the C locale and the
-\s-1ASCII\s0 character encoding, whereas the former is independent
-of locale and character set.
+means the character class of numbers and
+letters in the current locale. In the C locale and \s-1ASCII\s0
+character set encoding, this is the same as
+.BR [0\-9A\-Za\-z] .
 (Note that the brackets in these class names are part of the symbolic
 names, and must be included in addition to the brackets delimiting
 the bracket expression.)
@@ -718,11 +717,11 @@ at the edge of a word.
 The symbol
 .B \ew
 is a synonym for
-.B [[:alnum:]]
+.B [_[:alnum:]]
 and
 .B \eW
 is a synonym for
-.BR [^[:alnum:]] .
+.BR [^_[:alnum:]] .
 .SS Repetition
 A regular expression may be followed by one of several repetition operators:
 .PD 0
@@ -1174,7 +1173,7 @@ to use logic that tests for this general condition
 instead of strict equality with\ 2.
 .
 .SH COPYRIGHT
-Copyright 1998-2000, 2002, 2005-2011 Free Software Foundation, Inc.
+Copyright 1998-2000, 2002, 2005-2012 Free Software Foundation, Inc.
 .PP
 This is free software;
 see the source for copying conditions.
