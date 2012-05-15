@@ -4,6 +4,7 @@
 
 require_en_utf8_locale_
 require_timeout_
+require_compiled_in_MB_support
 
 encode() { echo "$1" | tr ABC '\357\274\241'; }
 
@@ -14,7 +15,7 @@ for LOC in en_US.UTF-8 $LOCALE_FR_UTF8; do
   encode ABC \
     | LC_ALL=$LOC timeout 10s grep -F "$(encode BC)" > $out 2>&1
   test $? = 1 || fail=1
-  compare $out /dev/null || fail=1
+  compare /dev/null $out || fail=1
 done
 
 Exit $fail

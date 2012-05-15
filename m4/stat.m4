@@ -1,6 +1,6 @@
-# serial 8
+# serial 9
 
-# Copyright (C) 2009-2011 Free Software Foundation, Inc.
+# Copyright (C) 2009-2012 Free Software Foundation, Inc.
 #
 # This file is free software; the Free Software Foundation
 # gives unlimited permission to copy and/or distribute it,
@@ -23,8 +23,9 @@ AC_DEFUN([gl_FUNC_STAT],
             mingw*) gl_cv_func_stat_dir_slash="guessing no";;
             *) gl_cv_func_stat_dir_slash="guessing yes";;
           esac])])
-  dnl AIX 7.1, Solaris 9 mistakenly succeed on stat("file/")
-  dnl FreeBSD 7.2 mistakenly succeeds on stat("link-to-file/")
+  dnl AIX 7.1, Solaris 9, mingw64 mistakenly succeed on stat("file/").
+  dnl (For mingw, this is due to a broken stat() override in libmingwex.a.)
+  dnl FreeBSD 7.2 mistakenly succeeds on stat("link-to-file/").
   AC_CACHE_CHECK([whether stat handles trailing slashes on files],
       [gl_cv_func_stat_file_slash],
       [touch conftest.tmp

@@ -1,6 +1,6 @@
 # Process this file with automake to create Makefile.in
 #
-# Copyright 1997-1998, 2005-2011 Free Software Foundation, Inc.
+# Copyright 1997-1998, 2005-2012 Free Software Foundation, Inc.
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -21,6 +21,7 @@ ACLOCAL_AMFLAGS = -I m4
 SUBDIRS = po lib doc src tests gnulib-tests
 
 EXTRA_DIST =		\
+  ChangeLog-2009	\
   Makefile.boot		\
   README		\
   README-alpha		\
@@ -28,10 +29,15 @@ EXTRA_DIST =		\
   TODO			\
   cfg.mk
 
+# Shortcut target to make it easier to run expensive tests.
+.PHONY: check-expensive
+check-expensive:
+	$(MAKE) check RUN_EXPENSIVE_TESTS=yes
+
 # Run syntax-check rules before creating a distribution tarball.
 .PHONY: run-syntax-check
 run-syntax-check:
-	$(AM_V_GEN)test -d .git && $(MAKE) syntax-check || :
+	$(AM_V_GEN)test ! -d .git || $(MAKE) syntax-check
 
 # Arrange so that .tarball-version appears only in the distribution
 # tarball, and never in a checked-out repository.

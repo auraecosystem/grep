@@ -1,5 +1,5 @@
 ## Process this file with automake to create Makefile.in
-# Copyright 1997-1998, 2005-2011 Free Software Foundation, Inc.
+# Copyright 1997-1998, 2005-2012 Free Software Foundation, Inc.
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -38,6 +38,7 @@ TESTS =						\
   backref					\
   backref-multibyte-slow			\
   backref-word					\
+  big-match					\
   bogus-wctob					\
   bre						\
   case-fold-backref				\
@@ -49,6 +50,7 @@ TESTS =						\
   dfa-heap-overrun				\
   dfaexec-multibyte				\
   empty						\
+  epipe						\
   equiv-classes                                 \
   ere						\
   euc-mb					\
@@ -61,6 +63,7 @@ TESTS =						\
   grep-dir					\
   help-version					\
   ignore-mmap					\
+  in-eq-out-infloop                             \
   include-exclude				\
   inconsistent-range                            \
   khadafy					\
@@ -72,11 +75,15 @@ TESTS =						\
   pcre-abort					\
   pcre-z					\
   prefix-of-multibyte				\
+  r-dot						\
+  repetition-overflow				\
   reversed-range-endpoints			\
+  skip-device					\
   sjis-mb					\
   spencer1					\
   spencer1-locale				\
   status					\
+  symlink					\
   turkish-I					\
   warn-char-classes				\
   word-delim-multibyte				\
@@ -104,7 +111,24 @@ MALLOC_PERTURB_ = 1
 TESTS_ENVIRONMENT =				\
   tmp__=$$TMPDIR; test -d "$$tmp__" || tmp__=.;	\
   TMPDIR=$$tmp__; export TMPDIR;		\
-  export					\
+						\
+  if test -n "$$BASH_VERSION" || (eval "export v=x") 2>/dev/null; then \
+    export_with_values () { export "$$@"; };		\
+  else							\
+    export_with_values ()				\
+    {							\
+      sed_extract_var='s/=.*//';			\
+      sed_quote_value="s/'/'\\\\''/g;s/=\\(.*\\)/='\\1'/";\
+      for arg in "$$@"; do				\
+        var=`echo "$$arg" | sed "$$sed_extract_var"`;	\
+        arg=`echo "$$arg" | sed "$$sed_quote_value"`;	\
+        eval "$$arg";					\
+        export "$$var";					\
+      done;						\
+    };							\
+  fi;							\
+						\
+  export_with_values				\
   VERSION='$(VERSION)'                          \
   LOCALE_FR='$(LOCALE_FR)'                      \
   LOCALE_FR_UTF8='$(LOCALE_FR_UTF8)'            \
@@ -120,13 +144,15 @@ TESTS_ENVIRONMENT =				\
   CC='$(CC)'					\
   GREP_TEST_NAME=`echo $$tst|sed 's,^\./,,;s,/,-,g'` \
   MAKE=$(MAKE)					\
-  MALLOC_PERTURB_=$(MALLOC_PERTURB_); export MALLOC_PERTURB_ \
+  MALLOC_PERTURB_=$(MALLOC_PERTURB_)		\
   PACKAGE_BUGREPORT='$(PACKAGE_BUGREPORT)'	\
   PACKAGE_VERSION=$(PACKAGE_VERSION)		\
   PERL='$(PERL)'				\
   SHELL='$(SHELL)'				\
   PATH='$(abs_top_builddir)/src$(PATH_SEPARATOR)'"$$PATH" \
-  ; $(SHELL) 9>&2
+  ; 9>&2
+
+LOG_COMPILER = $(SHELL)
 
 VERBOSE = yes
 

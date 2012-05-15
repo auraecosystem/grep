@@ -1,7 +1,5 @@
-/* -*- buffer-read-only: t -*- vi: set ro: */
-/* DO NOT EDIT! GENERATED AUTOMATICALLY! */
 /* Test of <fcntl.h> substitute.
-   Copyright (C) 2007, 2009-2011 Free Software Foundation, Inc.
+   Copyright (C) 2007, 2009-2012 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -32,6 +30,11 @@ int sk[] = { SEEK_CUR, SEEK_END, SEEK_SET };
 
 /* Check that the FD_* macros are defined.  */
 int i = FD_CLOEXEC;
+
+/* Check that the types are all defined.  */
+pid_t t1;
+off_t t2;
+mode_t t3;
 
 int
 main (void)

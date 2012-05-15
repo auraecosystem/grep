@@ -1,7 +1,7 @@
 dnl
 dnl autoconf input file for ``GNU grep''
 dnl
-dnl Copyright (C) 1997-2006, 2009-2011 Free Software Foundation, Inc.
+dnl Copyright (C) 1997-2006, 2009-2012 Free Software Foundation, Inc.
 dnl
 dnl This file is part of GNU grep.
 dnl
@@ -68,7 +68,7 @@ AC_DEFINE([GREP], 1, [We are building grep])
 AC_PREREQ(2.59)
 
 dnl Automake stuff.
-AM_INIT_AUTOMAKE([1.11 dist-xz color-tests parallel-tests])
+AM_INIT_AUTOMAKE([1.11 no-dist-gzip dist-xz color-tests parallel-tests])
 AM_SILENT_RULES([yes]) # make --enable-silent-rules the default.
 
 AC_CONFIG_HEADERS([config.h:config.hin])
@@ -82,7 +82,6 @@ gl_EARLY
 AC_PROG_RANLIB
 
 dnl Checks for typedefs, structures, and compiler characteristics.
-AC_SYS_LARGEFILE
 AC_TYPE_SIZE_T
 AC_C_CONST
 gl_INIT
@@ -165,6 +164,8 @@ if test "$gl_gcc_warnings" = yes; then
   #nw="$nw -Wmissing-prototypes"
   nw="$nw -Wold-style-definition"
   nw="$nw -Wcast-align"
+  nw="$nw -Wunsuffixed-float-constants"
+  gl_WARN_ADD([-Wno-format-nonliteral])
   gl_MANYWARN_COMPLEMENT([GNULIB_WARN_CFLAGS], [$WARN_CFLAGS], [$nw])
   AC_SUBST([GNULIB_WARN_CFLAGS])
 fi
@@ -182,7 +183,7 @@ AC_HEADER_DIRENT
 dnl Checks for functions.
 AC_FUNC_CLOSEDIR_VOID
 
-AC_CHECK_FUNCS_ONCE(isascii iswctype setlocale wcscoll)
+AC_CHECK_FUNCS_ONCE(isascii setlocale)
 
 dnl I18N feature
 AM_GNU_GETTEXT_VERSION([0.18])
@@ -198,6 +199,12 @@ if test "$ac_use_included_regex" = no; then
 fi
 
 gl_FUNC_PCRE
+
+case $host_os in
+  mingw*) suffix=w32 ;;
+  *) suffix=posix ;;
+esac
+AC_CONFIG_LINKS([lib/colorize.c:lib/colorize-$suffix.c])
 
 AC_CONFIG_FILES([
   Makefile

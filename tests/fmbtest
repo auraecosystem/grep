@@ -1,5 +1,5 @@
 #! /bin/sh
-# Copyright (C) 2001, 2006, 2009-2011 Free Software Foundation, Inc.
+# Copyright (C) 2001, 2006, 2009-2012 Free Software Foundation, Inc.
 #
 # Copying and distribution of this file, with or without modification,
 # are permitted in any medium without royalty provided the copyright
@@ -11,14 +11,14 @@ cz=cs_CZ.UTF-8
 
 # If cs_CZ.UTF-8 locale doesn't work, skip this test.
 LC_ALL=$cz locale -k LC_CTYPE 2>/dev/null | grep -q charmap.*UTF-8 \
-  || skip_test_ this system lacks the $cz locale
+  || skip_ this system lacks the $cz locale
 
 # If matching is done in single-byte mode, skip this test too
 printf 'é\n' | LC_ALL=$cz grep -Eq '^[é]{2}$'
 case $? in
-  0) skip_test_ this test works only in multibyte mode;;
+  0) skip_ "built without multi-byte support";;
   1) ;;
-  *) framework_failure_ grep exited with unexpected status $? ;;
+  *) fail_ "unexpected exit status: $?";;
 esac
 
 failures=0
