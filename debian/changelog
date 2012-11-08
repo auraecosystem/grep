@@ -1,4 +1,4 @@
-grep (2.14-1) UNRELEASED; urgency=low
+grep (2.14-1) unstable; urgency=low
 
   * [fb48cde] Imported Upstream version 2.14
     Merged upstream:
@@ -7,7 +7,7 @@ grep (2.14-1) UNRELEASED; urgency=low
       Closes: #678652
   * Standards Version is 3.9.4
 
- -- Anibal Monsalve Salazar <anibal@debian.org>  Thu, 08 Nov 2012 12:22:54 +1100
+ -- Anibal Monsalve Salazar <anibal@debian.org>  Thu, 08 Nov 2012 13:06:00 +1100
 
 grep (2.12-2) unstable; urgency=low
 
