@@ -1,113 +1,115 @@
 # Triditional Chinese Translatino of grep
-# Copyright (C) 2004 Free Software Foundation, Inc.
+# Copyright (C) 2004, 2012 Free Software Foundation, Inc.
+# This file is distributed under the same license as the grep package.
 # Yuan-Chen Cheng <ycheng@sinica.edu.tw>, 2004.
+# Webber Liao <wpliao@gmail.com>, 2012.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version:  grep 2.5g\n"
+"Project-Id-Version: grep 2.13.16-pre1\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2012-04-23 16:08+0200\n"
-"PO-Revision-Date: 2004-12-01 01:01+0800\n"
-"Last-Translator: Yuan-Chen Cheng <ycheng@sinica.edu.tw>\n"
+"POT-Creation-Date: 2012-08-20 08:12+0200\n"
+"PO-Revision-Date: 2012-08-19 00:10+1000\n"
+"Last-Translator: Webber Liao <wpliao@gmail.com>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=big5\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: lib/argmatch.c:133
-#, fuzzy, c-format
+#, c-format
 msgid "invalid argument %s for %s"
-msgstr "µL®Äªº³Ì¤j­p¦¸"
+msgstr "%2$s çš„å¼•æ•¸ %1$s ç„¡æ•ˆ"
 
 #: lib/argmatch.c:134
 #, c-format
 msgid "ambiguous argument %s for %s"
-msgstr ""
+msgstr "%2$s çš„å¼•æ•¸ %1$s ä¸æ˜ç¢º"
 
 #: lib/argmatch.c:153
 msgid "Valid arguments are:"
-msgstr ""
+msgstr "æœ‰æ•ˆçš„å¼•æ•¸ç‚º:"
 
-#: lib/closeout.c:112 src/main.c:894
+#: lib/closeout.c:112 src/main.c:952
 #, c-format
 msgid "write error"
-msgstr ""
+msgstr "å¯«å…¥ç™¼ç”ŸéŒ¯èª¤"
 
 #: lib/error.c:188
 msgid "Unknown system error"
-msgstr "¥¼ª¾ªº¨t²Î¿ù»~"
+msgstr "æœªçŸ¥çš„ç³»çµ±éŒ¯èª¤"
 
 #: lib/getopt.c:547 lib/getopt.c:576
-#, fuzzy, c-format
+#, c-format
 msgid "%s: option '%s' is ambiguous; possibilities:"
-msgstr "%s: ¿ï¶µ `%s' ¬O¼Ò½kªº\n"
+msgstr "%s: é¸é … \"%s\" ä¸æ˜ç¢º; å¯èƒ½é¸é …ç‚º:"
 
 #: lib/getopt.c:624 lib/getopt.c:628
-#, fuzzy, c-format
+#, c-format
 msgid "%s: option '--%s' doesn't allow an argument\n"
-msgstr "%s: ¿ï¶µ `--%s' ¤§«á¤£¤¹³\ªş¥[¥ô¦ó°Ñ¼Æ\n"
+msgstr "%s: é¸é … \"--%s\" ä¸æ¥å—å¼•æ•¸\n"
 
 #: lib/getopt.c:637 lib/getopt.c:642
-#, fuzzy, c-format
+#, c-format
 msgid "%s: option '%c%s' doesn't allow an argument\n"
-msgstr "%s: ¿ï¶µ `%c%s' ¤§«á¤£¤¹³\ªş¥[¥ô¦ó°Ñ¼Æ\n"
+msgstr "%s: é¸é … \"%c%s\" ä¸æ¥å—å¼•æ•¸\n"
 
 #: lib/getopt.c:685 lib/getopt.c:704
-#, fuzzy, c-format
+#, c-format
 msgid "%s: option '--%s' requires an argument\n"
-msgstr "%s: ¿ï¶µ `%s' ¤§«á»İ­n¤@­Ó°Ñ¼Æ\n"
+msgstr "%s: é¸é … \"--%s\" éœ€è¦ä¸€å€‹å¼•æ•¸\n"
 
 #: lib/getopt.c:742 lib/getopt.c:745
-#, fuzzy, c-format
+#, c-format
 msgid "%s: unrecognized option '--%s'\n"
-msgstr "%s: µLªk¿ëÃÑªº¿ï¶µ `--%s'\n"
+msgstr "%s: æœªçŸ¥çš„é¸é … \"--%s\"\n"
 
 #: lib/getopt.c:753 lib/getopt.c:756
-#, fuzzy, c-format
+#, c-format
 msgid "%s: unrecognized option '%c%s'\n"
-msgstr "%s: µLªk¿ëÃÑªº¿ï¶µ `%c%s'\n"
+msgstr "%s: æœªçŸ¥çš„é¸é … \"%c%s\"\n"
 
 #: lib/getopt.c:805 lib/getopt.c:808
-#, fuzzy, c-format
+#, c-format
 msgid "%s: invalid option -- '%c'\n"
-msgstr "%s: µL®Äªº¿ï¶µ -- %c\n"
+msgstr "%s: ç„¡æ•ˆçš„é¸é … -- \"%c\"\n"
 
 #: lib/getopt.c:861 lib/getopt.c:878 lib/getopt.c:1088 lib/getopt.c:1106
-#, fuzzy, c-format
+#, c-format
 msgid "%s: option requires an argument -- '%c'\n"
-msgstr "%s: ¿ï¶µ»İ­n¤@­Ó°Ñ¼Æ -- %c\n"
+msgstr "%s: é¸é …éœ€è¦ä¸€å€‹å¼•æ•¸ -- \"%c\"\n"
 
 #: lib/getopt.c:934 lib/getopt.c:950
-#, fuzzy, c-format
+#, c-format
 msgid "%s: option '-W %s' is ambiguous\n"
-msgstr "%s: ¿ï¶µ `-W %s' ¬O¼Ò½kªº\n"
+msgstr "%s: é¸é … \"-W %s\" ä¸æ˜ç¢º\n"
 
 #: lib/getopt.c:974 lib/getopt.c:992
-#, fuzzy, c-format
+#, c-format
 msgid "%s: option '-W %s' doesn't allow an argument\n"
-msgstr "%s: xxxx `-W %s' ¨Ã¤£»İ­n°Ñ¼Æ\n"
+msgstr "%s: é¸é … \"-W %s\" ä¸æ¥å—å¼•æ•¸\n"
 
 #: lib/getopt.c:1013 lib/getopt.c:1031
-#, fuzzy, c-format
+#, c-format
 msgid "%s: option '-W %s' requires an argument\n"
-msgstr "%s: ¿ï¶µ `%s' ¤§«á»İ­n¤@­Ó°Ñ¼Æ\n"
+msgstr "%s: é¸é … \"-W %s\" éœ€è¦ä¸€å€‹å¼•æ•¸\n"
 
 #: lib/obstack.c:413 lib/obstack.c:415 lib/xalloc-die.c:34 src/kwset.c:178
 #: src/kwset.c:186 src/kwset.c:409 src/pcresearch.c:153
 #, c-format
 msgid "memory exhausted"
-msgstr "°O¾ĞÅé¥ÎºÉ"
+msgstr "è¨˜æ†¶é«”ç”¨ç›¡"
 
 #: lib/openat-die.c:38
 #, c-format
 msgid "unable to record current working directory"
-msgstr ""
+msgstr "ç„¡æ³•è¨˜éŒ„ç¾è¡Œå·¥ä½œç›®éŒ„"
 
 #: lib/openat-die.c:57
 #, c-format
 msgid "failed to return to initial working directory"
-msgstr ""
+msgstr "ç„¡æ³•è¿”å›åŸæœ¬çš„å·¥ä½œç›®éŒ„"
 
 #. TRANSLATORS:
 #. Get translations for open and closing quotation marks.
@@ -140,92 +142,92 @@ msgstr "'"
 
 #: lib/regcomp.c:130
 msgid "Success"
-msgstr ""
+msgstr "æˆåŠŸ"
 
 #: lib/regcomp.c:133
 msgid "No match"
-msgstr ""
+msgstr "æ²’æœ‰ç¬¦åˆçš„é …ç›®"
 
 #: lib/regcomp.c:136
 msgid "Invalid regular expression"
-msgstr ""
+msgstr "ç„¡æ•ˆçš„æ­£è¦è¡¨ç¤ºå¼"
 
 #: lib/regcomp.c:139
 msgid "Invalid collation character"
-msgstr ""
+msgstr "ç„¡æ•ˆçš„å°ç…§å­—å…ƒ"
 
 #: lib/regcomp.c:142
 msgid "Invalid character class name"
-msgstr ""
+msgstr "ç„¡æ•ˆçš„å­—å…ƒé¡åˆ¥å"
 
 #: lib/regcomp.c:145
 msgid "Trailing backslash"
-msgstr ""
+msgstr "æœ«ç«¯æœ‰åæ–œç·š"
 
 #: lib/regcomp.c:148
 msgid "Invalid back reference"
-msgstr ""
+msgstr "ç„¡æ•ˆçš„å‘å¾Œå¼•ç”¨"
 
 #: lib/regcomp.c:151
 msgid "Unmatched [ or [^"
-msgstr ""
+msgstr "æ²’æœ‰å°æ‡‰çš„ [ æˆ– [^"
 
 #: lib/regcomp.c:154
 msgid "Unmatched ( or \\("
-msgstr ""
+msgstr "æ²’æœ‰å°æ‡‰çš„ ( æˆ– \\("
 
 #: lib/regcomp.c:157
 msgid "Unmatched \\{"
-msgstr ""
+msgstr "æ²’æœ‰å°æ‡‰çš„ \\{"
 
-#: lib/regcomp.c:160 src/dfa.c:1373
+#: lib/regcomp.c:160 src/dfa.c:1371
 msgid "Invalid content of \\{\\}"
-msgstr ""
+msgstr "ç„¡æ•ˆçš„ \\{\\} å…§å®¹"
 
 #: lib/regcomp.c:163
 msgid "Invalid range end"
-msgstr ""
+msgstr "ç„¡æ•ˆçš„çµæŸç¯„åœ"
 
 #: lib/regcomp.c:166
 msgid "Memory exhausted"
-msgstr "°O¾ĞÅé¥ÎºÉ"
+msgstr "è¨˜æ†¶é«”ç”¨ç›¡"
 
 #: lib/regcomp.c:169
 msgid "Invalid preceding regular expression"
-msgstr ""
+msgstr "ç„¡æ•ˆçš„å‰ç½®æ­£è¦è¡¨ç¤ºå¼"
 
 #: lib/regcomp.c:172
 msgid "Premature end of regular expression"
-msgstr ""
+msgstr "æ­£è¦è¡¨ç¤ºå¼éæ—©çµæŸ"
 
-#: lib/regcomp.c:175 src/dfa.c:1376
+#: lib/regcomp.c:175 src/dfa.c:1374
 msgid "Regular expression too big"
-msgstr ""
+msgstr "æ­£è¦è¡¨ç¤ºå¼éé•·"
 
 #: lib/regcomp.c:178
 msgid "Unmatched ) or \\)"
-msgstr ""
+msgstr "æ²’æœ‰å°æ‡‰çš„ ) æˆ– \\)"
 
 #: lib/regcomp.c:703
 msgid "No previous regular expression"
-msgstr ""
+msgstr "æ²’æœ‰å…ˆå‰çš„æ­£è¦è¡¨ç¤ºå¼"
 
 #: lib/version-etc.c:74
 #, c-format
 msgid "Packaged by %s (%s)\n"
-msgstr ""
+msgstr "å¥—ä»¶ç”± %s (%s) æ‰€æ‰“åŒ…\n"
 
 #: lib/version-etc.c:77
 #, c-format
 msgid "Packaged by %s\n"
-msgstr ""
+msgstr "å¥—ä»¶ç”± %s æ‰€æ‰“åŒ…\n"
 
 #. TRANSLATORS: Translate "(C)" to the copyright symbol
 #. (C-in-a-circle), if this symbol is available in the user's
 #. locale.  Otherwise, do not translate "(C)"; leave it as-is.
 #: lib/version-etc.c:84
 msgid "(C)"
-msgstr ""
+msgstr "(C)"
 
 #: lib/version-etc.c:86
 msgid ""
@@ -236,24 +238,29 @@ msgid ""
 "There is NO WARRANTY, to the extent permitted by law.\n"
 "\n"
 msgstr ""
+"\n"
+"è¨±å¯è­‰ GPLv3+: GNU GPL ç‰ˆæœ¬ 3 æˆ–æ›´æ–° <http://gnu.org/licenses/gpl.html>.\n"
+"é€™æ˜¯è‡ªç”±è»Ÿé«”ï¼šæ‚¨å¯è‡ªç”±ä¿®æ”¹æˆ–æ•£å¸ƒã€‚\n"
+"åœ¨æ³•å¾‹å‡†è¨±ç¯„åœå…§ä¸è² å¸¶ä¿è­‰ã€‚\n"
+"\n"
 
 #. TRANSLATORS: %s denotes an author name.
 #: lib/version-etc.c:102
 #, c-format
 msgid "Written by %s.\n"
-msgstr ""
+msgstr "ç”± %s ç·¨å¯«ã€‚\n"
 
 #. TRANSLATORS: Each %s denotes an author name.
 #: lib/version-etc.c:106
 #, c-format
 msgid "Written by %s and %s.\n"
-msgstr ""
+msgstr "ç”± %s å’Œ %s ç·¨å¯«ã€‚\n"
 
 #. TRANSLATORS: Each %s denotes an author name.
 #: lib/version-etc.c:110
 #, c-format
 msgid "Written by %s, %s, and %s.\n"
-msgstr ""
+msgstr "ç”± %sã€%s å’Œ %s ç·¨å¯«ã€‚\n"
 
 #. TRANSLATORS: Each %s denotes an author name.
 #. You can use line breaks, estimating that each author name occupies
@@ -264,6 +271,8 @@ msgid ""
 "Written by %s, %s, %s,\n"
 "and %s.\n"
 msgstr ""
+"ç”± %sã€%sã€%sã€\n"
+"å’Œ %s ç·¨å¯«ã€‚\n"
 
 #. TRANSLATORS: Each %s denotes an author name.
 #. You can use line breaks, estimating that each author name occupies
@@ -274,6 +283,8 @@ msgid ""
 "Written by %s, %s, %s,\n"
 "%s, and %s.\n"
 msgstr ""
+"ç”± %sã€%sã€%sã€\n"
+"%s å’Œ %s ç·¨å¯«ã€‚\n"
 
 #. TRANSLATORS: Each %s denotes an author name.
 #. You can use line breaks, estimating that each author name occupies
@@ -284,6 +295,8 @@ msgid ""
 "Written by %s, %s, %s,\n"
 "%s, %s, and %s.\n"
 msgstr ""
+"ç”± %sã€%sã€%sã€\n"
+"%sã€%s å’Œ %s ç·¨å¯«ã€‚\n"
 
 #. TRANSLATORS: Each %s denotes an author name.
 #. You can use line breaks, estimating that each author name occupies
@@ -294,6 +307,8 @@ msgid ""
 "Written by %s, %s, %s,\n"
 "%s, %s, %s, and %s.\n"
 msgstr ""
+"ç”± %sã€%sã€%sã€\n"
+"%sã€%sã€%s å’Œ %s ç·¨å¯«ã€‚\n"
 
 #. TRANSLATORS: Each %s denotes an author name.
 #. You can use line breaks, estimating that each author name occupies
@@ -305,6 +320,9 @@ msgid ""
 "%s, %s, %s, %s,\n"
 "and %s.\n"
 msgstr ""
+"ç”± %sã€%sã€%sã€\n"
+"%sã€%sã€%sã€%sã€\n"
+"å’Œ %s ç·¨å¯«ã€‚\n"
 
 #. TRANSLATORS: Each %s denotes an author name.
 #. You can use line breaks, estimating that each author name occupies
@@ -316,6 +334,9 @@ msgid ""
 "%s, %s, %s, %s,\n"
 "%s, and %s.\n"
 msgstr ""
+"ç”± %sã€%sã€%sã€\n"
+"%sã€%sã€%sã€%sã€\n"
+"%s å’Œ %s ç·¨å¯«ã€‚\n"
 
 #. TRANSLATORS: Each %s denotes an author name.
 #. You can use line breaks, estimating that each author name occupies
@@ -327,187 +348,188 @@ msgid ""
 "%s, %s, %s, %s,\n"
 "%s, %s, and others.\n"
 msgstr ""
+"ç”± %sã€%sã€%sã€\n"
+"%sã€%sã€%sã€%sã€\n"
+"%s å’Œ %s ç­‰äººç·¨å¯«ã€‚\n"
 
 #. TRANSLATORS: The placeholder indicates the bug-reporting address
 #. for this package.  Please add _another line_ saying
 #. "Report translation bugs to <...>\n" with the address for translation
 #. bugs (typically your translation team's web or email address).
-#: lib/version-etc.c:245 src/main.c:1572
+#: lib/version-etc.c:245 src/main.c:1629
 #, c-format
 msgid ""
 "\n"
 "Report bugs to: %s\n"
 msgstr ""
+"\n"
+"å›å ± bug åˆ°: %s\n"
 
 #: lib/version-etc.c:247
 #, c-format
 msgid "Report %s bugs to: %s\n"
-msgstr ""
+msgstr "å›å ± %s bug åˆ°: %s\n"
 
 #: lib/version-etc.c:251
 #, c-format
 msgid "%s home page: <%s>\n"
-msgstr ""
+msgstr "%s é¦–é : <%s>\n"
 
 #: lib/version-etc.c:253
 #, c-format
 msgid "%s home page: <http://www.gnu.org/software/%s/>\n"
-msgstr ""
+msgstr "%s é¦–é : <http://www.gnu.org/software/%s/>\n"
 
-#: lib/version-etc.c:256 src/main.c:1575
+#: lib/version-etc.c:256 src/main.c:1632
 msgid "General help using GNU software: <http://www.gnu.org/gethelp/>\n"
-msgstr ""
+msgstr "GNU è»Ÿé«”ç”¨æ³•çš„ä¸€èˆ¬èªªæ˜: <http://www.gnu.org/gethelp/>\n"
 
 #: lib/xstrtol-error.c:63
-#, fuzzy, c-format
+#, c-format
 msgid "invalid %s%s argument '%s'"
-msgstr "µL®Äªº³Ì¤j­p¦¸"
+msgstr "ç„¡æ•ˆ %s%s å¼•æ•¸ \"%s\""
 
 #: lib/xstrtol-error.c:68
-#, fuzzy, c-format
+#, c-format
 msgid "invalid suffix in %s%s argument '%s'"
-msgstr "µL®Äªº³Ì¤j­p¦¸"
+msgstr "%s%s å¼•æ•¸ \"%s\" ä¸­æœ‰ç„¡æ•ˆçš„å°¾ç¶´"
 
 #: lib/xstrtol-error.c:72
 #, c-format
 msgid "%s%s argument '%s' too large"
-msgstr ""
+msgstr "%s%s å¼•æ•¸ \"%s\" éå¤§"
 
-#: src/dfa.c:953 src/dfa.c:956 src/dfa.c:976 src/dfa.c:986 src/dfa.c:998
-#: src/dfa.c:1049 src/dfa.c:1058 src/dfa.c:1061 src/dfa.c:1066 src/dfa.c:1079
-#: src/dfa.c:1137
-#, fuzzy
+#: src/dfa.c:952 src/dfa.c:955 src/dfa.c:975 src/dfa.c:985 src/dfa.c:997
+#: src/dfa.c:1048 src/dfa.c:1057 src/dfa.c:1060 src/dfa.c:1065 src/dfa.c:1078
+#: src/dfa.c:1135
 msgid "unbalanced ["
-msgstr "¥¼¦¨¹ïªº ["
+msgstr "ä¸å°ç¨±çš„ ["
 
-#: src/dfa.c:1007
+#: src/dfa.c:1006
 msgid "invalid character class"
-msgstr ""
+msgstr "ç„¡æ•ˆçš„å­—å…ƒé¡åˆ¥"
 
-#: src/dfa.c:1174
+#: src/dfa.c:1172
 msgid "character class syntax is [[:space:]], not [:space:]"
-msgstr ""
+msgstr "å­—å…ƒé¡åˆ¥çš„èªæ³•ç‚º [[:space:]], é [:space:]"
 
-#: src/dfa.c:1226
-#, fuzzy
+#: src/dfa.c:1224
 msgid "unfinished \\ escape"
-msgstr "¥¼¥¿½Tµ²§ôªº \\ ¶h¥X"
+msgstr "ä¸å®Œæ•´çš„ \\ é€¸å‡º"
 
-#: src/dfa.c:1761
-#, fuzzy
+#: src/dfa.c:1759
 msgid "unbalanced ("
-msgstr "¥¼°t¹ïªº ("
+msgstr "ä¸å°ç¨±çš„ ("
 
-#: src/dfa.c:1891
-#, fuzzy
+#: src/dfa.c:1886
 msgid "no syntax specified"
-msgstr "¨Ã¥¼«ü©w»yªk"
+msgstr "æ²’æœ‰æŒ‡å®šçš„èªæ³•"
 
-#: src/dfa.c:1899
-#, fuzzy
+#: src/dfa.c:1894
 msgid "unbalanced )"
-msgstr "¥¼°t¹ïªº )"
+msgstr "ä¸å°ç¨±çš„ )"
 
 #: src/egrep.c:16
 msgid "PATTERN is an extended regular expression (ERE).\n"
-msgstr ""
+msgstr "PATTERN æ˜¯ä¸€å€‹å»¶ä¼¸æ­£è¦è¡¨ç¤ºå¼ (ERE)ã€‚\n"
 
 #: src/egrep.c:18
 msgid "Invocation as 'egrep' is deprecated; use 'grep -E' instead.\n"
-msgstr ""
+msgstr "\"egrep\" çš„å‘¼å«æ–¹å¼å·²è¢«å»¢é™¤; è«‹ç”¨ \"grep -E\" ä»£æ›¿ã€‚\n"
 
 #: src/fgrep.c:10
 msgid "PATTERN is a set of newline-separated fixed strings.\n"
-msgstr ""
+msgstr "PATTERN æ˜¯ä¸€çµ„ä»¥æ›è¡Œåˆ†éš”é–‹çš„å›ºå®šå­—ä¸²ã€‚\n"
 
 #: src/fgrep.c:12
 msgid "Invocation as 'fgrep' is deprecated; use 'grep -F' instead.\n"
-msgstr ""
+msgstr "\"fgrep\" çš„å‘¼å«æ–¹å¼å·²è¢«å»¢é™¤; è«‹ç”¨ \"grep -F\" ä»£æ›¿ã€‚\n"
 
 #: src/grep.c:32
 msgid "PATTERN is, by default, a basic regular expression (BRE).\n"
-msgstr ""
+msgstr "PATTERN åŸå‰‡ä¸Šæ˜¯ä¸€å€‹åŸºæœ¬æ­£è¦è¡¨ç¤ºå¼ (BRE)ã€‚\n"
 
 #: src/grep.c:34
 msgid ""
 "'egrep' means 'grep -E'.  'fgrep' means 'grep -F'.\n"
 "Direct invocation as either 'egrep' or 'fgrep' is deprecated.\n"
 msgstr ""
+"\"egrep\" ç­‰åŒæ–¼ \"grep -E\".  \"fgrep\" ç­‰åŒæ–¼ \"grep -F\"ã€‚\n"
+"ç›´æ¥å‘¼å« \"egrep\" æˆ– \"fgrep\" çš„åšæ³•å·²è¢«å»¢é™¤ã€‚\n"
 
 #. This is a proper name. See the gettext manual, section Names.
 #: src/main.c:58
 msgid "Mike Haertel"
-msgstr ""
+msgstr "Mike Haertel"
 
 #: src/main.c:59
 msgid "others, see <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
-msgstr ""
+msgstr "å…¶ä»–ä½œè€…ï¼Œè«‹è¦‹ <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
 
-#: src/main.c:448
+#: src/main.c:501
 msgid "invalid context length argument"
-msgstr "µL®Äªºªø«×¤Ş¼Æ"
+msgstr "ç„¡æ•ˆçš„å…§å®¹åˆ—æ•¸å€¼"
 
-#: src/main.c:503
+#: src/main.c:570
 msgid "lseek failed"
-msgstr ""
+msgstr "lseek å¤±æ•—"
 
-#: src/main.c:650
+#: src/main.c:708
 #, c-format
 msgid "input is too large to count"
-msgstr "¿é¤J¹LªøµLªk­p¼Æ"
+msgstr "è¼¸å…¥éé•·ç„¡æ³•è¨ˆæ•¸"
 
-#: src/main.c:1205
+#: src/main.c:1265
 #, c-format
 msgid "Binary file %s matches\n"
-msgstr "¤G¶i¦ì®æ¦¡ÀÉ®× %s ²Å¦X\n"
+msgstr "äºŒé€²ä½æ ¼å¼æª”æ¡ˆ %s ç¬¦åˆ\n"
 
-#: src/main.c:1256
-#, fuzzy, c-format
+#: src/main.c:1308
+#, c-format
 msgid "warning: %s: %s"
-msgstr "Äµ§i: %s: %s\n"
+msgstr "è­¦å‘Š: %s: %s"
 
-#: src/main.c:1257
+#: src/main.c:1309
 msgid "recursive directory loop"
-msgstr "»¼°jªº¥Ø¿ıµ²ºc"
+msgstr "éè¿´çš„ç›®éŒ„çµæ§‹"
 
-#: src/main.c:1400
+#: src/main.c:1457
 #, c-format
 msgid "input file %s is also the output"
-msgstr ""
+msgstr "è¼¸å…¥æª” %s ä¹Ÿæ˜¯è¼¸å‡ºå°è±¡"
 
-#: src/main.c:1458
+#: src/main.c:1515
 msgid "(standard input)"
-msgstr "(¼Ğ·Ç¿é¤J)"
+msgstr "(æ¨™æº–è¼¸å…¥)"
 
-#: src/main.c:1474 src/main.c:1481
+#: src/main.c:1531 src/main.c:1538
 #, c-format
 msgid "Usage: %s [OPTION]... PATTERN [FILE]...\n"
-msgstr "¥Îªk: %s [¿ï¶µ]... ¼ËªO [ÀÉ®×]...\n"
+msgstr "ç”¨æ³•: %s [é¸é …]... PATTERN [æª”æ¡ˆ]...\n"
 
-#: src/main.c:1476
-#, fuzzy, c-format
+#: src/main.c:1533
+#, c-format
 msgid "Try '%s --help' for more information.\n"
-msgstr "½Ğ¨Ï¥Î `%s --help' ¥H¾\Åª§ó¦hªº¸ê°T.\n"
+msgstr "è«‹ä½¿ç”¨ \"%s --help\" ä»¥é–±è®€æ›´å¤šçš„è³‡è¨Šã€‚\n"
 
-#: src/main.c:1482
+#: src/main.c:1539
 #, c-format
 msgid "Search for PATTERN in each FILE or standard input.\n"
-msgstr ""
+msgstr "å°æ¯å€‹ æª”æ¡ˆ æˆ–æ¨™æº–è¼¸å…¥æœå°‹ PATTERNã€‚\n"
 
-#: src/main.c:1485
-#, fuzzy, c-format
+#: src/main.c:1542
+#, c-format
 msgid ""
 "Example: %s -i 'hello world' menu.h main.c\n"
 "\n"
 "Regexp selection and interpretation:\n"
 msgstr ""
-"¦b¦U­ÓÀÉ®×©Î¬O¼Ğ·Ç¿é¤J¤¤§ä´M¼ËªO.\n"
-"¨Ò¦p: %s -i 'hello world' menu.h main.c\n"
+"ç¯„ä¾‹: %s -i \"hello world\" menu.h main.c\n"
 "\n"
-"¥¿³W¿ï¶µ¥H¤Î¸ÑÄ¶:\n"
+"æ­£è¦è¡¨ç¤ºå¼é¸é …åŠè§£é‡‹:\n"
 
-#: src/main.c:1490
-#, fuzzy, c-format
+#: src/main.c:1547
+#, c-format
 msgid ""
 "  -E, --extended-regexp     PATTERN is an extended regular expression (ERE)\n"
 "  -F, --fixed-strings       PATTERN is a set of newline-separated fixed "
@@ -515,13 +537,13 @@ msgid ""
 "  -G, --basic-regexp        PATTERN is a basic regular expression (BRE)\n"
 "  -P, --perl-regexp         PATTERN is a Perl regular expression\n"
 msgstr ""
-"  -E, --extended-regexp     PATTERN ¬O¤@­Ó©µ¦ùªº¥¿³Wªí¥Ü¦¡\n"
-"  -F, --fixed-strings       PATTERN ¬O¤@²Õ¥H´«¦æ¤À¹jªº¦r¦ê\n"
-"  -G, --basic-regexp        PATTERN ¬O¤@­Ó°ò¥»ªº¥¿³Wªí¥Ü¦¡\n"
-"  -P, --perl-regexp         PATTERN ¬O¤@­Ó Perl ªº¥¿³Wªí¥Ü¦¡\n"
+"  -E, --extended-regexp     PATTERN æ˜¯ä¸€å€‹å»¶ä¼¸æ­£è¦è¡¨ç¤ºå¼ (ERE)\n"
+"  -F, --fixed-strings       PATTERN æ˜¯ä¸€çµ„ä»¥æ›è¡Œåˆ†éš”é–‹çš„å›ºå®šå­—ä¸²\n"
+"  -G, --basic-regexp        PATTERN æ˜¯ä¸€å€‹åŸºæœ¬æ­£è¦è¡¨ç¤ºå¼ (BRE)\n"
+"  -P, --perl-regexp         PATTERN æ˜¯ä¸€å€‹ Perl çš„æ­£è¦è¡¨ç¤ºå¼\n"
 
-#: src/main.c:1496
-#, fuzzy, c-format
+#: src/main.c:1553
+#, c-format
 msgid ""
 "  -e, --regexp=PATTERN      use PATTERN for matching\n"
 "  -f, --file=FILE           obtain PATTERN from FILE\n"
@@ -530,15 +552,15 @@ msgid ""
 "  -x, --line-regexp         force PATTERN to match only whole lines\n"
 "  -z, --null-data           a data line ends in 0 byte, not newline\n"
 msgstr ""
-"  -e, --regexp=PATTERN      ¥H PATTERN ¬°¥¿³Wªí¥Ü¦¡\n"
-"  -f, --file=FILE           ¥H FILE ¤º®e¨ú±o¼ËªO (PATTERN)\n"
-"  -i, --ignore-case         ©¿²¤¤j¤p¼g®t²§\n"
-"  -w, --word-regexp         ¥H¼ËªO(PATTERN)§ä´M®É, ¥u°t¹ï³æ¦r¦Ó«D³æ¦r¤¤¤ù¬q\n"
-"  -x, --line-regexp         ¥H¼ËªO(PATTERN)§ä´M®É, «ü°t¹ï¤@¾ã¦æ¦Ó«D¤ù¬q\n"
-"  -z, --null-data           ¨C¦æ¸ê®Æ¥H 0 ³o­Ó¦ì¤¸µ²§ô, ¦Ó«D´«¦æ²Å¸¹\n"
+"  -e, --regexp=PATTERN      ç”¨ PATTERN æœå°‹\n"
+"  -f, --file=FILE           å¾ FILE ä¸­è®€å– PATTERN\n"
+"  -i, --ignore-case         å¿½ç•¥å¤§å°å¯«çš„å·®ç•°\n"
+"  -w, --word-regexp         é™åˆ¶ PATTERN åªç¬¦åˆæ•´å€‹å–®å­—\n"
+"  -x, --line-regexp         é™åˆ¶æ•´åˆ—ç¬¦åˆ PATTERN\n"
+"  -z, --null-data           è¨­å®šè³‡æ–™åˆ—çµå°¾ç‚ºç©ºç™½ä½å…ƒçµ„ï¼Œéæ›è¡Œç¬¦è™Ÿ\n"
 
-#: src/main.c:1503
-#, fuzzy, c-format
+#: src/main.c:1560
+#, c-format
 msgid ""
 "\n"
 "Miscellaneous:\n"
@@ -549,14 +571,14 @@ msgid ""
 "      --mmap                deprecated no-op; evokes a warning\n"
 msgstr ""
 "\n"
-"¨ä¥L°Ñ¼Æ:\n"
-"  -s, --no-messages         ¤£Åã¥Ü¿ù»~°T®§\n"
-"  -v, --invert-match        ¦C¥X¤£¬Û²Å¸ê®Æ¦æ\n"
-"  -V, --version             ¦L¥Xª©¥»¸ê°T«áµ²§ô\n"
-"      --help                Åã¥Ü¦¹¨Ï¥Î¤èªk«áµ²§ô\n"
-"      --mmap                ¦pªG¤¹³\, ¿é¤JÀÉ®×¨Ï¥Î°O¾ĞÅé¹ïÀ³ªk\n"
+"é›œé …:\n"
+"  -s, --no-messages         æŠ‘åˆ¶éŒ¯èª¤è¨Šæ¯\n"
+"  -v, --invert-match        é¸å–ä¸ç¬¦åˆçš„åˆ—\n"
+"  -V, --version             å°å‡ºç‰ˆæœ¬è³‡è¨Šç„¶å¾ŒçµæŸ\n"
+"      --help                é¡¯ç¤ºæ­¤èªªæ˜ç„¶å¾ŒçµæŸ\n"
+"      --mmap                å·²å»¢é™¤ï¼Œç„¡ä½œç”¨ï¼›æœƒèª˜ç™¼è­¦å‘Š\n"
 
-#: src/main.c:1511
+#: src/main.c:1568
 #, c-format
 msgid ""
 "\n"
@@ -570,30 +592,51 @@ msgid ""
 "      --label=LABEL         use LABEL as the standard input file name "
 "prefix\n"
 msgstr ""
+"\n"
+"è¼¸å‡ºæ§åˆ¶:\n"
+"  -m, --max-count=NUM       åœ¨é”åˆ° NUM ç¬¦åˆé …ç›®å¾Œåœæ­¢\n"
+"  -b, --byte-offset         å°å‡ºæ¯å€‹è¼¸å‡ºåˆ—çš„ä½å…ƒçµ„åç§»é‡\n"
+"  -n, --line-number         å°å‡ºæ¯å€‹è¼¸å‡ºåˆ—çš„åˆ—è™Ÿ\n"
+"      --line-buffered       è¼¸å‡ºæ¯åˆ—å¾Œæ¸…é™¤è¼¸å‡º\n"
+"  -H, --with-filename       å°å‡ºæ¯å€‹ç¬¦åˆé …ç›®çš„æª”å\n"
+"  -h, --no-filename         æŠ‘åˆ¶è¼¸å‡ºåˆ—çš„æª”åå‰ç¶´\n"
+"      --label=LABEL         ä»¥ LABEL ä½œæ¨™æº–è¼¸å…¥çš„æª”åå‰ç¶´\n"
 
-#: src/main.c:1522
+#: src/main.c:1579
 #, c-format
 msgid ""
 "  -o, --only-matching       show only the part of a line matching PATTERN\n"
 "  -q, --quiet, --silent     suppress all normal output\n"
 "      --binary-files=TYPE   assume that binary files are TYPE;\n"
-"                            TYPE is `binary', `text', or `without-match'\n"
+"                            TYPE is 'binary', 'text', or 'without-match'\n"
 "  -a, --text                equivalent to --binary-files=text\n"
 msgstr ""
+"  -o, --only-matching       åªé¡¯ç¤ºæ¯åˆ—ä¸­ç¬¦åˆ PATTERN çš„éƒ¨åˆ†\n"
+"  -q, --quiet, --silent     æŠ‘åˆ¶å…¨éƒ¨å¸¸æ…‹çš„è¼¸å‡º\n"
+"      --binary-files=TYPE   è¨­å®šäºŒé€²åˆ¶æª”æ¡ˆç‚º TYPE çš„æª”æ¡ˆ;\n"
+"                            TYPE ç‚º \"binary\"ã€\"text\" æˆ– \"without-match"
+"\"\n"
+"  -a, --text                ç­‰åŒæ–¼ --binary-files=text\n"
 
-#: src/main.c:1529
+#: src/main.c:1586
 #, c-format
 msgid ""
 "  -I                        equivalent to --binary-files=without-match\n"
 "  -d, --directories=ACTION  how to handle directories;\n"
-"                            ACTION is `read', `recurse', or `skip'\n"
+"                            ACTION is 'read', 'recurse', or 'skip'\n"
 "  -D, --devices=ACTION      how to handle devices, FIFOs and sockets;\n"
-"                            ACTION is `read' or `skip'\n"
+"                            ACTION is 'read' or 'skip'\n"
 "  -r, --recursive           like --directories=recurse\n"
 "  -R, --dereference-recursive  likewise, but follow all symlinks\n"
 msgstr ""
+"  -I                        ç­‰åŒæ–¼ --binary-files=without-matc\n"
+"  -d, --directories=ACTION  æª”æ¡ˆç›®éŒ„çš„è™•ç†æ–¹å¼;\n"
+"                            ACTION ç‚º \"read\"ã€\"recurse\" æˆ– \"skip\"\n"
+"  -D, --devices=ACTION      è£ç½®ã€FIFO å’Œé€šè¨Šç«¯çš„è™•ç†æ–¹å¼;\n"
+"                            ACTION ç‚º \"read\" æˆ– \"skip\"\n"
+"  -R, -r, --recursive       ç­‰åŒæ–¼ --directories=recurse\n"
 
-#: src/main.c:1538
+#: src/main.c:1595
 #, c-format
 msgid ""
 "      --include=FILE_PATTERN  search only files that match FILE_PATTERN\n"
@@ -603,8 +646,12 @@ msgid ""
 "      --exclude-dir=PATTERN  directories that match PATTERN will be "
 "skipped.\n"
 msgstr ""
+"      --include=FILE_PATTERN  åªæœå°‹æª”åç¬¦åˆ FILE_PATTERN çš„æª”æ¡ˆ\n"
+"      --exclude=FILE_PATTERN  è·³éåå­—ç¬¦åˆ FILE_PATTERN çš„æª”æ¡ˆå’Œæª”æ¡ˆç›®éŒ„\n"
+"      --exclude-from=FILE     è·³éæª”åç¬¦åˆ FILE ä¸­æ¨£å¼çš„æª”æ¡ˆ\n"
+"      --exclude-dir=PATTERN   è·³éåå­—ç¬¦åˆ PATTERN çš„æª”æ¡ˆç›®éŒ„ã€‚\n"
 
-#: src/main.c:1544
+#: src/main.c:1601
 #, c-format
 msgid ""
 "  -L, --files-without-match  print only names of FILEs containing no match\n"
@@ -613,8 +660,13 @@ msgid ""
 "  -T, --initial-tab         make tabs line up (if needed)\n"
 "  -Z, --null                print 0 byte after FILE name\n"
 msgstr ""
+"  -L, --files-without-match  åªå°å‡º æª”æ¡ˆ ä¸­ç¼ºä¹ç¬¦åˆé …ç›®çš„æª”å\n"
+"  -l, --files-with-matches  åªå°å‡º æª”æ¡ˆ ä¸­åŒ…å«ç¬¦åˆé …ç›®çš„æª”å\n"
+"  -c, --count               åªå°å‡ºæ¯å€‹ æª”æ¡ˆ å«æœ‰ç¬¦åˆé …ç›®çš„åˆ—æ•¸\n"
+"  -T, --initial-tab         (éœ€è¦æ™‚) å°é½Šæ¬„æ¨™ç¬¦è™Ÿ\n"
+"  -Z, --null                åœ¨ æª”æ¡ˆ åç¨±å¾Œå°å‡ºç©ºç™½ä½å…ƒçµ„\n"
 
-#: src/main.c:1550
+#: src/main.c:1607
 #, c-format
 msgid ""
 "\n"
@@ -623,38 +675,35 @@ msgid ""
 "  -A, --after-context=NUM   print NUM lines of trailing context\n"
 "  -C, --context=NUM         print NUM lines of output context\n"
 msgstr ""
+"\n"
+"å…§å®¹æ§åˆ¶:\n"
+"  -B, --before-context=NUM  å°å‡º NUM åˆ—çš„å‰æ–‡\n"
+"  -A, --after-context=NUM   å°å‡º NUM åˆ—çš„å¾Œæ–‡\n"
+"  -C, --context=NUM         å°å‡º NUM åˆ—çš„å…§å®¹\n"
 
-#: src/main.c:1557
-#, fuzzy, c-format
+#: src/main.c:1614
+#, c-format
 msgid ""
 "  -NUM                      same as --context=NUM\n"
 "      --color[=WHEN],\n"
 "      --colour[=WHEN]       use markers to highlight the matching strings;\n"
-"                            WHEN is `always', `never', or `auto'\n"
+"                            WHEN is 'always', 'never', or 'auto'\n"
 "  -U, --binary              do not strip CR characters at EOL (MSDOS/"
 "Windows)\n"
 "  -u, --unix-byte-offsets   report offsets as if CRs were not there\n"
 "                            (MSDOS/Windows)\n"
 "\n"
 msgstr ""
+"  -NUM                      ç­‰åŒæ–¼ --context=NUM\n"
+"      --color[=WHEN]ï¼Œ\n"
+"      --colour[=WHEN]       å°‡ç¬¦åˆå­—ä¸²ä¸Šè‰²;\n"
+"                            WHEN ç‚º \"always\"ã€\"never\" æˆ– \"auto\"\n"
+"  -U, --binary              ä¸è¦åˆªé™¤åˆ—å°¾çš„ CR å­—å…ƒ (MSDOS/Windows)\n"
+"  -u, --unix-byte-offsets   å ±å‘Šåç§»é‡æ™‚å¿½ç•¥ CR å­—å…ƒ\n"
+"                            (MSDOS/Windows)\n"
 "\n"
-"¤W¤U¤åª¬ºA±±¨î:\n"
-"  -B, --before-context=NUM  ¦L¥X¬Û²Å¤å¦r¦æ«e­±ªº NUM ¦æ¤å¦r\n"
-"  -A, --after-context=NUM   ¦L¥X¬Û²Å¤å¦r¦æ«á­±ªº NUM ¦æ¤å¦r\n"
-"  -C, --context=NUM         ¦L¥X¬Û²Å¤å¦r¦æ«e«áªº NUM ¦æ¤å¦r\n"
-"  -NUM                      »P --context=NUM ¬Û¦P\n"
-"      --color[=WHEN],\n"
-"      --colour[=WHEN]       ¨Ï¥Î¼Ğ°O¨Ó¬ğÅã§ä¨ìªº¦r¦ê\n"
-"                            WHEN ¥i¥H¬O `always', `never' ©Î `auto'.\n"
-"  -U, --binary              ¤£­n§R¥h¦b EOL ¤§«áªº CR ¦r¤¸ (MSDOS)\n"
-"  -u, --unix-byte-offsets   ¦b¦^³ø¦ì²¾­È®É, ©¿²¤ CR ¦r¤¸ªº¦ì²¾¼Æ¥Ø (MSDOS)\n"
-"\n"
-"`egrep' ¥Nªí `grep -E'.  `fgrep' ¥Nªí `grep -F'.\n"
-"·í¨S¦³´£¨Ñ FILE, ©Î¬O FILE ¬O -, «h±qªí·Ç¿é¤JÅª¨ú¸ê®Æ.  ¦pªG©Ò´£¨ÑªºÀÉ®×\n"
-"¤Ö©ó¨â®æ, «h³]©w¬° -h °Ñ¼Æ¦³¿é¤J. °²³]¦³§ä¨ì¸ê®Æ, µ{¦¡¦^¶Çª¬ºA¬° 0, §_«h\n"
-"¶Ç¦^ 1, ¦pªGµ{¦¡°õ¦æ¤¤¥X²{¿ù»~, «h¶Ç¦^ 2.\n"
 
-#: src/main.c:1567
+#: src/main.c:1624
 #, c-format
 msgid ""
 "When FILE is -, read standard input.  With no FILE, read . if a command-"
@@ -663,97 +712,92 @@ msgid ""
 "Exit status is 0 if any line is selected, 1 otherwise;\n"
 "if any error occurs and -q is not given, the exit status is 2.\n"
 msgstr ""
+"å¦‚æœ æª”æ¡ˆ ç‚º -ï¼Œè®€å–æ¨™æº–è¼¸å…¥ã€‚ ç•¶æ²’æœ‰æŒ‡å®š æª”æ¡ˆ æ™‚ï¼Œå¦‚æœæœ‰æ¡ç”¨ -r é¸é …\n"
+"å‰‡è®€å– . ï¼Œä¸ç„¶è®€å– - ã€‚ç•¶æŒ‡å®šçš„ æª”æ¡ˆ æ•¸ç›®å°‘æ–¼å…©å€‹æ™‚ï¼Œæ¡ç”¨ -h é¸é …ã€‚\n"
+"å¦‚æœæœ‰ç¬¦åˆçš„è¡Œåˆ—æ™‚ï¼ŒçµæŸç‹€æ…‹ç‚º 0ï¼Œå¦å‰‡ç‚º 1;\n"
+"å¦‚æœæœ‰ä»»ä½•éŒ¯èª¤ä¸”æ²’æœ‰æ¡ç”¨ -q é¸é …æ™‚ï¼ŒçµæŸç‹€æ…‹å‰‡ç‚º 2ã€‚\n"
 
-#: src/main.c:1573
+#: src/main.c:1630
 #, c-format
 msgid "GNU Grep home page: <%s>\n"
-msgstr ""
+msgstr "GNU Grep é¦–é : <%s>\n"
 
-#: src/main.c:1605
+#: src/main.c:1662
 #, c-format
 msgid "%s can only use the %s pattern syntax"
-msgstr ""
+msgstr "%s åªèƒ½ä½¿ç”¨ %s æ¨£å¼çš„èªæ³•"
 
-#: src/main.c:1608
+#: src/main.c:1665
 #, c-format
 msgid "conflicting matchers specified"
-msgstr "«ü©w¤F¤¬¬Û½Ä¬ğªº¼ËªO"
+msgstr "æŒ‡å®šäº†äº’ç›¸è¡çªçš„é…å°é¸é …"
 
-#: src/main.c:1622
-#, fuzzy, c-format
+#: src/main.c:1679
+#, c-format
 msgid "invalid matcher %s"
-msgstr "µL®Äªº³Ì¤j­p¦¸"
+msgstr "ç„¡æ•ˆçš„é…å°é¸é … %s"
 
-#: src/main.c:1870
+#: src/main.c:1927
 #, c-format
 msgid "unknown devices method"
-msgstr "¥¼ª¾ªº¸Ë¸m¤èªk"
-
-#: src/main.c:1999
-#, c-format
-msgid "invalid max count"
-msgstr "µL®Äªº³Ì¤j­p¦¸"
+msgstr "æœªçŸ¥çš„è£ç½®æ–¹æ³•"
 
 #: src/main.c:2056
 #, c-format
-msgid "unknown binary-files type"
-msgstr "¥¼ª¾ªº¤G¶i¦ìÀÉ®×«¬ºA"
+msgid "invalid max count"
+msgstr "ç„¡æ•ˆçš„æœ€å¤§è¨ˆæ¬¡"
 
-#: src/main.c:2119
+#: src/main.c:2113
+#, c-format
+msgid "unknown binary-files type"
+msgstr "æœªçŸ¥çš„äºŒé€²ä½æª”æ¡ˆé¡åˆ¥"
+
+#: src/main.c:2172
 #, c-format
 msgid "the --mmap option has been a no-op since 2010"
-msgstr ""
+msgstr "--mmap é¸é …è‡ª 2010 å¹´èµ·å·²ç¶“æ²’æœ‰ä»»ä½•æ•ˆç”¨"
 
 #: src/pcresearch.c:42
 msgid ""
 "support for the -P option is not compiled into this --disable-perl-regexp "
 "binary"
-msgstr ""
+msgstr "-P é¸é …çš„æ”¯æ´æ²’æœ‰è¢«ç·¨è­¯é€²æ­¤ --disable-perl-regexp çš„äºŒé€²ä½æª”æ¡ˆ"
 
 #: src/pcresearch.c:56
-#, fuzzy, c-format
+#, c-format
 msgid "the -P option only supports a single pattern"
-msgstr "¨Ã¤£¤ä´©°Ñ¼Æ -P"
+msgstr "-P é¸é …åªæ”¯æ´å–®ä¸€æ¨£å¼"
 
 #: src/pcresearch.c:110
 #, c-format
 msgid "internal error"
-msgstr ""
+msgstr "å…§éƒ¨éŒ¯èª¤"
 
 #: src/pcresearch.c:138
 #, c-format
 msgid "exceeded PCRE's line length limit"
-msgstr ""
+msgstr "å·²è¶…é PCRE çš„å­—æ•¸ä¸Šé™"
 
 #: src/pcresearch.c:157
 #, c-format
 msgid "exceeded PCRE's backtracking limit"
-msgstr ""
+msgstr "å·²è¶…é PCRE çš„å›æº¯ä¸Šé™"
 
 #~ msgid "unfinished repeat count"
-#~ msgstr "¥¼§¹¦¨ªº­«½Æ­p¦¸"
+#~ msgstr "æœªå®Œæˆçš„é‡è¤‡è¨ˆæ¬¡"
 
 #~ msgid "malformed repeat count"
-#~ msgstr "®æ¦¡¿ù»~ªº­«½Æ¦¸¼Æ"
+#~ msgstr "æ ¼å¼éŒ¯èª¤çš„é‡è¤‡æ¬¡æ•¸"
+
+#~ msgid "out of memory"
+#~ msgstr "è¨˜æ†¶é«”ç”¨ç›¡"
 
 #~ msgid "writing output"
-#~ msgstr "¥¿¦b¿é¥X"
+#~ msgstr "æ­£åœ¨è¼¸å‡º"
 
-#, fuzzy
-#~ msgid "%s: option '%s' is ambiguous\n"
-#~ msgstr "%s: ¿ï¶µ `-W %s' ¬O¼Ò½kªº\n"
+#~ msgid "Usage: %s [OPTION]... PATTERN [FILE] ...\n"
+#~ msgstr "ç”¨æ³•: %s [é¸é …]... æ¨£æ¿ [æª”æ¡ˆ]...\n"
 
-#, fuzzy
-#~ msgid "warning: %s"
-#~ msgstr "Äµ§i: %s: %s\n"
-
-#~ msgid "unknown directories method"
-#~ msgstr "¥¼ª¾ªº¥Ø¿ı¤èªk"
-
-#~ msgid "The -P and -z options cannot be combined"
-#~ msgstr "°Ñ¼Æ -P ¥H¤Î °Ñ¼Æ -z ¨Ã¤£¯àµ²¦X¨Ï¥Î"
-
-#, fuzzy
 #~ msgid ""
 #~ "\n"
 #~ "Output control:\n"
@@ -767,82 +811,71 @@ msgstr ""
 #~ "  -o, --only-matching       show only the part of a line matching "
 #~ "PATTERN\n"
 #~ "  -q, --quiet, --silent     suppress all normal output\n"
-#~ "      --binary-files=TYPE   assume that binary files are TYPE;\n"
-#~ "                            TYPE is `binary', `text', or `without-match'\n"
+#~ "      --binary-files=TYPE   assume that binary files are TYPE\n"
+#~ "                            TYPE is 'binary', 'text', or 'without-match'\n"
 #~ "  -a, --text                equivalent to --binary-files=text\n"
 #~ "  -I                        equivalent to --binary-files=without-match\n"
-#~ "  -d, --directories=ACTION  how to handle directories;\n"
-#~ "                            ACTION is `read', `recurse', or `skip'\n"
-#~ "  -D, --devices=ACTION      how to handle devices, FIFOs and sockets;\n"
-#~ "                            ACTION is `read' or `skip'\n"
+#~ "  -d, --directories=ACTION  how to handle directories\n"
+#~ "                            ACTION is 'read', 'recurse', or 'skip'\n"
+#~ "  -D, --devices=ACTION      how to handle devices, FIFOs and sockets\n"
+#~ "                            ACTION is 'read' or 'skip'\n"
 #~ "  -R, -r, --recursive       equivalent to --directories=recurse\n"
-#~ "      --include=FILE_PATTERN  search only files that match FILE_PATTERN\n"
-#~ "      --exclude=FILE_PATTERN  skip files and directories matching "
-#~ "FILE_PATTERN\n"
-#~ "      --exclude-from=FILE   skip files matching any file pattern from "
-#~ "FILE\n"
-#~ "      --exclude-dir=PATTERN  directories that match PATTERN will be "
+#~ "      --include=PATTERN     files that match PATTERN will be examined\n"
+#~ "      --exclude=PATTERN     files that match PATTERN will be skipped.\n"
+#~ "      --exclude-from=FILE   files that match PATTERN in FILE will be "
 #~ "skipped.\n"
-#~ "  -L, --files-without-match  print only names of FILEs containing no "
-#~ "match\n"
-#~ "  -l, --files-with-matches  print only names of FILEs containing matches\n"
-#~ "  -c, --count               print only a count of matching lines per "
+#~ "  -L, --files-without-match only print FILE names containing no match\n"
+#~ "  -l, --files-with-matches  only print FILE names containing matches\n"
+#~ "  -c, --count               only print a count of matching lines per "
 #~ "FILE\n"
-#~ "  -T, --initial-tab         make tabs line up (if needed)\n"
 #~ "  -Z, --null                print 0 byte after FILE name\n"
 #~ msgstr ""
 #~ "\n"
-#~ "¿é¥X±±¨î:\n"
-#~ "  -m, --max-count=NUM       ¦bÅã¥Ü NUM ­Óµ²ªG«á°±¤î\n"
-#~ "  -b, --byte-offset         ¥uÅã¥Ü¦X¥G±ø¥ó¸ê®Æ¥H byte ¬°°O¼Æ³æ¦ìªº¦ì¸m\n"
-#~ "  -n, --line-number         ¥uÅã¥Ü¦X¥G±ø¥óªº¦æ¦C½s¸¹\n"
-#~ "      --line-buffered       ¨C¤@¦æ¿é¥X«á³£¥ß§YÅã¥Ü\n"
-#~ "  -H, --with-filename       ¨C¦æµ²ªG³£¦L¥XÀÉ®×¦WºÙ\n"
-#~ "  -h, --no-filename         ¿é¥X®É¤£Åã¥Ü«e¸mªºÀÉ®×¦WºÙ\n"
-#~ "      --label=LABEL         ¹ï©ó¼Ğ·Ç¿é¤J, ¦bÅã¥ÜÀÉ¦W³BÅã¥Ü LABEL\n"
-#~ "  -o, --only-matching       ¥uÅã¥Ü¤@¦æ¸ê®Æ¤¤»P¼ËªO±ø¥ó¬Û²Åªº³¡¤À\n"
-#~ "  -q, --quiet, --silent     Ãö³¬©Ò¦³¤@¯ë¿é¥Xªº\n"
-#~ "      --binary-files=TYPE   ³]©w¤G¶i¦ìÀÉ®×«¬§O¬° TYPE\n"
-#~ "                            TYPE ¬O 'binary', 'text', ©Î 'without-match' "
-#~ "¤§¤@\n"
-#~ "  -a, --text                µ¥¦P©ó --binary-files=text\n"
-#~ "  -I                        µ¥¦P©ó --binary-files=without-match\n"
-#~ "  -d, --directories=ACTION  ³B²z¥Ø¿ıªº¤è¦¡\n"
-#~ "                            ACTION ¬O 'read', 'recurse', ©Î 'skip' ¤§¤@\n"
-#~ "  -D, --devices=ACTION      ³B²z¸Ë¸mÀÉ®×, FIFO ¥H¤Î socket ªº¤è¦¡\n"
-#~ "                            ACTION ¬O 'read' ©Î 'skip'¤§¤@\n"
-#~ "  -R, -r, --recursive       µ¥¦P©ó --directories=recurse\n"
-#~ "      --include=PATTERN     ÀÉ¦W»P PATTERN ¬Û²Åªº±N·|³QÀËÅç\n"
-#~ "      --exclude=PATTERN     ÀÉ¦W»P PATTERN ¬Û²Åªº±N·|³Q²¤¹L\n"
-#~ "      --exclude-from=FILE   ÀÉ¦W»P FILE ÀÉ®×¤¤ªº PATTERN ¬Û²Åªº±N·|³Q²¤"
-#~ "¹L\n"
-#~ "  -L, --files-without-match ¥u¦C¥X§ä¤£¨ì¬Û²ÅªºÀÉ®×¦WºÙ\n"
-#~ "  -l, --files-with-matches  ¥u¦C¥X¦³µo²{»P¼ËªO¬Û²ÅªºÀÉ®×\n"
-#~ "  -c, --count               ¥u°w¹ï¨CªºÀÉ®×¦C¥X¸ÓÀÉ®×¬Û²Å­Ó¼Æ\n"
-#~ "  -Z, --null                ¦bÀÉ¦W¤§«á¿é¥X¤@­Ó­È¬° 0 ªº¦ì¤¸\n"
-
-#~ msgid "%s: illegal option -- %c\n"
-#~ msgstr "%s; ¤£¾A¥Îªº¿ï¶µ -- %c\n"
-
-#~ msgid "out of memory"
-#~ msgstr "°O¾ĞÅé¥ÎºÉ"
-
-#~ msgid "Usage: %s [OPTION]... PATTERN [FILE] ...\n"
-#~ msgstr "¥Îªk: %s [¿ï¶µ]... ¼ËªO [ÀÉ®×]...\n"
+#~ "è¼¸å‡ºæ§åˆ¶:\n"
+#~ "  -m, --max-count=NUM       åœ¨é¡¯ç¤º NUM å€‹çµæœå¾Œåœæ­¢\n"
+#~ "  -b, --byte-offset         åªé¡¯ç¤ºåˆä¹æ¢ä»¶è³‡æ–™ä»¥ byte ç‚ºè¨˜æ•¸å–®ä½çš„ä½ç½®\n"
+#~ "  -n, --line-number         åªé¡¯ç¤ºåˆä¹æ¢ä»¶çš„è¡Œåˆ—ç·¨è™Ÿ\n"
+#~ "      --line-buffered       æ¯ä¸€è¡Œè¼¸å‡ºå¾Œéƒ½ç«‹å³é¡¯ç¤º\n"
+#~ "  -H, --with-filename       æ¯è¡Œçµæœéƒ½å°å‡ºæª”æ¡ˆåç¨±\n"
+#~ "  -h, --no-filename         è¼¸å‡ºæ™‚ä¸é¡¯ç¤ºå‰ç½®çš„æª”æ¡ˆåç¨±\n"
+#~ "      --label=LABEL         å°æ–¼æ¨™æº–è¼¸å…¥, åœ¨é¡¯ç¤ºæª”åè™•é¡¯ç¤º LABEL\n"
+#~ "  -o, --only-matching       åªé¡¯ç¤ºä¸€è¡Œè³‡æ–™ä¸­èˆ‡æ¨£æ¿æ¢ä»¶ç›¸ç¬¦çš„éƒ¨åˆ†\n"
+#~ "  -q, --quiet, --silent     é—œé–‰æ‰€æœ‰ä¸€èˆ¬è¼¸å‡ºçš„\n"
+#~ "      --binary-files=TYPE   è¨­å®šäºŒé€²ä½æª”æ¡ˆå‹åˆ¥ç‚º TYPE\n"
+#~ "                            TYPE æ˜¯ 'binary', 'text', æˆ– 'without-match' "
+#~ "ä¹‹ä¸€\n"
+#~ "  -a, --text                ç­‰åŒæ–¼ --binary-files=text\n"
+#~ "  -I                        ç­‰åŒæ–¼ --binary-files=without-match\n"
+#~ "  -d, --directories=ACTION  è™•ç†ç›®éŒ„çš„æ–¹å¼\n"
+#~ "                            ACTION æ˜¯ 'read', 'recurse', æˆ– 'skip' ä¹‹ä¸€\n"
+#~ "  -D, --devices=ACTION      è™•ç†è£ç½®æª”æ¡ˆ, FIFO ä»¥åŠ socket çš„æ–¹å¼\n"
+#~ "                            ACTION æ˜¯ 'read' æˆ– 'skip'ä¹‹ä¸€\n"
+#~ "  -R, -r, --recursive       ç­‰åŒæ–¼ --directories=recurse\n"
+#~ "      --include=PATTERN     æª”åèˆ‡ PATTERN ç›¸ç¬¦çš„å°‡æœƒè¢«æª¢é©—\n"
+#~ "      --exclude=PATTERN     æª”åèˆ‡ PATTERN ç›¸ç¬¦çš„å°‡æœƒè¢«ç•¥é\n"
+#~ "      --exclude-from=FILE   æª”åèˆ‡ FILE æª”æ¡ˆä¸­çš„ PATTERN ç›¸ç¬¦çš„å°‡æœƒè¢«ç•¥"
+#~ "é\n"
+#~ "  -L, --files-without-match åªåˆ—å‡ºæ‰¾ä¸åˆ°ç›¸ç¬¦çš„æª”æ¡ˆåç¨±\n"
+#~ "  -l, --files-with-matches  åªåˆ—å‡ºæœ‰ç™¼ç¾èˆ‡æ¨£æ¿ç›¸ç¬¦çš„æª”æ¡ˆ\n"
+#~ "  -c, --count               åªé‡å°æ¯çš„æª”æ¡ˆåˆ—å‡ºè©²æª”æ¡ˆç›¸ç¬¦å€‹æ•¸\n"
+#~ "  -Z, --null                åœ¨æª”åä¹‹å¾Œè¼¸å‡ºä¸€å€‹å€¼ç‚º 0 çš„ä½å…ƒ\n"
 
 #~ msgid ""
 #~ "\n"
 #~ "Report bugs to <bug-gnu-utils@gnu.org>.\n"
 #~ msgstr ""
 #~ "\n"
-#~ "½Ğ±Nµo²{ªº¿ù»~¡A¥H¹q¤l¶l¥ó±H¨ì <bug-gnu-utils@gnu.org>\n"
+#~ "è«‹å°‡ç™¼ç¾çš„éŒ¯èª¤ï¼Œä»¥é›»å­éƒµä»¶å¯„åˆ° <bug-gnu-utils@gnu.org>\n"
+
+#~ msgid "unknown directories method"
+#~ msgstr "æœªçŸ¥çš„ç›®éŒ„æ–¹æ³•"
 
 #~ msgid "%s (GNU grep) %s\n"
 #~ msgstr "%s (GNU grep) %s\n"
 
 #~ msgid ""
 #~ "Copyright 1988, 1992-1999, 2000, 2001 Free Software Foundation, Inc.\n"
-#~ msgstr "ª©Åv©Ò¦³ 1988, 1992-1999, 2000, 2001 ¦Û¥Ñ³nÅé°òª÷·|.\n"
+#~ msgstr "ç‰ˆæ¬Šæ‰€æœ‰ 1988, 1992-1999, 2000, 2001 è‡ªç”±è»Ÿé«”åŸºé‡‘æœƒ.\n"
 
 #~ msgid ""
 #~ "This is free software; see the source for copying conditions. There is "
@@ -850,5 +883,11 @@ msgstr ""
 #~ "warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR "
 #~ "PURPOSE.\n"
 #~ msgstr ""
-#~ "³o­Óµ{¦¡¬O¦Û¥Ñ³nÅé; ½Ğ°Ñ¾\¨äª©Åv±ø´Ú. ¦¹³nÅé¨S¦³\n"
-#~ "¨S¦³¥ô¦ó«Oµı; ¤]¨S¦³¥ô¦ó«Oµı¥¦¨Ï¥Î©ó¬Y¤@¯S©w¥Øªº.\n"
+#~ "é€™å€‹ç¨‹å¼æ˜¯è‡ªç”±è»Ÿé«”; è«‹åƒé–±å…¶ç‰ˆæ¬Šæ¢æ¬¾. æ­¤è»Ÿé«”æ²’æœ‰\n"
+#~ "æ²’æœ‰ä»»ä½•ä¿è¨¼; ä¹Ÿæ²’æœ‰ä»»ä½•ä¿è¨¼å®ƒä½¿ç”¨æ–¼æŸä¸€ç‰¹å®šç›®çš„.\n"
+
+#~ msgid "The -P and -z options cannot be combined"
+#~ msgstr "åƒæ•¸ -P ä»¥åŠ åƒæ•¸ -z ä¸¦ä¸èƒ½çµåˆä½¿ç”¨"
+
+#~ msgid "%s: illegal option -- %c\n"
+#~ msgstr "%s; ä¸é©ç”¨çš„é¸é … -- %c\n"

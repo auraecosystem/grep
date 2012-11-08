@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grep 2.7\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2012-04-23 16:08+0200\n"
+"POT-Creation-Date: 2012-08-20 08:12+0200\n"
 "PO-Revision-Date: 2010-10-19 01:23+0200\n"
 "Last-Translator: Emese Kovacs <emese@instantweb.hu>\n"
 "Language-Team: Hungarian <translation-team-hu@lists.sourceforge.net>\n"
@@ -34,7 +34,7 @@ msgstr "a(z) „%s” argumentum nem egyértelmű a következőhöz: „%s”"
 msgid "Valid arguments are:"
 msgstr "Az érvényes argumentumok a következők:"
 
-#: lib/closeout.c:112 src/main.c:894
+#: lib/closeout.c:112 src/main.c:952
 #, c-format
 msgid "write error"
 msgstr "íráshiba"
@@ -183,7 +183,7 @@ msgstr "Pár nélküli ( vagy \\("
 msgid "Unmatched \\{"
 msgstr "Pár nélküli \\{"
 
-#: lib/regcomp.c:160 src/dfa.c:1373
+#: lib/regcomp.c:160 src/dfa.c:1371
 msgid "Invalid content of \\{\\}"
 msgstr "A \\{\\} tartalma érvénytelen"
 
@@ -203,7 +203,7 @@ msgstr "Érvénytelen megelőző szabályos kifejezés"
 msgid "Premature end of regular expression"
 msgstr "A szabályos kifejezés túl korán véget ért"
 
-#: lib/regcomp.c:175 src/dfa.c:1376
+#: lib/regcomp.c:175 src/dfa.c:1374
 msgid "Regular expression too big"
 msgstr "A szabályos kifejezés túl nagy"
 
@@ -360,7 +360,7 @@ msgstr ""
 #. for this package.  Please add _another line_ saying
 #. "Report translation bugs to <...>\n" with the address for translation
 #. bugs (typically your translation team's web or email address).
-#: lib/version-etc.c:245 src/main.c:1572
+#: lib/version-etc.c:245 src/main.c:1629
 #, c-format
 msgid ""
 "\n"
@@ -384,7 +384,7 @@ msgstr "A(z) %s honlapja: <%s>\n"
 msgid "%s home page: <http://www.gnu.org/software/%s/>\n"
 msgstr "A %s honlapja: <http://www.gnu.org/software/%s/>\n"
 
-#: lib/version-etc.c:256 src/main.c:1575
+#: lib/version-etc.c:256 src/main.c:1632
 msgid "General help using GNU software: <http://www.gnu.org/gethelp/>\n"
 msgstr ""
 "Általános segítség a GNU szoftverek használatához: <http://www.gnu.org/"
@@ -405,33 +405,33 @@ msgstr "érvénytelen utótag a(z) %s%s argumentumban: „%s”"
 msgid "%s%s argument '%s' too large"
 msgstr "%s%s: a(z) „%s” argumentum túl nagy"
 
-#: src/dfa.c:953 src/dfa.c:956 src/dfa.c:976 src/dfa.c:986 src/dfa.c:998
-#: src/dfa.c:1049 src/dfa.c:1058 src/dfa.c:1061 src/dfa.c:1066 src/dfa.c:1079
-#: src/dfa.c:1137
+#: src/dfa.c:952 src/dfa.c:955 src/dfa.c:975 src/dfa.c:985 src/dfa.c:997
+#: src/dfa.c:1048 src/dfa.c:1057 src/dfa.c:1060 src/dfa.c:1065 src/dfa.c:1078
+#: src/dfa.c:1135
 msgid "unbalanced ["
 msgstr "kiegyensúlyozatlan ["
 
-#: src/dfa.c:1007
+#: src/dfa.c:1006
 msgid "invalid character class"
 msgstr "érvénytelen karakterosztály"
 
-#: src/dfa.c:1174
+#: src/dfa.c:1172
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr "a karakterosztály szintaxisa [[:space:]], nem [:space:]"
 
-#: src/dfa.c:1226
+#: src/dfa.c:1224
 msgid "unfinished \\ escape"
 msgstr "befejezetlen \\ escape"
 
-#: src/dfa.c:1761
+#: src/dfa.c:1759
 msgid "unbalanced ("
 msgstr "kiegyensúlyozatlan ("
 
-#: src/dfa.c:1891
+#: src/dfa.c:1886
 msgid "no syntax specified"
 msgstr "nincs szintaxis megadva"
 
-#: src/dfa.c:1899
+#: src/dfa.c:1894
 msgid "unbalanced )"
 msgstr "kiegyensúlyozatlan )"
 
@@ -477,58 +477,58 @@ msgstr "Mike Haertel"
 msgid "others, see <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
 msgstr "másol, lásd: <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
 
-#: src/main.c:448
+#: src/main.c:501
 msgid "invalid context length argument"
 msgstr "érvénytelen szövegkörnyezethossz argumentum"
 
-#: src/main.c:503
+#: src/main.c:570
 msgid "lseek failed"
 msgstr "az lseek meghiúsult"
 
-#: src/main.c:650
+#: src/main.c:708
 #, c-format
 msgid "input is too large to count"
 msgstr "a bemenet túl nagy a megszámláláshoz"
 
-#: src/main.c:1205
+#: src/main.c:1265
 #, c-format
 msgid "Binary file %s matches\n"
 msgstr "%s bináris fájl illeszkedik\n"
 
-#: src/main.c:1256
+#: src/main.c:1308
 #, c-format
 msgid "warning: %s: %s"
 msgstr "figyelmeztetés: %s: %s"
 
-#: src/main.c:1257
+#: src/main.c:1309
 msgid "recursive directory loop"
 msgstr "rekurzív könyvtárhurok"
 
-#: src/main.c:1400
+#: src/main.c:1457
 #, c-format
 msgid "input file %s is also the output"
 msgstr ""
 
-#: src/main.c:1458
+#: src/main.c:1515
 msgid "(standard input)"
 msgstr "(szabványos bemenet)"
 
-#: src/main.c:1474 src/main.c:1481
+#: src/main.c:1531 src/main.c:1538
 #, c-format
 msgid "Usage: %s [OPTION]... PATTERN [FILE]...\n"
 msgstr "Használat: %s [KAPCSOLÓ]… MINTA [FÁJL]…\n"
 
-#: src/main.c:1476
+#: src/main.c:1533
 #, fuzzy, c-format
 msgid "Try '%s --help' for more information.\n"
 msgstr "További információkért adja ki a(z) „%s --help” parancsot.\n"
 
-#: src/main.c:1482
+#: src/main.c:1539
 #, c-format
 msgid "Search for PATTERN in each FILE or standard input.\n"
 msgstr "A MINTA keresése minden FÁJLBAN vagy a szabványos bemeneten.\n"
 
-#: src/main.c:1485
+#: src/main.c:1542
 #, c-format
 msgid ""
 "Example: %s -i 'hello world' menu.h main.c\n"
@@ -539,7 +539,7 @@ msgstr ""
 "\n"
 "Reguláris kifejezés kiválasztása és értelmezése:\n"
 
-#: src/main.c:1490
+#: src/main.c:1547
 #, c-format
 msgid ""
 "  -E, --extended-regexp     PATTERN is an extended regular expression (ERE)\n"
@@ -554,7 +554,7 @@ msgstr ""
 "  -G, --basic-regexp        a MINTA alapvető reguláris kifejezés (BRE)\n"
 "  -P, --perl-regexp         a MINTA Perl reguláris kifejezés\n"
 
-#: src/main.c:1496
+#: src/main.c:1553
 #, c-format
 msgid ""
 "  -e, --regexp=PATTERN      use PATTERN for matching\n"
@@ -571,7 +571,7 @@ msgstr ""
 "  -x, --line-regexp         a MINTA csak egész sorra illeszkedik\n"
 "  -z, --null-data           az adat sorai 0 bájtra végződnek, nem újsorra\n"
 
-#: src/main.c:1503
+#: src/main.c:1560
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -591,7 +591,7 @@ msgstr ""
 "      --mmap                a visszamenőleges kompatibilitás érdekében "
 "mellőzve\n"
 
-#: src/main.c:1511
+#: src/main.c:1568
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -618,13 +618,13 @@ msgstr ""
 "bemenet\n"
 "                              használatakor\n"
 
-#: src/main.c:1522
-#, c-format
+#: src/main.c:1579
+#, fuzzy, c-format
 msgid ""
 "  -o, --only-matching       show only the part of a line matching PATTERN\n"
 "  -q, --quiet, --silent     suppress all normal output\n"
 "      --binary-files=TYPE   assume that binary files are TYPE;\n"
-"                            TYPE is `binary', `text', or `without-match'\n"
+"                            TYPE is 'binary', 'text', or 'without-match'\n"
 "  -a, --text                equivalent to --binary-files=text\n"
 msgstr ""
 "  -o, --only-matching       a sornak csak a MINTÁRA illeszkedő részét írja "
@@ -636,14 +636,14 @@ msgstr ""
 "egyike\n"
 "  -a, --text                ugyanaz, mint a --binary-files=text\n"
 
-#: src/main.c:1529
+#: src/main.c:1586
 #, fuzzy, c-format
 msgid ""
 "  -I                        equivalent to --binary-files=without-match\n"
 "  -d, --directories=ACTION  how to handle directories;\n"
-"                            ACTION is `read', `recurse', or `skip'\n"
+"                            ACTION is 'read', 'recurse', or 'skip'\n"
 "  -D, --devices=ACTION      how to handle devices, FIFOs and sockets;\n"
-"                            ACTION is `read' or `skip'\n"
+"                            ACTION is 'read' or 'skip'\n"
 "  -r, --recursive           like --directories=recurse\n"
 "  -R, --dereference-recursive  likewise, but follow all symlinks\n"
 msgstr ""
@@ -655,7 +655,7 @@ msgstr ""
 "                              egyike\n"
 "  -R, -r, --recursive       ugyanaz, mint a --directories=recurse\n"
 
-#: src/main.c:1538
+#: src/main.c:1595
 #, c-format
 msgid ""
 "      --include=FILE_PATTERN  search only files that match FILE_PATTERN\n"
@@ -672,7 +672,7 @@ msgstr ""
 "                              fájlok kihagyása.\n"
 "      --exclude-dir=MINTA   a MINTÁRA illeszkedő könyvtárak kihagyása\n"
 
-#: src/main.c:1544
+#: src/main.c:1601
 #, c-format
 msgid ""
 "  -L, --files-without-match  print only names of FILEs containing no match\n"
@@ -689,7 +689,7 @@ msgstr ""
 "  -T, --initial-tab         sorok feltöltése tabokkal (ha szükséges)\n"
 "  -Z, --null                0 bájt írása a FÁJLNÉV után\n"
 
-#: src/main.c:1550
+#: src/main.c:1607
 #, c-format
 msgid ""
 "\n"
@@ -706,13 +706,13 @@ msgstr ""
 "környezetből\n"
 "  -C, -- context=SZÁM       SZÁM darab sor kiírása a környezetből\n"
 
-#: src/main.c:1557
+#: src/main.c:1614
 #, fuzzy, c-format
 msgid ""
 "  -NUM                      same as --context=NUM\n"
 "      --color[=WHEN],\n"
 "      --colour[=WHEN]       use markers to highlight the matching strings;\n"
-"                            WHEN is `always', `never', or `auto'\n"
+"                            WHEN is 'always', 'never', or 'auto'\n"
 "  -U, --binary              do not strip CR characters at EOL (MSDOS/"
 "Windows)\n"
 "  -u, --unix-byte-offsets   report offsets as if CRs were not there\n"
@@ -728,7 +728,7 @@ msgstr ""
 "  -u, --unix-byte-offsets   eltolások kiírása, mintha nem lenne CR (MSDOS)\n"
 "\n"
 
-#: src/main.c:1567
+#: src/main.c:1624
 #, fuzzy, c-format
 msgid ""
 "When FILE is -, read standard input.  With no FILE, read . if a command-"
@@ -744,42 +744,42 @@ msgstr ""
 "érték: 0, ha van találat, egyébként 1, ha hiba történt és a -q nincs "
 "megadva: 2\n"
 
-#: src/main.c:1573
+#: src/main.c:1630
 #, c-format
 msgid "GNU Grep home page: <%s>\n"
 msgstr "A GNU Grep honlapja: <%s>\n"
 
-#: src/main.c:1605
+#: src/main.c:1662
 #, c-format
 msgid "%s can only use the %s pattern syntax"
 msgstr "a(z) %s csak a(z) %s mintaszintaxist tudja használni"
 
-#: src/main.c:1608
+#: src/main.c:1665
 #, c-format
 msgid "conflicting matchers specified"
 msgstr "ütköző illesztők lettek megadva"
 
-#: src/main.c:1622
+#: src/main.c:1679
 #, c-format
 msgid "invalid matcher %s"
 msgstr "érvénytelen illesztő: %s"
 
-#: src/main.c:1870
+#: src/main.c:1927
 #, c-format
 msgid "unknown devices method"
 msgstr "ismeretlen eszközmódszer"
 
-#: src/main.c:1999
+#: src/main.c:2056
 #, c-format
 msgid "invalid max count"
 msgstr "érvénytelen maximális szám"
 
-#: src/main.c:2056
+#: src/main.c:2113
 #, c-format
 msgid "unknown binary-files type"
 msgstr "ismeretlen bináris fájl típus"
 
-#: src/main.c:2119
+#: src/main.c:2172
 #, c-format
 msgid "the --mmap option has been a no-op since 2010"
 msgstr ""

@@ -32,12 +32,12 @@ XFAIL_TESTS = \
 if USE_INCLUDED_REGEX
 XFAIL_TESTS += equiv-classes
 endif
-XFAIL_TESTS += turkish-I
 
 TESTS =						\
   backref					\
   backref-multibyte-slow			\
   backref-word					\
+  big-hole					\
   big-match					\
   bogus-wctob					\
   bre						\
@@ -47,6 +47,7 @@ TESTS =						\
   case-fold-char-range				\
   case-fold-char-type				\
   char-class-multibyte				\
+  dfa-coverage					\
   dfa-heap-overrun				\
   dfaexec-multibyte				\
   empty						\
@@ -68,6 +69,7 @@ TESTS =						\
   inconsistent-range                            \
   khadafy					\
   max-count-vs-context				\
+  empty-line-mb					\
   unibyte-bracket-expr				\
   high-bit-range				\
   options					\
@@ -85,6 +87,7 @@ TESTS =						\
   status					\
   symlink					\
   turkish-I					\
+  turkish-I-without-dot				\
   warn-char-classes				\
   word-delim-multibyte				\
   word-multi-file				\

@@ -7,10 +7,10 @@
 # Yuri Chornoivan <yurchor@ukr.net>, 2011, 2012.
 msgid ""
 msgstr ""
-"Project-Id-Version: grep-2.11.11-pre1\n"
+"Project-Id-Version: grep-2.13.16-pre1\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2012-04-23 16:08+0200\n"
-"PO-Revision-Date: 2012-04-14 22:44+0300\n"
+"POT-Creation-Date: 2012-08-20 08:12+0200\n"
+"PO-Revision-Date: 2012-08-17 14:45+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <translation-team-uk@lists.sourceforge.net>\n"
 "Language: uk\n"
@@ -34,7 +34,7 @@ msgstr "неоднозначний аргумент, %s, %s"
 msgid "Valid arguments are:"
 msgstr "Список коректних аргументів:"
 
-#: lib/closeout.c:112 src/main.c:894
+#: lib/closeout.c:112 src/main.c:952
 #, c-format
 msgid "write error"
 msgstr "помилка запису"
@@ -183,7 +183,7 @@ msgstr "Неврівноважена послідовність ( або \\("
 msgid "Unmatched \\{"
 msgstr "Неврівноважена послідовність \\{"
 
-#: lib/regcomp.c:160 src/dfa.c:1373
+#: lib/regcomp.c:160 src/dfa.c:1371
 msgid "Invalid content of \\{\\}"
 msgstr "Некоректний вміст \\{\\}"
 
@@ -203,7 +203,7 @@ msgstr "Помилка у попередньому формальному вир
 msgid "Premature end of regular expression"
 msgstr "Неочікуване завершення формального виразу"
 
-#: lib/regcomp.c:175 src/dfa.c:1376
+#: lib/regcomp.c:175 src/dfa.c:1374
 msgid "Regular expression too big"
 msgstr "Занадто об'ємний формальний вираз"
 
@@ -361,7 +361,7 @@ msgstr ""
 #. for this package.  Please add _another line_ saying
 #. "Report translation bugs to <...>\n" with the address for translation
 #. bugs (typically your translation team's web or email address).
-#: lib/version-etc.c:245 src/main.c:1572
+#: lib/version-etc.c:245 src/main.c:1629
 #, c-format
 msgid ""
 "\n"
@@ -385,7 +385,7 @@ msgstr "Домашня сторінка %s: <%s>\n"
 msgid "%s home page: <http://www.gnu.org/software/%s/>\n"
 msgstr "Домашня сторінка %s: <http://www.gnu.org/software/%s/>\n"
 
-#: lib/version-etc.c:256 src/main.c:1575
+#: lib/version-etc.c:256 src/main.c:1632
 msgid "General help using GNU software: <http://www.gnu.org/gethelp/>\n"
 msgstr ""
 "Загальна довідкова інформація щодо використання програмного забезпечення "
@@ -406,35 +406,35 @@ msgstr "некоректний суфікс у аргументі %s%s «%s»"
 msgid "%s%s argument '%s' too large"
 msgstr "%s%s, аргумент «%s» є занадто об'ємним"
 
-#: src/dfa.c:953 src/dfa.c:956 src/dfa.c:976 src/dfa.c:986 src/dfa.c:998
-#: src/dfa.c:1049 src/dfa.c:1058 src/dfa.c:1061 src/dfa.c:1066 src/dfa.c:1079
-#: src/dfa.c:1137
+#: src/dfa.c:952 src/dfa.c:955 src/dfa.c:975 src/dfa.c:985 src/dfa.c:997
+#: src/dfa.c:1048 src/dfa.c:1057 src/dfa.c:1060 src/dfa.c:1065 src/dfa.c:1078
+#: src/dfa.c:1135
 msgid "unbalanced ["
 msgstr "неврівноважена дужка ["
 
-#: src/dfa.c:1007
+#: src/dfa.c:1006
 msgid "invalid character class"
 msgstr "некоректний клас символів"
 
-#: src/dfa.c:1174
+#: src/dfa.c:1172
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr ""
 "синтаксичну конструкцію класу символів слід визначати так: [[:space:]], а не "
 "так: [:space:]"
 
-#: src/dfa.c:1226
+#: src/dfa.c:1224
 msgid "unfinished \\ escape"
 msgstr "незавершена \\-послідовність"
 
-#: src/dfa.c:1761
+#: src/dfa.c:1759
 msgid "unbalanced ("
 msgstr "неврівноважена дужка ("
 
-#: src/dfa.c:1891
+#: src/dfa.c:1886
 msgid "no syntax specified"
 msgstr "не вказано синтаксис"
 
-#: src/dfa.c:1899
+#: src/dfa.c:1894
 msgid "unbalanced )"
 msgstr "неврівноважена дужка )"
 
@@ -480,59 +480,59 @@ msgstr "Mike Haertel"
 msgid "others, see <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
 msgstr "інші, див. <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
 
-#: src/main.c:448
+#: src/main.c:501
 msgid "invalid context length argument"
 msgstr "помилковий аргумент довжини контексту"
 
-#: src/main.c:503
+#: src/main.c:570
 msgid "lseek failed"
 msgstr "помилка lseek"
 
-#: src/main.c:650
+#: src/main.c:708
 #, c-format
 msgid "input is too large to count"
 msgstr "вхідні дані занадто довгі для обліку"
 
-#: src/main.c:1205
+#: src/main.c:1265
 #, c-format
 msgid "Binary file %s matches\n"
 msgstr "Двійковий файл %s містить збіжність\n"
 
-#: src/main.c:1256
+#: src/main.c:1308
 #, c-format
 msgid "warning: %s: %s"
 msgstr "попередження: %s: %s"
 
-#: src/main.c:1257
+#: src/main.c:1309
 msgid "recursive directory loop"
 msgstr "зациклення рекурсивного проходу каталогів"
 
-#: src/main.c:1400
+#: src/main.c:1457
 #, c-format
 msgid "input file %s is also the output"
 msgstr "файл вхідних даних %s є також файлом вихідних даних"
 
-#: src/main.c:1458
+#: src/main.c:1515
 msgid "(standard input)"
 msgstr "(стандартне джерело вхідних даних)"
 
-#: src/main.c:1474 src/main.c:1481
+#: src/main.c:1531 src/main.c:1538
 #, c-format
 msgid "Usage: %s [OPTION]... PATTERN [FILE]...\n"
 msgstr "Використання: %s [ПАРАМЕТР]... ШАБЛОН [ФАЙЛ]...\n"
 
-#: src/main.c:1476
+#: src/main.c:1533
 #, c-format
 msgid "Try '%s --help' for more information.\n"
 msgstr "Віддайте команду «%s --help», щоб дізнатися більше.\n"
 
-#: src/main.c:1482
+#: src/main.c:1539
 #, c-format
 msgid "Search for PATTERN in each FILE or standard input.\n"
 msgstr ""
 "Шукати ШАБЛОН у кожному ФАЙЛі або стандартному джерелі вхідних даних.\n"
 
-#: src/main.c:1485
+#: src/main.c:1542
 #, c-format
 msgid ""
 "Example: %s -i 'hello world' menu.h main.c\n"
@@ -543,7 +543,7 @@ msgstr ""
 "\n"
 "Вибір за формальними виразами і інтерпретація:\n"
 
-#: src/main.c:1490
+#: src/main.c:1547
 #, c-format
 msgid ""
 "  -E, --extended-regexp     PATTERN is an extended regular expression (ERE)\n"
@@ -557,7 +557,7 @@ msgstr ""
 "  -G, --basic-regexp        ШАБЛОН є звичайним формальним виразом (BRE)\n"
 "  -P, --perl-regexp         ШАБЛОН є формальним виразом Perl\n"
 
-#: src/main.c:1496
+#: src/main.c:1553
 #, c-format
 msgid ""
 "  -e, --regexp=PATTERN      use PATTERN for matching\n"
@@ -579,7 +579,7 @@ msgstr ""
 "символом\n"
 "                            кінця рядка (\\n)\n"
 
-#: src/main.c:1503
+#: src/main.c:1560
 #, c-format
 msgid ""
 "\n"
@@ -600,7 +600,7 @@ msgstr ""
 "відповідне\n"
 "                                   повідомлення\n"
 
-#: src/main.c:1511
+#: src/main.c:1568
 #, c-format
 msgid ""
 "\n"
@@ -628,13 +628,13 @@ msgstr ""
 "      --label=МІТКА         показувати МІТКУ замість назви файла для "
 "стандартного джерела вхідних даних\n"
 
-#: src/main.c:1522
+#: src/main.c:1579
 #, c-format
 msgid ""
 "  -o, --only-matching       show only the part of a line matching PATTERN\n"
 "  -q, --quiet, --silent     suppress all normal output\n"
 "      --binary-files=TYPE   assume that binary files are TYPE;\n"
-"                            TYPE is `binary', `text', or `without-match'\n"
+"                            TYPE is 'binary', 'text', or 'without-match'\n"
 "  -a, --text                equivalent to --binary-files=text\n"
 msgstr ""
 "  -o, --only-matching       показувати лише частину рядка, яка збігається з "
@@ -646,14 +646,14 @@ msgstr ""
 "match'\n"
 "  -a, --text                те саме, що і --binary-files=text\n"
 
-#: src/main.c:1529
+#: src/main.c:1586
 #, c-format
 msgid ""
 "  -I                        equivalent to --binary-files=without-match\n"
 "  -d, --directories=ACTION  how to handle directories;\n"
-"                            ACTION is `read', `recurse', or `skip'\n"
+"                            ACTION is 'read', 'recurse', or 'skip'\n"
 "  -D, --devices=ACTION      how to handle devices, FIFOs and sockets;\n"
-"                            ACTION is `read' or `skip'\n"
+"                            ACTION is 'read' or 'skip'\n"
 "  -r, --recursive           like --directories=recurse\n"
 "  -R, --dereference-recursive  likewise, but follow all symlinks\n"
 msgstr ""
@@ -670,7 +670,7 @@ msgstr ""
 "символічними\n"
 "                            посиланнями\n"
 
-#: src/main.c:1538
+#: src/main.c:1595
 #, c-format
 msgid ""
 "      --include=FILE_PATTERN  search only files that match FILE_PATTERN\n"
@@ -689,7 +689,7 @@ msgstr ""
 "      --exclude-dir=ШАБЛОН    пропустити каталоги, назви яких відповідають "
 "ШАБЛОНу.\n"
 
-#: src/main.c:1544
+#: src/main.c:1601
 #, c-format
 msgid ""
 "  -L, --files-without-match  print only names of FILEs containing no match\n"
@@ -708,7 +708,7 @@ msgstr ""
 "потрібно)\n"
 "  -Z, --null                вивести байти 0 після назви ФАЙЛа\n"
 
-#: src/main.c:1550
+#: src/main.c:1607
 #, c-format
 msgid ""
 "\n"
@@ -726,13 +726,13 @@ msgstr ""
 "  -C, --context=ЧИСЛО        показати ЧИСЛО рядків контексту виведених "
 "даних\n"
 
-#: src/main.c:1557
+#: src/main.c:1614
 #, c-format
 msgid ""
 "  -NUM                      same as --context=NUM\n"
 "      --color[=WHEN],\n"
 "      --colour[=WHEN]       use markers to highlight the matching strings;\n"
-"                            WHEN is `always', `never', or `auto'\n"
+"                            WHEN is 'always', 'never', or 'auto'\n"
 "  -U, --binary              do not strip CR characters at EOL (MSDOS/"
 "Windows)\n"
 "  -u, --unix-byte-offsets   report offsets as if CRs were not there\n"
@@ -751,7 +751,7 @@ msgstr ""
 "                             CR (MSDOS/Windows)\n"
 "\n"
 
-#: src/main.c:1567
+#: src/main.c:1624
 #, c-format
 msgid ""
 "When FILE is -, read standard input.  With no FILE, read . if a command-"
@@ -766,42 +766,42 @@ msgstr ""
 "Код завершення 0 — якщо було виявлено відповідники, 1 — коли їх нема,\n"
 "2 — якщо сталася помилка і не було використано параметр -q.\n"
 
-#: src/main.c:1573
+#: src/main.c:1630
 #, c-format
 msgid "GNU Grep home page: <%s>\n"
 msgstr "Домашня сторінка GNU Grep: <%s>\n"
 
-#: src/main.c:1605
+#: src/main.c:1662
 #, c-format
 msgid "%s can only use the %s pattern syntax"
 msgstr "У %s можна використовувати лише синтаксис шаблонів %s"
 
-#: src/main.c:1608
+#: src/main.c:1665
 #, c-format
 msgid "conflicting matchers specified"
 msgstr "задані умови відповідності є суперечливими"
 
-#: src/main.c:1622
+#: src/main.c:1679
 #, c-format
 msgid "invalid matcher %s"
 msgstr "некоректний вираз порівняння %s"
 
-#: src/main.c:1870
+#: src/main.c:1927
 #, c-format
 msgid "unknown devices method"
 msgstr "невідомий спосіб обробки для пристроїв"
 
-#: src/main.c:1999
+#: src/main.c:2056
 #, c-format
 msgid "invalid max count"
 msgstr "помилкова максимальна кількість"
 
-#: src/main.c:2056
+#: src/main.c:2113
 #, c-format
 msgid "unknown binary-files type"
 msgstr "невідомий тип двійкових файлів"
 
-#: src/main.c:2119
+#: src/main.c:2172
 #, c-format
 msgid "the --mmap option has been a no-op since 2010"
 msgstr "параметр --mmap не обробляється з 2010 року"

@@ -25,7 +25,7 @@ grep
 
 `grep' prints lines that contain a match for a pattern.
 
-   This manual is for version 2.12 of GNU Grep.
+   This manual is for version 2.14 of GNU Grep.
 
    This manual is for `grep', a pattern matching engine.
 
@@ -419,11 +419,11 @@ File: grep.info,  Node: File and Directory Selection,  Next: Other Options,  Pre
      the `--binary-files=text' option.
 
 `--binary-files=TYPE'
-     If the first few bytes of a file indicate that the file contains
-     binary data, assume that the file is of type TYPE.  By default,
-     TYPE is `binary', and `grep' normally outputs either a one-line
-     message saying that a binary file matches, or no message if there
-     is no match.
+     If a file's allocation metadata or its first few bytes indicate
+     that the file contains binary data, assume that the file is of
+     type TYPE.  By default, TYPE is `binary', and `grep' normally
+     outputs either a one-line message saying that a binary file
+     matches, or no message if there is no match.
 
      If TYPE is `without-match', `grep' assumes that a binary file does
      not match; this is equivalent to the `-I' option.
@@ -513,9 +513,9 @@ File: grep.info,  Node: Other Options,  Prev: File and Directory Selection,  Up:
 `-U'
 `--binary'
      Treat the file(s) as binary.  By default, under MS-DOS and
-     MS-Windows, `grep' guesses the file type by looking at the
-     contents of the first 32kB read from the file.  If `grep' decides
-     the file is a text file, it strips the `CR' characters from the
+     MS-Windows, `grep' guesses whether a file is text or binary as
+     described for the `--binary-files' option.  If `grep' decides the
+     file is a text file, it strips the `CR' characters from the
      original file contents (to make regular expressions with `^' and
      `$' work correctly).  Specifying `-U' overrules this guesswork,
      causing all files to be read and passed to the matching mechanism
@@ -2266,22 +2266,22 @@ Ref: General Output Control-Footnote-110048
 Node: Output Line Prefix Control10117
 Node: Context Line Control13052
 Node: File and Directory Selection14984
-Node: Other Options18528
-Node: Environment Variables20064
-Node: Exit Status29560
-Node: grep Programs30201
-Node: Regular Expressions31619
-Node: Fundamental Structure32771
-Node: Character Classes and Bracket Expressions34465
-Ref: invalid-bracket-expr37654
-Node: The Backslash Character and Special Expressions38831
-Node: Anchoring39830
-Node: Back-references and Subexpressions40273
-Node: Basic vs Extended40983
-Node: Usage41978
-Node: Reporting Bugs49235
-Node: Copying49897
-Node: GNU Free Documentation License50984
-Node: Index76111
+Node: Other Options18550
+Node: Environment Variables20086
+Node: Exit Status29582
+Node: grep Programs30223
+Node: Regular Expressions31641
+Node: Fundamental Structure32793
+Node: Character Classes and Bracket Expressions34487
+Ref: invalid-bracket-expr37676
+Node: The Backslash Character and Special Expressions38853
+Node: Anchoring39852
+Node: Back-references and Subexpressions40295
+Node: Basic vs Extended41005
+Node: Usage42000
+Node: Reporting Bugs49257
+Node: Copying49919
+Node: GNU Free Documentation License51006
+Node: Index76133
 
 End Tag Table

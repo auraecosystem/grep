@@ -147,7 +147,6 @@ AC_DEFUN([gl_EARLY],
   # Code from module gnumakefile:
   # Code from module gnupload:
   # Code from module gperf:
-  # Code from module hard-locale:
   # Code from module hash:
   # Code from module hash-pjw:
   # Code from module hash-tests:
@@ -240,6 +239,7 @@ AC_DEFUN([gl_EARLY],
   # Code from module opendir:
   # Code from module pathmax:
   # Code from module pathmax-tests:
+  # Code from module perl:
   # Code from module pipe-posix:
   # Code from module pipe-posix-tests:
   # Code from module progname:
@@ -289,7 +289,6 @@ AC_DEFUN([gl_EARLY],
   # Code from module stdlib:
   # Code from module stdlib-tests:
   # Code from module stpcpy:
-  # Code from module strcase:
   # Code from module strdup-posix:
   # Code from module streq:
   # Code from module strerror:
@@ -299,8 +298,6 @@ AC_DEFUN([gl_EARLY],
   # Code from module striconv-tests:
   # Code from module string:
   # Code from module string-tests:
-  # Code from module strings:
-  # Code from module strings-tests:
   # Code from module strnlen:
   # Code from module strnlen-tests:
   # Code from module strnlen1:
@@ -395,6 +392,7 @@ AC_DEFUN([gl_INIT],
   gl_source_base='lib'
 gl_FUNC_ALLOCA
 AC_LIBOBJ([openat-proc])
+AC_REQUIRE([AC_C_INLINE])
 AC_REQUIRE([AC_C_INLINE])
 gl_FUNC_BTOWC
 if test $HAVE_BTOWC = 0 || test $REPLACE_BTOWC = 1; then
@@ -550,7 +548,6 @@ m4_if(m4_version_compare([2.61a.100],
         m4_defn([m4_PACKAGE_VERSION])), [1], [],
       [AC_CONFIG_LINKS([$GNUmakefile:$GNUmakefile], [],
         [GNUmakefile=$GNUmakefile])])
-gl_HARD_LOCALE
 gl_I_RING
 AM_ICONV
 m4_ifdef([gl_ICONV_MODULE_INDICATOR],
@@ -723,6 +720,7 @@ if test $HAVE_OPENDIR = 0 || test $REPLACE_OPENDIR = 1; then
 fi
 gl_DIRENT_MODULE_INDICATOR([opendir])
 gl_PATHMAX
+gl_PERL
 AC_CHECK_DECLS([program_invocation_name], [], [], [#include <errno.h>])
 AC_CHECK_DECLS([program_invocation_short_name], [], [], [#include <errno.h>])
 m4_ifdef([AM_XGETTEXT_OPTION],
@@ -769,15 +767,6 @@ if test $HAVE_STPCPY = 0; then
   gl_PREREQ_STPCPY
 fi
 gl_STRING_MODULE_INDICATOR([stpcpy])
-gl_STRCASE
-if test $HAVE_STRCASECMP = 0; then
-  AC_LIBOBJ([strcasecmp])
-  gl_PREREQ_STRCASECMP
-fi
-if test $HAVE_STRNCASECMP = 0; then
-  AC_LIBOBJ([strncasecmp])
-  gl_PREREQ_STRNCASECMP
-fi
 gl_FUNC_STRDUP_POSIX
 if test $ac_cv_func_strdup = no || test $REPLACE_STRDUP = 1; then
   AC_LIBOBJ([strdup])
@@ -801,7 +790,6 @@ if test $gl_cond_libtool = false; then
   gl_libdeps="$gl_libdeps $LIBICONV"
 fi
 gl_HEADER_STRING_H
-gl_HEADER_STRINGS_H
 gl_FUNC_STRNLEN
 if test $HAVE_DECL_STRNLEN = 0 || test $REPLACE_STRNLEN = 1; then
   AC_LIBOBJ([strnlen])
@@ -849,7 +837,6 @@ gl_LIBUNISTRING_LIBHEADER([0.9], [uniwidth.h])
 gl_LIBUNISTRING_MODULE([0.9.4], [uniwidth/width])
 gl_FUNC_GLIBC_UNLOCKED_IO
 gl_VERSION_ETC
-AC_SUBST([WARN_CFLAGS])
 gl_WCHAR_H
 gl_FUNC_WCRTOMB
 if test $HAVE_WCRTOMB = 0 || test $REPLACE_WCRTOMB = 1; then
@@ -1224,8 +1211,6 @@ AC_DEFUN([gl_FILE_LIST], [
   lib/getopt_int.h
   lib/getpagesize.c
   lib/gettext.h
-  lib/hard-locale.c
-  lib/hard-locale.h
   lib/hash.c
   lib/hash.h
   lib/i-ring.c
@@ -1325,7 +1310,6 @@ AC_DEFUN([gl_FILE_LIST], [
   lib/stdlib.in.h
   lib/stpcpy.c
   lib/str-kmp.h
-  lib/strcasecmp.c
   lib/strdup.c
   lib/streq.h
   lib/strerror-override.c
@@ -1334,9 +1318,7 @@ AC_DEFUN([gl_FILE_LIST], [
   lib/striconv.c
   lib/striconv.h
   lib/string.in.h
-  lib/strings.in.h
   lib/stripslash.c
-  lib/strncasecmp.c
   lib/strnlen.c
   lib/strnlen1.c
   lib/strnlen1.h
@@ -1435,7 +1417,6 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/getpagesize.m4
   m4/glibc21.m4
   m4/gnulib-common.m4
-  m4/hard-locale.m4
   m4/i-ring.m4
   m4/iconv.m4
   m4/iconv_h.m4
@@ -1495,11 +1476,13 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/multiarch.m4
   m4/nl_langinfo.m4
   m4/nocrash.m4
+  m4/off_t.m4
   m4/onceonly.m4
   m4/open.m4
   m4/openat.m4
   m4/opendir.m4
   m4/pathmax.m4
+  m4/perl.m4
   m4/pipe.m4
   m4/printf.m4
   m4/putenv.m4
@@ -1523,11 +1506,9 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/stdio_h.m4
   m4/stdlib_h.m4
   m4/stpcpy.m4
-  m4/strcase.m4
   m4/strdup.m4
   m4/strerror.m4
   m4/string_h.m4
-  m4/strings_h.m4
   m4/strnlen.m4
   m4/strtoimax.m4
   m4/strtoll.m4
@@ -1690,7 +1671,6 @@ AC_DEFUN([gl_FILE_LIST], [
   tests/test-strerror.c
   tests/test-striconv.c
   tests/test-string.c
-  tests/test-strings.c
   tests/test-strnlen.c
   tests/test-strtoimax.c
   tests/test-strtoll.c

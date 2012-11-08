@@ -1,4 +1,358 @@
+2012-08-20  Jim Meyering  <meyering@redhat.com>
+
+	version 2.14
+	* NEWS: Record release date.
+
+2012-08-07  Jim Meyering  <meyering@redhat.com>
+
+	build: update gnulib and bootstrap
+
+	tests: test for bug with -i and ^$ in a multi-byte locale
+	* tests/empty-line-mb: New file.
+	* tests/Makefile.am (TESTS): Add it.
+
+	grep -i '^$' in a multi-byte locale could report a false match
+	* src/dfasearch.c (EGexecute): Do not match the sentinel "newline"
+	that is appended to each buffer.
+	This bug may sound like a big deal (it certainly surprised me), but
+	realize that only the empty-line-matching regular expression '^$'
+	can trigger it, and then only when you add the unnecessary (and
+	arguably superfluous) -i, *and* run the command in a multi-byte
+	locale.  Using a multi-byte locale for such a regular expression
+	is also pointless, and hurts performance.
+	* NEWS (Bug fixes): Mention it.
+	Reported by Alexander Katassonov <katasso@gmx.de>
+
+2012-08-06  Jim Meyering  <meyering@redhat.com>
+
+	tests: fix a skip diagnostic that mentioned the wrong locale
+	* tests/init.cfg (require_tr_utf8_locale_): s/en_US/tr_TR/
+
+2012-08-02  Jim Meyering  <meyering@redhat.com>
+
+	tests: skip failing test on FS/system that lack SEEK_HOLE support
+	* tests/big-hole: Test for SEEK_HOLE support.  If not available,
+	skip this test.  Hence, this test is now skipped on linux-3.5.0 with
+	ext4 or tmpfs.  The test runs (and passes) with at least btrfs, xfs,
+	or ocfs2.
+	* bootstrap.conf (gnulib_modules): Use the perl module.
+
+2012-07-30  Jim Meyering  <meyering@redhat.com>
+
+	maint: optimize long-line processing
+	* src/main.c (grep): Use memrchr rather than an open-coded loop,
+	reducing the cost of the replaced code by 50% when processing very
+	long lines.  If there were a rawmemrchr function (analogous to glibc's
+	rawmemchr), then the performance improvement would be even greater.
+
+2012-07-28  Paul Eggert  <eggert@cs.ucla.edu>
+
+	maint: remove stat-size
+	* bootstrap.conf (gnulib_modules): Remove stat-size.
+	* src/main.c: Don't include stat-size.h; no longer needed.
+
+2012-07-27  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: don't falsely report compressed text files as binary
+	* NEWS: Document this.
+	* src/main.c (file_is_binary): Remove the heuristic based on
+	st_blocks, as it does not work for compressed file systems.
+	On Solaris, it'd be cheap to test whether the file system is known
+	to be uncompressed, which allow the heuristic, but Solaris has
+	SEEK_HOLE so there's little point.
+
+	grep: don't falsely report tiny text files as binary
+	* NEWS: Document this.
+	* src/main.c (file_is_binary): When we are already at apparent
+	EOF, skip the file-size check, as some servers use zero blocks
+	to store binary files.  Reported by Martin Carroll in
+	<http://lists.gnu.org/archive/html/bug-grep/2012-07/msg00016.html>.
+
+2012-07-26  Paul Eggert  <eggert@cs.ucla.edu>
+
+	doc: document -r/-R in man page
+	* doc/grep.in.1: Document -r vs. -R.
+
+2012-07-21  Jim Meyering  <meyering@redhat.com>
+
+	tests: avoid false positive upon kernel OOM-kill
+	* tests/big-match (skip_diagnostic): Handle case of 139 (SIGKILL)
+	with no diagnostic.
+
+	build: update gnulib and bootstrap
+
+	maint: fix misspellings in old ChangeLog
+	* ChangeLog-2009: Fix typos.
+
+2012-07-19  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: fix ptrdiff/size_t clash
+	Reported by Jaroslav Škarvada in <http://savannah.gnu.org/bugs/?36883>.
+	* src/dfasearch.c (EGexecute): Use size_t, not ptrdiff_t, for lengths.
+	Use regoff_t to store re_match's output, and test it before converting
+	it to size_t.
+
+2012-07-06  Jim Meyering  <meyering@redhat.com>
+
+	maint: correct log typo, to reflect in generated ChangeLog
+	* Makefile.am (gen-ChangeLog): Use --amend, now that we must
+	make our first log correction.
+	* build-aux/git-log-fix: New file.
+
+2012-07-04  Jim Meyering  <meyering@redhat.com>
+
+	maint: post-release administrivia
+	* NEWS: Add header line for next release.
+	* .prev-version: Record previous version.
+	* cfg.mk (old_NEWS_hash): Auto-update.
+
+	version 2.13
+	* NEWS: Record release date.
+
+	build: update gnulib submodule, bootstrap, init.sh
+
+2012-06-17  Jim Meyering  <meyering@redhat.com>
+
+	tests: add another turkish-I-related test case
+	* tests/turkish-I-without-dot: Also exercise the case in which
+	the original string and the lower-case buffer have precisely
+	the same length (22 bytes here), yet internal offsets do differ.
+
+2012-06-16  Jim Meyering  <meyering@redhat.com>
+
+	grep -i: work also when converting to lower-case inflates byte count
+	Commit v2.12-16-g7aa698d addressed the case in which the lower-case
+	representation of an input byte occupies fewer bytes than the original.
+	However, even with commit v2.12-20-g074842d, grep -i would still
+	misbehave when converting a character to lower-case increased its
+	byte count.  The map-manipulation code assumed that the case conversion
+	could only shrink the byte count.  With the consideration that it may
+	also inflate it, the deltas recorded in the map array must be signed,
+	and we must account for the one-to-two-or-more mapping when the
+	original-to-lower-case conversion causes the byte count to increase.
+	* src/searchutils.c (mbtolower): When a lower-case character occupies
+	more than one byte, set its remaining map slots to zero.  Change the
+	type of the map to be signed, and compute the change in character
+	byte count as new_length - old_length.
+	* src/search.h: Include <stdint.h>, for decl of intmax_t.
+	(mb_case_map_apply): Adjust for signed increments:
+	each map entry is now signed.
+	(mb_len_map_t): Define type.  Thanks to Paul Eggert for noticing
+	in review that using a bare "char" as the base type would be wrong on
+	systems for which it is a signed type (as with gcc's -funsigned-char).
+	* src/kwsearch.c (Fcompile, Fexecute): Likewise.
+	* src/dfasearch.c (kwsincr_case, EGexecute): Likewise.
+	* tests/turkish-I-without-dot: New test.  Thanks to Paolo Bonzini
+	for the tip that in the tr_TR.utf8 locale, mapping "I" to lower case
+	increases the character's byte count.
+	* tests/Makefile.am (TESTS): Add it.
+	* tests/init.cfg (require_tr_utf8_locale_): New function.
+	* NEWS (Bug fixes): Expand the existing entry.
+
+2012-06-12  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: handle -i when chars differ in length but line does not
+	* src/searchutils.c (mbtolower): Return the map back to the caller
+	if any input character's length differs from the corresponding output
+	character's, not merely if the total string length differs.
+	Problem reported by Johannes Meixner in
+	<http://lists.gnu.org/archive/html/bug-grep/2012-06/msg00029.html>.
+
+2012-06-08  Jim Meyering  <meyering@redhat.com>
+
+	tests: extend coverage of dfa.c's match_mb_charset
+	Add a test case to increase test coverage of part of dfa.c (the DFA
+	matcher used by grep and gawk).  While thinking about removing the few
+	remaining uses of strncpy in dfa.c, I found that none of the existing
+	tests covered the 40+ lines of code at the end of match_mb_charset,
+	so constructed this test case to demonstrate that it's not dead code
+	* tests/dfa-coverage: New test, for improved coverage.
+	* tests/Makefile.am (TESTS): Add it.
+
+2012-06-05  Jim Meyering  <meyering@redhat.com>
+
+	build: fix a subtly twisted "make distcheck" failure
+	"make distcheck" would fail when, during a test build,
+	an attempt to overwrite the deliberately-write-protected
+	$(srcdir)/grep.pot file would fail.
+	* bootstrap.conf (bootstrap_epilogue): Don't let the existence of
+	a large sparse file in the build directory induce "make distcheck"
+	failure.  The existence of a large sparse test file named 8T-or-so
+	would make po/Makefile.in.in's use of grep (to search for "GNU grep"
+	as an indication that this is a GNU package) exit 2 without generating
+	any output, which made the first xgettext use --package-name=grep,
+	while that same search for "GNU grep" would succeed when run
+	from a pristine from-tarball build, thus making the second
+	xgettext invocation use --package-name='GNU grep'.
+	That mismatch:
+	-"Project-Id-Version: grep 2.12.18-1080\n"
+	+"Project-Id-Version: GNU grep 2.12.18-1080\n"
+	led to the attempt by Makefile.in.in's grep.pot-update rule to
+	overwrite ../../grep.pot in the read-only po/ source directory.
+
+2012-06-03  Jim Meyering  <meyering@redhat.com>
+
+	build: update gnulib submodule, bootstrap and init.sh
+	cfg.mk: Exempt dfa.c from the new no-strncpy test, for now.
+
+2012-06-02  Jim Meyering  <meyering@redhat.com>
+
+	grep: fix how -i works with a match containing the Turkish I-with-dot
+	Fix a long-standing problem in the way grep's -i interacts with
+	data whose byte count changes when we convert it to lower case.
+	For example, the UTF-8 Turkish I-with-dot (İ) occupies two bytes,
+	but its lower case analog, i, occupies just one byte.  The code
+	converts both search string and the haystack data to lower case,
+	and then searches for the modified string in the modified buffer.
+	The trouble arose when using a lowercase buffer <offset,length>
+	pair to manipulate the original (longer) buffer.
+
+	The solution is to change mbtolower to return additional information:
+	a malloc'd mapping vector.  With that, the caller maps the lowercase-
+	relative <offset,length> to numbers that refer to the original buffer.
+	This mapping is used only when lengths actually differ, so the cost
+	in general should be small.
+
+	* src/searchutils.c (mbtolower): Add the new map parameter.
+	* src/search.h (mb_case_map_apply): New function.
+	* src/kwsearch.c (Fexecute): Update mbtolower caller, and upon
+	success, apply the new map.
+	* src/dfasearch.c (EGexecute): Likewise.
+	* tests/Makefile.am (XFAIL_TESTS): Remove turkish-I from this list;
+	that test is no longer expected to fail.
+	* NEWS (Bug fixes): Mention it.
+	Reported by Ilya Basin in
+	http://thread.gmane.org/gmane.comp.gnu.grep.bugs/3413 and later
+	by Strahinja Kustudic in http://savannah.gnu.org/bugs/?36567
+
+2012-06-01  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: remove unnecessary "what-if-signal?" code
+	* src/main.c (fillbuf): Don't worry about EINTR when closing --
+	not possible, since we're not catching signals.
+
+2012-05-16  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: avoid nominal integer overflow
+	* src/dfa.c (add_utf8_anychar): Avoid signed integer overflow.
+	Although this works on all platforms we know about, strictly
+	speaking the behavior is undefined, and Sun C 5.8 warns about it.
+
+2012-05-16  Jim Meyering  <meyering@redhat.com>
+
+	maint: avoid nit-picky syntax-check test failure; tweak big-hole test
+	* NEWS: Restore deleted newline in "old" NEWS, to fix a syntax-check
+	test failure.
+	* tests/big-hole: Use awk, rather than a shell loop: saves 3000 lines
+	of verbose shell output in the .log file.
+
+2012-05-15  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: sparse files are now considered binary
+	* NEWS: Document this.
+	* doc/grep.texi (File and Directory Selection): Likewise.
+	* bootstrap.conf (gnulib_modules): Add stat-size.
+	* src/main.c: Include stat-size.h.
+	(usable_st_size): New function, mostly stolen from coreutils.
+	(fillbuf): Use it.
+	(file_is_binary): New function, which looks for holes too.
+	(grep): Use it.
+	* tests/Makefile.am (TESTS): Add big-hole.
+	* tests/big-hole: New file.
+
+2012-05-07  Paul Eggert  <eggert@cs.ucla.edu>
+
+	maint: quote 'like this' or "like this", not `like this'
+	See <http://lists.gnu.org/archive/html/bug-grep/2012-01/msg00125.html>.
+	* ChangeLog-2009, HACKING, NEWS, README-hacking, cfg.mk, configure.ac:
+	* lib/colorize-w32.c, m4/pcre.m4:
+	* src/Makefile.am, src/dfa.c, src/dosbuf.c, src/main.c:
+	* tests/backref, tests/help-version, tests/tests:
+	In commentary, quote 'like this' or "like this" rather than
+	`like this' or ``like this''.
+	* cfg.mk (old_NEWS_hash): Update due to changed old NEWS.
+	* doc/grep.texi (General Output Control): Quote sample text
+	with @samp, not with `...'.
+	* src/main.c (usage):
+	* tests/help-version: Quote 'like this' rather than `like this'
+	in diagnostics.
+
+	exclude: process exclude and include directives in order
+	Also, change exclude and include directives so that they apply to
+	command-line arguments too.  This restores the pre-2.6 behavior,
+	and fixes a bug reported by Quentin Arce in
+	<http://lists.gnu.org/archive/html/bug-grep/2012-04/msg00056.html>.
+	* NEWS: Document this.
+	* src/main.c (included_patterns): Remove.  All uses removed.
+	(skipped_file): New function.
+	(grepdirent): New arg command_line; all callers changed.  This is
+	needed because non-command-line files can invoke fts_open, and
+	their directory entries need to be distinguished from top-level
+	directory entries.  Move code into the new skipped_file function.
+	(grepdesc): Check whether a command-line argument should be skipped.
+	(main): --include and --exclude options now share excluded_patterns
+	rather than having separate variables included_patterns and
+	excluded_patterns.
+	* tests/include-exclude: Add a test to detect the fixed bug.
+
+	build: update gnulib submodule to latest
+
+2012-04-30  Jim Meyering  <meyering@redhat.com>
+
+	cosmetic: binary operator goes *after* the newline, when split
+	* src/dfa.c (match_mb_charset): Join split lines.
+	(parse_bracket_exp): Move "||" from end of first split line
+	to the beginning of the continued line.
+	* src/dosbuf.c (dossified_pos): Likewise, but for "&&".
+
+	grep: -K is not an option: remove it from list
+	The presence of "K" in the short-option string meant that
+	an erroneous "grep -K ..." would fail with a bare Usage/Try...
+	message, without the usual "invalid option -- 'K'".  With this
+	removal, now grep prints the expected invalid option diagnostic.
+	* src/main.c (short_options): Remove "K".
+	Reported by Петр Досычев in
+	http://thread.gmane.org/gmane.comp.gnu.grep.bugs/4488
+
+2012-04-30  Paolo Bonzini  <bonzini@gnu.org>
+
+	dfa: small fixes to single-byte range computation
+	* src/dfa.c (parse_bracket_exp): Do not call regexec with an invalid
+	subject.  Move declarations before all statements.
+
+2012-04-27  Paolo Bonzini  <bonzini@gnu.org>
+
+	dfa: do not use hard-locale
+	* bootstrap.conf (gnulib_modules): Remove hard-locale.
+	* src/dfa.c (hard_LC_COLLATE): Remove.
+	(dfaparse): Do not initialize it.
+	(parse_bracket_exp): Always go through system regex matcher to find
+	single byte characters matching a range.
+
+	drop support for Makefile.boot
+	* Makefile.am: Do not distribute README-boot and Makefile.boot.
+	* NEWS: Mention this change.
+	* README-alpha: Do not mention README-boot and Makefile.boot.
+	* Makefile.boot: Remove.
+	* README-boot: Remove.
+
+2012-04-27  Aharon Robbins  <arnold@skeeve.com>
+
+	dfa: do not use strcoll to match multibyte characters in ranges
+	This does not affect the behavior of grep, which always defers
+	to glibc or gnulib when matching ranges.
+	* src/dfa.c (match_mb_charset): Compare wc directly to the range
+	endpoints.
+
+	dfa: include stdbool.h explicitly
+	* src/dfa.c: Include stdbool.h explicitly
+
 2012-04-23  Jim Meyering  <meyering@redhat.com>
+
+	maint: post-release administrivia
+	* NEWS: Add header line for next release.
+	* .prev-version: Record previous version.
+	* cfg.mk (old_NEWS_hash): Auto-update.
 
 	version 2.12
 	* NEWS: Record release date.
