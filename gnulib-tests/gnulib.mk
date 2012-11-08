@@ -1155,14 +1155,6 @@ EXTRA_DIST += test-string.c
 
 ## end   gnulib module string-tests
 
-## begin gnulib module strings-tests
-
-TESTS += test-strings
-check_PROGRAMS += test-strings
-EXTRA_DIST += test-strings.c
-
-## end   gnulib module strings-tests
-
 ## begin gnulib module strnlen-tests
 
 TESTS += test-strnlen

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GNU grep 2.0f\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2012-04-23 16:08+0200\n"
+"POT-Creation-Date: 2012-08-20 08:12+0200\n"
 "PO-Revision-Date: 1997-09-03 11:19+0900\n"
 "Last-Translator: Bang Jun-Young <bangjy@geocities.com>\n"
 "Language-Team: Korean <ko@li.org>\n"
@@ -29,7 +29,7 @@ msgstr ""
 msgid "Valid arguments are:"
 msgstr ""
 
-#: lib/closeout.c:112 src/main.c:894
+#: lib/closeout.c:112 src/main.c:952
 #, c-format
 msgid "write error"
 msgstr ""
@@ -178,7 +178,7 @@ msgstr ""
 msgid "Unmatched \\{"
 msgstr ""
 
-#: lib/regcomp.c:160 src/dfa.c:1373
+#: lib/regcomp.c:160 src/dfa.c:1371
 msgid "Invalid content of \\{\\}"
 msgstr ""
 
@@ -198,7 +198,7 @@ msgstr ""
 msgid "Premature end of regular expression"
 msgstr ""
 
-#: lib/regcomp.c:175 src/dfa.c:1376
+#: lib/regcomp.c:175 src/dfa.c:1374
 msgid "Regular expression too big"
 msgstr ""
 
@@ -332,7 +332,7 @@ msgstr ""
 #. for this package.  Please add _another line_ saying
 #. "Report translation bugs to <...>\n" with the address for translation
 #. bugs (typically your translation team's web or email address).
-#: lib/version-etc.c:245 src/main.c:1572
+#: lib/version-etc.c:245 src/main.c:1629
 #, c-format
 msgid ""
 "\n"
@@ -354,7 +354,7 @@ msgstr ""
 msgid "%s home page: <http://www.gnu.org/software/%s/>\n"
 msgstr ""
 
-#: lib/version-etc.c:256 src/main.c:1575
+#: lib/version-etc.c:256 src/main.c:1632
 msgid "General help using GNU software: <http://www.gnu.org/gethelp/>\n"
 msgstr ""
 
@@ -373,37 +373,37 @@ msgstr "완결되지 않은 반복 회수"
 msgid "%s%s argument '%s' too large"
 msgstr ""
 
-#: src/dfa.c:953 src/dfa.c:956 src/dfa.c:976 src/dfa.c:986 src/dfa.c:998
-#: src/dfa.c:1049 src/dfa.c:1058 src/dfa.c:1061 src/dfa.c:1066 src/dfa.c:1079
-#: src/dfa.c:1137
+#: src/dfa.c:952 src/dfa.c:955 src/dfa.c:975 src/dfa.c:985 src/dfa.c:997
+#: src/dfa.c:1048 src/dfa.c:1057 src/dfa.c:1060 src/dfa.c:1065 src/dfa.c:1078
+#: src/dfa.c:1135
 #, fuzzy
 msgid "unbalanced ["
 msgstr "짝이 맞지 않는 ["
 
-#: src/dfa.c:1007
+#: src/dfa.c:1006
 msgid "invalid character class"
 msgstr ""
 
-#: src/dfa.c:1174
+#: src/dfa.c:1172
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr ""
 
-#: src/dfa.c:1226
+#: src/dfa.c:1224
 #, fuzzy
 msgid "unfinished \\ escape"
 msgstr "완결되지 않은 \\ 이스케이프"
 
-#: src/dfa.c:1761
+#: src/dfa.c:1759
 #, fuzzy
 msgid "unbalanced ("
 msgstr "짝이 맞지 않는 ("
 
-#: src/dfa.c:1891
+#: src/dfa.c:1886
 #, fuzzy
 msgid "no syntax specified"
 msgstr "문법이 지정되지 않았음"
 
-#: src/dfa.c:1899
+#: src/dfa.c:1894
 #, fuzzy
 msgid "unbalanced )"
 msgstr "짝이 맞지 않는 )"
@@ -445,58 +445,58 @@ msgstr ""
 msgid "others, see <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
 msgstr ""
 
-#: src/main.c:448
+#: src/main.c:501
 msgid "invalid context length argument"
 msgstr ""
 
-#: src/main.c:503
+#: src/main.c:570
 msgid "lseek failed"
 msgstr ""
 
-#: src/main.c:650
+#: src/main.c:708
 #, c-format
 msgid "input is too large to count"
 msgstr ""
 
-#: src/main.c:1205
+#: src/main.c:1265
 #, c-format
 msgid "Binary file %s matches\n"
 msgstr ""
 
-#: src/main.c:1256
+#: src/main.c:1308
 #, fuzzy, c-format
 msgid "warning: %s: %s"
 msgstr "%s: 경고: %s: %s\n"
 
-#: src/main.c:1257
+#: src/main.c:1309
 msgid "recursive directory loop"
 msgstr ""
 
-#: src/main.c:1400
+#: src/main.c:1457
 #, c-format
 msgid "input file %s is also the output"
 msgstr ""
 
-#: src/main.c:1458
+#: src/main.c:1515
 msgid "(standard input)"
 msgstr "(표준 입력)"
 
-#: src/main.c:1474 src/main.c:1481
+#: src/main.c:1531 src/main.c:1538
 #, c-format
 msgid "Usage: %s [OPTION]... PATTERN [FILE]...\n"
 msgstr "사용법: %s [옵션]... 패턴 [파일]...\n"
 
-#: src/main.c:1476
+#: src/main.c:1533
 #, fuzzy, c-format
 msgid "Try '%s --help' for more information.\n"
 msgstr "더 많은 정보를 보려면 `%s --help' 하십시오.\n"
 
-#: src/main.c:1482
+#: src/main.c:1539
 #, c-format
 msgid "Search for PATTERN in each FILE or standard input.\n"
 msgstr ""
 
-#: src/main.c:1485
+#: src/main.c:1542
 #, fuzzy, c-format
 msgid ""
 "Example: %s -i 'hello world' menu.h main.c\n"
@@ -504,7 +504,7 @@ msgid ""
 "Regexp selection and interpretation:\n"
 msgstr "정규식 선택과 해석:\n"
 
-#: src/main.c:1490
+#: src/main.c:1547
 #, c-format
 msgid ""
 "  -E, --extended-regexp     PATTERN is an extended regular expression (ERE)\n"
@@ -514,7 +514,7 @@ msgid ""
 "  -P, --perl-regexp         PATTERN is a Perl regular expression\n"
 msgstr ""
 
-#: src/main.c:1496
+#: src/main.c:1553
 #, c-format
 msgid ""
 "  -e, --regexp=PATTERN      use PATTERN for matching\n"
@@ -525,7 +525,7 @@ msgid ""
 "  -z, --null-data           a data line ends in 0 byte, not newline\n"
 msgstr ""
 
-#: src/main.c:1503
+#: src/main.c:1560
 #, c-format
 msgid ""
 "\n"
@@ -537,7 +537,7 @@ msgid ""
 "      --mmap                deprecated no-op; evokes a warning\n"
 msgstr ""
 
-#: src/main.c:1511
+#: src/main.c:1568
 #, c-format
 msgid ""
 "\n"
@@ -552,29 +552,29 @@ msgid ""
 "prefix\n"
 msgstr ""
 
-#: src/main.c:1522
+#: src/main.c:1579
 #, c-format
 msgid ""
 "  -o, --only-matching       show only the part of a line matching PATTERN\n"
 "  -q, --quiet, --silent     suppress all normal output\n"
 "      --binary-files=TYPE   assume that binary files are TYPE;\n"
-"                            TYPE is `binary', `text', or `without-match'\n"
+"                            TYPE is 'binary', 'text', or 'without-match'\n"
 "  -a, --text                equivalent to --binary-files=text\n"
 msgstr ""
 
-#: src/main.c:1529
+#: src/main.c:1586
 #, c-format
 msgid ""
 "  -I                        equivalent to --binary-files=without-match\n"
 "  -d, --directories=ACTION  how to handle directories;\n"
-"                            ACTION is `read', `recurse', or `skip'\n"
+"                            ACTION is 'read', 'recurse', or 'skip'\n"
 "  -D, --devices=ACTION      how to handle devices, FIFOs and sockets;\n"
-"                            ACTION is `read' or `skip'\n"
+"                            ACTION is 'read' or 'skip'\n"
 "  -r, --recursive           like --directories=recurse\n"
 "  -R, --dereference-recursive  likewise, but follow all symlinks\n"
 msgstr ""
 
-#: src/main.c:1538
+#: src/main.c:1595
 #, c-format
 msgid ""
 "      --include=FILE_PATTERN  search only files that match FILE_PATTERN\n"
@@ -585,7 +585,7 @@ msgid ""
 "skipped.\n"
 msgstr ""
 
-#: src/main.c:1544
+#: src/main.c:1601
 #, c-format
 msgid ""
 "  -L, --files-without-match  print only names of FILEs containing no match\n"
@@ -595,7 +595,7 @@ msgid ""
 "  -Z, --null                print 0 byte after FILE name\n"
 msgstr ""
 
-#: src/main.c:1550
+#: src/main.c:1607
 #, c-format
 msgid ""
 "\n"
@@ -605,13 +605,13 @@ msgid ""
 "  -C, --context=NUM         print NUM lines of output context\n"
 msgstr ""
 
-#: src/main.c:1557
+#: src/main.c:1614
 #, c-format
 msgid ""
 "  -NUM                      same as --context=NUM\n"
 "      --color[=WHEN],\n"
 "      --colour[=WHEN]       use markers to highlight the matching strings;\n"
-"                            WHEN is `always', `never', or `auto'\n"
+"                            WHEN is 'always', 'never', or 'auto'\n"
 "  -U, --binary              do not strip CR characters at EOL (MSDOS/"
 "Windows)\n"
 "  -u, --unix-byte-offsets   report offsets as if CRs were not there\n"
@@ -619,7 +619,7 @@ msgid ""
 "\n"
 msgstr ""
 
-#: src/main.c:1567
+#: src/main.c:1624
 #, c-format
 msgid ""
 "When FILE is -, read standard input.  With no FILE, read . if a command-"
@@ -629,42 +629,42 @@ msgid ""
 "if any error occurs and -q is not given, the exit status is 2.\n"
 msgstr ""
 
-#: src/main.c:1573
+#: src/main.c:1630
 #, c-format
 msgid "GNU Grep home page: <%s>\n"
 msgstr ""
 
-#: src/main.c:1605
+#: src/main.c:1662
 #, c-format
 msgid "%s can only use the %s pattern syntax"
 msgstr ""
 
-#: src/main.c:1608
+#: src/main.c:1665
 #, fuzzy, c-format
 msgid "conflicting matchers specified"
 msgstr "짝이 이미 지정되었음"
 
-#: src/main.c:1622
+#: src/main.c:1679
 #, fuzzy, c-format
 msgid "invalid matcher %s"
 msgstr "완결되지 않은 반복 회수"
 
-#: src/main.c:1870
+#: src/main.c:1927
 #, c-format
 msgid "unknown devices method"
 msgstr ""
 
-#: src/main.c:1999
+#: src/main.c:2056
 #, fuzzy, c-format
 msgid "invalid max count"
 msgstr "완결되지 않은 반복 회수"
 
-#: src/main.c:2056
+#: src/main.c:2113
 #, c-format
 msgid "unknown binary-files type"
 msgstr ""
 
-#: src/main.c:2119
+#: src/main.c:2172
 #, c-format
 msgid "the --mmap option has been a no-op since 2010"
 msgstr ""

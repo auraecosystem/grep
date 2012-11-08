@@ -51,9 +51,9 @@ export VERBOSE = yes
 # 1127556 9e
 export XZ_OPT = -6e
 
-old_NEWS_hash = 347e90ee0ec0489707df139ca3539934
+old_NEWS_hash = f2a68de3cf2aff0b4164738e6e537d88
 
-# Many m4 macros names once began with `jm_'.
+# Many m4 macros names once began with 'jm_'.
 # Make sure that none are inadvertently reintroduced.
 sc_prohibit_jm_in_m4:
 	@grep -nE 'jm_[A-Z]'						\
@@ -89,3 +89,4 @@ exclude_file_name_regexp--sc_prohibit_tab_based_indentation = \
   (Makefile|\.(am|mk)$$|^gl/lib/.*\.c\.diff$$)
 exclude_file_name_regexp--sc_space_tab = ^gl/lib/.*\.c\.diff$$
 exclude_file_name_regexp--sc_error_message_uppercase = ^src/dfa\.c$$
+exclude_file_name_regexp--sc_prohibit_strncpy = ^src/dfa\.c$$

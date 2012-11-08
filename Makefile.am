@@ -22,10 +22,8 @@ SUBDIRS = po lib doc src tests gnulib-tests
 
 EXTRA_DIST =		\
   ChangeLog-2009	\
-  Makefile.boot		\
   README		\
   README-alpha		\
-  README-boot		\
   TODO			\
   cfg.mk
 
@@ -49,6 +47,7 @@ gen_start_date = 2009-11-27
 gen-ChangeLog:
 	$(AM_V_GEN)if test -d .git; then				\
 	  $(top_srcdir)/build-aux/gitlog-to-changelog			\
+	    --amend=$(srcdir)/build-aux/git-log-fix			\
 	    --since=$(gen_start_date) > $(distdir)/cl-t;		\
 	  rm -f $(distdir)/ChangeLog;					\
 	  mv $(distdir)/cl-t $(distdir)/ChangeLog;			\
