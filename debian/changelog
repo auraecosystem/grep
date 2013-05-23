@@ -1,3 +1,10 @@
+grep (2.14-2) unstable; urgency=low
+
+  * Fixing bug in 03-397262-dlopen-pcre.patch: LIB instead of LIBS. Thanks
+    to Bjarni Ingi Gislason. (Closes: #693917)
+
+ -- Santiago Ruano Rincón <santiago@debian.org>  Thu, 23 May 2013 11:02:34 +0200
+
 grep (2.14-1) unstable; urgency=low
 
   * [fb48cde] Imported Upstream version 2.14

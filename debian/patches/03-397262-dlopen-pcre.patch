@@ -12,7 +12,7 @@ Modified by Marco d'Itri <md@Linux.IT>
    test "$ac_res" = "none required" || LIBS="$ac_res $LIBS"
    test "$ac_cv_search_pcre_compile" = "none required" ||
 -         LIB_PCRE=$ac_cv_search_pcre_compile
-+	 LIB="-ldl $LIBS"
++	 LIBS="-ldl $LIBS"
  fi
  
        for ac_func in pcre_compile
