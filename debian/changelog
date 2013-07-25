@@ -1,3 +1,11 @@
+grep (2.6.3-3+squeeze1) squeeze-security; urgency=high
+
+  * Fixes CVE-2012-5667. Patch by Jaroslav Škarvada
+    https://bugzilla.redhat.com/show_bug.cgi?id=889935
+    Closes: #701897
+
+ -- Santiago Ruano Rincón <santiago@debian.org>  Thu, 25 Jul 2013 10:13:24 +0200
+
 grep (2.6.3-3) unstable; urgency=high
 
   * Ignore MMAP_OPTION

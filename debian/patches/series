@@ -6,3 +6,4 @@
 04-446854-grep.1.patch
 05-kwset.c.patch
 06-578709-ignore-MMAP_OPTION.patch
+85-CVE-2012-5667.patch
