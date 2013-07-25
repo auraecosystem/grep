@@ -1,4 +1,4 @@
-grep (2.6.3-3+squeeze1) squeeze-security; urgency=high
+grep (2.6.3-3+squeeze1) oldstable; urgency=low
 
   * Fixes CVE-2012-5667. Patch by Jaroslav Škarvada
     https://bugzilla.redhat.com/show_bug.cgi?id=889935
