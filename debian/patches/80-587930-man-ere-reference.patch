@@ -1,5 +1,7 @@
---- a/doc/grep.in.1	2012-03-02 17:44:06.000000000 +1100
-+++ b/doc/grep.in.1	2012-04-13 09:33:25.000000000 +1000
+diff --git a/doc/grep.in.1 b/doc/grep.in.1
+index 4bf03b4..14ec84c 100644
+--- a/doc/grep.in.1
++++ b/doc/grep.in.1
 @@ -114,7 +114,7 @@ This is the default.
  .BR \-P ", " \-\^\-perl\-regexp
  Interpret
@@ -9,7 +11,7 @@
  This is highly experimental and
  .B "grep \-P"
  may warn of unimplemented features.
-@@ -598,7 +598,7 @@ expressions, by using various operators
+@@ -603,7 +603,7 @@ expressions, by using various operators to combine smaller expressions.
  .PP
  .B grep
  understands three different versions of regular expression syntax:
@@ -18,8 +20,21 @@
  .RB "\s-1GNU\s0\ " grep ,
  there is no difference in available functionality between basic and
  extended syntaxes.
---- a/doc/grep.info	2012-04-24 00:08:39.000000000 +1000
-+++ b/doc/grep.info	2012-05-08 11:49:59.000000000 +1000
+@@ -611,8 +611,8 @@ In other implementations, basic regular expressions are less powerful.
+ The following description applies to extended regular expressions;
+ differences for basic regular expressions are summarized afterwards.
+ Perl regular expressions give additional functionality, and are
+-documented in pcresyntax(3) and pcrepattern(3), but may not be
+-available on every system.
++documented in pcresyntax(3) and pcrepattern(3), but only work if pcre
++is available in the system.
+ .PP
+ The fundamental building blocks are the regular expressions
+ that match a single character.
+diff --git a/doc/grep.info b/doc/grep.info
+index 92d4c7a..f34a8d8 100644
+--- a/doc/grep.info
++++ b/doc/grep.info
 @@ -778,7 +778,7 @@ options.
  
  `-P'
@@ -29,7 +44,7 @@
       highly experimental and `grep -P' may warn of unimplemented
       features.
  
-@@ -799,7 +799,7 @@ A "regular expression" is a pattern that
+@@ -799,7 +799,7 @@ A "regular expression" is a pattern that describes a set of strings.
  Regular expressions are constructed analogously to arithmetic
  expressions, by using various operators to combine smaller expressions.
  `grep' understands three different versions of regular expression

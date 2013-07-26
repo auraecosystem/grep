@@ -1,3 +1,10 @@
+grep (2.14-3~1) UNRELEASED; urgency=low
+
+  * Updating 80-587930-man-ere-reference.patch to improve documentation 
+    regarding -P (Closes: #203109)
+
+ -- Santiago Ruano Rincón <santiago@debian.org>  Fri, 26 Jul 2013 17:41:43 +0200
+
 grep (2.14-2) unstable; urgency=low
 
   * Fixing bug in 03-397262-dlopen-pcre.patch: LIB instead of LIBS. Thanks
