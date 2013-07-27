@@ -1,7 +1,9 @@
-grep (2.14-3~1) UNRELEASED; urgency=low
+grep (2.14-3~2) UNRELEASED; urgency=low
 
   * Updating 80-587930-man-ere-reference.patch to improve documentation 
     regarding -P (Closes: #203109)
+  * Correcting a formatin issue in grep.in.1. Thanks to David Prévot
+    (Closes: #692760)
 
  -- Santiago Ruano Rincón <santiago@debian.org>  Fri, 26 Jul 2013 17:41:43 +0200
 
