@@ -1,0 +1,45 @@
+From 872449d000995ef5ca1778abd1699c503dfaefad Mon Sep 17 00:00:00 2001
+From: Paolo Bonzini <bonzini@gnu.org>
+Date: Fri, 05 Jul 2013 11:28:24 +0000
+Subject: tests: add testcase for previous change
+
+* tests/Makefile.am (TESTS): add char-class-multibyte2.
+* tests/char-class-multibyte2: New file.
+---
+diff --git a/tests/Makefile.am b/tests/Makefile.am
+index 1c6b10c..c96ce06 100644
+--- a/tests/Makefile.am
++++ b/tests/Makefile.am
+@@ -46,6 +46,7 @@ TESTS =						\
+   case-fold-char-range				\
+   case-fold-char-type				\
+   char-class-multibyte				\
++  char-class-multibyte2				\
+   dfa-coverage					\
+   dfa-heap-overrun				\
+   dfaexec-multibyte				\
+diff --git a/tests/char-class-multibyte2 b/tests/char-class-multibyte2
+new file mode 100755
+index 0000000..a4bcc18
+--- a/dev/null
++++ b/tests/char-class-multibyte2
+@@ -0,0 +1,17 @@
++#!/bin/sh
++# This test would segfault for grep-2.14
++. "${srcdir=.}/init.sh"; path_prepend_ ../src
++
++require_en_utf8_locale_
++require_compiled_in_MB_support
++
++printf 'é\n'      > exp1 || framework_failure_
++fail=0
++
++for LOC in en_US.UTF-8 $LOCALE_FR_UTF8; do
++  out=out4-$LOC
++  printf 'á\nç\né\n' | LC_ALL=$LOC grep -E '([^.]*[é]){1,2}' > $out || fail=1
++  compare exp1 $out || fail=1
++done
++
++Exit $fail
+--
+cgit v0.9.0.2
