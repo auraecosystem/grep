@@ -1,11 +1,11 @@
-grep (2.14-3~2) UNRELEASED; urgency=low
+grep (2.14-3~2) unstable; urgency=low
 
   * Updating 80-587930-man-ere-reference.patch to improve documentation 
     regarding -P (Closes: #203109)
-  * Correcting a formatin issue in grep.in.1. Thanks to David Prévot
+  * Correcting a formating issue in grep.in.1. Thanks to David Prévot
     (Closes: #692760)
 
- -- Santiago Ruano Rincón <santiago@debian.org>  Fri, 26 Jul 2013 17:41:43 +0200
+ -- Santiago Ruano Rincón <santiago@debian.org>  Sun, 11 Aug 2013 18:17:21 +0200
 
 grep (2.14-2) unstable; urgency=low
 
