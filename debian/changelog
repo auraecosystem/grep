@@ -1,4 +1,4 @@
-grep (2.14-3~2) unstable; urgency=low
+grep (2.14-3) unstable; urgency=low
 
   * Updating 80-587930-man-ere-reference.patch to improve documentation 
     regarding -P (Closes: #203109)
