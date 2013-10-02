@@ -1,11 +1,11 @@
-grep (2.14-4~1) UNRELEASED; urgency=low
+grep (2.14-4) unstable; urgency=low
 
-  * NOT RELEASE YET
   * Making debian/copyright machine-readable, according to the specification
     of version 1.0
   * Fixing matching of multi-byte white spaces
+  * debian/rules: using dh_autoreconf tools
 
- -- Santiago Ruano Rincón <santiago@debian.org>  Wed, 02 Oct 2013 11:38:21 +0200
+ -- Santiago Ruano Rincón <santiago@debian.org>  Wed, 02 Oct 2013 15:00:06 +0200
 
 grep (2.14-3) unstable; urgency=low
 
