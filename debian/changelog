@@ -3,8 +3,9 @@ grep (2.14-4~1) UNRELEASED; urgency=low
   * NOT RELEASE YET
   * Making debian/copyright machine-readable, according to the specification
     of version 1.0
+  * Fixing matching of multi-byte white spaces
 
- -- Santiago Ruano Rincón <santiago@debian.org>  Thu, 15 Aug 2013 23:25:25 +0200
+ -- Santiago Ruano Rincón <santiago@debian.org>  Wed, 02 Oct 2013 11:38:21 +0200
 
 grep (2.14-3) unstable; urgency=low
 
