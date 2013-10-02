@@ -5,10 +5,6 @@ A related bug is that \S would mistakenly match an invalid multibyte
 character.  E.g. this would match: printf '\x82\n' | src/grep '^\S$'
 [bug present since 2.6]
 
-grep -i would segfault on systems using UTF-16-based wchar_t (Cygwin)
-when converting an input string containing certain 4-byte UTF-8
-sequences to lower case.  The conversions to wchar_t and back to
-
 diff --git a/src/dfa.c b/src/dfa.c
 index e464fa1..de6c671 100644
 --- a/src/dfa.c
