@@ -5,11 +5,9 @@ A related bug is that \S would mistakenly match an invalid multibyte
 character.  E.g. this would match: printf '\x82\n' | src/grep '^\S$'
 [bug present since 2.6]
 
-diff --git a/src/dfa.c b/src/dfa.c
-index e464fa1..de6c671 100644
 --- a/src/dfa.c
 +++ b/src/dfa.c
-@@ -1435,14 +1435,45 @@ lex (void)
+@@ -1432,14 +1432,45 @@
          case 'S':
            if (!backslash || (syntax_bits & RE_NO_GNU_OPS))
              goto normal_char;
@@ -63,11 +61,9 @@ index e464fa1..de6c671 100644
  
          case 'w':
          case 'W':
-diff --git a/tests/Makefile.am b/tests/Makefile.am
-index 581f688..a64a2d2 100644
 --- a/tests/Makefile.am
 +++ b/tests/Makefile.am
-@@ -36,6 +36,7 @@ TESTS =						\
+@@ -37,6 +37,7 @@
    backref					\
    backref-multibyte-slow			\
    backref-word					\
@@ -75,17 +71,14 @@ index 581f688..a64a2d2 100644
    big-hole					\
    big-match					\
    bogus-wctob					\
-@@ -70,6 +71,7 @@ TESTS =						\
-   invalid-multibyte-infloop			\
+@@ -69,6 +70,7 @@
+   inconsistent-range                            \
    khadafy					\
    max-count-vs-context				\
 +  multibyte-white-space				\
    empty-line-mb					\
    unibyte-bracket-expr				\
    high-bit-range				\
-diff --git a/tests/backslash-s-vs-invalid-multitype b/tests/backslash-s-vs-invalid-multitype
-new file mode 100755
-index 0000000..4f1a71d
 --- /dev/null
 +++ b/tests/backslash-s-vs-invalid-multitype
 @@ -0,0 +1,26 @@
@@ -115,9 +108,6 @@ index 0000000..4f1a71d
 +compare /dev/null out-s || fail=1
 +
 +Exit $fail
-diff --git a/tests/multibyte-white-space b/tests/multibyte-white-space
-new file mode 100755
-index 0000000..df2fe1b
 --- /dev/null
 +++ b/tests/multibyte-white-space
 @@ -0,0 +1,51 @@
