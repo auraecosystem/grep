@@ -11,6 +11,7 @@ Vcs-Browser: http://git.debian.org/?p=collab-maint/grep.git
 
 Package: grep
 Architecture: any
+Multi-Arch: foreign
 Essential: yes
 Pre-Depends: ${shlibs:Depends}
 Depends: ${misc:Depends}, dpkg (>= 1.15.4) | install-info
