@@ -1,8 +1,14 @@
+grep (2.14-5~2) UNRELEASED; urgency=low
+
+  * d/control: Sets Multi-Arch to foreign (Closes: #726391)
+
+ -- Santiago Ruano Rincón <santiago@debian.org>  Wed, 16 Oct 2013 22:21:55 +0200
+
 grep (2.14-4) unstable; urgency=low
 
   * Making debian/copyright machine-readable, according to the specification
     of version 1.0
-  * Fixing matching of multi-byte white spaces
+  * d/patches/95-sS-multibyte.patch: Fixes matching of multi-byte white spaces
   * debian/rules: using dh_autoreconf tools
 
  -- Santiago Ruano Rincón <santiago@debian.org>  Wed, 02 Oct 2013 15:00:06 +0200
