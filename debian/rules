@@ -23,7 +23,6 @@ LIBS= -Wl,--no-as-needed -ldl -Wl,--as-needed
 
 config.status: configure
 	dh_testdir
-	dh_autoreconf
 	cp -f /usr/share/misc/config.sub /usr/share/misc/config.guess .
 	./configure $(CROSS) --prefix=/usr --exec-prefix=/ --mandir=\$${prefix}/share/man --infodir=\$${prefix}/share/info --without-included-regex CFLAGS="$(CFLAGS)" CPPFLAGS="$(CPPFLAGS)" LDFLAGS="$(LDFLAGS)" LIBS="$(LIBS)"
 
@@ -37,7 +36,6 @@ build-stamp: config.status
 
 clean: 
 	dh_testdir
-	dh_autoreconf_clean
 	dh_testroot
 	rm -f build-stamp 
 	[ ! -f Makefile ] || $(MAKE) distclean
