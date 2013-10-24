@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grep 2.5.1a\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2012-08-20 08:12+0200\n"
+"POT-Creation-Date: 2013-10-22 21:54-0700\n"
 "PO-Revision-Date: 2005-03-04 14:55+0200\n"
 "Last-Translator: Eli Zaretskii <eliz@gnu.org>\n"
 "Language-Team: Hebrew <eliz@gnu.org>\n"
@@ -16,9 +16,9 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: lib/argmatch.c:133
-#, fuzzy, c-format
+#, c-format
 msgid "invalid argument %s for %s"
-msgstr "יוגש יברימ רפסמ"
+msgstr ""
 
 #: lib/argmatch.c:134
 #, c-format
@@ -29,7 +29,7 @@ msgstr ""
 msgid "Valid arguments are:"
 msgstr ""
 
-#: lib/closeout.c:112 src/main.c:952
+#: lib/closeout.c:112 src/main.c:950
 #, c-format
 msgid "write error"
 msgstr ""
@@ -94,7 +94,7 @@ msgid "%s: option '-W %s' requires an argument\n"
 msgstr "%s תינכת רובע טנמוגרא בייחמ `%s' ןייפאמ\n"
 
 #: lib/obstack.c:413 lib/obstack.c:415 lib/xalloc-die.c:34 src/kwset.c:178
-#: src/kwset.c:186 src/kwset.c:409 src/pcresearch.c:153
+#: src/kwset.c:186 src/kwset.c:409 src/pcresearch.c:182
 #, c-format
 msgid "memory exhausted"
 msgstr "ןורכזה רמגנ"
@@ -138,75 +138,75 @@ msgstr "`"
 msgid "'"
 msgstr "'"
 
-#: lib/regcomp.c:130
+#: lib/regcomp.c:131
 msgid "Success"
 msgstr ""
 
-#: lib/regcomp.c:133
+#: lib/regcomp.c:134
 msgid "No match"
 msgstr ""
 
-#: lib/regcomp.c:136
+#: lib/regcomp.c:137
 msgid "Invalid regular expression"
 msgstr ""
 
-#: lib/regcomp.c:139
+#: lib/regcomp.c:140
 msgid "Invalid collation character"
 msgstr ""
 
-#: lib/regcomp.c:142
+#: lib/regcomp.c:143
 msgid "Invalid character class name"
 msgstr ""
 
-#: lib/regcomp.c:145
+#: lib/regcomp.c:146
 msgid "Trailing backslash"
 msgstr ""
 
-#: lib/regcomp.c:148
+#: lib/regcomp.c:149
 msgid "Invalid back reference"
 msgstr ""
 
-#: lib/regcomp.c:151
+#: lib/regcomp.c:152
 msgid "Unmatched [ or [^"
 msgstr ""
 
-#: lib/regcomp.c:154
+#: lib/regcomp.c:155
 msgid "Unmatched ( or \\("
 msgstr ""
 
-#: lib/regcomp.c:157
+#: lib/regcomp.c:158
 msgid "Unmatched \\{"
 msgstr ""
 
-#: lib/regcomp.c:160 src/dfa.c:1371
+#: lib/regcomp.c:161 src/dfa.c:1374
 msgid "Invalid content of \\{\\}"
 msgstr ""
 
-#: lib/regcomp.c:163
+#: lib/regcomp.c:164
 msgid "Invalid range end"
 msgstr ""
 
-#: lib/regcomp.c:166
+#: lib/regcomp.c:167
 msgid "Memory exhausted"
 msgstr "ןורכזה רמגנ"
 
-#: lib/regcomp.c:169
+#: lib/regcomp.c:170
 msgid "Invalid preceding regular expression"
 msgstr ""
 
-#: lib/regcomp.c:172
+#: lib/regcomp.c:173
 msgid "Premature end of regular expression"
 msgstr ""
 
-#: lib/regcomp.c:175 src/dfa.c:1374
+#: lib/regcomp.c:176 src/dfa.c:1377
 msgid "Regular expression too big"
 msgstr ""
 
-#: lib/regcomp.c:178
+#: lib/regcomp.c:179
 msgid "Unmatched ) or \\)"
 msgstr ""
 
-#: lib/regcomp.c:703
+#: lib/regcomp.c:707
 msgid "No previous regular expression"
 msgstr ""
 
@@ -332,7 +332,7 @@ msgstr ""
 #. for this package.  Please add _another line_ saying
 #. "Report translation bugs to <...>\n" with the address for translation
 #. bugs (typically your translation team's web or email address).
-#: lib/version-etc.c:245 src/main.c:1629
+#: lib/version-etc.c:245 src/main.c:1627
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -342,11 +342,9 @@ msgstr ""
 ".<bug-grep@gnu.org> תבותכל הלקת יחוויד חולשל אנ\n"
 
 #: lib/version-etc.c:247
-#, fuzzy, c-format
+#, c-format
 msgid "Report %s bugs to: %s\n"
 msgstr ""
-"\n"
-".<bug-grep@gnu.org> תבותכל הלקת יחוויד חולשל אנ\n"
 
 #: lib/version-etc.c:251
 #, c-format
@@ -358,56 +356,56 @@ msgstr ""
 msgid "%s home page: <http://www.gnu.org/software/%s/>\n"
 msgstr ""
 
-#: lib/version-etc.c:256 src/main.c:1632
+#: lib/version-etc.c:256 src/main.c:1630
 msgid "General help using GNU software: <http://www.gnu.org/gethelp/>\n"
 msgstr ""
 
 #: lib/xstrtol-error.c:63
-#, fuzzy, c-format
+#, c-format
 msgid "invalid %s%s argument '%s'"
-msgstr "יוגש יברימ רפסמ"
+msgstr ""
 
 #: lib/xstrtol-error.c:68
-#, fuzzy, c-format
+#, c-format
 msgid "invalid suffix in %s%s argument '%s'"
-msgstr "יוגש יברימ רפסמ"
+msgstr ""
 
 #: lib/xstrtol-error.c:72
 #, c-format
 msgid "%s%s argument '%s' too large"
 msgstr ""
 
-#: src/dfa.c:952 src/dfa.c:955 src/dfa.c:975 src/dfa.c:985 src/dfa.c:997
-#: src/dfa.c:1048 src/dfa.c:1057 src/dfa.c:1060 src/dfa.c:1065 src/dfa.c:1078
-#: src/dfa.c:1135
+#: src/dfa.c:956 src/dfa.c:959 src/dfa.c:979 src/dfa.c:989 src/dfa.c:1001
+#: src/dfa.c:1052 src/dfa.c:1061 src/dfa.c:1064 src/dfa.c:1069 src/dfa.c:1082
+#: src/dfa.c:1138
 #, fuzzy
 msgid "unbalanced ["
 msgstr "גוז-ןב ול ןיאש ["
 
-#: src/dfa.c:1006
+#: src/dfa.c:1010
 msgid "invalid character class"
 msgstr ""
 
-#: src/dfa.c:1172
+#: src/dfa.c:1175
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr ""
 
-#: src/dfa.c:1224
+#: src/dfa.c:1227
 #, fuzzy
 msgid "unfinished \\ escape"
 msgstr "הרומג-יתלב \\ הרקב תרדס"
 
-#: src/dfa.c:1759
+#: src/dfa.c:1793
 #, fuzzy
 msgid "unbalanced ("
 msgstr "גוז-ןב ול ןיאש ("
 
-#: src/dfa.c:1886
+#: src/dfa.c:1919
 #, fuzzy
 msgid "no syntax specified"
 msgstr "ריבחת תרדגה ןיא"
 
-#: src/dfa.c:1894
+#: src/dfa.c:1927
 #, fuzzy
 msgid "unbalanced )"
 msgstr "גוז-ןב ול ןיאש )"
@@ -439,66 +437,66 @@ msgid ""
 msgstr ""
 
 #. This is a proper name. See the gettext manual, section Names.
-#: src/main.c:58
+#: src/main.c:56
 msgid "Mike Haertel"
 msgstr ""
 
-#: src/main.c:59
+#: src/main.c:57
 msgid "others, see <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
 msgstr ""
 
-#: src/main.c:501
+#: src/main.c:499
 msgid "invalid context length argument"
 msgstr "רשקהה טסקט ךרוא לש היוגש הרדגה"
 
-#: src/main.c:570
+#: src/main.c:568
 msgid "lseek failed"
 msgstr ""
 
-#: src/main.c:708
+#: src/main.c:706
 #, c-format
 msgid "input is too large to count"
 msgstr "רופסל ידכמ לודג טלק"
 
-#: src/main.c:1265
+#: src/main.c:1263
 #, c-format
 msgid "Binary file %s matches\n"
 msgstr "המיאתמ תזורחמ ליכמ %s יראניב ץבוק\n"
 
-#: src/main.c:1308
+#: src/main.c:1306
 #, fuzzy, c-format
 msgid "warning: %s: %s"
 msgstr "%s %s :הרהזא\n"
 
-#: src/main.c:1309
+#: src/main.c:1307
 msgid "recursive directory loop"
 msgstr "היקיתב היסרוקר תאלול"
 
-#: src/main.c:1457
+#: src/main.c:1455
 #, c-format
 msgid "input file %s is also the output"
 msgstr ""
 
-#: src/main.c:1515
+#: src/main.c:1513
 msgid "(standard input)"
 msgstr "(ינקת טלק ץורע)"
 
-#: src/main.c:1531 src/main.c:1538
+#: src/main.c:1529 src/main.c:1536
 #, c-format
 msgid "Usage: %s [OPTION]... PATTERN [FILE]...\n"
 msgstr "%s [םינייפאמ]... PATTERN [ץבוק]  :שומישה ןפוא\n"
 
-#: src/main.c:1533
+#: src/main.c:1531
 #, fuzzy, c-format
 msgid "Try '%s --help' for more information.\n"
 msgstr ".רתוי בר עדימ תגצהל `%s --help' הסנ\n"
 
-#: src/main.c:1539
+#: src/main.c:1537
 #, c-format
 msgid "Search for PATTERN in each FILE or standard input.\n"
 msgstr ""
 
-#: src/main.c:1542
+#: src/main.c:1540
 #, fuzzy, c-format
 msgid ""
 "Example: %s -i 'hello world' menu.h main.c\n"
@@ -510,7 +508,7 @@ msgstr ""
 "\n"
 "                                        :םיירלוגרה םייטיבה גוויסו הריחב\n"
 
-#: src/main.c:1547
+#: src/main.c:1545
 #, fuzzy, c-format
 msgid ""
 "  -E, --extended-regexp     PATTERN is an extended regular expression (ERE)\n"
@@ -524,7 +522,7 @@ msgstr ""
 "                  יסיסב ירלוגר יוטיב אוה PATTERN   -E, --extended-regexp\n"
 "            Perl ןונגסב ירלוגר יוטיב אוה PATTERN   -P, --perl-regexp\n"
 
-#: src/main.c:1553
+#: src/main.c:1551
 #, fuzzy, c-format
 msgid ""
 "  -e, --regexp=PATTERN      use PATTERN for matching\n"
@@ -541,7 +539,7 @@ msgstr ""
 "           תומלש תורושל קרו ךא םיאתהל PATTERN לע   -x, --line-regexp\n"
 "           newline-ב אל ,0-תיבב תמייתסמ טלק תרוש   -z, --null-data\n"
 
-#: src/main.c:1560
+#: src/main.c:1558
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -560,7 +558,7 @@ msgstr ""
 "                     תינכתהמ אצו הז הרזע ךסמ גצה       --help\n"
 "    ןורכזל תורישי טלק יצבק יופימב שמתשה ,רשפא םא       --mmap\n"
 
-#: src/main.c:1568
+#: src/main.c:1566
 #, c-format
 msgid ""
 "\n"
@@ -575,7 +573,7 @@ msgid ""
 "prefix\n"
 msgstr ""
 
-#: src/main.c:1579
+#: src/main.c:1577
 #, c-format
 msgid ""
 "  -o, --only-matching       show only the part of a line matching PATTERN\n"
@@ -585,7 +583,7 @@ msgid ""
 "  -a, --text                equivalent to --binary-files=text\n"
 msgstr ""
 
-#: src/main.c:1586
+#: src/main.c:1584
 #, c-format
 msgid ""
 "  -I                        equivalent to --binary-files=without-match\n"
@@ -597,7 +595,7 @@ msgid ""
 "  -R, --dereference-recursive  likewise, but follow all symlinks\n"
 msgstr ""
 
-#: src/main.c:1595
+#: src/main.c:1593
 #, c-format
 msgid ""
 "      --include=FILE_PATTERN  search only files that match FILE_PATTERN\n"
@@ -608,7 +606,7 @@ msgid ""
 "skipped.\n"
 msgstr ""
 
-#: src/main.c:1601
+#: src/main.c:1599
 #, c-format
 msgid ""
 "  -L, --files-without-match  print only names of FILEs containing no match\n"
@@ -618,7 +616,7 @@ msgid ""
 "  -Z, --null                print 0 byte after FILE name\n"
 msgstr ""
 
-#: src/main.c:1607
+#: src/main.c:1605
 #, c-format
 msgid ""
 "\n"
@@ -628,7 +626,7 @@ msgid ""
 "  -C, --context=NUM         print NUM lines of output context\n"
 msgstr ""
 
-#: src/main.c:1614
+#: src/main.c:1612
 #, fuzzy, c-format
 msgid ""
 "  -NUM                      same as --context=NUM\n"
@@ -658,7 +656,7 @@ msgstr ""
 "                                     .-h עמתשמ ,םיצבק ינשמ תוחפ םינותנ םא\n"
 "       .תולקת לש הרקמב 2 ,ואצמנ אל םא 1 ,תומאתה ואצמנ םא 0 וניה האיצי דוק\n"
 
-#: src/main.c:1624
+#: src/main.c:1622
 #, c-format
 msgid ""
 "When FILE is -, read standard input.  With no FILE, read . if a command-"
@@ -668,68 +666,78 @@ msgid ""
 "if any error occurs and -q is not given, the exit status is 2.\n"
 msgstr ""
 
-#: src/main.c:1630
+#: src/main.c:1628
 #, c-format
 msgid "GNU Grep home page: <%s>\n"
 msgstr ""
 
-#: src/main.c:1662
+#: src/main.c:1660
 #, c-format
 msgid "%s can only use the %s pattern syntax"
 msgstr ""
 
-#: src/main.c:1665
+#: src/main.c:1663
 #, c-format
 msgid "conflicting matchers specified"
 msgstr "המאתהה יגוס לש םירתוס םינויצ"
 
-#: src/main.c:1679
+#: src/main.c:1677
 #, fuzzy, c-format
 msgid "invalid matcher %s"
 msgstr "יוגש יברימ רפסמ"
 
-#: src/main.c:1927
+#: src/main.c:1926
 #, c-format
 msgid "unknown devices method"
 msgstr "םינקתהב לופיטל תרכומ-יתלב תטיש"
 
-#: src/main.c:2056
+#: src/main.c:2057
 #, c-format
 msgid "invalid max count"
 msgstr "יוגש יברימ רפסמ"
 
-#: src/main.c:2113
+#: src/main.c:2114
 #, c-format
 msgid "unknown binary-files type"
 msgstr "םייראניב םיצבקב לופיטל תרכומ-יתלב תטיש"
 
-#: src/main.c:2172
+#: src/main.c:2173
 #, c-format
 msgid "the --mmap option has been a no-op since 2010"
 msgstr ""
 
-#: src/pcresearch.c:42
+#: src/pcresearch.c:51
 msgid ""
 "support for the -P option is not compiled into this --disable-perl-regexp "
 "binary"
 msgstr ""
 
-#: src/pcresearch.c:56
+#: src/pcresearch.c:70
 #, fuzzy, c-format
 msgid "the -P option only supports a single pattern"
 msgstr "-P ןייפאמב הכימת ןיא"
 
-#: src/pcresearch.c:110
+#: src/pcresearch.c:116
+#, c-format
+msgid "internal error (should never happen)"
+msgstr ""
+
+#: src/pcresearch.c:125
+#, c-format
+msgid "cannot allocate memory for the JIT stack"
+msgstr ""
+
+#: src/pcresearch.c:139
 #, c-format
 msgid "internal error"
 msgstr ""
 
-#: src/pcresearch.c:138
+#: src/pcresearch.c:167
 #, c-format
 msgid "exceeded PCRE's line length limit"
 msgstr ""
 
-#: src/pcresearch.c:157
+#: src/pcresearch.c:186
 #, c-format
 msgid "exceeded PCRE's backtracking limit"
 msgstr ""
@@ -740,24 +748,15 @@ msgstr ""
 #~ msgid "malformed repeat count"
 #~ msgstr "תונשיה הנומ תרדגהב יוגש ריבחת"
 
+#~ msgid "out of memory"
+#~ msgstr "ןורכזה רמגנ"
+
 #~ msgid "writing output"
 #~ msgstr "(טלפ תביתכ תעב הלקת)"
 
-#, fuzzy
-#~ msgid "%s: option '%s' is ambiguous\n"
-#~ msgstr "%s תינכת רובע יעמשמ-דח וניא `-W %s' ןייפאמ\n"
+#~ msgid "Usage: %s [OPTION]... PATTERN [FILE] ...\n"
+#~ msgstr "%s [םינייפאמ]... PATTERN [ץבוק]  :שומישה ןפוא\n"
 
-#, fuzzy
-#~ msgid "warning: %s"
-#~ msgstr "%s %s :הרהזא\n"
-
-#~ msgid "unknown directories method"
-#~ msgstr "תויקיתב לופיטל תרכומ-יתלב תטיש"
-
-#~ msgid "The -P and -z options cannot be combined"
-#~ msgstr "הז תא הז םירתוס -z-ו -P םינייפאמ"
-
-#, fuzzy
 #~ msgid ""
 #~ "\n"
 #~ "Output control:\n"
@@ -771,28 +770,23 @@ msgstr ""
 #~ "  -o, --only-matching       show only the part of a line matching "
 #~ "PATTERN\n"
 #~ "  -q, --quiet, --silent     suppress all normal output\n"
-#~ "      --binary-files=TYPE   assume that binary files are TYPE;\n"
-#~ "                            TYPE is `binary', `text', or `without-match'\n"
+#~ "      --binary-files=TYPE   assume that binary files are TYPE\n"
+#~ "                            TYPE is 'binary', 'text', or 'without-match'\n"
 #~ "  -a, --text                equivalent to --binary-files=text\n"
 #~ "  -I                        equivalent to --binary-files=without-match\n"
-#~ "  -d, --directories=ACTION  how to handle directories;\n"
-#~ "                            ACTION is `read', `recurse', or `skip'\n"
-#~ "  -D, --devices=ACTION      how to handle devices, FIFOs and sockets;\n"
-#~ "                            ACTION is `read' or `skip'\n"
+#~ "  -d, --directories=ACTION  how to handle directories\n"
+#~ "                            ACTION is 'read', 'recurse', or 'skip'\n"
+#~ "  -D, --devices=ACTION      how to handle devices, FIFOs and sockets\n"
+#~ "                            ACTION is 'read' or 'skip'\n"
 #~ "  -R, -r, --recursive       equivalent to --directories=recurse\n"
-#~ "      --include=FILE_PATTERN  search only files that match FILE_PATTERN\n"
-#~ "      --exclude=FILE_PATTERN  skip files and directories matching "
-#~ "FILE_PATTERN\n"
-#~ "      --exclude-from=FILE   skip files matching any file pattern from "
-#~ "FILE\n"
-#~ "      --exclude-dir=PATTERN  directories that match PATTERN will be "
+#~ "      --include=PATTERN     files that match PATTERN will be examined\n"
+#~ "      --exclude=PATTERN     files that match PATTERN will be skipped.\n"
+#~ "      --exclude-from=FILE   files that match PATTERN in FILE will be "
 #~ "skipped.\n"
-#~ "  -L, --files-without-match  print only names of FILEs containing no "
-#~ "match\n"
-#~ "  -l, --files-with-matches  print only names of FILEs containing matches\n"
-#~ "  -c, --count               print only a count of matching lines per "
+#~ "  -L, --files-without-match only print FILE names containing no match\n"
+#~ "  -l, --files-with-matches  only print FILE names containing matches\n"
+#~ "  -c, --count               only print a count of matching lines per "
 #~ "FILE\n"
-#~ "  -T, --initial-tab         make tabs line up (if needed)\n"
 #~ "  -Z, --null                print 0 byte after FILE name\n"
 #~ msgstr ""
 #~ "\n"
@@ -828,14 +822,8 @@ msgstr ""
 #~ "          ץבוק לכב תומאותה תורושה רפסמ תא קר גצה   -c, --count\n"
 #~ "                          0 תיבב ץבוק םש לכ םייס   -Z, --null\n"
 
-#~ msgid "%s: illegal option -- %c\n"
-#~ msgstr "%s: יקוח-יתלב ןייפאמ -- %c\n"
-
-#~ msgid "out of memory"
-#~ msgstr "ןורכזה רמגנ"
-
-#~ msgid "Usage: %s [OPTION]... PATTERN [FILE] ...\n"
-#~ msgstr "%s [םינייפאמ]... PATTERN [ץבוק]  :שומישה ןפוא\n"
+#~ msgid "unknown directories method"
+#~ msgstr "תויקיתב לופיטל תרכומ-יתלב תטיש"
 
 #~ msgid "%s (GNU grep) %s\n"
 #~ msgstr "%s (GNU grep) %s\n"
@@ -855,3 +843,9 @@ msgstr ""
 #~ "הנכת\n"
 #~ "   .תמיוסמ תילכת וזיאל המאתה וא תוריחס םשל עמתשמב-תוירחא אל וליפא ;"
 #~ "תוירחא\n"
+
+#~ msgid "The -P and -z options cannot be combined"
+#~ msgstr "הז תא הז םירתוס -z-ו -P םינייפאמ"
+
+#~ msgid "%s: illegal option -- %c\n"
+#~ msgstr "%s: יקוח-יתלב ןייפאמ -- %c\n"

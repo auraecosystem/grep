@@ -1,5 +1,5 @@
 /* obstack.h - object stack macros
-   Copyright (C) 1988-1994, 1996-1999, 2003-2006, 2009-2012 Free Software
+   Copyright (C) 1988-1994, 1996-1999, 2003-2006, 2009-2013 Free Software
    Foundation, Inc.
    This file is part of the GNU C Library.
 
@@ -183,7 +183,7 @@ extern int _obstack_begin (struct obstack *, int, int,
 extern int _obstack_begin_1 (struct obstack *, int, int,
                              void *(*) (void *, long),
                              void (*) (void *, void *), void *);
-extern int _obstack_memory_used (struct obstack *);
+extern int _obstack_memory_used (struct obstack *) _GL_ATTRIBUTE_PURE;
 
 /* The default name of the function for freeing a chunk is 'obstack_free',
    but gnulib users can override this by defining '__obstack_free'.  */
@@ -342,14 +342,16 @@ __extension__                                                           \
 # define obstack_ptr_grow_fast(OBSTACK,aptr)                            \
 __extension__                                                           \
 ({ struct obstack *__o1 = (OBSTACK);                                    \
-   *(const void **) __o1->next_free = (aptr);                           \
+   void *__p1 = __o1->next_free;                                        \
+   *(const void **) __p1 = (aptr);                                      \
    __o1->next_free += sizeof (const void *);                            \
    (void) 0; })
 
 # define obstack_int_grow_fast(OBSTACK,aint)                            \
 __extension__                                                           \
 ({ struct obstack *__o1 = (OBSTACK);                                    \
-   *(int *) __o1->next_free = (aint);                                   \
+   void *__p1 = __o1->next_free;                                        \
+   *(int *) __p1 = (aint);                                              \
    __o1->next_free += sizeof (int);                                     \
    (void) 0; })
 
