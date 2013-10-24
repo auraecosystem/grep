@@ -1,8 +1,6 @@
-diff --git a/doc/grep.in.1 b/doc/grep.in.1
-index 4bf03b4..14ec84c 100644
 --- a/doc/grep.in.1
 +++ b/doc/grep.in.1
-@@ -114,7 +114,7 @@ This is the default.
+@@ -118,7 +118,7 @@
  .BR \-P ", " \-\^\-perl\-regexp
  Interpret
  .I PATTERN
@@ -11,7 +9,7 @@ index 4bf03b4..14ec84c 100644
  This is highly experimental and
  .B "grep \-P"
  may warn of unimplemented features.
-@@ -603,7 +603,7 @@ expressions, by using various operators to combine smaller expressions.
+@@ -608,7 +608,7 @@
  .PP
  .B grep
  understands three different versions of regular expression syntax:
@@ -20,7 +18,7 @@ index 4bf03b4..14ec84c 100644
  .RB "\s-1GNU\s0\ " grep ,
  there is no difference in available functionality between basic and
  extended syntaxes.
-@@ -611,8 +611,8 @@ In other implementations, basic regular expressions are less powerful.
+@@ -616,8 +616,8 @@
  The following description applies to extended regular expressions;
  differences for basic regular expressions are summarized afterwards.
  Perl regular expressions give additional functionality, and are
@@ -31,11 +29,9 @@ index 4bf03b4..14ec84c 100644
  .PP
  The fundamental building blocks are the regular expressions
  that match a single character.
-diff --git a/doc/grep.info b/doc/grep.info
-index 92d4c7a..f34a8d8 100644
 --- a/doc/grep.info
 +++ b/doc/grep.info
-@@ -778,7 +778,7 @@ options.
+@@ -778,7 +778,7 @@
  
  `-P'
  `--perl-regexp'
@@ -44,7 +40,7 @@ index 92d4c7a..f34a8d8 100644
       highly experimental and `grep -P' may warn of unimplemented
       features.
  
-@@ -799,7 +799,7 @@ A "regular expression" is a pattern that describes a set of strings.
+@@ -799,7 +799,7 @@
  Regular expressions are constructed analogously to arithmetic
  expressions, by using various operators to combine smaller expressions.
  `grep' understands three different versions of regular expression

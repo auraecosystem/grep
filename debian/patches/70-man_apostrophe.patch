@@ -1,6 +1,6 @@
---- a/doc/grep.in.1	2012-03-05 21:51:58.000000000 +1100
-+++ b/doc/grep.in.1	2012-05-08 11:45:38.000000000 +1000
-@@ -819,7 +819,7 @@ attempts to support traditional usage by
+--- a/doc/grep.in.1
++++ b/doc/grep.in.1
+@@ -835,7 +835,7 @@
  is not special if it would be the start of an invalid interval
  specification.
  For example, the command
@@ -9,7 +9,7 @@
  searches for the two-character string
  .B {1
  instead of reporting a syntax error in the regular expression.
-@@ -859,7 +859,7 @@ to be placed in front of any explicit op
+@@ -875,7 +875,7 @@
  For example, if
  .B GREP_OPTIONS
  is
