@@ -1,0 +1,164 @@
+grep's \s and \S failed to work with multi-byte white space characters.
+For example, \s would fail to match a non-breaking space, and this
+would print nothing: LC_ALL=en_US.utf8 printf '\xc2\xa0' | grep '\s'
+A related bug is that \S would mistakenly match an invalid multibyte
+character.  E.g. this would match: printf '\x82\n' | src/grep '^\S$'
+[bug present since 2.6]
+
+--- a/src/dfa.c
++++ b/src/dfa.c
+@@ -1432,14 +1432,45 @@
+         case 'S':
+           if (!backslash || (syntax_bits & RE_NO_GNU_OPS))
+             goto normal_char;
+-          zeroset (ccl);
+-          for (c2 = 0; c2 < NOTCHAR; ++c2)
+-            if (isspace (c2))
+-              setbit (c2, ccl);
+-          if (c == 'S')
+-            notset (ccl);
+-          laststart = 0;
+-          return lasttok = CSET + charclass_index (ccl);
++          if (MB_CUR_MAX == 1)
++            {
++              zeroset (ccl);
++              for (c2 = 0; c2 < NOTCHAR; ++c2)
++                if (isspace (c2))
++                  setbit (c2, ccl);
++              if (c == 'S')
++                notset (ccl);
++              laststart = 0;
++              return lasttok = CSET + charclass_index (ccl);
++            }
++
++#define PUSH_LEX_STATE(s)			\
++  do						\
++    {						\
++      char const *lexptr_saved = lexptr;	\
++      size_t lexleft_saved = lexleft;		\
++      lexptr = (s);				\
++      lexleft = strlen (lexptr)
++
++#define POP_LEX_STATE()				\
++      lexptr = lexptr_saved;			\
++      lexleft = lexleft_saved;			\
++    }						\
++  while (0)
++
++          /* FIXME: see if optimizing this, as is done with ANYCHAR and
++             add_utf8_anychar, makes sense.  */
++
++          /* \s and \S are documented to be equivalent to [[:space:]] and
++             [^[:space:]] respectively, so tell the lexer to process those
++             strings, each minus its "already processed" '['.  */
++          PUSH_LEX_STATE (c == 's' ? "[:space:]]" : "^[:space:]]");
++
++          lasttok = parse_bracket_exp ();
++
++          POP_LEX_STATE ();
++
++          return lasttok;
+ 
+         case 'w':
+         case 'W':
+--- a/tests/Makefile.am
++++ b/tests/Makefile.am
+@@ -37,6 +37,7 @@
+   backref					\
+   backref-multibyte-slow			\
+   backref-word					\
++  backslash-s-vs-invalid-multitype		\
+   big-hole					\
+   big-match					\
+   bogus-wctob					\
+@@ -69,6 +70,7 @@
+   inconsistent-range                            \
+   khadafy					\
+   max-count-vs-context				\
++  multibyte-white-space				\
+   empty-line-mb					\
+   unibyte-bracket-expr				\
+   high-bit-range				\
+--- /dev/null
++++ b/tests/backslash-s-vs-invalid-multitype
+@@ -0,0 +1,26 @@
++#! /bin/sh
++# Ensure that neither \s nor \S matches an invalid multibyte character.
++#
++# Copyright (C) 2013 Free Software Foundation, Inc.
++#
++# Copying and distribution of this file, with or without modification,
++# are permitted in any medium without royalty provided the copyright
++# notice and this notice are preserved.
++
++. "${srcdir=.}/init.sh"; path_prepend_ ../src
++
++require_en_utf8_locale_
++
++LC_ALL=en_US.UTF-8
++export LC_ALL
++
++printf '\x82\n' > in || framework_failure_
++
++fail=0
++grep '^\S$' in > out-S && fail=1
++compare /dev/null out-S || fail=1
++
++grep '^\s$' in > out-s && fail=1
++compare /dev/null out-s || fail=1
++
++Exit $fail
+--- /dev/null
++++ b/tests/multibyte-white-space
+@@ -0,0 +1,51 @@
++#! /bin/sh
++# Test whether \s matches SP and UTF-8 multi-byte white space characters.
++#
++# Copyright (C) 2013 Free Software Foundation, Inc.
++#
++# Copying and distribution of this file, with or without modification,
++# are permitted in any medium without royalty provided the copyright
++# notice and this notice are preserved.
++
++. "${srcdir=.}/init.sh"; path_prepend_ ../src
++
++require_en_utf8_locale_
++
++LC_ALL=en_US.UTF-8
++export LC_ALL
++
++# FIXME: including any the following in the list below would
++# make this test fail on Fedora 19/glibc-2.17-18.fc19.
++# Restore them to the list once it is fixed.
++these_fail_with_glibc='
++U+00A0 NO-BREAK SPACE: c2 a0
++U+2007 FIGURE SPACE: e2 80 87
++U+200B ZERO WIDTH SPACE: e2 80 8b
++U+202F NARROW NO-BREAK SPACE: e2 80 af
++'
++
++utf8_space_characters=$(sed 's/.*://;s/ /\\x/g' <<\EOF
++U+0020 SPACE: 20
++U+1680 OGHAM SPACE MARK: e1 9a 80
++U+2000 EN QUAD: e2 80 80
++U+2001 EM QUAD: e2 80 81
++U+2002 EN SPACE: e2 80 82
++U+2003 EM SPACE: e2 80 83
++U+2004 THREE-PER-EM SPACE: e2 80 84
++U+2005 FOUR-PER-EM SPACE: e2 80 85
++U+2006 SIX-PER-EM SPACE: e2 80 86
++U+2008 PUNCTUATION SPACE: e2 80 88
++U+2009 THIN SPACE: e2 80 89
++U+200A HAIR SPACE: e2 80 8a
++U+205F MEDIUM MATHEMATICAL SPACE: e2 81 9f
++U+3000 IDEOGRAPHIC SPACE: e3 80 80
++EOF
++)
++
++fail=0
++
++for i in $utf8_space_characters; do
++  printf "$i\n" | grep -q '^\s$' || { warn_ "$i FAILED"; fail=1; }
++done
++
++Exit $fail
