@@ -1,6 +1,11 @@
-grep (2.14-5~2) UNRELEASED; urgency=low
-
-  * d/control: Sets Multi-Arch to foreign (Closes: #726391)
+grep (2.15~pre-2.14.51-7a35-1~1) UNRELEASED-experimental; urgency=low
+  
+  * NOT RELEASE YET
+  * d/control: 
+    - Multi-Arch: foreign (Closes: #726391)
+    - Removed Build-deps: dh-autoreconf
+    - Added Build-deps: texinfo
+  * Updated d/patches/03-397262-dlopen-pcre.patch
 
  -- Santiago Ruano Rincón <santiago@debian.org>  Wed, 16 Oct 2013 22:21:55 +0200
 
