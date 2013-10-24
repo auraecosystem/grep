@@ -1,7 +1,7 @@
 dnl
 dnl autoconf input file for GNU grep
 dnl
-dnl Copyright (C) 1997-2006, 2009-2012 Free Software Foundation, Inc.
+dnl Copyright (C) 1997-2006, 2009-2013 Free Software Foundation, Inc.
 dnl
 dnl This file is part of GNU grep.
 dnl
@@ -43,7 +43,7 @@ fn_grep () {
   esac
 
   case $pattern in
-    [*[].^$\\*[]*]) dnl The outer brackets are for M4.
+    [*['].^$\*[']*]) dnl The outer brackets are for M4.
       AC_MSG_ERROR([fn_grep: regular expressions not supported])  ;;
   esac
 
@@ -68,7 +68,8 @@ AC_DEFINE([GREP], 1, [We are building grep])
 AC_PREREQ(2.59)
 
 dnl Automake stuff.
-AM_INIT_AUTOMAKE([1.11 no-dist-gzip dist-xz color-tests parallel-tests])
+AM_INIT_AUTOMAKE([1.11 no-dist-gzip dist-xz color-tests parallel-tests
+                  subdir-objects])
 AM_SILENT_RULES([yes]) # make --enable-silent-rules the default.
 
 AC_CONFIG_HEADERS([config.h:config.hin])
@@ -94,7 +95,11 @@ AC_ARG_ENABLE([gcc-warnings],
      *)      AC_MSG_ERROR([bad value $enableval for gcc-warnings option]) ;;
    esac
    gl_gcc_warnings=$enableval],
-  [gl_gcc_warnings=no]
+  [if test -d "$srcdir"/.git; then
+     gl_gcc_warnings=yes
+   else
+     gl_gcc_warnings=no
+   fi]
 )
 
 if test "$gl_gcc_warnings" = yes; then
@@ -152,8 +157,13 @@ if test "$gl_gcc_warnings" = yes; then
   AC_SUBST([WARN_CFLAGS])
 
   AC_DEFINE([lint], [1], [Define to 1 if the compiler is checking for lint.])
-  AC_DEFINE([_FORTIFY_SOURCE], [2],
-    [enable compile-time and run-time bounds-checking, and some warnings])
+  AH_VERBATIM([FORTIFY_SOURCE],
+  [/* Enable compile-time and run-time bounds-checking, and some warnings,
+      without upsetting glibc 2.15+. */
+   #if !defined _FORTIFY_SOURCE && defined __OPTIMIZE__ && __OPTIMIZE__
+   # define _FORTIFY_SOURCE 2
+   #endif
+  ])
   AC_DEFINE([GNULIB_PORTCHECK], [1], [enable some gnulib portability checks])
 
   # We use a slightly smaller set of warning options for lib/.
@@ -186,7 +196,7 @@ AC_FUNC_CLOSEDIR_VOID
 AC_CHECK_FUNCS_ONCE(isascii setlocale)
 
 dnl I18N feature
-AM_GNU_GETTEXT_VERSION([0.18])
+AM_GNU_GETTEXT_VERSION([0.18.2])
 AM_GNU_GETTEXT([external])
 
 dnl Some installers want to be informed if we do not use our regex.

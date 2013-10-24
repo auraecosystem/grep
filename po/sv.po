@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grep 2.10\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2012-08-20 08:12+0200\n"
+"POT-Creation-Date: 2013-10-22 21:54-0700\n"
 "PO-Revision-Date: 2011-11-21 08:51+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
@@ -32,7 +32,7 @@ msgstr "tvetydligt argument %s för %s"
 msgid "Valid arguments are:"
 msgstr "Giltiga argument är:"
 
-#: lib/closeout.c:112 src/main.c:952
+#: lib/closeout.c:112 src/main.c:950
 #, c-format
 msgid "write error"
 msgstr "skrivfel"
@@ -97,7 +97,7 @@ msgid "%s: option '-W %s' requires an argument\n"
 msgstr "%s: flaggan \"-W %s\" behöver ett argument\n"
 
 #: lib/obstack.c:413 lib/obstack.c:415 lib/xalloc-die.c:34 src/kwset.c:178
-#: src/kwset.c:186 src/kwset.c:409 src/pcresearch.c:153
+#: src/kwset.c:186 src/kwset.c:409 src/pcresearch.c:182
 #, c-format
 msgid "memory exhausted"
 msgstr "minnet är slut"
@@ -145,75 +145,75 @@ msgstr "\""
 msgid "'"
 msgstr "\""
 
-#: lib/regcomp.c:130
+#: lib/regcomp.c:131
 msgid "Success"
 msgstr "Lyckades"
 
-#: lib/regcomp.c:133
+#: lib/regcomp.c:134
 msgid "No match"
 msgstr "Ingen träff"
 
-#: lib/regcomp.c:136
+#: lib/regcomp.c:137
 msgid "Invalid regular expression"
 msgstr "Ogiltigt reguljärt uttryck"
 
-#: lib/regcomp.c:139
+#: lib/regcomp.c:140
 msgid "Invalid collation character"
 msgstr "Ogiltigt sorteringstecken"
 
-#: lib/regcomp.c:142
+#: lib/regcomp.c:143
 msgid "Invalid character class name"
 msgstr "Ogiltigt teckenklassnamn"
 
-#: lib/regcomp.c:145
+#: lib/regcomp.c:146
 msgid "Trailing backslash"
 msgstr "Efterföljande omvänt snedstreck"
 
-#: lib/regcomp.c:148
+#: lib/regcomp.c:149
 msgid "Invalid back reference"
 msgstr "Ogiltig bakåtreferens"
 
-#: lib/regcomp.c:151
+#: lib/regcomp.c:152
 msgid "Unmatched [ or [^"
 msgstr "Omatchad [ eller [^"
 
-#: lib/regcomp.c:154
+#: lib/regcomp.c:155
 msgid "Unmatched ( or \\("
 msgstr "Omatchad ( eller \\("
 
-#: lib/regcomp.c:157
+#: lib/regcomp.c:158
 msgid "Unmatched \\{"
 msgstr "Omatchad \\{"
 
-#: lib/regcomp.c:160 src/dfa.c:1371
+#: lib/regcomp.c:161 src/dfa.c:1374
 msgid "Invalid content of \\{\\}"
 msgstr "Ogiltigt innehåll i \\{\\}"
 
-#: lib/regcomp.c:163
+#: lib/regcomp.c:164
 msgid "Invalid range end"
 msgstr "Ogiltigt intervallslut"
 
-#: lib/regcomp.c:166
+#: lib/regcomp.c:167
 msgid "Memory exhausted"
 msgstr "Minnet är slut"
 
-#: lib/regcomp.c:169
+#: lib/regcomp.c:170
 msgid "Invalid preceding regular expression"
 msgstr "Ogiltigt inledande reguljärt uttryck"
 
-#: lib/regcomp.c:172
+#: lib/regcomp.c:173
 msgid "Premature end of regular expression"
 msgstr "För tidigt slut på reguljärt uttryck"
 
-#: lib/regcomp.c:175 src/dfa.c:1374
+#: lib/regcomp.c:176 src/dfa.c:1377
 msgid "Regular expression too big"
 msgstr "Reguljärt uttryck är för stort"
 
-#: lib/regcomp.c:178
+#: lib/regcomp.c:179
 msgid "Unmatched ) or \\)"
 msgstr "Omatchad ) eller \\)"
 
-#: lib/regcomp.c:703
+#: lib/regcomp.c:707
 msgid "No previous regular expression"
 msgstr "Inget tidigare reguljärt uttryck"
 
@@ -362,7 +362,7 @@ msgstr ""
 #. for this package.  Please add _another line_ saying
 #. "Report translation bugs to <...>\n" with the address for translation
 #. bugs (typically your translation team's web or email address).
-#: lib/version-etc.c:245 src/main.c:1629
+#: lib/version-etc.c:245 src/main.c:1627
 #, c-format
 msgid ""
 "\n"
@@ -389,7 +389,7 @@ msgstr "Webbplats för %s: <%s>\n"
 msgid "%s home page: <http://www.gnu.org/software/%s/>\n"
 msgstr "Webbplats för %s: <http://www.gnu.org/software/%s/>\n"
 
-#: lib/version-etc.c:256 src/main.c:1632
+#: lib/version-etc.c:256 src/main.c:1630
 msgid "General help using GNU software: <http://www.gnu.org/gethelp/>\n"
 msgstr "Allmän hjälp för GNU-programvara: <http://www.gnu.org/gethelp/>\n"
 
@@ -408,33 +408,33 @@ msgstr "ogiltigt suffix i %s%s-argumentet \"%s\""
 msgid "%s%s argument '%s' too large"
 msgstr "%s%s-argumentet \"%s\" är för stort"
 
-#: src/dfa.c:952 src/dfa.c:955 src/dfa.c:975 src/dfa.c:985 src/dfa.c:997
-#: src/dfa.c:1048 src/dfa.c:1057 src/dfa.c:1060 src/dfa.c:1065 src/dfa.c:1078
-#: src/dfa.c:1135
+#: src/dfa.c:956 src/dfa.c:959 src/dfa.c:979 src/dfa.c:989 src/dfa.c:1001
+#: src/dfa.c:1052 src/dfa.c:1061 src/dfa.c:1064 src/dfa.c:1069 src/dfa.c:1082
+#: src/dfa.c:1138
 msgid "unbalanced ["
 msgstr "obalanserad ["
 
-#: src/dfa.c:1006
+#: src/dfa.c:1010
 msgid "invalid character class"
 msgstr "ogiltig teckenklass"
 
-#: src/dfa.c:1172
+#: src/dfa.c:1175
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr "syntax för teckenklass är [[:space:]], inte [:space:]"
 
-#: src/dfa.c:1224
+#: src/dfa.c:1227
 msgid "unfinished \\ escape"
 msgstr "oavslutad \\-sekvens"
 
-#: src/dfa.c:1759
+#: src/dfa.c:1793
 msgid "unbalanced ("
 msgstr "obalanserad ("
 
-#: src/dfa.c:1886
+#: src/dfa.c:1919
 msgid "no syntax specified"
 msgstr "ingen syntax angiven"
 
-#: src/dfa.c:1894
+#: src/dfa.c:1927
 msgid "unbalanced )"
 msgstr "obalanserad )"
 
@@ -470,66 +470,66 @@ msgstr ""
 "Direktanrop som antingen \"egrep\" eller \"fgrep\" är föråldrat.\n"
 
 #. This is a proper name. See the gettext manual, section Names.
-#: src/main.c:58
+#: src/main.c:56
 msgid "Mike Haertel"
 msgstr "Mike Haertel"
 
-#: src/main.c:59
+#: src/main.c:57
 msgid "others, see <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
 msgstr "andra, se <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
 
-#: src/main.c:501
+#: src/main.c:499
 msgid "invalid context length argument"
 msgstr "ogiltigt argument till -A, -B eller -C"
 
-#: src/main.c:570
+#: src/main.c:568
 msgid "lseek failed"
 msgstr "lseek misslyckades"
 
-#: src/main.c:708
+#: src/main.c:706
 #, c-format
 msgid "input is too large to count"
 msgstr "det är för mycket indata för att räkna"
 
-#: src/main.c:1265
+#: src/main.c:1263
 #, c-format
 msgid "Binary file %s matches\n"
 msgstr "Binär fil %s matchar\n"
 
-#: src/main.c:1308
+#: src/main.c:1306
 #, c-format
 msgid "warning: %s: %s"
 msgstr "varning: %s: %s"
 
-#: src/main.c:1309
+#: src/main.c:1307
 msgid "recursive directory loop"
 msgstr "rekursiv katalogloop"
 
-#: src/main.c:1457
+#: src/main.c:1455
 #, c-format
 msgid "input file %s is also the output"
 msgstr "inmatningsfilen %s är även utmatningen"
 
-#: src/main.c:1515
+#: src/main.c:1513
 msgid "(standard input)"
 msgstr "(standard in)"
 
-#: src/main.c:1531 src/main.c:1538
+#: src/main.c:1529 src/main.c:1536
 #, c-format
 msgid "Usage: %s [OPTION]... PATTERN [FILE]...\n"
 msgstr "Användning: %s [FLAGGA]... MÖNSTER [FIL]...\n"
 
-#: src/main.c:1533
+#: src/main.c:1531
 #, fuzzy, c-format
 msgid "Try '%s --help' for more information.\n"
 msgstr "Försök med \"%s --help\" för mer information\n"
 
-#: src/main.c:1539
+#: src/main.c:1537
 #, c-format
 msgid "Search for PATTERN in each FILE or standard input.\n"
 msgstr "Sök efter MÖNSTER i varje FIL eller standard in.\n"
 
-#: src/main.c:1542
+#: src/main.c:1540
 #, c-format
 msgid ""
 "Example: %s -i 'hello world' menu.h main.c\n"
@@ -540,7 +540,7 @@ msgstr ""
 "\n"
 "Val och tolkning av reguljära uttryck:\n"
 
-#: src/main.c:1547
+#: src/main.c:1545
 #, c-format
 msgid ""
 "  -E, --extended-regexp     PATTERN is an extended regular expression (ERE)\n"
@@ -555,7 +555,7 @@ msgstr ""
 " -G, --basic-regexp         MÖNSTER är ett enkelt reguljärt uttryck (BRE)\n"
 " -P, --perl-regexp          MÖNSTER är ett reguljärt uttryck som i Perl\n"
 
-#: src/main.c:1553
+#: src/main.c:1551
 #, c-format
 msgid ""
 "  -e, --regexp=PATTERN      use PATTERN for matching\n"
@@ -572,7 +572,7 @@ msgstr ""
 " -x, --line-regexp          tvinga MÖNSTER att endast matcha hela rader\n"
 " -z, --null-data            en datarad slutar i 0 byte, inte nyradstecken\n"
 
-#: src/main.c:1560
+#: src/main.c:1558
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -591,7 +591,7 @@ msgstr ""
 "      --help                visa detta hjälpmeddelande och avsluta\n"
 "      --mmap                ignoreras för bakåtkompatibilitet\n"
 
-#: src/main.c:1568
+#: src/main.c:1566
 #, c-format
 msgid ""
 "\n"
@@ -616,7 +616,7 @@ msgstr ""
 "      --label=ETIKETT       skriv ut ETIKETT som filnamnsprefix för standard "
 "in\n"
 
-#: src/main.c:1579
+#: src/main.c:1577
 #, fuzzy, c-format
 msgid ""
 "  -o, --only-matching       show only the part of a line matching PATTERN\n"
@@ -633,7 +633,7 @@ msgstr ""
 "match\"\n"
 "  -a, --text                samma som --binary-files=text\n"
 
-#: src/main.c:1586
+#: src/main.c:1584
 #, fuzzy, c-format
 msgid ""
 "  -I                        equivalent to --binary-files=without-match\n"
@@ -651,7 +651,7 @@ msgstr ""
 "                            ÅTGÄRD är \"read\" eller \"skip\"\n"
 "  -R, -r, --recursive       samma som --directories=recurse\n"
 
-#: src/main.c:1595
+#: src/main.c:1593
 #, c-format
 msgid ""
 "      --include=FILE_PATTERN  search only files that match FILE_PATTERN\n"
@@ -668,7 +668,7 @@ msgstr ""
 "FIL\n"
 "      --exclude-dir=MÖNSTER kataloger som matchar MÖNSTER hoppas över.\n"
 
-#: src/main.c:1601
+#: src/main.c:1599
 #, c-format
 msgid ""
 "  -L, --files-without-match  print only names of FILEs containing no match\n"
@@ -687,7 +687,7 @@ msgstr ""
 "behövs)\n"
 "  -Z, --null                skriv ut 0-tecken efter FILnamn\n"
 
-#: src/main.c:1607
+#: src/main.c:1605
 #, c-format
 msgid ""
 "\n"
@@ -702,7 +702,7 @@ msgstr ""
 "  -A, --after-context=ANTAL  skriv ANTAL rader efter träffad rad\n"
 "  -C, --context=ANTAL        skriv ANTAL rader runt träffad rad\n"
 
-#: src/main.c:1614
+#: src/main.c:1612
 #, fuzzy, c-format
 msgid ""
 "  -NUM                      same as --context=NUM\n"
@@ -724,7 +724,7 @@ msgstr ""
 "  -u, --unix-byte-offsets   skriv offset som om CR-tecken inte förekommit\n"
 "\n"
 
-#: src/main.c:1624
+#: src/main.c:1622
 #, fuzzy, c-format
 msgid ""
 "When FILE is -, read standard input.  With no FILE, read . if a command-"
@@ -738,47 +738,47 @@ msgstr ""
 "anges, anta -h.  Avslutningsstatus är 0 om någon rad valdes, annars 1;\n"
 "om något fel inträffar och -q inte angavs, är avslutningsstatusen 2.\n"
 
-#: src/main.c:1630
+#: src/main.c:1628
 #, c-format
 msgid "GNU Grep home page: <%s>\n"
 msgstr "Webbplats för GNU Grep: <%s>\n"
 
-#: src/main.c:1662
+#: src/main.c:1660
 #, c-format
 msgid "%s can only use the %s pattern syntax"
 msgstr "%s kan endast använda %s-mönstersyntax"
 
-#: src/main.c:1665
+#: src/main.c:1663
 #, c-format
 msgid "conflicting matchers specified"
 msgstr "motstridiga söksträngar angivna"
 
-#: src/main.c:1679
+#: src/main.c:1677
 #, c-format
 msgid "invalid matcher %s"
 msgstr "ogiltig matchning %s"
 
-#: src/main.c:1927
+#: src/main.c:1926
 #, c-format
 msgid "unknown devices method"
 msgstr "okänd metod för enheter"
 
-#: src/main.c:2056
+#: src/main.c:2057
 #, c-format
 msgid "invalid max count"
 msgstr "ogiltigt värde för antal träffar"
 
-#: src/main.c:2113
+#: src/main.c:2114
 #, c-format
 msgid "unknown binary-files type"
 msgstr "okänd binärfiltyp"
 
-#: src/main.c:2172
+#: src/main.c:2173
 #, c-format
 msgid "the --mmap option has been a no-op since 2010"
 msgstr ""
 
-#: src/pcresearch.c:42
+#: src/pcresearch.c:51
 msgid ""
 "support for the -P option is not compiled into this --disable-perl-regexp "
 "binary"
@@ -786,22 +786,32 @@ msgstr ""
 "stöd för flaggan -P är inte inbyggd i den här binären med --disable-perl-"
 "regexp"
 
-#: src/pcresearch.c:56
+#: src/pcresearch.c:70
 #, c-format
 msgid "the -P option only supports a single pattern"
 msgstr "flaggan -P har endast stöd för ett mönster"
 
-#: src/pcresearch.c:110
+#: src/pcresearch.c:116
+#, c-format
+msgid "internal error (should never happen)"
+msgstr ""
+
+#: src/pcresearch.c:125
+#, c-format
+msgid "cannot allocate memory for the JIT stack"
+msgstr ""
+
+#: src/pcresearch.c:139
 #, c-format
 msgid "internal error"
 msgstr "internt fel"
 
-#: src/pcresearch.c:138
+#: src/pcresearch.c:167
 #, fuzzy, c-format
 msgid "exceeded PCRE's line length limit"
 msgstr "översteg gräns för PCRE-bakåtspårning"
 
-#: src/pcresearch.c:157
+#: src/pcresearch.c:186
 #, c-format
 msgid "exceeded PCRE's backtracking limit"
 msgstr "översteg gräns för PCRE-bakåtspårning"

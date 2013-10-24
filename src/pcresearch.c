@@ -1,5 +1,5 @@
 /* pcresearch.c - searching subroutines using PCRE for grep.
-   Copyright 2000, 2007, 2009-2012 Free Software Foundation, Inc.
+   Copyright 2000, 2007, 2009-2013 Free Software Foundation, Inc.
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -25,6 +25,9 @@
 #elif HAVE_PCRE_PCRE_H
 # include <pcre/pcre.h>
 #endif
+#if HAVE_LANGINFO_CODESET
+# include <langinfo.h>
+#endif
 
 #if HAVE_LIBPCRE
 /* Compiled internal form of a Perl regular expression.  */
@@ -32,6 +35,12 @@ static pcre *cre;
 
 /* Additional information about the pattern.  */
 static pcre_extra *extra;
+
+#ifdef PCRE_STUDY_JIT_COMPILE
+static pcre_jit_stack *jit_stack;
+#else
+#define PCRE_STUDY_JIT_COMPILE 0
+#endif
 #endif
 
 void
@@ -51,8 +60,13 @@ Pcompile (char const *pattern, size_t size)
   char const *p;
   char const *pnul;
 
+#if defined HAVE_LANGINFO_CODESET
+  if (STREQ (nl_langinfo (CODESET), "UTF-8"))
+    flags |= PCRE_UTF8;
+#endif
+
   /* FIXME: Remove these restrictions.  */
-  if (memchr(pattern, '\n', size))
+  if (memchr (pattern, '\n', size))
     error (EXIT_TROUBLE, 0, _("the -P option only supports a single pattern"));
 
   *n = '\0';
@@ -93,11 +107,26 @@ Pcompile (char const *pattern, size_t size)
   if (!cre)
     error (EXIT_TROUBLE, 0, "%s", ep);
 
-  extra = pcre_study (cre, 0, &ep);
+  extra = pcre_study (cre, PCRE_STUDY_JIT_COMPILE, &ep);
   if (ep)
     error (EXIT_TROUBLE, 0, "%s", ep);
 
+#if PCRE_STUDY_JIT_COMPILE
+  if (pcre_fullinfo (cre, extra, PCRE_INFO_JIT, &e))
+    error (EXIT_TROUBLE, 0, _("internal error (should never happen)"));
+
+  if (e)
+    {
+      /* A 32K stack is allocated for the machine code by default, which
+         can grow to 512K if necessary. Since JIT uses far less memory
+         than the interpreter, this should be enough in practice.  */
+      jit_stack = pcre_jit_stack_alloc (32 * 1024, 512 * 1024);
+      if (!jit_stack)
+        error (EXIT_TROUBLE, 0, _("cannot allocate memory for the JIT stack"));
+      pcre_assign_jit_stack (extra, NULL, jit_stack);
+    }
   free (re);
+#endif
 #endif
 }
 

@@ -1,5 +1,5 @@
 /* dfasearch.c - searching subroutines using dfa and regex for grep.
-   Copyright 1992, 1998, 2000, 2007, 2009-2012 Free Software Foundation, Inc.
+   Copyright 1992, 1998, 2000, 2007, 2009-2013 Free Software Foundation, Inc.
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -412,8 +412,7 @@ EGexecute (char const *buf, size_t size, size_t *match_size,
     } /* for (beg = end ..) */
 
  failure:
-  ret_val = -1;
-  goto out;
+  return -1;
 
  success:
   len = end - beg;
@@ -422,6 +421,5 @@ EGexecute (char const *buf, size_t size, size_t *match_size,
   mb_case_map_apply (map, &off, &len);
   *match_size = len;
   ret_val = off;
- out:
   return ret_val;
 }

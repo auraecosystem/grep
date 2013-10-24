@@ -1,5 +1,5 @@
 /* grep.c - main driver file for grep.
-   Copyright (C) 1992, 1997-2002, 2004-2012 Free Software Foundation, Inc.
+   Copyright (C) 1992, 1997-2002, 2004-2013 Free Software Foundation, Inc.
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -51,8 +51,6 @@
 #define SEP_CHAR_SELECTED ':'
 #define SEP_CHAR_REJECTED '-'
 #define SEP_STR_GROUP    "--"
-
-#define STREQ(a, b) (strcmp (a, b) == 0)
 
 #define AUTHORS \
   proper_name ("Mike Haertel"), \
@@ -1862,6 +1860,7 @@ main (int argc, char **argv)
   size_t cc;
   int opt, status, prepended;
   int prev_optind, last_recursive;
+  int fread_errno;
   intmax_t default_context;
   FILE *fp;
   exit_failure = EXIT_TROUBLE;
@@ -2011,13 +2010,15 @@ main (int argc, char **argv)
           ;
         keys = xrealloc (keys, keyalloc);
         oldcc = keycc;
-        while (!feof (fp)
-               && (cc = fread (keys + keycc, 1, keyalloc - 1 - keycc, fp)) > 0)
+        while ((cc = fread (keys + keycc, 1, keyalloc - 1 - keycc, fp)) != 0)
           {
             keycc += cc;
             if (keycc == keyalloc - 1)
               keys = x2nrealloc (keys, &keyalloc, sizeof *keys);
           }
+        fread_errno = errno;
+        if (ferror (fp))
+          error (EXIT_TROUBLE, fread_errno, "%s", optarg);
         if (fp != stdin)
           fclose (fp);
         /* Append final newline if file ended in non-newline. */
@@ -2186,7 +2187,7 @@ main (int argc, char **argv)
     color_option = isatty (STDOUT_FILENO) && should_colorize ();
   init_colorize ();
 
-  /* POSIX.2 says that -q overrides -l, which in turn overrides the
+  /* POSIX says that -q overrides -l, which in turn overrides the
      other output options.  */
   if (exit_on_match)
     list_files = 0;

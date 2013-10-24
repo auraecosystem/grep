@@ -1,8 +1,8 @@
-This is grep.info, produced by makeinfo version 4.13 from grep.texi.
+This is grep.info-t, produced by makeinfo version 4.13 from grep.texi.
 
 This manual is for `grep', a pattern matching engine.
 
-   Copyright (C) 1999-2002, 2005, 2008-2012 Free Software Foundation,
+   Copyright (C) 1999-2002, 2005, 2008-2013 Free Software Foundation,
 Inc.
 
      Permission is granted to copy, distribute and/or modify this
@@ -18,18 +18,18 @@ START-INFO-DIR-ENTRY
 END-INFO-DIR-ENTRY
 
 
-File: grep.info,  Node: Top,  Next: Introduction,  Up: (dir)
+File: grep.info-t,  Node: Top,  Next: Introduction,  Up: (dir)
 
 grep
 ****
 
 `grep' prints lines that contain a match for a pattern.
 
-   This manual is for version 2.14 of GNU Grep.
+   This manual is for version 2.14.51-7a35 of GNU Grep.
 
    This manual is for `grep', a pattern matching engine.
 
-   Copyright (C) 1999-2002, 2005, 2008-2012 Free Software Foundation,
+   Copyright (C) 1999-2002, 2005, 2008-2013 Free Software Foundation,
 Inc.
 
      Permission is granted to copy, distribute and/or modify this
@@ -50,7 +50,7 @@ Inc.
 * Index::                       Combined index.
 
 
-File: grep.info,  Node: Introduction,  Next: Invoking,  Prev: Top,  Up: Top
+File: grep.info-t,  Node: Introduction,  Next: Invoking,  Prev: Top,  Up: Top
 
 1 Introduction
 **************
@@ -68,7 +68,7 @@ a separator for the list of patterns, there is no way to match newline
 characters in a text.
 
 
-File: grep.info,  Node: Invoking,  Next: Regular Expressions,  Prev: Introduction,  Up: Top
+File: grep.info-t,  Node: Invoking,  Next: Regular Expressions,  Prev: Introduction,  Up: Top
 
 2 Invoking `grep'
 *****************
@@ -90,7 +90,7 @@ zero or more INPUT_FILE_NAMES.
 * grep Programs::               `grep' programs.
 
 
-File: grep.info,  Node: Command-line Options,  Next: Environment Variables,  Up: Invoking
+File: grep.info-t,  Node: Command-line Options,  Next: Environment Variables,  Up: Invoking
 
 2.1 Command-line Options
 ========================
@@ -116,7 +116,7 @@ for compatibility with older or more exotic implementations.
 matching engine is used.  *Note grep Programs::.
 
 
-File: grep.info,  Node: Generic Program Information,  Next: Matching Control,  Up: Command-line Options
+File: grep.info-t,  Node: Generic Program Information,  Next: Matching Control,  Up: Command-line Options
 
 2.1.1 Generic Program Information
 ---------------------------------
@@ -132,7 +132,7 @@ File: grep.info,  Node: Generic Program Information,  Next: Matching Control,  U
 
 
 
-File: grep.info,  Node: Matching Control,  Next: General Output Control,  Prev: Generic Program Information,  Up: Command-line Options
+File: grep.info-t,  Node: Matching Control,  Next: General Output Control,  Prev: Generic Program Information,  Up: Command-line Options
 
 2.1.2 Matching Control
 ----------------------
@@ -177,7 +177,7 @@ File: grep.info,  Node: Matching Control,  Next: General Output Control,  Prev: 
 
 
 
-File: grep.info,  Node: General Output Control,  Next: Output Line Prefix Control,  Prev: Matching Control,  Up: Command-line Options
+File: grep.info-t,  Node: General Output Control,  Next: Output Line Prefix Control,  Prev: Matching Control,  Up: Command-line Options
 
 2.1.3 General Output Control
 ----------------------------
@@ -279,7 +279,7 @@ File: grep.info,  Node: General Output Control,  Next: Output Line Prefix Contro
    (1) Of course, 7th Edition Unix predated POSIX by several years!
 
 
-File: grep.info,  Node: Output Line Prefix Control,  Next: Context Line Control,  Prev: General Output Control,  Up: Command-line Options
+File: grep.info-t,  Node: Output Line Prefix Control,  Next: Context Line Control,  Prev: General Output Control,  Up: Command-line Options
 
 2.1.4 Output Line Prefix Control
 --------------------------------
@@ -352,7 +352,7 @@ these options were specified.
 
 
 
-File: grep.info,  Node: Context Line Control,  Next: File and Directory Selection,  Prev: Output Line Prefix Control,  Up: Command-line Options
+File: grep.info-t,  Node: Context Line Control,  Next: File and Directory Selection,  Prev: Output Line Prefix Control,  Up: Command-line Options
 
 2.1.5 Context Line Control
 --------------------------
@@ -408,7 +408,7 @@ between prefix fields and line content:
      groups connect and can just merge into a single contiguous one.
 
 
-File: grep.info,  Node: File and Directory Selection,  Next: Other Options,  Prev: Context Line Control,  Up: Command-line Options
+File: grep.info-t,  Node: File and Directory Selection,  Next: Other Options,  Prev: Context Line Control,  Up: Command-line Options
 
 2.1.6 File and Directory Selection
 ----------------------------------
@@ -494,7 +494,7 @@ File: grep.info,  Node: File and Directory Selection,  Next: Other Options,  Pre
 
 
 
-File: grep.info,  Node: Other Options,  Prev: File and Directory Selection,  Up: Command-line Options
+File: grep.info-t,  Node: Other Options,  Prev: File and Directory Selection,  Up: Command-line Options
 
 2.1.7 Other Options
 -------------------
@@ -533,7 +533,7 @@ File: grep.info,  Node: Other Options,  Prev: File and Directory Selection,  Up:
 
 
 
-File: grep.info,  Node: Environment Variables,  Next: Exit Status,  Prev: Command-line Options,  Up: Invoking
+File: grep.info-t,  Node: Environment Variables,  Next: Exit Status,  Prev: Command-line Options,  Up: Invoking
 
 2.2 Environment Variables
 =========================
@@ -732,7 +732,7 @@ capabilities are stored in an online database and accessed by the
 
 
 
-File: grep.info,  Node: Exit Status,  Next: grep Programs,  Prev: Environment Variables,  Up: Invoking
+File: grep.info-t,  Node: Exit Status,  Next: grep Programs,  Prev: Environment Variables,  Up: Invoking
 
 2.3 Exit Status
 ===============
@@ -747,7 +747,7 @@ to use logic that tests for this general condition instead of strict
 equality with 2.
 
 
-File: grep.info,  Node: grep Programs,  Prev: Exit Status,  Up: Invoking
+File: grep.info-t,  Node: grep Programs,  Prev: Exit Status,  Up: Invoking
 
 2.4 `grep' Programs
 ===================
@@ -790,7 +790,7 @@ provided to allow historical applications that rely on them to run
 unmodified.
 
 
-File: grep.info,  Node: Regular Expressions,  Next: Usage,  Prev: Invoking,  Up: Top
+File: grep.info-t,  Node: Regular Expressions,  Next: Usage,  Prev: Invoking,  Up: Top
 
 3 Regular Expressions
 *********************
@@ -818,7 +818,7 @@ pcrepattern(3) manual pages, but may not be available on every system.
 * Basic vs Extended::
 
 
-File: grep.info,  Node: Fundamental Structure,  Next: Character Classes and Bracket Expressions,  Up: Regular Expressions
+File: grep.info-t,  Node: Fundamental Structure,  Next: Character Classes and Bracket Expressions,  Up: Regular Expressions
 
 3.1 Fundamental Structure
 =========================
@@ -850,7 +850,8 @@ operators:
      The preceding item is matched N or more times.
 
 `{,M}'
-     The preceding item is matched at most M times.
+     The preceding item is matched at most M times.  This is a GNU
+     extension.
 
 `{N,M}'
      The preceding item is matched at least N times, but not more than
@@ -871,7 +872,7 @@ precedence over alternation.  A whole expression may be enclosed in
 parentheses to override these precedence rules and form a subexpression.
 
 
-File: grep.info,  Node: Character Classes and Bracket Expressions,  Next: The Backslash Character and Special Expressions,  Prev: Fundamental Structure,  Up: Regular Expressions
+File: grep.info-t,  Node: Character Classes and Bracket Expressions,  Next: The Backslash Character and Special Expressions,  Prev: Fundamental Structure,  Up: Regular Expressions
 
 3.2 Character Classes and Bracket Expressions
 =============================================
@@ -995,7 +996,7 @@ expressions.
 
 
 
-File: grep.info,  Node: The Backslash Character and Special Expressions,  Next: Anchoring,  Prev: Character Classes and Bracket Expressions,  Up: Regular Expressions
+File: grep.info-t,  Node: The Backslash Character and Special Expressions,  Next: Anchoring,  Prev: Character Classes and Bracket Expressions,  Up: Regular Expressions
 
 3.3 The Backslash Character and Special Expressions
 ===================================================
@@ -1032,7 +1033,7 @@ a special meaning:
 matches `crate' but not `furry rat'.
 
 
-File: grep.info,  Node: Anchoring,  Next: Back-references and Subexpressions,  Prev: The Backslash Character and Special Expressions,  Up: Regular Expressions
+File: grep.info-t,  Node: Anchoring,  Next: Back-references and Subexpressions,  Prev: The Backslash Character and Special Expressions,  Up: Regular Expressions
 
 3.4 Anchoring
 =============
@@ -1043,7 +1044,7 @@ They are termed "anchors", since they force the match to be "anchored"
 to beginning or end of a line, respectively.
 
 
-File: grep.info,  Node: Back-references and Subexpressions,  Next: Basic vs Extended,  Prev: Anchoring,  Up: Regular Expressions
+File: grep.info-t,  Node: Back-references and Subexpressions,  Next: Basic vs Extended,  Prev: Anchoring,  Up: Regular Expressions
 
 3.5 Back-references and Subexpressions
 ======================================
@@ -1058,7 +1059,7 @@ will not match `ba'.  When multiple regular expressions are given with
 expression.
 
 
-File: grep.info,  Node: Basic vs Extended,  Prev: Back-references and Subexpressions,  Up: Regular Expressions
+File: grep.info-t,  Node: Basic vs Extended,  Prev: Back-references and Subexpressions,  Up: Regular Expressions
 
 3.6 Basic vs Extended Regular Expressions
 =========================================
@@ -1080,7 +1081,7 @@ the regular expression.  POSIX allows this behavior as an extension,
 but portable scripts should avoid it.
 
 
-File: grep.info,  Node: Usage,  Next: Reporting Bugs,  Prev: Regular Expressions,  Up: Top
+File: grep.info-t,  Node: Usage,  Next: Reporting Bugs,  Prev: Regular Expressions,  Up: Top
 
 4 Usage
 *******
@@ -1283,7 +1284,7 @@ match.  *Note Invoking::, for more details about how to invoke `grep'.
 
 
 
-File: grep.info,  Node: Reporting Bugs,  Next: Copying,  Prev: Usage,  Up: Top
+File: grep.info-t,  Node: Reporting Bugs,  Next: Copying,  Prev: Usage,  Up: Top
 
 5 Reporting bugs
 ****************
@@ -1304,7 +1305,7 @@ run out of memory.
    Back-references are very slow, and may require exponential time.
 
 
-File: grep.info,  Node: Copying,  Next: Index,  Prev: Reporting Bugs,  Up: Top
+File: grep.info-t,  Node: Copying,  Next: Index,  Prev: Reporting Bugs,  Up: Top
 
 6 Copying
 *********
@@ -1335,14 +1336,14 @@ is available with the source code, or at
 * GNU Free Documentation License::
 
 
-File: grep.info,  Node: GNU Free Documentation License,  Up: Copying
+File: grep.info-t,  Node: GNU Free Documentation License,  Up: Copying
 
 6.1 GNU Free Documentation License
 ==================================
 
                      Version 1.3, 3 November 2008
 
-     Copyright (C) 2000-2002, 2007-2008, 2010-2012 Free Software
+     Copyright (C) 2000-2002, 2007-2008, 2010-2013 Free Software
      Foundation, Inc.
      `http://fsf.org/'
 
@@ -1822,7 +1823,7 @@ free software license, such as the GNU General Public License, to
 permit their use in free software.
 
 
-File: grep.info,  Node: Index,  Prev: Copying,  Up: Top
+File: grep.info-t,  Node: Index,  Prev: Copying,  Up: Top
 
 Index
 *****
@@ -2019,7 +2020,7 @@ Index
 * braces, second argument omitted:       Fundamental Structure.
                                                               (line  30)
 * braces, two arguments:                 Fundamental Structure.
-                                                              (line  36)
+                                                              (line  37)
 * bracket expression:                    Character Classes and Bracket Expressions.
                                                               (line   6)
 * Bugs, known:                           Reporting Bugs.      (line  14)
@@ -2127,7 +2128,7 @@ Index
 * match expression at most once:         Fundamental Structure.
                                                               (line  18)
 * match expression from N to M times:    Fundamental Structure.
-                                                              (line  36)
+                                                              (line  37)
 * match expression N or more times:      Fundamental Structure.
                                                               (line  30)
 * match expression N times:              Fundamental Structure.
@@ -2246,7 +2247,7 @@ Index
 * {,M}:                                  Fundamental Structure.
                                                               (line  33)
 * {N,M}:                                 Fundamental Structure.
-                                                              (line  36)
+                                                              (line  37)
 * {N,}:                                  Fundamental Structure.
                                                               (line  30)
 * {N}:                                   Fundamental Structure.
@@ -2255,33 +2256,33 @@ Index
 
 
 Tag Table:
-Node: Top764
-Node: Introduction1879
-Node: Invoking2607
-Node: Command-line Options3352
-Node: Generic Program Information4227
-Node: Matching Control4686
-Node: General Output Control6135
-Ref: General Output Control-Footnote-110048
-Node: Output Line Prefix Control10117
-Node: Context Line Control13052
-Node: File and Directory Selection14984
-Node: Other Options18550
-Node: Environment Variables20086
-Node: Exit Status29582
-Node: grep Programs30223
-Node: Regular Expressions31641
-Node: Fundamental Structure32793
-Node: Character Classes and Bracket Expressions34487
-Ref: invalid-bracket-expr37676
-Node: The Backslash Character and Special Expressions38853
-Node: Anchoring39852
-Node: Back-references and Subexpressions40295
-Node: Basic vs Extended41005
-Node: Usage42000
-Node: Reporting Bugs49257
-Node: Copying49919
-Node: GNU Free Documentation License51006
-Node: Index76133
+Node: Top766
+Node: Introduction1891
+Node: Invoking2621
+Node: Command-line Options3368
+Node: Generic Program Information4245
+Node: Matching Control4706
+Node: General Output Control6157
+Ref: General Output Control-Footnote-110072
+Node: Output Line Prefix Control10141
+Node: Context Line Control13078
+Node: File and Directory Selection15012
+Node: Other Options18580
+Node: Environment Variables20118
+Node: Exit Status29616
+Node: grep Programs30259
+Node: Regular Expressions31679
+Node: Fundamental Structure32833
+Node: Character Classes and Bracket Expressions34560
+Ref: invalid-bracket-expr37751
+Node: The Backslash Character and Special Expressions38928
+Node: Anchoring39929
+Node: Back-references and Subexpressions40374
+Node: Basic vs Extended41086
+Node: Usage42083
+Node: Reporting Bugs49342
+Node: Copying50006
+Node: GNU Free Documentation License51095
+Node: Index76224
 
 End Tag Table
