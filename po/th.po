@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grep-2.14\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2013-10-22 21:54-0700\n"
+"POT-Creation-Date: 2013-10-24 21:36-0700\n"
 "PO-Revision-Date: 2012-08-23 14:16+0700\n"
 "Last-Translator: Seksan Poltree <seksan.poltree@gmail.com>\n"
 "Language-Team: Thai <translation-team-th@lists.sourceforge.net>\n"
@@ -739,22 +739,22 @@ msgstr "การขัดแย้งของการตรงกันได
 msgid "invalid matcher %s"
 msgstr "ตัวจับคู่ไม่ถูกต้อง %s"
 
-#: src/main.c:1926
+#: src/main.c:1930
 #, c-format
 msgid "unknown devices method"
 msgstr "ไม่รู้จักกระบวนการอุปกรณ์"
 
-#: src/main.c:2057
+#: src/main.c:2061
 #, c-format
 msgid "invalid max count"
 msgstr "ตัวนับสูงสุดไม่ถูกต้อง"
 
-#: src/main.c:2114
+#: src/main.c:2118
 #, c-format
 msgid "unknown binary-files type"
 msgstr "ไม่รู้จักชนิดแฟ้มฐานสอง"
 
-#: src/main.c:2173
+#: src/main.c:2177
 #, c-format
 msgid "the --mmap option has been a no-op since 2010"
 msgstr "ตัวเลือก --mmap ได้กำหนดให้ไม่ดำเนินการใดตั้งแต่ 2010"

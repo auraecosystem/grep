@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grep 2.5.1a\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2013-10-22 21:54-0700\n"
+"POT-Creation-Date: 2013-10-24 21:36-0700\n"
 "PO-Revision-Date: 2005-03-04 14:55+0200\n"
 "Last-Translator: Eli Zaretskii <eliz@gnu.org>\n"
 "Language-Team: Hebrew <eliz@gnu.org>\n"
@@ -686,22 +686,22 @@ msgstr "המאתהה יגוס לש םירתוס םינויצ"
 msgid "invalid matcher %s"
 msgstr "יוגש יברימ רפסמ"
 
-#: src/main.c:1926
+#: src/main.c:1930
 #, c-format
 msgid "unknown devices method"
 msgstr "םינקתהב לופיטל תרכומ-יתלב תטיש"
 
-#: src/main.c:2057
+#: src/main.c:2061
 #, c-format
 msgid "invalid max count"
 msgstr "יוגש יברימ רפסמ"
 
-#: src/main.c:2114
+#: src/main.c:2118
 #, c-format
 msgid "unknown binary-files type"
 msgstr "םייראניב םיצבקב לופיטל תרכומ-יתלב תטיש"
 
-#: src/main.c:2173
+#: src/main.c:2177
 #, c-format
 msgid "the --mmap option has been a no-op since 2010"
 msgstr ""

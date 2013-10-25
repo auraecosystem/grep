@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grep 2.11.11-pre1\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2013-10-22 21:54-0700\n"
+"POT-Creation-Date: 2013-10-24 21:36-0700\n"
 "PO-Revision-Date: 2012-05-27 07:00+0700\n"
 "Last-Translator: Arif E. Nugroho <arif_endro@yahoo.com>\n"
 "Language-Team: Indonesian <translation-team-id@lists.sourceforge.net>\n"
@@ -726,22 +726,22 @@ msgstr "konflik pencocokan dispesifikasikan"
 msgid "invalid matcher %s"
 msgstr "jumlah maksimal tidak valid"
 
-#: src/main.c:1926
+#: src/main.c:1930
 #, c-format
 msgid "unknown devices method"
 msgstr "metode device tidak dikenal"
 
-#: src/main.c:2057
+#: src/main.c:2061
 #, c-format
 msgid "invalid max count"
 msgstr "jumlah maksimal tidak valid"
 
-#: src/main.c:2114
+#: src/main.c:2118
 #, c-format
 msgid "unknown binary-files type"
 msgstr "tipe berkas binari tidak dikenal"
 
-#: src/main.c:2173
+#: src/main.c:2177
 #, c-format
 msgid "the --mmap option has been a no-op since 2010"
 msgstr ""

@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GNU grep 2.10\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2013-10-22 21:54-0700\n"
+"POT-Creation-Date: 2013-10-24 21:36-0700\n"
 "PO-Revision-Date: 2011-11-19 10:09+0900\n"
 "Last-Translator: Yasuaki Taniguchi <yasuakit@gmail.com>\n"
 "Language-Team: Japanese <translation-team-ja@lists.sourceforge.net>\n"
@@ -767,22 +767,22 @@ msgstr "指定した一致処理系が競合しています"
 msgid "invalid matcher %s"
 msgstr "%s は無効な一致処理系です"
 
-#: src/main.c:1926
+#: src/main.c:1930
 #, c-format
 msgid "unknown devices method"
 msgstr "デバイスに対する不明な操作です"
 
-#: src/main.c:2057
+#: src/main.c:2061
 #, c-format
 msgid "invalid max count"
 msgstr "無効な一致回数です"
 
-#: src/main.c:2114
+#: src/main.c:2118
 #, c-format
 msgid "unknown binary-files type"
 msgstr "不明なバイナリファイルの形式です"
 
-#: src/main.c:2173
+#: src/main.c:2177
 #, c-format
 msgid "the --mmap option has been a no-op since 2010"
 msgstr ""

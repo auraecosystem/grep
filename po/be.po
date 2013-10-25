@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grep 2.5g\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2013-10-22 21:54-0700\n"
+"POT-Creation-Date: 2013-10-24 21:36-0700\n"
 "PO-Revision-Date: 2003-07-22 17:18+0300\n"
 "Last-Translator: Ales Nyakhaychyk <nab@mail.by>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
@@ -691,22 +691,22 @@ msgstr "заданы супярэчлівыя супадальнікі"
 msgid "invalid matcher %s"
 msgstr "недапушчальны найбольшы лічыльнік"
 
-#: src/main.c:1926
+#: src/main.c:1930
 #, c-format
 msgid "unknown devices method"
 msgstr "невядомы мэтад пралад"
 
-#: src/main.c:2057
+#: src/main.c:2061
 #, c-format
 msgid "invalid max count"
 msgstr "недапушчальны найбольшы лічыльнік"
 
-#: src/main.c:2114
+#: src/main.c:2118
 #, c-format
 msgid "unknown binary-files type"
 msgstr "невядомы від дваічнага файла"
 
-#: src/main.c:2173
+#: src/main.c:2177
 #, c-format
 msgid "the --mmap option has been a no-op since 2010"
 msgstr ""
