@@ -1,6 +1,5 @@
-grep (2.15~pre-2.14.54-37f7-1~1) UNRELEASED-experimental; urgency=low
+grep (2.15~pre-2.14.54-37f7-1) experimental; urgency=low
   
-  * NOT RELEASE YET
   * New upstream release
   * d/control: 
     - Multi-Arch: foreign (Closes: #726391)
@@ -8,7 +7,7 @@ grep (2.15~pre-2.14.54-37f7-1~1) UNRELEASED-experimental; urgency=low
     - Added Build-deps: texinfo
   * Updated d/patches/03-397262-dlopen-pcre.patch
 
- -- Santiago Ruano Rincón <santiago@debian.org>  Wed, 16 Oct 2013 22:21:55 +0200
+ -- Santiago Ruano Rincón <santiago@debian.org>  Sat, 26 Oct 2013 01:43:19 +0200
 
 grep (2.14-4) unstable; urgency=low
 
