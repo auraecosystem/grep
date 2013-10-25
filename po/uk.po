@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grep-2.14.46\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2013-10-22 21:54-0700\n"
+"POT-Creation-Date: 2013-10-24 21:36-0700\n"
 "PO-Revision-Date: 2013-10-21 12:43+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <translation-team-uk@lists.sourceforge.net>\n"
@@ -786,22 +786,22 @@ msgstr "задані умови відповідності є суперечли
 msgid "invalid matcher %s"
 msgstr "некоректний вираз порівняння %s"
 
-#: src/main.c:1926
+#: src/main.c:1930
 #, c-format
 msgid "unknown devices method"
 msgstr "невідомий спосіб обробки для пристроїв"
 
-#: src/main.c:2057
+#: src/main.c:2061
 #, c-format
 msgid "invalid max count"
 msgstr "помилкова максимальна кількість"
 
-#: src/main.c:2114
+#: src/main.c:2118
 #, c-format
 msgid "unknown binary-files type"
 msgstr "невідомий тип двійкових файлів"
 
-#: src/main.c:2173
+#: src/main.c:2177
 #, c-format
 msgid "the --mmap option has been a no-op since 2010"
 msgstr "параметр --mmap не обробляється з 2010 року"

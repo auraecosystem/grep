@@ -1,3 +1,31 @@
+2013-10-24  Jim Meyering  <meyering@fb.com>
+
+	tests: port more tests to bourne shells with hex-challenged printf
+	* tests/pcre-utf8: Convert the hex \xHH literals for the euro symbol
+	to octal \OOO.
+	* tests/turkish-I: Likewise for "I with dot".
+	* tests/turkish-I-without-dot: Likewise for another Turkish I: U+0131.
+
+	maint: clean up an ugly 'while' condition
+	* src/main.c (get_nondigit_option): Separate a slightly baroque
+	"while" expression into two separate statements, both inside the loop.
+
+2013-10-23  Jim Meyering  <meyering@fb.com>
+
+	tests: port to bourne shells whose printf doesn't grok hex
+	Use octal escapes, not hex, in printf(1) format strings,
+	and in one case, use $AWK's printf so we can continue
+	to use the table of hex values.
+	* tests/char-class-multibyte: Use printf octal escapes, not hex,
+	for portability to shells like dash and Solaris 10's /bin/sh.
+	* tests/backslash-s-vs-invalid-multitype: Likewise.
+	* tests/surrogate-pair: Likewise.
+	* tests/unibyte-bracket-expr: Count in decimal and convert to octal.
+	* tests/multibyte-white-space (hex_printf): New function.
+	Use it in place of printf so we can retain the table of hex digits
+	without hitting the limitation of some bourne shells.
+	Reported by Paul Eggert in http://bugs.gnu.org/15690#11
+
 2013-10-21  Jim Meyering  <meyering@fb.com>
 
 	gnulib: update to latest
