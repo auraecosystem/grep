@@ -1,3 +1,19 @@
+2013-10-26  Jim Meyering  <meyering@fb.com>
+
+	version 2.15
+	* NEWS: Record release date.
+
+2013-10-25  Paul Eggert  <eggert@cs.ucla.edu>
+
+	build: port to AIX
+	Problem reported by Pavel Kharitonov in <http://bugs.gnu.org/15690#68>.
+	* src/Makefile.am (LDADD): Add $(LIBTHREAD).
+
+	build: avoid duplicate -funit-at-a-time etc. options
+	* configure.ac (WERROR_CFLAGS): Don't add -fdiagnostics-show-option
+	and -funit-at-a-time, as Gnulib does that for us now, and we're
+	merely piling on duplicats.
+
 2013-10-24  Jim Meyering  <meyering@fb.com>
 
 	tests: port more tests to bourne shells with hex-challenged printf

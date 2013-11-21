@@ -223,18 +223,18 @@ egrep_LDADD = $(LDADD)
 am__DEPENDENCIES_1 =
 egrep_DEPENDENCIES = libgrep.a ../lib/libgreputils.a \
 	$(am__DEPENDENCIES_1) ../lib/libgreputils.a \
-	$(am__DEPENDENCIES_1)
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
 am_fgrep_OBJECTS = fgrep.$(OBJEXT)
 fgrep_OBJECTS = $(am_fgrep_OBJECTS)
 fgrep_LDADD = $(LDADD)
 fgrep_DEPENDENCIES = libgrep.a ../lib/libgreputils.a \
 	$(am__DEPENDENCIES_1) ../lib/libgreputils.a \
-	$(am__DEPENDENCIES_1)
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
 am_grep_OBJECTS = grep.$(OBJEXT)
 grep_OBJECTS = $(am_grep_OBJECTS)
 am__DEPENDENCIES_2 = libgrep.a ../lib/libgreputils.a \
 	$(am__DEPENDENCIES_1) ../lib/libgreputils.a \
-	$(am__DEPENDENCIES_1)
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
 grep_DEPENDENCIES = $(am__DEPENDENCIES_2) $(am__DEPENDENCIES_1)
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
@@ -1417,7 +1417,8 @@ libgrep_a_SOURCES = kwset.c dfa.c searchutils.c dfasearch.c kwsearch.c \
 # replacement functions defined in libgreputils.a.
 LDADD = \
   libgrep.a \
-  ../lib/libgreputils.a $(LIBINTL) ../lib/libgreputils.a $(LIBICONV)
+  ../lib/libgreputils.a $(LIBINTL) ../lib/libgreputils.a $(LIBICONV) \
+  $(LIBTHREAD)
 
 grep_LDADD = $(LDADD) $(LIB_PCRE)
 AM_CPPFLAGS = -I$(top_builddir)/lib -I$(top_srcdir)/lib
