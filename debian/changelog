@@ -1,9 +1,12 @@
-grep (2.15-1~1) UNRELEASED; urgency=low
+grep (2.15-1~1) UNRELEASED; urgency=high
 
   * NOT RELEASE YET
   * new upstream release. 
-  * d/patches/90-729581-multibyte-s.patch fixes a regresion bug, the \s 
-    was not working on UTF-8 systems. (Closes: #729581)
+  * d/patches/
+    - 90-729581-multibyte-s.patch fixes a regresion bug, the \s 
+      was not working on UTF-8 systems. (Closes: #729581)
+    - 91-P-regression-9a9b4c59babc60e15a79cf7db8167d42e68e44b9.patch
+      improves handling of PCRE errors and invalid UTF-8 inputs
 
  -- Santiago Ruano Rincón <santiago@debian.org>  Thu, 21 Nov 2013 15:21:21 +0100
 
