@@ -1,4 +1,4 @@
-grep (2.15-1~1) UNRELEASED; urgency=high
+grep (2.15-1~2) UNRELEASED; urgency=high
 
   * NOT RELEASE YET
   * new upstream release. 
@@ -7,6 +7,7 @@ grep (2.15-1~1) UNRELEASED; urgency=high
       was not working on UTF-8 systems. (Closes: #729581)
     - 91-P-regression-9a9b4c59babc60e15a79cf7db8167d42e68e44b9.patch
       improves handling of PCRE errors and invalid UTF-8 inputs
+  * Trying autoreconf again: disabling autopoint, autoheader and libtoolize.
 
  -- Santiago Ruano Rincón <santiago@debian.org>  Thu, 21 Nov 2013 15:21:21 +0100
 
