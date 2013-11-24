@@ -1,7 +1,6 @@
-grep (2.15-1~2) UNRELEASED; urgency=high
+grep (2.15-1) unstable; urgency=high
 
-  * NOT RELEASE YET
-  * new upstream release. 
+  * New upstream release. 
   * d/patches/
     - 90-729581-multibyte-s.patch fixes a regresion bug, the \s 
       was not working on UTF-8 systems. (Closes: #729581)
@@ -9,7 +8,7 @@ grep (2.15-1~2) UNRELEASED; urgency=high
       improves handling of PCRE errors and invalid UTF-8 inputs
   * Trying autoreconf again: disabling autopoint, autoheader and libtoolize.
 
- -- Santiago Ruano Rincón <santiago@debian.org>  Thu, 21 Nov 2013 15:21:21 +0100
+ -- Santiago Ruano Rincón <santiago@debian.org>  Sun, 24 Nov 2013 17:53:03 +0100
 
 grep (2.15~pre-2.14.54-37f7-1) experimental; urgency=low
   
