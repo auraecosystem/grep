@@ -1,11 +1,10 @@
-grep (2.15-2~1) UNRELEASED; urgency=low
+grep (2.15-2) unstable; urgency=high
 
-  * NOT RELEASED YET
   * d/patches/92-730472-PCRE-no-check-UTF8.patch flags PCRE with
     PCRE_NO_UTF8_CHECK instead of PCRE_UTF8 to avoid checking if input is 
     UTF8 valid (Closes: #730472).
 
- -- Santiago Ruano Rincón <santiago@debian.org>  Sun, 24 Nov 2013 18:26:43 +0100
+ -- Santiago Ruano Rincón <santiago@debian.org>  Wed, 27 Nov 2013 23:39:35 +0100
 
 grep (2.15-1) unstable; urgency=high
 
