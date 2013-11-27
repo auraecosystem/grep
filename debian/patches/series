@@ -6,3 +6,4 @@
 85-automake-warnings-bc9c23a4350598db4ec04225e1e0194a7b17175d.patch
 90-729581-multibyte-s.patch
 91-P-regression-9a9b4c59babc60e15a79cf7db8167d42e68e44b9.patch
+92-730472-PCRE-no-check-UTF8.patch
