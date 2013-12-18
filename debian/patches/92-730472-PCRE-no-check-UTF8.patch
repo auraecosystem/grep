@@ -17,12 +17,10 @@ See http://bugs.gnu.org/15758/
  tests/pcre-utf8  | 6 ++++++
  2 files changed, 11 insertions(+), 1 deletion(-)
 
-diff --git a/src/pcresearch.c b/src/pcresearch.c
-index 9ba1227..43988c6 100644
 --- a/src/pcresearch.c
 +++ b/src/pcresearch.c
-@@ -62,7 +62,11 @@ Pcompile (char const *pattern, size_t size)
-
+@@ -129,7 +129,11 @@
+ 
  #if defined HAVE_LANGINFO_CODESET
    if (STREQ (nl_langinfo (CODESET), "UTF-8"))
 -    flags |= PCRE_UTF8;
@@ -32,20 +30,18 @@ index 9ba1227..43988c6 100644
 +      flags |= PCRE_UTF8 | PCRE_NO_UTF8_CHECK;
 +    }
  #endif
-
-   /* FIXME: Remove these restrictions.  */
-diff --git a/tests/pcre-utf8 b/tests/pcre-utf8
-index b8228d5..a3b9390 100755
+ 
+   if (!map_pcre ())
 --- a/tests/pcre-utf8
 +++ b/tests/pcre-utf8
-@@ -19,9 +19,15 @@ echo '$' | LC_ALL=en_US.UTF-8 grep -qP '\p{S}' \
+@@ -19,9 +19,15 @@
  euro='\342\202\254 euro'
  printf "$euro\\n" > in || framework_failure_
-
+ 
 +# The euro sign has the unicode "Symbol" property, so this must match:
  LC_ALL=en_US.UTF-8 grep -P '^\p{S}' in > out || fail=1
  compare in out || fail=1
-
+ 
 +# This RE must *not* match in the C locale, because the first
 +# byte is not a "Symbol".
 +LC_ALL=C grep -P '^\p{S}' in > out && fail=1
@@ -53,7 +49,4 @@ index b8228d5..a3b9390 100755
 +
  LC_ALL=en_US.UTF-8 grep -P '^. euro$' in > out2 || fail=1
  compare in out2 || fail=1
-
--- 
-1.8.5.rc2.6.gc6f1b92
-
+ 
