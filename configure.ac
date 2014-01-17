@@ -1,7 +1,7 @@
 dnl
 dnl autoconf input file for GNU grep
 dnl
-dnl Copyright (C) 1997-2006, 2009-2013 Free Software Foundation, Inc.
+dnl Copyright (C) 1997-2006, 2009-2014 Free Software Foundation, Inc.
 dnl
 dnl This file is part of GNU grep.
 dnl
@@ -66,6 +66,7 @@ AC_CONFIG_AUX_DIR(build-aux)
 AC_CONFIG_SRCDIR(src/grep.c)
 AC_DEFINE([GREP], 1, [We are building grep])
 AC_PREREQ(2.59)
+AC_CONFIG_MACRO_DIRS([m4])
 
 dnl Automake stuff.
 AM_INIT_AUTOMAKE([1.11 no-dist-gzip dist-xz color-tests parallel-tests

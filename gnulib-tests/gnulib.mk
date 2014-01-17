@@ -1,6 +1,6 @@
 ## DO NOT EDIT! GENERATED AUTOMATICALLY!
 ## Process this file with automake to produce Makefile.in.
-# Copyright (C) 2002-2013 Free Software Foundation, Inc.
+# Copyright (C) 2002-2014 Free Software Foundation, Inc.
 #
 # This file is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -298,6 +298,37 @@ EXTRA_DIST += test-fgetc.c signature.h macros.h
 
 ## end   gnulib module fgetc-tests
 
+## begin gnulib module float
+
+BUILT_SOURCES += $(FLOAT_H)
+
+# We need the following in order to create <float.h> when the system
+# doesn't have one that works with the given compiler.
+if GL_GENERATE_FLOAT_H
+float.h: float.in.h $(top_builddir)/config.status
+	$(AM_V_GEN)rm -f $@-t $@ && \
+	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */' && \
+	  sed -e 's|@''GUARD_PREFIX''@|GL|g' \
+	      -e 's|@''INCLUDE_NEXT''@|$(INCLUDE_NEXT)|g' \
+	      -e 's|@''PRAGMA_SYSTEM_HEADER''@|@PRAGMA_SYSTEM_HEADER@|g' \
+	      -e 's|@''PRAGMA_COLUMNS''@|@PRAGMA_COLUMNS@|g' \
+	      -e 's|@''NEXT_FLOAT_H''@|$(NEXT_FLOAT_H)|g' \
+	      -e 's|@''REPLACE_ITOLD''@|$(REPLACE_ITOLD)|g' \
+	      < $(srcdir)/float.in.h; \
+	} > $@-t && \
+	mv $@-t $@
+else
+float.h: $(top_builddir)/config.status
+	rm -f $@
+endif
+MOSTLYCLEANFILES += float.h float.h-t
+
+EXTRA_DIST += float.c float.in.h itold.c
+
+EXTRA_libtests_a_SOURCES += float.c itold.c
+
+## end   gnulib module float
+
 ## begin gnulib module float-tests
 
 TESTS += test-float
@@ -323,6 +354,13 @@ EXTRA_DIST += test-fpending.c test-fpending.sh macros.h
 
 ## end   gnulib module fpending-tests
 
+## begin gnulib module fpucw
+
+
+EXTRA_DIST += fpucw.h
+
+## end   gnulib module fpucw
+
 ## begin gnulib module fputc-tests
 
 TESTS += test-fputc
@@ -338,33 +376,6 @@ check_PROGRAMS += test-fread
 EXTRA_DIST += test-fread.c signature.h macros.h
 
 ## end   gnulib module fread-tests
-
-## begin gnulib module frexp-nolibm-tests
-
-TESTS += test-frexp-nolibm
-check_PROGRAMS += test-frexp-nolibm
-test_frexp_nolibm_SOURCES = test-frexp.c randomd.c
-EXTRA_DIST += test-frexp.c test-frexp.h minus-zero.h infinity.h nan.h signature.h macros.h randomd.c
-
-## end   gnulib module frexp-nolibm-tests
-
-## begin gnulib module frexpl-nolibm-tests
-
-TESTS += test-frexpl-nolibm
-check_PROGRAMS += test-frexpl-nolibm
-test_frexpl_nolibm_SOURCES = test-frexpl.c randoml.c
-EXTRA_DIST += test-frexpl.c test-frexp.h minus-zero.h infinity.h nan.h signature.h macros.h randoml.c
-
-## end   gnulib module frexpl-nolibm-tests
-
-## begin gnulib module fseterr-tests
-
-TESTS += test-fseterr
-check_PROGRAMS += test-fseterr
-
-EXTRA_DIST += test-fseterr.c
-
-## end   gnulib module fseterr-tests
 
 ## begin gnulib module fstat-tests
 
@@ -416,6 +427,15 @@ test_getopt_LDADD = $(LDADD) $(LIBINTL)
 EXTRA_DIST += macros.h signature.h test-getopt.c test-getopt.h test-getopt_long.h
 
 ## end   gnulib module getopt-posix-tests
+
+## begin gnulib module gettimeofday-tests
+
+TESTS += test-gettimeofday
+check_PROGRAMS += test-gettimeofday
+
+EXTRA_DIST += signature.h test-gettimeofday.c
+
+## end   gnulib module gettimeofday-tests
 
 ## begin gnulib module hash-pjw
 
@@ -520,33 +540,6 @@ EXTRA_DIST += test-isblank.c signature.h macros.h
 
 ## end   gnulib module isblank-tests
 
-## begin gnulib module isnand-nolibm-tests
-
-TESTS += test-isnand-nolibm
-check_PROGRAMS += test-isnand-nolibm
-
-EXTRA_DIST += test-isnand-nolibm.c test-isnand.h minus-zero.h infinity.h nan.h macros.h
-
-## end   gnulib module isnand-nolibm-tests
-
-## begin gnulib module isnanf-nolibm-tests
-
-TESTS += test-isnanf-nolibm
-check_PROGRAMS += test-isnanf-nolibm
-
-EXTRA_DIST += test-isnanf-nolibm.c test-isnanf.h minus-zero.h infinity.h nan.h macros.h
-
-## end   gnulib module isnanf-nolibm-tests
-
-## begin gnulib module isnanl-nolibm-tests
-
-TESTS += test-isnanl-nolibm
-check_PROGRAMS += test-isnanl-nolibm
-
-EXTRA_DIST += test-isnanl-nolibm.c test-isnanl.h minus-zero.h infinity.h nan.h macros.h
-
-## end   gnulib module isnanl-nolibm-tests
-
 ## begin gnulib module iswblank-tests
 
 TESTS += test-iswblank
@@ -629,14 +622,6 @@ check_PROGRAMS += test-malloca
 EXTRA_DIST += test-malloca.c
 
 ## end   gnulib module malloca-tests
-
-## begin gnulib module math-tests
-
-TESTS += test-math
-check_PROGRAMS += test-math
-EXTRA_DIST += test-math.c macros.h
-
-## end   gnulib module math-tests
 
 ## begin gnulib module mbrtowc-tests
 
@@ -775,22 +760,6 @@ EXTRA_DIST += test-pipe.c signature.h macros.h
 
 ## end   gnulib module pipe-posix-tests
 
-## begin gnulib module printf-frexp-tests
-
-TESTS += test-printf-frexp
-check_PROGRAMS += test-printf-frexp
-EXTRA_DIST += test-printf-frexp.c macros.h
-
-## end   gnulib module printf-frexp-tests
-
-## begin gnulib module printf-frexpl-tests
-
-TESTS += test-printf-frexpl
-check_PROGRAMS += test-printf-frexpl
-EXTRA_DIST += test-printf-frexpl.c macros.h
-
-## end   gnulib module printf-frexpl-tests
-
 ## begin gnulib module putenv
 
 
@@ -808,6 +777,14 @@ test_quotearg_simple_LDADD = $(LDADD) @LIBINTL@
 EXTRA_DIST += test-quotearg-simple.c test-quotearg.h macros.h zerosize-ptr.h
 
 ## end   gnulib module quotearg-simple-tests
+
+## begin gnulib module read-tests
+
+TESTS += test-read
+check_PROGRAMS += test-read
+EXTRA_DIST += test-read.c signature.h macros.h
+
+## end   gnulib module read-tests
 
 ## begin gnulib module realloc-gnu-tests
 
@@ -865,14 +842,11 @@ EXTRA_DIST += test-setlocale1.sh test-setlocale1.c test-setlocale2.sh test-setlo
 
 ## end   gnulib module setlocale-tests
 
-## begin gnulib module signbit-tests
+## begin gnulib module size_max
 
-TESTS += test-signbit
-check_PROGRAMS += test-signbit
+libtests_a_SOURCES += size_max.h
 
-EXTRA_DIST += test-signbit.c minus-zero.h infinity.h macros.h
-
-## end   gnulib module signbit-tests
+## end   gnulib module size_max
 
 ## begin gnulib module snippet/_Noreturn
 
@@ -1138,6 +1112,14 @@ EXTRA_DIST += test-sys_stat.c
 
 ## end   gnulib module sys_stat-tests
 
+## begin gnulib module sys_time-tests
+
+TESTS += test-sys_time
+check_PROGRAMS += test-sys_time
+EXTRA_DIST += test-sys_time.c
+
+## end   gnulib module sys_time-tests
+
 ## begin gnulib module sys_types-tests
 
 TESTS += test-sys_types
@@ -1235,6 +1217,15 @@ EXTRA_DIST += test-update-copyright.sh
 
 ## end   gnulib module update-copyright-tests
 
+## begin gnulib module vasnprintf
+
+
+EXTRA_DIST += asnprintf.c float+.h printf-args.c printf-args.h printf-parse.c printf-parse.h vasnprintf.c vasnprintf.h
+
+EXTRA_libtests_a_SOURCES += asnprintf.c printf-args.c printf-parse.c vasnprintf.c
+
+## end   gnulib module vasnprintf
+
 ## begin gnulib module vasnprintf-tests
 
 TESTS += test-vasnprintf
@@ -1270,14 +1261,6 @@ test_version_etc_LDADD = $(LDADD) @LIBINTL@
 EXTRA_DIST += test-version-etc.c test-version-etc.sh
 
 ## end   gnulib module version-etc-tests
-
-## begin gnulib module vfprintf-posix-tests
-
-TESTS += test-vfprintf-posix.sh
-check_PROGRAMS += test-vfprintf-posix
-EXTRA_DIST += test-vfprintf-posix.sh test-vfprintf-posix.c test-fprintf-posix.h test-printf-posix.output infinity.h signature.h macros.h
-
-## end   gnulib module vfprintf-posix-tests
 
 ## begin gnulib module wchar-tests
 
@@ -1329,6 +1312,12 @@ test_xalloc_die_LDADD = $(LDADD) @LIBINTL@
 EXTRA_DIST += test-xalloc-die.c test-xalloc-die.sh
 
 ## end   gnulib module xalloc-die-tests
+
+## begin gnulib module xsize
+
+libtests_a_SOURCES += xsize.h xsize.c
+
+## end   gnulib module xsize
 
 ## begin gnulib module xstrtoimax-tests
 

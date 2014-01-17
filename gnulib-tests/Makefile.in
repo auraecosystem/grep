@@ -14,7 +14,7 @@
 
 @SET_MAKE@
 
-# Copyright (C) 2002-2013 Free Software Foundation, Inc.
+# Copyright (C) 2002-2014 Free Software Foundation, Inc.
 #
 # This file is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -118,35 +118,30 @@ TESTS = test-alloca-opt$(EXEEXT) test-argmatch$(EXEEXT) \
 	test-fdopen$(EXEEXT) test-fdopendir$(EXEEXT) \
 	test-fgetc$(EXEEXT) test-float$(EXEEXT) test-fnmatch$(EXEEXT) \
 	test-fpending.sh test-fputc$(EXEEXT) test-fread$(EXEEXT) \
-	test-frexp-nolibm$(EXEEXT) test-frexpl-nolibm$(EXEEXT) \
-	test-fseterr$(EXEEXT) test-fstat$(EXEEXT) \
-	test-fstatat$(EXEEXT) test-fwrite$(EXEEXT) \
+	test-fstat$(EXEEXT) test-fstatat$(EXEEXT) test-fwrite$(EXEEXT) \
 	test-getcwd-lgpl$(EXEEXT) test-getdtablesize$(EXEEXT) \
-	test-getopt$(EXEEXT) test-hash$(EXEEXT) test-i-ring$(EXEEXT) \
-	test-iconv-h$(EXEEXT) test-iconv$(EXEEXT) \
-	test-ignore-value$(EXEEXT) test-intprops$(EXEEXT) \
-	test-inttostr$(EXEEXT) test-inttypes$(EXEEXT) \
-	test-isatty$(EXEEXT) test-isblank$(EXEEXT) \
-	test-isnand-nolibm$(EXEEXT) test-isnanf-nolibm$(EXEEXT) \
-	test-isnanl-nolibm$(EXEEXT) test-iswblank$(EXEEXT) \
+	test-getopt$(EXEEXT) test-gettimeofday$(EXEEXT) \
+	test-hash$(EXEEXT) test-i-ring$(EXEEXT) test-iconv-h$(EXEEXT) \
+	test-iconv$(EXEEXT) test-ignore-value$(EXEEXT) \
+	test-intprops$(EXEEXT) test-inttostr$(EXEEXT) \
+	test-inttypes$(EXEEXT) test-isatty$(EXEEXT) \
+	test-isblank$(EXEEXT) test-iswblank$(EXEEXT) \
 	test-langinfo$(EXEEXT) test-locale$(EXEEXT) \
 	test-localeconv$(EXEEXT) test-localename$(EXEEXT) \
 	test-lseek.sh test-lstat$(EXEEXT) test-malloc-gnu$(EXEEXT) \
-	test-malloca$(EXEEXT) test-math$(EXEEXT) test-mbrtowc1.sh \
-	test-mbrtowc2.sh test-mbrtowc3.sh test-mbrtowc4.sh \
-	test-mbrtowc-w32-1.sh test-mbrtowc-w32-2.sh \
-	test-mbrtowc-w32-3.sh test-mbrtowc-w32-4.sh \
-	test-mbrtowc-w32-5.sh test-mbscasecmp.sh test-mbsinit.sh \
-	test-mbsrtowcs1.sh test-mbsrtowcs2.sh test-mbsrtowcs3.sh \
-	test-mbsrtowcs4.sh test-mbsstr1$(EXEEXT) test-mbsstr2.sh \
-	test-mbsstr3.sh test-memchr$(EXEEXT) test-memrchr$(EXEEXT) \
-	test-nl_langinfo.sh test-open$(EXEEXT) \
+	test-malloca$(EXEEXT) test-mbrtowc1.sh test-mbrtowc2.sh \
+	test-mbrtowc3.sh test-mbrtowc4.sh test-mbrtowc-w32-1.sh \
+	test-mbrtowc-w32-2.sh test-mbrtowc-w32-3.sh \
+	test-mbrtowc-w32-4.sh test-mbrtowc-w32-5.sh test-mbscasecmp.sh \
+	test-mbsinit.sh test-mbsrtowcs1.sh test-mbsrtowcs2.sh \
+	test-mbsrtowcs3.sh test-mbsrtowcs4.sh test-mbsstr1$(EXEEXT) \
+	test-mbsstr2.sh test-mbsstr3.sh test-memchr$(EXEEXT) \
+	test-memrchr$(EXEEXT) test-nl_langinfo.sh test-open$(EXEEXT) \
 	test-openat-safer$(EXEEXT) test-openat$(EXEEXT) \
 	test-pathmax$(EXEEXT) test-pipe$(EXEEXT) \
-	test-printf-frexp$(EXEEXT) test-printf-frexpl$(EXEEXT) \
-	test-quotearg-simple$(EXEEXT) test-realloc-gnu$(EXEEXT) \
-	test-regex$(EXEEXT) test-setenv$(EXEEXT) test-setlocale1.sh \
-	test-setlocale2.sh test-signbit$(EXEEXT) \
+	test-quotearg-simple$(EXEEXT) test-read$(EXEEXT) \
+	test-realloc-gnu$(EXEEXT) test-regex$(EXEEXT) \
+	test-setenv$(EXEEXT) test-setlocale1.sh test-setlocale2.sh \
 	test-snprintf$(EXEEXT) test-stat$(EXEEXT) \
 	test-stdbool$(EXEEXT) test-stddef$(EXEEXT) \
 	test-stdint$(EXEEXT) test-stdio$(EXEEXT) test-stdlib$(EXEEXT) \
@@ -155,19 +150,19 @@ TESTS = test-alloca-opt$(EXEEXT) test-argmatch$(EXEEXT) \
 	test-strtoimax$(EXEEXT) test-strtoll$(EXEEXT) \
 	test-strtoull$(EXEEXT) test-strtoumax$(EXEEXT) \
 	test-symlink$(EXEEXT) test-sys_stat$(EXEEXT) \
-	test-sys_types$(EXEEXT) test-init.sh test-time$(EXEEXT) \
-	test-dup-safer$(EXEEXT) test-unistd$(EXEEXT) \
-	test-u8-mbtoucr$(EXEEXT) test-u8-uctomb$(EXEEXT) \
-	test-uc_width$(EXEEXT) uniwidth/test-uc_width2.sh \
-	test-unsetenv$(EXEEXT) test-update-copyright.sh \
-	test-vasnprintf$(EXEEXT) test-vc-list-files-git.sh \
-	test-vc-list-files-cvs.sh test-verify$(EXEEXT) test-verify.sh \
-	test-version-etc.sh test-vfprintf-posix.sh test-wchar$(EXEEXT) \
-	test-wcrtomb.sh test-wcrtomb-w32-1.sh test-wcrtomb-w32-2.sh \
-	test-wcrtomb-w32-3.sh test-wcrtomb-w32-4.sh \
-	test-wcrtomb-w32-5.sh test-wctype-h$(EXEEXT) \
-	test-wcwidth$(EXEEXT) test-xalloc-die.sh test-xstrtoimax.sh \
-	test-xstrtol.sh
+	test-sys_time$(EXEEXT) test-sys_types$(EXEEXT) test-init.sh \
+	test-time$(EXEEXT) test-dup-safer$(EXEEXT) \
+	test-unistd$(EXEEXT) test-u8-mbtoucr$(EXEEXT) \
+	test-u8-uctomb$(EXEEXT) test-uc_width$(EXEEXT) \
+	uniwidth/test-uc_width2.sh test-unsetenv$(EXEEXT) \
+	test-update-copyright.sh test-vasnprintf$(EXEEXT) \
+	test-vc-list-files-git.sh test-vc-list-files-cvs.sh \
+	test-verify$(EXEEXT) test-verify.sh test-version-etc.sh \
+	test-wchar$(EXEEXT) test-wcrtomb.sh test-wcrtomb-w32-1.sh \
+	test-wcrtomb-w32-2.sh test-wcrtomb-w32-3.sh \
+	test-wcrtomb-w32-4.sh test-wcrtomb-w32-5.sh \
+	test-wctype-h$(EXEEXT) test-wcwidth$(EXEEXT) \
+	test-xalloc-die.sh test-xstrtoimax.sh test-xstrtol.sh
 XFAIL_TESTS =
 noinst_PROGRAMS =
 check_PROGRAMS = test-alloca-opt$(EXEEXT) test-argmatch$(EXEEXT) \
@@ -184,34 +179,30 @@ check_PROGRAMS = test-alloca-opt$(EXEEXT) test-argmatch$(EXEEXT) \
 	test-fdopendir$(EXEEXT) test-fgetc$(EXEEXT) \
 	test-float$(EXEEXT) test-fnmatch$(EXEEXT) \
 	test-fpending$(EXEEXT) test-fputc$(EXEEXT) test-fread$(EXEEXT) \
-	test-frexp-nolibm$(EXEEXT) test-frexpl-nolibm$(EXEEXT) \
-	test-fseterr$(EXEEXT) test-fstat$(EXEEXT) \
-	test-fstatat$(EXEEXT) test-fwrite$(EXEEXT) \
+	test-fstat$(EXEEXT) test-fstatat$(EXEEXT) test-fwrite$(EXEEXT) \
 	test-getcwd-lgpl$(EXEEXT) test-getdtablesize$(EXEEXT) \
-	test-getopt$(EXEEXT) test-hash$(EXEEXT) test-i-ring$(EXEEXT) \
-	test-iconv-h$(EXEEXT) test-iconv$(EXEEXT) \
-	test-ignore-value$(EXEEXT) test-intprops$(EXEEXT) \
-	test-inttostr$(EXEEXT) test-inttypes$(EXEEXT) \
-	test-isatty$(EXEEXT) test-isblank$(EXEEXT) \
-	test-isnand-nolibm$(EXEEXT) test-isnanf-nolibm$(EXEEXT) \
-	test-isnanl-nolibm$(EXEEXT) test-iswblank$(EXEEXT) \
+	test-getopt$(EXEEXT) test-gettimeofday$(EXEEXT) \
+	test-hash$(EXEEXT) test-i-ring$(EXEEXT) test-iconv-h$(EXEEXT) \
+	test-iconv$(EXEEXT) test-ignore-value$(EXEEXT) \
+	test-intprops$(EXEEXT) test-inttostr$(EXEEXT) \
+	test-inttypes$(EXEEXT) test-isatty$(EXEEXT) \
+	test-isblank$(EXEEXT) test-iswblank$(EXEEXT) \
 	test-langinfo$(EXEEXT) test-locale$(EXEEXT) \
 	test-localeconv$(EXEEXT) test-localename$(EXEEXT) \
 	test-lseek$(EXEEXT) test-lstat$(EXEEXT) \
 	test-malloc-gnu$(EXEEXT) test-malloca$(EXEEXT) \
-	test-math$(EXEEXT) test-mbrtowc$(EXEEXT) \
-	test-mbrtowc-w32$(EXEEXT) test-mbscasecmp$(EXEEXT) \
-	test-mbsinit$(EXEEXT) test-mbsrtowcs$(EXEEXT) \
-	test-mbsstr1$(EXEEXT) test-mbsstr2$(EXEEXT) \
-	test-mbsstr3$(EXEEXT) test-memchr$(EXEEXT) \
-	test-memrchr$(EXEEXT) test-nl_langinfo$(EXEEXT) \
-	test-open$(EXEEXT) test-openat-safer$(EXEEXT) \
-	test-openat$(EXEEXT) test-pathmax$(EXEEXT) test-pipe$(EXEEXT) \
-	test-printf-frexp$(EXEEXT) test-printf-frexpl$(EXEEXT) \
-	test-quotearg-simple$(EXEEXT) test-realloc-gnu$(EXEEXT) \
-	test-regex$(EXEEXT) test-setenv$(EXEEXT) \
-	test-setlocale1$(EXEEXT) test-setlocale2$(EXEEXT) \
-	test-signbit$(EXEEXT) test-snprintf$(EXEEXT) \
+	test-mbrtowc$(EXEEXT) test-mbrtowc-w32$(EXEEXT) \
+	test-mbscasecmp$(EXEEXT) test-mbsinit$(EXEEXT) \
+	test-mbsrtowcs$(EXEEXT) test-mbsstr1$(EXEEXT) \
+	test-mbsstr2$(EXEEXT) test-mbsstr3$(EXEEXT) \
+	test-memchr$(EXEEXT) test-memrchr$(EXEEXT) \
+	test-nl_langinfo$(EXEEXT) test-open$(EXEEXT) \
+	test-openat-safer$(EXEEXT) test-openat$(EXEEXT) \
+	test-pathmax$(EXEEXT) test-pipe$(EXEEXT) \
+	test-quotearg-simple$(EXEEXT) test-read$(EXEEXT) \
+	test-realloc-gnu$(EXEEXT) test-regex$(EXEEXT) \
+	test-setenv$(EXEEXT) test-setlocale1$(EXEEXT) \
+	test-setlocale2$(EXEEXT) test-snprintf$(EXEEXT) \
 	test-stat$(EXEEXT) test-stdbool$(EXEEXT) test-stddef$(EXEEXT) \
 	test-stdint$(EXEEXT) test-stdio$(EXEEXT) test-stdlib$(EXEEXT) \
 	test-strerror$(EXEEXT) test-striconv$(EXEEXT) \
@@ -219,13 +210,13 @@ check_PROGRAMS = test-alloca-opt$(EXEEXT) test-argmatch$(EXEEXT) \
 	test-strtoimax$(EXEEXT) test-strtoll$(EXEEXT) \
 	test-strtoull$(EXEEXT) test-strtoumax$(EXEEXT) \
 	test-symlink$(EXEEXT) test-sys_stat$(EXEEXT) \
-	test-sys_types$(EXEEXT) test-time$(EXEEXT) \
-	test-dup-safer$(EXEEXT) test-unistd$(EXEEXT) \
-	test-u8-mbtoucr$(EXEEXT) test-u8-uctomb$(EXEEXT) \
-	test-uc_width$(EXEEXT) test-uc_width2$(EXEEXT) \
-	test-unsetenv$(EXEEXT) test-vasnprintf$(EXEEXT) \
-	test-verify$(EXEEXT) test-version-etc$(EXEEXT) \
-	test-vfprintf-posix$(EXEEXT) test-wchar$(EXEEXT) \
+	test-sys_time$(EXEEXT) test-sys_types$(EXEEXT) \
+	test-time$(EXEEXT) test-dup-safer$(EXEEXT) \
+	test-unistd$(EXEEXT) test-u8-mbtoucr$(EXEEXT) \
+	test-u8-uctomb$(EXEEXT) test-uc_width$(EXEEXT) \
+	test-uc_width2$(EXEEXT) test-unsetenv$(EXEEXT) \
+	test-vasnprintf$(EXEEXT) test-verify$(EXEEXT) \
+	test-version-etc$(EXEEXT) test-wchar$(EXEEXT) \
 	test-wcrtomb$(EXEEXT) test-wcrtomb-w32$(EXEEXT) \
 	test-wctype-h$(EXEEXT) test-wcwidth$(EXEEXT) \
 	test-xalloc-die$(EXEEXT) test-xstrtoimax$(EXEEXT) \
@@ -233,8 +224,8 @@ check_PROGRAMS = test-alloca-opt$(EXEEXT) test-argmatch$(EXEEXT) \
 subdir = gnulib-tests
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/00gnulib.m4 \
-	$(top_srcdir)/m4/alloca.m4 $(top_srcdir)/m4/btowc.m4 \
-	$(top_srcdir)/m4/chdir-long.m4 \
+	$(top_srcdir)/m4/absolute-header.m4 $(top_srcdir)/m4/alloca.m4 \
+	$(top_srcdir)/m4/btowc.m4 $(top_srcdir)/m4/chdir-long.m4 \
 	$(top_srcdir)/m4/close-stream.m4 $(top_srcdir)/m4/close.m4 \
 	$(top_srcdir)/m4/closedir.m4 $(top_srcdir)/m4/closeout.m4 \
 	$(top_srcdir)/m4/codeset.m4 $(top_srcdir)/m4/configmake.m4 \
@@ -246,7 +237,6 @@ am__aclocal_m4_deps = $(top_srcdir)/m4/00gnulib.m4 \
 	$(top_srcdir)/m4/dup2.m4 $(top_srcdir)/m4/eealloc.m4 \
 	$(top_srcdir)/m4/environ.m4 $(top_srcdir)/m4/errno_h.m4 \
 	$(top_srcdir)/m4/error.m4 $(top_srcdir)/m4/exponentd.m4 \
-	$(top_srcdir)/m4/exponentf.m4 $(top_srcdir)/m4/exponentl.m4 \
 	$(top_srcdir)/m4/extensions.m4 \
 	$(top_srcdir)/m4/extern-inline.m4 $(top_srcdir)/m4/fchdir.m4 \
 	$(top_srcdir)/m4/fcntl-o.m4 $(top_srcdir)/m4/fcntl-safer.m4 \
@@ -254,12 +244,11 @@ am__aclocal_m4_deps = $(top_srcdir)/m4/00gnulib.m4 \
 	$(top_srcdir)/m4/fdopen.m4 $(top_srcdir)/m4/fdopendir.m4 \
 	$(top_srcdir)/m4/filenamecat.m4 $(top_srcdir)/m4/float_h.m4 \
 	$(top_srcdir)/m4/fnmatch.m4 $(top_srcdir)/m4/fpending.m4 \
-	$(top_srcdir)/m4/fpieee.m4 $(top_srcdir)/m4/frexp.m4 \
-	$(top_srcdir)/m4/frexpl.m4 $(top_srcdir)/m4/fseterr.m4 \
-	$(top_srcdir)/m4/fstat.m4 $(top_srcdir)/m4/fstatat.m4 \
-	$(top_srcdir)/m4/fts.m4 $(top_srcdir)/m4/getcwd.m4 \
-	$(top_srcdir)/m4/getdtablesize.m4 $(top_srcdir)/m4/getopt.m4 \
-	$(top_srcdir)/m4/getpagesize.m4 $(top_srcdir)/m4/gettext.m4 \
+	$(top_srcdir)/m4/fpieee.m4 $(top_srcdir)/m4/fstat.m4 \
+	$(top_srcdir)/m4/fstatat.m4 $(top_srcdir)/m4/fts.m4 \
+	$(top_srcdir)/m4/getcwd.m4 $(top_srcdir)/m4/getdtablesize.m4 \
+	$(top_srcdir)/m4/getopt.m4 $(top_srcdir)/m4/getpagesize.m4 \
+	$(top_srcdir)/m4/gettext.m4 $(top_srcdir)/m4/gettimeofday.m4 \
 	$(top_srcdir)/m4/glibc21.m4 $(top_srcdir)/m4/gnulib-common.m4 \
 	$(top_srcdir)/m4/gnulib-comp.m4 $(top_srcdir)/m4/i-ring.m4 \
 	$(top_srcdir)/m4/iconv.m4 $(top_srcdir)/m4/iconv_h.m4 \
@@ -269,11 +258,9 @@ am__aclocal_m4_deps = $(top_srcdir)/m4/00gnulib.m4 \
 	$(top_srcdir)/m4/inttostr.m4 $(top_srcdir)/m4/inttypes-pri.m4 \
 	$(top_srcdir)/m4/inttypes.m4 $(top_srcdir)/m4/inttypes_h.m4 \
 	$(top_srcdir)/m4/isatty.m4 $(top_srcdir)/m4/isblank.m4 \
-	$(top_srcdir)/m4/isnand.m4 $(top_srcdir)/m4/isnanf.m4 \
-	$(top_srcdir)/m4/isnanl.m4 $(top_srcdir)/m4/iswblank.m4 \
-	$(top_srcdir)/m4/iswctype.m4 $(top_srcdir)/m4/langinfo_h.m4 \
-	$(top_srcdir)/m4/largefile.m4 $(top_srcdir)/m4/lcmessage.m4 \
-	$(top_srcdir)/m4/ldexpl.m4 $(top_srcdir)/m4/lib-ld.m4 \
+	$(top_srcdir)/m4/iswblank.m4 $(top_srcdir)/m4/iswctype.m4 \
+	$(top_srcdir)/m4/langinfo_h.m4 $(top_srcdir)/m4/largefile.m4 \
+	$(top_srcdir)/m4/lcmessage.m4 $(top_srcdir)/m4/lib-ld.m4 \
 	$(top_srcdir)/m4/lib-link.m4 $(top_srcdir)/m4/lib-prefix.m4 \
 	$(top_srcdir)/m4/libunistring-base.m4 \
 	$(top_srcdir)/m4/localcharset.m4 $(top_srcdir)/m4/locale-fr.m4 \
@@ -283,15 +270,15 @@ am__aclocal_m4_deps = $(top_srcdir)/m4/00gnulib.m4 \
 	$(top_srcdir)/m4/lock.m4 $(top_srcdir)/m4/longlong.m4 \
 	$(top_srcdir)/m4/lseek.m4 $(top_srcdir)/m4/lstat.m4 \
 	$(top_srcdir)/m4/malloc.m4 $(top_srcdir)/m4/malloca.m4 \
-	$(top_srcdir)/m4/manywarnings.m4 $(top_srcdir)/m4/math_h.m4 \
-	$(top_srcdir)/m4/mbchar.m4 $(top_srcdir)/m4/mbiter.m4 \
-	$(top_srcdir)/m4/mbrlen.m4 $(top_srcdir)/m4/mbrtowc.m4 \
-	$(top_srcdir)/m4/mbsinit.m4 $(top_srcdir)/m4/mbslen.m4 \
-	$(top_srcdir)/m4/mbsrtowcs.m4 $(top_srcdir)/m4/mbstate_t.m4 \
-	$(top_srcdir)/m4/mbtowc.m4 $(top_srcdir)/m4/memchr.m4 \
-	$(top_srcdir)/m4/mempcpy.m4 $(top_srcdir)/m4/memrchr.m4 \
-	$(top_srcdir)/m4/minmax.m4 $(top_srcdir)/m4/mmap-anon.m4 \
-	$(top_srcdir)/m4/mode_t.m4 $(top_srcdir)/m4/msvc-inval.m4 \
+	$(top_srcdir)/m4/manywarnings.m4 $(top_srcdir)/m4/mbchar.m4 \
+	$(top_srcdir)/m4/mbiter.m4 $(top_srcdir)/m4/mbrlen.m4 \
+	$(top_srcdir)/m4/mbrtowc.m4 $(top_srcdir)/m4/mbsinit.m4 \
+	$(top_srcdir)/m4/mbslen.m4 $(top_srcdir)/m4/mbsrtowcs.m4 \
+	$(top_srcdir)/m4/mbstate_t.m4 $(top_srcdir)/m4/mbtowc.m4 \
+	$(top_srcdir)/m4/memchr.m4 $(top_srcdir)/m4/mempcpy.m4 \
+	$(top_srcdir)/m4/memrchr.m4 $(top_srcdir)/m4/minmax.m4 \
+	$(top_srcdir)/m4/mmap-anon.m4 $(top_srcdir)/m4/mode_t.m4 \
+	$(top_srcdir)/m4/msvc-inval.m4 \
 	$(top_srcdir)/m4/msvc-nothrow.m4 $(top_srcdir)/m4/multiarch.m4 \
 	$(top_srcdir)/m4/nl_langinfo.m4 $(top_srcdir)/m4/nls.m4 \
 	$(top_srcdir)/m4/nocrash.m4 $(top_srcdir)/m4/off_t.m4 \
@@ -299,31 +286,29 @@ am__aclocal_m4_deps = $(top_srcdir)/m4/00gnulib.m4 \
 	$(top_srcdir)/m4/openat.m4 $(top_srcdir)/m4/opendir.m4 \
 	$(top_srcdir)/m4/pathmax.m4 $(top_srcdir)/m4/pcre.m4 \
 	$(top_srcdir)/m4/perl.m4 $(top_srcdir)/m4/pipe.m4 \
-	$(top_srcdir)/m4/po.m4 $(top_srcdir)/m4/printf-frexp.m4 \
-	$(top_srcdir)/m4/printf-frexpl.m4 $(top_srcdir)/m4/printf.m4 \
+	$(top_srcdir)/m4/po.m4 $(top_srcdir)/m4/printf.m4 \
 	$(top_srcdir)/m4/progtest.m4 $(top_srcdir)/m4/putenv.m4 \
 	$(top_srcdir)/m4/quote.m4 $(top_srcdir)/m4/quotearg.m4 \
-	$(top_srcdir)/m4/readdir.m4 $(top_srcdir)/m4/realloc.m4 \
-	$(top_srcdir)/m4/regex.m4 $(top_srcdir)/m4/save-cwd.m4 \
+	$(top_srcdir)/m4/read.m4 $(top_srcdir)/m4/readdir.m4 \
+	$(top_srcdir)/m4/realloc.m4 $(top_srcdir)/m4/regex.m4 \
+	$(top_srcdir)/m4/safe-read.m4 $(top_srcdir)/m4/save-cwd.m4 \
 	$(top_srcdir)/m4/setenv.m4 $(top_srcdir)/m4/setlocale.m4 \
-	$(top_srcdir)/m4/signbit.m4 $(top_srcdir)/m4/size_max.m4 \
-	$(top_srcdir)/m4/snprintf.m4 $(top_srcdir)/m4/ssize_t.m4 \
-	$(top_srcdir)/m4/stat.m4 $(top_srcdir)/m4/stdarg.m4 \
-	$(top_srcdir)/m4/stdbool.m4 $(top_srcdir)/m4/stddef_h.m4 \
-	$(top_srcdir)/m4/stdint.m4 $(top_srcdir)/m4/stdint_h.m4 \
-	$(top_srcdir)/m4/stdio_h.m4 $(top_srcdir)/m4/stdlib_h.m4 \
-	$(top_srcdir)/m4/stpcpy.m4 $(top_srcdir)/m4/strdup.m4 \
-	$(top_srcdir)/m4/strerror.m4 $(top_srcdir)/m4/string_h.m4 \
-	$(top_srcdir)/m4/strnlen.m4 $(top_srcdir)/m4/strtoimax.m4 \
-	$(top_srcdir)/m4/strtoll.m4 $(top_srcdir)/m4/strtoull.m4 \
-	$(top_srcdir)/m4/strtoumax.m4 $(top_srcdir)/m4/symlink.m4 \
-	$(top_srcdir)/m4/sys_socket_h.m4 \
-	$(top_srcdir)/m4/sys_stat_h.m4 $(top_srcdir)/m4/sys_types_h.m4 \
-	$(top_srcdir)/m4/threadlib.m4 $(top_srcdir)/m4/time_h.m4 \
-	$(top_srcdir)/m4/unistd-safer.m4 $(top_srcdir)/m4/unistd_h.m4 \
-	$(top_srcdir)/m4/unlocked-io.m4 $(top_srcdir)/m4/vasnprintf.m4 \
-	$(top_srcdir)/m4/version-etc.m4 \
-	$(top_srcdir)/m4/vfprintf-posix.m4 \
+	$(top_srcdir)/m4/size_max.m4 $(top_srcdir)/m4/snprintf.m4 \
+	$(top_srcdir)/m4/ssize_t.m4 $(top_srcdir)/m4/stat.m4 \
+	$(top_srcdir)/m4/stdarg.m4 $(top_srcdir)/m4/stdbool.m4 \
+	$(top_srcdir)/m4/stddef_h.m4 $(top_srcdir)/m4/stdint.m4 \
+	$(top_srcdir)/m4/stdint_h.m4 $(top_srcdir)/m4/stdio_h.m4 \
+	$(top_srcdir)/m4/stdlib_h.m4 $(top_srcdir)/m4/stpcpy.m4 \
+	$(top_srcdir)/m4/strdup.m4 $(top_srcdir)/m4/strerror.m4 \
+	$(top_srcdir)/m4/string_h.m4 $(top_srcdir)/m4/strnlen.m4 \
+	$(top_srcdir)/m4/strtoimax.m4 $(top_srcdir)/m4/strtoll.m4 \
+	$(top_srcdir)/m4/strtoull.m4 $(top_srcdir)/m4/strtoumax.m4 \
+	$(top_srcdir)/m4/symlink.m4 $(top_srcdir)/m4/sys_socket_h.m4 \
+	$(top_srcdir)/m4/sys_stat_h.m4 $(top_srcdir)/m4/sys_time_h.m4 \
+	$(top_srcdir)/m4/sys_types_h.m4 $(top_srcdir)/m4/threadlib.m4 \
+	$(top_srcdir)/m4/time_h.m4 $(top_srcdir)/m4/unistd-safer.m4 \
+	$(top_srcdir)/m4/unistd_h.m4 $(top_srcdir)/m4/unlocked-io.m4 \
+	$(top_srcdir)/m4/vasnprintf.m4 $(top_srcdir)/m4/version-etc.m4 \
 	$(top_srcdir)/m4/warn-on-use.m4 $(top_srcdir)/m4/warnings.m4 \
 	$(top_srcdir)/m4/wchar_h.m4 $(top_srcdir)/m4/wchar_t.m4 \
 	$(top_srcdir)/m4/wcrtomb.m4 $(top_srcdir)/m4/wctob.m4 \
@@ -347,7 +332,8 @@ am__DEPENDENCIES_1 =
 am_libtests_a_OBJECTS = fd-safer-flag.$(OBJEXT) \
 	dup-safer-flag.$(OBJEXT) hash-pjw.$(OBJEXT) \
 	imaxtostr.$(OBJEXT) inttostr.$(OBJEXT) offtostr.$(OBJEXT) \
-	uinttostr.$(OBJEXT) umaxtostr.$(OBJEXT) localename.$(OBJEXT)
+	uinttostr.$(OBJEXT) umaxtostr.$(OBJEXT) localename.$(OBJEXT) \
+	xsize.$(OBJEXT)
 libtests_a_OBJECTS = $(am_libtests_a_OBJECTS)
 PROGRAMS = $(noinst_PROGRAMS)
 test_alloca_opt_SOURCES = test-alloca-opt.c
@@ -503,22 +489,6 @@ test_fread_OBJECTS = test-fread.$(OBJEXT)
 test_fread_LDADD = $(LDADD)
 test_fread_DEPENDENCIES = libtests.a ../lib/libgreputils.a libtests.a \
 	$(am__DEPENDENCIES_1)
-am_test_frexp_nolibm_OBJECTS = test-frexp.$(OBJEXT) randomd.$(OBJEXT)
-test_frexp_nolibm_OBJECTS = $(am_test_frexp_nolibm_OBJECTS)
-test_frexp_nolibm_LDADD = $(LDADD)
-test_frexp_nolibm_DEPENDENCIES = libtests.a ../lib/libgreputils.a \
-	libtests.a $(am__DEPENDENCIES_1)
-am_test_frexpl_nolibm_OBJECTS = test-frexpl.$(OBJEXT) \
-	randoml.$(OBJEXT)
-test_frexpl_nolibm_OBJECTS = $(am_test_frexpl_nolibm_OBJECTS)
-test_frexpl_nolibm_LDADD = $(LDADD)
-test_frexpl_nolibm_DEPENDENCIES = libtests.a ../lib/libgreputils.a \
-	libtests.a $(am__DEPENDENCIES_1)
-test_fseterr_SOURCES = test-fseterr.c
-test_fseterr_OBJECTS = test-fseterr.$(OBJEXT)
-test_fseterr_LDADD = $(LDADD)
-test_fseterr_DEPENDENCIES = libtests.a ../lib/libgreputils.a \
-	libtests.a $(am__DEPENDENCIES_1)
 test_fstat_SOURCES = test-fstat.c
 test_fstat_OBJECTS = test-fstat.$(OBJEXT)
 test_fstat_LDADD = $(LDADD)
@@ -544,6 +514,11 @@ test_getdtablesize_DEPENDENCIES = libtests.a ../lib/libgreputils.a \
 test_getopt_SOURCES = test-getopt.c
 test_getopt_OBJECTS = test-getopt.$(OBJEXT)
 test_getopt_DEPENDENCIES = $(am__DEPENDENCIES_2) $(am__DEPENDENCIES_1)
+test_gettimeofday_SOURCES = test-gettimeofday.c
+test_gettimeofday_OBJECTS = test-gettimeofday.$(OBJEXT)
+test_gettimeofday_LDADD = $(LDADD)
+test_gettimeofday_DEPENDENCIES = libtests.a ../lib/libgreputils.a \
+	libtests.a $(am__DEPENDENCIES_1)
 test_hash_SOURCES = test-hash.c
 test_hash_OBJECTS = test-hash.$(OBJEXT)
 test_hash_LDADD = $(LDADD)
@@ -592,21 +567,6 @@ test_isblank_OBJECTS = test-isblank.$(OBJEXT)
 test_isblank_LDADD = $(LDADD)
 test_isblank_DEPENDENCIES = libtests.a ../lib/libgreputils.a \
 	libtests.a $(am__DEPENDENCIES_1)
-test_isnand_nolibm_SOURCES = test-isnand-nolibm.c
-test_isnand_nolibm_OBJECTS = test-isnand-nolibm.$(OBJEXT)
-test_isnand_nolibm_LDADD = $(LDADD)
-test_isnand_nolibm_DEPENDENCIES = libtests.a ../lib/libgreputils.a \
-	libtests.a $(am__DEPENDENCIES_1)
-test_isnanf_nolibm_SOURCES = test-isnanf-nolibm.c
-test_isnanf_nolibm_OBJECTS = test-isnanf-nolibm.$(OBJEXT)
-test_isnanf_nolibm_LDADD = $(LDADD)
-test_isnanf_nolibm_DEPENDENCIES = libtests.a ../lib/libgreputils.a \
-	libtests.a $(am__DEPENDENCIES_1)
-test_isnanl_nolibm_SOURCES = test-isnanl-nolibm.c
-test_isnanl_nolibm_OBJECTS = test-isnanl-nolibm.$(OBJEXT)
-test_isnanl_nolibm_LDADD = $(LDADD)
-test_isnanl_nolibm_DEPENDENCIES = libtests.a ../lib/libgreputils.a \
-	libtests.a $(am__DEPENDENCIES_1)
 test_iswblank_SOURCES = test-iswblank.c
 test_iswblank_OBJECTS = test-iswblank.$(OBJEXT)
 test_iswblank_LDADD = $(LDADD)
@@ -651,11 +611,6 @@ test_malloca_OBJECTS = test-malloca.$(OBJEXT)
 test_malloca_LDADD = $(LDADD)
 test_malloca_DEPENDENCIES = libtests.a ../lib/libgreputils.a \
 	libtests.a $(am__DEPENDENCIES_1)
-test_math_SOURCES = test-math.c
-test_math_OBJECTS = test-math.$(OBJEXT)
-test_math_LDADD = $(LDADD)
-test_math_DEPENDENCIES = libtests.a ../lib/libgreputils.a libtests.a \
-	$(am__DEPENDENCIES_1)
 test_mbrtowc_SOURCES = test-mbrtowc.c
 test_mbrtowc_OBJECTS = test-mbrtowc.$(OBJEXT)
 test_mbrtowc_LDADD = $(LDADD)
@@ -732,19 +687,14 @@ test_pipe_OBJECTS = test-pipe.$(OBJEXT)
 test_pipe_LDADD = $(LDADD)
 test_pipe_DEPENDENCIES = libtests.a ../lib/libgreputils.a libtests.a \
 	$(am__DEPENDENCIES_1)
-test_printf_frexp_SOURCES = test-printf-frexp.c
-test_printf_frexp_OBJECTS = test-printf-frexp.$(OBJEXT)
-test_printf_frexp_LDADD = $(LDADD)
-test_printf_frexp_DEPENDENCIES = libtests.a ../lib/libgreputils.a \
-	libtests.a $(am__DEPENDENCIES_1)
-test_printf_frexpl_SOURCES = test-printf-frexpl.c
-test_printf_frexpl_OBJECTS = test-printf-frexpl.$(OBJEXT)
-test_printf_frexpl_LDADD = $(LDADD)
-test_printf_frexpl_DEPENDENCIES = libtests.a ../lib/libgreputils.a \
-	libtests.a $(am__DEPENDENCIES_1)
 test_quotearg_simple_SOURCES = test-quotearg-simple.c
 test_quotearg_simple_OBJECTS = test-quotearg-simple.$(OBJEXT)
 test_quotearg_simple_DEPENDENCIES = $(am__DEPENDENCIES_2)
+test_read_SOURCES = test-read.c
+test_read_OBJECTS = test-read.$(OBJEXT)
+test_read_LDADD = $(LDADD)
+test_read_DEPENDENCIES = libtests.a ../lib/libgreputils.a libtests.a \
+	$(am__DEPENDENCIES_1)
 test_realloc_gnu_SOURCES = test-realloc-gnu.c
 test_realloc_gnu_OBJECTS = test-realloc-gnu.$(OBJEXT)
 test_realloc_gnu_LDADD = $(LDADD)
@@ -767,11 +717,6 @@ test_setlocale2_SOURCES = test-setlocale2.c
 test_setlocale2_OBJECTS = test-setlocale2.$(OBJEXT)
 test_setlocale2_LDADD = $(LDADD)
 test_setlocale2_DEPENDENCIES = libtests.a ../lib/libgreputils.a \
-	libtests.a $(am__DEPENDENCIES_1)
-test_signbit_SOURCES = test-signbit.c
-test_signbit_OBJECTS = test-signbit.$(OBJEXT)
-test_signbit_LDADD = $(LDADD)
-test_signbit_DEPENDENCIES = libtests.a ../lib/libgreputils.a \
 	libtests.a $(am__DEPENDENCIES_1)
 test_snprintf_SOURCES = test-snprintf.c
 test_snprintf_OBJECTS = test-snprintf.$(OBJEXT)
@@ -854,6 +799,11 @@ test_sys_stat_OBJECTS = test-sys_stat.$(OBJEXT)
 test_sys_stat_LDADD = $(LDADD)
 test_sys_stat_DEPENDENCIES = libtests.a ../lib/libgreputils.a \
 	libtests.a $(am__DEPENDENCIES_1)
+test_sys_time_SOURCES = test-sys_time.c
+test_sys_time_OBJECTS = test-sys_time.$(OBJEXT)
+test_sys_time_LDADD = $(LDADD)
+test_sys_time_DEPENDENCIES = libtests.a ../lib/libgreputils.a \
+	libtests.a $(am__DEPENDENCIES_1)
 test_sys_types_SOURCES = test-sys_types.c
 test_sys_types_OBJECTS = test-sys_types.$(OBJEXT)
 test_sys_types_LDADD = $(LDADD)
@@ -900,11 +850,6 @@ test_verify_DEPENDENCIES = libtests.a ../lib/libgreputils.a libtests.a \
 test_version_etc_SOURCES = test-version-etc.c
 test_version_etc_OBJECTS = test-version-etc.$(OBJEXT)
 test_version_etc_DEPENDENCIES = $(am__DEPENDENCIES_2)
-test_vfprintf_posix_SOURCES = test-vfprintf-posix.c
-test_vfprintf_posix_OBJECTS = test-vfprintf-posix.$(OBJEXT)
-test_vfprintf_posix_LDADD = $(LDADD)
-test_vfprintf_posix_DEPENDENCIES = libtests.a ../lib/libgreputils.a \
-	libtests.a $(am__DEPENDENCIES_1)
 test_wchar_SOURCES = test-wchar.c
 test_wchar_OBJECTS = test-wchar.$(OBJEXT)
 test_wchar_LDADD = $(LDADD)
@@ -980,34 +925,30 @@ SOURCES = $(libtests_a_SOURCES) $(EXTRA_libtests_a_SOURCES) \
 	test-environ.c test-errno.c test-exclude.c test-fchdir.c \
 	test-fcntl.c test-fcntl-h.c test-fcntl-safer.c test-fdopen.c \
 	test-fdopendir.c test-fgetc.c test-float.c test-fnmatch.c \
-	test-fpending.c test-fputc.c test-fread.c \
-	$(test_frexp_nolibm_SOURCES) $(test_frexpl_nolibm_SOURCES) \
-	test-fseterr.c test-fstat.c test-fstatat.c test-fwrite.c \
-	test-getcwd-lgpl.c test-getdtablesize.c test-getopt.c \
+	test-fpending.c test-fputc.c test-fread.c test-fstat.c \
+	test-fstatat.c test-fwrite.c test-getcwd-lgpl.c \
+	test-getdtablesize.c test-getopt.c test-gettimeofday.c \
 	test-hash.c test-i-ring.c test-iconv.c test-iconv-h.c \
 	test-ignore-value.c test-intprops.c test-inttostr.c \
-	test-inttypes.c test-isatty.c test-isblank.c \
-	test-isnand-nolibm.c test-isnanf-nolibm.c test-isnanl-nolibm.c \
-	test-iswblank.c test-langinfo.c test-locale.c \
-	test-localeconv.c test-localename.c test-lseek.c test-lstat.c \
-	test-malloc-gnu.c test-malloca.c test-math.c test-mbrtowc.c \
-	test-mbrtowc-w32.c test-mbscasecmp.c test-mbsinit.c \
-	test-mbsrtowcs.c test-mbsstr1.c test-mbsstr2.c test-mbsstr3.c \
-	test-memchr.c test-memrchr.c test-nl_langinfo.c test-open.c \
-	test-openat.c test-openat-safer.c test-pathmax.c test-pipe.c \
-	test-printf-frexp.c test-printf-frexpl.c \
-	test-quotearg-simple.c test-realloc-gnu.c test-regex.c \
-	test-setenv.c test-setlocale1.c test-setlocale2.c \
-	test-signbit.c test-snprintf.c test-stat.c test-stdbool.c \
-	test-stddef.c test-stdint.c test-stdio.c test-stdlib.c \
-	test-strerror.c test-striconv.c test-string.c test-strnlen.c \
-	test-strtoimax.c test-strtoll.c test-strtoull.c \
-	test-strtoumax.c test-symlink.c test-sys_stat.c \
-	test-sys_types.c test-time.c $(test_u8_mbtoucr_SOURCES) \
-	$(test_u8_uctomb_SOURCES) $(test_uc_width_SOURCES) \
-	$(test_uc_width2_SOURCES) test-unistd.c test-unsetenv.c \
-	test-vasnprintf.c test-verify.c test-version-etc.c \
-	test-vfprintf-posix.c test-wchar.c test-wcrtomb.c \
+	test-inttypes.c test-isatty.c test-isblank.c test-iswblank.c \
+	test-langinfo.c test-locale.c test-localeconv.c \
+	test-localename.c test-lseek.c test-lstat.c test-malloc-gnu.c \
+	test-malloca.c test-mbrtowc.c test-mbrtowc-w32.c \
+	test-mbscasecmp.c test-mbsinit.c test-mbsrtowcs.c \
+	test-mbsstr1.c test-mbsstr2.c test-mbsstr3.c test-memchr.c \
+	test-memrchr.c test-nl_langinfo.c test-open.c test-openat.c \
+	test-openat-safer.c test-pathmax.c test-pipe.c \
+	test-quotearg-simple.c test-read.c test-realloc-gnu.c \
+	test-regex.c test-setenv.c test-setlocale1.c test-setlocale2.c \
+	test-snprintf.c test-stat.c test-stdbool.c test-stddef.c \
+	test-stdint.c test-stdio.c test-stdlib.c test-strerror.c \
+	test-striconv.c test-string.c test-strnlen.c test-strtoimax.c \
+	test-strtoll.c test-strtoull.c test-strtoumax.c test-symlink.c \
+	test-sys_stat.c test-sys_time.c test-sys_types.c test-time.c \
+	$(test_u8_mbtoucr_SOURCES) $(test_u8_uctomb_SOURCES) \
+	$(test_uc_width_SOURCES) $(test_uc_width2_SOURCES) \
+	test-unistd.c test-unsetenv.c test-vasnprintf.c test-verify.c \
+	test-version-etc.c test-wchar.c test-wcrtomb.c \
 	test-wcrtomb-w32.c test-wctype-h.c test-wcwidth.c \
 	test-xalloc-die.c test-xstrtoimax.c test-xstrtol.c \
 	test-xstrtoul.c
@@ -1020,34 +961,30 @@ DIST_SOURCES = $(libtests_a_SOURCES) $(EXTRA_libtests_a_SOURCES) \
 	test-environ.c test-errno.c test-exclude.c test-fchdir.c \
 	test-fcntl.c test-fcntl-h.c test-fcntl-safer.c test-fdopen.c \
 	test-fdopendir.c test-fgetc.c test-float.c test-fnmatch.c \
-	test-fpending.c test-fputc.c test-fread.c \
-	$(test_frexp_nolibm_SOURCES) $(test_frexpl_nolibm_SOURCES) \
-	test-fseterr.c test-fstat.c test-fstatat.c test-fwrite.c \
-	test-getcwd-lgpl.c test-getdtablesize.c test-getopt.c \
+	test-fpending.c test-fputc.c test-fread.c test-fstat.c \
+	test-fstatat.c test-fwrite.c test-getcwd-lgpl.c \
+	test-getdtablesize.c test-getopt.c test-gettimeofday.c \
 	test-hash.c test-i-ring.c test-iconv.c test-iconv-h.c \
 	test-ignore-value.c test-intprops.c test-inttostr.c \
-	test-inttypes.c test-isatty.c test-isblank.c \
-	test-isnand-nolibm.c test-isnanf-nolibm.c test-isnanl-nolibm.c \
-	test-iswblank.c test-langinfo.c test-locale.c \
-	test-localeconv.c test-localename.c test-lseek.c test-lstat.c \
-	test-malloc-gnu.c test-malloca.c test-math.c test-mbrtowc.c \
-	test-mbrtowc-w32.c test-mbscasecmp.c test-mbsinit.c \
-	test-mbsrtowcs.c test-mbsstr1.c test-mbsstr2.c test-mbsstr3.c \
-	test-memchr.c test-memrchr.c test-nl_langinfo.c test-open.c \
-	test-openat.c test-openat-safer.c test-pathmax.c test-pipe.c \
-	test-printf-frexp.c test-printf-frexpl.c \
-	test-quotearg-simple.c test-realloc-gnu.c test-regex.c \
-	test-setenv.c test-setlocale1.c test-setlocale2.c \
-	test-signbit.c test-snprintf.c test-stat.c test-stdbool.c \
-	test-stddef.c test-stdint.c test-stdio.c test-stdlib.c \
-	test-strerror.c test-striconv.c test-string.c test-strnlen.c \
-	test-strtoimax.c test-strtoll.c test-strtoull.c \
-	test-strtoumax.c test-symlink.c test-sys_stat.c \
-	test-sys_types.c test-time.c $(test_u8_mbtoucr_SOURCES) \
-	$(test_u8_uctomb_SOURCES) $(test_uc_width_SOURCES) \
-	$(test_uc_width2_SOURCES) test-unistd.c test-unsetenv.c \
-	test-vasnprintf.c test-verify.c test-version-etc.c \
-	test-vfprintf-posix.c test-wchar.c test-wcrtomb.c \
+	test-inttypes.c test-isatty.c test-isblank.c test-iswblank.c \
+	test-langinfo.c test-locale.c test-localeconv.c \
+	test-localename.c test-lseek.c test-lstat.c test-malloc-gnu.c \
+	test-malloca.c test-mbrtowc.c test-mbrtowc-w32.c \
+	test-mbscasecmp.c test-mbsinit.c test-mbsrtowcs.c \
+	test-mbsstr1.c test-mbsstr2.c test-mbsstr3.c test-memchr.c \
+	test-memrchr.c test-nl_langinfo.c test-open.c test-openat.c \
+	test-openat-safer.c test-pathmax.c test-pipe.c \
+	test-quotearg-simple.c test-read.c test-realloc-gnu.c \
+	test-regex.c test-setenv.c test-setlocale1.c test-setlocale2.c \
+	test-snprintf.c test-stat.c test-stdbool.c test-stddef.c \
+	test-stdint.c test-stdio.c test-stdlib.c test-strerror.c \
+	test-striconv.c test-string.c test-strnlen.c test-strtoimax.c \
+	test-strtoll.c test-strtoull.c test-strtoumax.c test-symlink.c \
+	test-sys_stat.c test-sys_time.c test-sys_types.c test-time.c \
+	$(test_u8_mbtoucr_SOURCES) $(test_u8_uctomb_SOURCES) \
+	$(test_uc_width_SOURCES) $(test_uc_width2_SOURCES) \
+	test-unistd.c test-unsetenv.c test-vasnprintf.c test-verify.c \
+	test-version-etc.c test-wchar.c test-wcrtomb.c \
 	test-wcrtomb-w32.c test-wctype-h.c test-wcwidth.c \
 	test-xalloc-die.c test-xstrtoimax.c test-xstrtol.c \
 	test-xstrtoul.c
@@ -1368,34 +1305,15 @@ GETTEXT_MACRO_VERSION = @GETTEXT_MACRO_VERSION@
 GLIBC21 = @GLIBC21@
 GMSGFMT = @GMSGFMT@
 GMSGFMT_015 = @GMSGFMT_015@
-GNULIB_ACOSF = @GNULIB_ACOSF@
-GNULIB_ACOSL = @GNULIB_ACOSL@
 GNULIB_ALPHASORT = @GNULIB_ALPHASORT@
-GNULIB_ASINF = @GNULIB_ASINF@
-GNULIB_ASINL = @GNULIB_ASINL@
-GNULIB_ATAN2F = @GNULIB_ATAN2F@
-GNULIB_ATANF = @GNULIB_ATANF@
-GNULIB_ATANL = @GNULIB_ATANL@
 GNULIB_ATOLL = @GNULIB_ATOLL@
 GNULIB_BTOWC = @GNULIB_BTOWC@
 GNULIB_CALLOC_POSIX = @GNULIB_CALLOC_POSIX@
 GNULIB_CANONICALIZE_FILE_NAME = @GNULIB_CANONICALIZE_FILE_NAME@
-GNULIB_CBRT = @GNULIB_CBRT@
-GNULIB_CBRTF = @GNULIB_CBRTF@
-GNULIB_CBRTL = @GNULIB_CBRTL@
-GNULIB_CEIL = @GNULIB_CEIL@
-GNULIB_CEILF = @GNULIB_CEILF@
-GNULIB_CEILL = @GNULIB_CEILL@
 GNULIB_CHDIR = @GNULIB_CHDIR@
 GNULIB_CHOWN = @GNULIB_CHOWN@
 GNULIB_CLOSE = @GNULIB_CLOSE@
 GNULIB_CLOSEDIR = @GNULIB_CLOSEDIR@
-GNULIB_COPYSIGN = @GNULIB_COPYSIGN@
-GNULIB_COPYSIGNF = @GNULIB_COPYSIGNF@
-GNULIB_COPYSIGNL = @GNULIB_COPYSIGNL@
-GNULIB_COSF = @GNULIB_COSF@
-GNULIB_COSHF = @GNULIB_COSHF@
-GNULIB_COSL = @GNULIB_COSL@
 GNULIB_DIRFD = @GNULIB_DIRFD@
 GNULIB_DPRINTF = @GNULIB_DPRINTF@
 GNULIB_DUP = @GNULIB_DUP@
@@ -1404,16 +1322,6 @@ GNULIB_DUP3 = @GNULIB_DUP3@
 GNULIB_DUPLOCALE = @GNULIB_DUPLOCALE@
 GNULIB_ENVIRON = @GNULIB_ENVIRON@
 GNULIB_EUIDACCESS = @GNULIB_EUIDACCESS@
-GNULIB_EXP2 = @GNULIB_EXP2@
-GNULIB_EXP2F = @GNULIB_EXP2F@
-GNULIB_EXP2L = @GNULIB_EXP2L@
-GNULIB_EXPF = @GNULIB_EXPF@
-GNULIB_EXPL = @GNULIB_EXPL@
-GNULIB_EXPM1 = @GNULIB_EXPM1@
-GNULIB_EXPM1F = @GNULIB_EXPM1F@
-GNULIB_EXPM1L = @GNULIB_EXPM1L@
-GNULIB_FABSF = @GNULIB_FABSF@
-GNULIB_FABSL = @GNULIB_FABSL@
 GNULIB_FACCESSAT = @GNULIB_FACCESSAT@
 GNULIB_FCHDIR = @GNULIB_FCHDIR@
 GNULIB_FCHMODAT = @GNULIB_FCHMODAT@
@@ -1428,15 +1336,6 @@ GNULIB_FFSL = @GNULIB_FFSL@
 GNULIB_FFSLL = @GNULIB_FFSLL@
 GNULIB_FGETC = @GNULIB_FGETC@
 GNULIB_FGETS = @GNULIB_FGETS@
-GNULIB_FLOOR = @GNULIB_FLOOR@
-GNULIB_FLOORF = @GNULIB_FLOORF@
-GNULIB_FLOORL = @GNULIB_FLOORL@
-GNULIB_FMA = @GNULIB_FMA@
-GNULIB_FMAF = @GNULIB_FMAF@
-GNULIB_FMAL = @GNULIB_FMAL@
-GNULIB_FMOD = @GNULIB_FMOD@
-GNULIB_FMODF = @GNULIB_FMODF@
-GNULIB_FMODL = @GNULIB_FMODL@
 GNULIB_FOPEN = @GNULIB_FOPEN@
 GNULIB_FPRINTF = @GNULIB_FPRINTF@
 GNULIB_FPRINTF_POSIX = @GNULIB_FPRINTF_POSIX@
@@ -1445,9 +1344,6 @@ GNULIB_FPUTC = @GNULIB_FPUTC@
 GNULIB_FPUTS = @GNULIB_FPUTS@
 GNULIB_FREAD = @GNULIB_FREAD@
 GNULIB_FREOPEN = @GNULIB_FREOPEN@
-GNULIB_FREXP = @GNULIB_FREXP@
-GNULIB_FREXPF = @GNULIB_FREXPF@
-GNULIB_FREXPL = @GNULIB_FREXPL@
 GNULIB_FSCANF = @GNULIB_FSCANF@
 GNULIB_FSEEK = @GNULIB_FSEEK@
 GNULIB_FSEEKO = @GNULIB_FSEEKO@
@@ -1473,51 +1369,23 @@ GNULIB_GETLOGIN = @GNULIB_GETLOGIN@
 GNULIB_GETLOGIN_R = @GNULIB_GETLOGIN_R@
 GNULIB_GETPAGESIZE = @GNULIB_GETPAGESIZE@
 GNULIB_GETSUBOPT = @GNULIB_GETSUBOPT@
+GNULIB_GETTIMEOFDAY = @GNULIB_GETTIMEOFDAY@
 GNULIB_GETUSERSHELL = @GNULIB_GETUSERSHELL@
 GNULIB_GL_UNISTD_H_GETOPT = @GNULIB_GL_UNISTD_H_GETOPT@
 GNULIB_GRANTPT = @GNULIB_GRANTPT@
 GNULIB_GROUP_MEMBER = @GNULIB_GROUP_MEMBER@
-GNULIB_HYPOT = @GNULIB_HYPOT@
-GNULIB_HYPOTF = @GNULIB_HYPOTF@
-GNULIB_HYPOTL = @GNULIB_HYPOTL@
 GNULIB_ICONV = @GNULIB_ICONV@
-GNULIB_ILOGB = @GNULIB_ILOGB@
-GNULIB_ILOGBF = @GNULIB_ILOGBF@
-GNULIB_ILOGBL = @GNULIB_ILOGBL@
 GNULIB_IMAXABS = @GNULIB_IMAXABS@
 GNULIB_IMAXDIV = @GNULIB_IMAXDIV@
 GNULIB_ISATTY = @GNULIB_ISATTY@
 GNULIB_ISBLANK = @GNULIB_ISBLANK@
-GNULIB_ISFINITE = @GNULIB_ISFINITE@
-GNULIB_ISINF = @GNULIB_ISINF@
-GNULIB_ISNAN = @GNULIB_ISNAN@
-GNULIB_ISNAND = @GNULIB_ISNAND@
-GNULIB_ISNANF = @GNULIB_ISNANF@
-GNULIB_ISNANL = @GNULIB_ISNANL@
 GNULIB_ISWBLANK = @GNULIB_ISWBLANK@
 GNULIB_ISWCTYPE = @GNULIB_ISWCTYPE@
 GNULIB_LCHMOD = @GNULIB_LCHMOD@
 GNULIB_LCHOWN = @GNULIB_LCHOWN@
-GNULIB_LDEXPF = @GNULIB_LDEXPF@
-GNULIB_LDEXPL = @GNULIB_LDEXPL@
 GNULIB_LINK = @GNULIB_LINK@
 GNULIB_LINKAT = @GNULIB_LINKAT@
 GNULIB_LOCALECONV = @GNULIB_LOCALECONV@
-GNULIB_LOG = @GNULIB_LOG@
-GNULIB_LOG10 = @GNULIB_LOG10@
-GNULIB_LOG10F = @GNULIB_LOG10F@
-GNULIB_LOG10L = @GNULIB_LOG10L@
-GNULIB_LOG1P = @GNULIB_LOG1P@
-GNULIB_LOG1PF = @GNULIB_LOG1PF@
-GNULIB_LOG1PL = @GNULIB_LOG1PL@
-GNULIB_LOG2 = @GNULIB_LOG2@
-GNULIB_LOG2F = @GNULIB_LOG2F@
-GNULIB_LOG2L = @GNULIB_LOG2L@
-GNULIB_LOGB = @GNULIB_LOGB@
-GNULIB_LOGBF = @GNULIB_LOGBF@
-GNULIB_LOGBL = @GNULIB_LOGBL@
-GNULIB_LOGF = @GNULIB_LOGF@
-GNULIB_LOGL = @GNULIB_LOGL@
 GNULIB_LSEEK = @GNULIB_LSEEK@
 GNULIB_LSTAT = @GNULIB_LSTAT@
 GNULIB_MALLOC_POSIX = @GNULIB_MALLOC_POSIX@
@@ -1556,9 +1424,6 @@ GNULIB_MKOSTEMPS = @GNULIB_MKOSTEMPS@
 GNULIB_MKSTEMP = @GNULIB_MKSTEMP@
 GNULIB_MKSTEMPS = @GNULIB_MKSTEMPS@
 GNULIB_MKTIME = @GNULIB_MKTIME@
-GNULIB_MODF = @GNULIB_MODF@
-GNULIB_MODFF = @GNULIB_MODFF@
-GNULIB_MODFL = @GNULIB_MODFL@
 GNULIB_NANOSLEEP = @GNULIB_NANOSLEEP@
 GNULIB_NL_LANGINFO = @GNULIB_NL_LANGINFO@
 GNULIB_NONBLOCKING = @GNULIB_NONBLOCKING@
@@ -1573,7 +1438,6 @@ GNULIB_PIPE = @GNULIB_PIPE@
 GNULIB_PIPE2 = @GNULIB_PIPE2@
 GNULIB_POPEN = @GNULIB_POPEN@
 GNULIB_POSIX_OPENPT = @GNULIB_POSIX_OPENPT@
-GNULIB_POWF = @GNULIB_POWF@
 GNULIB_PREAD = @GNULIB_PREAD@
 GNULIB_PRINTF = @GNULIB_PRINTF@
 GNULIB_PRINTF_POSIX = @GNULIB_PRINTF_POSIX@
@@ -1593,20 +1457,11 @@ GNULIB_READLINK = @GNULIB_READLINK@
 GNULIB_READLINKAT = @GNULIB_READLINKAT@
 GNULIB_REALLOC_POSIX = @GNULIB_REALLOC_POSIX@
 GNULIB_REALPATH = @GNULIB_REALPATH@
-GNULIB_REMAINDER = @GNULIB_REMAINDER@
-GNULIB_REMAINDERF = @GNULIB_REMAINDERF@
-GNULIB_REMAINDERL = @GNULIB_REMAINDERL@
 GNULIB_REMOVE = @GNULIB_REMOVE@
 GNULIB_RENAME = @GNULIB_RENAME@
 GNULIB_RENAMEAT = @GNULIB_RENAMEAT@
 GNULIB_REWINDDIR = @GNULIB_REWINDDIR@
-GNULIB_RINT = @GNULIB_RINT@
-GNULIB_RINTF = @GNULIB_RINTF@
-GNULIB_RINTL = @GNULIB_RINTL@
 GNULIB_RMDIR = @GNULIB_RMDIR@
-GNULIB_ROUND = @GNULIB_ROUND@
-GNULIB_ROUNDF = @GNULIB_ROUNDF@
-GNULIB_ROUNDL = @GNULIB_ROUNDL@
 GNULIB_RPMATCH = @GNULIB_RPMATCH@
 GNULIB_SCANDIR = @GNULIB_SCANDIR@
 GNULIB_SCANF = @GNULIB_SCANF@
@@ -1614,15 +1469,9 @@ GNULIB_SECURE_GETENV = @GNULIB_SECURE_GETENV@
 GNULIB_SETENV = @GNULIB_SETENV@
 GNULIB_SETHOSTNAME = @GNULIB_SETHOSTNAME@
 GNULIB_SETLOCALE = @GNULIB_SETLOCALE@
-GNULIB_SIGNBIT = @GNULIB_SIGNBIT@
-GNULIB_SINF = @GNULIB_SINF@
-GNULIB_SINHF = @GNULIB_SINHF@
-GNULIB_SINL = @GNULIB_SINL@
 GNULIB_SLEEP = @GNULIB_SLEEP@
 GNULIB_SNPRINTF = @GNULIB_SNPRINTF@
 GNULIB_SPRINTF_POSIX = @GNULIB_SPRINTF_POSIX@
-GNULIB_SQRTF = @GNULIB_SQRTF@
-GNULIB_SQRTL = @GNULIB_SQRTL@
 GNULIB_STAT = @GNULIB_STAT@
 GNULIB_STDIO_H_NONBLOCKING = @GNULIB_STDIO_H_NONBLOCKING@
 GNULIB_STDIO_H_SIGPIPE = @GNULIB_STDIO_H_SIGPIPE@
@@ -1651,16 +1500,10 @@ GNULIB_STRVERSCMP = @GNULIB_STRVERSCMP@
 GNULIB_SYMLINK = @GNULIB_SYMLINK@
 GNULIB_SYMLINKAT = @GNULIB_SYMLINKAT@
 GNULIB_SYSTEM_POSIX = @GNULIB_SYSTEM_POSIX@
-GNULIB_TANF = @GNULIB_TANF@
-GNULIB_TANHF = @GNULIB_TANHF@
-GNULIB_TANL = @GNULIB_TANL@
 GNULIB_TIMEGM = @GNULIB_TIMEGM@
 GNULIB_TIME_R = @GNULIB_TIME_R@
 GNULIB_TMPFILE = @GNULIB_TMPFILE@
 GNULIB_TOWCTRANS = @GNULIB_TOWCTRANS@
-GNULIB_TRUNC = @GNULIB_TRUNC@
-GNULIB_TRUNCF = @GNULIB_TRUNCF@
-GNULIB_TRUNCL = @GNULIB_TRUNCL@
 GNULIB_TTYNAME_R = @GNULIB_TTYNAME_R@
 GNULIB_UNISTD_H_NONBLOCKING = @GNULIB_UNISTD_H_NONBLOCKING@
 GNULIB_UNISTD_H_SIGPIPE = @GNULIB_UNISTD_H_SIGPIPE@
@@ -1720,50 +1563,18 @@ GNULIB_WMEMSET = @GNULIB_WMEMSET@
 GNULIB_WRITE = @GNULIB_WRITE@
 GNULIB__EXIT = @GNULIB__EXIT@
 GREP = @GREP@
-HAVE_ACOSF = @HAVE_ACOSF@
-HAVE_ACOSL = @HAVE_ACOSL@
 HAVE_ALPHASORT = @HAVE_ALPHASORT@
-HAVE_ASINF = @HAVE_ASINF@
-HAVE_ASINL = @HAVE_ASINL@
-HAVE_ATAN2F = @HAVE_ATAN2F@
-HAVE_ATANF = @HAVE_ATANF@
-HAVE_ATANL = @HAVE_ATANL@
 HAVE_ATOLL = @HAVE_ATOLL@
 HAVE_BTOWC = @HAVE_BTOWC@
 HAVE_CANONICALIZE_FILE_NAME = @HAVE_CANONICALIZE_FILE_NAME@
-HAVE_CBRT = @HAVE_CBRT@
-HAVE_CBRTF = @HAVE_CBRTF@
-HAVE_CBRTL = @HAVE_CBRTL@
 HAVE_CHOWN = @HAVE_CHOWN@
 HAVE_CLOSEDIR = @HAVE_CLOSEDIR@
-HAVE_COPYSIGN = @HAVE_COPYSIGN@
-HAVE_COPYSIGNL = @HAVE_COPYSIGNL@
-HAVE_COSF = @HAVE_COSF@
-HAVE_COSHF = @HAVE_COSHF@
-HAVE_COSL = @HAVE_COSL@
-HAVE_DECL_ACOSL = @HAVE_DECL_ACOSL@
-HAVE_DECL_ASINL = @HAVE_DECL_ASINL@
-HAVE_DECL_ATANL = @HAVE_DECL_ATANL@
-HAVE_DECL_CBRTF = @HAVE_DECL_CBRTF@
-HAVE_DECL_CBRTL = @HAVE_DECL_CBRTL@
-HAVE_DECL_CEILF = @HAVE_DECL_CEILF@
-HAVE_DECL_CEILL = @HAVE_DECL_CEILL@
-HAVE_DECL_COPYSIGNF = @HAVE_DECL_COPYSIGNF@
-HAVE_DECL_COSL = @HAVE_DECL_COSL@
 HAVE_DECL_DIRFD = @HAVE_DECL_DIRFD@
 HAVE_DECL_ENVIRON = @HAVE_DECL_ENVIRON@
-HAVE_DECL_EXP2 = @HAVE_DECL_EXP2@
-HAVE_DECL_EXP2F = @HAVE_DECL_EXP2F@
-HAVE_DECL_EXP2L = @HAVE_DECL_EXP2L@
-HAVE_DECL_EXPL = @HAVE_DECL_EXPL@
-HAVE_DECL_EXPM1L = @HAVE_DECL_EXPM1L@
 HAVE_DECL_FCHDIR = @HAVE_DECL_FCHDIR@
 HAVE_DECL_FDATASYNC = @HAVE_DECL_FDATASYNC@
 HAVE_DECL_FDOPENDIR = @HAVE_DECL_FDOPENDIR@
-HAVE_DECL_FLOORF = @HAVE_DECL_FLOORF@
-HAVE_DECL_FLOORL = @HAVE_DECL_FLOORL@
 HAVE_DECL_FPURGE = @HAVE_DECL_FPURGE@
-HAVE_DECL_FREXPL = @HAVE_DECL_FREXPL@
 HAVE_DECL_FSEEKO = @HAVE_DECL_FSEEKO@
 HAVE_DECL_FTELLO = @HAVE_DECL_FTELLO@
 HAVE_DECL_GETDELIM = @HAVE_DECL_GETDELIM@
@@ -1775,28 +1586,13 @@ HAVE_DECL_GETPAGESIZE = @HAVE_DECL_GETPAGESIZE@
 HAVE_DECL_GETUSERSHELL = @HAVE_DECL_GETUSERSHELL@
 HAVE_DECL_IMAXABS = @HAVE_DECL_IMAXABS@
 HAVE_DECL_IMAXDIV = @HAVE_DECL_IMAXDIV@
-HAVE_DECL_LDEXPL = @HAVE_DECL_LDEXPL@
 HAVE_DECL_LOCALTIME_R = @HAVE_DECL_LOCALTIME_R@
-HAVE_DECL_LOG10L = @HAVE_DECL_LOG10L@
-HAVE_DECL_LOG2 = @HAVE_DECL_LOG2@
-HAVE_DECL_LOG2F = @HAVE_DECL_LOG2F@
-HAVE_DECL_LOG2L = @HAVE_DECL_LOG2L@
-HAVE_DECL_LOGB = @HAVE_DECL_LOGB@
-HAVE_DECL_LOGL = @HAVE_DECL_LOGL@
 HAVE_DECL_MEMMEM = @HAVE_DECL_MEMMEM@
 HAVE_DECL_MEMRCHR = @HAVE_DECL_MEMRCHR@
 HAVE_DECL_OBSTACK_PRINTF = @HAVE_DECL_OBSTACK_PRINTF@
-HAVE_DECL_REMAINDER = @HAVE_DECL_REMAINDER@
-HAVE_DECL_REMAINDERL = @HAVE_DECL_REMAINDERL@
-HAVE_DECL_RINTF = @HAVE_DECL_RINTF@
-HAVE_DECL_ROUND = @HAVE_DECL_ROUND@
-HAVE_DECL_ROUNDF = @HAVE_DECL_ROUNDF@
-HAVE_DECL_ROUNDL = @HAVE_DECL_ROUNDL@
 HAVE_DECL_SETENV = @HAVE_DECL_SETENV@
 HAVE_DECL_SETHOSTNAME = @HAVE_DECL_SETHOSTNAME@
-HAVE_DECL_SINL = @HAVE_DECL_SINL@
 HAVE_DECL_SNPRINTF = @HAVE_DECL_SNPRINTF@
-HAVE_DECL_SQRTL = @HAVE_DECL_SQRTL@
 HAVE_DECL_STRDUP = @HAVE_DECL_STRDUP@
 HAVE_DECL_STRERROR_R = @HAVE_DECL_STRERROR_R@
 HAVE_DECL_STRNDUP = @HAVE_DECL_STRNDUP@
@@ -1805,10 +1601,6 @@ HAVE_DECL_STRSIGNAL = @HAVE_DECL_STRSIGNAL@
 HAVE_DECL_STRTOIMAX = @HAVE_DECL_STRTOIMAX@
 HAVE_DECL_STRTOK_R = @HAVE_DECL_STRTOK_R@
 HAVE_DECL_STRTOUMAX = @HAVE_DECL_STRTOUMAX@
-HAVE_DECL_TANL = @HAVE_DECL_TANL@
-HAVE_DECL_TRUNC = @HAVE_DECL_TRUNC@
-HAVE_DECL_TRUNCF = @HAVE_DECL_TRUNCF@
-HAVE_DECL_TRUNCL = @HAVE_DECL_TRUNCL@
 HAVE_DECL_TTYNAME_R = @HAVE_DECL_TTYNAME_R@
 HAVE_DECL_UNSETENV = @HAVE_DECL_UNSETENV@
 HAVE_DECL_VSNPRINTF = @HAVE_DECL_VSNPRINTF@
@@ -1820,12 +1612,6 @@ HAVE_DUP2 = @HAVE_DUP2@
 HAVE_DUP3 = @HAVE_DUP3@
 HAVE_DUPLOCALE = @HAVE_DUPLOCALE@
 HAVE_EUIDACCESS = @HAVE_EUIDACCESS@
-HAVE_EXPF = @HAVE_EXPF@
-HAVE_EXPL = @HAVE_EXPL@
-HAVE_EXPM1 = @HAVE_EXPM1@
-HAVE_EXPM1F = @HAVE_EXPM1F@
-HAVE_FABSF = @HAVE_FABSF@
-HAVE_FABSL = @HAVE_FABSL@
 HAVE_FACCESSAT = @HAVE_FACCESSAT@
 HAVE_FCHDIR = @HAVE_FCHDIR@
 HAVE_FCHMODAT = @HAVE_FCHMODAT@
@@ -1836,12 +1622,6 @@ HAVE_FDOPENDIR = @HAVE_FDOPENDIR@
 HAVE_FEATURES_H = @HAVE_FEATURES_H@
 HAVE_FFSL = @HAVE_FFSL@
 HAVE_FFSLL = @HAVE_FFSLL@
-HAVE_FMA = @HAVE_FMA@
-HAVE_FMAF = @HAVE_FMAF@
-HAVE_FMAL = @HAVE_FMAL@
-HAVE_FMODF = @HAVE_FMODF@
-HAVE_FMODL = @HAVE_FMODL@
-HAVE_FREXPF = @HAVE_FREXPF@
 HAVE_FSEEKO = @HAVE_FSEEKO@
 HAVE_FSTATAT = @HAVE_FSTATAT@
 HAVE_FSYNC = @HAVE_FSYNC@
@@ -1855,18 +1635,11 @@ HAVE_GETLOGIN = @HAVE_GETLOGIN@
 HAVE_GETOPT_H = @HAVE_GETOPT_H@
 HAVE_GETPAGESIZE = @HAVE_GETPAGESIZE@
 HAVE_GETSUBOPT = @HAVE_GETSUBOPT@
+HAVE_GETTIMEOFDAY = @HAVE_GETTIMEOFDAY@
 HAVE_GRANTPT = @HAVE_GRANTPT@
 HAVE_GROUP_MEMBER = @HAVE_GROUP_MEMBER@
-HAVE_HYPOTF = @HAVE_HYPOTF@
-HAVE_HYPOTL = @HAVE_HYPOTL@
-HAVE_ILOGB = @HAVE_ILOGB@
-HAVE_ILOGBF = @HAVE_ILOGBF@
-HAVE_ILOGBL = @HAVE_ILOGBL@
 HAVE_INTTYPES_H = @HAVE_INTTYPES_H@
 HAVE_ISBLANK = @HAVE_ISBLANK@
-HAVE_ISNAND = @HAVE_ISNAND@
-HAVE_ISNANF = @HAVE_ISNANF@
-HAVE_ISNANL = @HAVE_ISNANL@
 HAVE_ISWBLANK = @HAVE_ISWBLANK@
 HAVE_ISWCNTRL = @HAVE_ISWCNTRL@
 HAVE_LANGINFO_CODESET = @HAVE_LANGINFO_CODESET@
@@ -1876,18 +1649,8 @@ HAVE_LANGINFO_T_FMT_AMPM = @HAVE_LANGINFO_T_FMT_AMPM@
 HAVE_LANGINFO_YESEXPR = @HAVE_LANGINFO_YESEXPR@
 HAVE_LCHMOD = @HAVE_LCHMOD@
 HAVE_LCHOWN = @HAVE_LCHOWN@
-HAVE_LDEXPF = @HAVE_LDEXPF@
 HAVE_LINK = @HAVE_LINK@
 HAVE_LINKAT = @HAVE_LINKAT@
-HAVE_LOG10F = @HAVE_LOG10F@
-HAVE_LOG10L = @HAVE_LOG10L@
-HAVE_LOG1P = @HAVE_LOG1P@
-HAVE_LOG1PF = @HAVE_LOG1PF@
-HAVE_LOG1PL = @HAVE_LOG1PL@
-HAVE_LOGBF = @HAVE_LOGBF@
-HAVE_LOGBL = @HAVE_LOGBL@
-HAVE_LOGF = @HAVE_LOGF@
-HAVE_LOGL = @HAVE_LOGL@
 HAVE_LONG_LONG_INT = @HAVE_LONG_LONG_INT@
 HAVE_LSTAT = @HAVE_LSTAT@
 HAVE_MBRLEN = @HAVE_MBRLEN@
@@ -1908,8 +1671,6 @@ HAVE_MKOSTEMP = @HAVE_MKOSTEMP@
 HAVE_MKOSTEMPS = @HAVE_MKOSTEMPS@
 HAVE_MKSTEMP = @HAVE_MKSTEMP@
 HAVE_MKSTEMPS = @HAVE_MKSTEMPS@
-HAVE_MODFF = @HAVE_MODFF@
-HAVE_MODFL = @HAVE_MODFL@
 HAVE_MSVC_INVALID_PARAMETER_HANDLER = @HAVE_MSVC_INVALID_PARAMETER_HANDLER@
 HAVE_NANOSLEEP = @HAVE_NANOSLEEP@
 HAVE_NL_LANGINFO = @HAVE_NL_LANGINFO@
@@ -1921,7 +1682,6 @@ HAVE_PIPE = @HAVE_PIPE@
 HAVE_PIPE2 = @HAVE_PIPE2@
 HAVE_POPEN = @HAVE_POPEN@
 HAVE_POSIX_OPENPT = @HAVE_POSIX_OPENPT@
-HAVE_POWF = @HAVE_POWF@
 HAVE_PREAD = @HAVE_PREAD@
 HAVE_PTSNAME = @HAVE_PTSNAME@
 HAVE_PTSNAME_R = @HAVE_PTSNAME_R@
@@ -1934,14 +1694,9 @@ HAVE_READDIR = @HAVE_READDIR@
 HAVE_READLINK = @HAVE_READLINK@
 HAVE_READLINKAT = @HAVE_READLINKAT@
 HAVE_REALPATH = @HAVE_REALPATH@
-HAVE_REMAINDER = @HAVE_REMAINDER@
-HAVE_REMAINDERF = @HAVE_REMAINDERF@
 HAVE_RENAMEAT = @HAVE_RENAMEAT@
 HAVE_REWINDDIR = @HAVE_REWINDDIR@
-HAVE_RINT = @HAVE_RINT@
-HAVE_RINTL = @HAVE_RINTL@
 HAVE_RPMATCH = @HAVE_RPMATCH@
-HAVE_SAME_LONG_DOUBLE_AS_DOUBLE = @HAVE_SAME_LONG_DOUBLE_AS_DOUBLE@
 HAVE_SCANDIR = @HAVE_SCANDIR@
 HAVE_SECURE_GETENV = @HAVE_SECURE_GETENV@
 HAVE_SETENV = @HAVE_SETENV@
@@ -1949,12 +1704,7 @@ HAVE_SETHOSTNAME = @HAVE_SETHOSTNAME@
 HAVE_SIGNED_SIG_ATOMIC_T = @HAVE_SIGNED_SIG_ATOMIC_T@
 HAVE_SIGNED_WCHAR_T = @HAVE_SIGNED_WCHAR_T@
 HAVE_SIGNED_WINT_T = @HAVE_SIGNED_WINT_T@
-HAVE_SINF = @HAVE_SINF@
-HAVE_SINHF = @HAVE_SINHF@
-HAVE_SINL = @HAVE_SINL@
 HAVE_SLEEP = @HAVE_SLEEP@
-HAVE_SQRTF = @HAVE_SQRTF@
-HAVE_SQRTL = @HAVE_SQRTL@
 HAVE_STDINT_H = @HAVE_STDINT_H@
 HAVE_STPCPY = @HAVE_STPCPY@
 HAVE_STPNCPY = @HAVE_STPNCPY@
@@ -1967,6 +1717,7 @@ HAVE_STRTOD = @HAVE_STRTOD@
 HAVE_STRTOLL = @HAVE_STRTOLL@
 HAVE_STRTOULL = @HAVE_STRTOULL@
 HAVE_STRUCT_RANDOM_DATA = @HAVE_STRUCT_RANDOM_DATA@
+HAVE_STRUCT_TIMEVAL = @HAVE_STRUCT_TIMEVAL@
 HAVE_STRVERSCMP = @HAVE_STRVERSCMP@
 HAVE_SYMLINK = @HAVE_SYMLINK@
 HAVE_SYMLINKAT = @HAVE_SYMLINKAT@
@@ -1974,10 +1725,8 @@ HAVE_SYS_BITYPES_H = @HAVE_SYS_BITYPES_H@
 HAVE_SYS_INTTYPES_H = @HAVE_SYS_INTTYPES_H@
 HAVE_SYS_LOADAVG_H = @HAVE_SYS_LOADAVG_H@
 HAVE_SYS_PARAM_H = @HAVE_SYS_PARAM_H@
+HAVE_SYS_TIME_H = @HAVE_SYS_TIME_H@
 HAVE_SYS_TYPES_H = @HAVE_SYS_TYPES_H@
-HAVE_TANF = @HAVE_TANF@
-HAVE_TANHF = @HAVE_TANHF@
-HAVE_TANL = @HAVE_TANL@
 HAVE_TIMEGM = @HAVE_TIMEGM@
 HAVE_UNISTD_H = @HAVE_UNISTD_H@
 HAVE_UNLINKAT = @HAVE_UNLINKAT@
@@ -2084,7 +1833,6 @@ NEXT_AS_FIRST_DIRECTIVE_ICONV_H = @NEXT_AS_FIRST_DIRECTIVE_ICONV_H@
 NEXT_AS_FIRST_DIRECTIVE_INTTYPES_H = @NEXT_AS_FIRST_DIRECTIVE_INTTYPES_H@
 NEXT_AS_FIRST_DIRECTIVE_LANGINFO_H = @NEXT_AS_FIRST_DIRECTIVE_LANGINFO_H@
 NEXT_AS_FIRST_DIRECTIVE_LOCALE_H = @NEXT_AS_FIRST_DIRECTIVE_LOCALE_H@
-NEXT_AS_FIRST_DIRECTIVE_MATH_H = @NEXT_AS_FIRST_DIRECTIVE_MATH_H@
 NEXT_AS_FIRST_DIRECTIVE_STDARG_H = @NEXT_AS_FIRST_DIRECTIVE_STDARG_H@
 NEXT_AS_FIRST_DIRECTIVE_STDDEF_H = @NEXT_AS_FIRST_DIRECTIVE_STDDEF_H@
 NEXT_AS_FIRST_DIRECTIVE_STDINT_H = @NEXT_AS_FIRST_DIRECTIVE_STDINT_H@
@@ -2092,6 +1840,7 @@ NEXT_AS_FIRST_DIRECTIVE_STDIO_H = @NEXT_AS_FIRST_DIRECTIVE_STDIO_H@
 NEXT_AS_FIRST_DIRECTIVE_STDLIB_H = @NEXT_AS_FIRST_DIRECTIVE_STDLIB_H@
 NEXT_AS_FIRST_DIRECTIVE_STRING_H = @NEXT_AS_FIRST_DIRECTIVE_STRING_H@
 NEXT_AS_FIRST_DIRECTIVE_SYS_STAT_H = @NEXT_AS_FIRST_DIRECTIVE_SYS_STAT_H@
+NEXT_AS_FIRST_DIRECTIVE_SYS_TIME_H = @NEXT_AS_FIRST_DIRECTIVE_SYS_TIME_H@
 NEXT_AS_FIRST_DIRECTIVE_SYS_TYPES_H = @NEXT_AS_FIRST_DIRECTIVE_SYS_TYPES_H@
 NEXT_AS_FIRST_DIRECTIVE_TIME_H = @NEXT_AS_FIRST_DIRECTIVE_TIME_H@
 NEXT_AS_FIRST_DIRECTIVE_UNISTD_H = @NEXT_AS_FIRST_DIRECTIVE_UNISTD_H@
@@ -2107,7 +1856,6 @@ NEXT_ICONV_H = @NEXT_ICONV_H@
 NEXT_INTTYPES_H = @NEXT_INTTYPES_H@
 NEXT_LANGINFO_H = @NEXT_LANGINFO_H@
 NEXT_LOCALE_H = @NEXT_LOCALE_H@
-NEXT_MATH_H = @NEXT_MATH_H@
 NEXT_STDARG_H = @NEXT_STDARG_H@
 NEXT_STDDEF_H = @NEXT_STDDEF_H@
 NEXT_STDINT_H = @NEXT_STDINT_H@
@@ -2115,6 +1863,7 @@ NEXT_STDIO_H = @NEXT_STDIO_H@
 NEXT_STDLIB_H = @NEXT_STDLIB_H@
 NEXT_STRING_H = @NEXT_STRING_H@
 NEXT_SYS_STAT_H = @NEXT_SYS_STAT_H@
+NEXT_SYS_TIME_H = @NEXT_SYS_TIME_H@
 NEXT_SYS_TYPES_H = @NEXT_SYS_TYPES_H@
 NEXT_TIME_H = @NEXT_TIME_H@
 NEXT_UNISTD_H = @NEXT_UNISTD_H@
@@ -2141,11 +1890,6 @@ RANLIB = @RANLIB@
 REPLACE_BTOWC = @REPLACE_BTOWC@
 REPLACE_CALLOC = @REPLACE_CALLOC@
 REPLACE_CANONICALIZE_FILE_NAME = @REPLACE_CANONICALIZE_FILE_NAME@
-REPLACE_CBRTF = @REPLACE_CBRTF@
-REPLACE_CBRTL = @REPLACE_CBRTL@
-REPLACE_CEIL = @REPLACE_CEIL@
-REPLACE_CEILF = @REPLACE_CEILF@
-REPLACE_CEILL = @REPLACE_CEILL@
 REPLACE_CHOWN = @REPLACE_CHOWN@
 REPLACE_CLOSE = @REPLACE_CLOSE@
 REPLACE_CLOSEDIR = @REPLACE_CLOSEDIR@
@@ -2154,33 +1898,16 @@ REPLACE_DPRINTF = @REPLACE_DPRINTF@
 REPLACE_DUP = @REPLACE_DUP@
 REPLACE_DUP2 = @REPLACE_DUP2@
 REPLACE_DUPLOCALE = @REPLACE_DUPLOCALE@
-REPLACE_EXP2 = @REPLACE_EXP2@
-REPLACE_EXP2L = @REPLACE_EXP2L@
-REPLACE_EXPM1 = @REPLACE_EXPM1@
-REPLACE_EXPM1F = @REPLACE_EXPM1F@
-REPLACE_FABSL = @REPLACE_FABSL@
 REPLACE_FCHOWNAT = @REPLACE_FCHOWNAT@
 REPLACE_FCLOSE = @REPLACE_FCLOSE@
 REPLACE_FCNTL = @REPLACE_FCNTL@
 REPLACE_FDOPEN = @REPLACE_FDOPEN@
 REPLACE_FDOPENDIR = @REPLACE_FDOPENDIR@
 REPLACE_FFLUSH = @REPLACE_FFLUSH@
-REPLACE_FLOOR = @REPLACE_FLOOR@
-REPLACE_FLOORF = @REPLACE_FLOORF@
-REPLACE_FLOORL = @REPLACE_FLOORL@
-REPLACE_FMA = @REPLACE_FMA@
-REPLACE_FMAF = @REPLACE_FMAF@
-REPLACE_FMAL = @REPLACE_FMAL@
-REPLACE_FMOD = @REPLACE_FMOD@
-REPLACE_FMODF = @REPLACE_FMODF@
-REPLACE_FMODL = @REPLACE_FMODL@
 REPLACE_FOPEN = @REPLACE_FOPEN@
 REPLACE_FPRINTF = @REPLACE_FPRINTF@
 REPLACE_FPURGE = @REPLACE_FPURGE@
 REPLACE_FREOPEN = @REPLACE_FREOPEN@
-REPLACE_FREXP = @REPLACE_FREXP@
-REPLACE_FREXPF = @REPLACE_FREXPF@
-REPLACE_FREXPL = @REPLACE_FREXPL@
 REPLACE_FSEEK = @REPLACE_FSEEK@
 REPLACE_FSEEKO = @REPLACE_FSEEKO@
 REPLACE_FSTAT = @REPLACE_FSTAT@
@@ -2197,43 +1924,21 @@ REPLACE_GETGROUPS = @REPLACE_GETGROUPS@
 REPLACE_GETLINE = @REPLACE_GETLINE@
 REPLACE_GETLOGIN_R = @REPLACE_GETLOGIN_R@
 REPLACE_GETPAGESIZE = @REPLACE_GETPAGESIZE@
-REPLACE_HUGE_VAL = @REPLACE_HUGE_VAL@
-REPLACE_HYPOT = @REPLACE_HYPOT@
-REPLACE_HYPOTF = @REPLACE_HYPOTF@
-REPLACE_HYPOTL = @REPLACE_HYPOTL@
+REPLACE_GETTIMEOFDAY = @REPLACE_GETTIMEOFDAY@
+REPLACE_GMTIME = @REPLACE_GMTIME@
 REPLACE_ICONV = @REPLACE_ICONV@
 REPLACE_ICONV_OPEN = @REPLACE_ICONV_OPEN@
 REPLACE_ICONV_UTF = @REPLACE_ICONV_UTF@
-REPLACE_ILOGB = @REPLACE_ILOGB@
-REPLACE_ILOGBF = @REPLACE_ILOGBF@
 REPLACE_ISATTY = @REPLACE_ISATTY@
-REPLACE_ISFINITE = @REPLACE_ISFINITE@
-REPLACE_ISINF = @REPLACE_ISINF@
-REPLACE_ISNAN = @REPLACE_ISNAN@
 REPLACE_ISWBLANK = @REPLACE_ISWBLANK@
 REPLACE_ISWCNTRL = @REPLACE_ISWCNTRL@
 REPLACE_ITOLD = @REPLACE_ITOLD@
 REPLACE_LCHOWN = @REPLACE_LCHOWN@
-REPLACE_LDEXPL = @REPLACE_LDEXPL@
 REPLACE_LINK = @REPLACE_LINK@
 REPLACE_LINKAT = @REPLACE_LINKAT@
 REPLACE_LOCALECONV = @REPLACE_LOCALECONV@
+REPLACE_LOCALTIME = @REPLACE_LOCALTIME@
 REPLACE_LOCALTIME_R = @REPLACE_LOCALTIME_R@
-REPLACE_LOG = @REPLACE_LOG@
-REPLACE_LOG10 = @REPLACE_LOG10@
-REPLACE_LOG10F = @REPLACE_LOG10F@
-REPLACE_LOG10L = @REPLACE_LOG10L@
-REPLACE_LOG1P = @REPLACE_LOG1P@
-REPLACE_LOG1PF = @REPLACE_LOG1PF@
-REPLACE_LOG1PL = @REPLACE_LOG1PL@
-REPLACE_LOG2 = @REPLACE_LOG2@
-REPLACE_LOG2F = @REPLACE_LOG2F@
-REPLACE_LOG2L = @REPLACE_LOG2L@
-REPLACE_LOGB = @REPLACE_LOGB@
-REPLACE_LOGBF = @REPLACE_LOGBF@
-REPLACE_LOGBL = @REPLACE_LOGBL@
-REPLACE_LOGF = @REPLACE_LOGF@
-REPLACE_LOGL = @REPLACE_LOGL@
 REPLACE_LSEEK = @REPLACE_LSEEK@
 REPLACE_LSTAT = @REPLACE_LSTAT@
 REPLACE_MALLOC = @REPLACE_MALLOC@
@@ -2251,10 +1956,6 @@ REPLACE_MKFIFO = @REPLACE_MKFIFO@
 REPLACE_MKNOD = @REPLACE_MKNOD@
 REPLACE_MKSTEMP = @REPLACE_MKSTEMP@
 REPLACE_MKTIME = @REPLACE_MKTIME@
-REPLACE_MODF = @REPLACE_MODF@
-REPLACE_MODFF = @REPLACE_MODFF@
-REPLACE_MODFL = @REPLACE_MODFL@
-REPLACE_NAN = @REPLACE_NAN@
 REPLACE_NANOSLEEP = @REPLACE_NANOSLEEP@
 REPLACE_NL_LANGINFO = @REPLACE_NL_LANGINFO@
 REPLACE_NULL = @REPLACE_NULL@
@@ -2275,24 +1976,15 @@ REPLACE_READ = @REPLACE_READ@
 REPLACE_READLINK = @REPLACE_READLINK@
 REPLACE_REALLOC = @REPLACE_REALLOC@
 REPLACE_REALPATH = @REPLACE_REALPATH@
-REPLACE_REMAINDER = @REPLACE_REMAINDER@
-REPLACE_REMAINDERF = @REPLACE_REMAINDERF@
-REPLACE_REMAINDERL = @REPLACE_REMAINDERL@
 REPLACE_REMOVE = @REPLACE_REMOVE@
 REPLACE_RENAME = @REPLACE_RENAME@
 REPLACE_RENAMEAT = @REPLACE_RENAMEAT@
 REPLACE_RMDIR = @REPLACE_RMDIR@
-REPLACE_ROUND = @REPLACE_ROUND@
-REPLACE_ROUNDF = @REPLACE_ROUNDF@
-REPLACE_ROUNDL = @REPLACE_ROUNDL@
 REPLACE_SETENV = @REPLACE_SETENV@
 REPLACE_SETLOCALE = @REPLACE_SETLOCALE@
-REPLACE_SIGNBIT = @REPLACE_SIGNBIT@
-REPLACE_SIGNBIT_USING_GCC = @REPLACE_SIGNBIT_USING_GCC@
 REPLACE_SLEEP = @REPLACE_SLEEP@
 REPLACE_SNPRINTF = @REPLACE_SNPRINTF@
 REPLACE_SPRINTF = @REPLACE_SPRINTF@
-REPLACE_SQRTL = @REPLACE_SQRTL@
 REPLACE_STAT = @REPLACE_STAT@
 REPLACE_STDIO_READ_FUNCS = @REPLACE_STDIO_READ_FUNCS@
 REPLACE_STDIO_WRITE_FUNCS = @REPLACE_STDIO_WRITE_FUNCS@
@@ -2312,13 +2004,11 @@ REPLACE_STRTOIMAX = @REPLACE_STRTOIMAX@
 REPLACE_STRTOK_R = @REPLACE_STRTOK_R@
 REPLACE_STRTOUMAX = @REPLACE_STRTOUMAX@
 REPLACE_STRUCT_LCONV = @REPLACE_STRUCT_LCONV@
+REPLACE_STRUCT_TIMEVAL = @REPLACE_STRUCT_TIMEVAL@
 REPLACE_SYMLINK = @REPLACE_SYMLINK@
 REPLACE_TIMEGM = @REPLACE_TIMEGM@
 REPLACE_TMPFILE = @REPLACE_TMPFILE@
 REPLACE_TOWLOWER = @REPLACE_TOWLOWER@
-REPLACE_TRUNC = @REPLACE_TRUNC@
-REPLACE_TRUNCF = @REPLACE_TRUNCF@
-REPLACE_TRUNCL = @REPLACE_TRUNCL@
 REPLACE_TTYNAME_R = @REPLACE_TTYNAME_R@
 REPLACE_UNLINK = @REPLACE_UNLINK@
 REPLACE_UNLINKAT = @REPLACE_UNLINKAT@
@@ -2460,32 +2150,25 @@ EXTRA_DIST = test-alloca-opt.c test-argmatch.c macros.h \
 	test-fchdir.c signature.h macros.h test-fcntl-h.c test-open.h \
 	test-fcntl-safer.c macros.h test-fcntl.c signature.h macros.h \
 	fdopen.c test-fdopen.c signature.h macros.h test-fdopendir.c \
-	signature.h macros.h test-fgetc.c signature.h macros.h \
-	test-float.c macros.h test-fnmatch.c signature.h macros.h \
-	test-fpending.c test-fpending.sh macros.h test-fputc.c \
-	signature.h macros.h test-fread.c signature.h macros.h \
-	test-frexp.c test-frexp.h minus-zero.h infinity.h nan.h \
-	signature.h macros.h randomd.c test-frexpl.c test-frexp.h \
-	minus-zero.h infinity.h nan.h signature.h macros.h randoml.c \
-	test-fseterr.c test-fstat.c signature.h macros.h \
+	signature.h macros.h test-fgetc.c signature.h macros.h float.c \
+	float.in.h itold.c test-float.c macros.h test-fnmatch.c \
+	signature.h macros.h test-fpending.c test-fpending.sh macros.h \
+	fpucw.h test-fputc.c signature.h macros.h test-fread.c \
+	signature.h macros.h test-fstat.c signature.h macros.h \
 	test-fstatat.c test-lstat.h test-stat.h signature.h macros.h \
 	test-fwrite.c signature.h macros.h test-getcwd-lgpl.c \
 	signature.h macros.h test-getdtablesize.c signature.h macros.h \
 	macros.h signature.h test-getopt.c test-getopt.h \
-	test-getopt_long.h test-hash.c macros.h test-i-ring.c macros.h \
-	test-iconv-h.c test-iconv.c signature.h macros.h \
-	test-ignore-value.c test-intprops.c macros.h anytostr.c \
-	inttostr.h macros.h test-inttostr.c test-inttypes.c \
-	test-isatty.c signature.h macros.h test-isblank.c signature.h \
-	macros.h test-isnand-nolibm.c test-isnand.h minus-zero.h \
-	infinity.h nan.h macros.h test-isnanf-nolibm.c test-isnanf.h \
-	minus-zero.h infinity.h nan.h macros.h test-isnanl-nolibm.c \
-	test-isnanl.h minus-zero.h infinity.h nan.h macros.h \
-	test-iswblank.c macros.h test-langinfo.c test-locale.c \
-	test-localeconv.c signature.h macros.h localename.h \
-	test-localename.c macros.h test-lseek.c test-lseek.sh \
-	signature.h macros.h test-lstat.h test-lstat.c signature.h \
-	macros.h test-malloc-gnu.c test-malloca.c test-math.c macros.h \
+	test-getopt_long.h signature.h test-gettimeofday.c test-hash.c \
+	macros.h test-i-ring.c macros.h test-iconv-h.c test-iconv.c \
+	signature.h macros.h test-ignore-value.c test-intprops.c \
+	macros.h anytostr.c inttostr.h macros.h test-inttostr.c \
+	test-inttypes.c test-isatty.c signature.h macros.h \
+	test-isblank.c signature.h macros.h test-iswblank.c macros.h \
+	test-langinfo.c test-locale.c test-localeconv.c signature.h \
+	macros.h localename.h test-localename.c macros.h test-lseek.c \
+	test-lseek.sh signature.h macros.h test-lstat.h test-lstat.c \
+	signature.h macros.h test-malloc-gnu.c test-malloca.c \
 	test-mbrtowc1.sh test-mbrtowc2.sh test-mbrtowc3.sh \
 	test-mbrtowc4.sh test-mbrtowc.c test-mbrtowc-w32-1.sh \
 	test-mbrtowc-w32-2.sh test-mbrtowc-w32-3.sh \
@@ -2501,13 +2184,12 @@ EXTRA_DIST = test-alloca-opt.c test-argmatch.c macros.h \
 	macros.h test-open.h test-open.c signature.h macros.h \
 	test-openat-safer.c macros.h test-openat.c test-open.h \
 	signature.h macros.h test-pathmax.c pipe.c test-pipe.c \
-	signature.h macros.h test-printf-frexp.c macros.h \
-	test-printf-frexpl.c macros.h putenv.c test-quotearg-simple.c \
-	test-quotearg.h macros.h zerosize-ptr.h test-realloc-gnu.c \
-	test-regex.c macros.h setenv.c test-setenv.c signature.h \
-	macros.h setlocale.c test-setlocale1.sh test-setlocale1.c \
-	test-setlocale2.sh test-setlocale2.c signature.h macros.h \
-	test-signbit.c minus-zero.h infinity.h macros.h \
+	signature.h macros.h putenv.c test-quotearg-simple.c \
+	test-quotearg.h macros.h zerosize-ptr.h test-read.c \
+	signature.h macros.h test-realloc-gnu.c test-regex.c macros.h \
+	setenv.c test-setenv.c signature.h macros.h setlocale.c \
+	test-setlocale1.sh test-setlocale1.c test-setlocale2.sh \
+	test-setlocale2.c signature.h macros.h \
 	$(top_srcdir)/build-aux/snippet/_Noreturn.h \
 	$(top_srcdir)/build-aux/snippet/arg-nonnull.h \
 	$(top_srcdir)/build-aux/snippet/c++defs.h \
@@ -2522,19 +2204,18 @@ EXTRA_DIST = test-alloca-opt.c test-argmatch.c macros.h \
 	signature.h macros.h test-strtoull.c signature.h macros.h \
 	test-strtoumax.c signature.h macros.h symlink.c test-symlink.h \
 	test-symlink.c signature.h macros.h test-sys_stat.c \
-	test-sys_types.c init.sh test-init.sh test-time.c \
-	test-dup-safer.c macros.h test-unistd.c \
+	test-sys_time.c test-sys_types.c init.sh test-init.sh \
+	test-time.c test-dup-safer.c macros.h test-unistd.c \
 	unistr/test-u8-mbtoucr.c macros.h unistr/test-u8-uctomb.c \
 	macros.h uniwidth/test-uc_width.c uniwidth/test-uc_width2.c \
 	uniwidth/test-uc_width2.sh macros.h unsetenv.c test-unsetenv.c \
-	signature.h macros.h test-update-copyright.sh \
-	test-vasnprintf.c macros.h test-vc-list-files-git.sh \
-	test-vc-list-files-cvs.sh test-verify.c test-verify.sh \
-	test-version-etc.c test-version-etc.sh test-vfprintf-posix.sh \
-	test-vfprintf-posix.c test-fprintf-posix.h \
-	test-printf-posix.output infinity.h signature.h macros.h \
-	test-wchar.c test-wcrtomb.sh test-wcrtomb.c \
-	test-wcrtomb-w32-1.sh test-wcrtomb-w32-2.sh \
+	signature.h macros.h test-update-copyright.sh asnprintf.c \
+	float+.h printf-args.c printf-args.h printf-parse.c \
+	printf-parse.h vasnprintf.c vasnprintf.h test-vasnprintf.c \
+	macros.h test-vc-list-files-git.sh test-vc-list-files-cvs.sh \
+	test-verify.c test-verify.sh test-version-etc.c \
+	test-version-etc.sh test-wchar.c test-wcrtomb.sh \
+	test-wcrtomb.c test-wcrtomb-w32-1.sh test-wcrtomb-w32-2.sh \
 	test-wcrtomb-w32-3.sh test-wcrtomb-w32-4.sh \
 	test-wcrtomb-w32-5.sh test-wcrtomb-w32.c signature.h macros.h \
 	test-wctype-h.c macros.h test-wcwidth.c signature.h macros.h \
@@ -2556,12 +2237,13 @@ EXTRA_DIST = test-alloca-opt.c test-argmatch.c macros.h \
 # statements but through direct file reference. Therefore this snippet must be
 # present in all Makefile.am that need it. This is ensured by the applicability
 # 'all' defined above.
-BUILT_SOURCES = arg-nonnull.h c++defs.h unused-parameter.h \
+BUILT_SOURCES = $(FLOAT_H) arg-nonnull.h c++defs.h unused-parameter.h \
 	warn-on-use.h
 SUFFIXES = 
-MOSTLYCLEANFILES = core *.stackdump test-fpending.t arg-nonnull.h \
-	arg-nonnull.h-t c++defs.h c++defs.h-t unused-parameter.h \
-	unused-parameter.h-t warn-on-use.h warn-on-use.h-t
+MOSTLYCLEANFILES = core *.stackdump float.h float.h-t test-fpending.t \
+	arg-nonnull.h arg-nonnull.h-t c++defs.h c++defs.h-t \
+	unused-parameter.h unused-parameter.h-t warn-on-use.h \
+	warn-on-use.h-t
 MOSTLYCLEANDIRS = 
 CLEANFILES = 
 DISTCLEANFILES = 
@@ -2575,11 +2257,12 @@ AM_CPPFLAGS = \
 LDADD = libtests.a ../lib/libgreputils.a libtests.a $(LIBTESTS_LIBDEPS)
 libtests_a_SOURCES = fd-safer-flag.c dup-safer-flag.c hash-pjw.h \
 	hash-pjw.c imaxtostr.c inttostr.c offtostr.c uinttostr.c \
-	umaxtostr.c localename.c
+	umaxtostr.c localename.c size_max.h xsize.h xsize.c
 libtests_a_LIBADD = $(gltests_LIBOBJS)
 libtests_a_DEPENDENCIES = $(gltests_LIBOBJS)
-EXTRA_libtests_a_SOURCES = fdopen.c anytostr.c pipe.c putenv.c \
-	setenv.c setlocale.c snprintf.c symlink.c unsetenv.c
+EXTRA_libtests_a_SOURCES = fdopen.c float.c itold.c anytostr.c pipe.c \
+	putenv.c setenv.c setlocale.c snprintf.c symlink.c unsetenv.c \
+	asnprintf.c printf-args.c printf-parse.c vasnprintf.c
 AM_LIBTOOLFLAGS = --preserve-dup-deps
 test_argmatch_LDADD = $(LDADD) @LIBINTL@
 # Link with libintl when needed. dirent-safer uses fdopendir if it is present,
@@ -2588,8 +2271,6 @@ test_dirent_safer_LDADD = $(LDADD) $(LIBINTL)
 test_exclude_LDADD = $(LDADD) @LIBINTL@
 test_fchdir_LDADD = $(LDADD) $(LIBINTL)
 test_fdopendir_LDADD = $(LDADD) @LIBINTL@
-test_frexp_nolibm_SOURCES = test-frexp.c randomd.c
-test_frexpl_nolibm_SOURCES = test-frexpl.c randoml.c
 test_fstatat_LDADD = $(LDADD) @LIBINTL@
 test_getcwd_lgpl_LDADD = $(LDADD) $(LIBINTL)
 test_getopt_LDADD = $(LDADD) $(LIBINTL)
@@ -2805,18 +2486,6 @@ test-fread$(EXEEXT): $(test_fread_OBJECTS) $(test_fread_DEPENDENCIES) $(EXTRA_te
 	@rm -f test-fread$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(test_fread_OBJECTS) $(test_fread_LDADD) $(LIBS)
 
-test-frexp-nolibm$(EXEEXT): $(test_frexp_nolibm_OBJECTS) $(test_frexp_nolibm_DEPENDENCIES) $(EXTRA_test_frexp_nolibm_DEPENDENCIES) 
-	@rm -f test-frexp-nolibm$(EXEEXT)
-	$(AM_V_CCLD)$(LINK) $(test_frexp_nolibm_OBJECTS) $(test_frexp_nolibm_LDADD) $(LIBS)
-
-test-frexpl-nolibm$(EXEEXT): $(test_frexpl_nolibm_OBJECTS) $(test_frexpl_nolibm_DEPENDENCIES) $(EXTRA_test_frexpl_nolibm_DEPENDENCIES) 
-	@rm -f test-frexpl-nolibm$(EXEEXT)
-	$(AM_V_CCLD)$(LINK) $(test_frexpl_nolibm_OBJECTS) $(test_frexpl_nolibm_LDADD) $(LIBS)
-
-test-fseterr$(EXEEXT): $(test_fseterr_OBJECTS) $(test_fseterr_DEPENDENCIES) $(EXTRA_test_fseterr_DEPENDENCIES) 
-	@rm -f test-fseterr$(EXEEXT)
-	$(AM_V_CCLD)$(LINK) $(test_fseterr_OBJECTS) $(test_fseterr_LDADD) $(LIBS)
-
 test-fstat$(EXEEXT): $(test_fstat_OBJECTS) $(test_fstat_DEPENDENCIES) $(EXTRA_test_fstat_DEPENDENCIES) 
 	@rm -f test-fstat$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(test_fstat_OBJECTS) $(test_fstat_LDADD) $(LIBS)
@@ -2840,6 +2509,10 @@ test-getdtablesize$(EXEEXT): $(test_getdtablesize_OBJECTS) $(test_getdtablesize_
 test-getopt$(EXEEXT): $(test_getopt_OBJECTS) $(test_getopt_DEPENDENCIES) $(EXTRA_test_getopt_DEPENDENCIES) 
 	@rm -f test-getopt$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(test_getopt_OBJECTS) $(test_getopt_LDADD) $(LIBS)
+
+test-gettimeofday$(EXEEXT): $(test_gettimeofday_OBJECTS) $(test_gettimeofday_DEPENDENCIES) $(EXTRA_test_gettimeofday_DEPENDENCIES) 
+	@rm -f test-gettimeofday$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(test_gettimeofday_OBJECTS) $(test_gettimeofday_LDADD) $(LIBS)
 
 test-hash$(EXEEXT): $(test_hash_OBJECTS) $(test_hash_DEPENDENCIES) $(EXTRA_test_hash_DEPENDENCIES) 
 	@rm -f test-hash$(EXEEXT)
@@ -2881,18 +2554,6 @@ test-isblank$(EXEEXT): $(test_isblank_OBJECTS) $(test_isblank_DEPENDENCIES) $(EX
 	@rm -f test-isblank$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(test_isblank_OBJECTS) $(test_isblank_LDADD) $(LIBS)
 
-test-isnand-nolibm$(EXEEXT): $(test_isnand_nolibm_OBJECTS) $(test_isnand_nolibm_DEPENDENCIES) $(EXTRA_test_isnand_nolibm_DEPENDENCIES) 
-	@rm -f test-isnand-nolibm$(EXEEXT)
-	$(AM_V_CCLD)$(LINK) $(test_isnand_nolibm_OBJECTS) $(test_isnand_nolibm_LDADD) $(LIBS)
-
-test-isnanf-nolibm$(EXEEXT): $(test_isnanf_nolibm_OBJECTS) $(test_isnanf_nolibm_DEPENDENCIES) $(EXTRA_test_isnanf_nolibm_DEPENDENCIES) 
-	@rm -f test-isnanf-nolibm$(EXEEXT)
-	$(AM_V_CCLD)$(LINK) $(test_isnanf_nolibm_OBJECTS) $(test_isnanf_nolibm_LDADD) $(LIBS)
-
-test-isnanl-nolibm$(EXEEXT): $(test_isnanl_nolibm_OBJECTS) $(test_isnanl_nolibm_DEPENDENCIES) $(EXTRA_test_isnanl_nolibm_DEPENDENCIES) 
-	@rm -f test-isnanl-nolibm$(EXEEXT)
-	$(AM_V_CCLD)$(LINK) $(test_isnanl_nolibm_OBJECTS) $(test_isnanl_nolibm_LDADD) $(LIBS)
-
 test-iswblank$(EXEEXT): $(test_iswblank_OBJECTS) $(test_iswblank_DEPENDENCIES) $(EXTRA_test_iswblank_DEPENDENCIES) 
 	@rm -f test-iswblank$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(test_iswblank_OBJECTS) $(test_iswblank_LDADD) $(LIBS)
@@ -2928,10 +2589,6 @@ test-malloc-gnu$(EXEEXT): $(test_malloc_gnu_OBJECTS) $(test_malloc_gnu_DEPENDENC
 test-malloca$(EXEEXT): $(test_malloca_OBJECTS) $(test_malloca_DEPENDENCIES) $(EXTRA_test_malloca_DEPENDENCIES) 
 	@rm -f test-malloca$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(test_malloca_OBJECTS) $(test_malloca_LDADD) $(LIBS)
-
-test-math$(EXEEXT): $(test_math_OBJECTS) $(test_math_DEPENDENCIES) $(EXTRA_test_math_DEPENDENCIES) 
-	@rm -f test-math$(EXEEXT)
-	$(AM_V_CCLD)$(LINK) $(test_math_OBJECTS) $(test_math_LDADD) $(LIBS)
 
 test-mbrtowc$(EXEEXT): $(test_mbrtowc_OBJECTS) $(test_mbrtowc_DEPENDENCIES) $(EXTRA_test_mbrtowc_DEPENDENCIES) 
 	@rm -f test-mbrtowc$(EXEEXT)
@@ -2997,17 +2654,13 @@ test-pipe$(EXEEXT): $(test_pipe_OBJECTS) $(test_pipe_DEPENDENCIES) $(EXTRA_test_
 	@rm -f test-pipe$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(test_pipe_OBJECTS) $(test_pipe_LDADD) $(LIBS)
 
-test-printf-frexp$(EXEEXT): $(test_printf_frexp_OBJECTS) $(test_printf_frexp_DEPENDENCIES) $(EXTRA_test_printf_frexp_DEPENDENCIES) 
-	@rm -f test-printf-frexp$(EXEEXT)
-	$(AM_V_CCLD)$(LINK) $(test_printf_frexp_OBJECTS) $(test_printf_frexp_LDADD) $(LIBS)
-
-test-printf-frexpl$(EXEEXT): $(test_printf_frexpl_OBJECTS) $(test_printf_frexpl_DEPENDENCIES) $(EXTRA_test_printf_frexpl_DEPENDENCIES) 
-	@rm -f test-printf-frexpl$(EXEEXT)
-	$(AM_V_CCLD)$(LINK) $(test_printf_frexpl_OBJECTS) $(test_printf_frexpl_LDADD) $(LIBS)
-
 test-quotearg-simple$(EXEEXT): $(test_quotearg_simple_OBJECTS) $(test_quotearg_simple_DEPENDENCIES) $(EXTRA_test_quotearg_simple_DEPENDENCIES) 
 	@rm -f test-quotearg-simple$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(test_quotearg_simple_OBJECTS) $(test_quotearg_simple_LDADD) $(LIBS)
+
+test-read$(EXEEXT): $(test_read_OBJECTS) $(test_read_DEPENDENCIES) $(EXTRA_test_read_DEPENDENCIES) 
+	@rm -f test-read$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(test_read_OBJECTS) $(test_read_LDADD) $(LIBS)
 
 test-realloc-gnu$(EXEEXT): $(test_realloc_gnu_OBJECTS) $(test_realloc_gnu_DEPENDENCIES) $(EXTRA_test_realloc_gnu_DEPENDENCIES) 
 	@rm -f test-realloc-gnu$(EXEEXT)
@@ -3028,10 +2681,6 @@ test-setlocale1$(EXEEXT): $(test_setlocale1_OBJECTS) $(test_setlocale1_DEPENDENC
 test-setlocale2$(EXEEXT): $(test_setlocale2_OBJECTS) $(test_setlocale2_DEPENDENCIES) $(EXTRA_test_setlocale2_DEPENDENCIES) 
 	@rm -f test-setlocale2$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(test_setlocale2_OBJECTS) $(test_setlocale2_LDADD) $(LIBS)
-
-test-signbit$(EXEEXT): $(test_signbit_OBJECTS) $(test_signbit_DEPENDENCIES) $(EXTRA_test_signbit_DEPENDENCIES) 
-	@rm -f test-signbit$(EXEEXT)
-	$(AM_V_CCLD)$(LINK) $(test_signbit_OBJECTS) $(test_signbit_LDADD) $(LIBS)
 
 test-snprintf$(EXEEXT): $(test_snprintf_OBJECTS) $(test_snprintf_DEPENDENCIES) $(EXTRA_test_snprintf_DEPENDENCIES) 
 	@rm -f test-snprintf$(EXEEXT)
@@ -3101,6 +2750,10 @@ test-sys_stat$(EXEEXT): $(test_sys_stat_OBJECTS) $(test_sys_stat_DEPENDENCIES) $
 	@rm -f test-sys_stat$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(test_sys_stat_OBJECTS) $(test_sys_stat_LDADD) $(LIBS)
 
+test-sys_time$(EXEEXT): $(test_sys_time_OBJECTS) $(test_sys_time_DEPENDENCIES) $(EXTRA_test_sys_time_DEPENDENCIES) 
+	@rm -f test-sys_time$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(test_sys_time_OBJECTS) $(test_sys_time_LDADD) $(LIBS)
+
 test-sys_types$(EXEEXT): $(test_sys_types_OBJECTS) $(test_sys_types_DEPENDENCIES) $(EXTRA_test_sys_types_DEPENDENCIES) 
 	@rm -f test-sys_types$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(test_sys_types_OBJECTS) $(test_sys_types_LDADD) $(LIBS)
@@ -3165,10 +2818,6 @@ test-version-etc$(EXEEXT): $(test_version_etc_OBJECTS) $(test_version_etc_DEPEND
 	@rm -f test-version-etc$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(test_version_etc_OBJECTS) $(test_version_etc_LDADD) $(LIBS)
 
-test-vfprintf-posix$(EXEEXT): $(test_vfprintf_posix_OBJECTS) $(test_vfprintf_posix_DEPENDENCIES) $(EXTRA_test_vfprintf_posix_DEPENDENCIES) 
-	@rm -f test-vfprintf-posix$(EXEEXT)
-	$(AM_V_CCLD)$(LINK) $(test_vfprintf_posix_OBJECTS) $(test_vfprintf_posix_LDADD) $(LIBS)
-
 test-wchar$(EXEEXT): $(test_wchar_OBJECTS) $(test_wchar_DEPENDENCIES) $(EXTRA_test_wchar_DEPENDENCIES) 
 	@rm -f test-wchar$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(test_wchar_OBJECTS) $(test_wchar_LDADD) $(LIBS)
@@ -3214,18 +2863,21 @@ distclean-compile:
 	-rm -f *.tab.c
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/anytostr.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/asnprintf.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dup-safer-flag.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/fd-safer-flag.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/fdopen.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/float.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/hash-pjw.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/imaxtostr.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/inttostr.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/itold.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/localename.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/offtostr.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pipe.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/printf-args.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/printf-parse.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/putenv.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/randomd.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/randoml.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/setenv.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/setlocale.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/snprintf.Po@am__quote@
@@ -3262,15 +2914,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-fpending.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-fputc.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-fread.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-frexp.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-frexpl.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-fseterr.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-fstat.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-fstatat.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-fwrite.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-getcwd-lgpl.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-getdtablesize.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-getopt.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-gettimeofday.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-hash.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-i-ring.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-iconv-h.Po@am__quote@
@@ -3281,9 +2931,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-inttypes.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-isatty.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-isblank.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-isnand-nolibm.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-isnanf-nolibm.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-isnanl-nolibm.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-iswblank.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-langinfo.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-locale.Po@am__quote@
@@ -3293,7 +2940,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-lstat.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-malloc-gnu.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-malloca.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-math.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-mbrtowc-w32.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-mbrtowc.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-mbscasecmp.Po@am__quote@
@@ -3310,15 +2956,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-openat.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-pathmax.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-pipe.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-printf-frexp.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-printf-frexpl.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-quotearg-simple.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-read.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-realloc-gnu.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-regex.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-setenv.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-setlocale1.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-setlocale2.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-signbit.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-snprintf.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-stat.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-stdbool.Po@am__quote@
@@ -3336,6 +2980,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-strtoumax.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-symlink.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-sys_stat.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-sys_time.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-sys_types.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-time.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-unistd.Po@am__quote@
@@ -3343,7 +2988,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-vasnprintf.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-verify.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-version-etc.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-vfprintf-posix.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-wchar.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-wcrtomb-w32.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-wcrtomb.Po@am__quote@
@@ -3356,6 +3000,8 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/uinttostr.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/umaxtostr.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/unsetenv.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/vasnprintf.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xsize.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@unistr/$(DEPDIR)/test-u8-mbtoucr.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@unistr/$(DEPDIR)/test-u8-uctomb.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@uniwidth/$(DEPDIR)/test-uc_width.Po@am__quote@
@@ -3883,27 +3529,6 @@ test-fread.log: test-fread$(EXEEXT)
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
 	"$$tst" $(AM_TESTS_FD_REDIRECT)
-test-frexp-nolibm.log: test-frexp-nolibm$(EXEEXT)
-	@p='test-frexp-nolibm$(EXEEXT)'; \
-	b='test-frexp-nolibm'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-test-frexpl-nolibm.log: test-frexpl-nolibm$(EXEEXT)
-	@p='test-frexpl-nolibm$(EXEEXT)'; \
-	b='test-frexpl-nolibm'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-test-fseterr.log: test-fseterr$(EXEEXT)
-	@p='test-fseterr$(EXEEXT)'; \
-	b='test-fseterr'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
 test-fstat.log: test-fstat$(EXEEXT)
 	@p='test-fstat$(EXEEXT)'; \
 	b='test-fstat'; \
@@ -3942,6 +3567,13 @@ test-getdtablesize.log: test-getdtablesize$(EXEEXT)
 test-getopt.log: test-getopt$(EXEEXT)
 	@p='test-getopt$(EXEEXT)'; \
 	b='test-getopt'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+test-gettimeofday.log: test-gettimeofday$(EXEEXT)
+	@p='test-gettimeofday$(EXEEXT)'; \
+	b='test-gettimeofday'; \
 	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
@@ -4016,27 +3648,6 @@ test-isblank.log: test-isblank$(EXEEXT)
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
 	"$$tst" $(AM_TESTS_FD_REDIRECT)
-test-isnand-nolibm.log: test-isnand-nolibm$(EXEEXT)
-	@p='test-isnand-nolibm$(EXEEXT)'; \
-	b='test-isnand-nolibm'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-test-isnanf-nolibm.log: test-isnanf-nolibm$(EXEEXT)
-	@p='test-isnanf-nolibm$(EXEEXT)'; \
-	b='test-isnanf-nolibm'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-test-isnanl-nolibm.log: test-isnanl-nolibm$(EXEEXT)
-	@p='test-isnanl-nolibm$(EXEEXT)'; \
-	b='test-isnanl-nolibm'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
 test-iswblank.log: test-iswblank$(EXEEXT)
 	@p='test-iswblank$(EXEEXT)'; \
 	b='test-iswblank'; \
@@ -4096,13 +3707,6 @@ test-malloc-gnu.log: test-malloc-gnu$(EXEEXT)
 test-malloca.log: test-malloca$(EXEEXT)
 	@p='test-malloca$(EXEEXT)'; \
 	b='test-malloca'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-test-math.log: test-math$(EXEEXT)
-	@p='test-math$(EXEEXT)'; \
-	b='test-math'; \
 	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
@@ -4289,23 +3893,16 @@ test-pipe.log: test-pipe$(EXEEXT)
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
 	"$$tst" $(AM_TESTS_FD_REDIRECT)
-test-printf-frexp.log: test-printf-frexp$(EXEEXT)
-	@p='test-printf-frexp$(EXEEXT)'; \
-	b='test-printf-frexp'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-test-printf-frexpl.log: test-printf-frexpl$(EXEEXT)
-	@p='test-printf-frexpl$(EXEEXT)'; \
-	b='test-printf-frexpl'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
 test-quotearg-simple.log: test-quotearg-simple$(EXEEXT)
 	@p='test-quotearg-simple$(EXEEXT)'; \
 	b='test-quotearg-simple'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+test-read.log: test-read$(EXEEXT)
+	@p='test-read$(EXEEXT)'; \
+	b='test-read'; \
 	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
@@ -4341,13 +3938,6 @@ test-setlocale1.sh.log: test-setlocale1.sh
 test-setlocale2.sh.log: test-setlocale2.sh
 	@p='test-setlocale2.sh'; \
 	b='test-setlocale2.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-test-signbit.log: test-signbit$(EXEEXT)
-	@p='test-signbit$(EXEEXT)'; \
-	b='test-signbit'; \
 	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
@@ -4471,6 +4061,13 @@ test-sys_stat.log: test-sys_stat$(EXEEXT)
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
 	"$$tst" $(AM_TESTS_FD_REDIRECT)
+test-sys_time.log: test-sys_time$(EXEEXT)
+	@p='test-sys_time$(EXEEXT)'; \
+	b='test-sys_time'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
 test-sys_types.log: test-sys_types$(EXEEXT)
 	@p='test-sys_types$(EXEEXT)'; \
 	b='test-sys_types'; \
@@ -4586,13 +4183,6 @@ test-verify.sh.log: test-verify.sh
 test-version-etc.sh.log: test-version-etc.sh
 	@p='test-version-etc.sh'; \
 	b='test-version-etc.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-test-vfprintf-posix.sh.log: test-vfprintf-posix.sh
-	@p='test-vfprintf-posix.sh'; \
-	b='test-vfprintf-posix.sh'; \
 	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
@@ -4893,6 +4483,23 @@ uninstall-am:
 	mostlyclean-local pdf pdf-am ps ps-am recheck tags tags-am \
 	uninstall uninstall-am
 
+
+# We need the following in order to create <float.h> when the system
+# doesn't have one that works with the given compiler.
+@GL_GENERATE_FLOAT_H_TRUE@float.h: float.in.h $(top_builddir)/config.status
+@GL_GENERATE_FLOAT_H_TRUE@	$(AM_V_GEN)rm -f $@-t $@ && \
+@GL_GENERATE_FLOAT_H_TRUE@	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */' && \
+@GL_GENERATE_FLOAT_H_TRUE@	  sed -e 's|@''GUARD_PREFIX''@|GL|g' \
+@GL_GENERATE_FLOAT_H_TRUE@	      -e 's|@''INCLUDE_NEXT''@|$(INCLUDE_NEXT)|g' \
+@GL_GENERATE_FLOAT_H_TRUE@	      -e 's|@''PRAGMA_SYSTEM_HEADER''@|@PRAGMA_SYSTEM_HEADER@|g' \
+@GL_GENERATE_FLOAT_H_TRUE@	      -e 's|@''PRAGMA_COLUMNS''@|@PRAGMA_COLUMNS@|g' \
+@GL_GENERATE_FLOAT_H_TRUE@	      -e 's|@''NEXT_FLOAT_H''@|$(NEXT_FLOAT_H)|g' \
+@GL_GENERATE_FLOAT_H_TRUE@	      -e 's|@''REPLACE_ITOLD''@|$(REPLACE_ITOLD)|g' \
+@GL_GENERATE_FLOAT_H_TRUE@	      < $(srcdir)/float.in.h; \
+@GL_GENERATE_FLOAT_H_TRUE@	} > $@-t && \
+@GL_GENERATE_FLOAT_H_TRUE@	mv $@-t $@
+@GL_GENERATE_FLOAT_H_FALSE@float.h: $(top_builddir)/config.status
+@GL_GENERATE_FLOAT_H_FALSE@	rm -f $@
 # The arg-nonnull.h that gets inserted into generated .h files is the same as
 # build-aux/snippet/arg-nonnull.h, except that it has the copyright header cut
 # off.

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grep 2.11.11-pre1\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2013-10-26 09:47-0700\n"
+"POT-Creation-Date: 2014-01-01 20:44-0800\n"
 "PO-Revision-Date: 2012-05-27 07:00+0700\n"
 "Last-Translator: Arif E. Nugroho <arif_endro@yahoo.com>\n"
 "Language-Team: Indonesian <translation-team-id@lists.sourceforge.net>\n"
@@ -31,7 +31,7 @@ msgstr "ambiguous (tidak sesuai) argumen %s untuk %s"
 msgid "Valid arguments are:"
 msgstr "Valid (sesuai) argumen adalah:"
 
-#: lib/closeout.c:112 src/main.c:950
+#: lib/closeout.c:112 src/main.c:954
 #, c-format
 msgid "write error"
 msgstr "penulisan error"
@@ -96,7 +96,7 @@ msgid "%s: option '-W %s' requires an argument\n"
 msgstr "%s: opsi `-W %s' membutuhkan sebuah argumen\n"
 
 #: lib/obstack.c:413 lib/obstack.c:415 lib/xalloc-die.c:34 src/kwset.c:178
-#: src/kwset.c:186 src/kwset.c:409 src/pcresearch.c:182
+#: src/kwset.c:186 src/kwset.c:409 src/pcresearch.c:191
 #, c-format
 msgid "memory exhausted"
 msgstr "kehabisan memori"
@@ -359,7 +359,7 @@ msgstr ""
 #. for this package.  Please add _another line_ saying
 #. "Report translation bugs to <...>\n" with the address for translation
 #. bugs (typically your translation team's web or email address).
-#: lib/version-etc.c:245 src/main.c:1627
+#: lib/version-etc.c:245 src/main.c:1637
 #, c-format
 msgid ""
 "\n"
@@ -383,7 +383,7 @@ msgstr "Halaman rumah %s: <%s>\n"
 msgid "%s home page: <http://www.gnu.org/software/%s/>\n"
 msgstr "Halaman rumah %s: <http://www.gnu.org/software/%s/>\n"
 
-#: lib/version-etc.c:256 src/main.c:1630
+#: lib/version-etc.c:256 src/main.c:1640
 msgid "General help using GNU software: <http://www.gnu.org/gethelp/>\n"
 msgstr "Bantuan umum menggunakan aplikasi GNU: <http://www.gnu.org/gethelp/>\n"
 
@@ -421,15 +421,15 @@ msgstr ""
 msgid "unfinished \\ escape"
 msgstr "escape \\\\ tidak selesai"
 
-#: src/dfa.c:1793
+#: src/dfa.c:1794
 msgid "unbalanced ("
 msgstr "( tidak seimbang"
 
-#: src/dfa.c:1919
+#: src/dfa.c:1920
 msgid "no syntax specified"
 msgstr "Tidak ada sintaks yang dispesifikasikan"
 
-#: src/dfa.c:1927
+#: src/dfa.c:1928
 msgid "unbalanced )"
 msgstr ") tidak seimbang"
 
@@ -466,66 +466,66 @@ msgstr ""
 "Pemanggilan langsung baik sebagai `egrep' atau `fgrep' sudah ditinggalkan.\n"
 
 #. This is a proper name. See the gettext manual, section Names.
-#: src/main.c:56
+#: src/main.c:57
 msgid "Mike Haertel"
 msgstr "Mike Haertel"
 
-#: src/main.c:57
+#: src/main.c:58
 msgid "others, see <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
 msgstr "lain, lihat <http://git.sv.gnu.org/sgit/grep.git/tree/AUTHORS>"
 
-#: src/main.c:499
+#: src/main.c:500
 msgid "invalid context length argument"
 msgstr "konteks panjang argumen tidak valid"
 
-#: src/main.c:568
+#: src/main.c:569
 msgid "lseek failed"
 msgstr "gagal lseek"
 
-#: src/main.c:706
+#: src/main.c:707
 #, c-format
 msgid "input is too large to count"
 msgstr "masukan terlalu besar untuk dihitung"
 
-#: src/main.c:1263
+#: src/main.c:1273
 #, c-format
 msgid "Binary file %s matches\n"
 msgstr "Berkas binari %s cocok\n"
 
-#: src/main.c:1306
+#: src/main.c:1316
 #, fuzzy, c-format
 msgid "warning: %s: %s"
 msgstr "peringatan: %s: %s\n"
 
-#: src/main.c:1307
+#: src/main.c:1317
 msgid "recursive directory loop"
 msgstr "perulangan direktori rekursif"
 
-#: src/main.c:1455
+#: src/main.c:1465
 #, c-format
 msgid "input file %s is also the output"
 msgstr "input (masuk) berkas %s juga keluar"
 
-#: src/main.c:1513
+#: src/main.c:1523
 msgid "(standard input)"
 msgstr "(standar masukan)"
 
-#: src/main.c:1529 src/main.c:1536
+#: src/main.c:1539 src/main.c:1546
 #, c-format
 msgid "Usage: %s [OPTION]... PATTERN [FILE]...\n"
 msgstr "Penggunaan: %s [OPSI]... POLA [BERKAS]...\n"
 
-#: src/main.c:1531
+#: src/main.c:1541
 #, fuzzy, c-format
 msgid "Try '%s --help' for more information.\n"
 msgstr "Coba `%s --help' untuk informasi lebih lanjut.\n"
 
-#: src/main.c:1537
+#: src/main.c:1547
 #, c-format
 msgid "Search for PATTERN in each FILE or standard input.\n"
 msgstr "Cari untuk POLA dalam setiap berkas atau standar masukan.\n"
 
-#: src/main.c:1540
+#: src/main.c:1550
 #, c-format
 msgid ""
 "Example: %s -i 'hello world' menu.h main.c\n"
@@ -536,7 +536,7 @@ msgstr ""
 "\n"
 "Seleksi dan interpretasi regexp:\n"
 
-#: src/main.c:1545
+#: src/main.c:1555
 #, c-format
 msgid ""
 "  -E, --extended-regexp     PATTERN is an extended regular expression (ERE)\n"
@@ -551,7 +551,7 @@ msgstr ""
 "  -G, --basic-regexp        POLA adalah ekspresi reguler dasar\n"
 "  -P, --perl-regexp         POLA adalah sebuah ekspresi reguler Perl\n"
 
-#: src/main.c:1551
+#: src/main.c:1561
 #, c-format
 msgid ""
 "  -e, --regexp=PATTERN      use PATTERN for matching\n"
@@ -572,7 +572,7 @@ msgstr ""
 "baru\n"
 "\n"
 
-#: src/main.c:1558
+#: src/main.c:1568
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -591,7 +591,7 @@ msgstr ""
 "      --help                tampilkan bantuan ini dan keluar\n"
 "      --mmap                gunakan masukan memory-mapped bila memungkinkan\n"
 
-#: src/main.c:1566
+#: src/main.c:1576
 #, c-format
 msgid ""
 "\n"
@@ -606,7 +606,7 @@ msgid ""
 "prefix\n"
 msgstr ""
 
-#: src/main.c:1577
+#: src/main.c:1587
 #, c-format
 msgid ""
 "  -o, --only-matching       show only the part of a line matching PATTERN\n"
@@ -616,7 +616,7 @@ msgid ""
 "  -a, --text                equivalent to --binary-files=text\n"
 msgstr ""
 
-#: src/main.c:1584
+#: src/main.c:1594
 #, c-format
 msgid ""
 "  -I                        equivalent to --binary-files=without-match\n"
@@ -628,7 +628,7 @@ msgid ""
 "  -R, --dereference-recursive  likewise, but follow all symlinks\n"
 msgstr ""
 
-#: src/main.c:1593
+#: src/main.c:1603
 #, c-format
 msgid ""
 "      --include=FILE_PATTERN  search only files that match FILE_PATTERN\n"
@@ -639,7 +639,7 @@ msgid ""
 "skipped.\n"
 msgstr ""
 
-#: src/main.c:1599
+#: src/main.c:1609
 #, c-format
 msgid ""
 "  -L, --files-without-match  print only names of FILEs containing no match\n"
@@ -649,7 +649,7 @@ msgid ""
 "  -Z, --null                print 0 byte after FILE name\n"
 msgstr ""
 
-#: src/main.c:1605
+#: src/main.c:1615
 #, c-format
 msgid ""
 "\n"
@@ -659,7 +659,7 @@ msgid ""
 "  -C, --context=NUM         print NUM lines of output context\n"
 msgstr ""
 
-#: src/main.c:1612
+#: src/main.c:1622
 #, fuzzy, c-format
 msgid ""
 "  -NUM                      same as --context=NUM\n"
@@ -690,7 +690,7 @@ msgstr ""
 "(MSDOS)\n"
 "\n"
 
-#: src/main.c:1622
+#: src/main.c:1632
 #, fuzzy, c-format
 msgid ""
 "When FILE is -, read standard input.  With no FILE, read . if a command-"
@@ -706,42 +706,42 @@ msgstr ""
 "jika ada error apapun yang terjadi dan opsi -q tidak diberikan, status "
 "keluar adalah 2.\n"
 
-#: src/main.c:1628
+#: src/main.c:1638
 #, c-format
 msgid "GNU Grep home page: <%s>\n"
 msgstr "Halaman rumah GNU Grep: <%s>\n"
 
-#: src/main.c:1660
+#: src/main.c:1670
 #, c-format
 msgid "%s can only use the %s pattern syntax"
 msgstr ""
 
-#: src/main.c:1663
+#: src/main.c:1673
 #, c-format
 msgid "conflicting matchers specified"
 msgstr "konflik pencocokan dispesifikasikan"
 
-#: src/main.c:1677
+#: src/main.c:1687
 #, fuzzy, c-format
 msgid "invalid matcher %s"
 msgstr "jumlah maksimal tidak valid"
 
-#: src/main.c:1930
+#: src/main.c:1940
 #, c-format
 msgid "unknown devices method"
 msgstr "metode device tidak dikenal"
 
-#: src/main.c:2061
+#: src/main.c:2071
 #, c-format
 msgid "invalid max count"
 msgstr "jumlah maksimal tidak valid"
 
-#: src/main.c:2118
+#: src/main.c:2128
 #, c-format
 msgid "unknown binary-files type"
 msgstr "tipe berkas binari tidak dikenal"
 
-#: src/main.c:2177
+#: src/main.c:2187
 #, c-format
 msgid "the --mmap option has been a no-op since 2010"
 msgstr ""
@@ -755,35 +755,45 @@ msgstr ""
 "Dukungan untuk opsi -P tidak dikompile kedalam ini --disable-perl-regexp "
 "binari"
 
-#: src/pcresearch.c:70
+#: src/pcresearch.c:74
 #, fuzzy, c-format
 msgid "the -P option only supports a single pattern"
 msgstr "Opsi -P hanya mendukung sebuah pola tunggal"
 
-#: src/pcresearch.c:116
+#: src/pcresearch.c:120
 #, c-format
 msgid "internal error (should never happen)"
 msgstr ""
 
-#: src/pcresearch.c:125
+#: src/pcresearch.c:130
 #, c-format
-msgid "cannot allocate memory for the JIT stack"
+msgid "failed to allocate memory for the PCRE JIT stack"
 msgstr ""
 
-#: src/pcresearch.c:139
+#: src/pcresearch.c:144
 #, fuzzy, c-format
 msgid "internal error"
 msgstr "penulisan error"
 
-#: src/pcresearch.c:167
+#: src/pcresearch.c:176
 #, c-format
 msgid "exceeded PCRE's line length limit"
 msgstr ""
 
-#: src/pcresearch.c:186
+#: src/pcresearch.c:195
 #, c-format
 msgid "exceeded PCRE's backtracking limit"
 msgstr ""
+
+#: src/pcresearch.c:199
+#, c-format
+msgid "invalid UTF-8 byte sequence in input"
+msgstr ""
+
+#: src/pcresearch.c:206
+#, fuzzy, c-format
+msgid "internal PCRE error: %d"
+msgstr "penulisan error"
 
 #~ msgid "unfinished repeat count"
 #~ msgstr "jumlah perulangan tidak selesai"

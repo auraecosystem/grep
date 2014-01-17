@@ -2,7 +2,7 @@ This is grep.info-t, produced by makeinfo version 4.13 from grep.texi.
 
 This manual is for `grep', a pattern matching engine.
 
-   Copyright (C) 1999-2002, 2005, 2008-2013 Free Software Foundation,
+   Copyright (C) 1999-2002, 2005, 2008-2014 Free Software Foundation,
 Inc.
 
      Permission is granted to copy, distribute and/or modify this
@@ -25,11 +25,11 @@ grep
 
 `grep' prints lines that contain a match for a pattern.
 
-   This manual is for version 2.14.56-1e3d of GNU Grep.
+   This manual is for version 2.16 of GNU Grep.
 
    This manual is for `grep', a pattern matching engine.
 
-   Copyright (C) 1999-2002, 2005, 2008-2013 Free Software Foundation,
+   Copyright (C) 1999-2002, 2005, 2008-2014 Free Software Foundation,
 Inc.
 
      Permission is granted to copy, distribute and/or modify this
@@ -1343,7 +1343,7 @@ File: grep.info-t,  Node: GNU Free Documentation License,  Up: Copying
 
                      Version 1.3, 3 November 2008
 
-     Copyright (C) 2000-2002, 2007-2008, 2010-2013 Free Software
+     Copyright (C) 2000-2002, 2007-2008, 2010-2014 Free Software
      Foundation, Inc.
      `http://fsf.org/'
 
@@ -2257,32 +2257,32 @@ Index
 
 Tag Table:
 Node: Top766
-Node: Introduction1891
-Node: Invoking2621
-Node: Command-line Options3368
-Node: Generic Program Information4245
-Node: Matching Control4706
-Node: General Output Control6157
-Ref: General Output Control-Footnote-110072
-Node: Output Line Prefix Control10141
-Node: Context Line Control13078
-Node: File and Directory Selection15012
-Node: Other Options18580
-Node: Environment Variables20118
-Node: Exit Status29616
-Node: grep Programs30259
-Node: Regular Expressions31679
-Node: Fundamental Structure32833
-Node: Character Classes and Bracket Expressions34560
-Ref: invalid-bracket-expr37751
-Node: The Backslash Character and Special Expressions38928
-Node: Anchoring39929
-Node: Back-references and Subexpressions40374
-Node: Basic vs Extended41086
-Node: Usage42083
-Node: Reporting Bugs49342
-Node: Copying50006
-Node: GNU Free Documentation License51095
-Node: Index76224
+Node: Introduction1883
+Node: Invoking2613
+Node: Command-line Options3360
+Node: Generic Program Information4237
+Node: Matching Control4698
+Node: General Output Control6149
+Ref: General Output Control-Footnote-110064
+Node: Output Line Prefix Control10133
+Node: Context Line Control13070
+Node: File and Directory Selection15004
+Node: Other Options18572
+Node: Environment Variables20110
+Node: Exit Status29608
+Node: grep Programs30251
+Node: Regular Expressions31671
+Node: Fundamental Structure32825
+Node: Character Classes and Bracket Expressions34552
+Ref: invalid-bracket-expr37743
+Node: The Backslash Character and Special Expressions38920
+Node: Anchoring39921
+Node: Back-references and Subexpressions40366
+Node: Basic vs Extended41078
+Node: Usage42075
+Node: Reporting Bugs49334
+Node: Copying49998
+Node: GNU Free Documentation License51087
+Node: Index76216
 
 End Tag Table
