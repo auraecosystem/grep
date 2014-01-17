@@ -1,4 +1,179 @@
+2014-01-01  Jim Meyering  <meyering@fb.com>
+
+	version 2.16
+	* NEWS: Record release date.
+
+	gnulib: update to latest, for maint.mk fix
+
+	maint: update copyright dates for 2014
+	Do that by running "make update-copyright".
+
+	gnulib: update to latest
+
+2013-12-31  Jim Meyering  <meyering@fb.com>
+
+	pcre: use PCRE_NO_UTF8_CHECK properly
+	In order to obtain the behavior we want, i.e., to disable
+	error-on-invalid-UTF-in-input, apply this PCRE option in
+	pcre_exec, not when compiling.
+	* src/pcresearch.c (Pexecute): Use PCRE_NO_UTF8_CHECK here, ...
+	(Pcompile): ...rather than here.
+	* tests/pcre-invalid-utf8-input: Adjust test case to test for this.
+
+2013-12-26  Jim Meyering  <meyering@fb.com>
+
+	maint: fix inconsistent spacing in expression
+	* src/main.c (prline): Fix inconsistent spacing in expression:
+	s/  / /.
+
+2013-12-26  behoffski  <behoffski@grouse.com.au>
+
+	maint: fix a garbled comment
+	* src/dfa.c (XNMALLOC, etc.): Fix garbled comment wording.
+
+2013-12-23  Jim Meyering  <meyering@fb.com>
+
+	maint: fix/improve a comment
+	* src/main.c (prline): Replace untrue FIXME comment with one
+	telling how the hard-to-reach code can be exercised.
+
+2013-12-21  Santiago Ruano Rincón  <santiago@debian.org>
+
+	pcre: tell grep -P to relax its stance on invalid multibyte chars
+	Do not exit-2 for invalid UTF-8 characters.  Just prior to this
+	change, this command would match no lines and fail like this:
+	  $ printf 'j\x82\nj\n'|LC_ALL=en_US.UTF-8 grep -P j|cat -A; echo $?
+	  grep: invalid UTF-8 byte sequence in input
+	  2
+	After this change, the same command matches both lines, and succeeds:
+	  jM-^B$
+	  j$
+	  0
+	* src/pcresearch.c (Pcompile): Use PCRE_NO_UTF8_CHECK, too, and
+	add a comment.
+	* tests/pcre-utf8: Add a test and a comment.
+	This change did not work with Debian unstable pcre-8.31-2
+	or with some 8.33 and 8.34-based versions, but does work with
+	Fedora 20's 8.33 and with a built-from-latest source library.
+	Based on a patch by Santiago Ruano Rincón.
+	See http://bugs.gnu.org/15758/
+
+2013-12-21  Jim Meyering  <meyering@fb.com>
+
+	tests: avoid FP failure due to exhausted memory
+	* tests/long-line-vs-2GiB-read: Don't declare the test "failed"
+	when running out of memory.  In that case, skip it.
+
+2013-12-18  Jim Meyering  <meyering@fb.com>
+
+	maint: add comments and split some long lines
+	* src/main.c (do_execute): Add a comment.
+	Split some lines longer than 80 bytes.
+
+	pcre: avoid a nominal leak
+	* src/pcresearch.c (Pcompile)[HAVE_LIBPCRE && !PCRE_STUDY_JIT_COMPILE]:
+	We would leak "re" if built with HAVE_LIBPCRE but without
+	PCRE_STUDY_JIT_COMPILE.  Move the free out one level.
+
+	maint: indent cpp directives to reflect nesting
+	* src/pcresearch.c: Insert spaces after a few "#", to indent
+	cpp directives to reflect their nesting.
+
+	grep: handle lines longer than INT_MAX on more systems
+	When trying to exercize some long-line-handling code, I ran these
+	commands:
+	  $ dd bs=1 seek=2G of=big < /dev/null; grep -l x big; echo $?
+	  grep: big: Invalid argument
+	  2
+	grep should not have issued that diagnostic, and it should
+	have exited with status 1, not 2.  What happened?
+	grep read the 2GiB of NULs, doubled its buffer size,
+	copied the 2GiB into the new 4GiB buffer, and proceeded
+	to call "read" with a byte-count argument of 2^32.
+	On at least Darwin 12.5.0, that makes read fail with EINVAL.
+	The solution is to use gnulib's safe_read wrapper.
+	* src/main.c: Include "safe-read.h"
+	(fillbuf): Use safe_read, rather than bare read.  The latter
+	cannot handle a read size of 2^32 on some systems.
+	* bootstrap.conf (gnulib_modules): Add safe-read.
+	* tests/long-line-vs-2GiB-read: New file.
+	* tests/Makefile.am (TESTS): Add it.
+	* NEWS (Bug fixes): Mention it.
+
+2013-11-25  Jim Meyering  <meyering@fb.com>
+
+	tests: port to non-GNU sed
+	* tests/multibyte-white-space (utf8_space_characters): The generation
+	of test inputs relied on GNU sed's interpretation of \<, but that is
+	not portable, and caused spurious test failures.  Adjust the sed regexp
+	to work on all versions.
+	Reported by Karl Dubost in http://bugs.gnu.org/15953.
+
+2013-11-22  Jim Meyering  <meyering@fb.com>
+
+	maint: minor cleanup: xmalloc+strcpy -> xmemdup
+	* src/main.c (main): Replace an xmalloc+strcpy combination
+	with an equivalent use of xmemdup.
+
+2013-11-21  Jim Meyering  <meyering@fb.com>
+	    Paul Eggert  <eggert@cs.ucla.edu>
+
+	dfa: avoid undefined behavior of "1 << 31"
+	* src/dfa.c (charclass): Change type from "int" to "unsigned int".
+	(tstbit): Rather than shifting "1" left to form a mask, shift the
+	LHS bits the right and use "1" as the mask.  Also, return bool, rather
+	than "int".
+	(setbit, clrbit, dfastate): Don't shift "1" (aka (int)1) left by 31 bits.
+	Instead, use "1U" as the operand, to avoid undefined behavior.
+	Spotted by gcc's new -fsanitize=undefined.
+
+2013-11-02  Jim Meyering  <meyering@fb.com>
+
+	grep: fix regression with -P vs. invalid UTF-8 input
+	* src/pcresearch.c (Pexecute): Don't abort upon unexpected
+	PCRE-specific error code.  Explicitly handle PCRE_ERROR_BADUTF8,
+	and change the default to print a diagnostic including the unhandled
+	integer PCRE error code and exit with status 2.
+	* tests/pcre-invalid-utf8-input: New file.
+	* tests/Makefile.am (TESTS): Add it.
+	* NEWS (Bug fixes): Mention it.
+	* THANKS: Update.
+	Reported by Dave Reisner in http://bugs.gnu.org/15758.
+
+	grep: fix regression involving \s and \S
+	Commit v2.14-40-g01ec90b made \s and \S work with multi-byte
+	characters, but it made it so any use like \s*, \s+, \s?, \s{3}
+	would malfunction in a multi-byte locale.
+	* src/dfa.c (lex): Also reset laststart.
+	* tests/backslash-s-and-repetition-operators: New file.
+	* tests/Makefile.am (TESTS): Add it.
+	* NEWS (Bug fixes): Mention it.
+	* THANKS: Update.
+	Reported by Mirraz Mirraz in http://bugs.gnu.org/15773.
+
+2013-11-01  Jim Meyering  <meyering@fb.com>
+
+	maint: NEWS: document a release-related bug fix
+	* NEWS (Bug fixes): Add an entry for a fix pulled from gnulib.
+
 2013-10-26  Jim Meyering  <meyering@fb.com>
+
+	build: update gnulib submodule to latest
+	This pulls in a gnulib fix for maint.mk that ensures the procedure
+	described in README-release actually does what we want.  Before this
+	change, that procedure resulted in a grep-2.15 tarball that would
+	lead to a grep binary whose --version- reported version number was
+	2.14.51... rather than the expected 2.15.
+
+	maint: avoid automake deprecation warning re ACLOCAL_AMFLAGS
+	* Makefile.am (ACLOCAL_AMFLAGS): Don't use this deprecated variable.
+	* configure.ac (AC_CONFIG_MACRO_DIRS): Use this instead.
+	(AUTOMAKE_OPTIONS): Require automake-1.12.
+
+	maint: post-release administrivia
+	* NEWS: Add header line for next release.
+	* .prev-version: Record previous version.
+	* cfg.mk (old_NEWS_hash): Auto-update.
 
 	version 2.15
 	* NEWS: Record release date.
