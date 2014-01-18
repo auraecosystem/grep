@@ -1,5 +1,5 @@
 ## Process this file with automake to create Makefile.in
-# Copyright 1997-1998, 2005-2013 Free Software Foundation, Inc.
+# Copyright 1997-1998, 2005-2014 Free Software Foundation, Inc.
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -36,6 +36,7 @@ TESTS =						\
   backref					\
   backref-multibyte-slow			\
   backref-word					\
+  backslash-s-and-repetition-operators		\
   backslash-s-vs-invalid-multitype		\
   big-hole					\
   big-match					\
@@ -70,6 +71,7 @@ TESTS =						\
   inconsistent-range				\
   invalid-multibyte-infloop			\
   khadafy					\
+  long-line-vs-2GiB-read			\
   max-count-vs-context				\
   multibyte-white-space				\
   empty-line-mb					\
@@ -78,6 +80,7 @@ TESTS =						\
   options					\
   pcre						\
   pcre-abort					\
+  pcre-invalid-utf8-input			\
   pcre-utf8					\
   pcre-z					\
   prefix-of-multibyte				\

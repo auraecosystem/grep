@@ -1,3 +1,14 @@
+grep (2.16-1~0) UNRELEASED; urgency=low
+
+  * New upstream release.
+  * d/patches, Removed not longer needed patches:
+    - 85-automake-warnings-bc9c23a4350598db4ec04225e1e0194a7b17175d.patch
+    - 90-729581-multibyte-s.patch
+    - 91-P-regression-9a9b4c59babc60e15a79cf7db8167d42e68e44b9.patch
+    - 92-730472-PCRE-no-check-UTF8.patch
+
+ -- Santiago Ruano Rincón <santiago@debian.org>  Fri, 17 Jan 2014 11:00:17 +0100
+
 grep (2.15-2) unstable; urgency=high
 
   * d/patches/92-730472-PCRE-no-check-UTF8.patch flags PCRE with

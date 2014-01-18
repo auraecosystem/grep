@@ -7,7 +7,7 @@ Modified by Marco d'Itri <md@Linux.IT>
 
 --- a/configure
 +++ b/configure
-@@ -40749,13 +40749,14 @@
+@@ -35682,13 +35682,14 @@
  if test "$ac_res" != no; then :
    test "$ac_res" = "none required" || LIBS="$ac_res $LIBS"
    test "$ac_cv_search_pcre_compile" = "none required" ||
@@ -41,7 +41,7 @@ Modified by Marco d'Itri <md@Linux.IT>
  #if HAVE_LANGINFO_CODESET
  # include <langinfo.h>
 @@ -43,6 +49,67 @@
- #endif
+ # endif
  #endif
  
 +#ifdef HAVE_DYNAMIC_LIBPCRE
@@ -108,9 +108,9 @@ Modified by Marco d'Itri <md@Linux.IT>
  void
  Pcompile (char const *pattern, size_t size)
  {
-@@ -65,6 +132,10 @@
-     flags |= PCRE_UTF8;
- #endif
+@@ -69,6 +136,10 @@
+     }
+ # endif
  
 +  if (!map_pcre ())
 +    error (EXIT_TROUBLE, 0, "%s",
