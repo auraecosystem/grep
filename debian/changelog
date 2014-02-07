@@ -1,3 +1,14 @@
+grep (2.16-2~1) UNRELEASED; urgency=low
+
+  * NOT RELEASE YET
+  * Move to CDBS. And additional changes to make it build twice in a row
+    (Closes: #736977) 
+  * d/patches/
+    - 03-397262-dlopen-pcre.patch: removed unneeded changes in configure
+    - 99-autotools-changes.patch: included modifications made by autotools
+
+ -- Santiago Ruano Rincón <santiago@debian.org>  Fri, 07 Feb 2014 00:06:25 +0100
+
 grep (2.16-1) unstable; urgency=low
 
   * New upstream release.
