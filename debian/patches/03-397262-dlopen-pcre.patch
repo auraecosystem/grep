@@ -5,24 +5,6 @@ Patch by Reuben Thomas <rrt@sc3d.org>
 Modified by Aníbal Monsalve Salazar <anibal@debian.org>
 Modified by Marco d'Itri <md@Linux.IT>
 
---- a/configure
-+++ b/configure
-@@ -35682,13 +35682,14 @@
- if test "$ac_res" != no; then :
-   test "$ac_res" = "none required" || LIBS="$ac_res $LIBS"
-   test "$ac_cv_search_pcre_compile" = "none required" ||
--         LIB_PCRE=$ac_cv_search_pcre_compile
-+	 LIBS="-ldl $LIBS"
- fi
- 
-       for ac_func in pcre_compile
- do :
-   ac_fn_c_check_func "$LINENO" "pcre_compile" "ac_cv_func_pcre_compile"
- if test "x$ac_cv_func_pcre_compile" = xyes; then :
-+  CPPFLAGS="$CPPFLAGS -DHAVE_DYNAMIC_LIBPCRE"
-   cat >>confdefs.h <<_ACEOF
- #define HAVE_PCRE_COMPILE 1
- _ACEOF
 --- a/src/pcresearch.c
 +++ b/src/pcresearch.c
 @@ -22,8 +22,14 @@
