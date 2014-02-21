@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grep-2.15.15\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2014-01-01 20:44-0800\n"
+"POT-Creation-Date: 2014-02-09 21:26-0800\n"
 "PO-Revision-Date: 2013-12-22 15:54+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <translation-team-uk@lists.sourceforge.net>\n"
@@ -34,7 +34,7 @@ msgstr "неоднозначний аргумент, %s, %s"
 msgid "Valid arguments are:"
 msgstr "Список коректних аргументів:"
 
-#: lib/closeout.c:112 src/main.c:954
+#: lib/closeout.c:112 src/main.c:953
 #, c-format
 msgid "write error"
 msgstr "помилка запису"
@@ -183,7 +183,7 @@ msgstr "Неврівноважена послідовність ( або \\("
 msgid "Unmatched \\{"
 msgstr "Неврівноважена послідовність \\{"
 
-#: lib/regcomp.c:161 src/dfa.c:1374
+#: lib/regcomp.c:161 src/dfa.c:1352
 msgid "Invalid content of \\{\\}"
 msgstr "Некоректний вміст \\{\\}"
 
@@ -203,7 +203,7 @@ msgstr "Помилка у попередньому формальному вир
 msgid "Premature end of regular expression"
 msgstr "Неочікуване завершення формального виразу"
 
-#: lib/regcomp.c:176 src/dfa.c:1377
+#: lib/regcomp.c:176 src/dfa.c:1355
 msgid "Regular expression too big"
 msgstr "Занадто об'ємний формальний вираз"
 
@@ -361,7 +361,7 @@ msgstr ""
 #. for this package.  Please add _another line_ saying
 #. "Report translation bugs to <...>\n" with the address for translation
 #. bugs (typically your translation team's web or email address).
-#: lib/version-etc.c:245 src/main.c:1637
+#: lib/version-etc.c:245 src/main.c:1635
 #, c-format
 msgid ""
 "\n"
@@ -385,7 +385,7 @@ msgstr "Домашня сторінка %s: <%s>\n"
 msgid "%s home page: <http://www.gnu.org/software/%s/>\n"
 msgstr "Домашня сторінка %s: <http://www.gnu.org/software/%s/>\n"
 
-#: lib/version-etc.c:256 src/main.c:1640
+#: lib/version-etc.c:256 src/main.c:1638
 msgid "General help using GNU software: <http://www.gnu.org/gethelp/>\n"
 msgstr ""
 "Загальна довідкова інформація щодо використання програмного забезпечення "
@@ -408,7 +408,7 @@ msgstr "%s%s, аргумент «%s» є занадто об'ємним"
 
 #: src/dfa.c:956 src/dfa.c:959 src/dfa.c:979 src/dfa.c:989 src/dfa.c:1001
 #: src/dfa.c:1052 src/dfa.c:1061 src/dfa.c:1064 src/dfa.c:1069 src/dfa.c:1082
-#: src/dfa.c:1138
+#: src/dfa.c:1120
 msgid "unbalanced ["
 msgstr "неврівноважена дужка ["
 
@@ -416,25 +416,25 @@ msgstr "неврівноважена дужка ["
 msgid "invalid character class"
 msgstr "некоректний клас символів"
 
-#: src/dfa.c:1175
+#: src/dfa.c:1153
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr ""
 "синтаксичну конструкцію класу символів слід визначати так: [[:space:]], а не "
 "так: [:space:]"
 
-#: src/dfa.c:1227
+#: src/dfa.c:1205
 msgid "unfinished \\ escape"
 msgstr "незавершена \\-послідовність"
 
-#: src/dfa.c:1794
+#: src/dfa.c:1770
 msgid "unbalanced ("
 msgstr "неврівноважена дужка ("
 
-#: src/dfa.c:1920
+#: src/dfa.c:1896
 msgid "no syntax specified"
 msgstr "не вказано синтаксис"
 
-#: src/dfa.c:1928
+#: src/dfa.c:1904
 msgid "unbalanced )"
 msgstr "неврівноважена дужка )"
 
@@ -459,11 +459,11 @@ msgstr ""
 "Виклик команди «fgrep» вважається застарілим, скористайтеся командою «grep -"
 "F».\n"
 
-#: src/grep.c:32
+#: src/grep.c:46
 msgid "PATTERN is, by default, a basic regular expression (BRE).\n"
 msgstr "ШАБЛОНом, типово, є звичайний формальний вираз (BRE).\n"
 
-#: src/grep.c:34
+#: src/grep.c:48
 msgid ""
 "'egrep' means 'grep -E'.  'fgrep' means 'grep -F'.\n"
 "Direct invocation as either 'egrep' or 'fgrep' is deprecated.\n"
@@ -472,67 +472,67 @@ msgstr ""
 "Безпосередній виклик команд «egrep» та «fgrep» використовувати не варто.\n"
 
 #. This is a proper name. See the gettext manual, section Names.
-#: src/main.c:57
+#: src/main.c:59
 msgid "Mike Haertel"
 msgstr "Mike Haertel"
 
-#: src/main.c:58
+#: src/main.c:60
 msgid "others, see <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
 msgstr "інші, див. <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
 
-#: src/main.c:500
+#: src/main.c:499
 msgid "invalid context length argument"
 msgstr "помилковий аргумент довжини контексту"
 
-#: src/main.c:569
+#: src/main.c:568
 msgid "lseek failed"
 msgstr "помилка lseek"
 
-#: src/main.c:707
+#: src/main.c:706
 #, c-format
 msgid "input is too large to count"
 msgstr "вхідні дані занадто довгі для обліку"
 
-#: src/main.c:1273
+#: src/main.c:1272
 #, c-format
 msgid "Binary file %s matches\n"
 msgstr "Двійковий файл %s містить збіжність\n"
 
-#: src/main.c:1316
+#: src/main.c:1315
 #, c-format
 msgid "warning: %s: %s"
 msgstr "попередження: %s: %s"
 
-#: src/main.c:1317
+#: src/main.c:1316
 msgid "recursive directory loop"
 msgstr "зациклення рекурсивного проходу каталогів"
 
-#: src/main.c:1465
+#: src/main.c:1464
 #, c-format
 msgid "input file %s is also the output"
 msgstr "файл вхідних даних %s є також файлом вихідних даних"
 
-#: src/main.c:1523
+#: src/main.c:1522
 msgid "(standard input)"
 msgstr "(стандартне джерело вхідних даних)"
 
-#: src/main.c:1539 src/main.c:1546
+#: src/main.c:1538 src/main.c:1545
 #, c-format
 msgid "Usage: %s [OPTION]... PATTERN [FILE]...\n"
 msgstr "Використання: %s [ПАРАМЕТР]... ШАБЛОН [ФАЙЛ]...\n"
 
-#: src/main.c:1541
+#: src/main.c:1540
 #, c-format
 msgid "Try '%s --help' for more information.\n"
 msgstr "Віддайте команду «%s --help», щоб дізнатися більше.\n"
 
-#: src/main.c:1547
+#: src/main.c:1546
 #, c-format
 msgid "Search for PATTERN in each FILE or standard input.\n"
 msgstr ""
 "Шукати ШАБЛОН у кожному ФАЙЛі або стандартному джерелі вхідних даних.\n"
 
-#: src/main.c:1550
+#: src/main.c:1549
 #, c-format
 msgid ""
 "Example: %s -i 'hello world' menu.h main.c\n"
@@ -543,7 +543,7 @@ msgstr ""
 "\n"
 "Вибір за формальними виразами і інтерпретація:\n"
 
-#: src/main.c:1555
+#: src/main.c:1554
 #, c-format
 msgid ""
 "  -E, --extended-regexp     PATTERN is an extended regular expression (ERE)\n"
@@ -557,7 +557,7 @@ msgstr ""
 "  -G, --basic-regexp        ШАБЛОН є звичайним формальним виразом (BRE)\n"
 "  -P, --perl-regexp         ШАБЛОН є формальним виразом Perl\n"
 
-#: src/main.c:1561
+#: src/main.c:1560
 #, c-format
 msgid ""
 "  -e, --regexp=PATTERN      use PATTERN for matching\n"
@@ -579,8 +579,8 @@ msgstr ""
 "символом\n"
 "                            кінця рядка (\\n)\n"
 
-#: src/main.c:1568
-#, c-format
+#: src/main.c:1567
+#, fuzzy, c-format
 msgid ""
 "\n"
 "Miscellaneous:\n"
@@ -588,7 +588,7 @@ msgid ""
 "  -v, --invert-match        select non-matching lines\n"
 "  -V, --version             print version information and exit\n"
 "      --help                display this help and exit\n"
-"      --mmap                deprecated no-op; evokes a warning\n"
+"n"
 msgstr ""
 "\n"
 "Інше:\n"
@@ -600,7 +600,7 @@ msgstr ""
 "відповідне\n"
 "                                   повідомлення\n"
 
-#: src/main.c:1576
+#: src/main.c:1574
 #, c-format
 msgid ""
 "\n"
@@ -628,7 +628,7 @@ msgstr ""
 "      --label=МІТКА         показувати МІТКУ замість назви файла для "
 "стандартного джерела вхідних даних\n"
 
-#: src/main.c:1587
+#: src/main.c:1585
 #, c-format
 msgid ""
 "  -o, --only-matching       show only the part of a line matching PATTERN\n"
@@ -646,7 +646,7 @@ msgstr ""
 "match'\n"
 "  -a, --text                те саме, що і --binary-files=text\n"
 
-#: src/main.c:1594
+#: src/main.c:1592
 #, c-format
 msgid ""
 "  -I                        equivalent to --binary-files=without-match\n"
@@ -670,7 +670,7 @@ msgstr ""
 "символічними\n"
 "                            посиланнями\n"
 
-#: src/main.c:1603
+#: src/main.c:1601
 #, c-format
 msgid ""
 "      --include=FILE_PATTERN  search only files that match FILE_PATTERN\n"
@@ -689,7 +689,7 @@ msgstr ""
 "      --exclude-dir=ШАБЛОН    пропустити каталоги, назви яких відповідають "
 "ШАБЛОНу.\n"
 
-#: src/main.c:1609
+#: src/main.c:1607
 #, c-format
 msgid ""
 "  -L, --files-without-match  print only names of FILEs containing no match\n"
@@ -708,7 +708,7 @@ msgstr ""
 "потрібно)\n"
 "  -Z, --null                вивести байти 0 після назви ФАЙЛа\n"
 
-#: src/main.c:1615
+#: src/main.c:1613
 #, c-format
 msgid ""
 "\n"
@@ -726,7 +726,7 @@ msgstr ""
 "  -C, --context=ЧИСЛО        показати ЧИСЛО рядків контексту виведених "
 "даних\n"
 
-#: src/main.c:1622
+#: src/main.c:1620
 #, c-format
 msgid ""
 "  -NUM                      same as --context=NUM\n"
@@ -751,7 +751,7 @@ msgstr ""
 "                             CR (MSDOS/Windows)\n"
 "\n"
 
-#: src/main.c:1632
+#: src/main.c:1630
 #, c-format
 msgid ""
 "When FILE is -, read standard input.  With no FILE, read . if a command-"
@@ -766,45 +766,40 @@ msgstr ""
 "Код завершення 0 — якщо було виявлено відповідники, 1 — коли їх нема,\n"
 "2 — якщо сталася помилка і не було використано параметр -q.\n"
 
-#: src/main.c:1638
+#: src/main.c:1636
 #, c-format
 msgid "GNU Grep home page: <%s>\n"
 msgstr "Домашня сторінка GNU Grep: <%s>\n"
 
-#: src/main.c:1670
+#: src/main.c:1669
 #, c-format
 msgid "%s can only use the %s pattern syntax"
 msgstr "У %s можна використовувати лише синтаксис шаблонів %s"
 
-#: src/main.c:1673
+#: src/main.c:1672
 #, c-format
 msgid "conflicting matchers specified"
 msgstr "задані умови відповідності є суперечливими"
 
-#: src/main.c:1687
+#: src/main.c:1686
 #, c-format
 msgid "invalid matcher %s"
 msgstr "некоректний вираз порівняння %s"
 
-#: src/main.c:1940
+#: src/main.c:2017
 #, c-format
 msgid "unknown devices method"
 msgstr "невідомий спосіб обробки для пристроїв"
 
-#: src/main.c:2071
+#: src/main.c:2148
 #, c-format
 msgid "invalid max count"
 msgstr "помилкова максимальна кількість"
 
-#: src/main.c:2128
+#: src/main.c:2205
 #, c-format
 msgid "unknown binary-files type"
 msgstr "невідомий тип двійкових файлів"
-
-#: src/main.c:2187
-#, c-format
-msgid "the --mmap option has been a no-op since 2010"
-msgstr "параметр --mmap не обробляється з 2010 року"
 
 #: src/pcresearch.c:51
 msgid ""
@@ -853,6 +848,9 @@ msgstr "некоректна послідовність байтів UTF-8 у в
 #, c-format
 msgid "internal PCRE error: %d"
 msgstr "внутрішня помилка PCRE: %d"
+
+#~ msgid "the --mmap option has been a no-op since 2010"
+#~ msgstr "параметр --mmap не обробляється з 2010 року"
 
 #~ msgid "unfinished repeat count"
 #~ msgstr "не завершено лічильник повторів"

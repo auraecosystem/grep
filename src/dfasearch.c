@@ -46,6 +46,11 @@ static struct patterns
 static struct patterns *patterns;
 static size_t pcount;
 
+/* Number of compiled fixed strings known to exactly match the regexp.
+   If kwsexec returns < kwset_exact_matches, then we don't need to
+   call the regexp matcher at all. */
+static size_t kwset_exact_matches;
+
 void
 dfaerror (char const *mesg)
 {
@@ -69,22 +74,6 @@ dfawarn (char const *mesg)
     dfaerror (mesg);
 }
 
-/* Number of compiled fixed strings known to exactly match the regexp.
-   If kwsexec returns < kwset_exact_matches, then we don't need to
-   call the regexp matcher at all. */
-static size_t kwset_exact_matches;
-
-static char const *
-kwsincr_case (const char *must)
-{
-  size_t n = strlen (must);
-  mb_len_map_t *map = NULL;
-  const char *buf = (match_icase && MB_CUR_MAX > 1
-                     ? mbtolower (must, &n, &map)
-                     : must);
-  return kwsincr (kwset, buf, n);
-}
-
 /* If the DFA turns out to have some set of fixed strings one of
    which must occur in the match, then we build a kwset matcher
    to find those strings, and thus quickly filter out impossible
@@ -92,12 +81,16 @@ kwsincr_case (const char *must)
 static void
 kwsmusts (void)
 {
-  struct dfamust const *dm;
-  char const *err;
+  /* With case-insensitive matching in a multi-byte locale, do not
+     use kwsearch, because in that case, it would be too expensive,
+     requiring that we case-convert all searched input.  */
+  if (MB_CUR_MAX > 1 && match_icase)
+    return;
 
-  dm = dfamusts (dfa);
+  struct dfamust const *dm = dfamusts (dfa);
   if (dm)
     {
+      char const *err;
       kwsinit (&kwset);
       /* First, we compile in the substrings known to be exact
          matches.  The kwset matcher will return the index
@@ -107,7 +100,7 @@ kwsmusts (void)
           if (!dm->exact)
             continue;
           ++kwset_exact_matches;
-          if ((err = kwsincr_case (dm->must)) != NULL)
+          if ((err = kwsincr (kwset, dm->must, strlen (dm->must))) != NULL)
             error (EXIT_TROUBLE, 0, "%s", err);
         }
       /* Now, we compile the substrings that will require
@@ -116,7 +109,7 @@ kwsmusts (void)
         {
           if (dm->exact)
             continue;
-          if ((err = kwsincr_case (dm->must)) != NULL)
+          if ((err = kwsincr (kwset, dm->must, strlen (dm->must))) != NULL)
             error (EXIT_TROUBLE, 0, "%s", err);
         }
       if ((err = kwsprep (kwset)) != NULL)
@@ -217,21 +210,7 @@ EGexecute (char const *buf, size_t size, size_t *match_size,
   regoff_t start;
   size_t len, best_len;
   struct kwsmatch kwsm;
-  size_t i, ret_val;
-  mb_len_map_t *map = NULL;
-
-  if (MB_CUR_MAX > 1)
-    {
-      if (match_icase)
-        {
-          /* mbtolower adds a NUL byte at the end.  That will provide
-             space for the sentinel byte dfaexec may add.  */
-          char *case_buf = mbtolower (buf, &size, &map);
-          if (start_ptr)
-            start_ptr = case_buf + (start_ptr - buf);
-          buf = case_buf;
-        }
-    }
+  size_t i;
 
   mb_start = buf;
   buflim = buf + size;
@@ -346,9 +325,9 @@ EGexecute (char const *buf, size_t size, size_t *match_size,
                 while (match <= best_match)
                   {
                     regoff_t shorter_len = 0;
-                    if ((match == buf || !WCHAR ((unsigned char) match[-1]))
+                    if ((match == buf || !WCHAR (to_uchar (match[-1])))
                         && (start + len == end - buf - 1
-                            || !WCHAR ((unsigned char) match[len])))
+                            || !WCHAR (to_uchar (match[len]))))
                       goto assess_pattern_match;
                     if (len > 0)
                       {
@@ -418,8 +397,6 @@ EGexecute (char const *buf, size_t size, size_t *match_size,
   len = end - beg;
  success_in_len:;
   size_t off = beg - buf;
-  mb_case_map_apply (map, &off, &len);
   *match_size = len;
-  ret_val = off;
-  return ret_val;
+  return off;
 }

@@ -25,7 +25,7 @@ grep
 
 `grep' prints lines that contain a match for a pattern.
 
-   This manual is for version 2.16 of GNU Grep.
+   This manual is for version 2.16.14-b75c of GNU Grep.
 
    This manual is for `grep', a pattern matching engine.
 
@@ -503,13 +503,6 @@ File: grep.info-t,  Node: Other Options,  Prev: File and Directory Selection,  U
      Use line buffering on output.  This can cause a performance
      penalty.
 
-`--mmap'
-     This option is deprecated and now elicits a warning, but is
-     otherwise a no-op.  It used to make `grep' read input with the
-     `mmap' system call, instead of the default `read' system call.  On
-     modern systems, `mmap' would rarely if ever yield better
-     performance.
-
 `-U'
 `--binary'
      Treat the file(s) as binary.  By default, under MS-DOS and
@@ -694,8 +687,8 @@ capabilities are stored in an online database and accessed by the
 `LC_COLLATE'
 `LANG'
      These variables specify the locale for the `LC_COLLATE' category,
-     which determines the collating sequence used to interpret range
-     expressions like `[a-z]'.
+     which might affect how range expressions like `[a-z]' are
+     interpreted.
 
 `LC_ALL'
 `LC_CTYPE'
@@ -885,14 +878,14 @@ single digit.
 
    Within a bracket expression, a "range expression" consists of two
 characters separated by a hyphen.  It matches any single character that
-sorts between the two characters, inclusive, using the locale's
-collating sequence and character set.  For example, in the default C
-locale, `[a-d]' is equivalent to `[abcd]'.  Many locales sort
-characters in dictionary order, and in these locales `[a-d]' is
-typically not equivalent to `[abcd]'; it might be equivalent to
-`[aBbCcDd]', for example.  To obtain the traditional interpretation of
-bracket expressions, you can use the `C' locale by setting the `LC_ALL'
-environment variable to the value `C'.
+sorts between the two characters, inclusive.  In the default C locale,
+the sorting sequence is the native character order; for example,
+`[a-d]' is equivalent to `[abcd]'.  In other locales, the sorting
+sequence is not specified, and `[a-d]' might be equivalent to `[abcd]'
+or to `[aBbCcDd]', or it might fail to match any character, or the set
+of characters that it matches might even be erratic.  To obtain the
+traditional interpretation of bracket expressions, you can use the `C'
+locale by setting the `LC_ALL' environment variable to the value `C'.
 
    Finally, certain named classes of characters are predefined within
 bracket expressions, as follows.  Their interpretation depends on the
@@ -1840,7 +1833,7 @@ Index
 * --basic-regexp:                        grep Programs.       (line  16)
 * --before-context:                      Context Line Control.
                                                               (line  17)
-* --binary:                              Other Options.       (line  19)
+* --binary:                              Other Options.       (line  12)
 * --binary-files:                        File and Directory Selection.
                                                               (line  12)
 * --byte-offset:                         Output Line Prefix Control.
@@ -1890,14 +1883,13 @@ Index
 * --line-regexp:                         Matching Control.    (line  41)
 * --max-count:                           General Output Control.
                                                               (line  42)
-* --mmap:                                Other Options.       (line  11)
 * --no-filename:                         Output Line Prefix Control.
                                                               (line  25)
 * --no-messages:                         General Output Control.
                                                               (line  88)
 * --null:                                Output Line Prefix Control.
                                                               (line  63)
-* --null-data:                           Other Options.       (line  33)
+* --null-data:                           Other Options.       (line  26)
 * --only-matching:                       General Output Control.
                                                               (line  75)
 * --perl-regexp:                         grep Programs.       (line  32)
@@ -1966,7 +1958,7 @@ Index
                                                               (line  88)
 * -T:                                    Output Line Prefix Control.
                                                               (line  43)
-* -U:                                    Other Options.       (line  19)
+* -U:                                    Other Options.       (line  12)
 * -u:                                    Output Line Prefix Control.
                                                               (line  53)
 * -v:                                    Matching Control.    (line  27)
@@ -1975,7 +1967,7 @@ Index
 * -w:                                    Matching Control.    (line  32)
 * -x:                                    Matching Control.    (line  41)
 * -y:                                    Matching Control.    (line  21)
-* -z:                                    Other Options.       (line  33)
+* -z:                                    Other Options.       (line  26)
 * -Z:                                    Output Line Prefix Control.
                                                               (line  63)
 * .:                                     Fundamental Structure.
@@ -2006,7 +1998,7 @@ Index
                                                               (line  17)
 * binary files:                          File and Directory Selection.
                                                               (line   8)
-* binary files, MS-DOS/MS-Windows:       Other Options.       (line  19)
+* binary files, MS-DOS/MS-Windows:       Other Options.       (line  12)
 * blank character class:                 Character Classes and Bracket Expressions.
                                                               (line  39)
 * blank characters:                      Character Classes and Bracket Expressions.
@@ -2147,12 +2139,11 @@ Index
                                                               (line  42)
 * mc GREP_COLORS capability:             Environment Variables.
                                                               (line 116)
-* memory mapped input:                   Other Options.       (line  11)
 * message language:                      Environment Variables.
                                                               (line 175)
 * ms GREP_COLORS capability:             Environment Variables.
                                                               (line 108)
-* MS-DOS/MS-Windows binary files:        Other Options.       (line  19)
+* MS-DOS/MS-Windows binary files:        Other Options.       (line  12)
 * MS-DOS/MS-Windows byte offsets:        Output Line Prefix Control.
                                                               (line  53)
 * mt GREP_COLORS capability:             Environment Variables.
@@ -2243,7 +2234,7 @@ Index
                                                               (line  76)
 * zero-terminated file names:            Output Line Prefix Control.
                                                               (line  63)
-* zero-terminated lines:                 Other Options.       (line  33)
+* zero-terminated lines:                 Other Options.       (line  26)
 * {,M}:                                  Fundamental Structure.
                                                               (line  33)
 * {N,M}:                                 Fundamental Structure.
@@ -2257,32 +2248,32 @@ Index
 
 Tag Table:
 Node: Top766
-Node: Introduction1883
-Node: Invoking2613
-Node: Command-line Options3360
-Node: Generic Program Information4237
-Node: Matching Control4698
-Node: General Output Control6149
-Ref: General Output Control-Footnote-110064
-Node: Output Line Prefix Control10133
-Node: Context Line Control13070
-Node: File and Directory Selection15004
-Node: Other Options18572
-Node: Environment Variables20110
-Node: Exit Status29608
-Node: grep Programs30251
-Node: Regular Expressions31671
-Node: Fundamental Structure32825
-Node: Character Classes and Bracket Expressions34552
-Ref: invalid-bracket-expr37743
-Node: The Backslash Character and Special Expressions38920
-Node: Anchoring39921
-Node: Back-references and Subexpressions40366
-Node: Basic vs Extended41078
-Node: Usage42075
-Node: Reporting Bugs49334
-Node: Copying49998
-Node: GNU Free Documentation License51087
-Node: Index76216
+Node: Introduction1891
+Node: Invoking2621
+Node: Command-line Options3368
+Node: Generic Program Information4245
+Node: Matching Control4706
+Node: General Output Control6157
+Ref: General Output Control-Footnote-110072
+Node: Output Line Prefix Control10141
+Node: Context Line Control13078
+Node: File and Directory Selection15012
+Node: Other Options18580
+Node: Environment Variables19823
+Node: Exit Status29302
+Node: grep Programs29945
+Node: Regular Expressions31365
+Node: Fundamental Structure32519
+Node: Character Classes and Bracket Expressions34246
+Ref: invalid-bracket-expr37485
+Node: The Backslash Character and Special Expressions38662
+Node: Anchoring39663
+Node: Back-references and Subexpressions40108
+Node: Basic vs Extended40820
+Node: Usage41817
+Node: Reporting Bugs49076
+Node: Copying49740
+Node: GNU Free Documentation License50829
+Node: Index75958
 
 End Tag Table

@@ -27,6 +27,7 @@
 #include <fcntl.h>
 #include <inttypes.h>
 #include <stdio.h>
+#include <assert.h>
 #include "system.h"
 
 #include "argmatch.h"
@@ -45,6 +46,7 @@
 #include "propername.h"
 #include "quote.h"
 #include "safe-read.h"
+#include "search.h"
 #include "version-etc.h"
 #include "xalloc.h"
 #include "xstrtol.h"
@@ -287,8 +289,7 @@ enum
   LINE_BUFFERED_OPTION,
   LABEL_OPTION,
   EXCLUDE_DIRECTORY_OPTION,
-  GROUP_SEPARATOR_OPTION,
-  MMAP_OPTION
+  GROUP_SEPARATOR_OPTION
 };
 
 /* Long options equivalences. */
@@ -326,8 +327,6 @@ static struct option const long_options[] =
   {"line-regexp", no_argument, NULL, 'x'},
   {"max-count", required_argument, NULL, 'm'},
 
-  /* FIXME: disabled in Mar 2010; warn towards end of 2011; remove in 2013.  */
-  {"mmap", no_argument, NULL, MMAP_OPTION},
   {"no-filename", no_argument, NULL, 'h'},
   {"no-group-separator", no_argument, NULL, GROUP_SEPARATOR_OPTION},
   {"no-messages", no_argument, NULL, 's'},
@@ -1571,8 +1570,7 @@ Miscellaneous:\n\
   -s, --no-messages         suppress error messages\n\
   -v, --invert-match        select non-matching lines\n\
   -V, --version             print version information and exit\n\
-      --help                display this help and exit\n\
-      --mmap                deprecated no-op; evokes a warning\n"));
+      --help                display this help and exit\nn"));
       printf (_("\
 \n\
 Output control:\n\
@@ -1644,13 +1642,14 @@ if any error occurs and -q is not given, the exit status is 2.\n"));
   exit (status);
 }
 
+static char const *matcher;
+
 /* If M is NULL, initialize the matcher to the default.  Otherwise set the
    matcher to M if available.  Exit in case of conflicts or if M is not
    available.  */
 static void
 setmatcher (char const *m)
 {
-  static char const *matcher;
   unsigned int i;
 
   if (!m)
@@ -1702,7 +1701,7 @@ prepend_args (char const *options, char *buf, char **argv)
 
   for (;;)
     {
-      while (c_isspace ((unsigned char) *o))
+      while (c_isspace (to_uchar (*o)))
         o++;
       if (!*o)
         return n;
@@ -1713,7 +1712,7 @@ prepend_args (char const *options, char *buf, char **argv)
       do
         if ((*b++ = *o++) == '\\' && *o)
           b[-1] = *o++;
-      while (*o && ! c_isspace ((unsigned char) *o));
+      while (*o && ! c_isspace (to_uchar (*o)));
 
       *b++ = '\0';
     }
@@ -1863,6 +1862,84 @@ parse_grep_colors (void)
       q++; /* Accumulate val.  Protect the terminal from being sent crap.  */
     else
       return;
+}
+
+#define MBRTOWC(pwc, s, n, ps) \
+  (MB_CUR_MAX == 1 ? \
+   (*(pwc) = btowc (*(unsigned char *) (s)), 1) : \
+   mbrtowc ((pwc), (s), (n), (ps)))
+
+#define WCRTOMB(s, wc, ps) \
+  (MB_CUR_MAX == 1 ? \
+   (*(s) = wctob ((wint_t) (wc)), 1) : \
+   wcrtomb ((s), (wc), (ps)))
+
+/* If the newline-separated regular expressions, KEYS (with length, LEN
+   and no trailing NUL byte), are amenable to transformation into
+   otherwise equivalent case-ignoring ones, perform the transformation,
+   put the result into malloc'd memory, *NEW_KEYS with length *NEW_LEN,
+   and return true.  Otherwise, return false.  */
+static bool
+trivial_case_ignore (size_t len, char const *keys,
+                     size_t *new_len, char **new_keys)
+{
+  /* FIXME: consider removing the following restriction:
+     Reject if KEYS contain ASCII '\\' or '['.  */
+  if (memchr (keys, '\\', len) || memchr (keys, '[', len))
+    return false;
+
+  /* Worst case is that each byte B of KEYS is ASCII alphabetic and each
+     other_case(B) character, C, occupies MB_CUR_MAX bytes, so each B
+     maps to [BC], which requires MB_CUR_MAX + 3 bytes.   */
+  *new_keys = xnmalloc (MB_CUR_MAX + 3, len + 1);
+  char *p = *new_keys;
+
+  mbstate_t mb_state;
+  memset (&mb_state, 0, sizeof mb_state);
+  while (len)
+    {
+      wchar_t wc;
+      int n = MBRTOWC (&wc, keys, len, &mb_state);
+
+      /* For an invalid, incomplete or L'\0', skip this optimization.  */
+      if (n <= 0)
+        {
+        skip_case_ignore_optimization:
+          free (*new_keys);
+          return false;
+        }
+
+      char const *orig = keys;
+      keys += n;
+      len -= n;
+
+      if (!iswalpha (wc))
+        {
+          memcpy (p, orig, n);
+          p += n;
+        }
+      else
+        {
+          *p++ = '[';
+          memcpy (p, orig, n);
+          p += n;
+
+          wchar_t wc2 = iswupper (wc) ? towlower (wc) : towupper (wc);
+          char buf[MB_CUR_MAX];
+          int n2 = WCRTOMB (buf, wc2, &mb_state);
+          if (n2 <= 0)
+            goto skip_case_ignore_optimization;
+          assert (n2 <= MB_CUR_MAX);
+          memcpy (p, buf, n2);
+          p += n2;
+
+          *p++ = ']';
+        }
+    }
+
+  *new_len = p - *new_keys;
+
+  return true;
 }
 
 int
@@ -2183,10 +2260,6 @@ main (int argc, char **argv)
         label = optarg;
         break;
 
-      case MMAP_OPTION:
-        error (0, 0, _("the --mmap option has been a no-op since 2010"));
-        break;
-
       case 0:
         /* long options */
         break;
@@ -2262,6 +2335,40 @@ main (int argc, char **argv)
     }
   else
     usage (EXIT_TROUBLE);
+
+  /* As currently implemented, case-insensitive matching is expensive in
+     multi-byte locales because of a few outlier locales in which some
+     characters change size when converted to upper or lower case.  To
+     accommodate those, we revert to searching the input one line at a
+     time, rather than using the much more efficient buffer search.
+     However, if we have a regular expression, /foo/i, we can convert
+     it to an equivalent case-insensitive /[fF][oO][oO]/, and thus
+     avoid the expensive read-and-process-a-line-at-a-time requirement.
+     Optimize-away the "-i" option, when possible, converting each
+     candidate alpha, C, in the regexp to [Cc].  */
+  if (match_icase)
+    {
+      size_t new_keycc;
+      char *new_keys;
+      /* It is not possible with -F, not useful with -P (pcre) and there is no
+         point when there is no regexp.  It also depends on which constructs
+         appear in the regexp.  See trivial_case_ignore for those details.  */
+      if (keycc
+          && ! (matcher
+                && (STREQ (matcher, "fgrep") || STREQ (matcher, "pcre")))
+          && trivial_case_ignore (keycc, keys, &new_keycc, &new_keys))
+        {
+          match_icase = 0;
+          free (keys);
+          keys = new_keys;
+          keycc = new_keycc;
+        }
+    }
+
+#if MBS_SUPPORT
+  if (MB_CUR_MAX > 1)
+    build_mbclen_cache ();
+#endif
 
   compile (keys, keycc);
   free (keys);
