@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GNU grep-2.14\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2014-01-01 20:44-0800\n"
+"POT-Creation-Date: 2014-02-09 21:26-0800\n"
 "PO-Revision-Date: 2012-11-04 15:09-0200\n"
 "Last-Translator: Rodolfo Ribeiro Gomes <rodolforg@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <ldpbr-translation@lists.sourceforge."
@@ -38,7 +38,7 @@ msgstr "%s é um argumento ambíguo para %s"
 msgid "Valid arguments are:"
 msgstr "Os argumentos válidos são:"
 
-#: lib/closeout.c:112 src/main.c:954
+#: lib/closeout.c:112 src/main.c:953
 #, c-format
 msgid "write error"
 msgstr "erro de escrita"
@@ -187,7 +187,7 @@ msgstr "( ou \\( sem correspondente"
 msgid "Unmatched \\{"
 msgstr "\\{ sem correspondente"
 
-#: lib/regcomp.c:161 src/dfa.c:1374
+#: lib/regcomp.c:161 src/dfa.c:1352
 msgid "Invalid content of \\{\\}"
 msgstr "Conteúdo inválido de \\{\\}"
 
@@ -207,7 +207,7 @@ msgstr "Expressão regular precedente é inválida"
 msgid "Premature end of regular expression"
 msgstr "Fim prematuro da expressão regular"
 
-#: lib/regcomp.c:176 src/dfa.c:1377
+#: lib/regcomp.c:176 src/dfa.c:1355
 msgid "Regular expression too big"
 msgstr "Expressão regular grande demais"
 
@@ -364,7 +364,7 @@ msgstr ""
 #. for this package.  Please add _another line_ saying
 #. "Report translation bugs to <...>\n" with the address for translation
 #. bugs (typically your translation team's web or email address).
-#: lib/version-etc.c:245 src/main.c:1637
+#: lib/version-etc.c:245 src/main.c:1635
 #, c-format
 msgid ""
 "\n"
@@ -388,7 +388,7 @@ msgstr "página de %s: <%s>\n"
 msgid "%s home page: <http://www.gnu.org/software/%s/>\n"
 msgstr "página de %s: <http://www.gnu.org/software/%s/>\n"
 
-#: lib/version-etc.c:256 src/main.c:1640
+#: lib/version-etc.c:256 src/main.c:1638
 msgid "General help using GNU software: <http://www.gnu.org/gethelp/>\n"
 msgstr "Ajuda geral sobre uso de software GNU: <http://www.gnu.org/gethelp/>\n"
 
@@ -409,7 +409,7 @@ msgstr "%s%s: argumento \"%s\" é grande demais"
 
 #: src/dfa.c:956 src/dfa.c:959 src/dfa.c:979 src/dfa.c:989 src/dfa.c:1001
 #: src/dfa.c:1052 src/dfa.c:1061 src/dfa.c:1064 src/dfa.c:1069 src/dfa.c:1082
-#: src/dfa.c:1138
+#: src/dfa.c:1120
 msgid "unbalanced ["
 msgstr "[ sem correspondente"
 
@@ -417,23 +417,23 @@ msgstr "[ sem correspondente"
 msgid "invalid character class"
 msgstr "categoria de caracteres inválida"
 
-#: src/dfa.c:1175
+#: src/dfa.c:1153
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr "a sintaxe de categoria de caracteres é [[:space:]], e não [:space:]"
 
-#: src/dfa.c:1227
+#: src/dfa.c:1205
 msgid "unfinished \\ escape"
 msgstr "escape \\ não terminado"
 
-#: src/dfa.c:1794
+#: src/dfa.c:1770
 msgid "unbalanced ("
 msgstr "( sem correspondente"
 
-#: src/dfa.c:1920
+#: src/dfa.c:1896
 msgid "no syntax specified"
 msgstr "nenhuma sintaxe especificada"
 
-#: src/dfa.c:1928
+#: src/dfa.c:1904
 msgid "unbalanced )"
 msgstr ") sem correspondente"
 
@@ -454,11 +454,11 @@ msgstr ""
 msgid "Invocation as 'fgrep' is deprecated; use 'grep -F' instead.\n"
 msgstr "Invocar como \"fgrep\" está obsoleto; use \"grep -F\".\n"
 
-#: src/grep.c:32
+#: src/grep.c:46
 msgid "PATTERN is, by default, a basic regular expression (BRE).\n"
 msgstr "PADRÃO é, por padrão, uma expressão regular básica (BRE).\n"
 
-#: src/grep.c:34
+#: src/grep.c:48
 msgid ""
 "'egrep' means 'grep -E'.  'fgrep' means 'grep -F'.\n"
 "Direct invocation as either 'egrep' or 'fgrep' is deprecated.\n"
@@ -467,66 +467,66 @@ msgstr ""
 "A invocação direta tanto por \"egrep\" como por \"fgrep\" está obsoleta.\n"
 
 #. This is a proper name. See the gettext manual, section Names.
-#: src/main.c:57
+#: src/main.c:59
 msgid "Mike Haertel"
 msgstr "Mike Haertel"
 
-#: src/main.c:58
+#: src/main.c:60
 msgid "others, see <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
 msgstr "outros, veja <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
 
-#: src/main.c:500
+#: src/main.c:499
 msgid "invalid context length argument"
 msgstr "argumento inválido para comprimento do contexto"
 
-#: src/main.c:569
+#: src/main.c:568
 msgid "lseek failed"
 msgstr "a movimentação pelo arquivo (lseek) falhou"
 
-#: src/main.c:707
+#: src/main.c:706
 #, c-format
 msgid "input is too large to count"
 msgstr "entrada longa demais para contar"
 
-#: src/main.c:1273
+#: src/main.c:1272
 #, c-format
 msgid "Binary file %s matches\n"
 msgstr "Arquivo binário %s coincide com o padrão\n"
 
-#: src/main.c:1316
+#: src/main.c:1315
 #, c-format
 msgid "warning: %s: %s"
 msgstr "aviso: %s: %s"
 
-#: src/main.c:1317
+#: src/main.c:1316
 msgid "recursive directory loop"
 msgstr "recursão cíclica de diretório"
 
-#: src/main.c:1465
+#: src/main.c:1464
 #, c-format
 msgid "input file %s is also the output"
 msgstr "o arquivo de entrada %s é também o de saída"
 
-#: src/main.c:1523
+#: src/main.c:1522
 msgid "(standard input)"
 msgstr "(entrada padrão)"
 
-#: src/main.c:1539 src/main.c:1546
+#: src/main.c:1538 src/main.c:1545
 #, c-format
 msgid "Usage: %s [OPTION]... PATTERN [FILE]...\n"
 msgstr "Uso: %s [OPÇÃO]... PADRÃO [ARQUIVO]...\n"
 
-#: src/main.c:1541
+#: src/main.c:1540
 #, c-format
 msgid "Try '%s --help' for more information.\n"
 msgstr "Experimente \"%s --help\" para mais informações.\n"
 
-#: src/main.c:1547
+#: src/main.c:1546
 #, c-format
 msgid "Search for PATTERN in each FILE or standard input.\n"
 msgstr "Busca por PADRÃO em cada ARQUIVO ou entrada padrão.\n"
 
-#: src/main.c:1550
+#: src/main.c:1549
 #, c-format
 msgid ""
 "Example: %s -i 'hello world' menu.h main.c\n"
@@ -537,7 +537,7 @@ msgstr ""
 "\n"
 "Seleção e interpretação de expressão regular:\n"
 
-#: src/main.c:1555
+#: src/main.c:1554
 #, c-format
 msgid ""
 "  -E, --extended-regexp     PATTERN is an extended regular expression (ERE)\n"
@@ -551,7 +551,7 @@ msgstr ""
 "  -G, --basic-regexp        PADRÃO é uma expressão regular básica\n"
 "  -P, --perl-regexp         PADRÃO é uma expressão regular de sintaxe Perl\n"
 
-#: src/main.c:1561
+#: src/main.c:1560
 #, c-format
 msgid ""
 "  -e, --regexp=PATTERN      use PATTERN for matching\n"
@@ -571,8 +571,8 @@ msgstr ""
 "com\n"
 "                              caractere de nova linha\n"
 
-#: src/main.c:1568
-#, c-format
+#: src/main.c:1567
+#, fuzzy, c-format
 msgid ""
 "\n"
 "Miscellaneous:\n"
@@ -580,7 +580,7 @@ msgid ""
 "  -v, --invert-match        select non-matching lines\n"
 "  -V, --version             print version information and exit\n"
 "      --help                display this help and exit\n"
-"      --mmap                deprecated no-op; evokes a warning\n"
+"n"
 msgstr ""
 "\n"
 "Miscelânea:\n"
@@ -590,7 +590,7 @@ msgstr ""
 "      --help                exibe esta ajuda e sai\n"
 "      --mmap                obsoleta e inútil; emite um aviso\n"
 
-#: src/main.c:1576
+#: src/main.c:1574
 #, c-format
 msgid ""
 "\n"
@@ -614,7 +614,7 @@ msgstr ""
 "  -h, --no-filename         inibe o nome de arquivo na saída\n"
 "      --label=RÓTULO        usa RÓTULO para identificar a entrada padrão\n"
 
-#: src/main.c:1587
+#: src/main.c:1585
 #, c-format
 msgid ""
 "  -o, --only-matching       show only the part of a line matching PATTERN\n"
@@ -632,7 +632,7 @@ msgstr ""
 "                             ou \\\"without-match\\\" (nunca coincide)\n"
 "  -a, --text                equivalente a --binary-files=text\n"
 
-#: src/main.c:1594
+#: src/main.c:1592
 #, c-format
 msgid ""
 "  -I                        equivalent to --binary-files=without-match\n"
@@ -655,7 +655,7 @@ msgstr ""
 "  -R, --dereference-recursive  similar, mas segue todas as ligações "
 "simbólicas\n"
 
-#: src/main.c:1603
+#: src/main.c:1601
 #, c-format
 msgid ""
 "      --include=FILE_PATTERN  search only files that match FILE_PATTERN\n"
@@ -674,7 +674,7 @@ msgstr ""
 "                              em ARQUIvo\n"
 "      --exclude-dir=PADRÃO  diretórios que casam com PADRÃO serão ignorados\n"
 
-#: src/main.c:1609
+#: src/main.c:1607
 #, c-format
 msgid ""
 "  -L, --files-without-match  print only names of FILEs containing no match\n"
@@ -695,7 +695,7 @@ msgstr ""
 "  -T, --initial-tab         alinha por tabulação (se necessário)\n"
 "  -Z, --null                emite byte 0 depois do nome do ARQUIVO\n"
 
-#: src/main.c:1615
+#: src/main.c:1613
 #, c-format
 msgid ""
 "\n"
@@ -710,7 +710,7 @@ msgstr ""
 "  -A, --after-context=NÚM   emite NÚM linhas de contexto posteriores\n"
 "  -C, --context=NÚM         emite NÚM linhas de contexto de saída\n"
 
-#: src/main.c:1622
+#: src/main.c:1620
 #, c-format
 msgid ""
 "  -NUM                      same as --context=NUM\n"
@@ -736,7 +736,7 @@ msgstr ""
 "                              (MSDOS/Windows)\n"
 "\n"
 
-#: src/main.c:1632
+#: src/main.c:1630
 #, c-format
 msgid ""
 "When FILE is -, read standard input.  With no FILE, read . if a command-"
@@ -754,45 +754,40 @@ msgstr ""
 "foi\n"
 "especificado, o estado de saída é 2.\n"
 
-#: src/main.c:1638
+#: src/main.c:1636
 #, c-format
 msgid "GNU Grep home page: <%s>\n"
 msgstr "Página do GNU Grep: <%s>\n"
 
-#: src/main.c:1670
+#: src/main.c:1669
 #, c-format
 msgid "%s can only use the %s pattern syntax"
 msgstr "%s só pode usar a sintaxe de padrão %s"
 
-#: src/main.c:1673
+#: src/main.c:1672
 #, c-format
 msgid "conflicting matchers specified"
 msgstr "especificou-se padrões de busca conflitantes"
 
-#: src/main.c:1687
+#: src/main.c:1686
 #, c-format
 msgid "invalid matcher %s"
 msgstr "comparador inválido %s"
 
-#: src/main.c:1940
+#: src/main.c:2017
 #, c-format
 msgid "unknown devices method"
 msgstr "método desconhecido de dispositivos"
 
-#: src/main.c:2071
+#: src/main.c:2148
 #, c-format
 msgid "invalid max count"
 msgstr "valor máximo inválido"
 
-#: src/main.c:2128
+#: src/main.c:2205
 #, c-format
 msgid "unknown binary-files type"
 msgstr "tipo de arquivo binário desconhecido"
-
-#: src/main.c:2187
-#, c-format
-msgid "the --mmap option has been a no-op since 2010"
-msgstr "a opção --mmap não faz nada desde 2010"
 
 #: src/pcresearch.c:51
 msgid ""
@@ -840,6 +835,9 @@ msgstr ""
 #, fuzzy, c-format
 msgid "internal PCRE error: %d"
 msgstr "erro interno"
+
+#~ msgid "the --mmap option has been a no-op since 2010"
+#~ msgstr "a opção --mmap não faz nada desde 2010"
 
 #~ msgid "unfinished repeat count"
 #~ msgstr "contador de repetição não terminado"

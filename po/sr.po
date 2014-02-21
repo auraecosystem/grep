@@ -2,13 +2,13 @@
 # Copyright (C) 2012 Free Software Foundation, Inc.
 # This file is distributed under the same license as the grep package.
 # Danilo Segan <dsegan@gmx.net>, 2003.
-# Мирослав Николић <miroslavnikolic@rocketmail.com>, 2011, 2012, 2013.
+# Мирослав Николић <miroslavnikolic@rocketmail.com>, 2011, 2012, 2013, 2014.
 msgid ""
 msgstr ""
-"Project-Id-Version: grep-2.14.46\n"
+"Project-Id-Version: grep-2.15.15\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2014-01-01 20:44-0800\n"
-"PO-Revision-Date: 2013-10-27 11:58+0200\n"
+"POT-Creation-Date: 2014-02-09 21:26-0800\n"
+"PO-Revision-Date: 2014-01-13 17:34+0200\n"
 "Last-Translator: Мирослав Николић <miroslavnikolic@rocketmail.com>\n"
 "Language-Team: Serbian <(nothing)>\n"
 "Language: sr\n"
@@ -32,7 +32,7 @@ msgstr "двосмислени аргумент %s за %s"
 msgid "Valid arguments are:"
 msgstr "Исправни аргументи су:"
 
-#: lib/closeout.c:112 src/main.c:954
+#: lib/closeout.c:112 src/main.c:953
 #, c-format
 msgid "write error"
 msgstr "грешка у писању"
@@ -181,7 +181,7 @@ msgstr "Не одговара ( или \\("
 msgid "Unmatched \\{"
 msgstr "Не одговара \\{"
 
-#: lib/regcomp.c:161 src/dfa.c:1374
+#: lib/regcomp.c:161 src/dfa.c:1352
 msgid "Invalid content of \\{\\}"
 msgstr "Неисправан садржај \\{\\}"
 
@@ -202,7 +202,7 @@ msgstr "Неисправан регуларан израз који претхо
 msgid "Premature end of regular expression"
 msgstr "Прерани крај регуларног израза"
 
-#: lib/regcomp.c:176 src/dfa.c:1377
+#: lib/regcomp.c:176 src/dfa.c:1355
 msgid "Regular expression too big"
 msgstr "Регуларни израз је превелик"
 
@@ -359,7 +359,7 @@ msgstr ""
 #. for this package.  Please add _another line_ saying
 #. "Report translation bugs to <...>\n" with the address for translation
 #. bugs (typically your translation team's web or email address).
-#: lib/version-etc.c:245 src/main.c:1637
+#: lib/version-etc.c:245 src/main.c:1635
 #, c-format
 msgid ""
 "\n"
@@ -383,7 +383,7 @@ msgstr "%s матична страница: <%s>\n"
 msgid "%s home page: <http://www.gnu.org/software/%s/>\n"
 msgstr "%s матична страница: <http://www.gnu.org/software/%s/>\n"
 
-#: lib/version-etc.c:256 src/main.c:1640
+#: lib/version-etc.c:256 src/main.c:1638
 msgid "General help using GNU software: <http://www.gnu.org/gethelp/>\n"
 msgstr "Општа помоћ користећи ГНУ софтвер: <http://www.gnu.org/gethelp/>\n"
 
@@ -404,7 +404,7 @@ msgstr "%s%s аргумент „%s“ је превелик"
 
 #: src/dfa.c:956 src/dfa.c:959 src/dfa.c:979 src/dfa.c:989 src/dfa.c:1001
 #: src/dfa.c:1052 src/dfa.c:1061 src/dfa.c:1064 src/dfa.c:1069 src/dfa.c:1082
-#: src/dfa.c:1138
+#: src/dfa.c:1120
 msgid "unbalanced ["
 msgstr "неуравнотежена ["
 
@@ -412,23 +412,23 @@ msgstr "неуравнотежена ["
 msgid "invalid character class"
 msgstr "неисправна класа знака"
 
-#: src/dfa.c:1175
+#: src/dfa.c:1153
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr "синтакса класе знака је [[:размак:]], а не [:размак:]"
 
-#: src/dfa.c:1227
+#: src/dfa.c:1205
 msgid "unfinished \\ escape"
 msgstr "недовршена \\ излазим"
 
-#: src/dfa.c:1794
+#: src/dfa.c:1770
 msgid "unbalanced ("
 msgstr "неуравнотежена ("
 
-#: src/dfa.c:1920
+#: src/dfa.c:1896
 msgid "no syntax specified"
 msgstr "синтакса није наведена"
 
-#: src/dfa.c:1928
+#: src/dfa.c:1904
 msgid "unbalanced )"
 msgstr "неуравнотежена )"
 
@@ -448,11 +448,11 @@ msgstr "ШАБЛОН је скуп сталних низова у новим р�
 msgid "Invocation as 'fgrep' is deprecated; use 'grep -F' instead.\n"
 msgstr "Позив као „fgrep“ није одобрен; користите „grep -F“ уместо тога.\n"
 
-#: src/grep.c:32
+#: src/grep.c:46
 msgid "PATTERN is, by default, a basic regular expression (BRE).\n"
 msgstr "ШАБЛОН је, по основи, основни регуларан израз (BRE).\n"
 
-#: src/grep.c:34
+#: src/grep.c:48
 msgid ""
 "'egrep' means 'grep -E'.  'fgrep' means 'grep -F'.\n"
 "Direct invocation as either 'egrep' or 'fgrep' is deprecated.\n"
@@ -461,66 +461,66 @@ msgstr ""
 "Директно призивање као „egrep“ или „fgrep“ није одобрено.\n"
 
 #. This is a proper name. See the gettext manual, section Names.
-#: src/main.c:57
+#: src/main.c:59
 msgid "Mike Haertel"
 msgstr "Мајк Хартел"
 
-#: src/main.c:58
+#: src/main.c:60
 msgid "others, see <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
 msgstr "остали, погледајте <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
 
-#: src/main.c:500
+#: src/main.c:499
 msgid "invalid context length argument"
 msgstr "неисправан аргумент дужине контекста"
 
-#: src/main.c:569
+#: src/main.c:568
 msgid "lseek failed"
 msgstr "„lseek“ није успело"
 
-#: src/main.c:707
+#: src/main.c:706
 #, c-format
 msgid "input is too large to count"
 msgstr "улаз је превелик за пребројавање"
 
-#: src/main.c:1273
+#: src/main.c:1272
 #, c-format
 msgid "Binary file %s matches\n"
 msgstr "Бинарна датотека %s одговара\n"
 
-#: src/main.c:1316
+#: src/main.c:1315
 #, c-format
 msgid "warning: %s: %s"
 msgstr "упозорење: %s: %s"
 
-#: src/main.c:1317
+#: src/main.c:1316
 msgid "recursive directory loop"
 msgstr "рекурзивно вртење кроз директоријуме"
 
-#: src/main.c:1465
+#: src/main.c:1464
 #, c-format
 msgid "input file %s is also the output"
 msgstr "улазна датотека %s је такође излаз"
 
-#: src/main.c:1523
+#: src/main.c:1522
 msgid "(standard input)"
 msgstr "(стандардни улаз)"
 
-#: src/main.c:1539 src/main.c:1546
+#: src/main.c:1538 src/main.c:1545
 #, c-format
 msgid "Usage: %s [OPTION]... PATTERN [FILE]...\n"
 msgstr "Употреба: %s [ОПЦИЈА]... ШАБЛОН [ДАТОТЕКА]...\n"
 
-#: src/main.c:1541
+#: src/main.c:1540
 #, c-format
 msgid "Try '%s --help' for more information.\n"
 msgstr "Пробајте „%s --help“ за више података.\n"
 
-#: src/main.c:1547
+#: src/main.c:1546
 #, c-format
 msgid "Search for PATTERN in each FILE or standard input.\n"
 msgstr "Тражи наведени ШАБЛОН у свакој датотеци или стандардном улазу.\n"
 
-#: src/main.c:1550
+#: src/main.c:1549
 #, c-format
 msgid ""
 "Example: %s -i 'hello world' menu.h main.c\n"
@@ -531,7 +531,7 @@ msgstr ""
 "\n"
 "Избор регуларних израза и обрада:\n"
 
-#: src/main.c:1555
+#: src/main.c:1554
 #, c-format
 msgid ""
 "  -E, --extended-regexp     PATTERN is an extended regular expression (ERE)\n"
@@ -546,7 +546,7 @@ msgstr ""
 "  -G, --basic-regexp              ШАБЛОН је основни регуларан израз\n"
 "  -P, --perl-regexp               ШАБЛОН је Перлов регуларан израз\n"
 
-#: src/main.c:1561
+#: src/main.c:1560
 #, c-format
 msgid ""
 "  -e, --regexp=PATTERN      use PATTERN for matching\n"
@@ -566,8 +566,8 @@ msgstr ""
 "  -z, --null-data                 ред података се завршава 0-бајтом, не "
 "новим редом\n"
 
-#: src/main.c:1568
-#, c-format
+#: src/main.c:1567
+#, fuzzy, c-format
 msgid ""
 "\n"
 "Miscellaneous:\n"
@@ -575,7 +575,7 @@ msgid ""
 "  -v, --invert-match        select non-matching lines\n"
 "  -V, --version             print version information and exit\n"
 "      --help                display this help and exit\n"
-"      --mmap                deprecated no-op; evokes a warning\n"
+"n"
 msgstr ""
 "\n"
 "Разно:\n"
@@ -585,7 +585,7 @@ msgstr ""
 "      --help                      приказује ову помоћ и излази\n"
 "      --mmap                      занемарено; призива упозорење\n"
 
-#: src/main.c:1576
+#: src/main.c:1574
 #, c-format
 msgid ""
 "\n"
@@ -612,7 +612,7 @@ msgstr ""
 "      --label=НАТПИС              користи НАТПИС као префикс назива датотеке "
 "стандардног улаза\n"
 
-#: src/main.c:1587
+#: src/main.c:1585
 #, c-format
 msgid ""
 "  -o, --only-matching       show only the part of a line matching PATTERN\n"
@@ -629,7 +629,7 @@ msgstr ""
 "„without-match“\n"
 "  -a, --text                      исто као и „--binary-files=text“\n"
 
-#: src/main.c:1594
+#: src/main.c:1592
 #, c-format
 msgid ""
 "  -I                        equivalent to --binary-files=without-match\n"
@@ -650,7 +650,7 @@ msgstr ""
 "  -r, --recursive                 исто као и „--directories=recurse“\n"
 "  -R, --dereference-recursive     слично, али прати све симболичке везе\n"
 
-#: src/main.c:1603
+#: src/main.c:1601
 #, c-format
 msgid ""
 "      --include=FILE_PATTERN  search only files that match FILE_PATTERN\n"
@@ -669,7 +669,7 @@ msgstr ""
 "      --exclude-dir=ШАБЛОН        директоријуми који се поклапају са "
 "ШАБЛОНОМ биће прескочени.\n"
 
-#: src/main.c:1609
+#: src/main.c:1607
 #, c-format
 msgid ""
 "  -L, --files-without-match  print only names of FILEs containing no match\n"
@@ -687,7 +687,7 @@ msgstr ""
 "  -T, --initial-tab               помера табове ред горе (ако је потребно)\n"
 "  -Z, --null                      исписује 0-ти бајт након назива ДАТОТЕКЕ\n"
 
-#: src/main.c:1615
+#: src/main.c:1613
 #, c-format
 msgid ""
 "\n"
@@ -702,7 +702,7 @@ msgstr ""
 "  -A, --after-context=БРОЈ        исписује БРОЈ редова пратећег контекста\n"
 "  -C, --context=БРОЈ              исписује БРОЈ редова излазног контекста\n"
 
-#: src/main.c:1622
+#: src/main.c:1620
 #, c-format
 msgid ""
 "  -NUM                      same as --context=NUM\n"
@@ -727,7 +727,7 @@ msgstr ""
 "били ту (МСДОС/Виндоуз)\n"
 "\n"
 
-#: src/main.c:1632
+#: src/main.c:1630
 #, c-format
 msgid ""
 "When FILE is -, read standard input.  With no FILE, read . if a command-"
@@ -742,45 +742,40 @@ msgstr ""
 "Излазно стање је 0 ако је изабран неки ред, у супротном 1;\n"
 "ако је дошло до неке грешке а „-q“ није дато, онда је излазно стање 2.\n"
 
-#: src/main.c:1638
+#: src/main.c:1636
 #, c-format
 msgid "GNU Grep home page: <%s>\n"
 msgstr "Матична страница ГНУ Грепа: <%s>\n"
 
-#: src/main.c:1670
+#: src/main.c:1669
 #, c-format
 msgid "%s can only use the %s pattern syntax"
 msgstr "%s може да користи само %s синтаксу шаблона"
 
-#: src/main.c:1673
+#: src/main.c:1672
 #, c-format
 msgid "conflicting matchers specified"
 msgstr "наведени су трагачи у сукобу"
 
-#: src/main.c:1687
+#: src/main.c:1686
 #, c-format
 msgid "invalid matcher %s"
 msgstr "неисправан трагач %s"
 
-#: src/main.c:1940
+#: src/main.c:2017
 #, c-format
 msgid "unknown devices method"
 msgstr "непознат метод уређаја"
 
-#: src/main.c:2071
+#: src/main.c:2148
 #, c-format
 msgid "invalid max count"
 msgstr "неисправан највећи број"
 
-#: src/main.c:2128
+#: src/main.c:2205
 #, c-format
 msgid "unknown binary-files type"
 msgstr "непозната врста бинарних датотека"
-
-#: src/main.c:2187
-#, c-format
-msgid "the --mmap option has been a no-op since 2010"
-msgstr "„--mmap“ опција је била без опције од 2010"
 
 #: src/pcresearch.c:51
 msgid ""
@@ -800,9 +795,9 @@ msgid "internal error (should never happen)"
 msgstr "унутрашња грешка (не треба никада да се деси)"
 
 #: src/pcresearch.c:130
-#, fuzzy, c-format
+#, c-format
 msgid "failed to allocate memory for the PCRE JIT stack"
-msgstr "Не могу да доделим меморију за ЏИТ сток"
+msgstr "нисам успео да доделим меморију за ПЦРЕ ЏИТ стек"
 
 #: src/pcresearch.c:144
 #, c-format
@@ -822,9 +817,12 @@ msgstr "прекорачено је ПЦРЕ-ово ограничење тра�
 #: src/pcresearch.c:199
 #, c-format
 msgid "invalid UTF-8 byte sequence in input"
-msgstr ""
+msgstr "неисправан низ УТФ-8 бита у улазу"
 
 #: src/pcresearch.c:206
-#, fuzzy, c-format
+#, c-format
 msgid "internal PCRE error: %d"
-msgstr "унутрашња грешка"
+msgstr "унутрашња грешка ПЦРЕ-а: %d"
+
+#~ msgid "the --mmap option has been a no-op since 2010"
+#~ msgstr "„--mmap“ опција је била без опције од 2010"

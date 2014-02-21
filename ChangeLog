@@ -1,4 +1,177 @@
+2014-02-09  Norihiro Tanaka  <noritnk@kcn.ne.jp>
+
+	speed up mb-boundary-detection after each preliminary match
+	After each kwsexec or dfaexec match, we must determine whether
+	the tentative match falls in the middle of a multi-byte character.
+	That is what our is_mb_middle function does, but it was expensive,
+	even when most input consisted of single-byte characters.  The main
+	cost was for each call to mbrlen.  This change constructs and uses
+	a cache of the lengths returned by mbrlen for unibyte values.
+	The largest speed-up (3x to 7x, CPU-dependent) is when most
+	lines contain a match, yet few are printed, e.g., when using
+	grep -v common-pattern ... to filter out all but a few lines.
+
+	* src/search.h (build_mbclen_cache): Declare it.
+	* src/main.c: Include "search.h".
+	[MBS_SUPPORT] (main): Call build_mbclen_cache in a multibyte locale.
+	* src/searchutils.c [HAVE_LANGINFO_CODESET]: Include <langinfo.h>.
+	(mbclen_cache): New global.
+	(build_mbclen_cache): New function.
+	(is_mb_middle) [HAVE_LANGINFO_CODESET]: Use it.
+	* NEWS (Improvements): Mention it.
+
+2014-02-01  Jim Meyering  <meyering@fb.com>
+
+	maint: use to_uchar function rather than explicit casts
+	* src/system.h (to_uchar): Define function.
+	* src/kwsearch.c (Fexecute): Use to_uchar twice in place of casts.
+	* src/dfasearch.c (EGexecute): Likewise.
+	* src/main.c (prepend_args): Likewise.
+	* src/kwset.c (U): Define in terms of to_uchar.
+	* src/dfa.c (match_mb_charset): Use to_uchar, not an explicit cast.
+
+2014-01-27  Jim Meyering  <meyering@fb.com>
+
+	maint: remove vestiges of support for long-disabled --mmap option
+	This option was disabled in March of 2010, and began to elicit a
+	warning in January of 2012.  Its time has come.
+	* doc/grep.in.1: Remove mention.
+	* doc/grep.texi: Likewise.
+	* src/main.c (GROUP_SEPARATOR_OPTION, usage, MMAP_OPTION)
+	(long_options, main): Remove all traces.
+	* tests/Makefile.am (check_PROGRAMS): Remove mention of ignore-mmap.
+	* tests/ignore-mmap: Remove file.
+	* NEWS (Maintenance): Mention it.
+
+2014-01-26  Jim Meyering  <meyering@fb.com>
+
+	maint: move two local variable declarations
+	* src/dfasearch.c (kwsmusts): Move one declaration down to the point
+	of definition.  Move another into the sole scope where it is used.
+
+2014-01-26  Norihiro Tanaka  <noritnk@kcn.ne.jp>
+
+	dfasearch: skip kwset optimization when multi-byte+case-insensitive
+	Now that DFA searching works with multi-byte locales, the only remaining
+	reason to case-convert the searched input is the kwset optimization.
+	But multi-byte case-conversion is so expensive that it's not
+	worthwhile even to attempt that optimization.
+
+	* src/dfasearch.c (kwsmusts): Skip this function in ignore-case mode
+	when the locale is multi-byte.
+	(EGexecute): Now that this code need not handle multi-byte case-ignoring
+	matches, remove the expensive copy/case-conversion code.
+	With no case-converted buffer, there is no longer any need to call
+	mb_case_map_apply, so remove it and associated code.
+	(kwsincr_case): Remove function.  Now, every use of this function
+	is equivalent to a use of kwsincr.  Replace all uses.
+	* tests/turkish-eyes: Test all of -E, -F and -G.
+
+2014-01-25  Norihiro Tanaka  <noritnk@kcn.ne.jp>
+
+	dfa: remove GREP-ifdef'd code in favor of code used by gawk
+	For many years, gawk and grep have used different #ifdef'd bits of
+	code relating to how the DFA matcher matches multibyte characters.
+	Remove the GREP-specific code in favor of the code gawk uses.  This
+	permits us to avoid still more cases in which grep must resort to
+	the expensive process of copying/case-converting each input line
+	before matching against a case-converted regexp.
+	* src/dfa.c (parse_bracket_exp, atom): As above.
+
+2014-01-25  Jim Meyering  <meyering@fb.com>
+
+	gnulib: update to latest
+
+2014-01-17  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: DFA now uses rational ranges in unibyte locales
+	Problem reported by Aharon Robbins in <http://bugs.gnu.org/16481>.
+	* NEWS:
+	* doc/grep.texi (Environment Variables)
+	(Character Classes and Bracket Expressions):
+	Document this.
+	* src/dfa.c (parse_bracket_exp): Treat unibyte locales like multibyte.
+
+2014-01-17  Aharon Robbins  <arnold@skeeve.com>
+
+	grep: add undocumented '-X gawk' and '-X posixawk' options
+	See <http://bugs.gnu.org/16481>.
+	* src/grep.c (GAcompile, PAcompile): New functions.
+	(const): Use them.
+
+2014-01-10  Pádraig Brady  <P@draigBrady.com>
+
+	tests: remove superfluous uses of printf
+	* tests/turkish-eyes: Remove unnecessary uses of printf.
+
+2014-01-09  Jim Meyering  <meyering@fb.com>
+
+	grep: make --ignore-case (-i) faster (sometimes 10x) in multibyte locales
+	These days, nearly everyone uses a multibyte locale, and grep is often
+	used with the --ignore-case (-i) option, but that option imposes a very
+	high cost in order to handle some unusual cases in just a few multibyte
+	locales.  This change gets most of the performance of using LC_ALL=C
+	without eliminating the ability to search for multibyte strings.
+
+	With the following example, I see an 11x speed-up with a 2.3GHz i7:
+	Generate a 10M-line file, with each line consisting of 40 'j's:
+
+	    yes jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj | head -10000000 > k
+
+	Time searching it for the simple/noexistent string "foobar",
+	first with this patch (best-of-5 trials):
+
+	    LC_ALL=en_US.UTF-8 env time src/grep -i foobar k
+	        1.10 real         1.03 user         0.07 sys
+
+	Back out that commit (temporarily), recompile, and rerun the experiment:
+
+	    git log -1 -p|patch -R -p1; make
+	    LC_ALL=en_US.UTF-8 env time src/grep -i foobar k
+	        12.50 real        12.41 user         0.08 sys
+
+	The trick is to realize that for some search strings, it is easy
+	to convert to an equivalent one that is handled much more efficiently.
+	E.g., convert this command:
+
+	  grep -i foobar k
+
+	to this:
+
+	  grep '[fF][oO][oO][bB][aA][rR]' k
+
+	That allows the matcher to search in buffer mode, rather than having to
+	extract/case-convert/search each line separately.  Currently, we perform
+	this conversion only when search strings contain neither '\' nor '['.
+	See the comments for more detail.
+
+	* src/main.c (trivial_case_ignore): New function.
+	(main): When possible, transform the regexp so we can drop the -i.
+	* tests/turkish-eyes: New file.
+	* tests/Makefile.am (TESTS): Use it.
+	* NEWS (Improvements): Mention it.
+
+2014-01-07  Paul Eggert  <eggert@cs.ucla.edu>
+
+	tests: port Solaris 10 /bin/sh patch back to GNU/Linux
+	Problem reported by Jim Meyering.
+	* tests/bre, tests/ere, tests/spencer1-locale:
+	Prefer re_shell, not re_shell_.
+	* tests/init.sh (re_shell): New var, which is exported instead of
+	re_shell_.
+
+	Port to Solaris 10 /bin/sh.
+	Problem reported by Dagobert Michelsen in <http://bugs.gnu.org/16380>.
+	* tests/bre, tests/ere, tests/spencer1-locale:
+	Prefer re_shell_ to SHELL, if re_shell_ is set.
+	* tests/init.sh (re_shell_): Export if it's used.
+
 2014-01-01  Jim Meyering  <meyering@fb.com>
+
+	maint: post-release administrivia
+	* NEWS: Add header line for next release.
+	* .prev-version: Record previous version.
+	* cfg.mk (old_NEWS_hash): Auto-update.
 
 	version 2.16
 	* NEWS: Record release date.

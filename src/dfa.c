@@ -1094,7 +1094,6 @@ parse_bracket_exp (void)
               work_mbc->range_ends[work_mbc->nranges++] =
                 case_fold ? towlower (wc2) : (wchar_t) wc2;
 
-#ifndef GREP
               if (case_fold && (iswalpha (wc) || iswalpha (wc2)))
                 {
                   REALLOC_IF_NECESSARY (work_mbc->range_sts,
@@ -1104,34 +1103,17 @@ parse_bracket_exp (void)
                                         range_ends_al, work_mbc->nranges + 1);
                   work_mbc->range_ends[work_mbc->nranges++] = towupper (wc2);
                 }
-#endif
             }
           else
             {
-              /* Defer to the system regex library about the meaning
-                 of range expressions.  */
-              regex_t re;
-              char pattern[6] = { '[', 0, '-', 0, ']', 0 };
-              char subject[2] = { 0, 0 };
               c1 = c;
               if (case_fold)
                 {
                   c1 = tolower (c1);
                   c2 = tolower (c2);
                 }
-
-              pattern[1] = c1;
-              pattern[3] = c2;
-              regcomp (&re, pattern, REG_NOSUB);
-              for (c = 0; c < NOTCHAR; ++c)
-                {
-                  if ((case_fold && isupper (c)))
-                    continue;
-                  subject[0] = c;
-                  if (regexec (&re, subject, 0, NULL, 0) != REG_NOMATCH)
-                    setbit_case_fold_c (c, ccl);
-                }
-              regfree (&re);
+              for (c = c1; c <= c2; c++)
+                setbit_case_fold_c (c, ccl);
             }
 
           colon_warning_state |= 8;
@@ -1156,11 +1138,7 @@ parse_bracket_exp (void)
                                     work_mbc->nchars + 1);
               work_mbc->chars[work_mbc->nchars++] = wc;
             }
-#ifdef GREP
-          continue;
-#else
           wc = towupper (wc);
-#endif
         }
       if (!setbit_wc (wc, ccl))
         {
@@ -1754,13 +1732,11 @@ atom (void)
   else if (MBS_SUPPORT && tok == WCHAR)
     {
       addtok_wc (case_fold ? towlower (wctok) : wctok);
-#ifndef GREP
       if (case_fold && iswalpha (wctok))
         {
           addtok_wc (towupper (wctok));
           addtok (OR);
         }
-#endif
 
       tok = lex ();
     }
@@ -3027,7 +3003,7 @@ match_mb_charset (struct dfa *d, state_num s, position pos, size_t idx)
 
   /* Match in range 0-255?  */
   if (wc < NOTCHAR && work_mbc->cset != -1
-      && tstbit ((unsigned char) wc, d->charclasses[work_mbc->cset]))
+      && tstbit (to_uchar (wc), d->charclasses[work_mbc->cset]))
     goto charset_matched;
 
   /* match with a character class?  */

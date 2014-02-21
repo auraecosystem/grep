@@ -65,7 +65,6 @@ TESTS =						\
   grep-dev-null					\
   grep-dir					\
   help-version					\
-  ignore-mmap					\
   in-eq-out-infloop				\
   include-exclude				\
   inconsistent-range				\
@@ -94,6 +93,7 @@ TESTS =						\
   status					\
   surrogate-pair				\
   symlink					\
+  turkish-eyes					\
   turkish-I					\
   turkish-I-without-dot				\
   warn-char-classes				\

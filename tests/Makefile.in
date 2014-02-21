@@ -1362,7 +1362,6 @@ TESTS = \
   grep-dev-null					\
   grep-dir					\
   help-version					\
-  ignore-mmap					\
   in-eq-out-infloop				\
   include-exclude				\
   inconsistent-range				\
@@ -1391,6 +1390,7 @@ TESTS = \
   status					\
   surrogate-pair				\
   symlink					\
+  turkish-eyes					\
   turkish-I					\
   turkish-I-without-dot				\
   warn-char-classes				\
@@ -1945,13 +1945,6 @@ help-version.log: help-version
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
 	"$$tst" $(AM_TESTS_FD_REDIRECT)
-ignore-mmap.log: ignore-mmap
-	@p='ignore-mmap'; \
-	b='ignore-mmap'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
 in-eq-out-infloop.log: in-eq-out-infloop
 	@p='in-eq-out-infloop'; \
 	b='in-eq-out-infloop'; \
@@ -2144,6 +2137,13 @@ surrogate-pair.log: surrogate-pair
 symlink.log: symlink
 	@p='symlink'; \
 	b='symlink'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+turkish-eyes.log: turkish-eyes
+	@p='turkish-eyes'; \
+	b='turkish-eyes'; \
 	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
