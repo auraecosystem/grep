@@ -2,7 +2,7 @@ http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=446854
 
 --- a/doc/grep.in.1
 +++ b/doc/grep.in.1
-@@ -1170,23 +1170,9 @@
+@@ -1153,23 +1153,9 @@
  is not set.
  .
  .SH "EXIT STATUS"
