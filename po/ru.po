@@ -4,13 +4,13 @@
 # This file is distributed under the same license as the grep package.
 #
 # Denis Perchine <dyp@perchine.com>, 1998-2000.
-# Yuri Kozlov <yuray@komyakino.ru>, 2009, 2010, 2011, 2012, 2013.
+# Yuri Kozlov <yuray@komyakino.ru>, 2009, 2010, 2011, 2012, 2013, 2014.
 msgid ""
 msgstr ""
-"Project-Id-Version: grep 2.15.15\n"
+"Project-Id-Version: grep 2.16.14\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2014-02-09 21:26-0800\n"
-"PO-Revision-Date: 2013-12-29 12:58+0400\n"
+"POT-Creation-Date: 2014-02-17 17:58-0800\n"
+"PO-Revision-Date: 2014-02-16 09:03+0400\n"
 "Last-Translator: Yuri Kozlov <yuray@komyakino.ru>\n"
 "Language-Team: Russian <gnu@mx.ru>\n"
 "Language: ru\n"
@@ -184,7 +184,7 @@ msgstr "Непарная ( или \\("
 msgid "Unmatched \\{"
 msgstr "Непарная \\{"
 
-#: lib/regcomp.c:161 src/dfa.c:1352
+#: lib/regcomp.c:161 src/dfa.c:1368
 msgid "Invalid content of \\{\\}"
 msgstr "Неправильное содержимое в \\{\\}"
 
@@ -204,7 +204,7 @@ msgstr "Неправильное предшествующее регулярно
 msgid "Premature end of regular expression"
 msgstr "Преждевременное завершение регулярного выражения"
 
-#: lib/regcomp.c:176 src/dfa.c:1355
+#: lib/regcomp.c:176 src/dfa.c:1371
 msgid "Regular expression too big"
 msgstr "Регулярное выражение слишком большое"
 
@@ -407,7 +407,7 @@ msgstr "аргумент %s%s слишком велик для «%s»"
 
 #: src/dfa.c:956 src/dfa.c:959 src/dfa.c:979 src/dfa.c:989 src/dfa.c:1001
 #: src/dfa.c:1052 src/dfa.c:1061 src/dfa.c:1064 src/dfa.c:1069 src/dfa.c:1082
-#: src/dfa.c:1120
+#: src/dfa.c:1136
 msgid "unbalanced ["
 msgstr "несбалансированная ["
 
@@ -415,23 +415,23 @@ msgstr "несбалансированная ["
 msgid "invalid character class"
 msgstr "неправильный класс символов"
 
-#: src/dfa.c:1153
+#: src/dfa.c:1169
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr "синтаксис класса символов: [[:space:]], а не [:space:]"
 
-#: src/dfa.c:1205
+#: src/dfa.c:1221
 msgid "unfinished \\ escape"
 msgstr "незавершённая \\ экранирующая последовательность"
 
-#: src/dfa.c:1770
+#: src/dfa.c:1786
 msgid "unbalanced ("
 msgstr "несбалансированная ("
 
-#: src/dfa.c:1896
+#: src/dfa.c:1912
 msgid "no syntax specified"
 msgstr "не указан синтаксис"
 
-#: src/dfa.c:1904
+#: src/dfa.c:1920
 msgid "unbalanced )"
 msgstr "несбалансированная )"
 
@@ -582,19 +582,16 @@ msgid ""
 "Miscellaneous:\n"
 "  -s, --no-messages         suppress error messages\n"
 "  -v, --invert-match        select non-matching lines\n"
-"  -V, --version             print version information and exit\n"
-"      --help                display this help and exit\n"
-"n"
+"  -V, --version             display version information and exit\n"
+"      --help                display this help text and exit\n"
 msgstr ""
 "\n"
 "Разное:\n"
-"  -s, --no-messages         подавлять сообщения об ошибках\n"
+"  -s, --no-messages         не показывать сообщения об ошибках\n"
 "  -v, --invert-match        выбирать не подходящие строки\n"
-"  -V, --version             напечатать информацию о версии и закончить "
-"работу\n"
+"  -V, --version             показать информацию о версии и закончить работу\n"
 "      --help                показать эту справку и закончить работу\n"
-"      --mmap                устарел, ничего не делается; показ "
-"предупреждения\n"
+"n"
 
 #: src/main.c:1574
 #, c-format
