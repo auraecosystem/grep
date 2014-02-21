@@ -1,15 +1,15 @@
 # Finnish translation for GNU grep.
-# Copyright © 2002, 2007, 2008, 2009, 2010, 2011, 2012, 2013 Free Software Foundation, Inc.
+# Copyright © 2002, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014 Free Software Foundation, Inc.
 # This file is distributed under the same license as the grep package.
 # Sami J. Laine <sami.laine@iki.fi>, 2002.
-# Jorma Karvonen <karvonen.jorma@gmail.com>, 2007-2013.
+# Jorma Karvonen <karvonen.jorma@gmail.com>, 2007-2014.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: grep 2.15.15\n"
+"Project-Id-Version: grep 2.16.14\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2014-02-09 21:26-0800\n"
-"PO-Revision-Date: 2013-12-26 11:57+0200\n"
+"POT-Creation-Date: 2014-02-17 17:58-0800\n"
+"PO-Revision-Date: 2014-02-14 10:37+0200\n"
 "Last-Translator: Jorma Karvonen <karvonen.jorma@gmail.com>\n"
 "Language-Team: Finnish <translation-team-fi@lists.sourceforge.net>\n"
 "Language: fi\n"
@@ -182,7 +182,7 @@ msgstr "Pariton ( tai \\("
 msgid "Unmatched \\{"
 msgstr "Pariton \\{"
 
-#: lib/regcomp.c:161 src/dfa.c:1352
+#: lib/regcomp.c:161 src/dfa.c:1368
 msgid "Invalid content of \\{\\}"
 msgstr "Virheellinen kohteen \\{\\} sisältö"
 
@@ -202,7 +202,7 @@ msgstr "Virheellinen edeltävä säännöllinen lauseke"
 msgid "Premature end of regular expression"
 msgstr "Ennenaikainen säännöllisen lausekkeen loppu"
 
-#: lib/regcomp.c:176 src/dfa.c:1355
+#: lib/regcomp.c:176 src/dfa.c:1371
 msgid "Regular expression too big"
 msgstr "Säännöllinen lauseke on liian suuri"
 
@@ -412,7 +412,7 @@ msgstr "valitsimen %s%s argumentti ’%s’ on liian iso"
 
 #: src/dfa.c:956 src/dfa.c:959 src/dfa.c:979 src/dfa.c:989 src/dfa.c:1001
 #: src/dfa.c:1052 src/dfa.c:1061 src/dfa.c:1064 src/dfa.c:1069 src/dfa.c:1082
-#: src/dfa.c:1120
+#: src/dfa.c:1136
 msgid "unbalanced ["
 msgstr "pariton ["
 
@@ -420,23 +420,23 @@ msgstr "pariton ["
 msgid "invalid character class"
 msgstr "virheellinen merkkiluokkanimi"
 
-#: src/dfa.c:1153
+#: src/dfa.c:1169
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr "merkkiluokkasyntaksi on [[:välilyönti:]], ei [:välilyönti:]"
 
-#: src/dfa.c:1205
+#: src/dfa.c:1221
 msgid "unfinished \\ escape"
 msgstr "päättymätön \\-ohjausmerkki"
 
-#: src/dfa.c:1770
+#: src/dfa.c:1786
 msgid "unbalanced ("
 msgstr "pariton ("
 
-#: src/dfa.c:1896
+#: src/dfa.c:1912
 msgid "no syntax specified"
 msgstr "syntaksia ei ole määritelty"
 
-#: src/dfa.c:1904
+#: src/dfa.c:1920
 msgid "unbalanced )"
 msgstr "pariton )"
 
@@ -586,9 +586,8 @@ msgid ""
 "Miscellaneous:\n"
 "  -s, --no-messages         suppress error messages\n"
 "  -v, --invert-match        select non-matching lines\n"
-"  -V, --version             print version information and exit\n"
-"      --help                display this help and exit\n"
-"n"
+"  -V, --version             display version information and exit\n"
+"      --help                display this help text and exit\n"
 msgstr ""
 "\n"
 "Sekalaista:\n"
@@ -596,8 +595,7 @@ msgstr ""
 "  -v, --invert-match        valitse hakuun täsmäämättömät rivit\n"
 "  -V, --version             tulosta versiotiedot ja poistu\n"
 "      --help                tulosta tämä ohje ja poistu\n"
-"      --mmap                vanhentunut ei-toiminnallisuus; kutsuu esiin "
-"varoituksen\n"
+"n"
 
 #: src/main.c:1574
 #, c-format
@@ -971,3 +969,20 @@ msgstr "sisäinen PCRE-virhe: %d"
 #~ msgid "Direct invocation as either `egrep' or `fgrep' is deprecated.\n"
 #~ msgstr ""
 #~ "Suora kutsuminen joko komennolla ”egrep” tai ”fgrep” on vanhentunut.\n"
+
+#~ msgid ""
+#~ "\n"
+#~ "Miscellaneous:\n"
+#~ "  -s, --no-messages         suppress error messages\n"
+#~ "  -v, --invert-match        select non-matching lines\n"
+#~ "  -V, --version             print version information and exit\n"
+#~ "      --help                display this help and exit\n"
+#~ "\n"
+#~ msgstr ""
+#~ "\n"
+#~ "Sekalaista:\n"
+#~ "  -s, --no-messages         vaienna virheilmoitukset\n"
+#~ "  -v, --invert-match        valitse hakuun täsmäämättömät rivit\n"
+#~ "  -V, --version             tulosta versiotiedot ja poistu\n"
+#~ "      --help                tulosta tämä ohje ja poistu\n"
+#~ "\n"

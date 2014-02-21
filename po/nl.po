@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grep-2.15.15\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2014-02-09 21:26-0800\n"
+"POT-Creation-Date: 2014-02-17 17:58-0800\n"
 "PO-Revision-Date: 2013-12-22 10:53+0100\n"
 "Last-Translator: Benno Schulenberg <benno@vertaalt.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -188,7 +188,7 @@ msgstr "Ongepaarde ( of \\("
 msgid "Unmatched \\{"
 msgstr "Ongepaarde \\{"
 
-#: lib/regcomp.c:161 src/dfa.c:1352
+#: lib/regcomp.c:161 src/dfa.c:1368
 msgid "Invalid content of \\{\\}"
 msgstr "Ongeldige inhoud van \\{\\}"
 
@@ -208,7 +208,7 @@ msgstr "Ongeldige voorafgaande reguliere expressie"
 msgid "Premature end of regular expression"
 msgstr "Voortijdig einde van reguliere expressie"
 
-#: lib/regcomp.c:176 src/dfa.c:1355
+#: lib/regcomp.c:176 src/dfa.c:1371
 msgid "Regular expression too big"
 msgstr "Reguliere expressie is te groot"
 
@@ -415,7 +415,7 @@ msgstr "argument '%3$s' van %1$s%2$s is te groot"
 
 #: src/dfa.c:956 src/dfa.c:959 src/dfa.c:979 src/dfa.c:989 src/dfa.c:1001
 #: src/dfa.c:1052 src/dfa.c:1061 src/dfa.c:1064 src/dfa.c:1069 src/dfa.c:1082
-#: src/dfa.c:1120
+#: src/dfa.c:1136
 msgid "unbalanced ["
 msgstr "ongepaarde ["
 
@@ -423,23 +423,23 @@ msgstr "ongepaarde ["
 msgid "invalid character class"
 msgstr "ongeldige tekenklasse"
 
-#: src/dfa.c:1153
+#: src/dfa.c:1169
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr "syntax van tekenklasse is [[:space:]], niet [:space:]"
 
-#: src/dfa.c:1205
+#: src/dfa.c:1221
 msgid "unfinished \\ escape"
 msgstr "onafgemaakte \\-stuurcode"
 
-#: src/dfa.c:1770
+#: src/dfa.c:1786
 msgid "unbalanced ("
 msgstr "ongepaarde ("
 
-#: src/dfa.c:1896
+#: src/dfa.c:1912
 msgid "no syntax specified"
 msgstr "geen syntax opgegeven"
 
-#: src/dfa.c:1904
+#: src/dfa.c:1920
 msgid "unbalanced )"
 msgstr "ongepaarde )"
 
@@ -587,9 +587,8 @@ msgid ""
 "Miscellaneous:\n"
 "  -s, --no-messages         suppress error messages\n"
 "  -v, --invert-match        select non-matching lines\n"
-"  -V, --version             print version information and exit\n"
-"      --help                display this help and exit\n"
-"n"
+"  -V, --version             display version information and exit\n"
+"      --help                display this help text and exit\n"
 msgstr ""
 "\n"
 "Diversen:\n"

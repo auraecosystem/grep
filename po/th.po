@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grep-2.15.15\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2014-02-09 21:26-0800\n"
+"POT-Creation-Date: 2014-02-17 17:58-0800\n"
 "PO-Revision-Date: 2013-12-24 01:26+0700\n"
 "Last-Translator: Seksan Poltree <seksan.poltree@gmail.com>\n"
 "Language-Team: Thai <translation-team-th@lists.sourceforge.net>\n"
@@ -180,7 +180,7 @@ msgstr "ไม่ตรงกันกับ ( หรือ \\("
 msgid "Unmatched \\{"
 msgstr "ไม่ตรงกันกับ \\{"
 
-#: lib/regcomp.c:161 src/dfa.c:1352
+#: lib/regcomp.c:161 src/dfa.c:1368
 msgid "Invalid content of \\{\\}"
 msgstr "เนื้อหาของ \\{\\} ไม่ถูกต้อง"
 
@@ -200,7 +200,7 @@ msgstr "นิพจน์ปกติก่อนหน้าไม่ถูก
 msgid "Premature end of regular expression"
 msgstr "นิพจน์ปกติจบโดยยังไม่สมบูรณ์"
 
-#: lib/regcomp.c:176 src/dfa.c:1355
+#: lib/regcomp.c:176 src/dfa.c:1371
 msgid "Regular expression too big"
 msgstr "นิพจน์ปกติใหญ่เกินไป"
 
@@ -402,7 +402,7 @@ msgstr "%s%s อาร์กิวเมนต์ '%s' ใหญ่มากเ�
 
 #: src/dfa.c:956 src/dfa.c:959 src/dfa.c:979 src/dfa.c:989 src/dfa.c:1001
 #: src/dfa.c:1052 src/dfa.c:1061 src/dfa.c:1064 src/dfa.c:1069 src/dfa.c:1082
-#: src/dfa.c:1120
+#: src/dfa.c:1136
 msgid "unbalanced ["
 msgstr " [ ไม่สมดุลกัน"
 
@@ -410,23 +410,23 @@ msgstr " [ ไม่สมดุลกัน"
 msgid "invalid character class"
 msgstr "ชื่อกลุ่มชุดอักขระไม่ถูกต้อง"
 
-#: src/dfa.c:1153
+#: src/dfa.c:1169
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr "character class syntax is [[:space:]], not [:space:]"
 
-#: src/dfa.c:1205
+#: src/dfa.c:1221
 msgid "unfinished \\ escape"
 msgstr "เครื่องหมายหลีก \\ ไม่เสร็จสิ้น"
 
-#: src/dfa.c:1770
+#: src/dfa.c:1786
 msgid "unbalanced ("
 msgstr "( ไม่สมดุลกัน"
 
-#: src/dfa.c:1896
+#: src/dfa.c:1912
 msgid "no syntax specified"
 msgstr "ไม่ระบุวากยสัมพันธ์"
 
-#: src/dfa.c:1904
+#: src/dfa.c:1920
 msgid "unbalanced )"
 msgstr ") ไม่สมดุลกัน"
 
@@ -567,9 +567,8 @@ msgid ""
 "Miscellaneous:\n"
 "  -s, --no-messages         suppress error messages\n"
 "  -v, --invert-match        select non-matching lines\n"
-"  -V, --version             print version information and exit\n"
-"      --help                display this help and exit\n"
-"n"
+"  -V, --version             display version information and exit\n"
+"      --help                display this help text and exit\n"
 msgstr ""
 "\n"
 "เบ็ดเตล็ด:\n"

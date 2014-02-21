@@ -1,24 +1,24 @@
 # Italian translation of grep
-# Copyright (C) 2008, 2009, 2010, 2011, 2012, 2013 Free Software Foundation, Inc.
+# Copyright (C) 2008, 2009, 2010, 2011, 2012, 2013, 2014 Free Software Foundation, Inc.
 # This file is distributed under the same license as the grep package.
 #
 # Marco d'Itri <md@linux.it>, 1999, 2001.
-# Milo Casagrande <milo@milo.name>, 2008, 2009, 2010, 2011, 2012, 2013.
+# Milo Casagrande <milo@milo.name>, 2008, 2009, 2010, 2011, 2012, 2013, 2014.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: grep-2.15.15\n"
+"Project-Id-Version: grep-2.16.14\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2014-02-09 21:26-0800\n"
-"PO-Revision-Date: 2013-12-23 14:23+0100\n"
+"POT-Creation-Date: 2014-02-17 17:58-0800\n"
+"PO-Revision-Date: 2014-02-10 18:56+0100\n"
 "Last-Translator: Milo Casagrande <milo@milo.name>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8-bit\n"
+"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
-"X-Generator: Gtranslator 2.91.6\n"
+"X-Generator: Poedit 1.6.4\n"
 
 #: lib/argmatch.c:133
 #, c-format
@@ -184,7 +184,7 @@ msgstr "( o \\( senza corrispondenza"
 msgid "Unmatched \\{"
 msgstr "\\{ senza corrispondenza"
 
-#: lib/regcomp.c:161 src/dfa.c:1352
+#: lib/regcomp.c:161 src/dfa.c:1368
 msgid "Invalid content of \\{\\}"
 msgstr "Contenuto di \\{\\} non valido"
 
@@ -204,7 +204,7 @@ msgstr "Espressione regolare precedente non valida"
 msgid "Premature end of regular expression"
 msgstr "Fine prematura dell'espressione regolare"
 
-#: lib/regcomp.c:176 src/dfa.c:1355
+#: lib/regcomp.c:176 src/dfa.c:1371
 msgid "Regular expression too big"
 msgstr "Espressione regolare troppo grande"
 
@@ -409,7 +409,7 @@ msgstr "l'argomento \"%3$s\" di %1$s%2$s è troppo grande"
 
 #: src/dfa.c:956 src/dfa.c:959 src/dfa.c:979 src/dfa.c:989 src/dfa.c:1001
 #: src/dfa.c:1052 src/dfa.c:1061 src/dfa.c:1064 src/dfa.c:1069 src/dfa.c:1082
-#: src/dfa.c:1120
+#: src/dfa.c:1136
 msgid "unbalanced ["
 msgstr "[ non bilanciata"
 
@@ -417,23 +417,23 @@ msgstr "[ non bilanciata"
 msgid "invalid character class"
 msgstr "Classe del carattere non valido"
 
-#: src/dfa.c:1153
+#: src/dfa.c:1169
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr "La sintassi per la classe di caratteri è [[:space:]], non [:space:]"
 
-#: src/dfa.c:1205
+#: src/dfa.c:1221
 msgid "unfinished \\ escape"
 msgstr "Escape \\ incompleto"
 
-#: src/dfa.c:1770
+#: src/dfa.c:1786
 msgid "unbalanced ("
 msgstr "( non bilanciata"
 
-#: src/dfa.c:1896
+#: src/dfa.c:1912
 msgid "no syntax specified"
 msgstr "Nessuna sintassi specificata"
 
-#: src/dfa.c:1904
+#: src/dfa.c:1920
 msgid "unbalanced )"
 msgstr ") non bilanciata"
 
@@ -505,7 +505,7 @@ msgstr "ciclo ricorsivo di directory"
 #: src/main.c:1464
 #, c-format
 msgid "input file %s is also the output"
-msgstr "il file di input %s è anche l'output"
+msgstr "il file di input %s è anche l'output"
 
 #: src/main.c:1522
 msgid "(standard input)"
@@ -580,9 +580,8 @@ msgid ""
 "Miscellaneous:\n"
 "  -s, --no-messages         suppress error messages\n"
 "  -v, --invert-match        select non-matching lines\n"
-"  -V, --version             print version information and exit\n"
-"      --help                display this help and exit\n"
-"n"
+"  -V, --version             display version information and exit\n"
+"      --help                display this help text and exit\n"
 msgstr ""
 "\n"
 "Varie:\n"
@@ -590,7 +589,7 @@ msgstr ""
 "  -v, --invert-match        Seleziona le righe che non corrispondono\n"
 "  -V, --version             Stampa la versione ed esce\n"
 "      --help                Visualizza questo aiuto ed esce\n"
-"      --mmap                Deprecata, stampa un avviso\n"
+"n"
 
 #: src/main.c:1574
 #, c-format

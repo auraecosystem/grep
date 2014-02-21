@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GNU grep 2.14.46\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2014-02-09 21:26-0800\n"
+"POT-Creation-Date: 2014-02-17 17:58-0800\n"
 "PO-Revision-Date: 2013-10-21 14:01+0200\n"
 "Last-Translator: Philipp Thomas <pth@suse.de>\n"
 "Language-Team: German <translation-team-de@lists.sourceforge.net>\n"
@@ -179,7 +179,7 @@ msgstr "Kein Gegenstück für ( oder \\("
 msgid "Unmatched \\{"
 msgstr "Kein Gegenstück für \\{"
 
-#: lib/regcomp.c:161 src/dfa.c:1352
+#: lib/regcomp.c:161 src/dfa.c:1368
 msgid "Invalid content of \\{\\}"
 msgstr "Ungültiger Inhalt von \\{\\}"
 
@@ -199,7 +199,7 @@ msgstr "Ungültiger vorhergehender regulärer Ausdruck"
 msgid "Premature end of regular expression"
 msgstr "Vorzeitiges Ende des regulären Ausdrucks"
 
-#: lib/regcomp.c:176 src/dfa.c:1355
+#: lib/regcomp.c:176 src/dfa.c:1371
 msgid "Regular expression too big"
 msgstr "Der reguläre Ausdruck ist zu groß"
 
@@ -407,7 +407,7 @@ msgstr "%s%s Argument „%s“ ist zu groß"
 # or for ] without [ as well?
 #: src/dfa.c:956 src/dfa.c:959 src/dfa.c:979 src/dfa.c:989 src/dfa.c:1001
 #: src/dfa.c:1052 src/dfa.c:1061 src/dfa.c:1064 src/dfa.c:1069 src/dfa.c:1082
-#: src/dfa.c:1120
+#: src/dfa.c:1136
 msgid "unbalanced ["
 msgstr "[ ohne schließendes Gegenstück."
 
@@ -415,23 +415,23 @@ msgstr "[ ohne schließendes Gegenstück."
 msgid "invalid character class"
 msgstr "Ungültige Zeichenklasse %s"
 
-#: src/dfa.c:1153
+#: src/dfa.c:1169
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr "die Syntax für Zeichenklassen ist [[:space:]], nicht [:space:]"
 
-#: src/dfa.c:1205
+#: src/dfa.c:1221
 msgid "unfinished \\ escape"
 msgstr "unbeendete \\-Escape-Sequenz."
 
-#: src/dfa.c:1770
+#: src/dfa.c:1786
 msgid "unbalanced ("
 msgstr "( ohne schließendes Gegenstück."
 
-#: src/dfa.c:1896
+#: src/dfa.c:1912
 msgid "no syntax specified"
 msgstr "es wurde keine Syntax angegeben"
 
-#: src/dfa.c:1904
+#: src/dfa.c:1920
 msgid "unbalanced )"
 msgstr "Schließende ) ohne öffnendes Gegenstück"
 
@@ -579,9 +579,8 @@ msgid ""
 "Miscellaneous:\n"
 "  -s, --no-messages         suppress error messages\n"
 "  -v, --invert-match        select non-matching lines\n"
-"  -V, --version             print version information and exit\n"
-"      --help                display this help and exit\n"
-"n"
+"  -V, --version             display version information and exit\n"
+"      --help                display this help text and exit\n"
 msgstr ""
 "\n"
 "Verschiedenes:\n"

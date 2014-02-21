@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grep-2.15.15\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2014-02-09 21:26-0800\n"
+"POT-Creation-Date: 2014-02-17 17:58-0800\n"
 "PO-Revision-Date: 2014-01-13 17:34+0200\n"
 "Last-Translator: Мирослав Николић <miroslavnikolic@rocketmail.com>\n"
 "Language-Team: Serbian <(nothing)>\n"
@@ -181,7 +181,7 @@ msgstr "Не одговара ( или \\("
 msgid "Unmatched \\{"
 msgstr "Не одговара \\{"
 
-#: lib/regcomp.c:161 src/dfa.c:1352
+#: lib/regcomp.c:161 src/dfa.c:1368
 msgid "Invalid content of \\{\\}"
 msgstr "Неисправан садржај \\{\\}"
 
@@ -202,7 +202,7 @@ msgstr "Неисправан регуларан израз који претхо
 msgid "Premature end of regular expression"
 msgstr "Прерани крај регуларног израза"
 
-#: lib/regcomp.c:176 src/dfa.c:1355
+#: lib/regcomp.c:176 src/dfa.c:1371
 msgid "Regular expression too big"
 msgstr "Регуларни израз је превелик"
 
@@ -404,7 +404,7 @@ msgstr "%s%s аргумент „%s“ је превелик"
 
 #: src/dfa.c:956 src/dfa.c:959 src/dfa.c:979 src/dfa.c:989 src/dfa.c:1001
 #: src/dfa.c:1052 src/dfa.c:1061 src/dfa.c:1064 src/dfa.c:1069 src/dfa.c:1082
-#: src/dfa.c:1120
+#: src/dfa.c:1136
 msgid "unbalanced ["
 msgstr "неуравнотежена ["
 
@@ -412,23 +412,23 @@ msgstr "неуравнотежена ["
 msgid "invalid character class"
 msgstr "неисправна класа знака"
 
-#: src/dfa.c:1153
+#: src/dfa.c:1169
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr "синтакса класе знака је [[:размак:]], а не [:размак:]"
 
-#: src/dfa.c:1205
+#: src/dfa.c:1221
 msgid "unfinished \\ escape"
 msgstr "недовршена \\ излазим"
 
-#: src/dfa.c:1770
+#: src/dfa.c:1786
 msgid "unbalanced ("
 msgstr "неуравнотежена ("
 
-#: src/dfa.c:1896
+#: src/dfa.c:1912
 msgid "no syntax specified"
 msgstr "синтакса није наведена"
 
-#: src/dfa.c:1904
+#: src/dfa.c:1920
 msgid "unbalanced )"
 msgstr "неуравнотежена )"
 
@@ -573,9 +573,8 @@ msgid ""
 "Miscellaneous:\n"
 "  -s, --no-messages         suppress error messages\n"
 "  -v, --invert-match        select non-matching lines\n"
-"  -V, --version             print version information and exit\n"
-"      --help                display this help and exit\n"
-"n"
+"  -V, --version             display version information and exit\n"
+"      --help                display this help text and exit\n"
 msgstr ""
 "\n"
 "Разно:\n"

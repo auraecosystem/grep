@@ -4,13 +4,13 @@
 #
 # Volodymyr M. Lisivka <lvm@mystery.lviv.net>, 2001-2002.
 # Dmytro O. Redchuk <dor@kiev-online.net>, 2002.
-# Yuri Chornoivan <yurchor@ukr.net>, 2011, 2012, 2013.
+# Yuri Chornoivan <yurchor@ukr.net>, 2011, 2012, 2013, 2014.
 msgid ""
 msgstr ""
-"Project-Id-Version: grep-2.15.15\n"
+"Project-Id-Version: grep-2.16.14\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2014-02-09 21:26-0800\n"
-"PO-Revision-Date: 2013-12-22 15:54+0200\n"
+"POT-Creation-Date: 2014-02-17 17:58-0800\n"
+"PO-Revision-Date: 2014-02-10 13:17+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <translation-team-uk@lists.sourceforge.net>\n"
 "Language: uk\n"
@@ -183,7 +183,7 @@ msgstr "Неврівноважена послідовність ( або \\("
 msgid "Unmatched \\{"
 msgstr "Неврівноважена послідовність \\{"
 
-#: lib/regcomp.c:161 src/dfa.c:1352
+#: lib/regcomp.c:161 src/dfa.c:1368
 msgid "Invalid content of \\{\\}"
 msgstr "Некоректний вміст \\{\\}"
 
@@ -203,7 +203,7 @@ msgstr "Помилка у попередньому формальному вир
 msgid "Premature end of regular expression"
 msgstr "Неочікуване завершення формального виразу"
 
-#: lib/regcomp.c:176 src/dfa.c:1355
+#: lib/regcomp.c:176 src/dfa.c:1371
 msgid "Regular expression too big"
 msgstr "Занадто об'ємний формальний вираз"
 
@@ -408,7 +408,7 @@ msgstr "%s%s, аргумент «%s» є занадто об'ємним"
 
 #: src/dfa.c:956 src/dfa.c:959 src/dfa.c:979 src/dfa.c:989 src/dfa.c:1001
 #: src/dfa.c:1052 src/dfa.c:1061 src/dfa.c:1064 src/dfa.c:1069 src/dfa.c:1082
-#: src/dfa.c:1120
+#: src/dfa.c:1136
 msgid "unbalanced ["
 msgstr "неврівноважена дужка ["
 
@@ -416,25 +416,25 @@ msgstr "неврівноважена дужка ["
 msgid "invalid character class"
 msgstr "некоректний клас символів"
 
-#: src/dfa.c:1153
+#: src/dfa.c:1169
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr ""
 "синтаксичну конструкцію класу символів слід визначати так: [[:space:]], а не "
 "так: [:space:]"
 
-#: src/dfa.c:1205
+#: src/dfa.c:1221
 msgid "unfinished \\ escape"
 msgstr "незавершена \\-послідовність"
 
-#: src/dfa.c:1770
+#: src/dfa.c:1786
 msgid "unbalanced ("
 msgstr "неврівноважена дужка ("
 
-#: src/dfa.c:1896
+#: src/dfa.c:1912
 msgid "no syntax specified"
 msgstr "не вказано синтаксис"
 
-#: src/dfa.c:1904
+#: src/dfa.c:1920
 msgid "unbalanced )"
 msgstr "неврівноважена дужка )"
 
@@ -586,9 +586,8 @@ msgid ""
 "Miscellaneous:\n"
 "  -s, --no-messages         suppress error messages\n"
 "  -v, --invert-match        select non-matching lines\n"
-"  -V, --version             print version information and exit\n"
-"      --help                display this help and exit\n"
-"n"
+"  -V, --version             display version information and exit\n"
+"      --help                display this help text and exit\n"
 msgstr ""
 "\n"
 "Інше:\n"
@@ -596,9 +595,7 @@ msgstr ""
 "  -v, --invert-match        вибирати рядки без збіжностей\n"
 "  -V, --version             показати дані щодо версії і завершити роботу\n"
 "      --help                показати ці довідкові дані і завершити роботу\n"
-"      --mmap                застарілий, не обробляється, викликає "
-"відповідне\n"
-"                                   повідомлення\n"
+" "
 
 #: src/main.c:1574
 #, c-format

@@ -3,14 +3,15 @@
 # This file is distributed under the same license as the grep package.
 # Vladimir Michl <Vladimir.Michl@seznam.cz>, 1998.
 # Petr Pisar <petr.pisar@atlas.cz>, 2008, 2009, 2010, 2011, 2012, 201, 2013.
+# Petr Pisar <petr.pisar@atlas.cz>, 2014.
 #
 # Thanks to: Stanislav Brabec <utx@k332.feld.cvut.cz>
 msgid ""
 msgstr ""
-"Project-Id-Version: grep 2.14.46\n"
+"Project-Id-Version: grep 2.16.14\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2014-02-09 21:26-0800\n"
-"PO-Revision-Date: 2013-10-21 19:58+0200\n"
+"POT-Creation-Date: 2014-02-17 17:58-0800\n"
+"PO-Revision-Date: 2014-02-10 19:45+0100\n"
 "Last-Translator: Petr Pisar <petr.pisar@atlas.cz>\n"
 "Language-Team: Czech <translation-team-cs@lists.sourceforge.net>\n"
 "Language: cs\n"
@@ -181,7 +182,7 @@ msgstr "Nepárový ( nebo \\("
 msgid "Unmatched \\{"
 msgstr "Nepárový \\{"
 
-#: lib/regcomp.c:161 src/dfa.c:1352
+#: lib/regcomp.c:161 src/dfa.c:1368
 msgid "Invalid content of \\{\\}"
 msgstr "Neplatný obsah \\{\\}"
 
@@ -201,7 +202,7 @@ msgstr "Neplatný předchozí regulární výraz"
 msgid "Premature end of regular expression"
 msgstr "Předčasný konec regulárního výrazu"
 
-#: lib/regcomp.c:176 src/dfa.c:1355
+#: lib/regcomp.c:176 src/dfa.c:1371
 msgid "Regular expression too big"
 msgstr "Regulární výraz je příliš velký"
 
@@ -406,7 +407,7 @@ msgstr "argument „%3$s“ u %1$s%2$s je příliš dlouhý"
 
 #: src/dfa.c:956 src/dfa.c:959 src/dfa.c:979 src/dfa.c:989 src/dfa.c:1001
 #: src/dfa.c:1052 src/dfa.c:1061 src/dfa.c:1064 src/dfa.c:1069 src/dfa.c:1082
-#: src/dfa.c:1120
+#: src/dfa.c:1136
 msgid "unbalanced ["
 msgstr "nevyvážená ["
 
@@ -414,24 +415,24 @@ msgstr "nevyvážená ["
 msgid "invalid character class"
 msgstr "neplatný třída znaků"
 
-#: src/dfa.c:1153
+#: src/dfa.c:1169
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr "zápis třídy znaků je [[:space:]], ne [:space:]"
 
-#: src/dfa.c:1205
+#: src/dfa.c:1221
 msgid "unfinished \\ escape"
 msgstr "neukončená escape sekvence \\"
 
-#: src/dfa.c:1770
+#: src/dfa.c:1786
 msgid "unbalanced ("
 msgstr "nevyvážená ("
 
 # ? Není zadaná syntaxe
-#: src/dfa.c:1896
+#: src/dfa.c:1912
 msgid "no syntax specified"
 msgstr "syntaxe není určena"
 
-#: src/dfa.c:1904
+#: src/dfa.c:1920
 msgid "unbalanced )"
 msgstr "nevyvážená )"
 
@@ -578,17 +579,16 @@ msgid ""
 "Miscellaneous:\n"
 "  -s, --no-messages         suppress error messages\n"
 "  -v, --invert-match        select non-matching lines\n"
-"  -V, --version             print version information and exit\n"
-"      --help                display this help and exit\n"
-"n"
+"  -V, --version             display version information and exit\n"
+"      --help                display this help text and exit\n"
 msgstr ""
 "\n"
 "Různé:\n"
 "  -s, --no-messages         potlačí chybové zprávy\n"
-"  -v, --invert-match        vypíše řádky, které VZORKU nevyhovují\n"
+"  -v, --invert-match        vybere neodpovídající řádky\n"
 "  -V, --version             vypíše označení verze a skončí\n"
 "      --help                vypíše tuto nápovědu a skončí\n"
-"      --mmap                bez významu, zastaralé, vypíše upozornění\n"
+"n"
 
 #: src/main.c:1574
 #, c-format
@@ -805,9 +805,9 @@ msgid "internal error (should never happen)"
 msgstr "vnitřní chyba (to by se nikdy nemělo stát)"
 
 #: src/pcresearch.c:130
-#, fuzzy, c-format
+#, c-format
 msgid "failed to allocate memory for the PCRE JIT stack"
-msgstr "paměť pro zásobník JIT nelze alokovat"
+msgstr "alokace paměti pro JIT zásobník PCRE selhala"
 
 #: src/pcresearch.c:144
 #, c-format
@@ -827,12 +827,12 @@ msgstr "překročeno omezení PCRE na hloubku zanoření"
 #: src/pcresearch.c:199
 #, c-format
 msgid "invalid UTF-8 byte sequence in input"
-msgstr ""
+msgstr "neplatná posloupnost UTF-8 bajtů ve vstupu"
 
 #: src/pcresearch.c:206
-#, fuzzy, c-format
+#, c-format
 msgid "internal PCRE error: %d"
-msgstr "vnitřní chyba"
+msgstr "vnitřní chyba PCRE: %d"
 
 #~ msgid "the --mmap option has been a no-op since 2010"
 #~ msgstr "přepínač --map nic nedělá již od roku 2010"

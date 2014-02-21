@@ -1,3 +1,49 @@
+2014-02-17  Jim Meyering  <meyering@fb.com>
+
+	version 2.17
+	* NEWS: Record release date.
+
+2014-02-17  Paolo Bonzini  <bonzini@gnu.org>
+
+	revert "grep: DFA now uses rational ranges in unibyte locales"
+	The correct course of action for grep is to defer range interpretation
+	to regex, because otherwise you can get mismatches between regexes with
+	backreferences and those without.
+
+	For example, [A-Z]. will use RRI but ([A-Z])\1 won't, with the confusing
+	result that the first regex won't match a superset of the language
+	described by the second regex.
+
+	The source of the confusion is that, even though grep's dfa.c was changed
+	to use range checking instead of strcoll, that code is only invoked if
+	dfaexec is called with backref = NULL, and that never happens for grep!
+
+	In the end, all that's needed for RRI is compiling --with-included-regex,
+	and in that case the patch is almost a no-op.  Almost, because there
+	are corner cases that aren't handled correctly (e.g. [a-[.e.]], or
+	regular expressions that include a NUL character), but this can be
+	handled separately.
+
+	* NEWS: Revert paragraph introduced by commit v2.16-7-g1078b64.
+	* src/dfa.c (parse_bracket_exp): Revert back to regcomp/regexec.
+
+2014-02-16  Mike Frysinger  <vapier@gentoo.org>
+
+	maint: ignore configure.lineno
+	* .gitignore: Add configure.lineno.
+
+2014-02-11  Benno Schulenberg  <bensberg@justemail.net>
+
+	help: remove surplus newline
+	* src/main.c (usage): Remove inconsistent \n introduced by previous
+	patch.
+
+2014-02-10  Benno Schulenberg  <bensberg@justemail.net>
+
+	help: fix a line ending, and use the same word for similar things
+	* src/main.c (usage): Change a stray 'n' to a newline, and use
+	the word "display" for showing version info as for help text.
+
 2014-02-09  Norihiro Tanaka  <noritnk@kcn.ne.jp>
 
 	speed up mb-boundary-detection after each preliminary match

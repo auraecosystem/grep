@@ -29,7 +29,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grep-2.14\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2014-02-09 21:26-0800\n"
+"POT-Creation-Date: 2014-02-17 17:58-0800\n"
 "PO-Revision-Date: 2012-11-01 02:12+0100\n"
 "Last-Translator: Ask Hjorth Larsen <asklarsen@gmail.com>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
@@ -201,7 +201,7 @@ msgstr "Uparret ( eller \\("
 msgid "Unmatched \\{"
 msgstr "Uparret \\{"
 
-#: lib/regcomp.c:161 src/dfa.c:1352
+#: lib/regcomp.c:161 src/dfa.c:1368
 msgid "Invalid content of \\{\\}"
 msgstr "Ugyldigt indhold af \\{\\}"
 
@@ -221,7 +221,7 @@ msgstr "Ugyldigt foranstillet regulært udtryk"
 msgid "Premature end of regular expression"
 msgstr "Utidig afslutning af regulært udtryk"
 
-#: lib/regcomp.c:176 src/dfa.c:1355
+#: lib/regcomp.c:176 src/dfa.c:1371
 msgid "Regular expression too big"
 msgstr "Regulært udtryk er for stort"
 
@@ -425,7 +425,7 @@ msgstr "%s%s-argumentet '%s' er for stort"
 
 #: src/dfa.c:956 src/dfa.c:959 src/dfa.c:979 src/dfa.c:989 src/dfa.c:1001
 #: src/dfa.c:1052 src/dfa.c:1061 src/dfa.c:1064 src/dfa.c:1069 src/dfa.c:1082
-#: src/dfa.c:1120
+#: src/dfa.c:1136
 msgid "unbalanced ["
 msgstr "ubalanceret ["
 
@@ -433,23 +433,23 @@ msgstr "ubalanceret ["
 msgid "invalid character class"
 msgstr "ugyldig tegnklasse"
 
-#: src/dfa.c:1153
+#: src/dfa.c:1169
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr "syntaksen for tegnklasser er [[:space:]], ikke [:space:]"
 
-#: src/dfa.c:1205
+#: src/dfa.c:1221
 msgid "unfinished \\ escape"
 msgstr "ufærdig \\-undvigesekvens"
 
-#: src/dfa.c:1770
+#: src/dfa.c:1786
 msgid "unbalanced ("
 msgstr "ubalanceret ("
 
-#: src/dfa.c:1896
+#: src/dfa.c:1912
 msgid "no syntax specified"
 msgstr "ingen syntaks angivet"
 
-#: src/dfa.c:1904
+#: src/dfa.c:1920
 msgid "unbalanced )"
 msgstr "ubalanceret )"
 
@@ -593,9 +593,8 @@ msgid ""
 "Miscellaneous:\n"
 "  -s, --no-messages         suppress error messages\n"
 "  -v, --invert-match        select non-matching lines\n"
-"  -V, --version             print version information and exit\n"
-"      --help                display this help and exit\n"
-"n"
+"  -V, --version             display version information and exit\n"
+"      --help                display this help text and exit\n"
 msgstr ""
 "\n"
 "Diverse:\n"
