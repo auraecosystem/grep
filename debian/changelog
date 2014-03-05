@@ -1,9 +1,9 @@
-grep (2.17-0~1) UNRELEASED; urgency=low
+grep (2.18-0~1) UNRELEASED; urgency=low
 
   * NOT RELEASE YET
   * New upstream release
-  * Move to CDBS. And additional changes to make it build twice in a row
-    (Closes: #736977) 
+  * Move to CDBS. Jointly with included patches, makes grep build twice in a
+    row (Closes: #736977) 
   * d/patches/
     - 03-397262-dlopen-pcre.patch: removed unneeded changes in configure
     - 99-autotools-changes.patch: included modifications made by autotools
