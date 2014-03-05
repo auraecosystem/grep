@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GNU grep-2.14\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2014-02-17 17:58-0800\n"
+"POT-Creation-Date: 2014-02-20 22:40-0800\n"
 "PO-Revision-Date: 2012-09-22 10:35+0200\n"
 "Last-Translator: Àngel Mompó <mecatxis@gmail.com>\n"
 "Language-Team: Catalan <ca@dodds.net>\n"
@@ -32,7 +32,7 @@ msgstr "l'argument %s és ambigu per %s"
 msgid "Valid arguments are:"
 msgstr "Els arguments vàlids són:"
 
-#: lib/closeout.c:112 src/main.c:953
+#: lib/closeout.c:112 src/main.c:954
 #, c-format
 msgid "write error"
 msgstr "error d'escriptura"
@@ -181,7 +181,7 @@ msgstr "falten o sobren ( o \\("
 msgid "Unmatched \\{"
 msgstr "Falten o sobren \\{"
 
-#: lib/regcomp.c:161 src/dfa.c:1368
+#: lib/regcomp.c:161 src/dfa.c:1371
 msgid "Invalid content of \\{\\}"
 msgstr "El context de \\{\\} no és vàlid"
 
@@ -201,7 +201,7 @@ msgstr "L'expressió regular precedent no és vàlida"
 msgid "Premature end of regular expression"
 msgstr "Final prematur de l'expressió regular"
 
-#: lib/regcomp.c:176 src/dfa.c:1371
+#: lib/regcomp.c:176 src/dfa.c:1374
 msgid "Regular expression too big"
 msgstr "L'expressió regular és massa gran"
 
@@ -359,7 +359,7 @@ msgstr ""
 #. for this package.  Please add _another line_ saying
 #. "Report translation bugs to <...>\n" with the address for translation
 #. bugs (typically your translation team's web or email address).
-#: lib/version-etc.c:245 src/main.c:1635
+#: lib/version-etc.c:245 src/main.c:1636
 #, c-format
 msgid ""
 "\n"
@@ -383,7 +383,7 @@ msgstr "Pàgina inicial de %s: <%s>\n"
 msgid "%s home page: <http://www.gnu.org/software/%s/>\n"
 msgstr "Pàgina inicial de %s: <http://www.gnu.org/software/%s/>\n"
 
-#: lib/version-etc.c:256 src/main.c:1638
+#: lib/version-etc.c:256 src/main.c:1639
 msgid "General help using GNU software: <http://www.gnu.org/gethelp/>\n"
 msgstr ""
 "Ajuda general d'utilització del programari de GNU: <http://www.gnu.org/"
@@ -406,7 +406,7 @@ msgstr "l'argument «%s» de %s%s és massa gran"
 
 #: src/dfa.c:956 src/dfa.c:959 src/dfa.c:979 src/dfa.c:989 src/dfa.c:1001
 #: src/dfa.c:1052 src/dfa.c:1061 src/dfa.c:1064 src/dfa.c:1069 src/dfa.c:1082
-#: src/dfa.c:1136
+#: src/dfa.c:1139
 msgid "unbalanced ["
 msgstr "[ desaparellat"
 
@@ -414,23 +414,23 @@ msgstr "[ desaparellat"
 msgid "invalid character class"
 msgstr "La classe de caràcter no és vàlida"
 
-#: src/dfa.c:1169
+#: src/dfa.c:1172
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr "La sintaxi de la classe de caràcter és [[:espai]], no [:espai:]"
 
-#: src/dfa.c:1221
+#: src/dfa.c:1224
 msgid "unfinished \\ escape"
 msgstr "Codi d'escapada \\ inacabat"
 
-#: src/dfa.c:1786
+#: src/dfa.c:1789
 msgid "unbalanced ("
 msgstr "( desaparellat"
 
-#: src/dfa.c:1912
+#: src/dfa.c:1915
 msgid "no syntax specified"
 msgstr "no s'ha especificat cap sintaxi"
 
-#: src/dfa.c:1920
+#: src/dfa.c:1923
 msgid "unbalanced )"
 msgstr ") desaparellat"
 
@@ -464,66 +464,66 @@ msgstr ""
 "La crida directa tant de «egrep» com de «fgrep» està desfasada.\n"
 
 #. This is a proper name. See the gettext manual, section Names.
-#: src/main.c:59
+#: src/main.c:60
 msgid "Mike Haertel"
 msgstr "Mike Haertel"
 
-#: src/main.c:60
+#: src/main.c:61
 msgid "others, see <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
 msgstr "la resta, vegeu <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
 
-#: src/main.c:499
+#: src/main.c:500
 msgid "invalid context length argument"
 msgstr "la longitud de l'argument no és vàlida"
 
-#: src/main.c:568
+#: src/main.c:569
 msgid "lseek failed"
 msgstr "l'lseek ha fallat"
 
-#: src/main.c:706
+#: src/main.c:707
 #, c-format
 msgid "input is too large to count"
 msgstr "l'entrada és massa llarga per a comptar"
 
-#: src/main.c:1272
+#: src/main.c:1273
 #, c-format
 msgid "Binary file %s matches\n"
 msgstr "Hi ha coincidències en el fitxer binari %s\n"
 
-#: src/main.c:1315
+#: src/main.c:1316
 #, c-format
 msgid "warning: %s: %s"
 msgstr "aví­s: %s: %s"
 
-#: src/main.c:1316
+#: src/main.c:1317
 msgid "recursive directory loop"
 msgstr "bucle de directori recursiu"
 
-#: src/main.c:1464
+#: src/main.c:1465
 #, c-format
 msgid "input file %s is also the output"
 msgstr "el fitxer d'entrada %s és també la sortida"
 
-#: src/main.c:1522
+#: src/main.c:1523
 msgid "(standard input)"
 msgstr "(entrada estàndard)"
 
-#: src/main.c:1538 src/main.c:1545
+#: src/main.c:1539 src/main.c:1546
 #, c-format
 msgid "Usage: %s [OPTION]... PATTERN [FILE]...\n"
 msgstr "Forma d'ús: %s [OPCIÓ]... PATRÓ [FITXER] ...\n"
 
-#: src/main.c:1540
+#: src/main.c:1541
 #, c-format
 msgid "Try '%s --help' for more information.\n"
 msgstr "Feu servir «%s --help» per a obtenir més informació.\n"
 
-#: src/main.c:1546
+#: src/main.c:1547
 #, c-format
 msgid "Search for PATTERN in each FILE or standard input.\n"
 msgstr "Busca el PATRÓ a cada FITXER o a l'entrada estàndard.\n"
 
-#: src/main.c:1549
+#: src/main.c:1550
 #, c-format
 msgid ""
 "Example: %s -i 'hello world' menu.h main.c\n"
@@ -534,7 +534,7 @@ msgstr ""
 "\n"
 "Selecció i interpretació de l'expressió regular:\n"
 
-#: src/main.c:1554
+#: src/main.c:1555
 #, c-format
 msgid ""
 "  -E, --extended-regexp     PATTERN is an extended regular expression (ERE)\n"
@@ -549,7 +549,7 @@ msgstr ""
 "  -G, --basic-regexp        PATRÓ és un expressió regular bàsica (ERB)\n"
 "  -P, --perl-regexp         PATRÓ és un expressió regular de Perl\n"
 
-#: src/main.c:1560
+#: src/main.c:1561
 #, c-format
 msgid ""
 "  -e, --regexp=PATTERN      use PATTERN for matching\n"
@@ -569,7 +569,7 @@ msgstr ""
 "  -z, --null-data           considera que una lí­nia de dades acaba amb byte "
 "0 i no amb un salt de línia\n"
 
-#: src/main.c:1567
+#: src/main.c:1568
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -587,7 +587,7 @@ msgstr ""
 "      --help                mostra aquesta ajuda i surt\n"
 "      --mmap                desfasat. Només mostra un avís\n"
 
-#: src/main.c:1574
+#: src/main.c:1575
 #, c-format
 msgid ""
 "\n"
@@ -614,7 +614,7 @@ msgstr ""
 "      --label=ETIQUETA         fes servir ETIQUETA com a prefix del nom del "
 "fitxer per l'entrada estàndard\n"
 
-#: src/main.c:1585
+#: src/main.c:1586
 #, c-format
 msgid ""
 "  -o, --only-matching       show only the part of a line matching PATTERN\n"
@@ -632,7 +632,7 @@ msgstr ""
 "match»\n"
 "  -a, --text                equivalent a --binary-files=text\n"
 
-#: src/main.c:1592
+#: src/main.c:1593
 #, c-format
 msgid ""
 "  -I                        equivalent to --binary-files=without-match\n"
@@ -652,7 +652,7 @@ msgstr ""
 "  -R, --dereference-recursive  igual que l'anterior, però segueix tots els "
 "enllaços simbòlics\n"
 
-#: src/main.c:1601
+#: src/main.c:1602
 #, c-format
 msgid ""
 "      --include=FILE_PATTERN  search only files that match FILE_PATTERN\n"
@@ -671,7 +671,7 @@ msgstr ""
 "      --exclude-dir=PATRÓ  salta els directoris que coincideixin amb el "
 "PATRÓ.\n"
 
-#: src/main.c:1607
+#: src/main.c:1608
 #, c-format
 msgid ""
 "  -L, --files-without-match  print only names of FILEs containing no match\n"
@@ -689,7 +689,7 @@ msgstr ""
 "  -T, --initial-tab         alinea les tabulacions (si cal)\n"
 "  -Z, --null                mostra 0 byte després del nom de FITXER\n"
 
-#: src/main.c:1613
+#: src/main.c:1614
 #, c-format
 msgid ""
 "\n"
@@ -707,7 +707,7 @@ msgstr ""
 "  -C, --context=NOMBRE        mostra un NOMBRE de línies del context de "
 "sortida\n"
 
-#: src/main.c:1620
+#: src/main.c:1621
 #, c-format
 msgid ""
 "  -NUM                      same as --context=NUM\n"
@@ -732,7 +732,7 @@ msgstr ""
 "                              (MSDOS/Windows)\n"
 "\n"
 
-#: src/main.c:1630
+#: src/main.c:1631
 #, c-format
 msgid ""
 "When FILE is -, read standard input.  With no FILE, read . if a command-"
@@ -748,37 +748,37 @@ msgstr ""
 "L'estat de sortida és 0 si s'havia seleccionat alguna línia, si no 1.\n"
 "Si hi ha algun error i no s'ha indicat -q, l'estat de sortida és 2.\n"
 
-#: src/main.c:1636
+#: src/main.c:1637
 #, c-format
 msgid "GNU Grep home page: <%s>\n"
 msgstr "Pàgina principal del Grep de GNU: <%s>\n"
 
-#: src/main.c:1669
+#: src/main.c:1670
 #, c-format
 msgid "%s can only use the %s pattern syntax"
 msgstr "%s només pot fer servir la sintaxis de patró %s"
 
-#: src/main.c:1672
+#: src/main.c:1673
 #, c-format
 msgid "conflicting matchers specified"
 msgstr "s'han especificat expressions conflictives"
 
-#: src/main.c:1686
+#: src/main.c:1687
 #, c-format
 msgid "invalid matcher %s"
 msgstr "l'expressió %s no és vàlida"
 
-#: src/main.c:2017
+#: src/main.c:2023
 #, c-format
 msgid "unknown devices method"
 msgstr "el mètode de dispositius és desconegut"
 
-#: src/main.c:2148
+#: src/main.c:2154
 #, c-format
 msgid "invalid max count"
 msgstr "el comptador de màxims no és vàlid"
 
-#: src/main.c:2205
+#: src/main.c:2211
 #, c-format
 msgid "unknown binary-files type"
 msgstr "el tipus de fitxer binari és desconegut"

@@ -1369,9 +1369,11 @@ TESTS = \
   khadafy					\
   long-line-vs-2GiB-read			\
   max-count-vs-context				\
+  mb-non-UTF8-performance			\
   multibyte-white-space				\
   empty-line-mb					\
   unibyte-bracket-expr				\
+  unibyte-negated-circumflex			\
   high-bit-range				\
   options					\
   pcre						\
@@ -1994,6 +1996,13 @@ max-count-vs-context.log: max-count-vs-context
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
 	"$$tst" $(AM_TESTS_FD_REDIRECT)
+mb-non-UTF8-performance.log: mb-non-UTF8-performance
+	@p='mb-non-UTF8-performance'; \
+	b='mb-non-UTF8-performance'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
 multibyte-white-space.log: multibyte-white-space
 	@p='multibyte-white-space'; \
 	b='multibyte-white-space'; \
@@ -2011,6 +2020,13 @@ empty-line-mb.log: empty-line-mb
 unibyte-bracket-expr.log: unibyte-bracket-expr
 	@p='unibyte-bracket-expr'; \
 	b='unibyte-bracket-expr'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+unibyte-negated-circumflex.log: unibyte-negated-circumflex
+	@p='unibyte-negated-circumflex'; \
+	b='unibyte-negated-circumflex'; \
 	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \

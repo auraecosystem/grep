@@ -1,4 +1,55 @@
+2014-02-20  Jim Meyering  <meyering@fb.com>
+
+	version 2.18
+	* NEWS: Record release date.
+
+	tests: test for the non-UTF8 multi-byte performance regression
+	Test for the just-fixed performance regression.
+	With a 100-200x differential, it is reasonable to expect that
+	a very slow system will be able to complete the designated
+	task in a few seconds, while with the bug, even a very fast
+	system would exceed the timeout.
+	* tests/mb-non-UTF8-performance: New file.
+	* tests/Makefile.am (TESTS): Add it.
+	* tests/init.cfg (require_JP_EUC_locale_): New function.
+
+	grep -i: avoid a performance regression in multibyte non-UTF8 locales
+	* src/main.c: Include dfa.h.
+	(trivial_case_ignore): Perform this optimization only for UTF8 locales.
+	This rectifies a 100-200x performance regression in non-UTF8 multi-byte
+	locales like ja_JP.eucJP.  The regression was introduced by the 10x
+	UTF8/grep-i speedup, commit v2.16-4-g97318f5.
+	* NEWS (Bug fixes): Mention it.
+	Reported by Norihiro Tanaka in http://debbugs.gnu.org/16232#50
+
+	maint: give dfa.c's using_utf8 function external scope
+	* src/dfa.c (using_utf8): Remove "static inline".
+	* src/dfa.h (using_utf8): Declare it.
+	* src/searchutils.c (is_mb_middle): Use using_utf8 rather than
+	rolling our own.
+
+2014-02-20  Paul Eggert  <eggert@cs.ucla.edu>
+
+	tests: test [^^-^] in unibyte locales
+	This is a bug in the current dfa.c, which was reintroduced by the
+	recent reversion from RRI.
+	* tests/unibyte-negated-circumflex: New file.
+	* tests/Makefile.am (TESTS): Add it.
+	* tests/init.cfg (require_unibyte_locale): New function.
+
+	grep: fix bug with patterns like [^^-~] in unibyte locales
+	* NEWS: Document this.
+	* src/dfa.c (parse_bracket_exp): Escape patterns like [^^-~], or
+	Awk patterns like [\^-\]], so that they are not misinterpreted by
+	the system regex library.  Check for system regex failure due to
+	memory exhaustion.
+
 2014-02-17  Jim Meyering  <meyering@fb.com>
+
+	maint: post-release administrivia
+	* NEWS: Add header line for next release.
+	* .prev-version: Record previous version.
+	* cfg.mk (old_NEWS_hash): Auto-update.
 
 	version 2.17
 	* NEWS: Record release date.

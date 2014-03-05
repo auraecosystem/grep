@@ -25,7 +25,7 @@ grep
 
 `grep' prints lines that contain a match for a pattern.
 
-   This manual is for version 2.17 of GNU Grep.
+   This manual is for version 2.18 of GNU Grep.
 
    This manual is for `grep', a pattern matching engine.
 
