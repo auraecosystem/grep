@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grep-2.15.15\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2014-02-17 17:58-0800\n"
+"POT-Creation-Date: 2014-02-20 22:40-0800\n"
 "PO-Revision-Date: 2014-01-13 17:34+0200\n"
 "Last-Translator: Мирослав Николић <miroslavnikolic@rocketmail.com>\n"
 "Language-Team: Serbian <(nothing)>\n"
@@ -32,7 +32,7 @@ msgstr "двосмислени аргумент %s за %s"
 msgid "Valid arguments are:"
 msgstr "Исправни аргументи су:"
 
-#: lib/closeout.c:112 src/main.c:953
+#: lib/closeout.c:112 src/main.c:954
 #, c-format
 msgid "write error"
 msgstr "грешка у писању"
@@ -181,7 +181,7 @@ msgstr "Не одговара ( или \\("
 msgid "Unmatched \\{"
 msgstr "Не одговара \\{"
 
-#: lib/regcomp.c:161 src/dfa.c:1368
+#: lib/regcomp.c:161 src/dfa.c:1371
 msgid "Invalid content of \\{\\}"
 msgstr "Неисправан садржај \\{\\}"
 
@@ -202,7 +202,7 @@ msgstr "Неисправан регуларан израз који претхо
 msgid "Premature end of regular expression"
 msgstr "Прерани крај регуларног израза"
 
-#: lib/regcomp.c:176 src/dfa.c:1371
+#: lib/regcomp.c:176 src/dfa.c:1374
 msgid "Regular expression too big"
 msgstr "Регуларни израз је превелик"
 
@@ -359,7 +359,7 @@ msgstr ""
 #. for this package.  Please add _another line_ saying
 #. "Report translation bugs to <...>\n" with the address for translation
 #. bugs (typically your translation team's web or email address).
-#: lib/version-etc.c:245 src/main.c:1635
+#: lib/version-etc.c:245 src/main.c:1636
 #, c-format
 msgid ""
 "\n"
@@ -383,7 +383,7 @@ msgstr "%s матична страница: <%s>\n"
 msgid "%s home page: <http://www.gnu.org/software/%s/>\n"
 msgstr "%s матична страница: <http://www.gnu.org/software/%s/>\n"
 
-#: lib/version-etc.c:256 src/main.c:1638
+#: lib/version-etc.c:256 src/main.c:1639
 msgid "General help using GNU software: <http://www.gnu.org/gethelp/>\n"
 msgstr "Општа помоћ користећи ГНУ софтвер: <http://www.gnu.org/gethelp/>\n"
 
@@ -404,7 +404,7 @@ msgstr "%s%s аргумент „%s“ је превелик"
 
 #: src/dfa.c:956 src/dfa.c:959 src/dfa.c:979 src/dfa.c:989 src/dfa.c:1001
 #: src/dfa.c:1052 src/dfa.c:1061 src/dfa.c:1064 src/dfa.c:1069 src/dfa.c:1082
-#: src/dfa.c:1136
+#: src/dfa.c:1139
 msgid "unbalanced ["
 msgstr "неуравнотежена ["
 
@@ -412,23 +412,23 @@ msgstr "неуравнотежена ["
 msgid "invalid character class"
 msgstr "неисправна класа знака"
 
-#: src/dfa.c:1169
+#: src/dfa.c:1172
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr "синтакса класе знака је [[:размак:]], а не [:размак:]"
 
-#: src/dfa.c:1221
+#: src/dfa.c:1224
 msgid "unfinished \\ escape"
 msgstr "недовршена \\ излазим"
 
-#: src/dfa.c:1786
+#: src/dfa.c:1789
 msgid "unbalanced ("
 msgstr "неуравнотежена ("
 
-#: src/dfa.c:1912
+#: src/dfa.c:1915
 msgid "no syntax specified"
 msgstr "синтакса није наведена"
 
-#: src/dfa.c:1920
+#: src/dfa.c:1923
 msgid "unbalanced )"
 msgstr "неуравнотежена )"
 
@@ -461,66 +461,66 @@ msgstr ""
 "Директно призивање као „egrep“ или „fgrep“ није одобрено.\n"
 
 #. This is a proper name. See the gettext manual, section Names.
-#: src/main.c:59
+#: src/main.c:60
 msgid "Mike Haertel"
 msgstr "Мајк Хартел"
 
-#: src/main.c:60
+#: src/main.c:61
 msgid "others, see <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
 msgstr "остали, погледајте <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
 
-#: src/main.c:499
+#: src/main.c:500
 msgid "invalid context length argument"
 msgstr "неисправан аргумент дужине контекста"
 
-#: src/main.c:568
+#: src/main.c:569
 msgid "lseek failed"
 msgstr "„lseek“ није успело"
 
-#: src/main.c:706
+#: src/main.c:707
 #, c-format
 msgid "input is too large to count"
 msgstr "улаз је превелик за пребројавање"
 
-#: src/main.c:1272
+#: src/main.c:1273
 #, c-format
 msgid "Binary file %s matches\n"
 msgstr "Бинарна датотека %s одговара\n"
 
-#: src/main.c:1315
+#: src/main.c:1316
 #, c-format
 msgid "warning: %s: %s"
 msgstr "упозорење: %s: %s"
 
-#: src/main.c:1316
+#: src/main.c:1317
 msgid "recursive directory loop"
 msgstr "рекурзивно вртење кроз директоријуме"
 
-#: src/main.c:1464
+#: src/main.c:1465
 #, c-format
 msgid "input file %s is also the output"
 msgstr "улазна датотека %s је такође излаз"
 
-#: src/main.c:1522
+#: src/main.c:1523
 msgid "(standard input)"
 msgstr "(стандардни улаз)"
 
-#: src/main.c:1538 src/main.c:1545
+#: src/main.c:1539 src/main.c:1546
 #, c-format
 msgid "Usage: %s [OPTION]... PATTERN [FILE]...\n"
 msgstr "Употреба: %s [ОПЦИЈА]... ШАБЛОН [ДАТОТЕКА]...\n"
 
-#: src/main.c:1540
+#: src/main.c:1541
 #, c-format
 msgid "Try '%s --help' for more information.\n"
 msgstr "Пробајте „%s --help“ за више података.\n"
 
-#: src/main.c:1546
+#: src/main.c:1547
 #, c-format
 msgid "Search for PATTERN in each FILE or standard input.\n"
 msgstr "Тражи наведени ШАБЛОН у свакој датотеци или стандардном улазу.\n"
 
-#: src/main.c:1549
+#: src/main.c:1550
 #, c-format
 msgid ""
 "Example: %s -i 'hello world' menu.h main.c\n"
@@ -531,7 +531,7 @@ msgstr ""
 "\n"
 "Избор регуларних израза и обрада:\n"
 
-#: src/main.c:1554
+#: src/main.c:1555
 #, c-format
 msgid ""
 "  -E, --extended-regexp     PATTERN is an extended regular expression (ERE)\n"
@@ -546,7 +546,7 @@ msgstr ""
 "  -G, --basic-regexp              ШАБЛОН је основни регуларан израз\n"
 "  -P, --perl-regexp               ШАБЛОН је Перлов регуларан израз\n"
 
-#: src/main.c:1560
+#: src/main.c:1561
 #, c-format
 msgid ""
 "  -e, --regexp=PATTERN      use PATTERN for matching\n"
@@ -566,7 +566,7 @@ msgstr ""
 "  -z, --null-data                 ред података се завршава 0-бајтом, не "
 "новим редом\n"
 
-#: src/main.c:1567
+#: src/main.c:1568
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -584,7 +584,7 @@ msgstr ""
 "      --help                      приказује ову помоћ и излази\n"
 "      --mmap                      занемарено; призива упозорење\n"
 
-#: src/main.c:1574
+#: src/main.c:1575
 #, c-format
 msgid ""
 "\n"
@@ -611,7 +611,7 @@ msgstr ""
 "      --label=НАТПИС              користи НАТПИС као префикс назива датотеке "
 "стандардног улаза\n"
 
-#: src/main.c:1585
+#: src/main.c:1586
 #, c-format
 msgid ""
 "  -o, --only-matching       show only the part of a line matching PATTERN\n"
@@ -628,7 +628,7 @@ msgstr ""
 "„without-match“\n"
 "  -a, --text                      исто као и „--binary-files=text“\n"
 
-#: src/main.c:1592
+#: src/main.c:1593
 #, c-format
 msgid ""
 "  -I                        equivalent to --binary-files=without-match\n"
@@ -649,7 +649,7 @@ msgstr ""
 "  -r, --recursive                 исто као и „--directories=recurse“\n"
 "  -R, --dereference-recursive     слично, али прати све симболичке везе\n"
 
-#: src/main.c:1601
+#: src/main.c:1602
 #, c-format
 msgid ""
 "      --include=FILE_PATTERN  search only files that match FILE_PATTERN\n"
@@ -668,7 +668,7 @@ msgstr ""
 "      --exclude-dir=ШАБЛОН        директоријуми који се поклапају са "
 "ШАБЛОНОМ биће прескочени.\n"
 
-#: src/main.c:1607
+#: src/main.c:1608
 #, c-format
 msgid ""
 "  -L, --files-without-match  print only names of FILEs containing no match\n"
@@ -686,7 +686,7 @@ msgstr ""
 "  -T, --initial-tab               помера табове ред горе (ако је потребно)\n"
 "  -Z, --null                      исписује 0-ти бајт након назива ДАТОТЕКЕ\n"
 
-#: src/main.c:1613
+#: src/main.c:1614
 #, c-format
 msgid ""
 "\n"
@@ -701,7 +701,7 @@ msgstr ""
 "  -A, --after-context=БРОЈ        исписује БРОЈ редова пратећег контекста\n"
 "  -C, --context=БРОЈ              исписује БРОЈ редова излазног контекста\n"
 
-#: src/main.c:1620
+#: src/main.c:1621
 #, c-format
 msgid ""
 "  -NUM                      same as --context=NUM\n"
@@ -726,7 +726,7 @@ msgstr ""
 "били ту (МСДОС/Виндоуз)\n"
 "\n"
 
-#: src/main.c:1630
+#: src/main.c:1631
 #, c-format
 msgid ""
 "When FILE is -, read standard input.  With no FILE, read . if a command-"
@@ -741,37 +741,37 @@ msgstr ""
 "Излазно стање је 0 ако је изабран неки ред, у супротном 1;\n"
 "ако је дошло до неке грешке а „-q“ није дато, онда је излазно стање 2.\n"
 
-#: src/main.c:1636
+#: src/main.c:1637
 #, c-format
 msgid "GNU Grep home page: <%s>\n"
 msgstr "Матична страница ГНУ Грепа: <%s>\n"
 
-#: src/main.c:1669
+#: src/main.c:1670
 #, c-format
 msgid "%s can only use the %s pattern syntax"
 msgstr "%s може да користи само %s синтаксу шаблона"
 
-#: src/main.c:1672
+#: src/main.c:1673
 #, c-format
 msgid "conflicting matchers specified"
 msgstr "наведени су трагачи у сукобу"
 
-#: src/main.c:1686
+#: src/main.c:1687
 #, c-format
 msgid "invalid matcher %s"
 msgstr "неисправан трагач %s"
 
-#: src/main.c:2017
+#: src/main.c:2023
 #, c-format
 msgid "unknown devices method"
 msgstr "непознат метод уређаја"
 
-#: src/main.c:2148
+#: src/main.c:2154
 #, c-format
 msgid "invalid max count"
 msgstr "неисправан највећи број"
 
-#: src/main.c:2205
+#: src/main.c:2211
 #, c-format
 msgid "unknown binary-files type"
 msgstr "непозната врста бинарних датотека"

@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GNU grep 2.10\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2014-02-17 17:58-0800\n"
+"POT-Creation-Date: 2014-02-20 22:40-0800\n"
 "PO-Revision-Date: 2011-11-19 10:09+0900\n"
 "Last-Translator: Yasuaki Taniguchi <yasuakit@gmail.com>\n"
 "Language-Team: Japanese <translation-team-ja@lists.sourceforge.net>\n"
@@ -40,7 +40,7 @@ msgstr "%2$s に対する引数 %1$s が曖昧です"
 msgid "Valid arguments are:"
 msgstr "有効な引数:"
 
-#: lib/closeout.c:112 src/main.c:953
+#: lib/closeout.c:112 src/main.c:954
 #, c-format
 msgid "write error"
 msgstr "書き込みエラー"
@@ -189,7 +189,7 @@ msgstr "( または \\( が不一致です"
 msgid "Unmatched \\{"
 msgstr "\\{ が不一致です"
 
-#: lib/regcomp.c:161 src/dfa.c:1368
+#: lib/regcomp.c:161 src/dfa.c:1371
 msgid "Invalid content of \\{\\}"
 msgstr "\\{\\} の中身が無効です"
 
@@ -209,7 +209,7 @@ msgstr "無効な前方正規表現です"
 msgid "Premature end of regular expression"
 msgstr "正規表現が途中で終了しました"
 
-#: lib/regcomp.c:176 src/dfa.c:1371
+#: lib/regcomp.c:176 src/dfa.c:1374
 msgid "Regular expression too big"
 msgstr "正規表現が大きすぎます"
 
@@ -366,7 +366,7 @@ msgstr ""
 #. for this package.  Please add _another line_ saying
 #. "Report translation bugs to <...>\n" with the address for translation
 #. bugs (typically your translation team's web or email address).
-#: lib/version-etc.c:245 src/main.c:1635
+#: lib/version-etc.c:245 src/main.c:1636
 #, c-format
 msgid ""
 "\n"
@@ -395,7 +395,7 @@ msgstr "%s のホームページ: <%s>\n"
 msgid "%s home page: <http://www.gnu.org/software/%s/>\n"
 msgstr "%s のホームページ: <http://www.gnu.org/software/%s/>\n"
 
-#: lib/version-etc.c:256 src/main.c:1638
+#: lib/version-etc.c:256 src/main.c:1639
 msgid "General help using GNU software: <http://www.gnu.org/gethelp/>\n"
 msgstr ""
 "GNU ソフトウェアを使用する際の一般的なヘルプ: <http://www.gnu.org/gethelp/>\n"
@@ -417,7 +417,7 @@ msgstr "引数 `%3$s' に対する %1$s%2$s が大きすぎます"
 
 #: src/dfa.c:956 src/dfa.c:959 src/dfa.c:979 src/dfa.c:989 src/dfa.c:1001
 #: src/dfa.c:1052 src/dfa.c:1061 src/dfa.c:1064 src/dfa.c:1069 src/dfa.c:1082
-#: src/dfa.c:1136
+#: src/dfa.c:1139
 msgid "unbalanced ["
 msgstr "対応がとれていない [ です"
 
@@ -425,23 +425,23 @@ msgstr "対応がとれていない [ です"
 msgid "invalid character class"
 msgstr "無効な文字クラス名です"
 
-#: src/dfa.c:1169
+#: src/dfa.c:1172
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr "文字クラスの構文は [[:space:]] です。 [:space:] ではありません"
 
-#: src/dfa.c:1221
+#: src/dfa.c:1224
 msgid "unfinished \\ escape"
 msgstr "\\ エスケープが終了していません"
 
-#: src/dfa.c:1786
+#: src/dfa.c:1789
 msgid "unbalanced ("
 msgstr "対応がとれていない ( です"
 
-#: src/dfa.c:1912
+#: src/dfa.c:1915
 msgid "no syntax specified"
 msgstr "構文が指定されていません"
 
-#: src/dfa.c:1920
+#: src/dfa.c:1923
 msgid "unbalanced )"
 msgstr "対応がとれていない ) です"
 
@@ -481,68 +481,68 @@ msgstr ""
 "`egrep' または `fgrep' による直接起動は廃止予定です。\n"
 
 #. This is a proper name. See the gettext manual, section Names.
-#: src/main.c:59
+#: src/main.c:60
 msgid "Mike Haertel"
 msgstr "Mike Haertel"
 
-#: src/main.c:60
+#: src/main.c:61
 msgid "others, see <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
 msgstr ""
 "その他の方々は <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS> を参照して"
 "ください"
 
-#: src/main.c:499
+#: src/main.c:500
 msgid "invalid context length argument"
 msgstr "一致した前後の行の表示に関する引数が無効です"
 
-#: src/main.c:568
+#: src/main.c:569
 msgid "lseek failed"
 msgstr "lseek に失敗しました"
 
-#: src/main.c:706
+#: src/main.c:707
 #, c-format
 msgid "input is too large to count"
 msgstr "入力が大きすぎて数えられません"
 
-#: src/main.c:1272
+#: src/main.c:1273
 #, c-format
 msgid "Binary file %s matches\n"
 msgstr "バイナリファイル %s に一致しました\n"
 
-#: src/main.c:1315
+#: src/main.c:1316
 #, c-format
 msgid "warning: %s: %s"
 msgstr "警告: %s: %s"
 
-#: src/main.c:1316
+#: src/main.c:1317
 msgid "recursive directory loop"
 msgstr "ディレクトリーが再帰的ループをしています"
 
-#: src/main.c:1464
+#: src/main.c:1465
 #, c-format
 msgid "input file %s is also the output"
 msgstr "入力ファイル %s が出力にもなっています"
 
-#: src/main.c:1522
+#: src/main.c:1523
 msgid "(standard input)"
 msgstr "(標準入力)"
 
-#: src/main.c:1538 src/main.c:1545
+#: src/main.c:1539 src/main.c:1546
 #, c-format
 msgid "Usage: %s [OPTION]... PATTERN [FILE]...\n"
 msgstr "使用法: %s [OPTION]... PATTERN [FILE]...\n"
 
-#: src/main.c:1540
+#: src/main.c:1541
 #, fuzzy, c-format
 msgid "Try '%s --help' for more information.\n"
 msgstr "詳しくは`%s --help'を実行してください。\n"
 
-#: src/main.c:1546
+#: src/main.c:1547
 #, c-format
 msgid "Search for PATTERN in each FILE or standard input.\n"
 msgstr "各 FILE または標準入力内の PATTERN を検索します。\n"
 
-#: src/main.c:1549
+#: src/main.c:1550
 #, c-format
 msgid ""
 "Example: %s -i 'hello world' menu.h main.c\n"
@@ -553,7 +553,7 @@ msgstr ""
 "\n"
 "正規表現の選択および解釈:\n"
 
-#: src/main.c:1554
+#: src/main.c:1555
 #, c-format
 msgid ""
 "  -E, --extended-regexp     PATTERN is an extended regular expression (ERE)\n"
@@ -567,7 +567,7 @@ msgstr ""
 "  -G, --basic-regexp        PATTERN を基本正規表現 (BRE) とする\n"
 "  -P, --perl-regexp         PATTERN を Perl 正規表現とする\n"
 
-#: src/main.c:1560
+#: src/main.c:1561
 #, c-format
 msgid ""
 "  -e, --regexp=PATTERN      use PATTERN for matching\n"
@@ -584,7 +584,7 @@ msgstr ""
 "  -x, --line-regexp         強制的に行全体で PATTERN の一致処理を行う\n"
 "  -z, --null-data           データの行末を改行ではなく NULL とする\n"
 
-#: src/main.c:1567
+#: src/main.c:1568
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -602,7 +602,7 @@ msgstr ""
 "      --help                このヘルプを表示して終了する\n"
 "      --mmap                無視する (後方互換性を保つために存在する)\n"
 
-#: src/main.c:1574
+#: src/main.c:1575
 #, c-format
 msgid ""
 "\n"
@@ -627,7 +627,7 @@ msgstr ""
 "      --label=LABEL         標準入力のファイル名の接頭辞として LABEL を使用す"
 "る\n"
 
-#: src/main.c:1585
+#: src/main.c:1586
 #, fuzzy, c-format
 msgid ""
 "  -o, --only-matching       show only the part of a line matching PATTERN\n"
@@ -642,7 +642,7 @@ msgstr ""
 "                            TYPE は `binary'、`text' または `without-match'\n"
 "  -a, --text                --binary-files=text と等価\n"
 
-#: src/main.c:1592
+#: src/main.c:1593
 #, fuzzy, c-format
 msgid ""
 "  -I                        equivalent to --binary-files=without-match\n"
@@ -660,7 +660,7 @@ msgstr ""
 "                            ACTION は `read' または `skip'\n"
 "  -R, -r, --recursive       --directories=recurse と等価\n"
 
-#: src/main.c:1601
+#: src/main.c:1602
 #, c-format
 msgid ""
 "      --include=FILE_PATTERN  search only files that match FILE_PATTERN\n"
@@ -677,7 +677,7 @@ msgstr ""
 "ファイルをスキップする\n"
 "      --exclude-dir=PATTERN  PATTERN に一致したディレクトリをスキップする\n"
 
-#: src/main.c:1607
+#: src/main.c:1608
 #, c-format
 msgid ""
 "  -L, --files-without-match  print only names of FILEs containing no match\n"
@@ -693,7 +693,7 @@ msgstr ""
 "  -Z, --null                FILE の名前を表示した後に値が 0 のバイトを出力す"
 "る\n"
 
-#: src/main.c:1613
+#: src/main.c:1614
 #, c-format
 msgid ""
 "\n"
@@ -708,7 +708,7 @@ msgstr ""
 "  -A, --after-context=NUM   一致した後の NUM 行を表示する\n"
 "  -C, --context=NUM         一致した前後 NUM 行を表示する\n"
 
-#: src/main.c:1620
+#: src/main.c:1621
 #, fuzzy, c-format
 msgid ""
 "  -NUM                      same as --context=NUM\n"
@@ -730,7 +730,7 @@ msgstr ""
 "  -u, --unix-byte-offsets   CR が無いものとしてオフセットを表示する (MSDOS)\n"
 "\n"
 
-#: src/main.c:1630
+#: src/main.c:1631
 #, fuzzy, c-format
 msgid ""
 "When FILE is -, read standard input.  With no FILE, read . if a command-"
@@ -746,37 +746,37 @@ msgstr ""
 "それ以外は 1 です。エラーが発生して -q を指定していない場合の終了コードは 2\n"
 "になります。\n"
 
-#: src/main.c:1636
+#: src/main.c:1637
 #, c-format
 msgid "GNU Grep home page: <%s>\n"
 msgstr "GNU Grep のホームページ: <%s>\n"
 
-#: src/main.c:1669
+#: src/main.c:1670
 #, c-format
 msgid "%s can only use the %s pattern syntax"
 msgstr "%s は %s パターン構文の時のみ使用できます"
 
-#: src/main.c:1672
+#: src/main.c:1673
 #, c-format
 msgid "conflicting matchers specified"
 msgstr "指定した一致処理系が競合しています"
 
-#: src/main.c:1686
+#: src/main.c:1687
 #, c-format
 msgid "invalid matcher %s"
 msgstr "%s は無効な一致処理系です"
 
-#: src/main.c:2017
+#: src/main.c:2023
 #, c-format
 msgid "unknown devices method"
 msgstr "デバイスに対する不明な操作です"
 
-#: src/main.c:2148
+#: src/main.c:2154
 #, c-format
 msgid "invalid max count"
 msgstr "無効な一致回数です"
 
-#: src/main.c:2205
+#: src/main.c:2211
 #, c-format
 msgid "unknown binary-files type"
 msgstr "不明なバイナリファイルの形式です"
