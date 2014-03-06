@@ -25,6 +25,10 @@ DEB_CONFIGURE_EXTRA_FLAGS += --without-included-regex
 DEB_CONFIGURE_SCRIPT_ENV += LIBS="-Wl,--no-as-needed -ldl -Wl,--as-needed"
 DEB_CONFIGURE_SCRIPT_ENV += CPPFLAGS="-DHAVE_DYNAMIC_LIBPCRE"
 
+# FIXME: CDBS should include a specific var for this 
+# (e.g. DEB_CONFIGURE_EXECDIR in autotools-vars.mk)?
+DEB_CONFIGURE_EXTRA_FLAGS += --exec-prefix=/
+
 include /usr/share/cdbs/1/rules/autoreconf.mk
 include /usr/share/cdbs/1/rules/debhelper.mk
 include /usr/share/cdbs/1/class/autotools.mk
