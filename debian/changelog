@@ -1,3 +1,11 @@
+grep (2.18-3~1) UNRELEASED; urgency=medium
+
+  * NOT RELEASE YET
+  * Improve documentation about -F and -x. Thanks to Justin Pryzby.
+    85-412370-F-x-documentation.patch (Closes: #412370)
+
+ -- Santiago Ruano Rincón <santiago@debian.org>  Sat, 21 Jun 2014 21:35:47 +0200
+
 grep (2.18-2) unstable; urgency=medium
 
   * Depends on pcre3 >= 1:8.31-3. Since that revision, pcre3 enables to 
