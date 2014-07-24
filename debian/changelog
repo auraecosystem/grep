@@ -3,6 +3,8 @@ grep (2.18-3~1) UNRELEASED; urgency=medium
   * NOT RELEASE YET
   * Improve documentation about -F and -x. Thanks to Justin Pryzby.
     85-412370-F-x-documentation.patch (Closes: #412370)
+  * Add d/upstream/signing-key.asc and updated d/watch to verify upstream
+    signature.
 
  -- Santiago Ruano Rincón <santiago@debian.org>  Sat, 21 Jun 2014 21:35:47 +0200
 
