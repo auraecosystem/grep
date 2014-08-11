@@ -1,4 +1,4 @@
-grep (2.18-3~1) UNRELEASED; urgency=medium
+grep (2.20-1~1) UNRELEASED; urgency=medium
 
   * NOT RELEASE YET
   * Improve documentation about -F and -x. Thanks to Justin Pryzby.
@@ -6,7 +6,7 @@ grep (2.18-3~1) UNRELEASED; urgency=medium
   * Add d/upstream/signing-key.asc and updated d/watch to verify upstream
     signature.
 
- -- Santiago Ruano Rincón <santiago@debian.org>  Sat, 21 Jun 2014 21:35:47 +0200
+ -- Santiago Ruano Rincón <santiago@debian.org>  Mon, 11 Aug 2014 10:49:27 +0200
 
 grep (2.18-2) unstable; urgency=medium
 
