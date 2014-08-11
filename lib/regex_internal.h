@@ -863,8 +863,7 @@ re_string_wchar_at (const re_string_t *pstr, Idx idx)
 # ifndef NOT_IN_libc
 static int
 internal_function __attribute__ ((pure, unused))
-re_string_elem_size_at (const re_string_t *pstr _UNUSED_PARAMETER_,
-			Idx idx _UNUSED_PARAMETER_)
+re_string_elem_size_at (const re_string_t *pstr, Idx idx)
 {
 #  ifdef _LIBC
   const unsigned char *p, *extra;

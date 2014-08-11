@@ -21,15 +21,13 @@ AM_CFLAGS = $(WARN_CFLAGS) $(WERROR_CFLAGS)
 # Tell the linker to omit references to unused shared libraries.
 AM_LDFLAGS = $(IGNORE_UNUSED_LIBRARIES_CFLAGS)
 
-bin_PROGRAMS = grep egrep fgrep
-grep_SOURCES  = grep.c
-egrep_SOURCES = egrep.c
-fgrep_SOURCES = fgrep.c
-noinst_HEADERS = grep.h dfa.h kwset.h search.h system.h mbsupport.h
-
-noinst_LIBRARIES = libgrep.a
-libgrep_a_SOURCES = kwset.c dfa.c searchutils.c dfasearch.c kwsearch.c \
-	pcresearch.c main.c
+bin_PROGRAMS = grep
+bin_SCRIPTS = egrep fgrep
+grep_SOURCES = grep.c searchutils.c \
+          dfa.c dfasearch.c \
+          kwset.c kwsearch.c \
+          pcresearch.c
+noinst_HEADERS = grep.h dfa.h kwset.h search.h system.h
 
 # Sometimes, the expansion of $(LIBINTL) includes -lc which may
 # include modules defining variables like 'optind', so libgreputils.a
@@ -37,7 +35,6 @@ libgrep_a_SOURCES = kwset.c dfa.c searchutils.c dfasearch.c kwsearch.c \
 # But libgreputils.a must also follow $(LIBINTL), since libintl uses
 # replacement functions defined in libgreputils.a.
 LDADD = \
-  libgrep.a \
   ../lib/libgreputils.a $(LIBINTL) ../lib/libgreputils.a $(LIBICONV) \
   $(LIBTHREAD)
 
@@ -45,4 +42,22 @@ grep_LDADD = $(LDADD) $(LIB_PCRE)
 localedir = $(datadir)/locale
 AM_CPPFLAGS = -I$(top_builddir)/lib -I$(top_srcdir)/lib
 
-EXTRA_DIST = dosbuf.c
+EXTRA_DIST = dosbuf.c egrep.sh
+
+egrep fgrep: egrep.sh Makefile
+	$(AM_V_GEN)grep=`echo grep | sed -e '$(transform)'`	&& \
+	case $@ in egrep) option=-E;; fgrep) option=-F;; esac	&& \
+	shell_does_substrings='set x/y && d=$${1%/*} && test "$$d" = x' && \
+	if $(SHELL) -c "$$shell_does_substrings" 2>/dev/null; then \
+	  edit_substring='s,X,X,'; \
+	else \
+	  edit_substring='s,\$${0%/\*},`expr "X$$0" : '\''X\\(.*\\)/'\''`,g'; \
+	fi && \
+	sed -e 's|[@]SHELL@|$(SHELL)|g' \
+	    -e "$$edit_substring" \
+	    -e "s|[@]grep@|$$grep|g" \
+	    -e "s|[@]option@|$$option|g" <$(srcdir)/egrep.sh >$@-t
+	$(AM_V_at)chmod +x $@-t
+	$(AM_V_at)mv $@-t $@
+
+CLEANFILES = egrep fgrep *-t

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grep-2.5g.ro\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2014-02-20 22:40-0800\n"
+"POT-Creation-Date: 2014-06-03 06:49-0700\n"
 "PO-Revision-Date: 2003-04-19 02:47+0000\n"
 "Last-Translator: Eugen Hoanca <eugenh@urban-grafx.ro>\n"
 "Language-Team: Romanian <translation-team-ro@lists.sourceforge.net>\n"
@@ -30,7 +30,7 @@ msgstr ""
 msgid "Valid arguments are:"
 msgstr ""
 
-#: lib/closeout.c:112 src/main.c:954
+#: lib/closeout.c:112 src/grep.c:949
 #, c-format
 msgid "write error"
 msgstr ""
@@ -94,8 +94,8 @@ msgstr "%s: opþiunea `-W %s' nu permite un parametru\n"
 msgid "%s: option '-W %s' requires an argument\n"
 msgstr "%s: opþiunea `%s' necesitã un parametru\n"
 
-#: lib/obstack.c:413 lib/obstack.c:415 lib/xalloc-die.c:34 src/kwset.c:178
-#: src/kwset.c:186 src/kwset.c:409 src/pcresearch.c:191
+#: lib/obstack.c:416 lib/obstack.c:418 lib/xalloc-die.c:34
+#: src/pcresearch.c:177
 #, c-format
 msgid "memory exhausted"
 msgstr "memorie plinã"
@@ -179,7 +179,7 @@ msgstr ""
 msgid "Unmatched \\{"
 msgstr ""
 
-#: lib/regcomp.c:161 src/dfa.c:1371
+#: lib/regcomp.c:161
 msgid "Invalid content of \\{\\}"
 msgstr ""
 
@@ -199,7 +199,7 @@ msgstr ""
 msgid "Premature end of regular expression"
 msgstr ""
 
-#: lib/regcomp.c:176 src/dfa.c:1374
+#: lib/regcomp.c:176
 msgid "Regular expression too big"
 msgstr ""
 
@@ -333,7 +333,7 @@ msgstr ""
 #. for this package.  Please add _another line_ saying
 #. "Report translation bugs to <...>\n" with the address for translation
 #. bugs (typically your translation team's web or email address).
-#: lib/version-etc.c:245 src/main.c:1636
+#: lib/version-etc.c:245 src/grep.c:1620
 #, c-format
 msgid ""
 "\n"
@@ -355,7 +355,7 @@ msgstr ""
 msgid "%s home page: <http://www.gnu.org/software/%s/>\n"
 msgstr ""
 
-#: lib/version-etc.c:256 src/main.c:1639
+#: lib/version-etc.c:256 src/grep.c:1623
 msgid "General help using GNU software: <http://www.gnu.org/gethelp/>\n"
 msgstr ""
 
@@ -374,128 +374,116 @@ msgstr ""
 msgid "%s%s argument '%s' too large"
 msgstr ""
 
-#: src/dfa.c:956 src/dfa.c:959 src/dfa.c:979 src/dfa.c:989 src/dfa.c:1001
-#: src/dfa.c:1052 src/dfa.c:1061 src/dfa.c:1064 src/dfa.c:1069 src/dfa.c:1082
-#: src/dfa.c:1139
+#: src/dfa.c:1017 src/dfa.c:1020 src/dfa.c:1039 src/dfa.c:1049 src/dfa.c:1061
+#: src/dfa.c:1097 src/dfa.c:1106 src/dfa.c:1109 src/dfa.c:1114 src/dfa.c:1128
+#: src/dfa.c:1174
 #, fuzzy
 msgid "unbalanced ["
 msgstr "[ fãrã pereche"
 
-#: src/dfa.c:1010
+#: src/dfa.c:1073
 msgid "invalid character class"
 msgstr ""
 
-#: src/dfa.c:1172
+#: src/dfa.c:1217
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr ""
 
-#: src/dfa.c:1224
+#: src/dfa.c:1265
 #, fuzzy
 msgid "unfinished \\ escape"
 msgstr "\\ escape neterminat"
 
-#: src/dfa.c:1789
+#: src/dfa.c:1412
+#, fuzzy
+msgid "invalid content of \\{\\}"
+msgstr "numãrare maximã invalidã"
+
+#: src/dfa.c:1415
+msgid "regular expression too big"
+msgstr ""
+
+#: src/dfa.c:1845
 #, fuzzy
 msgid "unbalanced ("
 msgstr "( fãrã pereche"
 
-#: src/dfa.c:1915
+#: src/dfa.c:1971
 #, fuzzy
 msgid "no syntax specified"
 msgstr "Nu s-a specificat sintaxa"
 
-#: src/dfa.c:1923
+#: src/dfa.c:1979
 #, fuzzy
 msgid "unbalanced )"
 msgstr ") fãra pereche"
 
-#: src/egrep.c:16
-msgid "PATTERN is an extended regular expression (ERE).\n"
-msgstr ""
-
-#: src/egrep.c:18
-msgid "Invocation as 'egrep' is deprecated; use 'grep -E' instead.\n"
-msgstr ""
-
-#: src/fgrep.c:10
-msgid "PATTERN is a set of newline-separated fixed strings.\n"
-msgstr ""
-
-#: src/fgrep.c:12
-msgid "Invocation as 'fgrep' is deprecated; use 'grep -F' instead.\n"
-msgstr ""
-
-#: src/grep.c:46
-msgid "PATTERN is, by default, a basic regular expression (BRE).\n"
-msgstr ""
-
-#: src/grep.c:48
-msgid ""
-"'egrep' means 'grep -E'.  'fgrep' means 'grep -F'.\n"
-"Direct invocation as either 'egrep' or 'fgrep' is deprecated.\n"
-msgstr ""
-
 #. This is a proper name. See the gettext manual, section Names.
-#: src/main.c:60
+#: src/grep.c:57
 msgid "Mike Haertel"
 msgstr ""
 
-#: src/main.c:61
+#: src/grep.c:58
 msgid "others, see <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
 msgstr ""
 
-#: src/main.c:500
+#: src/grep.c:502
 msgid "invalid context length argument"
 msgstr "parametru lungime context invalid"
 
-#: src/main.c:569
+#: src/grep.c:571
 msgid "lseek failed"
 msgstr ""
 
-#: src/main.c:707
+#: src/grep.c:704
 #, c-format
 msgid "input is too large to count"
 msgstr "intrarea(input) este prea mare pentru numãrare"
 
-#: src/main.c:1273
+#: src/grep.c:1257
 #, c-format
 msgid "Binary file %s matches\n"
 msgstr "Fiºierul binar %s corespunde\n"
 
-#: src/main.c:1316
+#: src/grep.c:1300
 #, fuzzy, c-format
 msgid "warning: %s: %s"
 msgstr "avertisment: %s: %s\n"
 
-#: src/main.c:1317
+#: src/grep.c:1301
 msgid "recursive directory loop"
 msgstr "buclã recursivã de directoare"
 
-#: src/main.c:1465
+#: src/grep.c:1449
 #, c-format
 msgid "input file %s is also the output"
 msgstr ""
 
-#: src/main.c:1523
+#: src/grep.c:1507
 msgid "(standard input)"
 msgstr "(intrare standard)"
 
-#: src/main.c:1539 src/main.c:1546
+#: src/grep.c:1523 src/grep.c:1530
 #, c-format
 msgid "Usage: %s [OPTION]... PATTERN [FILE]...\n"
 msgstr "Folosire: %s [OPÞIUNE]... TIPAR [FIªIER]...\n"
 
-#: src/main.c:1541
+#: src/grep.c:1525
 #, fuzzy, c-format
 msgid "Try '%s --help' for more information.\n"
 msgstr "Încercaþi `%s --help' pentru mai multe informaþii.\n"
 
-#: src/main.c:1547
+#: src/grep.c:1531
 #, c-format
 msgid "Search for PATTERN in each FILE or standard input.\n"
 msgstr ""
 
-#: src/main.c:1550
+#: src/grep.c:1532
+#, c-format
+msgid "PATTERN is, by default, a basic regular expression (BRE).\n"
+msgstr ""
+
+#: src/grep.c:1533
 #, fuzzy, c-format
 msgid ""
 "Example: %s -i 'hello world' menu.h main.c\n"
@@ -507,7 +495,7 @@ msgstr ""
 "\n"
 "Selecþie ºi interpretare regexp:\n"
 
-#: src/main.c:1555
+#: src/grep.c:1537
 #, fuzzy, c-format
 msgid ""
 "  -E, --extended-regexp     PATTERN is an extended regular expression (ERE)\n"
@@ -522,7 +510,7 @@ msgstr ""
 "  -G, --basic-regexp       TIPAR este o expresie exactã primarã\n"
 "  -P, --perl-regexp        TIPAR este o expresie exactã Perl\n"
 
-#: src/main.c:1561
+#: src/grep.c:1543
 #, fuzzy, c-format
 msgid ""
 "  -e, --regexp=PATTERN      use PATTERN for matching\n"
@@ -542,7 +530,7 @@ msgstr ""
 "  -z, --null-data           linia de date se terminã în octet 0, nu "
 "linie_nouã\n"
 
-#: src/main.c:1568
+#: src/grep.c:1550
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -560,7 +548,7 @@ msgstr ""
 "      --help                afiºeazã acest ajutor ºi terminã\n"
 "      --mmap                foloseºte intrare memory-mapped dacã e posibil\n"
 
-#: src/main.c:1575
+#: src/grep.c:1557
 #, c-format
 msgid ""
 "\n"
@@ -575,7 +563,7 @@ msgid ""
 "prefix\n"
 msgstr ""
 
-#: src/main.c:1586
+#: src/grep.c:1568
 #, c-format
 msgid ""
 "  -o, --only-matching       show only the part of a line matching PATTERN\n"
@@ -585,7 +573,7 @@ msgid ""
 "  -a, --text                equivalent to --binary-files=text\n"
 msgstr ""
 
-#: src/main.c:1593
+#: src/grep.c:1575
 #, c-format
 msgid ""
 "  -I                        equivalent to --binary-files=without-match\n"
@@ -597,7 +585,7 @@ msgid ""
 "  -R, --dereference-recursive  likewise, but follow all symlinks\n"
 msgstr ""
 
-#: src/main.c:1602
+#: src/grep.c:1584
 #, c-format
 msgid ""
 "      --include=FILE_PATTERN  search only files that match FILE_PATTERN\n"
@@ -608,7 +596,7 @@ msgid ""
 "skipped.\n"
 msgstr ""
 
-#: src/main.c:1608
+#: src/grep.c:1590
 #, c-format
 msgid ""
 "  -L, --files-without-match  print only names of FILEs containing no match\n"
@@ -618,7 +606,7 @@ msgid ""
 "  -Z, --null                print 0 byte after FILE name\n"
 msgstr ""
 
-#: src/main.c:1614
+#: src/grep.c:1596
 #, c-format
 msgid ""
 "\n"
@@ -628,7 +616,7 @@ msgid ""
 "  -C, --context=NUM         print NUM lines of output context\n"
 msgstr ""
 
-#: src/main.c:1621
+#: src/grep.c:1603
 #, fuzzy, c-format
 msgid ""
 "  -NUM                      same as --context=NUM\n"
@@ -661,7 +649,14 @@ msgstr ""
 "mai puþin de 2 FIªIERe, se presupune -h. Starea de ieºire e 0 pentru\n"
 "corespunzãtor, 1 pentru necorespunzãtor, ºi 2 pentru probleme.\n"
 
-#: src/main.c:1631
+#: src/grep.c:1612
+#, c-format
+msgid ""
+"'egrep' means 'grep -E'.  'fgrep' means 'grep -F'.\n"
+"Direct invocation as either 'egrep' or 'fgrep' is deprecated.\n"
+msgstr ""
+
+#: src/grep.c:1615
 #, c-format
 msgid ""
 "When FILE is -, read standard input.  With no FILE, read . if a command-"
@@ -671,83 +666,78 @@ msgid ""
 "if any error occurs and -q is not given, the exit status is 2.\n"
 msgstr ""
 
-#: src/main.c:1637
+#: src/grep.c:1621
 #, c-format
 msgid "GNU Grep home page: <%s>\n"
 msgstr ""
 
-#: src/main.c:1670
-#, c-format
-msgid "%s can only use the %s pattern syntax"
-msgstr ""
-
-#: src/main.c:1673
+#: src/grep.c:1687
 #, c-format
 msgid "conflicting matchers specified"
 msgstr "conflicte între cãutãtorii (matchers) specificaþi"
 
-#: src/main.c:1687
+#: src/grep.c:1698
 #, fuzzy, c-format
 msgid "invalid matcher %s"
 msgstr "numãrare maximã invalidã"
 
-#: src/main.c:2023
+#: src/grep.c:2006
 #, c-format
 msgid "unknown devices method"
 msgstr "metodã dispozitive(devices) necunoscutã"
 
-#: src/main.c:2154
+#: src/grep.c:2133
 #, c-format
 msgid "invalid max count"
 msgstr "numãrare maximã invalidã"
 
-#: src/main.c:2211
+#: src/grep.c:2190
 #, c-format
 msgid "unknown binary-files type"
 msgstr "tip fiºiere-binare necunoscut"
 
-#: src/pcresearch.c:51
+#: src/pcresearch.c:48
 msgid ""
 "support for the -P option is not compiled into this --disable-perl-regexp "
 "binary"
 msgstr ""
 
-#: src/pcresearch.c:74
+#: src/pcresearch.c:64
 #, fuzzy, c-format
 msgid "the -P option only supports a single pattern"
 msgstr "Opþiunea -P nu este suportatã"
 
-#: src/pcresearch.c:120
+#: src/pcresearch.c:110
 #, c-format
 msgid "internal error (should never happen)"
 msgstr ""
 
-#: src/pcresearch.c:130
+#: src/pcresearch.c:120
 #, c-format
 msgid "failed to allocate memory for the PCRE JIT stack"
 msgstr ""
 
-#: src/pcresearch.c:144
+#: src/pcresearch.c:134
 #, c-format
 msgid "internal error"
 msgstr ""
 
-#: src/pcresearch.c:176
+#: src/pcresearch.c:162
 #, c-format
 msgid "exceeded PCRE's line length limit"
 msgstr ""
 
-#: src/pcresearch.c:195
+#: src/pcresearch.c:181
 #, c-format
 msgid "exceeded PCRE's backtracking limit"
 msgstr ""
 
-#: src/pcresearch.c:199
+#: src/pcresearch.c:185
 #, c-format
 msgid "invalid UTF-8 byte sequence in input"
 msgstr ""
 
-#: src/pcresearch.c:206
+#: src/pcresearch.c:192
 #, c-format
 msgid "internal PCRE error: %d"
 msgstr ""
