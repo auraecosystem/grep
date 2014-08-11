@@ -21,12 +21,8 @@
 #include <config.h>
 #include "search.h"
 
-/* Whether -w considers WC to be a word constituent.  */
-static bool
-wordchar (wint_t wc)
-{
-  return wc == L'_' || iswalnum (wc);
-}
+/* For -w, we also consider _ to be word constituent.  */
+#define WCHAR(C) (isalnum (C) || (C) == '_')
 
 /* KWset compiled pattern.  For Ecompile and Gcompile, we compile
    a list of strings, at least one of which is known to occur in
@@ -36,69 +32,47 @@ static kwset_t kwset;
 void
 Fcompile (char const *pattern, size_t size)
 {
-  size_t total = size;
+  char const *err;
+  size_t psize = size;
   mb_len_map_t *map = NULL;
   char const *pat = (match_icase && MB_CUR_MAX > 1
-                     ? mbtoupper (pattern, &total, &map)
+                     ? mbtolower (pattern, &psize, &map)
                      : pattern);
 
   kwsinit (&kwset);
 
-  char const *p = pat;
+  char const *beg = pat;
   do
     {
-      size_t len;
-      char const *sep = memchr (p, '\n', total);
-      if (sep)
+      char const *lim;
+      char const *end;
+      for (lim = beg;; ++lim)
         {
-          len = sep - p;
-          sep++;
-          total -= (len + 1);
-        }
-      else
-        {
-          len = total;
-          total = 0;
+          end = lim;
+          if (lim >= pat + psize)
+            break;
+         if (*lim == '\n')
+           {
+             lim++;
+             break;
+           }
+#if HAVE_DOS_FILE_CONTENTS
+         if (*lim == '\r' && lim + 1 < pat + psize && lim[1] == '\n')
+           {
+             lim += 2;
+             break;
+           }
+#endif
         }
 
-      char *buf = NULL;
-      if (match_lines)
-        {
-          buf = xmalloc (len + 2);
-          buf[0] = eolbyte;
-          memcpy (buf + 1, p, len);
-          buf[len + 1] = eolbyte;
-          p = buf;
-          len += 2;
-        }
-      kwsincr (kwset, p, len);
-      free (buf);
-
-      p = sep;
+      if ((err = kwsincr (kwset, beg, end - beg)) != NULL)
+        error (EXIT_TROUBLE, 0, "%s", err);
+      beg = lim;
     }
-  while (p);
+  while (beg < pat + psize);
 
-  kwsprep (kwset);
-}
-
-/* Apply the MAP (created by mbtoupper) to the uppercase-buffer-relative
-   *OFF and *LEN, converting them to be relative to the original buffer.  */
-
-static void
-mb_case_map_apply (mb_len_map_t const *map, size_t *off, size_t *len)
-{
-  if (map)
-    {
-      size_t off_incr = 0;
-      size_t len_incr = 0;
-      size_t k;
-      for (k = 0; k < *off; k++)
-        off_incr += map[k];
-      for (; k < *off + *len; k++)
-        len_incr += map[k];
-      *off += off_incr;
-      *len += len_incr;
-    }
+  if ((err = kwsprep (kwset)) != NULL)
+    error (EXIT_TROUBLE, 0, "%s", err);
 }
 
 size_t
@@ -116,7 +90,7 @@ Fexecute (char const *buf, size_t size, size_t *match_size,
     {
       if (match_icase)
         {
-          char *case_buf = mbtoupper (buf, &size, &map);
+          char *case_buf = mbtolower (buf, &size, &map);
           if (start_ptr)
             start_ptr = case_buf + (start_ptr - buf);
           buf = case_buf;
@@ -125,30 +99,40 @@ Fexecute (char const *buf, size_t size, size_t *match_size,
 
   for (mb_start = beg = start_ptr ? start_ptr : buf; beg <= buf + size; beg++)
     {
-      size_t offset = kwsexec (kwset, beg - match_lines,
-                               buf + size - beg + match_lines, &kwsmatch);
+      size_t offset = kwsexec (kwset, beg, buf + size - beg, &kwsmatch);
       if (offset == (size_t) -1)
         goto failure;
-      len = kwsmatch.size[0] - match_lines;
-      if (!match_lines && MB_CUR_MAX > 1 && !using_utf8 ()
-          && mb_goback (&mb_start, beg + offset, buf + size) != 0)
+      len = kwsmatch.size[0];
+      if (MB_CUR_MAX > 1
+          && is_mb_middle (&mb_start, beg + offset, buf + size, len))
         {
           /* The match was a part of multibyte character, advance at least
              one byte to ensure no infinite loop happens.  */
-          beg = mb_start;
+          mbstate_t s;
+          memset (&s, 0, sizeof s);
+          size_t mb_len = mbrlen (mb_start, (buf + size) - (beg + offset), &s);
+          if (mb_len == (size_t) -2 || mb_len == (size_t) -1)
+            goto failure;
+          beg = mb_start + mb_len - 1;
           continue;
         }
       beg += offset;
       if (start_ptr && !match_words)
         goto success_in_beg_and_len;
       if (match_lines)
-        goto success_in_beg_and_len;
-      if (match_words)
+        {
+          if (beg > buf && beg[-1] != eol)
+            continue;
+          if (beg + len < buf + size && beg[len] != eol)
+            continue;
+          goto success;
+        }
+      else if (match_words)
         for (try = beg; ; )
           {
-            if (wordchar (mb_prev_wc (buf, try, buf + size)))
+            if (try > buf && WCHAR(to_uchar (try[-1])))
               break;
-            if (wordchar (mb_next_wc (try + len, buf + size)))
+            if (try + len < buf + size && WCHAR(to_uchar (try[len])))
               {
                 if (!len)
                   break;

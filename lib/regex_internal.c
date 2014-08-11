@@ -17,6 +17,8 @@
    License along with the GNU C Library; if not, see
    <http://www.gnu.org/licenses/>.  */
 
+#include "verify.h"
+#include "intprops.h"
 static void re_string_construct_common (const char *str, Idx len,
 					re_string_t *pstr,
 					RE_TRANSLATE_TYPE trans, bool icase,
@@ -311,11 +313,12 @@ build_wcs_upper_buffer (re_string_t *pstr)
 			       + byte_idx), remain_len, &pstr->cur_state);
 	  if (BE (mbclen < (size_t) -2, 1))
 	    {
-	      wchar_t wcu = towupper (wc);
-	      if (wcu != wc)
+	      wchar_t wcu = wc;
+	      if (iswlower (wc))
 		{
 		  size_t mbcdlen;
 
+		  wcu = towupper (wc);
 		  mbcdlen = wcrtomb (buf, wcu, &prev_st);
 		  if (BE (mbclen == mbcdlen, 1))
 		    memcpy (pstr->mbs + byte_idx, buf, mbclen);
@@ -380,11 +383,12 @@ build_wcs_upper_buffer (re_string_t *pstr)
 	mbclen = __mbrtowc (&wc, p, remain_len, &pstr->cur_state);
 	if (BE (mbclen < (size_t) -2, 1))
 	  {
-	    wchar_t wcu = towupper (wc);
-	    if (wcu != wc)
+	    wchar_t wcu = wc;
+	    if (iswlower (wc))
 	      {
 		size_t mbcdlen;
 
+		wcu = towupper (wc);
 		mbcdlen = wcrtomb ((char *) buf, wcu, &prev_st);
 		if (BE (mbclen == mbcdlen, 1))
 		  memcpy (pstr->mbs + byte_idx, buf, mbclen);
@@ -536,7 +540,10 @@ build_upper_buffer (re_string_t *pstr)
       int ch = pstr->raw_mbs[pstr->raw_mbs_idx + char_idx];
       if (BE (pstr->trans != NULL, 0))
 	ch = pstr->trans[ch];
-      pstr->mbs[char_idx] = toupper (ch);
+      if (islower (ch))
+	pstr->mbs[char_idx] = toupper (ch);
+      else
+	pstr->mbs[char_idx] = ch;
     }
   pstr->valid_len = char_idx;
   pstr->valid_raw_len = char_idx;
@@ -1389,7 +1396,10 @@ static void
 internal_function
 re_node_set_remove_at (re_node_set *set, Idx idx)
 {
-  if (idx < 0 || idx >= set->nelem)
+  verify (! TYPE_SIGNED (Idx));
+  /* if (idx < 0)
+     return; */
+  if (idx >= set->nelem)
     return;
   --set->nelem;
   for (; idx < set->nelem; idx++)

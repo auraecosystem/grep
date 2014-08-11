@@ -221,8 +221,6 @@ AC_DEFUN([gl_EARLY],
   # Code from module mbuiter:
   # Code from module memchr:
   # Code from module memchr-tests:
-  # Code from module memchr2:
-  # Code from module memchr2-tests:
   # Code from module mempcpy:
   # Code from module memrchr:
   # Code from module memrchr-tests:
@@ -630,7 +628,6 @@ AC_DEFUN([gl_INIT],
   gl_SYS_STAT_MODULE_INDICATOR([lstat])
   AC_CONFIG_COMMANDS_PRE([m4_ifdef([AH_HEADER],
     [AC_SUBST([CONFIG_INCLUDE], m4_defn([AH_HEADER]))])])
-  AC_REQUIRE([AC_PROG_SED])
   gl_FUNC_MALLOC_GNU
   if test $REPLACE_MALLOC = 1; then
     AC_LIBOBJ([malloc])
@@ -980,9 +977,6 @@ changequote([, ])dnl
   gl_FUNC_MMAP_ANON
   AC_CHECK_HEADERS_ONCE([sys/mman.h])
   AC_CHECK_FUNCS_ONCE([mprotect])
-  gl_FUNC_MMAP_ANON
-  AC_CHECK_HEADERS_ONCE([sys/mman.h])
-  AC_CHECK_FUNCS_ONCE([mprotect])
   gt_LOCALE_FR
   gt_LOCALE_FR_UTF8
   gl_FUNC_PIPE
@@ -1296,9 +1290,6 @@ AC_DEFUN([gl_FILE_LIST], [
   lib/mbuiter.h
   lib/memchr.c
   lib/memchr.valgrind
-  lib/memchr2.c
-  lib/memchr2.h
-  lib/memchr2.valgrind
   lib/mempcpy.c
   lib/memrchr.c
   lib/minmax.h
@@ -1693,7 +1684,6 @@ AC_DEFUN([gl_FILE_LIST], [
   tests/test-mbsstr3.c
   tests/test-mbsstr3.sh
   tests/test-memchr.c
-  tests/test-memchr2.c
   tests/test-memrchr.c
   tests/test-nl_langinfo.c
   tests/test-nl_langinfo.sh

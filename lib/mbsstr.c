@@ -50,8 +50,7 @@ knuth_morris_pratt_multibyte (const char *haystack, const char *needle,
   if (memory == NULL)
     return false;
   needle_mbchars = memory;
-  table_memory = needle_mbchars + m;
-  table = table_memory;
+  table = table_memory = needle_mbchars + m;
 
   /* Fill needle_mbchars.  */
   {

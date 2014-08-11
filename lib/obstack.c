@@ -1,21 +1,19 @@
 /* obstack.c - subroutines used implicitly by object stack macros
-   Copyright (C) 1988-2014 Free Software Foundation, Inc.
-   This file is part of the GNU C Library.
 
-   The GNU C Library is free software; you can redistribute it and/or
-   modify it under the terms of the GNU General Public
-   License as published by the Free Software Foundation; either
-   version 3 of the License, or (at your option) any later version.
+   Copyright (C) 1988-1994, 1996-2006, 2009-2014 Free Software Foundation, Inc.
 
-   The GNU C Library is distributed in the hope that it will be useful,
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 3 of the License, or
+   (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-   General Public License for more details.
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
 
-   You should have received a copy of the GNU General Public
-   License along with the GNU C Library; if not, see
-   <http://www.gnu.org/licenses/>.  */
-
+   You should have received a copy of the GNU General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
 
 #ifdef _LIBC
 # include <obstack.h>
@@ -51,7 +49,6 @@
 
 #ifndef ELIDE_CODE
 
-
 # include <stdint.h>
 
 /* Determine default alignment.  */
@@ -70,10 +67,10 @@ struct fooalign
    But in fact it might be less smart and round addresses to as much as
    DEFAULT_ROUNDING.  So we prepare for it to do that.  */
 enum
-{
-  DEFAULT_ALIGNMENT = offsetof (struct fooalign, u),
-  DEFAULT_ROUNDING = sizeof (union fooround)
-};
+  {
+    DEFAULT_ALIGNMENT = offsetof (struct fooalign, u),
+    DEFAULT_ROUNDING = sizeof (union fooround)
+  };
 
 /* When we copy a long block of data, this is the unit to do it with.
    On some machines, copying successive ints does not work;
@@ -107,7 +104,7 @@ int obstack_exit_failure = EXIT_FAILURE;
 /* A looong time ago (before 1994, anyway; we're not sure) this global variable
    was used by non-GNU-C macros to avoid multiple evaluation.  The GNU C
    library still exports it because somebody might use it.  */
-struct obstack *_obstack_compat = 0;
+struct obstack *_obstack_compat;
 compat_symbol (libc, _obstack_compat, _obstack, GLIBC_2_0);
 #  endif
 # endif
@@ -119,19 +116,19 @@ compat_symbol (libc, _obstack_compat, _obstack, GLIBC_2_0);
    do not allow (expr) ? void : void.  */
 
 # define CALL_CHUNKFUN(h, size) \
-  (((h)->use_extra_arg)							      \
-   ? (*(h)->chunkfun)((h)->extra_arg, (size))				      \
-   : (*(struct _obstack_chunk *(*)(long))(h)->chunkfun)((size)))
+  (((h) -> use_extra_arg) \
+   ? (*(h)->chunkfun) ((h)->extra_arg, (size)) \
+   : (*(struct _obstack_chunk *(*) (long)) (h)->chunkfun) ((size)))
 
 # define CALL_FREEFUN(h, old_chunk) \
   do { \
-      if ((h)->use_extra_arg)						      \
-        (*(h)->freefun)((h)->extra_arg, (old_chunk));			      \
-      else								      \
-        (*(void (*)(void *))(h)->freefun)((old_chunk));			      \
-    } while (0)
+    if ((h) -> use_extra_arg) \
+      (*(h)->freefun) ((h)->extra_arg, (old_chunk)); \
+    else \
+      (*(void (*) (void *)) (h)->freefun) ((old_chunk)); \
+  } while (0)
 
-
+
 /* Initialize an obstack H for use.  Specify chunk size SIZE (0 means default).
    Objects start on multiples of ALIGNMENT (0 means use default).
    CHUNKFUN is the function to use to allocate chunks,
@@ -146,7 +143,7 @@ _obstack_begin (struct obstack *h,
                 void *(*chunkfun) (long),
                 void (*freefun) (void *))
 {
-  struct _obstack_chunk *chunk; /* points to new chunk */
+  register struct _obstack_chunk *chunk; /* points to new chunk */
 
   if (alignment == 0)
     alignment = DEFAULT_ALIGNMENT;
@@ -167,19 +164,19 @@ _obstack_begin (struct obstack *h,
       size = 4096 - extra;
     }
 
-  h->chunkfun = (struct _obstack_chunk * (*) (void *, long)) chunkfun;
+  h->chunkfun = (struct _obstack_chunk * (*)(void *, long)) chunkfun;
   h->freefun = (void (*) (void *, struct _obstack_chunk *)) freefun;
   h->chunk_size = size;
   h->alignment_mask = alignment - 1;
   h->use_extra_arg = 0;
 
-  chunk = h->chunk = CALL_CHUNKFUN (h, h->chunk_size);
+  chunk = h->chunk = CALL_CHUNKFUN (h, h -> chunk_size);
   if (!chunk)
     (*obstack_alloc_failed_handler) ();
   h->next_free = h->object_base = __PTR_ALIGN ((char *) chunk, chunk->contents,
                                                alignment - 1);
   h->chunk_limit = chunk->limit
-                     = (char *) chunk + h->chunk_size;
+    = (char *) chunk + h->chunk_size;
   chunk->prev = 0;
   /* The initial chunk now contains no empty object.  */
   h->maybe_empty_object = 0;
@@ -193,7 +190,7 @@ _obstack_begin_1 (struct obstack *h, int size, int alignment,
                   void (*freefun) (void *, void *),
                   void *arg)
 {
-  struct _obstack_chunk *chunk; /* points to new chunk */
+  register struct _obstack_chunk *chunk; /* points to new chunk */
 
   if (alignment == 0)
     alignment = DEFAULT_ALIGNMENT;
@@ -221,13 +218,13 @@ _obstack_begin_1 (struct obstack *h, int size, int alignment,
   h->extra_arg = arg;
   h->use_extra_arg = 1;
 
-  chunk = h->chunk = CALL_CHUNKFUN (h, h->chunk_size);
+  chunk = h->chunk = CALL_CHUNKFUN (h, h -> chunk_size);
   if (!chunk)
     (*obstack_alloc_failed_handler) ();
   h->next_free = h->object_base = __PTR_ALIGN ((char *) chunk, chunk->contents,
                                                alignment - 1);
   h->chunk_limit = chunk->limit
-                     = (char *) chunk + h->chunk_size;
+    = (char *) chunk + h->chunk_size;
   chunk->prev = 0;
   /* The initial chunk now contains no empty object.  */
   h->maybe_empty_object = 0;
@@ -244,11 +241,11 @@ _obstack_begin_1 (struct obstack *h, int size, int alignment,
 void
 _obstack_newchunk (struct obstack *h, int length)
 {
-  struct _obstack_chunk *old_chunk = h->chunk;
-  struct _obstack_chunk *new_chunk;
-  long new_size;
-  long obj_size = h->next_free - h->object_base;
-  long i;
+  register struct _obstack_chunk *old_chunk = h->chunk;
+  register struct _obstack_chunk *new_chunk;
+  register long new_size;
+  register long obj_size = h->next_free - h->object_base;
+  register long i;
   long already;
   char *object_base;
 
@@ -260,7 +257,7 @@ _obstack_newchunk (struct obstack *h, int length)
   /* Allocate and initialize the new chunk.  */
   new_chunk = CALL_CHUNKFUN (h, new_size);
   if (!new_chunk)
-    (*obstack_alloc_failed_handler)();
+    (*obstack_alloc_failed_handler) ();
   h->chunk = new_chunk;
   new_chunk->prev = old_chunk;
   new_chunk->limit = h->chunk_limit = (char *) new_chunk + new_size;
@@ -276,8 +273,8 @@ _obstack_newchunk (struct obstack *h, int length)
     {
       for (i = obj_size / sizeof (COPYING_UNIT) - 1;
            i >= 0; i--)
-        ((COPYING_UNIT *) object_base)[i]
-          = ((COPYING_UNIT *) h->object_base)[i];
+        ((COPYING_UNIT *)object_base)[i]
+          = ((COPYING_UNIT *)h->object_base)[i];
       /* We used to copy the odd few remaining bytes as one extra COPYING_UNIT,
          but that can cross a page boundary on a machine
          which does not do strict alignment for COPYING_UNITS.  */
@@ -292,7 +289,7 @@ _obstack_newchunk (struct obstack *h, int length)
   /* If the object just copied was the only data in OLD_CHUNK,
      free that chunk and remove it from the chain.
      But not if that chunk might contain an empty object.  */
-  if (!h->maybe_empty_object
+  if (! h->maybe_empty_object
       && (h->object_base
           == __PTR_ALIGN ((char *) old_chunk, old_chunk->contents,
                           h->alignment_mask)))
@@ -316,13 +313,13 @@ libc_hidden_def (_obstack_newchunk)
 
 /* Suppress -Wmissing-prototypes warning.  We don't want to declare this in
    obstack.h because it is just for debugging.  */
-int _obstack_allocated_p (struct obstack *h, void *obj) __attribute_pure__;
+int _obstack_allocated_p (struct obstack *h, void *obj) _GL_ATTRIBUTE_PURE;
 
 int
 _obstack_allocated_p (struct obstack *h, void *obj)
 {
-  struct _obstack_chunk *lp;    /* below addr of any objects in this chunk */
-  struct _obstack_chunk *plp;   /* point to previous chunk if any */
+  register struct _obstack_chunk *lp;   /* below addr of any objects in this chunk */
+  register struct _obstack_chunk *plp;  /* point to previous chunk if any */
 
   lp = (h)->chunk;
   /* We use >= rather than > since the object cannot be exactly at
@@ -335,7 +332,7 @@ _obstack_allocated_p (struct obstack *h, void *obj)
     }
   return lp != 0;
 }
-
+
 /* Free objects in obstack H, including OBJ and everything allocate
    more recently than OBJ.  If OBJ is zero, free everything in H.  */
 
@@ -344,8 +341,8 @@ _obstack_allocated_p (struct obstack *h, void *obj)
 void
 __obstack_free (struct obstack *h, void *obj)
 {
-  struct _obstack_chunk *lp;    /* below addr of any objects in this chunk */
-  struct _obstack_chunk *plp;   /* point to previous chunk if any */
+  register struct _obstack_chunk *lp;   /* below addr of any objects in this chunk */
+  register struct _obstack_chunk *plp;  /* point to previous chunk if any */
 
   lp = h->chunk;
   /* We use >= because there cannot be an object at the beginning of a chunk.
@@ -376,12 +373,12 @@ __obstack_free (struct obstack *h, void *obj)
    called by non-GCC compilers.  */
 strong_alias (obstack_free, _obstack_free)
 # endif
-
+
 int
 _obstack_memory_used (struct obstack *h)
 {
-  struct _obstack_chunk *lp;
-  int nbytes = 0;
+  register struct _obstack_chunk* lp;
+  register int nbytes = 0;
 
   for (lp = h->chunk; lp != 0; lp = lp->prev)
     {
@@ -389,7 +386,7 @@ _obstack_memory_used (struct obstack *h)
     }
   return nbytes;
 }
-
+
 /* Define the error handler.  */
 # ifdef _LIBC
 #  include <libintl.h>

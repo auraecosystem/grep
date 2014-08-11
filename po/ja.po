@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GNU grep 2.10\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2014-06-03 06:49-0700\n"
+"POT-Creation-Date: 2014-02-20 22:40-0800\n"
 "PO-Revision-Date: 2011-11-19 10:09+0900\n"
 "Last-Translator: Yasuaki Taniguchi <yasuakit@gmail.com>\n"
 "Language-Team: Japanese <translation-team-ja@lists.sourceforge.net>\n"
@@ -40,7 +40,7 @@ msgstr "%2$s に対する引数 %1$s が曖昧です"
 msgid "Valid arguments are:"
 msgstr "有効な引数:"
 
-#: lib/closeout.c:112 src/grep.c:949
+#: lib/closeout.c:112 src/main.c:954
 #, c-format
 msgid "write error"
 msgstr "書き込みエラー"
@@ -104,8 +104,8 @@ msgstr "%s: オプション '-W %s' は引数を取ることができません\n
 msgid "%s: option '-W %s' requires an argument\n"
 msgstr "%s: オプション '-W %s' には引数が必要です\n"
 
-#: lib/obstack.c:416 lib/obstack.c:418 lib/xalloc-die.c:34
-#: src/pcresearch.c:177
+#: lib/obstack.c:413 lib/obstack.c:415 lib/xalloc-die.c:34 src/kwset.c:178
+#: src/kwset.c:186 src/kwset.c:409 src/pcresearch.c:191
 #, c-format
 msgid "memory exhausted"
 msgstr "メモリを使い果たしました"
@@ -189,7 +189,7 @@ msgstr "( または \\( が不一致です"
 msgid "Unmatched \\{"
 msgstr "\\{ が不一致です"
 
-#: lib/regcomp.c:161
+#: lib/regcomp.c:161 src/dfa.c:1371
 msgid "Invalid content of \\{\\}"
 msgstr "\\{\\} の中身が無効です"
 
@@ -209,7 +209,7 @@ msgstr "無効な前方正規表現です"
 msgid "Premature end of regular expression"
 msgstr "正規表現が途中で終了しました"
 
-#: lib/regcomp.c:176
+#: lib/regcomp.c:176 src/dfa.c:1374
 msgid "Regular expression too big"
 msgstr "正規表現が大きすぎます"
 
@@ -366,7 +366,7 @@ msgstr ""
 #. for this package.  Please add _another line_ saying
 #. "Report translation bugs to <...>\n" with the address for translation
 #. bugs (typically your translation team's web or email address).
-#: lib/version-etc.c:245 src/grep.c:1620
+#: lib/version-etc.c:245 src/main.c:1636
 #, c-format
 msgid ""
 "\n"
@@ -395,7 +395,7 @@ msgstr "%s のホームページ: <%s>\n"
 msgid "%s home page: <http://www.gnu.org/software/%s/>\n"
 msgstr "%s のホームページ: <http://www.gnu.org/software/%s/>\n"
 
-#: lib/version-etc.c:256 src/grep.c:1623
+#: lib/version-etc.c:256 src/main.c:1639
 msgid "General help using GNU software: <http://www.gnu.org/gethelp/>\n"
 msgstr ""
 "GNU ソフトウェアを使用する際の一般的なヘルプ: <http://www.gnu.org/gethelp/>\n"
@@ -415,114 +415,134 @@ msgstr "引数 `%3$s' に対して無効な接尾辞 %1$s%2$s です"
 msgid "%s%s argument '%s' too large"
 msgstr "引数 `%3$s' に対する %1$s%2$s が大きすぎます"
 
-#: src/dfa.c:1017 src/dfa.c:1020 src/dfa.c:1039 src/dfa.c:1049 src/dfa.c:1061
-#: src/dfa.c:1097 src/dfa.c:1106 src/dfa.c:1109 src/dfa.c:1114 src/dfa.c:1128
-#: src/dfa.c:1174
+#: src/dfa.c:956 src/dfa.c:959 src/dfa.c:979 src/dfa.c:989 src/dfa.c:1001
+#: src/dfa.c:1052 src/dfa.c:1061 src/dfa.c:1064 src/dfa.c:1069 src/dfa.c:1082
+#: src/dfa.c:1139
 msgid "unbalanced ["
 msgstr "対応がとれていない [ です"
 
-#: src/dfa.c:1073
+#: src/dfa.c:1010
 msgid "invalid character class"
 msgstr "無効な文字クラス名です"
 
-#: src/dfa.c:1217
+#: src/dfa.c:1172
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr "文字クラスの構文は [[:space:]] です。 [:space:] ではありません"
 
-#: src/dfa.c:1265
+#: src/dfa.c:1224
 msgid "unfinished \\ escape"
 msgstr "\\ エスケープが終了していません"
 
-#: src/dfa.c:1412
-#, fuzzy
-msgid "invalid content of \\{\\}"
-msgstr "\\{\\} の中身が無効です"
-
-#: src/dfa.c:1415
-#, fuzzy
-msgid "regular expression too big"
-msgstr "正規表現が大きすぎます"
-
-#: src/dfa.c:1845
+#: src/dfa.c:1789
 msgid "unbalanced ("
 msgstr "対応がとれていない ( です"
 
-#: src/dfa.c:1971
+#: src/dfa.c:1915
 msgid "no syntax specified"
 msgstr "構文が指定されていません"
 
-#: src/dfa.c:1979
+#: src/dfa.c:1923
 msgid "unbalanced )"
 msgstr "対応がとれていない ) です"
 
+#: src/egrep.c:16
+msgid "PATTERN is an extended regular expression (ERE).\n"
+msgstr "PATTERN は拡張正規表現 (ERE) です。\n"
+
+#: src/egrep.c:18
+#, fuzzy
+msgid "Invocation as 'egrep' is deprecated; use 'grep -E' instead.\n"
+msgstr ""
+"`egrep' という名前での起動は廃止予定です。代わりに `grep -E' を使用してくださ"
+"い。\n"
+
+#: src/fgrep.c:10
+msgid "PATTERN is a set of newline-separated fixed strings.\n"
+msgstr "PATTERN は改行で区切られた固定文字列の組です。\n"
+
+#: src/fgrep.c:12
+#, fuzzy
+msgid "Invocation as 'fgrep' is deprecated; use 'grep -F' instead.\n"
+msgstr ""
+"`fgrep' という名前での起動は廃止予定です。代わりに `grep -F' を使用してくださ"
+"い。\n"
+
+#: src/grep.c:46
+msgid "PATTERN is, by default, a basic regular expression (BRE).\n"
+msgstr "PATTERN はデフォルトでは基本正規表現 (BRE) です。\n"
+
+#: src/grep.c:48
+#, fuzzy
+msgid ""
+"'egrep' means 'grep -E'.  'fgrep' means 'grep -F'.\n"
+"Direct invocation as either 'egrep' or 'fgrep' is deprecated.\n"
+msgstr ""
+"`egrep' は `grep -E' を意味します。 `fgrep' は `grep -F' を意味します。\n"
+"`egrep' または `fgrep' による直接起動は廃止予定です。\n"
+
 #. This is a proper name. See the gettext manual, section Names.
-#: src/grep.c:57
+#: src/main.c:60
 msgid "Mike Haertel"
 msgstr "Mike Haertel"
 
-#: src/grep.c:58
+#: src/main.c:61
 msgid "others, see <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
 msgstr ""
 "その他の方々は <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS> を参照して"
 "ください"
 
-#: src/grep.c:502
+#: src/main.c:500
 msgid "invalid context length argument"
 msgstr "一致した前後の行の表示に関する引数が無効です"
 
-#: src/grep.c:571
+#: src/main.c:569
 msgid "lseek failed"
 msgstr "lseek に失敗しました"
 
-#: src/grep.c:704
+#: src/main.c:707
 #, c-format
 msgid "input is too large to count"
 msgstr "入力が大きすぎて数えられません"
 
-#: src/grep.c:1257
+#: src/main.c:1273
 #, c-format
 msgid "Binary file %s matches\n"
 msgstr "バイナリファイル %s に一致しました\n"
 
-#: src/grep.c:1300
+#: src/main.c:1316
 #, c-format
 msgid "warning: %s: %s"
 msgstr "警告: %s: %s"
 
-#: src/grep.c:1301
+#: src/main.c:1317
 msgid "recursive directory loop"
 msgstr "ディレクトリーが再帰的ループをしています"
 
-#: src/grep.c:1449
+#: src/main.c:1465
 #, c-format
 msgid "input file %s is also the output"
 msgstr "入力ファイル %s が出力にもなっています"
 
-#: src/grep.c:1507
+#: src/main.c:1523
 msgid "(standard input)"
 msgstr "(標準入力)"
 
-#: src/grep.c:1523 src/grep.c:1530
+#: src/main.c:1539 src/main.c:1546
 #, c-format
 msgid "Usage: %s [OPTION]... PATTERN [FILE]...\n"
 msgstr "使用法: %s [OPTION]... PATTERN [FILE]...\n"
 
-#: src/grep.c:1525
+#: src/main.c:1541
 #, fuzzy, c-format
 msgid "Try '%s --help' for more information.\n"
 msgstr "詳しくは`%s --help'を実行してください。\n"
 
-#: src/grep.c:1531
+#: src/main.c:1547
 #, c-format
 msgid "Search for PATTERN in each FILE or standard input.\n"
 msgstr "各 FILE または標準入力内の PATTERN を検索します。\n"
 
-#: src/grep.c:1532
-#, c-format
-msgid "PATTERN is, by default, a basic regular expression (BRE).\n"
-msgstr "PATTERN はデフォルトでは基本正規表現 (BRE) です。\n"
-
-#: src/grep.c:1533
+#: src/main.c:1550
 #, c-format
 msgid ""
 "Example: %s -i 'hello world' menu.h main.c\n"
@@ -533,7 +553,7 @@ msgstr ""
 "\n"
 "正規表現の選択および解釈:\n"
 
-#: src/grep.c:1537
+#: src/main.c:1555
 #, c-format
 msgid ""
 "  -E, --extended-regexp     PATTERN is an extended regular expression (ERE)\n"
@@ -547,7 +567,7 @@ msgstr ""
 "  -G, --basic-regexp        PATTERN を基本正規表現 (BRE) とする\n"
 "  -P, --perl-regexp         PATTERN を Perl 正規表現とする\n"
 
-#: src/grep.c:1543
+#: src/main.c:1561
 #, c-format
 msgid ""
 "  -e, --regexp=PATTERN      use PATTERN for matching\n"
@@ -564,7 +584,7 @@ msgstr ""
 "  -x, --line-regexp         強制的に行全体で PATTERN の一致処理を行う\n"
 "  -z, --null-data           データの行末を改行ではなく NULL とする\n"
 
-#: src/grep.c:1550
+#: src/main.c:1568
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -582,7 +602,7 @@ msgstr ""
 "      --help                このヘルプを表示して終了する\n"
 "      --mmap                無視する (後方互換性を保つために存在する)\n"
 
-#: src/grep.c:1557
+#: src/main.c:1575
 #, c-format
 msgid ""
 "\n"
@@ -607,7 +627,7 @@ msgstr ""
 "      --label=LABEL         標準入力のファイル名の接頭辞として LABEL を使用す"
 "る\n"
 
-#: src/grep.c:1568
+#: src/main.c:1586
 #, fuzzy, c-format
 msgid ""
 "  -o, --only-matching       show only the part of a line matching PATTERN\n"
@@ -622,7 +642,7 @@ msgstr ""
 "                            TYPE は `binary'、`text' または `without-match'\n"
 "  -a, --text                --binary-files=text と等価\n"
 
-#: src/grep.c:1575
+#: src/main.c:1593
 #, fuzzy, c-format
 msgid ""
 "  -I                        equivalent to --binary-files=without-match\n"
@@ -640,7 +660,7 @@ msgstr ""
 "                            ACTION は `read' または `skip'\n"
 "  -R, -r, --recursive       --directories=recurse と等価\n"
 
-#: src/grep.c:1584
+#: src/main.c:1602
 #, c-format
 msgid ""
 "      --include=FILE_PATTERN  search only files that match FILE_PATTERN\n"
@@ -657,7 +677,7 @@ msgstr ""
 "ファイルをスキップする\n"
 "      --exclude-dir=PATTERN  PATTERN に一致したディレクトリをスキップする\n"
 
-#: src/grep.c:1590
+#: src/main.c:1608
 #, c-format
 msgid ""
 "  -L, --files-without-match  print only names of FILEs containing no match\n"
@@ -673,7 +693,7 @@ msgstr ""
 "  -Z, --null                FILE の名前を表示した後に値が 0 のバイトを出力す"
 "る\n"
 
-#: src/grep.c:1596
+#: src/main.c:1614
 #, c-format
 msgid ""
 "\n"
@@ -688,7 +708,7 @@ msgstr ""
 "  -A, --after-context=NUM   一致した後の NUM 行を表示する\n"
 "  -C, --context=NUM         一致した前後 NUM 行を表示する\n"
 
-#: src/grep.c:1603
+#: src/main.c:1621
 #, fuzzy, c-format
 msgid ""
 "  -NUM                      same as --context=NUM\n"
@@ -710,16 +730,7 @@ msgstr ""
 "  -u, --unix-byte-offsets   CR が無いものとしてオフセットを表示する (MSDOS)\n"
 "\n"
 
-#: src/grep.c:1612
-#, fuzzy, c-format
-msgid ""
-"'egrep' means 'grep -E'.  'fgrep' means 'grep -F'.\n"
-"Direct invocation as either 'egrep' or 'fgrep' is deprecated.\n"
-msgstr ""
-"`egrep' は `grep -E' を意味します。 `fgrep' は `grep -F' を意味します。\n"
-"`egrep' または `fgrep' による直接起動は廃止予定です。\n"
-
-#: src/grep.c:1615
+#: src/main.c:1631
 #, fuzzy, c-format
 msgid ""
 "When FILE is -, read standard input.  With no FILE, read . if a command-"
@@ -735,37 +746,42 @@ msgstr ""
 "それ以外は 1 です。エラーが発生して -q を指定していない場合の終了コードは 2\n"
 "になります。\n"
 
-#: src/grep.c:1621
+#: src/main.c:1637
 #, c-format
 msgid "GNU Grep home page: <%s>\n"
 msgstr "GNU Grep のホームページ: <%s>\n"
 
-#: src/grep.c:1687
+#: src/main.c:1670
+#, c-format
+msgid "%s can only use the %s pattern syntax"
+msgstr "%s は %s パターン構文の時のみ使用できます"
+
+#: src/main.c:1673
 #, c-format
 msgid "conflicting matchers specified"
 msgstr "指定した一致処理系が競合しています"
 
-#: src/grep.c:1698
+#: src/main.c:1687
 #, c-format
 msgid "invalid matcher %s"
 msgstr "%s は無効な一致処理系です"
 
-#: src/grep.c:2006
+#: src/main.c:2023
 #, c-format
 msgid "unknown devices method"
 msgstr "デバイスに対する不明な操作です"
 
-#: src/grep.c:2133
+#: src/main.c:2154
 #, c-format
 msgid "invalid max count"
 msgstr "無効な一致回数です"
 
-#: src/grep.c:2190
+#: src/main.c:2211
 #, c-format
 msgid "unknown binary-files type"
 msgstr "不明なバイナリファイルの形式です"
 
-#: src/pcresearch.c:48
+#: src/pcresearch.c:51
 msgid ""
 "support for the -P option is not compiled into this --disable-perl-regexp "
 "binary"
@@ -773,66 +789,45 @@ msgstr ""
 "このバイナリは --disable-perl-regexp 付きでコンパイルされているため -P オプ"
 "ションはサポートしません"
 
-#: src/pcresearch.c:64
+#: src/pcresearch.c:74
 #, c-format
 msgid "the -P option only supports a single pattern"
 msgstr "-P オプションは単一のパターンしかサポートしません"
 
-#: src/pcresearch.c:110
+#: src/pcresearch.c:120
 #, c-format
 msgid "internal error (should never happen)"
 msgstr ""
 
-#: src/pcresearch.c:120
+#: src/pcresearch.c:130
 #, c-format
 msgid "failed to allocate memory for the PCRE JIT stack"
 msgstr ""
 
-#: src/pcresearch.c:134
+#: src/pcresearch.c:144
 #, c-format
 msgid "internal error"
 msgstr "内部エラー"
 
-#: src/pcresearch.c:162
+#: src/pcresearch.c:176
 #, fuzzy, c-format
 msgid "exceeded PCRE's line length limit"
 msgstr "PCRE のバックスラッシュ制限を超過しました"
 
-#: src/pcresearch.c:181
+#: src/pcresearch.c:195
 #, c-format
 msgid "exceeded PCRE's backtracking limit"
 msgstr "PCRE のバックスラッシュ制限を超過しました"
 
-#: src/pcresearch.c:185
+#: src/pcresearch.c:199
 #, c-format
 msgid "invalid UTF-8 byte sequence in input"
 msgstr ""
 
-#: src/pcresearch.c:192
+#: src/pcresearch.c:206
 #, fuzzy, c-format
 msgid "internal PCRE error: %d"
 msgstr "内部エラー"
-
-#~ msgid "PATTERN is an extended regular expression (ERE).\n"
-#~ msgstr "PATTERN は拡張正規表現 (ERE) です。\n"
-
-#, fuzzy
-#~ msgid "Invocation as 'egrep' is deprecated; use 'grep -E' instead.\n"
-#~ msgstr ""
-#~ "`egrep' という名前での起動は廃止予定です。代わりに `grep -E' を使用してく"
-#~ "ださい。\n"
-
-#~ msgid "PATTERN is a set of newline-separated fixed strings.\n"
-#~ msgstr "PATTERN は改行で区切られた固定文字列の組です。\n"
-
-#, fuzzy
-#~ msgid "Invocation as 'fgrep' is deprecated; use 'grep -F' instead.\n"
-#~ msgstr ""
-#~ "`fgrep' という名前での起動は廃止予定です。代わりに `grep -F' を使用してく"
-#~ "ださい。\n"
-
-#~ msgid "%s can only use the %s pattern syntax"
-#~ msgstr "%s は %s パターン構文の時のみ使用できます"
 
 #~ msgid "unfinished repeat count"
 #~ msgstr "繰返し回数が終了していません"

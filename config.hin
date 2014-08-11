@@ -1534,10 +1534,6 @@
 /* Define to a substitute value for mmap()'s MAP_ANONYMOUS flag. */
 #undef MAP_ANONYMOUS
 
-/* Define if the mbrtowc function does not return (size_t) -2 for empty input.
-   */
-#undef MBRTOWC_EMPTY_INPUT_BUG
-
 /* Define if the mbrtowc function has the NULL pwc argument bug. */
 #undef MBRTOWC_NULL_ARG1_BUG
 

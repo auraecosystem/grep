@@ -22,7 +22,9 @@ AM_CFLAGS = $(WARN_CFLAGS) $(WERROR_CFLAGS)
 AM_LDFLAGS = $(IGNORE_UNUSED_LIBRARIES_CFLAGS)
 LDADD = ../lib/libgreputils.a $(LIBINTL) ../lib/libgreputils.a
 
-XFAIL_TESTS =
+# Remove this definition once the failing test passes.
+XFAIL_TESTS = \
+  word-delim-multibyte
 
 # Equivalence classes are only supported when using the system
 # matcher (which means only with glibc).
@@ -45,16 +47,12 @@ TESTS =						\
   case-fold-char-class				\
   case-fold-char-range				\
   case-fold-char-type				\
-  case-fold-titlecase				\
   char-class-multibyte				\
   char-class-multibyte2				\
-  context-0					\
-  count-newline					\
   dfa-coverage					\
   dfa-heap-overrun				\
   dfaexec-multibyte				\
   empty						\
-  empty-line					\
   epipe						\
   equiv-classes					\
   ere						\
@@ -73,12 +71,9 @@ TESTS =						\
   invalid-multibyte-infloop			\
   khadafy					\
   long-line-vs-2GiB-read			\
-  max-count-overread				\
   max-count-vs-context				\
   mb-non-UTF8-performance			\
   multibyte-white-space				\
-  multiple-begin-or-end-line			\
-  null-byte					\
   empty-line-mb					\
   unibyte-bracket-expr				\
   unibyte-negated-circumflex			\
@@ -86,13 +81,9 @@ TESTS =						\
   options					\
   pcre						\
   pcre-abort					\
-  pcre-infloop					\
   pcre-invalid-utf8-input			\
   pcre-utf8					\
-  pcre-w					\
-  pcre-wx-backref				\
   pcre-z					\
-  posix-bracket					\
   prefix-of-multibyte				\
   r-dot						\
   repetition-overflow				\

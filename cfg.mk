@@ -51,7 +51,7 @@ export VERBOSE = yes
 # 1127556 9e
 export XZ_OPT = -6e
 
-old_NEWS_hash = 194c77a94c1652647d0abbc66c0c553f
+old_NEWS_hash = 5ace02fbd92a43b8a4255e9e8884dce5
 
 # Many m4 macros names once began with 'jm_'.
 # Make sure that none are inadvertently reintroduced.
@@ -86,8 +86,7 @@ exclude_file_name_regexp--sc_bindtextdomain = ^tests/get-mb-cur-max\.c$$
 exclude_file_name_regexp--sc_prohibit_strcmp = /colorize-.*\.c$$
 exclude_file_name_regexp--sc_prohibit_xalloc_without_use = ^src/kwset\.c$$
 exclude_file_name_regexp--sc_prohibit_tab_based_indentation = \
-  (Makefile|\.(am|mk)$$)
+  (Makefile|\.(am|mk)$$|^gl/lib/.*\.c\.diff$$)
+exclude_file_name_regexp--sc_space_tab = ^gl/lib/.*\.c\.diff$$
 exclude_file_name_regexp--sc_error_message_uppercase = ^src/dfa\.c$$
 exclude_file_name_regexp--sc_prohibit_strncpy = ^src/dfa\.c$$
-
-exclude_file_name_regexp--sc_prohibit_doubled_word = ^tests/count-newline$$

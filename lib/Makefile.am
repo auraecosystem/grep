@@ -29,12 +29,10 @@ include gnulib.mk
 
 AM_CFLAGS += $(GNULIB_WARN_CFLAGS) $(WERROR_CFLAGS)
 
-nodist_libgreputils_a_SOURCES = colorize.c
-libgreputils_a_SOURCES += colorize.h
+libgreputils_a_SOURCES += \
+  colorize.c colorize.h
+
 EXTRA_DIST += colorize-posix.c colorize-w32.c
-CLEANFILES += colorize.c
-colorize.c:
-	$(AM_V_GEN)echo '#include <$(COLORIZE_SOURCE)>' >$@
 
 libgreputils_a_LIBADD += $(LIBOBJS) $(ALLOCA)
 libgreputils_a_DEPENDENCIES += $(LIBOBJS) $(ALLOCA)

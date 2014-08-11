@@ -692,14 +692,6 @@ EXTRA_DIST += test-memchr.c zerosize-ptr.h signature.h macros.h
 
 ## end   gnulib module memchr-tests
 
-## begin gnulib module memchr2-tests
-
-TESTS += test-memchr2
-check_PROGRAMS += test-memchr2
-EXTRA_DIST += test-memchr2.c zerosize-ptr.h macros.h
-
-## end   gnulib module memchr2-tests
-
 ## begin gnulib module memrchr-tests
 
 TESTS += test-memrchr
