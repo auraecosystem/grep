@@ -49,8 +49,24 @@ static int       dos_pos_map_size  = 0;
 static int       dos_pos_map_used  = 0;
 static int       inp_map_idx = 0, out_map_idx = 1;
 
+/* Set default DOS file type to binary.  */
+static void
+dos_binary (void)
+{
+  if (O_BINARY)
+    dos_use_file_type = DOS_BINARY;
+}
+
+/* Tell DOS routines to report Unix offset.  */
+static void
+dos_unix_byte_offsets (void)
+{
+  if (O_BINARY)
+    dos_report_unix_offset = 1;
+}
+
 /* Guess DOS file type by looking at its contents.  */
-static inline File_type
+static File_type
 guess_type (char *buf, size_t buflen)
 {
   int crlf_seen = 0;
@@ -76,9 +92,12 @@ guess_type (char *buf, size_t buflen)
 /* Convert external DOS file representation to internal.
    Return the count of characters left in the buffer.
    Build table to map character positions when reporting byte counts.  */
-static inline int
+static int
 undossify_input (char *buf, size_t buflen)
 {
+  if (! O_BINARY)
+    return buflen;
+
   int chars_left = 0;
 
   if (totalcc == 0)
@@ -164,9 +183,12 @@ undossify_input (char *buf, size_t buflen)
 }
 
 /* Convert internal byte count into external.  */
-static inline off_t
+static off_t
 dossified_pos (off_t byteno)
 {
+  if (! O_BINARY)
+    return byteno;
+
   off_t pos_lo;
   off_t pos_hi;
 
