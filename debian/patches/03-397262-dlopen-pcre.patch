@@ -20,9 +20,9 @@ Modified by Marco d'Itri <md@Linux.IT>
 +#  include <dlfcn.h>
 +# endif
  #endif
- #if HAVE_LANGINFO_CODESET
- # include <langinfo.h>
-@@ -43,6 +49,67 @@
+ 
+ #if HAVE_LIBPCRE
+@@ -40,6 +46,67 @@
  # endif
  #endif
  
@@ -90,9 +90,9 @@ Modified by Marco d'Itri <md@Linux.IT>
  void
  Pcompile (char const *pattern, size_t size)
  {
-@@ -69,6 +136,10 @@
-     }
- # endif
+@@ -59,6 +126,10 @@
+   char const *p;
+   char const *pnul;
  
 +  if (!map_pcre ())
 +    error (EXIT_TROUBLE, 0, "%s",

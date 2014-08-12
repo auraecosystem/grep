@@ -31,7 +31,7 @@
  that match a single character.
 --- a/doc/grep.info
 +++ b/doc/grep.info
-@@ -771,7 +771,7 @@
+@@ -783,7 +783,7 @@
  
  `-P'
  `--perl-regexp'
@@ -40,7 +40,7 @@
       highly experimental and `grep -P' may warn of unimplemented
       features.
  
-@@ -792,7 +792,7 @@
+@@ -804,7 +804,7 @@
  Regular expressions are constructed analogously to arithmetic
  expressions, by using various operators to combine smaller expressions.
  `grep' understands three different versions of regular expression
