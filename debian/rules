@@ -8,7 +8,7 @@ export AUTOPOINT=true
 export AUTOHEADER=true
 export LIBTOOLIZE=true
 
-#export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
 
 ##########################################################################
 # I need to investigate why CDBS doesn't export automatically build flags 
