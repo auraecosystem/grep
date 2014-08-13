@@ -9,7 +9,7 @@ grep (2.20-1) unstable; urgency=low
   * Add 0001-build-avoid-Wstack-protector.patch. See:
     http://bugs.gnu.org/17793
 
- -- Santiago Ruano Rincón <santiago@nomada>  Wed, 13 Aug 2014 16:49:29 +0200
+ -- Santiago Ruano Rincón <santiago@debian.org>  Wed, 13 Aug 2014 16:49:29 +0200
 
 grep (2.18-2) unstable; urgency=medium
 
