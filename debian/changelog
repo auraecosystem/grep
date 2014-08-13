@@ -1,10 +1,13 @@
-grep (2.20-1~2) UNRELEASED; urgency=medium
+grep (2.20-1~3) UNRELEASED; urgency=medium
 
   * NOT RELEASE YET
   * Improve documentation about -F and -x. Thanks to Justin Pryzby.
     85-412370-F-x-documentation.patch (Closes: #412370)
   * Add d/upstream/signing-key.asc and updated d/watch to verify upstream
     signature.
+  * d/rules: Enable all hardening options
+  * Add 0001-build-avoid-Wstack-protector.patch. See:
+    http://bugs.gnu.org/17793
 
  -- Santiago Ruano Rincón <santiago@debian.org>  Mon, 11 Aug 2014 10:49:27 +0200
 
