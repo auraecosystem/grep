@@ -36,6 +36,8 @@ DEB_CONFIGURE_SCRIPT_ENV += LIBS="$(LIBS)"
 # (e.g. DEB_CONFIGURE_EXECDIR in autotools-vars.mk)?
 DEB_CONFIGURE_EXTRA_FLAGS += --exec-prefix=/
 
+DEB_MAKE_CHECK_TARGET = check
+
 include /usr/share/cdbs/1/rules/upstream-tarball.mk
 include /usr/share/cdbs/1/rules/autoreconf.mk
 include /usr/share/cdbs/1/rules/debhelper.mk
