@@ -3,7 +3,7 @@
 
 export DH_VERBOSE=1
 
-# true prevents autoreconf invokes these tools
+# true prevents autoreconf from invoking these tools
 export AUTOPOINT=true
 export AUTOHEADER=true
 export LIBTOOLIZE=true
