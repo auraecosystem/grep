@@ -1,3 +1,12 @@
+grep (2.20-2~3) UNRELEASED; urgency=medium
+
+  * NOT RELEASE YET
+  * Add 85-412370-F-x-documentation.patch to d/patches/series
+  * Correct hardening CPPFLAGS. Thanks to Simon Ruderich.
+    (Closes: #758069)
+
+ -- Santiago Ruano Rincón <santiago@debian.org>  Thu, 14 Aug 2014 14:42:36 +0200
+
 grep (2.20-1) unstable; urgency=low
 
   * New upstream release.
