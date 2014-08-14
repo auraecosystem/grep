@@ -1,11 +1,12 @@
-grep (2.20-2~3) UNRELEASED; urgency=medium
+grep (2.20-2) unstable; urgency=low
 
-  * NOT RELEASE YET
   * Add 85-412370-F-x-documentation.patch to d/patches/series
-  * Correct hardening CPPFLAGS. Thanks to Simon Ruderich.
-    (Closes: #758069)
+  * d/rules: 
+    - Correct hardening CPPFLAGS. Thanks to Simon Ruderich.
+      (Closes: #758069)
+    - Set DEB_MAKE_CHECK_TARGET = check to run make check after build.
 
- -- Santiago Ruano Rincón <santiago@debian.org>  Thu, 14 Aug 2014 14:42:36 +0200
+ -- Santiago Ruano Rincón <santiago@debian.org>  Thu, 14 Aug 2014 17:40:36 +0200
 
 grep (2.20-1) unstable; urgency=low
 
