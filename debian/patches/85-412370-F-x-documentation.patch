@@ -1,3 +1,4 @@
+Closes: https://bugs.debian.org/412370
 --- a/doc/grep.in.1
 +++ b/doc/grep.in.1
 @@ -104,8 +104,8 @@
