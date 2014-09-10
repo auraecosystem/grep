@@ -1,3 +1,11 @@
+grep (2.20-3) unstable; urgency=high
+
+  * d/patches/0001-grep-P-invalid-utf8-non-matching-debian.patch From
+    upstream: -P now treats invalid UTF-8 characters as non matching.
+    Thanks to Paul Eggert. (Closes: #758105). 
+
+ -- Santiago Ruano Rincón <santiago@debian.org>  Wed, 10 Sep 2014 13:10:32 +0200
+
 grep (2.20-2) unstable; urgency=low
 
   * Add 85-412370-F-x-documentation.patch to d/patches/series
