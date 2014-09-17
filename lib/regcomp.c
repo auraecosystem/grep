@@ -540,7 +540,7 @@ regerror (errcode, preg, errbuf, errbuf_size)
     size_t errbuf_size;
 #else /* size_t might promote */
 size_t
-regerror (int errcode, const regex_t *_Restrict_ preg _UNUSED_PARAMETER_,
+regerror (int errcode, const regex_t *_Restrict_ preg,
 	  char *_Restrict_ errbuf, size_t errbuf_size)
 #endif
 {
@@ -1427,7 +1427,7 @@ calc_first (void *extra, bin_tree_t *node)
 
 /* Pass 2: compute NEXT on the tree.  Preorder visit.  */
 static reg_errcode_t
-calc_next (void *extra _UNUSED_PARAMETER_, bin_tree_t *node)
+calc_next (void *extra, bin_tree_t *node)
 {
   switch (node->token.type)
     {
@@ -2806,10 +2806,8 @@ build_range_exp (const reg_syntax_t syntax,
 static reg_errcode_t
 internal_function
 # ifdef RE_ENABLE_I18N
-build_collating_symbol (bitset_t sbcset,
-                        re_charset_t *mbcset _UNUSED_PARAMETER_,
-			Idx *coll_sym_alloc _UNUSED_PARAMETER_,
-                        const unsigned char *name)
+build_collating_symbol (bitset_t sbcset, re_charset_t *mbcset,
+			Idx *coll_sym_alloc, const unsigned char *name)
 # else /* not RE_ENABLE_I18N */
 build_collating_symbol (bitset_t sbcset, const unsigned char *name)
 # endif /* not RE_ENABLE_I18N */
@@ -3377,8 +3375,7 @@ parse_bracket_exp (re_string_t *regexp, re_dfa_t *dfa, re_token_t *token,
 
 static reg_errcode_t
 parse_bracket_element (bracket_elem_t *elem, re_string_t *regexp,
-		       re_token_t *token, int token_len,
-		       re_dfa_t *dfa _UNUSED_PARAMETER_,
+		       re_token_t *token, int token_len, re_dfa_t *dfa,
 		       reg_syntax_t syntax, bool accept_hyphen)
 {
 #ifdef RE_ENABLE_I18N
@@ -3465,10 +3462,8 @@ parse_bracket_symbol (bracket_elem_t *elem, re_string_t *regexp,
 
 static reg_errcode_t
 #ifdef RE_ENABLE_I18N
-build_equiv_class (bitset_t sbcset,
-                   re_charset_t *mbcset _UNUSED_PARAMETER_,
-		   Idx *equiv_class_alloc _UNUSED_PARAMETER_,
-		   const unsigned char *name)
+build_equiv_class (bitset_t sbcset, re_charset_t *mbcset,
+		   Idx *equiv_class_alloc, const unsigned char *name)
 #else /* not RE_ENABLE_I18N */
 build_equiv_class (bitset_t sbcset, const unsigned char *name)
 #endif /* not RE_ENABLE_I18N */
@@ -3874,7 +3869,7 @@ free_token (re_token_t *node)
    and its children. */
 
 static reg_errcode_t
-free_tree (void *extra _UNUSED_PARAMETER_, bin_tree_t *node)
+free_tree (void *extra, bin_tree_t *node)
 {
   free_token (&node->token);
   return REG_NOERROR;

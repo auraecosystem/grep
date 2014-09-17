@@ -28,6 +28,10 @@ local-checks-to-skip =			\
 # Tools used to bootstrap this package, used for "announcement".
 bootstrap-tools = autoconf,automake,gnulib
 
+# The tight_scope test gets confused about inline functions.
+# like 'to_uchar'.
+_gl_TS_unmarked_extern_functions = main usage mb_clen to_uchar
+
 # Now that we have better tests, make this the default.
 export VERBOSE = yes
 
@@ -51,7 +55,7 @@ export VERBOSE = yes
 # 1127556 9e
 export XZ_OPT = -6e
 
-old_NEWS_hash = 5ace02fbd92a43b8a4255e9e8884dce5
+old_NEWS_hash = 8c5f53627941c649412bbabc1bb1d26a
 
 # Many m4 macros names once began with 'jm_'.
 # Make sure that none are inadvertently reintroduced.
@@ -66,6 +70,25 @@ sc_prohibit_echo_minus_en:
 	halt='do not use echo ''-e or echo ''-n; use printf instead'	\
 	  $(_sc_search_regexp)
 
+# Look for lines longer than 80 characters, except omit:
+# - program-generated long lines in diff headers,
+# - the help2man script copied from upstream,
+# - tests involving long checksum lines, and
+# - the 'pr' test cases.
+LINE_LEN_MAX = 80
+FILTER_LONG_LINES =						\
+  /^[^:]*\.diff:[^:]*:@@ / d;					\
+  \|^[^:]*man/help2man:| d;			\
+  \|^[^:]*tests/misc/sha[0-9]*sum.*\.pl[-:]| d;			\
+  \|^[^:]*tests/pr/|{ \|^[^:]*tests/pr/pr-tests:| !d; };
+sc_long_lines:
+	@files=$$($(VC_LIST_EXCEPT))					\
+	halt='line(s) with more than $(LINE_LEN_MAX) characters; reindent'; \
+	for file in $$files; do						\
+	  expand $$file | grep -nE '^.{$(LINE_LEN_MAX)}.' |		\
+	  sed -e "s|^|$$file:|" -e '$(FILTER_LONG_LINES)';		\
+	done | grep . && { msg="$$halt" $(_sc_say_and_exit) } || :
+
 # Indent only with spaces.
 sc_prohibit_tab_based_indentation:
 	@prohibit='^ *	'						\
@@ -78,6 +101,19 @@ sc_prohibit_emacs__indent_tabs_mode__setting:
 	halt='use of emacs indent-tabs-mode: setting'			\
 	  $(_sc_search_regexp)
 
+# THANKS.in is a list of name/email pairs for people who are mentioned in
+# commit logs (and generated ChangeLog), but who are not also listed as an
+# author of a commit.  Name/email pairs of commit authors are automatically
+# extracted from the repository.  As a very minor factorization, when
+# someone who was initially listed only in THANKS.in later authors a commit,
+# this rule detects that their pair may now be removed from THANKS.in.
+sc_THANKS_in_duplicates:
+	@{ git log --pretty=format:%aN | sort -u;			\
+	    cut -b-36 THANKS.in | sed '/^$$/d;s/  *$$//'; }		\
+	  | sort | uniq -d | grep .					\
+	    && { echo '$(ME): remove the above names from THANKS.in'	\
+		  1>&2; exit 1; } || :
+
 update-copyright-env = \
   UPDATE_COPYRIGHT_USE_INTERVALS=1 \
   UPDATE_COPYRIGHT_MAX_LINE_LENGTH=79
@@ -86,7 +122,10 @@ exclude_file_name_regexp--sc_bindtextdomain = ^tests/get-mb-cur-max\.c$$
 exclude_file_name_regexp--sc_prohibit_strcmp = /colorize-.*\.c$$
 exclude_file_name_regexp--sc_prohibit_xalloc_without_use = ^src/kwset\.c$$
 exclude_file_name_regexp--sc_prohibit_tab_based_indentation = \
-  (Makefile|\.(am|mk)$$|^gl/lib/.*\.c\.diff$$)
-exclude_file_name_regexp--sc_space_tab = ^gl/lib/.*\.c\.diff$$
+  (Makefile|\.(am|mk)$$)
 exclude_file_name_regexp--sc_error_message_uppercase = ^src/dfa\.c$$
 exclude_file_name_regexp--sc_prohibit_strncpy = ^src/dfa\.c$$
+
+exclude_file_name_regexp--sc_prohibit_doubled_word = ^tests/count-newline$$
+
+exclude_file_name_regexp--sc_long_lines = ^tests/.*$$
