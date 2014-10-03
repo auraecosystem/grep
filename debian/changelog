@@ -1,3 +1,11 @@
+grep (2.20-4) unstable; urgency=medium
+
+  * d/patches/05-grep-wrapper-sh.patch: egrep and fgrep wrap scripts use sh
+    instead of bash. The patch also removes the possible call ./grep (looking
+    for it in the working directory) (Closes: #762427, #762917).
+
+ -- Santiago Ruano Rincón <santiago@debian.org>  Fri, 03 Oct 2014 12:09:05 +0200
+
 grep (2.20-3) unstable; urgency=high
 
   * d/patches/0001-grep-P-invalid-utf8-non-matching-debian.patch From
