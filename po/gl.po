@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grep 2.10\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2014-09-17 22:18+0200\n"
+"POT-Creation-Date: 2014-10-29 10:51-0700\n"
 "PO-Revision-Date: 2012-02-23 18:30+0100\n"
 "Last-Translator: Leandro Regueiro <leandro.regueiro@gmail.com>\n"
 "Language-Team: Galician <proxecto@trasno.net>\n"
@@ -37,12 +37,12 @@ msgstr "argumento %s ambiguo para %s"
 msgid "Valid arguments are:"
 msgstr "Os argumentos válidos son:"
 
-#: lib/closeout.c:112 src/grep.c:980
+#: lib/closeout.c:112 src/grep.c:1096
 #, c-format
 msgid "write error"
 msgstr "erro de escritura"
 
-#: lib/error.c:188
+#: lib/error.c:191
 msgid "Unknown system error"
 msgstr "Erro do sistema descoñecido"
 
@@ -102,7 +102,7 @@ msgid "%s: option '-W %s' requires an argument\n"
 msgstr "%s: a opción '-W %s' require un argumento\n"
 
 #: lib/obstack.c:416 lib/obstack.c:418 lib/xalloc-die.c:34
-#: src/pcresearch.c:211
+#: src/pcresearch.c:267
 #, c-format
 msgid "memory exhausted"
 msgstr "memoria esgotada"
@@ -406,43 +406,43 @@ msgstr "sufixo non válido no argumento %s%s `%s'"
 msgid "%s%s argument '%s' too large"
 msgstr "%s%s argumento `%s' demasiado grande"
 
-#: src/dfa.c:1017 src/dfa.c:1020 src/dfa.c:1039 src/dfa.c:1049 src/dfa.c:1061
-#: src/dfa.c:1097 src/dfa.c:1106 src/dfa.c:1109 src/dfa.c:1114 src/dfa.c:1128
-#: src/dfa.c:1176
+#: src/dfa.c:1026 src/dfa.c:1029 src/dfa.c:1048 src/dfa.c:1058 src/dfa.c:1070
+#: src/dfa.c:1106 src/dfa.c:1115 src/dfa.c:1118 src/dfa.c:1123 src/dfa.c:1137
+#: src/dfa.c:1185
 msgid "unbalanced ["
 msgstr "[ desemparellado"
 
-#: src/dfa.c:1073
+#: src/dfa.c:1082
 msgid "invalid character class"
 msgstr "clase de caracteres non válida"
 
-#: src/dfa.c:1219
+#: src/dfa.c:1228
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr "a sintaxe da clase de caracteres é [[:space:]], non [:space:]"
 
-#: src/dfa.c:1267
+#: src/dfa.c:1290
 msgid "unfinished \\ escape"
 msgstr "secuencia de escape \\ sen rematar"
 
-#: src/dfa.c:1414
+#: src/dfa.c:1437
 #, fuzzy
 msgid "invalid content of \\{\\}"
 msgstr "Contido non válido de \\{\\}"
 
-#: src/dfa.c:1417
+#: src/dfa.c:1440
 #, fuzzy
 msgid "regular expression too big"
 msgstr "A expresión regular é demasiado grande"
 
-#: src/dfa.c:1847
+#: src/dfa.c:1875
 msgid "unbalanced ("
 msgstr "( desemparellado"
 
-#: src/dfa.c:1973
+#: src/dfa.c:2001
 msgid "no syntax specified"
 msgstr "no se especificou ningunha sintaxe"
 
-#: src/dfa.c:1981
+#: src/dfa.c:2009
 msgid "unbalanced )"
 msgstr ") desemparellado"
 
@@ -455,63 +455,63 @@ msgstr "Mike Haertel"
 msgid "others, see <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
 msgstr "outros, véase <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
 
-#: src/grep.c:531
+#: src/grep.c:605
 msgid "invalid context length argument"
 msgstr "argumento de lonxitude do contexto non vlido"
 
-#: src/grep.c:600
-msgid "lseek failed"
-msgstr "fallou a chamada ao sistema `lskeek'"
-
-#: src/grep.c:735
+#: src/grep.c:658
 #, c-format
 msgid "input is too large to count"
 msgstr "a entrada  longa de mis para contala"
 
-#: src/grep.c:1267
+#: src/grep.c:700
+msgid "lseek failed"
+msgstr "fallou a chamada ao sistema `lskeek'"
+
+#: src/grep.c:1420
 #, c-format
 msgid "Binary file %s matches\n"
 msgstr "Arquivo binario %s aparicins\n"
 
-#: src/grep.c:1311
+#: src/grep.c:1464
 #, c-format
 msgid "warning: %s: %s"
 msgstr "atención: %s: %s"
 
-#: src/grep.c:1312
+#: src/grep.c:1465
 msgid "recursive directory loop"
 msgstr "ciclo de directorios recursivo"
 
-#: src/grep.c:1460
+#: src/grep.c:1613
 #, c-format
 msgid "input file %s is also the output"
 msgstr "o fichero de entrada %s tamén é o de salida"
 
-#: src/grep.c:1518
+#: src/grep.c:1671
 msgid "(standard input)"
 msgstr "(entrada estándar)"
 
-#: src/grep.c:1534 src/grep.c:1541
+#: src/grep.c:1687 src/grep.c:1694
 #, c-format
 msgid "Usage: %s [OPTION]... PATTERN [FILE]...\n"
 msgstr "Emprego: %s [OPCIN]... PATRN [FICHEIRO]...\n"
 
-#: src/grep.c:1536
+#: src/grep.c:1689
 #, fuzzy, c-format
 msgid "Try '%s --help' for more information.\n"
 msgstr "Escriba `%s --help' para mis informacin.\n"
 
-#: src/grep.c:1542
+#: src/grep.c:1695
 #, c-format
 msgid "Search for PATTERN in each FILE or standard input.\n"
 msgstr "Busca PATRÓN en cada FICHERO ou na entrada estándar.\n"
 
-#: src/grep.c:1543
+#: src/grep.c:1696
 #, c-format
 msgid "PATTERN is, by default, a basic regular expression (BRE).\n"
 msgstr "PATRÓN é, por omisión, unha expresión regular básica (BRE).\n"
 
-#: src/grep.c:1544
+#: src/grep.c:1697
 #, c-format
 msgid ""
 "Example: %s -i 'hello world' menu.h main.c\n"
@@ -522,7 +522,7 @@ msgstr ""
 "\n"
 "Selección e interpretación de Expreg:\n"
 
-#: src/grep.c:1548
+#: src/grep.c:1701
 #, fuzzy, c-format
 msgid ""
 "  -E, --extended-regexp     PATTERN is an extended regular expression (ERE)\n"
@@ -536,7 +536,7 @@ msgstr ""
 "  -G, --basic-regexp        PATRÓN é unha expresión regular básica (BRE)\n"
 "  -P, --perl-regexp         PATRÓN é unha expresión regular en Perl\n"
 
-#: src/grep.c:1554
+#: src/grep.c:1707
 #, c-format
 msgid ""
 "  -e, --regexp=PATTERN      use PATTERN for matching\n"
@@ -556,7 +556,7 @@ msgstr ""
 "  -z, --null-data           unha liña de datos termina nun byte 0, non\n"
 "                            nun carácter de nova liña\n"
 
-#: src/grep.c:1561
+#: src/grep.c:1714
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -574,7 +574,7 @@ msgstr ""
 "      --help                mostra esta axuda e finaliza\n"
 "      --mmap                descártase para compatibilidade cara atrás\n"
 
-#: src/grep.c:1568
+#: src/grep.c:1721
 #, c-format
 msgid ""
 "\n"
@@ -603,7 +603,7 @@ msgstr ""
 "      --label=ETIQUETA      utiliza ETIQUETA como nome de ficheiro prefixo\n"
 "                            para a entrada estándar\n"
 
-#: src/grep.c:1579
+#: src/grep.c:1732
 #, fuzzy, c-format
 msgid ""
 "  -o, --only-matching       show only the part of a line matching PATTERN\n"
@@ -619,7 +619,7 @@ msgstr ""
 "                            TIPO é `binary', `text', ou `without-match'\n"
 "  -a, --text                equivalente a --binary-files=text\n"
 
-#: src/grep.c:1586
+#: src/grep.c:1739
 #, fuzzy, c-format
 msgid ""
 "  -I                        equivalent to --binary-files=without-match\n"
@@ -637,7 +637,7 @@ msgstr ""
 "                            `sockets', pode ser 'read' ou 'skip'\n"
 "  -R, -r, --recursive       equivalente a --directories=recurse\n"
 
-#: src/grep.c:1595
+#: src/grep.c:1748
 #, c-format
 msgid ""
 "      --include=FILE_PATTERN  search only files that match FILE_PATTERN\n"
@@ -656,7 +656,7 @@ msgstr ""
 "      --exclude-dir=PATRÓN    omítense os directorios que coinciden con "
 "PATRÓN\n"
 
-#: src/grep.c:1602
+#: src/grep.c:1755
 #, c-format
 msgid ""
 "  -L, --files-without-match  print only names of FILEs containing no match\n"
@@ -673,7 +673,7 @@ msgstr ""
 "                            por cada FICHEIRO\n"
 "  -Z, --null                imprime un byte 0 despois do nome do FICHEIRO\n"
 
-#: src/grep.c:1608
+#: src/grep.c:1761
 #, c-format
 msgid ""
 "\n"
@@ -688,7 +688,7 @@ msgstr ""
 "  -A, --after-context=NÚM   mostra NÚM liñas de contexto posterior\n"
 "  -C, --context=NÚM         mostra NÚM liñas de contexto\n"
 
-#: src/grep.c:1615
+#: src/grep.c:1768
 #, fuzzy, c-format
 msgid ""
 "  -NUM                      same as --context=NUM\n"
@@ -710,7 +710,7 @@ msgstr ""
 "  -u, --unix-byte-offsets   conta os desprazamentos como se non houbera\n"
 "                            retornos de carro (MSDOS)\n"
 
-#: src/grep.c:1624
+#: src/grep.c:1777
 #, fuzzy, c-format
 msgid ""
 "'egrep' means 'grep -E'.  'fgrep' means 'grep -F'.\n"
@@ -719,7 +719,7 @@ msgstr ""
 "`egrep' significa `grep -E'.  `fgrep' significa `grep -F'.\n"
 "A invocación directa como `egrep' ou `fgrep' está obsoleta.\n"
 
-#: src/grep.c:1627
+#: src/grep.c:1780
 #, fuzzy, c-format
 msgid ""
 "When FILE is -, read standard input.  With no FILE, read . if a command-"
@@ -733,37 +733,37 @@ msgstr ""
 "é 0 se hai coincidencias, 1 se non as hai; se se produce algún error e non \n"
 "se especificou -q, o estado de saída é 2.\n"
 
-#: src/grep.c:1696
+#: src/grep.c:1849
 #, c-format
 msgid "conflicting matchers specified"
 msgstr "especificronse patrns conflictivos"
 
-#: src/grep.c:1707
+#: src/grep.c:1860
 #, c-format
 msgid "invalid matcher %s"
 msgstr "expresión non válida %s"
 
-#: src/grep.c:1990
+#: src/grep.c:2143
 #, c-format
 msgid "warning: GREP_OPTIONS is deprecated; please use an alias or script"
 msgstr ""
 
-#: src/grep.c:2020
+#: src/grep.c:2173
 #, c-format
 msgid "unknown devices method"
 msgstr "método de dispositivos descoñecido"
 
-#: src/grep.c:2147
+#: src/grep.c:2300
 #, c-format
 msgid "invalid max count"
 msgstr "contador máximo non válido"
 
-#: src/grep.c:2204
+#: src/grep.c:2357
 #, c-format
 msgid "unknown binary-files type"
 msgstr "tipo binary-files descoñecido"
 
-#: src/pcresearch.c:56
+#: src/pcresearch.c:54
 msgid ""
 "support for the -P option is not compiled into this --disable-perl-regexp "
 "binary"
@@ -771,45 +771,67 @@ msgstr ""
 "a compatibilidade para a opción -P non está compilada neste executábel --"
 "disable-perl-regexp"
 
-#: src/pcresearch.c:72
+#: src/pcresearch.c:70
 #, c-format
 msgid "-P supports only unibyte and UTF-8 locales"
 msgstr ""
 
-#: src/pcresearch.c:76
+#: src/pcresearch.c:74
 #, c-format
 msgid "the -P option only supports a single pattern"
 msgstr "a opción -P só admite un patrón"
 
-#: src/pcresearch.c:122
+#: src/pcresearch.c:120
 #, c-format
 msgid "internal error (should never happen)"
 msgstr ""
 
-#: src/pcresearch.c:132
+#: src/pcresearch.c:130
 #, c-format
 msgid "failed to allocate memory for the PCRE JIT stack"
 msgstr ""
 
-#: src/pcresearch.c:152
+#: src/pcresearch.c:150
 #, c-format
 msgid "internal error"
 msgstr "erro interno"
 
-#: src/pcresearch.c:172
+#: src/pcresearch.c:186
 #, fuzzy, c-format
 msgid "exceeded PCRE's line length limit"
 msgstr "excedeuse o límite de volta atrás das PCREs"
 
-#: src/pcresearch.c:215
+#: src/pcresearch.c:271
 #, c-format
 msgid "exceeded PCRE's backtracking limit"
 msgstr "excedeuse o límite de volta atrás das PCREs"
 
-#: src/pcresearch.c:222
+#: src/pcresearch.c:278
 #, fuzzy, c-format
 msgid "internal PCRE error: %d"
 msgstr "erro interno"
+
+#~ msgid "GNU Grep home page: <%s>\n"
+#~ msgstr "Páxina web de GNU grep: <%s>\n"
+
+#~ msgid "PATTERN is an extended regular expression (ERE).\n"
+#~ msgstr "PATRÓN é una expresión regular estendida (ERE).\n"
+
+#, fuzzy
+#~ msgid "Invocation as 'egrep' is deprecated; use 'grep -E' instead.\n"
+#~ msgstr ""
+#~ "A invocación como `egrep' está obsoleta; utilice `grep -E' no seu lugar.\n"
+
+#~ msgid "PATTERN is a set of newline-separated fixed strings.\n"
+#~ msgstr "PATRÓN é un conxunto de cadenas fixas separadas por nova liña\n"
+
+#, fuzzy
+#~ msgid "Invocation as 'fgrep' is deprecated; use 'grep -F' instead.\n"
+#~ msgstr ""
+#~ "A invocación como `fgrep' está obsoleta; utilice `grep -F' no seu lugar.\n"
+
+#~ msgid "%s can only use the %s pattern syntax"
+#~ msgstr "%s só puede usar a sintaxe de patrón %s"
 
 #~ msgid "unfinished repeat count"
 #~ msgstr "contador de repetición sen rematar"
@@ -817,28 +839,8 @@ msgstr "erro interno"
 #~ msgid "malformed repeat count"
 #~ msgstr "contador de repetición erróneo"
 
-#~ msgid "PATTERN is an extended regular expression (ERE).\n"
-#~ msgstr "PATRÓN é una expresión regular estendida (ERE).\n"
-
-#~ msgid "Invocation as `egrep' is deprecated; use `grep -E' instead.\n"
-#~ msgstr ""
-#~ "A invocación como `egrep' está obsoleta; utilice `grep -E' no seu lugar.\n"
-
-#~ msgid "PATTERN is a set of newline-separated fixed strings.\n"
-#~ msgstr "PATRÓN é un conxunto de cadenas fixas separadas por nova liña\n"
-
-#~ msgid "Invocation as `fgrep' is deprecated; use `grep -F' instead.\n"
-#~ msgstr ""
-#~ "A invocación como `fgrep' está obsoleta; utilice `grep -F' no seu lugar.\n"
-
 #~ msgid "writing output"
 #~ msgstr "escribiendo o resultado"
-
-#~ msgid "GNU Grep home page: <%s>\n"
-#~ msgstr "Páxina web de GNU grep: <%s>\n"
-
-#~ msgid "%s can only use the %s pattern syntax"
-#~ msgstr "%s só puede usar a sintaxe de patrón %s"
 
 #~ msgid ""
 #~ "in GREP_COLORS=\"%s\", the \"%s\" capacity needs a value (\"=...\"); "

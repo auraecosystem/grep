@@ -4,6 +4,12 @@ GNU grep NEWS                                    -*- outline -*-
 
 ** Improvements
 
+  Performance has been greatly improved for searching files containing
+  holes, on platforms where lseek's SEEK_DATA flag works efficiently.
+
+  Performance has improved for rejecting data that cannot match even
+  the first part of a nontrivial pattern.
+
   Performance has improved for very long strings in patterns.
 
   If a file contains data improperly encoded for the current locale,
@@ -15,6 +21,30 @@ GNU grep NEWS                                    -*- outline -*-
 
 ** Bug fixes
 
+  grep no longer mishandles patterns that contain \w or \W in multibyte
+  locales.
+
+  grep would fail to count newlines internally when operating in non-UTF8
+  multibyte locales, leading it to print potentially many lines that did
+  not match.  E.g., the command, "seq 10 | env LC_ALL=zh_CN src/grep -n .."
+  would print this:
+  1:1
+  2
+  3
+  4
+  5
+  6
+  7
+  8
+  9
+  10
+  implying that the match, "10" was on line 1.
+  [bug introduced in grep-2.19]
+
+  grep in a non-UTF8 multibyte locale could mistakenly match in the middle
+  of a multibyte character when using a '^'-anchored alternate in a pattern,
+  leading it to print non-matching lines.  [bug present since "the beginning"]
+
   grep -E rejected unmatched ')', instead of treating it like '\)'.
   [bug present since "the beginning"]
 
@@ -25,6 +55,11 @@ GNU grep NEWS                                    -*- outline -*-
 
   In locales with multibyte character encodings other than UTF-8,
   grep -P now reports an error and exits instead of misbehaving.
+
+  When searching binary data, grep now may treat non-text bytes as
+  line terminators.  This can boost performance significantly.
+
+  grep -z no longer automatically treats the byte '\200' as binary data.
 
 * Noteworthy changes in release 2.20 (2014-06-03) [stable]
 

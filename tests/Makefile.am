@@ -75,6 +75,8 @@ TESTS =						\
   long-line-vs-2GiB-read			\
   max-count-overread				\
   max-count-vs-context				\
+  mb-dot-newline				\
+  mb-non-UTF8-overrun				\
   mb-non-UTF8-performance			\
   multibyte-white-space				\
   multiple-begin-or-end-line			\
@@ -88,6 +90,7 @@ TESTS =						\
   pcre-abort					\
   pcre-infloop					\
   pcre-invalid-utf8-input			\
+  pcre-o					\
   pcre-utf8					\
   pcre-w					\
   pcre-wx-backref				\
@@ -111,6 +114,7 @@ TESTS =						\
   warn-char-classes				\
   word-delim-multibyte				\
   word-multi-file				\
+  word-multibyte				\
   yesno
 
 EXTRA_DIST =					\

@@ -350,7 +350,8 @@ static struct option const long_options[] =
 bool match_icase;
 bool match_words;
 bool match_lines;
-unsigned char eolbyte;
+char eolbyte;
+enum textbin input_textbin;
 
 static char const *matcher;
 
@@ -413,6 +414,15 @@ usable_st_size (struct stat const *st)
   return S_ISREG (st->st_mode) || S_TYPEISSHM (st) || S_TYPEISTMO (st);
 }
 
+/* Lame substitutes for SEEK_DATA and SEEK_HOLE on platforms lacking them.
+   Do not rely on these finding data or holes if they equal SEEK_SET.  */
+#ifndef SEEK_DATA
+enum { SEEK_DATA = SEEK_SET };
+#endif
+#ifndef SEEK_HOLE
+enum { SEEK_HOLE = SEEK_SET };
+#endif
+
 /* Functions we'll use to search. */
 typedef void (*compile_fp_t) (char const *, size_t);
 typedef size_t (*execute_fp_t) (char const *, size_t, size_t *, char const *);
@@ -437,64 +447,128 @@ clean_up_stdout (void)
     close_stdout ();
 }
 
-/* Return 1 if BUF (of size SIZE) contains text, -1 if it contains
-   binary data, and 0 if the answer depends on what comes immediately
-   after BUF.  */
-static int
-buffer_textbin (char const *buf, size_t size)
+static bool
+textbin_is_binary (enum textbin textbin)
 {
-  char badbyte = eolbyte ? '\0' : '\200';
+  return textbin < TEXTBIN_UNKNOWN;
+}
 
-  if (MB_CUR_MAX <= 1)
-    return memchr (buf, badbyte, size) ? -1 : 1;
-  else
+/* The high-order bit of a byte.  */
+enum { HIBYTE = 0x80 };
+
+/* True if every byte with HIBYTE off is a single-byte character.
+   UTF-8 has this property.  */
+static bool easy_encoding;
+
+static void
+init_easy_encoding (void)
+{
+  easy_encoding = true;
+  for (int i = 0; i < HIBYTE; i++)
+    easy_encoding &= mbclen_cache[i] == 1;
+}
+
+/* A cast to TYPE of VAL.  Use this when TYPE is a pointer type, VAL
+   is properly aligned for TYPE, and 'gcc -Wcast-align' cannot infer
+   the alignment and would otherwise complain about the cast.  */
+#if 4 < __GNUC__ + (6 <= __GNUC_MINOR__)
+# define CAST_ALIGNED(type, val)                           \
+    ({ __typeof__ (val) val_ = val;                        \
+       _Pragma ("GCC diagnostic push")                     \
+       _Pragma ("GCC diagnostic ignored \"-Wcast-align\"") \
+       (type) val_;                                        \
+       _Pragma ("GCC diagnostic pop")                      \
+    })
+#else
+# define CAST_ALIGNED(type, val) ((type) (val))
+#endif
+
+/* An unsigned type suitable for fast matching.  */
+typedef uintmax_t uword;
+
+/* Skip the easy bytes in a buffer that is guaranteed to have a sentinel
+   that is not easy, and return a pointer to the first non-easy byte.
+   In easy encodings, the easy bytes all have HIBYTE off.
+   In other encodings, no byte is easy.  */
+static char const * _GL_ATTRIBUTE_PURE
+skip_easy_bytes (char const *buf)
+{
+  if (!easy_encoding)
+    return buf;
+
+  uword uword_max = -1;
+
+  /* 0x8080..., extended to be wide enough for uword.  */
+  uword hibyte_mask = uword_max / UCHAR_MAX * HIBYTE;
+
+  /* Search a byte at a time until the pointer is aligned, then a
+     uword at a time until a match is found, then a byte at a time to
+     identify the exact byte.  The uword search may go slightly past
+     the buffer end, but that's benign.  */
+  char const *p;
+  uword const *s;
+  for (p = buf; (uintptr_t) p % sizeof (uword) != 0; p++)
+    if (*p & HIBYTE)
+      return p;
+  for (s = CAST_ALIGNED (uword const *, p); ! (*s & hibyte_mask); s++)
+    continue;
+  for (p = (char const *) s; ! (*p & HIBYTE); p++)
+    continue;
+  return p;
+}
+
+/* Return the text type of data in BUF, of size SIZE.
+   BUF must be followed by at least sizeof (uword) bytes,
+   which may be arbitrarily written to or read from.  */
+static enum textbin
+buffer_textbin (char *buf, size_t size)
+{
+  if (eolbyte && memchr (buf, '\0', size))
+    return TEXTBIN_BINARY;
+
+  if (1 < MB_CUR_MAX)
     {
       mbstate_t mbs = { 0 };
       size_t clen;
       char const *p;
 
-      for (p = buf; p < buf + size; p += clen)
+      buf[size] = -1;
+      for (p = buf; (p = skip_easy_bytes (p)) < buf + size; p += clen)
         {
-          if (*p == badbyte)
-            return -1;
-          clen = mb_clen (p, buf + size - p, &mbs);
+          clen = mbrlen (p, buf + size - p, &mbs);
           if ((size_t) -2 <= clen)
-            return clen == (size_t) -2 ? 0 : -1;
+            return clen == (size_t) -2 ? TEXTBIN_UNKNOWN : TEXTBIN_BINARY;
         }
-
-      return 1;
     }
+
+  return TEXTBIN_TEXT;
 }
 
-/* Return 1 if a file is known to be text for the purpose of 'grep'.
-   Return -1 if it is known to be binary, 0 if unknown.
-   BUF, of size BUFSIZE, is the initial buffer read from the file with
-   descriptor FD and status ST.  */
-static int
-file_textbin (char const *buf, size_t bufsize, int fd, struct stat const *st)
+/* Return the text type of a file.  BUF, of size SIZE, is the initial
+   buffer read from the file with descriptor FD and status ST.
+   BUF must be followed by at least sizeof (uword) bytes,
+   which may be arbitrarily written to or read from.  */
+static enum textbin
+file_textbin (char *buf, size_t size, int fd, struct stat const *st)
 {
-  #ifndef SEEK_HOLE
-  enum { SEEK_HOLE = SEEK_END };
-  #endif
-
-  int textbin = buffer_textbin (buf, bufsize);
-  if (textbin < 0)
+  enum textbin textbin = buffer_textbin (buf, size);
+  if (textbin_is_binary (textbin))
     return textbin;
 
   if (usable_st_size (st))
     {
-      if (st->st_size <= bufsize)
-        return 2 * textbin - 1;
+      if (st->st_size <= size)
+        return textbin == TEXTBIN_UNKNOWN ? TEXTBIN_BINARY : textbin;
 
       /* If the file has holes, it must contain a null byte somewhere.  */
-      if (SEEK_HOLE != SEEK_END && eolbyte)
+      if (SEEK_HOLE != SEEK_SET && eolbyte)
         {
-          off_t cur = bufsize;
+          off_t cur = size;
           if (O_BINARY || fd == STDIN_FILENO)
             {
               cur = lseek (fd, 0, SEEK_CUR);
               if (cur < 0)
-                return 0;
+                return TEXTBIN_UNKNOWN;
             }
 
           /* Look for a hole after the current location.  */
@@ -504,12 +578,12 @@ file_textbin (char const *buf, size_t bufsize, int fd, struct stat const *st)
               if (lseek (fd, cur, SEEK_SET) < 0)
                 suppressible_error (filename, errno);
               if (hole_start < st->st_size)
-                return -1;
+                return TEXTBIN_BINARY;
             }
         }
     }
 
-  return 0;
+  return TEXTBIN_UNKNOWN;
 }
 
 /* Convert STR to a nonnegative integer, storing the result in *OUT.
@@ -562,6 +636,10 @@ static off_t bufoffset;		/* Read offset; defined on regular files.  */
 static off_t after_last_match;	/* Pointer after last matching line that
                                    would have been output if we were
                                    outputting characters. */
+static bool skip_nuls;		/* Skip '\0' in data.  */
+static bool skip_empty_lines;	/* Skip empty lines in data.  */
+static bool seek_data_failed;	/* lseek with SEEK_DATA failed.  */
+static uintmax_t totalnl;	/* Total newline count before lastnl. */
 
 /* Return VAL aligned to the next multiple of ALIGNMENT.  VAL can be
    an integer or a pointer.  Both args must be free of side effects.  */
@@ -569,6 +647,27 @@ static off_t after_last_match;	/* Pointer after last matching line that
   ((size_t) (val) % (alignment) == 0 \
    ? (val) \
    : (val) + ((alignment) - (size_t) (val) % (alignment)))
+
+/* Add two numbers that count input bytes or lines, and report an
+   error if the addition overflows.  */
+static uintmax_t
+add_count (uintmax_t a, uintmax_t b)
+{
+  uintmax_t sum = a + b;
+  if (sum < a)
+    error (EXIT_TROUBLE, 0, _("input is too large to count"));
+  return sum;
+}
+
+/* Return true if BUF (of size SIZE) is all zeros.  */
+static bool
+all_zeros (char const *buf, size_t size)
+{
+  for (char const *p = buf; p < buf + size; p++)
+    if (*p)
+      return false;
+  return true;
+}
 
 /* Reset the buffer for a new file, returning false if we should skip it.
    Initialize on the first time through. */
@@ -580,7 +679,8 @@ reset (int fd, struct stat const *st)
       pagesize = getpagesize ();
       if (pagesize == 0 || 2 * pagesize + 1 <= pagesize)
         abort ();
-      bufalloc = ALIGN_TO (INITIAL_BUFSIZE, pagesize) + pagesize + 1;
+      bufalloc = (ALIGN_TO (INITIAL_BUFSIZE, pagesize)
+                  + pagesize + sizeof (uword));
       buffer = xmalloc (bufalloc);
     }
 
@@ -621,7 +721,7 @@ fillbuf (size_t save, struct stat const *st)
      that we want to save.  */
   size_t saved_offset = buflim - save - buffer;
 
-  if (pagesize <= buffer + bufalloc - buflim)
+  if (pagesize <= buffer + bufalloc - sizeof (uword) - buflim)
     {
       readbuf = buflim;
       bufbeg = buflim - save;
@@ -634,8 +734,10 @@ fillbuf (size_t save, struct stat const *st)
       char *newbuf;
 
       /* Grow newsize until it is at least as great as minsize.  */
-      for (newsize = bufalloc - pagesize - 1; newsize < minsize; newsize *= 2)
-        if (newsize * 2 < newsize || newsize * 2 + pagesize + 1 < newsize * 2)
+      for (newsize = bufalloc - pagesize - sizeof (uword);
+           newsize < minsize;
+           newsize *= 2)
+        if ((SIZE_MAX - pagesize - sizeof (uword)) / 2 < newsize)
           xalloc_die ();
 
       /* Try not to allocate more memory than the file size indicates,
@@ -655,8 +757,9 @@ fillbuf (size_t save, struct stat const *st)
         }
 
       /* Add enough room so that the buffer is aligned and has room
-         for byte sentinels fore and aft.  */
-      newalloc = newsize + pagesize + 1;
+         for byte sentinels fore and aft, and so that a uword can
+         be read aft.  */
+      newalloc = newsize + pagesize + sizeof (uword);
 
       newbuf = bufalloc < newalloc ? xmalloc (bufalloc = newalloc) : buffer;
       readbuf = ALIGN_TO (newbuf + 1 + save, pagesize);
@@ -670,16 +773,41 @@ fillbuf (size_t save, struct stat const *st)
         }
     }
 
-  readsize = buffer + bufalloc - readbuf;
+  readsize = buffer + bufalloc - sizeof (uword) - readbuf;
   readsize -= readsize % pagesize;
 
-  fillsize = safe_read (bufdesc, readbuf, readsize);
-  if (fillsize == SAFE_READ_ERROR)
+  while (true)
     {
-      fillsize = 0;
-      cc = false;
+      fillsize = safe_read (bufdesc, readbuf, readsize);
+      if (fillsize == SAFE_READ_ERROR)
+        {
+          fillsize = 0;
+          cc = false;
+        }
+      bufoffset += fillsize;
+
+      if (fillsize == 0 || !skip_nuls || !all_zeros (readbuf, fillsize))
+        break;
+      totalnl = add_count (totalnl, fillsize);
+
+      if (SEEK_DATA != SEEK_SET && !seek_data_failed)
+        {
+          /* Solaris SEEK_DATA fails with errno == ENXIO in a hole at EOF.  */
+          off_t data_start = lseek (bufdesc, bufoffset, SEEK_DATA);
+          if (data_start < 0 && errno == ENXIO
+              && usable_st_size (st) && bufoffset < st->st_size)
+            data_start = lseek (bufdesc, 0, SEEK_END);
+
+          if (data_start < 0)
+            seek_data_failed = true;
+          else
+            {
+              totalnl = add_count (totalnl, data_start - bufoffset);
+              bufoffset = data_start;
+            }
+        }
     }
-  bufoffset += fillsize;
+
   fillsize = undossify_input (readbuf, fillsize);
   buflim = readbuf + fillsize;
   return cc;
@@ -716,7 +844,6 @@ static char const *lastnl;	/* Pointer after last newline counted. */
 static char const *lastout;	/* Pointer after last character output;
                                    NULL if no character has been output
                                    or if it's conceptually before bufbeg. */
-static uintmax_t totalnl;	/* Total newline count before lastnl. */
 static intmax_t outleft;	/* Maximum number of lines to be output.  */
 static intmax_t pending;	/* Pending lines of output.
                                    Always kept 0 if out_quiet is true.  */
@@ -724,17 +851,6 @@ static bool done_on_match;	/* Stop scanning file on first match.  */
 static bool exit_on_match;	/* Exit on first match.  */
 
 #include "dosbuf.c"
-
-/* Add two numbers that count input bytes or lines, and report an
-   error if the addition overflows.  */
-static uintmax_t
-add_count (uintmax_t a, uintmax_t b)
-{
-  uintmax_t sum = a + b;
-  if (sum < a)
-    error (EXIT_TROUBLE, 0, _("input is too large to count"));
-  return sum;
-}
 
 static void
 nlscan (char const *lim)
@@ -1079,9 +1195,30 @@ prtext (char const *beg, char const *lim)
   outleft -= n;
 }
 
+/* Replace all NUL bytes in buffer P (which ends at LIM) with EOL.
+   This avoids running out of memory when binary input contains a long
+   sequence of zeros, which would otherwise be considered to be part
+   of a long line.  P[LIM] should be EOL.  */
+static void
+zap_nuls (char *p, char *lim, char eol)
+{
+  if (eol)
+    while (true)
+      {
+        *lim = '\0';
+        p += strlen (p);
+        *lim = eol;
+        if (p == lim)
+          break;
+        do
+          *p++ = eol;
+        while (!*p);
+      }
+}
+
 /* Scan the specified portion of the buffer, matching lines (or
    between matching lines if OUT_INVERT is true).  Return a count of
-   lines printed. */
+   lines printed.  Replace all NUL bytes with NUL_ZAPPER as we go.  */
 static intmax_t
 grepbuf (char const *beg, char const *lim)
 {
@@ -1129,12 +1266,13 @@ static intmax_t
 grep (int fd, struct stat const *st)
 {
   intmax_t nlines, i;
-  int textbin;
+  enum textbin textbin;
   size_t residue, save;
   char oldc;
   char *beg;
   char *lim;
   char eol = eolbyte;
+  char nul_zapper = '\0';
   bool done_on_match_0 = done_on_match;
   bool out_quiet_0 = out_quiet;
 
@@ -1147,6 +1285,8 @@ grep (int fd, struct stat const *st)
   outleft = max_count;
   after_last_match = 0;
   pending = 0;
+  skip_nuls = skip_empty_lines && !eol;
+  seek_data_failed = false;
 
   nlines = 0;
   residue = 0;
@@ -1159,20 +1299,25 @@ grep (int fd, struct stat const *st)
     }
 
   if (binary_files == TEXT_BINARY_FILES)
-    textbin = 1;
+    textbin = TEXTBIN_TEXT;
   else
     {
       textbin = file_textbin (bufbeg, buflim - bufbeg, fd, st);
-      if (textbin < 0)
+      if (textbin_is_binary (textbin))
         {
           if (binary_files == WITHOUT_MATCH_BINARY_FILES)
             return 0;
           done_on_match = out_quiet = true;
+          nul_zapper = eol;
+          skip_nuls = skip_empty_lines;
         }
+      else if (execute != Pexecute)
+        textbin = TEXTBIN_TEXT;
     }
 
   for (;;)
     {
+      input_textbin = textbin;
       lastnl = bufbeg;
       if (lastout)
         lastout = bufbeg;
@@ -1182,6 +1327,8 @@ grep (int fd, struct stat const *st)
       /* no more data to scan (eof) except for maybe a residue -> break */
       if (beg == buflim)
         break;
+
+      zap_nuls (beg, buflim, nul_zapper);
 
       /* Determine new residue (the length of an incomplete line at the end of
          the buffer, 0 means there is no incomplete last line).  */
@@ -1223,8 +1370,8 @@ grep (int fd, struct stat const *st)
       /* Detect whether leading context is adjacent to previous output.  */
       if (lastout)
         {
-          if (!textbin)
-            textbin = 1;
+          if (textbin == TEXTBIN_UNKNOWN)
+            textbin = TEXTBIN_TEXT;
           if (beg != lastout)
             lastout = 0;
         }
@@ -1243,12 +1390,18 @@ grep (int fd, struct stat const *st)
 
       /* If the file's textbin has not been determined yet, assume
          it's binary if the next input buffer suggests so.  */
-      if (! textbin && buffer_textbin (bufbeg, buflim - bufbeg) < 0)
+      if (textbin == TEXTBIN_UNKNOWN)
         {
-          textbin = -1;
-          if (binary_files == WITHOUT_MATCH_BINARY_FILES)
-            return 0;
-          done_on_match = out_quiet = true;
+          enum textbin tb = buffer_textbin (bufbeg, buflim - bufbeg);
+          if (textbin_is_binary (tb))
+            {
+              if (binary_files == WITHOUT_MATCH_BINARY_FILES)
+                return 0;
+              textbin = tb;
+              done_on_match = out_quiet = true;
+              nul_zapper = eol;
+              skip_nuls = skip_empty_lines;
+            }
         }
     }
   if (residue)
@@ -1263,7 +1416,7 @@ grep (int fd, struct stat const *st)
  finish_grep:
   done_on_match = done_on_match_0;
   out_quiet = out_quiet_0;
-  if (textbin < 0 && !out_quiet && nlines != 0)
+  if (textbin_is_binary (textbin) && !out_quiet && nlines != 0)
     printf (_("Binary file %s matches\n"), filename);
   return nlines;
 }
@@ -2337,6 +2490,7 @@ main (int argc, char **argv)
     usage (EXIT_TROUBLE);
 
   build_mbclen_cache ();
+  init_easy_encoding ();
 
   /* If fgrep in a multibyte locale, then use grep if either
      (1) case is ignored (where grep is typically faster), or
@@ -2357,6 +2511,11 @@ main (int argc, char **argv)
 
   compile (keys, keycc);
   free (keys);
+  /* We need one byte prior and one after.  */
+  char eolbytes[3] = { 0, eolbyte, 0 };
+  size_t match_size;
+  skip_empty_lines = ((execute (eolbytes + 1, 1, &match_size, NULL) == 0)
+                      == out_invert);
 
   if ((argc - optind > 1 && !no_filenames) || with_filenames)
     out_file = 1;
