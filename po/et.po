@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: grep 2.16.14\n"
+"Project-Id-Version: grep 2.19.12\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2014-02-20 22:40-0800\n"
-"PO-Revision-Date: 2014-02-10 11:39+0200\n"
+"POT-Creation-Date: 2014-10-29 10:51-0700\n"
+"PO-Revision-Date: 2014-06-01 09:25+0400\n"
 "Last-Translator: Toomas Soome <tsoome@me.com>\n"
 "Language-Team: Estonian <linux-ee@lists.eenet.ee>\n"
 "Language: et\n"
@@ -30,12 +30,12 @@ msgstr "segane argument %s võtmele %s"
 msgid "Valid arguments are:"
 msgstr "Lubatud argumendid on:"
 
-#: lib/closeout.c:112 src/main.c:954
+#: lib/closeout.c:112 src/grep.c:1096
 #, c-format
 msgid "write error"
 msgstr "viga kirjutamisel"
 
-#: lib/error.c:188
+#: lib/error.c:191
 msgid "Unknown system error"
 msgstr "Tundmatu süsteemi viga"
 
@@ -94,8 +94,8 @@ msgstr "%s: võti '-W %s' ei luba argumenti\n"
 msgid "%s: option '-W %s' requires an argument\n"
 msgstr "%s: võti '-W %s' nõuab argumenti\n"
 
-#: lib/obstack.c:413 lib/obstack.c:415 lib/xalloc-die.c:34 src/kwset.c:178
-#: src/kwset.c:186 src/kwset.c:409 src/pcresearch.c:191
+#: lib/obstack.c:416 lib/obstack.c:418 lib/xalloc-die.c:34
+#: src/pcresearch.c:267
 #, c-format
 msgid "memory exhausted"
 msgstr "mälu on otsas"
@@ -179,7 +179,7 @@ msgstr "Puudub ( või \\("
 msgid "Unmatched \\{"
 msgstr "Puudub \\{"
 
-#: lib/regcomp.c:161 src/dfa.c:1371
+#: lib/regcomp.c:161
 msgid "Invalid content of \\{\\}"
 msgstr "Vigane \\{\\} sisu"
 
@@ -199,7 +199,7 @@ msgstr "Vigane eelnev regulaaravaldis"
 msgid "Premature end of regular expression"
 msgstr "Ootamatu reagulaaravaldise lõpp"
 
-#: lib/regcomp.c:176 src/dfa.c:1374
+#: lib/regcomp.c:176
 msgid "Regular expression too big"
 msgstr "Regulaaravaldis on liiga suur"
 
@@ -355,7 +355,7 @@ msgstr ""
 #. for this package.  Please add _another line_ saying
 #. "Report translation bugs to <...>\n" with the address for translation
 #. bugs (typically your translation team's web or email address).
-#: lib/version-etc.c:245 src/main.c:1636
+#: lib/version-etc.c:245
 #, c-format
 msgid ""
 "\n"
@@ -379,7 +379,7 @@ msgstr "%s koduleht: <%s>\n"
 msgid "%s home page: <http://www.gnu.org/software/%s/>\n"
 msgstr "%s koduleht: <http://www.gnu.org/software/%s/>\n"
 
-#: lib/version-etc.c:256 src/main.c:1639
+#: lib/version-etc.c:256
 msgid "General help using GNU software: <http://www.gnu.org/gethelp/>\n"
 msgstr "Üldine abiinfo GNU tarkvara kohta: <http://www.gnu.org/gethelp/>\n"
 
@@ -398,125 +398,110 @@ msgstr "vigane sufiks %s%s argumendis '%s'"
 msgid "%s%s argument '%s' too large"
 msgstr "%s%s argument '%s' on liiga suur"
 
-#: src/dfa.c:956 src/dfa.c:959 src/dfa.c:979 src/dfa.c:989 src/dfa.c:1001
-#: src/dfa.c:1052 src/dfa.c:1061 src/dfa.c:1064 src/dfa.c:1069 src/dfa.c:1082
-#: src/dfa.c:1139
+#: src/dfa.c:1026 src/dfa.c:1029 src/dfa.c:1048 src/dfa.c:1058 src/dfa.c:1070
+#: src/dfa.c:1106 src/dfa.c:1115 src/dfa.c:1118 src/dfa.c:1123 src/dfa.c:1137
+#: src/dfa.c:1185
 msgid "unbalanced ["
 msgstr "balanseerimata ["
 
-#: src/dfa.c:1010
+#: src/dfa.c:1082
 msgid "invalid character class"
 msgstr "vigane sümboliklass"
 
-#: src/dfa.c:1172
+#: src/dfa.c:1228
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr "sümbolklassi süntaks on [[:space:]], mitte [:space:]"
 
-#: src/dfa.c:1224
+#: src/dfa.c:1290
 msgid "unfinished \\ escape"
 msgstr "lõpetamata \\ paojada"
 
-#: src/dfa.c:1789
+#: src/dfa.c:1437
+msgid "invalid content of \\{\\}"
+msgstr "vigane \\{\\} sisu"
+
+#: src/dfa.c:1440
+msgid "regular expression too big"
+msgstr "regulaaravaldis on liiga suur"
+
+#: src/dfa.c:1875
 msgid "unbalanced ("
 msgstr "balanseerimata ("
 
-#: src/dfa.c:1915
+#: src/dfa.c:2001
 msgid "no syntax specified"
 msgstr "süntaksit pole määratud"
 
-#: src/dfa.c:1923
+#: src/dfa.c:2009
 msgid "unbalanced )"
 msgstr "balanseerimata )"
 
-#: src/egrep.c:16
-msgid "PATTERN is an extended regular expression (ERE).\n"
-msgstr "MUSTER on laiendatud regulaaravaldis (ERE).\n"
-
-#: src/egrep.c:18
-msgid "Invocation as 'egrep' is deprecated; use 'grep -E' instead.\n"
-msgstr "Käsu 'egrep' kasutamine pole soovitatav; kasutage 'grep -E'.\n"
-
-#: src/fgrep.c:10
-msgid "PATTERN is a set of newline-separated fixed strings.\n"
-msgstr "MUSTER on reavahetusega eraldatud sõnede hulk.\n"
-
-#: src/fgrep.c:12
-msgid "Invocation as 'fgrep' is deprecated; use 'grep -F' instead.\n"
-msgstr "Käsu 'fgrep' kasutamine pole soovitatav; kasutage 'grep -F'.\n"
-
-#: src/grep.c:46
-msgid "PATTERN is, by default, a basic regular expression (BRE).\n"
-msgstr "MUSTER on vaikimisi lihtne regulaaravaldis (BRE).\n"
-
-#: src/grep.c:48
-msgid ""
-"'egrep' means 'grep -E'.  'fgrep' means 'grep -F'.\n"
-"Direct invocation as either 'egrep' or 'fgrep' is deprecated.\n"
-msgstr ""
-"'egrep' tähendab 'grep -E'.  'fgrep' tähendab 'grep -F'.\n"
-"Otsene 'egrep' või 'fgrep' kasutamine pole soovitatav.\n"
-
 #. This is a proper name. See the gettext manual, section Names.
-#: src/main.c:60
+#: src/grep.c:57
 msgid "Mike Haertel"
 msgstr "Mike Haertel"
 
-#: src/main.c:61
+#: src/grep.c:58
 msgid "others, see <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
 msgstr "teised, vaata <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
 
-#: src/main.c:500
+#: src/grep.c:605
 msgid "invalid context length argument"
 msgstr "vigane konteksti pikkuse argument"
 
-#: src/main.c:569
-msgid "lseek failed"
-msgstr "lseek ebaõnnestus"
-
-#: src/main.c:707
+#: src/grep.c:658
 #, c-format
 msgid "input is too large to count"
 msgstr "sisend on loendamiseks liiga suur"
 
-#: src/main.c:1273
+#: src/grep.c:700
+msgid "lseek failed"
+msgstr "lseek ebaõnnestus"
+
+#: src/grep.c:1420
 #, c-format
 msgid "Binary file %s matches\n"
 msgstr "Kahendfail %s sobib\n"
 
-#: src/main.c:1316
+#: src/grep.c:1464
 #, c-format
 msgid "warning: %s: %s"
 msgstr "hoiatus: %s: %s"
 
-#: src/main.c:1317
+#: src/grep.c:1465
 msgid "recursive directory loop"
 msgstr "rekursiivne kataloogipuu tsükkel"
 
-#: src/main.c:1465
+#: src/grep.c:1613
 #, c-format
 msgid "input file %s is also the output"
 msgstr "sisendfail %s on samuti väljund"
 
-#: src/main.c:1523
+#: src/grep.c:1671
 msgid "(standard input)"
 msgstr "(standardsisend)"
 
-#: src/main.c:1539 src/main.c:1546
+#: src/grep.c:1687 src/grep.c:1694
 #, c-format
 msgid "Usage: %s [OPTION]... PATTERN [FILE]...\n"
 msgstr "Kasuta: %s [VÕTI]... MUSTER [FAIL] ...\n"
 
-#: src/main.c:1541
+#: src/grep.c:1689
 #, c-format
 msgid "Try '%s --help' for more information.\n"
 msgstr "Lisainfo saamiseks proovige võtit '%s --help'.\n"
 
-#: src/main.c:1547
+#: src/grep.c:1695
 #, c-format
 msgid "Search for PATTERN in each FILE or standard input.\n"
 msgstr "Otsib MUSTRIT igast FAIList või standardsisendist.\n"
 
-#: src/main.c:1550
+#: src/grep.c:1696
+#, c-format
+msgid "PATTERN is, by default, a basic regular expression (BRE).\n"
+msgstr "MUSTER on vaikimisi lihtne regulaaravaldis (BRE).\n"
+
+#: src/grep.c:1697
 #, c-format
 msgid ""
 "Example: %s -i 'hello world' menu.h main.c\n"
@@ -527,12 +512,11 @@ msgstr ""
 "\n"
 "Regulaaravaldise valik ja interpreteerimine:\n"
 
-#: src/main.c:1555
-#, c-format
+#: src/grep.c:1701
+#, fuzzy, c-format
 msgid ""
 "  -E, --extended-regexp     PATTERN is an extended regular expression (ERE)\n"
-"  -F, --fixed-strings       PATTERN is a set of newline-separated fixed "
-"strings\n"
+"  -F, --fixed-strings       PATTERN is a set of newline-separated strings\n"
 "  -G, --basic-regexp        PATTERN is a basic regular expression (BRE)\n"
 "  -P, --perl-regexp         PATTERN is a Perl regular expression\n"
 msgstr ""
@@ -541,7 +525,7 @@ msgstr ""
 "  -G, --basic-regexp        MUSTER on lihtne regulaaravaldis (BRE)\n"
 "  -P, --perl-regexp         MUSTER on Perl regulaaravaldis\n"
 
-#: src/main.c:1561
+#: src/grep.c:1707
 #, c-format
 msgid ""
 "  -e, --regexp=PATTERN      use PATTERN for matching\n"
@@ -558,8 +542,8 @@ msgstr ""
 "  -x, --line-regexp         kasuta MUSTRIT ridade leidmiseks\n"
 "  -z, --null-data           andmerida lõppeb baidil 0, mitte reavahetusel\n"
 
-#: src/main.c:1568
-#, fuzzy, c-format
+#: src/grep.c:1714
+#, c-format
 msgid ""
 "\n"
 "Miscellaneous:\n"
@@ -576,7 +560,7 @@ msgstr ""
 "      --help                esita see abiinfo ja lõpeta töö\n"
 "\n"
 
-#: src/main.c:1575
+#: src/grep.c:1721
 #, c-format
 msgid ""
 "\n"
@@ -600,7 +584,7 @@ msgstr ""
 "  -h, --no-filename         blokeeri väljundis failinimi\n"
 "      --label=MÄRGEND       kasuta väljundis failinime asemel märgendit\n"
 
-#: src/main.c:1586
+#: src/grep.c:1732
 #, c-format
 msgid ""
 "  -o, --only-matching       show only the part of a line matching PATTERN\n"
@@ -615,7 +599,7 @@ msgstr ""
 "                            TÜÜP on 'binary', 'text', või 'without-match'\n"
 "  -a, --text                sama, kui --binary-files=text\n"
 
-#: src/main.c:1593
+#: src/grep.c:1739
 #, c-format
 msgid ""
 "  -I                        equivalent to --binary-files=without-match\n"
@@ -635,7 +619,7 @@ msgstr ""
 "  -r, --recursive           sama, kui --directories=recurse\n"
 "  -R                        sama, aga järgib kõiki nimeviiteid\n"
 
-#: src/main.c:1602
+#: src/grep.c:1748
 #, c-format
 msgid ""
 "      --include=FILE_PATTERN  search only files that match FILE_PATTERN\n"
@@ -652,7 +636,7 @@ msgstr ""
 "mustrile\n"
 "      --exclude-dir=MUSTER   välista mustrile vastavad kataloogid.\n"
 
-#: src/main.c:1608
+#: src/grep.c:1755
 #, c-format
 msgid ""
 "  -L, --files-without-match  print only names of FILEs containing no match\n"
@@ -668,7 +652,7 @@ msgstr ""
 "tabulaatorit\n"
 "  -Z, --null                väljasta faili nime järel bait 0\n"
 
-#: src/main.c:1614
+#: src/grep.c:1761
 #, c-format
 msgid ""
 "\n"
@@ -683,7 +667,7 @@ msgstr ""
 "  -A, --after-context=NUM   väljasta NUM rida järgnevat konteksti\n"
 "  -C, --context=NUM         väljasta NUM rida väljundi konteksti\n"
 
-#: src/main.c:1621
+#: src/grep.c:1768
 #, c-format
 msgid ""
 "  -NUM                      same as --context=NUM\n"
@@ -706,7 +690,16 @@ msgstr ""
 "                            (MSDOS/WINDOWS)\n"
 "\n"
 
-#: src/main.c:1631
+#: src/grep.c:1777
+#, c-format
+msgid ""
+"'egrep' means 'grep -E'.  'fgrep' means 'grep -F'.\n"
+"Direct invocation as either 'egrep' or 'fgrep' is deprecated.\n"
+msgstr ""
+"'egrep' tähendab 'grep -E'.  'fgrep' tähendab 'grep -F'.\n"
+"Otsene 'egrep' või 'fgrep' kasutamine pole soovitatav.\n"
+
+#: src/grep.c:1780
 #, c-format
 msgid ""
 "When FILE is -, read standard input.  With no FILE, read . if a command-"
@@ -721,47 +714,47 @@ msgstr ""
 "Lõpetamise kood on 0, kui rida leiti, muidu 1;\n"
 "kui tekkis viga ja -q ei kasutatud, on lõpetamise kood 2.\n"
 
-#: src/main.c:1637
-#, c-format
-msgid "GNU Grep home page: <%s>\n"
-msgstr "GNU Grep koduleht: <%s>\n"
-
-#: src/main.c:1670
-#, c-format
-msgid "%s can only use the %s pattern syntax"
-msgstr "%s saab kasutada ainult %s mustri süntaksit"
-
-#: src/main.c:1673
+#: src/grep.c:1849
 #, c-format
 msgid "conflicting matchers specified"
 msgstr "määrati konfliktsed otsijad"
 
-#: src/main.c:1687
+#: src/grep.c:1860
 #, c-format
 msgid "invalid matcher %s"
 msgstr "vigane sobitaja %s"
 
-#: src/main.c:2023
+#: src/grep.c:2143
+#, c-format
+msgid "warning: GREP_OPTIONS is deprecated; please use an alias or script"
+msgstr ""
+
+#: src/grep.c:2173
 #, c-format
 msgid "unknown devices method"
 msgstr "tundmatu seadmete meetod"
 
-#: src/main.c:2154
+#: src/grep.c:2300
 #, c-format
 msgid "invalid max count"
 msgstr "vigane maksimum"
 
-#: src/main.c:2211
+#: src/grep.c:2357
 #, c-format
 msgid "unknown binary-files type"
 msgstr "tundmatu kahendfailide tüüp"
 
-#: src/pcresearch.c:51
+#: src/pcresearch.c:54
 msgid ""
 "support for the -P option is not compiled into this --disable-perl-regexp "
 "binary"
 msgstr ""
 "võtme -P tuge ei ole kompileeritud sellesse --disable-perl-regexp koodi"
+
+#: src/pcresearch.c:70
+#, c-format
+msgid "-P supports only unibyte and UTF-8 locales"
+msgstr ""
 
 #: src/pcresearch.c:74
 #, c-format
@@ -778,27 +771,28 @@ msgstr "sisemine viga (ei peaks kunagi juhtuma)"
 msgid "failed to allocate memory for the PCRE JIT stack"
 msgstr "PCRE JIT magasini jaoks ei jätku mälu"
 
-#: src/pcresearch.c:144
+#: src/pcresearch.c:150
 #, c-format
 msgid "internal error"
 msgstr "sisemine viga"
 
-#: src/pcresearch.c:176
+#: src/pcresearch.c:186
 #, c-format
 msgid "exceeded PCRE's line length limit"
 msgstr "PCRE rea pikkuse piirang on ületatud"
 
-#: src/pcresearch.c:195
+#: src/pcresearch.c:271
 #, c-format
 msgid "exceeded PCRE's backtracking limit"
 msgstr "PCRE tagasivaate piirang on ületatud"
 
-#: src/pcresearch.c:199
-#, c-format
-msgid "invalid UTF-8 byte sequence in input"
-msgstr "sisendis on vigane UTF-8 baidi järjend"
-
-#: src/pcresearch.c:206
+#: src/pcresearch.c:278
 #, c-format
 msgid "internal PCRE error: %d"
 msgstr "sisemine PCRE viga: %d"
+
+#~ msgid "GNU Grep home page: <%s>\n"
+#~ msgstr "GNU Grep koduleht: <%s>\n"
+
+#~ msgid "invalid UTF-8 byte sequence in input"
+#~ msgstr "sisendis on vigane UTF-8 baidi järjend"

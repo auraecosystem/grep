@@ -20,28 +20,31 @@
 #ifndef GREP_GREP_H
 #define GREP_GREP_H 1
 
-/* Function pointer types.  */
-typedef void (*compile_fp_t) (char const *, size_t);
-typedef size_t (*execute_fp_t) (char const *, size_t, size_t *, char const *);
-
-/* grep.c expects the matchers vector to be terminated by an entry
-   with a NULL name, and to contain at least one entry. */
-struct matcher
-{
-  const char *name;
-  compile_fp_t compile;
-  execute_fp_t execute;
-};
-extern const struct matcher matchers[];
-
-extern const char before_options[];
-extern const char after_options[];
+#include <stdbool.h>
 
 /* The following flags are exported from grep for the matchers
    to look at. */
-extern int match_icase;		/* -i */
-extern int match_words;		/* -w */
-extern int match_lines;		/* -x */
-extern unsigned char eolbyte;	/* -z */
+extern bool match_icase;	/* -i */
+extern bool match_words;	/* -w */
+extern bool match_lines;	/* -x */
+extern char eolbyte;		/* -z */
+
+/* An enum textbin describes the file's type, inferred from data read
+   before the first line is selected for output.  */
+enum textbin
+  {
+    /* Binary, as it contains null bytes and the -z option is not in effect,
+       or it contains encoding errors.  */
+    TEXTBIN_BINARY = -1,
+
+    /* Not known yet.  Only text has been seen so far.  */
+    TEXTBIN_UNKNOWN = 0,
+
+    /* Text.  */
+    TEXTBIN_TEXT = 1
+  };
+
+/* Input file type.  */
+extern enum textbin input_textbin;
 
 #endif

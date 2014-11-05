@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grep 2.11.11-pre1\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2014-02-20 22:40-0800\n"
+"POT-Creation-Date: 2014-10-29 10:51-0700\n"
 "PO-Revision-Date: 2012-04-15 14:48+0800\n"
 "Last-Translator: Ji ZhengYu <zhengyuji@gmail.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
@@ -29,12 +29,12 @@ msgstr "%2$s 的参数 %1$s 有歧义"
 msgid "Valid arguments are:"
 msgstr "有效参数是:"
 
-#: lib/closeout.c:112 src/main.c:954
+#: lib/closeout.c:112 src/grep.c:1096
 #, c-format
 msgid "write error"
 msgstr "写错误"
 
-#: lib/error.c:188
+#: lib/error.c:191
 msgid "Unknown system error"
 msgstr "未知的系统错误"
 
@@ -93,8 +93,8 @@ msgstr "%s: 选项 ‘-W %s’不允许带参数\n"
 msgid "%s: option '-W %s' requires an argument\n"
 msgstr "%s: 选项 ‘-W %s’必须带参数\n"
 
-#: lib/obstack.c:413 lib/obstack.c:415 lib/xalloc-die.c:34 src/kwset.c:178
-#: src/kwset.c:186 src/kwset.c:409 src/pcresearch.c:191
+#: lib/obstack.c:416 lib/obstack.c:418 lib/xalloc-die.c:34
+#: src/pcresearch.c:267
 #, c-format
 msgid "memory exhausted"
 msgstr "内存耗尽"
@@ -178,7 +178,7 @@ msgstr "( 或 \\( 不匹配"
 msgid "Unmatched \\{"
 msgstr "\\{ 不匹配"
 
-#: lib/regcomp.c:161 src/dfa.c:1371
+#: lib/regcomp.c:161
 msgid "Invalid content of \\{\\}"
 msgstr "\\{\\} 中的内容无效"
 
@@ -198,7 +198,7 @@ msgstr "之前的正则表达式无效"
 msgid "Premature end of regular expression"
 msgstr "正则表达式非正常结束"
 
-#: lib/regcomp.c:176 src/dfa.c:1374
+#: lib/regcomp.c:176
 msgid "Regular expression too big"
 msgstr "正则表达式太大"
 
@@ -355,7 +355,7 @@ msgstr ""
 #. for this package.  Please add _another line_ saying
 #. "Report translation bugs to <...>\n" with the address for translation
 #. bugs (typically your translation team's web or email address).
-#: lib/version-etc.c:245 src/main.c:1636
+#: lib/version-etc.c:245
 #, c-format
 msgid ""
 "\n"
@@ -379,7 +379,7 @@ msgstr "%s 主页: <%s>\n"
 msgid "%s home page: <http://www.gnu.org/software/%s/>\n"
 msgstr "%s 主页: <http://www.gnu.org/software/%s/>\n"
 
-#: lib/version-etc.c:256 src/main.c:1639
+#: lib/version-etc.c:256
 msgid "General help using GNU software: <http://www.gnu.org/gethelp/>\n"
 msgstr "GNU 软件的通用帮助: <http://www.gnu.org/gethelp/>\n"
 
@@ -398,125 +398,112 @@ msgstr "%s%s 参数‘%s’的后缀无效"
 msgid "%s%s argument '%s' too large"
 msgstr "%s%s 参数‘%s’过多"
 
-#: src/dfa.c:956 src/dfa.c:959 src/dfa.c:979 src/dfa.c:989 src/dfa.c:1001
-#: src/dfa.c:1052 src/dfa.c:1061 src/dfa.c:1064 src/dfa.c:1069 src/dfa.c:1082
-#: src/dfa.c:1139
+#: src/dfa.c:1026 src/dfa.c:1029 src/dfa.c:1048 src/dfa.c:1058 src/dfa.c:1070
+#: src/dfa.c:1106 src/dfa.c:1115 src/dfa.c:1118 src/dfa.c:1123 src/dfa.c:1137
+#: src/dfa.c:1185
 msgid "unbalanced ["
 msgstr "有未匹配的 ["
 
-#: src/dfa.c:1010
+#: src/dfa.c:1082
 msgid "invalid character class"
 msgstr "无效的字符类名"
 
-#: src/dfa.c:1172
+#: src/dfa.c:1228
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr "字符类的语法是 [[:space:]],而非 [:space:]"
 
-#: src/dfa.c:1224
+#: src/dfa.c:1290
 msgid "unfinished \\ escape"
 msgstr "未做好 \\ 转义"
 
-#: src/dfa.c:1789
+#: src/dfa.c:1437
+#, fuzzy
+msgid "invalid content of \\{\\}"
+msgstr "\\{\\} 中的内容无效"
+
+#: src/dfa.c:1440
+#, fuzzy
+msgid "regular expression too big"
+msgstr "正则表达式太大"
+
+#: src/dfa.c:1875
 msgid "unbalanced ("
 msgstr "有未匹配的 ("
 
-#: src/dfa.c:1915
+#: src/dfa.c:2001
 msgid "no syntax specified"
 msgstr "未指定语法"
 
-#: src/dfa.c:1923
+#: src/dfa.c:2009
 msgid "unbalanced )"
 msgstr "有未匹配的 )"
 
-#: src/egrep.c:16
-msgid "PATTERN is an extended regular expression (ERE).\n"
-msgstr "PATTERN 是一个可扩展的正则表达式(缩写为 ERE)。\n"
-
-#: src/egrep.c:18
-msgid "Invocation as 'egrep' is deprecated; use 'grep -E' instead.\n"
-msgstr "‘egrep’已不再使用了；请用‘grep -E’代替。\n"
-
-#: src/fgrep.c:10
-msgid "PATTERN is a set of newline-separated fixed strings.\n"
-msgstr "PATTERN 是一组由断行符分隔的定长字符串。\n"
-
-#: src/fgrep.c:12
-msgid "Invocation as 'fgrep' is deprecated; use 'grep -F' instead.\n"
-msgstr "‘fgrep’已不再使用了；请用 ‘grep -F’代替。\n"
-
-#: src/grep.c:46
-msgid "PATTERN is, by default, a basic regular expression (BRE).\n"
-msgstr "默认的 PATTERN 是一个基本正则表达式(缩写为 BRE)。\n"
-
-#: src/grep.c:48
-msgid ""
-"'egrep' means 'grep -E'.  'fgrep' means 'grep -F'.\n"
-"Direct invocation as either 'egrep' or 'fgrep' is deprecated.\n"
-msgstr ""
-"‘egrep’即‘grep -E’。‘fgrep’即‘grep -F’。\n"
-"直接使用‘egrep’或是‘fgrep’均已不可行了。\n"
-
 #. This is a proper name. See the gettext manual, section Names.
-#: src/main.c:60
+#: src/grep.c:57
 msgid "Mike Haertel"
 msgstr "Mike Haertel"
 
-#: src/main.c:61
+#: src/grep.c:58
 msgid "others, see <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
 msgstr "其余作者请参看 <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
 
-#: src/main.c:500
+#: src/grep.c:605
 msgid "invalid context length argument"
 msgstr "无效的文本长度参数"
 
-#: src/main.c:569
-msgid "lseek failed"
-msgstr "lseek 失败"
-
-#: src/main.c:707
+#: src/grep.c:658
 #, c-format
 msgid "input is too large to count"
 msgstr "输入太多无法计数"
 
-#: src/main.c:1273
+#: src/grep.c:700
+msgid "lseek failed"
+msgstr "lseek 失败"
+
+#: src/grep.c:1420
 #, c-format
 msgid "Binary file %s matches\n"
 msgstr "匹配到二进制文件 %s\n"
 
-#: src/main.c:1316
+#: src/grep.c:1464
 #, c-format
 msgid "warning: %s: %s"
 msgstr "警告: %s: %s"
 
-#: src/main.c:1317
+#: src/grep.c:1465
 msgid "recursive directory loop"
 msgstr "嵌套目录循环"
 
-#: src/main.c:1465
+#: src/grep.c:1613
 #, c-format
 msgid "input file %s is also the output"
 msgstr "输入文件 %s 同时也作输出"
 
-#: src/main.c:1523
+#: src/grep.c:1671
 msgid "(standard input)"
 msgstr "(标准输入)"
 
-#: src/main.c:1539 src/main.c:1546
+#: src/grep.c:1687 src/grep.c:1694
 #, c-format
 msgid "Usage: %s [OPTION]... PATTERN [FILE]...\n"
 msgstr "用法: %s [选项]... PATTERN [FILE]...\n"
 
-#: src/main.c:1541
+#: src/grep.c:1689
 #, c-format
 msgid "Try '%s --help' for more information.\n"
 msgstr "试用‘%s --help’来获得更多信息。\n"
 
-#: src/main.c:1547
+#: src/grep.c:1695
 #, c-format
 msgid "Search for PATTERN in each FILE or standard input.\n"
 msgstr "在每个 FILE 或是标准输入中查找 PATTERN。\n"
 
-#: src/main.c:1550
+#: src/grep.c:1696
+#, c-format
+msgid "PATTERN is, by default, a basic regular expression (BRE).\n"
+msgstr "默认的 PATTERN 是一个基本正则表达式(缩写为 BRE)。\n"
+
+#: src/grep.c:1697
 #, c-format
 msgid ""
 "Example: %s -i 'hello world' menu.h main.c\n"
@@ -527,12 +514,11 @@ msgstr ""
 "\n"
 "正则表达式选择与解释:\n"
 
-#: src/main.c:1555
-#, c-format
+#: src/grep.c:1701
+#, fuzzy, c-format
 msgid ""
 "  -E, --extended-regexp     PATTERN is an extended regular expression (ERE)\n"
-"  -F, --fixed-strings       PATTERN is a set of newline-separated fixed "
-"strings\n"
+"  -F, --fixed-strings       PATTERN is a set of newline-separated strings\n"
 "  -G, --basic-regexp        PATTERN is a basic regular expression (BRE)\n"
 "  -P, --perl-regexp         PATTERN is a Perl regular expression\n"
 msgstr ""
@@ -541,7 +527,7 @@ msgstr ""
 "  -G, --basic-regexp        PATTERN 是一个基本正则表达式(缩写为 BRE)\n"
 "  -P, --perl-regexp         PATTERN 是一个 Perl 正则表达式\n"
 
-#: src/main.c:1561
+#: src/grep.c:1707
 #, c-format
 msgid ""
 "  -e, --regexp=PATTERN      use PATTERN for matching\n"
@@ -558,7 +544,7 @@ msgstr ""
 "  -x, --line-regexp         强制 PATTERN 仅完全匹配一行\n"
 "  -z, --null-data           一个 0 字节的数据行，但不是空行\n"
 
-#: src/main.c:1568
+#: src/grep.c:1714
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -576,7 +562,7 @@ msgstr ""
 "      --help                显示此帮助并退出\n"
 "      --mmap                忽略向后兼容性\n"
 
-#: src/main.c:1575
+#: src/grep.c:1721
 #, c-format
 msgid ""
 "\n"
@@ -600,7 +586,7 @@ msgstr ""
 "  -h, --no-filename         输出时不显示文件名前缀\n"
 "      --label=LABEL         将LABEL 作为标准输入文件名前缀\n"
 
-#: src/main.c:1586
+#: src/grep.c:1732
 #, fuzzy, c-format
 msgid ""
 "  -o, --only-matching       show only the part of a line matching PATTERN\n"
@@ -615,7 +601,7 @@ msgstr ""
 "                            TYPE 可以是`binary', `text', 或`without-match'\n"
 "  -a, --text                等同于 --binary-files=text\n"
 
-#: src/main.c:1593
+#: src/grep.c:1739
 #, fuzzy, c-format
 msgid ""
 "  -I                        equivalent to --binary-files=without-match\n"
@@ -634,7 +620,7 @@ msgstr ""
 "  -r, --recursive           等同于--directories=recurse\n"
 "  -R, --dereference-recursive       与上类似，但遍历所有符号链接\n"
 
-#: src/main.c:1602
+#: src/grep.c:1748
 #, c-format
 msgid ""
 "      --include=FILE_PATTERN  search only files that match FILE_PATTERN\n"
@@ -649,7 +635,7 @@ msgstr ""
 "      --exclude-from=FILE   跳过所有除FILE 以外的文件\n"
 "      --exclude-dir=PATTERN  跳过所有匹配PATTERN 的目录。\n"
 
-#: src/main.c:1608
+#: src/grep.c:1755
 #, c-format
 msgid ""
 "  -L, --files-without-match  print only names of FILEs containing no match\n"
@@ -664,7 +650,7 @@ msgstr ""
 "  -T, --initial-tab         行首tabs 分隔（如有必要）\n"
 "  -Z, --null                在FILE 文件最后打印空字符\n"
 
-#: src/main.c:1614
+#: src/grep.c:1761
 #, c-format
 msgid ""
 "\n"
@@ -679,7 +665,7 @@ msgstr ""
 "  -A, --after-context=NUM   打印以文本结尾的NUM 行\n"
 "  -C, --context=NUM         打印输出文本NUM 行\n"
 
-#: src/main.c:1621
+#: src/grep.c:1768
 #, fuzzy, c-format
 msgid ""
 "  -NUM                      same as --context=NUM\n"
@@ -701,7 +687,16 @@ msgstr ""
 "式)\n"
 "\n"
 
-#: src/main.c:1631
+#: src/grep.c:1777
+#, c-format
+msgid ""
+"'egrep' means 'grep -E'.  'fgrep' means 'grep -F'.\n"
+"Direct invocation as either 'egrep' or 'fgrep' is deprecated.\n"
+msgstr ""
+"‘egrep’即‘grep -E’。‘fgrep’即‘grep -F’。\n"
+"直接使用‘egrep’或是‘fgrep’均已不可行了。\n"
+
+#: src/grep.c:1780
 #, c-format
 msgid ""
 "When FILE is -, read standard input.  With no FILE, read . if a command-"
@@ -716,46 +711,46 @@ msgstr ""
 "如果有任意行被匹配，那退出状态为 0，否则为 1；\n"
 "如果有错误产生，且未指定 -q 参数，那退出状态为 2。\n"
 
-#: src/main.c:1637
-#, c-format
-msgid "GNU Grep home page: <%s>\n"
-msgstr "GNU Grep 主页: <%s>\n"
-
-#: src/main.c:1670
-#, c-format
-msgid "%s can only use the %s pattern syntax"
-msgstr "%s 只能使用 %s 匹配语法"
-
-#: src/main.c:1673
+#: src/grep.c:1849
 #, c-format
 msgid "conflicting matchers specified"
 msgstr "指定了互相冲突的比较程序"
 
-#: src/main.c:1687
+#: src/grep.c:1860
 #, c-format
 msgid "invalid matcher %s"
 msgstr "无效的比较 %s"
 
-#: src/main.c:2023
+#: src/grep.c:2143
+#, c-format
+msgid "warning: GREP_OPTIONS is deprecated; please use an alias or script"
+msgstr ""
+
+#: src/grep.c:2173
 #, c-format
 msgid "unknown devices method"
 msgstr "未知的设备处理方法"
 
-#: src/main.c:2154
+#: src/grep.c:2300
 #, c-format
 msgid "invalid max count"
 msgstr "无效的最大计数"
 
-#: src/main.c:2211
+#: src/grep.c:2357
 #, c-format
 msgid "unknown binary-files type"
 msgstr "未知的二进制文件类型"
 
-#: src/pcresearch.c:51
+#: src/pcresearch.c:54
 msgid ""
 "support for the -P option is not compiled into this --disable-perl-regexp "
 "binary"
 msgstr "-P 选项的支持未编译入 --disable-perl-regexp binary"
+
+#: src/pcresearch.c:70
+#, c-format
+msgid "-P supports only unibyte and UTF-8 locales"
+msgstr ""
 
 #: src/pcresearch.c:74
 #, c-format
@@ -772,30 +767,43 @@ msgstr ""
 msgid "failed to allocate memory for the PCRE JIT stack"
 msgstr ""
 
-#: src/pcresearch.c:144
+#: src/pcresearch.c:150
 #, c-format
 msgid "internal error"
 msgstr "内部错误"
 
-#: src/pcresearch.c:176
+#: src/pcresearch.c:186
 #, c-format
 msgid "exceeded PCRE's line length limit"
 msgstr "超过PCRE 的行长度限制"
 
-#: src/pcresearch.c:195
+#: src/pcresearch.c:271
 #, c-format
 msgid "exceeded PCRE's backtracking limit"
 msgstr "超过PCRE 的回溯限制"
 
-#: src/pcresearch.c:199
-#, c-format
-msgid "invalid UTF-8 byte sequence in input"
-msgstr ""
-
-#: src/pcresearch.c:206
+#: src/pcresearch.c:278
 #, fuzzy, c-format
 msgid "internal PCRE error: %d"
 msgstr "内部错误"
+
+#~ msgid "GNU Grep home page: <%s>\n"
+#~ msgstr "GNU Grep 主页: <%s>\n"
+
+#~ msgid "PATTERN is an extended regular expression (ERE).\n"
+#~ msgstr "PATTERN 是一个可扩展的正则表达式(缩写为 ERE)。\n"
+
+#~ msgid "Invocation as 'egrep' is deprecated; use 'grep -E' instead.\n"
+#~ msgstr "‘egrep’已不再使用了；请用‘grep -E’代替。\n"
+
+#~ msgid "PATTERN is a set of newline-separated fixed strings.\n"
+#~ msgstr "PATTERN 是一组由断行符分隔的定长字符串。\n"
+
+#~ msgid "Invocation as 'fgrep' is deprecated; use 'grep -F' instead.\n"
+#~ msgstr "‘fgrep’已不再使用了；请用 ‘grep -F’代替。\n"
+
+#~ msgid "%s can only use the %s pattern syntax"
+#~ msgstr "%s 只能使用 %s 匹配语法"
 
 #~ msgid "the --mmap option has been a no-op since 2010"
 #~ msgstr "--mmap 选项从2010 年起已不再是操作符了"

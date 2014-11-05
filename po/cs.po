@@ -8,10 +8,10 @@
 # Thanks to: Stanislav Brabec <utx@k332.feld.cvut.cz>
 msgid ""
 msgstr ""
-"Project-Id-Version: grep 2.16.14\n"
+"Project-Id-Version: grep 2.19.12\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2014-02-20 22:40-0800\n"
-"PO-Revision-Date: 2014-02-10 19:45+0100\n"
+"POT-Creation-Date: 2014-10-29 10:51-0700\n"
+"PO-Revision-Date: 2014-05-30 14:23+0200\n"
 "Last-Translator: Petr Pisar <petr.pisar@atlas.cz>\n"
 "Language-Team: Czech <translation-team-cs@lists.sourceforge.net>\n"
 "Language: cs\n"
@@ -33,12 +33,12 @@ msgstr "nejednoznačný argument %s u %s"
 msgid "Valid arguments are:"
 msgstr "Platné argumenty jsou:"
 
-#: lib/closeout.c:112 src/main.c:954
+#: lib/closeout.c:112 src/grep.c:1096
 #, c-format
 msgid "write error"
 msgstr "chyba při zápisu"
 
-#: lib/error.c:188
+#: lib/error.c:191
 msgid "Unknown system error"
 msgstr "Neznámá systémová chyba"
 
@@ -97,8 +97,8 @@ msgstr "%s: přepínač „-W %s“ musí být zadán bez argumentu\n"
 msgid "%s: option '-W %s' requires an argument\n"
 msgstr "%s: přepínač „-W %s“ vyžaduje argument\n"
 
-#: lib/obstack.c:413 lib/obstack.c:415 lib/xalloc-die.c:34 src/kwset.c:178
-#: src/kwset.c:186 src/kwset.c:409 src/pcresearch.c:191
+#: lib/obstack.c:416 lib/obstack.c:418 lib/xalloc-die.c:34
+#: src/pcresearch.c:267
 #, c-format
 msgid "memory exhausted"
 msgstr "paměť vyčerpána"
@@ -182,7 +182,7 @@ msgstr "Nepárový ( nebo \\("
 msgid "Unmatched \\{"
 msgstr "Nepárový \\{"
 
-#: lib/regcomp.c:161 src/dfa.c:1371
+#: lib/regcomp.c:161
 msgid "Invalid content of \\{\\}"
 msgstr "Neplatný obsah \\{\\}"
 
@@ -202,7 +202,7 @@ msgstr "Neplatný předchozí regulární výraz"
 msgid "Premature end of regular expression"
 msgstr "Předčasný konec regulárního výrazu"
 
-#: lib/regcomp.c:176 src/dfa.c:1374
+#: lib/regcomp.c:176
 msgid "Regular expression too big"
 msgstr "Regulární výraz je příliš velký"
 
@@ -359,7 +359,7 @@ msgstr ""
 #. for this package.  Please add _another line_ saying
 #. "Report translation bugs to <...>\n" with the address for translation
 #. bugs (typically your translation team's web or email address).
-#: lib/version-etc.c:245 src/main.c:1636
+#: lib/version-etc.c:245
 #, c-format
 msgid ""
 "\n"
@@ -385,7 +385,7 @@ msgstr "Domovská stránka programu %s: <%s>\n"
 msgid "%s home page: <http://www.gnu.org/software/%s/>\n"
 msgstr "Domovská stránka programu %s: <http://www.gnu.org/software/%s/>\n"
 
-#: lib/version-etc.c:256 src/main.c:1639
+#: lib/version-etc.c:256
 msgid "General help using GNU software: <http://www.gnu.org/gethelp/>\n"
 msgstr ""
 "Obecná pomoc s používáním GNU softwaru: <http://www.gnu.org/gethelp/>\n"
@@ -405,122 +405,101 @@ msgstr "neplatná přípona argumentu „%3$s“ u %1$s%2$s"
 msgid "%s%s argument '%s' too large"
 msgstr "argument „%3$s“ u %1$s%2$s je příliš dlouhý"
 
-#: src/dfa.c:956 src/dfa.c:959 src/dfa.c:979 src/dfa.c:989 src/dfa.c:1001
-#: src/dfa.c:1052 src/dfa.c:1061 src/dfa.c:1064 src/dfa.c:1069 src/dfa.c:1082
-#: src/dfa.c:1139
+#: src/dfa.c:1026 src/dfa.c:1029 src/dfa.c:1048 src/dfa.c:1058 src/dfa.c:1070
+#: src/dfa.c:1106 src/dfa.c:1115 src/dfa.c:1118 src/dfa.c:1123 src/dfa.c:1137
+#: src/dfa.c:1185
 msgid "unbalanced ["
 msgstr "nevyvážená ["
 
-#: src/dfa.c:1010
+#: src/dfa.c:1082
 msgid "invalid character class"
 msgstr "neplatný třída znaků"
 
-#: src/dfa.c:1172
+#: src/dfa.c:1228
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr "zápis třídy znaků je [[:space:]], ne [:space:]"
 
-#: src/dfa.c:1224
+#: src/dfa.c:1290
 msgid "unfinished \\ escape"
 msgstr "neukončená escape sekvence \\"
 
-#: src/dfa.c:1789
+#: src/dfa.c:1437
+msgid "invalid content of \\{\\}"
+msgstr "neplatný obsah \\{\\}"
+
+#: src/dfa.c:1440
+msgid "regular expression too big"
+msgstr "regulární výraz je příliš velký"
+
+#: src/dfa.c:1875
 msgid "unbalanced ("
 msgstr "nevyvážená ("
 
 # ? Není zadaná syntaxe
-#: src/dfa.c:1915
+#: src/dfa.c:2001
 msgid "no syntax specified"
 msgstr "syntaxe není určena"
 
-#: src/dfa.c:1923
+#: src/dfa.c:2009
 msgid "unbalanced )"
 msgstr "nevyvážená )"
 
-#: src/egrep.c:16
-msgid "PATTERN is an extended regular expression (ERE).\n"
-msgstr "VZOREK představuje rozšířený regulární výraz (ERE).\n"
-
-#: src/egrep.c:18
-msgid "Invocation as 'egrep' is deprecated; use 'grep -E' instead.\n"
-msgstr "Spouštění programu jako „egrep“ je zastaralé; použijte „grep -E“.\n"
-
-#: src/fgrep.c:10
-msgid "PATTERN is a set of newline-separated fixed strings.\n"
-msgstr "VZOREK představuje množinu řetězců, každý na novém řádku.\n"
-
-#: src/fgrep.c:12
-msgid "Invocation as 'fgrep' is deprecated; use 'grep -F' instead.\n"
-msgstr "Spouštění programu jako „fgrep“ je zastaralé; použijte „grep -F“.\n"
-
-#: src/grep.c:46
-msgid "PATTERN is, by default, a basic regular expression (BRE).\n"
-msgstr ""
-"VZOREK představuje základní regulární výraz (BRE), pokud není řečeno jinak.\n"
-
-#: src/grep.c:48
-msgid ""
-"'egrep' means 'grep -E'.  'fgrep' means 'grep -F'.\n"
-"Direct invocation as either 'egrep' or 'fgrep' is deprecated.\n"
-msgstr ""
-"„egrep“ znamená „grep -E“. „fgrep“ znamená „grep -F“.\n"
-"Přímé spouštění příkazem „egrep“ nebo „fgrep“ je zastaralé.\n"
-
 #. This is a proper name. See the gettext manual, section Names.
-#: src/main.c:60
+#: src/grep.c:57
 msgid "Mike Haertel"
 msgstr "Mike Haertel"
 
-#: src/main.c:61
+#: src/grep.c:58
 msgid "others, see <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
 msgstr "další, vizte <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
 
-#: src/main.c:500
+#: src/grep.c:605
 msgid "invalid context length argument"
 msgstr "neplatný argument délky kontextu"
 
-#: src/main.c:569
-msgid "lseek failed"
-msgstr "posun v souboru (lseek) se nezdařil"
-
-#: src/main.c:707
+#: src/grep.c:658
 #, c-format
 msgid "input is too large to count"
 msgstr "počet vstupních řádků nelze spočítat (je jich hodně)"
 
-#: src/main.c:1273
+#: src/grep.c:700
+msgid "lseek failed"
+msgstr "posun v souboru (lseek) se nezdařil"
+
+#: src/grep.c:1420
 #, c-format
 msgid "Binary file %s matches\n"
 msgstr "Binární soubor %s odpovídá\n"
 
-#: src/main.c:1316
+#: src/grep.c:1464
 #, c-format
 msgid "warning: %s: %s"
 msgstr "varování: %s: %s"
 
-#: src/main.c:1317
+#: src/grep.c:1465
 msgid "recursive directory loop"
 msgstr "smyčka pro rekurzivní průchod"
 
-#: src/main.c:1465
+#: src/grep.c:1613
 #, c-format
 msgid "input file %s is also the output"
 msgstr "vstupní soubor %s je rovněž výstupem"
 
-#: src/main.c:1523
+#: src/grep.c:1671
 msgid "(standard input)"
 msgstr "(standardní vstup)"
 
-#: src/main.c:1539 src/main.c:1546
+#: src/grep.c:1687 src/grep.c:1694
 #, c-format
 msgid "Usage: %s [OPTION]... PATTERN [FILE]...\n"
 msgstr "Použití: %s [PŘEPÍNAČ]… VZOREK [SOUBOR]…\n"
 
-#: src/main.c:1541
+#: src/grep.c:1689
 #, c-format
 msgid "Try '%s --help' for more information.\n"
 msgstr "Více informací získáte příkazem „%s --help“.\n"
 
-#: src/main.c:1547
+#: src/grep.c:1695
 #, c-format
 msgid "Search for PATTERN in each FILE or standard input.\n"
 msgstr ""
@@ -528,7 +507,13 @@ msgstr ""
 "postupně\n"
 "ze všech zadaných SOUBORů nebo ze standardního vstupu.\n"
 
-#: src/main.c:1550
+#: src/grep.c:1696
+#, c-format
+msgid "PATTERN is, by default, a basic regular expression (BRE).\n"
+msgstr ""
+"VZOREK představuje základní regulární výraz (BRE), pokud není řečeno jinak.\n"
+
+#: src/grep.c:1697
 #, c-format
 msgid ""
 "Example: %s -i 'hello world' menu.h main.c\n"
@@ -539,12 +524,11 @@ msgstr ""
 "\n"
 "Výběr a interpretace regulárního výrazu:\n"
 
-#: src/main.c:1555
-#, c-format
+#: src/grep.c:1701
+#, fuzzy, c-format
 msgid ""
 "  -E, --extended-regexp     PATTERN is an extended regular expression (ERE)\n"
-"  -F, --fixed-strings       PATTERN is a set of newline-separated fixed "
-"strings\n"
+"  -F, --fixed-strings       PATTERN is a set of newline-separated strings\n"
 "  -G, --basic-regexp        PATTERN is a basic regular expression (BRE)\n"
 "  -P, --perl-regexp         PATTERN is a Perl regular expression\n"
 msgstr ""
@@ -554,7 +538,7 @@ msgstr ""
 "  -G, --basic-regexp        VZOREK je základní regulární výraz (BRE)\n"
 "  -P, --perl-regexp         VZOREK je regulární výraz z jazyka Perl\n"
 
-#: src/main.c:1561
+#: src/grep.c:1707
 #, c-format
 msgid ""
 "  -e, --regexp=PATTERN      use PATTERN for matching\n"
@@ -572,8 +556,8 @@ msgstr ""
 "  -z, --null-data           řádek končí nulovým bajtem místo znaku nového "
 "řádku\n"
 
-#: src/main.c:1568
-#, fuzzy, c-format
+#: src/grep.c:1714
+#, c-format
 msgid ""
 "\n"
 "Miscellaneous:\n"
@@ -588,9 +572,8 @@ msgstr ""
 "  -v, --invert-match        vybere neodpovídající řádky\n"
 "  -V, --version             vypíše označení verze a skončí\n"
 "      --help                vypíše tuto nápovědu a skončí\n"
-"n"
 
-#: src/main.c:1575
+#: src/grep.c:1721
 #, c-format
 msgid ""
 "\n"
@@ -617,7 +600,7 @@ msgstr ""
 "      --label=NÁZEV         použije NÁZEV jako označení standardního\n"
 "                            vstupu na výstupu\n"
 
-#: src/main.c:1586
+#: src/grep.c:1732
 #, c-format
 msgid ""
 "  -o, --only-matching       show only the part of a line matching PATTERN\n"
@@ -634,7 +617,7 @@ msgstr ""
 "                            nebo „without-match“ (bez vyhovění vzorku)\n"
 "  -a, --text                jako --binary-files=text\n"
 
-#: src/main.c:1593
+#: src/grep.c:1739
 #, c-format
 msgid ""
 "  -I                        equivalent to --binary-files=without-match\n"
@@ -658,7 +641,7 @@ msgstr ""
 "                            obdobně, jen následuje všechny symbolické "
 "odkazy\n"
 
-#: src/main.c:1602
+#: src/grep.c:1748
 #, c-format
 msgid ""
 "      --include=FILE_PATTERN  search only files that match FILE_PATTERN\n"
@@ -678,7 +661,7 @@ msgstr ""
 "      --exclude-dir=VZOREK  adresáře, které vyhovují vzorku, budou "
 "přeskočeny\n"
 
-#: src/main.c:1608
+#: src/grep.c:1755
 #, c-format
 msgid ""
 "  -L, --files-without-match  print only names of FILEs containing no match\n"
@@ -697,7 +680,7 @@ msgstr ""
 "třeba)\n"
 "  -Z, --null                vypíše nulový bajt za jménem SOUBORU\n"
 
-#: src/main.c:1614
+#: src/grep.c:1761
 #, c-format
 msgid ""
 "\n"
@@ -712,7 +695,7 @@ msgstr ""
 "  -A, --after-context=POČET  vypíše POČET řádků za shodou\n"
 "  -C, --context=POČET        vypíše POČET řádků kontextu (před i za shodou)\n"
 
-#: src/main.c:1621
+#: src/grep.c:1768
 #, c-format
 msgid ""
 "  -NUM                      same as --context=NUM\n"
@@ -736,7 +719,16 @@ msgstr ""
 "  -u, --unix-byte-offsets    vypisuje pozici, jako by CR nebyly v souboru\n"
 "                             (MSDOS/Windows)\n"
 
-#: src/main.c:1631
+#: src/grep.c:1777
+#, c-format
+msgid ""
+"'egrep' means 'grep -E'.  'fgrep' means 'grep -F'.\n"
+"Direct invocation as either 'egrep' or 'fgrep' is deprecated.\n"
+msgstr ""
+"„egrep“ znamená „grep -E“. „fgrep“ znamená „grep -F“.\n"
+"Přímé spouštění příkazem „egrep“ nebo „fgrep“ je zastaralé.\n"
+
+#: src/grep.c:1780
 #, c-format
 msgid ""
 "When FILE is -, read standard input.  With no FILE, read . if a command-"
@@ -751,48 +743,48 @@ msgstr ""
 "Návratový kód je 0 při nalezení vyhovujícího řádku, 1 nevyhovoval-li žádný\n"
 "řádek. Vyskytne-li se chyba a není-li zadán argument -q, bude vrácen kód 2.\n"
 
-#: src/main.c:1637
-#, c-format
-msgid "GNU Grep home page: <%s>\n"
-msgstr "Domovská stránka GNU Grepu: <%s>\n"
-
-#: src/main.c:1670
-#, c-format
-msgid "%s can only use the %s pattern syntax"
-msgstr "%s umí pouze syntaxi vzorků %s"
-
-#: src/main.c:1673
+#: src/grep.c:1849
 #, c-format
 msgid "conflicting matchers specified"
 msgstr "zadány kolidující vzorky"
 
-#: src/main.c:1687
+#: src/grep.c:1860
 #, c-format
 msgid "invalid matcher %s"
 msgstr "neplatný syntaxe vzorku %s"
 
-#: src/main.c:2023
+#: src/grep.c:2143
+#, c-format
+msgid "warning: GREP_OPTIONS is deprecated; please use an alias or script"
+msgstr ""
+
+#: src/grep.c:2173
 #, c-format
 msgid "unknown devices method"
 msgstr "neznámá metoda obsluhy zařízení"
 
-#: src/main.c:2154
+#: src/grep.c:2300
 #, c-format
 msgid "invalid max count"
 msgstr "neplatný maximální počet"
 
-#: src/main.c:2211
+#: src/grep.c:2357
 #, c-format
 msgid "unknown binary-files type"
 msgstr "neznámý typ binárního souboru"
 
-#: src/pcresearch.c:51
+#: src/pcresearch.c:54
 msgid ""
 "support for the -P option is not compiled into this --disable-perl-regexp "
 "binary"
 msgstr ""
 "Volba -P není podporována. Tento program byl přeložen s --disable-perl-"
 "regexp."
+
+#: src/pcresearch.c:70
+#, c-format
+msgid "-P supports only unibyte and UTF-8 locales"
+msgstr ""
 
 #: src/pcresearch.c:74
 #, c-format
@@ -809,30 +801,46 @@ msgstr "vnitřní chyba (to by se nikdy nemělo stát)"
 msgid "failed to allocate memory for the PCRE JIT stack"
 msgstr "alokace paměti pro JIT zásobník PCRE selhala"
 
-#: src/pcresearch.c:144
+#: src/pcresearch.c:150
 #, c-format
 msgid "internal error"
 msgstr "vnitřní chyba"
 
-#: src/pcresearch.c:176
+#: src/pcresearch.c:186
 #, c-format
 msgid "exceeded PCRE's line length limit"
 msgstr "překročeno omezení PCRE na délku řádku"
 
-#: src/pcresearch.c:195
+#: src/pcresearch.c:271
 #, c-format
 msgid "exceeded PCRE's backtracking limit"
 msgstr "překročeno omezení PCRE na hloubku zanoření"
 
-#: src/pcresearch.c:199
-#, c-format
-msgid "invalid UTF-8 byte sequence in input"
-msgstr "neplatná posloupnost UTF-8 bajtů ve vstupu"
-
-#: src/pcresearch.c:206
+#: src/pcresearch.c:278
 #, c-format
 msgid "internal PCRE error: %d"
 msgstr "vnitřní chyba PCRE: %d"
+
+#~ msgid "GNU Grep home page: <%s>\n"
+#~ msgstr "Domovská stránka GNU Grepu: <%s>\n"
+
+#~ msgid "invalid UTF-8 byte sequence in input"
+#~ msgstr "neplatná posloupnost UTF-8 bajtů ve vstupu"
+
+#~ msgid "PATTERN is an extended regular expression (ERE).\n"
+#~ msgstr "VZOREK představuje rozšířený regulární výraz (ERE).\n"
+
+#~ msgid "Invocation as 'egrep' is deprecated; use 'grep -E' instead.\n"
+#~ msgstr "Spouštění programu jako „egrep“ je zastaralé; použijte „grep -E“.\n"
+
+#~ msgid "PATTERN is a set of newline-separated fixed strings.\n"
+#~ msgstr "VZOREK představuje množinu řetězců, každý na novém řádku.\n"
+
+#~ msgid "Invocation as 'fgrep' is deprecated; use 'grep -F' instead.\n"
+#~ msgstr "Spouštění programu jako „fgrep“ je zastaralé; použijte „grep -F“.\n"
+
+#~ msgid "%s can only use the %s pattern syntax"
+#~ msgstr "%s umí pouze syntaxi vzorků %s"
 
 #~ msgid "the --mmap option has been a no-op since 2010"
 #~ msgstr "přepínač --map nic nedělá již od roku 2010"

@@ -40,7 +40,7 @@
 # define lock_fini(lock) 0
 # define lock_lock(lock) __libc_lock_lock (lock)
 # define lock_unlock(lock) __libc_lock_unlock (lock)
-#elif defined GNULIB_LOCK
+#elif defined GNULIB_LOCK && !defined USE_UNLOCKED_IO
 # include "glthread/lock.h"
   /* Use gl_lock_define if empty macro arguments are known to work.
      Otherwise, fall back on less-portable substitutes.  */
@@ -62,7 +62,7 @@
 # define lock_fini(lock) glthread_lock_destroy (&(lock))
 # define lock_lock(lock) glthread_lock_lock (&(lock))
 # define lock_unlock(lock) glthread_lock_unlock (&(lock))
-#elif defined GNULIB_PTHREAD
+#elif defined GNULIB_PTHREAD && !defined USE_UNLOCKED_IO
 # include <pthread.h>
 # define lock_define(name) pthread_mutex_t name;
 # define lock_init(lock) pthread_mutex_init (&(lock), 0)
@@ -863,8 +863,7 @@ re_string_wchar_at (const re_string_t *pstr, Idx idx)
 # ifndef NOT_IN_libc
 static int
 internal_function __attribute__ ((pure, unused))
-re_string_elem_size_at (const re_string_t *pstr _UNUSED_PARAMETER_,
-			Idx idx _UNUSED_PARAMETER_)
+re_string_elem_size_at (const re_string_t *pstr, Idx idx)
 {
 #  ifdef _LIBC
   const unsigned char *p, *extra;
