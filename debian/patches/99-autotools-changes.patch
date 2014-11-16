@@ -1,0 +1,19 @@
+Description: Autotools modifies these files.
+ Patch needed to enable build twice in a row.
+
+--- a/doc/stamp-vti
++++ b/doc/stamp-vti
+@@ -1,4 +1,4 @@
+-@set UPDATED 29 October 2014
++@set UPDATED 05 November 2014
+ @set UPDATED-MONTH October 2014
+ @set EDITION 2.20.72-d512
+ @set VERSION 2.20.72-d512
+--- a/doc/version.texi
++++ b/doc/version.texi
+@@ -1,4 +1,4 @@
+-@set UPDATED 29 October 2014
++@set UPDATED 05 November 2014
+ @set UPDATED-MONTH October 2014
+ @set EDITION 2.20.72-d512
+ @set VERSION 2.20.72-d512
