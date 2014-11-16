@@ -25,7 +25,7 @@ grep
 
 `grep' prints lines that contain a match for a pattern.
 
-   This manual is for version 2.20.72-d512 of GNU Grep.
+   This manual is for version 2.20.90-a07a4 of GNU Grep.
 
    This manual is for `grep', a pattern matching engine.
 
@@ -2253,33 +2253,33 @@ Index
 
 Tag Table:
 Node: Top766
-Node: Introduction1891
-Node: Invoking2621
-Node: Command-line Options3368
-Node: Generic Program Information4245
-Node: Matching Control4706
-Node: General Output Control6955
-Ref: General Output Control-Footnote-110870
-Node: Output Line Prefix Control10939
-Node: Context Line Control13870
-Node: File and Directory Selection15698
-Node: Other Options19617
-Node: Environment Variables20851
-Node: Exit Status29960
-Node: grep Programs30424
-Node: Regular Expressions31844
-Node: Fundamental Structure32998
-Node: Character Classes and Bracket Expressions34763
-Ref: invalid-bracket-expr38000
-Node: The Backslash Character and Special Expressions39177
-Node: Anchoring40178
-Node: Back-references and Subexpressions40623
-Node: Basic vs Extended41335
-Node: Usage42332
-Node: Reporting Bugs49416
-Node: Copying50084
-Node: GNU Free Documentation License51173
-Node: Index76294
+Node: Introduction1892
+Node: Invoking2622
+Node: Command-line Options3369
+Node: Generic Program Information4246
+Node: Matching Control4707
+Node: General Output Control6956
+Ref: General Output Control-Footnote-110871
+Node: Output Line Prefix Control10940
+Node: Context Line Control13871
+Node: File and Directory Selection15699
+Node: Other Options19618
+Node: Environment Variables20852
+Node: Exit Status29961
+Node: grep Programs30425
+Node: Regular Expressions31845
+Node: Fundamental Structure32999
+Node: Character Classes and Bracket Expressions34764
+Ref: invalid-bracket-expr38001
+Node: The Backslash Character and Special Expressions39178
+Node: Anchoring40179
+Node: Back-references and Subexpressions40624
+Node: Basic vs Extended41336
+Node: Usage42333
+Node: Reporting Bugs49417
+Node: Copying50085
+Node: GNU Free Documentation License51174
+Node: Index76295
 
 End Tag Table
 

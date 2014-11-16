@@ -1,5 +1,5 @@
 # Japanese messages for GNU grep
-# Copyright (C) 1996, 2010 Free Software Foundation, Inc.
+# Copyright (C) 1996, 2014 Free Software Foundation, Inc.
 # This file is distributed under the same license as the grep package.
 # IIDA Yosiaki <iida@gnu.org>, 1999, 2000, 2001, 2002.
 # Yasuyuki Furukawa <yasu@on.cs.keio.ac.jp>, 1997
@@ -11,13 +11,13 @@
 #  derived from the version by Yasuyuki Furukawa <yasu@on.cs.keio.ac.jp> 1998.
 #                              Jun Nishii <jun@flatout.org> 1999.
 #                              Daisuke Yamashita <yamad@mb.infoweb.ne.jp> 1999.
-# Yasuaki Taniguchi <yasuakit@gmail.com>, 2010, 2011.
+# Yasuaki Taniguchi <yasuakit@gmail.com>, 2010, 2011, 2014.
 msgid ""
 msgstr ""
-"Project-Id-Version: GNU grep 2.10\n"
+"Project-Id-Version: GNU grep 2.20.72\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2014-10-29 10:51-0700\n"
-"PO-Revision-Date: 2011-11-19 10:09+0900\n"
+"POT-Creation-Date: 2014-11-16 08:29-0800\n"
+"PO-Revision-Date: 2014-10-30 06:46+0100\n"
 "Last-Translator: Yasuaki Taniguchi <yasuakit@gmail.com>\n"
 "Language-Team: Japanese <translation-team-ja@lists.sourceforge.net>\n"
 "Language: ja\n"
@@ -104,7 +104,7 @@ msgstr "%s: オプション '-W %s' は引数を取ることができません\n
 msgid "%s: option '-W %s' requires an argument\n"
 msgstr "%s: オプション '-W %s' には引数が必要です\n"
 
-#: lib/obstack.c:416 lib/obstack.c:418 lib/xalloc-die.c:34
+#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34
 #: src/pcresearch.c:267
 #, c-format
 msgid "memory exhausted"
@@ -401,19 +401,19 @@ msgstr ""
 "GNU ソフトウェアを使用する際の一般的なヘルプ: <http://www.gnu.org/gethelp/>\n"
 
 #: lib/xstrtol-error.c:63
-#, fuzzy, c-format
+#, c-format
 msgid "invalid %s%s argument '%s'"
-msgstr "引数 `%3$s' に対して %1$s%2$s が無効です"
+msgstr "引数 '%3$s' に対して %1$s%2$s が無効です"
 
 #: lib/xstrtol-error.c:68
-#, fuzzy, c-format
+#, c-format
 msgid "invalid suffix in %s%s argument '%s'"
-msgstr "引数 `%3$s' に対して無効な接尾辞 %1$s%2$s です"
+msgstr "引数 '%3$s' に対して無効な接尾辞 %1$s%2$s です"
 
 #: lib/xstrtol-error.c:72
-#, fuzzy, c-format
+#, c-format
 msgid "%s%s argument '%s' too large"
-msgstr "引数 `%3$s' に対する %1$s%2$s が大きすぎます"
+msgstr "引数 '%3$s' に対する %1$s%2$s が大きすぎます"
 
 #: src/dfa.c:1026 src/dfa.c:1029 src/dfa.c:1048 src/dfa.c:1058 src/dfa.c:1070
 #: src/dfa.c:1106 src/dfa.c:1115 src/dfa.c:1118 src/dfa.c:1123 src/dfa.c:1137
@@ -434,12 +434,10 @@ msgid "unfinished \\ escape"
 msgstr "\\ エスケープが終了していません"
 
 #: src/dfa.c:1437
-#, fuzzy
 msgid "invalid content of \\{\\}"
 msgstr "\\{\\} の中身が無効です"
 
 #: src/dfa.c:1440
-#, fuzzy
 msgid "regular expression too big"
 msgstr "正規表現が大きすぎます"
 
@@ -493,36 +491,36 @@ msgstr "警告: %s: %s"
 msgid "recursive directory loop"
 msgstr "ディレクトリーが再帰的ループをしています"
 
-#: src/grep.c:1613
+#: src/grep.c:1627
 #, c-format
 msgid "input file %s is also the output"
 msgstr "入力ファイル %s が出力にもなっています"
 
-#: src/grep.c:1671
+#: src/grep.c:1685
 msgid "(standard input)"
 msgstr "(標準入力)"
 
-#: src/grep.c:1687 src/grep.c:1694
+#: src/grep.c:1701 src/grep.c:1708
 #, c-format
 msgid "Usage: %s [OPTION]... PATTERN [FILE]...\n"
 msgstr "使用法: %s [OPTION]... PATTERN [FILE]...\n"
 
-#: src/grep.c:1689
-#, fuzzy, c-format
+#: src/grep.c:1703
+#, c-format
 msgid "Try '%s --help' for more information.\n"
-msgstr "詳しくは`%s --help'を実行してください。\n"
+msgstr "詳しくは'%s --help'を実行してください。\n"
 
-#: src/grep.c:1695
+#: src/grep.c:1709
 #, c-format
 msgid "Search for PATTERN in each FILE or standard input.\n"
 msgstr "各 FILE または標準入力内の PATTERN を検索します。\n"
 
-#: src/grep.c:1696
+#: src/grep.c:1710
 #, c-format
 msgid "PATTERN is, by default, a basic regular expression (BRE).\n"
 msgstr "PATTERN はデフォルトでは基本正規表現 (BRE) です。\n"
 
-#: src/grep.c:1697
+#: src/grep.c:1711
 #, c-format
 msgid ""
 "Example: %s -i 'hello world' menu.h main.c\n"
@@ -533,8 +531,8 @@ msgstr ""
 "\n"
 "正規表現の選択および解釈:\n"
 
-#: src/grep.c:1701
-#, fuzzy, c-format
+#: src/grep.c:1715
+#, c-format
 msgid ""
 "  -E, --extended-regexp     PATTERN is an extended regular expression (ERE)\n"
 "  -F, --fixed-strings       PATTERN is a set of newline-separated strings\n"
@@ -542,11 +540,11 @@ msgid ""
 "  -P, --perl-regexp         PATTERN is a Perl regular expression\n"
 msgstr ""
 "  -E, --extended-regexp     PATTERN を拡張正規表現 (ERE) とする\n"
-"  -F, --fixed-strings       PATTERN を改行で区切られた固定文字列の組とする\n"
+"  -F, --fixed-strings       PATTERN を改行で区切られた文字列の組とする\n"
 "  -G, --basic-regexp        PATTERN を基本正規表現 (BRE) とする\n"
 "  -P, --perl-regexp         PATTERN を Perl 正規表現とする\n"
 
-#: src/grep.c:1707
+#: src/grep.c:1721
 #, c-format
 msgid ""
 "  -e, --regexp=PATTERN      use PATTERN for matching\n"
@@ -563,8 +561,8 @@ msgstr ""
 "  -x, --line-regexp         強制的に行全体で PATTERN の一致処理を行う\n"
 "  -z, --null-data           データの行末を改行ではなく NULL とする\n"
 
-#: src/grep.c:1714
-#, fuzzy, c-format
+#: src/grep.c:1728
+#, c-format
 msgid ""
 "\n"
 "Miscellaneous:\n"
@@ -579,9 +577,8 @@ msgstr ""
 "  -v, --invert-match        一致しない行を選択する\n"
 "  -V, --version             バージョン情報を表示して終了する\n"
 "      --help                このヘルプを表示して終了する\n"
-"      --mmap                無視する (後方互換性を保つために存在する)\n"
 
-#: src/grep.c:1721
+#: src/grep.c:1735
 #, c-format
 msgid ""
 "\n"
@@ -606,8 +603,8 @@ msgstr ""
 "      --label=LABEL         標準入力のファイル名の接頭辞として LABEL を使用す"
 "る\n"
 
-#: src/grep.c:1732
-#, fuzzy, c-format
+#: src/grep.c:1746
+#, c-format
 msgid ""
 "  -o, --only-matching       show only the part of a line matching PATTERN\n"
 "  -q, --quiet, --silent     suppress all normal output\n"
@@ -618,11 +615,11 @@ msgstr ""
 "  -o, --only-matching       行の中で PATTERN に一致した部分のみ表示する\n"
 "  -q, --quiet, --silent     通常出力を全て抑止する\n"
 "      --binary-files=TYPE   バイナリファイルの形式を TYPE と仮定する\n"
-"                            TYPE は `binary'、`text' または `without-match'\n"
+"                            TYPE は 'binary'、'text' または 'without-match'\n"
 "  -a, --text                --binary-files=text と等価\n"
 
-#: src/grep.c:1739
-#, fuzzy, c-format
+#: src/grep.c:1753
+#, c-format
 msgid ""
 "  -I                        equivalent to --binary-files=without-match\n"
 "  -d, --directories=ACTION  how to handle directories;\n"
@@ -634,12 +631,13 @@ msgid ""
 msgstr ""
 "  -I                        --binary-files=without-match と等価\n"
 "  -d, --directories=ACTION  ディレクトリの扱い方を指定する\n"
-"                            ACTION は `read'、`recurse' または `skip'\n"
+"                            ACTION は 'read'、'recurse' または 'skip'\n"
 "  -D, --devices=ACTION      デバイス、FIFO およびソケットの扱い方を指定する\n"
 "                            ACTION は `read' または `skip'\n"
-"  -R, -r, --recursive       --directories=recurse と等価\n"
+"  -r, --recursive           --directories=recurse と等価\n"
+"  -R, --dereference-recursive  上と同様だがシンボリックリンクを辿る\n"
 
-#: src/grep.c:1748
+#: src/grep.c:1762
 #, c-format
 msgid ""
 "      --include=FILE_PATTERN  search only files that match FILE_PATTERN\n"
@@ -656,7 +654,7 @@ msgstr ""
 "ファイルをスキップする\n"
 "      --exclude-dir=PATTERN  PATTERN に一致したディレクトリをスキップする\n"
 
-#: src/grep.c:1755
+#: src/grep.c:1769
 #, c-format
 msgid ""
 "  -L, --files-without-match  print only names of FILEs containing no match\n"
@@ -672,7 +670,7 @@ msgstr ""
 "  -Z, --null                FILE の名前を表示した後に値が 0 のバイトを出力す"
 "る\n"
 
-#: src/grep.c:1761
+#: src/grep.c:1775
 #, c-format
 msgid ""
 "\n"
@@ -687,8 +685,8 @@ msgstr ""
 "  -A, --after-context=NUM   一致した後の NUM 行を表示する\n"
 "  -C, --context=NUM         一致した前後 NUM 行を表示する\n"
 
-#: src/grep.c:1768
-#, fuzzy, c-format
+#: src/grep.c:1782
+#, c-format
 msgid ""
 "  -NUM                      same as --context=NUM\n"
 "      --color[=WHEN],\n"
@@ -704,21 +702,22 @@ msgstr ""
 "      --color[=WHEN],\n"
 "      --colour[=WHEN]       一致した文字列をハイライトするための印を使用す"
 "る。\n"
-"                            WHEN は `always'、`never' または `auto'\n"
-"  -U, --binary              行末にある CR を削除しない (MSDOS)\n"
-"  -u, --unix-byte-offsets   CR が無いものとしてオフセットを表示する (MSDOS)\n"
+"                            WHEN は 'always'、'never' または 'auto'\n"
+"  -U, --binary              行末にある CR を削除しない (MSDOS/Windows)\n"
+"  -u, --unix-byte-offsets   CR が無いものとしてオフセットを表示する\n"
+"                            (MSDOS/Windows)\n"
 "\n"
 
-#: src/grep.c:1777
-#, fuzzy, c-format
+#: src/grep.c:1791
+#, c-format
 msgid ""
 "'egrep' means 'grep -E'.  'fgrep' means 'grep -F'.\n"
 "Direct invocation as either 'egrep' or 'fgrep' is deprecated.\n"
 msgstr ""
-"`egrep' は `grep -E' を意味します。 `fgrep' は `grep -F' を意味します。\n"
-"`egrep' または `fgrep' による直接起動は廃止予定です。\n"
+"'egrep' は 'grep -E' を意味します。 'fgrep' は 'grep -F' を意味します。\n"
+"'egrep' または 'fgrep' による直接起動は廃止予定です。\n"
 
-#: src/grep.c:1780
+#: src/grep.c:1794
 #, fuzzy, c-format
 msgid ""
 "When FILE is -, read standard input.  With no FILE, read . if a command-"
@@ -734,32 +733,33 @@ msgstr ""
 "それ以外は 1 です。エラーが発生して -q を指定していない場合の終了コードは 2\n"
 "になります。\n"
 
-#: src/grep.c:1849
+#: src/grep.c:1863
 #, c-format
 msgid "conflicting matchers specified"
 msgstr "指定した一致処理系が競合しています"
 
-#: src/grep.c:1860
+#: src/grep.c:1874
 #, c-format
 msgid "invalid matcher %s"
 msgstr "%s は無効な一致処理系です"
 
-#: src/grep.c:2143
+#: src/grep.c:2157
 #, c-format
 msgid "warning: GREP_OPTIONS is deprecated; please use an alias or script"
 msgstr ""
+"警告: GREP_OPTIONS は廃止されました。alias またはスクリプトを使用してください"
 
-#: src/grep.c:2173
+#: src/grep.c:2187
 #, c-format
 msgid "unknown devices method"
 msgstr "デバイスに対する不明な操作です"
 
-#: src/grep.c:2300
+#: src/grep.c:2314
 #, c-format
 msgid "invalid max count"
 msgstr "無効な一致回数です"
 
-#: src/grep.c:2357
+#: src/grep.c:2371
 #, c-format
 msgid "unknown binary-files type"
 msgstr "不明なバイナリファイルの形式です"
@@ -775,7 +775,7 @@ msgstr ""
 #: src/pcresearch.c:70
 #, c-format
 msgid "-P supports only unibyte and UTF-8 locales"
-msgstr ""
+msgstr "-P は1バイトの UTF-8 ロケールのみサポートします"
 
 #: src/pcresearch.c:74
 #, c-format
@@ -785,12 +785,12 @@ msgstr "-P オプションは単一のパターンしかサポートしません
 #: src/pcresearch.c:120
 #, c-format
 msgid "internal error (should never happen)"
-msgstr ""
+msgstr "内部エラー (決して発生しないはず)"
 
 #: src/pcresearch.c:130
 #, c-format
 msgid "failed to allocate memory for the PCRE JIT stack"
-msgstr ""
+msgstr "PCRE JIT スタックへのメモリ割り当てに失敗しました"
 
 #: src/pcresearch.c:150
 #, c-format
@@ -798,9 +798,9 @@ msgid "internal error"
 msgstr "内部エラー"
 
 #: src/pcresearch.c:186
-#, fuzzy, c-format
+#, c-format
 msgid "exceeded PCRE's line length limit"
-msgstr "PCRE のバックスラッシュ制限を超過しました"
+msgstr "PCRE の行長制限を超過しました"
 
 #: src/pcresearch.c:271
 #, c-format
@@ -808,33 +808,9 @@ msgid "exceeded PCRE's backtracking limit"
 msgstr "PCRE のバックスラッシュ制限を超過しました"
 
 #: src/pcresearch.c:278
-#, fuzzy, c-format
+#, c-format
 msgid "internal PCRE error: %d"
-msgstr "内部エラー"
-
-#~ msgid "GNU Grep home page: <%s>\n"
-#~ msgstr "GNU Grep のホームページ: <%s>\n"
-
-#~ msgid "PATTERN is an extended regular expression (ERE).\n"
-#~ msgstr "PATTERN は拡張正規表現 (ERE) です。\n"
-
-#, fuzzy
-#~ msgid "Invocation as 'egrep' is deprecated; use 'grep -E' instead.\n"
-#~ msgstr ""
-#~ "`egrep' という名前での起動は廃止予定です。代わりに `grep -E' を使用してく"
-#~ "ださい。\n"
-
-#~ msgid "PATTERN is a set of newline-separated fixed strings.\n"
-#~ msgstr "PATTERN は改行で区切られた固定文字列の組です。\n"
-
-#, fuzzy
-#~ msgid "Invocation as 'fgrep' is deprecated; use 'grep -F' instead.\n"
-#~ msgstr ""
-#~ "`fgrep' という名前での起動は廃止予定です。代わりに `grep -F' を使用してく"
-#~ "ださい。\n"
-
-#~ msgid "%s can only use the %s pattern syntax"
-#~ msgstr "%s は %s パターン構文の時のみ使用できます"
+msgstr "PCRE 内部エラー: %d"
 
 #~ msgid "unfinished repeat count"
 #~ msgstr "繰返し回数が終了していません"
@@ -842,8 +818,30 @@ msgstr "内部エラー"
 #~ msgid "malformed repeat count"
 #~ msgstr "不正な形式の繰り返し回数です"
 
+#~ msgid "PATTERN is an extended regular expression (ERE).\n"
+#~ msgstr "PATTERN は拡張正規表現 (ERE) です。\n"
+
+#~ msgid "Invocation as `egrep' is deprecated; use `grep -E' instead.\n"
+#~ msgstr ""
+#~ "`egrep' という名前での起動は廃止予定です。代わりに `grep -E' を使用してく"
+#~ "ださい。\n"
+
+#~ msgid "PATTERN is a set of newline-separated fixed strings.\n"
+#~ msgstr "PATTERN は改行で区切られた固定文字列の組です。\n"
+
+#~ msgid "Invocation as `fgrep' is deprecated; use `grep -F' instead.\n"
+#~ msgstr ""
+#~ "`fgrep' という名前での起動は廃止予定です。代わりに `grep -F' を使用してく"
+#~ "ださい。\n"
+
 #~ msgid "writing output"
 #~ msgstr "出力の書込み"
+
+#~ msgid "GNU Grep home page: <%s>\n"
+#~ msgstr "GNU Grep のホームページ: <%s>\n"
+
+#~ msgid "%s can only use the %s pattern syntax"
+#~ msgstr "%s は %s パターン構文の時のみ使用できます"
 
 #~ msgid ""
 #~ "in GREP_COLORS=\"%s\", the \"%s\" capacity needs a value (\"=...\"); "
