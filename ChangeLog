@@ -1,3 +1,137 @@
+2014-11-16  Norihiro Tanaka  <noritnk@kcn.ne.jp>
+
+	dfa: avoid undefined behavior
+	* src/dfa.c (dfassbuild): Don't call memcpy with a second
+	argument of NULL, even when the size (3rd argument) is 0.
+
+2014-11-14  Jim Meyering  <meyering@fb.com>
+
+	gnulib: update to latest
+
+2014-11-14  Norihiro Tanaka  <noritnk@kcn.ne.jp>
+
+	grep -F -x -o PAT would print an extra newline for each match
+	* src/kwsearch.c (Fexecute): Correctly compute the length of a match
+	by subtracting 2 (not 1) when match_lines is set.  With -x, we augment
+	the "line" by both prepending and appending an EOLBYTE to the search
+	pattern.  Here, we must correct for that.  However, to compensate,
+	when we are using -x (--line-regexp) and start_ptr is NULL, we have
+	to add 1 to the length so that we still print the trailing EOLBYTE.
+	Introduced by commit v2.18-85-g2c94326.
+	* tests/match-lines: Add a new test.
+	* tests/Makefile.am (TESTS): Add it.
+	* NEWS (Bug fixes): Mention it.
+
+2014-11-11  Paul Eggert  <eggert@cs.ucla.edu>
+
+	tests: port to Darwin
+	The 'sed' command 's/.//' does not delete all bytes in the C locale.
+	Problem reported by Nelson H. F. Beebe.
+	* tests/fmbtest: Don't assume that sed treats bytes with the
+	top bit set as valid characters in the C locale, as this is not
+	true for Darwin.  Use the cs_CZ.UTF-8 locale instead, and
+	simplify the sed script.
+
+	tests: fix recently-introduced stray output
+	* tests/init.cfg (require_pcre_): Remove stray debugging output.
+
+	build: port to GCC 4.6.4 + glibc 2.5
+	On platforms this old, building with _FORTIFY_SOURCE equal to 2
+	results in duplicate definitions of standard library functions.
+	Problem reported by Nelson H. F. Beebe.
+	* configure.ac (_FORTIFY_SOURCE): Sort after GNULIB_PORTCHECK.
+	By default, do not enable this unless GNULIB_PORTCHECK is defined.
+	This better matches the original intent, which as I recall was to
+	enable these extra checks only with --enable-gcc-warnings.
+
+	tests: port to libpcre sans UTF-8 support
+	Problem reported by Nelson H. F. Beebe.
+	* tests/pcre-infloop, tests/pcre-invalid-utf8-input, tests/pcre-utf8:
+	Skip the test unless PCRE works in an en_US.UTF-8 locale.
+
+2014-11-09  Jim Meyering  <meyering@fb.com>
+
+	tests: do not fail when the zh_CN.UTF-8 locale is not installed
+	* tests/word-multibyte: This test would fail on a system with
+	no zh_CN.UTF-8 locale. Use it only if it is installed.
+
+	tests: avoid hex_printf_ portability problems
+	* tests/init.cfg (hex_printf_): Spell out a-f and A-F, for
+	non-C locales, ensure that the input to sed is newline-terminated,
+	and quote the final octal format string.
+	Suggestions from Paul Eggert.
+
+2014-11-08  Jim Meyering  <meyering@fb.com>
+
+	tests: avoid a multibyte tr portability problem
+	* tests/init.cfg (tr): New wrapper function.
+	See comments for details.  Reported by Norihiro Tanaka
+	in http://debbugs.gnu.org/18991
+
+	maint: remove spurious LC_ALL setting from one test
+	* tests/word-multibyte: Remove unnecessary setting of LC_ALL.
+
+	tests: fix typo in previous change
+	* tests/init.cfg (hex_printf_): Fix typo s/A-f/A-F/.
+	For the record, I introduced that error, not Norihiro.
+
+2014-11-08  Norihiro Tanaka  <noritnk@kcn.ne.jp>
+
+	tests: avoid awk+printf+\xHH portability trap
+	* tests/init.cfg (hex_printf_): Rewrite in terms of printf and sed.
+	Using awk's printf with \xHH in the format string was not portable
+	to the awk of Solaris 10, AIX 7 or HP-UX 11.23, as reported in
+	http://debbugs.gnu.org/18987.
+	* tests/word-multibyte: Use printf rather than hex_printf_,
+	and give the character we're printing a name: e_acute (rather
+	than A-grave), since that is used in other tests.
+	a trailing \n in the format string, adjust by removing it, and
+	instead invoking echo.
+	* tests/multibyte-white-space: Simply remove each trailing \n.
+	They were not needed.
+
+2014-11-07  Jim Meyering  <meyering@fb.com>
+
+	tests: avoid printf+\xHH portability trap
+	* tests/word-multibyte: Using the bourne shell's printf function
+	with strings like "\xHH\xHH" happens to work for most interactive
+	shells, but not for dash.  That is not portable.  Use our hex_printf_
+	awk wrapper instead. Without this change, this test would fail on
+	a Debian system for which /bin/sh is configured to be "dash".
+
+	maint: move helper function, hex_printf to init.cfg
+	* tests/init.cfg (hex_printf_): New function, from ...
+	* tests/multibyte-white-space: ... here.  Reflect the
+	s/hex_print/hex_printf_/ renaming.
+
+2014-11-02  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: port O_NOFOLLOW errno checking to NetBSD
+	Problem reported by Assaf Gordon in: http://bugs.gnu.org/18892
+	* NEWS: Document it.
+	* src/grep.c (open_symlink_nofollow_error):
+	New function, which does the right thing on NetBSD.
+	(grepfile): Use it.
+
+2014-10-31  Jim Meyering  <meyering@fb.com>
+
+	build: generate man pages even when existing targets are read-only
+	* doc/Makefile.am (grep.1): Use mv -f to move temporary to target,
+	in case the target is read-only.  Also, always make the generated
+	files read-only.
+	(egrep.1 fgrep.1): Likewise.
+	This avoids a build failure reported by Eric Blake in
+	http://lists.gnu.org/archive/html/bug-grep/2014-10/msg00112.html
+
+2014-10-30  Jim Meyering  <meyering@fb.com>
+
+	tests: avoid false-positive failure due to some zh_CN.* locales
+	On some systems, and for some zh_CN.* locales (e.g., OpenBSD5.5) the
+	E-acute pair of bytes do not qualify as a word-constituent character.
+	* tests/word-multibyte: Use zh_CN.UTF-8, rather than "zh_CN".
+	Reported by Assaf Gordon and Bruce Dubbs in
+	http://debbugs.gnu.org/18892
+
 2014-10-29  Jim Meyering  <meyering@fb.com>
 
 	gnulib: update to latest; bootstrap, too

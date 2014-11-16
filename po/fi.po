@@ -6,10 +6,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: grep 2.19.12\n"
+"Project-Id-Version: grep 2.20.72\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2014-10-29 10:51-0700\n"
-"PO-Revision-Date: 2014-05-31 17:27+0300\n"
+"POT-Creation-Date: 2014-11-16 08:29-0800\n"
+"PO-Revision-Date: 2014-11-02 17:22+0200\n"
 "Last-Translator: Jorma Karvonen <karvonen.jorma@gmail.com>\n"
 "Language-Team: Finnish <translation-team-fi@lists.sourceforge.net>\n"
 "Language: fi\n"
@@ -97,7 +97,7 @@ msgstr "%s: valitsin ’-W %s’ ei salli argumenttia\n"
 msgid "%s: option '-W %s' requires an argument\n"
 msgstr "%s: valitsin ’-W %s’ tarvitsee argumentin\n"
 
-#: lib/obstack.c:416 lib/obstack.c:418 lib/xalloc-die.c:34
+#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34
 #: src/pcresearch.c:267
 #, c-format
 msgid "memory exhausted"
@@ -484,36 +484,36 @@ msgstr "varoitus: %s: %s"
 msgid "recursive directory loop"
 msgstr "rekursiivinen hakemistosilmukka"
 
-#: src/grep.c:1613
+#: src/grep.c:1627
 #, c-format
 msgid "input file %s is also the output"
 msgstr "syötetiedosto %s on myös tuloste"
 
-#: src/grep.c:1671
+#: src/grep.c:1685
 msgid "(standard input)"
 msgstr "(vakiosyöte)"
 
-#: src/grep.c:1687 src/grep.c:1694
+#: src/grep.c:1701 src/grep.c:1708
 #, c-format
 msgid "Usage: %s [OPTION]... PATTERN [FILE]...\n"
 msgstr "Käyttö: %s [VALITSIN]... HAKULAUSEKE [TIEDOSTO]...\n"
 
-#: src/grep.c:1689
+#: src/grep.c:1703
 #, c-format
 msgid "Try '%s --help' for more information.\n"
 msgstr "Katso lisäohjeet valitsimella ’%s --help’.\n"
 
-#: src/grep.c:1695
+#: src/grep.c:1709
 #, c-format
 msgid "Search for PATTERN in each FILE or standard input.\n"
 msgstr "Haetaan HAKULAUSEKEtta jokaisessa TIEDOSTOssa tai vakiosyötteessä.\n"
 
-#: src/grep.c:1696
+#: src/grep.c:1710
 #, c-format
 msgid "PATTERN is, by default, a basic regular expression (BRE).\n"
 msgstr "HAKULAUSEKE on oletuksena perussäännöllinen lauseke (BRE).\n"
 
-#: src/grep.c:1697
+#: src/grep.c:1711
 #, c-format
 msgid ""
 "Example: %s -i 'hello world' menu.h main.c\n"
@@ -524,8 +524,8 @@ msgstr ""
 "\n"
 "Säännöllisten lausekkeiden valinta ja tulkinta:\n"
 
-#: src/grep.c:1701
-#, fuzzy, c-format
+#: src/grep.c:1715
+#, c-format
 msgid ""
 "  -E, --extended-regexp     PATTERN is an extended regular expression (ERE)\n"
 "  -F, --fixed-strings       PATTERN is a set of newline-separated strings\n"
@@ -536,11 +536,11 @@ msgstr ""
 "(ERE)\n"
 "  -F, --fixed-strings       HAKULAUSEKE on joukko rivinvaihdolla eroteltuja  "
 "merkkijonoja\n"
-"  -G, --basic-regexp        HAKULAUSEKE on perus-säännöllinen lauseke (BRE)\n"
+"  -G, --basic-regexp        HAKULAUSEKE on perussäännöllinen lauseke (BRE)\n"
 "  -P, --perl-regexp         HAKULAUSEKE on Perl-tyyppinen säännöllinen "
 "lauseke\n"
 
-#: src/grep.c:1707
+#: src/grep.c:1721
 #, c-format
 msgid ""
 "  -e, --regexp=PATTERN      use PATTERN for matching\n"
@@ -559,7 +559,7 @@ msgstr ""
 "riveihin\n"
 "  -z, --null-data           datarivi päättyy nollatavuun, ei rivinvaihtoon\n"
 
-#: src/grep.c:1714
+#: src/grep.c:1728
 #, c-format
 msgid ""
 "\n"
@@ -576,7 +576,7 @@ msgstr ""
 "  -V, --version             tulosta versiotiedot ja poistu\n"
 "      --help                tulosta tämä ohje ja poistu\n"
 
-#: src/grep.c:1721
+#: src/grep.c:1735
 #, c-format
 msgid ""
 "\n"
@@ -601,7 +601,7 @@ msgstr ""
 "tulosteessa\n"
 "      --label=NIMIÖ         tulosta NIMIÖ tiedostonimenä vakiosyötteelle\n"
 
-#: src/grep.c:1732
+#: src/grep.c:1746
 #, c-format
 msgid ""
 "  -o, --only-matching       show only the part of a line matching PATTERN\n"
@@ -616,7 +616,7 @@ msgstr ""
 "                            TYYPPI on ’binary’, ’text’, tai ’without-match’\n"
 "  -a, --text                sama kuin --binary-files=text\n"
 
-#: src/grep.c:1739
+#: src/grep.c:1753
 #, c-format
 msgid ""
 "  -I                        equivalent to --binary-files=without-match\n"
@@ -637,7 +637,7 @@ msgstr ""
 "  -R, --dereference-recursive  samoin, mutta seuraa kaikkia symbolisia "
 "linkkejä\n"
 
-#: src/grep.c:1748
+#: src/grep.c:1762
 #, c-format
 msgid ""
 "      --include=FILE_PATTERN  search only files that match FILE_PATTERN\n"
@@ -656,7 +656,7 @@ msgstr ""
 "      --exclude-dir=HAKULAUSEKE      ohitetaan HAKULAUSEKE-täsmäävät "
 "hakemistot.\n"
 
-#: src/grep.c:1755
+#: src/grep.c:1769
 #, c-format
 msgid ""
 "  -L, --files-without-match  print only names of FILEs containing no match\n"
@@ -674,7 +674,7 @@ msgstr ""
 "  -T, --initial-tab         tee sarkaimet rivi ylöspäin (jos tarvitaan)\n"
 "  -Z, --null                tulosta nollatavu TIEDOSTOnimen jälkeen\n"
 
-#: src/grep.c:1761
+#: src/grep.c:1775
 #, c-format
 msgid ""
 "\n"
@@ -689,7 +689,7 @@ msgstr ""
 "  -A, --after-context=N     tulosta N riviä konteksin jälkeen\n"
 "  -C, --context=N           tulosta N riviä tulostekonteksia\n"
 
-#: src/grep.c:1768
+#: src/grep.c:1782
 #, c-format
 msgid ""
 "  -NUM                      same as --context=NUM\n"
@@ -714,7 +714,7 @@ msgstr ""
 "                            -merkkiä CR ei olisi lainkaan (MSDOS/Windows)\n"
 "\n"
 
-#: src/grep.c:1777
+#: src/grep.c:1791
 #, c-format
 msgid ""
 "'egrep' means 'grep -E'.  'fgrep' means 'grep -F'.\n"
@@ -723,7 +723,7 @@ msgstr ""
 "Käsky ’egrep’ tarkoittaa ’grep -E’.  Käsky ’fgrep’ tarkoittaa ’grep -F’.\n"
 "Suora kutsuminen ’egrep’- ja ’fgrep’-käskyillä ei ole enää suositeltavaa.\n"
 
-#: src/grep.c:1780
+#: src/grep.c:1794
 #, c-format
 msgid ""
 "When FILE is -, read standard input.  With no FILE, read . if a command-"
@@ -739,32 +739,32 @@ msgstr ""
 "jos tapahtuu virheitä ja ”-q”-valitsinta ei ollut annettu, niin paluuarvo\n"
 "on kaksi.\n"
 
-#: src/grep.c:1849
+#: src/grep.c:1863
 #, c-format
 msgid "conflicting matchers specified"
 msgstr "määritelty ristiriitaiset haut"
 
-#: src/grep.c:1860
+#: src/grep.c:1874
 #, c-format
 msgid "invalid matcher %s"
 msgstr "virheellinen täsmääjä %s"
 
-#: src/grep.c:2143
+#: src/grep.c:2157
 #, c-format
 msgid "warning: GREP_OPTIONS is deprecated; please use an alias or script"
-msgstr ""
+msgstr "varoitus: GREP_OPTIONS on vanhentunut; käytä aliasta tai skriptiä"
 
-#: src/grep.c:2173
+#: src/grep.c:2187
 #, c-format
 msgid "unknown devices method"
 msgstr "tuntematon laitemetodi"
 
-#: src/grep.c:2300
+#: src/grep.c:2314
 #, c-format
 msgid "invalid max count"
 msgstr "virheellinen maksimimäärä"
 
-#: src/grep.c:2357
+#: src/grep.c:2371
 #, c-format
 msgid "unknown binary-files type"
 msgstr "tuntematon binääritiedostojen tyyppi"
@@ -780,7 +780,7 @@ msgstr ""
 #: src/pcresearch.c:70
 #, c-format
 msgid "-P supports only unibyte and UTF-8 locales"
-msgstr ""
+msgstr "-P tukee vain unibyte- ja UTF-8-paikallisasetuksia"
 
 #: src/pcresearch.c:74
 #, c-format

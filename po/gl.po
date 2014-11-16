@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grep 2.10\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2014-10-29 10:51-0700\n"
+"POT-Creation-Date: 2014-11-16 08:29-0800\n"
 "PO-Revision-Date: 2012-02-23 18:30+0100\n"
 "Last-Translator: Leandro Regueiro <leandro.regueiro@gmail.com>\n"
 "Language-Team: Galician <proxecto@trasno.net>\n"
@@ -101,7 +101,7 @@ msgstr "%s: a opción '-W %s' non admite ningún argumento\n"
 msgid "%s: option '-W %s' requires an argument\n"
 msgstr "%s: a opción '-W %s' require un argumento\n"
 
-#: lib/obstack.c:416 lib/obstack.c:418 lib/xalloc-die.c:34
+#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34
 #: src/pcresearch.c:267
 #, c-format
 msgid "memory exhausted"
@@ -482,36 +482,36 @@ msgstr "atención: %s: %s"
 msgid "recursive directory loop"
 msgstr "ciclo de directorios recursivo"
 
-#: src/grep.c:1613
+#: src/grep.c:1627
 #, c-format
 msgid "input file %s is also the output"
 msgstr "o fichero de entrada %s tamén é o de salida"
 
-#: src/grep.c:1671
+#: src/grep.c:1685
 msgid "(standard input)"
 msgstr "(entrada estándar)"
 
-#: src/grep.c:1687 src/grep.c:1694
+#: src/grep.c:1701 src/grep.c:1708
 #, c-format
 msgid "Usage: %s [OPTION]... PATTERN [FILE]...\n"
 msgstr "Emprego: %s [OPCIN]... PATRN [FICHEIRO]...\n"
 
-#: src/grep.c:1689
+#: src/grep.c:1703
 #, fuzzy, c-format
 msgid "Try '%s --help' for more information.\n"
 msgstr "Escriba `%s --help' para mis informacin.\n"
 
-#: src/grep.c:1695
+#: src/grep.c:1709
 #, c-format
 msgid "Search for PATTERN in each FILE or standard input.\n"
 msgstr "Busca PATRÓN en cada FICHERO ou na entrada estándar.\n"
 
-#: src/grep.c:1696
+#: src/grep.c:1710
 #, c-format
 msgid "PATTERN is, by default, a basic regular expression (BRE).\n"
 msgstr "PATRÓN é, por omisión, unha expresión regular básica (BRE).\n"
 
-#: src/grep.c:1697
+#: src/grep.c:1711
 #, c-format
 msgid ""
 "Example: %s -i 'hello world' menu.h main.c\n"
@@ -522,7 +522,7 @@ msgstr ""
 "\n"
 "Selección e interpretación de Expreg:\n"
 
-#: src/grep.c:1701
+#: src/grep.c:1715
 #, fuzzy, c-format
 msgid ""
 "  -E, --extended-regexp     PATTERN is an extended regular expression (ERE)\n"
@@ -536,7 +536,7 @@ msgstr ""
 "  -G, --basic-regexp        PATRÓN é unha expresión regular básica (BRE)\n"
 "  -P, --perl-regexp         PATRÓN é unha expresión regular en Perl\n"
 
-#: src/grep.c:1707
+#: src/grep.c:1721
 #, c-format
 msgid ""
 "  -e, --regexp=PATTERN      use PATTERN for matching\n"
@@ -556,7 +556,7 @@ msgstr ""
 "  -z, --null-data           unha liña de datos termina nun byte 0, non\n"
 "                            nun carácter de nova liña\n"
 
-#: src/grep.c:1714
+#: src/grep.c:1728
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -574,7 +574,7 @@ msgstr ""
 "      --help                mostra esta axuda e finaliza\n"
 "      --mmap                descártase para compatibilidade cara atrás\n"
 
-#: src/grep.c:1721
+#: src/grep.c:1735
 #, c-format
 msgid ""
 "\n"
@@ -603,7 +603,7 @@ msgstr ""
 "      --label=ETIQUETA      utiliza ETIQUETA como nome de ficheiro prefixo\n"
 "                            para a entrada estándar\n"
 
-#: src/grep.c:1732
+#: src/grep.c:1746
 #, fuzzy, c-format
 msgid ""
 "  -o, --only-matching       show only the part of a line matching PATTERN\n"
@@ -619,7 +619,7 @@ msgstr ""
 "                            TIPO é `binary', `text', ou `without-match'\n"
 "  -a, --text                equivalente a --binary-files=text\n"
 
-#: src/grep.c:1739
+#: src/grep.c:1753
 #, fuzzy, c-format
 msgid ""
 "  -I                        equivalent to --binary-files=without-match\n"
@@ -637,7 +637,7 @@ msgstr ""
 "                            `sockets', pode ser 'read' ou 'skip'\n"
 "  -R, -r, --recursive       equivalente a --directories=recurse\n"
 
-#: src/grep.c:1748
+#: src/grep.c:1762
 #, c-format
 msgid ""
 "      --include=FILE_PATTERN  search only files that match FILE_PATTERN\n"
@@ -656,7 +656,7 @@ msgstr ""
 "      --exclude-dir=PATRÓN    omítense os directorios que coinciden con "
 "PATRÓN\n"
 
-#: src/grep.c:1755
+#: src/grep.c:1769
 #, c-format
 msgid ""
 "  -L, --files-without-match  print only names of FILEs containing no match\n"
@@ -673,7 +673,7 @@ msgstr ""
 "                            por cada FICHEIRO\n"
 "  -Z, --null                imprime un byte 0 despois do nome do FICHEIRO\n"
 
-#: src/grep.c:1761
+#: src/grep.c:1775
 #, c-format
 msgid ""
 "\n"
@@ -688,7 +688,7 @@ msgstr ""
 "  -A, --after-context=NÚM   mostra NÚM liñas de contexto posterior\n"
 "  -C, --context=NÚM         mostra NÚM liñas de contexto\n"
 
-#: src/grep.c:1768
+#: src/grep.c:1782
 #, fuzzy, c-format
 msgid ""
 "  -NUM                      same as --context=NUM\n"
@@ -710,7 +710,7 @@ msgstr ""
 "  -u, --unix-byte-offsets   conta os desprazamentos como se non houbera\n"
 "                            retornos de carro (MSDOS)\n"
 
-#: src/grep.c:1777
+#: src/grep.c:1791
 #, fuzzy, c-format
 msgid ""
 "'egrep' means 'grep -E'.  'fgrep' means 'grep -F'.\n"
@@ -719,7 +719,7 @@ msgstr ""
 "`egrep' significa `grep -E'.  `fgrep' significa `grep -F'.\n"
 "A invocación directa como `egrep' ou `fgrep' está obsoleta.\n"
 
-#: src/grep.c:1780
+#: src/grep.c:1794
 #, fuzzy, c-format
 msgid ""
 "When FILE is -, read standard input.  With no FILE, read . if a command-"
@@ -733,32 +733,32 @@ msgstr ""
 "é 0 se hai coincidencias, 1 se non as hai; se se produce algún error e non \n"
 "se especificou -q, o estado de saída é 2.\n"
 
-#: src/grep.c:1849
+#: src/grep.c:1863
 #, c-format
 msgid "conflicting matchers specified"
 msgstr "especificronse patrns conflictivos"
 
-#: src/grep.c:1860
+#: src/grep.c:1874
 #, c-format
 msgid "invalid matcher %s"
 msgstr "expresión non válida %s"
 
-#: src/grep.c:2143
+#: src/grep.c:2157
 #, c-format
 msgid "warning: GREP_OPTIONS is deprecated; please use an alias or script"
 msgstr ""
 
-#: src/grep.c:2173
+#: src/grep.c:2187
 #, c-format
 msgid "unknown devices method"
 msgstr "método de dispositivos descoñecido"
 
-#: src/grep.c:2300
+#: src/grep.c:2314
 #, c-format
 msgid "invalid max count"
 msgstr "contador máximo non válido"
 
-#: src/grep.c:2357
+#: src/grep.c:2371
 #, c-format
 msgid "unknown binary-files type"
 msgstr "tipo binary-files descoñecido"

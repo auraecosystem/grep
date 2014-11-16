@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grep 2.13.16-pre1\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2014-10-29 10:51-0700\n"
+"POT-Creation-Date: 2014-11-16 08:29-0800\n"
 "PO-Revision-Date: 2012-08-17 13:52+0100\n"
 "Last-Translator: Ivan Masár <helix84@centrum.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
@@ -94,7 +94,7 @@ msgstr "%s: voľba „-W %s“ nepripúšťa argument\n"
 msgid "%s: option '-W %s' requires an argument\n"
 msgstr "%s: voľba „-W %s“ vyžaduje argument\n"
 
-#: lib/obstack.c:416 lib/obstack.c:418 lib/xalloc-die.c:34
+#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34
 #: src/pcresearch.c:267
 #, c-format
 msgid "memory exhausted"
@@ -476,36 +476,36 @@ msgstr "upozornenie: %s: %s"
 msgid "recursive directory loop"
 msgstr "rekurzívna slučka v adresári"
 
-#: src/grep.c:1613
+#: src/grep.c:1627
 #, c-format
 msgid "input file %s is also the output"
 msgstr "vstupný súbor %s je tiež uvedený ako výstupný"
 
-#: src/grep.c:1671
+#: src/grep.c:1685
 msgid "(standard input)"
 msgstr "(štandardný vstup)"
 
-#: src/grep.c:1687 src/grep.c:1694
+#: src/grep.c:1701 src/grep.c:1708
 #, c-format
 msgid "Usage: %s [OPTION]... PATTERN [FILE]...\n"
 msgstr "Použitie: %s [VOĽBA]... VZORKA [SÚBOR]...\n"
 
-#: src/grep.c:1689
+#: src/grep.c:1703
 #, c-format
 msgid "Try '%s --help' for more information.\n"
 msgstr "Ďalšie informácie získate príkazom „%s --help“.\n"
 
-#: src/grep.c:1695
+#: src/grep.c:1709
 #, c-format
 msgid "Search for PATTERN in each FILE or standard input.\n"
 msgstr "Hľadať VZORKU v každom SÚBORE alebo na štandardnom vstupe.\n"
 
-#: src/grep.c:1696
+#: src/grep.c:1710
 #, c-format
 msgid "PATTERN is, by default, a basic regular expression (BRE).\n"
 msgstr "VZORKA je štandardne základný regulárny výraz (BRE).\n"
 
-#: src/grep.c:1697
+#: src/grep.c:1711
 #, c-format
 msgid ""
 "Example: %s -i 'hello world' menu.h main.c\n"
@@ -516,7 +516,7 @@ msgstr ""
 "\n"
 "Výber a interpretácia regulárneho výrazu:\n"
 
-#: src/grep.c:1701
+#: src/grep.c:1715
 #, fuzzy, c-format
 msgid ""
 "  -E, --extended-regexp     PATTERN is an extended regular expression (ERE)\n"
@@ -530,7 +530,7 @@ msgstr ""
 "  -G, --basic-regexp        VZORKA je základný regulárny výraz (BRE)\n"
 "  -P, --perl-regexp         VZORKA je perlovský regulárny výraz\n"
 
-#: src/grep.c:1707
+#: src/grep.c:1721
 #, c-format
 msgid ""
 "  -e, --regexp=PATTERN      use PATTERN for matching\n"
@@ -549,7 +549,7 @@ msgstr ""
 "riadkom\n"
 "  -z, --null-data           údaje končia bajtom 0, nie novým riadkom\n"
 
-#: src/grep.c:1714
+#: src/grep.c:1728
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -568,7 +568,7 @@ msgstr ""
 "      --mmap                zavrhovaný príkaz, ktorý nič nerobí, vyvolá "
 "upozornenie\n"
 
-#: src/grep.c:1721
+#: src/grep.c:1735
 #, c-format
 msgid ""
 "\n"
@@ -593,7 +593,7 @@ msgstr ""
 "      --label=NÁVESTIE      vypísať NÁVESTIE ako názov súboru pre štand. "
 "vstup\n"
 
-#: src/grep.c:1732
+#: src/grep.c:1746
 #, c-format
 msgid ""
 "  -o, --only-matching       show only the part of a line matching PATTERN\n"
@@ -610,7 +610,7 @@ msgstr ""
 "match“\n"
 "  -a, --text                ekvivalentné s --binary-files=text\n"
 
-#: src/grep.c:1739
+#: src/grep.c:1753
 #, c-format
 msgid ""
 "  -I                        equivalent to --binary-files=without-match\n"
@@ -631,7 +631,7 @@ msgstr ""
 "  -r, --recursive           ekvivalentné s --directories=recurse\n"
 "  -R, --dereference-recursive  podobné, ale nasleduje symbolické odkazy\n"
 
-#: src/grep.c:1748
+#: src/grep.c:1762
 #, c-format
 msgid ""
 "      --include=FILE_PATTERN  search only files that match FILE_PATTERN\n"
@@ -650,7 +650,7 @@ msgstr ""
 "                              súboru zo SÚBORU\n"
 "      --exclude-dir=VZOR      preskočiť adresáre, ktoré zodpovedajú VZORu\n"
 
-#: src/grep.c:1755
+#: src/grep.c:1769
 #, c-format
 msgid ""
 "  -L, --files-without-match  print only names of FILEs containing no match\n"
@@ -666,7 +666,7 @@ msgstr ""
 "  -T, --initial-tab         zarovnávať tabulátory (ak je to potrebné)\n"
 "  -Z, --null                vypísať za názvom SÚBORu bajt 0\n"
 
-#: src/grep.c:1761
+#: src/grep.c:1775
 #, c-format
 msgid ""
 "\n"
@@ -681,7 +681,7 @@ msgstr ""
 "  -A, --after-context=POČ   vytlačiť POČ riadkov kontextu za\n"
 "  -C, --context=POČ         vytlačiť POČ riadkov kontextu výstupu\n"
 
-#: src/grep.c:1768
+#: src/grep.c:1782
 #, c-format
 msgid ""
 "  -NUM                      same as --context=NUM\n"
@@ -704,7 +704,7 @@ msgstr ""
 "                            znaky CR (MSDOS)\n"
 "\n"
 
-#: src/grep.c:1777
+#: src/grep.c:1791
 #, c-format
 msgid ""
 "'egrep' means 'grep -E'.  'fgrep' means 'grep -F'.\n"
@@ -713,7 +713,7 @@ msgstr ""
 "„egrep“ znamená „grep -E“. „fgrep“ znamená „grep -F“.\n"
 "Priame vyvolanie príkazu ako „egrep“ či „fgrep“ sa neodporúča.\n"
 
-#: src/grep.c:1780
+#: src/grep.c:1794
 #, c-format
 msgid ""
 "When FILE is -, read standard input.  With no FILE, read . if a command-"
@@ -728,32 +728,32 @@ msgstr ""
 "Chybová úroveň je 0 ak bol vybraný nejaký riadok a 1 inak;\n"
 "ak sa vyskytne nejaká chyba a nebolo zadané -q, chybová úroveň je 2.\n"
 
-#: src/grep.c:1849
+#: src/grep.c:1863
 #, c-format
 msgid "conflicting matchers specified"
 msgstr "boli zadané konfliktné špecifikátory"
 
-#: src/grep.c:1860
+#: src/grep.c:1874
 #, c-format
 msgid "invalid matcher %s"
 msgstr "neplatný zástupný znak %s"
 
-#: src/grep.c:2143
+#: src/grep.c:2157
 #, c-format
 msgid "warning: GREP_OPTIONS is deprecated; please use an alias or script"
 msgstr ""
 
-#: src/grep.c:2173
+#: src/grep.c:2187
 #, c-format
 msgid "unknown devices method"
 msgstr "neznáme metódy zariadení"
 
-#: src/grep.c:2300
+#: src/grep.c:2314
 #, c-format
 msgid "invalid max count"
 msgstr "neplatný maximálny počet"
 
-#: src/grep.c:2357
+#: src/grep.c:2371
 #, c-format
 msgid "unknown binary-files type"
 msgstr "neznámy typ binárneho súboru"

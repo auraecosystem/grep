@@ -104,16 +104,17 @@ host_triplet = @host@
 DIST_COMMON = $(srcdir)/gnulib.mk $(srcdir)/Makefile.in \
 	$(srcdir)/Makefile.am $(top_srcdir)/build-aux/depcomp \
 	$(noinst_HEADERS) $(top_srcdir)/build-aux/test-driver
-TESTS = test-alloca-opt$(EXEEXT) test-argmatch$(EXEEXT) \
-	test-binary-io.sh test-bitrotate$(EXEEXT) test-btowc1.sh \
-	test-btowc2.sh test-c-ctype$(EXEEXT) test-c-strcase.sh \
-	test-chdir$(EXEEXT) test-cloexec$(EXEEXT) test-close$(EXEEXT) \
-	test-ctype$(EXEEXT) test-dirent-safer$(EXEEXT) \
-	test-dirent$(EXEEXT) test-dup$(EXEEXT) test-dup2$(EXEEXT) \
-	test-environ$(EXEEXT) test-errno$(EXEEXT) test-exclude1.sh \
-	test-exclude2.sh test-exclude3.sh test-exclude4.sh \
-	test-exclude5.sh test-exclude6.sh test-exclude7.sh \
-	test-exclude8.sh test-fchdir$(EXEEXT) test-fcntl-h$(EXEEXT) \
+TESTS = test-alignof$(EXEEXT) test-alloca-opt$(EXEEXT) \
+	test-argmatch$(EXEEXT) test-binary-io.sh \
+	test-bitrotate$(EXEEXT) test-btowc1.sh test-btowc2.sh \
+	test-c-ctype$(EXEEXT) test-c-strcase.sh test-chdir$(EXEEXT) \
+	test-cloexec$(EXEEXT) test-close$(EXEEXT) test-ctype$(EXEEXT) \
+	test-dirent-safer$(EXEEXT) test-dirent$(EXEEXT) \
+	test-dup$(EXEEXT) test-dup2$(EXEEXT) test-environ$(EXEEXT) \
+	test-errno$(EXEEXT) test-exclude1.sh test-exclude2.sh \
+	test-exclude3.sh test-exclude4.sh test-exclude5.sh \
+	test-exclude6.sh test-exclude7.sh test-exclude8.sh \
+	test-fchdir$(EXEEXT) test-fcntl-h$(EXEEXT) \
 	test-fcntl-safer$(EXEEXT) test-fcntl$(EXEEXT) \
 	test-fdopen$(EXEEXT) test-fdopendir$(EXEEXT) \
 	test-fgetc$(EXEEXT) test-float$(EXEEXT) test-fnmatch$(EXEEXT) \
@@ -163,15 +164,15 @@ TESTS = test-alloca-opt$(EXEEXT) test-argmatch$(EXEEXT) \
 	test-xstrtol.sh
 XFAIL_TESTS =
 noinst_PROGRAMS =
-check_PROGRAMS = test-alloca-opt$(EXEEXT) test-argmatch$(EXEEXT) \
-	test-binary-io$(EXEEXT) test-bitrotate$(EXEEXT) \
-	test-btowc$(EXEEXT) test-c-ctype$(EXEEXT) \
-	test-c-strcasecmp$(EXEEXT) test-c-strncasecmp$(EXEEXT) \
-	test-chdir$(EXEEXT) test-cloexec$(EXEEXT) test-close$(EXEEXT) \
-	test-ctype$(EXEEXT) test-dirent-safer$(EXEEXT) \
-	test-dirent$(EXEEXT) test-dup$(EXEEXT) test-dup2$(EXEEXT) \
-	test-environ$(EXEEXT) test-errno$(EXEEXT) \
-	test-exclude$(EXEEXT) test-fchdir$(EXEEXT) \
+check_PROGRAMS = test-alignof$(EXEEXT) test-alloca-opt$(EXEEXT) \
+	test-argmatch$(EXEEXT) test-binary-io$(EXEEXT) \
+	test-bitrotate$(EXEEXT) test-btowc$(EXEEXT) \
+	test-c-ctype$(EXEEXT) test-c-strcasecmp$(EXEEXT) \
+	test-c-strncasecmp$(EXEEXT) test-chdir$(EXEEXT) \
+	test-cloexec$(EXEEXT) test-close$(EXEEXT) test-ctype$(EXEEXT) \
+	test-dirent-safer$(EXEEXT) test-dirent$(EXEEXT) \
+	test-dup$(EXEEXT) test-dup2$(EXEEXT) test-environ$(EXEEXT) \
+	test-errno$(EXEEXT) test-exclude$(EXEEXT) test-fchdir$(EXEEXT) \
 	test-fcntl-h$(EXEEXT) test-fcntl-safer$(EXEEXT) \
 	test-fcntl$(EXEEXT) test-fdopen$(EXEEXT) \
 	test-fdopendir$(EXEEXT) test-fgetc$(EXEEXT) \
@@ -279,30 +280,30 @@ am__aclocal_m4_deps = $(top_srcdir)/m4/00gnulib.m4 \
 	$(top_srcdir)/m4/msvc-inval.m4 \
 	$(top_srcdir)/m4/msvc-nothrow.m4 $(top_srcdir)/m4/multiarch.m4 \
 	$(top_srcdir)/m4/nl_langinfo.m4 $(top_srcdir)/m4/nls.m4 \
-	$(top_srcdir)/m4/nocrash.m4 $(top_srcdir)/m4/off_t.m4 \
-	$(top_srcdir)/m4/onceonly.m4 $(top_srcdir)/m4/open.m4 \
-	$(top_srcdir)/m4/openat.m4 $(top_srcdir)/m4/opendir.m4 \
-	$(top_srcdir)/m4/pathmax.m4 $(top_srcdir)/m4/pcre.m4 \
-	$(top_srcdir)/m4/perl.m4 $(top_srcdir)/m4/pipe.m4 \
-	$(top_srcdir)/m4/po.m4 $(top_srcdir)/m4/printf.m4 \
-	$(top_srcdir)/m4/progtest.m4 $(top_srcdir)/m4/putenv.m4 \
-	$(top_srcdir)/m4/quote.m4 $(top_srcdir)/m4/quotearg.m4 \
-	$(top_srcdir)/m4/read.m4 $(top_srcdir)/m4/readdir.m4 \
-	$(top_srcdir)/m4/realloc.m4 $(top_srcdir)/m4/regex.m4 \
-	$(top_srcdir)/m4/safe-read.m4 $(top_srcdir)/m4/save-cwd.m4 \
-	$(top_srcdir)/m4/setenv.m4 $(top_srcdir)/m4/setlocale.m4 \
-	$(top_srcdir)/m4/size_max.m4 $(top_srcdir)/m4/snprintf.m4 \
-	$(top_srcdir)/m4/ssize_t.m4 $(top_srcdir)/m4/stat.m4 \
-	$(top_srcdir)/m4/stdarg.m4 $(top_srcdir)/m4/stdbool.m4 \
-	$(top_srcdir)/m4/stddef_h.m4 $(top_srcdir)/m4/stdint.m4 \
-	$(top_srcdir)/m4/stdint_h.m4 $(top_srcdir)/m4/stdio_h.m4 \
-	$(top_srcdir)/m4/stdlib_h.m4 $(top_srcdir)/m4/stpcpy.m4 \
-	$(top_srcdir)/m4/strdup.m4 $(top_srcdir)/m4/strerror.m4 \
-	$(top_srcdir)/m4/string_h.m4 $(top_srcdir)/m4/strnlen.m4 \
-	$(top_srcdir)/m4/strstr.m4 $(top_srcdir)/m4/strtoimax.m4 \
-	$(top_srcdir)/m4/strtoll.m4 $(top_srcdir)/m4/strtoull.m4 \
-	$(top_srcdir)/m4/strtoumax.m4 $(top_srcdir)/m4/symlink.m4 \
-	$(top_srcdir)/m4/sys_socket_h.m4 \
+	$(top_srcdir)/m4/nocrash.m4 $(top_srcdir)/m4/obstack.m4 \
+	$(top_srcdir)/m4/off_t.m4 $(top_srcdir)/m4/onceonly.m4 \
+	$(top_srcdir)/m4/open.m4 $(top_srcdir)/m4/openat.m4 \
+	$(top_srcdir)/m4/opendir.m4 $(top_srcdir)/m4/pathmax.m4 \
+	$(top_srcdir)/m4/pcre.m4 $(top_srcdir)/m4/perl.m4 \
+	$(top_srcdir)/m4/pipe.m4 $(top_srcdir)/m4/po.m4 \
+	$(top_srcdir)/m4/printf.m4 $(top_srcdir)/m4/progtest.m4 \
+	$(top_srcdir)/m4/putenv.m4 $(top_srcdir)/m4/quote.m4 \
+	$(top_srcdir)/m4/quotearg.m4 $(top_srcdir)/m4/read.m4 \
+	$(top_srcdir)/m4/readdir.m4 $(top_srcdir)/m4/realloc.m4 \
+	$(top_srcdir)/m4/regex.m4 $(top_srcdir)/m4/safe-read.m4 \
+	$(top_srcdir)/m4/save-cwd.m4 $(top_srcdir)/m4/setenv.m4 \
+	$(top_srcdir)/m4/setlocale.m4 $(top_srcdir)/m4/size_max.m4 \
+	$(top_srcdir)/m4/snprintf.m4 $(top_srcdir)/m4/ssize_t.m4 \
+	$(top_srcdir)/m4/stat.m4 $(top_srcdir)/m4/stdarg.m4 \
+	$(top_srcdir)/m4/stdbool.m4 $(top_srcdir)/m4/stddef_h.m4 \
+	$(top_srcdir)/m4/stdint.m4 $(top_srcdir)/m4/stdint_h.m4 \
+	$(top_srcdir)/m4/stdio_h.m4 $(top_srcdir)/m4/stdlib_h.m4 \
+	$(top_srcdir)/m4/stpcpy.m4 $(top_srcdir)/m4/strdup.m4 \
+	$(top_srcdir)/m4/strerror.m4 $(top_srcdir)/m4/string_h.m4 \
+	$(top_srcdir)/m4/strnlen.m4 $(top_srcdir)/m4/strstr.m4 \
+	$(top_srcdir)/m4/strtoimax.m4 $(top_srcdir)/m4/strtoll.m4 \
+	$(top_srcdir)/m4/strtoull.m4 $(top_srcdir)/m4/strtoumax.m4 \
+	$(top_srcdir)/m4/symlink.m4 $(top_srcdir)/m4/sys_socket_h.m4 \
 	$(top_srcdir)/m4/sys_stat_h.m4 $(top_srcdir)/m4/sys_time_h.m4 \
 	$(top_srcdir)/m4/sys_types_h.m4 $(top_srcdir)/m4/threadlib.m4 \
 	$(top_srcdir)/m4/time_h.m4 $(top_srcdir)/m4/unistd-safer.m4 \
@@ -335,6 +336,11 @@ am_libtests_a_OBJECTS = fd-safer-flag.$(OBJEXT) \
 	xsize.$(OBJEXT)
 libtests_a_OBJECTS = $(am_libtests_a_OBJECTS)
 PROGRAMS = $(noinst_PROGRAMS)
+test_alignof_SOURCES = test-alignof.c
+test_alignof_OBJECTS = test-alignof.$(OBJEXT)
+test_alignof_LDADD = $(LDADD)
+test_alignof_DEPENDENCIES = libtests.a ../lib/libgreputils.a \
+	libtests.a $(am__DEPENDENCIES_1)
 test_alloca_opt_SOURCES = test-alloca-opt.c
 test_alloca_opt_OBJECTS = test-alloca-opt.$(OBJEXT)
 test_alloca_opt_LDADD = $(LDADD)
@@ -917,8 +923,8 @@ am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
 SOURCES = $(libtests_a_SOURCES) $(EXTRA_libtests_a_SOURCES) \
-	test-alloca-opt.c test-argmatch.c test-binary-io.c \
-	test-bitrotate.c test-btowc.c test-c-ctype.c \
+	test-alignof.c test-alloca-opt.c test-argmatch.c \
+	test-binary-io.c test-bitrotate.c test-btowc.c test-c-ctype.c \
 	test-c-strcasecmp.c test-c-strncasecmp.c test-chdir.c \
 	test-cloexec.c test-close.c test-ctype.c test-dirent.c \
 	test-dirent-safer.c test-dup.c test-dup-safer.c test-dup2.c \
@@ -953,8 +959,8 @@ SOURCES = $(libtests_a_SOURCES) $(EXTRA_libtests_a_SOURCES) \
 	test-xalloc-die.c test-xstrtoimax.c test-xstrtol.c \
 	test-xstrtoul.c
 DIST_SOURCES = $(libtests_a_SOURCES) $(EXTRA_libtests_a_SOURCES) \
-	test-alloca-opt.c test-argmatch.c test-binary-io.c \
-	test-bitrotate.c test-btowc.c test-c-ctype.c \
+	test-alignof.c test-alloca-opt.c test-argmatch.c \
+	test-binary-io.c test-bitrotate.c test-btowc.c test-c-ctype.c \
 	test-c-strcasecmp.c test-c-strncasecmp.c test-chdir.c \
 	test-cloexec.c test-close.c test-ctype.c test-dirent.c \
 	test-dirent-safer.c test-dup.c test-dup-safer.c test-dup2.c \
@@ -2139,7 +2145,7 @@ TESTS_ENVIRONMENT = EXEEXT='@EXEEXT@' srcdir='$(srcdir)' \
 noinst_HEADERS = 
 noinst_LIBRARIES = 
 check_LIBRARIES = libtests.a
-EXTRA_DIST = test-alloca-opt.c test-argmatch.c macros.h \
+EXTRA_DIST = test-alignof.c test-alloca-opt.c test-argmatch.c macros.h \
 	test-binary-io.sh test-binary-io.c macros.h test-bitrotate.c \
 	macros.h test-btowc1.sh test-btowc2.sh test-btowc.c \
 	signature.h macros.h test-c-ctype.c macros.h test-c-strcase.sh \
@@ -2357,6 +2363,10 @@ clean-checkPROGRAMS:
 
 clean-noinstPROGRAMS:
 	-test -z "$(noinst_PROGRAMS)" || rm -f $(noinst_PROGRAMS)
+
+test-alignof$(EXEEXT): $(test_alignof_OBJECTS) $(test_alignof_DEPENDENCIES) $(EXTRA_test_alignof_DEPENDENCIES) 
+	@rm -f test-alignof$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(test_alignof_OBJECTS) $(test_alignof_LDADD) $(LIBS)
 
 test-alloca-opt$(EXEEXT): $(test_alloca_opt_OBJECTS) $(test_alloca_opt_DEPENDENCIES) $(EXTRA_test_alloca_opt_DEPENDENCIES) 
 	@rm -f test-alloca-opt$(EXEEXT)
@@ -2882,6 +2892,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/setlocale.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/snprintf.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/symlink.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-alignof.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-alloca-opt.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-argmatch.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-binary-io.Po@am__quote@
@@ -3263,6 +3274,13 @@ recheck: all $(check_LIBRARIES) $(check_PROGRAMS)
 	        am__force_recheck=am--force-recheck \
 	        TEST_LOGS="$$log_list"; \
 	exit $$?
+test-alignof.log: test-alignof$(EXEEXT)
+	@p='test-alignof$(EXEEXT)'; \
+	b='test-alignof'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
 test-alloca-opt.log: test-alloca-opt$(EXEEXT)
 	@p='test-alloca-opt$(EXEEXT)'; \
 	b='test-alloca-opt'; \
