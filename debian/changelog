@@ -1,9 +1,15 @@
-grep (2.21~pre2.20.72-d512-1~1) UNRELEASED; urgency=medium
+grep (2.21~pre-2.20.90-a07a4-1) experimental; urgency=low
 
   * New upstream pre-release.
-  * Closes: GREP_OPTIONS
+  * Remove no longer need patches:
+    - 70-man_apostrophe.patch
+    - 04-446854-grep.1.patch
+    - 0001-build-avoid-Wstack-protector.patch
+    - 0001-grep-P-invalid-utf8-non-matching-debian.patch
+  * GREP_OPTIONS is obsolete now. grep warns its use (Closes: #411931).
+  * Bump Standards-Version to 3.9.6.
 
- -- Santiago Ruano Rincón <santiago@debian.org>  Wed, 05 Nov 2014 17:20:20 +0100
+ -- Santiago Ruano Rincón <santiago@debian.org>  Mon, 17 Nov 2014 16:05:53 +0100
 
 grep (2.20-4) unstable; urgency=medium
 
