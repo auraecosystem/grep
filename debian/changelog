@@ -1,3 +1,10 @@
+grep (2.21~pre-2.20.90-a07a4-2~1) UNRELEASED-experimental; urgency=low
+
+  * A cleaner d/patches/90-doc-Makefile-Mostlyclean-files.patch replaces
+    99-autotools-changes.patch. Needed to allow grep build twice in a row.
+
+ -- Santiago Ruano Rincón <santiago@debian.org>  Tue, 18 Nov 2014 13:27:30 +0100
+
 grep (2.21~pre-2.20.90-a07a4-1) experimental; urgency=low
 
   * New upstream pre-release.
