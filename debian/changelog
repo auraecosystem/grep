@@ -1,3 +1,10 @@
+grep (2.21~pre-2.20.90-a07a4-3~2) UNRELEASED; urgency=medium
+
+  * d/source/options: extend-diff-ignore to ignore changes in stamp-vti and
+    version.texi. Remove 90-doc-Makefile-Mostlyclean-files.patch.
+
+ -- Santiago Ruano Rincón <santiago@debian.org>  Tue, 18 Nov 2014 22:29:44 +0100
+
 grep (2.21~pre-2.20.90-a07a4-2) experimental; urgency=low
 
   * A cleaner d/patches/90-doc-Makefile-Mostlyclean-files.patch replaces
