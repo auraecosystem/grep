@@ -2,6 +2,8 @@ grep (2.21-1~1) UNRELEASED; urgency=low
 
   * New upstream release.
   * Fix handling of word boundaries in multibyte locales (Closes: #720482).
+  * Ingore regenerated files by automake via d/source/options. Remove
+    now obsolete d/patches/90-doc-Makefile-Mostlyclean-files.patch.
 
  -- Santiago Ruano Rincón <santiago@debian.org>  Mon, 24 Nov 2014 17:42:36 +0100
 
