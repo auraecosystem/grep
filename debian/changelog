@@ -1,3 +1,10 @@
+grep (2.21-1~1) UNRELEASED; urgency=low
+
+  * New upstream release.
+  * Fix handling of word boundaries in multibyte locales (Closes: #720482).
+
+ -- Santiago Ruano Rincón <santiago@debian.org>  Mon, 24 Nov 2014 17:42:36 +0100
+
 grep (2.21~pre-2.20.90-a07a4-2) experimental; urgency=low
 
   * A cleaner d/patches/90-doc-Makefile-Mostlyclean-files.patch replaces
