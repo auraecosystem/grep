@@ -22,9 +22,9 @@ Modified by Marco d'Itri <md@Linux.IT>
  #endif
  
  #if HAVE_LIBPCRE
-@@ -40,6 +46,67 @@
- # endif
- #endif
+@@ -46,6 +52,67 @@
+    in pcre_exec.  */
+ enum { NSUB = 300 };
  
 +#ifdef HAVE_DYNAMIC_LIBPCRE
 +
@@ -90,9 +90,9 @@ Modified by Marco d'Itri <md@Linux.IT>
  void
  Pcompile (char const *pattern, size_t size)
  {
-@@ -59,6 +126,10 @@
-   char const *p;
-   char const *pnul;
+@@ -69,6 +136,10 @@
+   else if (MB_CUR_MAX != 1)
+     error (EXIT_TROUBLE, 0, _("-P supports only unibyte and UTF-8 locales"));
  
 +  if (!map_pcre ())
 +    error (EXIT_TROUBLE, 0, "%s",
