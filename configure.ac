@@ -83,6 +83,11 @@ AC_PROG_CC
 gl_EARLY
 AC_PROG_RANLIB
 
+# grep never invokes mbrtowc or mbrlen on empty input,
+# so don't worry about this common bug,
+# as working around it would merely slow grep down.
+gl_cv_func_mbrtowc_empty_input='assume yes'
+
 dnl Checks for typedefs, structures, and compiler characteristics.
 AC_TYPE_SIZE_T
 AC_C_CONST
@@ -117,6 +122,7 @@ if test "$gl_gcc_warnings" = yes; then
   nw="$nw -Wsystem-headers"         # Don't let system headers trigger warnings
   nw="$nw -Wpadded"                 # Our structs are not padded
   nw="$nw -Wvla"                    # warnings in gettext.h
+  nw="$nw -Wstack-protector"        # generates false alarms for useful code
   nw="$nw -Wswitch-default"         # Too many warnings for now
   nw="$nw -Wunsafe-loop-optimizations" # OK to suppress unsafe optimizations
   nw="$nw -Winline"                 # streq.h's streq4, streq6 and strcaseeq6
@@ -138,14 +144,15 @@ if test "$gl_gcc_warnings" = yes; then
   AC_SUBST([WARN_CFLAGS])
 
   AC_DEFINE([lint], [1], [Define to 1 if the compiler is checking for lint.])
-  AH_VERBATIM([FORTIFY_SOURCE],
+  AC_DEFINE([GNULIB_PORTCHECK], [1], [enable some gnulib portability checks])
+  AH_VERBATIM([GNULIB_PORTCHECK_FORTIFY_SOURCE],
   [/* Enable compile-time and run-time bounds-checking, and some warnings,
       without upsetting glibc 2.15+. */
-   #if !defined _FORTIFY_SOURCE && defined __OPTIMIZE__ && __OPTIMIZE__
+   #if (defined GNULIB_PORTCHECK && !defined _FORTIFY_SOURCE \
+        && defined __OPTIMIZE__ && __OPTIMIZE__)
    # define _FORTIFY_SOURCE 2
    #endif
   ])
-  AC_DEFINE([GNULIB_PORTCHECK], [1], [enable some gnulib portability checks])
 
   # We use a slightly smaller set of warning options for lib/.
   # Remove the following and save the result in GNULIB_WARN_CFLAGS.

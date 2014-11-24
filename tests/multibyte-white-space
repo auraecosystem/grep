@@ -57,20 +57,22 @@ EOF
 
 fail=0
 
-# Like printf with a single argument.
-# The difference is that while some printf implementations fail to
-# handle \xHH escapes, no awk implementation has that problem.
-hex_printf()
-{
-   ${AWK-awk} 'BEGIN { printf "'"$1"'" }' </dev/null
-}
-
 for i in $utf8_space_characters; do
-  hex_printf "$i\n" | grep -q '^\s$' \
+  hex_printf_ "$i" | grep -q '^\s$' \
       || { warn_ "$i FAILED to match \\s"; fail=1; }
-  hex_printf "$i\n" | grep -q '\S'
+  hex_printf_ "$i" | grep -q '\S'
   test $? = 1 \
       || { warn_ "$i vs. \\S FAILED"; fail=1; }
 done
+
+
+# This is a separate test, only nominally related to \s.
+# It is solely to get coverage of a code path (exercising dfa.c's
+# match_mb_charset function) that would have otherwise been untouched.
+# However, as of the change-set adding this new test, match_mb_charset
+# is unreachable via grep.
+printf '\0' | grep -aE '^\s?$' > out 2>&1
+test $? = 1 || fail=1
+compare /dev/null out
 
 Exit $fail
