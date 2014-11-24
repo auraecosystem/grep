@@ -1,3 +1,48 @@
+2014-11-23  Jim Meyering  <meyering@fb.com>
+
+	version 2.21
+	* NEWS: Record release date.
+
+2014-11-21  Jim Meyering  <meyering@fb.com>
+
+	tests: sjis-mb: remove now-obsolete and failing sub-tests
+	* tests/sjis-mb: Commit v2.18-123-geb3292b changed how grep
+	handles patterns with encoding errors.  These SJIS tests are
+	skipped so often that we didn't notice until now that there were
+	two tests of that changed behavior, and that on any system with
+	the ja_JP.SHIFT_JIS locale, they would always fail.  Remove those
+	two tests, since this functionality is well tested separately,
+	via tests/prefix-of-multibyte.
+
+2014-11-20  Norihiro Tanaka  <noritnk@kcn.ne.jp>
+
+	grep -F could erroneously fail to match in non-UTF8 multibyte locales
+	This fixes a bug that can strike only when using a non-UTF8 multibyte
+	locale like ja_JP.SHIFT_JIS.
+
+	Consider this example: it would mistakenly fail to match before
+	this patch:
+
+	  printf '\203AA\n'|LC_ALL=ja_JP.SHIFT_JIS src/grep -F A
+
+	When searching for a single byte that happens to be the latter
+	byte of a multibyte character, and the target byte also follows
+	that multibyte character, grep -F would advance an internal pointer
+	by one byte too many, thus missing the target byte.  A test case
+	for this bug is already included in tests/sjis-mb.
+
+	* src/kwsearch.c (Fexecute): Skip one byte less, after matched middle of a
+	multi-byte character.  Introduced by commit v2.18-119-gfb7d538.
+
+2014-11-17  Jim Meyering  <meyering@fb.com>
+
+	tests: big-match: disable OOM-provoking subtest
+	* tests/big-match: Our application of this regexp '^.*x\(\)\1'
+	to a file containing a single matching line of length 2GiB+2
+	would cause inordinate memory consumption (over 100GB) via
+	regexec.c, but no leak.  That would cause disruption on most
+	systems, so remove this subtest.  Reported by Assaf Gordon.
+
 2014-11-16  Norihiro Tanaka  <noritnk@kcn.ne.jp>
 
 	dfa: avoid undefined behavior
