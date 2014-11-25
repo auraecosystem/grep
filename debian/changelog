@@ -1,11 +1,11 @@
-grep (2.21-1~1) UNRELEASED; urgency=low
+grep (2.21-1) experimental; urgency=low
 
-  * New upstream release.
+  * New upstream release (Uploading to experimental since Jessie is frozen).
   * Fix handling of word boundaries in multibyte locales (Closes: #720482).
-  * Ingore regenerated files by automake via d/source/options. Remove
+  * Ignore regenerated files by automake via d/source/options. Remove
     now obsolete d/patches/90-doc-Makefile-Mostlyclean-files.patch.
 
- -- Santiago Ruano Rincón <santiago@debian.org>  Mon, 24 Nov 2014 17:42:36 +0100
+ -- Santiago Ruano Rincón <santiago@debian.org>  Tue, 25 Nov 2014 09:06:46 +0100
 
 grep (2.21~pre-2.20.90-a07a4-2) experimental; urgency=low
 
