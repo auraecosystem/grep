@@ -49,22 +49,15 @@ enum { EXIT_TROUBLE = 2 };
 
 #include "unlocked-io.h"
 
-_GL_INLINE_HEADER_BEGIN
-#ifndef SYSTEM_INLINE
-# define SYSTEM_INLINE _GL_INLINE
-#endif
-
 #define STREQ(a, b) (strcmp (a, b) == 0)
 
 /* Convert a possibly-signed character to an unsigned character.  This is
    a bit safer than casting to unsigned char, since it catches some type
    errors that the cast doesn't.  */
-SYSTEM_INLINE unsigned char
+static inline unsigned char
 to_uchar (char ch)
 {
   return ch;
 }
-
-_GL_INLINE_HEADER_END
 
 #endif

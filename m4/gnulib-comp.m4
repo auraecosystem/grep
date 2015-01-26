@@ -40,8 +40,6 @@ AC_DEFUN([gl_EARLY],
   AC_REQUIRE([gl_PROG_AR_RANLIB])
   AC_REQUIRE([AM_PROG_CC_C_O])
   # Code from module absolute-header:
-  # Code from module alignof:
-  # Code from module alignof-tests:
   # Code from module alloca:
   # Code from module alloca-opt:
   # Code from module alloca-opt-tests:
@@ -111,7 +109,6 @@ AC_DEFUN([gl_EARLY],
   # Code from module fcntl-tests:
   # Code from module fd-hook:
   # Code from module fd-safer-flag:
-  # Code from module fdl:
   # Code from module fdopen:
   # Code from module fdopen-tests:
   # Code from module fdopendir:
@@ -210,6 +207,7 @@ AC_DEFUN([gl_EARLY],
   # Code from module mbiter:
   # Code from module mbrlen:
   # Code from module mbrtowc:
+  # Code from module mbrtowc-tests:
   # Code from module mbscasecmp:
   # Code from module mbscasecmp-tests:
   # Code from module mbsinit:
@@ -313,9 +311,6 @@ AC_DEFUN([gl_EARLY],
   # Code from module strnlen:
   # Code from module strnlen-tests:
   # Code from module strnlen1:
-  # Code from module strstr:
-  # Code from module strstr-simple:
-  # Code from module strstr-tests:
   # Code from module strtoimax:
   # Code from module strtoimax-tests:
   # Code from module strtoll:
@@ -825,15 +820,6 @@ AC_DEFUN([gl_INIT],
     gl_PREREQ_STRNLEN
   fi
   gl_STRING_MODULE_INDICATOR([strnlen])
-  gl_FUNC_STRSTR
-  if test $REPLACE_STRSTR = 1; then
-    AC_LIBOBJ([strstr])
-  fi
-  gl_FUNC_STRSTR_SIMPLE
-  if test $REPLACE_STRSTR = 1; then
-    AC_LIBOBJ([strstr])
-  fi
-  gl_STRING_MODULE_INDICATOR([strstr])
   gl_FUNC_STRTOIMAX
   if test $HAVE_DECL_STRTOIMAX = 0 || test $REPLACE_STRTOIMAX = 1; then
     AC_LIBOBJ([strtoimax])
@@ -975,6 +961,10 @@ changequote([, ])dnl
   AC_CHECK_FUNCS_ONCE([newlocale])
   gl_LOCALENAME
   AC_CHECK_FUNCS_ONCE([newlocale])
+  gt_LOCALE_FR
+  gt_LOCALE_FR_UTF8
+  gt_LOCALE_JA
+  gt_LOCALE_ZH_CN
   gt_LOCALE_TR_UTF8
   gt_LOCALE_FR_UTF8
   gt_LOCALE_FR
@@ -1033,10 +1023,6 @@ changequote([, ])dnl
   AC_REQUIRE([gt_TYPE_WCHAR_T])
   AC_REQUIRE([gt_TYPE_WINT_T])
   dnl Check for prerequisites for memory fence checks.
-  gl_FUNC_MMAP_ANON
-  AC_CHECK_HEADERS_ONCE([sys/mman.h])
-  AC_CHECK_FUNCS_ONCE([mprotect])
-  AC_CHECK_DECLS_ONCE([alarm])
   gl_FUNC_MMAP_ANON
   AC_CHECK_HEADERS_ONCE([sys/mman.h])
   AC_CHECK_FUNCS_ONCE([mprotect])
@@ -1173,9 +1159,7 @@ AC_DEFUN([gl_FILE_LIST], [
   build-aux/update-copyright
   build-aux/useless-if-before-free
   build-aux/vc-list-files
-  doc/fdl.texi
   doc/gendocs_template
-  lib/alignof.h
   lib/alloca.c
   lib/alloca.in.h
   lib/argmatch.c
@@ -1369,7 +1353,6 @@ AC_DEFUN([gl_FILE_LIST], [
   lib/stdlib.in.h
   lib/stpcpy.c
   lib/str-kmp.h
-  lib/str-two-way.h
   lib/strdup.c
   lib/streq.h
   lib/strerror-override.c
@@ -1382,7 +1365,6 @@ AC_DEFUN([gl_FILE_LIST], [
   lib/strnlen.c
   lib/strnlen1.c
   lib/strnlen1.h
-  lib/strstr.c
   lib/strtoimax.c
   lib/strtol.c
   lib/strtoll.c
@@ -1541,7 +1523,6 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/multiarch.m4
   m4/nl_langinfo.m4
   m4/nocrash.m4
-  m4/obstack.m4
   m4/off_t.m4
   m4/onceonly.m4
   m4/open.m4
@@ -1578,7 +1559,6 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/strerror.m4
   m4/string_h.m4
   m4/strnlen.m4
-  m4/strstr.m4
   m4/strtoimax.m4
   m4/strtoll.m4
   m4/strtoull.m4
@@ -1611,7 +1591,6 @@ AC_DEFUN([gl_FILE_LIST], [
   tests/init.sh
   tests/macros.h
   tests/signature.h
-  tests/test-alignof.c
   tests/test-alloca-opt.c
   tests/test-argmatch.c
   tests/test-binary-io.c
@@ -1688,6 +1667,17 @@ AC_DEFUN([gl_FILE_LIST], [
   tests/test-lstat.h
   tests/test-malloc-gnu.c
   tests/test-malloca.c
+  tests/test-mbrtowc-w32-1.sh
+  tests/test-mbrtowc-w32-2.sh
+  tests/test-mbrtowc-w32-3.sh
+  tests/test-mbrtowc-w32-4.sh
+  tests/test-mbrtowc-w32-5.sh
+  tests/test-mbrtowc-w32.c
+  tests/test-mbrtowc.c
+  tests/test-mbrtowc1.sh
+  tests/test-mbrtowc2.sh
+  tests/test-mbrtowc3.sh
+  tests/test-mbrtowc4.sh
   tests/test-mbscasecmp.c
   tests/test-mbscasecmp.sh
   tests/test-mbsinit.c
@@ -1735,7 +1725,6 @@ AC_DEFUN([gl_FILE_LIST], [
   tests/test-striconv.c
   tests/test-string.c
   tests/test-strnlen.c
-  tests/test-strstr.c
   tests/test-strtoimax.c
   tests/test-strtoll.c
   tests/test-strtoull.c

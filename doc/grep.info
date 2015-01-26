@@ -25,7 +25,7 @@ grep
 
 `grep' prints lines that contain a match for a pattern.
 
-   This manual is for version 2.21 of GNU Grep.
+   This manual is for version 2.20 of GNU Grep.
 
    This manual is for `grep', a pattern matching engine.
 
@@ -346,15 +346,15 @@ these options were specified.
 `--unix-byte-offsets'
      Report Unix-style byte offsets.  This option causes `grep' to
      report byte offsets as if the file were a Unix-style text file,
-     i.e., the byte offsets ignore carriage returns that were stripped.
-     This will produce results identical to running `grep' on a Unix
-     machine.  This option has no effect unless the `-b' option is also
-     used; it has no effect on platforms other than MS-DOS and
-     MS-Windows.
+     i.e., the byte offsets ignore the `CR' characters that were
+     stripped.  This will produce results identical to running `grep'
+     on a Unix machine.  This option has no effect unless the `-b'
+     option is also used; it has no effect on platforms other than
+     MS-DOS and MS-Windows.
 
 `-Z'
 `--null'
-     Output a zero byte (the ASCII NUL character) instead of the
+     Output a zero byte (the ASCII `NUL' character) instead of the
      character that normally follows a file name.  For example, `grep
      -lZ' outputs a zero byte after each file name instead of the usual
      newline.  This option makes the output unambiguous, even in the
@@ -431,13 +431,11 @@ File: grep.info-t,  Node: File and Directory Selection,  Next: Other Options,  P
      the `--binary-files=text' option.
 
 `--binary-files=TYPE'
-     If a file's allocation metadata, or if its data read before a line
-     is selected for output, indicate that the file contains binary
-     data, assume that the file is of type TYPE.  By default, TYPE is
-     `binary', and `grep' normally outputs either a one-line message
-     saying that a binary file matches, or no message if there is no
-     match.  When matching binary data, `grep' may treat non-text bytes
-     as line terminators.
+     If a file's allocation metadata or its first few bytes indicate
+     that the file contains binary data, assume that the file is of
+     type TYPE.  By default, TYPE is `binary', and `grep' normally
+     outputs either a one-line message saying that a binary file
+     matches, or no message if there is no match.
 
      If TYPE is `without-match', `grep' assumes that a binary file does
      not match; this is equivalent to the `-I' option.
@@ -474,28 +472,25 @@ File: grep.info-t,  Node: File and Directory Selection,  Next: Other Options,  P
      this is equivalent to the `-r' option.
 
 `--exclude=GLOB'
-     Skip files whose name matches the pattern GLOB, using wildcard
-     matching.  When searching recursively, skip any subfile whose base
-     name matches GLOB; the base name is the part after the last `/'.
-     A pattern can use `*', `?', and `['...`]' as wildcards, and `\' to
-     quote a wildcard or backslash character literally.
+     Skip files whose base name matches GLOB (using wildcard matching).
+     A file-name glob can use `*', `?', and `['...`]' as wildcards, and
+     `\' to quote a wildcard or backslash character literally.
 
 `--exclude-from=FILE'
-     Skip files whose name matches any of the patterns read from FILE
-     (using wildcard matching as described under `--exclude').
+     Skip files whose base name matches any of the file-name globs read
+     from FILE (using wildcard matching as described under `--exclude').
 
-`--exclude-dir=GLOB'
-     Skip any directory whose name matches the pattern GLOB.  When
-     searching recursively, skip any subdirectory whose base name
-     matches GLOB.  Ignore any redundant trailing slashes in GLOB.
+`--exclude-dir=DIR'
+     Skip any directory whose name matches the pattern DIR, ignoring
+     any redundant trailing slashes in DIR.
 
 `-I'
      Process a binary file as if it did not contain matching data; this
      is equivalent to the `--binary-files=without-match' option.
 
 `--include=GLOB'
-     Search only files whose name matches GLOB, using wildcard matching
-     as described under `--exclude'.
+     Search only files whose base name matches GLOB (using wildcard
+     matching as described under `--exclude').
 
 `-r'
 `--recursive'
@@ -525,20 +520,21 @@ File: grep.info-t,  Node: Other Options,  Prev: File and Directory Selection,  U
      Treat the file(s) as binary.  By default, under MS-DOS and
      MS-Windows, `grep' guesses whether a file is text or binary as
      described for the `--binary-files' option.  If `grep' decides the
-     file is a text file, it strips carriage returns from the original
-     file contents (to make regular expressions with `^' and `$' work
-     correctly).  Specifying `-U' overrules this guesswork, causing all
-     files to be read and passed to the matching mechanism verbatim; if
-     the file is a text file with `CR/LF' pairs at the end of each line,
-     this will cause some regular expressions to fail.  This option has
-     no effect on platforms other than MS-DOS and MS-Windows.
+     file is a text file, it strips the `CR' characters from the
+     original file contents (to make regular expressions with `^' and
+     `$' work correctly).  Specifying `-U' overrules this guesswork,
+     causing all files to be read and passed to the matching mechanism
+     verbatim; if the file is a text file with `CR/LF' pairs at the end
+     of each line, this will cause some regular expressions to fail.
+     This option has no effect on platforms other than MS-DOS and
+     MS-Windows.
 
 `-z'
 `--null-data'
      Treat the input as a set of lines, each terminated by a zero byte
-     (the ASCII NUL character) instead of a newline.  Like the `-Z' or
-     `--null' option, this option can be used with commands like `sort
-     -z' to process arbitrary file names.
+     (the ASCII `NUL' character) instead of a newline.  Like the `-Z'
+     or `--null' option, this option can be used with commands like
+     `sort -z' to process arbitrary file names.
 
 
 
@@ -553,14 +549,11 @@ variables.
    The locale for category `LC_FOO' is specified by examining the three
 environment variables `LC_ALL', `LC_FOO', and `LANG', in that order.
 The first of these variables that is set specifies the locale.  For
-example, if `LC_ALL' is not set, but `LC_COLLATE' is set to `pt_BR',
-then the Brazilian Portuguese locale is used for the `LC_COLLATE'
-category.  As a special case for `LC_MESSAGES' only, the environment
-variable `LANGUAGE' can contain a colon-separated list of languages that
-overrides the three environment variables that ordinarily specify the
-`LC_MESSAGES' category.  The `C' locale is used if none of these
-environment variables are set, if the locale catalog is not installed,
-or if `grep' was not compiled with national language support (NLS).
+example, if `LC_ALL' is not set, but `LC_MESSAGES' is set to `pt_BR',
+then the Brazilian Portuguese locale is used for the `LC_MESSAGES'
+category.  The `C' locale is used if none of these environment
+variables are set, if the locale catalog is not installed, or if `grep'
+was not compiled with national language support (NLS).
 
    Many of the environment variables in the following list let you
 control highlighting using Select Graphic Rendition (SGR) commands
@@ -586,10 +579,20 @@ capabilities are stored in an online database and accessed by the
 
 `GREP_OPTIONS'
      This variable specifies default options to be placed in front of
-     any explicit options.  As this causes problems when writing
-     portable scripts, this feature will be removed in a future release
-     of `grep', and `grep' warns if it is used.  Please use an alias or
-     script instead.
+     any explicit options.  For example, if `GREP_OPTIONS' is
+     `--binary-files=without-match --directories=skip', `grep' behaves
+     as if the two options `--binary-files=without-match' and
+     `--directories=skip' had been specified before any explicit
+     options.  Option specifications are separated by whitespace.  A
+     backslash escapes the next character, so it can be used to specify
+     an option containing whitespace or a backslash.
+
+     The `GREP_OPTIONS' value does not affect whether `grep' without
+     file operands searches standard input or the working directory;
+     that is affected only by command-line options.  For example, the
+     command `grep PAT' searches standard input and the command `grep
+     -r PAT' searches the working directory, regardless of whether
+     `GREP_OPTIONS' contains `-r'.
 
 `GREP_COLOR'
      This variable specifies the color used to highlight matched
@@ -706,7 +709,6 @@ capabilities are stored in an online database and accessed by the
      which determines the type of characters, e.g., which characters
      are whitespace.
 
-`LANGUAGE'
 `LC_ALL'
 `LC_MESSAGES'
 `LANG'
@@ -740,11 +742,14 @@ File: grep.info-t,  Node: Exit Status,  Next: grep Programs,  Prev: Environment 
 2.3 Exit Status
 ===============
 
-Normally the exit status is 0 if a line is selected, 1 if no lines were
-selected, and 2 if an error occurred.  However, if the `-q' or
-`--quiet' or `--silent' option is used and a line is selected, the exit
-status is 0 even if an error occurred.  Other `grep' implementations
-may exit with status greater than 2 on error.
+Normally, the exit status is 0 if selected lines are found and 1
+otherwise.  But the exit status is 2 if an error occurred, unless the
+`-q' or `--quiet' or `--silent' option is used and a selected line is
+found.  Note, however, that POSIX only mandates, for programs such as
+`grep', `cmp', and `diff', that the exit status in case of error be
+greater than 1; it is therefore advisable, for the sake of portability,
+to use logic that tests for this general condition instead of strict
+equality with 2.
 
 
 File: grep.info-t,  Node: grep Programs,  Prev: Exit Status,  Up: Invoking
@@ -870,7 +875,6 @@ alternate expression.
    Repetition takes precedence over concatenation, which in turn takes
 precedence over alternation.  A whole expression may be enclosed in
 parentheses to override these precedence rules and form a subexpression.
-An unmatched `)' matches just itself.
 
 
 File: grep.info-t,  Node: Character Classes and Bracket Expressions,  Next: The Backslash Character and Special Expressions,  Prev: Fundamental Structure,  Up: Regular Expressions
@@ -915,8 +919,8 @@ of numbers and letters in the current locale.
 
 `[:cntrl:]'
      Control characters.  In ASCII, these characters have octal codes
-     000 through 037, and 177 (DEL).  In other character sets, these are
-     the equivalent characters, if any.
+     000 through 037, and 177 (`DEL').  In other character sets, these
+     are the equivalent characters, if any.
 
 `[:digit:]'
      Digits: `0 1 2 3 4 5 6 7 8 9'.
@@ -1286,10 +1290,10 @@ File: grep.info-t,  Node: Reporting Bugs,  Next: Copying,  Prev: Usage,  Up: Top
 5 Reporting bugs
 ****************
 
-Bug reports can be found at the GNU bug report logs for `grep'
-(http://debbugs.gnu.org/cgi/pkgreport.cgi?package=grep).  If you find a
-bug not listed there, please email it to <bug-grep@gnu.org> to create a
-new bug report.
+Email bug reports to <bug-grep@gnu.org>, a mailing list whose web page
+is `http://lists.gnu.org/mailman/listinfo/bug-grep'.  The Savannah bug
+tracker for `grep' is located at
+`http://savannah.gnu.org/bugs/?group=grep'.
 
 5.1 Known Bugs
 ==============
@@ -1340,7 +1344,8 @@ File: grep.info-t,  Node: GNU Free Documentation License,  Up: Copying
 
                      Version 1.3, 3 November 2008
 
-     Copyright (C) 2000, 2001, 2002, 2007, 2008 Free Software Foundation, Inc.
+     Copyright (C) 2000-2002, 2007-2008, 2010-2014 Free Software
+     Foundation, Inc.
      `http://fsf.org/'
 
      Everyone is permitted to copy and distribute verbatim copies
@@ -1850,17 +1855,17 @@ Index
 * --count:                               General Output Control.
                                                               (line   8)
 * --dereference-recursive:               File and Directory Selection.
-                                                              (line  87)
+                                                              (line  82)
 * --devices:                             File and Directory Selection.
-                                                              (line  32)
+                                                              (line  30)
 * --directories:                         File and Directory Selection.
-                                                              (line  44)
+                                                              (line  42)
 * --exclude:                             File and Directory Selection.
-                                                              (line  55)
+                                                              (line  53)
 * --exclude-dir:                         File and Directory Selection.
-                                                              (line  66)
-* --exclude-from:                        File and Directory Selection.
                                                               (line  62)
+* --exclude-from:                        File and Directory Selection.
+                                                              (line  58)
 * --extended-regexp:                     grep Programs.       (line  21)
 * --file:                                Matching Control.    (line  14)
 * --files-with-matches:                  General Output Control.
@@ -1874,7 +1879,7 @@ Index
                                                               (line   7)
 * --ignore-case:                         Matching Control.    (line  21)
 * --include:                             File and Directory Selection.
-                                                              (line  75)
+                                                              (line  70)
 * --initial-tab:                         Output Line Prefix Control.
                                                               (line  43)
 * --invert-match:                        Matching Control.    (line  40)
@@ -1892,14 +1897,14 @@ Index
                                                               (line  88)
 * --null:                                Output Line Prefix Control.
                                                               (line  63)
-* --null-data:                           Other Options.       (line  25)
+* --null-data:                           Other Options.       (line  26)
 * --only-matching:                       General Output Control.
                                                               (line  75)
 * --perl-regexp:                         grep Programs.       (line  32)
 * --quiet:                               General Output Control.
                                                               (line  81)
 * --recursive:                           File and Directory Selection.
-                                                              (line  80)
+                                                              (line  75)
 * --regexp=PATTERN:                      Matching Control.    (line   8)
 * --silent:                              General Output Control.
                                                               (line  81)
@@ -1925,9 +1930,9 @@ Index
 * -c:                                    General Output Control.
                                                               (line   8)
 * -d:                                    File and Directory Selection.
-                                                              (line  44)
+                                                              (line  42)
 * -D:                                    File and Directory Selection.
-                                                              (line  32)
+                                                              (line  30)
 * -E:                                    grep Programs.       (line  21)
 * -e:                                    Matching Control.    (line   8)
 * -F:                                    grep Programs.       (line  26)
@@ -1954,9 +1959,9 @@ Index
 * -q:                                    General Output Control.
                                                               (line  81)
 * -R:                                    File and Directory Selection.
-                                                              (line  87)
+                                                              (line  82)
 * -r:                                    File and Directory Selection.
-                                                              (line  80)
+                                                              (line  75)
 * -s:                                    General Output Control.
                                                               (line  88)
 * -T:                                    Output Line Prefix Control.
@@ -1970,7 +1975,7 @@ Index
 * -w:                                    Matching Control.    (line  45)
 * -x:                                    Matching Control.    (line  54)
 * -y:                                    Matching Control.    (line  21)
-* -z:                                    Other Options.       (line  25)
+* -z:                                    Other Options.       (line  26)
 * -Z:                                    Output Line Prefix Control.
                                                               (line  63)
 * .:                                     Fundamental Structure.
@@ -1978,7 +1983,7 @@ Index
 * ?:                                     Fundamental Structure.
                                                               (line  18)
 * _N_GNU_nonoption_argv_flags_ environment variable: Environment Variables.
-                                                              (line 183)
+                                                              (line 189)
 * after context:                         Context Line Control.
                                                               (line  13)
 * alnum character class:                 Character Classes and Bracket Expressions.
@@ -2007,7 +2012,7 @@ Index
 * blank characters:                      Character Classes and Bracket Expressions.
                                                               (line  39)
 * bn GREP_COLORS capability:             Environment Variables.
-                                                              (line 127)
+                                                              (line 134)
 * braces, first argument omitted:        Fundamental Structure.
                                                               (line  33)
 * braces, one argument:                  Fundamental Structure.
@@ -2032,7 +2037,7 @@ Index
 * character classes:                     Character Classes and Bracket Expressions.
                                                               (line  28)
 * character type:                        Environment Variables.
-                                                              (line 154)
+                                                              (line 161)
 * classes of characters:                 Character Classes and Bracket Expressions.
                                                               (line  28)
 * cntrl character class:                 Character Classes and Bracket Expressions.
@@ -2049,73 +2054,71 @@ Index
 * counting lines:                        General Output Control.
                                                               (line   8)
 * cx GREP_COLORS capability:             Environment Variables.
-                                                              (line  78)
+                                                              (line  85)
 * default options environment variable:  Environment Variables.
-                                                              (line  44)
+                                                              (line  41)
 * device search:                         File and Directory Selection.
-                                                              (line  32)
+                                                              (line  30)
 * digit character class:                 Character Classes and Bracket Expressions.
                                                               (line  47)
 * digit characters:                      Character Classes and Bracket Expressions.
                                                               (line  47)
 * directory search:                      File and Directory Selection.
-                                                              (line  44)
+                                                              (line  42)
 * dot:                                   Fundamental Structure.
                                                               (line  15)
 * environment variables:                 Environment Variables.
-                                                              (line  43)
+                                                              (line  40)
 * exclude directories:                   File and Directory Selection.
-                                                              (line  66)
+                                                              (line  62)
 * exclude files:                         File and Directory Selection.
-                                                              (line  55)
+                                                              (line  53)
 * exit status:                           Exit Status.         (line   6)
 * FAQ about grep usage:                  Usage.               (line  17)
 * files which don't match:               General Output Control.
                                                               (line  29)
 * fn GREP_COLORS capability:             Environment Variables.
-                                                              (line 117)
+                                                              (line 124)
 * graph character class:                 Character Classes and Bracket Expressions.
                                                               (line  50)
 * graphic characters:                    Character Classes and Bracket Expressions.
                                                               (line  50)
 * grep programs:                         grep Programs.       (line   6)
 * GREP_COLOR environment variable:       Environment Variables.
-                                                              (line  51)
+                                                              (line  58)
 * GREP_COLORS environment variable:      Environment Variables.
-                                                              (line  62)
+                                                              (line  69)
 * GREP_OPTIONS environment variable:     Environment Variables.
-                                                              (line  44)
+                                                              (line  41)
 * group separator:                       Context Line Control.
                                                               (line  25)
 * hexadecimal digits:                    Character Classes and Bracket Expressions.
                                                               (line  76)
 * highlight markers:                     Environment Variables.
-                                                              (line  51)
+                                                              (line  58)
 * highlight, color, colour:              General Output Control.
                                                               (line  14)
 * include files:                         File and Directory Selection.
-                                                              (line  75)
+                                                              (line  70)
 * interval specifications:               Basic vs Extended.   (line  10)
 * invert matching:                       Matching Control.    (line  40)
 * LANG environment variable:             Environment Variables.
-                                                              (line   9)
-* LANGUAGE environment variable:         Environment Variables.
-                                                              (line   9)
-* language of messages:                  Environment Variables.
-                                                              (line 169)
-* LC_ALL environment variable:           Environment Variables.
-                                                              (line   9)
-* LC_COLLATE environment variable:       Environment Variables.
-                                                              (line 154)
-* LC_CTYPE environment variable:         Environment Variables.
                                                               (line 161)
+* language of messages:                  Environment Variables.
+                                                              (line 175)
+* LC_ALL environment variable:           Environment Variables.
+                                                              (line 161)
+* LC_COLLATE environment variable:       Environment Variables.
+                                                              (line 161)
+* LC_CTYPE environment variable:         Environment Variables.
+                                                              (line 168)
 * LC_MESSAGES environment variable:      Environment Variables.
-                                                              (line   9)
+                                                              (line 175)
 * line buffering:                        Other Options.       (line   7)
 * line numbering:                        Output Line Prefix Control.
                                                               (line  38)
 * ln GREP_COLORS capability:             Environment Variables.
-                                                              (line 122)
+                                                              (line 129)
 * lower character class:                 Character Classes and Bracket Expressions.
                                                               (line  53)
 * lower-case letters:                    Character Classes and Bracket Expressions.
@@ -2143,24 +2146,24 @@ Index
 * max-count:                             General Output Control.
                                                               (line  42)
 * mc GREP_COLORS capability:             Environment Variables.
-                                                              (line 109)
+                                                              (line 116)
 * message language:                      Environment Variables.
-                                                              (line 169)
+                                                              (line 175)
 * ms GREP_COLORS capability:             Environment Variables.
-                                                              (line 101)
+                                                              (line 108)
 * MS-DOS/MS-Windows binary files:        Other Options.       (line  12)
 * MS-DOS/MS-Windows byte offsets:        Output Line Prefix Control.
                                                               (line  53)
 * mt GREP_COLORS capability:             Environment Variables.
-                                                              (line  93)
+                                                              (line 100)
 * names of matching files:               General Output Control.
                                                               (line  35)
 * national language support:             Environment Variables.
-                                                              (line 154)
+                                                              (line 161)
 * ne GREP_COLORS capability:             Environment Variables.
-                                                              (line 139)
+                                                              (line 146)
 * NLS:                                   Environment Variables.
-                                                              (line 154)
+                                                              (line 161)
 * no filename prefix:                    Output Line Prefix Control.
                                                               (line  25)
 * numeric characters:                    Character Classes and Bracket Expressions.
@@ -2175,7 +2178,7 @@ Index
 * plus sign:                             Fundamental Structure.
                                                               (line  24)
 * POSIXLY_CORRECT environment variable:  Environment Variables.
-                                                              (line 174)
+                                                              (line 180)
 * print character class:                 Character Classes and Bracket Expressions.
                                                               (line  58)
 * print non-matching lines:              Matching Control.    (line  40)
@@ -2192,16 +2195,16 @@ Index
 * range expression:                      Character Classes and Bracket Expressions.
                                                               (line  12)
 * recursive search:                      File and Directory Selection.
-                                                              (line  80)
+                                                              (line  75)
 * regular expressions:                   Regular Expressions. (line   6)
 * return status:                         Exit Status.         (line   6)
 * rv GREP_COLORS capability:             Environment Variables.
-                                                              (line  87)
+                                                              (line  94)
 * searching directory trees:             File and Directory Selection.
-                                                              (line  55)
+                                                              (line  53)
 * searching for a pattern:               Introduction.        (line   6)
 * sl GREP_COLORS capability:             Environment Variables.
-                                                              (line  70)
+                                                              (line  77)
 * space character class:                 Character Classes and Bracket Expressions.
                                                               (line  66)
 * space characters:                      Character Classes and Bracket Expressions.
@@ -2213,11 +2216,11 @@ Index
 * suppress error messages:               General Output Control.
                                                               (line  88)
 * symbolic links:                        File and Directory Selection.
-                                                              (line  44)
+                                                              (line  42)
 * tab-aligned content lines:             Output Line Prefix Control.
                                                               (line  43)
 * translation of message language:       Environment Variables.
-                                                              (line 169)
+                                                              (line 175)
 * upper character class:                 Character Classes and Bracket Expressions.
                                                               (line  71)
 * upper-case letters:                    Character Classes and Bracket Expressions.
@@ -2239,7 +2242,7 @@ Index
                                                               (line  76)
 * zero-terminated file names:            Output Line Prefix Control.
                                                               (line  63)
-* zero-terminated lines:                 Other Options.       (line  25)
+* zero-terminated lines:                 Other Options.       (line  26)
 * {,M}:                                  Fundamental Structure.
                                                               (line  33)
 * {N,M}:                                 Fundamental Structure.
@@ -2261,25 +2264,25 @@ Node: Matching Control4698
 Node: General Output Control6947
 Ref: General Output Control-Footnote-110862
 Node: Output Line Prefix Control10931
-Node: Context Line Control13862
-Node: File and Directory Selection15690
-Node: Other Options19609
-Node: Environment Variables20843
-Node: Exit Status29952
-Node: grep Programs30416
-Node: Regular Expressions31836
-Node: Fundamental Structure32990
-Node: Character Classes and Bracket Expressions34755
-Ref: invalid-bracket-expr37992
-Node: The Backslash Character and Special Expressions39169
-Node: Anchoring40170
-Node: Back-references and Subexpressions40615
-Node: Basic vs Extended41327
-Node: Usage42324
-Node: Reporting Bugs49408
-Node: Copying50076
-Node: GNU Free Documentation License51165
-Node: Index76286
+Node: Context Line Control13868
+Node: File and Directory Selection15696
+Node: Other Options19287
+Node: Environment Variables20530
+Node: Exit Status30009
+Node: grep Programs30652
+Node: Regular Expressions32072
+Node: Fundamental Structure33226
+Node: Character Classes and Bracket Expressions34953
+Ref: invalid-bracket-expr38192
+Node: The Backslash Character and Special Expressions39369
+Node: Anchoring40370
+Node: Back-references and Subexpressions40815
+Node: Basic vs Extended41527
+Node: Usage42524
+Node: Reporting Bugs49608
+Node: Copying50272
+Node: GNU Free Documentation License51361
+Node: Index76490
 
 End Tag Table
 

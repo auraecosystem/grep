@@ -1,31 +1,9 @@
-grep (2.21-1) experimental; urgency=low
+grep (2.20-4.1) unstable; urgency=high
 
-  * New upstream release (Uploading to experimental since Jessie is frozen).
-  * Fix handling of word boundaries in multibyte locales (Closes: #720482).
-  * Ignore regenerated files by automake via d/source/options. Remove
-    now obsolete d/patches/90-doc-Makefile-Mostlyclean-files.patch.
+  * Non-maintainer upload by the Security Team.
+  * Fix CVE-2015-1345: buffer overrun in src/kwset.c (closes: #776039).
 
- -- Santiago Ruano Rincón <santiago@debian.org>  Tue, 25 Nov 2014 09:06:46 +0100
-
-grep (2.21~pre-2.20.90-a07a4-2) experimental; urgency=low
-
-  * A cleaner d/patches/90-doc-Makefile-Mostlyclean-files.patch replaces
-    99-autotools-changes.patch. Needed to allow grep build twice in a row.
-
- -- Santiago Ruano Rincón <santiago@debian.org>  Tue, 18 Nov 2014 17:55:11 +0100
-
-grep (2.21~pre-2.20.90-a07a4-1) experimental; urgency=low
-
-  * New upstream pre-release.
-  * Remove no longer need patches:
-    - 70-man_apostrophe.patch
-    - 04-446854-grep.1.patch
-    - 0001-build-avoid-Wstack-protector.patch
-    - 0001-grep-P-invalid-utf8-non-matching-debian.patch
-  * GREP_OPTIONS is obsolete now. grep warns its use (Closes: #411931).
-  * Bump Standards-Version to 3.9.6.
-
- -- Santiago Ruano Rincón <santiago@debian.org>  Mon, 17 Nov 2014 16:05:53 +0100
+ -- Michael Gilbert <mgilbert@debian.org>  Mon, 26 Jan 2015 02:56:14 +0000
 
 grep (2.20-4) unstable; urgency=medium
 

@@ -17,16 +17,12 @@
    02110-1301, USA.  */
 
 #include <config.h>
-
-#define SEARCH_INLINE _GL_EXTERN_INLINE
-#define SYSTEM_INLINE _GL_EXTERN_INLINE
-#include "search.h"
-
 #include <assert.h>
+#include "search.h"
 
 #define NCHAR (UCHAR_MAX + 1)
 
-size_t mbclen_cache[NCHAR];
+static size_t mbclen_cache[NCHAR];
 
 void
 kwsinit (kwset_t *kwset)
@@ -222,8 +218,7 @@ build_mbclen_cache (void)
       char c = i;
       unsigned char uc = i;
       mbstate_t mbs = { 0 };
-      size_t len = mbrlen (&c, 1, &mbs);
-      mbclen_cache[uc] = len ? len : 1;
+      mbclen_cache[uc] = mbrlen (&c, 1, &mbs);
     }
 }
 
@@ -249,17 +244,20 @@ mb_goback (char const **mb_start, char const *cur, char const *end)
 
   while (p < cur)
     {
-      size_t clen = mb_clen (p, end - p, &cur_state);
+      size_t mbclen = mbclen_cache[to_uchar (*p)];
 
-      if ((size_t) -2 <= clen)
+      if (mbclen == (size_t) -2)
+        mbclen = mbrlen (p, end - p, &cur_state);
+
+      if (! (0 < mbclen && mbclen < (size_t) -2))
         {
-          /* An invalid sequence, or a truncated multibyte character.
-             Treat it as a single byte character.  */
-          clen = 1;
+          /* An invalid sequence, or a truncated multibyte character, or
+             a null wide character.  Treat it as a single byte character.  */
+          mbclen = 1;
           memset (&cur_state, 0, sizeof cur_state);
         }
       p0 = p;
-      p += clen;
+      p += mbclen;
     }
 
   *mb_start = p;
@@ -287,6 +285,5 @@ mb_next_wc (char const *cur, char const *end)
 {
   wchar_t wc;
   mbstate_t mbs = { 0 };
-  return (end - cur != 0 && mbrtowc (&wc, cur, end - cur, &mbs) < (size_t) -2
-          ? wc : WEOF);
+  return mbrtowc (&wc, cur, end - cur, &mbs) < (size_t) -2 ? wc : WEOF;
 }

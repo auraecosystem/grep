@@ -90,15 +90,15 @@ guess_type (char *buf, size_t buflen)
 }
 
 /* Convert external DOS file representation to internal.
-   Return the count of bytes left in the buffer.
+   Return the count of characters left in the buffer.
    Build table to map character positions when reporting byte counts.  */
-static size_t
+static int
 undossify_input (char *buf, size_t buflen)
 {
   if (! O_BINARY)
     return buflen;
 
-  size_t bytes_left = 0;
+  int chars_left = 0;
 
   if (totalcc == 0)
     {
@@ -126,7 +126,7 @@ undossify_input (char *buf, size_t buflen)
           if (*buf != '\r')
             {
               *destp++ = *buf++;
-              bytes_left++;
+              chars_left++;
             }
           else
             {
@@ -176,7 +176,7 @@ undossify_input (char *buf, size_t buflen)
             }
         }
 
-      return bytes_left;
+      return chars_left;
     }
 
   return buflen;

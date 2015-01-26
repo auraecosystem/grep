@@ -33,18 +33,12 @@ static pcre *cre;
 /* Additional information about the pattern.  */
 static pcre_extra *extra;
 
-# ifndef PCRE_STUDY_JIT_COMPILE
+# ifdef PCRE_STUDY_JIT_COMPILE
+static pcre_jit_stack *jit_stack;
+# else
 #  define PCRE_STUDY_JIT_COMPILE 0
 # endif
 #endif
-
-/* Table, indexed by ! (flag & PCRE_NOTBOL), of whether the empty
-   string matches when that flag is used.  */
-static int empty_match[2];
-
-/* This must be at least 2; everything after that is for performance
-   in pcre_exec.  */
-enum { NSUB = 300 };
 
 void
 Pcompile (char const *pattern, size_t size)
@@ -58,16 +52,12 @@ Pcompile (char const *pattern, size_t size)
   char const *ep;
   char *re = xnmalloc (4, size + 7);
   int flags = (PCRE_MULTILINE
-               | (match_icase ? PCRE_CASELESS : 0));
+               | (match_icase ? PCRE_CASELESS : 0)
+               | (using_utf8 () ? PCRE_UTF8 : 0));
   char const *patlim = pattern + size;
   char *n = re;
   char const *p;
   char const *pnul;
-
-  if (using_utf8 ())
-    flags |= PCRE_UTF8;
-  else if (MB_CUR_MAX != 1)
-    error (EXIT_TROUBLE, 0, _("-P supports only unibyte and UTF-8 locales"));
 
   /* FIXME: Remove these restrictions.  */
   if (memchr (pattern, '\n', size))
@@ -124,20 +114,14 @@ Pcompile (char const *pattern, size_t size)
       /* A 32K stack is allocated for the machine code by default, which
          can grow to 512K if necessary. Since JIT uses far less memory
          than the interpreter, this should be enough in practice.  */
-      pcre_jit_stack *jit_stack = pcre_jit_stack_alloc (32 * 1024, 512 * 1024);
+      jit_stack = pcre_jit_stack_alloc (32 * 1024, 512 * 1024);
       if (!jit_stack)
         error (EXIT_TROUBLE, 0,
                _("failed to allocate memory for the PCRE JIT stack"));
       pcre_assign_jit_stack (extra, NULL, jit_stack);
     }
-
 # endif
   free (re);
-
-  int sub[NSUB];
-  empty_match[false] = pcre_exec (cre, extra, "", 0, 0,
-                                  PCRE_NOTBOL, sub, NSUB);
-  empty_match[true] = pcre_exec (cre, extra, "", 0, 0, 0, sub, NSUB);
 #endif /* HAVE_LIBPCRE */
 }
 
@@ -150,110 +134,36 @@ Pexecute (char const *buf, size_t size, size_t *match_size,
   error (EXIT_TROUBLE, 0, _("internal error"));
   return -1;
 #else
-  int sub[NSUB];
-  char const *p = start_ptr ? start_ptr : buf;
-  bool bol = p[-1] == eolbyte;
-  char const *line_start = buf;
+  /* This array must have at least two elements; everything after that
+     is just for performance improvement in pcre_exec.  */
+  int sub[300];
+
+  const char *line_buf, *line_end, *line_next;
   int e = PCRE_ERROR_NOMATCH;
-  char const *line_end;
+  ptrdiff_t start_ofs = start_ptr ? start_ptr - buf : 0;
 
-  /* If the input type is unknown, the caller is still testing the
-     input, which means the current buffer cannot contain encoding
-     errors and a multiline search is typically more efficient.
-     Otherwise, a single-line search is typically faster, so that
-     pcre_exec doesn't waste time validating the entire input
-     buffer.  */
-  bool multiline = input_textbin == TEXTBIN_UNKNOWN;
-
-  for (; p < buf + size; p = line_start = line_end + 1)
+  /* PCRE can't limit the matching to single lines, therefore we have to
+     match each line in the buffer separately.  */
+  for (line_next = buf;
+       e == PCRE_ERROR_NOMATCH && line_next < buf + size;
+       start_ofs -= line_next - line_buf)
     {
-      bool too_big;
-
-      if (multiline)
-        {
-          size_t pcre_size_max = MIN (INT_MAX, SIZE_MAX - 1);
-          size_t scan_size = MIN (pcre_size_max + 1, buf + size - p);
-          line_end = memrchr (p, eolbyte, scan_size);
-          too_big = ! line_end;
-        }
+      line_buf = line_next;
+      line_end = memchr (line_buf, eolbyte, (buf + size) - line_buf);
+      if (line_end == NULL)
+        line_next = line_end = buf + size;
       else
-        {
-          line_end = memchr (p, eolbyte, buf + size - p);
-          too_big = INT_MAX < line_end - p;
-        }
+        line_next = line_end + 1;
 
-      if (too_big)
+      if (start_ptr && start_ptr >= line_end)
+        continue;
+
+      if (INT_MAX < line_end - line_buf)
         error (EXIT_TROUBLE, 0, _("exceeded PCRE's line length limit"));
 
-      for (;;)
-        {
-          /* Skip past bytes that are easily determined to be encoding
-             errors, treating them as data that cannot match.  This is
-             faster than having pcre_exec check them.  */
-          while (mbclen_cache[to_uchar (*p)] == (size_t) -1)
-            {
-              p++;
-              bol = false;
-            }
-
-          /* Check for an empty match; this is faster than letting
-             pcre_exec do it.  */
-          int search_bytes = line_end - p;
-          if (search_bytes == 0)
-            {
-              sub[0] = sub[1] = 0;
-              e = empty_match[bol];
-              break;
-            }
-
-          int options = 0;
-          if (!bol)
-            options |= PCRE_NOTBOL;
-          if (multiline)
-            options |= PCRE_NO_UTF8_CHECK;
-
-          e = pcre_exec (cre, extra, p, search_bytes, 0,
-                         options, sub, NSUB);
-          if (e != PCRE_ERROR_BADUTF8)
-            {
-              if (0 < e && multiline && sub[1] - sub[0] != 0)
-                {
-                  char const *nl = memchr (p + sub[0], eolbyte,
-                                           sub[1] - sub[0]);
-                  if (nl)
-                    {
-                      /* This match crosses a line boundary; reject it.  */
-                      p += sub[0];
-                      line_end = nl;
-                      continue;
-                    }
-                }
-              break;
-            }
-          int valid_bytes = sub[0];
-
-          /* Try to match the string before the encoding error.
-             Again, handle the empty-match case specially, for speed.  */
-          if (valid_bytes == 0)
-            {
-              sub[1] = 0;
-              e = empty_match[bol];
-            }
-          else
-            e = pcre_exec (cre, extra, p, valid_bytes, 0,
-                           options | PCRE_NO_UTF8_CHECK | PCRE_NOTEOL,
-                           sub, NSUB);
-          if (e != PCRE_ERROR_NOMATCH)
-            break;
-
-          /* Treat the encoding error as data that cannot match.  */
-          p += valid_bytes + 1;
-          bol = false;
-        }
-
-      if (e != PCRE_ERROR_NOMATCH)
-        break;
-      bol = true;
+      e = pcre_exec (cre, extra, line_buf, line_end - line_buf,
+                     start_ofs < 0 ? 0 : start_ofs, 0,
+                     sub, sizeof sub / sizeof *sub);
     }
 
   if (e <= 0)
@@ -261,7 +171,7 @@ Pexecute (char const *buf, size_t size, size_t *match_size,
       switch (e)
         {
         case PCRE_ERROR_NOMATCH:
-          break;
+          return -1;
 
         case PCRE_ERROR_NOMEMORY:
           error (EXIT_TROUBLE, 0, _("memory exhausted"));
@@ -269,6 +179,10 @@ Pexecute (char const *buf, size_t size, size_t *match_size,
         case PCRE_ERROR_MATCHLIMIT:
           error (EXIT_TROUBLE, 0,
                  _("exceeded PCRE's backtracking limit"));
+
+        case PCRE_ERROR_BADUTF8:
+          error (EXIT_TROUBLE, 0,
+                 _("invalid UTF-8 byte sequence in input"));
 
         default:
           /* For now, we lump all remaining PCRE failures into this basket.
@@ -278,33 +192,30 @@ Pexecute (char const *buf, size_t size, size_t *match_size,
           error (EXIT_TROUBLE, 0, _("internal PCRE error: %d"), e);
         }
 
+      /* NOTREACHED */
       return -1;
     }
   else
     {
-      char const *matchbeg = p + sub[0];
-      char const *matchend = p + sub[1];
-      char const *beg;
-      char const *end;
-      if (start_ptr)
+      /* Narrow down to the line we've found.  */
+      char const *beg = line_buf + sub[0];
+      char const *end = line_buf + sub[1];
+      char const *buflim = buf + size;
+      char eol = eolbyte;
+      if (!start_ptr)
         {
-          beg = matchbeg;
-          end = matchend;
+          /* FIXME: The case when '\n' is not found indicates a bug:
+             Since grep is line oriented, the match should never contain
+             a newline, so there _must_ be a newline following.
+           */
+          if (!(end = memchr (end, eol, buflim - end)))
+            end = buflim;
+          else
+            end++;
+          while (buf < beg && beg[-1] != eol)
+            --beg;
         }
-      else if (multiline)
-        {
-          char const *prev_nl = memrchr (line_start - 1, eolbyte,
-                                         matchbeg - (line_start - 1));
-          char const *next_nl = memchr (matchend, eolbyte,
-                                        line_end + 1 - matchend);
-          beg = prev_nl + 1;
-          end = next_nl + 1;
-        }
-      else
-        {
-          beg = line_start;
-          end = line_end + 1;
-        }
+
       *match_size = end - beg;
       return beg - buf;
     }

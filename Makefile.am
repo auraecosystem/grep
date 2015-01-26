@@ -20,14 +20,11 @@ AUTOMAKE_OPTIONS = gnu 1.12
 SUBDIRS = po lib doc src tests gnulib-tests
 
 EXTRA_DIST =		\
-  .mailmap		\
   ChangeLog-2009	\
   README		\
   README-alpha		\
-  THANKS.in		\
   TODO			\
-  cfg.mk		\
-  thanks-gen
+  cfg.mk
 
 # Shortcut target to make it easier to run expensive tests.
 .PHONY: check-expensive
@@ -57,25 +54,3 @@ gen-ChangeLog:
 	    { rm -f $(distdir)/ChangeLog &&				\
 	      mv $(distdir)/cl-t $(distdir)/ChangeLog; }		\
 	fi
-
-# Sort in traditional ASCII order, regardless of the current locale;
-# otherwise we may get into trouble with distinct strings that the
-# current locale considers to be equal.
-ASSORT = LC_ALL=C sort
-
-# Extract all lines up to the first one starting with "##".
-prologue = perl -ne '/^\#\#/ and exit; print' $(srcdir)/THANKS.in
-
-THANKS: THANKS.in Makefile.am .mailmap thanks-gen
-	$(AM_V_GEN)rm -f $@-t $@;					\
-	{								\
-	  $(prologue); echo;						\
-	  { perl -ne '/^$$/.../^$$/ and print' $(srcdir)/THANKS.in	\
-	      | grep -v '^$$' | perl -pe 's/  +/\0/';			\
-	    git log --pretty=format:'%aN%x00%aE'			\
-	      | $(ASSORT) -u;						\
-	  } | $(srcdir)/thanks-gen					\
-	    | LC_ALL=en_US.UTF-8 sort -f;				\
-	  echo;								\
-	  printf ';; %s\n' 'Local Variables:' 'coding: utf-8' End:;	\
-	} > $@-t && chmod a-w $@-t && mv $@-t $@

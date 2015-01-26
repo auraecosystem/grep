@@ -104,12 +104,4 @@ rpl_getdtablesize(void)
   return getdtablesize ();
 }
 
-#elif defined _SC_OPEN_MAX
-
-int
-getdtablesize (void)
-{
-  return sysconf (_SC_OPEN_MAX);
-}
-
 #endif

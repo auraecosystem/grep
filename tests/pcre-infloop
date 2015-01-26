@@ -18,16 +18,16 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 . "${srcdir=.}/init.sh"; path_prepend_ ../src
+require_pcre_
 require_timeout_
 require_en_utf8_locale_
 require_compiled_in_MB_support
-LC_ALL=en_US.UTF-8 require_pcre_
 
 printf 'a\201b\r' > in || framework_failure_
 
 fail=0
 
 LC_ALL=en_US.UTF-8 timeout 3 grep -P 'a.?..b' in
-test $? = 1 || fail_ "libpcre's match function appears to infloop"
+test $? = 2 || fail_ "libpcre's match function appears to infloop"
 
 Exit $fail

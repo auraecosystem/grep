@@ -21,10 +21,8 @@
    around a glibc bug whereby 'open' cannot be used as a function
    pointer when _FORTIFY_SOURCE is positive.  */
 
-#if __GLIBC__ && defined __always_inline
-# define ALWAYS_INLINE __always_inline
-#else
-# define ALWAYS_INLINE
+#ifndef __always_inline
+#define __always_inline
 #endif
 
 /* This file is designed to test both open(n,buf[,mode]) and
@@ -33,7 +31,7 @@
    appropriate headers are already included.  If PRINT, warn before
    skipping symlink tests with status 77.  */
 
-static ALWAYS_INLINE int
+static __always_inline int
 test_open (int (*func) (char const *, int, ...), bool print)
 {
   int fd;

@@ -22,7 +22,7 @@ AM_CFLAGS = $(WARN_CFLAGS) $(WERROR_CFLAGS)
 AM_LDFLAGS = $(IGNORE_UNUSED_LIBRARIES_CFLAGS)
 LDADD = ../lib/libgreputils.a $(LIBINTL) ../lib/libgreputils.a
 
-XFAIL_TESTS = triple-backref
+XFAIL_TESTS =
 
 # Equivalence classes are only supported when using the system
 # matcher (which means only with glibc).
@@ -73,11 +73,8 @@ TESTS =						\
   invalid-multibyte-infloop			\
   khadafy					\
   long-line-vs-2GiB-read			\
-  match-lines					\
   max-count-overread				\
   max-count-vs-context				\
-  mb-dot-newline				\
-  mb-non-UTF8-overrun				\
   mb-non-UTF8-performance			\
   multibyte-white-space				\
   multiple-begin-or-end-line			\
@@ -91,7 +88,6 @@ TESTS =						\
   pcre-abort					\
   pcre-infloop					\
   pcre-invalid-utf8-input			\
-  pcre-o					\
   pcre-utf8					\
   pcre-w					\
   pcre-wx-backref				\
@@ -108,14 +104,12 @@ TESTS =						\
   status					\
   surrogate-pair				\
   symlink					\
-  triple-backref				\
   turkish-eyes					\
   turkish-I					\
   turkish-I-without-dot				\
   warn-char-classes				\
   word-delim-multibyte				\
   word-multi-file				\
-  word-multibyte				\
   yesno
 
 EXTRA_DIST =					\

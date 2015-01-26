@@ -65,20 +65,20 @@ static struct stat out_stat;
 /* if non-zero, display usage information and exit */
 static int show_help;
 
-/* Print the version on standard output and exit.  */
-static bool show_version;
+/* If non-zero, print the version on standard output and exit.  */
+static int show_version;
 
-/* Suppress diagnostics for nonexistent or unreadable files.  */
-static bool suppress_errors;
+/* If nonzero, suppress diagnostics for nonexistent or unreadable files.  */
+static int suppress_errors;
 
 /* If nonzero, use color markers.  */
 static int color_option;
 
-/* Show only the part of a line matching the expression. */
-static bool only_matching;
+/* If nonzero, show only the part of a line matching the expression. */
+static int only_matching;
 
 /* If nonzero, make sure first content char in a line is on a tab stop. */
-static bool align_tabs;
+static int align_tabs;
 
 /* The group separator used when context is requested. */
 static const char *group_separator = SEP_STR_GROUP;
@@ -347,11 +347,10 @@ static struct option const long_options[] =
 };
 
 /* Define flags declared in grep.h. */
-bool match_icase;
-bool match_words;
-bool match_lines;
-char eolbyte;
-enum textbin input_textbin;
+int match_icase;
+int match_words;
+int match_lines;
+unsigned char eolbyte;
 
 static char const *matcher;
 
@@ -359,8 +358,8 @@ static char const *matcher;
 /* The input file name, or (if standard input) "-" or a --label argument.  */
 static char const *filename;
 static size_t filename_prefix_len;
-static bool errseen;
-static bool write_error_seen;
+static int errseen;
+static int write_error_seen;
 
 enum directories_type
   {
@@ -393,35 +392,26 @@ static enum
     SKIP_DEVICES
   } devices = READ_COMMAND_LINE_DEVICES;
 
-static bool grepfile (int, char const *, bool, bool);
-static bool grepdesc (int, bool);
+static int grepfile (int, char const *, int, int);
+static int grepdesc (int, int);
 
 static void dos_binary (void);
 static void dos_unix_byte_offsets (void);
-static size_t undossify_input (char *, size_t);
+static int undossify_input (char *, size_t);
 
-static bool
+static int
 is_device_mode (mode_t m)
 {
   return S_ISCHR (m) || S_ISBLK (m) || S_ISSOCK (m) || S_ISFIFO (m);
 }
 
-/* Return if ST->st_size is defined.  Assume the file is not a
+/* Return nonzero if ST->st_size is defined.  Assume the file is not a
    symbolic link.  */
-static bool
+static int
 usable_st_size (struct stat const *st)
 {
   return S_ISREG (st->st_mode) || S_TYPEISSHM (st) || S_TYPEISTMO (st);
 }
-
-/* Lame substitutes for SEEK_DATA and SEEK_HOLE on platforms lacking them.
-   Do not rely on these finding data or holes if they equal SEEK_SET.  */
-#ifndef SEEK_DATA
-enum { SEEK_DATA = SEEK_SET };
-#endif
-#ifndef SEEK_HOLE
-enum { SEEK_HOLE = SEEK_SET };
-#endif
 
 /* Functions we'll use to search. */
 typedef void (*compile_fp_t) (char const *, size_t);
@@ -435,7 +425,7 @@ suppressible_error (char const *mesg, int errnum)
 {
   if (! suppress_errors)
     error (0, errnum, "%s", mesg);
-  errseen = true;
+  errseen = 1;
 }
 
 /* If there has already been a write error, don't bother closing
@@ -447,143 +437,50 @@ clean_up_stdout (void)
     close_stdout ();
 }
 
-static bool
-textbin_is_binary (enum textbin textbin)
+/* Return 1 if a file is known to be binary for the purpose of 'grep'.
+   BUF, of size BUFSIZE, is the initial buffer read from the file with
+   descriptor FD and status ST.  */
+static int
+file_is_binary (char const *buf, size_t bufsize, int fd, struct stat const *st)
 {
-  return textbin < TEXTBIN_UNKNOWN;
-}
+  #ifndef SEEK_HOLE
+  enum { SEEK_HOLE = SEEK_END };
+  #endif
 
-/* The high-order bit of a byte.  */
-enum { HIBYTE = 0x80 };
+  /* If -z, test only whether the initial buffer contains '\200';
+     knowing about holes won't help.  */
+  if (! eolbyte)
+    return memchr (buf, '\200', bufsize) != 0;
 
-/* True if every byte with HIBYTE off is a single-byte character.
-   UTF-8 has this property.  */
-static bool easy_encoding;
+  /* If the initial buffer contains a null byte, guess that the file
+     is binary.  */
+  if (memchr (buf, '\0', bufsize))
+    return 1;
 
-static void
-init_easy_encoding (void)
-{
-  easy_encoding = true;
-  for (int i = 0; i < HIBYTE; i++)
-    easy_encoding &= mbclen_cache[i] == 1;
-}
-
-/* A cast to TYPE of VAL.  Use this when TYPE is a pointer type, VAL
-   is properly aligned for TYPE, and 'gcc -Wcast-align' cannot infer
-   the alignment and would otherwise complain about the cast.  */
-#if 4 < __GNUC__ + (6 <= __GNUC_MINOR__)
-# define CAST_ALIGNED(type, val)                           \
-    ({ __typeof__ (val) val_ = val;                        \
-       _Pragma ("GCC diagnostic push")                     \
-       _Pragma ("GCC diagnostic ignored \"-Wcast-align\"") \
-       (type) val_;                                        \
-       _Pragma ("GCC diagnostic pop")                      \
-    })
-#else
-# define CAST_ALIGNED(type, val) ((type) (val))
-#endif
-
-/* An unsigned type suitable for fast matching.  */
-typedef uintmax_t uword;
-
-/* Skip the easy bytes in a buffer that is guaranteed to have a sentinel
-   that is not easy, and return a pointer to the first non-easy byte.
-   In easy encodings, the easy bytes all have HIBYTE off.
-   In other encodings, no byte is easy.  */
-static char const * _GL_ATTRIBUTE_PURE
-skip_easy_bytes (char const *buf)
-{
-  if (!easy_encoding)
-    return buf;
-
-  uword uword_max = -1;
-
-  /* 0x8080..., extended to be wide enough for uword.  */
-  uword hibyte_mask = uword_max / UCHAR_MAX * HIBYTE;
-
-  /* Search a byte at a time until the pointer is aligned, then a
-     uword at a time until a match is found, then a byte at a time to
-     identify the exact byte.  The uword search may go slightly past
-     the buffer end, but that's benign.  */
-  char const *p;
-  uword const *s;
-  for (p = buf; (uintptr_t) p % sizeof (uword) != 0; p++)
-    if (*p & HIBYTE)
-      return p;
-  for (s = CAST_ALIGNED (uword const *, p); ! (*s & hibyte_mask); s++)
-    continue;
-  for (p = (char const *) s; ! (*p & HIBYTE); p++)
-    continue;
-  return p;
-}
-
-/* Return the text type of data in BUF, of size SIZE.
-   BUF must be followed by at least sizeof (uword) bytes,
-   which may be arbitrarily written to or read from.  */
-static enum textbin
-buffer_textbin (char *buf, size_t size)
-{
-  if (eolbyte && memchr (buf, '\0', size))
-    return TEXTBIN_BINARY;
-
-  if (1 < MB_CUR_MAX)
+  /* If the file has holes, it must contain a null byte somewhere.  */
+  if (SEEK_HOLE != SEEK_END && usable_st_size (st))
     {
-      mbstate_t mbs = { 0 };
-      size_t clen;
-      char const *p;
-
-      buf[size] = -1;
-      for (p = buf; (p = skip_easy_bytes (p)) < buf + size; p += clen)
+      off_t cur = bufsize;
+      if (O_BINARY || fd == STDIN_FILENO)
         {
-          clen = mbrlen (p, buf + size - p, &mbs);
-          if ((size_t) -2 <= clen)
-            return clen == (size_t) -2 ? TEXTBIN_UNKNOWN : TEXTBIN_BINARY;
+          cur = lseek (fd, 0, SEEK_CUR);
+          if (cur < 0)
+            return 0;
+        }
+
+      /* Look for a hole after the current location.  */
+      off_t hole_start = lseek (fd, cur, SEEK_HOLE);
+      if (0 <= hole_start)
+        {
+          if (lseek (fd, cur, SEEK_SET) < 0)
+            suppressible_error (filename, errno);
+          if (hole_start < st->st_size)
+            return 1;
         }
     }
 
-  return TEXTBIN_TEXT;
-}
-
-/* Return the text type of a file.  BUF, of size SIZE, is the initial
-   buffer read from the file with descriptor FD and status ST.
-   BUF must be followed by at least sizeof (uword) bytes,
-   which may be arbitrarily written to or read from.  */
-static enum textbin
-file_textbin (char *buf, size_t size, int fd, struct stat const *st)
-{
-  enum textbin textbin = buffer_textbin (buf, size);
-  if (textbin_is_binary (textbin))
-    return textbin;
-
-  if (usable_st_size (st))
-    {
-      if (st->st_size <= size)
-        return textbin == TEXTBIN_UNKNOWN ? TEXTBIN_BINARY : textbin;
-
-      /* If the file has holes, it must contain a null byte somewhere.  */
-      if (SEEK_HOLE != SEEK_SET && eolbyte)
-        {
-          off_t cur = size;
-          if (O_BINARY || fd == STDIN_FILENO)
-            {
-              cur = lseek (fd, 0, SEEK_CUR);
-              if (cur < 0)
-                return TEXTBIN_UNKNOWN;
-            }
-
-          /* Look for a hole after the current location.  */
-          off_t hole_start = lseek (fd, cur, SEEK_HOLE);
-          if (0 <= hole_start)
-            {
-              if (lseek (fd, cur, SEEK_SET) < 0)
-                suppressible_error (filename, errno);
-              if (hole_start < st->st_size)
-                return TEXTBIN_BINARY;
-            }
-        }
-    }
-
-  return TEXTBIN_UNKNOWN;
+  /* Guess that the file does not contain binary data.  */
+  return 0;
 }
 
 /* Convert STR to a nonnegative integer, storing the result in *OUT.
@@ -606,11 +503,11 @@ context_length_arg (char const *str, intmax_t *out)
     }
 }
 
-/* Return true if the file with NAME should be skipped.
-   If COMMAND_LINE, it is a command-line argument.
-   If IS_DIR, it is a directory.  */
-static bool
-skipped_file (char const *name, bool command_line, bool is_dir)
+/* Return nonzero if the file with NAME should be skipped.
+   If COMMAND_LINE is nonzero, it is a command-line argument.
+   If IS_DIR is nonzero, it is a directory.  */
+static int
+skipped_file (char const *name, int command_line, int is_dir)
 {
   return (is_dir
           ? (directories == SKIP_DIRECTORIES
@@ -636,10 +533,6 @@ static off_t bufoffset;		/* Read offset; defined on regular files.  */
 static off_t after_last_match;	/* Pointer after last matching line that
                                    would have been output if we were
                                    outputting characters. */
-static bool skip_nuls;		/* Skip '\0' in data.  */
-static bool skip_empty_lines;	/* Skip empty lines in data.  */
-static bool seek_data_failed;	/* lseek with SEEK_DATA failed.  */
-static uintmax_t totalnl;	/* Total newline count before lastnl. */
 
 /* Return VAL aligned to the next multiple of ALIGNMENT.  VAL can be
    an integer or a pointer.  Both args must be free of side effects.  */
@@ -648,30 +541,9 @@ static uintmax_t totalnl;	/* Total newline count before lastnl. */
    ? (val) \
    : (val) + ((alignment) - (size_t) (val) % (alignment)))
 
-/* Add two numbers that count input bytes or lines, and report an
-   error if the addition overflows.  */
-static uintmax_t
-add_count (uintmax_t a, uintmax_t b)
-{
-  uintmax_t sum = a + b;
-  if (sum < a)
-    error (EXIT_TROUBLE, 0, _("input is too large to count"));
-  return sum;
-}
-
-/* Return true if BUF (of size SIZE) is all zeros.  */
-static bool
-all_zeros (char const *buf, size_t size)
-{
-  for (char const *p = buf; p < buf + size; p++)
-    if (*p)
-      return false;
-  return true;
-}
-
-/* Reset the buffer for a new file, returning false if we should skip it.
+/* Reset the buffer for a new file, returning zero if we should skip it.
    Initialize on the first time through. */
-static bool
+static int
 reset (int fd, struct stat const *st)
 {
   if (! pagesize)
@@ -679,8 +551,7 @@ reset (int fd, struct stat const *st)
       pagesize = getpagesize ();
       if (pagesize == 0 || 2 * pagesize + 1 <= pagesize)
         abort ();
-      bufalloc = (ALIGN_TO (INITIAL_BUFSIZE, pagesize)
-                  + pagesize + sizeof (uword));
+      bufalloc = ALIGN_TO (INITIAL_BUFSIZE, pagesize) + pagesize + 1;
       buffer = xmalloc (bufalloc);
     }
 
@@ -698,22 +569,22 @@ reset (int fd, struct stat const *st)
           if (bufoffset < 0)
             {
               suppressible_error (_("lseek failed"), errno);
-              return false;
+              return 0;
             }
         }
     }
-  return true;
+  return 1;
 }
 
 /* Read new stuff into the buffer, saving the specified
    amount of old stuff.  When we're done, 'bufbeg' points
    to the beginning of the buffer contents, and 'buflim'
-   points just after the end.  Return false if there's an error.  */
-static bool
+   points just after the end.  Return zero if there's an error.  */
+static int
 fillbuf (size_t save, struct stat const *st)
 {
-  size_t fillsize;
-  bool cc = true;
+  ssize_t fillsize;
+  int cc = 1;
   char *readbuf;
   size_t readsize;
 
@@ -721,7 +592,7 @@ fillbuf (size_t save, struct stat const *st)
      that we want to save.  */
   size_t saved_offset = buflim - save - buffer;
 
-  if (pagesize <= buffer + bufalloc - sizeof (uword) - buflim)
+  if (pagesize <= buffer + bufalloc - buflim)
     {
       readbuf = buflim;
       bufbeg = buflim - save;
@@ -734,10 +605,8 @@ fillbuf (size_t save, struct stat const *st)
       char *newbuf;
 
       /* Grow newsize until it is at least as great as minsize.  */
-      for (newsize = bufalloc - pagesize - sizeof (uword);
-           newsize < minsize;
-           newsize *= 2)
-        if ((SIZE_MAX - pagesize - sizeof (uword)) / 2 < newsize)
+      for (newsize = bufalloc - pagesize - 1; newsize < minsize; newsize *= 2)
+        if (newsize * 2 < newsize || newsize * 2 + pagesize + 1 < newsize * 2)
           xalloc_die ();
 
       /* Try not to allocate more memory than the file size indicates,
@@ -757,9 +626,8 @@ fillbuf (size_t save, struct stat const *st)
         }
 
       /* Add enough room so that the buffer is aligned and has room
-         for byte sentinels fore and aft, and so that a uword can
-         be read aft.  */
-      newalloc = newsize + pagesize + sizeof (uword);
+         for byte sentinels fore and aft.  */
+      newalloc = newsize + pagesize + 1;
 
       newbuf = bufalloc < newalloc ? xmalloc (bufalloc = newalloc) : buffer;
       readbuf = ALIGN_TO (newbuf + 1 + save, pagesize);
@@ -773,41 +641,13 @@ fillbuf (size_t save, struct stat const *st)
         }
     }
 
-  readsize = buffer + bufalloc - sizeof (uword) - readbuf;
+  readsize = buffer + bufalloc - readbuf;
   readsize -= readsize % pagesize;
 
-  while (true)
-    {
-      fillsize = safe_read (bufdesc, readbuf, readsize);
-      if (fillsize == SAFE_READ_ERROR)
-        {
-          fillsize = 0;
-          cc = false;
-        }
-      bufoffset += fillsize;
-
-      if (fillsize == 0 || !skip_nuls || !all_zeros (readbuf, fillsize))
-        break;
-      totalnl = add_count (totalnl, fillsize);
-
-      if (SEEK_DATA != SEEK_SET && !seek_data_failed)
-        {
-          /* Solaris SEEK_DATA fails with errno == ENXIO in a hole at EOF.  */
-          off_t data_start = lseek (bufdesc, bufoffset, SEEK_DATA);
-          if (data_start < 0 && errno == ENXIO
-              && usable_st_size (st) && bufoffset < st->st_size)
-            data_start = lseek (bufdesc, 0, SEEK_END);
-
-          if (data_start < 0)
-            seek_data_failed = true;
-          else
-            {
-              totalnl = add_count (totalnl, data_start - bufoffset);
-              bufoffset = data_start;
-            }
-        }
-    }
-
+  fillsize = safe_read (bufdesc, readbuf, readsize);
+  if (fillsize < 0)
+    fillsize = cc = 0;
+  bufoffset += fillsize;
   fillsize = undossify_input (readbuf, fillsize);
   buflim = readbuf + fillsize;
   return cc;
@@ -822,19 +662,20 @@ static enum
 } binary_files;		/* How to handle binary files.  */
 
 static int filename_mask;	/* If zero, output nulls after filenames.  */
-static bool out_quiet;		/* Suppress all normal output. */
+static int out_quiet;		/* Suppress all normal output. */
 static bool out_invert;		/* Print nonmatching stuff. */
 static int out_file;		/* Print filenames. */
-static bool out_line;		/* Print line numbers. */
-static bool out_byte;		/* Print byte offsets. */
+static int out_line;		/* Print line numbers. */
+static int out_byte;		/* Print byte offsets. */
 static intmax_t out_before;	/* Lines of leading context. */
 static intmax_t out_after;	/* Lines of trailing context. */
-static bool count_matches;	/* Count matching lines.  */
+static int count_matches;	/* Count matching lines.  */
 static int list_files;		/* List matching files.  */
-static bool no_filenames;	/* Suppress file names.  */
+static int no_filenames;	/* Suppress file names.  */
 static intmax_t max_count;	/* Stop after outputting this many
                                    lines from an input file.  */
-static bool line_buffered;	/* Use line buffering.  */
+static int line_buffered;       /* If nonzero, use line buffering, i.e.
+                                   fflush everyline out.  */
 static char *label = NULL;      /* Fake filename for stdin */
 
 
@@ -844,13 +685,25 @@ static char const *lastnl;	/* Pointer after last newline counted. */
 static char const *lastout;	/* Pointer after last character output;
                                    NULL if no character has been output
                                    or if it's conceptually before bufbeg. */
+static uintmax_t totalnl;	/* Total newline count before lastnl. */
 static intmax_t outleft;	/* Maximum number of lines to be output.  */
 static intmax_t pending;	/* Pending lines of output.
                                    Always kept 0 if out_quiet is true.  */
-static bool done_on_match;	/* Stop scanning file on first match.  */
-static bool exit_on_match;	/* Exit on first match.  */
+static int done_on_match;	/* Stop scanning file on first match.  */
+static int exit_on_match;	/* Exit on first match.  */
 
 #include "dosbuf.c"
+
+/* Add two numbers that count input bytes or lines, and report an
+   error if the addition overflows.  */
+static uintmax_t
+add_count (uintmax_t a, uintmax_t b)
+{
+  uintmax_t sum = a + b;
+  if (sum < a)
+    error (EXIT_TROUBLE, 0, _("input is too large to count"));
+  return sum;
+}
 
 static void
 nlscan (char const *lim)
@@ -915,15 +768,15 @@ print_offset (uintmax_t pos, int min_width, const char *color)
 
 /* Print a whole line head (filename, line, byte).  */
 static void
-print_line_head (char const *beg, char const *lim, char sep)
+print_line_head (char const *beg, char const *lim, int sep)
 {
-  bool pending_sep = false;
+  int pending_sep = 0;
 
   if (out_file)
     {
       print_filename ();
       if (filename_mask)
-        pending_sep = true;
+        pending_sep = 1;
       else
         fputc (0, stdout);
     }
@@ -939,7 +792,7 @@ print_line_head (char const *beg, char const *lim, char sep)
       if (pending_sep)
         print_sep (sep);
       print_offset (totalnl, 4, line_num_color);
-      pending_sep = true;
+      pending_sep = 1;
     }
 
   if (out_byte)
@@ -949,7 +802,7 @@ print_line_head (char const *beg, char const *lim, char sep)
       if (pending_sep)
         print_sep (sep);
       print_offset (pos, 6, byte_num_color);
-      pending_sep = true;
+      pending_sep = 1;
     }
 
   if (pending_sep)
@@ -1050,9 +903,9 @@ print_line_tail (const char *beg, const char *lim, const char *line_color)
 }
 
 static void
-prline (char const *beg, char const *lim, char sep)
+prline (char const *beg, char const *lim, int sep)
 {
-  bool matching;
+  int matching;
   const char *line_color;
   const char *match_color;
 
@@ -1092,7 +945,7 @@ prline (char const *beg, char const *lim, char sep)
 
   if (ferror (stdout))
     {
-      write_error_seen = true;
+      write_error_seen = 1;
       error (EXIT_TROUBLE, 0, _("write error"));
     }
 
@@ -1195,30 +1048,52 @@ prtext (char const *beg, char const *lim)
   outleft -= n;
 }
 
-/* Replace all NUL bytes in buffer P (which ends at LIM) with EOL.
-   This avoids running out of memory when binary input contains a long
-   sequence of zeros, which would otherwise be considered to be part
-   of a long line.  P[LIM] should be EOL.  */
-static void
-zap_nuls (char *p, char *lim, char eol)
+/* Invoke the matcher, EXECUTE, on buffer BUF of SIZE bytes.  If there
+   is no match, return (size_t) -1.  Otherwise, set *MATCH_SIZE to the
+   length of the match and return the offset of the start of the match.  */
+static size_t
+do_execute (char const *buf, size_t size, size_t *match_size)
 {
-  if (eol)
-    while (true)
-      {
-        *lim = '\0';
-        p += strlen (p);
-        *lim = eol;
-        if (p == lim)
-          break;
-        do
-          *p++ = eol;
-        while (!*p);
-      }
+  size_t result;
+  const char *line_next;
+
+  /* With the current implementation, using --ignore-case with a multi-byte
+     character set is very inefficient when applied to a large buffer
+     containing many matches.  We can avoid much of the wasted effort
+     by matching line-by-line.
+
+     FIXME: this is just an ugly workaround, and it doesn't really
+     belong here.  Also, PCRE is always using this same per-line
+     matching algorithm.  Either we fix -i, or we should refactor
+     this code---for example, we could add another function pointer
+     to struct matcher to split the buffer passed to execute.  It would
+     perform the memchr if line-by-line matching is necessary, or just
+     return buf + size otherwise.  */
+  if (! (execute == Fexecute || execute == Pexecute)
+      || MB_CUR_MAX == 1 || !match_icase)
+    return execute (buf, size, match_size, NULL);
+
+  for (line_next = buf; line_next < buf + size; )
+    {
+      const char *line_buf = line_next;
+      const char *line_end = memchr (line_buf, eolbyte,
+                                     (buf + size) - line_buf);
+      if (line_end == NULL)
+        line_next = line_end = buf + size;
+      else
+        line_next = line_end + 1;
+
+      result = execute (line_buf, line_next - line_buf, match_size, NULL);
+      if (result != (size_t) -1)
+        return (line_buf - buf) + result;
+    }
+
+  return (size_t) -1;
 }
 
 /* Scan the specified portion of the buffer, matching lines (or
    between matching lines if OUT_INVERT is true).  Return a count of
-   lines printed.  Replace all NUL bytes with NUL_ZAPPER as we go.  */
+   lines printed. */
 static intmax_t
 grepbuf (char const *beg, char const *lim)
 {
@@ -1229,7 +1104,7 @@ grepbuf (char const *beg, char const *lim)
   for (p = beg; p < lim; p = endp)
     {
       size_t match_size;
-      size_t match_offset = execute (p, lim - p, &match_size, NULL);
+      size_t match_offset = do_execute (p, lim - p, &match_size);
       if (match_offset == (size_t) -1)
         {
           if (!out_invert)
@@ -1266,15 +1141,12 @@ static intmax_t
 grep (int fd, struct stat const *st)
 {
   intmax_t nlines, i;
-  enum textbin textbin;
+  int not_text;
   size_t residue, save;
   char oldc;
   char *beg;
   char *lim;
   char eol = eolbyte;
-  char nul_zapper = '\0';
-  bool done_on_match_0 = done_on_match;
-  bool out_quiet_0 = out_quiet;
 
   if (! reset (fd, st))
     return 0;
@@ -1285,8 +1157,6 @@ grep (int fd, struct stat const *st)
   outleft = max_count;
   after_last_match = 0;
   pending = 0;
-  skip_nuls = skip_empty_lines && !eol;
-  seek_data_failed = false;
 
   nlines = 0;
   residue = 0;
@@ -1298,26 +1168,16 @@ grep (int fd, struct stat const *st)
       return 0;
     }
 
-  if (binary_files == TEXT_BINARY_FILES)
-    textbin = TEXTBIN_TEXT;
-  else
-    {
-      textbin = file_textbin (bufbeg, buflim - bufbeg, fd, st);
-      if (textbin_is_binary (textbin))
-        {
-          if (binary_files == WITHOUT_MATCH_BINARY_FILES)
-            return 0;
-          done_on_match = out_quiet = true;
-          nul_zapper = eol;
-          skip_nuls = skip_empty_lines;
-        }
-      else if (execute != Pexecute)
-        textbin = TEXTBIN_TEXT;
-    }
+  not_text = (((binary_files == BINARY_BINARY_FILES && !out_quiet)
+               || binary_files == WITHOUT_MATCH_BINARY_FILES)
+              && file_is_binary (bufbeg, buflim - bufbeg, fd, st));
+  if (not_text && binary_files == WITHOUT_MATCH_BINARY_FILES)
+    return 0;
+  done_on_match += not_text;
+  out_quiet += not_text;
 
   for (;;)
     {
-      input_textbin = textbin;
       lastnl = bufbeg;
       if (lastout)
         lastout = bufbeg;
@@ -1327,8 +1187,6 @@ grep (int fd, struct stat const *st)
       /* no more data to scan (eof) except for maybe a residue -> break */
       if (beg == buflim)
         break;
-
-      zap_nuls (beg, buflim, nul_zapper);
 
       /* Determine new residue (the length of an incomplete line at the end of
          the buffer, 0 means there is no incomplete last line).  */
@@ -1368,13 +1226,8 @@ grep (int fd, struct stat const *st)
         }
 
       /* Detect whether leading context is adjacent to previous output.  */
-      if (lastout)
-        {
-          if (textbin == TEXTBIN_UNKNOWN)
-            textbin = TEXTBIN_TEXT;
-          if (beg != lastout)
-            lastout = 0;
-        }
+      if (beg != lastout)
+        lastout = 0;
 
       /* Handle some details and read more data to scan.  */
       save = residue + lim - beg;
@@ -1387,22 +1240,6 @@ grep (int fd, struct stat const *st)
           suppressible_error (filename, errno);
           goto finish_grep;
         }
-
-      /* If the file's textbin has not been determined yet, assume
-         it's binary if the next input buffer suggests so.  */
-      if (textbin == TEXTBIN_UNKNOWN)
-        {
-          enum textbin tb = buffer_textbin (bufbeg, buflim - bufbeg);
-          if (textbin_is_binary (tb))
-            {
-              if (binary_files == WITHOUT_MATCH_BINARY_FILES)
-                return 0;
-              textbin = tb;
-              done_on_match = out_quiet = true;
-              nul_zapper = eol;
-              skip_nuls = skip_empty_lines;
-            }
-        }
     }
   if (residue)
     {
@@ -1414,18 +1251,17 @@ grep (int fd, struct stat const *st)
     }
 
  finish_grep:
-  done_on_match = done_on_match_0;
-  out_quiet = out_quiet_0;
-  if (textbin_is_binary (textbin) && !out_quiet && nlines != 0)
+  done_on_match -= not_text;
+  out_quiet -= not_text;
+  if ((not_text & ~out_quiet) && nlines != 0)
     printf (_("Binary file %s matches\n"), filename);
   return nlines;
 }
 
-static bool
-grepdirent (FTS *fts, FTSENT *ent, bool command_line)
+static int
+grepdirent (FTS *fts, FTSENT *ent, int command_line)
 {
-  bool follow;
-  int dirdesc;
+  int follow, dirdesc;
   struct stat *st = ent->fts_statp;
   command_line &= ent->fts_level == FTS_ROOTLEVEL;
 
@@ -1433,7 +1269,7 @@ grepdirent (FTS *fts, FTSENT *ent, bool command_line)
     {
       if (directories == RECURSE_DIRECTORIES && command_line)
         out_file &= ~ (2 * !no_filenames);
-      return true;
+      return 1;
     }
 
   if (skipped_file (ent->fts_name, command_line,
@@ -1441,7 +1277,7 @@ grepdirent (FTS *fts, FTSENT *ent, bool command_line)
                      || ent->fts_info == FTS_DNR)))
     {
       fts_set (fts, ent, FTS_SKIP);
-      return true;
+      return 1;
     }
 
   filename = ent->fts_path + filename_prefix_len;
@@ -1454,7 +1290,7 @@ grepdirent (FTS *fts, FTSENT *ent, bool command_line)
       if (directories == RECURSE_DIRECTORIES)
         {
           out_file |= 2 * !no_filenames;
-          return true;
+          return 1;
         }
       fts_set (fts, ent, FTS_SKIP);
       break;
@@ -1463,13 +1299,13 @@ grepdirent (FTS *fts, FTSENT *ent, bool command_line)
       if (!suppress_errors)
         error (0, 0, _("warning: %s: %s"), filename,
                _("recursive directory loop"));
-      return true;
+      return 1;
 
     case FTS_DNR:
     case FTS_ERR:
     case FTS_NS:
       suppressible_error (filename, ent->fts_errno);
-      return true;
+      return 1;
 
     case FTS_DEFAULT:
     case FTS_NSOK:
@@ -1486,12 +1322,12 @@ grepdirent (FTS *fts, FTSENT *ent, bool command_line)
               if (fstatat (fts->fts_cwd_fd, ent->fts_accpath, &st1, flag) != 0)
                 {
                   suppressible_error (filename, errno);
-                  return true;
+                  return 1;
                 }
               st = &st1;
             }
           if (is_device_mode (st->st_mode))
-            return true;
+            return 1;
         }
       break;
 
@@ -1501,7 +1337,7 @@ grepdirent (FTS *fts, FTSENT *ent, bool command_line)
 
     case FTS_SL:
     case FTS_W:
-      return true;
+      return 1;
 
     default:
       abort ();
@@ -1513,38 +1349,24 @@ grepdirent (FTS *fts, FTSENT *ent, bool command_line)
   return grepfile (dirdesc, ent->fts_accpath, follow, command_line);
 }
 
-/* True if errno is ERR after 'open ("symlink", ... O_NOFOLLOW ...)'.
-   POSIX specifies ELOOP, but it's EMLINK on FreeBSD and EFTYPE on NetBSD.  */
-static bool
-open_symlink_nofollow_error (int err)
-{
-  if (err == ELOOP || err == EMLINK)
-    return true;
-#ifdef EFTYPE
-  if (err == EFTYPE)
-    return true;
-#endif
-  return false;
-}
-
-static bool
-grepfile (int dirdesc, char const *name, bool follow, bool command_line)
+static int
+grepfile (int dirdesc, char const *name, int follow, int command_line)
 {
   int desc = openat_safer (dirdesc, name, O_RDONLY | (follow ? 0 : O_NOFOLLOW));
   if (desc < 0)
     {
-      if (follow || ! open_symlink_nofollow_error (errno))
+      if (follow || (errno != ELOOP && errno != EMLINK))
         suppressible_error (filename, errno);
-      return true;
+      return 1;
     }
   return grepdesc (desc, command_line);
 }
 
-static bool
-grepdesc (int desc, bool command_line)
+static int
+grepdesc (int desc, int command_line)
 {
   intmax_t count;
-  bool status = true;
+  int status = 1;
   struct stat st;
 
   /* Get the file status, possibly for the second time.  This catches
@@ -1560,7 +1382,7 @@ grepdesc (int desc, bool command_line)
     }
 
   if (desc != STDIN_FILENO && command_line
-      && skipped_file (filename, true, S_ISDIR (st.st_mode) != 0))
+      && skipped_file (filename, 1, S_ISDIR (st.st_mode)))
     goto closeout;
 
   if (desc != STDIN_FILENO
@@ -1625,7 +1447,7 @@ grepdesc (int desc, bool command_line)
     {
       if (! suppress_errors)
         error (0, 0, _("input file %s is also the output"), quote (filename));
-      errseen = true;
+      errseen = 1;
       goto closeout;
     }
 
@@ -1677,18 +1499,18 @@ grepdesc (int desc, bool command_line)
   return status;
 }
 
-static bool
+static int
 grep_command_line_arg (char const *arg)
 {
   if (STREQ (arg, "-"))
     {
       filename = label ? label : _("(standard input)");
-      return grepdesc (STDIN_FILENO, true);
+      return grepdesc (STDIN_FILENO, 1);
     }
   else
     {
       filename = arg;
-      return grepfile (AT_FDCWD, arg, true, true);
+      return grepfile (AT_FDCWD, arg, 1, 1);
     }
 }
 
@@ -1714,10 +1536,10 @@ Example: %s -i 'hello world' menu.h main.c\n\
 Regexp selection and interpretation:\n"), program_name);
       printf (_("\
   -E, --extended-regexp     PATTERN is an extended regular expression (ERE)\n\
-  -F, --fixed-strings       PATTERN is a set of newline-separated strings\n\
+  -F, --fixed-strings       PATTERN is a set of newline-separated fixed strings\n\
   -G, --basic-regexp        PATTERN is a basic regular expression (BRE)\n\
   -P, --perl-regexp         PATTERN is a Perl regular expression\n"));
-  /* -X is deliberately undocumented.  */
+  /* -X is undocumented on purpose. */
       printf (_("\
   -e, --regexp=PATTERN      use PATTERN for matching\n\
   -f, --file=FILE           obtain PATTERN from FILE\n\
@@ -1761,8 +1583,7 @@ Output control:\n\
 "));
       printf (_("\
       --include=FILE_PATTERN  search only files that match FILE_PATTERN\n\
-      --exclude=FILE_PATTERN  skip files and directories matching\
- FILE_PATTERN\n\
+      --exclude=FILE_PATTERN  skip files and directories matching FILE_PATTERN\n\
       --exclude-from=FILE   skip files matching any file pattern from FILE\n\
       --exclude-dir=PATTERN  directories that match PATTERN will be skipped.\n\
 "));
@@ -1796,7 +1617,12 @@ When FILE is -, read standard input.  With no FILE, read . if a command-line\n\
 -r is given, - otherwise.  If fewer than two FILEs are given, assume -h.\n\
 Exit status is 0 if any line is selected, 1 otherwise;\n\
 if any error occurs and -q is not given, the exit status is 2.\n"));
-      emit_bug_reporting_address ();
+      printf (_("\nReport bugs to: %s\n"), PACKAGE_BUGREPORT);
+      printf (_("GNU Grep home page: <%s>\n"),
+              "http://www.gnu.org/software/grep/");
+      fputs (_("General help using GNU software: <http://www.gnu.org/gethelp/>\n"),
+             stdout);
+
     }
   exit (status);
 }
@@ -1812,9 +1638,7 @@ Gcompile (char const *pattern, size_t size)
 static void
 Ecompile (char const *pattern, size_t size)
 {
-  GEAcompile (pattern, size,
-              (RE_SYNTAX_POSIX_EGREP | RE_NO_EMPTY_RANGES
-               | RE_UNMATCHED_RIGHT_PAREN_ORD));
+  GEAcompile (pattern, size, RE_SYNTAX_POSIX_EGREP | RE_NO_EMPTY_RANGES);
 }
 
 static void
@@ -1942,15 +1766,14 @@ static int
 get_nondigit_option (int argc, char *const *argv, intmax_t *default_context)
 {
   static int prev_digit_optind = -1;
-  int this_digit_optind;
-  bool was_digit;
+  int this_digit_optind, was_digit;
   char buf[INT_BUFSIZE_BOUND (intmax_t) + 4];
   char *p = buf;
   int opt;
 
-  was_digit = false;
+  was_digit = 0;
   this_digit_optind = optind;
-  while (true)
+  while (1)
     {
       opt = getopt_long (argc, (char **) argv, short_options,
                          long_options, NULL);
@@ -1980,7 +1803,7 @@ get_nondigit_option (int argc, char *const *argv, intmax_t *default_context)
         }
       *p++ = opt;
 
-      was_digit = true;
+      was_digit = 1;
       prev_digit_optind = this_digit_optind;
       this_digit_optind = optind;
     }
@@ -2059,9 +1882,9 @@ contains_encoding_error (char const *pat, size_t patlen)
   mbstate_t mbs = { 0 };
   size_t i, charlen;
 
-  for (i = 0; i < patlen; i += charlen)
+  for (i = 0; i < patlen; i += charlen + (charlen == 0))
     {
-      charlen = mb_clen (pat + i, patlen - i, &mbs);
+      charlen = mbrlen (pat + i, patlen - i, &mbs);
       if ((size_t) -2 <= charlen)
         return true;
     }
@@ -2079,7 +1902,8 @@ fgrep_to_grep_pattern (size_t len, char const *keys,
 
   for (; len; keys += n, len -= n)
     {
-      n = mb_clen (keys, len, &mb_state);
+      wchar_t wc;
+      n = mbrtowc (&wc, keys, len, &mb_state);
       switch (n)
         {
         case (size_t) -2:
@@ -2111,9 +1935,9 @@ main (int argc, char **argv)
 {
   char *keys;
   size_t keycc, oldcc, keyalloc;
-  bool with_filenames, ok;
+  int with_filenames;
   size_t cc;
-  int opt, prepended;
+  int opt, status, prepended;
   int prev_optind, last_recursive;
   int fread_errno;
   intmax_t default_context;
@@ -2125,7 +1949,7 @@ main (int argc, char **argv)
 
   keys = NULL;
   keycc = 0;
-  with_filenames = false;
+  with_filenames = 0;
   eolbyte = '\n';
   filename_mask = ~0;
 
@@ -2136,7 +1960,7 @@ main (int argc, char **argv)
   /* Default before/after context: changed by -C/-NUM options */
   default_context = -1;
   /* Changed by -o option */
-  only_matching = false;
+  only_matching = 0;
 
   /* Internationalization. */
 #if defined HAVE_SETLOCALE
@@ -2151,12 +1975,7 @@ main (int argc, char **argv)
   atexit (clean_up_stdout);
 
   last_recursive = 0;
-
   prepended = prepend_default_options (getenv ("GREP_OPTIONS"), &argc, &argv);
-  if (prepended)
-    error (0, 0, _("warning: GREP_OPTIONS is deprecated;"
-                   " please use an alias or script"));
-
   compile = matchers[0].compile;
   execute = matchers[0].execute;
 
@@ -2208,8 +2027,8 @@ main (int argc, char **argv)
         break;
 
       case 'H':
-        with_filenames = true;
-        no_filenames = false;
+        with_filenames = 1;
+        no_filenames = 0;
         break;
 
       case 'I':
@@ -2217,7 +2036,7 @@ main (int argc, char **argv)
         break;
 
       case 'T':
-        align_tabs = true;
+        align_tabs = 1;
         break;
 
       case 'U':
@@ -2229,7 +2048,7 @@ main (int argc, char **argv)
         break;
 
       case 'V':
-        show_version = true;
+        show_version = 1;
         break;
 
       case 'a':
@@ -2237,11 +2056,11 @@ main (int argc, char **argv)
         break;
 
       case 'b':
-        out_byte = true;
+        out_byte = 1;
         break;
 
       case 'c':
-        count_matches = true;
+        count_matches = 1;
         break;
 
       case 'd':
@@ -2284,13 +2103,13 @@ main (int argc, char **argv)
         break;
 
       case 'h':
-        with_filenames = false;
-        no_filenames = true;
+        with_filenames = 0;
+        no_filenames = 1;
         break;
 
       case 'i':
       case 'y':			/* For old-timers . . . */
-        match_icase = true;
+        match_icase = 1;
         break;
 
       case 'L':
@@ -2316,15 +2135,15 @@ main (int argc, char **argv)
         break;
 
       case 'n':
-        out_line = true;
+        out_line = 1;
         break;
 
       case 'o':
-        only_matching = true;
+        only_matching = 1;
         break;
 
       case 'q':
-        exit_on_match = true;
+        exit_on_match = 1;
         exit_failure = 0;
         break;
 
@@ -2337,7 +2156,7 @@ main (int argc, char **argv)
         break;
 
       case 's':
-        suppress_errors = true;
+        suppress_errors = 1;
         break;
 
       case 'v':
@@ -2345,11 +2164,11 @@ main (int argc, char **argv)
         break;
 
       case 'w':
-        match_words = true;
+        match_words = 1;
         break;
 
       case 'x':
-        match_lines = true;
+        match_lines = 1;
         break;
 
       case 'Z':
@@ -2420,7 +2239,7 @@ main (int argc, char **argv)
         break;
 
       case LINE_BUFFERED_OPTION:
-        line_buffered = true;
+        line_buffered = 1;
         break;
 
       case LABEL_OPTION:
@@ -2447,8 +2266,8 @@ main (int argc, char **argv)
     list_files = 0;
   if (exit_on_match | list_files)
     {
-      count_matches = false;
-      done_on_match = true;
+      count_matches = 0;
+      done_on_match = 1;
     }
   out_quiet = count_matches | done_on_match;
 
@@ -2488,7 +2307,7 @@ main (int argc, char **argv)
         {
           /* No keys were specified (e.g. -f /dev/null).  Match nothing.  */
           out_invert ^= true;
-          match_lines = match_words = false;
+          match_lines = match_words = 0;
         }
       else
         /* Strip trailing newline. */
@@ -2502,9 +2321,6 @@ main (int argc, char **argv)
     }
   else
     usage (EXIT_TROUBLE);
-
-  build_mbclen_cache ();
-  init_easy_encoding ();
 
   /* If fgrep in a multibyte locale, then use grep if either
      (1) case is ignored (where grep is typically faster), or
@@ -2523,13 +2339,11 @@ main (int argc, char **argv)
       execute = EGexecute;
     }
 
+  if (MB_CUR_MAX > 1)
+    build_mbclen_cache ();
+
   compile (keys, keycc);
   free (keys);
-  /* We need one byte prior and one after.  */
-  char eolbytes[3] = { 0, eolbyte, 0 };
-  size_t match_size;
-  skip_empty_lines = ((execute (eolbytes + 1, 1, &match_size, NULL) == 0)
-                      == out_invert);
 
   if ((argc - optind > 1 && !no_filenames) || with_filenames)
     out_file = 1;
@@ -2549,21 +2363,21 @@ main (int argc, char **argv)
 
   if (optind < argc)
     {
-      ok = true;
+      status = 1;
       do
-        ok &= grep_command_line_arg (argv[optind]);
+        status &= grep_command_line_arg (argv[optind]);
       while (++optind < argc);
     }
   else if (directories == RECURSE_DIRECTORIES && prepended < last_recursive)
     {
       /* Grep through ".", omitting leading "./" from diagnostics.  */
       filename_prefix_len = 2;
-      ok = grep_command_line_arg (".");
+      status = grep_command_line_arg (".");
     }
   else
-    ok = grep_command_line_arg ("-");
+    status = grep_command_line_arg ("-");
 
   /* We register via atexit() to test stdout.  */
-  exit (errseen ? EXIT_TROUBLE : ok);
+  exit (errseen ? EXIT_TROUBLE : status);
 }
 /* vim:set shiftwidth=2: */

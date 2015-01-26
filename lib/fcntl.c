@@ -89,25 +89,8 @@ dupfd (int oldfd, int newfd, int flags)
                             inherit,                /* InheritHandle */
                             DUPLICATE_SAME_ACCESS)) /* Options */
         {
-          switch (GetLastError ())
-            {
-              case ERROR_TOO_MANY_OPEN_FILES:
-                errno = EMFILE;
-                break;
-              case ERROR_INVALID_HANDLE:
-              case ERROR_INVALID_TARGET_HANDLE:
-              case ERROR_DIRECT_ACCESS_HANDLE:
-                errno = EBADF;
-                break;
-              case ERROR_INVALID_PARAMETER:
-              case ERROR_INVALID_FUNCTION:
-              case ERROR_INVALID_ACCESS:
-                errno = EINVAL;
-                break;
-              default:
-                errno = EACCES;
-                break;
-            }
+          /* TODO: Translate GetLastError () into errno.  */
+          errno = EMFILE;
           result = -1;
           break;
         }
@@ -115,6 +98,7 @@ dupfd (int oldfd, int newfd, int flags)
       if (duplicated_fd < 0)
         {
           CloseHandle (new_handle);
+          errno = EMFILE;
           result = -1;
           break;
         }

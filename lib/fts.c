@@ -1293,7 +1293,6 @@ fts_build (register FTS *sp, int type)
         int dir_fd;
         FTSENT *cur = sp->fts_cur;
         bool continue_readdir = !!cur->fts_dirp;
-        size_t max_entries;
 
         /* When cur->fts_dirp is non-NULL, that means we should
            continue calling readdir on that existing DIR* pointer
@@ -1355,7 +1354,8 @@ fts_build (register FTS *sp, int type)
            function.  But when no such function is specified, we can read
            entries in batches that are large enough to help us with inode-
            sorting, yet not so large that we risk exhausting memory.  */
-        max_entries = sp->fts_compar ? SIZE_MAX : FTS_MAX_READDIR_ENTRIES;
+        size_t max_entries = (sp->fts_compar == NULL
+                              ? FTS_MAX_READDIR_ENTRIES : SIZE_MAX);
 
         /*
          * Nlinks is the number of possible entries of type directory in the

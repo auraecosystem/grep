@@ -58,15 +58,6 @@ AM_LIBTOOLFLAGS = --preserve-dup-deps
 
 TESTS_ENVIRONMENT += EXEEXT='@EXEEXT@' srcdir='$(srcdir)'
 
-## begin gnulib module alignof-tests
-
-TESTS += test-alignof
-check_PROGRAMS += test-alignof
-
-EXTRA_DIST += test-alignof.c
-
-## end   gnulib module alignof-tests
-
 ## begin gnulib module alloca-opt-tests
 
 TESTS += test-alloca-opt
@@ -229,7 +220,7 @@ TESTS += \
  test-exclude8.sh
 
 check_PROGRAMS += test-exclude
-test_exclude_LDADD = $(LDADD) @LIBINTL@ $(LIBTHREAD)
+test_exclude_LDADD = $(LDADD) @LIBINTL@
 EXTRA_DIST += test-exclude.c test-exclude1.sh test-exclude2.sh test-exclude3.sh test-exclude4.sh test-exclude5.sh test-exclude6.sh test-exclude7.sh test-exclude8.sh
 
 ## end   gnulib module exclude-tests
@@ -631,6 +622,23 @@ check_PROGRAMS += test-malloca
 EXTRA_DIST += test-malloca.c
 
 ## end   gnulib module malloca-tests
+
+## begin gnulib module mbrtowc-tests
+
+TESTS += \
+  test-mbrtowc1.sh test-mbrtowc2.sh test-mbrtowc3.sh test-mbrtowc4.sh \
+  test-mbrtowc-w32-1.sh test-mbrtowc-w32-2.sh test-mbrtowc-w32-3.sh \
+  test-mbrtowc-w32-4.sh test-mbrtowc-w32-5.sh
+TESTS_ENVIRONMENT += \
+  LOCALE_FR='@LOCALE_FR@' \
+  LOCALE_FR_UTF8='@LOCALE_FR_UTF8@' \
+  LOCALE_JA='@LOCALE_JA@' \
+  LOCALE_ZH_CN='@LOCALE_ZH_CN@'
+check_PROGRAMS += test-mbrtowc test-mbrtowc-w32
+
+EXTRA_DIST += test-mbrtowc1.sh test-mbrtowc2.sh test-mbrtowc3.sh test-mbrtowc4.sh test-mbrtowc.c test-mbrtowc-w32-1.sh test-mbrtowc-w32-2.sh test-mbrtowc-w32-3.sh test-mbrtowc-w32-4.sh test-mbrtowc-w32-5.sh test-mbrtowc-w32.c signature.h macros.h
+
+## end   gnulib module mbrtowc-tests
 
 ## begin gnulib module mbscasecmp-tests
 
@@ -1054,14 +1062,6 @@ check_PROGRAMS += test-strnlen
 EXTRA_DIST += test-strnlen.c zerosize-ptr.h signature.h macros.h
 
 ## end   gnulib module strnlen-tests
-
-## begin gnulib module strstr-tests
-
-TESTS += test-strstr
-check_PROGRAMS += test-strstr
-EXTRA_DIST += test-strstr.c zerosize-ptr.h signature.h macros.h
-
-## end   gnulib module strstr-tests
 
 ## begin gnulib module strtoimax-tests
 
