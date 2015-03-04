@@ -1,3 +1,9 @@
+grep (2.20-5) UNRELEASED; urgency=low
+
+  * 80-587930-man-ere-reference.patch: Fix typo (Closes: #779728).
+
+ -- Santiago Ruano Rincón <santiago@debian.org>  Wed, 04 Mar 2015 21:53:47 +0100
+
 grep (2.20-4.1) unstable; urgency=high
 
   * Non-maintainer upload by the Security Team.
