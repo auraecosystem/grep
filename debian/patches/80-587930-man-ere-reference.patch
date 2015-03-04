@@ -14,7 +14,7 @@
  .B grep
  understands three different versions of regular expression syntax:
 -\*(lqbasic,\*(rq \*(lqextended\*(rq and \*(lqperl.\*(rq In
-+\*(lqbasic\*(rq (BRE), \*(lqextended\*(rq (ERE) and \*(lqperl\*(rq (PRCE). In
++\*(lqbasic\*(rq (BRE), \*(lqextended\*(rq (ERE) and \*(lqperl\*(rq (PCRE). In
  .RB "\s-1GNU\s0\ " grep ,
  there is no difference in available functionality between basic and
  extended syntaxes.
