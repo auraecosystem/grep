@@ -1,8 +1,15 @@
-grep (2.21-2~1) UNRELEASED; urgency=medium
+grep (2.21-2) unstable; urgency=low
 
-  * d/patches/80-587930-man-ere-reference.patch: Fix type. (Closes: #779728).
+  * 80-587930-man-ere-reference.patch: Fix typo in man page (Closes: #779728).
 
- -- Santiago Ruano Rincón <santiago@debian.org>  Wed, 04 Mar 2015 21:48:34 +0100
+ -- Santiago Ruano Rincón <santiago@debian.org>  Sat, 16 May 2015 11:20:32 +0200
+
+grep (2.20-4.1) unstable; urgency=high
+
+  * Non-maintainer upload by the Security Team.
+  * Fix CVE-2015-1345: buffer overrun in src/kwset.c (closes: #776039).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Mon, 26 Jan 2015 02:56:14 +0000
 
 grep (2.21-1) experimental; urgency=low
 
