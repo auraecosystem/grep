@@ -9,7 +9,7 @@
  This is highly experimental and
  .B "grep \-P"
  may warn of unimplemented features.
-@@ -526,7 +526,7 @@
+@@ -533,7 +533,7 @@
  .PP
  .B grep
  understands three different versions of regular expression syntax:
@@ -18,7 +18,7 @@
  .RB "\s-1GNU\s0\ " grep ,
  there is no difference in available functionality between basic and
  extended syntaxes.
-@@ -534,8 +534,8 @@
+@@ -541,8 +541,8 @@
  The following description applies to extended regular expressions;
  differences for basic regular expressions are summarized afterwards.
  Perl regular expressions give additional functionality, and are

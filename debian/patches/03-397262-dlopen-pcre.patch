@@ -7,24 +7,19 @@ Modified by Marco d'Itri <md@Linux.IT>
 
 --- a/src/pcresearch.c
 +++ b/src/pcresearch.c
-@@ -22,8 +22,14 @@
- #include "search.h"
- #if HAVE_PCRE_H
+@@ -23,6 +23,9 @@
+ 
+ #if HAVE_LIBPCRE
  # include <pcre.h>
 +# ifdef HAVE_DYNAMIC_LIBPCRE
 +#  include <dlfcn.h>
 +# endif
- #elif HAVE_PCRE_PCRE_H
- # include <pcre/pcre.h>
-+# ifdef HAVE_DYNAMIC_LIBPCRE
-+#  include <dlfcn.h>
-+# endif
- #endif
  
- #if HAVE_LIBPCRE
-@@ -46,6 +52,67 @@
+ /* This must be at least 2; everything after that is for performance
     in pcre_exec.  */
- enum { NSUB = 300 };
+@@ -86,6 +89,67 @@
+ static int empty_match[2];
+ #endif
  
 +#ifdef HAVE_DYNAMIC_LIBPCRE
 +
@@ -90,7 +85,7 @@ Modified by Marco d'Itri <md@Linux.IT>
  void
  Pcompile (char const *pattern, size_t size)
  {
-@@ -69,6 +136,10 @@
+@@ -109,6 +173,10 @@
    else if (MB_CUR_MAX != 1)
      error (EXIT_TROUBLE, 0, _("-P supports only unibyte and UTF-8 locales"));
  

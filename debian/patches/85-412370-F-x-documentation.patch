@@ -34,7 +34,7 @@ Closes: https://bugs.debian.org/412370
  
  @end table
  
-@@ -1070,8 +1071,8 @@
+@@ -1087,8 +1088,8 @@
  @opindex -F
  @opindex --fixed-strings
  @cindex matching fixed strings
