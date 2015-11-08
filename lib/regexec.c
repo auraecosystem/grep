@@ -1,5 +1,5 @@
 /* Extended regular expression matching and search library.
-   Copyright (C) 2002-2014 Free Software Foundation, Inc.
+   Copyright (C) 2002-2015 Free Software Foundation, Inc.
    This file is part of the GNU C Library.
    Contributed by Isamu Hasegawa <isamu@yamato.ibm.com>.
 
@@ -17,8 +17,6 @@
    License along with the GNU C Library; if not, see
    <http://www.gnu.org/licenses/>.  */
 
-#include "verify.h"
-#include "intprops.h"
 static reg_errcode_t match_ctx_init (re_match_context_t *cache, int eflags,
 				     Idx n) internal_function;
 static void match_ctx_clean (re_match_context_t *mctx) internal_function;
@@ -375,11 +373,8 @@ re_search_2_stub (struct re_pattern_buffer *bufp,
   Idx len = length1 + length2;
   char *s = NULL;
 
-  verify (! TYPE_SIGNED (Idx));
-  if (BE (len < length1, 0))
-     return -2;
-  /* if (BE (length1 < 0 || length2 < 0 || stop < 0, 0))
-     return -2; */
+  if (BE (length1 < 0 || length2 < 0 || stop < 0 || len < length1, 0))
+    return -2;
 
   /* Concatenate the strings.  */
   if (length2 > 0)
@@ -428,14 +423,11 @@ re_search_stub (struct re_pattern_buffer *bufp,
   Idx last_start = start + range;
 
   /* Check for out-of-range.  */
-  verify (! TYPE_SIGNED (Idx));
-  /* if (BE (start < 0, 0))
-     return -1; */
-  if (BE (start > length, 0))
-     return -1;
+  if (BE (start < 0 || start > length, 0))
+    return -1;
   if (BE (length < last_start || (0 <= range && last_start < start), 0))
     last_start = length;
-  else if (BE (/* last_start < 0 || */ (range < 0 && start <= last_start), 0))
+  else if (BE (last_start < 0 || (range < 0 && start <= last_start), 0))
     last_start = 0;
 
   lock_lock (dfa->lock);
@@ -3784,6 +3776,10 @@ group_nodes_into_DFAstates (const re_dfa_t *dfa, const re_dfastate_t *state,
    one collating element like '.', '[a-z]', opposite to the other nodes
    can only accept one byte.  */
 
+# ifdef _LIBC
+#  include <locale/weight.h>
+# endif
+
 static int
 internal_function
 check_node_accept_bytes (const re_dfa_t *dfa, Idx node_idx,
@@ -3903,8 +3899,6 @@ check_node_accept_bytes (const re_dfa_t *dfa, Idx node_idx,
 	  const int32_t *table, *indirect;
 	  const unsigned char *weights, *extra;
 	  const char *collseqwc;
-	  /* This #include defines a local function!  */
-#  include <locale/weight.h>
 
 	  /* match with collating_symbol?  */
 	  if (cset->ncoll_syms)
@@ -3961,7 +3955,7 @@ check_node_accept_bytes (const re_dfa_t *dfa, Idx node_idx,
 		_NL_CURRENT (LC_COLLATE, _NL_COLLATE_EXTRAMB);
 	      indirect = (const int32_t *)
 		_NL_CURRENT (LC_COLLATE, _NL_COLLATE_INDIRECTMB);
-	      int32_t idx = findidx (&cp, elem_len);
+	      int32_t idx = findidx (table, indirect, extra, &cp, elem_len);
 	      if (idx > 0)
 		for (i = 0; i < cset->nequiv_classes; ++i)
 		  {

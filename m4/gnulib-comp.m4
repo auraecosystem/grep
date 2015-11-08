@@ -1,5 +1,5 @@
 # DO NOT EDIT! GENERATED AUTOMATICALLY!
-# Copyright (C) 2002-2014 Free Software Foundation, Inc.
+# Copyright (C) 2002-2015 Free Software Foundation, Inc.
 #
 # This file is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -37,15 +37,22 @@ AC_DEFUN([gl_EARLY],
   m4_pattern_allow([^gl_ES$])dnl a valid locale name
   m4_pattern_allow([^gl_LIBOBJS$])dnl a variable
   m4_pattern_allow([^gl_LTLIBOBJS$])dnl a variable
+
+  # Pre-early section.
+  AC_REQUIRE([gl_USE_SYSTEM_EXTENSIONS])
   AC_REQUIRE([gl_PROG_AR_RANLIB])
+
   AC_REQUIRE([AM_PROG_CC_C_O])
   # Code from module absolute-header:
+  # Code from module alignof:
+  # Code from module alignof-tests:
   # Code from module alloca:
   # Code from module alloca-opt:
   # Code from module alloca-opt-tests:
   # Code from module announce-gen:
   # Code from module argmatch:
   # Code from module argmatch-tests:
+  # Code from module assure:
   # Code from module at-internal:
   # Code from module binary-io:
   # Code from module binary-io-tests:
@@ -97,7 +104,6 @@ AC_DEFUN([gl_EARLY],
   # Code from module exclude-tests:
   # Code from module exitfail:
   # Code from module extensions:
-  AC_REQUIRE([gl_USE_SYSTEM_EXTENSIONS])
   # Code from module extern-inline:
   # Code from module fchdir:
   # Code from module fchdir-tests:
@@ -109,6 +115,7 @@ AC_DEFUN([gl_EARLY],
   # Code from module fcntl-tests:
   # Code from module fd-hook:
   # Code from module fd-safer-flag:
+  # Code from module fdl:
   # Code from module fdopen:
   # Code from module fdopen-tests:
   # Code from module fdopendir:
@@ -116,6 +123,7 @@ AC_DEFUN([gl_EARLY],
   # Code from module fgetc-tests:
   # Code from module filename:
   # Code from module filenamecat-lgpl:
+  # Code from module flexmember:
   # Code from module float:
   # Code from module float-tests:
   # Code from module fnmatch:
@@ -207,7 +215,6 @@ AC_DEFUN([gl_EARLY],
   # Code from module mbiter:
   # Code from module mbrlen:
   # Code from module mbrtowc:
-  # Code from module mbrtowc-tests:
   # Code from module mbscasecmp:
   # Code from module mbscasecmp-tests:
   # Code from module mbsinit:
@@ -221,6 +228,8 @@ AC_DEFUN([gl_EARLY],
   # Code from module mbuiter:
   # Code from module memchr:
   # Code from module memchr-tests:
+  # Code from module memchr2:
+  # Code from module memchr2-tests:
   # Code from module mempcpy:
   # Code from module memrchr:
   # Code from module memrchr-tests:
@@ -280,6 +289,8 @@ AC_DEFUN([gl_EARLY],
   # Code from module ssize_t:
   # Code from module stat:
   # Code from module stat-tests:
+  # Code from module stdalign:
+  # Code from module stdalign-tests:
   # Code from module stdarg:
   dnl Some compilers (e.g., AIX 5.3 cc) need to be in c99 mode
   dnl for the builtin va_copy to work.  With Autoconf 2.60 or later,
@@ -309,6 +320,9 @@ AC_DEFUN([gl_EARLY],
   # Code from module strnlen:
   # Code from module strnlen-tests:
   # Code from module strnlen1:
+  # Code from module strstr:
+  # Code from module strstr-simple:
+  # Code from module strstr-tests:
   # Code from module strtoimax:
   # Code from module strtoimax-tests:
   # Code from module strtoll:
@@ -482,6 +496,7 @@ AC_DEFUN([gl_INIT],
   gl_DIRENT_MODULE_INDICATOR([fdopendir])
   gl_MODULE_INDICATOR([fdopendir])
   gl_FILE_NAME_CONCAT_LGPL
+  AC_C_FLEXIBLE_ARRAY_MEMBER
   gl_FUNC_FNMATCH_POSIX
   if test -n "$FNMATCH_H"; then
     AC_LIBOBJ([fnmatch])
@@ -628,6 +643,7 @@ AC_DEFUN([gl_INIT],
   gl_SYS_STAT_MODULE_INDICATOR([lstat])
   AC_CONFIG_COMMANDS_PRE([m4_ifdef([AH_HEADER],
     [AC_SUBST([CONFIG_INCLUDE], m4_defn([AH_HEADER]))])])
+  AC_REQUIRE([AC_PROG_SED])
   gl_FUNC_MALLOC_GNU
   if test $REPLACE_MALLOC = 1; then
     AC_LIBOBJ([malloc])
@@ -776,6 +792,7 @@ AC_DEFUN([gl_INIT],
     gl_PREREQ_STAT
   fi
   gl_SYS_STAT_MODULE_INDICATOR([stat])
+  gl_STDALIGN_H
   gl_STDARG_H
   AM_STDBOOL_H
   gl_STDDEF_H
@@ -817,6 +834,15 @@ AC_DEFUN([gl_INIT],
     gl_PREREQ_STRNLEN
   fi
   gl_STRING_MODULE_INDICATOR([strnlen])
+  gl_FUNC_STRSTR
+  if test $REPLACE_STRSTR = 1; then
+    AC_LIBOBJ([strstr])
+  fi
+  gl_FUNC_STRSTR_SIMPLE
+  if test $REPLACE_STRSTR = 1; then
+    AC_LIBOBJ([strstr])
+  fi
+  gl_STRING_MODULE_INDICATOR([strstr])
   gl_FUNC_STRTOIMAX
   if test $HAVE_DECL_STRTOIMAX = 0 || test $REPLACE_STRTOIMAX = 1; then
     AC_LIBOBJ([strtoimax])
@@ -851,14 +877,14 @@ AC_DEFUN([gl_INIT],
   gl_HEADER_TIME_H
   gl_UNISTD_H
   gl_UNISTD_SAFER
-  gl_LIBUNISTRING_LIBHEADER([0.9.2], [unistr.h])
+  gl_LIBUNISTRING_LIBHEADER([0.9.4], [unistr.h])
   gl_MODULE_INDICATOR([unistr/u8-mbtoucr])
   gl_LIBUNISTRING_MODULE([0.9], [unistr/u8-mbtoucr])
   gl_MODULE_INDICATOR([unistr/u8-uctomb])
   gl_LIBUNISTRING_MODULE([0.9], [unistr/u8-uctomb])
-  gl_LIBUNISTRING_LIBHEADER([0.9], [unitypes.h])
-  gl_LIBUNISTRING_LIBHEADER([0.9], [uniwidth.h])
-  gl_LIBUNISTRING_MODULE([0.9.4], [uniwidth/width])
+  gl_LIBUNISTRING_LIBHEADER([0.9.4], [unitypes.h])
+  gl_LIBUNISTRING_LIBHEADER([0.9.4], [uniwidth.h])
+  gl_LIBUNISTRING_MODULE([0.9.6], [uniwidth/width])
   gl_FUNC_GLIBC_UNLOCKED_IO
   gl_VERSION_ETC
   gl_WCHAR_H
@@ -958,10 +984,6 @@ changequote([, ])dnl
   AC_CHECK_FUNCS_ONCE([newlocale])
   gl_LOCALENAME
   AC_CHECK_FUNCS_ONCE([newlocale])
-  gt_LOCALE_FR
-  gt_LOCALE_FR_UTF8
-  gt_LOCALE_JA
-  gt_LOCALE_ZH_CN
   gt_LOCALE_TR_UTF8
   gt_LOCALE_FR_UTF8
   gt_LOCALE_FR
@@ -971,6 +993,9 @@ changequote([, ])dnl
   gt_LOCALE_FR_UTF8
   gt_LOCALE_ZH_CN
   dnl Check for prerequisites for memory fence checks.
+  gl_FUNC_MMAP_ANON
+  AC_CHECK_HEADERS_ONCE([sys/mman.h])
+  AC_CHECK_FUNCS_ONCE([mprotect])
   gl_FUNC_MMAP_ANON
   AC_CHECK_HEADERS_ONCE([sys/mman.h])
   AC_CHECK_FUNCS_ONCE([mprotect])
@@ -1017,6 +1042,10 @@ changequote([, ])dnl
   AC_REQUIRE([gt_TYPE_WCHAR_T])
   AC_REQUIRE([gt_TYPE_WINT_T])
   dnl Check for prerequisites for memory fence checks.
+  gl_FUNC_MMAP_ANON
+  AC_CHECK_HEADERS_ONCE([sys/mman.h])
+  AC_CHECK_FUNCS_ONCE([mprotect])
+  AC_CHECK_DECLS_ONCE([alarm])
   gl_FUNC_MMAP_ANON
   AC_CHECK_HEADERS_ONCE([sys/mman.h])
   AC_CHECK_FUNCS_ONCE([mprotect])
@@ -1153,11 +1182,15 @@ AC_DEFUN([gl_FILE_LIST], [
   build-aux/update-copyright
   build-aux/useless-if-before-free
   build-aux/vc-list-files
+  doc/fdl.texi
   doc/gendocs_template
+  doc/gendocs_template_min
+  lib/alignof.h
   lib/alloca.c
   lib/alloca.in.h
   lib/argmatch.c
   lib/argmatch.h
+  lib/assure.h
   lib/at-func.c
   lib/basename-lgpl.c
   lib/binary-io.c
@@ -1290,6 +1323,9 @@ AC_DEFUN([gl_FILE_LIST], [
   lib/mbuiter.h
   lib/memchr.c
   lib/memchr.valgrind
+  lib/memchr2.c
+  lib/memchr2.h
+  lib/memchr2.valgrind
   lib/mempcpy.c
   lib/memrchr.c
   lib/minmax.h
@@ -1336,6 +1372,7 @@ AC_DEFUN([gl_FILE_LIST], [
   lib/save-cwd.c
   lib/save-cwd.h
   lib/stat.c
+  lib/stdalign.in.h
   lib/stdarg.in.h
   lib/stdbool.in.h
   lib/stddef.in.h
@@ -1344,6 +1381,7 @@ AC_DEFUN([gl_FILE_LIST], [
   lib/stdlib.in.h
   lib/stpcpy.c
   lib/str-kmp.h
+  lib/str-two-way.h
   lib/strdup.c
   lib/streq.h
   lib/strerror-override.c
@@ -1356,6 +1394,7 @@ AC_DEFUN([gl_FILE_LIST], [
   lib/strnlen.c
   lib/strnlen1.c
   lib/strnlen1.h
+  lib/strstr.c
   lib/strtoimax.c
   lib/strtol.c
   lib/strtoll.c
@@ -1441,6 +1480,7 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/fdopen.m4
   m4/fdopendir.m4
   m4/filenamecat.m4
+  m4/flexmember.m4
   m4/float_h.m4
   m4/fnmatch.m4
   m4/fpending.m4
@@ -1514,6 +1554,7 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/multiarch.m4
   m4/nl_langinfo.m4
   m4/nocrash.m4
+  m4/obstack.m4
   m4/off_t.m4
   m4/onceonly.m4
   m4/open.m4
@@ -1538,6 +1579,7 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/snprintf.m4
   m4/ssize_t.m4
   m4/stat.m4
+  m4/stdalign.m4
   m4/stdarg.m4
   m4/stdbool.m4
   m4/stddef_h.m4
@@ -1550,6 +1592,7 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/strerror.m4
   m4/string_h.m4
   m4/strnlen.m4
+  m4/strstr.m4
   m4/strtoimax.m4
   m4/strtoll.m4
   m4/strtoull.m4
@@ -1582,6 +1625,7 @@ AC_DEFUN([gl_FILE_LIST], [
   tests/init.sh
   tests/macros.h
   tests/signature.h
+  tests/test-alignof.c
   tests/test-alloca-opt.c
   tests/test-argmatch.c
   tests/test-binary-io.c
@@ -1658,17 +1702,6 @@ AC_DEFUN([gl_FILE_LIST], [
   tests/test-lstat.h
   tests/test-malloc-gnu.c
   tests/test-malloca.c
-  tests/test-mbrtowc-w32-1.sh
-  tests/test-mbrtowc-w32-2.sh
-  tests/test-mbrtowc-w32-3.sh
-  tests/test-mbrtowc-w32-4.sh
-  tests/test-mbrtowc-w32-5.sh
-  tests/test-mbrtowc-w32.c
-  tests/test-mbrtowc.c
-  tests/test-mbrtowc1.sh
-  tests/test-mbrtowc2.sh
-  tests/test-mbrtowc3.sh
-  tests/test-mbrtowc4.sh
   tests/test-mbscasecmp.c
   tests/test-mbscasecmp.sh
   tests/test-mbsinit.c
@@ -1684,6 +1717,7 @@ AC_DEFUN([gl_FILE_LIST], [
   tests/test-mbsstr3.c
   tests/test-mbsstr3.sh
   tests/test-memchr.c
+  tests/test-memchr2.c
   tests/test-memrchr.c
   tests/test-nl_langinfo.c
   tests/test-nl_langinfo.sh
@@ -1706,6 +1740,7 @@ AC_DEFUN([gl_FILE_LIST], [
   tests/test-snprintf.c
   tests/test-stat.c
   tests/test-stat.h
+  tests/test-stdalign.c
   tests/test-stdbool.c
   tests/test-stddef.c
   tests/test-stdint.c
@@ -1715,6 +1750,7 @@ AC_DEFUN([gl_FILE_LIST], [
   tests/test-striconv.c
   tests/test-string.c
   tests/test-strnlen.c
+  tests/test-strstr.c
   tests/test-strtoimax.c
   tests/test-strtoll.c
   tests/test-strtoull.c

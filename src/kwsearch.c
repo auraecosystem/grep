@@ -1,5 +1,5 @@
 /* kwsearch.c - searching subroutines using kwset for grep.
-   Copyright 1992, 1998, 2000, 2007, 2009-2014 Free Software Foundation, Inc.
+   Copyright 1992, 1998, 2000, 2007, 2009-2015 Free Software Foundation, Inc.
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -21,8 +21,12 @@
 #include <config.h>
 #include "search.h"
 
-/* For -w, we also consider _ to be word constituent.  */
-#define WCHAR(C) (isalnum (C) || (C) == '_')
+/* Whether -w considers WC to be a word constituent.  */
+static bool
+wordchar (wint_t wc)
+{
+  return wc == L'_' || iswalnum (wc);
+}
 
 /* KWset compiled pattern.  For Ecompile and Gcompile, we compile
    a list of strings, at least one of which is known to occur in
@@ -32,47 +36,45 @@ static kwset_t kwset;
 void
 Fcompile (char const *pattern, size_t size)
 {
-  char const *err;
-  size_t psize = size;
-  mb_len_map_t *map = NULL;
-  char const *pat = (match_icase && MB_CUR_MAX > 1
-                     ? mbtolower (pattern, &psize, &map)
-                     : pattern);
+  size_t total = size;
 
   kwsinit (&kwset);
 
-  char const *beg = pat;
+  char const *p = pattern;
   do
     {
-      char const *lim;
-      char const *end;
-      for (lim = beg;; ++lim)
+      size_t len;
+      char const *sep = memchr (p, '\n', total);
+      if (sep)
         {
-          end = lim;
-          if (lim >= pat + psize)
-            break;
-         if (*lim == '\n')
-           {
-             lim++;
-             break;
-           }
-#if HAVE_DOS_FILE_CONTENTS
-         if (*lim == '\r' && lim + 1 < pat + psize && lim[1] == '\n')
-           {
-             lim += 2;
-             break;
-           }
-#endif
+          len = sep - p;
+          sep++;
+          total -= (len + 1);
+        }
+      else
+        {
+          len = total;
+          total = 0;
         }
 
-      if ((err = kwsincr (kwset, beg, end - beg)) != NULL)
-        error (EXIT_TROUBLE, 0, "%s", err);
-      beg = lim;
-    }
-  while (beg < pat + psize);
+      char *buf = NULL;
+      if (match_lines)
+        {
+          buf = xmalloc (len + 2);
+          buf[0] = eolbyte;
+          memcpy (buf + 1, p, len);
+          buf[len + 1] = eolbyte;
+          p = buf;
+          len += 2;
+        }
+      kwsincr (kwset, p, len);
+      free (buf);
 
-  if ((err = kwsprep (kwset)) != NULL)
-    error (EXIT_TROUBLE, 0, "%s", err);
+      p = sep;
+    }
+  while (p);
+
+  kwsprep (kwset);
 }
 
 size_t
@@ -84,36 +86,31 @@ Fexecute (char const *buf, size_t size, size_t *match_size,
   char eol = eolbyte;
   struct kwsmatch kwsmatch;
   size_t ret_val;
-  mb_len_map_t *map = NULL;
-
-  if (MB_CUR_MAX > 1)
-    {
-      if (match_icase)
-        {
-          char *case_buf = mbtolower (buf, &size, &map);
-          if (start_ptr)
-            start_ptr = case_buf + (start_ptr - buf);
-          buf = case_buf;
-        }
-    }
 
   for (mb_start = beg = start_ptr ? start_ptr : buf; beg <= buf + size; beg++)
     {
-      size_t offset = kwsexec (kwset, beg, buf + size - beg, &kwsmatch);
+      size_t offset = kwsexec (kwset, beg - match_lines,
+                               buf + size - beg + match_lines, &kwsmatch);
       if (offset == (size_t) -1)
         goto failure;
-      len = kwsmatch.size[0];
-      if (MB_CUR_MAX > 1
-          && is_mb_middle (&mb_start, beg + offset, buf + size, len))
+      len = kwsmatch.size[0] - 2 * match_lines;
+      if (!match_lines && MB_CUR_MAX > 1 && !using_utf8 ()
+          && mb_goback (&mb_start, beg + offset, buf + size) != 0)
         {
-          /* The match was a part of multibyte character, advance at least
-             one byte to ensure no infinite loop happens.  */
-          mbstate_t s;
-          memset (&s, 0, sizeof s);
-          size_t mb_len = mbrlen (mb_start, (buf + size) - (beg + offset), &s);
-          if (mb_len == (size_t) -2 || mb_len == (size_t) -1)
-            goto failure;
-          beg = mb_start + mb_len - 1;
+          /* We have matched a single byte that is not at the beginning of a
+             multibyte character.  mb_goback has advanced MB_START past that
+             multibyte character.  Now, we want to position BEG so that the
+             next kwsexec search starts there.  Thus, to compensate for the
+             for-loop's BEG++, above, subtract one here.  This code is
+             unusually hard to reach, and exceptionally, let's show how to
+             trigger it here:
+
+               printf '\203AA\n'|LC_ALL=ja_JP.SHIFT_JIS src/grep -F A
+
+             That assumes the named locale is installed.
+             Note that your system's shift-JIS locale may have a different
+             name, possibly including "sjis".  */
+          beg = mb_start - 1;
           continue;
         }
       beg += offset;
@@ -121,18 +118,17 @@ Fexecute (char const *buf, size_t size, size_t *match_size,
         goto success_in_beg_and_len;
       if (match_lines)
         {
-          if (beg > buf && beg[-1] != eol)
-            continue;
-          if (beg + len < buf + size && beg[len] != eol)
-            continue;
-          goto success;
+          len += start_ptr == NULL;
+          goto success_in_beg_and_len;
         }
-      else if (match_words)
+      if (match_words)
         for (try = beg; ; )
           {
-            if (try > buf && WCHAR(to_uchar (try[-1])))
+            char const *bol = memrchr (buf, eol, beg - buf);
+            bol = bol ? bol + 1 : buf;
+            if (wordchar (mb_prev_wc (bol, try, buf + size)))
               break;
-            if (try + len < buf + size && WCHAR(to_uchar (try[len])))
+            if (wordchar (mb_next_wc (try + len, buf + size)))
               {
                 if (!len)
                   break;
@@ -155,16 +151,13 @@ Fexecute (char const *buf, size_t size, size_t *match_size,
   return -1;
 
  success:
-  if ((end = memchr (beg + len, eol, (buf + size) - (beg + len))) != NULL)
-    end++;
-  else
-    end = buf + size;
-  while (buf < beg && beg[-1] != eol)
-    --beg;
+  end = memchr (beg + len, eol, (buf + size) - (beg + len));
+  end = end ? end + 1 : buf + size;
+  beg = memrchr (buf, eol, beg - buf);
+  beg = beg ? beg + 1 : buf;
   len = end - beg;
  success_in_beg_and_len:;
   size_t off = beg - buf;
-  mb_case_map_apply (map, &off, &len);
 
   *match_size = len;
   ret_val = off;

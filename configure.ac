@@ -1,7 +1,7 @@
 dnl
 dnl autoconf input file for GNU grep
 dnl
-dnl Copyright (C) 1997-2006, 2009-2014 Free Software Foundation, Inc.
+dnl Copyright (C) 1997-2006, 2009-2015 Free Software Foundation, Inc.
 dnl
 dnl This file is part of GNU grep.
 dnl
@@ -82,6 +82,12 @@ AC_PROG_INSTALL
 AC_PROG_CC
 gl_EARLY
 AC_PROG_RANLIB
+PKG_PROG_PKG_CONFIG([0.9.0])
+
+# grep never invokes mbrtowc or mbrlen on empty input,
+# so don't worry about this common bug,
+# as working around it would merely slow grep down.
+gl_cv_func_mbrtowc_empty_input='assume yes'
 
 dnl Checks for typedefs, structures, and compiler characteristics.
 AC_TYPE_SIZE_T
@@ -114,29 +120,14 @@ if test "$gl_gcc_warnings" = yes; then
   nw="$nw -Wlong-long"              # C90 is anachronistic (lib/gethrxtime.h)
   nw="$nw -Wc++-compat"             # We don't care about C++ compilers
   nw="$nw -Wundef"                  # Warns on '#if GNULIB_FOO' etc in gnulib
-  nw="$nw -Wtraditional"            # Warns on #elif which we use often
-  nw="$nw -Wcast-qual"              # Too many warnings for now
-  nw="$nw -Wconversion"             # Too many warnings for now
   nw="$nw -Wsystem-headers"         # Don't let system headers trigger warnings
-  nw="$nw -Wsign-conversion"        # Too many warnings for now
-  nw="$nw -Wtraditional-conversion" # Too many warnings for now
-  nw="$nw -Wunreachable-code"       # Too many warnings for now
   nw="$nw -Wpadded"                 # Our structs are not padded
-  nw="$nw -Wredundant-decls"        # openat.h declares e.g., mkdirat
-  nw="$nw -Wlogical-op"             # any use of fwrite provokes this
-  nw="$nw -Wformat-nonliteral"      # who.c and pinky.c strftime uses
   nw="$nw -Wvla"                    # warnings in gettext.h
-  nw="$nw -Wnested-externs"         # use of XARGMATCH/verify_function__
-  nw="$nw -Wswitch-enum"            # Too many warnings for now
+  nw="$nw -Wstack-protector"        # generates false alarms for useful code
   nw="$nw -Wswitch-default"         # Too many warnings for now
-  nw="$nw -Wstack-protector"        # not worth working around
-  # things I might fix soon:
-  nw="$nw -Wfloat-equal"            # sort.c, seq.c
-  nw="$nw -Wmissing-format-attribute" # copy.c
-  nw="$nw -Wunsafe-loop-optimizations" # a few src/*.c
-  nw="$nw -Winline"                 # system.h's readdir_ignoring_dot_and_dotdot
-  nw="$nw -Wstrict-overflow"        # expr.c, pr.c, tr.c, factor.c
-  # ?? -Wstrict-overflow
+  nw="$nw -Wunsafe-loop-optimizations" # OK to suppress unsafe optimizations
+  nw="$nw -Winline"                 # streq.h's streq4, streq6 and strcaseeq6
+  nw="$nw -Wstrict-overflow"        # regexec.c
 
   gl_MANYWARN_ALL_GCC([ws])
   gl_MANYWARN_COMPLEMENT([ws], [$ws], [$nw])
@@ -145,7 +136,6 @@ if test "$gl_gcc_warnings" = yes; then
   done
   gl_WARN_ADD([-Wno-missing-field-initializers]) # We need this one
   gl_WARN_ADD([-Wno-sign-compare])     # Too many warnings for now
-  gl_WARN_ADD([-Wno-pointer-sign])     # Too many warnings for now
   gl_WARN_ADD([-Wno-unused-parameter]) # Too many warnings for now
 
   # In spite of excluding -Wlogical-op above, it is enabled, as of
@@ -155,24 +145,20 @@ if test "$gl_gcc_warnings" = yes; then
   AC_SUBST([WARN_CFLAGS])
 
   AC_DEFINE([lint], [1], [Define to 1 if the compiler is checking for lint.])
-  AH_VERBATIM([FORTIFY_SOURCE],
+  AC_DEFINE([GNULIB_PORTCHECK], [1], [enable some gnulib portability checks])
+  AH_VERBATIM([GNULIB_PORTCHECK_FORTIFY_SOURCE],
   [/* Enable compile-time and run-time bounds-checking, and some warnings,
       without upsetting glibc 2.15+. */
-   #if !defined _FORTIFY_SOURCE && defined __OPTIMIZE__ && __OPTIMIZE__
+   #if (defined GNULIB_PORTCHECK && !defined _FORTIFY_SOURCE \
+        && defined __OPTIMIZE__ && __OPTIMIZE__)
    # define _FORTIFY_SOURCE 2
    #endif
   ])
-  AC_DEFINE([GNULIB_PORTCHECK], [1], [enable some gnulib portability checks])
 
   # We use a slightly smaller set of warning options for lib/.
   # Remove the following and save the result in GNULIB_WARN_CFLAGS.
   nw=
-  #nw="$nw -Wuninitialized"
   nw="$nw -Wunused-macros"
-  #nw="$nw -Wmissing-prototypes"
-  nw="$nw -Wold-style-definition"
-  nw="$nw -Wcast-align"
-  nw="$nw -Wunsuffixed-float-constants"
   gl_WARN_ADD([-Wno-format-nonliteral])
   gl_MANYWARN_COMPLEMENT([GNULIB_WARN_CFLAGS], [$WARN_CFLAGS], [$nw])
   AC_SUBST([GNULIB_WARN_CFLAGS])
@@ -212,7 +198,8 @@ case $host_os in
   mingw*) suffix=w32 ;;
   *) suffix=posix ;;
 esac
-AC_CONFIG_LINKS([lib/colorize.c:lib/colorize-$suffix.c])
+COLORIZE_SOURCE=colorize-$suffix.c
+AC_SUBST([COLORIZE_SOURCE])
 
 AC_CONFIG_FILES([
   Makefile

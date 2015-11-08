@@ -1,15 +1,15 @@
 #! /bin/sh
 # Ensure that, with -P, Unicode \p{} symbols are correctly matched.
 #
-# Copyright (C) 2012-2014 Free Software Foundation, Inc.
+# Copyright (C) 2012-2015 Free Software Foundation, Inc.
 #
 # Copying and distribution of this file, with or without modification,
 # are permitted in any medium without royalty provided the copyright
 # notice and this notice are preserved.
 
 . "${srcdir=.}/init.sh"; path_prepend_ ../src
-require_pcre_
 require_en_utf8_locale_
+LC_ALL=en_US.UTF-8 require_pcre_
 
 fail=0
 

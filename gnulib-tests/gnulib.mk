@@ -1,6 +1,6 @@
 ## DO NOT EDIT! GENERATED AUTOMATICALLY!
 ## Process this file with automake to produce Makefile.in.
-# Copyright (C) 2002-2014 Free Software Foundation, Inc.
+# Copyright (C) 2002-2015 Free Software Foundation, Inc.
 #
 # This file is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -58,6 +58,15 @@ AM_LIBTOOLFLAGS = --preserve-dup-deps
 
 TESTS_ENVIRONMENT += EXEEXT='@EXEEXT@' srcdir='$(srcdir)'
 
+## begin gnulib module alignof-tests
+
+TESTS += test-alignof
+check_PROGRAMS += test-alignof
+
+EXTRA_DIST += test-alignof.c
+
+## end   gnulib module alignof-tests
+
 ## begin gnulib module alloca-opt-tests
 
 TESTS += test-alloca-opt
@@ -108,7 +117,6 @@ EXTRA_DIST += test-btowc1.sh test-btowc2.sh test-btowc.c signature.h macros.h
 
 TESTS += test-c-ctype
 check_PROGRAMS += test-c-ctype
-
 EXTRA_DIST += test-c-ctype.c macros.h
 
 ## end   gnulib module c-ctype-tests
@@ -220,7 +228,7 @@ TESTS += \
  test-exclude8.sh
 
 check_PROGRAMS += test-exclude
-test_exclude_LDADD = $(LDADD) @LIBINTL@
+test_exclude_LDADD = $(LDADD) @LIBINTL@ $(LIBTHREAD)
 EXTRA_DIST += test-exclude.c test-exclude1.sh test-exclude2.sh test-exclude3.sh test-exclude4.sh test-exclude5.sh test-exclude6.sh test-exclude7.sh test-exclude8.sh
 
 ## end   gnulib module exclude-tests
@@ -623,23 +631,6 @@ EXTRA_DIST += test-malloca.c
 
 ## end   gnulib module malloca-tests
 
-## begin gnulib module mbrtowc-tests
-
-TESTS += \
-  test-mbrtowc1.sh test-mbrtowc2.sh test-mbrtowc3.sh test-mbrtowc4.sh \
-  test-mbrtowc-w32-1.sh test-mbrtowc-w32-2.sh test-mbrtowc-w32-3.sh \
-  test-mbrtowc-w32-4.sh test-mbrtowc-w32-5.sh
-TESTS_ENVIRONMENT += \
-  LOCALE_FR='@LOCALE_FR@' \
-  LOCALE_FR_UTF8='@LOCALE_FR_UTF8@' \
-  LOCALE_JA='@LOCALE_JA@' \
-  LOCALE_ZH_CN='@LOCALE_ZH_CN@'
-check_PROGRAMS += test-mbrtowc test-mbrtowc-w32
-
-EXTRA_DIST += test-mbrtowc1.sh test-mbrtowc2.sh test-mbrtowc3.sh test-mbrtowc4.sh test-mbrtowc.c test-mbrtowc-w32-1.sh test-mbrtowc-w32-2.sh test-mbrtowc-w32-3.sh test-mbrtowc-w32-4.sh test-mbrtowc-w32-5.sh test-mbrtowc-w32.c signature.h macros.h
-
-## end   gnulib module mbrtowc-tests
-
 ## begin gnulib module mbscasecmp-tests
 
 TESTS += test-mbscasecmp.sh
@@ -691,6 +682,14 @@ check_PROGRAMS += test-memchr
 EXTRA_DIST += test-memchr.c zerosize-ptr.h signature.h macros.h
 
 ## end   gnulib module memchr-tests
+
+## begin gnulib module memchr2-tests
+
+TESTS += test-memchr2
+check_PROGRAMS += test-memchr2
+EXTRA_DIST += test-memchr2.c zerosize-ptr.h macros.h
+
+## end   gnulib module memchr2-tests
 
 ## begin gnulib module memrchr-tests
 
@@ -981,6 +980,14 @@ EXTRA_DIST += test-stat.h test-stat.c signature.h macros.h
 
 ## end   gnulib module stat-tests
 
+## begin gnulib module stdalign-tests
+
+TESTS += test-stdalign
+check_PROGRAMS += test-stdalign
+EXTRA_DIST += test-stdalign.c macros.h
+
+## end   gnulib module stdalign-tests
+
 ## begin gnulib module stdbool-tests
 
 TESTS += test-stdbool
@@ -1054,6 +1061,14 @@ check_PROGRAMS += test-strnlen
 EXTRA_DIST += test-strnlen.c zerosize-ptr.h signature.h macros.h
 
 ## end   gnulib module strnlen-tests
+
+## begin gnulib module strstr-tests
+
+TESTS += test-strstr
+check_PROGRAMS += test-strstr
+EXTRA_DIST += test-strstr.c zerosize-ptr.h signature.h macros.h
+
+## end   gnulib module strstr-tests
 
 ## begin gnulib module strtoimax-tests
 

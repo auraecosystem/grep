@@ -1,5 +1,5 @@
 /* searchutils.c - helper subroutines for grep's matchers.
-   Copyright 1992, 1998, 2000, 2007, 2009-2014 Free Software Foundation, Inc.
+   Copyright 1992, 1998, 2000, 2007, 2009-2015 Free Software Foundation, Inc.
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -17,16 +17,16 @@
    02110-1301, USA.  */
 
 #include <config.h>
-#include <assert.h>
+
+#define SEARCH_INLINE _GL_EXTERN_INLINE
+#define SYSTEM_INLINE _GL_EXTERN_INLINE
 #include "search.h"
-#include "dfa.h"
-#if HAVE_LANGINFO_CODESET
-# include <langinfo.h>
-#endif
+
+#include <assert.h>
 
 #define NCHAR (UCHAR_MAX + 1)
 
-static size_t mbclen_cache[NCHAR];
+size_t mbclen_cache[NCHAR];
 
 void
 kwsinit (kwset_t *kwset)
@@ -37,7 +37,7 @@ kwsinit (kwset_t *kwset)
   if (match_icase && MB_CUR_MAX == 1)
     {
       for (i = 0; i < NCHAR; ++i)
-        trans[i] = tolower (i);
+        trans[i] = toupper (i);
 
       *kwset = kwsalloc (trans);
     }
@@ -48,39 +48,37 @@ kwsinit (kwset_t *kwset)
     xalloc_die ();
 }
 
-#if MBS_SUPPORT
-/* Convert the *N-byte string, BEG, to lower-case, and write the
+/* Convert BEG, an *N-byte string, to uppercase, and write the
    NUL-terminated result into malloc'd storage.  Upon success, set *N
    to the length (in bytes) of the resulting string (not including the
-   trailing NUL byte), and return a pointer to the lower-case string.
-   Upon memory allocation failure, this function exits.
-   Note that on input, *N must be larger than zero.
+   trailing NUL byte), and return a pointer to the uppercase string.
+   Upon memory allocation failure, exit.  *N must be positive.
 
-   Note that while this function returns a pointer to malloc'd storage,
+   Although this function returns a pointer to malloc'd storage,
    the caller must not free it, since this function retains a pointer
    to the buffer and reuses it on any subsequent call.  As a consequence,
    this function is not thread-safe.
 
-   When each character in the lower-case result string has the same length
+   When each character in the uppercase result string has the same length
    as the corresponding character in the input string, set *LEN_MAP_P
    to NULL.  Otherwise, set it to a malloc'd buffer (like the returned
    buffer, this must not be freed by caller) of the same length as the
    result string.  (*LEN_MAP_P)[J] is the change in byte-length of the
    character in BEG that formed byte J of the result as it was converted to
-   lower-case.  It is usually zero.  For the upper-case Turkish I-with-dot
-   it is -1, since the upper-case character occupies two bytes, while the
-   lower-case one occupies only one byte.  For the Turkish-I-without-dot
-   in the tr_TR.utf8 locale, it is 1 because the lower-case representation
+   uppercase.  It is usually zero.  For lowercase Turkish dotless I it
+   is -1, since the lowercase input occupies two bytes, while the
+   uppercase output occupies only one byte.  For lowercase I in the
+   tr_TR.utf8 locale, it is 1 because the uppercase Turkish dotted I
    is one byte longer than the original.  When that happens, we have two
    or more slots in *LEN_MAP_P for each such character.  We store the
    difference in the first one and 0's in any remaining slots.
 
    This map is used by the caller to convert offset,length pairs that
-   reference the lower-case result to numbers that refer to the matched
+   reference the uppercase result to numbers that refer to the matched
    part of the original buffer.  */
 
 char *
-mbtolower (const char *beg, size_t *n, mb_len_map_t **len_map_p)
+mbtoupper (const char *beg, size_t *n, mb_len_map_t **len_map_p)
 {
   static char *out;
   static mb_len_map_t *len_map;
@@ -94,7 +92,7 @@ mbtolower (const char *beg, size_t *n, mb_len_map_t **len_map_p)
 
   if (*n > outalloc || outalloc == 0)
     {
-      outalloc = MAX(1, *n);
+      outalloc = MAX (1, *n);
       out = xrealloc (out, outalloc);
       len_map = xrealloc (len_map, outalloc);
     }
@@ -175,8 +173,8 @@ mbtolower (const char *beg, size_t *n, mb_len_map_t **len_map_p)
           /* Handle Unicode characters beyond the base plane.  */
           if (mbclen == 4)
             {
-              /* towlower, taking wint_t (4 bytes), handles UCS-4 values.  */
-              wci = towlower (wci);
+              /* towupper, taking wint_t (4 bytes), handles UCS-4 values.  */
+              wci = towupper (wci);
               if (wci >= 0x10000)
                 {
                   wci -= 0x10000;
@@ -197,7 +195,7 @@ mbtolower (const char *beg, size_t *n, mb_len_map_t **len_map_p)
             }
           else
 #endif
-          ombclen = wcrtomb (p, towlower ((wint_t) wc), &os);
+          ombclen = wcrtomb (p, towupper (wc), &os);
           *m = mbclen - ombclen;
           memset (m + 1, 0, ombclen - 1);
           m += ombclen;
@@ -224,57 +222,71 @@ build_mbclen_cache (void)
       char c = i;
       unsigned char uc = i;
       mbstate_t mbs = { 0 };
-      mbclen_cache[uc] = mbrlen (&c, 1, &mbs);
+      size_t len = mbrlen (&c, 1, &mbs);
+      mbclen_cache[uc] = len ? len : 1;
     }
 }
 
-bool
-is_mb_middle (const char **good, const char *buf, const char *end,
-              size_t match_len)
+/* In the buffer *MB_START, return the number of bytes needed to go
+   back from CUR to the previous boundary, where a "boundary" is the
+   start of a multibyte character or is an error-encoding byte.  The
+   buffer ends at END (i.e., one past the address of the buffer's last
+   byte).  If CUR is already at a boundary, return 0.  If *MB_START is
+   greater than or equal to CUR, return the negative value CUR - *MB_START.
+
+   When returning zero, set *MB_START to CUR.  When returning a
+   positive value, set *MB_START to the next boundary after CUR, or to
+   END if there is no such boundary.  When returning a negative value,
+   leave *MB_START alone.  */
+ptrdiff_t
+mb_goback (char const **mb_start, char const *cur, char const *end)
 {
-  const char *p = *good;
-  const char *prev = p;
+  const char *p = *mb_start;
+  const char *p0 = p;
   mbstate_t cur_state;
-
-  if (using_utf8 () && buf - p > MB_CUR_MAX)
-    {
-      for (p = buf; buf - p > MB_CUR_MAX; p--)
-        if (mbclen_cache[to_uchar (*p)] != (size_t) -1)
-          break;
-
-      if (buf - p == MB_CUR_MAX)
-        p = buf;
-    }
 
   memset (&cur_state, 0, sizeof cur_state);
 
-  while (p < buf)
+  while (p < cur)
     {
-      size_t mbclen = mbclen_cache[to_uchar (*p)];
+      size_t clen = mb_clen (p, end - p, &cur_state);
 
-      if (mbclen == (size_t) -2)
-        mbclen = mbrlen (p, end - p, &cur_state);
-
-      /* Store the beginning of the previous complete multibyte character.  */
-      if (mbclen != (size_t) -2)
-        prev = p;
-
-      if (mbclen == (size_t) -1 || mbclen == (size_t) -2 || mbclen == 0)
+      if ((size_t) -2 <= clen)
         {
           /* An invalid sequence, or a truncated multibyte character.
-             We treat it as a single byte character.  */
-          mbclen = 1;
+             Treat it as a single byte character.  */
+          clen = 1;
           memset (&cur_state, 0, sizeof cur_state);
         }
-      p += mbclen;
+      p0 = p;
+      p += clen;
     }
 
-  *good = prev;
-
-  if (p > buf)
-    return true;
-
-  /* P == BUF here.  */
-  return 0 < match_len && match_len < mbrlen (p, end - p, &cur_state);
+  *mb_start = p;
+  return p == cur ? 0 : cur - p0;
 }
-#endif /* MBS_SUPPORT */
+
+/* In the buffer BUF, return the wide character that is encoded just
+   before CUR.  The buffer ends at END.  Return WEOF if there is no
+   wide character just before CUR.  */
+wint_t
+mb_prev_wc (char const *buf, char const *cur, char const *end)
+{
+  if (cur == buf)
+    return WEOF;
+  char const *p = buf;
+  cur--;
+  cur -= mb_goback (&p, cur, end);
+  return mb_next_wc (cur, end);
+}
+
+/* Return the wide character that is encoded at CUR.  The buffer ends
+   at END.  Return WEOF if there is no wide character encoded at CUR.  */
+wint_t
+mb_next_wc (char const *cur, char const *end)
+{
+  wchar_t wc;
+  mbstate_t mbs = { 0 };
+  return (end - cur != 0 && mbrtowc (&wc, cur, end - cur, &mbs) < (size_t) -2
+          ? wc : WEOF);
+}

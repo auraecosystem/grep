@@ -1,5 +1,5 @@
 /* dfa.h - declarations for GNU deterministic regexp compiler
-   Copyright (C) 1988, 1998, 2007, 2009-2014 Free Software Foundation, Inc.
+   Copyright (C) 1988, 1998, 2007, 2009-2015 Free Software Foundation, Inc.
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -19,15 +19,19 @@
 /* Written June, 1988 by Mike Haertel */
 
 #include <regex.h>
+#include <stdbool.h>
 #include <stddef.h>
+
+#include "xalloc.h" /* for _GL_ATTRIBUTE_MALLOC */
 
 /* Element of a list of strings, at least one of which is known to
    appear in any R.E. matching the DFA. */
 struct dfamust
 {
-  int exact;
+  bool exact;
+  bool begline;
+  bool endline;
   char *must;
-  struct dfamust *next;
 };
 
 /* The dfa structure. It is completely opaque. */
@@ -38,10 +42,13 @@ struct dfa;
 /* Allocate a struct dfa.  The struct dfa is completely opaque.
    The returned pointer should be passed directly to free() after
    calling dfafree() on it. */
-extern struct dfa *dfaalloc (void);
+extern struct dfa *dfaalloc (void) _GL_ATTRIBUTE_MALLOC;
 
-/* Return the dfamusts associated with a dfa. */
-extern struct dfamust *dfamusts (struct dfa const *);
+/* Build and return the struct dfamust from the given struct dfa. */
+extern struct dfamust *dfamust (struct dfa const *);
+
+/* Free the storage held by the components of a struct dfamust. */
+extern void dfamustfree (struct dfamust *);
 
 /* dfasyntax() takes three arguments; the first sets the syntax bits described
    earlier in this file, the second sets the case-folding flag, and the
@@ -67,6 +74,15 @@ extern void dfacomp (char const *, size_t, struct dfa *, int);
    to decide whether to fall back on a backtracking matcher. */
 extern char *dfaexec (struct dfa *d, char const *begin, char *end,
                       int newline, size_t *count, int *backref);
+
+/* Return a superset for D.  The superset matches everything that D
+   matches, along with some other strings (though the latter should be
+   rare, for efficiency reasons).  Return a null pointer if no useful
+   superset is available.  */
+extern struct dfa *dfasuperset (struct dfa const *d) _GL_ATTRIBUTE_PURE;
+
+/* The DFA is likely to be fast.  */
+extern bool dfaisfast (struct dfa const *) _GL_ATTRIBUTE_PURE;
 
 /* Free the storage held by the components of a struct dfa. */
 extern void dfafree (struct dfa *);
