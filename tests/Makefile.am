@@ -1,5 +1,5 @@
 ## Process this file with automake to create Makefile.in
-# Copyright 1997-1998, 2005-2014 Free Software Foundation, Inc.
+# Copyright 1997-1998, 2005-2015 Free Software Foundation, Inc.
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -14,24 +14,37 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-check_PROGRAMS = get-mb-cur-max
-AM_CPPFLAGS = -I$(top_builddir)/lib -I$(top_srcdir)/lib
+check_PROGRAMS = get-mb-cur-max dfa-match-aux
+AM_CPPFLAGS = -I$(top_builddir)/lib -I$(top_srcdir)/lib \
+  -I$(top_srcdir)/src
 AM_CFLAGS = $(WARN_CFLAGS) $(WERROR_CFLAGS)
 
 # Tell the linker to omit references to unused shared libraries.
 AM_LDFLAGS = $(IGNORE_UNUSED_LIBRARIES_CFLAGS)
 LDADD = ../lib/libgreputils.a $(LIBINTL) ../lib/libgreputils.a
+dfa_match_aux_LDADD = ../src/dfa.$(OBJEXT) $(LDADD)
 
+# The triple-backref test is expected to fail with both the system
+# matcher (i.e., with glibc) and with the included matcher.
+# Both matchers need to be fixed.
+# FIXME-2015: Remove this once the glibc and gnulib bugs are fixed.
 XFAIL_TESTS = triple-backref
 
 # Equivalence classes are only supported when using the system
 # matcher (which means only with glibc).
+# The included matcher needs to be fixed.
+# FIXME-2015: Remove this once the gnulib bug is fixed.
 if USE_INCLUDED_REGEX
 XFAIL_TESTS += equiv-classes
+else
+# The backslash-alt test fails for glibc, which needs to be fixed.
+# FIXME-2015: Remove this once the glibc bug is fixed.
+XFAIL_TESTS += backref-alt
 endif
 
 TESTS =						\
   backref					\
+  backref-alt					\
   backref-multibyte-slow			\
   backref-word					\
   backslash-s-and-repetition-operators		\
@@ -52,9 +65,11 @@ TESTS =						\
   count-newline					\
   dfa-coverage					\
   dfa-heap-overrun				\
+  dfa-match					\
   dfaexec-multibyte				\
   empty						\
   empty-line					\
+  empty-line-mb					\
   epipe						\
   equiv-classes					\
   ere						\
@@ -67,12 +82,16 @@ TESTS =						\
   grep-dev-null					\
   grep-dir					\
   help-version					\
+  high-bit-range				\
   in-eq-out-infloop				\
   include-exclude				\
   inconsistent-range				\
+  invalid-char-class				\
   invalid-multibyte-infloop			\
   khadafy					\
+  kwset-abuse					\
   long-line-vs-2GiB-read			\
+  long-pattern-perf				\
   match-lines					\
   max-count-overread				\
   max-count-vs-context				\
@@ -82,15 +101,13 @@ TESTS =						\
   multibyte-white-space				\
   multiple-begin-or-end-line			\
   null-byte					\
-  empty-line-mb					\
-  unibyte-bracket-expr				\
-  unibyte-negated-circumflex			\
-  high-bit-range				\
   options					\
   pcre						\
   pcre-abort					\
+  pcre-context					\
   pcre-infloop					\
   pcre-invalid-utf8-input			\
+  pcre-jitstack					\
   pcre-o					\
   pcre-utf8					\
   pcre-w					\
@@ -101,17 +118,21 @@ TESTS =						\
   r-dot						\
   repetition-overflow				\
   reversed-range-endpoints			\
-  skip-device					\
   sjis-mb					\
+  skip-device					\
   spencer1					\
   spencer1-locale				\
   status					\
   surrogate-pair				\
   symlink					\
   triple-backref				\
-  turkish-eyes					\
   turkish-I					\
   turkish-I-without-dot				\
+  turkish-eyes					\
+  two-files					\
+  unibyte-bracket-expr				\
+  unibyte-negated-circumflex			\
+  utf8-bracket					\
   warn-char-classes				\
   word-delim-multibyte				\
   word-multi-file				\

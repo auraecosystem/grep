@@ -18,7 +18,7 @@
 @copying
 This manual is for @command{grep}, a pattern matching engine.
 
-Copyright @copyright{} 1999--2002, 2005, 2008--2014 Free Software Foundation,
+Copyright @copyright{} 1999-2002, 2005, 2008-2015 Free Software Foundation,
 Inc.
 
 @quotation
@@ -596,12 +596,19 @@ If a file's allocation metadata,
 or if its data read before a line is selected for output,
 indicate that the file contains binary data,
 assume that the file is of type @var{type}.
+Non-text bytes indicate binary data; these are either data bytes
+improperly encoded for the current locale, or null bytes when the
+@option{-z} (@option{--null-data}) option is not given (@pxref{Other
+Options}).
+
 By default, @var{type} is @samp{binary},
 and @command{grep} normally outputs either
 a one-line message saying that a binary file matches,
 or no message if there is no match.
-When matching binary data, @command{grep} may treat non-text
-bytes as line terminators.
+When processing binary data, @command{grep} may treat non-text bytes
+as line terminators; for example, the pattern @samp{.} (period) might
+not match a null byte, as the null byte might be treated as a line
+terminator even without the @option{-z} (@option{--null-data}) option.
 
 If @var{type} is @samp{without-match},
 @command{grep} assumes that a binary file does not match;
@@ -698,6 +705,7 @@ For each directory operand,
 read and process all files in that directory, recursively.
 Follow symbolic links on the command line, but skip symlinks
 that are encountered recursively.
+Note that if no file operand is given, grep searches the working directory.
 This is the same as the @samp{--directories=recurse} option.
 
 @item -R
@@ -830,6 +838,15 @@ explicit options.
 As this causes problems when writing portable scripts, this feature
 will be removed in a future release of @command{grep}, and @command{grep}
 warns if it is used.  Please use an alias or script instead.
+For example, if @command{grep} is in the directory @samp{/usr/bin} you
+can prepend @file{$HOME/bin} to your @env{PATH} and create an
+executable script @file{$HOME/bin/grep} containing the following:
+
+@example
+#! /bin/sh
+export PATH=/usr/bin
+exec grep --color=auto --devices=skip "$@@"
+@end example
 
 @item GREP_COLOR
 @vindex GREP_COLOR @r{environment variable}
@@ -1720,8 +1737,8 @@ Standard grep cannot do this, as it is fundamentally line-based.
 Therefore, merely using the @code{[:space:]} character class does not
 match newlines in the way you might expect.
 
-With the GNU @command{grep} option @code{-z} (@pxref{File and
-Directory Selection}), the input is terminated by null bytes.  Thus,
+With the GNU @command{grep} option @option{-z} (@option{--null-data}), each
+input ``line'' is terminated by a null byte; @pxref{Other Options}.  Thus,
 you can match newlines in the input, but typically if there is a match
 the entire input is output, so this usage is often combined with
 output-suppressing options like @option{-q}, e.g.:

@@ -1,5 +1,5 @@
 # Customize maint.mk                           -*- makefile -*-
-# Copyright (C) 2009-2014 Free Software Foundation, Inc.
+# Copyright (C) 2009-2015 Free Software Foundation, Inc.
 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -55,7 +55,7 @@ export VERBOSE = yes
 # 1127556 9e
 export XZ_OPT = -6e
 
-old_NEWS_hash = 8c5f53627941c649412bbabc1bb1d26a
+old_NEWS_hash = 1b194dba492bc6e90c4446daef4b7782
 
 # Many m4 macros names once began with 'jm_'.
 # Make sure that none are inadvertently reintroduced.
@@ -101,6 +101,12 @@ sc_prohibit_emacs__indent_tabs_mode__setting:
 	halt='use of emacs indent-tabs-mode: setting'			\
 	  $(_sc_search_regexp)
 
+# Ensure that the list of test file names in tests/Makefile.am is sorted.
+sc_sorted_tests:
+	@perl -0777 -ne \
+	    '/^TESTS =(.*?)^$$/ms; ($$t = $$1) =~ s/[\\\s\n]+/\n/g;print $$t' \
+	  tests/Makefile.am | sort -c
+
 # THANKS.in is a list of name/email pairs for people who are mentioned in
 # commit logs (and generated ChangeLog), but who are not also listed as an
 # author of a commit.  Name/email pairs of commit authors are automatically
@@ -118,7 +124,11 @@ update-copyright-env = \
   UPDATE_COPYRIGHT_USE_INTERVALS=1 \
   UPDATE_COPYRIGHT_MAX_LINE_LENGTH=79
 
-exclude_file_name_regexp--sc_bindtextdomain = ^tests/get-mb-cur-max\.c$$
+exclude_file_name_regexp--sc_bindtextdomain = \
+  ^tests/(get-mb-cur-max|dfa-match-aux)\.c$$
+exclude_file_name_regexp--sc_prohibit_atoi_atof = \
+  ^tests/dfa-match-aux\.c$$
+
 exclude_file_name_regexp--sc_prohibit_strcmp = /colorize-.*\.c$$
 exclude_file_name_regexp--sc_prohibit_xalloc_without_use = ^src/kwset\.c$$
 exclude_file_name_regexp--sc_prohibit_tab_based_indentation = \

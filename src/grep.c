@@ -1,5 +1,5 @@
 /* grep.c - main driver file for grep.
-   Copyright (C) 1992, 1997-2002, 2004-2014 Free Software Foundation, Inc.
+   Copyright (C) 1992, 1997-2002, 2004-2015 Free Software Foundation, Inc.
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -79,6 +79,32 @@ static bool only_matching;
 
 /* If nonzero, make sure first content char in a line is on a tab stop. */
 static bool align_tabs;
+
+#if HAVE_ASAN
+/* Record the starting address and length of the sole poisoned region,
+   so that we can unpoison it later, just before each following read.  */
+static void const *poison_buf;
+static size_t poison_len;
+
+static void
+clear_asan_poison (void)
+{
+  if (poison_buf)
+    __asan_unpoison_memory_region (poison_buf, poison_len);
+}
+
+static void
+asan_poison (void const *addr, size_t size)
+{
+  poison_buf = addr;
+  poison_len = size;
+
+  __asan_poison_memory_region (poison_buf, poison_len);
+}
+#else
+static void clear_asan_poison (void) { }
+static void asan_poison (void const volatile *addr, size_t size) { }
+#endif
 
 /* The group separator used when context is requested. */
 static const char *group_separator = SEP_STR_GROUP;
@@ -281,13 +307,13 @@ enum
 {
   BINARY_FILES_OPTION = CHAR_MAX + 1,
   COLOR_OPTION,
-  INCLUDE_OPTION,
+  EXCLUDE_DIRECTORY_OPTION,
   EXCLUDE_OPTION,
   EXCLUDE_FROM_OPTION,
+  GROUP_SEPARATOR_OPTION,
+  INCLUDE_OPTION,
   LINE_BUFFERED_OPTION,
-  LABEL_OPTION,
-  EXCLUDE_DIRECTORY_OPTION,
-  GROUP_SEPARATOR_OPTION
+  LABEL_OPTION
 };
 
 /* Long options equivalences. */
@@ -358,7 +384,8 @@ static char const *matcher;
 /* For error messages. */
 /* The input file name, or (if standard input) "-" or a --label argument.  */
 static char const *filename;
-static size_t filename_prefix_len;
+/* Omit leading "./" from file names in diagnostics.  */
+static bool omit_dot_slash;
 static bool errseen;
 static bool write_error_seen;
 
@@ -404,6 +431,13 @@ static bool
 is_device_mode (mode_t m)
 {
   return S_ISCHR (m) || S_ISBLK (m) || S_ISSOCK (m) || S_ISFIFO (m);
+}
+
+static bool
+skip_devices (bool command_line)
+{
+  return (devices == SKIP_DEVICES
+          || (devices == READ_COMMAND_LINE_DEVICES && !command_line));
 }
 
 /* Return if ST->st_size is defined.  Assume the file is not a
@@ -614,7 +648,7 @@ skipped_file (char const *name, bool command_line, bool is_dir)
 {
   return (is_dir
           ? (directories == SKIP_DIRECTORIES
-             || (! (command_line && filename_prefix_len != 0)
+             || (! (command_line && omit_dot_slash)
                  && excluded_directory_patterns
                  && excluded_file_name (excluded_directory_patterns, name)))
           : (excluded_patterns
@@ -773,6 +807,8 @@ fillbuf (size_t save, struct stat const *st)
         }
     }
 
+  clear_asan_poison ();
+
   readsize = buffer + bufalloc - sizeof (uword) - readbuf;
   readsize -= readsize % pagesize;
 
@@ -810,6 +846,17 @@ fillbuf (size_t save, struct stat const *st)
 
   fillsize = undossify_input (readbuf, fillsize);
   buflim = readbuf + fillsize;
+
+  /* Initialize the following word, because skip_easy_bytes and some
+     matchers read (but do not use) those bytes.  This avoids false
+     positive reports of these bytes being used uninitialized.  */
+  memset (buflim, 0, sizeof (uword));
+
+  /* Mark the part of the buffer not filled by the read or set by
+     the above memset call as ASAN-poisoned.  */
+  asan_poison (buflim + sizeof (uword),
+               bufalloc - (buflim - buffer) - sizeof (uword));
+
   return cc;
 }
 
@@ -975,8 +1022,8 @@ print_line_middle (const char *beg, const char *lim,
   const char *mid = NULL;
 
   while (cur < lim
-         && ((match_offset = execute (beg, lim - beg, &match_size,
-                                      beg + (cur - beg))) != (size_t) -1))
+         && ((match_offset = execute (beg, lim - beg, &match_size, cur))
+             != (size_t) -1))
     {
       char const *b = beg + match_offset;
 
@@ -1426,7 +1473,6 @@ grepdirent (FTS *fts, FTSENT *ent, bool command_line)
 {
   bool follow;
   int dirdesc;
-  struct stat *st = ent->fts_statp;
   command_line &= ent->fts_level == FTS_ROOTLEVEL;
 
   if (ent->fts_info == FTS_DP)
@@ -1436,15 +1482,18 @@ grepdirent (FTS *fts, FTSENT *ent, bool command_line)
       return true;
     }
 
-  if (skipped_file (ent->fts_name, command_line,
-                    (ent->fts_info == FTS_D || ent->fts_info == FTS_DC
-                     || ent->fts_info == FTS_DNR)))
+  if (!command_line
+      && skipped_file (ent->fts_name, false,
+                       (ent->fts_info == FTS_D || ent->fts_info == FTS_DC
+                        || ent->fts_info == FTS_DNR)))
     {
       fts_set (fts, ent, FTS_SKIP);
       return true;
     }
 
-  filename = ent->fts_path + filename_prefix_len;
+  filename = ent->fts_path;
+  if (omit_dot_slash && filename[1])
+    filename += 2;
   follow = (fts->fts_options & FTS_LOGICAL
             || (fts->fts_options & FTS_COMFOLLOW && command_line));
 
@@ -1473,9 +1522,9 @@ grepdirent (FTS *fts, FTSENT *ent, bool command_line)
 
     case FTS_DEFAULT:
     case FTS_NSOK:
-      if (devices == SKIP_DEVICES
-          || (devices == READ_COMMAND_LINE_DEVICES && !command_line))
+      if (skip_devices (command_line))
         {
+          struct stat *st = ent->fts_statp;
           struct stat st1;
           if (! st->st_mode)
             {
@@ -1530,7 +1579,10 @@ open_symlink_nofollow_error (int err)
 static bool
 grepfile (int dirdesc, char const *name, bool follow, bool command_line)
 {
-  int desc = openat_safer (dirdesc, name, O_RDONLY | (follow ? 0 : O_NOFOLLOW));
+  int oflag = (O_RDONLY | O_NOCTTY
+               | (follow ? 0 : O_NOFOLLOW)
+               | (skip_devices (command_line) ? O_NONBLOCK : 0));
+  int desc = openat_safer (dirdesc, name, oflag);
   if (desc < 0)
     {
       if (follow || ! open_symlink_nofollow_error (errno))
@@ -1558,6 +1610,10 @@ grepdesc (int desc, bool command_line)
       suppressible_error (filename, errno);
       goto closeout;
     }
+
+  if (desc != STDIN_FILENO && skip_devices (command_line)
+      && is_device_mode (st.st_mode))
+    goto closeout;
 
   if (desc != STDIN_FILENO && command_line
       && skipped_file (filename, true, S_ISDIR (st.st_mode) != 0))
@@ -1806,15 +1862,13 @@ if any error occurs and -q is not given, the exit status is 2.\n"));
 static void
 Gcompile (char const *pattern, size_t size)
 {
-  GEAcompile (pattern, size, RE_SYNTAX_GREP | RE_NO_EMPTY_RANGES);
+  GEAcompile (pattern, size, RE_SYNTAX_GREP);
 }
 
 static void
 Ecompile (char const *pattern, size_t size)
 {
-  GEAcompile (pattern, size,
-              (RE_SYNTAX_POSIX_EGREP | RE_NO_EMPTY_RANGES
-               | RE_UNMATCHED_RIGHT_PAREN_ORD));
+  GEAcompile (pattern, size, RE_SYNTAX_EGREP);
 }
 
 static void
@@ -2111,7 +2165,7 @@ main (int argc, char **argv)
 {
   char *keys;
   size_t keycc, oldcc, keyalloc;
-  bool with_filenames, ok;
+  bool with_filenames;
   size_t cc;
   int opt, prepended;
   int prev_optind, last_recursive;
@@ -2395,14 +2449,14 @@ main (int argc, char **argv)
         if (!excluded_patterns)
           excluded_patterns = new_exclude ();
         add_exclude (excluded_patterns, optarg,
-                     (EXCLUDE_WILDCARDS
+                     (EXCLUDE_ANCHORED | EXCLUDE_WILDCARDS
                       | (opt == INCLUDE_OPTION ? EXCLUDE_INCLUDE : 0)));
         break;
       case EXCLUDE_FROM_OPTION:
         if (!excluded_patterns)
           excluded_patterns = new_exclude ();
         if (add_exclude_file (add_exclude, excluded_patterns, optarg,
-                              EXCLUDE_WILDCARDS, '\n') != 0)
+                              EXCLUDE_ANCHORED | EXCLUDE_WILDCARDS, '\n') != 0)
           {
             error (EXIT_TROUBLE, errno, "%s", optarg);
           }
@@ -2412,7 +2466,8 @@ main (int argc, char **argv)
         if (!excluded_directory_patterns)
           excluded_directory_patterns = new_exclude ();
         strip_trailing_slashes (optarg);
-        add_exclude (excluded_directory_patterns, optarg, EXCLUDE_WILDCARDS);
+        add_exclude (excluded_directory_patterns, optarg,
+                     EXCLUDE_ANCHORED | EXCLUDE_WILDCARDS);
         break;
 
       case GROUP_SEPARATOR_OPTION:
@@ -2472,7 +2527,7 @@ main (int argc, char **argv)
     {
       version_etc (stdout, program_name, PACKAGE_NAME, VERSION, AUTHORS,
                    (char *) NULL);
-      exit (EXIT_SUCCESS);
+      return EXIT_SUCCESS;
     }
 
   if (show_help)
@@ -2506,11 +2561,15 @@ main (int argc, char **argv)
   build_mbclen_cache ();
   init_easy_encoding ();
 
-  /* If fgrep in a multibyte locale, then use grep if either
+  /* In a unibyte locale, switch from fgrep to grep if
+     the pattern matches words (where grep is typically faster).
+     In a multibyte locale, switch from fgrep to grep if either
      (1) case is ignored (where grep is typically faster), or
      (2) the pattern has an encoding error (where fgrep might not work).  */
-  if (compile == Fcompile && MB_CUR_MAX > 1
-      && (match_icase || contains_encoding_error (keys, keycc)))
+  if (compile == Fcompile
+      && (MB_CUR_MAX <= 1
+          ? match_words
+          : match_icase || contains_encoding_error (keys, keycc)))
     {
       size_t new_keycc;
       char *new_keys;
@@ -2537,33 +2596,38 @@ main (int argc, char **argv)
 #ifdef SET_BINARY
   /* Output is set to binary mode because we shouldn't convert
      NL to CR-LF pairs, especially when grepping binary files.  */
-  if (!isatty (1))
-    SET_BINARY (1);
+  if (!isatty (STDOUT_FILENO))
+    SET_BINARY (STDOUT_FILENO);
 #endif
 
   if (max_count == 0)
-    exit (EXIT_FAILURE);
+    return EXIT_FAILURE;
 
   if (fts_options & FTS_LOGICAL && devices == READ_COMMAND_LINE_DEVICES)
     devices = READ_DEVICES;
 
+  char *const *files;
   if (optind < argc)
     {
-      ok = true;
-      do
-        ok &= grep_command_line_arg (argv[optind]);
-      while (++optind < argc);
+      files = argv + optind;
     }
   else if (directories == RECURSE_DIRECTORIES && prepended < last_recursive)
     {
-      /* Grep through ".", omitting leading "./" from diagnostics.  */
-      filename_prefix_len = 2;
-      ok = grep_command_line_arg (".");
+      static char *const cwd_only[] = { (char *) ".", NULL };
+      files = cwd_only;
+      omit_dot_slash = true;
     }
   else
-    ok = grep_command_line_arg ("-");
+    {
+      static char *const stdin_only[] = { (char *) "-", NULL };
+      files = stdin_only;
+    }
+
+  bool status = true;
+  do
+    status &= grep_command_line_arg (*files++);
+  while (*files != NULL);
 
   /* We register via atexit() to test stdout.  */
-  exit (errseen ? EXIT_TROUBLE : ok);
+  return errseen ? EXIT_TROUBLE : status;
 }
-/* vim:set shiftwidth=2: */

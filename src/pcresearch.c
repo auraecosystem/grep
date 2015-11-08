@@ -1,5 +1,5 @@
 /* pcresearch.c - searching subroutines using PCRE for grep.
-   Copyright 2000, 2007, 2009-2014 Free Software Foundation, Inc.
+   Copyright 2000, 2007, 2009-2015 Free Software Foundation, Inc.
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -20,13 +20,14 @@
 
 #include <config.h>
 #include "search.h"
-#if HAVE_PCRE_H
-# include <pcre.h>
-#elif HAVE_PCRE_PCRE_H
-# include <pcre/pcre.h>
-#endif
 
 #if HAVE_LIBPCRE
+# include <pcre.h>
+
+/* This must be at least 2; everything after that is for performance
+   in pcre_exec.  */
+enum { NSUB = 300 };
+
 /* Compiled internal form of a Perl regular expression.  */
 static pcre *cre;
 
@@ -36,15 +37,54 @@ static pcre_extra *extra;
 # ifndef PCRE_STUDY_JIT_COMPILE
 #  define PCRE_STUDY_JIT_COMPILE 0
 # endif
+
+# if PCRE_STUDY_JIT_COMPILE
+/* Maximum size of the JIT stack.  */
+static int jit_stack_size;
+# endif
+
+/* Match the already-compiled PCRE pattern against the data in SUBJECT,
+   of size SEARCH_BYTES and starting with offset SEARCH_OFFSET, with
+   options OPTIONS, and storing resulting matches into SUB.  Return
+   the (nonnegative) match location or a (negative) error number.  */
+static int
+jit_exec (char const *subject, int search_bytes, int search_offset,
+          int options, int *sub)
+{
+  while (true)
+    {
+      int e = pcre_exec (cre, extra, subject, search_bytes, search_offset,
+                         options, sub, NSUB);
+
+# if PCRE_STUDY_JIT_COMPILE
+      if (e == PCRE_ERROR_JIT_STACKLIMIT
+          && 0 < jit_stack_size && jit_stack_size <= INT_MAX / 2)
+        {
+          int old_size = jit_stack_size;
+          int new_size = jit_stack_size = old_size * 2;
+          static pcre_jit_stack *jit_stack;
+          if (jit_stack)
+            pcre_jit_stack_free (jit_stack);
+          jit_stack = pcre_jit_stack_alloc (old_size, new_size);
+          if (!jit_stack)
+            error (EXIT_TROUBLE, 0,
+                   _("failed to allocate memory for the PCRE JIT stack"));
+          pcre_assign_jit_stack (extra, NULL, jit_stack);
+          continue;
+        }
+# endif
+
+      return e;
+    }
+}
+
 #endif
 
+#if HAVE_LIBPCRE
 /* Table, indexed by ! (flag & PCRE_NOTBOL), of whether the empty
    string matches when that flag is used.  */
 static int empty_match[2];
-
-/* This must be at least 2; everything after that is for performance
-   in pcre_exec.  */
-enum { NSUB = 300 };
+#endif
 
 void
 Pcompile (char const *pattern, size_t size)
@@ -119,19 +159,11 @@ Pcompile (char const *pattern, size_t size)
   if (pcre_fullinfo (cre, extra, PCRE_INFO_JIT, &e))
     error (EXIT_TROUBLE, 0, _("internal error (should never happen)"));
 
+  /* The PCRE documentation says that a 32 KiB stack is the default.  */
   if (e)
-    {
-      /* A 32K stack is allocated for the machine code by default, which
-         can grow to 512K if necessary. Since JIT uses far less memory
-         than the interpreter, this should be enough in practice.  */
-      pcre_jit_stack *jit_stack = pcre_jit_stack_alloc (32 * 1024, 512 * 1024);
-      if (!jit_stack)
-        error (EXIT_TROUBLE, 0,
-               _("failed to allocate memory for the PCRE JIT stack"));
-      pcre_assign_jit_stack (extra, NULL, jit_stack);
-    }
-
+    jit_stack_size = 32 << 10;
 # endif
+
   free (re);
 
   int sub[NSUB];
@@ -156,6 +188,11 @@ Pexecute (char const *buf, size_t size, size_t *match_size,
   char const *line_start = buf;
   int e = PCRE_ERROR_NOMATCH;
   char const *line_end;
+
+  /* The search address to pass to pcre_exec.  This is the start of
+     the buffer, or just past the most-recently discovered encoding
+     error.  */
+  char const *subject = buf;
 
   /* If the input type is unknown, the caller is still testing the
      input, which means the current buffer cannot contain encoding
@@ -196,12 +233,13 @@ Pexecute (char const *buf, size_t size, size_t *match_size,
               bol = false;
             }
 
+          int search_offset = p - subject;
+
           /* Check for an empty match; this is faster than letting
              pcre_exec do it.  */
-          int search_bytes = line_end - p;
-          if (search_bytes == 0)
+          if (p == line_end)
             {
-              sub[0] = sub[1] = 0;
+              sub[0] = sub[1] = search_offset;
               e = empty_match[bol];
               break;
             }
@@ -212,18 +250,18 @@ Pexecute (char const *buf, size_t size, size_t *match_size,
           if (multiline)
             options |= PCRE_NO_UTF8_CHECK;
 
-          e = pcre_exec (cre, extra, p, search_bytes, 0,
-                         options, sub, NSUB);
+          e = jit_exec (subject, line_end - subject, search_offset,
+                        options, sub);
           if (e != PCRE_ERROR_BADUTF8)
             {
               if (0 < e && multiline && sub[1] - sub[0] != 0)
                 {
-                  char const *nl = memchr (p + sub[0], eolbyte,
+                  char const *nl = memchr (subject + sub[0], eolbyte,
                                            sub[1] - sub[0]);
                   if (nl)
                     {
                       /* This match crosses a line boundary; reject it.  */
-                      p += sub[0];
+                      p = subject + sub[0];
                       line_end = nl;
                       continue;
                     }
@@ -232,22 +270,26 @@ Pexecute (char const *buf, size_t size, size_t *match_size,
             }
           int valid_bytes = sub[0];
 
-          /* Try to match the string before the encoding error.
-             Again, handle the empty-match case specially, for speed.  */
-          if (valid_bytes == 0)
+          /* Try to match the string before the encoding error.  */
+          if (valid_bytes < search_offset)
+            e = PCRE_ERROR_NOMATCH;
+          else if (valid_bytes == 0)
             {
+              /* Handle the empty-match case specially, for speed.
+                 This optimization is valid if VALID_BYTES is zero,
+                 which means SEARCH_OFFSET is also zero.  */
               sub[1] = 0;
               e = empty_match[bol];
             }
           else
-            e = pcre_exec (cre, extra, p, valid_bytes, 0,
-                           options | PCRE_NO_UTF8_CHECK | PCRE_NOTEOL,
-                           sub, NSUB);
+            e = jit_exec (subject, valid_bytes, search_offset,
+                          options | PCRE_NO_UTF8_CHECK | PCRE_NOTEOL, sub);
+
           if (e != PCRE_ERROR_NOMATCH)
             break;
 
           /* Treat the encoding error as data that cannot match.  */
-          p += valid_bytes + 1;
+          p = subject += valid_bytes + 1;
           bol = false;
         }
 
@@ -266,9 +308,13 @@ Pexecute (char const *buf, size_t size, size_t *match_size,
         case PCRE_ERROR_NOMEMORY:
           error (EXIT_TROUBLE, 0, _("memory exhausted"));
 
+# if PCRE_STUDY_JIT_COMPILE
+        case PCRE_ERROR_JIT_STACKLIMIT:
+          error (EXIT_TROUBLE, 0, _("exhausted PCRE JIT stack"));
+# endif
+
         case PCRE_ERROR_MATCHLIMIT:
-          error (EXIT_TROUBLE, 0,
-                 _("exceeded PCRE's backtracking limit"));
+          error (EXIT_TROUBLE, 0, _("exceeded PCRE's backtracking limit"));
 
         default:
           /* For now, we lump all remaining PCRE failures into this basket.
@@ -282,8 +328,8 @@ Pexecute (char const *buf, size_t size, size_t *match_size,
     }
   else
     {
-      char const *matchbeg = p + sub[0];
-      char const *matchend = p + sub[1];
+      char const *matchbeg = subject + sub[0];
+      char const *matchend = subject + sub[1];
       char const *beg;
       char const *end;
       if (start_ptr)

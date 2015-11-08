@@ -1,5 +1,49 @@
 GNU grep NEWS                                    -*- outline -*-
 
+* Noteworthy changes in release 2.22 (2015-11-01) [stable]
+
+** Improvements
+
+  Performance has improved for patterns containing very long strings,
+  reducing preprocessing time for an N-byte regexp from O(N^2) to
+  only slightly superlinear for most patterns.  Before, a command like
+  the following would take over a minute, but now, it takes less than
+  a second:
+  : | grep -f <(seq -s '' 99999)
+
+  When building grep, 'configure' now uses PCRE's pkg-config module for
+  configuration information, rather than attempting to guess it by hand.
+
+** Bug fixes
+
+  A DFA matcher bug made this command mistakenly print its input line:
+    echo axb | grep -E '^x|x$'
+  Likewise for this equivalent command:
+    echo axb | grep -e '^x' -e 'x$'
+  [bug introduced in grep-2.19 ]
+
+  grep no longer reads from uninitialized memory or from beyond the end
+  of the heap-allocated input buffer.  This fix addressed CVE-2015-1345.
+  [bug introduced in grep-2.19 ]
+
+  With -z, '.' and '[^x]' in a pattern now consistently match newline.
+  Previously, they sometimes matched newline, and sometimes did not.
+  [bug introduced in grep-2.4]
+
+  When the JIT stack is exhausted, grep -P now grows the stack rather
+  than reporting an internal PCRE error.
+
+  'grep -D skip PATTERN FILE' no longer hangs if FILE is a fifo.
+  [bug introduced in grep-2.12]
+
+  --exclude and related options are now matched against entire
+  command-line arguments, not against command-line components.
+  [bug introduced in grep-2.6]
+
+  Fix performance degradation of grep -Fw in unibyte locales.
+  [bug introduced in grep-2.19 ]
+
+
 * Noteworthy changes in release 2.21 (2014-11-23) [stable]
 
 ** Improvements
@@ -841,7 +885,7 @@ necessary to track the evolution of the regex package, and since
 I was changing it anyway I decided to do a general cleanup.
 
 ========================================================================
-Copyright (C) 1992, 1997-2002, 2004-2014 Free Software Foundation, Inc.
+Copyright (C) 1992, 1997-2002, 2004-2015 Free Software Foundation, Inc.
 
   Copying and distribution of this file, with or without modification,
   are permitted in any medium without royalty provided the copyright

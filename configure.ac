@@ -1,7 +1,7 @@
 dnl
 dnl autoconf input file for GNU grep
 dnl
-dnl Copyright (C) 1997-2006, 2009-2014 Free Software Foundation, Inc.
+dnl Copyright (C) 1997-2006, 2009-2015 Free Software Foundation, Inc.
 dnl
 dnl This file is part of GNU grep.
 dnl
@@ -82,6 +82,7 @@ AC_PROG_INSTALL
 AC_PROG_CC
 gl_EARLY
 AC_PROG_RANLIB
+PKG_PROG_PKG_CONFIG([0.9.0])
 
 # grep never invokes mbrtowc or mbrlen on empty input,
 # so don't worry about this common bug,

@@ -1,7 +1,7 @@
 #!/bin/sh
 # Test NUL bytes in patterns and data.
 
-# Copyright 2014 Free Software Foundation, Inc.
+# Copyright 2014-2015 Free Software Foundation, Inc.
 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -39,7 +39,9 @@ for left in '' a '#' '\0'; do
           printf "$pat\\n" >pat || framework_failure_
           for locale in $locales; do
             LC_ALL=$locale grep -f pat in
-            test $? -eq 0 || test $? -eq 1 || fail_ "'$pat' caused an error"
+            status=$?
+            test $status -eq 0 || test $status -eq 1 ||
+              fail_ "'$pat' caused an error"
             LC_ALL=$locale grep -a -f pat in | cmp -s - in ||
               fail_ "-a '$pat' does not match '$data'"
           done
