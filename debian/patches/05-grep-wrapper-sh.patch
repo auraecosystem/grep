@@ -15,7 +15,7 @@ Closes: #762427, #762917
  
  AM_CFLAGS = $(WARN_CFLAGS) $(WERROR_CFLAGS) $(PCRE_CFLAGS)
  
-@@ -47,15 +48,7 @@
+@@ -47,14 +48,7 @@
  egrep fgrep: egrep.sh Makefile
  	$(AM_V_GEN)grep=`echo grep | sed -e '$(transform)'` &&		\
  	case $@ in egrep) option=-E;; fgrep) option=-F;; esac &&	\
@@ -27,7 +27,6 @@ Closes: #762427, #762917
 -	fi &&								\
  	sed -e 's|[@]SHELL@|$(SHELL)|g'					\
 -	    -e "$$edit_substring"					\
--	    -e "s|[@]grep@|$$grep|g"					\
+ 	    -e "s|[@]grep@|$$grep|g"					\
  	    -e "s|[@]option@|$$option|g" <$(srcdir)/egrep.sh >$@-t
  	$(AM_V_at)chmod +x $@-t
- 	$(AM_V_at)mv $@-t $@
