@@ -2116,7 +2116,7 @@ Index
 * LANGUAGE environment variable <1>:     Environment Variables.
                                                               (line 175)
 * language of messages:                  Environment Variables.
-                                                              (line 169)
+                                                              (line 175)
 * LC_ALL environment variable:           Environment Variables.
                                                               (line   9)
 * LC_ALL environment variable <1>:       Environment Variables.
@@ -2167,7 +2167,7 @@ Index
 * mc GREP_COLORS capability:             Environment Variables.
                                                               (line 115)
 * message language:                      Environment Variables.
-                                                              (line 169)
+                                                              (line 175)
 * ms GREP_COLORS capability:             Environment Variables.
                                                               (line 107)
 * MS-DOS/MS-Windows binary files:        Other Options.       (line  12)
@@ -2199,7 +2199,7 @@ Index
 * plus sign:                             Fundamental Structure.
                                                               (line  24)
 * POSIXLY_CORRECT environment variable:  Environment Variables.
-                                                              (line 174)
+                                                              (line 180)
 * print character class:                 Character Classes and Bracket Expressions.
                                                               (line  57)
 * print non-matching lines:              Matching Control.    (line  40)
@@ -2255,7 +2255,7 @@ Index
 * tab-aligned content lines:             Output Line Prefix Control.
                                                               (line  43)
 * translation of message language:       Environment Variables.
-                                                              (line 169)
+                                                              (line 175)
 * upper character class:                 Character Classes and Bracket Expressions.
                                                               (line  70)
 * upper-case letters:                    Character Classes and Bracket Expressions.

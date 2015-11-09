@@ -813,24 +813,6 @@ msgstr "内部PCRE 错误: %d"
 #~ msgid "%s can only use the %s pattern syntax"
 #~ msgstr "%s 只能使用 %s 匹配语法"
 
-#~ msgid "GNU Grep home page: <%s>\n"
-#~ msgstr "GNU Grep 主页: <%s>\n"
-
-#~ msgid "PATTERN is an extended regular expression (ERE).\n"
-#~ msgstr "PATTERN 是一个可扩展的正则表达式(缩写为 ERE)。\n"
-
-#~ msgid "Invocation as 'egrep' is deprecated; use 'grep -E' instead.\n"
-#~ msgstr "‘egrep’已不再使用了；请用‘grep -E’代替。\n"
-
-#~ msgid "PATTERN is a set of newline-separated fixed strings.\n"
-#~ msgstr "PATTERN 是一组由断行符分隔的定长字符串。\n"
-
-#~ msgid "Invocation as 'fgrep' is deprecated; use 'grep -F' instead.\n"
-#~ msgstr "‘fgrep’已不再使用了；请用 ‘grep -F’代替。\n"
-
-#~ msgid "%s can only use the %s pattern syntax"
-#~ msgstr "%s 只能使用 %s 匹配语法"
-
 #~ msgid "the --mmap option has been a no-op since 2010"
 #~ msgstr "--mmap 选项从2010 年起已不再是操作符了"
 

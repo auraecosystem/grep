@@ -8,7 +8,6 @@ AC_DEFUN([gl_FUNC_DUP2],
 [
   AC_REQUIRE([gl_UNISTD_H_DEFAULTS])
   AC_REQUIRE([AC_CANONICAL_HOST])
-  AC_CHECK_FUNCS_ONCE([getdtablesize])
   m4_ifdef([gl_FUNC_DUP2_OBSOLETE], [
     AC_CHECK_FUNCS_ONCE([dup2])
     if test $ac_cv_func_dup2 = no; then

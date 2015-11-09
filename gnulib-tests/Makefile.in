@@ -4870,8 +4870,6 @@ uninstall-am:
 
 .PRECIOUS: Makefile
 
-.PRECIOUS: Makefile
-
 
 # We need the following in order to create <float.h> when the system
 # doesn't have one that works with the given compiler.

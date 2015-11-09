@@ -19,7 +19,7 @@ AC_DEFUN([gl_FUNC_FCNTL],
   AC_REQUIRE([gl_USE_SYSTEM_EXTENSIONS])
   AC_REQUIRE([gl_FCNTL_H_DEFAULTS])
   AC_REQUIRE([AC_CANONICAL_HOST])
-  AC_CHECK_FUNCS_ONCE([fcntl getdtablesize])
+  AC_CHECK_FUNCS_ONCE([fcntl])
   if test $ac_cv_func_fcntl = no; then
     gl_REPLACE_FCNTL
   else
