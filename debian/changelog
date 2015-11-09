@@ -1,8 +1,9 @@
-grep (2.22-1~1) UNRELEASED; urgency=medium
+grep (2.22-1~2) unstable; urgency=low
 
+  * NOT RELEASE YET: make check-expensive enabled
   * New upstream release
 
- -- Santiago Ruano Rincón <santiago@debian.org>  Mon, 09 Nov 2015 06:45:45 +0100
+ -- Santiago Ruano Rincón <santiago@debian.org>  Mon, 09 Nov 2015 14:31:36 +0100
 
 grep (2.21-2) unstable; urgency=low
 
