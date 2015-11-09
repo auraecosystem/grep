@@ -1,6 +1,6 @@
 ## DO NOT EDIT! GENERATED AUTOMATICALLY!
 ## Process this file with automake to produce Makefile.in.
-# Copyright (C) 2002-2014 Free Software Foundation, Inc.
+# Copyright (C) 2002-2015 Free Software Foundation, Inc.
 #
 # This file is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -97,6 +97,13 @@ libgreputils_a_SOURCES += argmatch.c
 EXTRA_DIST += argmatch.h
 
 ## end   gnulib module argmatch
+
+## begin gnulib module assure
+
+
+EXTRA_DIST += assure.h
+
+## end   gnulib module assure
 
 ## begin gnulib module at-internal
 
@@ -721,6 +728,9 @@ EXTRA_DIST += $(top_srcdir)/build-aux/gnupload
 ## begin gnulib module gperf
 
 GPERF = gperf
+V_GPERF = $(V_GPERF_@AM_V@)
+V_GPERF_ = $(V_GPERF_@AM_DEFAULT_V@)
+V_GPERF_0 = @echo "  GPERF   " $@;
 
 ## end   gnulib module gperf
 
@@ -786,19 +796,19 @@ EXTRA_DIST += iconv.in.h
 ## begin gnulib module iconv_open
 
 iconv_open-aix.h: iconv_open-aix.gperf
-	$(GPERF) -m 10 $(srcdir)/iconv_open-aix.gperf > $(srcdir)/iconv_open-aix.h-t
+	$(V_GPERF)$(GPERF) -m 10 $(srcdir)/iconv_open-aix.gperf > $(srcdir)/iconv_open-aix.h-t && \
 	mv $(srcdir)/iconv_open-aix.h-t $(srcdir)/iconv_open-aix.h
 iconv_open-hpux.h: iconv_open-hpux.gperf
-	$(GPERF) -m 10 $(srcdir)/iconv_open-hpux.gperf > $(srcdir)/iconv_open-hpux.h-t
+	$(V_GPERF)$(GPERF) -m 10 $(srcdir)/iconv_open-hpux.gperf > $(srcdir)/iconv_open-hpux.h-t && \
 	mv $(srcdir)/iconv_open-hpux.h-t $(srcdir)/iconv_open-hpux.h
 iconv_open-irix.h: iconv_open-irix.gperf
-	$(GPERF) -m 10 $(srcdir)/iconv_open-irix.gperf > $(srcdir)/iconv_open-irix.h-t
+	$(V_GPERF)$(GPERF) -m 10 $(srcdir)/iconv_open-irix.gperf > $(srcdir)/iconv_open-irix.h-t && \
 	mv $(srcdir)/iconv_open-irix.h-t $(srcdir)/iconv_open-irix.h
 iconv_open-osf.h: iconv_open-osf.gperf
-	$(GPERF) -m 10 $(srcdir)/iconv_open-osf.gperf > $(srcdir)/iconv_open-osf.h-t
+	$(V_GPERF)$(GPERF) -m 10 $(srcdir)/iconv_open-osf.gperf > $(srcdir)/iconv_open-osf.h-t && \
 	mv $(srcdir)/iconv_open-osf.h-t $(srcdir)/iconv_open-osf.h
 iconv_open-solaris.h: iconv_open-solaris.gperf
-	$(GPERF) -m 10 $(srcdir)/iconv_open-solaris.gperf > $(srcdir)/iconv_open-solaris.h-t
+	$(V_GPERF)$(GPERF) -m 10 $(srcdir)/iconv_open-solaris.gperf > $(srcdir)/iconv_open-solaris.h-t && \
 	mv $(srcdir)/iconv_open-solaris.h-t $(srcdir)/iconv_open-solaris.h
 BUILT_SOURCES        += iconv_open-aix.h iconv_open-hpux.h iconv_open-irix.h iconv_open-osf.h iconv_open-solaris.h
 MOSTLYCLEANFILES     += iconv_open-aix.h-t iconv_open-hpux.h-t iconv_open-irix.h-t iconv_open-osf.h-t iconv_open-solaris.h-t
@@ -1547,6 +1557,29 @@ EXTRA_libgreputils_a_SOURCES += stat.c
 
 ## end   gnulib module stat
 
+## begin gnulib module stdalign
+
+BUILT_SOURCES += $(STDALIGN_H)
+
+# We need the following in order to create <stdalign.h> when the system
+# doesn't have one that works.
+if GL_GENERATE_STDALIGN_H
+stdalign.h: stdalign.in.h $(top_builddir)/config.status
+	$(AM_V_GEN)rm -f $@-t $@ && \
+	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+	  cat $(srcdir)/stdalign.in.h; \
+	} > $@-t && \
+	mv $@-t $@
+else
+stdalign.h: $(top_builddir)/config.status
+	rm -f $@
+endif
+MOSTLYCLEANFILES += stdalign.h stdalign.h-t
+
+EXTRA_DIST += stdalign.in.h
+
+## end   gnulib module stdalign
+
 ## begin gnulib module stdarg
 
 BUILT_SOURCES += $(STDARG_H)
@@ -1613,6 +1646,7 @@ stddef.h: stddef.in.h $(top_builddir)/config.status
 	      -e 's|@''PRAGMA_SYSTEM_HEADER''@|@PRAGMA_SYSTEM_HEADER@|g' \
 	      -e 's|@''PRAGMA_COLUMNS''@|@PRAGMA_COLUMNS@|g' \
 	      -e 's|@''NEXT_STDDEF_H''@|$(NEXT_STDDEF_H)|g' \
+	      -e 's|@''HAVE_MAX_ALIGN_T''@|$(HAVE_MAX_ALIGN_T)|g' \
 	      -e 's|@''HAVE_WCHAR_T''@|$(HAVE_WCHAR_T)|g' \
 	      -e 's|@''REPLACE_NULL''@|$(REPLACE_NULL)|g' \
 	      < $(srcdir)/stddef.in.h; \
@@ -2271,10 +2305,12 @@ time.h: time.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(ARG_NONNULL_H) $(
 	      -e 's/@''GNULIB_STRPTIME''@/$(GNULIB_STRPTIME)/g' \
 	      -e 's/@''GNULIB_TIMEGM''@/$(GNULIB_TIMEGM)/g' \
 	      -e 's/@''GNULIB_TIME_R''@/$(GNULIB_TIME_R)/g' \
+	      -e 's/@''GNULIB_TIME_RZ''@/$(GNULIB_TIME_RZ)/g' \
 	      -e 's|@''HAVE_DECL_LOCALTIME_R''@|$(HAVE_DECL_LOCALTIME_R)|g' \
 	      -e 's|@''HAVE_NANOSLEEP''@|$(HAVE_NANOSLEEP)|g' \
 	      -e 's|@''HAVE_STRPTIME''@|$(HAVE_STRPTIME)|g' \
 	      -e 's|@''HAVE_TIMEGM''@|$(HAVE_TIMEGM)|g' \
+	      -e 's|@''HAVE_TIMEZONE_T''@|$(HAVE_TIMEZONE_T)|g' \
 	      -e 's|@''REPLACE_GMTIME''@|$(REPLACE_GMTIME)|g' \
 	      -e 's|@''REPLACE_LOCALTIME''@|$(REPLACE_LOCALTIME)|g' \
 	      -e 's|@''REPLACE_LOCALTIME_R''@|$(REPLACE_LOCALTIME_R)|g' \
@@ -2284,6 +2320,7 @@ time.h: time.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(ARG_NONNULL_H) $(
 	      -e 's|@''PTHREAD_H_DEFINES_STRUCT_TIMESPEC''@|$(PTHREAD_H_DEFINES_STRUCT_TIMESPEC)|g' \
 	      -e 's|@''SYS_TIME_H_DEFINES_STRUCT_TIMESPEC''@|$(SYS_TIME_H_DEFINES_STRUCT_TIMESPEC)|g' \
 	      -e 's|@''TIME_H_DEFINES_STRUCT_TIMESPEC''@|$(TIME_H_DEFINES_STRUCT_TIMESPEC)|g' \
+	      -e 's|@''UNISTD_H_DEFINES_STRUCT_TIMESPEC''@|$(UNISTD_H_DEFINES_STRUCT_TIMESPEC)|g' \
 	      -e '/definitions of _GL_FUNCDECL_RPL/r $(CXXDEFS_H)' \
 	      -e '/definition of _GL_ARG_NONNULL/r $(ARG_NONNULL_H)' \
 	      -e '/definition of _GL_WARN_ON_USE/r $(WARN_ON_USE_H)' \

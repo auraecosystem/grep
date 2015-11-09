@@ -4,21 +4,23 @@
 # Yuan-Chen Cheng <ycheng@sinica.edu.tw>, 2004.
 # Webber Liao <wpliao@gmail.com>, 2012.
 # Wei-Lun Chao <bluebat@member.fsf.org>, 2013.
+# Webber Liao <wpliao@gmail.com>, 2015.
 #
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: grep 2.14\n"
+"Project-Id-Version: grep 2.21.78\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2014-11-23 10:14-0800\n"
-"PO-Revision-Date: 2013-03-19 00:10+1000\n"
-"Last-Translator: Wei-Lun Chao <bluebat@member.fsf.org>\n"
+"POT-Creation-Date: 2015-11-01 17:26-0800\n"
+"PO-Revision-Date: 2015-10-25 13:34+0800\n"
+"Last-Translator: Webber Liao <wpliao@gmail.com>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 1.8\n"
 
 #: lib/argmatch.c:133
 #, c-format
@@ -34,7 +36,7 @@ msgstr "%2$s 的引數 %1$s 不明確"
 msgid "Valid arguments are:"
 msgstr "有效的引數為:"
 
-#: lib/closeout.c:112 src/grep.c:1096
+#: lib/closeout.c:112 src/grep.c:1143
 #, c-format
 msgid "write error"
 msgstr "寫入發生錯誤"
@@ -43,63 +45,68 @@ msgstr "寫入發生錯誤"
 msgid "Unknown system error"
 msgstr "未知的系統錯誤"
 
-#: lib/getopt.c:547 lib/getopt.c:576
+#: lib/getopt.c:575 lib/getopt.c:604
 #, c-format
 msgid "%s: option '%s' is ambiguous; possibilities:"
 msgstr "%s: 選項 \"%s\" 不明確; 可能選項為:"
 
-#: lib/getopt.c:624 lib/getopt.c:628
+#: lib/getopt.c:619
+#, c-format
+msgid "%s: option '%s' is ambiguous\n"
+msgstr "%s: 選項 \"%s\" 不明確\n"
+
+#: lib/getopt.c:654 lib/getopt.c:658
 #, c-format
 msgid "%s: option '--%s' doesn't allow an argument\n"
 msgstr "%s: 選項 \"--%s\" 不接受引數\n"
 
-#: lib/getopt.c:637 lib/getopt.c:642
+#: lib/getopt.c:667 lib/getopt.c:672
 #, c-format
 msgid "%s: option '%c%s' doesn't allow an argument\n"
 msgstr "%s: 選項 \"%c%s\" 不接受引數\n"
 
-#: lib/getopt.c:685 lib/getopt.c:704
+#: lib/getopt.c:715 lib/getopt.c:734
 #, c-format
 msgid "%s: option '--%s' requires an argument\n"
 msgstr "%s: 選項 \"--%s\" 需要一個引數\n"
 
-#: lib/getopt.c:742 lib/getopt.c:745
+#: lib/getopt.c:772 lib/getopt.c:775
 #, c-format
 msgid "%s: unrecognized option '--%s'\n"
 msgstr "%s: 未知的選項 \"--%s\"\n"
 
-#: lib/getopt.c:753 lib/getopt.c:756
+#: lib/getopt.c:783 lib/getopt.c:786
 #, c-format
 msgid "%s: unrecognized option '%c%s'\n"
 msgstr "%s: 未知的選項 \"%c%s\"\n"
 
-#: lib/getopt.c:805 lib/getopt.c:808
+#: lib/getopt.c:835 lib/getopt.c:838
 #, c-format
 msgid "%s: invalid option -- '%c'\n"
 msgstr "%s: 無效的選項 -- \"%c\"\n"
 
-#: lib/getopt.c:861 lib/getopt.c:878 lib/getopt.c:1088 lib/getopt.c:1106
+#: lib/getopt.c:891 lib/getopt.c:908 lib/getopt.c:1118 lib/getopt.c:1136
 #, c-format
 msgid "%s: option requires an argument -- '%c'\n"
 msgstr "%s: 選項需要一個引數 -- \"%c\"\n"
 
-#: lib/getopt.c:934 lib/getopt.c:950
+#: lib/getopt.c:964 lib/getopt.c:980
 #, c-format
 msgid "%s: option '-W %s' is ambiguous\n"
 msgstr "%s: 選項 \"-W %s\" 不明確\n"
 
-#: lib/getopt.c:974 lib/getopt.c:992
+#: lib/getopt.c:1004 lib/getopt.c:1022
 #, c-format
 msgid "%s: option '-W %s' doesn't allow an argument\n"
 msgstr "%s: 選項 \"-W %s\" 不接受引數\n"
 
-#: lib/getopt.c:1013 lib/getopt.c:1031
+#: lib/getopt.c:1043 lib/getopt.c:1061
 #, c-format
 msgid "%s: option '-W %s' requires an argument\n"
 msgstr "%s: 選項 \"-W %s\" 需要一個引數\n"
 
 #: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34
-#: src/pcresearch.c:267
+#: src/pcresearch.c:309
 #, c-format
 msgid "memory exhausted"
 msgstr "記憶體用盡"
@@ -143,75 +150,75 @@ msgstr "`"
 msgid "'"
 msgstr "'"
 
-#: lib/regcomp.c:131
+#: lib/regcomp.c:135
 msgid "Success"
 msgstr "成功"
 
-#: lib/regcomp.c:134
+#: lib/regcomp.c:138
 msgid "No match"
 msgstr "沒有符合的項目"
 
-#: lib/regcomp.c:137
+#: lib/regcomp.c:141
 msgid "Invalid regular expression"
 msgstr "無效的正規表示式"
 
-#: lib/regcomp.c:140
+#: lib/regcomp.c:144
 msgid "Invalid collation character"
 msgstr "無效的對照字元"
 
-#: lib/regcomp.c:143
+#: lib/regcomp.c:147
 msgid "Invalid character class name"
 msgstr "無效的字元類別名"
 
-#: lib/regcomp.c:146
+#: lib/regcomp.c:150
 msgid "Trailing backslash"
 msgstr "末端有反斜線"
 
-#: lib/regcomp.c:149
+#: lib/regcomp.c:153
 msgid "Invalid back reference"
 msgstr "無效的向後引用"
 
-#: lib/regcomp.c:152
+#: lib/regcomp.c:156
 msgid "Unmatched [ or [^"
 msgstr "沒有對應的 [ 或 [^"
 
-#: lib/regcomp.c:155
+#: lib/regcomp.c:159
 msgid "Unmatched ( or \\("
 msgstr "沒有對應的 ( 或 \\("
 
-#: lib/regcomp.c:158
+#: lib/regcomp.c:162
 msgid "Unmatched \\{"
 msgstr "沒有對應的 \\{"
 
-#: lib/regcomp.c:161
+#: lib/regcomp.c:165
 msgid "Invalid content of \\{\\}"
 msgstr "無效的 \\{\\} 內容"
 
-#: lib/regcomp.c:164
+#: lib/regcomp.c:168
 msgid "Invalid range end"
 msgstr "無效的結束範圍"
 
-#: lib/regcomp.c:167
+#: lib/regcomp.c:171
 msgid "Memory exhausted"
 msgstr "記憶體用盡"
 
-#: lib/regcomp.c:170
+#: lib/regcomp.c:174
 msgid "Invalid preceding regular expression"
 msgstr "無效的前置正規表示式"
 
-#: lib/regcomp.c:173
+#: lib/regcomp.c:177
 msgid "Premature end of regular expression"
 msgstr "正規表示式過早結束"
 
-#: lib/regcomp.c:176
+#: lib/regcomp.c:180
 msgid "Regular expression too big"
 msgstr "正規表示式過長"
 
-#: lib/regcomp.c:179
+#: lib/regcomp.c:183
 msgid "Unmatched ) or \\)"
 msgstr "沒有對應的 ) 或 \\)"
 
-#: lib/regcomp.c:707
+#: lib/regcomp.c:711
 msgid "No previous regular expression"
 msgstr "沒有先前的正規表示式"
 
@@ -402,43 +409,41 @@ msgstr "%s%s 引數 \"%s\" 中有無效的尾綴"
 msgid "%s%s argument '%s' too large"
 msgstr "%s%s 引數 \"%s\" 過大"
 
-#: src/dfa.c:1026 src/dfa.c:1029 src/dfa.c:1048 src/dfa.c:1058 src/dfa.c:1070
-#: src/dfa.c:1106 src/dfa.c:1115 src/dfa.c:1118 src/dfa.c:1123 src/dfa.c:1137
-#: src/dfa.c:1185
+#: src/dfa.c:1005 src/dfa.c:1008 src/dfa.c:1027 src/dfa.c:1037 src/dfa.c:1049
+#: src/dfa.c:1076 src/dfa.c:1085 src/dfa.c:1088 src/dfa.c:1093 src/dfa.c:1114
+#: src/dfa.c:1117
 msgid "unbalanced ["
 msgstr "不對稱的 ["
 
-#: src/dfa.c:1082
+#: src/dfa.c:1061
 msgid "invalid character class"
 msgstr "無效的字元類別"
 
-#: src/dfa.c:1228
+#: src/dfa.c:1183
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr "字元類別的語法為 [[:space:]], 非 [:space:]"
 
-#: src/dfa.c:1290
+#: src/dfa.c:1245
 msgid "unfinished \\ escape"
 msgstr "不完整的 \\ 逸出"
 
-#: src/dfa.c:1437
-#, fuzzy
+#: src/dfa.c:1392
 msgid "invalid content of \\{\\}"
-msgstr "無效的 \\{\\} 內容"
+msgstr "\\{\\} 的內容無效"
 
-#: src/dfa.c:1440
-#, fuzzy
+#: src/dfa.c:1395
 msgid "regular expression too big"
 msgstr "正規表示式過長"
 
-#: src/dfa.c:1875
+#: src/dfa.c:1811
 msgid "unbalanced ("
 msgstr "不對稱的 ("
 
-#: src/dfa.c:2001
+#: src/dfa.c:1937
 msgid "no syntax specified"
 msgstr "沒有指定的語法"
 
-#: src/dfa.c:2009
+#: src/dfa.c:1945
 msgid "unbalanced )"
 msgstr "不對稱的 )"
 
@@ -451,63 +456,63 @@ msgstr "Mike Haertel"
 msgid "others, see <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
 msgstr "其他作者，請見 <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
 
-#: src/grep.c:605
+#: src/grep.c:639
 msgid "invalid context length argument"
 msgstr "無效的內容列數值"
 
-#: src/grep.c:658
+#: src/grep.c:692
 #, c-format
 msgid "input is too large to count"
 msgstr "輸入過長無法計數"
 
-#: src/grep.c:700
+#: src/grep.c:734
 msgid "lseek failed"
 msgstr "lseek 失敗"
 
-#: src/grep.c:1420
+#: src/grep.c:1467
 #, c-format
 msgid "Binary file %s matches\n"
 msgstr "二進位格式檔案 %s 符合\n"
 
-#: src/grep.c:1464
+#: src/grep.c:1513
 #, c-format
 msgid "warning: %s: %s"
 msgstr "警告: %s: %s"
 
-#: src/grep.c:1465
+#: src/grep.c:1514
 msgid "recursive directory loop"
 msgstr "遞迴的目錄結構"
 
-#: src/grep.c:1627
+#: src/grep.c:1683
 #, c-format
 msgid "input file %s is also the output"
 msgstr "輸入檔 %s 也是輸出對象"
 
-#: src/grep.c:1685
+#: src/grep.c:1741
 msgid "(standard input)"
 msgstr "(標準輸入)"
 
-#: src/grep.c:1701 src/grep.c:1708
+#: src/grep.c:1757 src/grep.c:1764
 #, c-format
 msgid "Usage: %s [OPTION]... PATTERN [FILE]...\n"
 msgstr "用法: %s [選項]… PATTERN [檔案]…\n"
 
-#: src/grep.c:1703
+#: src/grep.c:1759
 #, c-format
 msgid "Try '%s --help' for more information.\n"
 msgstr "請使用 \"%s --help\" 以閱讀更多的資訊。\n"
 
-#: src/grep.c:1709
+#: src/grep.c:1765
 #, c-format
 msgid "Search for PATTERN in each FILE or standard input.\n"
 msgstr "對每個 檔案 或標準輸入搜尋 PATTERN。\n"
 
-#: src/grep.c:1710
+#: src/grep.c:1766
 #, c-format
 msgid "PATTERN is, by default, a basic regular expression (BRE).\n"
 msgstr "PATTERN 原則上是一個基本正規表示式 (BRE)。\n"
 
-#: src/grep.c:1711
+#: src/grep.c:1767
 #, c-format
 msgid ""
 "Example: %s -i 'hello world' menu.h main.c\n"
@@ -518,8 +523,8 @@ msgstr ""
 "\n"
 "正規表示式選項及解釋:\n"
 
-#: src/grep.c:1715
-#, fuzzy, c-format
+#: src/grep.c:1771
+#, c-format
 msgid ""
 "  -E, --extended-regexp     PATTERN is an extended regular expression (ERE)\n"
 "  -F, --fixed-strings       PATTERN is a set of newline-separated strings\n"
@@ -531,7 +536,7 @@ msgstr ""
 "  -G, --basic-regexp        PATTERN 是一個基本正規表示式 (BRE)\n"
 "  -P, --perl-regexp         PATTERN 是一個 Perl 的正規表示式\n"
 
-#: src/grep.c:1721
+#: src/grep.c:1777
 #, c-format
 msgid ""
 "  -e, --regexp=PATTERN      use PATTERN for matching\n"
@@ -548,8 +553,8 @@ msgstr ""
 "  -x, --line-regexp         限制整列符合 PATTERN\n"
 "  -z, --null-data           設定資料列結尾為空白位元組，非換列符號\n"
 
-#: src/grep.c:1728
-#, fuzzy, c-format
+#: src/grep.c:1784
+#, c-format
 msgid ""
 "\n"
 "Miscellaneous:\n"
@@ -564,9 +569,8 @@ msgstr ""
 "  -v, --invert-match        選取不符合的列\n"
 "  -V, --version             印出版本資訊然後結束\n"
 "      --help                顯示此說明然後結束\n"
-"      --mmap                已廢除，無作用；會誘發警告\n"
 
-#: src/grep.c:1735
+#: src/grep.c:1791
 #, c-format
 msgid ""
 "\n"
@@ -590,7 +594,7 @@ msgstr ""
 "  -h, --no-filename         抑制輸出列的檔名前綴\n"
 "      --label=LABEL         以 LABEL 作標準輸入的檔名前綴\n"
 
-#: src/grep.c:1746
+#: src/grep.c:1802
 #, c-format
 msgid ""
 "  -o, --only-matching       show only the part of a line matching PATTERN\n"
@@ -606,7 +610,7 @@ msgstr ""
 "\"\n"
 "  -a, --text                等同於 --binary-files=text\n"
 
-#: src/grep.c:1753
+#: src/grep.c:1809
 #, c-format
 msgid ""
 "  -I                        equivalent to --binary-files=without-match\n"
@@ -624,7 +628,7 @@ msgstr ""
 "                            ACTION 為 \"read\" 或 \"skip\"\n"
 "  -R, -r, --recursive       等同於 --directories=recurse\n"
 
-#: src/grep.c:1762
+#: src/grep.c:1818
 #, c-format
 msgid ""
 "      --include=FILE_PATTERN  search only files that match FILE_PATTERN\n"
@@ -639,7 +643,7 @@ msgstr ""
 "      --exclude-from=FILE     跳過檔名符合 FILE 中樣式的檔案\n"
 "      --exclude-dir=PATTERN   跳過名字符合 PATTERN 的檔案目錄。\n"
 
-#: src/grep.c:1769
+#: src/grep.c:1825
 #, c-format
 msgid ""
 "  -L, --files-without-match  print only names of FILEs containing no match\n"
@@ -654,7 +658,7 @@ msgstr ""
 "  -T, --initial-tab         (需要時) 對齊欄標符號\n"
 "  -Z, --null                在 檔案 名稱後印出空白位元組\n"
 
-#: src/grep.c:1775
+#: src/grep.c:1831
 #, c-format
 msgid ""
 "\n"
@@ -669,7 +673,7 @@ msgstr ""
 "  -A, --after-context=NUM   印出 NUM 列的後文\n"
 "  -C, --context=NUM         印出 NUM 列的內容\n"
 
-#: src/grep.c:1782
+#: src/grep.c:1838
 #, c-format
 msgid ""
 "  -NUM                      same as --context=NUM\n"
@@ -691,7 +695,7 @@ msgstr ""
 "                            (MSDOS/Windows)\n"
 "\n"
 
-#: src/grep.c:1791
+#: src/grep.c:1847
 #, c-format
 msgid ""
 "'egrep' means 'grep -E'.  'fgrep' means 'grep -F'.\n"
@@ -700,7 +704,7 @@ msgstr ""
 "\"egrep\" 等同於 \"grep -E\".  \"fgrep\" 等同於 \"grep -F\"。\n"
 "直接呼叫 \"egrep\" 或 \"fgrep\" 的做法已被廢除。\n"
 
-#: src/grep.c:1794
+#: src/grep.c:1850
 #, c-format
 msgid ""
 "When FILE is -, read standard input.  With no FILE, read . if a command-"
@@ -714,81 +718,104 @@ msgstr ""
 "如果有符合的行列時，結束狀態為 0，否則為 1;\n"
 "如果有任何錯誤且沒有採用 -q 選項時，結束狀態則為 2。\n"
 
-#: src/grep.c:1863
+#: src/grep.c:1917
 #, c-format
 msgid "conflicting matchers specified"
 msgstr "指定了互相衝突的配對選項"
 
-#: src/grep.c:1874
+#: src/grep.c:1928
 #, c-format
 msgid "invalid matcher %s"
 msgstr "無效的配對選項 %s"
 
-#: src/grep.c:2157
+#: src/grep.c:2211
 #, c-format
 msgid "warning: GREP_OPTIONS is deprecated; please use an alias or script"
-msgstr ""
+msgstr "警告: GREP_OPTIONS 已經被廢除。請使用別名或腳本取代。"
 
-#: src/grep.c:2187
+#: src/grep.c:2241
 #, c-format
 msgid "unknown devices method"
 msgstr "未知的裝置方法"
 
-#: src/grep.c:2314
+#: src/grep.c:2368
 #, c-format
 msgid "invalid max count"
 msgstr "無效的最大計次"
 
-#: src/grep.c:2371
+#: src/grep.c:2425
 #, c-format
 msgid "unknown binary-files type"
 msgstr "未知的二進位檔案類別"
 
-#: src/pcresearch.c:54
+#: src/pcresearch.c:71
+#, c-format
+msgid "failed to allocate memory for the PCRE JIT stack"
+msgstr "為 PCRE JIT 堆疊分配記憶體時出現錯誤"
+
+#: src/pcresearch.c:94
 msgid ""
 "support for the -P option is not compiled into this --disable-perl-regexp "
 "binary"
 msgstr "-P 選項的支援沒有被編譯進此 --disable-perl-regexp 的二進位檔案"
 
-#: src/pcresearch.c:70
+#: src/pcresearch.c:110
 #, c-format
 msgid "-P supports only unibyte and UTF-8 locales"
-msgstr ""
+msgstr "-P supports only unibyte and UTF-8 locales"
 
-#: src/pcresearch.c:74
+#: src/pcresearch.c:114
 #, c-format
 msgid "the -P option only supports a single pattern"
 msgstr "-P 選項只支援單一樣式"
 
-#: src/pcresearch.c:120
+#: src/pcresearch.c:160
 #, c-format
 msgid "internal error (should never happen)"
-msgstr ""
+msgstr "內部錯誤 (不應該出現這個錯誤)"
 
-#: src/pcresearch.c:130
-#, c-format
-msgid "failed to allocate memory for the PCRE JIT stack"
-msgstr ""
-
-#: src/pcresearch.c:150
+#: src/pcresearch.c:182
 #, c-format
 msgid "internal error"
 msgstr "內部錯誤"
 
-#: src/pcresearch.c:186
+#: src/pcresearch.c:223
 #, c-format
 msgid "exceeded PCRE's line length limit"
 msgstr "已超過 PCRE 的字數上限"
 
-#: src/pcresearch.c:271
+#: src/pcresearch.c:313
+#, c-format
+msgid "exhausted PCRE JIT stack"
+msgstr "已耗盡 PCRE JIT 堆疊"
+
+#: src/pcresearch.c:317
 #, c-format
 msgid "exceeded PCRE's backtracking limit"
 msgstr "已超過 PCRE 的回溯上限"
 
-#: src/pcresearch.c:278
-#, fuzzy, c-format
+#: src/pcresearch.c:324
+#, c-format
 msgid "internal PCRE error: %d"
-msgstr "內部錯誤"
+msgstr "內部 PCRE 錯誤: %d"
+
+#~ msgid "PATTERN is an extended regular expression (ERE).\n"
+#~ msgstr "PATTERN 是一個延伸正規表示式 (ERE)。\n"
+
+#~ msgid "Invocation as 'egrep' is deprecated; use 'grep -E' instead.\n"
+#~ msgstr "\"egrep\" 的呼叫方式已被廢除; 請用 \"grep -E\" 代替。\n"
+
+#~ msgid "PATTERN is a set of newline-separated fixed strings.\n"
+#~ msgstr "PATTERN 是一組以換列分隔開的固定字串。\n"
+
+#~ msgid "Invocation as 'fgrep' is deprecated; use 'grep -F' instead.\n"
+#~ msgstr "\"fgrep\" 的呼叫方式已被廢除; 請用 \"grep -F\" 代替。\n"
+
+#~ msgid "GNU Grep home page: <%s>\n"
+#~ msgstr "GNU Grep 首頁: <%s>\n"
+
+#~ msgid "%s can only use the %s pattern syntax"
+#~ msgstr "%s 只能使用 %s 樣式的語法"
 
 #~ msgid "GNU Grep home page: <%s>\n"
 #~ msgstr "GNU Grep 首頁: <%s>\n"

@@ -4,6 +4,7 @@ if you'd rather not be listed, or if you'd prefer a different address
 be used, please send a note to the bug-report mailing list (as seen at
 end of e.g., grep --help).
 
+'Drake' Daham Wang                  drakewang@gmail.com
 Adam Katz                           savannah@kopis.com
 Aharon Robbins                      arnold@skeeve.com
 Akim Demaille                       akim@epita.fr
@@ -40,12 +41,13 @@ Florian La Roche                    laroche@redhat.com
 François Pinard                     pinard@iro.umontreal.ca
 Gerald Stoller                      gerald_stoller@hotmail.com
 Grant McDorman                      grant@isgtec.com
+Greg Boyd                           gboyd.ccsf@gmail.com
 Greg Louis                          glouis@dynamicro.on.ca
 Guglielmo 'bond' Bondioni           g.bondioni@libero.it
+H. Merijn Brand                     h.m.brand@hccnet.nl
 Hans-Bernhard Broeker               broeker@physik.rwth-aachen.de
 Harald Hanche-Olsen                 hanche@math.ntnu.no
 Heikki Korpela                      heko@iki.fi
-H. Merijn Brand                     h.m.brand@hccnet.nl
 Igor O. Ladygin                     assa@zabtrans.ru
 Ilya Basin                          basinilya@gmail.com
 Isamu Hasegawa                      isamu@yamato.ibm.com
@@ -81,22 +83,22 @@ Miles Bader                         miles@ccs.mt.nec.co.jp
 Mirraz Mirraz                       mirraz1@rambler.ru
 Nelson H. F. Beebe                  beebe@math.utah.edu
 Nicolas Vigier                      boklm@mars-attacks.org
-Norihirio Tanaka                    noritnk@kcn.ne.jp
+Nima Aghdaii                        naghdaii@fb.com
 Norihiro Tanaka                     noritnk@kcn.ne.jp
 Olaf Kirch                          okir@ns.lst.de
-Pádraig Brady                       P@draigBrady.com
 Paolo Bonzini                       bonzini@gnu.org
 Patrick Boyd                        pboyd04@gmail.com
 Paul Eggert                         eggert@cs.ucla.edu
 Paul Kimoto                         kimoto@spacenet.tn.cornell.edu
-Péter Radics                        mitchnull@gmail.com
-Petr Písař                          petr.pisar@atlas.cz
 Petr Pisar                          ppisar@redhat.com
+Petr Písař                          petr.pisar@atlas.cz
 Philip Hazel                        ph10@cus.cam.ac.uk
-Philippe Defert                     Philippe.Defert@cern.ch
-Philippe De Muyter                  phdm@info.ucl.ac.be
 Philipp Kohlbecher                  xt28@gmx.de
+Philippe De Muyter                  phdm@info.ucl.ac.be
+Philippe Defert                     Philippe.Defert@cern.ch
 Phillip C. Brisco                   phillip.craig.brisco@ccmail.census.gov
+Pádraig Brady                       P@draigBrady.com
+Péter Radics                        mitchnull@gmail.com
 Rainer Orth                         ro@cebitec.uni-bielefeld.de
 Reuben Thomas                       rrt@sc3d.org
 Roland Roberts                      rroberts@muller.com
@@ -125,6 +127,8 @@ Volker Borchert                     bt@teknon.de
 Wichert Akkerman                    wichert@cistron.nl
 William Bader                       william@nscs.fast.net
 Wolfgang Schludi                    schludi@syscomp.de
+Yuliy Pisetsky                      ypisetsky@fb.com
+Zev Weiss                           zev@bewilderbeest.net
 Zoltan Herczeg                      hzmester@freemail.hu
 
 ;; Local Variables:

@@ -1,5 +1,5 @@
 # DO NOT EDIT! GENERATED AUTOMATICALLY!
-# Copyright (C) 2002-2014 Free Software Foundation, Inc.
+# Copyright (C) 2002-2015 Free Software Foundation, Inc.
 #
 # This file is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -37,7 +37,11 @@ AC_DEFUN([gl_EARLY],
   m4_pattern_allow([^gl_ES$])dnl a valid locale name
   m4_pattern_allow([^gl_LIBOBJS$])dnl a variable
   m4_pattern_allow([^gl_LTLIBOBJS$])dnl a variable
+
+  # Pre-early section.
+  AC_REQUIRE([gl_USE_SYSTEM_EXTENSIONS])
   AC_REQUIRE([gl_PROG_AR_RANLIB])
+
   AC_REQUIRE([AM_PROG_CC_C_O])
   # Code from module absolute-header:
   # Code from module alignof:
@@ -48,6 +52,7 @@ AC_DEFUN([gl_EARLY],
   # Code from module announce-gen:
   # Code from module argmatch:
   # Code from module argmatch-tests:
+  # Code from module assure:
   # Code from module at-internal:
   # Code from module binary-io:
   # Code from module binary-io-tests:
@@ -99,7 +104,6 @@ AC_DEFUN([gl_EARLY],
   # Code from module exclude-tests:
   # Code from module exitfail:
   # Code from module extensions:
-  AC_REQUIRE([gl_USE_SYSTEM_EXTENSIONS])
   # Code from module extern-inline:
   # Code from module fchdir:
   # Code from module fchdir-tests:
@@ -119,6 +123,7 @@ AC_DEFUN([gl_EARLY],
   # Code from module fgetc-tests:
   # Code from module filename:
   # Code from module filenamecat-lgpl:
+  # Code from module flexmember:
   # Code from module float:
   # Code from module float-tests:
   # Code from module fnmatch:
@@ -284,6 +289,8 @@ AC_DEFUN([gl_EARLY],
   # Code from module ssize_t:
   # Code from module stat:
   # Code from module stat-tests:
+  # Code from module stdalign:
+  # Code from module stdalign-tests:
   # Code from module stdarg:
   dnl Some compilers (e.g., AIX 5.3 cc) need to be in c99 mode
   dnl for the builtin va_copy to work.  With Autoconf 2.60 or later,
@@ -489,6 +496,7 @@ AC_DEFUN([gl_INIT],
   gl_DIRENT_MODULE_INDICATOR([fdopendir])
   gl_MODULE_INDICATOR([fdopendir])
   gl_FILE_NAME_CONCAT_LGPL
+  AC_C_FLEXIBLE_ARRAY_MEMBER
   gl_FUNC_FNMATCH_POSIX
   if test -n "$FNMATCH_H"; then
     AC_LIBOBJ([fnmatch])
@@ -784,6 +792,7 @@ AC_DEFUN([gl_INIT],
     gl_PREREQ_STAT
   fi
   gl_SYS_STAT_MODULE_INDICATOR([stat])
+  gl_STDALIGN_H
   gl_STDARG_H
   AM_STDBOOL_H
   gl_STDDEF_H
@@ -868,14 +877,14 @@ AC_DEFUN([gl_INIT],
   gl_HEADER_TIME_H
   gl_UNISTD_H
   gl_UNISTD_SAFER
-  gl_LIBUNISTRING_LIBHEADER([0.9.2], [unistr.h])
+  gl_LIBUNISTRING_LIBHEADER([0.9.4], [unistr.h])
   gl_MODULE_INDICATOR([unistr/u8-mbtoucr])
   gl_LIBUNISTRING_MODULE([0.9], [unistr/u8-mbtoucr])
   gl_MODULE_INDICATOR([unistr/u8-uctomb])
   gl_LIBUNISTRING_MODULE([0.9], [unistr/u8-uctomb])
-  gl_LIBUNISTRING_LIBHEADER([0.9], [unitypes.h])
-  gl_LIBUNISTRING_LIBHEADER([0.9], [uniwidth.h])
-  gl_LIBUNISTRING_MODULE([0.9.4], [uniwidth/width])
+  gl_LIBUNISTRING_LIBHEADER([0.9.4], [unitypes.h])
+  gl_LIBUNISTRING_LIBHEADER([0.9.4], [uniwidth.h])
+  gl_LIBUNISTRING_MODULE([0.9.6], [uniwidth/width])
   gl_FUNC_GLIBC_UNLOCKED_IO
   gl_VERSION_ETC
   gl_WCHAR_H
@@ -1175,11 +1184,13 @@ AC_DEFUN([gl_FILE_LIST], [
   build-aux/vc-list-files
   doc/fdl.texi
   doc/gendocs_template
+  doc/gendocs_template_min
   lib/alignof.h
   lib/alloca.c
   lib/alloca.in.h
   lib/argmatch.c
   lib/argmatch.h
+  lib/assure.h
   lib/at-func.c
   lib/basename-lgpl.c
   lib/binary-io.c
@@ -1361,6 +1372,7 @@ AC_DEFUN([gl_FILE_LIST], [
   lib/save-cwd.c
   lib/save-cwd.h
   lib/stat.c
+  lib/stdalign.in.h
   lib/stdarg.in.h
   lib/stdbool.in.h
   lib/stddef.in.h
@@ -1468,6 +1480,7 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/fdopen.m4
   m4/fdopendir.m4
   m4/filenamecat.m4
+  m4/flexmember.m4
   m4/float_h.m4
   m4/fnmatch.m4
   m4/fpending.m4
@@ -1566,6 +1579,7 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/snprintf.m4
   m4/ssize_t.m4
   m4/stat.m4
+  m4/stdalign.m4
   m4/stdarg.m4
   m4/stdbool.m4
   m4/stddef_h.m4
@@ -1726,6 +1740,7 @@ AC_DEFUN([gl_FILE_LIST], [
   tests/test-snprintf.c
   tests/test-stat.c
   tests/test-stat.h
+  tests/test-stdalign.c
   tests/test-stdbool.c
   tests/test-stddef.c
   tests/test-stdint.c

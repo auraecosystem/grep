@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GNU grep 2.20.72\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2014-11-23 10:14-0800\n"
+"POT-Creation-Date: 2015-11-01 17:26-0800\n"
 "PO-Revision-Date: 2014-11-11 10:51-0400\n"
 "Last-Translator: David Prévot <david@tilapin.org>\n"
 "Language-Team: French <traduc@traduc.org>\n"
@@ -35,7 +35,7 @@ msgstr "argument %s ambigu pour %s"
 msgid "Valid arguments are:"
 msgstr "Les arguments valables sont :"
 
-#: lib/closeout.c:112 src/grep.c:1096
+#: lib/closeout.c:112 src/grep.c:1143
 #, c-format
 msgid "write error"
 msgstr "erreur d'écriture"
@@ -44,63 +44,68 @@ msgstr "erreur d'écriture"
 msgid "Unknown system error"
 msgstr "Erreur système inconnue"
 
-#: lib/getopt.c:547 lib/getopt.c:576
+#: lib/getopt.c:575 lib/getopt.c:604
 #, c-format
 msgid "%s: option '%s' is ambiguous; possibilities:"
 msgstr "%s : l'option « %s » est ambiguë ; possibilités :"
 
-#: lib/getopt.c:624 lib/getopt.c:628
+#: lib/getopt.c:619
+#, fuzzy, c-format
+msgid "%s: option '%s' is ambiguous\n"
+msgstr "%s : l'option « -W %s » est ambiguë\n"
+
+#: lib/getopt.c:654 lib/getopt.c:658
 #, c-format
 msgid "%s: option '--%s' doesn't allow an argument\n"
 msgstr "%s : l'option « --%s » n'accepte pas d'argument\n"
 
-#: lib/getopt.c:637 lib/getopt.c:642
+#: lib/getopt.c:667 lib/getopt.c:672
 #, c-format
 msgid "%s: option '%c%s' doesn't allow an argument\n"
 msgstr "%s : l'option « %c%s » n'accepte pas d'argument\n"
 
-#: lib/getopt.c:685 lib/getopt.c:704
+#: lib/getopt.c:715 lib/getopt.c:734
 #, c-format
 msgid "%s: option '--%s' requires an argument\n"
 msgstr "%s : l'option « --%s » nécessite un argument\n"
 
-#: lib/getopt.c:742 lib/getopt.c:745
+#: lib/getopt.c:772 lib/getopt.c:775
 #, c-format
 msgid "%s: unrecognized option '--%s'\n"
 msgstr "%s : option « --%s » non reconnue\n"
 
-#: lib/getopt.c:753 lib/getopt.c:756
+#: lib/getopt.c:783 lib/getopt.c:786
 #, c-format
 msgid "%s: unrecognized option '%c%s'\n"
 msgstr "%s : option « %c%s » non reconnue\n"
 
-#: lib/getopt.c:805 lib/getopt.c:808
+#: lib/getopt.c:835 lib/getopt.c:838
 #, c-format
 msgid "%s: invalid option -- '%c'\n"
 msgstr "%s : option incorrecte — « %c »\n"
 
-#: lib/getopt.c:861 lib/getopt.c:878 lib/getopt.c:1088 lib/getopt.c:1106
+#: lib/getopt.c:891 lib/getopt.c:908 lib/getopt.c:1118 lib/getopt.c:1136
 #, c-format
 msgid "%s: option requires an argument -- '%c'\n"
 msgstr "%s : l'option nécessite un argument — « %c »\n"
 
-#: lib/getopt.c:934 lib/getopt.c:950
+#: lib/getopt.c:964 lib/getopt.c:980
 #, c-format
 msgid "%s: option '-W %s' is ambiguous\n"
 msgstr "%s : l'option « -W %s » est ambiguë\n"
 
-#: lib/getopt.c:974 lib/getopt.c:992
+#: lib/getopt.c:1004 lib/getopt.c:1022
 #, c-format
 msgid "%s: option '-W %s' doesn't allow an argument\n"
 msgstr "%s : l'option « -W %s » n'accepte pas d'argument\n"
 
-#: lib/getopt.c:1013 lib/getopt.c:1031
+#: lib/getopt.c:1043 lib/getopt.c:1061
 #, c-format
 msgid "%s: option '-W %s' requires an argument\n"
 msgstr "%s : l'option « -W %s » nécessite un argument\n"
 
 #: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34
-#: src/pcresearch.c:267
+#: src/pcresearch.c:309
 #, c-format
 msgid "memory exhausted"
 msgstr "mémoire épuisée"
@@ -144,75 +149,75 @@ msgstr "« "
 msgid "'"
 msgstr " »"
 
-#: lib/regcomp.c:131
+#: lib/regcomp.c:135
 msgid "Success"
 msgstr "Réussite"
 
-#: lib/regcomp.c:134
+#: lib/regcomp.c:138
 msgid "No match"
 msgstr "Pas de correspondance"
 
-#: lib/regcomp.c:137
+#: lib/regcomp.c:141
 msgid "Invalid regular expression"
 msgstr "Expression rationnelle incorrecte"
 
-#: lib/regcomp.c:140
+#: lib/regcomp.c:144
 msgid "Invalid collation character"
 msgstr "Caractère de collation incorrect"
 
-#: lib/regcomp.c:143
+#: lib/regcomp.c:147
 msgid "Invalid character class name"
 msgstr "Nom de classe de caractères incorrect"
 
-#: lib/regcomp.c:146
+#: lib/regcomp.c:150
 msgid "Trailing backslash"
 msgstr "Barre oblique inverse finale"
 
-#: lib/regcomp.c:149
+#: lib/regcomp.c:153
 msgid "Invalid back reference"
 msgstr "Référence arrière incorrecte"
 
-#: lib/regcomp.c:152
+#: lib/regcomp.c:156
 msgid "Unmatched [ or [^"
 msgstr "[ ou [^ sans correspondance"
 
-#: lib/regcomp.c:155
+#: lib/regcomp.c:159
 msgid "Unmatched ( or \\("
 msgstr "( ou \\( sans correspondance"
 
-#: lib/regcomp.c:158
+#: lib/regcomp.c:162
 msgid "Unmatched \\{"
 msgstr "\\{ sans correspondance"
 
-#: lib/regcomp.c:161
+#: lib/regcomp.c:165
 msgid "Invalid content of \\{\\}"
 msgstr "Contenu de \\{\\} incorrect"
 
-#: lib/regcomp.c:164
+#: lib/regcomp.c:168
 msgid "Invalid range end"
 msgstr "Fin d'intervalle incorrecte"
 
-#: lib/regcomp.c:167
+#: lib/regcomp.c:171
 msgid "Memory exhausted"
 msgstr "Mémoire épuisée"
 
-#: lib/regcomp.c:170
+#: lib/regcomp.c:174
 msgid "Invalid preceding regular expression"
 msgstr "Expression rationnelle précédente incorrecte"
 
-#: lib/regcomp.c:173
+#: lib/regcomp.c:177
 msgid "Premature end of regular expression"
 msgstr "Fin prématurée d'expression rationnelle"
 
-#: lib/regcomp.c:176
+#: lib/regcomp.c:180
 msgid "Regular expression too big"
 msgstr "Expression rationnelle trop grande"
 
-#: lib/regcomp.c:179
+#: lib/regcomp.c:183
 msgid "Unmatched ) or \\)"
 msgstr ") ou \\) sans correspondance"
 
-#: lib/regcomp.c:707
+#: lib/regcomp.c:711
 msgid "No previous regular expression"
 msgstr "Pas d'expression rationnelle précédente"
 
@@ -405,41 +410,41 @@ msgstr "suffixe incorrect dans l'argument %s%s « %s »"
 msgid "%s%s argument '%s' too large"
 msgstr "argument %s%s « %s » trop grand"
 
-#: src/dfa.c:1026 src/dfa.c:1029 src/dfa.c:1048 src/dfa.c:1058 src/dfa.c:1070
-#: src/dfa.c:1106 src/dfa.c:1115 src/dfa.c:1118 src/dfa.c:1123 src/dfa.c:1137
-#: src/dfa.c:1185
+#: src/dfa.c:1005 src/dfa.c:1008 src/dfa.c:1027 src/dfa.c:1037 src/dfa.c:1049
+#: src/dfa.c:1076 src/dfa.c:1085 src/dfa.c:1088 src/dfa.c:1093 src/dfa.c:1114
+#: src/dfa.c:1117
 msgid "unbalanced ["
 msgstr "[ non apparié"
 
-#: src/dfa.c:1082
+#: src/dfa.c:1061
 msgid "invalid character class"
 msgstr "classe de caractères incorrecte"
 
-#: src/dfa.c:1228
+#: src/dfa.c:1183
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr "la syntaxe d'une classe de caractères est [[:space:]], pas [:space:]"
 
-#: src/dfa.c:1290
+#: src/dfa.c:1245
 msgid "unfinished \\ escape"
 msgstr "séquence d'échappement \\ non terminée"
 
-#: src/dfa.c:1437
+#: src/dfa.c:1392
 msgid "invalid content of \\{\\}"
 msgstr "contenu de \\{\\} incorrect"
 
-#: src/dfa.c:1440
+#: src/dfa.c:1395
 msgid "regular expression too big"
 msgstr "expression rationnelle trop grande"
 
-#: src/dfa.c:1875
+#: src/dfa.c:1811
 msgid "unbalanced ("
 msgstr "( non appariée"
 
-#: src/dfa.c:2001
+#: src/dfa.c:1937
 msgid "no syntax specified"
 msgstr "aucune syntaxe indiquée"
 
-#: src/dfa.c:2009
+#: src/dfa.c:1945
 msgid "unbalanced )"
 msgstr ") non appariée"
 
@@ -452,65 +457,65 @@ msgstr "Mike Haertel"
 msgid "others, see <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
 msgstr "autres, consultez <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
 
-#: src/grep.c:605
+#: src/grep.c:639
 msgid "invalid context length argument"
 msgstr "argument de longueur de contexte incorrect"
 
-#: src/grep.c:658
+#: src/grep.c:692
 #, c-format
 msgid "input is too large to count"
 msgstr "taille des données en entrée trop importante pour compter"
 
-#: src/grep.c:700
+#: src/grep.c:734
 msgid "lseek failed"
 msgstr "échec de lseek"
 
-#: src/grep.c:1420
+#: src/grep.c:1467
 #, c-format
 msgid "Binary file %s matches\n"
 msgstr "Fichier binaire %s correspondant\n"
 
-#: src/grep.c:1464
+#: src/grep.c:1513
 #, c-format
 msgid "warning: %s: %s"
 msgstr "Avertissement : %s : %s"
 
-#: src/grep.c:1465
+#: src/grep.c:1514
 msgid "recursive directory loop"
 msgstr "boucle de répertoire récursive"
 
-#: src/grep.c:1627
+#: src/grep.c:1683
 #, c-format
 msgid "input file %s is also the output"
 msgstr "le fichier d'entrée %s est aussi en sortie"
 
-#: src/grep.c:1685
+#: src/grep.c:1741
 msgid "(standard input)"
 msgstr "(entrée standard)"
 
-#: src/grep.c:1701 src/grep.c:1708
+#: src/grep.c:1757 src/grep.c:1764
 #, c-format
 msgid "Usage: %s [OPTION]... PATTERN [FILE]...\n"
 msgstr "Utilisation : %s [OPTION]... MOTIF [FICHIER]...\n"
 
-#: src/grep.c:1703
+#: src/grep.c:1759
 #, c-format
 msgid "Try '%s --help' for more information.\n"
 msgstr ""
 "Exécutez « %s --help » pour obtenir des renseignements complémentaires.\n"
 
-#: src/grep.c:1709
+#: src/grep.c:1765
 #, c-format
 msgid "Search for PATTERN in each FILE or standard input.\n"
 msgstr ""
 "Chercher un MOTIF dans chaque FICHIER ou à partir de l'entrée standard.\n"
 
-#: src/grep.c:1710
+#: src/grep.c:1766
 #, c-format
 msgid "PATTERN is, by default, a basic regular expression (BRE).\n"
 msgstr "MOTIF est, par défaut, une expression rationnelle simple.\n"
 
-#: src/grep.c:1711
+#: src/grep.c:1767
 #, c-format
 msgid ""
 "Example: %s -i 'hello world' menu.h main.c\n"
@@ -521,7 +526,7 @@ msgstr ""
 "\n"
 "Sélection et interprétation de l'expression rationnelle :\n"
 
-#: src/grep.c:1715
+#: src/grep.c:1771
 #, c-format
 msgid ""
 "  -E, --extended-regexp     PATTERN is an extended regular expression (ERE)\n"
@@ -534,7 +539,7 @@ msgstr ""
 "  -G, --basic-regexp        MOTIF est une expression rationnelle de base\n"
 "  -P, --perl-regexp         MOTIF est une expression rationnelle en Perl\n"
 
-#: src/grep.c:1721
+#: src/grep.c:1777
 #, c-format
 msgid ""
 "  -e, --regexp=PATTERN      use PATTERN for matching\n"
@@ -553,8 +558,8 @@ msgstr ""
 "entières\n"
 "  -z, --null-data           finir les lignes de données par un octet nul\n"
 
-#: src/grep.c:1728
-#, c-format
+#: src/grep.c:1784
+#, fuzzy, c-format
 msgid ""
 "\n"
 "Miscellaneous:\n"
@@ -570,7 +575,7 @@ msgstr ""
 "  -V, --version             afficher le nom et la version du logiciel\n"
 "      --help                afficher l'aide et quitter\n"
 
-#: src/grep.c:1735
+#: src/grep.c:1791
 #, c-format
 msgid ""
 "\n"
@@ -597,7 +602,7 @@ msgstr ""
 "      --label=ÉTIQUETTE     utiliser ÉTIQUETTE pour le préfixe d'entrée "
 "standard\n"
 
-#: src/grep.c:1746
+#: src/grep.c:1802
 #, c-format
 msgid ""
 "  -o, --only-matching       show only the part of a line matching PATTERN\n"
@@ -615,7 +620,7 @@ msgstr ""
 "match »\n"
 "  -a, --text                identique à --binary-files=text\n"
 
-#: src/grep.c:1753
+#: src/grep.c:1809
 #, c-format
 msgid ""
 "  -I                        equivalent to --binary-files=without-match\n"
@@ -637,7 +642,7 @@ msgstr ""
 "  -R, --dereference-recursive  similaire, mais avec suivi des liens "
 "symboliques\n"
 
-#: src/grep.c:1762
+#: src/grep.c:1818
 #, c-format
 msgid ""
 "      --include=FILE_PATTERN  search only files that match FILE_PATTERN\n"
@@ -655,7 +660,7 @@ msgstr ""
 "FIC\n"
 "      --exclude-dir=MOTIF   ignorer les répertoires correspondants au MOTIF\n"
 
-#: src/grep.c:1769
+#: src/grep.c:1825
 #, c-format
 msgid ""
 "  -L, --files-without-match  print only names of FILEs containing no match\n"
@@ -672,7 +677,7 @@ msgstr ""
 "  -T, --initial-tab         insérer des tabulations (si nécessaire)\n"
 "  -Z, --null                afficher l'octet nul après le nom de fichier\n"
 
-#: src/grep.c:1775
+#: src/grep.c:1831
 #, c-format
 msgid ""
 "\n"
@@ -687,7 +692,7 @@ msgstr ""
 "  -A, --after-context=NBRE  afficher NBRE lignes de contexte après\n"
 "  -C, --context=NBRE        afficher NBRE lignes de contexte en sortie\n"
 
-#: src/grep.c:1782
+#: src/grep.c:1838
 #, c-format
 msgid ""
 "  -NUM                      same as --context=NUM\n"
@@ -713,7 +718,7 @@ msgstr ""
 "                            chariot (MS-DOS ou Windows)\n"
 "\n"
 
-#: src/grep.c:1791
+#: src/grep.c:1847
 #, c-format
 msgid ""
 "'egrep' means 'grep -E'.  'fgrep' means 'grep -F'.\n"
@@ -722,7 +727,7 @@ msgstr ""
 "« egrep » équivaut à « grep -E ». « fgrep » équivaut à « grep -F ».\n"
 "L'invocation directe de « egrep » ou « fgrep » doit être abandonnée.\n"
 
-#: src/grep.c:1794
+#: src/grep.c:1850
 #, c-format
 msgid ""
 "When FILE is -, read standard input.  With no FILE, read . if a command-"
@@ -738,39 +743,44 @@ msgstr ""
 "en cas d'erreur et si l'option -q n'est pas présente, le code de sortie est "
 "2.\n"
 
-#: src/grep.c:1863
+#: src/grep.c:1917
 #, c-format
 msgid "conflicting matchers specified"
 msgstr "opérateurs de correspondance indiqués en conflit"
 
-#: src/grep.c:1874
+#: src/grep.c:1928
 #, c-format
 msgid "invalid matcher %s"
 msgstr "motif de correspondance incorrect %s"
 
-#: src/grep.c:2157
+#: src/grep.c:2211
 #, c-format
 msgid "warning: GREP_OPTIONS is deprecated; please use an alias or script"
 msgstr ""
 "Avertissement : GREP_OPTIONS doit être abandonnée ; veuillez utiliser un "
 "alias ou un script"
 
-#: src/grep.c:2187
+#: src/grep.c:2241
 #, c-format
 msgid "unknown devices method"
 msgstr "méthode d'examen des périphériques inconnue"
 
-#: src/grep.c:2314
+#: src/grep.c:2368
 #, c-format
 msgid "invalid max count"
 msgstr "décompte maximal incorrect"
 
-#: src/grep.c:2371
+#: src/grep.c:2425
 #, c-format
 msgid "unknown binary-files type"
 msgstr "type de fichier binaire inconnu"
 
-#: src/pcresearch.c:54
+#: src/pcresearch.c:71
+#, c-format
+msgid "failed to allocate memory for the PCRE JIT stack"
+msgstr "échec d’allocation mémoire pour la pile JIT PCRE"
+
+#: src/pcresearch.c:94
 msgid ""
 "support for the -P option is not compiled into this --disable-perl-regexp "
 "binary"
@@ -778,45 +788,59 @@ msgstr ""
 "l'option -P n'est pas prise en charge par ce programme compilé avec l'option "
 "--disable-perl-regexp"
 
-#: src/pcresearch.c:70
+#: src/pcresearch.c:110
 #, c-format
 msgid "-P supports only unibyte and UTF-8 locales"
 msgstr "-P ne fonctionne qu’avec des paramètres régionaux monooctets ou UTF-8"
 
-#: src/pcresearch.c:74
+#: src/pcresearch.c:114
 #, c-format
 msgid "the -P option only supports a single pattern"
 msgstr "l'option -P ne permet d'utiliser qu'un seul motif"
 
-#: src/pcresearch.c:120
+#: src/pcresearch.c:160
 #, c-format
 msgid "internal error (should never happen)"
 msgstr "erreur interne (ça ne devrait jamais arriver)"
 
-#: src/pcresearch.c:130
-#, c-format
-msgid "failed to allocate memory for the PCRE JIT stack"
-msgstr "échec d’allocation mémoire pour la pile JIT PCRE"
-
-#: src/pcresearch.c:150
+#: src/pcresearch.c:182
 #, c-format
 msgid "internal error"
 msgstr "erreur interne"
 
-#: src/pcresearch.c:186
+#: src/pcresearch.c:223
 #, c-format
 msgid "exceeded PCRE's line length limit"
 msgstr "limite de longueur de ligne des PCRE dépassée"
 
-#: src/pcresearch.c:271
+#: src/pcresearch.c:313
+#, c-format
+msgid "exhausted PCRE JIT stack"
+msgstr ""
+
+#: src/pcresearch.c:317
 #, c-format
 msgid "exceeded PCRE's backtracking limit"
 msgstr "limite de retour arrière des PCRE dépassée"
 
-#: src/pcresearch.c:278
+#: src/pcresearch.c:324
 #, c-format
 msgid "internal PCRE error: %d"
 msgstr "erreur PCRE interne : %d"
+
+#, fuzzy
+#~ msgid ""
+#~ "Usage: %s [OPTION]... PATTERN [FILE]...\n"
+#~ "  or:  %s [OPTION]... --files0-from=F PATTERN\n"
+#~ msgstr "Usage: %s [OPTION]... MOTIF [FICHIER] ...\n"
+
+#, fuzzy
+#~ msgid "%s: read error"
+#~ msgstr "erreur d'écriture"
+
+#, fuzzy
+#~ msgid "invalid zero-length file name"
+#~ msgstr "argument de longueur de contexte incorrect"
 
 #~ msgid "GNU Grep home page: <%s>\n"
 #~ msgstr "Page d'accueil de GNU Grep : <%s>\n"
@@ -974,6 +998,3 @@ msgstr "erreur PCRE interne : %d"
 
 #~ msgid "out of memory"
 #~ msgstr "Mémoire épuisée."
-
-#~ msgid "Usage: %s [OPTION]... PATTERN [FILE] ...\n"
-#~ msgstr "Usage: %s [OPTION]... MOTIF [FICHIER] ...\n"

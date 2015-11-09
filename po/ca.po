@@ -2,22 +2,22 @@
 # Copyright (C) 2002 Free Software Foundation, Inc.
 # This file is distributed under the same license as the grep package.
 # Enric Alberola Rosell <enricalberola@wanadoo.es>, 2002, 2010.
-# Àngel Mompó <mecatxis@gmail.com>, 2010, 2011, 2012, 2014.
+# Àngel Mompó <mecatxis@mecatxis.cat>, 2010, 2011, 2012, 2014.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: GNU grep-2.19.12\n"
+"Project-Id-Version: GNU grep-2.20.72\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2014-11-23 10:14-0800\n"
-"PO-Revision-Date: 2014-07-15 14:33+0100\n"
+"POT-Creation-Date: 2015-11-01 17:26-0800\n"
+"PO-Revision-Date: 2014-12-28 14:04+0100\n"
 "Last-Translator: Àngel Mompó <mecatxis@gmail.com>\n"
 "Language-Team: Catalan <ca@dodds.net>\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n!=1);\n"
-"X-Generator: Poedit 1.5.4\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Gtranslator 2.91.6\n"
 
 #: lib/argmatch.c:133
 #, c-format
@@ -33,7 +33,7 @@ msgstr "l'argument %s és ambigu per %s"
 msgid "Valid arguments are:"
 msgstr "Els arguments vàlids són:"
 
-#: lib/closeout.c:112 src/grep.c:1096
+#: lib/closeout.c:112 src/grep.c:1143
 #, c-format
 msgid "write error"
 msgstr "error d'escriptura"
@@ -42,63 +42,68 @@ msgstr "error d'escriptura"
 msgid "Unknown system error"
 msgstr "Error desconegut del sistema"
 
-#: lib/getopt.c:547 lib/getopt.c:576
+#: lib/getopt.c:575 lib/getopt.c:604
 #, c-format
 msgid "%s: option '%s' is ambiguous; possibilities:"
 msgstr "%s: l'opció «%s» és ambigua; possibilitats:"
 
-#: lib/getopt.c:624 lib/getopt.c:628
+#: lib/getopt.c:619
+#, fuzzy, c-format
+msgid "%s: option '%s' is ambiguous\n"
+msgstr "%s: l'opció «-W %s» és ambigua\n"
+
+#: lib/getopt.c:654 lib/getopt.c:658
 #, c-format
 msgid "%s: option '--%s' doesn't allow an argument\n"
 msgstr "%s: l'opció «--%s» no permet un argument\n"
 
-#: lib/getopt.c:637 lib/getopt.c:642
+#: lib/getopt.c:667 lib/getopt.c:672
 #, c-format
 msgid "%s: option '%c%s' doesn't allow an argument\n"
 msgstr "%s: l'opció «%c%s» no permet un argument\n"
 
-#: lib/getopt.c:685 lib/getopt.c:704
+#: lib/getopt.c:715 lib/getopt.c:734
 #, c-format
 msgid "%s: option '--%s' requires an argument\n"
 msgstr "%s: l'opció «--%s» necessita un argument\n"
 
-#: lib/getopt.c:742 lib/getopt.c:745
+#: lib/getopt.c:772 lib/getopt.c:775
 #, c-format
 msgid "%s: unrecognized option '--%s'\n"
 msgstr "%s: l'opció és desconeguda «--%s»\n"
 
-#: lib/getopt.c:753 lib/getopt.c:756
+#: lib/getopt.c:783 lib/getopt.c:786
 #, c-format
 msgid "%s: unrecognized option '%c%s'\n"
 msgstr "%s: no es reconeix l'opció «%c%s»\n"
 
-#: lib/getopt.c:805 lib/getopt.c:808
+#: lib/getopt.c:835 lib/getopt.c:838
 #, c-format
 msgid "%s: invalid option -- '%c'\n"
 msgstr "%s: l'opció no és vàlida -- «%c»\n"
 
-#: lib/getopt.c:861 lib/getopt.c:878 lib/getopt.c:1088 lib/getopt.c:1106
+#: lib/getopt.c:891 lib/getopt.c:908 lib/getopt.c:1118 lib/getopt.c:1136
 #, c-format
 msgid "%s: option requires an argument -- '%c'\n"
 msgstr "%s: l'opció necessita un argument -- «%c»\n"
 
-#: lib/getopt.c:934 lib/getopt.c:950
+#: lib/getopt.c:964 lib/getopt.c:980
 #, c-format
 msgid "%s: option '-W %s' is ambiguous\n"
 msgstr "%s: l'opció «-W %s» és ambigua\n"
 
-#: lib/getopt.c:974 lib/getopt.c:992
+#: lib/getopt.c:1004 lib/getopt.c:1022
 #, c-format
 msgid "%s: option '-W %s' doesn't allow an argument\n"
 msgstr "%s: l'opció «-W %s» no permet un argument\n"
 
-#: lib/getopt.c:1013 lib/getopt.c:1031
+#: lib/getopt.c:1043 lib/getopt.c:1061
 #, c-format
 msgid "%s: option '-W %s' requires an argument\n"
 msgstr "%s: l'opció «-W %s» necessita un argument\n"
 
 #: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34
-#: src/pcresearch.c:267
+#: src/pcresearch.c:309
 #, c-format
 msgid "memory exhausted"
 msgstr "memòria exhaurida"
@@ -142,75 +147,75 @@ msgstr "«"
 msgid "'"
 msgstr "»"
 
-#: lib/regcomp.c:131
+#: lib/regcomp.c:135
 msgid "Success"
 msgstr "Èxit"
 
-#: lib/regcomp.c:134
+#: lib/regcomp.c:138
 msgid "No match"
 msgstr "No coincideix"
 
-#: lib/regcomp.c:137
+#: lib/regcomp.c:141
 msgid "Invalid regular expression"
 msgstr "L'expressió regular no és vàlida"
 
-#: lib/regcomp.c:140
+#: lib/regcomp.c:144
 msgid "Invalid collation character"
 msgstr "La compaginació del caràcter no és vàlida"
 
-#: lib/regcomp.c:143
+#: lib/regcomp.c:147
 msgid "Invalid character class name"
 msgstr "El nom de la classe del caràcter no és vàlida"
 
-#: lib/regcomp.c:146
+#: lib/regcomp.c:150
 msgid "Trailing backslash"
 msgstr "Barra inversa final"
 
-#: lib/regcomp.c:149
+#: lib/regcomp.c:153
 msgid "Invalid back reference"
 msgstr "La referència anterior no és vàlida"
 
-#: lib/regcomp.c:152
+#: lib/regcomp.c:156
 msgid "Unmatched [ or [^"
 msgstr "Falten o sobren [ o [^"
 
-#: lib/regcomp.c:155
+#: lib/regcomp.c:159
 msgid "Unmatched ( or \\("
 msgstr "falten o sobren ( o \\("
 
-#: lib/regcomp.c:158
+#: lib/regcomp.c:162
 msgid "Unmatched \\{"
 msgstr "Falten o sobren \\{"
 
-#: lib/regcomp.c:161
+#: lib/regcomp.c:165
 msgid "Invalid content of \\{\\}"
 msgstr "El context de \\{\\} no és vàlid"
 
-#: lib/regcomp.c:164
+#: lib/regcomp.c:168
 msgid "Invalid range end"
 msgstr "L'abast no és vàlid"
 
-#: lib/regcomp.c:167
+#: lib/regcomp.c:171
 msgid "Memory exhausted"
 msgstr "Memòria exhaurida"
 
-#: lib/regcomp.c:170
+#: lib/regcomp.c:174
 msgid "Invalid preceding regular expression"
 msgstr "L'expressió regular precedent no és vàlida"
 
-#: lib/regcomp.c:173
+#: lib/regcomp.c:177
 msgid "Premature end of regular expression"
 msgstr "Final prematur de l'expressió regular"
 
-#: lib/regcomp.c:176
+#: lib/regcomp.c:180
 msgid "Regular expression too big"
 msgstr "L'expressió regular és massa gran"
 
-#: lib/regcomp.c:179
+#: lib/regcomp.c:183
 msgid "Unmatched ) or \\)"
 msgstr "Falten o sobren ) o \\)"
 
-#: lib/regcomp.c:707
+#: lib/regcomp.c:711
 msgid "No previous regular expression"
 msgstr "No hi ha una expressió regular prèvia"
 
@@ -405,41 +410,41 @@ msgstr "el sufix «%s» de %s%s no és vàlid"
 msgid "%s%s argument '%s' too large"
 msgstr "l'argument «%s» de %s%s és massa gran"
 
-#: src/dfa.c:1026 src/dfa.c:1029 src/dfa.c:1048 src/dfa.c:1058 src/dfa.c:1070
-#: src/dfa.c:1106 src/dfa.c:1115 src/dfa.c:1118 src/dfa.c:1123 src/dfa.c:1137
-#: src/dfa.c:1185
+#: src/dfa.c:1005 src/dfa.c:1008 src/dfa.c:1027 src/dfa.c:1037 src/dfa.c:1049
+#: src/dfa.c:1076 src/dfa.c:1085 src/dfa.c:1088 src/dfa.c:1093 src/dfa.c:1114
+#: src/dfa.c:1117
 msgid "unbalanced ["
 msgstr "[ desaparellat"
 
-#: src/dfa.c:1082
+#: src/dfa.c:1061
 msgid "invalid character class"
 msgstr "La classe de caràcter no és vàlida"
 
-#: src/dfa.c:1228
+#: src/dfa.c:1183
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr "La sintaxi de la classe de caràcter és [[:espai]], no [:espai:]"
 
-#: src/dfa.c:1290
+#: src/dfa.c:1245
 msgid "unfinished \\ escape"
 msgstr "Codi d'escapada \\ inacabat"
 
-#: src/dfa.c:1437
+#: src/dfa.c:1392
 msgid "invalid content of \\{\\}"
 msgstr "el context de \\{\\} no és vàlid"
 
-#: src/dfa.c:1440
+#: src/dfa.c:1395
 msgid "regular expression too big"
 msgstr "l'expressió regular és massa gran"
 
-#: src/dfa.c:1875
+#: src/dfa.c:1811
 msgid "unbalanced ("
 msgstr "( desaparellat"
 
-#: src/dfa.c:2001
+#: src/dfa.c:1937
 msgid "no syntax specified"
 msgstr "no s'ha especificat cap sintaxi"
 
-#: src/dfa.c:2009
+#: src/dfa.c:1945
 msgid "unbalanced )"
 msgstr ") desaparellat"
 
@@ -452,63 +457,63 @@ msgstr "Mike Haertel"
 msgid "others, see <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
 msgstr "la resta, vegeu <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
 
-#: src/grep.c:605
+#: src/grep.c:639
 msgid "invalid context length argument"
 msgstr "la longitud de l'argument no és vàlida"
 
-#: src/grep.c:658
+#: src/grep.c:692
 #, c-format
 msgid "input is too large to count"
 msgstr "l'entrada és massa llarga per a comptar"
 
-#: src/grep.c:700
+#: src/grep.c:734
 msgid "lseek failed"
 msgstr "l'lseek ha fallat"
 
-#: src/grep.c:1420
+#: src/grep.c:1467
 #, c-format
 msgid "Binary file %s matches\n"
 msgstr "Hi ha coincidències en el fitxer binari %s\n"
 
-#: src/grep.c:1464
+#: src/grep.c:1513
 #, c-format
 msgid "warning: %s: %s"
 msgstr "aví­s: %s: %s"
 
-#: src/grep.c:1465
+#: src/grep.c:1514
 msgid "recursive directory loop"
 msgstr "bucle de directori recursiu"
 
-#: src/grep.c:1627
+#: src/grep.c:1683
 #, c-format
 msgid "input file %s is also the output"
 msgstr "el fitxer d'entrada %s és també la sortida"
 
-#: src/grep.c:1685
+#: src/grep.c:1741
 msgid "(standard input)"
 msgstr "(entrada estàndard)"
 
-#: src/grep.c:1701 src/grep.c:1708
+#: src/grep.c:1757 src/grep.c:1764
 #, c-format
 msgid "Usage: %s [OPTION]... PATTERN [FILE]...\n"
 msgstr "Forma d'ús: %s [OPCIÓ]... PATRÓ [FITXER] ...\n"
 
-#: src/grep.c:1703
+#: src/grep.c:1759
 #, c-format
 msgid "Try '%s --help' for more information.\n"
 msgstr "Feu servir «%s --help» per a obtenir més informació.\n"
 
-#: src/grep.c:1709
+#: src/grep.c:1765
 #, c-format
 msgid "Search for PATTERN in each FILE or standard input.\n"
 msgstr "Busca el PATRÓ a cada FITXER o a l'entrada estàndard.\n"
 
-#: src/grep.c:1710
+#: src/grep.c:1766
 #, c-format
 msgid "PATTERN is, by default, a basic regular expression (BRE).\n"
 msgstr "El PATRÓ és, per defecte, una expressió regular bàsica (ERB).\n"
 
-#: src/grep.c:1711
+#: src/grep.c:1767
 #, c-format
 msgid ""
 "Example: %s -i 'hello world' menu.h main.c\n"
@@ -519,8 +524,8 @@ msgstr ""
 "\n"
 "Selecció i interpretació de l'expressió regular:\n"
 
-#: src/grep.c:1715
-#, fuzzy, c-format
+#: src/grep.c:1771
+#, c-format
 msgid ""
 "  -E, --extended-regexp     PATTERN is an extended regular expression (ERE)\n"
 "  -F, --fixed-strings       PATTERN is a set of newline-separated strings\n"
@@ -528,12 +533,12 @@ msgid ""
 "  -P, --perl-regexp         PATTERN is a Perl regular expression\n"
 msgstr ""
 "  -E, --extended-regexp     PATRÓ és una expressió regular ampliada (ERA)\n"
-"  -F, --fixed-strings       PATRó és un conjunt de cadenes separades per "
+"  -F, --fixed-strings       PATRÓ és un conjunt de cadenes separades per "
 "salts de lí­nia\n"
 "  -G, --basic-regexp        PATRÓ és un expressió regular bàsica (ERB)\n"
 "  -P, --perl-regexp         PATRÓ és un expressió regular de Perl\n"
 
-#: src/grep.c:1721
+#: src/grep.c:1777
 #, c-format
 msgid ""
 "  -e, --regexp=PATTERN      use PATTERN for matching\n"
@@ -553,8 +558,8 @@ msgstr ""
 "  -z, --null-data           considera que una lí­nia de dades acaba amb byte "
 "0 i no amb un salt de línia\n"
 
-#: src/grep.c:1728
-#, c-format
+#: src/grep.c:1784
+#, fuzzy, c-format
 msgid ""
 "\n"
 "Miscellaneous:\n"
@@ -570,7 +575,7 @@ msgstr ""
 "  -V, --version             mostra la informació sobre la versió i surt\n"
 "      --help                mostra aquesta ajuda i surt\n"
 
-#: src/grep.c:1735
+#: src/grep.c:1791
 #, c-format
 msgid ""
 "\n"
@@ -597,7 +602,7 @@ msgstr ""
 "      --label=ETIQUETA         fes servir ETIQUETA com a prefix del nom del "
 "fitxer per l'entrada estàndard\n"
 
-#: src/grep.c:1746
+#: src/grep.c:1802
 #, c-format
 msgid ""
 "  -o, --only-matching       show only the part of a line matching PATTERN\n"
@@ -615,7 +620,7 @@ msgstr ""
 "match»\n"
 "  -a, --text                equivalent a --binary-files=text\n"
 
-#: src/grep.c:1753
+#: src/grep.c:1809
 #, c-format
 msgid ""
 "  -I                        equivalent to --binary-files=without-match\n"
@@ -635,7 +640,7 @@ msgstr ""
 "  -R, --dereference-recursive  igual que l'anterior, però segueix tots els "
 "enllaços simbòlics\n"
 
-#: src/grep.c:1762
+#: src/grep.c:1818
 #, c-format
 msgid ""
 "      --include=FILE_PATTERN  search only files that match FILE_PATTERN\n"
@@ -654,7 +659,7 @@ msgstr ""
 "      --exclude-dir=PATRÓ  salta els directoris que coincideixin amb el "
 "PATRÓ.\n"
 
-#: src/grep.c:1769
+#: src/grep.c:1825
 #, c-format
 msgid ""
 "  -L, --files-without-match  print only names of FILEs containing no match\n"
@@ -672,7 +677,7 @@ msgstr ""
 "  -T, --initial-tab         alinea les tabulacions (si cal)\n"
 "  -Z, --null                mostra 0 byte després del nom de FITXER\n"
 
-#: src/grep.c:1775
+#: src/grep.c:1831
 #, c-format
 msgid ""
 "\n"
@@ -690,7 +695,7 @@ msgstr ""
 "  -C, --context=NOMBRE        mostra un NOMBRE de línies del context de "
 "sortida\n"
 
-#: src/grep.c:1782
+#: src/grep.c:1838
 #, c-format
 msgid ""
 "  -NUM                      same as --context=NUM\n"
@@ -715,7 +720,7 @@ msgstr ""
 "                              (MSDOS/Windows)\n"
 "\n"
 
-#: src/grep.c:1791
+#: src/grep.c:1847
 #, c-format
 msgid ""
 "'egrep' means 'grep -E'.  'fgrep' means 'grep -F'.\n"
@@ -724,7 +729,7 @@ msgstr ""
 "«egrep» ara és «grep -E». «fgrep» ara és «grep -F».\n"
 "La crida directa tant de «egrep» com de «fgrep» és obsoleta.\n"
 
-#: src/grep.c:1794
+#: src/grep.c:1850
 #, c-format
 msgid ""
 "When FILE is -, read standard input.  With no FILE, read . if a command-"
@@ -740,37 +745,42 @@ msgstr ""
 "L'estat de sortida és 0 si s'havia seleccionat alguna línia, si no 1.\n"
 "Si hi ha algun error i no s'ha indicat -q, l'estat de sortida és 2.\n"
 
-#: src/grep.c:1863
+#: src/grep.c:1917
 #, c-format
 msgid "conflicting matchers specified"
 msgstr "s'han especificat expressions conflictives"
 
-#: src/grep.c:1874
+#: src/grep.c:1928
 #, c-format
 msgid "invalid matcher %s"
 msgstr "l'expressió %s no és vàlida"
 
-#: src/grep.c:2157
+#: src/grep.c:2211
 #, c-format
 msgid "warning: GREP_OPTIONS is deprecated; please use an alias or script"
-msgstr ""
+msgstr "avís: GREP_OPTIONS està desfasat; feu servir un alies o un script"
 
-#: src/grep.c:2187
+#: src/grep.c:2241
 #, c-format
 msgid "unknown devices method"
 msgstr "el mètode de dispositius és desconegut"
 
-#: src/grep.c:2314
+#: src/grep.c:2368
 #, c-format
 msgid "invalid max count"
 msgstr "el comptador de màxims no és vàlid"
 
-#: src/grep.c:2371
+#: src/grep.c:2425
 #, c-format
 msgid "unknown binary-files type"
 msgstr "el tipus de fitxer binari és desconegut"
 
-#: src/pcresearch.c:54
+#: src/pcresearch.c:71
+#, c-format
+msgid "failed to allocate memory for the PCRE JIT stack"
+msgstr "no s'ha pogut assignar memòria per la pila JIT del PCRE"
+
+#: src/pcresearch.c:94
 msgid ""
 "support for the -P option is not compiled into this --disable-perl-regexp "
 "binary"
@@ -778,47 +788,61 @@ msgstr ""
 "el suport per l'opció -P no està  compilat a aquest binari --disable-perl-"
 "regexp"
 
-#: src/pcresearch.c:70
+#: src/pcresearch.c:110
 #, c-format
 msgid "-P supports only unibyte and UTF-8 locales"
-msgstr ""
+msgstr "-P només permet la configuració local en unibyte i en UTF-8"
 
-#: src/pcresearch.c:74
+#: src/pcresearch.c:114
 #, c-format
 msgid "the -P option only supports a single pattern"
 msgstr "l'opció -P només suporta un sol patró"
 
-#: src/pcresearch.c:120
+#: src/pcresearch.c:160
 #, c-format
 msgid "internal error (should never happen)"
 msgstr "error intern (no hauria de passar mai)"
 
-#: src/pcresearch.c:130
-#, c-format
-msgid "failed to allocate memory for the PCRE JIT stack"
-msgstr "no s'ha pogut assignar memòria per la pila JIT del PCRE"
-
-#: src/pcresearch.c:150
+#: src/pcresearch.c:182
 #, c-format
 msgid "internal error"
 msgstr "error intern"
 
 # PCRE is 'Perl Compatible Regular Expression'
-#: src/pcresearch.c:186
+#: src/pcresearch.c:223
 #, c-format
 msgid "exceeded PCRE's line length limit"
 msgstr "s'ha superat el límit de longitud de línia del PCRE"
 
+#: src/pcresearch.c:313
+#, c-format
+msgid "exhausted PCRE JIT stack"
+msgstr ""
+
 # PCRE is 'Perl Compatible Regular Expression'
-#: src/pcresearch.c:271
+#: src/pcresearch.c:317
 #, c-format
 msgid "exceeded PCRE's backtracking limit"
 msgstr "s'ha superat el límit de l'estratègia «tornada enrere» del PCRE"
 
-#: src/pcresearch.c:278
+#: src/pcresearch.c:324
 #, c-format
 msgid "internal PCRE error: %d"
 msgstr "error intern del PCRE: %d"
+
+#, fuzzy
+#~ msgid ""
+#~ "Usage: %s [OPTION]... PATTERN [FILE]...\n"
+#~ "  or:  %s [OPTION]... --files0-from=F PATTERN\n"
+#~ msgstr "Forma d'ús: %s [OPCIÓ]... PATRÓ [FITXER] ...\n"
+
+#, fuzzy
+#~ msgid "%s: read error"
+#~ msgstr "error d'escriptura"
+
+#, fuzzy
+#~ msgid "invalid zero-length file name"
+#~ msgstr "la longitud de l'argument no és vàlida"
 
 #~ msgid "GNU Grep home page: <%s>\n"
 #~ msgstr "Pàgina principal del Grep de GNU: <%s>\n"
@@ -877,7 +901,3 @@ msgstr "error intern del PCRE: %d"
 #~ msgstr ""
 #~ "s'ha deixat de processar de les subcadenes GREP_COLORS=\"%s\" mal "
 #~ "formades \"%s\""
-
-#, fuzzy
-#~ msgid "%s: option '%s' is ambiguous\n"
-#~ msgstr "%s: l'opció «-W %s» és ambigua\n"
