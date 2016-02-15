@@ -17,8 +17,8 @@ Modified by Marco d'Itri <md@Linux.IT>
  
  /* This must be at least 2; everything after that is for performance
     in pcre_exec.  */
-@@ -86,6 +89,67 @@
- static int empty_match[2];
+@@ -88,6 +91,67 @@
+ static bool multibyte_locale;
  #endif
  
 +#ifdef HAVE_DYNAMIC_LIBPCRE
@@ -85,9 +85,9 @@ Modified by Marco d'Itri <md@Linux.IT>
  void
  Pcompile (char const *pattern, size_t size)
  {
-@@ -109,6 +173,10 @@
-   else if (MB_CUR_MAX != 1)
-     error (EXIT_TROUBLE, 0, _("-P supports only unibyte and UTF-8 locales"));
+@@ -121,6 +185,10 @@
+       flags |= PCRE_UTF8;
+     }
  
 +  if (!map_pcre ())
 +    error (EXIT_TROUBLE, 0, "%s",
