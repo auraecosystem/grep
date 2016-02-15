@@ -14,7 +14,7 @@
 
 @SET_MAKE@
 
-# Copyright (C) 2002-2015 Free Software Foundation, Inc.
+# Copyright (C) 2002-2016 Free Software Foundation, Inc.
 #
 # This file is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -161,14 +161,14 @@ TESTS = test-alignof$(EXEEXT) test-alloca-opt$(EXEEXT) \
 	test-unistd$(EXEEXT) test-u8-mbtoucr$(EXEEXT) \
 	test-u8-uctomb$(EXEEXT) test-uc_width$(EXEEXT) \
 	uniwidth/test-uc_width2.sh test-unsetenv$(EXEEXT) \
-	test-update-copyright.sh test-vasnprintf$(EXEEXT) \
-	test-vc-list-files-git.sh test-vc-list-files-cvs.sh \
-	test-verify$(EXEEXT) test-verify.sh test-version-etc.sh \
-	test-wchar$(EXEEXT) test-wcrtomb.sh test-wcrtomb-w32-1.sh \
-	test-wcrtomb-w32-2.sh test-wcrtomb-w32-3.sh \
-	test-wcrtomb-w32-4.sh test-wcrtomb-w32-5.sh \
-	test-wctype-h$(EXEEXT) test-wcwidth$(EXEEXT) \
-	test-xalloc-die.sh test-xstrtoimax.sh test-xstrtol.sh
+	test-vasnprintf$(EXEEXT) test-vc-list-files-git.sh \
+	test-vc-list-files-cvs.sh test-verify$(EXEEXT) test-verify.sh \
+	test-version-etc.sh test-wchar$(EXEEXT) test-wcrtomb.sh \
+	test-wcrtomb-w32-1.sh test-wcrtomb-w32-2.sh \
+	test-wcrtomb-w32-3.sh test-wcrtomb-w32-4.sh \
+	test-wcrtomb-w32-5.sh test-wctype-h$(EXEEXT) \
+	test-wcwidth$(EXEEXT) test-xalloc-die.sh test-xstrtoimax.sh \
+	test-xstrtol.sh
 XFAIL_TESTS =
 noinst_PROGRAMS =
 check_PROGRAMS = test-alignof$(EXEEXT) test-alloca-opt$(EXEEXT) \
@@ -2246,9 +2246,9 @@ TESTS_ENVIRONMENT = EXEEXT='@EXEEXT@' srcdir='$(srcdir)' \
 	LOCALE_FR_UTF8='@LOCALE_FR_UTF8@' LOCALE_FR='@LOCALE_FR@' \
 	LOCALE_FR_UTF8='@LOCALE_FR_UTF8@' LOCALE_JA='@LOCALE_JA@' \
 	LOCALE_ZH_CN='@LOCALE_ZH_CN@' abs_aux_dir='$(abs_aux_dir)' \
-	abs_aux_dir='$(abs_aux_dir)' MAKE='$(MAKE)' \
-	LOCALE_FR='@LOCALE_FR@' LOCALE_FR_UTF8='@LOCALE_FR_UTF8@' \
-	LOCALE_JA='@LOCALE_JA@' LOCALE_ZH_CN='@LOCALE_ZH_CN@'
+	MAKE='$(MAKE)' LOCALE_FR='@LOCALE_FR@' \
+	LOCALE_FR_UTF8='@LOCALE_FR_UTF8@' LOCALE_JA='@LOCALE_JA@' \
+	LOCALE_ZH_CN='@LOCALE_ZH_CN@'
 noinst_HEADERS = 
 noinst_LIBRARIES = 
 check_LIBRARIES = libtests.a
@@ -2324,10 +2324,10 @@ EXTRA_DIST = test-alignof.c test-alloca-opt.c test-argmatch.c macros.h \
 	unistr/test-u8-mbtoucr.c macros.h unistr/test-u8-uctomb.c \
 	macros.h uniwidth/test-uc_width.c uniwidth/test-uc_width2.c \
 	uniwidth/test-uc_width2.sh macros.h unsetenv.c test-unsetenv.c \
-	signature.h macros.h test-update-copyright.sh asnprintf.c \
-	float+.h printf-args.c printf-args.h printf-parse.c \
-	printf-parse.h vasnprintf.c vasnprintf.h test-vasnprintf.c \
-	macros.h test-vc-list-files-git.sh test-vc-list-files-cvs.sh \
+	signature.h macros.h asnprintf.c float+.h printf-args.c \
+	printf-args.h printf-parse.c printf-parse.h vasnprintf.c \
+	vasnprintf.h test-vasnprintf.c macros.h \
+	test-vc-list-files-git.sh test-vc-list-files-cvs.sh \
 	test-verify.c test-verify.sh test-version-etc.c \
 	test-version-etc.sh test-wchar.c test-wcrtomb.sh \
 	test-wcrtomb.c test-wcrtomb-w32-1.sh test-wcrtomb-w32-2.sh \
@@ -2355,10 +2355,14 @@ EXTRA_DIST = test-alignof.c test-alloca-opt.c test-argmatch.c macros.h \
 BUILT_SOURCES = $(FLOAT_H) arg-nonnull.h c++defs.h unused-parameter.h \
 	warn-on-use.h
 SUFFIXES = 
+
+# This test expects compilation of test-verify.c to fail, and
+# each time it fails, the makefile rule does not perform the usual
+#  "mv -f $name.Tpo $name.po, so tell make clean to remove that file.
 MOSTLYCLEANFILES = core *.stackdump float.h float.h-t test-fpending.t \
 	arg-nonnull.h arg-nonnull.h-t c++defs.h c++defs.h-t \
 	unused-parameter.h unused-parameter.h-t warn-on-use.h \
-	warn-on-use.h-t
+	warn-on-use.h-t .deps/test-verify.Tpo
 MOSTLYCLEANDIRS = 
 CLEANFILES = 
 DISTCLEANFILES = 
@@ -4229,13 +4233,6 @@ uniwidth/test-uc_width2.sh.log: uniwidth/test-uc_width2.sh
 test-unsetenv.log: test-unsetenv$(EXEEXT)
 	@p='test-unsetenv$(EXEEXT)'; \
 	b='test-unsetenv'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-test-update-copyright.sh.log: test-update-copyright.sh
-	@p='test-update-copyright.sh'; \
-	b='test-update-copyright.sh'; \
 	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \

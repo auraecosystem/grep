@@ -2,7 +2,7 @@
 # This Makefile fragment tries to be general-purpose enough to be
 # used by many projects via the gnulib maintainer-makefile module.
 
-## Copyright (C) 2001-2015 Free Software Foundation, Inc.
+## Copyright (C) 2001-2016 Free Software Foundation, Inc.
 ##
 ## This program is free software: you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
@@ -1423,6 +1423,7 @@ alpha beta stable: $(local-check) writable-files $(submodule-checks)
 	  || :
 	$(AM_V_at)$(MAKE) vc-diff-check
 	$(AM_V_at)$(MAKE) news-check
+	$(AM_V_at)$(MAKE) distcheck
 	$(AM_V_at)$(MAKE) dist
 	$(AM_V_at)$(MAKE) $(release-prep-hook) RELEASE_TYPE=$@
 	$(AM_V_at)$(MAKE) -s emit_upload_commands RELEASE_TYPE=$@

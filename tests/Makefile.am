@@ -1,5 +1,5 @@
 ## Process this file with automake to create Makefile.in
-# Copyright 1997-1998, 2005-2015 Free Software Foundation, Inc.
+# Copyright 1997-1998, 2005-2016 Free Software Foundation, Inc.
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -70,6 +70,7 @@ TESTS =						\
   empty						\
   empty-line					\
   empty-line-mb					\
+  encoding-error				\
   epipe						\
   equiv-classes					\
   ere						\
@@ -105,7 +106,9 @@ TESTS =						\
   pcre						\
   pcre-abort					\
   pcre-context					\
+  pcre-count					\
   pcre-infloop					\
+  pcre-invalid-utf8-infloop			\
   pcre-invalid-utf8-input			\
   pcre-jitstack					\
   pcre-o					\
@@ -130,6 +133,7 @@ TESTS =						\
   turkish-I-without-dot				\
   turkish-eyes					\
   two-files					\
+  unibyte-binary				\
   unibyte-bracket-expr				\
   unibyte-negated-circumflex			\
   utf8-bracket					\
