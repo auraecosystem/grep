@@ -1,4 +1,321 @@
+2016-02-04  Jim Meyering  <meyering@fb.com>
+
+	version 2.23
+	* NEWS: Record release date.
+
+2016-02-02  Jim Meyering  <meyering@fb.com>
+
+	gnulib: update to latest
+	Update for this "make distcheck"-fixing change:
+	> verify-tests: also remove stray test-verify.Tpo
+
+2016-02-01  Jim Meyering  <meyering@fb.com>
+
+	tests/null-byte: test another code path
+	* tests/null-byte: Also exercise the case in which there is
+	a match in the block along with the NUL byte.
+
+2016-01-31  Paul Eggert  <eggert@cs.ucla.edu>
+
+	Omit excess "Binary file ... matches"
+	Problem reported in: http://bugs.gnu.org/22461
+	* src/grep.c (grep): Don't report "Binary file ... matches"
+	merely because the file contained both matches and binary data.
+	Insist that the binary data contained a match.
+	* tests/null-byte: Add a test for this.
+
+2016-01-28  Jim Meyering  <meyering@fb.com>
+
+	gnulib: update to latest
+
+2016-01-23  Jim Meyering  <meyering@fb.com>
+
+	gnulib: update to latest
+
+	maint: fix typo in NEWS: s/a/an/
+
+2016-01-15  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: -x now supersedes -w more consistently
+	* NEWS, doc/grep.texi (Matching Control): Mention this.
+	* src/dfasearch.c (EGexecute):
+	* src/pcresearch.c (Pcompile):
+	Don't get confused by -w if -x is also present.
+	* src/pcresearch.c (Pcompile): Remove misleading comment about
+	non-UTF-8 multibyte locales, as PCRE doesn't support them.
+	Calculate buffer sizes more carefully; the old method
+	allocated a buffer slightly too big, seemingly due to luck.
+	* tests/backref-word, tests/pcre: Add tests for this bug.
+
+	tests: omit update-copyright-tests
+	This test does not check how 'grep' itself operates, so it is
+	out of place for grep's 'make check'.  Problem reported by Sam Razavi in:
+	http://bugs.gnu.org/22376
+	* bootstrap.conf (avoided_gnulib_modules): Add update-copyright-tests.
+
+2016-01-11  Jim Meyering  <meyering@fb.com>
+
+	tests: do use "yes" but via an AWK replacement
+	Also, use sed Nq in place of head -N
+	* tests/init.cfg (yes): Define.
+	Thanks to Paul Eggert for this definition.
+	* tests/max-count-overread: Revert to using "yes".
+	* tests/mb-non-UTF8-performance: Likewise, and use
+	"sed Nq" in place of head -N.
+
+2016-01-11  Paul Eggert  <eggert@cs.ucla.edu>
+
+	* tests/pcre-count: Don't assume the page size is 32kB.
+
+2016-01-08  Paul Eggert  <eggert@cs.ucla.edu>
+
+	tests: port to other POSIXish platforms
+	I tested this on Solaris 10 and AIX 7.1.
+	* tests/max-count-overread:
+	* tests/mb-non-UTF8-performance:
+	Don't assume 'yes' exists, as 'yes' is not in POSIX.
+	* tests/mb-non-UTF8-performance:
+	Don't rely on 'head -1000', as that option syntax is not POSIX.
+	* tests/pcre-count: Don't rely on "printf '\x0'".
+	* tests/unibyte-binary: Don't assume \200 is an encoding error
+	in every unibyte locale.
+
+2016-01-08  Jim Meyering  <meyering@fb.com>
+
+	tests: fix encoding-error test failure to use of printf '\xHH'
+	* tests/encoding-error: Don't rely on printf having support for \xHH
+	hexadecimal.  That is not portable.  Use \OOO octal, instead.
+
+	maint: fix typo in NEWS: s/a/an/
+
+2016-01-07  Jim Meyering  <meyering@fb.com>
+
+	mb-non-UTF8-performance: avoid FP test failure on fast hardware
+	* tests/mb-non-UTF8-performance: Don't use a fixed size.
+	Otherwise, on a fast system, the fixed-size unibyte test
+	would complete in a nominal 0 ms, which might well be
+	smaller than 1/30 of the multibyte duration, provoking
+	a false positive test failure.  Instead, increase the
+	size of the input until we obtain a unibyte duration of
+	at least 10ms.
+
+2016-01-07  Paul Eggert  <eggert@cs.ucla.edu>
+
+	doc: mention unibyte encoding fix
+	* NEWS: Document recent fix for encoding errors in unibyte locales.
+
+	grep: improve unibyte -P performance
+	This is a followon to the recent changes prompted by Bug#20526.
+	In <http://bugs.gnu.org/bug=20526#86> Norihiro Tanaka pointed out
+	that grep mistakenly assumed that unibyte locales cannot have
+	encoding errors.  Here, the mistake hurt performance significantly.
+	On Fedora 23 x86-64 in the C locale, this patch improved grep's
+	performance by a factor of 7 when run as "grep -P 'z.*a'" on the
+	output of "yes $(printf '\200\n') | head -n 1000000000".
+	* src/pcresearch.c (multibyte_locale) [HAVE_LIBPCRE]: New static var.
+	(Pcompile): Set it.
+	(Pexecute): Use it to avoid the need to call
+	buf_has_encoding_errors in unibyte locales.
+
+2016-01-06  Paul Eggert  <eggert@cs.ucla.edu>
+
+	Improve on fix for Bug#22181
+	* src/pcresearch.c (Pexecute): Update subject when skipping past
+	easily-determined encoding errors, as this is faster than letting
+	pcre_exec skip them.  On my platform this improves performance
+	4.7x on a benchmark created via "yes $(printf '\200\200\200\200
+	\200\200\200\200\200\200\200\200\200\200\200\200\200\200\200\200x\n')
+	| head -n 1000000 >j; grep -oP y j" in a UTF-8 locale.  Rework
+	code that deals with PCRE_ERROR_BADUTF8 return, to avoid an
+	incorrect (albeit currently harmless) 'bol = false' assignment.
+
+	grep: restore -P optimization (followup fix)
+	* src/search.h (EGexecute, Fexecute, Pexecute):
+	Change decls to match new implementations.
+	I forgot to add this file to the previous commit.
+
+	grep: restore -P PCRE_NO_UTF8_CHECK optimization
+	On my platform in the en_US.utf8 locale, this makes 'grep -P "z.*a" k'
+	220x faster, where k is created by the shell command:
+	yes 'abcdefg hijklmn opqrstu vwxyz' | head -n 10000000 >k
+	* src/dfasearch.c (EGexecute):
+	* src/grep.c (execute_fp_t):
+	* src/kwsearch.c (Fexecute):
+	* src/pcresearch.c (Pexecute):
+	First arg is now char *, not char const *, since Pexecute now
+	temporarily modifies this argument.
+	* src/grep.c, src/grep.h (buf_has_encoding_errors): Now extern.
+	* src/pcresearch.c (Pexecute): Use it.  If the input is free of
+	encoding errors, use a multiline search and the PCRE_NO_UTF8_CHECK
+	option, as this is typically way faster.  This restores an
+	optimization that was removed with the recent changes for binary
+	file detection.
+
+2016-01-05  Paul Eggert  <eggert@cs.ucla.edu>
+
+	Fix calculation of unibyte_mask
+	* src/grep.c (initialize_unibyte_mask): The old method worked for
+	UTF-8 and other typical encodings, but did not work for weird
+	encodings, e.g., one where all bytes other than 0x7f and 0x80 are
+	unibyte characters.
+
+2016-01-01  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: fix bug with with invalid unibyte sequence
+	This was introduced by the recent binary-data-detection changes.
+	Problem reported by Norihiro Tanaka in: http://bugs.gnu.org/20526#86
+	* src/grep.c (HIBYTE, easy_encoding, init_easy_encoding): Remove,
+	replacing with ...
+	(uword_max, unibyte_mask, initialize_unibyte_mask): ... this new
+	constant, static var, and function.  All uses changed.  The
+	unibyte_mask var generalizes the old local var hibyte_mask, which
+	worked only for encodings where every byte with 0x80 turned off is
+	a single-byte character.
+	(buf_has_encoding_errors): Return false immediately if
+	unibyte_mask is zero, not whether the current encoding is unibyte.
+	The old test was incorrect in unibyte locales in which some bytes
+	were encoding errors.
+	* tests/pcre-z: Require UTF-8 locale, since the grep -z . test now
+	needs this.  Use printf \0 rather than tr.  Port the 'grep -z .'
+	test to platforms where the C locale says '\200' is an encoding
+	error.  Use cmp rather than compare, as the file is binary and
+	so non-GNU diff might not work.
+	* tests/unibyte-binary: New file.
+	* tests/Makefile.am (TESTS): Add it.
+
+2016-01-01  Jim Meyering  <meyering@fb.com>
+
+	maint: update copyright year, bootstrap, init.sh
+	Run "make update-copyright" and then...
+
+	* gnulib: Update to latest.
+	* tests/init.sh: Update from gnulib.
+	* bootstrap: Likewise.
+
+2015-12-31  Paul Eggert  <eggert@cs.ucla.edu>
+
+	doc: clarify text vs binary match output
+	* NEWS:
+	* doc/grep.texi (File and Directory Selection):
+	Make it clearer that grep can now output matching text before
+	reporting a binary match.  Problem reported by Norihiro Tanaka in:
+	http://bugs.gnu.org/20526#83
+
+	doc: minor clarifications
+	* doc/grep.in.1, doc/grep.texi: Minor clarifications suggested by
+	Debian documentation patches.  Problem reported by Santiago Ruano
+	Rincón in: http://bugs.gnu.org/18651
+
+	grep: fix -l --line-buffer bug
+	Problem reported by Louis Sautier in: http://bugs.gnu.org/18750
+	* NEWS: Document this.
+	* src/grep.c (grep, grepdesc): If --line-buffered, flush
+	stdout after outputting newline (or null byte, if applicable).
+
+2015-12-30  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: remove duplicate init
+	* src/grep.c (print_line_middle): Remove duplicate initialization.
+
+	grep: report line-buffered write error right away
+	* src/grep.c (prline): When line buffered, if there is a write
+	error, report it immediately rather than waiting until the next
+	line of output.
+
+	grep: -c should keep counting after binary data
+	Problem and fix reported by Jaroslav Škarvada, and test case
+	reported by Norihiro Tanaka, in: http://bugs.gnu.org/22028
+	* NEWS: Document this.
+	* src/grep.c (grep): Don't stop counting merely because nulls seen.
+	* tests/pcre-count: New file.
+	* tests/Makefile.am (TESTS): Add it.
+
+	dfa: port to tinycc
+	* src/dfa.c (add_utf8_anychar): Put 'const' after type.
+	Problem reported by Aharon Robbins in:
+	http://bugs.gnu.org/22260
+
+	grep: be less picky about encoding errors
+	This fixes a longstanding problem introduced in grep 2.21,
+	which is overly picky about binary files.
+	* NEWS:
+	* doc/grep.texi (File and Directory Selection): Document this.
+	* src/grep.c (input_textbin, textbin_is_binary, buffer_textbin)
+	(file_textbin):
+	Remove.  All uses removed.
+	(encoding_error_output): New static var.
+	(buf_has_encoding_errors, buf_has_nulls, file_must_have_nulls):
+	New functions, which reuse bits
+	and pieces of the removed functions.
+	(lastout, print_line_head, print_line_middle, print_line_tail, prline)
+	(prpending, prtext, grepbuf):
+	Avoid use of const, now that we have
+	functions that require modifying a sentinel.
+	(print_line_head): New arg LEN.  All uses changed.
+	(print_line_head, print_line_tail):
+	Return indicator whether the output line was printed.
+	All uses changed.
+	(print_line_middle): Exit early on encoding error.
+	(grep): Use new method for determining whether file is binary.
+	* src/grep.h (enum textbin, TEXTBIN_BINARY, TEXTBIN_UNKNOWN)
+	(TEXTBIN_TEXT, input_textbin): Remove decls.  All uses removed.
+	* src/pcresearch.c (Pexecute): Remove multiline optimization,
+	since the main program no longer checks for encoding errors on input.
+	* tests/encoding-error: New file.
+	* tests/Makefile.am (TESTS): Add it.
+
+2015-12-29  Jim Meyering  <meyering@fb.com>
+
+	maint: correct (make sorted) order of test file names
+	* tests/Makefile.am (TESTS): Insert new test name in sorted order.
+
+2015-12-28  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: --exclude matches trailing parts of args
+	Problem reported by Vincent Lefevre in:
+	http://bugs.gnu.org/22144
+	* NEWS:
+	* doc/grep.texi (File and Directory Selection): Document this.
+	* src/grep.c (excluded_patterns, excluded_directory_patterns):
+	Now 2-element arrays, with one element for subfiles and another
+	for command-line args.  All uses changed.  This implements the change.
+	(exclude_options): New function.
+	* tests/include-exclude: Test the change.
+
+2015-12-18  Jim Meyering  <meyering@fb.com>
+
+	grep -oP: don't infloop when processing invalid UTF8 preceding a match
+	* src/pcresearch.c (Pexecute): When advancing SUBJECT past an
+	encoding error, don't blindly set P to that new value, since we
+	will soon compute SEARCH_OFFSET = P - SUBJECT, and mistakenly
+	making that difference too small would allow us to match some
+	previously-processed text, resulting in an infinite loop.
+	* NEWS (Bug fixes): Mention it.
+	* THANKS.in: Add Christian's name and email address.
+	* tests/pcre-invalid-utf8-infloop: New file.
+	* tests/Makefile.am (TESTS): Add it.
+	Reported by Christian Boltz in http://debbugs.gnu.org/22181
+	Introduced by commit, v2.21-37-g14f8e48.
+
+2015-11-04  Jim Meyering  <meyering@fb.com>
+
+	tests: mark performance-related tests as expensive
+	These performance-related tests are slightly failure prone due to
+	varying system load during the two runs.
+	Marking these tests as "expensive" makes it so they are no longer run
+	via "make check". You can still run them via make "check-expensive".
+	This makes them less likely to be run by regular users.
+	* tests/long-pattern-perf: Use expensive_.
+	* tests/mb-non-UTF8-performance: Likewise.
+	Reported by Jaroslav Skarvada in http://debbugs.gnu.org/21826
+	and by Andreas Schwab in http://debbugs.gnu.org/21812.
+
 2015-11-01  Jim Meyering  <meyering@fb.com>
+
+	maint: post-release administrivia
+	* NEWS: Add header line for next release.
+	* .prev-version: Record previous version.
+	* cfg.mk (old_NEWS_hash): Auto-update.
 
 	version 2.22
 	* NEWS: Record release date.

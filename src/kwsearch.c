@@ -1,5 +1,5 @@
 /* kwsearch.c - searching subroutines using kwset for grep.
-   Copyright 1992, 1998, 2000, 2007, 2009-2015 Free Software Foundation, Inc.
+   Copyright 1992, 1998, 2000, 2007, 2009-2016 Free Software Foundation, Inc.
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -78,7 +78,7 @@ Fcompile (char const *pattern, size_t size)
 }
 
 size_t
-Fexecute (char const *buf, size_t size, size_t *match_size,
+Fexecute (char *buf, size_t size, size_t *match_size,
           char const *start_ptr)
 {
   char const *beg, *try, *end, *mb_start;

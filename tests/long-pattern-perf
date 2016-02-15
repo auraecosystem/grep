@@ -1,7 +1,7 @@
 #!/bin/sh
 # grep-2.21 would incur a 100x penalty for 10x increase in regexp length
 
-# Copyright 2015 Free Software Foundation, Inc.
+# Copyright 2015-2016 Free Software Foundation, Inc.
 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -19,6 +19,11 @@
 . "${srcdir=.}/init.sh"; path_prepend_ ../src
 
 fail=0
+
+# This test is susceptible to failure due to differences in
+# system load during the two test runs, so we'll mark it as
+# "expensive", making it less likely to be run by regular users.
+expensive_
 
 echo x > in || framework_failure_
 # We could use seq -s '' (avoiding the tr filter), but I

@@ -1,5 +1,5 @@
 /* Extended regular expression matching and search library.
-   Copyright (C) 2002-2015 Free Software Foundation, Inc.
+   Copyright (C) 2002-2016 Free Software Foundation, Inc.
    This file is part of the GNU C Library.
    Contributed by Isamu Hasegawa <isamu@yamato.ibm.com>.
 
@@ -153,9 +153,9 @@ static const char __re_error_msgid[] =
     gettext_noop ("Invalid back reference") /* REG_ESUBREG */
     "\0"
 #define REG_EBRACK_IDX	(REG_ESUBREG_IDX + sizeof "Invalid back reference")
-    gettext_noop ("Unmatched [ or [^")	/* REG_EBRACK */
+    gettext_noop ("Unmatched [, [^, [:, [., or [=")	/* REG_EBRACK */
     "\0"
-#define REG_EPAREN_IDX	(REG_EBRACK_IDX + sizeof "Unmatched [ or [^")
+#define REG_EPAREN_IDX	(REG_EBRACK_IDX + sizeof "Unmatched [, [^, [:, [., or [=")
     gettext_noop ("Unmatched ( or \\(") /* REG_EPAREN */
     "\0"
 #define REG_EBRACE_IDX	(REG_EPAREN_IDX + sizeof "Unmatched ( or \\(")
@@ -2696,6 +2696,19 @@ parse_dup_op (bin_tree_t *elem, re_string_t *regexp, re_dfa_t *dfa,
 #define BRACKET_NAME_BUF_SIZE 32
 
 #ifndef _LIBC
+
+# ifdef RE_ENABLE_I18N
+/* Convert the byte B to the corresponding wide character.  In a
+   unibyte locale, treat B as itself if it is an encoding error.
+   In a multibyte locale, return WEOF if B is an encoding error.  */
+static wint_t
+parse_byte (unsigned char b, re_charset_t *mbcset)
+{
+  wint_t wc = __btowc (b);
+  return wc == WEOF && !mbcset ? b : wc;
+}
+#endif
+
   /* Local function for parse_bracket_exp only used in case of NOT _LIBC.
      Build the range expression which starts from START_ELEM, and ends
      at END_ELEM.  The result are written to MBCSET and SBCSET.
@@ -2747,9 +2760,9 @@ build_range_exp (const reg_syntax_t syntax,
 	      : ((end_elem->type == COLL_SYM) ? end_elem->opr.name[0]
 		 : 0));
     start_wc = ((start_elem->type == SB_CHAR || start_elem->type == COLL_SYM)
-		? __btowc (start_ch) : start_elem->opr.wch);
+		? parse_byte (start_ch, mbcset) : start_elem->opr.wch);
     end_wc = ((end_elem->type == SB_CHAR || end_elem->type == COLL_SYM)
-	      ? __btowc (end_ch) : end_elem->opr.wch);
+	      ? parse_byte (end_ch, mbcset) : end_elem->opr.wch);
     if (start_wc == WEOF || end_wc == WEOF)
       return REG_ECOLLATE;
     else if (BE ((syntax & RE_NO_EMPTY_RANGES) && start_wc > end_wc, 0))
@@ -2779,7 +2792,11 @@ build_range_exp (const reg_syntax_t syntax,
 					new_nranges);
 
 	    if (BE (new_array_start == NULL || new_array_end == NULL, 0))
-	      return REG_ESPACE;
+	      {
+		re_free (new_array_start);
+		re_free (new_array_end);
+		return REG_ESPACE;
+	      }
 
 	    mbcset->range_starts = new_array_start;
 	    mbcset->range_ends = new_array_end;
@@ -3676,26 +3693,21 @@ build_charclass_op (re_dfa_t *dfa, RE_TRANSLATE_TYPE trans,
   bin_tree_t *tree;
 
   sbcset = (re_bitset_ptr_t) calloc (sizeof (bitset_t), 1);
-#ifdef RE_ENABLE_I18N
-  mbcset = (re_charset_t *) calloc (sizeof (re_charset_t), 1);
-#endif /* RE_ENABLE_I18N */
-
-#ifdef RE_ENABLE_I18N
-  if (BE (sbcset == NULL || mbcset == NULL, 0))
-#else /* not RE_ENABLE_I18N */
   if (BE (sbcset == NULL, 0))
-#endif /* not RE_ENABLE_I18N */
     {
       *err = REG_ESPACE;
       return NULL;
     }
-
-  if (non_match)
-    {
 #ifdef RE_ENABLE_I18N
-      mbcset->non_match = 1;
-#endif /* not RE_ENABLE_I18N */
+  mbcset = (re_charset_t *) calloc (sizeof (re_charset_t), 1);
+  if (BE (mbcset == NULL, 0))
+    {
+      re_free (sbcset);
+      *err = REG_ESPACE;
+      return NULL;
     }
+  mbcset->non_match = non_match;
+#endif /* RE_ENABLE_I18N */
 
   /* We don't care the syntax in this case.  */
   ret = build_charclass (trans, sbcset,
@@ -3728,6 +3740,9 @@ build_charclass_op (re_dfa_t *dfa, RE_TRANSLATE_TYPE trans,
 #endif
 
   /* Build a tree for simple bracket.  */
+#ifdef lint
+  memset (&br_token, 0, sizeof br_token);
+#endif
   br_token.type = SIMPLE_BRACKET;
   br_token.opr.sbcset = sbcset;
   tree = create_token_tree (dfa, NULL, NULL, &br_token);
@@ -3822,6 +3837,9 @@ create_tree (re_dfa_t *dfa, bin_tree_t *left, bin_tree_t *right,
 	     re_token_type_t type)
 {
   re_token_t t;
+#ifdef lint
+  memset (&t, 0, sizeof t);
+#endif
   t.type = type;
   return create_token_tree (dfa, left, right, &t);
 }

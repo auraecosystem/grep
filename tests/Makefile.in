@@ -14,7 +14,7 @@
 
 @SET_MAKE@
 
-# Copyright 1997-1998, 2005-2015 Free Software Foundation, Inc.
+# Copyright 1997-1998, 2005-2016 Free Software Foundation, Inc.
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -1406,6 +1406,7 @@ TESTS = \
   empty						\
   empty-line					\
   empty-line-mb					\
+  encoding-error				\
   epipe						\
   equiv-classes					\
   ere						\
@@ -1441,7 +1442,9 @@ TESTS = \
   pcre						\
   pcre-abort					\
   pcre-context					\
+  pcre-count					\
   pcre-infloop					\
+  pcre-invalid-utf8-infloop			\
   pcre-invalid-utf8-input			\
   pcre-jitstack					\
   pcre-o					\
@@ -1466,6 +1469,7 @@ TESTS = \
   turkish-I-without-dot				\
   turkish-eyes					\
   two-files					\
+  unibyte-binary				\
   unibyte-bracket-expr				\
   unibyte-negated-circumflex			\
   utf8-bracket					\
@@ -1997,6 +2001,13 @@ empty-line-mb.log: empty-line-mb
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
 	"$$tst" $(AM_TESTS_FD_REDIRECT)
+encoding-error.log: encoding-error
+	@p='encoding-error'; \
+	b='encoding-error'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
 epipe.log: epipe
 	@p='epipe'; \
 	b='epipe'; \
@@ -2242,9 +2253,23 @@ pcre-context.log: pcre-context
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
 	"$$tst" $(AM_TESTS_FD_REDIRECT)
+pcre-count.log: pcre-count
+	@p='pcre-count'; \
+	b='pcre-count'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
 pcre-infloop.log: pcre-infloop
 	@p='pcre-infloop'; \
 	b='pcre-infloop'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+pcre-invalid-utf8-infloop.log: pcre-invalid-utf8-infloop
+	@p='pcre-invalid-utf8-infloop'; \
+	b='pcre-invalid-utf8-infloop'; \
 	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
@@ -2413,6 +2438,13 @@ turkish-eyes.log: turkish-eyes
 two-files.log: two-files
 	@p='two-files'; \
 	b='two-files'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+unibyte-binary.log: unibyte-binary
+	@p='unibyte-binary'; \
+	b='unibyte-binary'; \
 	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \

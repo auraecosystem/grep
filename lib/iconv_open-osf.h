@@ -39,10 +39,12 @@ struct mapping { int standard_name; const char vendor_name[10 + 1]; };
 #define MAX_HASH_VALUE 47
 /* maximum key range = 42, duplicates = 0 */
 
-#if (defined (__STDC_VERSION__) && __STDC_VERSION__ >= 199901L) || defined(__cplusplus) || defined(__GNUC_STDC_INLINE__)
-inline
-#elif defined(__GNUC__)
+#ifdef __GNUC__
 __inline
+#else
+#ifdef __cplusplus
+inline
+#endif
 #endif
 static unsigned int
 mapping_hash (register const char *str, register unsigned int len)

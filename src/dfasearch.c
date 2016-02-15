@@ -1,5 +1,5 @@
 /* dfasearch.c - searching subroutines using dfa and regex for grep.
-   Copyright 1992, 1998, 2000, 2007, 2009-2015 Free Software Foundation, Inc.
+   Copyright 1992, 1998, 2000, 2007, 2009-2016 Free Software Foundation, Inc.
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -202,7 +202,7 @@ GEAcompile (char const *pattern, size_t size, reg_syntax_t syntax_bits)
 }
 
 size_t
-EGexecute (char const *buf, size_t size, size_t *match_size,
+EGexecute (char *buf, size_t size, size_t *match_size,
            char const *start_ptr)
 {
   char const *buflim, *beg, *end, *ptr, *match, *best_match, *mb_start;
@@ -363,14 +363,14 @@ EGexecute (char const *buf, size_t size, size_t *match_size,
                   len = end - ptr;
                   goto assess_pattern_match;
                 }
-              /* If -w, check if the match aligns with word boundaries.
-                 We do this iteratively because:
+              /* If -w and not -x, check whether the match aligns with
+                 word boundaries.  Do this iteratively because:
                  (a) the line may contain more than one occurrence of the
                  pattern, and
                  (b) Several alternatives in the pattern might be valid at a
                  given point, and we may need to consider a shorter one to
                  find a word boundary.  */
-              if (match_words)
+              if (!match_lines && match_words)
                 while (match <= best_match)
                   {
                     regoff_t shorter_len = 0;

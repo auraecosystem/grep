@@ -2,9 +2,9 @@
 # Run this after each non-alpha release, to update the web documentation at
 # http://www.gnu.org/software/$pkg/manual/
 
-VERSION=2015-06-16.06; # UTC
+VERSION=2016-01-12.23; # UTC
 
-# Copyright (C) 2009-2015 Free Software Foundation, Inc.
+# Copyright (C) 2009-2016 Free Software Foundation, Inc.
 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -117,7 +117,7 @@ do
       opt=$(echo "$1" | sed -e 's/=.*//')
       val=$(echo "$1" | sed -e 's/[^=]*=//')
       shift
-      set dummy "$opt" "$val" ${1+"$@"}; shift
+      set dummy "$opt" "$val" "$@"; shift
       ;;
   esac
 
@@ -179,11 +179,12 @@ $RSYNC -avP "$builddir"/doc/manual/ $tmp/$pkg/manual
   cd $tmp/$pkg/manual
 
   # Add all the files.  This is simpler than trying to add only the
-  # new ones because of new directories: it would require iterating on
-  # adding the outer directories, and then their contents.
-  #
-  # find guarantees that we add outer directories first.
-  find . -name CVS -prune -o -print             \
+  # new ones because of new directories
+  # First add non empty dirs individually
+  find . -name CVS -prune -o -type d \! -empty -print             \
+    | $XARGS -n1 --no-run-if-empty -- $dryrun $CVS add -ko
+  # Now add all files
+  find . -name CVS -prune -o -type f -print             \
     | $XARGS --no-run-if-empty -- $dryrun $CVS add -ko
 
   # Report/Remove stale files
@@ -204,6 +205,6 @@ $RSYNC -avP "$builddir"/doc/manual/ $tmp/$pkg/manual
 # eval: (add-hook 'write-file-hooks 'time-stamp)
 # time-stamp-start: "VERSION="
 # time-stamp-format: "%:y-%02m-%02d.%02H"
-# time-stamp-time-zone: "UTC"
+# time-stamp-time-zone: "UTC0"
 # time-stamp-end: "; # UTC"
 # End:

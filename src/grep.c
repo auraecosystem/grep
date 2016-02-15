@@ -1,5 +1,5 @@
 /* grep.c - main driver file for grep.
-   Copyright (C) 1992, 1997-2002, 2004-2015 Free Software Foundation, Inc.
+   Copyright (C) 1992, 1997-2002, 2004-2016 Free Software Foundation, Inc.
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -296,8 +296,8 @@ static const struct color_cap color_dict[] =
     { NULL, NULL,                  NULL }
   };
 
-static struct exclude *excluded_patterns;
-static struct exclude *excluded_directory_patterns;
+static struct exclude *excluded_patterns[2];
+static struct exclude *excluded_directory_patterns[2];
 /* Short options.  */
 static char const short_options[] =
 "0123456789A:B:C:D:EFGHIPTUVX:abcd:e:f:hiLlm:noqRrsuvwxyZz";
@@ -377,7 +377,6 @@ bool match_icase;
 bool match_words;
 bool match_lines;
 char eolbyte;
-enum textbin input_textbin;
 
 static char const *matcher;
 
@@ -388,6 +387,10 @@ static char const *filename;
 static bool omit_dot_slash;
 static bool errseen;
 static bool write_error_seen;
+
+/* True if output from the current input file has been suppressed
+   because an output line had an encoding error.  */
+static bool encoding_error_output;
 
 enum directories_type
   {
@@ -459,7 +462,7 @@ enum { SEEK_HOLE = SEEK_SET };
 
 /* Functions we'll use to search. */
 typedef void (*compile_fp_t) (char const *, size_t);
-typedef size_t (*execute_fp_t) (char const *, size_t, size_t *, char const *);
+typedef size_t (*execute_fp_t) (char *, size_t, size_t *, char const *);
 static compile_fp_t compile;
 static execute_fp_t execute;
 
@@ -481,27 +484,6 @@ clean_up_stdout (void)
     close_stdout ();
 }
 
-static bool
-textbin_is_binary (enum textbin textbin)
-{
-  return textbin < TEXTBIN_UNKNOWN;
-}
-
-/* The high-order bit of a byte.  */
-enum { HIBYTE = 0x80 };
-
-/* True if every byte with HIBYTE off is a single-byte character.
-   UTF-8 has this property.  */
-static bool easy_encoding;
-
-static void
-init_easy_encoding (void)
-{
-  easy_encoding = true;
-  for (int i = 0; i < HIBYTE; i++)
-    easy_encoding &= mbclen_cache[i] == 1;
-}
-
 /* A cast to TYPE of VAL.  Use this when TYPE is a pointer type, VAL
    is properly aligned for TYPE, and 'gcc -Wcast-align' cannot infer
    the alignment and would otherwise complain about the cast.  */
@@ -520,21 +502,46 @@ init_easy_encoding (void)
 /* An unsigned type suitable for fast matching.  */
 typedef uintmax_t uword;
 
+/* A mask to test for unibyte characters, with the pattern repeated to
+   fill a uword.  For a multibyte character encoding where
+   all bytes are unibyte characters, this is 0.  For UTF-8, this is
+   0x808080....  For encodings where unibyte characters have no discerned
+   pattern, this is all 1s.  The unsigned char C is a unibyte
+   character if C & UNIBYTE_MASK is zero.  If the uword W is the
+   concatenation of bytes, the bytes are all unibyte characters
+   if W & UNIBYTE_MASK is zero.  */
+static uword unibyte_mask;
+
+static void
+initialize_unibyte_mask (void)
+{
+  /* For each encoding error I that MASK does not already match,
+     accumulate I's most significant 1 bit by ORing it into MASK.
+     Although any 1 bit of I could be used, in practice high-order
+     bits work better.  */
+  unsigned char mask = 0;
+  int ms1b = 1;
+  for (int i = 1; i <= UCHAR_MAX; i++)
+    if (mbclen_cache[i] != 1 && ! (mask & i))
+      {
+        while (ms1b * 2 <= i)
+          ms1b *= 2;
+        mask |= ms1b;
+      }
+
+  /* Now MASK will detect any encoding-error byte, although it may
+     cry wolf and it may not be optimal.  Build a uword-length mask by
+     repeating MASK.  */
+  uword uword_max = -1;
+  unibyte_mask = uword_max / UCHAR_MAX * mask;
+}
+
 /* Skip the easy bytes in a buffer that is guaranteed to have a sentinel
    that is not easy, and return a pointer to the first non-easy byte.
-   In easy encodings, the easy bytes all have HIBYTE off.
-   In other encodings, no byte is easy.  */
+   The easy bytes all have UNIBYTE_MASK off.  */
 static char const * _GL_ATTRIBUTE_PURE
 skip_easy_bytes (char const *buf)
 {
-  if (!easy_encoding)
-    return buf;
-
-  uword uword_max = -1;
-
-  /* 0x8080..., extended to be wide enough for uword.  */
-  uword hibyte_mask = uword_max / UCHAR_MAX * HIBYTE;
-
   /* Search a byte at a time until the pointer is aligned, then a
      uword at a time until a match is found, then a byte at a time to
      identify the exact byte.  The uword search may go slightly past
@@ -542,67 +549,69 @@ skip_easy_bytes (char const *buf)
   char const *p;
   uword const *s;
   for (p = buf; (uintptr_t) p % sizeof (uword) != 0; p++)
-    if (*p & HIBYTE)
+    if (to_uchar (*p) & unibyte_mask)
       return p;
-  for (s = CAST_ALIGNED (uword const *, p); ! (*s & hibyte_mask); s++)
+  for (s = CAST_ALIGNED (uword const *, p); ! (*s & unibyte_mask); s++)
     continue;
-  for (p = (char const *) s; ! (*p & HIBYTE); p++)
+  for (p = (char const *) s; ! (to_uchar (*p) & unibyte_mask); p++)
     continue;
   return p;
 }
 
-/* Return the text type of data in BUF, of size SIZE.
+/* Return true if BUF, of size SIZE, has an encoding error.
    BUF must be followed by at least sizeof (uword) bytes,
-   which may be arbitrarily written to or read from.  */
-static enum textbin
-buffer_textbin (char *buf, size_t size)
+   the first of which may be modified.  */
+bool
+buf_has_encoding_errors (char *buf, size_t size)
 {
-  if (eolbyte && memchr (buf, '\0', size))
-    return TEXTBIN_BINARY;
+  if (! unibyte_mask)
+    return false;
 
-  if (1 < MB_CUR_MAX)
+  mbstate_t mbs = { 0 };
+  size_t clen;
+
+  buf[size] = -1;
+  for (char const *p = buf; (p = skip_easy_bytes (p)) < buf + size; p += clen)
     {
-      mbstate_t mbs = { 0 };
-      size_t clen;
-      char const *p;
-
-      buf[size] = -1;
-      for (p = buf; (p = skip_easy_bytes (p)) < buf + size; p += clen)
-        {
-          clen = mbrlen (p, buf + size - p, &mbs);
-          if ((size_t) -2 <= clen)
-            return clen == (size_t) -2 ? TEXTBIN_UNKNOWN : TEXTBIN_BINARY;
-        }
+      clen = mbrlen (p, buf + size - p, &mbs);
+      if ((size_t) -2 <= clen)
+        return true;
     }
 
-  return TEXTBIN_TEXT;
+  return false;
 }
 
-/* Return the text type of a file.  BUF, of size SIZE, is the initial
-   buffer read from the file with descriptor FD and status ST.
-   BUF must be followed by at least sizeof (uword) bytes,
-   which may be arbitrarily written to or read from.  */
-static enum textbin
-file_textbin (char *buf, size_t size, int fd, struct stat const *st)
-{
-  enum textbin textbin = buffer_textbin (buf, size);
-  if (textbin_is_binary (textbin))
-    return textbin;
 
+/* Return true if BUF, of size SIZE, has a null byte.
+   BUF must be followed by at least one byte,
+   which may be arbitrarily written to or read from.  */
+static bool
+buf_has_nulls (char *buf, size_t size)
+{
+  buf[size] = 0;
+  return strlen (buf) != size;
+}
+
+/* Return true if a file is known to contain null bytes.
+   SIZE bytes have already been read from the file
+   with descriptor FD and status ST.  */
+static bool
+file_must_have_nulls (size_t size, int fd, struct stat const *st)
+{
   if (usable_st_size (st))
     {
       if (st->st_size <= size)
-        return textbin == TEXTBIN_UNKNOWN ? TEXTBIN_BINARY : textbin;
+        return false;
 
       /* If the file has holes, it must contain a null byte somewhere.  */
-      if (SEEK_HOLE != SEEK_SET && eolbyte)
+      if (SEEK_HOLE != SEEK_SET)
         {
           off_t cur = size;
           if (O_BINARY || fd == STDIN_FILENO)
             {
               cur = lseek (fd, 0, SEEK_CUR);
               if (cur < 0)
-                return TEXTBIN_UNKNOWN;
+                return false;
             }
 
           /* Look for a hole after the current location.  */
@@ -612,12 +621,12 @@ file_textbin (char *buf, size_t size, int fd, struct stat const *st)
               if (lseek (fd, cur, SEEK_SET) < 0)
                 suppressible_error (filename, errno);
               if (hole_start < st->st_size)
-                return TEXTBIN_BINARY;
+                return true;
             }
         }
     }
 
-  return TEXTBIN_UNKNOWN;
+  return false;
 }
 
 /* Convert STR to a nonnegative integer, storing the result in *OUT.
@@ -640,19 +649,30 @@ context_length_arg (char const *str, intmax_t *out)
     }
 }
 
+/* Return the add_exclude options suitable for excluding a file name.
+   If COMMAND_LINE, it is a command-line file name.  */
+static int
+exclude_options (bool command_line)
+{
+  return EXCLUDE_WILDCARDS | (command_line ? 0 : EXCLUDE_ANCHORED);
+}
+
 /* Return true if the file with NAME should be skipped.
    If COMMAND_LINE, it is a command-line argument.
    If IS_DIR, it is a directory.  */
 static bool
 skipped_file (char const *name, bool command_line, bool is_dir)
 {
-  return (is_dir
-          ? (directories == SKIP_DIRECTORIES
-             || (! (command_line && omit_dot_slash)
-                 && excluded_directory_patterns
-                 && excluded_file_name (excluded_directory_patterns, name)))
-          : (excluded_patterns
-             && excluded_file_name (excluded_patterns, name)));
+  struct exclude **pats;
+  if (! is_dir)
+    pats = excluded_patterns;
+  else if (directories == SKIP_DIRECTORIES)
+    return true;
+  else if (command_line && omit_dot_slash)
+    return false;
+  else
+    pats = excluded_directory_patterns;
+  return pats[command_line] && excluded_file_name (pats[command_line], name);
 }
 
 /* Hairy buffering mechanism for grep.  The intent is to keep
@@ -888,7 +908,7 @@ static char *label = NULL;      /* Fake filename for stdin */
 /* Internal variables to keep track of byte count, context, etc. */
 static uintmax_t totalcc;	/* Total character count before bufbeg. */
 static char const *lastnl;	/* Pointer after last newline counted. */
-static char const *lastout;	/* Pointer after last character output;
+static char *lastout;		/* Pointer after last character output;
                                    NULL if no character has been output
                                    or if it's conceptually before bufbeg. */
 static intmax_t outleft;	/* Maximum number of lines to be output.  */
@@ -960,10 +980,31 @@ print_offset (uintmax_t pos, int min_width, const char *color)
   pr_sgr_end_if (color);
 }
 
-/* Print a whole line head (filename, line, byte).  */
-static void
-print_line_head (char const *beg, char const *lim, char sep)
+/* Print a whole line head (filename, line, byte).  The output data
+   starts at BEG and contains LEN bytes; it is followed by at least
+   sizeof (uword) bytes, the first of which may be temporarily modified.
+   The output data comes from what is perhaps a larger input line that
+   goes until LIM, where LIM[-1] is an end-of-line byte.  Use SEP as
+   the separator on output.
+
+   Return true unless the line was suppressed due to an encoding error.  */
+
+static bool
+print_line_head (char *beg, size_t len, char const *lim, char sep)
 {
+  bool encoding_errors = false;
+  if (binary_files != TEXT_BINARY_FILES)
+    {
+      char ch = beg[len];
+      encoding_errors = buf_has_encoding_errors (beg, len);
+      beg[len] = ch;
+    }
+  if (encoding_errors)
+    {
+      encoding_error_output = done_on_match = out_quiet = true;
+      return false;
+    }
+
   bool pending_sep = false;
 
   if (out_file)
@@ -1010,22 +1051,27 @@ print_line_head (char const *beg, char const *lim, char sep)
 
       print_sep (sep);
     }
+
+  return true;
 }
 
-static const char *
-print_line_middle (const char *beg, const char *lim,
+static char *
+print_line_middle (char *beg, char *lim,
                    const char *line_color, const char *match_color)
 {
   size_t match_size;
   size_t match_offset;
-  const char *cur = beg;
-  const char *mid = NULL;
+  char *cur;
+  char *mid = NULL;
+  char *b;
 
-  while (cur < lim
-         && ((match_offset = execute (beg, lim - beg, &match_size, cur))
-             != (size_t) -1))
+  for (cur = beg;
+       (cur < lim
+        && ((match_offset = execute (beg, lim - beg, &match_size, cur))
+            != (size_t) -1));
+       cur = b + match_size)
     {
-      char const *b = beg + match_offset;
+      b = beg + match_offset;
 
       /* Avoid matching the empty line at the end of the buffer. */
       if (b == lim)
@@ -1045,8 +1091,11 @@ print_line_middle (const char *beg, const char *lim,
           /* This function is called on a matching line only,
              but is it selected or rejected/context?  */
           if (only_matching)
-            print_line_head (b, lim, (out_invert ? SEP_CHAR_REJECTED
-                                      : SEP_CHAR_SELECTED));
+            {
+              char sep = out_invert ? SEP_CHAR_REJECTED : SEP_CHAR_SELECTED;
+              if (! print_line_head (b, match_size, lim, sep))
+                return NULL;
+            }
           else
             {
               pr_sgr_start (line_color);
@@ -1064,7 +1113,6 @@ print_line_middle (const char *beg, const char *lim,
           if (only_matching)
             fputs ("\n", stdout);
         }
-      cur = b + match_size;
     }
 
   if (only_matching)
@@ -1075,8 +1123,8 @@ print_line_middle (const char *beg, const char *lim,
   return cur;
 }
 
-static const char *
-print_line_tail (const char *beg, const char *lim, const char *line_color)
+static char *
+print_line_tail (char *beg, const char *lim, const char *line_color)
 {
   size_t eol_size;
   size_t tail_size;
@@ -1097,14 +1145,15 @@ print_line_tail (const char *beg, const char *lim, const char *line_color)
 }
 
 static void
-prline (char const *beg, char const *lim, char sep)
+prline (char *beg, char *lim, char sep)
 {
   bool matching;
   const char *line_color;
   const char *match_color;
 
   if (!only_matching)
-    print_line_head (beg, lim, sep);
+    if (! print_line_head (beg, lim - beg - 1, lim, sep))
+      return;
 
   matching = (sep == SEP_CHAR_SELECTED) ^ out_invert;
 
@@ -1124,7 +1173,11 @@ prline (char const *beg, char const *lim, char sep)
     {
       /* We already know that non-matching lines have no match (to colorize). */
       if (matching && (only_matching || *match_color))
-        beg = print_line_middle (beg, lim, line_color, match_color);
+        {
+          beg = print_line_middle (beg, lim, line_color, match_color);
+          if (! beg)
+            return;
+        }
 
       if (!only_matching && *line_color)
         {
@@ -1137,6 +1190,9 @@ prline (char const *beg, char const *lim, char sep)
   if (!only_matching && lim > beg)
     fwrite (beg, 1, lim - beg, stdout);
 
+  if (line_buffered)
+    fflush (stdout);
+
   if (ferror (stdout))
     {
       write_error_seen = true;
@@ -1144,9 +1200,6 @@ prline (char const *beg, char const *lim, char sep)
     }
 
   lastout = lim;
-
-  if (line_buffered)
-    fflush (stdout);
 }
 
 /* Print pending lines of trailing context prior to LIM. Trailing context ends
@@ -1158,7 +1211,7 @@ prpending (char const *lim)
     lastout = bufbeg;
   while (pending > 0 && lastout < lim)
     {
-      char const *nl = memchr (lastout, eolbyte, lim - lastout);
+      char *nl = memchr (lastout, eolbyte, lim - lastout);
       size_t match_size;
       --pending;
       if (outleft
@@ -1173,7 +1226,7 @@ prpending (char const *lim)
 
 /* Output the lines between BEG and LIM.  Deal with context.  */
 static void
-prtext (char const *beg, char const *lim)
+prtext (char *beg, char *lim)
 {
   static bool used;	/* Avoid printing SEP_STR_GROUP before any output.  */
   char eol = eolbyte;
@@ -1181,7 +1234,7 @@ prtext (char const *beg, char const *lim)
   if (!out_quiet && pending > 0)
     prpending (beg);
 
-  char const *p = beg;
+  char *p = beg;
 
   if (!out_quiet)
     {
@@ -1207,7 +1260,7 @@ prtext (char const *beg, char const *lim)
 
       while (p < beg)
         {
-          char const *nl = memchr (p, eol, beg - p);
+          char *nl = memchr (p, eol, beg - p);
           nl++;
           prline (p, nl, SEP_CHAR_REJECTED);
           p = nl;
@@ -1220,7 +1273,7 @@ prtext (char const *beg, char const *lim)
       /* One or more lines are output.  */
       for (n = 0; p < lim && n < outleft; n++)
         {
-          char const *nl = memchr (p, eol, lim - p);
+          char *nl = memchr (p, eol, lim - p);
           nl++;
           if (!out_quiet)
             prline (p, nl, SEP_CHAR_SELECTED);
@@ -1267,13 +1320,12 @@ zap_nuls (char *p, char *lim, char eol)
    between matching lines if OUT_INVERT is true).  Return a count of
    lines printed.  Replace all NUL bytes with NUL_ZAPPER as we go.  */
 static intmax_t
-grepbuf (char const *beg, char const *lim)
+grepbuf (char *beg, char const *lim)
 {
   intmax_t outleft0 = outleft;
-  char const *p;
-  char const *endp;
+  char *endp;
 
-  for (p = beg; p < lim; p = endp)
+  for (char *p = beg; p < lim; p = endp)
     {
       size_t match_size;
       size_t match_offset = execute (p, lim - p, &match_size, NULL);
@@ -1284,15 +1336,15 @@ grepbuf (char const *beg, char const *lim)
           match_offset = lim - p;
           match_size = 0;
         }
-      char const *b = p + match_offset;
+      char *b = p + match_offset;
       endp = b + match_size;
       /* Avoid matching the empty line at the end of the buffer. */
       if (!out_invert && b == lim)
         break;
       if (!out_invert || p < b)
         {
-          char const *prbeg = out_invert ? p : b;
-          char const *prend = out_invert ? b : endp;
+          char *prbeg = out_invert ? p : b;
+          char *prend = out_invert ? b : endp;
           prtext (prbeg, prend);
           if (!outleft || done_on_match)
             {
@@ -1313,7 +1365,6 @@ static intmax_t
 grep (int fd, struct stat const *st)
 {
   intmax_t nlines, i;
-  enum textbin textbin;
   size_t residue, save;
   char oldc;
   char *beg;
@@ -1322,6 +1373,11 @@ grep (int fd, struct stat const *st)
   char nul_zapper = '\0';
   bool done_on_match_0 = done_on_match;
   bool out_quiet_0 = out_quiet;
+
+  /* The value of NLINES when nulls were first deduced in the input;
+     this is not necessarily the same as the number of matching lines
+     before the first null.  -1 if no input nulls have been deduced.  */
+  intmax_t nlines_first_null = -1;
 
   if (! reset (fd, st))
     return 0;
@@ -1333,6 +1389,7 @@ grep (int fd, struct stat const *st)
   after_last_match = 0;
   pending = 0;
   skip_nuls = skip_empty_lines && !eol;
+  encoding_error_output = false;
   seek_data_failed = false;
 
   nlines = 0;
@@ -1345,26 +1402,21 @@ grep (int fd, struct stat const *st)
       return 0;
     }
 
-  if (binary_files == TEXT_BINARY_FILES)
-    textbin = TEXTBIN_TEXT;
-  else
+  for (bool firsttime = true; ; firsttime = false)
     {
-      textbin = file_textbin (bufbeg, buflim - bufbeg, fd, st);
-      if (textbin_is_binary (textbin))
+      if (nlines_first_null < 0 && eol && binary_files != TEXT_BINARY_FILES
+          && (buf_has_nulls (bufbeg, buflim - bufbeg)
+              || (firsttime && file_must_have_nulls (buflim - bufbeg, fd, st))))
         {
           if (binary_files == WITHOUT_MATCH_BINARY_FILES)
             return 0;
-          done_on_match = out_quiet = true;
+          if (!count_matches)
+            done_on_match = out_quiet = true;
+          nlines_first_null = nlines;
           nul_zapper = eol;
           skip_nuls = skip_empty_lines;
         }
-      else if (execute != Pexecute)
-        textbin = TEXTBIN_TEXT;
-    }
 
-  for (;;)
-    {
-      input_textbin = textbin;
       lastnl = bufbeg;
       if (lastout)
         lastout = bufbeg;
@@ -1397,7 +1449,8 @@ grep (int fd, struct stat const *st)
             nlines += grepbuf (beg, lim);
           if (pending)
             prpending (lim);
-          if ((!outleft && !pending) || (nlines && done_on_match))
+          if ((!outleft && !pending)
+              || (done_on_match && MAX (0, nlines_first_null) < nlines))
             goto finish_grep;
         }
 
@@ -1415,13 +1468,8 @@ grep (int fd, struct stat const *st)
         }
 
       /* Detect whether leading context is adjacent to previous output.  */
-      if (lastout)
-        {
-          if (textbin == TEXTBIN_UNKNOWN)
-            textbin = TEXTBIN_TEXT;
-          if (beg != lastout)
-            lastout = 0;
-        }
+      if (beg != lastout)
+        lastout = 0;
 
       /* Handle some details and read more data to scan.  */
       save = residue + lim - beg;
@@ -1433,22 +1481,6 @@ grep (int fd, struct stat const *st)
         {
           suppressible_error (filename, errno);
           goto finish_grep;
-        }
-
-      /* If the file's textbin has not been determined yet, assume
-         it's binary if the next input buffer suggests so.  */
-      if (textbin == TEXTBIN_UNKNOWN)
-        {
-          enum textbin tb = buffer_textbin (bufbeg, buflim - bufbeg);
-          if (textbin_is_binary (tb))
-            {
-              if (binary_files == WITHOUT_MATCH_BINARY_FILES)
-                return 0;
-              textbin = tb;
-              done_on_match = out_quiet = true;
-              nul_zapper = eol;
-              skip_nuls = skip_empty_lines;
-            }
         }
     }
   if (residue)
@@ -1463,8 +1495,13 @@ grep (int fd, struct stat const *st)
  finish_grep:
   done_on_match = done_on_match_0;
   out_quiet = out_quiet_0;
-  if (textbin_is_binary (textbin) && !out_quiet && nlines != 0)
-    printf (_("Binary file %s matches\n"), filename);
+  if (!out_quiet && (encoding_error_output
+                     || (0 <= nlines_first_null && nlines_first_null < nlines)))
+    {
+      printf (_("Binary file %s matches\n"), filename);
+      if (line_buffered)
+        fflush (stdout);
+    }
   return nlines;
 }
 
@@ -1708,6 +1745,8 @@ grepdesc (int desc, bool command_line)
                 fputc (0, stdout);
             }
           printf ("%" PRIdMAX "\n", count);
+          if (line_buffered)
+            fflush (stdout);
         }
 
       status = !count;
@@ -1715,6 +1754,8 @@ grepdesc (int desc, bool command_line)
         {
           print_filename ();
           fputc ('\n' & filename_mask, stdout);
+          if (line_buffered)
+            fflush (stdout);
         }
 
       if (desc == STDIN_FILENO)
@@ -2446,28 +2487,36 @@ main (int argc, char **argv)
 
       case EXCLUDE_OPTION:
       case INCLUDE_OPTION:
-        if (!excluded_patterns)
-          excluded_patterns = new_exclude ();
-        add_exclude (excluded_patterns, optarg,
-                     (EXCLUDE_ANCHORED | EXCLUDE_WILDCARDS
-                      | (opt == INCLUDE_OPTION ? EXCLUDE_INCLUDE : 0)));
+        for (int cmd = 0; cmd < 2; cmd++)
+          {
+            if (!excluded_patterns[cmd])
+              excluded_patterns[cmd] = new_exclude ();
+            add_exclude (excluded_patterns[cmd], optarg,
+                         ((opt == INCLUDE_OPTION ? EXCLUDE_INCLUDE : 0)
+                          | exclude_options (cmd)));
+          }
         break;
       case EXCLUDE_FROM_OPTION:
-        if (!excluded_patterns)
-          excluded_patterns = new_exclude ();
-        if (add_exclude_file (add_exclude, excluded_patterns, optarg,
-                              EXCLUDE_ANCHORED | EXCLUDE_WILDCARDS, '\n') != 0)
+        for (int cmd = 0; cmd < 2; cmd++)
           {
-            error (EXIT_TROUBLE, errno, "%s", optarg);
+            if (!excluded_patterns[cmd])
+              excluded_patterns[cmd] = new_exclude ();
+            if (add_exclude_file (add_exclude, excluded_patterns[cmd],
+                                  optarg, exclude_options (cmd), '\n')
+                != 0)
+              error (EXIT_TROUBLE, errno, "%s", optarg);
           }
         break;
 
       case EXCLUDE_DIRECTORY_OPTION:
-        if (!excluded_directory_patterns)
-          excluded_directory_patterns = new_exclude ();
         strip_trailing_slashes (optarg);
-        add_exclude (excluded_directory_patterns, optarg,
-                     EXCLUDE_ANCHORED | EXCLUDE_WILDCARDS);
+        for (int cmd = 0; cmd < 2; cmd++)
+          {
+            if (!excluded_directory_patterns[cmd])
+              excluded_directory_patterns[cmd] = new_exclude ();
+            add_exclude (excluded_directory_patterns[cmd], optarg,
+                         exclude_options (cmd));
+          }
         break;
 
       case GROUP_SEPARATOR_OPTION:
@@ -2559,7 +2608,7 @@ main (int argc, char **argv)
     usage (EXIT_TROUBLE);
 
   build_mbclen_cache ();
-  init_easy_encoding ();
+  initialize_unibyte_mask ();
 
   /* In a unibyte locale, switch from fgrep to grep if
      the pattern matches words (where grep is typically faster).

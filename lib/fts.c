@@ -1,6 +1,6 @@
 /* Traverse a file hierarchy.
 
-   Copyright (C) 2004-2015 Free Software Foundation, Inc.
+   Copyright (C) 2004-2016 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -665,6 +665,7 @@ fts_close (FTS *sp)
 # define S_MAGIC_TMPFS 0x1021994
 # define S_MAGIC_NFS 0x6969
 # define S_MAGIC_REISERFS 0x52654973
+# define S_MAGIC_XFS 0x58465342
 # define S_MAGIC_PROC 0x9FA0
 
 /* Return false if it is easy to determine the file system type of
@@ -720,13 +721,20 @@ leaf_optimization_applies (int dir_fd)
       /* List here the file system types that lack usable dirent.d_type
          info, yet for which the optimization does apply.  */
     case S_MAGIC_REISERFS:
+    case S_MAGIC_XFS:
       return true;
 
+      /* Explicitly list here any other file system type for which the
+         optimization is not applicable, but need documentation.  */
+    case S_MAGIC_NFS:
+      /* NFS provides usable dirent.d_type but not necessarily for all entries
+         of large directories, so as per <https://bugzilla.redhat.com/1252549>
+         NFS should return true.  However st_nlink values are not accurate on
+         all implementations as per <https://bugzilla.redhat.com/1299169>.  */
+      /* fall through */
     case S_MAGIC_PROC:
-      /* Explicitly listing this or any other file system type for which
-         the optimization is not applicable is not necessary, but we leave
-         it here to document the risk.  Per http://bugs.debian.org/143111,
-         /proc may have bogus stat.st_nlink values.  */
+      /* Per <http://bugs.debian.org/143111> /proc may have
+         bogus stat.st_nlink values.  */
       /* fall through */
     default:
       return false;

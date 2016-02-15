@@ -1,5 +1,5 @@
 /* pcresearch.c - searching subroutines using PCRE for grep.
-   Copyright 2000, 2007, 2009-2015 Free Software Foundation, Inc.
+   Copyright 2000, 2007, 2009-2016 Free Software Foundation, Inc.
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -84,6 +84,8 @@ jit_exec (char const *subject, int search_bytes, int search_offset,
 /* Table, indexed by ! (flag & PCRE_NOTBOL), of whether the empty
    string matches when that flag is used.  */
 static int empty_match[2];
+
+static bool multibyte_locale;
 #endif
 
 void
@@ -96,7 +98,13 @@ Pcompile (char const *pattern, size_t size)
 #else
   int e;
   char const *ep;
-  char *re = xnmalloc (4, size + 7);
+  static char const wprefix[] = "(?<!\\w)(?:";
+  static char const wsuffix[] = ")(?!\\w)";
+  static char const xprefix[] = "^(?:";
+  static char const xsuffix[] = ")$";
+  int fix_len_max = MAX (sizeof wprefix - 1 + sizeof wsuffix - 1,
+                         sizeof xprefix - 1 + sizeof xsuffix - 1);
+  char *re = xnmalloc (4, size + (fix_len_max + 4 - 1) / 4);
   int flags = (PCRE_MULTILINE
                | (match_icase ? PCRE_CASELESS : 0));
   char const *patlim = pattern + size;
@@ -104,30 +112,30 @@ Pcompile (char const *pattern, size_t size)
   char const *p;
   char const *pnul;
 
-  if (using_utf8 ())
-    flags |= PCRE_UTF8;
-  else if (MB_CUR_MAX != 1)
-    error (EXIT_TROUBLE, 0, _("-P supports only unibyte and UTF-8 locales"));
+  if (1 < MB_CUR_MAX)
+    {
+      if (! using_utf8 ())
+        error (EXIT_TROUBLE, 0,
+               _("-P supports only unibyte and UTF-8 locales"));
+      multibyte_locale = true;
+      flags |= PCRE_UTF8;
+    }
 
   /* FIXME: Remove these restrictions.  */
   if (memchr (pattern, '\n', size))
     error (EXIT_TROUBLE, 0, _("the -P option only supports a single pattern"));
 
   *n = '\0';
-  if (match_lines)
-    strcpy (n, "^(?:");
   if (match_words)
-    strcpy (n, "(?<!\\w)(?:");
+    strcpy (n, wprefix);
+  if (match_lines)
+    strcpy (n, xprefix);
   n += strlen (n);
 
   /* The PCRE interface doesn't allow NUL bytes in the pattern, so
      replace each NUL byte in the pattern with the four characters
      "\000", removing a preceding backslash if there are an odd
-     number of backslashes before the NUL.
-
-     FIXME: This method does not work with some multibyte character
-     encodings, notably Shift-JIS, where a multibyte character can end
-     in a backslash byte.  */
+     number of backslashes before the NUL.  */
   for (p = pattern; (pnul = memchr (p, '\0', patlim - p)); p = pnul + 1)
     {
       memcpy (n, p, pnul - p);
@@ -143,9 +151,9 @@ Pcompile (char const *pattern, size_t size)
   n += patlim - p;
   *n = '\0';
   if (match_words)
-    strcpy (n, ")(?!\\w)");
+    strcpy (n, wsuffix);
   if (match_lines)
-    strcpy (n, ")$");
+    strcpy (n, xsuffix);
 
   cre = pcre_compile (re, flags, &ep, &e, pcre_maketables ());
   if (!cre)
@@ -174,7 +182,7 @@ Pcompile (char const *pattern, size_t size)
 }
 
 size_t
-Pexecute (char const *buf, size_t size, size_t *match_size,
+Pexecute (char *buf, size_t size, size_t *match_size,
           char const *start_ptr)
 {
 #if !HAVE_LIBPCRE
@@ -194,13 +202,16 @@ Pexecute (char const *buf, size_t size, size_t *match_size,
      error.  */
   char const *subject = buf;
 
-  /* If the input type is unknown, the caller is still testing the
-     input, which means the current buffer cannot contain encoding
-     errors and a multiline search is typically more efficient.
-     Otherwise, a single-line search is typically faster, so that
-     pcre_exec doesn't waste time validating the entire input
-     buffer.  */
-  bool multiline = input_textbin == TEXTBIN_UNKNOWN;
+  /* If the input is unibyte or is free of encoding errors a multiline search is
+     typically more efficient.  Otherwise, a single-line search is
+     typically faster, so that pcre_exec doesn't waste time validating
+     the entire input buffer.  */
+  bool multiline = true;
+  if (multibyte_locale)
+    {
+      multiline = ! buf_has_encoding_errors (buf, size - 1);
+      buf[size - 1] = eolbyte;
+    }
 
   for (; p < buf + size; p = line_start = line_end + 1)
     {
@@ -230,6 +241,7 @@ Pexecute (char const *buf, size_t size, size_t *match_size,
           while (mbclen_cache[to_uchar (*p)] == (size_t) -1)
             {
               p++;
+              subject = p;
               bol = false;
             }
 
@@ -270,27 +282,30 @@ Pexecute (char const *buf, size_t size, size_t *match_size,
             }
           int valid_bytes = sub[0];
 
-          /* Try to match the string before the encoding error.  */
-          if (valid_bytes < search_offset)
-            e = PCRE_ERROR_NOMATCH;
-          else if (valid_bytes == 0)
+          if (search_offset <= valid_bytes)
             {
-              /* Handle the empty-match case specially, for speed.
-                 This optimization is valid if VALID_BYTES is zero,
-                 which means SEARCH_OFFSET is also zero.  */
-              sub[1] = 0;
-              e = empty_match[bol];
+              /* Try to match the string before the encoding error.  */
+              if (valid_bytes == 0)
+                {
+                  /* Handle the empty-match case specially, for speed.
+                     This optimization is valid if VALID_BYTES is zero,
+                     which means SEARCH_OFFSET is also zero.  */
+                  sub[1] = 0;
+                  e = empty_match[bol];
+                }
+              else
+                e = jit_exec (subject, valid_bytes, search_offset,
+                              options | PCRE_NO_UTF8_CHECK | PCRE_NOTEOL, sub);
+
+              if (e != PCRE_ERROR_NOMATCH)
+                break;
+
+              /* Treat the encoding error as data that cannot match.  */
+              p = subject + valid_bytes + 1;
+              bol = false;
             }
-          else
-            e = jit_exec (subject, valid_bytes, search_offset,
-                          options | PCRE_NO_UTF8_CHECK | PCRE_NOTEOL, sub);
 
-          if (e != PCRE_ERROR_NOMATCH)
-            break;
-
-          /* Treat the encoding error as data that cannot match.  */
-          p = subject += valid_bytes + 1;
-          bol = false;
+          subject += valid_bytes + 1;
         }
 
       if (e != PCRE_ERROR_NOMATCH)
