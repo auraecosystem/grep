@@ -1,3 +1,13 @@
+grep (2.23-1) unstable; urgency=low
+
+  * New upstream release.
+  * Fix grep --exclude no longer works against arguments with a directory
+    name. Closes: #807641.
+  * Fix grep treats ISO-8859 text files as binary. Closes: #799956.
+  * Remove no longer needed 85-412370-F-x-documentation.patch.
+
+ -- Santiago Ruano Rincón <santiago@debian.org>  Mon, 15 Feb 2016 23:22:58 +0100
+
 grep (2.22-1) unstable; urgency=low
 
   * New upstream release
