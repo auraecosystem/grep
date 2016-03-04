@@ -1,20 +1,20 @@
---- a/doc/grep.info
-+++ b/doc/grep.info
-@@ -786,7 +786,7 @@
+--- a/doc/grep.texi
++++ b/doc/grep.texi
+@@ -1102,7 +1102,7 @@
+ @opindex -P
+ @opindex --perl-regexp
+ @cindex matching Perl regular expressions
+-Interpret the pattern as a Perl regular expression.
++Interpret the pattern as a Perl regular expression (PCRE).
+ This is highly experimental and
+ @samp{grep@ -P} may warn of unimplemented features.
  
- ‘-P’
- ‘--perl-regexp’
--     Interpret the pattern as a Perl regular expression.  This is highly
-+     Interpret the pattern as a Perl regular expression (PCRE). This is highly
-      experimental and ‘grep -P’ may warn of unimplemented features.
- 
-    In addition, two variant programs ‘egrep’ and ‘fgrep’ are available.
-@@ -805,7 +805,7 @@
- Regular expressions are constructed analogously to arithmetic
- expressions, by using various operators to combine smaller expressions.
- ‘grep’ understands three different versions of regular expression
--syntax: “basic,” (BRE) “extended” (ERE) and “perl”.  In GNU ‘grep’,
-+syntax: “basic,” (BRE) “extended” (ERE) and “perl” (PCRE).  In GNU ‘grep’,
+@@ -1127,7 +1127,7 @@
+ by using various operators to combine smaller expressions.
+ @command{grep} understands
+ three different versions of regular expression syntax:
+-``basic,'' (BRE) ``extended'' (ERE) and ``perl''.
++``basic,'' (BRE) ``extended'' (ERE) and ``perl'' (PCRE).
+ In GNU @command{grep},
  there is no difference in available functionality between the basic and
- extended syntaxes.  In other implementations, basic regular expressions
- are less powerful.  The following description applies to extended
+ extended syntaxes.
