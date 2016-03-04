@@ -1,11 +1,12 @@
-grep (2.23-2~1) UNRELEASED; urgency=medium
+grep (2.23.7~9e28-1) experimental; urgency=medium
 
   * debian/rules: set DEB_MAKE_CHECK_TARGET to run expensive tests on amd64
     and i386 only, and cheap tests on any other architecture.
   * Add 81-356120-document-multiple-e.patch to clarify information about
     multiple -e and -f options. Closes: #356120.
+  * Updated 80-587930-man-ere-reference.patch to modify grep.texi.
 
- -- Santiago Ruano Rincón <santiago@debian.org>  Fri, 04 Mar 2016 00:40:58 +0100
+ -- Santiago Ruano Rincón <santiago@debian.org>  Fri, 04 Mar 2016 21:14:58 +0100
 
 grep (2.23-1) unstable; urgency=low
 
