@@ -2,3 +2,4 @@
 03-397262-dlopen-pcre.patch
 05-grep-wrapper-sh.patch
 80-587930-man-ere-reference.patch
+81-356120-document-multiple-e.patch
