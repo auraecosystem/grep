@@ -36,8 +36,15 @@ DEB_CONFIGURE_SCRIPT_ENV += LIBS="$(LIBS)"
 # (e.g. DEB_CONFIGURE_EXECDIR in autotools-vars.mk)?
 DEB_CONFIGURE_EXTRA_FLAGS += --exec-prefix=/
 
-#DEB_MAKE_CHECK_TARGET = check
-DEB_MAKE_CHECK_TARGET = check-expensive
+# Run expensive tests only on amd64 and i386. Builders have had some
+# problems with expensive checks, e.g. long-pattern-perf, on other
+# architectures such as s390x, ppc64el and hurd-i386.
+
+ifeq ($(DEB_HOST_ARCH),$(filter $(DEB_HOST_ARCH),amd64 i386))
+  DEB_MAKE_CHECK_TARGET = check-expensive
+else
+  DEB_MAKE_CHECK_TARGET = check
+endif
 
 include /usr/share/cdbs/1/rules/upstream-tarball.mk
 include /usr/share/cdbs/1/rules/autoreconf.mk
