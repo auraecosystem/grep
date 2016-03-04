@@ -55,7 +55,7 @@ export VERBOSE = yes
 # 1127556 9e
 export XZ_OPT = -6e
 
-old_NEWS_hash = 71681135bc12700bfb929dad90587568
+old_NEWS_hash = 3379d61dae538c411df7438f5e2fb6ad
 
 # Many m4 macros names once began with 'jm_'.
 # Make sure that none are inadvertently reintroduced.
@@ -120,9 +120,22 @@ sc_THANKS_in_duplicates:
 	    && { echo '$(ME): remove the above names from THANKS.in'	\
 		  1>&2; exit 1; } || :
 
+# Ensure that tests don't use `cmd ... && fail=1` as that hides crashes.
+# The "exclude" expression allows common idioms like `test ... && fail=1`
+# and the 2>... portion allows commands that redirect stderr and so probably
+# independently check its contents and thus detect any crash messages.
+sc_prohibit_and_fail_1:
+	@prohibit='&& fail=1'						\
+	exclude='(stat|kill|test |EGREP|grep|compare|2> *[^/])'		\
+	halt='&& fail=1 detected. Please use: returns_ 1 ... || fail=1'	\
+	in_vc_files='^tests/'						\
+	  $(_sc_search_regexp)
+
 update-copyright-env = \
   UPDATE_COPYRIGHT_USE_INTERVALS=1 \
   UPDATE_COPYRIGHT_MAX_LINE_LENGTH=79
+
+include $(abs_top_srcdir)/dist-check.mk
 
 exclude_file_name_regexp--sc_bindtextdomain = \
   ^tests/(get-mb-cur-max|dfa-match-aux)\.c$$

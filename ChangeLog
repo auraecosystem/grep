@@ -1,4 +1,57 @@
+2016-02-28  Jim Meyering  <meyering@fb.com>
+
+	maint: add dist-check.mk
+	This file augments "make distcheck" rules.
+	* dist-check.mk: New file, from coreutils via gzip.
+	* Makefile.am (EXTRA_DIST): Add it.
+	* cfg.mk: Include it.
+
+2016-02-21  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: -Pz is incompatible with ^ and $
+	Problem reported by Sergei Trofimovich in: http://bugs.gnu.org/22655
+	* NEWS: Document this.
+	* src/pcresearch.c (Pcompile): Warn with -Pz and anchors.
+	* tests/pcre: Test new behavior.
+
+2016-02-21  Jim Meyering  <meyering@fb.com>
+
+	tests: test cleanup
+	* tests/z-anchor-newline: Remove test artifact that would write
+	to /t/x.
+
+2016-02-20  Jim Meyering  <meyering@fb.com>
+
+	grep -z: avoid erroneous match with regexp anchor and \n in text
+	* src/dfasearch.c (EGexecute): Clear the newline_anchor bit when
+	eolbyte is not '\n'.
+	* tests/z-anchor-newline: New file.
+	* tests/Makefile.am (TESTS): Add it.
+	* NEWS (Bug fixes): Describe it.
+	Originally reported by Ulrich Mueller in
+	https://bugs.gentoo.org/show_bug.cgi?id=574662
+	Reported to us by Sergei Trofimovich as http://debbugs.gnu.org/22655
+
+	tests: convert "cmd && fail=1" to "returns_ 1 cmd || fail=1"
+	The latter is robust, while the former can silently ignore
+	failure due to signals.
+	* cfg.mk (sc_prohibit_and_fail_1): New rule, copied from coreutils.
+	* tests/long-pattern-perf: Perform the above substitution.
+	* tests/mb-non-UTF8-performance: Likewise.
+	* tests/help-version: Merge from coreutils.
+
+2016-02-09  Jim Meyering  <meyering@fb.com>
+
+	maint: add a check-very-expensive target
+	* Makefile.am (check-very-expensive): New convenience rule,
+	currently merely equivalent to check-expensive.
+
 2016-02-04  Jim Meyering  <meyering@fb.com>
+
+	maint: post-release administrivia
+	* NEWS: Add header line for next release.
+	* .prev-version: Record previous version.
+	* cfg.mk (old_NEWS_hash): Auto-update.
 
 	version 2.23
 	* NEWS: Record release date.

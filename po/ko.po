@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GNU grep 2.0f\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2016-02-04 14:41-0800\n"
+"POT-Creation-Date: 2016-03-03 17:39-0800\n"
 "PO-Revision-Date: 1997-09-03 11:19+0900\n"
 "Last-Translator: Bang Jun-Young <bangjy@geocities.com>\n"
 "Language-Team: Korean <ko@li.org>\n"
@@ -98,7 +98,8 @@ msgstr "%s: `-W %s' 옵션은 인수를 허용하지 않습니다\n"
 msgid "%s: option '-W %s' requires an argument\n"
 msgstr "%s: `%s' 옵션은 인수가 필요합니다\n"
 
-#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34 src/pcresearch.c:324
+#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34
+#: src/pcresearch.c:338
 #, c-format
 msgid "memory exhausted"
 msgstr "메모리가 바닥남"
@@ -210,7 +211,7 @@ msgstr ""
 msgid "Unmatched ) or \\)"
 msgstr ""
 
-#: lib/regcomp.c:711
+#: lib/regcomp.c:687
 msgid "No previous regular expression"
 msgstr ""
 
@@ -398,8 +399,9 @@ msgid "unfinished \\ escape"
 msgstr "완결되지 않은 \\ 이스케이프"
 
 #: src/dfa.c:1392
+#, fuzzy
 msgid "invalid content of \\{\\}"
-msgstr ""
+msgstr "완결되지 않은 반복 회수"
 
 #: src/dfa.c:1395
 msgid "regular expression too big"
@@ -674,32 +676,37 @@ msgstr ""
 msgid "the -P option only supports a single pattern"
 msgstr ""
 
-#: src/pcresearch.c:168
+#: src/pcresearch.c:138
+#, c-format
+msgid "unescaped ^ or $ not supported with -Pz"
+msgstr ""
+
+#: src/pcresearch.c:182
 #, c-format
 msgid "internal error (should never happen)"
 msgstr ""
 
-#: src/pcresearch.c:190
+#: src/pcresearch.c:204
 #, c-format
 msgid "internal error"
 msgstr ""
 
-#: src/pcresearch.c:234
+#: src/pcresearch.c:248
 #, c-format
 msgid "exceeded PCRE's line length limit"
 msgstr ""
 
-#: src/pcresearch.c:328
+#: src/pcresearch.c:342
 #, c-format
 msgid "exhausted PCRE JIT stack"
 msgstr ""
 
-#: src/pcresearch.c:332
+#: src/pcresearch.c:346
 #, c-format
 msgid "exceeded PCRE's backtracking limit"
 msgstr ""
 
-#: src/pcresearch.c:339
+#: src/pcresearch.c:353
 #, c-format
 msgid "internal PCRE error: %d"
 msgstr ""
@@ -709,6 +716,10 @@ msgstr ""
 #~ "Usage: %s [OPTION]... PATTERN [FILE]...\n"
 #~ "  or:  %s [OPTION]... --files0-from=F PATTERN\n"
 #~ msgstr "사용법: %s [옵션]... 패턴 [파일] ...\n"
+
+#, fuzzy
+#~ msgid "PATTERN is an extended regular expression (ERE).\n"
+#~ msgstr "  -E, --extended-regexp     패턴은 확장 정규식이 됩니다\n"
 
 #~ msgid "malformed repeat count"
 #~ msgstr "잘못 주어진 반복 회수"
@@ -782,10 +793,6 @@ msgstr ""
 
 #~ msgid "memory exhausted\n"
 #~ msgstr "메모리가 바닥남\n"
-
-#~ msgid ""
-#~ "  -E, --extended-regexp     PATTERN is an extended regular expression\n"
-#~ msgstr "  -E, --extended-regexp     패턴은 확장 정규식이 됩니다\n"
 
 #~ msgid ""
 #~ "  -F, --fixed-strings       PATTERN is a fixed string separated by "
