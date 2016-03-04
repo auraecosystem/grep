@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grep 2.21.78\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2016-02-04 14:41-0800\n"
+"POT-Creation-Date: 2016-03-03 17:39-0800\n"
 "PO-Revision-Date: 2015-10-19 08:37+0700\n"
 "Last-Translator: Trần Ngọc Quân <vnwildman@gmail.com>\n"
 "Language-Team: Vietnamese <translation-team-vi@lists.sourceforge.net>\n"
@@ -104,7 +104,8 @@ msgstr "%s: tùy chọn “-W %s” không cho phép đối số\n"
 msgid "%s: option '-W %s' requires an argument\n"
 msgstr "%s: tùy chọn “-W %s” yêu cầu một đối số\n"
 
-#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34 src/pcresearch.c:324
+#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34
+#: src/pcresearch.c:338
 #, c-format
 msgid "memory exhausted"
 msgstr "hết bộ nhớ"
@@ -217,7 +218,7 @@ msgstr "Biểu thức chính quy quá lớn"
 msgid "Unmatched ) or \\)"
 msgstr "Có ký tự “)” hay “\\)” lẻ cặp"
 
-#: lib/regcomp.c:711
+#: lib/regcomp.c:687
 msgid "No previous regular expression"
 msgstr "Không có biểu thức chính quy nằm trước"
 
@@ -794,32 +795,37 @@ msgstr "-P chỉ hỗ trợ miền địa phương unibyte và UTF-8"
 msgid "the -P option only supports a single pattern"
 msgstr "tùy chọn “-P” chỉ hỗ trợ một mẫu đơn lẻ"
 
-#: src/pcresearch.c:168
+#: src/pcresearch.c:138
+#, c-format
+msgid "unescaped ^ or $ not supported with -Pz"
+msgstr ""
+
+#: src/pcresearch.c:182
 #, c-format
 msgid "internal error (should never happen)"
 msgstr "lỗi nội bộ (không nên xảy ra như thế)"
 
-#: src/pcresearch.c:190
+#: src/pcresearch.c:204
 #, c-format
 msgid "internal error"
 msgstr "lỗi nội bộ"
 
-#: src/pcresearch.c:234
+#: src/pcresearch.c:248
 #, c-format
 msgid "exceeded PCRE's line length limit"
 msgstr "đã vượt quá giới hạn chiều dài dòng của PCRE"
 
-#: src/pcresearch.c:328
+#: src/pcresearch.c:342
 #, c-format
 msgid "exhausted PCRE JIT stack"
 msgstr "ngăn xếp “PCRE JIT” đã hết"
 
-#: src/pcresearch.c:332
+#: src/pcresearch.c:346
 #, c-format
 msgid "exceeded PCRE's backtracking limit"
 msgstr "đã vượt quá giới hạn tìm ngược của PCRE"
 
-#: src/pcresearch.c:339
+#: src/pcresearch.c:353
 #, c-format
 msgid "internal PCRE error: %d"
 msgstr "lỗi nội bộ PCRE: %d"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grep-2.21.78\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2016-02-04 14:41-0800\n"
+"POT-Creation-Date: 2016-03-03 17:39-0800\n"
 "PO-Revision-Date: 2015-10-18 12:10+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <translation-team-uk@lists.sourceforge.net>\n"
@@ -103,7 +103,8 @@ msgstr "%s: додавання аргументів до параметра «-W
 msgid "%s: option '-W %s' requires an argument\n"
 msgstr "%s: до параметра «-W %s» слід додати аргумент\n"
 
-#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34 src/pcresearch.c:324
+#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34
+#: src/pcresearch.c:338
 #, c-format
 msgid "memory exhausted"
 msgstr "пам'ять вичерпано"
@@ -216,7 +217,7 @@ msgstr "Занадто об'ємний формальний вираз"
 msgid "Unmatched ) or \\)"
 msgstr "Неврівноважена послідовність ) або \\)"
 
-#: lib/regcomp.c:711
+#: lib/regcomp.c:687
 msgid "No previous regular expression"
 msgstr "Не виявлено попереднього формального виразу"
 
@@ -811,32 +812,37 @@ msgstr "у -P передбачено підтримку лише однобай�
 msgid "the -P option only supports a single pattern"
 msgstr "аргументом параметра -P може бути лише один шаблон"
 
-#: src/pcresearch.c:168
+#: src/pcresearch.c:138
+#, c-format
+msgid "unescaped ^ or $ not supported with -Pz"
+msgstr ""
+
+#: src/pcresearch.c:182
 #, c-format
 msgid "internal error (should never happen)"
 msgstr "внутрішня помилка (такої помилки не повинно було статися)"
 
-#: src/pcresearch.c:190
+#: src/pcresearch.c:204
 #, c-format
 msgid "internal error"
 msgstr "внутрішня помилка"
 
-#: src/pcresearch.c:234
+#: src/pcresearch.c:248
 #, c-format
 msgid "exceeded PCRE's line length limit"
 msgstr "перевищено обмеження на довжину рядка PCRE"
 
-#: src/pcresearch.c:328
+#: src/pcresearch.c:342
 #, c-format
 msgid "exhausted PCRE JIT stack"
 msgstr "вичерпано стек JIT PCRE"
 
-#: src/pcresearch.c:332
+#: src/pcresearch.c:346
 #, c-format
 msgid "exceeded PCRE's backtracking limit"
 msgstr "перевищено обмеження на зворотне стеження у PCRE"
 
-#: src/pcresearch.c:339
+#: src/pcresearch.c:353
 #, c-format
 msgid "internal PCRE error: %d"
 msgstr "внутрішня помилка PCRE: %d"

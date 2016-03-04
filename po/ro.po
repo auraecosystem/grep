@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grep-2.5g.ro\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2016-02-04 14:41-0800\n"
+"POT-Creation-Date: 2016-03-03 17:39-0800\n"
 "PO-Revision-Date: 2003-04-19 02:47+0000\n"
 "Last-Translator: Eugen Hoanca <eugenh@urban-grafx.ro>\n"
 "Language-Team: Romanian <translation-team-ro@lists.sourceforge.net>\n"
@@ -99,7 +99,8 @@ msgstr "%s: opþiunea `-W %s' nu permite un parametru\n"
 msgid "%s: option '-W %s' requires an argument\n"
 msgstr "%s: opþiunea `%s' necesitã un parametru\n"
 
-#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34 src/pcresearch.c:324
+#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34
+#: src/pcresearch.c:338
 #, c-format
 msgid "memory exhausted"
 msgstr "memorie plinã"
@@ -211,7 +212,7 @@ msgstr ""
 msgid "Unmatched ) or \\)"
 msgstr ""
 
-#: lib/regcomp.c:711
+#: lib/regcomp.c:687
 msgid "No previous regular expression"
 msgstr ""
 
@@ -720,32 +721,37 @@ msgstr ""
 msgid "the -P option only supports a single pattern"
 msgstr "Opþiunea -P nu este suportatã"
 
-#: src/pcresearch.c:168
+#: src/pcresearch.c:138
+#, c-format
+msgid "unescaped ^ or $ not supported with -Pz"
+msgstr ""
+
+#: src/pcresearch.c:182
 #, c-format
 msgid "internal error (should never happen)"
 msgstr ""
 
-#: src/pcresearch.c:190
+#: src/pcresearch.c:204
 #, c-format
 msgid "internal error"
 msgstr ""
 
-#: src/pcresearch.c:234
+#: src/pcresearch.c:248
 #, c-format
 msgid "exceeded PCRE's line length limit"
 msgstr ""
 
-#: src/pcresearch.c:328
+#: src/pcresearch.c:342
 #, c-format
 msgid "exhausted PCRE JIT stack"
 msgstr ""
 
-#: src/pcresearch.c:332
+#: src/pcresearch.c:346
 #, c-format
 msgid "exceeded PCRE's backtracking limit"
 msgstr ""
 
-#: src/pcresearch.c:339
+#: src/pcresearch.c:353
 #, c-format
 msgid "internal PCRE error: %d"
 msgstr ""

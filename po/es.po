@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GNU grep 2.19.12\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2016-02-04 14:41-0800\n"
+"POT-Creation-Date: 2016-03-03 17:39-0800\n"
 "PO-Revision-Date: 2014-07-11 18:53+0200\n"
 "Last-Translator: Santiago Vila Doncel <sanvila@unex.es>\n"
 "Language-Team: Spanish <es@tp.org.es>\n"
@@ -100,7 +100,8 @@ msgstr "%s: la opción '-W %s' no admite ningún argumento\n"
 msgid "%s: option '-W %s' requires an argument\n"
 msgstr "%s: la opción '-W %s' requiere un argumento\n"
 
-#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34 src/pcresearch.c:324
+#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34
+#: src/pcresearch.c:338
 #, c-format
 msgid "memory exhausted"
 msgstr "memoria agotada"
@@ -213,7 +214,7 @@ msgstr "La expresión regular es demasiado grande"
 msgid "Unmatched ) or \\)"
 msgstr ") o \\) desemparejado"
 
-#: lib/regcomp.c:711
+#: lib/regcomp.c:687
 msgid "No previous regular expression"
 msgstr "No hay ninguna expresión regular anterior"
 
@@ -798,32 +799,37 @@ msgstr ""
 msgid "the -P option only supports a single pattern"
 msgstr "la opción -P solamente admite un patrón"
 
-#: src/pcresearch.c:168
+#: src/pcresearch.c:138
+#, c-format
+msgid "unescaped ^ or $ not supported with -Pz"
+msgstr ""
+
+#: src/pcresearch.c:182
 #, c-format
 msgid "internal error (should never happen)"
 msgstr "error interno (no debería ocurrir nunca)"
 
-#: src/pcresearch.c:190
+#: src/pcresearch.c:204
 #, c-format
 msgid "internal error"
 msgstr "error interno"
 
-#: src/pcresearch.c:234
+#: src/pcresearch.c:248
 #, c-format
 msgid "exceeded PCRE's line length limit"
 msgstr "se ha excedido el límite de longitud de línea de las PCREs"
 
-#: src/pcresearch.c:328
+#: src/pcresearch.c:342
 #, c-format
 msgid "exhausted PCRE JIT stack"
 msgstr ""
 
-#: src/pcresearch.c:332
+#: src/pcresearch.c:346
 #, c-format
 msgid "exceeded PCRE's backtracking limit"
 msgstr "se ha excedido el límite de vuelta atrás de las PCREs"
 
-#: src/pcresearch.c:339
+#: src/pcresearch.c:353
 #, c-format
 msgid "internal PCRE error: %d"
 msgstr "error interno de PCRE: %d"

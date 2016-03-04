@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grep-2.21.78\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2016-02-04 14:41-0800\n"
+"POT-Creation-Date: 2016-03-03 17:39-0800\n"
 "PO-Revision-Date: 2015-12-24 11:24+0200\n"
 "Last-Translator: Мирослав Николић <miroslavnikolic@rocketmail.com>\n"
 "Language-Team: Serbian <(nothing)>\n"
@@ -101,7 +101,8 @@ msgstr "%s: опција „-W %s“ не дозвољава аргумент\n"
 msgid "%s: option '-W %s' requires an argument\n"
 msgstr "%s: опција „-W %s“ захтева аргумент\n"
 
-#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34 src/pcresearch.c:324
+#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34
+#: src/pcresearch.c:338
 #, c-format
 msgid "memory exhausted"
 msgstr "меморија је потрошена"
@@ -215,7 +216,7 @@ msgstr "Регуларни израз је превелик"
 msgid "Unmatched ) or \\)"
 msgstr "Не одговара ) или \\)"
 
-#: lib/regcomp.c:711
+#: lib/regcomp.c:687
 msgid "No previous regular expression"
 msgstr "Нема претходног регуларног израза"
 
@@ -789,32 +790,37 @@ msgstr "„-P“ подржава само једнобајтне и УТФ-8 ј
 msgid "the -P option only supports a single pattern"
 msgstr "опција „-P“ подржава само самосталне шаблоне"
 
-#: src/pcresearch.c:168
+#: src/pcresearch.c:138
+#, c-format
+msgid "unescaped ^ or $ not supported with -Pz"
+msgstr ""
+
+#: src/pcresearch.c:182
 #, c-format
 msgid "internal error (should never happen)"
 msgstr "унутрашња грешка (не треба никада да се деси)"
 
-#: src/pcresearch.c:190
+#: src/pcresearch.c:204
 #, c-format
 msgid "internal error"
 msgstr "унутрашња грешка"
 
-#: src/pcresearch.c:234
+#: src/pcresearch.c:248
 #, c-format
 msgid "exceeded PCRE's line length limit"
 msgstr "прекорачено је ограничење дужине реда ПЦРЕ-а"
 
-#: src/pcresearch.c:328
+#: src/pcresearch.c:342
 #, c-format
 msgid "exhausted PCRE JIT stack"
 msgstr "потрошени ПЦРЕ ЈИТ спремник"
 
-#: src/pcresearch.c:332
+#: src/pcresearch.c:346
 #, c-format
 msgid "exceeded PCRE's backtracking limit"
 msgstr "прекорачено је ПЦРЕ-ово ограничење тражења уназад"
 
-#: src/pcresearch.c:339
+#: src/pcresearch.c:353
 #, c-format
 msgid "internal PCRE error: %d"
 msgstr "унутрашња грешка ПЦРЕ-а: %d"
