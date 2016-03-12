@@ -3,15 +3,15 @@
 # This file is distributed under the same license as the grep package.
 # Vladimir Michl <Vladimir.Michl@seznam.cz>, 1998.
 # Petr Pisar <petr.pisar@atlas.cz>, 2008, 2009, 2010, 2011, 2012, 201, 2013.
-# Petr Pisar <petr.pisar@atlas.cz>, 2014, 2015.
+# Petr Pisar <petr.pisar@atlas.cz>, 2014, 2015, 2016.
 #
 # Thanks to: Stanislav Brabec <utx@k332.feld.cvut.cz>
 msgid ""
 msgstr ""
-"Project-Id-Version: grep 2.21.78\n"
+"Project-Id-Version: grep 2.23.7\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2016-03-03 17:39-0800\n"
-"PO-Revision-Date: 2015-10-18 11:01+0200\n"
+"POT-Creation-Date: 2016-03-10 21:38-0800\n"
+"PO-Revision-Date: 2016-03-04 17:26+01:00\n"
 "Last-Translator: Petr Pisar <petr.pisar@atlas.cz>\n"
 "Language-Team: Czech <translation-team-cs@lists.sourceforge.net>\n"
 "Language: cs\n"
@@ -102,8 +102,7 @@ msgstr "%s: přepínač „-W %s“ musí být zadán bez argumentu\n"
 msgid "%s: option '-W %s' requires an argument\n"
 msgstr "%s: přepínač „-W %s“ vyžaduje argument\n"
 
-#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34
-#: src/pcresearch.c:338
+#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34 src/pcresearch.c:338
 #, c-format
 msgid "memory exhausted"
 msgstr "paměť vyčerpána"
@@ -176,9 +175,8 @@ msgid "Invalid back reference"
 msgstr "Neplatný zpětný odkaz"
 
 #: lib/regcomp.c:156
-#, fuzzy
 msgid "Unmatched [, [^, [:, [., or [="
-msgstr "Nepárový [ nebo [^"
+msgstr "Nepárový [, [^, [:, [. nebo [="
 
 #: lib/regcomp.c:159
 msgid "Unmatched ( or \\("
@@ -216,7 +214,7 @@ msgstr "Regulární výraz je příliš velký"
 msgid "Unmatched ) or \\)"
 msgstr "Nepárový ) nebo \\)"
 
-#: lib/regcomp.c:687
+#: lib/regcomp.c:711
 msgid "No previous regular expression"
 msgstr "Žádný předchozí regulární výraz"
 
@@ -806,7 +804,7 @@ msgstr "přepínač -P lze být použít pouze s jedním vzorkem"
 #: src/pcresearch.c:138
 #, c-format
 msgid "unescaped ^ or $ not supported with -Pz"
-msgstr ""
+msgstr "s přepínači -Pz nejsou podporovány neescapované znaky ^ a $"
 
 #: src/pcresearch.c:182
 #, c-format

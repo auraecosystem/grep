@@ -1,24 +1,24 @@
 # Swedish messages for GNU Grep
-# Copyright © 1996, 1998-2001, 2006-2011, 2014, 2015 Free Software Foundation, Inc.
+# Copyright © 1996, 1998, 1999, 2000, 2001, 2006, 2007, 2008, 2009, 2010, 2011, 2014, 2015, 2016 Free Software Foundation, Inc.
 # This file is distributed under the same license as the grep package.
 # Thomas Olsson <cid95tho@student1.lu.se>, 1996.
 # Daniel Resare <daniel@resare.com>, 1998, 1999, 2000, 2001
 # Daniel Nylander <po@danielnylander.se>, 2006, 2007, 2008, 2009, 2010, 2011.
-# Anders Jonsson <anders.jonsson@norsjovallen.se>, 2014, 2015.
+# Anders Jonsson <anders.jonsson@norsjovallen.se>, 2014, 2015, 2016.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: grep 2.21.78\n"
+"Project-Id-Version: grep 2.23.7\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2016-03-03 17:39-0800\n"
-"PO-Revision-Date: 2015-10-20 23:14+0200\n"
+"POT-Creation-Date: 2016-03-10 21:38-0800\n"
+"PO-Revision-Date: 2016-03-04 19:32+0100\n"
 "Last-Translator: Anders Jonsson <anders.jonsson@norsjovallen.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.5\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
 #: lib/argmatch.c:133
 #, c-format
@@ -103,8 +103,7 @@ msgstr "%s: flaggan ”-W %s” tillåter inget argument\n"
 msgid "%s: option '-W %s' requires an argument\n"
 msgstr "%s: flaggan ”-W %s” behöver ett argument\n"
 
-#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34
-#: src/pcresearch.c:338
+#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34 src/pcresearch.c:338
 #, c-format
 msgid "memory exhausted"
 msgstr "minnet är slut"
@@ -181,9 +180,8 @@ msgid "Invalid back reference"
 msgstr "Ogiltig bakåtreferens"
 
 #: lib/regcomp.c:156
-#, fuzzy
 msgid "Unmatched [, [^, [:, [., or [="
-msgstr "Omatchad [ eller [^"
+msgstr "Omatchad [, [^, [:, [. eller [="
 
 #: lib/regcomp.c:159
 msgid "Unmatched ( or \\("
@@ -221,7 +219,7 @@ msgstr "Reguljärt uttryck är för stort"
 msgid "Unmatched ) or \\)"
 msgstr "Omatchad ) eller \\)"
 
-#: lib/regcomp.c:687
+#: lib/regcomp.c:711
 msgid "No previous regular expression"
 msgstr "Inget tidigare reguljärt uttryck"
 
@@ -791,7 +789,7 @@ msgstr "flaggan -P har endast stöd för ett mönster"
 #: src/pcresearch.c:138
 #, c-format
 msgid "unescaped ^ or $ not supported with -Pz"
-msgstr ""
+msgstr "oskyddat ^ eller $ stöds ej med -Pz"
 
 #: src/pcresearch.c:182
 #, c-format

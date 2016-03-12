@@ -1,3 +1,8 @@
+2016-03-10  Jim Meyering  <meyering@fb.com>
+
+	version 2.24
+	* NEWS: Record release date.
+
 2016-02-28  Jim Meyering  <meyering@fb.com>
 
 	maint: add dist-check.mk

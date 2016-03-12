@@ -922,7 +922,7 @@ internal_function
 re_string_context_at (const re_string_t *input, Idx idx, int eflags)
 {
   int c;
-  if (BE (idx < 0, 0))
+  if (BE (! REG_VALID_INDEX (idx), 0))
     /* In this case, we use the value stored in input->tip_context,
        since we can't know the character in input->mbs[-1] here.  */
     return input->tip_context;
@@ -938,10 +938,10 @@ re_string_context_at (const re_string_t *input, Idx idx, int eflags)
 	{
 #if defined DEBUG && DEBUG
 	  /* It must not happen.  */
-	  assert (wc_idx >= 0);
+	  assert (REG_VALID_INDEX (wc_idx));
 #endif
 	  --wc_idx;
-	  if (wc_idx < 0)
+	  if (! REG_VALID_INDEX (wc_idx))
 	    return input->tip_context;
 	}
       wc = input->wcs[wc_idx];
@@ -1077,25 +1077,25 @@ re_node_set_add_intersect (re_node_set *dest, const re_node_set *src1,
       if (src1->elems[i1] == src2->elems[i2])
 	{
 	  /* Try to find the item in DEST.  Maybe we could binary search?  */
-	  while (id >= 0 && dest->elems[id] > src1->elems[i1])
+	  while (REG_VALID_INDEX (id) && dest->elems[id] > src1->elems[i1])
 	    --id;
 
-	  if (id < 0 || dest->elems[id] != src1->elems[i1])
+          if (! REG_VALID_INDEX (id) || dest->elems[id] != src1->elems[i1])
             dest->elems[--sbase] = src1->elems[i1];
 
-	  if (--i1 < 0 || --i2 < 0)
+	  if (! REG_VALID_INDEX (--i1) || ! REG_VALID_INDEX (--i2))
 	    break;
 	}
 
       /* Lower the highest of the two items.  */
       else if (src1->elems[i1] < src2->elems[i2])
 	{
-	  if (--i2 < 0)
+	  if (! REG_VALID_INDEX (--i2))
 	    break;
 	}
       else
 	{
-	  if (--i1 < 0)
+	  if (! REG_VALID_INDEX (--i1))
 	    break;
 	}
     }
@@ -1108,7 +1108,7 @@ re_node_set_add_intersect (re_node_set *dest, const re_node_set *src1,
      DEST elements are already in place; this is more or
      less the same loop that is in re_node_set_merge.  */
   dest->nelem += delta;
-  if (delta > 0 && id >= 0)
+  if (delta > 0 && REG_VALID_INDEX (id))
     for (;;)
       {
 	if (dest->elems[is] > dest->elems[id])
@@ -1122,7 +1122,7 @@ re_node_set_add_intersect (re_node_set *dest, const re_node_set *src1,
 	  {
 	    /* Slide from the bottom.  */
 	    dest->elems[id + delta] = dest->elems[id];
-	    if (--id < 0)
+	    if (! REG_VALID_INDEX (--id))
 	      break;
 	  }
       }
@@ -1216,7 +1216,8 @@ re_node_set_merge (re_node_set *dest, const re_node_set *src)
   /* Copy into the top of DEST the items of SRC that are not
      found in DEST.  Maybe we could binary search in DEST?  */
   for (sbase = dest->nelem + 2 * src->nelem,
-       is = src->nelem - 1, id = dest->nelem - 1; is >= 0 && id >= 0; )
+       is = src->nelem - 1, id = dest->nelem - 1;
+       REG_VALID_INDEX (is) && REG_VALID_INDEX (id); )
     {
       if (dest->elems[id] == src->elems[is])
 	is--, id--;
@@ -1226,7 +1227,7 @@ re_node_set_merge (re_node_set *dest, const re_node_set *src)
 	--id;
     }
 
-  if (is >= 0)
+  if (REG_VALID_INDEX (is))
     {
       /* If DEST is exhausted, the remaining items of SRC must be unique.  */
       sbase -= is + 1;
@@ -1255,7 +1256,7 @@ re_node_set_merge (re_node_set *dest, const re_node_set *src)
 	{
 	  /* Slide from the bottom.  */
 	  dest->elems[id + delta] = dest->elems[id];
-	  if (--id < 0)
+	  if (! REG_VALID_INDEX (--id))
 	    {
 	      /* Copy remaining SRC elements.  */
 	      memcpy (dest->elems, dest->elems + sbase,
@@ -1354,7 +1355,7 @@ re_node_set_compare (const re_node_set *set1, const re_node_set *set2)
   Idx i;
   if (set1 == NULL || set2 == NULL || set1->nelem != set2->nelem)
     return false;
-  for (i = set1->nelem ; --i >= 0 ; )
+  for (i = set1->nelem ; REG_VALID_INDEX (--i) ; )
     if (set1->elems[i] != set2->elems[i])
       return false;
   return true;
@@ -1367,7 +1368,7 @@ internal_function __attribute__ ((pure))
 re_node_set_contains (const re_node_set *set, Idx elem)
 {
   __re_size_t idx, right, mid;
-  if (set->nelem <= 0)
+  if (! REG_VALID_NONZERO_INDEX (set->nelem))
     return 0;
 
   /* Binary search the element.  */
@@ -1397,7 +1398,7 @@ re_node_set_remove_at (re_node_set *set, Idx idx)
 
 
 /* Add the token TOKEN to dfa->nodes, and return the index of the token.
-   Or return -1 if an error occurred.  */
+   Or return REG_MISSING if an error occurred.  */
 
 static Idx
 internal_function
@@ -1415,11 +1416,11 @@ re_dfa_add_node (re_dfa_t *dfa, re_token_t token)
 					  MAX (sizeof (re_node_set),
 					       sizeof (Idx)));
       if (BE (MIN (IDX_MAX, SIZE_MAX / max_object_size) < new_nodes_alloc, 0))
-	return -1;
+	return REG_MISSING;
 
       new_nodes = re_realloc (dfa->nodes, re_token_t, new_nodes_alloc);
       if (BE (new_nodes == NULL, 0))
-	return -1;
+	return REG_MISSING;
       dfa->nodes = new_nodes;
       new_nexts = re_realloc (dfa->nexts, Idx, new_nodes_alloc);
       new_indices = re_realloc (dfa->org_indices, Idx, new_nodes_alloc);
@@ -1432,7 +1433,7 @@ re_dfa_add_node (re_dfa_t *dfa, re_token_t token)
 	   re_free (new_indices);
 	   re_free (new_edests);
 	   re_free (new_eclosures);
-	   return -1;
+	   return REG_MISSING;
 	}
       dfa->nexts = new_nexts;
       dfa->org_indices = new_indices;
@@ -1447,7 +1448,7 @@ re_dfa_add_node (re_dfa_t *dfa, re_token_t token)
     ((token.type == OP_PERIOD && dfa->mb_cur_max > 1)
      || token.type == COMPLEX_BRACKET);
 #endif
-  dfa->nexts[dfa->nodes_len] = -1;
+  dfa->nexts[dfa->nodes_len] = REG_MISSING;
   re_node_set_init_empty (dfa->edests + dfa->nodes_len);
   re_node_set_init_empty (dfa->eclosures + dfa->nodes_len);
   return dfa->nodes_len++;

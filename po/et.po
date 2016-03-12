@@ -1,14 +1,14 @@
 # This file is distributed under the same license as the grep package.
 # Estonian translations for grep
 # Copyright (C) 2000 Free Software Foundation, Inc.
-# Toomas Soome <tsoome@me.com>, 2015.
+# Toomas Soome <tsoome@me.com>, 2016.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: grep 2.21.78\n"
+"Project-Id-Version: grep 2.23.7\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2016-03-03 17:39-0800\n"
-"PO-Revision-Date: 2015-10-18 13:00+0300\n"
+"POT-Creation-Date: 2016-03-10 21:38-0800\n"
+"PO-Revision-Date: 2016-03-04 17:55+0200\n"
 "Last-Translator: Toomas Soome <tsoome@me.com>\n"
 "Language-Team: Estonian <linux-ee@lists.eenet.ee>\n"
 "Language: et\n"
@@ -99,8 +99,7 @@ msgstr "%s: võti '-W %s' ei luba argumenti\n"
 msgid "%s: option '-W %s' requires an argument\n"
 msgstr "%s: võti '-W %s' nõuab argumenti\n"
 
-#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34
-#: src/pcresearch.c:338
+#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34 src/pcresearch.c:338
 #, c-format
 msgid "memory exhausted"
 msgstr "mälu on otsas"
@@ -173,9 +172,8 @@ msgid "Invalid back reference"
 msgstr "Vigane tagasi viide"
 
 #: lib/regcomp.c:156
-#, fuzzy
 msgid "Unmatched [, [^, [:, [., or [="
-msgstr "Puudub [ või [^"
+msgstr "Puudub [, [^, [:, [. või [= paariline"
 
 #: lib/regcomp.c:159
 msgid "Unmatched ( or \\("
@@ -213,7 +211,7 @@ msgstr "Regulaaravaldis on liiga suur"
 msgid "Unmatched ) or \\)"
 msgstr "Puudub ) või \\)"
 
-#: lib/regcomp.c:687
+#: lib/regcomp.c:711
 msgid "No previous regular expression"
 msgstr "Eelnevat regulaaravaldist pole"
 
@@ -775,7 +773,7 @@ msgstr "võti -P toetab ainult ühte mustrit"
 #: src/pcresearch.c:138
 #, c-format
 msgid "unescaped ^ or $ not supported with -Pz"
-msgstr ""
+msgstr "kvootimata ^ või $ ei ole -Pz korral toetatud"
 
 #: src/pcresearch.c:182
 #, c-format

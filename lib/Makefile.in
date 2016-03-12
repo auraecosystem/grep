@@ -305,18 +305,19 @@ am__v_at_1 =
 DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/build-aux/depcomp
 am__maybe_remake_depfiles = depfiles
-am__depfiles_remade = ./$(DEPDIR)/alloca.Po ./$(DEPDIR)/argmatch.Po \
-	./$(DEPDIR)/at-func.Po ./$(DEPDIR)/basename-lgpl.Po \
-	./$(DEPDIR)/binary-io.Po ./$(DEPDIR)/bitrotate.Po \
-	./$(DEPDIR)/btowc.Po ./$(DEPDIR)/c-ctype.Po \
-	./$(DEPDIR)/c-strcasecmp.Po ./$(DEPDIR)/c-strncasecmp.Po \
-	./$(DEPDIR)/chdir-long.Po ./$(DEPDIR)/cloexec.Po \
-	./$(DEPDIR)/close-stream.Po ./$(DEPDIR)/close.Po \
-	./$(DEPDIR)/closedir.Po ./$(DEPDIR)/closeout.Po \
-	./$(DEPDIR)/colorize.Po ./$(DEPDIR)/creat-safer.Po \
-	./$(DEPDIR)/cycle-check.Po ./$(DEPDIR)/dirfd.Po \
-	./$(DEPDIR)/dirname-lgpl.Po ./$(DEPDIR)/dup-safer.Po \
-	./$(DEPDIR)/dup.Po ./$(DEPDIR)/dup2.Po ./$(DEPDIR)/error.Po \
+am__depfiles_remade = $(DEPDIR)/alloca.Po ./$(DEPDIR)/alloca.Po \
+	./$(DEPDIR)/argmatch.Po ./$(DEPDIR)/at-func.Po \
+	./$(DEPDIR)/basename-lgpl.Po ./$(DEPDIR)/binary-io.Po \
+	./$(DEPDIR)/bitrotate.Po ./$(DEPDIR)/btowc.Po \
+	./$(DEPDIR)/c-ctype.Po ./$(DEPDIR)/c-strcasecmp.Po \
+	./$(DEPDIR)/c-strncasecmp.Po ./$(DEPDIR)/chdir-long.Po \
+	./$(DEPDIR)/cloexec.Po ./$(DEPDIR)/close-stream.Po \
+	./$(DEPDIR)/close.Po ./$(DEPDIR)/closedir.Po \
+	./$(DEPDIR)/closeout.Po ./$(DEPDIR)/colorize.Po \
+	./$(DEPDIR)/creat-safer.Po ./$(DEPDIR)/cycle-check.Po \
+	./$(DEPDIR)/dirfd.Po ./$(DEPDIR)/dirname-lgpl.Po \
+	./$(DEPDIR)/dup-safer.Po ./$(DEPDIR)/dup.Po \
+	./$(DEPDIR)/dup2.Po ./$(DEPDIR)/error.Po \
 	./$(DEPDIR)/exclude.Po ./$(DEPDIR)/exitfail.Po \
 	./$(DEPDIR)/fchdir.Po ./$(DEPDIR)/fcntl.Po \
 	./$(DEPDIR)/fd-hook.Po ./$(DEPDIR)/fd-safer.Po \
@@ -1538,6 +1539,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/alloca.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/alloca.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/argmatch.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/at-func.Po@am__quote@ # am--include-marker
@@ -1834,7 +1836,8 @@ clean: clean-am
 clean-am: clean-generic clean-noinstLIBRARIES mostlyclean-am
 
 distclean: distclean-am
-		-rm -f ./$(DEPDIR)/alloca.Po
+		-rm -f $(DEPDIR)/alloca.Po
+	-rm -f ./$(DEPDIR)/alloca.Po
 	-rm -f ./$(DEPDIR)/argmatch.Po
 	-rm -f ./$(DEPDIR)/at-func.Po
 	-rm -f ./$(DEPDIR)/basename-lgpl.Po
@@ -2019,7 +2022,8 @@ install-ps-am:
 installcheck-am:
 
 maintainer-clean: maintainer-clean-am
-		-rm -f ./$(DEPDIR)/alloca.Po
+		-rm -f $(DEPDIR)/alloca.Po
+	-rm -f ./$(DEPDIR)/alloca.Po
 	-rm -f ./$(DEPDIR)/argmatch.Po
 	-rm -f ./$(DEPDIR)/at-func.Po
 	-rm -f ./$(DEPDIR)/basename-lgpl.Po
