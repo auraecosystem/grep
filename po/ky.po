@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grep 2.5.3\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2016-03-03 17:39-0800\n"
+"POT-Creation-Date: 2016-03-10 21:38-0800\n"
 "PO-Revision-Date: 2007-09-01 17:27+0100\n"
 "Last-Translator: Azilet Beishenaliev <aziletb@gmail.com>\n"
 "Language-Team: Kirghiz <i18n-team-ky-kyrgyz@lists.sourceforge.net>\n"
@@ -103,8 +103,7 @@ msgid "%s: option '-W %s' requires an argument\n"
 msgstr "%s: `%s' опциясы менен аргумент болуш керек\n"
 
 # Памятты эмне дейбиз яя? ;)
-#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34
-#: src/pcresearch.c:338
+#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34 src/pcresearch.c:338
 #, c-format
 msgid "memory exhausted"
 msgstr "память жетпей калды"
@@ -217,7 +216,7 @@ msgstr ""
 msgid "Unmatched ) or \\)"
 msgstr ""
 
-#: lib/regcomp.c:687
+#: lib/regcomp.c:711
 msgid "No previous regular expression"
 msgstr ""
 
@@ -781,22 +780,6 @@ msgstr ""
 #~ msgid "invalid zero-length file name"
 #~ msgstr "контекст узундугу жарабайт"
 
-#~ msgid "PATTERN is an extended regular expression (ERE).\n"
-#~ msgstr "ШАБЛОН кеңейтилген түрдөгү регулярдуу выражение (ERE).\n"
-
-#, fuzzy
-#~ msgid "Invocation as 'egrep' is deprecated; use 'grep -E' instead.\n"
-#~ msgstr ""
-#~ "`egrep' деген колдонулбай калды; анын ордуна `grep -E' деп колдонунуз.\n"
-
-#~ msgid "PATTERN is a set of newline-separated fixed strings.\n"
-#~ msgstr "ШАБЛОН ар сапта бир сөз болгон жыйын.\n"
-
-#, fuzzy
-#~ msgid "Invocation as 'fgrep' is deprecated; use 'grep -F' instead.\n"
-#~ msgstr ""
-#~ "`fgrep' деген колдонулбай калды; анын ордуна `grep -F' деп колдонунуз.\n"
-
 #~ msgid "unfinished repeat count"
 #~ msgstr "кайталоо саны толук эмес жазылды"
 
@@ -805,6 +788,12 @@ msgstr ""
 
 #~ msgid "writing output"
 #~ msgstr "жооп жазыбатат"
+
+#~ msgid "PATTERN is an extended regular expression (ERE).\n"
+#~ msgstr "ШАБЛОН кеңейтилген түрдөгү регулярдуу выражение (ERE).\n"
+
+#~ msgid "PATTERN is a set of newline-separated fixed strings.\n"
+#~ msgstr "ШАБЛОН ар сапта бир сөз болгон жыйын.\n"
 
 # line - сап деп колдоном
 #~ msgid ""
@@ -882,6 +871,14 @@ msgstr ""
 #~ "  -c, --count               ар файлда табылган уйкаш саны гана жазылат\n"
 #~ "  -T, --initial-tab         табтарды түздөйт (керек болсо)\n"
 #~ "  -Z, --null                файлдын атынан кийин 0 байты жазылат\n"
+
+#~ msgid "Invocation as `egrep' is deprecated; use `grep -E' instead.\n"
+#~ msgstr ""
+#~ "`egrep' деген колдонулбай калды; анын ордуна `grep -E' деп колдонунуз.\n"
+
+#~ msgid "Invocation as `fgrep' is deprecated; use `grep -F' instead.\n"
+#~ msgstr ""
+#~ "`fgrep' деген колдонулбай калды; анын ордуна `grep -F' деп колдонунуз.\n"
 
 # kandai koldpnulat bilbeim.
 #~ msgid ""

@@ -1,4 +1,4 @@
-This is grep.info-t, produced by makeinfo version 5.2 from grep.texi.
+This is grep.info-t, produced by makeinfo version 6.0 from grep.texi.
 
 This manual is for ‘grep’, a pattern matching engine.
 
@@ -23,7 +23,7 @@ grep
 
 ‘grep’ prints lines that contain a match for a pattern.
 
-   This manual is for version 2.23.7-9e28 of GNU Grep.
+   This manual is for version 2.24 of GNU Grep.
 
    This manual is for ‘grep’, a pattern matching engine.
 
@@ -801,7 +801,7 @@ File: grep.info-t,  Node: Regular Expressions,  Next: Usage,  Prev: Invoking,  U
 3 Regular Expressions
 *********************
 
-A "regular expression" is a pattern that describes a set of strings.
+A “regular expression” is a pattern that describes a set of strings.
 Regular expressions are constructed analogously to arithmetic
 expressions, by using various operators to combine smaller expressions.
 ‘grep’ understands three different versions of regular expression
@@ -884,13 +884,13 @@ File: grep.info-t,  Node: Character Classes and Bracket Expressions,  Next: The 
 3.2 Character Classes and Bracket Expressions
 =============================================
 
-A "bracket expression" is a list of characters enclosed by ‘[’ and ‘]’.
+A “bracket expression” is a list of characters enclosed by ‘[’ and ‘]’.
 It matches any single character in that list; if the first character of
 the list is the caret ‘^’, then it matches any character *not* in the
 list.  For example, the regular expression ‘[0123456789]’ matches any
 single digit.
 
-   Within a bracket expression, a "range expression" consists of two
+   Within a bracket expression, a “range expression” consists of two
 characters separated by a hyphen.  It matches any single character that
 sorts between the two characters, inclusive.  In the default C locale,
 the sorting sequence is the native character order; for example, ‘[a-d]’
@@ -1043,7 +1043,7 @@ File: grep.info-t,  Node: Anchoring,  Next: Back-references and Subexpressions, 
 
 The caret ‘^’ and the dollar sign ‘$’ are meta-characters that
 respectively match the empty string at the beginning and end of a line.
-They are termed "anchors", since they force the match to be “anchored”
+They are termed “anchors”, since they force the match to be “anchored”
 to beginning or end of a line, respectively.
 
 
@@ -1307,8 +1307,8 @@ File: grep.info-t,  Node: Copying,  Next: Index,  Prev: Reporting Bugs,  Up: Top
 6 Copying
 *********
 
-GNU ‘grep’ is licensed under the GNU GPL, which makes it "free
-software".
+GNU ‘grep’ is licensed under the GNU GPL, which makes it “free
+software”.
 
    The “free” in “free software” refers to liberty, not price.  As some
 GNU project advocates like to point out, think of “free speech” rather
@@ -1317,8 +1317,8 @@ change ‘grep’ and distribute it to other people, and—if you want—charge
 money for doing either.  The important restriction is that you have to
 grant your recipients the same rights and impose the same restrictions.
 
-   This general method of licensing software is sometimes called "open
-source".  The GNU project prefers the term “free software” for reasons
+   This general method of licensing software is sometimes called “open
+source”.  The GNU project prefers the term “free software” for reasons
 outlined at
 <http://www.gnu.org/philosophy/open-source-misses-the-point.html>.
 
@@ -1348,7 +1348,7 @@ File: grep.info-t,  Node: GNU Free Documentation License,  Up: Copying
   0. PREAMBLE
 
      The purpose of this License is to make a manual, textbook, or other
-     functional and useful document "free" in the sense of freedom: to
+     functional and useful document “free” in the sense of freedom: to
      assure everyone the effective freedom to copy and redistribute it,
      with or without modifying it, either commercially or
      noncommercially.  Secondarily, this License preserves for the
@@ -2292,33 +2292,33 @@ Index
 
 Tag Table:
 Node: Top771
-Node: Introduction1906
-Node: Invoking2648
-Node: Command-line Options3421
-Node: Generic Program Information4306
-Node: Matching Control4782
-Node: General Output Control7345
-Ref: General Output Control-Footnote-111476
-Node: Output Line Prefix Control11545
-Node: Context Line Control14607
-Node: File and Directory Selection16538
-Node: Other Options21411
-Node: Environment Variables22704
-Node: Exit Status32641
-Node: grep Programs33121
-Node: Regular Expressions34676
-Node: Fundamental Structure35858
-Node: Character Classes and Bracket Expressions37666
-Ref: invalid-bracket-expr41080
-Node: The Backslash Character and Special Expressions42320
-Node: Anchoring43394
-Node: Back-references and Subexpressions43851
-Node: Basic vs Extended44591
-Node: Usage45684
-Node: Reporting Bugs53164
-Node: Copying53848
-Node: GNU Free Documentation License54968
-Node: Index80269
+Node: Introduction1899
+Node: Invoking2641
+Node: Command-line Options3414
+Node: Generic Program Information4299
+Node: Matching Control4775
+Node: General Output Control7338
+Ref: General Output Control-Footnote-111469
+Node: Output Line Prefix Control11538
+Node: Context Line Control14600
+Node: File and Directory Selection16531
+Node: Other Options21404
+Node: Environment Variables22697
+Node: Exit Status32634
+Node: grep Programs33114
+Node: Regular Expressions34669
+Node: Fundamental Structure35855
+Node: Character Classes and Bracket Expressions37663
+Ref: invalid-bracket-expr41085
+Node: The Backslash Character and Special Expressions42325
+Node: Anchoring43399
+Node: Back-references and Subexpressions43860
+Node: Basic vs Extended44600
+Node: Usage45693
+Node: Reporting Bugs53173
+Node: Copying53857
+Node: GNU Free Documentation License54985
+Node: Index80290
 
 End Tag Table
 

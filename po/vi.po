@@ -1,16 +1,16 @@
 # Vietnamese Translation for Grep.
 # Bản dịch tiếng Việt dành cho Grep.
-# Copyright © 2015 Free Software Foundation, Inc.
+# Copyright © 2016 Free Software Foundation, Inc.
 # This file is distributed under the same license as the grep package.
 # Clytie Siddall <clytie@riverland.net.au>, 2005-2010.
-# Trần Ngọc Quân <vnwildman@gmail.com>, 2012-2014, 2015.
+# Trần Ngọc Quân <vnwildman@gmail.com>, 2012-2014, 2015, 2016.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: grep 2.21.78\n"
+"Project-Id-Version: grep 2.23.7\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2016-03-03 17:39-0800\n"
-"PO-Revision-Date: 2015-10-19 08:37+0700\n"
+"POT-Creation-Date: 2016-03-10 21:38-0800\n"
+"PO-Revision-Date: 2016-03-05 07:45+0700\n"
 "Last-Translator: Trần Ngọc Quân <vnwildman@gmail.com>\n"
 "Language-Team: Vietnamese <translation-team-vi@lists.sourceforge.net>\n"
 "Language: vi\n"
@@ -104,8 +104,7 @@ msgstr "%s: tùy chọn “-W %s” không cho phép đối số\n"
 msgid "%s: option '-W %s' requires an argument\n"
 msgstr "%s: tùy chọn “-W %s” yêu cầu một đối số\n"
 
-#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34
-#: src/pcresearch.c:338
+#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34 src/pcresearch.c:338
 #, c-format
 msgid "memory exhausted"
 msgstr "hết bộ nhớ"
@@ -178,9 +177,8 @@ msgid "Invalid back reference"
 msgstr "Tham chiếu ngược không hợp lệ"
 
 #: lib/regcomp.c:156
-#, fuzzy
 msgid "Unmatched [, [^, [:, [., or [="
-msgstr "Có ký tự “[” hay “[^” lẻ cặp"
+msgstr "Có ký tự [, [^, [:, [., hay [= lẻ cặp"
 
 #: lib/regcomp.c:159
 msgid "Unmatched ( or \\("
@@ -192,7 +190,7 @@ msgstr "Có ký tự “\\{” lẻ cặp"
 
 #: lib/regcomp.c:165
 msgid "Invalid content of \\{\\}"
-msgstr "\\{\\} có nội dung sai"
+msgstr "Nội dung của \\{\\} không hợp lệ"
 
 #: lib/regcomp.c:168
 msgid "Invalid range end"
@@ -204,7 +202,7 @@ msgstr "Hết bộ nhớ"
 
 #: lib/regcomp.c:174
 msgid "Invalid preceding regular expression"
-msgstr "Biểu thức chính quy đi trước mà không hợp lệ"
+msgstr "Biểu thức chính quy có trước không hợp lệ"
 
 #: lib/regcomp.c:177
 msgid "Premature end of regular expression"
@@ -218,7 +216,7 @@ msgstr "Biểu thức chính quy quá lớn"
 msgid "Unmatched ) or \\)"
 msgstr "Có ký tự “)” hay “\\)” lẻ cặp"
 
-#: lib/regcomp.c:687
+#: lib/regcomp.c:711
 msgid "No previous regular expression"
 msgstr "Không có biểu thức chính quy nằm trước"
 
@@ -798,7 +796,7 @@ msgstr "tùy chọn “-P” chỉ hỗ trợ một mẫu đơn lẻ"
 #: src/pcresearch.c:138
 #, c-format
 msgid "unescaped ^ or $ not supported with -Pz"
-msgstr ""
+msgstr "không thoát ^ hay $ không được hỗ trợ với -Pz"
 
 #: src/pcresearch.c:182
 #, c-format
@@ -867,21 +865,21 @@ msgstr "lỗi nội bộ PCRE: %d"
 #~ msgid ""
 #~ "in GREP_COLORS='%s', the `%s' capacity needs a value ('=...'); skipped"
 #~ msgstr ""
-#~ "trong chuỗi “GREP_COLORS='%s'”, khả năng “%s” cần giá trị (“=…”); nên bỏ "
+#~ "trong chuỗi “GREP_COLORS=“%s”, khả năng “%s” cần giá trị (“=…”); nên bỏ "
 #~ "qua"
 
 #~ msgid ""
 #~ "in GREP_COLORS='%s', the `%s' capacity is boolean and cannot take a value "
 #~ "('=%s'); skipped"
 #~ msgstr ""
-#~ "trong chuỗi “GREP_COLORS='%s'”, khả năng “%s” là luận lý thì không chấp "
+#~ "trong chuỗi “GREP_COLORS=“%s”, khả năng “%s” là luận lý thì không chấp "
 #~ "nhận được giá trị (“=%s”); nên bỏ qua"
 
 #~ msgid "in GREP_COLORS='%s', the `%s' capacity %s"
-#~ msgstr "trong GREP_COLORS='%s”, khả năng “%s” %s"
+#~ msgstr "trong GREP_COLORS=“%s”, khả năng “%s” %s"
 
 #~ msgid ""
 #~ "stopped processing of ill-formed GREP_COLORS='%s' at remaining substring `"
 #~ "%s'"
 #~ msgstr ""
-#~ "đã dừng xử lý chuỗi GREP_COLORS='%s” dạng sai ở chuỗi con còn lại “%s”"
+#~ "đã dừng xử lý chuỗi GREP_COLORS=“%s” dạng sai ở chuỗi con còn lại “%s”"
