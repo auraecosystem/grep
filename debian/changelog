@@ -1,3 +1,9 @@
+grep (2.24-1) unstable; urgency=medium
+
+  * New upstream release.
+
+ -- Santiago Ruano Rincón <santiago@debian.org>  Sat, 12 Mar 2016 12:21:28 +0100
+
 grep (2.23.7~9e28-1) experimental; urgency=medium
 
   * debian/rules: set DEB_MAKE_CHECK_TARGET to run expensive tests on amd64
