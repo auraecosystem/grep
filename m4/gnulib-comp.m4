@@ -159,6 +159,7 @@ AC_DEFUN([gl_EARLY],
   # Code from module gnumakefile:
   # Code from module gnupload:
   # Code from module gperf:
+  # Code from module hard-locale:
   # Code from module hash:
   # Code from module hash-pjw:
   # Code from module hash-tests:
@@ -575,6 +576,7 @@ AC_DEFUN([gl_INIT],
           m4_defn([m4_PACKAGE_VERSION])), [1], [],
         [AC_CONFIG_LINKS([$GNUmakefile:$GNUmakefile], [],
           [GNUmakefile=$GNUmakefile])])
+  gl_HARD_LOCALE
   gl_I_RING
   AM_ICONV
   m4_ifdef([gl_ICONV_MODULE_INDICATOR],
@@ -1270,6 +1272,8 @@ AC_DEFUN([gl_FILE_LIST], [
   lib/glthread/lock.c
   lib/glthread/lock.h
   lib/glthread/threadlib.c
+  lib/hard-locale.c
+  lib/hard-locale.h
   lib/hash.c
   lib/hash.h
   lib/i-ring.c
@@ -1493,6 +1497,7 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/gettimeofday.m4
   m4/glibc21.m4
   m4/gnulib-common.m4
+  m4/hard-locale.m4
   m4/i-ring.m4
   m4/iconv.m4
   m4/iconv_h.m4

@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GNU grep 2.20.72\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2016-03-10 21:38-0800\n"
+"POT-Creation-Date: 2016-04-11 08:26-0700\n"
 "PO-Revision-Date: 2014-10-30 06:46+0100\n"
 "Last-Translator: Yasuaki Taniguchi <yasuakit@gmail.com>\n"
 "Language-Team: Japanese <translation-team-ja@lists.sourceforge.net>\n"
@@ -40,7 +40,7 @@ msgstr "%2$s に対する引数 %1$s が曖昧です"
 msgid "Valid arguments are:"
 msgstr "有効な引数:"
 
-#: lib/closeout.c:112 src/grep.c:1199
+#: lib/closeout.c:112 src/grep.c:1238
 #, c-format
 msgid "write error"
 msgstr "書き込みエラー"
@@ -109,7 +109,8 @@ msgstr "%s: オプション '-W %s' は引数を取ることができません\n
 msgid "%s: option '-W %s' requires an argument\n"
 msgstr "%s: オプション '-W %s' には引数が必要です\n"
 
-#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34 src/pcresearch.c:338
+#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34
+#: src/pcresearch.c:340
 #, c-format
 msgid "memory exhausted"
 msgstr "メモリを使い果たしました"
@@ -222,7 +223,7 @@ msgstr "正規表現が大きすぎます"
 msgid "Unmatched ) or \\)"
 msgstr ") または \\) が不一致です"
 
-#: lib/regcomp.c:711
+#: lib/regcomp.c:687
 msgid "No previous regular expression"
 msgstr "以前に正規表現がありません"
 
@@ -459,73 +460,73 @@ msgid "unbalanced )"
 msgstr "対応がとれていない ) です"
 
 #. This is a proper name. See the gettext manual, section Names.
-#: src/grep.c:57
+#: src/grep.c:58
 msgid "Mike Haertel"
 msgstr "Mike Haertel"
 
-#: src/grep.c:58
+#: src/grep.c:59
 msgid "others, see <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
 msgstr ""
 "その他の方々は <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS> を参照して"
 "ください"
 
-#: src/grep.c:648
+#: src/grep.c:689
 msgid "invalid context length argument"
 msgstr "一致した前後の行の表示に関する引数が無効です"
 
-#: src/grep.c:712
+#: src/grep.c:753
 #, c-format
 msgid "input is too large to count"
 msgstr "入力が大きすぎて数えられません"
 
-#: src/grep.c:754
+#: src/grep.c:795
 msgid "lseek failed"
 msgstr "lseek に失敗しました"
 
-#: src/grep.c:1501
+#: src/grep.c:1539
 #, c-format
 msgid "Binary file %s matches\n"
 msgstr "バイナリファイル %s に一致しました\n"
 
-#: src/grep.c:1550
+#: src/grep.c:1588
 #, c-format
 msgid "warning: %s: %s"
 msgstr "警告: %s: %s"
 
-#: src/grep.c:1551
+#: src/grep.c:1589
 msgid "recursive directory loop"
 msgstr "ディレクトリーが再帰的ループをしています"
 
-#: src/grep.c:1720
+#: src/grep.c:1758
 #, c-format
 msgid "input file %s is also the output"
 msgstr "入力ファイル %s が出力にもなっています"
 
-#: src/grep.c:1782
+#: src/grep.c:1820
 msgid "(standard input)"
 msgstr "(標準入力)"
 
-#: src/grep.c:1798 src/grep.c:1805
+#: src/grep.c:1836 src/grep.c:1843
 #, c-format
 msgid "Usage: %s [OPTION]... PATTERN [FILE]...\n"
 msgstr "使用法: %s [OPTION]... PATTERN [FILE]...\n"
 
-#: src/grep.c:1800
+#: src/grep.c:1838
 #, c-format
 msgid "Try '%s --help' for more information.\n"
 msgstr "詳しくは'%s --help'を実行してください。\n"
 
-#: src/grep.c:1806
+#: src/grep.c:1844
 #, c-format
 msgid "Search for PATTERN in each FILE or standard input.\n"
 msgstr "各 FILE または標準入力内の PATTERN を検索します。\n"
 
-#: src/grep.c:1807
+#: src/grep.c:1845
 #, c-format
 msgid "PATTERN is, by default, a basic regular expression (BRE).\n"
 msgstr "PATTERN はデフォルトでは基本正規表現 (BRE) です。\n"
 
-#: src/grep.c:1808
+#: src/grep.c:1846
 #, c-format
 msgid ""
 "Example: %s -i 'hello world' menu.h main.c\n"
@@ -536,7 +537,7 @@ msgstr ""
 "\n"
 "正規表現の選択および解釈:\n"
 
-#: src/grep.c:1812
+#: src/grep.c:1850
 #, c-format
 msgid ""
 "  -E, --extended-regexp     PATTERN is an extended regular expression (ERE)\n"
@@ -549,7 +550,7 @@ msgstr ""
 "  -G, --basic-regexp        PATTERN を基本正規表現 (BRE) とする\n"
 "  -P, --perl-regexp         PATTERN を Perl 正規表現とする\n"
 
-#: src/grep.c:1818
+#: src/grep.c:1856
 #, c-format
 msgid ""
 "  -e, --regexp=PATTERN      use PATTERN for matching\n"
@@ -566,7 +567,7 @@ msgstr ""
 "  -x, --line-regexp         強制的に行全体で PATTERN の一致処理を行う\n"
 "  -z, --null-data           データの行末を改行ではなく NULL とする\n"
 
-#: src/grep.c:1825
+#: src/grep.c:1863
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -583,7 +584,7 @@ msgstr ""
 "  -V, --version             バージョン情報を表示して終了する\n"
 "      --help                このヘルプを表示して終了する\n"
 
-#: src/grep.c:1832
+#: src/grep.c:1870
 #, c-format
 msgid ""
 "\n"
@@ -608,7 +609,7 @@ msgstr ""
 "      --label=LABEL         標準入力のファイル名の接頭辞として LABEL を使用す"
 "る\n"
 
-#: src/grep.c:1843
+#: src/grep.c:1881
 #, c-format
 msgid ""
 "  -o, --only-matching       show only the part of a line matching PATTERN\n"
@@ -623,7 +624,7 @@ msgstr ""
 "                            TYPE は 'binary'、'text' または 'without-match'\n"
 "  -a, --text                --binary-files=text と等価\n"
 
-#: src/grep.c:1850
+#: src/grep.c:1888
 #, c-format
 msgid ""
 "  -I                        equivalent to --binary-files=without-match\n"
@@ -642,7 +643,7 @@ msgstr ""
 "  -r, --recursive           --directories=recurse と等価\n"
 "  -R, --dereference-recursive  上と同様だがシンボリックリンクを辿る\n"
 
-#: src/grep.c:1859
+#: src/grep.c:1897
 #, c-format
 msgid ""
 "      --include=FILE_PATTERN  search only files that match FILE_PATTERN\n"
@@ -659,7 +660,7 @@ msgstr ""
 "ファイルをスキップする\n"
 "      --exclude-dir=PATTERN  PATTERN に一致したディレクトリをスキップする\n"
 
-#: src/grep.c:1866
+#: src/grep.c:1904
 #, c-format
 msgid ""
 "  -L, --files-without-match  print only names of FILEs containing no match\n"
@@ -675,7 +676,7 @@ msgstr ""
 "  -Z, --null                FILE の名前を表示した後に値が 0 のバイトを出力す"
 "る\n"
 
-#: src/grep.c:1872
+#: src/grep.c:1910
 #, c-format
 msgid ""
 "\n"
@@ -690,7 +691,7 @@ msgstr ""
 "  -A, --after-context=NUM   一致した後の NUM 行を表示する\n"
 "  -C, --context=NUM         一致した前後 NUM 行を表示する\n"
 
-#: src/grep.c:1879
+#: src/grep.c:1917
 #, c-format
 msgid ""
 "  -NUM                      same as --context=NUM\n"
@@ -713,7 +714,7 @@ msgstr ""
 "                            (MSDOS/Windows)\n"
 "\n"
 
-#: src/grep.c:1888
+#: src/grep.c:1926
 #, c-format
 msgid ""
 "'egrep' means 'grep -E'.  'fgrep' means 'grep -F'.\n"
@@ -722,7 +723,7 @@ msgstr ""
 "'egrep' は 'grep -E' を意味します。 'fgrep' は 'grep -F' を意味します。\n"
 "'egrep' または 'fgrep' による直接起動は廃止予定です。\n"
 
-#: src/grep.c:1891
+#: src/grep.c:1929
 #, fuzzy, c-format
 msgid ""
 "When FILE is -, read standard input.  With no FILE, read . if a command-"
@@ -738,33 +739,33 @@ msgstr ""
 "それ以外は 1 です。エラーが発生して -q を指定していない場合の終了コードは 2\n"
 "になります。\n"
 
-#: src/grep.c:1958
+#: src/grep.c:1996
 #, c-format
 msgid "conflicting matchers specified"
 msgstr "指定した一致処理系が競合しています"
 
-#: src/grep.c:1969
+#: src/grep.c:2007
 #, c-format
 msgid "invalid matcher %s"
 msgstr "%s は無効な一致処理系です"
 
-#: src/grep.c:2252
+#: src/grep.c:2290
 #, c-format
 msgid "warning: GREP_OPTIONS is deprecated; please use an alias or script"
 msgstr ""
 "警告: GREP_OPTIONS は廃止されました。alias またはスクリプトを使用してください"
 
-#: src/grep.c:2282
+#: src/grep.c:2320
 #, c-format
 msgid "unknown devices method"
 msgstr "デバイスに対する不明な操作です"
 
-#: src/grep.c:2409
+#: src/grep.c:2447
 #, c-format
 msgid "invalid max count"
 msgstr "無効な一致回数です"
 
-#: src/grep.c:2466
+#: src/grep.c:2504
 #, c-format
 msgid "unknown binary-files type"
 msgstr "不明なバイナリファイルの形式です"
@@ -797,32 +798,32 @@ msgstr "-P オプションは単一のパターンしかサポートしません
 msgid "unescaped ^ or $ not supported with -Pz"
 msgstr ""
 
-#: src/pcresearch.c:182
+#: src/pcresearch.c:184
 #, c-format
 msgid "internal error (should never happen)"
 msgstr "内部エラー (決して発生しないはず)"
 
-#: src/pcresearch.c:204
+#: src/pcresearch.c:206
 #, c-format
 msgid "internal error"
 msgstr "内部エラー"
 
-#: src/pcresearch.c:248
+#: src/pcresearch.c:250
 #, c-format
 msgid "exceeded PCRE's line length limit"
 msgstr "PCRE の行長制限を超過しました"
 
-#: src/pcresearch.c:342
+#: src/pcresearch.c:344
 #, c-format
 msgid "exhausted PCRE JIT stack"
 msgstr ""
 
-#: src/pcresearch.c:346
+#: src/pcresearch.c:348
 #, c-format
 msgid "exceeded PCRE's backtracking limit"
 msgstr "PCRE のバックスラッシュ制限を超過しました"
 
-#: src/pcresearch.c:353
+#: src/pcresearch.c:355
 #, c-format
 msgid "internal PCRE error: %d"
 msgstr "PCRE 内部エラー: %d"

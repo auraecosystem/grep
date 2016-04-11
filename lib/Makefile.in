@@ -159,7 +159,8 @@ am__aclocal_m4_deps = $(top_srcdir)/m4/00gnulib.m4 \
 	$(top_srcdir)/m4/getpagesize.m4 $(top_srcdir)/m4/gettext.m4 \
 	$(top_srcdir)/m4/gettimeofday.m4 $(top_srcdir)/m4/glibc21.m4 \
 	$(top_srcdir)/m4/gnulib-common.m4 \
-	$(top_srcdir)/m4/gnulib-comp.m4 $(top_srcdir)/m4/i-ring.m4 \
+	$(top_srcdir)/m4/gnulib-comp.m4 \
+	$(top_srcdir)/m4/hard-locale.m4 $(top_srcdir)/m4/i-ring.m4 \
 	$(top_srcdir)/m4/iconv.m4 $(top_srcdir)/m4/iconv_h.m4 \
 	$(top_srcdir)/m4/iconv_open.m4 \
 	$(top_srcdir)/m4/include_next.m4 $(top_srcdir)/m4/inline.m4 \
@@ -247,18 +248,18 @@ am__libgreputils_a_SOURCES_DIST = argmatch.c binary-io.h binary-io.c \
 	closeout.c cycle-check.c opendir-safer.c dirname-lgpl.c \
 	basename-lgpl.c stripslash.c exclude.c exitfail.c \
 	creat-safer.c open-safer.c fd-hook.c filenamecat-lgpl.c \
-	gettext.h hash.c i-ring.c localcharset.h localcharset.c \
-	glthread/lock.h glthread/lock.c malloca.c mbchar.c mbiter.h \
-	mbiter.c mbscasecmp.c mbslen.c mbsstr.c mbuiter.h mbuiter.c \
-	memchr2.h memchr2.c minmax.h openat-die.c openat-safer.c \
-	progname.h progname.c propername.h propername.c quotearg.c \
-	safe-read.c save-cwd.c striconv.h striconv.c strnlen1.h \
-	strnlen1.c glthread/threadlib.c trim.c unistd.c dup-safer.c \
-	fd-safer.c pipe-safer.c unistr/u8-mbtoucr.c unistr/u8-uctomb.c \
-	unistr/u8-uctomb-aux.c uniwidth/width.c version-etc.h \
-	version-etc.c version-etc-fsf.c wctype-h.c xmalloc.c \
-	xalloc-die.c xstriconv.h xstriconv.c xstrtoimax.c xstrtol.c \
-	xstrtoul.c xstrtol-error.c colorize.h
+	gettext.h hard-locale.c hash.c i-ring.c localcharset.h \
+	localcharset.c glthread/lock.h glthread/lock.c malloca.c \
+	mbchar.c mbiter.h mbiter.c mbscasecmp.c mbslen.c mbsstr.c \
+	mbuiter.h mbuiter.c memchr2.h memchr2.c minmax.h openat-die.c \
+	openat-safer.c progname.h progname.c propername.h propername.c \
+	quotearg.c safe-read.c save-cwd.c striconv.h striconv.c \
+	strnlen1.h strnlen1.c glthread/threadlib.c trim.c unistd.c \
+	dup-safer.c fd-safer.c pipe-safer.c unistr/u8-mbtoucr.c \
+	unistr/u8-uctomb.c unistr/u8-uctomb-aux.c uniwidth/width.c \
+	version-etc.h version-etc.c version-etc-fsf.c wctype-h.c \
+	xmalloc.c xalloc-die.c xstriconv.h xstriconv.c xstrtoimax.c \
+	xstrtol.c xstrtoul.c xstrtol-error.c colorize.h
 am__dirstamp = .dirstamp
 @LIBUNISTRING_COMPILE_UNISTR_U8_MBTOUCR_TRUE@am__objects_1 = unistr/u8-mbtoucr.$(OBJEXT)
 @LIBUNISTRING_COMPILE_UNISTR_U8_UCTOMB_TRUE@am__objects_2 = unistr/u8-uctomb.$(OBJEXT) \
@@ -272,14 +273,14 @@ am_libgreputils_a_OBJECTS = argmatch.$(OBJEXT) binary-io.$(OBJEXT) \
 	dirname-lgpl.$(OBJEXT) basename-lgpl.$(OBJEXT) \
 	stripslash.$(OBJEXT) exclude.$(OBJEXT) exitfail.$(OBJEXT) \
 	creat-safer.$(OBJEXT) open-safer.$(OBJEXT) fd-hook.$(OBJEXT) \
-	filenamecat-lgpl.$(OBJEXT) hash.$(OBJEXT) i-ring.$(OBJEXT) \
-	localcharset.$(OBJEXT) glthread/lock.$(OBJEXT) \
-	malloca.$(OBJEXT) mbchar.$(OBJEXT) mbiter.$(OBJEXT) \
-	mbscasecmp.$(OBJEXT) mbslen.$(OBJEXT) mbsstr.$(OBJEXT) \
-	mbuiter.$(OBJEXT) memchr2.$(OBJEXT) openat-die.$(OBJEXT) \
-	openat-safer.$(OBJEXT) progname.$(OBJEXT) propername.$(OBJEXT) \
-	quotearg.$(OBJEXT) safe-read.$(OBJEXT) save-cwd.$(OBJEXT) \
-	striconv.$(OBJEXT) strnlen1.$(OBJEXT) \
+	filenamecat-lgpl.$(OBJEXT) hard-locale.$(OBJEXT) \
+	hash.$(OBJEXT) i-ring.$(OBJEXT) localcharset.$(OBJEXT) \
+	glthread/lock.$(OBJEXT) malloca.$(OBJEXT) mbchar.$(OBJEXT) \
+	mbiter.$(OBJEXT) mbscasecmp.$(OBJEXT) mbslen.$(OBJEXT) \
+	mbsstr.$(OBJEXT) mbuiter.$(OBJEXT) memchr2.$(OBJEXT) \
+	openat-die.$(OBJEXT) openat-safer.$(OBJEXT) progname.$(OBJEXT) \
+	propername.$(OBJEXT) quotearg.$(OBJEXT) safe-read.$(OBJEXT) \
+	save-cwd.$(OBJEXT) striconv.$(OBJEXT) strnlen1.$(OBJEXT) \
 	glthread/threadlib.$(OBJEXT) trim.$(OBJEXT) unistd.$(OBJEXT) \
 	dup-safer.$(OBJEXT) fd-safer.$(OBJEXT) pipe-safer.$(OBJEXT) \
 	$(am__objects_1) $(am__objects_2) $(am__objects_3) \
@@ -305,19 +306,18 @@ am__v_at_1 =
 DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/build-aux/depcomp
 am__maybe_remake_depfiles = depfiles
-am__depfiles_remade = $(DEPDIR)/alloca.Po ./$(DEPDIR)/alloca.Po \
-	./$(DEPDIR)/argmatch.Po ./$(DEPDIR)/at-func.Po \
-	./$(DEPDIR)/basename-lgpl.Po ./$(DEPDIR)/binary-io.Po \
-	./$(DEPDIR)/bitrotate.Po ./$(DEPDIR)/btowc.Po \
-	./$(DEPDIR)/c-ctype.Po ./$(DEPDIR)/c-strcasecmp.Po \
-	./$(DEPDIR)/c-strncasecmp.Po ./$(DEPDIR)/chdir-long.Po \
-	./$(DEPDIR)/cloexec.Po ./$(DEPDIR)/close-stream.Po \
-	./$(DEPDIR)/close.Po ./$(DEPDIR)/closedir.Po \
-	./$(DEPDIR)/closeout.Po ./$(DEPDIR)/colorize.Po \
-	./$(DEPDIR)/creat-safer.Po ./$(DEPDIR)/cycle-check.Po \
-	./$(DEPDIR)/dirfd.Po ./$(DEPDIR)/dirname-lgpl.Po \
-	./$(DEPDIR)/dup-safer.Po ./$(DEPDIR)/dup.Po \
-	./$(DEPDIR)/dup2.Po ./$(DEPDIR)/error.Po \
+am__depfiles_remade = ./$(DEPDIR)/alloca.Po ./$(DEPDIR)/argmatch.Po \
+	./$(DEPDIR)/at-func.Po ./$(DEPDIR)/basename-lgpl.Po \
+	./$(DEPDIR)/binary-io.Po ./$(DEPDIR)/bitrotate.Po \
+	./$(DEPDIR)/btowc.Po ./$(DEPDIR)/c-ctype.Po \
+	./$(DEPDIR)/c-strcasecmp.Po ./$(DEPDIR)/c-strncasecmp.Po \
+	./$(DEPDIR)/chdir-long.Po ./$(DEPDIR)/cloexec.Po \
+	./$(DEPDIR)/close-stream.Po ./$(DEPDIR)/close.Po \
+	./$(DEPDIR)/closedir.Po ./$(DEPDIR)/closeout.Po \
+	./$(DEPDIR)/colorize.Po ./$(DEPDIR)/creat-safer.Po \
+	./$(DEPDIR)/cycle-check.Po ./$(DEPDIR)/dirfd.Po \
+	./$(DEPDIR)/dirname-lgpl.Po ./$(DEPDIR)/dup-safer.Po \
+	./$(DEPDIR)/dup.Po ./$(DEPDIR)/dup2.Po ./$(DEPDIR)/error.Po \
 	./$(DEPDIR)/exclude.Po ./$(DEPDIR)/exitfail.Po \
 	./$(DEPDIR)/fchdir.Po ./$(DEPDIR)/fcntl.Po \
 	./$(DEPDIR)/fd-hook.Po ./$(DEPDIR)/fd-safer.Po \
@@ -328,8 +328,8 @@ am__depfiles_remade = $(DEPDIR)/alloca.Po ./$(DEPDIR)/alloca.Po \
 	./$(DEPDIR)/fts.Po ./$(DEPDIR)/getcwd-lgpl.Po \
 	./$(DEPDIR)/getdtablesize.Po ./$(DEPDIR)/getopt.Po \
 	./$(DEPDIR)/getopt1.Po ./$(DEPDIR)/getpagesize.Po \
-	./$(DEPDIR)/gettimeofday.Po ./$(DEPDIR)/hash.Po \
-	./$(DEPDIR)/i-ring.Po ./$(DEPDIR)/iconv.Po \
+	./$(DEPDIR)/gettimeofday.Po ./$(DEPDIR)/hard-locale.Po \
+	./$(DEPDIR)/hash.Po ./$(DEPDIR)/i-ring.Po ./$(DEPDIR)/iconv.Po \
 	./$(DEPDIR)/iconv_close.Po ./$(DEPDIR)/iconv_open.Po \
 	./$(DEPDIR)/isatty.Po ./$(DEPDIR)/isblank.Po \
 	./$(DEPDIR)/iswblank.Po ./$(DEPDIR)/iswctype.Po \
@@ -1339,8 +1339,8 @@ EXTRA_DIST = alignof.h alloca.c alloca.in.h \
 	$(top_srcdir)/build-aux/gitlog-to-changelog \
 	$(top_srcdir)/build-aux/gnu-web-doc-update \
 	$(top_srcdir)/GNUmakefile $(top_srcdir)/build-aux/gnupload \
-	hash.h $(top_srcdir)/build-aux/config.rpath i-ring.h \
-	iconv.in.h iconv_open-aix.h iconv_open-hpux.h \
+	hard-locale.h hash.h $(top_srcdir)/build-aux/config.rpath \
+	i-ring.h iconv.in.h iconv_open-aix.h iconv_open-hpux.h \
 	iconv_open-irix.h iconv_open-osf.h iconv_open-solaris.h \
 	iconv.c iconv_close.c iconv_open-aix.gperf \
 	iconv_open-hpux.gperf iconv_open-irix.gperf \
@@ -1406,17 +1406,18 @@ libgreputils_a_SOURCES = argmatch.c binary-io.h binary-io.c \
 	closeout.c cycle-check.c opendir-safer.c dirname-lgpl.c \
 	basename-lgpl.c stripslash.c exclude.c exitfail.c \
 	creat-safer.c open-safer.c fd-hook.c filenamecat-lgpl.c \
-	gettext.h hash.c i-ring.c localcharset.h localcharset.c \
-	glthread/lock.h glthread/lock.c malloca.c mbchar.c mbiter.h \
-	mbiter.c mbscasecmp.c mbslen.c mbsstr.c mbuiter.h mbuiter.c \
-	memchr2.h memchr2.c minmax.h openat-die.c openat-safer.c \
-	progname.h progname.c propername.h propername.c quotearg.c \
-	safe-read.c save-cwd.c striconv.h striconv.c strnlen1.h \
-	strnlen1.c glthread/threadlib.c trim.c unistd.c dup-safer.c \
-	fd-safer.c pipe-safer.c $(am__append_1) $(am__append_2) \
-	$(am__append_3) version-etc.h version-etc.c version-etc-fsf.c \
-	wctype-h.c xmalloc.c xalloc-die.c xstriconv.h xstriconv.c \
-	xstrtoimax.c xstrtol.c xstrtoul.c xstrtol-error.c colorize.h
+	gettext.h hard-locale.c hash.c i-ring.c localcharset.h \
+	localcharset.c glthread/lock.h glthread/lock.c malloca.c \
+	mbchar.c mbiter.h mbiter.c mbscasecmp.c mbslen.c mbsstr.c \
+	mbuiter.h mbuiter.c memchr2.h memchr2.c minmax.h openat-die.c \
+	openat-safer.c progname.h progname.c propername.h propername.c \
+	quotearg.c safe-read.c save-cwd.c striconv.h striconv.c \
+	strnlen1.h strnlen1.c glthread/threadlib.c trim.c unistd.c \
+	dup-safer.c fd-safer.c pipe-safer.c $(am__append_1) \
+	$(am__append_2) $(am__append_3) version-etc.h version-etc.c \
+	version-etc-fsf.c wctype-h.c xmalloc.c xalloc-die.c \
+	xstriconv.h xstriconv.c xstrtoimax.c xstrtol.c xstrtoul.c \
+	xstrtol-error.c colorize.h
 libgreputils_a_LIBADD = $(gl_LIBOBJS) @ALLOCA@ $(LIBOBJS) $(ALLOCA)
 libgreputils_a_DEPENDENCIES = $(gl_LIBOBJS) @ALLOCA@ $(LIBOBJS) \
 	$(ALLOCA)
@@ -1539,7 +1540,6 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/alloca.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/alloca.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/argmatch.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/at-func.Po@am__quote@ # am--include-marker
@@ -1586,6 +1586,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/getopt1.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/getpagesize.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gettimeofday.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/hard-locale.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/hash.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/i-ring.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/iconv.Po@am__quote@ # am--include-marker
@@ -1836,8 +1837,7 @@ clean: clean-am
 clean-am: clean-generic clean-noinstLIBRARIES mostlyclean-am
 
 distclean: distclean-am
-		-rm -f $(DEPDIR)/alloca.Po
-	-rm -f ./$(DEPDIR)/alloca.Po
+		-rm -f ./$(DEPDIR)/alloca.Po
 	-rm -f ./$(DEPDIR)/argmatch.Po
 	-rm -f ./$(DEPDIR)/at-func.Po
 	-rm -f ./$(DEPDIR)/basename-lgpl.Po
@@ -1883,6 +1883,7 @@ distclean: distclean-am
 	-rm -f ./$(DEPDIR)/getopt1.Po
 	-rm -f ./$(DEPDIR)/getpagesize.Po
 	-rm -f ./$(DEPDIR)/gettimeofday.Po
+	-rm -f ./$(DEPDIR)/hard-locale.Po
 	-rm -f ./$(DEPDIR)/hash.Po
 	-rm -f ./$(DEPDIR)/i-ring.Po
 	-rm -f ./$(DEPDIR)/iconv.Po
@@ -2022,8 +2023,7 @@ install-ps-am:
 installcheck-am:
 
 maintainer-clean: maintainer-clean-am
-		-rm -f $(DEPDIR)/alloca.Po
-	-rm -f ./$(DEPDIR)/alloca.Po
+		-rm -f ./$(DEPDIR)/alloca.Po
 	-rm -f ./$(DEPDIR)/argmatch.Po
 	-rm -f ./$(DEPDIR)/at-func.Po
 	-rm -f ./$(DEPDIR)/basename-lgpl.Po
@@ -2069,6 +2069,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f ./$(DEPDIR)/getopt1.Po
 	-rm -f ./$(DEPDIR)/getpagesize.Po
 	-rm -f ./$(DEPDIR)/gettimeofday.Po
+	-rm -f ./$(DEPDIR)/hard-locale.Po
 	-rm -f ./$(DEPDIR)/hash.Po
 	-rm -f ./$(DEPDIR)/i-ring.Po
 	-rm -f ./$(DEPDIR)/iconv.Po

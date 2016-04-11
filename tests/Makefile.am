@@ -53,6 +53,7 @@ TESTS =						\
   big-match					\
   bogus-wctob					\
   bre						\
+  c-locale					\
   case-fold-backref				\
   case-fold-backslash-w				\
   case-fold-char-class				\
@@ -141,6 +142,7 @@ TESTS =						\
   word-delim-multibyte				\
   word-multi-file				\
   word-multibyte				\
+  write-error-msg				\
   yesno						\
   z-anchor-newline
 
@@ -181,6 +183,14 @@ TESTS_ENVIRONMENT =				\
       done;						\
     };							\
   fi;							\
+							\
+  : 'Test egrep/fgrep help if they use our grep.';	\
+  grep=`echo grep | sed -e '$(transform)'` || exit;	\
+  if test "$$grep" = grep; then				\
+    built_programs='grep egrep fgrep';			\
+  else							\
+    built_programs='grep';				\
+  fi;							\
 						\
   export_with_values				\
   VERSION='$(VERSION)'				\
@@ -192,7 +202,7 @@ TESTS_ENVIRONMENT =				\
   abs_top_builddir='$(abs_top_builddir)'	\
   abs_top_srcdir='$(abs_top_srcdir)'		\
   abs_srcdir='$(abs_srcdir)'			\
-  built_programs='grep egrep fgrep'		\
+  built_programs="$$built_programs"		\
   srcdir='$(srcdir)'				\
   top_srcdir='$(top_srcdir)'			\
   CC='$(CC)'					\

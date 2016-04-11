@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grep 2.11.11-pre1\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2016-03-10 21:38-0800\n"
+"POT-Creation-Date: 2016-04-11 08:26-0700\n"
 "PO-Revision-Date: 2012-05-19 17:52+0530\n"
 "Last-Translator: A S Alam <aalam@users.sf.net>\n"
 "Language-Team: Punjabi <punjabi-l10n@lists.sourceforge.net>\n"
@@ -32,7 +32,7 @@ msgstr ""
 msgid "Valid arguments are:"
 msgstr "ਠੀਕ ਆਰਗੂਮੈਂਟ ਹਨ:"
 
-#: lib/closeout.c:112 src/grep.c:1199
+#: lib/closeout.c:112 src/grep.c:1238
 #, c-format
 msgid "write error"
 msgstr "ਲਿਖਣ ਗਲਤੀ"
@@ -101,7 +101,8 @@ msgstr "%s: ਚੋਣ '-W %s' ਲਈ ਕੋਈ ਆਰਗੂਮੈਂਟ ਨਹ�
 msgid "%s: option '-W %s' requires an argument\n"
 msgstr ""
 
-#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34 src/pcresearch.c:338
+#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34
+#: src/pcresearch.c:340
 #, c-format
 msgid "memory exhausted"
 msgstr "ਮੈਮੋਰੀ ਖਤਮ ਹੋਈ"
@@ -214,7 +215,7 @@ msgstr "ਨਿਯਮਤ ਸਮੀਕਰਨ ਬਹੁਤ ਵੱਡੀ ਹੈ"
 msgid "Unmatched ) or \\)"
 msgstr "ਨਾ ਮਿਲਦੇ ) ਜਾਂ \\)"
 
-#: lib/regcomp.c:711
+#: lib/regcomp.c:687
 msgid "No previous regular expression"
 msgstr "ਕੋਈ ਪਿਛਲਾ ਨਿਯਮਤ ਸਮੀਕਰਨ ਨਹੀਂ"
 
@@ -441,71 +442,71 @@ msgid "unbalanced )"
 msgstr "ਅਧੂਰੀ )"
 
 #. This is a proper name. See the gettext manual, section Names.
-#: src/grep.c:57
+#: src/grep.c:58
 msgid "Mike Haertel"
 msgstr "ਮਾਈਕ ਹਾਇਰਟੇਲ"
 
-#: src/grep.c:58
+#: src/grep.c:59
 msgid "others, see <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
 msgstr "ਹੋਰਾਂ ਲਈ <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS> ਵੇਖੋ"
 
-#: src/grep.c:648
+#: src/grep.c:689
 msgid "invalid context length argument"
 msgstr ""
 
-#: src/grep.c:712
+#: src/grep.c:753
 #, c-format
 msgid "input is too large to count"
 msgstr "ਇੰਪੁੱਟ ਗਿਣਤੀ ਕਰਨ ਲਈ ਬਹੁਤ ਵੱਡੀ ਹੈ"
 
-#: src/grep.c:754
+#: src/grep.c:795
 msgid "lseek failed"
 msgstr "lseek ਫੇਲ੍ਹ ਹੈ"
 
-#: src/grep.c:1501
+#: src/grep.c:1539
 #, c-format
 msgid "Binary file %s matches\n"
 msgstr "ਬਾਈਨਰੀ ਫਾਇਲ %s ਮਿਲਦੀ ਹੈ\n"
 
-#: src/grep.c:1550
+#: src/grep.c:1588
 #, c-format
 msgid "warning: %s: %s"
 msgstr "ਸਾਵਧਾਨ: %s: %s"
 
-#: src/grep.c:1551
+#: src/grep.c:1589
 msgid "recursive directory loop"
 msgstr "ਲਗਾਤਾਰ ਡਾਇਰੈਕਟਰੀ ਲੂਪ"
 
-#: src/grep.c:1720
+#: src/grep.c:1758
 #, c-format
 msgid "input file %s is also the output"
 msgstr "ਇੰਪੁੱਟ ਫਾਇਲ %s ਆਉਟਪੁੱਟ ਫਾਇਲ ਵੀ ਹੈ"
 
-#: src/grep.c:1782
+#: src/grep.c:1820
 msgid "(standard input)"
 msgstr "(ਸਟੈਂਡਰਡ ਆਉਟਪੁੱਟ)"
 
-#: src/grep.c:1798 src/grep.c:1805
+#: src/grep.c:1836 src/grep.c:1843
 #, c-format
 msgid "Usage: %s [OPTION]... PATTERN [FILE]...\n"
 msgstr "ਵਰਤੋਂ: %s [ਚੋਣਾਂ]... ਪੈਟਰਨ [ਫਾਇਲ]...\n"
 
-#: src/grep.c:1800
+#: src/grep.c:1838
 #, c-format
 msgid "Try '%s --help' for more information.\n"
 msgstr "ਹੋਰ ਜਾਣਕਾਰੀ ਲਈ '%s --help' ਨਾਲ ਕੋਸ਼ਿਸ਼ ਕਰੋ।\n"
 
-#: src/grep.c:1806
+#: src/grep.c:1844
 #, c-format
 msgid "Search for PATTERN in each FILE or standard input.\n"
 msgstr "ਹਰੇਕ ਫਾਇਲ (FILE) ਜਾਂ ਸਟੈਂਡਰਡ ਆਉਟਪੁੱਟ ਲਈ ਪੈਟਰਨ ਦੀ ਖੋਜ।\n"
 
-#: src/grep.c:1807
+#: src/grep.c:1845
 #, c-format
 msgid "PATTERN is, by default, a basic regular expression (BRE).\n"
 msgstr "ਪੈਟਰਨ (PATTERN) ਮੂਲ ਰੂਪ ਵਿੱਚ ਇੱਕ ਨਿਯਮਤ ਸਕਰੀਨ (BRE) ਹੁੰਦਾ ਹੈ।\n"
 
-#: src/grep.c:1808
+#: src/grep.c:1846
 #, c-format
 msgid ""
 "Example: %s -i 'hello world' menu.h main.c\n"
@@ -516,7 +517,7 @@ msgstr ""
 "\n"
 "ਨਿਯਮਤ-ਸਮੀਕਰਨ (Regexp) ਚੋਣ ਅਤੇ ਚਲਾਉਣਾ:\n"
 
-#: src/grep.c:1812
+#: src/grep.c:1850
 #, c-format
 msgid ""
 "  -E, --extended-regexp     PATTERN is an extended regular expression (ERE)\n"
@@ -525,7 +526,7 @@ msgid ""
 "  -P, --perl-regexp         PATTERN is a Perl regular expression\n"
 msgstr ""
 
-#: src/grep.c:1818
+#: src/grep.c:1856
 #, c-format
 msgid ""
 "  -e, --regexp=PATTERN      use PATTERN for matching\n"
@@ -536,7 +537,7 @@ msgid ""
 "  -z, --null-data           a data line ends in 0 byte, not newline\n"
 msgstr ""
 
-#: src/grep.c:1825
+#: src/grep.c:1863
 #, c-format
 msgid ""
 "\n"
@@ -547,7 +548,7 @@ msgid ""
 "      --help                display this help text and exit\n"
 msgstr ""
 
-#: src/grep.c:1832
+#: src/grep.c:1870
 #, c-format
 msgid ""
 "\n"
@@ -562,7 +563,7 @@ msgid ""
 "prefix\n"
 msgstr ""
 
-#: src/grep.c:1843
+#: src/grep.c:1881
 #, c-format
 msgid ""
 "  -o, --only-matching       show only the part of a line matching PATTERN\n"
@@ -572,7 +573,7 @@ msgid ""
 "  -a, --text                equivalent to --binary-files=text\n"
 msgstr ""
 
-#: src/grep.c:1850
+#: src/grep.c:1888
 #, c-format
 msgid ""
 "  -I                        equivalent to --binary-files=without-match\n"
@@ -584,7 +585,7 @@ msgid ""
 "  -R, --dereference-recursive  likewise, but follow all symlinks\n"
 msgstr ""
 
-#: src/grep.c:1859
+#: src/grep.c:1897
 #, c-format
 msgid ""
 "      --include=FILE_PATTERN  search only files that match FILE_PATTERN\n"
@@ -595,7 +596,7 @@ msgid ""
 "skipped.\n"
 msgstr ""
 
-#: src/grep.c:1866
+#: src/grep.c:1904
 #, c-format
 msgid ""
 "  -L, --files-without-match  print only names of FILEs containing no match\n"
@@ -605,7 +606,7 @@ msgid ""
 "  -Z, --null                print 0 byte after FILE name\n"
 msgstr ""
 
-#: src/grep.c:1872
+#: src/grep.c:1910
 #, c-format
 msgid ""
 "\n"
@@ -615,7 +616,7 @@ msgid ""
 "  -C, --context=NUM         print NUM lines of output context\n"
 msgstr ""
 
-#: src/grep.c:1879
+#: src/grep.c:1917
 #, c-format
 msgid ""
 "  -NUM                      same as --context=NUM\n"
@@ -629,14 +630,14 @@ msgid ""
 "\n"
 msgstr ""
 
-#: src/grep.c:1888
+#: src/grep.c:1926
 #, c-format
 msgid ""
 "'egrep' means 'grep -E'.  'fgrep' means 'grep -F'.\n"
 "Direct invocation as either 'egrep' or 'fgrep' is deprecated.\n"
 msgstr ""
 
-#: src/grep.c:1891
+#: src/grep.c:1929
 #, c-format
 msgid ""
 "When FILE is -, read standard input.  With no FILE, read . if a command-"
@@ -646,32 +647,32 @@ msgid ""
 "if any error occurs and -q is not given, the exit status is 2.\n"
 msgstr ""
 
-#: src/grep.c:1958
+#: src/grep.c:1996
 #, c-format
 msgid "conflicting matchers specified"
 msgstr ""
 
-#: src/grep.c:1969
+#: src/grep.c:2007
 #, c-format
 msgid "invalid matcher %s"
 msgstr "ਗਲਤ ਮੈਚਰ %s"
 
-#: src/grep.c:2252
+#: src/grep.c:2290
 #, c-format
 msgid "warning: GREP_OPTIONS is deprecated; please use an alias or script"
 msgstr ""
 
-#: src/grep.c:2282
+#: src/grep.c:2320
 #, c-format
 msgid "unknown devices method"
 msgstr "ਅਣਜਾਣ ਜੰਤਰ ਢੰਗ"
 
-#: src/grep.c:2409
+#: src/grep.c:2447
 #, c-format
 msgid "invalid max count"
 msgstr "ਗਲਤ ਵੱਧ ਤੋਂ ਵੱਧ ਗਿਣਤੀ"
 
-#: src/grep.c:2466
+#: src/grep.c:2504
 #, c-format
 msgid "unknown binary-files type"
 msgstr "ਅਣਜਾਣ ਬਾਈਨਰੀ-ਫਾਇਲ ਕਿਸਮ"
@@ -702,32 +703,32 @@ msgstr ""
 msgid "unescaped ^ or $ not supported with -Pz"
 msgstr ""
 
-#: src/pcresearch.c:182
+#: src/pcresearch.c:184
 #, c-format
 msgid "internal error (should never happen)"
 msgstr ""
 
-#: src/pcresearch.c:204
+#: src/pcresearch.c:206
 #, c-format
 msgid "internal error"
 msgstr "ਅੰਦਰੂਨੀ ਗਲਤੀ"
 
-#: src/pcresearch.c:248
+#: src/pcresearch.c:250
 #, c-format
 msgid "exceeded PCRE's line length limit"
 msgstr ""
 
-#: src/pcresearch.c:342
+#: src/pcresearch.c:344
 #, c-format
 msgid "exhausted PCRE JIT stack"
 msgstr ""
 
-#: src/pcresearch.c:346
+#: src/pcresearch.c:348
 #, c-format
 msgid "exceeded PCRE's backtracking limit"
 msgstr ""
 
-#: src/pcresearch.c:353
+#: src/pcresearch.c:355
 #, fuzzy, c-format
 msgid "internal PCRE error: %d"
 msgstr "ਅੰਦਰੂਨੀ ਗਲਤੀ"

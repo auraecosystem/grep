@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grep-2.23.7\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2016-03-10 21:38-0800\n"
+"POT-Creation-Date: 2016-04-11 08:26-0700\n"
 "PO-Revision-Date: 2016-03-05 09:37+0200\n"
 "Last-Translator: Мирослав Николић <miroslavnikolic@rocketmail.com>\n"
 "Language-Team: Serbian <(nothing)>\n"
@@ -32,7 +32,7 @@ msgstr "нејасан аргумент „%s“ за „%s“"
 msgid "Valid arguments are:"
 msgstr "Исправни аргументи су:"
 
-#: lib/closeout.c:112 src/grep.c:1199
+#: lib/closeout.c:112 src/grep.c:1238
 #, c-format
 msgid "write error"
 msgstr "грешка писања"
@@ -101,7 +101,8 @@ msgstr "%s: опција „-W %s“ не дозвољава аргумент\n"
 msgid "%s: option '-W %s' requires an argument\n"
 msgstr "%s: опција „-W %s“ захтева аргумент\n"
 
-#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34 src/pcresearch.c:338
+#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34
+#: src/pcresearch.c:340
 #, c-format
 msgid "memory exhausted"
 msgstr "меморија је потрошена"
@@ -214,7 +215,7 @@ msgstr "Регуларни израз је превелик"
 msgid "Unmatched ) or \\)"
 msgstr "Не одговара ) или \\)"
 
-#: lib/regcomp.c:711
+#: lib/regcomp.c:687
 msgid "No previous regular expression"
 msgstr "Нема претходног регуларног израза"
 
@@ -445,71 +446,71 @@ msgid "unbalanced )"
 msgstr "неуравнотежена )"
 
 #. This is a proper name. See the gettext manual, section Names.
-#: src/grep.c:57
+#: src/grep.c:58
 msgid "Mike Haertel"
 msgstr "Мајк Хартел"
 
-#: src/grep.c:58
+#: src/grep.c:59
 msgid "others, see <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
 msgstr "остали, погледајте <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
 
-#: src/grep.c:648
+#: src/grep.c:689
 msgid "invalid context length argument"
 msgstr "неисправан аргумент дужине контекста"
 
-#: src/grep.c:712
+#: src/grep.c:753
 #, c-format
 msgid "input is too large to count"
 msgstr "улаз је превелик за пребројавање"
 
-#: src/grep.c:754
+#: src/grep.c:795
 msgid "lseek failed"
 msgstr "„lseek“ није успело"
 
-#: src/grep.c:1501
+#: src/grep.c:1539
 #, c-format
 msgid "Binary file %s matches\n"
 msgstr "Бинарна датотека %s одговара\n"
 
-#: src/grep.c:1550
+#: src/grep.c:1588
 #, c-format
 msgid "warning: %s: %s"
 msgstr "упозорење: %s: %s"
 
-#: src/grep.c:1551
+#: src/grep.c:1589
 msgid "recursive directory loop"
 msgstr "дубинско вртење кроз директоријуме"
 
-#: src/grep.c:1720
+#: src/grep.c:1758
 #, c-format
 msgid "input file %s is also the output"
 msgstr "улазна датотека %s је такође излаз"
 
-#: src/grep.c:1782
+#: src/grep.c:1820
 msgid "(standard input)"
 msgstr "(стандардни улаз)"
 
-#: src/grep.c:1798 src/grep.c:1805
+#: src/grep.c:1836 src/grep.c:1843
 #, c-format
 msgid "Usage: %s [OPTION]... PATTERN [FILE]...\n"
 msgstr "Употреба: %s [ОПЦИЈА]... ШАБЛОН [ДАТОТЕКА]...\n"
 
-#: src/grep.c:1800
+#: src/grep.c:1838
 #, c-format
 msgid "Try '%s --help' for more information.\n"
 msgstr "Пробајте „%s --help“ за више података.\n"
 
-#: src/grep.c:1806
+#: src/grep.c:1844
 #, c-format
 msgid "Search for PATTERN in each FILE or standard input.\n"
 msgstr "Тражи наведени ШАБЛОН у свакој датотеци или стандардном улазу.\n"
 
-#: src/grep.c:1807
+#: src/grep.c:1845
 #, c-format
 msgid "PATTERN is, by default, a basic regular expression (BRE).\n"
 msgstr "ШАБЛОН је, по основи, основни регуларан израз (BRE).\n"
 
-#: src/grep.c:1808
+#: src/grep.c:1846
 #, c-format
 msgid ""
 "Example: %s -i 'hello world' menu.h main.c\n"
@@ -520,7 +521,7 @@ msgstr ""
 "\n"
 "Избор регуларних израза и обрада:\n"
 
-#: src/grep.c:1812
+#: src/grep.c:1850
 #, c-format
 msgid ""
 "  -E, --extended-regexp     PATTERN is an extended regular expression (ERE)\n"
@@ -533,7 +534,7 @@ msgstr ""
 "  -G, --basic-regexp              ШАБЛОН је основни регуларан израз\n"
 "  -P, --perl-regexp               ШАБЛОН је Перлов регуларан израз\n"
 
-#: src/grep.c:1818
+#: src/grep.c:1856
 #, c-format
 msgid ""
 "  -e, --regexp=PATTERN      use PATTERN for matching\n"
@@ -553,7 +554,7 @@ msgstr ""
 "  -z, --null-data                 ред података се завршава 0-бајтом, не "
 "новим редом\n"
 
-#: src/grep.c:1825
+#: src/grep.c:1863
 #, c-format
 msgid ""
 "\n"
@@ -570,7 +571,7 @@ msgstr ""
 "  -V, --version                   исписује податке о издању и излази\n"
 "      --help                      приказује ову помоћ и излази\n"
 
-#: src/grep.c:1832
+#: src/grep.c:1870
 #, c-format
 msgid ""
 "\n"
@@ -597,7 +598,7 @@ msgstr ""
 "      --label=НАТПИС              користи НАТПИС као префикс назива датотеке "
 "стандардног улаза\n"
 
-#: src/grep.c:1843
+#: src/grep.c:1881
 #, c-format
 msgid ""
 "  -o, --only-matching       show only the part of a line matching PATTERN\n"
@@ -614,7 +615,7 @@ msgstr ""
 "„without-match“\n"
 "  -a, --text                      исто као и „--binary-files=text“\n"
 
-#: src/grep.c:1850
+#: src/grep.c:1888
 #, c-format
 msgid ""
 "  -I                        equivalent to --binary-files=without-match\n"
@@ -635,7 +636,7 @@ msgstr ""
 "  -r, --recursive                 исто као и „--directories=recurse“\n"
 "  -R, --dereference-recursive     слично, али прати све симболичке везе\n"
 
-#: src/grep.c:1859
+#: src/grep.c:1897
 #, c-format
 msgid ""
 "      --include=FILE_PATTERN  search only files that match FILE_PATTERN\n"
@@ -654,7 +655,7 @@ msgstr ""
 "      --exclude-dir=ШАБЛОН        директоријуми који се поклапају са "
 "ШАБЛОНОМ биће прескочени.\n"
 
-#: src/grep.c:1866
+#: src/grep.c:1904
 #, c-format
 msgid ""
 "  -L, --files-without-match  print only names of FILEs containing no match\n"
@@ -672,7 +673,7 @@ msgstr ""
 "  -T, --initial-tab               помера табове ред горе (ако је потребно)\n"
 "  -Z, --null                      исписује 0-ти бајт након назива ДАТОТЕКЕ\n"
 
-#: src/grep.c:1872
+#: src/grep.c:1910
 #, c-format
 msgid ""
 "\n"
@@ -687,7 +688,7 @@ msgstr ""
 "  -A, --after-context=БРОЈ        исписује БРОЈ редова пратећег контекста\n"
 "  -C, --context=БРОЈ              исписује БРОЈ редова излазног контекста\n"
 
-#: src/grep.c:1879
+#: src/grep.c:1917
 #, c-format
 msgid ""
 "  -NUM                      same as --context=NUM\n"
@@ -712,7 +713,7 @@ msgstr ""
 "били ту (МСДОС/Виндоуз)\n"
 "\n"
 
-#: src/grep.c:1888
+#: src/grep.c:1926
 #, c-format
 msgid ""
 "'egrep' means 'grep -E'.  'fgrep' means 'grep -F'.\n"
@@ -721,7 +722,7 @@ msgstr ""
 "„egrep“ значи „grep -E“.  „fgrep“ значи „grep -F“.\n"
 "Директно призивање као „egrep“ или „fgrep“ није одобрено.\n"
 
-#: src/grep.c:1891
+#: src/grep.c:1929
 #, c-format
 msgid ""
 "When FILE is -, read standard input.  With no FILE, read . if a command-"
@@ -736,32 +737,32 @@ msgstr ""
 "Излазно стање је 0 ако је изабран неки ред, у супротном 1;\n"
 "ако је дошло до неке грешке а „-q“ није дато, онда је излазно стање 2.\n"
 
-#: src/grep.c:1958
+#: src/grep.c:1996
 #, c-format
 msgid "conflicting matchers specified"
 msgstr "наведени су трагачи у сукобу"
 
-#: src/grep.c:1969
+#: src/grep.c:2007
 #, c-format
 msgid "invalid matcher %s"
 msgstr "неисправан трагач %s"
 
-#: src/grep.c:2252
+#: src/grep.c:2290
 #, c-format
 msgid "warning: GREP_OPTIONS is deprecated; please use an alias or script"
 msgstr "упозорење: „GREP_OPTIONS“ је застарело; користите алијас или скрипту"
 
-#: src/grep.c:2282
+#: src/grep.c:2320
 #, c-format
 msgid "unknown devices method"
 msgstr "непознат метод уређаја"
 
-#: src/grep.c:2409
+#: src/grep.c:2447
 #, c-format
 msgid "invalid max count"
 msgstr "неисправан највећи број"
 
-#: src/grep.c:2466
+#: src/grep.c:2504
 #, c-format
 msgid "unknown binary-files type"
 msgstr "непозната врста бинарних датотека"
@@ -793,32 +794,32 @@ msgstr "опција „-P“ подржава само самосталне ш�
 msgid "unescaped ^ or $ not supported with -Pz"
 msgstr "непреспојено ^ или $ није подржано са „-Pz“"
 
-#: src/pcresearch.c:182
+#: src/pcresearch.c:184
 #, c-format
 msgid "internal error (should never happen)"
 msgstr "унутрашња грешка (не треба никада да се деси)"
 
-#: src/pcresearch.c:204
+#: src/pcresearch.c:206
 #, c-format
 msgid "internal error"
 msgstr "унутрашња грешка"
 
-#: src/pcresearch.c:248
+#: src/pcresearch.c:250
 #, c-format
 msgid "exceeded PCRE's line length limit"
 msgstr "прекорачено је ограничење дужине реда ПЦРЕ-а"
 
-#: src/pcresearch.c:342
+#: src/pcresearch.c:344
 #, c-format
 msgid "exhausted PCRE JIT stack"
 msgstr "потрошени ПЦРЕ ЈИТ спремник"
 
-#: src/pcresearch.c:346
+#: src/pcresearch.c:348
 #, c-format
 msgid "exceeded PCRE's backtracking limit"
 msgstr "прекорачено је ПЦРЕ-ово ограничење тражења уназад"
 
-#: src/pcresearch.c:353
+#: src/pcresearch.c:355
 #, c-format
 msgid "internal PCRE error: %d"
 msgstr "унутрашња грешка ПЦРЕ-а: %d"

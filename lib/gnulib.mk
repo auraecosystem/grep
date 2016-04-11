@@ -734,6 +734,14 @@ V_GPERF_0 = @echo "  GPERF   " $@;
 
 ## end   gnulib module gperf
 
+## begin gnulib module hard-locale
+
+libgreputils_a_SOURCES += hard-locale.c
+
+EXTRA_DIST += hard-locale.h
+
+## end   gnulib module hard-locale
+
 ## begin gnulib module hash
 
 libgreputils_a_SOURCES += hash.c

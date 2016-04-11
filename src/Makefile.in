@@ -135,7 +135,8 @@ am__aclocal_m4_deps = $(top_srcdir)/m4/00gnulib.m4 \
 	$(top_srcdir)/m4/getpagesize.m4 $(top_srcdir)/m4/gettext.m4 \
 	$(top_srcdir)/m4/gettimeofday.m4 $(top_srcdir)/m4/glibc21.m4 \
 	$(top_srcdir)/m4/gnulib-common.m4 \
-	$(top_srcdir)/m4/gnulib-comp.m4 $(top_srcdir)/m4/i-ring.m4 \
+	$(top_srcdir)/m4/gnulib-comp.m4 \
+	$(top_srcdir)/m4/hard-locale.m4 $(top_srcdir)/m4/i-ring.m4 \
 	$(top_srcdir)/m4/iconv.m4 $(top_srcdir)/m4/iconv_h.m4 \
 	$(top_srcdir)/m4/iconv_open.m4 \
 	$(top_srcdir)/m4/include_next.m4 $(top_srcdir)/m4/inline.m4 \
