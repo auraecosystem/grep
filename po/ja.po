@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GNU grep 2.20.72\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2016-04-11 08:26-0700\n"
+"POT-Creation-Date: 2016-04-21 21:37-0700\n"
 "PO-Revision-Date: 2014-10-30 06:46+0100\n"
 "Last-Translator: Yasuaki Taniguchi <yasuakit@gmail.com>\n"
 "Language-Team: Japanese <translation-team-ja@lists.sourceforge.net>\n"
@@ -109,8 +109,7 @@ msgstr "%s: オプション '-W %s' は引数を取ることができません\n
 msgid "%s: option '-W %s' requires an argument\n"
 msgstr "%s: オプション '-W %s' には引数が必要です\n"
 
-#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34
-#: src/pcresearch.c:340
+#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34 src/pcresearch.c:340
 #, c-format
 msgid "memory exhausted"
 msgstr "メモリを使い果たしました"
@@ -421,41 +420,41 @@ msgstr "引数 '%3$s' に対して無効な接尾辞 %1$s%2$s です"
 msgid "%s%s argument '%s' too large"
 msgstr "引数 '%3$s' に対する %1$s%2$s が大きすぎます"
 
-#: src/dfa.c:1005 src/dfa.c:1008 src/dfa.c:1027 src/dfa.c:1037 src/dfa.c:1049
-#: src/dfa.c:1076 src/dfa.c:1085 src/dfa.c:1088 src/dfa.c:1093 src/dfa.c:1114
-#: src/dfa.c:1117
+#: src/dfa.c:990 src/dfa.c:993 src/dfa.c:1012 src/dfa.c:1022 src/dfa.c:1034
+#: src/dfa.c:1061 src/dfa.c:1070 src/dfa.c:1073 src/dfa.c:1078 src/dfa.c:1099
+#: src/dfa.c:1102
 msgid "unbalanced ["
 msgstr "対応がとれていない [ です"
 
-#: src/dfa.c:1061
+#: src/dfa.c:1046
 msgid "invalid character class"
 msgstr "無効な文字クラス名です"
 
-#: src/dfa.c:1183
+#: src/dfa.c:1168
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr "文字クラスの構文は [[:space:]] です。 [:space:] ではありません"
 
-#: src/dfa.c:1245
+#: src/dfa.c:1230
 msgid "unfinished \\ escape"
 msgstr "\\ エスケープが終了していません"
 
-#: src/dfa.c:1392
+#: src/dfa.c:1377
 msgid "invalid content of \\{\\}"
 msgstr "\\{\\} の中身が無効です"
 
-#: src/dfa.c:1395
+#: src/dfa.c:1380
 msgid "regular expression too big"
 msgstr "正規表現が大きすぎます"
 
-#: src/dfa.c:1811
+#: src/dfa.c:1796
 msgid "unbalanced ("
 msgstr "対応がとれていない ( です"
 
-#: src/dfa.c:1937
+#: src/dfa.c:1922
 msgid "no syntax specified"
 msgstr "構文が指定されていません"
 
-#: src/dfa.c:1945
+#: src/dfa.c:1930
 msgid "unbalanced )"
 msgstr "対応がとれていない ) です"
 

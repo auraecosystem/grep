@@ -4,7 +4,6 @@ if you'd rather not be listed, or if you'd prefer a different address
 be used, please send a note to the bug-report mailing list (as seen at
 end of e.g., grep --help).
 
-'Drake' Daham Wang                  drakewang@gmail.com
 Adam Katz                           savannah@kopis.com
 Aharon Robbins                      arnold@skeeve.com
 Akim Demaille                       akim@epita.fr
@@ -15,6 +14,7 @@ Andreas Schwab                      schwab@suse.de
 Arnold D. Robbins                   arnold@skeeve.com
 Arnold Robbins                      arnold@skeeve.com
 Bastiaan "Darquan" Stougie          darquan@zonnet.nl
+behoffski                           behoffski@grouse.com.au
 Ben Elliston                        bje@cygnus.com
 Benno Schulenberg                   bensberg@justemail.net
 Bernd Strieder                      strieder@student.uni-kl.de
@@ -33,6 +33,7 @@ David Clissold                      cliss@austin.ibm.com
 David J MacKenzie                   djm@catapult.va.pubnix.com
 David O'Brien                       obrien@freebsd.org
 Dmitry V. Levin                     ldv@altlinux.org
+'Drake' Daham Wang                  drakewang@gmail.com
 Egmont Koblinger                    egmont@gmail.com
 Eli Zaretskii                       eliz@gnu.org
 Eric Blake                          eblake@redhat.com
@@ -86,19 +87,19 @@ Nicolas Vigier                      boklm@mars-attacks.org
 Nima Aghdaii                        naghdaii@fb.com
 Norihiro Tanaka                     noritnk@kcn.ne.jp
 Olaf Kirch                          okir@ns.lst.de
+Pádraig Brady                       P@draigBrady.com
 Paolo Bonzini                       bonzini@gnu.org
 Patrick Boyd                        pboyd04@gmail.com
 Paul Eggert                         eggert@cs.ucla.edu
 Paul Kimoto                         kimoto@spacenet.tn.cornell.edu
-Petr Pisar                          ppisar@redhat.com
+Péter Radics                        mitchnull@gmail.com
 Petr Písař                          petr.pisar@atlas.cz
+Petr Pisar                          ppisar@redhat.com
 Philip Hazel                        ph10@cus.cam.ac.uk
 Philipp Kohlbecher                  xt28@gmx.de
-Philippe De Muyter                  phdm@info.ucl.ac.be
 Philippe Defert                     Philippe.Defert@cern.ch
+Philippe De Muyter                  phdm@info.ucl.ac.be
 Phillip C. Brisco                   phillip.craig.brisco@ccmail.census.gov
-Pádraig Brady                       P@draigBrady.com
-Péter Radics                        mitchnull@gmail.com
 Rainer Orth                         ro@cebitec.uni-bielefeld.de
 Reuben Thomas                       rrt@sc3d.org
 Roland Roberts                      rroberts@muller.com
@@ -130,7 +131,6 @@ Wolfgang Schludi                    schludi@syscomp.de
 Yuliy Pisetsky                      ypisetsky@fb.com
 Zev Weiss                           zev@bewilderbeest.net
 Zoltan Herczeg                      hzmester@freemail.hu
-behoffski                           behoffski@grouse.com.au
 
 ;; Local Variables:
 ;; coding: utf-8

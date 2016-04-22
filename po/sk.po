@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grep 2.13.16-pre1\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2016-04-11 08:26-0700\n"
+"POT-Creation-Date: 2016-04-21 21:37-0700\n"
 "PO-Revision-Date: 2012-08-17 13:52+0100\n"
 "Last-Translator: Ivan Masár <helix84@centrum.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
@@ -99,8 +99,7 @@ msgstr "%s: voľba „-W %s“ nepripúšťa argument\n"
 msgid "%s: option '-W %s' requires an argument\n"
 msgstr "%s: voľba „-W %s“ vyžaduje argument\n"
 
-#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34
-#: src/pcresearch.c:340
+#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34 src/pcresearch.c:340
 #, c-format
 msgid "memory exhausted"
 msgstr "pamäť bola vyčerpaná"
@@ -406,43 +405,43 @@ msgstr "neplatná prípona v argumente %s%s „%s“"
 msgid "%s%s argument '%s' too large"
 msgstr "argument %s%s „%s“ je príliš veľký"
 
-#: src/dfa.c:1005 src/dfa.c:1008 src/dfa.c:1027 src/dfa.c:1037 src/dfa.c:1049
-#: src/dfa.c:1076 src/dfa.c:1085 src/dfa.c:1088 src/dfa.c:1093 src/dfa.c:1114
-#: src/dfa.c:1117
+#: src/dfa.c:990 src/dfa.c:993 src/dfa.c:1012 src/dfa.c:1022 src/dfa.c:1034
+#: src/dfa.c:1061 src/dfa.c:1070 src/dfa.c:1073 src/dfa.c:1078 src/dfa.c:1099
+#: src/dfa.c:1102
 msgid "unbalanced ["
 msgstr "[ bez náprotivku"
 
-#: src/dfa.c:1061
+#: src/dfa.c:1046
 msgid "invalid character class"
 msgstr "neplatná trieda znakov"
 
-#: src/dfa.c:1183
+#: src/dfa.c:1168
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr "syntax triedy znakov je [[:space:]], nie [:space:]"
 
-#: src/dfa.c:1245
+#: src/dfa.c:1230
 msgid "unfinished \\ escape"
 msgstr "nedokončená úniková klauzula \\"
 
-#: src/dfa.c:1392
+#: src/dfa.c:1377
 #, fuzzy
 msgid "invalid content of \\{\\}"
 msgstr "Neplatný obsah \\{\\}"
 
-#: src/dfa.c:1395
+#: src/dfa.c:1380
 #, fuzzy
 msgid "regular expression too big"
 msgstr "Regulárny výraz je príliš veľký"
 
-#: src/dfa.c:1811
+#: src/dfa.c:1796
 msgid "unbalanced ("
 msgstr "( bez náprotivku"
 
-#: src/dfa.c:1937
+#: src/dfa.c:1922
 msgid "no syntax specified"
 msgstr "neuvedená syntax"
 
-#: src/dfa.c:1945
+#: src/dfa.c:1930
 msgid "unbalanced )"
 msgstr ") bez náprotivku"
 

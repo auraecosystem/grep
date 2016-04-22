@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grep 2.5g\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2016-04-11 08:26-0700\n"
+"POT-Creation-Date: 2016-04-21 21:37-0700\n"
 "PO-Revision-Date: 2004-03-03 13:33+0200\n"
 "Last-Translator: Petri Jooste <rkwjpj@puk.ac.za>\n"
 "Language-Team: Afrikaans <i18n@af.org.za>\n"
@@ -101,8 +101,7 @@ msgstr "%s: opsie `-W %s' laat nie 'n parameter toe nie\n"
 msgid "%s: option '-W %s' requires an argument\n"
 msgstr "%s: opsie `%s' benodig 'n parameter\n"
 
-#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34
-#: src/pcresearch.c:340
+#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34 src/pcresearch.c:340
 #, c-format
 msgid "memory exhausted"
 msgstr "geheue uitgeput"
@@ -393,46 +392,46 @@ msgstr ""
 msgid "%s%s argument '%s' too large"
 msgstr ""
 
-#: src/dfa.c:1005 src/dfa.c:1008 src/dfa.c:1027 src/dfa.c:1037 src/dfa.c:1049
-#: src/dfa.c:1076 src/dfa.c:1085 src/dfa.c:1088 src/dfa.c:1093 src/dfa.c:1114
-#: src/dfa.c:1117
+#: src/dfa.c:990 src/dfa.c:993 src/dfa.c:1012 src/dfa.c:1022 src/dfa.c:1034
+#: src/dfa.c:1061 src/dfa.c:1070 src/dfa.c:1073 src/dfa.c:1078 src/dfa.c:1099
+#: src/dfa.c:1102
 #, fuzzy
 msgid "unbalanced ["
 msgstr "Ongebalanseerde ["
 
-#: src/dfa.c:1061
+#: src/dfa.c:1046
 msgid "invalid character class"
 msgstr ""
 
-#: src/dfa.c:1183
+#: src/dfa.c:1168
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr ""
 
-#: src/dfa.c:1245
+#: src/dfa.c:1230
 #, fuzzy
 msgid "unfinished \\ escape"
 msgstr "Onbeëindigde \\-ontsnapstring"
 
-#: src/dfa.c:1392
+#: src/dfa.c:1377
 #, fuzzy
 msgid "invalid content of \\{\\}"
 msgstr "ongeldige maks-telling"
 
-#: src/dfa.c:1395
+#: src/dfa.c:1380
 msgid "regular expression too big"
 msgstr ""
 
-#: src/dfa.c:1811
+#: src/dfa.c:1796
 #, fuzzy
 msgid "unbalanced ("
 msgstr "Ongebalanseerde ("
 
-#: src/dfa.c:1937
+#: src/dfa.c:1922
 #, fuzzy
 msgid "no syntax specified"
 msgstr "Geen sintaks gespesifiseer"
 
-#: src/dfa.c:1945
+#: src/dfa.c:1930
 #, fuzzy
 msgid "unbalanced )"
 msgstr "Ongebalanseerde )"

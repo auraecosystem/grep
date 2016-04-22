@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grep 2.23.7\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2016-04-11 08:26-0700\n"
+"POT-Creation-Date: 2016-04-21 21:37-0700\n"
 "PO-Revision-Date: 2016-03-30 16:53China Standard Time\n"
 "Last-Translator: Ji ZhengYu <zhengyuji@gmail.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
@@ -98,8 +98,7 @@ msgstr "%s: 选项'-W %s' 不允许带参数\n"
 msgid "%s: option '-W %s' requires an argument\n"
 msgstr "%s: 选项'-W %s' 必须带参数\n"
 
-#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34
-#: src/pcresearch.c:340
+#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34 src/pcresearch.c:340
 #, c-format
 msgid "memory exhausted"
 msgstr "内存耗尽"
@@ -404,41 +403,41 @@ msgstr "%s%s 参数'%s' 的后缀无效"
 msgid "%s%s argument '%s' too large"
 msgstr "%s%s 参数'%s' 过多"
 
-#: src/dfa.c:1005 src/dfa.c:1008 src/dfa.c:1027 src/dfa.c:1037 src/dfa.c:1049
-#: src/dfa.c:1076 src/dfa.c:1085 src/dfa.c:1088 src/dfa.c:1093 src/dfa.c:1114
-#: src/dfa.c:1117
+#: src/dfa.c:990 src/dfa.c:993 src/dfa.c:1012 src/dfa.c:1022 src/dfa.c:1034
+#: src/dfa.c:1061 src/dfa.c:1070 src/dfa.c:1073 src/dfa.c:1078 src/dfa.c:1099
+#: src/dfa.c:1102
 msgid "unbalanced ["
 msgstr "有未匹配的 ["
 
-#: src/dfa.c:1061
+#: src/dfa.c:1046
 msgid "invalid character class"
 msgstr "无效的字符类名"
 
-#: src/dfa.c:1183
+#: src/dfa.c:1168
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr "字符类的语法是 [[:space:]],而非 [:space:]"
 
-#: src/dfa.c:1245
+#: src/dfa.c:1230
 msgid "unfinished \\ escape"
 msgstr "未做好 \\ 转义"
 
-#: src/dfa.c:1392
+#: src/dfa.c:1377
 msgid "invalid content of \\{\\}"
 msgstr "\\{\\}中内容无效"
 
-#: src/dfa.c:1395
+#: src/dfa.c:1380
 msgid "regular expression too big"
 msgstr "正则表达式太长"
 
-#: src/dfa.c:1811
+#: src/dfa.c:1796
 msgid "unbalanced ("
 msgstr "有未匹配的 ("
 
-#: src/dfa.c:1937
+#: src/dfa.c:1922
 msgid "no syntax specified"
 msgstr "未指定语法"
 
-#: src/dfa.c:1945
+#: src/dfa.c:1930
 msgid "unbalanced )"
 msgstr "有未匹配的 )"
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grep-2.5.4-pre3\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2016-04-11 08:26-0700\n"
+"POT-Creation-Date: 2016-04-21 21:37-0700\n"
 "PO-Revision-Date: 2008-07-09 13:28+0300\n"
 "Last-Translator: Gintautas Miliauskas <gintas@akl.lt>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
@@ -102,8 +102,7 @@ msgstr "%s: parametras „-W %s“ nepriima argumento\n"
 msgid "%s: option '-W %s' requires an argument\n"
 msgstr "%s: parametrui „%s“ reikia argumento\n"
 
-#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34
-#: src/pcresearch.c:340
+#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34 src/pcresearch.c:340
 #, c-format
 msgid "memory exhausted"
 msgstr "baigėsi atmintis"
@@ -391,46 +390,46 @@ msgstr ""
 msgid "%s%s argument '%s' too large"
 msgstr ""
 
-#: src/dfa.c:1005 src/dfa.c:1008 src/dfa.c:1027 src/dfa.c:1037 src/dfa.c:1049
-#: src/dfa.c:1076 src/dfa.c:1085 src/dfa.c:1088 src/dfa.c:1093 src/dfa.c:1114
-#: src/dfa.c:1117
+#: src/dfa.c:990 src/dfa.c:993 src/dfa.c:1012 src/dfa.c:1022 src/dfa.c:1034
+#: src/dfa.c:1061 src/dfa.c:1070 src/dfa.c:1073 src/dfa.c:1078 src/dfa.c:1099
+#: src/dfa.c:1102
 #, fuzzy
 msgid "unbalanced ["
 msgstr "Nesubalansuotas ["
 
-#: src/dfa.c:1061
+#: src/dfa.c:1046
 msgid "invalid character class"
 msgstr ""
 
-#: src/dfa.c:1183
+#: src/dfa.c:1168
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr ""
 
-#: src/dfa.c:1245
+#: src/dfa.c:1230
 #, fuzzy
 msgid "unfinished \\ escape"
 msgstr "Nebaigta \\ kaitos seka"
 
-#: src/dfa.c:1392
+#: src/dfa.c:1377
 #, fuzzy
 msgid "invalid content of \\{\\}"
 msgstr "netaisyklingas maksimalus skaičius"
 
-#: src/dfa.c:1395
+#: src/dfa.c:1380
 msgid "regular expression too big"
 msgstr ""
 
-#: src/dfa.c:1811
+#: src/dfa.c:1796
 #, fuzzy
 msgid "unbalanced ("
 msgstr "Nesubalansuotas ("
 
-#: src/dfa.c:1937
+#: src/dfa.c:1922
 #, fuzzy
 msgid "no syntax specified"
 msgstr "Nenurodyta sintaksė"
 
-#: src/dfa.c:1945
+#: src/dfa.c:1930
 #, fuzzy
 msgid "unbalanced )"
 msgstr "Nesubalansuotas )"
@@ -779,20 +778,6 @@ msgstr ""
 #~ msgid "invalid zero-length file name"
 #~ msgstr "netaisyklingas konteksto ilgio argumentas"
 
-#~ msgid "PATTERN is an extended regular expression (ERE).\n"
-#~ msgstr "ŠABLONAS yra išplėstinė reguliarioji išraiška (ERE).\n"
-
-#, fuzzy
-#~ msgid "Invocation as 'egrep' is deprecated; use 'grep -E' instead.\n"
-#~ msgstr "Kvietimas pavadinimu „egrep“ nebenaudotinas, naudokite „grep -E“.\n"
-
-#~ msgid "PATTERN is a set of newline-separated fixed strings.\n"
-#~ msgstr "ŠABLONAS yra aibė simbolių sekų atskirose eilutėse.\n"
-
-#, fuzzy
-#~ msgid "Invocation as 'fgrep' is deprecated; use 'grep -F' instead.\n"
-#~ msgstr "Kvietimas pavadinimu „fgrep“ nebenaudotinas, naudokite „grep -F“.\n"
-
 #~ msgid "unfinished repeat count"
 #~ msgstr "nebaigtas pakartojimų skaičius"
 
@@ -801,6 +786,12 @@ msgstr ""
 
 #~ msgid "writing output"
 #~ msgstr "rašomas išvedimas"
+
+#~ msgid "PATTERN is an extended regular expression (ERE).\n"
+#~ msgstr "ŠABLONAS yra išplėstinė reguliarioji išraiška (ERE).\n"
+
+#~ msgid "PATTERN is a set of newline-separated fixed strings.\n"
+#~ msgstr "ŠABLONAS yra aibė simbolių sekų atskirose eilutėse.\n"
 
 #~ msgid ""
 #~ "\n"
@@ -880,6 +871,12 @@ msgstr ""
 #~ "skaičių\n"
 #~ "  -T, --initial-tab         lygiuoti tabuliatorius (jei reikia)\n"
 #~ "  -Z, --null                spausdinti 0 baitą po FAILO vardo\n"
+
+#~ msgid "Invocation as `egrep' is deprecated; use `grep -E' instead.\n"
+#~ msgstr "Kvietimas pavadinimu „egrep“ nebenaudotinas, naudokite „grep -E“.\n"
+
+#~ msgid "Invocation as `fgrep' is deprecated; use `grep -F' instead.\n"
+#~ msgstr "Kvietimas pavadinimu „fgrep“ nebenaudotinas, naudokite „grep -F“.\n"
 
 #~ msgid ""
 #~ "In GREP_COLORS=\"%s\", the \"%s\" capacity needs a value (\"=...\"); "

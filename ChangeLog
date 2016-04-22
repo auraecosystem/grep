@@ -1,3 +1,28 @@
+2016-04-21  Jim Meyering  <meyering@fb.com>
+
+	version 2.25
+	* NEWS: Record release date.
+
+2016-04-19  Paul Eggert  <eggert@cs.ucla.edu>
+
+	dfa: remove dependency on btowc
+	MirOS BSD btowc is a macro that (when GCC is being used) hardcodes
+	btowc (0x80) == WEOF regardless of locale, which contradicts
+	future POSIX in the C locale.  Instead of bothering to develop a
+	Gnulib workaround for the btowc incompatibility, use mbrtowc,
+	which we are using elsewhere and fixing anyway, and are caching so
+	it is fast here.  Problem reported by Nelson H. F. Beebe via Jim
+	Meyering in: http://bugs.gnu.org/23269#14
+	* bootstrap.conf (gnulib_modules): Remove btowc.
+	* src/dfa.c (struct dfa): Remove mbrtowc_cache member, replacing with ...
+	(mbrtowc_cache): ... this new static var.  All uses changed.
+	(dfambcache): Remove; now done by setsyntax.  Call removed.
+	(is_valid_unibyte_character): Remove.
+	(IS_WORD_CONSTITUENT): Remove this macro, replacing it with ...
+	(unibyte_word_constituent): ... this new function.  It uses
+	mbrtowc_cache rather than btowc.
+	(dfasyntax): Initialize mbrtowc_cache before using it.
+
 2016-04-10  Paul Eggert  <eggert@cs.ucla.edu>
 
 	grep: minor doc tweaks inspired by Debian

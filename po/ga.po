@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grep 2.8\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2016-04-11 08:26-0700\n"
+"POT-Creation-Date: 2016-04-21 21:37-0700\n"
 "PO-Revision-Date: 2011-05-18 15:48-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -98,8 +98,7 @@ msgstr "%s: ní cheadaítear argóint i ndiaidh rogha '-W %s'\n"
 msgid "%s: option '-W %s' requires an argument\n"
 msgstr "%s: tá argóint de dhíth i ndiaidh rogha '-W %s'\n"
 
-#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34
-#: src/pcresearch.c:340
+#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34 src/pcresearch.c:340
 #, c-format
 msgid "memory exhausted"
 msgstr "cuimhne ídithe"
@@ -404,44 +403,44 @@ msgstr "iarmhír neamhbhailí tar éis argóint %s%s `%s'"
 msgid "%s%s argument '%s' too large"
 msgstr "argóint %s%s rómhór: `%s'"
 
-#: src/dfa.c:1005 src/dfa.c:1008 src/dfa.c:1027 src/dfa.c:1037 src/dfa.c:1049
-#: src/dfa.c:1076 src/dfa.c:1085 src/dfa.c:1088 src/dfa.c:1093 src/dfa.c:1114
-#: src/dfa.c:1117
+#: src/dfa.c:990 src/dfa.c:993 src/dfa.c:1012 src/dfa.c:1022 src/dfa.c:1034
+#: src/dfa.c:1061 src/dfa.c:1070 src/dfa.c:1073 src/dfa.c:1078 src/dfa.c:1099
+#: src/dfa.c:1102
 msgid "unbalanced ["
 msgstr "[ corr"
 
-#: src/dfa.c:1061
+#: src/dfa.c:1046
 msgid "invalid character class"
 msgstr "Aicme charachtar neamhbhailí"
 
-#: src/dfa.c:1183
+#: src/dfa.c:1168
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr ""
 "Is é [[:space:]] an chomhréir cheart in aicme carachtar, in ionad [:space:]"
 
-#: src/dfa.c:1245
+#: src/dfa.c:1230
 msgid "unfinished \\ escape"
 msgstr "Seicheamh éalúcháin \\ gan chríochnú"
 
-#: src/dfa.c:1392
+#: src/dfa.c:1377
 #, fuzzy
 msgid "invalid content of \\{\\}"
 msgstr "Ábhar neamhbhailí idir \\{\\}"
 
-#: src/dfa.c:1395
+#: src/dfa.c:1380
 #, fuzzy
 msgid "regular expression too big"
 msgstr "Slonn ionadaíochta rómhór"
 
-#: src/dfa.c:1811
+#: src/dfa.c:1796
 msgid "unbalanced ("
 msgstr "( corr"
 
-#: src/dfa.c:1937
+#: src/dfa.c:1922
 msgid "no syntax specified"
 msgstr "Níor sonraíodh aon chomhréir"
 
-#: src/dfa.c:1945
+#: src/dfa.c:1930
 msgid "unbalanced )"
 msgstr ") corr"
 
@@ -811,9 +810,9 @@ msgid "exceeded PCRE's backtracking limit"
 msgstr ""
 
 #: src/pcresearch.c:355
-#, fuzzy, c-format
+#, c-format
 msgid "internal PCRE error: %d"
-msgstr "earráid sa scríobh"
+msgstr ""
 
 #, fuzzy
 #~ msgid ""
@@ -832,23 +831,6 @@ msgstr "earráid sa scríobh"
 #~ msgid "GNU Grep home page: <%s>\n"
 #~ msgstr "Leathanach baile GNU Grep: <%s>\n"
 
-#~ msgid "PATTERN is an extended regular expression (ERE).\n"
-#~ msgstr "Is slonn ionadaíochta feabhsaithe (ERE) é PATRÚN.\n"
-
-#, fuzzy
-#~ msgid "Invocation as 'egrep' is deprecated; use 'grep -E' instead.\n"
-#~ msgstr "Tá an t-ordú `egrep' imithe i léig; úsáid `grep -E' ina ionad.\n"
-
-#~ msgid "PATTERN is a set of newline-separated fixed strings.\n"
-#~ msgstr "Is tacar teaghrán é PATRÚN, scartha le línte nua.\n"
-
-#, fuzzy
-#~ msgid "Invocation as 'fgrep' is deprecated; use 'grep -F' instead.\n"
-#~ msgstr "Tá an t-ordú `fgrep' imithe i léig; úsáid `grep -F' ina ionad.\n"
-
-#~ msgid "%s can only use the %s pattern syntax"
-#~ msgstr "Ní féidir le %s ach comhréir phatrúin %s a úsáid"
-
 #~ msgid "unfinished repeat count"
 #~ msgstr "Tá líon na hathráite neamhiomlán"
 
@@ -856,8 +838,23 @@ msgstr "earráid sa scríobh"
 #~ msgid "malformed repeat count"
 #~ msgstr "Tá líon na hathráite míchumtha"
 
+#~ msgid "PATTERN is an extended regular expression (ERE).\n"
+#~ msgstr "Is slonn ionadaíochta feabhsaithe (ERE) é PATRÚN.\n"
+
+#~ msgid "Invocation as `egrep' is deprecated; use `grep -E' instead.\n"
+#~ msgstr "Tá an t-ordú `egrep' imithe i léig; úsáid `grep -E' ina ionad.\n"
+
+#~ msgid "PATTERN is a set of newline-separated fixed strings.\n"
+#~ msgstr "Is tacar teaghrán é PATRÚN, scartha le línte nua.\n"
+
+#~ msgid "Invocation as `fgrep' is deprecated; use `grep -F' instead.\n"
+#~ msgstr "Tá an t-ordú `fgrep' imithe i léig; úsáid `grep -F' ina ionad.\n"
+
 #~ msgid "writing output"
 #~ msgstr "aschur á scríobh"
+
+#~ msgid "%s can only use the %s pattern syntax"
+#~ msgstr "Ní féidir le %s ach comhréir phatrúin %s a úsáid"
 
 #~ msgid ""
 #~ "in GREP_COLORS=\"%s\", the \"%s\" capacity needs a value (\"=...\"); "
