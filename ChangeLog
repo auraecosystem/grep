@@ -1,4 +1,142 @@
+2016-04-21  Jim Meyering  <meyering@fb.com>
+
+	version 2.25
+	* NEWS: Record release date.
+
+2016-04-19  Paul Eggert  <eggert@cs.ucla.edu>
+
+	dfa: remove dependency on btowc
+	MirOS BSD btowc is a macro that (when GCC is being used) hardcodes
+	btowc (0x80) == WEOF regardless of locale, which contradicts
+	future POSIX in the C locale.  Instead of bothering to develop a
+	Gnulib workaround for the btowc incompatibility, use mbrtowc,
+	which we are using elsewhere and fixing anyway, and are caching so
+	it is fast here.  Problem reported by Nelson H. F. Beebe via Jim
+	Meyering in: http://bugs.gnu.org/23269#14
+	* bootstrap.conf (gnulib_modules): Remove btowc.
+	* src/dfa.c (struct dfa): Remove mbrtowc_cache member, replacing with ...
+	(mbrtowc_cache): ... this new static var.  All uses changed.
+	(dfambcache): Remove; now done by setsyntax.  Call removed.
+	(is_valid_unibyte_character): Remove.
+	(IS_WORD_CONSTITUENT): Remove this macro, replacing it with ...
+	(unibyte_word_constituent): ... this new function.  It uses
+	mbrtowc_cache rather than btowc.
+	(dfasyntax): Initialize mbrtowc_cache before using it.
+
+2016-04-10  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: minor doc tweaks inspired by Debian
+	Problem reported by Santiago Ruano Rincón in: http://bugs.gnu.org/22911
+	* doc/grep.in.1:
+	* doc/grep.texi (Matching Control, grep Programs)
+	(Regular Expressions):
+	Document -e, -f, and PCRE more carefully.
+
+2016-04-10  Jim Meyering  <meyering@fb.com>
+
+	maint: remove unused mbtoupper function
+	* src/searchutils.c (mbtoupper): Remove now-unused function.
+	Also remove inclusion of <assert.h>, since this change removed
+	the final use of assert.
+	* src/search.h (mbtoupper): Remove declaration.
+
+2016-04-10  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: in C locale, all bytes are valid characters
+	This works around glibc bug 19932:
+	https://sourceware.org/bugzilla/show_bug.cgi?id=19932
+	The actual bug fix was the update to the current version of Gnulib.
+	grep problem reported by Björn Jacke in: http://bugs.gnu.org/23234
+	* NEWS: Mention this.
+	* doc/grep.texi (File and Directory Selection): Crossref to LC_*
+	section.  Suggest why -a or LC_ALL=C might be useful.
+	(Environment Variables): Mention 'locale -a'.
+	Say that LC_CTYPE also specifies encoding, and that every
+	byte is a valid character in the C or POSIX locale.
+	* tests/c-locale: New test.
+	* tests/Makefile.am (TESTS): Add it.
+
+	build: update gnulib submodule to latest
+
+2016-04-05  Paul Eggert  <eggert@cs.ucla.edu>
+
+	Give another example of binary file processing
+	Problem reported by Shlomi Fish
+	* doc/grep.texi (File and Directory Selection):
+	Document that 'q$' might match 'q' followed by a NUL
+	if --binary-files=binary is in effect.
+
+2016-04-03  Paul Eggert  <eggert@cs.ucla.edu>
+
+	tests: test egrep/fgrep help only if our grep
+	Problem reported by Christian Weisgerber in: http://bugs.gnu.org/23146
+	* tests/Makefile.am (TESTS_ENVIRONMENT):
+	Test egrep and fgrep only if they use our grep.
+
+2016-03-29  Jim Meyering  <meyering@fb.com>
+
+	tests: remove spurious test of egrep
+	* tests/reversed-range-endpoints: Do not test egrep here.
+	There is already a test of grep -E.
+	Prompted by http://bugs.gnu.org/23146
+
+2016-03-23  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: -Pz no longer misdiagnoses [^a]
+	Problem reported by Michael Jess.
+	* NEWS: Document this.
+	* src/pcresearch.c (Pcompile): Do not diagnose [^ when [ is unescaped.
+	* tests/pcre: Test for the bug.
+
+2016-03-22  Jim Meyering  <meyering@fb.com>
+
+	maint: move new 'Improvements' blurb into proper section
+	* NEWS (Improvements): Move this new section from within the block
+	for the already-released 2.24 into the proper "next-release" block.
+	Also, retain the 2-blank-line separator between blocks.
+
+2016-03-18  Jim Meyering  <meyering@fb.com>
+
+	maint: avoid spurious "binary file ... matches" in generated THANKS
+	* Makefile.am (THANKS): Don't apply grep to a stream containing
+	NUL bytes.  Sync this rule from the one in coreutils: it was missing
+	some improvements.
+	Reported by Bailes Magio in http://bugs.gnu.org/22899
+
+2016-03-18  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: -oz now outputs null bytes, not newlines
+	* NEWS: Document this.
+	* doc/grep.texi (Other Options): Clarify that -z affects output
+	as well as input data.
+	* src/grep.c (print_line_middle): Output eolbyte, not newline, if -o.
+	* tests/null-byte: Test -o too.
+	* tests/pcre-context: Adjust test to match new behavior.
+
+2016-03-17  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: use errno consistently in write diagnostics
+	Feature request and initial version reported by Assaf Gordon in:
+	http://bugs.gnu.org/23031
+	* NEWS: Document this.
+	* src/grep.c: Include <stdarg.h>.
+	(stdout_errno): New static var.
+	(write_error_seen): Remove; superseded by stdout_errno.
+	All uses changed.
+	(putchar_errno, fputs_errno, printf_errno, fwrite_errno)
+	(fflush_errno): New static functions.
+	(print_filename, print_sep, print_offset, print_line_head)
+	(print_line_middle, print_line_tail, prline, prtext, grep)
+	(grepdesc): Use them.
+	* tests/write-error-msg: New file.
+	* tests/Makefile.am (TESTS): Add it.
+
 2016-03-10  Jim Meyering  <meyering@fb.com>
+
+	maint: post-release administrivia
+	* NEWS: Add header line for next release.
+	* .prev-version: Record previous version.
+	* cfg.mk (old_NEWS_hash): Auto-update.
 
 	version 2.24
 	* NEWS: Record release date.

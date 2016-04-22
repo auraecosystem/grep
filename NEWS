@@ -1,5 +1,28 @@
 GNU grep NEWS                                    -*- outline -*-
 
+* Noteworthy changes in release 2.25 (2016-04-21) [stable]
+
+** Bug fixes
+
+  In the C or POSIX locale, grep now treats all bytes as valid
+  characters even if the C runtime library says otherwise.  The
+  revised behavior is more compatible with the original intent of
+  POSIX, and the next release of POSIX will likely make this official.
+  [bug introduced in grep-2.23]
+
+  grep -Pz no longer mistakenly diagnoses patterns like [^a] that use
+  negated character classes. [bug introduced in grep-2.24]
+
+  grep -oz now uses null bytes, not newlines, to terminate output lines.
+  [bug introduced in grep-2.5]
+
+** Improvements
+
+  grep now outputs details more consistently when reporting a write error.
+  E.g., "grep: write error: No space left on device" rather than just
+  "grep: write error".
+
+
 * Noteworthy changes in release 2.24 (2016-03-10) [stable]
 
 ** Bug fixes
