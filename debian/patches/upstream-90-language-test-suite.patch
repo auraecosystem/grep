@@ -13,11 +13,11 @@ Date:   Fri May 13 08:43:53 2016 -0700
     Also select TMPDIR as we do for coreutils tests.
     Reported by Benno Schulenberg in http://bugs.gnu.org/23527.
 
-diff --git a/tests/Makefile.am b/tests/Makefile.am
-index 7effa57..38b0e32 100644
---- a/tests/Makefile.am
-+++ b/tests/Makefile.am
-@@ -151,6 +151,7 @@ EXTRA_DIST =					\
+Index: grep/tests/Makefile.am
+===================================================================
+--- grep.orig/tests/Makefile.am
++++ grep/tests/Makefile.am
+@@ -122,6 +122,7 @@ EXTRA_DIST =					\
    $(TESTS)					\
    bre.awk					\
    bre.tests					\
@@ -25,7 +25,7 @@ index 7effa57..38b0e32 100644
    ere.awk					\
    ere.tests					\
    init.cfg					\
-@@ -166,7 +167,9 @@ EXTRA_DIST =					\
+@@ -137,7 +138,9 @@ EXTRA_DIST =					\
  MALLOC_PERTURB_ = 1
  
  TESTS_ENVIRONMENT =				\
@@ -36,11 +36,10 @@ index 7effa57..38b0e32 100644
    TMPDIR=$$tmp__; export TMPDIR;		\
  						\
    if test -n "$$BASH_VERSION" || (eval "export v=x") 2>/dev/null; then \
-diff --git a/tests/envvar-check b/tests/envvar-check
-new file mode 100644
-index 0000000..16d7069
+Index: grep/tests/envvar-check
+===================================================================
 --- /dev/null
-+++ b/tests/envvar-check
++++ grep/tests/envvar-check
 @@ -0,0 +1,63 @@
 +# -*- sh -*-
 +# Check environment variables for sane values while testing.
