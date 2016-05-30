@@ -1,3 +1,13 @@
+grep (2.25-2~1) UNRELEASED; urgency=medium
+
+  * Add debian/patches/upstream-90-language-test-suite.patch
+  * Changes to enable first autopkgtest test:
+    - debian/control: Add Testsuite: stanza
+    - debian/rules: include cdbs patchsys-quilt.
+    - debian/tests/upstream-test-suite: try building binary packages.
+
+ -- Santiago Ruano Rincón <santiago@debian.org>  Sun, 29 May 2016 23:46:07 +0200
+
 grep (2.25-1) unstable; urgency=medium
 
   * New upstream release.
