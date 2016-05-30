@@ -1,2 +1,2 @@
 Tests: upstream-test-suite
-Depends: fakeroot
+Depends: fakeroot, libpcre3
