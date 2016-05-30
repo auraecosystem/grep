@@ -40,11 +40,7 @@ DEB_CONFIGURE_EXTRA_FLAGS += --exec-prefix=/
 # problems with expensive checks, e.g. long-pattern-perf, on other
 # architectures such as s390x, ppc64el and hurd-i386.
 
-ifeq ($(DEB_HOST_ARCH),$(filter $(DEB_HOST_ARCH),amd64 i386))
-  DEB_MAKE_CHECK_TARGET = check-expensive
-else
-  DEB_MAKE_CHECK_TARGET = check
-endif
+DEB_MAKE_CHECK_TARGET = check
 
 include /usr/share/cdbs/1/rules/upstream-tarball.mk
 include /usr/share/cdbs/1/rules/patchsys-quilt.mk
