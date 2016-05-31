@@ -1,3 +1,12 @@
+grep (2.25-3) unstable; urgency=medium
+
+  * Add Build-Deps on quilt to make lintian happy
+  * Bump Standards-Version to 3.9.8
+  * Use Vcs-* secure links
+  * Bump debian/compat to 9
+
+ -- Santiago Ruano Rincón <santiago@debian.org>  Tue, 31 May 2016 19:41:32 +0200
+
 grep (2.25-2) unstable; urgency=medium
 
   * Add debian/patches/upstream-90-language-test-suite.patch
