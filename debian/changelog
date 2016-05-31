@@ -1,12 +1,14 @@
-grep (2.25-2~1) UNRELEASED; urgency=medium
+grep (2.25-2) unstable; urgency=medium
 
   * Add debian/patches/upstream-90-language-test-suite.patch
   * Changes to enable first autopkgtest test:
     - debian/control: Add Testsuite: stanza
-    - debian/rules: include cdbs patchsys-quilt.
-    - debian/tests/upstream-test-suite: try building binary packages.
+    - debian/rules: Include cdbs patchsys-quilt.
+      Disable check-expensive. At least for the moment, let's use
+      non-expensive checks.
+    - debian/tests/upstream-test-suite: Try building binary packages.
 
- -- Santiago Ruano Rincón <santiago@debian.org>  Sun, 29 May 2016 23:46:07 +0200
+ -- Santiago Ruano Rincón <santiago@debian.org>  Tue, 31 May 2016 16:55:00 +0200
 
 grep (2.25-1) unstable; urgency=medium
 
