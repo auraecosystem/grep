@@ -3,7 +3,7 @@ Section: utils
 Priority: required
 Maintainer: Anibal Monsalve Salazar <anibal@debian.org>
 Uploaders: Santiago Ruano Rincón <santiago@debian.org>
-Standards-Version: 3.9.6
+Standards-Version: 3.9.8
 Build-Depends: autotools-dev, cdbs, debhelper (>= 7), dh-autoreconf, gettext, libpcre3-dev (>= 1:8.31-3), quilt, texinfo
 Homepage: http://www.gnu.org/software/grep/
 Vcs-Git: git://git.debian.org/git/collab-maint/grep.git
