@@ -1,0 +1,12 @@
+diff --git a/tests/Makefile.am b/tests/Makefile.am
+index 45908ce..c06725f 100644
+--- a/tests/Makefile.am
++++ b/tests/Makefile.am
+@@ -213,7 +213,6 @@ TESTS_ENVIRONMENT =				\
+   PACKAGE_VERSION=$(PACKAGE_VERSION)		\
+   PERL='$(PERL)'				\
+   SHELL='$(SHELL)'				\
+-  PATH='$(abs_top_builddir)/src$(PATH_SEPARATOR)'"$$PATH" \
+   ; 9>&2
+ 
+ LOG_COMPILER = $(SHELL)
