@@ -1,17 +1,8 @@
 #!/bin/sh
 set -e
 
-export LOCPATH=/tmp/locale
-export LOCALEGENTESTS=debian/tests/locale.gen
-
-sed -e s,LOCALEGEN=/etc/locale.gen,LOCALEGEN="$LOCALEGENTESTS",g \
-    -e s,LOCALES=/usr/share/i18n/locales,LOCALES="$LOCPATH"/,g  /usr/sbin/locale-gen \
-    > ./debian/tests/locale-gen
-
-sh ./debian/tests/locale-gen
-
 dpkg-source --before-build `pwd`
-patch -p1 < debian/tests/patches/01-test-Makefile-remove-PATH.patch
+dpkg-buildpackage -rfakeroot --target=pre-build
 dpkg-buildpackage -rfakeroot --target=common-configure-arch 2>/dev/null
 make -C lib
 make -C tests check-am
