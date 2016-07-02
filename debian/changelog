@@ -1,9 +1,9 @@
-grep (2.25-5~1) UNRELEASED; urgency=medium
+grep (2.25-5) unstable; urgency=medium
 
-  * Add debian/tests/upstream-test-suite-no-pcre3: run tests where pcre3 is
-    unavailable.
+  * Add debian/tests/upstream-test-suite-no-pcre3: run tests also under
+    unavailable pcre3.
 
- -- Santiago Ruano Rincón <santiago@debian.org>  Sat, 02 Jul 2016 12:01:41 +0200
+ -- Santiago Ruano Rincón <santiago@debian.org>  Sat, 02 Jul 2016 14:59:28 +0200
 
 grep (2.25-4) unstable; urgency=medium
 
