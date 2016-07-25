@@ -28,14 +28,12 @@ Subject: [PATCH 1/2] tests: add coreutils' perl-driven test framework
  create mode 100644 tests/CuTmpdir.pm
  create mode 100644 tests/no-perl
 
-diff --git a/configure.ac b/configure.ac
-index 4de0f39..afb8cd2 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -94,6 +94,13 @@ AC_TYPE_SIZE_T
+@@ -94,6 +94,13 @@
  AC_C_CONST
  gl_INIT
-
+ 
 +# The test suite needs to know if we have a working perl.
 +# FIXME: this is suboptimal.  Ideally, we would be able to call gl_PERL
 +# with an ACTION-IF-NOT-FOUND argument ...
@@ -46,9 +44,6 @@ index 4de0f39..afb8cd2 100644
  AC_ARG_ENABLE([gcc-warnings],
    [AS_HELP_STRING([--enable-gcc-warnings],
                    [turn on lots of GCC warnings (for developers)])],
-diff --git a/tests/Coreutils.pm b/tests/Coreutils.pm
-new file mode 100644
-index 0000000..bd2088f
 --- /dev/null
 +++ b/tests/Coreutils.pm
 @@ -0,0 +1,620 @@
@@ -672,9 +667,6 @@ index 0000000..bd2088f
 +
 +## package return
 +1;
-diff --git a/tests/CuSkip.pm b/tests/CuSkip.pm
-new file mode 100644
-index 0000000..a25688a
 --- /dev/null
 +++ b/tests/CuSkip.pm
 @@ -0,0 +1,39 @@
@@ -717,9 +709,6 @@ index 0000000..a25688a
 +}
 +
 +1;
-diff --git a/tests/CuTmpdir.pm b/tests/CuTmpdir.pm
-new file mode 100644
-index 0000000..fd65556
 --- /dev/null
 +++ b/tests/CuTmpdir.pm
 @@ -0,0 +1,111 @@
@@ -834,14 +823,12 @@ index 0000000..fd65556
 +}
 +
 +1;
-diff --git a/tests/Makefile.am b/tests/Makefile.am
-index b29328b..03cfdbb 100644
 --- a/tests/Makefile.am
 +++ b/tests/Makefile.am
 @@ -14,6 +14,26 @@
  # You should have received a copy of the GNU General Public License
  # along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
+ 
 +TEST_EXTENSIONS = .sh .pl
 +
 +if HAVE_PERL
@@ -865,7 +852,7 @@ index b29328b..03cfdbb 100644
  check_PROGRAMS = get-mb-cur-max dfa-match-aux
  AM_CPPFLAGS = -I$(top_builddir)/lib -I$(top_srcdir)/lib \
    -I$(top_srcdir)/src
-@@ -152,6 +172,9 @@ EXTRA_DIST =					\
+@@ -150,6 +170,9 @@
    $(TESTS)					\
    bre.awk					\
    bre.tests					\
@@ -875,7 +862,7 @@ index b29328b..03cfdbb 100644
    envvar-check					\
    ere.awk					\
    ere.tests					\
-@@ -159,6 +182,7 @@ EXTRA_DIST =					\
+@@ -157,6 +180,7 @@
    init.sh					\
    khadafy.lines					\
    khadafy.regexp				\
@@ -883,9 +870,6 @@ index b29328b..03cfdbb 100644
    spencer1.awk					\
    spencer1.tests				\
    spencer1-locale.awk
-diff --git a/tests/no-perl b/tests/no-perl
-new file mode 100644
-index 0000000..956a826
 --- /dev/null
 +++ b/tests/no-perl
 @@ -0,0 +1,6 @@
@@ -895,7 +879,3 @@ index 0000000..956a826
 +# to the original stderr (usually, the user's terminal).
 +echo "test skipped: no usable version of Perl found" >&9
 +exit 77
--- 
-2.8.0-rc2
-
-
