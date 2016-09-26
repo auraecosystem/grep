@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grep-2.23.7\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2016-04-21 21:37-0700\n"
+"POT-Creation-Date: 2016-09-25 16:36-0700\n"
 "PO-Revision-Date: 2016-03-15 12:10+0100\n"
 "Last-Translator: Milo Casagrande <milo@milo.name>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
@@ -17,28 +17,67 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Bugs: Report translation errors to the Language-Team address.\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
 "X-Generator: Poedit 1.8.7\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: lib/argmatch.c:133
+#: lib/argmatch.c:134
 #, c-format
 msgid "invalid argument %s for %s"
 msgstr "argomento %s per %s non valido"
 
-#: lib/argmatch.c:134
+#: lib/argmatch.c:135
 #, c-format
 msgid "ambiguous argument %s for %s"
 msgstr "argomento %s ambiguo per %s"
 
-#: lib/argmatch.c:153
+#: lib/argmatch.c:154
 msgid "Valid arguments are:"
 msgstr "Gli argomenti validi sono:"
 
-#: lib/closeout.c:112 src/grep.c:1238
+#: lib/closeout.c:112 src/grep.c:1312
 #, c-format
 msgid "write error"
 msgstr "errore di scrittura"
+
+#: lib/dfa.c:948 lib/dfa.c:951 lib/dfa.c:970 lib/dfa.c:980 lib/dfa.c:993
+#: lib/dfa.c:1021 lib/dfa.c:1030 lib/dfa.c:1033 lib/dfa.c:1038 lib/dfa.c:1060
+#: lib/dfa.c:1063
+msgid "unbalanced ["
+msgstr "[ non bilanciata"
+
+#: lib/dfa.c:1006
+msgid "invalid character class"
+msgstr "Classe del carattere non valido"
+
+#: lib/dfa.c:1129
+msgid "character class syntax is [[:space:]], not [:space:]"
+msgstr "La sintassi per la classe di caratteri è [[:space:]], non [:space:]"
+
+#: lib/dfa.c:1198
+msgid "unfinished \\ escape"
+msgstr "Escape \\ incompleto"
+
+#: lib/dfa.c:1359
+msgid "invalid content of \\{\\}"
+msgstr "Contenuto di \\{\\} non valido"
+
+#: lib/dfa.c:1362
+msgid "regular expression too big"
+msgstr "Espressione regolare troppo grande"
+
+#: lib/dfa.c:1777
+msgid "unbalanced ("
+msgstr "( non bilanciata"
+
+#: lib/dfa.c:1904
+msgid "no syntax specified"
+msgstr "Nessuna sintassi specificata"
+
+#: lib/dfa.c:1912
+msgid "unbalanced )"
+msgstr ") non bilanciata"
 
 #: lib/error.c:191
 msgid "Unknown system error"
@@ -412,111 +451,73 @@ msgstr "il suffisso nell'argomento \"%3$s\" di %1$s%2$s non è valido"
 msgid "%s%s argument '%s' too large"
 msgstr "l'argomento \"%3$s\" di %1$s%2$s è troppo grande"
 
-#: src/dfa.c:990 src/dfa.c:993 src/dfa.c:1012 src/dfa.c:1022 src/dfa.c:1034
-#: src/dfa.c:1061 src/dfa.c:1070 src/dfa.c:1073 src/dfa.c:1078 src/dfa.c:1099
-#: src/dfa.c:1102
-msgid "unbalanced ["
-msgstr "[ non bilanciata"
-
-#: src/dfa.c:1046
-msgid "invalid character class"
-msgstr "Classe del carattere non valido"
-
-#: src/dfa.c:1168
-msgid "character class syntax is [[:space:]], not [:space:]"
-msgstr "La sintassi per la classe di caratteri è [[:space:]], non [:space:]"
-
-#: src/dfa.c:1230
-msgid "unfinished \\ escape"
-msgstr "Escape \\ incompleto"
-
-#: src/dfa.c:1377
-msgid "invalid content of \\{\\}"
-msgstr "Contenuto di \\{\\} non valido"
-
-#: src/dfa.c:1380
-msgid "regular expression too big"
-msgstr "Espressione regolare troppo grande"
-
-#: src/dfa.c:1796
-msgid "unbalanced ("
-msgstr "( non bilanciata"
-
-#: src/dfa.c:1922
-msgid "no syntax specified"
-msgstr "Nessuna sintassi specificata"
-
-#: src/dfa.c:1930
-msgid "unbalanced )"
-msgstr ") non bilanciata"
-
 #. This is a proper name. See the gettext manual, section Names.
-#: src/grep.c:58
+#: src/grep.c:57
 msgid "Mike Haertel"
 msgstr "Mike Haertel"
 
-#: src/grep.c:59
+#: src/grep.c:58
 msgid "others, see <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
 msgstr "altri, consultare <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
 
-#: src/grep.c:689
+#: src/grep.c:767
 msgid "invalid context length argument"
 msgstr "argomento della lunghezza del contesto non valido"
 
-#: src/grep.c:753
+#: src/grep.c:831
 #, c-format
 msgid "input is too large to count"
 msgstr "l'input è troppo grande per essere contato"
 
-#: src/grep.c:795
+#: src/grep.c:863
 msgid "lseek failed"
 msgstr "lseek non riuscita"
 
-#: src/grep.c:1539
+#: src/grep.c:1611
 #, c-format
 msgid "Binary file %s matches\n"
 msgstr "Il file binario %s corrisponde\n"
 
-#: src/grep.c:1588
+#: src/grep.c:1659
 #, c-format
 msgid "warning: %s: %s"
 msgstr "attenzione: %s: %s"
 
-#: src/grep.c:1589
+#: src/grep.c:1660
 msgid "recursive directory loop"
 msgstr "ciclo ricorsivo di directory"
 
-#: src/grep.c:1758
+#: src/grep.c:1825
 #, c-format
 msgid "input file %s is also the output"
 msgstr "il file di input %s è anche l'output"
 
-#: src/grep.c:1820
+#: src/grep.c:1882
 msgid "(standard input)"
 msgstr "(standard input)"
 
-#: src/grep.c:1836 src/grep.c:1843
+#: src/grep.c:1898 src/grep.c:1905
 #, c-format
 msgid "Usage: %s [OPTION]... PATTERN [FILE]...\n"
 msgstr "Uso: %s [OPZIONE]... MODELLO [FILE]...\n"
 
-#: src/grep.c:1838
+#: src/grep.c:1900
 #, c-format
 msgid "Try '%s --help' for more information.\n"
 msgstr "Usare \"%s --help\" per ulteriori informazioni.\n"
 
-#: src/grep.c:1844
+#: src/grep.c:1906
 #, c-format
 msgid "Search for PATTERN in each FILE or standard input.\n"
 msgstr "Cerca il MODELLO in ogni FILE o nello standard input.\n"
 
-#: src/grep.c:1845
+#: src/grep.c:1907
 #, c-format
 msgid "PATTERN is, by default, a basic regular expression (BRE).\n"
 msgstr ""
 "MODELLO è, in modo predefinito, un'espressione regolare di base (BRE).\n"
 
-#: src/grep.c:1846
+#: src/grep.c:1908
 #, c-format
 msgid ""
 "Example: %s -i 'hello world' menu.h main.c\n"
@@ -527,7 +528,7 @@ msgstr ""
 "\n"
 "Selezione e interpretazione delle regexp:\n"
 
-#: src/grep.c:1850
+#: src/grep.c:1912
 #, c-format
 msgid ""
 "  -E, --extended-regexp     PATTERN is an extended regular expression (ERE)\n"
@@ -543,7 +544,7 @@ msgstr ""
 "(BRE)\n"
 "  -P, --perl-regexp         MODELLO è un'espressione regolare Perl\n"
 
-#: src/grep.c:1856
+#: src/grep.c:1918
 #, c-format
 msgid ""
 "  -e, --regexp=PATTERN      use PATTERN for matching\n"
@@ -564,7 +565,7 @@ msgstr ""
 "che\n"
 "                            newline\n"
 
-#: src/grep.c:1863
+#: src/grep.c:1925
 #, c-format
 msgid ""
 "\n"
@@ -581,7 +582,7 @@ msgstr ""
 "  -V, --version             Stampa la versione ed esce\n"
 "      --help                Visualizza questo aiuto ed esce\n"
 
-#: src/grep.c:1870
+#: src/grep.c:1932
 #, c-format
 msgid ""
 "\n"
@@ -607,7 +608,7 @@ msgstr ""
 "      --label=ETICH         Usa ETICH come nome del file per lo standard "
 "input\n"
 
-#: src/grep.c:1881
+#: src/grep.c:1943
 #, c-format
 msgid ""
 "  -o, --only-matching       show only the part of a line matching PATTERN\n"
@@ -625,7 +626,7 @@ msgstr ""
 "                            \\\"text\\\" oppure \\\"without-match\\\"\n"
 "  -a, --text                Equivale a --binary-files=text\n"
 
-#: src/grep.c:1888
+#: src/grep.c:1950
 #, c-format
 msgid ""
 "  -I                        equivalent to --binary-files=without-match\n"
@@ -646,7 +647,7 @@ msgstr ""
 "                            Simile al precedente, ma segue i collegamenti\n"
 "                            simbolici\n"
 
-#: src/grep.c:1897
+#: src/grep.c:1959
 #, c-format
 msgid ""
 "      --include=FILE_PATTERN  search only files that match FILE_PATTERN\n"
@@ -661,7 +662,7 @@ msgstr ""
 "      --exclude-from=FILE   Salta i file corrispondenti ai modelli nel FILE\n"
 "      --exclude-dir=MODELLO Salta le directory corrispondenti al MODELLO\n"
 
-#: src/grep.c:1904
+#: src/grep.c:1966
 #, c-format
 msgid ""
 "  -L, --files-without-match  print only names of FILEs containing no match\n"
@@ -680,7 +681,7 @@ msgstr ""
 "  -T, --initial-tab         Allinea le tabulazioni (se necessario)\n"
 "  -Z, --null                Stampa il byte 0 dopo ogni nome di FILE\n"
 
-#: src/grep.c:1910
+#: src/grep.c:1972
 #, c-format
 msgid ""
 "\n"
@@ -695,7 +696,7 @@ msgstr ""
 "  -A, --after-context=NUM   Stampa NUM righe di contesto seguente\n"
 "  -C, --context=NUM         Stampa NUM righe di contesto dell'output\n"
 
-#: src/grep.c:1917
+#: src/grep.c:1979
 #, c-format
 msgid ""
 "  -NUM                      same as --context=NUM\n"
@@ -720,7 +721,7 @@ msgstr ""
 "                            (MSDOS/Windows)\n"
 "\n"
 
-#: src/grep.c:1926
+#: src/grep.c:1988
 #, c-format
 msgid ""
 "'egrep' means 'grep -E'.  'fgrep' means 'grep -F'.\n"
@@ -729,7 +730,7 @@ msgstr ""
 "\"egrep\" significa \"grep -E\", \"fgrep\" significa \"grep -F\".\n"
 "L'invocazione diretta come \"egrep\" o \"fgrep\" è deprecata.\n"
 
-#: src/grep.c:1929
+#: src/grep.c:1991
 #, c-format
 msgid ""
 "When FILE is -, read standard input.  With no FILE, read . if a command-"
@@ -747,32 +748,32 @@ msgstr ""
 "stato\n"
 "è 2.\n"
 
-#: src/grep.c:1996
+#: src/grep.c:2058
 #, c-format
 msgid "conflicting matchers specified"
 msgstr "specificate corrispondenze in conflitto"
 
-#: src/grep.c:2007
+#: src/grep.c:2069
 #, c-format
 msgid "invalid matcher %s"
 msgstr "corrispondenza %s non valida"
 
-#: src/grep.c:2290
+#: src/grep.c:2393
 #, c-format
 msgid "warning: GREP_OPTIONS is deprecated; please use an alias or script"
 msgstr "attenzione: GREP_OPTIONS è deprecata, utilizzare un alias o uno script"
 
-#: src/grep.c:2320
+#: src/grep.c:2423
 #, c-format
 msgid "unknown devices method"
 msgstr "metodo per i device sconosciuto"
 
-#: src/grep.c:2447
+#: src/grep.c:2552
 #, c-format
 msgid "invalid max count"
 msgstr "numero massimo non valido"
 
-#: src/grep.c:2504
+#: src/grep.c:2609
 #, c-format
 msgid "unknown binary-files type"
 msgstr "tipo di file binario sconosciuto"

@@ -1,10 +1,11 @@
 # The Croatian translation of grep.
-# Copyright © 2015 Free Software Foundation, Inc.
+# Copyright © 2016 Free Software Foundation, Inc.
 # This file is distributed under the same license as the grep package.
 #
 # Matej Vela <mvela@public.srce.hr>, 1999.
 # Hrvoje Niksic <hniksic@xemacs.org>, 2002.
 # Tomislav Krznar <tomislav.krznar@gmail.com>, 2012.
+# Božidar Putanec <bozidarp@yahoo.com>, 2016.
 # bp, nekoliko noticija
 # ovo je ista verzija grep.po kao 2012. od TK. Samo je nekoliko riječi
 # izmjenjeno. Dodani su novi msgid-ovi i popravljeni su fuzzies.
@@ -15,16 +16,17 @@
 # bp, 2016-04-03
 msgid ""
 msgstr ""
-"Project-Id-Version: grep-2.23.7\n"
+"Project-Id-Version: grep-2.25.92\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2016-04-21 21:37-0700\n"
-"PO-Revision-Date: 2016-04-04 07:34-0700\n"
+"POT-Creation-Date: 2016-09-25 16:36-0700\n"
+"PO-Revision-Date: 2016-09-18 17:27+0200\n"
 "Last-Translator: Božidar Putanec <bozidarp@yahoo.com>\n"
 "Language-Team: Croatian <lokalizacija@linux.hr>\n"
 "Language: hr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Bugs: Report translation errors to the Language-Team address.\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Poedit 1.8.7.1\n"
@@ -32,24 +34,63 @@ msgstr ""
 "X-Poedit-Basepath: ../../Downloads/grep/src\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: lib/argmatch.c:133
+#: lib/argmatch.c:134
 #, c-format
 msgid "invalid argument %s for %s"
 msgstr "neispravan argument %s za %s"
 
-#: lib/argmatch.c:134
+#: lib/argmatch.c:135
 #, c-format
 msgid "ambiguous argument %s for %s"
 msgstr "višeznačan argument %s za %s"
 
-#: lib/argmatch.c:153
+#: lib/argmatch.c:154
 msgid "Valid arguments are:"
 msgstr "Ispravni argumenti su:"
 
-#: lib/closeout.c:112 src/grep.c:1238
+#: lib/closeout.c:112 src/grep.c:1312
 #, c-format
 msgid "write error"
 msgstr "greška pisanja"
+
+#: lib/dfa.c:948 lib/dfa.c:951 lib/dfa.c:970 lib/dfa.c:980 lib/dfa.c:993
+#: lib/dfa.c:1021 lib/dfa.c:1030 lib/dfa.c:1033 lib/dfa.c:1038 lib/dfa.c:1060
+#: lib/dfa.c:1063
+msgid "unbalanced ["
+msgstr "nesparena ["
+
+#: lib/dfa.c:1006
+msgid "invalid character class"
+msgstr "neispravan razred znakova"
+
+#: lib/dfa.c:1129
+msgid "character class syntax is [[:space:]], not [:space:]"
+msgstr "sintaksa razreda znakova je [[:space]], ne [:space:]"
+
+#: lib/dfa.c:1198
+msgid "unfinished \\ escape"
+msgstr "nedovršeni \\ izlaz (escape znak)"
+
+#: lib/dfa.c:1359
+msgid "invalid content of \\{\\}"
+msgstr "neispravan sadržaj \\{\\}"
+
+#: lib/dfa.c:1362
+msgid "regular expression too big"
+msgstr "regularni izraz je prevelik"
+
+#: lib/dfa.c:1777
+msgid "unbalanced ("
+msgstr "nesparena ("
+
+# „zadano“ je često „default“, pa radije „navedena“ ili „imenovana“
+#: lib/dfa.c:1904
+msgid "no syntax specified"
+msgstr "sintaksa nije navedena"
+
+#: lib/dfa.c:1912
+msgid "unbalanced )"
+msgstr "nesparena )"
 
 #: lib/error.c:191
 msgid "Unknown system error"
@@ -432,111 +473,72 @@ msgstr "neispravan sufiks u %s%s argumentu „%s“"
 msgid "%s%s argument '%s' too large"
 msgstr "%s%s argument „%s“ je prevelik"
 
-#: src/dfa.c:990 src/dfa.c:993 src/dfa.c:1012 src/dfa.c:1022 src/dfa.c:1034
-#: src/dfa.c:1061 src/dfa.c:1070 src/dfa.c:1073 src/dfa.c:1078 src/dfa.c:1099
-#: src/dfa.c:1102
-msgid "unbalanced ["
-msgstr "nesparena ["
-
-#: src/dfa.c:1046
-msgid "invalid character class"
-msgstr "neispravan razred znakova"
-
-#: src/dfa.c:1168
-msgid "character class syntax is [[:space:]], not [:space:]"
-msgstr "sintaksa razreda znakova je [[:space]], ne [:space:]"
-
-#: src/dfa.c:1230
-msgid "unfinished \\ escape"
-msgstr "nedovršeni \\ izlaz (escape znak)"
-
-#: src/dfa.c:1377
-msgid "invalid content of \\{\\}"
-msgstr "neispravan sadržaj \\{\\}"
-
-#: src/dfa.c:1380
-msgid "regular expression too big"
-msgstr "regularni izraz je prevelik"
-
-#: src/dfa.c:1796
-msgid "unbalanced ("
-msgstr "nesparena ("
-
-# „zadano“ je često „default“, pa radije „navedena“ ili „imenovana“
-#: src/dfa.c:1922
-msgid "no syntax specified"
-msgstr "sintaksa nije imenovana"
-
-#: src/dfa.c:1930
-msgid "unbalanced )"
-msgstr "nesparena )"
-
 #. This is a proper name. See the gettext manual, section Names.
-#: src/grep.c:58
+#: src/grep.c:57
 msgid "Mike Haertel"
 msgstr "Mike Haertel"
 
-#: src/grep.c:59
+#: src/grep.c:58
 msgid "others, see <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
 msgstr "ostali, pogledajte <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
 
-#: src/grep.c:689
+#: src/grep.c:767
 msgid "invalid context length argument"
 msgstr "neispravan argument duljine konteksta"
 
-#: src/grep.c:753
+#: src/grep.c:831
 #, c-format
 msgid "input is too large to count"
 msgstr "ulaz je prevelik da se prebroji"
 
-#: src/grep.c:795
+#: src/grep.c:863
 msgid "lseek failed"
 msgstr "lseek nije uspio"
 
-#: src/grep.c:1539
+#: src/grep.c:1611
 #, c-format
 msgid "Binary file %s matches\n"
 msgstr "Binarna datoteka %s se podudara\n"
 
-#: src/grep.c:1588
+#: src/grep.c:1659
 #, c-format
 msgid "warning: %s: %s"
 msgstr "upozorenje: %s: %s"
 
-#: src/grep.c:1589
+#: src/grep.c:1660
 msgid "recursive directory loop"
 msgstr "rekurzivna petlja direktorija"
 
-#: src/grep.c:1758
+#: src/grep.c:1825
 #, c-format
 msgid "input file %s is also the output"
 msgstr "ulazna datoteka %s je također i izlaz"
 
-#: src/grep.c:1820
+#: src/grep.c:1882
 msgid "(standard input)"
 msgstr "(standardni ulaz)"
 
-#: src/grep.c:1836 src/grep.c:1843
+#: src/grep.c:1898 src/grep.c:1905
 #, c-format
 msgid "Usage: %s [OPTION]... PATTERN [FILE]...\n"
 msgstr "Uporaba: %s [OPCIJA]... UZORAK [DATOTEKA]...\n"
 
-#: src/grep.c:1838
+#: src/grep.c:1900
 #, c-format
 msgid "Try '%s --help' for more information.\n"
 msgstr "‘%s --help’  za pomoć i više informacija\n"
 
-#: src/grep.c:1844
+#: src/grep.c:1906
 #, c-format
 msgid "Search for PATTERN in each FILE or standard input.\n"
 msgstr "Traži UZORAK u svakoj DATOTECI ili standardnom ulazu.\n"
 
-#: src/grep.c:1845
+#: src/grep.c:1907
 #, c-format
 msgid "PATTERN is, by default, a basic regular expression (BRE).\n"
 msgstr "UZORAK je uobičajeno osnovni regularni izraz (BRE).\n"
 
-#: src/grep.c:1846
+#: src/grep.c:1908
 #, c-format
 msgid ""
 "Example: %s -i 'hello world' menu.h main.c\n"
@@ -551,7 +553,7 @@ msgstr ""
 # Prijedlog je string  > niska
 # vidi http://hjp.znanje.hr/index.php?show=search_by_id&id=eF1uXRg%3D
 # ili ostavimo string = string !
-#: src/grep.c:1850
+#: src/grep.c:1912
 #, c-format
 msgid ""
 "  -E, --extended-regexp     PATTERN is an extended regular expression (ERE)\n"
@@ -565,7 +567,7 @@ msgstr ""
 "  -G, --basic-regexp        UZORAK je osnovni regularni izraz (BRE)\n"
 "  -P, --perl-regexp         UZORAK je Perl regularni izraz\n"
 
-#: src/grep.c:1856
+#: src/grep.c:1918
 #, c-format
 msgid ""
 "  -e, --regexp=PATTERN      use PATTERN for matching\n"
@@ -583,7 +585,7 @@ msgstr ""
 "  -z, --null-data           podatkovni redak završava bajtom 0, ne znakom\n"
 "                              novog retka\n"
 
-#: src/grep.c:1863
+#: src/grep.c:1925
 #, c-format
 msgid ""
 "\n"
@@ -597,10 +599,10 @@ msgstr ""
 "Razno:\n"
 "  -s, --no-messages         izostavi poruke o greškama\n"
 "  -v, --invert-match        odaberi redove koji se ne podudaraju\n"
-"  -V, --version             ispiši informacije o inačici i izađi\n"
-"      --help                prikaži ovu pomoć i izađi\n"
+"  -V, --version             ispiši informacije o inačici i iziđi\n"
+"      --help                prikaži ovu pomoć i iziđi\n"
 
-#: src/grep.c:1870
+#: src/grep.c:1932
 #, c-format
 msgid ""
 "\n"
@@ -626,7 +628,7 @@ msgstr ""
 "                              standardnog ulaza\n"
 "\n"
 
-#: src/grep.c:1881
+#: src/grep.c:1943
 #, c-format
 msgid ""
 "  -o, --only-matching       show only the part of a line matching PATTERN\n"
@@ -643,7 +645,7 @@ msgstr ""
 "\n"
 "\n"
 
-#: src/grep.c:1888
+#: src/grep.c:1950
 #, c-format
 msgid ""
 "  -I                        equivalent to --binary-files=without-match\n"
@@ -665,7 +667,7 @@ msgstr ""
 
 # http://hjp.znanje.hr/index.php?show=kosi_oblici&id=eVxhWxI%3D
 # podudaran > koji je sukladan s čim, koji se poklapa s kim/čim
-#: src/grep.c:1897
+#: src/grep.c:1959
 #, c-format
 msgid ""
 "      --include=FILE_PATTERN  search only files that match FILE_PATTERN\n"
@@ -686,7 +688,7 @@ msgstr ""
 "\n"
 "\n"
 
-#: src/grep.c:1904
+#: src/grep.c:1966
 #, c-format
 msgid ""
 "  -L, --files-without-match  print only names of FILEs containing no match\n"
@@ -702,7 +704,7 @@ msgstr ""
 "  -T, --initial-tab          poravnaj tabulatore (ako je potrebno)\n"
 "  -Z, --null                 ispiši bajt 0 nakon imena DATOTEKE\n"
 
-#: src/grep.c:1910
+#: src/grep.c:1972
 #, c-format
 msgid ""
 "\n"
@@ -717,7 +719,7 @@ msgstr ""
 "  -A, --after-context=BROJ   ispiši BROJ redaka sadržaja koji slijedi\n"
 "  -C, --context=BROJ         ispiši BROJ redaka izlaznog sadržaja\n"
 
-#: src/grep.c:1917
+#: src/grep.c:1979
 #, c-format
 msgid ""
 "  -NUM                      same as --context=NUM\n"
@@ -743,7 +745,7 @@ msgstr ""
 "Windows)\n"
 "\n"
 
-#: src/grep.c:1926
+#: src/grep.c:1988
 #, c-format
 msgid ""
 "'egrep' means 'grep -E'.  'fgrep' means 'grep -F'.\n"
@@ -752,7 +754,7 @@ msgstr ""
 "„egrep“ znači „grep -E“.  „fgrep“ znači „grep -F“.\n"
 "Izravno pozivanje „egrep“ i „fgrep“ je zastarjelo.\n"
 
-#: src/grep.c:1929
+#: src/grep.c:1991
 #, c-format
 msgid ""
 "When FILE is -, read standard input.  With no FILE, read . if a command-"
@@ -768,34 +770,34 @@ msgstr ""
 "ako su se pojavile greške i opcija -q nije zadana, izlazno stanje je 2.\n"
 
 # matchers su tragači (java, perl, itd.)
-#: src/grep.c:1996
+#: src/grep.c:2058
 #, c-format
 msgid "conflicting matchers specified"
 msgstr "navedeni su suprotstavljeni izrazi"
 
-#: src/grep.c:2007
+#: src/grep.c:2069
 #, c-format
 msgid "invalid matcher %s"
 msgstr "neispravan uspoređivač %s"
 
 # bp: alias > pseudonim ? > nadimak ?
 # script > skripta
-#: src/grep.c:2290
+#: src/grep.c:2393
 #, c-format
 msgid "warning: GREP_OPTIONS is deprecated; please use an alias or script"
 msgstr "Upozorenje: GREP_OPTIONS je zastarjela; upotrijebite alias ili script"
 
-#: src/grep.c:2320
+#: src/grep.c:2423
 #, c-format
 msgid "unknown devices method"
 msgstr "nepoznati uređaj"
 
-#: src/grep.c:2447
+#: src/grep.c:2552
 #, c-format
 msgid "invalid max count"
 msgstr "neispravan maksimalni broj ponavljanja"
 
-#: src/grep.c:2504
+#: src/grep.c:2609
 #, c-format
 msgid "unknown binary-files type"
 msgstr "nepoznata vrsta binarnih datoteka"

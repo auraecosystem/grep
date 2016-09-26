@@ -338,6 +338,7 @@ do
 done
 @end example
 
+@cindex context lines
 When @command{grep} stops after @var{num} matching lines,
 it outputs any trailing context lines.
 Since context does not include matching lines,
@@ -501,8 +502,11 @@ even those that contain newline characters.
 @node Context Line Control
 @subsection Context Line Control
 
+@cindex context lines
+@dfn{Context lines} are non-matching lines that are near a matching line.
+They are output only if one of the following options are used.
 Regardless of how these options are set,
-@command{grep} will never print any given line more than once.
+@command{grep} never outputs any given line more than once.
 If the @option{-o} (@option{--only-matching}) option is specified,
 these options have no effect and a warning is given upon their use.
 
@@ -530,7 +534,7 @@ Print @var{num} lines of leading context before matching lines.
 @opindex -C
 @opindex --context
 @opindex -@var{num}
-@cindex context
+@cindex context lines
 Print @var{num} lines of leading and trailing output context.
 
 @item --group-separator=@var{string}
@@ -606,18 +610,19 @@ Variables}), or null input bytes when the
 @option{-z} (@option{--null-data}) option is not given (@pxref{Other
 Options}).
 
-By default, @var{type} is @samp{binary}, and when @command{grep}
-discovers that a file is binary it suppresses any further output, and
-instead outputs either a one-line message saying that a binary file
-matches, or no message if there is no match.
+By default, @var{type} is @samp{binary}, and @command{grep}
+suppresses output afer null input binary data is discovered,
+and suppresses output lines that contain improperly encoded data.
+When some output is suppressed, @command{grep} follows any output
+with a one-line message saying that a binary file matches.
 
 If @var{type} is @samp{without-match},
-when @command{grep} discovers that a file is binary
+when @command{grep} discovers null input binary data
 it assumes that the rest of the file does not match;
 this is equivalent to the @option{-I} option.
 
 If @var{type} is @samp{text},
-@command{grep} processes a binary file as if it were text;
+@command{grep} processes binary data as if it were text;
 this is equivalent to the @option{-a} option.
 
 When @var{type} is @samp{binary}, @command{grep} may treat non-text

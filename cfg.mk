@@ -30,7 +30,7 @@ bootstrap-tools = autoconf,automake,gnulib
 
 # The tight_scope test gets confused about inline functions.
 # like 'to_uchar'.
-_gl_TS_unmarked_extern_functions = main usage mb_clen to_uchar
+_gl_TS_unmarked_extern_functions = main usage mb_clen to_uchar dfaerror dfawarn
 
 # Now that we have better tests, make this the default.
 export VERBOSE = yes
@@ -55,7 +55,7 @@ export VERBOSE = yes
 # 1127556 9e
 export XZ_OPT = -6e
 
-old_NEWS_hash = 7225c806189eaa7ffd4c744e3248d0a5
+old_NEWS_hash = e6d8fb5156c7a39f9541bffaa1074795
 
 # Many m4 macros names once began with 'jm_'.
 # Make sure that none are inadvertently reintroduced.
@@ -138,16 +138,12 @@ update-copyright-env = \
 include $(abs_top_srcdir)/dist-check.mk
 
 exclude_file_name_regexp--sc_bindtextdomain = \
-  ^tests/(get-mb-cur-max|dfa-match-aux)\.c$$
-exclude_file_name_regexp--sc_prohibit_atoi_atof = \
-  ^tests/dfa-match-aux\.c$$
+  ^tests/get-mb-cur-max\.c$$
 
 exclude_file_name_regexp--sc_prohibit_strcmp = /colorize-.*\.c$$
 exclude_file_name_regexp--sc_prohibit_xalloc_without_use = ^src/kwset\.c$$
 exclude_file_name_regexp--sc_prohibit_tab_based_indentation = \
   (Makefile|\.(am|mk)$$)
-exclude_file_name_regexp--sc_error_message_uppercase = ^src/dfa\.c$$
-exclude_file_name_regexp--sc_prohibit_strncpy = ^src/dfa\.c$$
 
 exclude_file_name_regexp--sc_prohibit_doubled_word = ^tests/count-newline$$
 

@@ -1,5 +1,5 @@
 #!/bin/sh
-# This would fail for grep-2.21.
+# This would fail with grep-2.21's dfa.c.
 
 # Copyright 2014-2016 Free Software Foundation, Inc.
 
@@ -21,25 +21,19 @@
 # Add "." to PATH for the use of dfa-match-aux.
 path_prepend_ .
 
-require_timeout_
+if (type timeout) >/dev/null 2>&1; then
+  timeout_10='timeout 10'
+else
+  timeout_10=
+fi
 
 fail=0
 
-fail1=0
-dfa-match-aux a ba 0 > out || fail1=1
-compare /dev/null out || fail1=1
-if test $fail1 -ne 0; then
-  warn_ 'dfa-match test #1 failed\n'
-  fail=1
-fi
+dfa-match-aux a ba 0 > out || fail=1
+compare /dev/null out || fail=1
 
-fail2=0
 in=$(printf "bb\nbb")
-timeout 3 dfa-match-aux a "$in" 1 > out || fail2=1
-compare /dev/null out || fail2=1
-if test $fail2 -ne 0; then
-  warn_ 'dfa-match test #2 failed\n'
-  fail=1
-fi
+$timeout_10 dfa-match-aux a "$in" 1 > out || fail=1
+compare /dev/null out || fail=1
 
 Exit $fail

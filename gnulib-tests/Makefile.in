@@ -116,6 +116,7 @@ TESTS = test-alignof$(EXEEXT) test-alloca-opt$(EXEEXT) \
 	test-bitrotate$(EXEEXT) test-btowc1.sh test-btowc2.sh \
 	test-c-ctype$(EXEEXT) test-c-strcase.sh test-chdir$(EXEEXT) \
 	test-cloexec$(EXEEXT) test-close$(EXEEXT) test-ctype$(EXEEXT) \
+	dfa-invalid-char-class.sh dfa-match.sh \
 	test-dirent-safer$(EXEEXT) test-dirent$(EXEEXT) \
 	test-dup$(EXEEXT) test-dup2$(EXEEXT) test-environ$(EXEEXT) \
 	test-errno$(EXEEXT) test-exclude1.sh test-exclude2.sh \
@@ -128,13 +129,14 @@ TESTS = test-alignof$(EXEEXT) test-alloca-opt$(EXEEXT) \
 	test-fpending.sh test-fputc$(EXEEXT) test-fread$(EXEEXT) \
 	test-fstat$(EXEEXT) test-fstatat$(EXEEXT) test-fwrite$(EXEEXT) \
 	test-getcwd-lgpl$(EXEEXT) test-getdtablesize$(EXEEXT) \
-	test-getopt$(EXEEXT) test-gettimeofday$(EXEEXT) \
-	test-hash$(EXEEXT) test-i-ring$(EXEEXT) test-iconv-h$(EXEEXT) \
-	test-iconv$(EXEEXT) test-ignore-value$(EXEEXT) \
-	test-intprops$(EXEEXT) test-inttostr$(EXEEXT) \
-	test-inttypes$(EXEEXT) test-isatty$(EXEEXT) \
-	test-isblank$(EXEEXT) test-iswblank$(EXEEXT) \
-	test-langinfo$(EXEEXT) test-locale$(EXEEXT) \
+	test-getopt$(EXEEXT) test-getprogname$(EXEEXT) \
+	test-gettimeofday$(EXEEXT) test-hash$(EXEEXT) \
+	test-i-ring$(EXEEXT) test-iconv-h$(EXEEXT) test-iconv$(EXEEXT) \
+	test-ignore-value$(EXEEXT) test-intprops$(EXEEXT) \
+	test-inttostr$(EXEEXT) test-inttypes$(EXEEXT) \
+	test-isatty$(EXEEXT) test-isblank$(EXEEXT) \
+	test-iswblank$(EXEEXT) test-langinfo$(EXEEXT) \
+	test-limits-h$(EXEEXT) test-locale$(EXEEXT) \
 	test-localeconv$(EXEEXT) test-localename$(EXEEXT) \
 	test-lseek.sh test-lstat$(EXEEXT) test-malloc-gnu$(EXEEXT) \
 	test-malloca$(EXEEXT) test-mbscasecmp.sh test-mbsinit.sh \
@@ -177,9 +179,10 @@ check_PROGRAMS = test-alignof$(EXEEXT) test-alloca-opt$(EXEEXT) \
 	test-c-ctype$(EXEEXT) test-c-strcasecmp$(EXEEXT) \
 	test-c-strncasecmp$(EXEEXT) test-chdir$(EXEEXT) \
 	test-cloexec$(EXEEXT) test-close$(EXEEXT) test-ctype$(EXEEXT) \
-	test-dirent-safer$(EXEEXT) test-dirent$(EXEEXT) \
-	test-dup$(EXEEXT) test-dup2$(EXEEXT) test-environ$(EXEEXT) \
-	test-errno$(EXEEXT) test-exclude$(EXEEXT) test-fchdir$(EXEEXT) \
+	dfa-match-aux$(EXEEXT) test-dirent-safer$(EXEEXT) \
+	test-dirent$(EXEEXT) test-dup$(EXEEXT) test-dup2$(EXEEXT) \
+	test-environ$(EXEEXT) test-errno$(EXEEXT) \
+	test-exclude$(EXEEXT) test-fchdir$(EXEEXT) \
 	test-fcntl-h$(EXEEXT) test-fcntl-safer$(EXEEXT) \
 	test-fcntl$(EXEEXT) test-fdopen$(EXEEXT) \
 	test-fdopendir$(EXEEXT) test-fgetc$(EXEEXT) \
@@ -187,13 +190,14 @@ check_PROGRAMS = test-alignof$(EXEEXT) test-alloca-opt$(EXEEXT) \
 	test-fpending$(EXEEXT) test-fputc$(EXEEXT) test-fread$(EXEEXT) \
 	test-fstat$(EXEEXT) test-fstatat$(EXEEXT) test-fwrite$(EXEEXT) \
 	test-getcwd-lgpl$(EXEEXT) test-getdtablesize$(EXEEXT) \
-	test-getopt$(EXEEXT) test-gettimeofday$(EXEEXT) \
-	test-hash$(EXEEXT) test-i-ring$(EXEEXT) test-iconv-h$(EXEEXT) \
-	test-iconv$(EXEEXT) test-ignore-value$(EXEEXT) \
-	test-intprops$(EXEEXT) test-inttostr$(EXEEXT) \
-	test-inttypes$(EXEEXT) test-isatty$(EXEEXT) \
-	test-isblank$(EXEEXT) test-iswblank$(EXEEXT) \
-	test-langinfo$(EXEEXT) test-locale$(EXEEXT) \
+	test-getopt$(EXEEXT) test-getprogname$(EXEEXT) \
+	test-gettimeofday$(EXEEXT) test-hash$(EXEEXT) \
+	test-i-ring$(EXEEXT) test-iconv-h$(EXEEXT) test-iconv$(EXEEXT) \
+	test-ignore-value$(EXEEXT) test-intprops$(EXEEXT) \
+	test-inttostr$(EXEEXT) test-inttypes$(EXEEXT) \
+	test-isatty$(EXEEXT) test-isblank$(EXEEXT) \
+	test-iswblank$(EXEEXT) test-langinfo$(EXEEXT) \
+	test-limits-h$(EXEEXT) test-locale$(EXEEXT) \
 	test-localeconv$(EXEEXT) test-localename$(EXEEXT) \
 	test-lseek$(EXEEXT) test-lstat$(EXEEXT) \
 	test-malloc-gnu$(EXEEXT) test-malloca$(EXEEXT) \
@@ -232,7 +236,8 @@ subdir = gnulib-tests
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/00gnulib.m4 \
 	$(top_srcdir)/m4/absolute-header.m4 $(top_srcdir)/m4/alloca.m4 \
-	$(top_srcdir)/m4/btowc.m4 $(top_srcdir)/m4/chdir-long.m4 \
+	$(top_srcdir)/m4/assert.m4 $(top_srcdir)/m4/btowc.m4 \
+	$(top_srcdir)/m4/chdir-long.m4 \
 	$(top_srcdir)/m4/close-stream.m4 $(top_srcdir)/m4/close.m4 \
 	$(top_srcdir)/m4/closedir.m4 $(top_srcdir)/m4/closeout.m4 \
 	$(top_srcdir)/m4/codeset.m4 $(top_srcdir)/m4/configmake.m4 \
@@ -255,7 +260,8 @@ am__aclocal_m4_deps = $(top_srcdir)/m4/00gnulib.m4 \
 	$(top_srcdir)/m4/fstat.m4 $(top_srcdir)/m4/fstatat.m4 \
 	$(top_srcdir)/m4/fts.m4 $(top_srcdir)/m4/getcwd.m4 \
 	$(top_srcdir)/m4/getdtablesize.m4 $(top_srcdir)/m4/getopt.m4 \
-	$(top_srcdir)/m4/getpagesize.m4 $(top_srcdir)/m4/gettext.m4 \
+	$(top_srcdir)/m4/getpagesize.m4 \
+	$(top_srcdir)/m4/getprogname.m4 $(top_srcdir)/m4/gettext.m4 \
 	$(top_srcdir)/m4/gettimeofday.m4 $(top_srcdir)/m4/glibc21.m4 \
 	$(top_srcdir)/m4/gnulib-common.m4 \
 	$(top_srcdir)/m4/gnulib-comp.m4 \
@@ -272,22 +278,22 @@ am__aclocal_m4_deps = $(top_srcdir)/m4/00gnulib.m4 \
 	$(top_srcdir)/m4/lcmessage.m4 $(top_srcdir)/m4/lib-ld.m4 \
 	$(top_srcdir)/m4/lib-link.m4 $(top_srcdir)/m4/lib-prefix.m4 \
 	$(top_srcdir)/m4/libunistring-base.m4 \
-	$(top_srcdir)/m4/localcharset.m4 $(top_srcdir)/m4/locale-fr.m4 \
-	$(top_srcdir)/m4/locale-ja.m4 $(top_srcdir)/m4/locale-tr.m4 \
-	$(top_srcdir)/m4/locale-zh.m4 $(top_srcdir)/m4/locale_h.m4 \
-	$(top_srcdir)/m4/localeconv.m4 $(top_srcdir)/m4/localename.m4 \
-	$(top_srcdir)/m4/lock.m4 $(top_srcdir)/m4/longlong.m4 \
-	$(top_srcdir)/m4/lseek.m4 $(top_srcdir)/m4/lstat.m4 \
-	$(top_srcdir)/m4/malloc.m4 $(top_srcdir)/m4/malloca.m4 \
-	$(top_srcdir)/m4/manywarnings.m4 $(top_srcdir)/m4/mbchar.m4 \
-	$(top_srcdir)/m4/mbiter.m4 $(top_srcdir)/m4/mbrlen.m4 \
-	$(top_srcdir)/m4/mbrtowc.m4 $(top_srcdir)/m4/mbsinit.m4 \
-	$(top_srcdir)/m4/mbslen.m4 $(top_srcdir)/m4/mbsrtowcs.m4 \
-	$(top_srcdir)/m4/mbstate_t.m4 $(top_srcdir)/m4/mbtowc.m4 \
-	$(top_srcdir)/m4/memchr.m4 $(top_srcdir)/m4/mempcpy.m4 \
-	$(top_srcdir)/m4/memrchr.m4 $(top_srcdir)/m4/minmax.m4 \
-	$(top_srcdir)/m4/mmap-anon.m4 $(top_srcdir)/m4/mode_t.m4 \
-	$(top_srcdir)/m4/msvc-inval.m4 \
+	$(top_srcdir)/m4/limits-h.m4 $(top_srcdir)/m4/localcharset.m4 \
+	$(top_srcdir)/m4/locale-fr.m4 $(top_srcdir)/m4/locale-ja.m4 \
+	$(top_srcdir)/m4/locale-tr.m4 $(top_srcdir)/m4/locale-zh.m4 \
+	$(top_srcdir)/m4/locale_h.m4 $(top_srcdir)/m4/localeconv.m4 \
+	$(top_srcdir)/m4/localename.m4 $(top_srcdir)/m4/lock.m4 \
+	$(top_srcdir)/m4/longlong.m4 $(top_srcdir)/m4/lseek.m4 \
+	$(top_srcdir)/m4/lstat.m4 $(top_srcdir)/m4/malloc.m4 \
+	$(top_srcdir)/m4/malloca.m4 $(top_srcdir)/m4/manywarnings.m4 \
+	$(top_srcdir)/m4/mbchar.m4 $(top_srcdir)/m4/mbiter.m4 \
+	$(top_srcdir)/m4/mbrlen.m4 $(top_srcdir)/m4/mbrtowc.m4 \
+	$(top_srcdir)/m4/mbsinit.m4 $(top_srcdir)/m4/mbslen.m4 \
+	$(top_srcdir)/m4/mbsrtowcs.m4 $(top_srcdir)/m4/mbstate_t.m4 \
+	$(top_srcdir)/m4/mbtowc.m4 $(top_srcdir)/m4/memchr.m4 \
+	$(top_srcdir)/m4/mempcpy.m4 $(top_srcdir)/m4/memrchr.m4 \
+	$(top_srcdir)/m4/minmax.m4 $(top_srcdir)/m4/mmap-anon.m4 \
+	$(top_srcdir)/m4/mode_t.m4 $(top_srcdir)/m4/msvc-inval.m4 \
 	$(top_srcdir)/m4/msvc-nothrow.m4 $(top_srcdir)/m4/multiarch.m4 \
 	$(top_srcdir)/m4/nl_langinfo.m4 $(top_srcdir)/m4/nls.m4 \
 	$(top_srcdir)/m4/nocrash.m4 $(top_srcdir)/m4/obstack.m4 \
@@ -349,6 +355,11 @@ am_libtests_a_OBJECTS = fd-safer-flag.$(OBJEXT) \
 	xsize.$(OBJEXT)
 libtests_a_OBJECTS = $(am_libtests_a_OBJECTS)
 PROGRAMS = $(noinst_PROGRAMS)
+dfa_match_aux_SOURCES = dfa-match-aux.c
+dfa_match_aux_OBJECTS = dfa-match-aux.$(OBJEXT)
+am__DEPENDENCIES_2 = libtests.a ../lib/libgreputils.a libtests.a \
+	$(am__DEPENDENCIES_1)
+dfa_match_aux_DEPENDENCIES = $(am__DEPENDENCIES_2)
 test_alignof_SOURCES = test-alignof.c
 test_alignof_OBJECTS = test-alignof.$(OBJEXT)
 test_alignof_LDADD = $(LDADD)
@@ -361,8 +372,6 @@ test_alloca_opt_DEPENDENCIES = libtests.a ../lib/libgreputils.a \
 	libtests.a $(am__DEPENDENCIES_1)
 test_argmatch_SOURCES = test-argmatch.c
 test_argmatch_OBJECTS = test-argmatch.$(OBJEXT)
-am__DEPENDENCIES_2 = libtests.a ../lib/libgreputils.a libtests.a \
-	$(am__DEPENDENCIES_1)
 test_argmatch_DEPENDENCIES = $(am__DEPENDENCIES_2)
 test_binary_io_SOURCES = test-binary-io.c
 test_binary_io_OBJECTS = test-binary-io.$(OBJEXT)
@@ -533,6 +542,9 @@ test_getdtablesize_DEPENDENCIES = libtests.a ../lib/libgreputils.a \
 test_getopt_SOURCES = test-getopt.c
 test_getopt_OBJECTS = test-getopt.$(OBJEXT)
 test_getopt_DEPENDENCIES = $(am__DEPENDENCIES_2) $(am__DEPENDENCIES_1)
+test_getprogname_SOURCES = test-getprogname.c
+test_getprogname_OBJECTS = test-getprogname.$(OBJEXT)
+test_getprogname_DEPENDENCIES = $(am__DEPENDENCIES_2)
 test_gettimeofday_SOURCES = test-gettimeofday.c
 test_gettimeofday_OBJECTS = test-gettimeofday.$(OBJEXT)
 test_gettimeofday_LDADD = $(LDADD)
@@ -595,6 +607,11 @@ test_langinfo_SOURCES = test-langinfo.c
 test_langinfo_OBJECTS = test-langinfo.$(OBJEXT)
 test_langinfo_LDADD = $(LDADD)
 test_langinfo_DEPENDENCIES = libtests.a ../lib/libgreputils.a \
+	libtests.a $(am__DEPENDENCIES_1)
+test_limits_h_SOURCES = test-limits-h.c
+test_limits_h_OBJECTS = test-limits-h.$(OBJEXT)
+test_limits_h_LDADD = $(LDADD)
+test_limits_h_DEPENDENCIES = libtests.a ../lib/libgreputils.a \
 	libtests.a $(am__DEPENDENCIES_1)
 test_locale_SOURCES = test-locale.c
 test_locale_OBJECTS = test-locale.$(OBJEXT)
@@ -927,19 +944,20 @@ DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/build-aux/depcomp
 am__maybe_remake_depfiles = depfiles
 am__depfiles_remade = ./$(DEPDIR)/anytostr.Po ./$(DEPDIR)/asnprintf.Po \
-	./$(DEPDIR)/dup-safer-flag.Po ./$(DEPDIR)/fd-safer-flag.Po \
-	./$(DEPDIR)/fdopen.Po ./$(DEPDIR)/float.Po \
-	./$(DEPDIR)/hash-pjw.Po ./$(DEPDIR)/imaxtostr.Po \
-	./$(DEPDIR)/inttostr.Po ./$(DEPDIR)/itold.Po \
-	./$(DEPDIR)/localename.Po ./$(DEPDIR)/offtostr.Po \
-	./$(DEPDIR)/pipe.Po ./$(DEPDIR)/printf-args.Po \
-	./$(DEPDIR)/printf-parse.Po ./$(DEPDIR)/putenv.Po \
-	./$(DEPDIR)/setenv.Po ./$(DEPDIR)/setlocale.Po \
-	./$(DEPDIR)/snprintf.Po ./$(DEPDIR)/symlink.Po \
-	./$(DEPDIR)/test-alignof.Po ./$(DEPDIR)/test-alloca-opt.Po \
-	./$(DEPDIR)/test-argmatch.Po ./$(DEPDIR)/test-binary-io.Po \
-	./$(DEPDIR)/test-bitrotate.Po ./$(DEPDIR)/test-btowc.Po \
-	./$(DEPDIR)/test-c-ctype.Po ./$(DEPDIR)/test-c-strcasecmp.Po \
+	./$(DEPDIR)/dfa-match-aux.Po ./$(DEPDIR)/dup-safer-flag.Po \
+	./$(DEPDIR)/fd-safer-flag.Po ./$(DEPDIR)/fdopen.Po \
+	./$(DEPDIR)/float.Po ./$(DEPDIR)/hash-pjw.Po \
+	./$(DEPDIR)/imaxtostr.Po ./$(DEPDIR)/inttostr.Po \
+	./$(DEPDIR)/itold.Po ./$(DEPDIR)/localename.Po \
+	./$(DEPDIR)/offtostr.Po ./$(DEPDIR)/pipe.Po \
+	./$(DEPDIR)/printf-args.Po ./$(DEPDIR)/printf-parse.Po \
+	./$(DEPDIR)/putenv.Po ./$(DEPDIR)/setenv.Po \
+	./$(DEPDIR)/setlocale.Po ./$(DEPDIR)/snprintf.Po \
+	./$(DEPDIR)/symlink.Po ./$(DEPDIR)/test-alignof.Po \
+	./$(DEPDIR)/test-alloca-opt.Po ./$(DEPDIR)/test-argmatch.Po \
+	./$(DEPDIR)/test-binary-io.Po ./$(DEPDIR)/test-bitrotate.Po \
+	./$(DEPDIR)/test-btowc.Po ./$(DEPDIR)/test-c-ctype.Po \
+	./$(DEPDIR)/test-c-strcasecmp.Po \
 	./$(DEPDIR)/test-c-strncasecmp.Po ./$(DEPDIR)/test-chdir.Po \
 	./$(DEPDIR)/test-cloexec.Po ./$(DEPDIR)/test-close.Po \
 	./$(DEPDIR)/test-ctype.Po ./$(DEPDIR)/test-dirent-safer.Po \
@@ -956,48 +974,50 @@ am__depfiles_remade = ./$(DEPDIR)/anytostr.Po ./$(DEPDIR)/asnprintf.Po \
 	./$(DEPDIR)/test-fstatat.Po ./$(DEPDIR)/test-fwrite.Po \
 	./$(DEPDIR)/test-getcwd-lgpl.Po \
 	./$(DEPDIR)/test-getdtablesize.Po ./$(DEPDIR)/test-getopt.Po \
+	./$(DEPDIR)/test-getprogname.Po \
 	./$(DEPDIR)/test-gettimeofday.Po ./$(DEPDIR)/test-hash.Po \
 	./$(DEPDIR)/test-i-ring.Po ./$(DEPDIR)/test-iconv-h.Po \
 	./$(DEPDIR)/test-iconv.Po ./$(DEPDIR)/test-ignore-value.Po \
 	./$(DEPDIR)/test-intprops.Po ./$(DEPDIR)/test-inttostr.Po \
 	./$(DEPDIR)/test-inttypes.Po ./$(DEPDIR)/test-isatty.Po \
 	./$(DEPDIR)/test-isblank.Po ./$(DEPDIR)/test-iswblank.Po \
-	./$(DEPDIR)/test-langinfo.Po ./$(DEPDIR)/test-locale.Po \
-	./$(DEPDIR)/test-localeconv.Po ./$(DEPDIR)/test-localename.Po \
-	./$(DEPDIR)/test-lseek.Po ./$(DEPDIR)/test-lstat.Po \
-	./$(DEPDIR)/test-malloc-gnu.Po ./$(DEPDIR)/test-malloca.Po \
-	./$(DEPDIR)/test-mbscasecmp.Po ./$(DEPDIR)/test-mbsinit.Po \
-	./$(DEPDIR)/test-mbsrtowcs.Po ./$(DEPDIR)/test-mbsstr1.Po \
-	./$(DEPDIR)/test-mbsstr2.Po ./$(DEPDIR)/test-mbsstr3.Po \
-	./$(DEPDIR)/test-memchr.Po ./$(DEPDIR)/test-memchr2.Po \
-	./$(DEPDIR)/test-memrchr.Po ./$(DEPDIR)/test-nl_langinfo.Po \
-	./$(DEPDIR)/test-open.Po ./$(DEPDIR)/test-openat-safer.Po \
-	./$(DEPDIR)/test-openat.Po ./$(DEPDIR)/test-pathmax.Po \
-	./$(DEPDIR)/test-pipe.Po ./$(DEPDIR)/test-quotearg-simple.Po \
-	./$(DEPDIR)/test-read.Po ./$(DEPDIR)/test-realloc-gnu.Po \
-	./$(DEPDIR)/test-regex.Po ./$(DEPDIR)/test-setenv.Po \
-	./$(DEPDIR)/test-setlocale1.Po ./$(DEPDIR)/test-setlocale2.Po \
-	./$(DEPDIR)/test-snprintf.Po ./$(DEPDIR)/test-stat.Po \
-	./$(DEPDIR)/test-stdalign.Po ./$(DEPDIR)/test-stdbool.Po \
-	./$(DEPDIR)/test-stddef.Po ./$(DEPDIR)/test-stdint.Po \
-	./$(DEPDIR)/test-stdio.Po ./$(DEPDIR)/test-stdlib.Po \
-	./$(DEPDIR)/test-strerror.Po ./$(DEPDIR)/test-striconv.Po \
-	./$(DEPDIR)/test-string.Po ./$(DEPDIR)/test-strnlen.Po \
-	./$(DEPDIR)/test-strstr.Po ./$(DEPDIR)/test-strtoimax.Po \
-	./$(DEPDIR)/test-strtoll.Po ./$(DEPDIR)/test-strtoull.Po \
-	./$(DEPDIR)/test-strtoumax.Po ./$(DEPDIR)/test-symlink.Po \
-	./$(DEPDIR)/test-sys_stat.Po ./$(DEPDIR)/test-sys_time.Po \
-	./$(DEPDIR)/test-sys_types.Po ./$(DEPDIR)/test-time.Po \
-	./$(DEPDIR)/test-unistd.Po ./$(DEPDIR)/test-unsetenv.Po \
-	./$(DEPDIR)/test-vasnprintf.Po ./$(DEPDIR)/test-verify.Po \
-	./$(DEPDIR)/test-version-etc.Po ./$(DEPDIR)/test-wchar.Po \
-	./$(DEPDIR)/test-wcrtomb-w32.Po ./$(DEPDIR)/test-wcrtomb.Po \
-	./$(DEPDIR)/test-wctype-h.Po ./$(DEPDIR)/test-wcwidth.Po \
-	./$(DEPDIR)/test-xalloc-die.Po ./$(DEPDIR)/test-xstrtoimax.Po \
-	./$(DEPDIR)/test-xstrtol.Po ./$(DEPDIR)/test-xstrtoul.Po \
-	./$(DEPDIR)/uinttostr.Po ./$(DEPDIR)/umaxtostr.Po \
-	./$(DEPDIR)/unsetenv.Po ./$(DEPDIR)/vasnprintf.Po \
-	./$(DEPDIR)/xsize.Po unistr/$(DEPDIR)/test-u8-mbtoucr.Po \
+	./$(DEPDIR)/test-langinfo.Po ./$(DEPDIR)/test-limits-h.Po \
+	./$(DEPDIR)/test-locale.Po ./$(DEPDIR)/test-localeconv.Po \
+	./$(DEPDIR)/test-localename.Po ./$(DEPDIR)/test-lseek.Po \
+	./$(DEPDIR)/test-lstat.Po ./$(DEPDIR)/test-malloc-gnu.Po \
+	./$(DEPDIR)/test-malloca.Po ./$(DEPDIR)/test-mbscasecmp.Po \
+	./$(DEPDIR)/test-mbsinit.Po ./$(DEPDIR)/test-mbsrtowcs.Po \
+	./$(DEPDIR)/test-mbsstr1.Po ./$(DEPDIR)/test-mbsstr2.Po \
+	./$(DEPDIR)/test-mbsstr3.Po ./$(DEPDIR)/test-memchr.Po \
+	./$(DEPDIR)/test-memchr2.Po ./$(DEPDIR)/test-memrchr.Po \
+	./$(DEPDIR)/test-nl_langinfo.Po ./$(DEPDIR)/test-open.Po \
+	./$(DEPDIR)/test-openat-safer.Po ./$(DEPDIR)/test-openat.Po \
+	./$(DEPDIR)/test-pathmax.Po ./$(DEPDIR)/test-pipe.Po \
+	./$(DEPDIR)/test-quotearg-simple.Po ./$(DEPDIR)/test-read.Po \
+	./$(DEPDIR)/test-realloc-gnu.Po ./$(DEPDIR)/test-regex.Po \
+	./$(DEPDIR)/test-setenv.Po ./$(DEPDIR)/test-setlocale1.Po \
+	./$(DEPDIR)/test-setlocale2.Po ./$(DEPDIR)/test-snprintf.Po \
+	./$(DEPDIR)/test-stat.Po ./$(DEPDIR)/test-stdalign.Po \
+	./$(DEPDIR)/test-stdbool.Po ./$(DEPDIR)/test-stddef.Po \
+	./$(DEPDIR)/test-stdint.Po ./$(DEPDIR)/test-stdio.Po \
+	./$(DEPDIR)/test-stdlib.Po ./$(DEPDIR)/test-strerror.Po \
+	./$(DEPDIR)/test-striconv.Po ./$(DEPDIR)/test-string.Po \
+	./$(DEPDIR)/test-strnlen.Po ./$(DEPDIR)/test-strstr.Po \
+	./$(DEPDIR)/test-strtoimax.Po ./$(DEPDIR)/test-strtoll.Po \
+	./$(DEPDIR)/test-strtoull.Po ./$(DEPDIR)/test-strtoumax.Po \
+	./$(DEPDIR)/test-symlink.Po ./$(DEPDIR)/test-sys_stat.Po \
+	./$(DEPDIR)/test-sys_time.Po ./$(DEPDIR)/test-sys_types.Po \
+	./$(DEPDIR)/test-time.Po ./$(DEPDIR)/test-unistd.Po \
+	./$(DEPDIR)/test-unsetenv.Po ./$(DEPDIR)/test-vasnprintf.Po \
+	./$(DEPDIR)/test-verify.Po ./$(DEPDIR)/test-version-etc.Po \
+	./$(DEPDIR)/test-wchar.Po ./$(DEPDIR)/test-wcrtomb-w32.Po \
+	./$(DEPDIR)/test-wcrtomb.Po ./$(DEPDIR)/test-wctype-h.Po \
+	./$(DEPDIR)/test-wcwidth.Po ./$(DEPDIR)/test-xalloc-die.Po \
+	./$(DEPDIR)/test-xstrtoimax.Po ./$(DEPDIR)/test-xstrtol.Po \
+	./$(DEPDIR)/test-xstrtoul.Po ./$(DEPDIR)/uinttostr.Po \
+	./$(DEPDIR)/umaxtostr.Po ./$(DEPDIR)/unsetenv.Po \
+	./$(DEPDIR)/vasnprintf.Po ./$(DEPDIR)/xsize.Po \
+	unistr/$(DEPDIR)/test-u8-mbtoucr.Po \
 	unistr/$(DEPDIR)/test-u8-uctomb.Po \
 	uniwidth/$(DEPDIR)/test-uc_width.Po \
 	uniwidth/$(DEPDIR)/test-uc_width2.Po
@@ -1016,33 +1036,33 @@ am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
 SOURCES = $(libtests_a_SOURCES) $(EXTRA_libtests_a_SOURCES) \
-	test-alignof.c test-alloca-opt.c test-argmatch.c \
-	test-binary-io.c test-bitrotate.c test-btowc.c test-c-ctype.c \
-	test-c-strcasecmp.c test-c-strncasecmp.c test-chdir.c \
-	test-cloexec.c test-close.c test-ctype.c test-dirent.c \
-	test-dirent-safer.c test-dup.c test-dup-safer.c test-dup2.c \
-	test-environ.c test-errno.c test-exclude.c test-fchdir.c \
-	test-fcntl.c test-fcntl-h.c test-fcntl-safer.c test-fdopen.c \
-	test-fdopendir.c test-fgetc.c test-float.c test-fnmatch.c \
-	test-fpending.c test-fputc.c test-fread.c test-fstat.c \
-	test-fstatat.c test-fwrite.c test-getcwd-lgpl.c \
-	test-getdtablesize.c test-getopt.c test-gettimeofday.c \
-	test-hash.c test-i-ring.c test-iconv.c test-iconv-h.c \
-	test-ignore-value.c test-intprops.c test-inttostr.c \
-	test-inttypes.c test-isatty.c test-isblank.c test-iswblank.c \
-	test-langinfo.c test-locale.c test-localeconv.c \
-	test-localename.c test-lseek.c test-lstat.c test-malloc-gnu.c \
-	test-malloca.c test-mbscasecmp.c test-mbsinit.c \
-	test-mbsrtowcs.c test-mbsstr1.c test-mbsstr2.c test-mbsstr3.c \
-	test-memchr.c test-memchr2.c test-memrchr.c test-nl_langinfo.c \
-	test-open.c test-openat.c test-openat-safer.c test-pathmax.c \
-	test-pipe.c test-quotearg-simple.c test-read.c \
-	test-realloc-gnu.c test-regex.c test-setenv.c \
-	test-setlocale1.c test-setlocale2.c test-snprintf.c \
-	test-stat.c test-stdalign.c test-stdbool.c test-stddef.c \
-	test-stdint.c test-stdio.c test-stdlib.c test-strerror.c \
-	test-striconv.c test-string.c test-strnlen.c test-strstr.c \
-	test-strtoimax.c test-strtoll.c test-strtoull.c \
+	dfa-match-aux.c test-alignof.c test-alloca-opt.c \
+	test-argmatch.c test-binary-io.c test-bitrotate.c test-btowc.c \
+	test-c-ctype.c test-c-strcasecmp.c test-c-strncasecmp.c \
+	test-chdir.c test-cloexec.c test-close.c test-ctype.c \
+	test-dirent.c test-dirent-safer.c test-dup.c test-dup-safer.c \
+	test-dup2.c test-environ.c test-errno.c test-exclude.c \
+	test-fchdir.c test-fcntl.c test-fcntl-h.c test-fcntl-safer.c \
+	test-fdopen.c test-fdopendir.c test-fgetc.c test-float.c \
+	test-fnmatch.c test-fpending.c test-fputc.c test-fread.c \
+	test-fstat.c test-fstatat.c test-fwrite.c test-getcwd-lgpl.c \
+	test-getdtablesize.c test-getopt.c test-getprogname.c \
+	test-gettimeofday.c test-hash.c test-i-ring.c test-iconv.c \
+	test-iconv-h.c test-ignore-value.c test-intprops.c \
+	test-inttostr.c test-inttypes.c test-isatty.c test-isblank.c \
+	test-iswblank.c test-langinfo.c test-limits-h.c test-locale.c \
+	test-localeconv.c test-localename.c test-lseek.c test-lstat.c \
+	test-malloc-gnu.c test-malloca.c test-mbscasecmp.c \
+	test-mbsinit.c test-mbsrtowcs.c test-mbsstr1.c test-mbsstr2.c \
+	test-mbsstr3.c test-memchr.c test-memchr2.c test-memrchr.c \
+	test-nl_langinfo.c test-open.c test-openat.c \
+	test-openat-safer.c test-pathmax.c test-pipe.c \
+	test-quotearg-simple.c test-read.c test-realloc-gnu.c \
+	test-regex.c test-setenv.c test-setlocale1.c test-setlocale2.c \
+	test-snprintf.c test-stat.c test-stdalign.c test-stdbool.c \
+	test-stddef.c test-stdint.c test-stdio.c test-stdlib.c \
+	test-strerror.c test-striconv.c test-string.c test-strnlen.c \
+	test-strstr.c test-strtoimax.c test-strtoll.c test-strtoull.c \
 	test-strtoumax.c test-symlink.c test-sys_stat.c \
 	test-sys_time.c test-sys_types.c test-time.c \
 	$(test_u8_mbtoucr_SOURCES) $(test_u8_uctomb_SOURCES) \
@@ -1053,33 +1073,33 @@ SOURCES = $(libtests_a_SOURCES) $(EXTRA_libtests_a_SOURCES) \
 	test-xalloc-die.c test-xstrtoimax.c test-xstrtol.c \
 	test-xstrtoul.c
 DIST_SOURCES = $(libtests_a_SOURCES) $(EXTRA_libtests_a_SOURCES) \
-	test-alignof.c test-alloca-opt.c test-argmatch.c \
-	test-binary-io.c test-bitrotate.c test-btowc.c test-c-ctype.c \
-	test-c-strcasecmp.c test-c-strncasecmp.c test-chdir.c \
-	test-cloexec.c test-close.c test-ctype.c test-dirent.c \
-	test-dirent-safer.c test-dup.c test-dup-safer.c test-dup2.c \
-	test-environ.c test-errno.c test-exclude.c test-fchdir.c \
-	test-fcntl.c test-fcntl-h.c test-fcntl-safer.c test-fdopen.c \
-	test-fdopendir.c test-fgetc.c test-float.c test-fnmatch.c \
-	test-fpending.c test-fputc.c test-fread.c test-fstat.c \
-	test-fstatat.c test-fwrite.c test-getcwd-lgpl.c \
-	test-getdtablesize.c test-getopt.c test-gettimeofday.c \
-	test-hash.c test-i-ring.c test-iconv.c test-iconv-h.c \
-	test-ignore-value.c test-intprops.c test-inttostr.c \
-	test-inttypes.c test-isatty.c test-isblank.c test-iswblank.c \
-	test-langinfo.c test-locale.c test-localeconv.c \
-	test-localename.c test-lseek.c test-lstat.c test-malloc-gnu.c \
-	test-malloca.c test-mbscasecmp.c test-mbsinit.c \
-	test-mbsrtowcs.c test-mbsstr1.c test-mbsstr2.c test-mbsstr3.c \
-	test-memchr.c test-memchr2.c test-memrchr.c test-nl_langinfo.c \
-	test-open.c test-openat.c test-openat-safer.c test-pathmax.c \
-	test-pipe.c test-quotearg-simple.c test-read.c \
-	test-realloc-gnu.c test-regex.c test-setenv.c \
-	test-setlocale1.c test-setlocale2.c test-snprintf.c \
-	test-stat.c test-stdalign.c test-stdbool.c test-stddef.c \
-	test-stdint.c test-stdio.c test-stdlib.c test-strerror.c \
-	test-striconv.c test-string.c test-strnlen.c test-strstr.c \
-	test-strtoimax.c test-strtoll.c test-strtoull.c \
+	dfa-match-aux.c test-alignof.c test-alloca-opt.c \
+	test-argmatch.c test-binary-io.c test-bitrotate.c test-btowc.c \
+	test-c-ctype.c test-c-strcasecmp.c test-c-strncasecmp.c \
+	test-chdir.c test-cloexec.c test-close.c test-ctype.c \
+	test-dirent.c test-dirent-safer.c test-dup.c test-dup-safer.c \
+	test-dup2.c test-environ.c test-errno.c test-exclude.c \
+	test-fchdir.c test-fcntl.c test-fcntl-h.c test-fcntl-safer.c \
+	test-fdopen.c test-fdopendir.c test-fgetc.c test-float.c \
+	test-fnmatch.c test-fpending.c test-fputc.c test-fread.c \
+	test-fstat.c test-fstatat.c test-fwrite.c test-getcwd-lgpl.c \
+	test-getdtablesize.c test-getopt.c test-getprogname.c \
+	test-gettimeofday.c test-hash.c test-i-ring.c test-iconv.c \
+	test-iconv-h.c test-ignore-value.c test-intprops.c \
+	test-inttostr.c test-inttypes.c test-isatty.c test-isblank.c \
+	test-iswblank.c test-langinfo.c test-limits-h.c test-locale.c \
+	test-localeconv.c test-localename.c test-lseek.c test-lstat.c \
+	test-malloc-gnu.c test-malloca.c test-mbscasecmp.c \
+	test-mbsinit.c test-mbsrtowcs.c test-mbsstr1.c test-mbsstr2.c \
+	test-mbsstr3.c test-memchr.c test-memchr2.c test-memrchr.c \
+	test-nl_langinfo.c test-open.c test-openat.c \
+	test-openat-safer.c test-pathmax.c test-pipe.c \
+	test-quotearg-simple.c test-read.c test-realloc-gnu.c \
+	test-regex.c test-setenv.c test-setlocale1.c test-setlocale2.c \
+	test-snprintf.c test-stat.c test-stdalign.c test-stdbool.c \
+	test-stddef.c test-stdint.c test-stdio.c test-stdlib.c \
+	test-strerror.c test-striconv.c test-string.c test-strnlen.c \
+	test-strstr.c test-strtoimax.c test-strtoll.c test-strtoull.c \
 	test-strtoumax.c test-symlink.c test-sys_stat.c \
 	test-sys_time.c test-sys_types.c test-time.c \
 	$(test_u8_mbtoucr_SOURCES) $(test_u8_uctomb_SOURCES) \
@@ -1389,7 +1409,7 @@ CONFIG_INCLUDE = @CONFIG_INCLUDE@
 CPP = @CPP@
 CPPFLAGS = @CPPFLAGS@
 CYGPATH_W = @CYGPATH_W@
-DEFS = @DEFS@
+DEFS = @DEFS@ -DEXEEXT=\"@EXEEXT@\"
 DEPDIR = @DEPDIR@
 ECHO_C = @ECHO_C@
 ECHO_N = @ECHO_N@
@@ -1673,6 +1693,7 @@ GREP = @GREP@
 HAVE_ALPHASORT = @HAVE_ALPHASORT@
 HAVE_ATOLL = @HAVE_ATOLL@
 HAVE_BTOWC = @HAVE_BTOWC@
+HAVE_C99_STDINT_H = @HAVE_C99_STDINT_H@
 HAVE_CANONICALIZE_FILE_NAME = @HAVE_CANONICALIZE_FILE_NAME@
 HAVE_CHOWN = @HAVE_CHOWN@
 HAVE_CLOSEDIR = @HAVE_CLOSEDIR@
@@ -1914,6 +1935,7 @@ LIBTHREAD = @LIBTHREAD@
 LIBUNISTRING_UNISTR_H = @LIBUNISTRING_UNISTR_H@
 LIBUNISTRING_UNITYPES_H = @LIBUNISTRING_UNITYPES_H@
 LIBUNISTRING_UNIWIDTH_H = @LIBUNISTRING_UNIWIDTH_H@
+LIMITS_H = @LIMITS_H@
 LOCALCHARSET_TESTS_ENVIRONMENT = @LOCALCHARSET_TESTS_ENVIRONMENT@
 LOCALE_FR = @LOCALE_FR@
 LOCALE_FR_UTF8 = @LOCALE_FR_UTF8@
@@ -1940,6 +1962,7 @@ NEXT_AS_FIRST_DIRECTIVE_GETOPT_H = @NEXT_AS_FIRST_DIRECTIVE_GETOPT_H@
 NEXT_AS_FIRST_DIRECTIVE_ICONV_H = @NEXT_AS_FIRST_DIRECTIVE_ICONV_H@
 NEXT_AS_FIRST_DIRECTIVE_INTTYPES_H = @NEXT_AS_FIRST_DIRECTIVE_INTTYPES_H@
 NEXT_AS_FIRST_DIRECTIVE_LANGINFO_H = @NEXT_AS_FIRST_DIRECTIVE_LANGINFO_H@
+NEXT_AS_FIRST_DIRECTIVE_LIMITS_H = @NEXT_AS_FIRST_DIRECTIVE_LIMITS_H@
 NEXT_AS_FIRST_DIRECTIVE_LOCALE_H = @NEXT_AS_FIRST_DIRECTIVE_LOCALE_H@
 NEXT_AS_FIRST_DIRECTIVE_STDARG_H = @NEXT_AS_FIRST_DIRECTIVE_STDARG_H@
 NEXT_AS_FIRST_DIRECTIVE_STDDEF_H = @NEXT_AS_FIRST_DIRECTIVE_STDDEF_H@
@@ -1963,6 +1986,7 @@ NEXT_GETOPT_H = @NEXT_GETOPT_H@
 NEXT_ICONV_H = @NEXT_ICONV_H@
 NEXT_INTTYPES_H = @NEXT_INTTYPES_H@
 NEXT_LANGINFO_H = @NEXT_LANGINFO_H@
+NEXT_LIMITS_H = @NEXT_LIMITS_H@
 NEXT_LOCALE_H = @NEXT_LOCALE_H@
 NEXT_STDARG_H = @NEXT_STDARG_H@
 NEXT_STDDEF_H = @NEXT_STDDEF_H@
@@ -2259,7 +2283,8 @@ EXTRA_DIST = test-alignof.c test-alloca-opt.c test-argmatch.c macros.h \
 	signature.h macros.h test-c-ctype.c macros.h test-c-strcase.sh \
 	test-c-strcasecmp.c test-c-strncasecmp.c macros.h test-chdir.c \
 	signature.h macros.h test-cloexec.c macros.h test-close.c \
-	signature.h macros.h test-ctype.c test-dirent-safer.c macros.h \
+	signature.h macros.h test-ctype.c dfa-match.sh dfa-match-aux.c \
+	dfa-invalid-char-class.sh test-dirent-safer.c macros.h \
 	test-dirent.c test-dup.c signature.h macros.h test-dup2.c \
 	signature.h macros.h test-environ.c test-errno.c \
 	test-exclude.c test-exclude1.sh test-exclude2.sh \
@@ -2277,13 +2302,14 @@ EXTRA_DIST = test-alignof.c test-alloca-opt.c test-argmatch.c macros.h \
 	test-fwrite.c signature.h macros.h test-getcwd-lgpl.c \
 	signature.h macros.h test-getdtablesize.c signature.h macros.h \
 	macros.h signature.h test-getopt.c test-getopt.h \
-	test-getopt_long.h signature.h test-gettimeofday.c test-hash.c \
-	macros.h test-i-ring.c macros.h test-iconv-h.c test-iconv.c \
-	signature.h macros.h test-ignore-value.c test-intprops.c \
-	macros.h anytostr.c inttostr.h macros.h test-inttostr.c \
-	test-inttypes.c test-isatty.c signature.h macros.h \
-	test-isblank.c signature.h macros.h test-iswblank.c macros.h \
-	test-langinfo.c test-locale.c test-localeconv.c signature.h \
+	test-getopt_long.h test-getprogname.c signature.h \
+	test-gettimeofday.c test-hash.c macros.h test-i-ring.c \
+	macros.h test-iconv-h.c test-iconv.c signature.h macros.h \
+	test-ignore-value.c test-intprops.c macros.h anytostr.c \
+	inttostr.h macros.h test-inttostr.c test-inttypes.c \
+	test-isatty.c signature.h macros.h test-isblank.c signature.h \
+	macros.h test-iswblank.c macros.h test-langinfo.c \
+	test-limits-h.c test-locale.c test-localeconv.c signature.h \
 	macros.h localename.h test-localename.c macros.h test-lseek.c \
 	test-lseek.sh signature.h macros.h test-lstat.h test-lstat.c \
 	signature.h macros.h test-malloc-gnu.c test-malloca.c \
@@ -2385,6 +2411,7 @@ EXTRA_libtests_a_SOURCES = fdopen.c float.c itold.c anytostr.c pipe.c \
 	asnprintf.c printf-args.c printf-parse.c vasnprintf.c
 AM_LIBTOOLFLAGS = --preserve-dup-deps
 test_argmatch_LDADD = $(LDADD) @LIBINTL@
+dfa_match_aux_LDADD = $(LDADD) @LIBINTL@
 # Link with libintl when needed. dirent-safer uses fdopendir if it is present,
 # and fdopendir indirectly depends on openat-die -> gettext-h.
 test_dirent_safer_LDADD = $(LDADD) $(LIBINTL)
@@ -2394,6 +2421,7 @@ test_fdopendir_LDADD = $(LDADD) @LIBINTL@
 test_fstatat_LDADD = $(LDADD) @LIBINTL@
 test_getcwd_lgpl_LDADD = $(LDADD) $(LIBINTL)
 test_getopt_LDADD = $(LDADD) $(LIBINTL)
+test_getprogname_LDADD = $(LDADD)
 test_iconv_LDADD = $(LDADD) @LIBICONV@
 test_localename_LDADD = $(LDADD) @INTL_MACOSX_LIBS@ $(LIBTHREAD)
 test_openat_safer_LDADD = $(LDADD) @LIBINTL@
@@ -2476,6 +2504,10 @@ clean-checkPROGRAMS:
 
 clean-noinstPROGRAMS:
 	-test -z "$(noinst_PROGRAMS)" || rm -f $(noinst_PROGRAMS)
+
+dfa-match-aux$(EXEEXT): $(dfa_match_aux_OBJECTS) $(dfa_match_aux_DEPENDENCIES) $(EXTRA_dfa_match_aux_DEPENDENCIES) 
+	@rm -f dfa-match-aux$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(dfa_match_aux_OBJECTS) $(dfa_match_aux_LDADD) $(LIBS)
 
 test-alignof$(EXEEXT): $(test_alignof_OBJECTS) $(test_alignof_DEPENDENCIES) $(EXTRA_test_alignof_DEPENDENCIES) 
 	@rm -f test-alignof$(EXEEXT)
@@ -2633,6 +2665,10 @@ test-getopt$(EXEEXT): $(test_getopt_OBJECTS) $(test_getopt_DEPENDENCIES) $(EXTRA
 	@rm -f test-getopt$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(test_getopt_OBJECTS) $(test_getopt_LDADD) $(LIBS)
 
+test-getprogname$(EXEEXT): $(test_getprogname_OBJECTS) $(test_getprogname_DEPENDENCIES) $(EXTRA_test_getprogname_DEPENDENCIES) 
+	@rm -f test-getprogname$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(test_getprogname_OBJECTS) $(test_getprogname_LDADD) $(LIBS)
+
 test-gettimeofday$(EXEEXT): $(test_gettimeofday_OBJECTS) $(test_gettimeofday_DEPENDENCIES) $(EXTRA_test_gettimeofday_DEPENDENCIES) 
 	@rm -f test-gettimeofday$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(test_gettimeofday_OBJECTS) $(test_gettimeofday_LDADD) $(LIBS)
@@ -2684,6 +2720,10 @@ test-iswblank$(EXEEXT): $(test_iswblank_OBJECTS) $(test_iswblank_DEPENDENCIES) $
 test-langinfo$(EXEEXT): $(test_langinfo_OBJECTS) $(test_langinfo_DEPENDENCIES) $(EXTRA_test_langinfo_DEPENDENCIES) 
 	@rm -f test-langinfo$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(test_langinfo_OBJECTS) $(test_langinfo_LDADD) $(LIBS)
+
+test-limits-h$(EXEEXT): $(test_limits_h_OBJECTS) $(test_limits_h_DEPENDENCIES) $(EXTRA_test_limits_h_DEPENDENCIES) 
+	@rm -f test-limits-h$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(test_limits_h_OBJECTS) $(test_limits_h_LDADD) $(LIBS)
 
 test-locale$(EXEEXT): $(test_locale_OBJECTS) $(test_locale_DEPENDENCIES) $(EXTRA_test_locale_DEPENDENCIES) 
 	@rm -f test-locale$(EXEEXT)
@@ -2991,6 +3031,7 @@ distclean-compile:
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/anytostr.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/asnprintf.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dfa-match-aux.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dup-safer-flag.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/fd-safer-flag.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/fdopen.Po@am__quote@ # am--include-marker
@@ -3048,6 +3089,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-getcwd-lgpl.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-getdtablesize.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-getopt.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-getprogname.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-gettimeofday.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-hash.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-i-ring.Po@am__quote@ # am--include-marker
@@ -3061,6 +3103,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-isblank.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-iswblank.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-langinfo.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-limits-h.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-locale.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-localeconv.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-localename.Po@am__quote@ # am--include-marker
@@ -3144,16 +3187,18 @@ am--depfiles: $(am__depfiles_remade)
 
 .c.o:
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(am__set_depbase) && \
-@am__fastdepCC_TRUE@	$(COMPILE) -MT $@ -MD -MP -MF $$depbase.Tpo -c -o $@  $< && \
-@am__fastdepCC_TRUE@	$(am__mv) $$depbase.Tpo $$depbase.Po
+@am__fastdepCC_TRUE@	$(COMPILE) -MT $@ -MD -MP -MF $$depbase.Tpo -c -o $@  $<; \
+@am__fastdepCC_TRUE@	if test $$? = 0; then $(am__mv) $$depbase.Tpo $$depbase.Po; \
+@am__fastdepCC_TRUE@	  else rm -f $$depbase.Tpo; false; fi
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(COMPILE) -c -o $@  $<
 
 .c.obj:
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(am__set_depbase) && \
-@am__fastdepCC_TRUE@	$(COMPILE) -MT $@ -MD -MP -MF $$depbase.Tpo -c -o $@  $$($(CYGPATH_W) $<) && \
-@am__fastdepCC_TRUE@	$(am__mv) $$depbase.Tpo $$depbase.Po
+@am__fastdepCC_TRUE@	$(COMPILE) -MT $@ -MD -MP -MF $$depbase.Tpo -c -o $@  $$($(CYGPATH_W) $<); \
+@am__fastdepCC_TRUE@	if test $$? = 0; then $(am__mv) $$depbase.Tpo $$depbase.Po; \
+@am__fastdepCC_TRUE@	  else rm -f $$depbase.Tpo; false; fi
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(COMPILE) -c -o $@  $$($(CYGPATH_W) $<)
@@ -3489,6 +3534,20 @@ test-ctype.log: test-ctype$(EXEEXT)
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
 	"$$tst" $(AM_TESTS_FD_REDIRECT)
+dfa-invalid-char-class.sh.log: dfa-invalid-char-class.sh
+	@p='dfa-invalid-char-class.sh'; \
+	b='dfa-invalid-char-class.sh'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+dfa-match.sh.log: dfa-match.sh
+	@p='dfa-match.sh'; \
+	b='dfa-match.sh'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
 test-dirent-safer.log: test-dirent-safer$(EXEEXT)
 	@p='test-dirent-safer$(EXEEXT)'; \
 	b='test-dirent-safer'; \
@@ -3713,6 +3772,13 @@ test-getopt.log: test-getopt$(EXEEXT)
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
 	"$$tst" $(AM_TESTS_FD_REDIRECT)
+test-getprogname.log: test-getprogname$(EXEEXT)
+	@p='test-getprogname$(EXEEXT)'; \
+	b='test-getprogname'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
 test-gettimeofday.log: test-gettimeofday$(EXEEXT)
 	@p='test-gettimeofday$(EXEEXT)'; \
 	b='test-gettimeofday'; \
@@ -3800,6 +3866,13 @@ test-iswblank.log: test-iswblank$(EXEEXT)
 test-langinfo.log: test-langinfo$(EXEEXT)
 	@p='test-langinfo$(EXEEXT)'; \
 	b='test-langinfo'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+test-limits-h.log: test-limits-h$(EXEEXT)
+	@p='test-limits-h$(EXEEXT)'; \
+	b='test-limits-h'; \
 	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
@@ -4494,6 +4567,7 @@ clean-am: clean-checkLIBRARIES clean-checkPROGRAMS clean-generic \
 distclean: distclean-recursive
 		-rm -f ./$(DEPDIR)/anytostr.Po
 	-rm -f ./$(DEPDIR)/asnprintf.Po
+	-rm -f ./$(DEPDIR)/dfa-match-aux.Po
 	-rm -f ./$(DEPDIR)/dup-safer-flag.Po
 	-rm -f ./$(DEPDIR)/fd-safer-flag.Po
 	-rm -f ./$(DEPDIR)/fdopen.Po
@@ -4551,6 +4625,7 @@ distclean: distclean-recursive
 	-rm -f ./$(DEPDIR)/test-getcwd-lgpl.Po
 	-rm -f ./$(DEPDIR)/test-getdtablesize.Po
 	-rm -f ./$(DEPDIR)/test-getopt.Po
+	-rm -f ./$(DEPDIR)/test-getprogname.Po
 	-rm -f ./$(DEPDIR)/test-gettimeofday.Po
 	-rm -f ./$(DEPDIR)/test-hash.Po
 	-rm -f ./$(DEPDIR)/test-i-ring.Po
@@ -4564,6 +4639,7 @@ distclean: distclean-recursive
 	-rm -f ./$(DEPDIR)/test-isblank.Po
 	-rm -f ./$(DEPDIR)/test-iswblank.Po
 	-rm -f ./$(DEPDIR)/test-langinfo.Po
+	-rm -f ./$(DEPDIR)/test-limits-h.Po
 	-rm -f ./$(DEPDIR)/test-locale.Po
 	-rm -f ./$(DEPDIR)/test-localeconv.Po
 	-rm -f ./$(DEPDIR)/test-localename.Po
@@ -4685,6 +4761,7 @@ installcheck-am:
 maintainer-clean: maintainer-clean-recursive
 		-rm -f ./$(DEPDIR)/anytostr.Po
 	-rm -f ./$(DEPDIR)/asnprintf.Po
+	-rm -f ./$(DEPDIR)/dfa-match-aux.Po
 	-rm -f ./$(DEPDIR)/dup-safer-flag.Po
 	-rm -f ./$(DEPDIR)/fd-safer-flag.Po
 	-rm -f ./$(DEPDIR)/fdopen.Po
@@ -4742,6 +4819,7 @@ maintainer-clean: maintainer-clean-recursive
 	-rm -f ./$(DEPDIR)/test-getcwd-lgpl.Po
 	-rm -f ./$(DEPDIR)/test-getdtablesize.Po
 	-rm -f ./$(DEPDIR)/test-getopt.Po
+	-rm -f ./$(DEPDIR)/test-getprogname.Po
 	-rm -f ./$(DEPDIR)/test-gettimeofday.Po
 	-rm -f ./$(DEPDIR)/test-hash.Po
 	-rm -f ./$(DEPDIR)/test-i-ring.Po
@@ -4755,6 +4833,7 @@ maintainer-clean: maintainer-clean-recursive
 	-rm -f ./$(DEPDIR)/test-isblank.Po
 	-rm -f ./$(DEPDIR)/test-iswblank.Po
 	-rm -f ./$(DEPDIR)/test-langinfo.Po
+	-rm -f ./$(DEPDIR)/test-limits-h.Po
 	-rm -f ./$(DEPDIR)/test-locale.Po
 	-rm -f ./$(DEPDIR)/test-localeconv.Po
 	-rm -f ./$(DEPDIR)/test-localename.Po

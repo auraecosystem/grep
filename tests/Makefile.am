@@ -14,7 +14,27 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-check_PROGRAMS = get-mb-cur-max dfa-match-aux
+TEST_EXTENSIONS = .sh .pl
+
+if HAVE_PERL
+TESTSUITE_PERL = $(PERL)
+else
+TESTSUITE_PERL = $(SHELL) $(srcdir)/no-perl
+endif
+
+# Options passed to the perl invocations running the perl test scripts.
+TESTSUITE_PERL_OPTIONS = -w -I$(srcdir) -MCoreutils -MCuSkip
+# '$f' is set by the Automake-generated test harness to the path of the
+# current test script stripped of VPATH components, and is used by the
+# CuTmpdir module to determine the name of the temporary files to be
+# used.  Note that $f is a shell variable, not a make macro, so the use
+# of '$$f' below is correct, and not a typo.
+TESTSUITE_PERL_OPTIONS += -M"CuTmpdir qw($$f)"
+
+SH_LOG_COMPILER = $(SHELL)
+PL_LOG_COMPILER = $(TESTSUITE_PERL) $(TESTSUITE_PERL_OPTIONS)
+
+check_PROGRAMS = get-mb-cur-max
 AM_CPPFLAGS = -I$(top_builddir)/lib -I$(top_srcdir)/lib \
   -I$(top_srcdir)/src
 AM_CFLAGS = $(WARN_CFLAGS) $(WERROR_CFLAGS)
@@ -22,7 +42,6 @@ AM_CFLAGS = $(WARN_CFLAGS) $(WERROR_CFLAGS)
 # Tell the linker to omit references to unused shared libraries.
 AM_LDFLAGS = $(IGNORE_UNUSED_LIBRARIES_CFLAGS)
 LDADD = ../lib/libgreputils.a $(LIBINTL) ../lib/libgreputils.a
-dfa_match_aux_LDADD = ../src/dfa.$(OBJEXT) $(LDADD)
 
 # The triple-backref test is expected to fail with both the system
 # matcher (i.e., with glibc) and with the included matcher.
@@ -66,7 +85,6 @@ TESTS =						\
   count-newline					\
   dfa-coverage					\
   dfa-heap-overrun				\
-  dfa-match					\
   dfaexec-multibyte				\
   empty						\
   empty-line					\
@@ -79,16 +97,17 @@ TESTS =						\
   fedora					\
   fgrep-infloop					\
   file						\
+  filename-lineno.pl				\
   fmbtest					\
   foad1						\
   grep-dev-null					\
+  grep-dev-null-out				\
   grep-dir					\
   help-version					\
   high-bit-range				\
   in-eq-out-infloop				\
   include-exclude				\
   inconsistent-range				\
-  invalid-char-class				\
   invalid-multibyte-infloop			\
   khadafy					\
   kwset-abuse					\
@@ -133,6 +152,7 @@ TESTS =						\
   turkish-I					\
   turkish-I-without-dot				\
   turkish-eyes					\
+  two-chars					\
   two-files					\
   unibyte-binary				\
   unibyte-bracket-expr				\
@@ -150,12 +170,17 @@ EXTRA_DIST =					\
   $(TESTS)					\
   bre.awk					\
   bre.tests					\
+  Coreutils.pm					\
+  CuSkip.pm					\
+  CuTmpdir.pm					\
+  envvar-check					\
   ere.awk					\
   ere.tests					\
   init.cfg					\
   init.sh					\
   khadafy.lines					\
   khadafy.regexp				\
+  no-perl					\
   spencer1.awk					\
   spencer1.tests				\
   spencer1-locale.awk
@@ -165,7 +190,9 @@ EXTRA_DIST =					\
 MALLOC_PERTURB_ = 1
 
 TESTS_ENVIRONMENT =				\
-  tmp__=$$TMPDIR; test -d "$$tmp__" || tmp__=.;	\
+  tmp__=$${TMPDIR-/tmp};			\
+  test -d "$$tmp__" && test -w "$$tmp__" || tmp__=.;	\
+  . $(srcdir)/envvar-check;			\
   TMPDIR=$$tmp__; export TMPDIR;		\
 						\
   if test -n "$$BASH_VERSION" || (eval "export v=x") 2>/dev/null; then \

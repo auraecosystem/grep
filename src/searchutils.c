@@ -24,42 +24,36 @@
 
 #define NCHAR (UCHAR_MAX + 1)
 
-size_t mbclen_cache[NCHAR];
-
-void
-kwsinit (kwset_t *kwset)
+kwset_t
+kwsinit (bool mb_trans)
 {
   static char trans[NCHAR];
-  int i;
+  char *transptr = NULL;
 
-  if (match_icase && MB_CUR_MAX == 1)
+  if (match_icase && (MB_CUR_MAX == 1 || mb_trans))
     {
-      for (i = 0; i < NCHAR; ++i)
-        trans[i] = toupper (i);
-
-      *kwset = kwsalloc (trans);
+      if (MB_CUR_MAX == 1)
+        for (int i = 0; i < NCHAR; i++)
+          trans[i] = toupper (i);
+      else
+        for (int i = 0; i < NCHAR; i++)
+          {
+            wint_t wc = localeinfo.sbctowc[i];
+            wint_t uwc = towupper (wc);
+            if (uwc != wc)
+              {
+                mbstate_t mbs = { 0 };
+                size_t len = wcrtomb (&trans[i], uwc, &mbs);
+                if (len != 1)
+                  abort ();
+              }
+            else
+              trans[i] = i;
+          }
+      transptr = trans;
     }
-  else
-    *kwset = kwsalloc (NULL);
 
-  if (!*kwset)
-    xalloc_die ();
-}
-
-/* Initialize a cache of mbrlen values for each of its 1-byte inputs.  */
-void
-build_mbclen_cache (void)
-{
-  int i;
-
-  for (i = CHAR_MIN; i <= CHAR_MAX; ++i)
-    {
-      char c = i;
-      unsigned char uc = i;
-      mbstate_t mbs = { 0 };
-      size_t len = mbrlen (&c, 1, &mbs);
-      mbclen_cache[uc] = len ? len : 1;
-    }
+  return kwsalloc (transptr, false);
 }
 
 /* In the buffer *MB_START, return the number of bytes needed to go

@@ -52,6 +52,7 @@ AC_DEFUN([gl_EARLY],
   # Code from module announce-gen:
   # Code from module argmatch:
   # Code from module argmatch-tests:
+  # Code from module assert:
   # Code from module assure:
   # Code from module at-internal:
   # Code from module binary-io:
@@ -82,6 +83,8 @@ AC_DEFUN([gl_EARLY],
   # Code from module d-ino:
   # Code from module d-type:
   # Code from module dev-ino:
+  # Code from module dfa:
+  # Code from module dfa-tests:
   # Code from module dirent:
   # Code from module dirent-safer:
   # Code from module dirent-safer-tests:
@@ -150,6 +153,8 @@ AC_DEFUN([gl_EARLY],
   # Code from module getopt-posix:
   # Code from module getopt-posix-tests:
   # Code from module getpagesize:
+  # Code from module getprogname:
+  # Code from module getprogname-tests:
   # Code from module gettext-h:
   # Code from module gettimeofday:
   # Code from module gettimeofday-tests:
@@ -193,6 +198,8 @@ AC_DEFUN([gl_EARLY],
   # Code from module langinfo-tests:
   # Code from module largefile:
   AC_REQUIRE([AC_SYS_LARGEFILE])
+  # Code from module limits-h:
+  # Code from module limits-h-tests:
   # Code from module localcharset:
   # Code from module locale:
   # Code from module locale-tests:
@@ -256,7 +263,6 @@ AC_DEFUN([gl_EARLY],
   # Code from module perl:
   # Code from module pipe-posix:
   # Code from module pipe-posix-tests:
-  # Code from module progname:
   # Code from module propername:
   # Code from module putenv:
   # Code from module quote:
@@ -414,6 +420,7 @@ AC_DEFUN([gl_INIT],
   gl_COMMON
   gl_source_base='lib'
   gl_FUNC_ALLOCA
+  gl_ASSERT
   AC_LIBOBJ([openat-proc])
   gl_FUNC_BTOWC
   if test $HAVE_BTOWC = 0 || test $REPLACE_BTOWC = 1; then
@@ -558,6 +565,11 @@ AC_DEFUN([gl_INIT],
     AC_LIBOBJ([getpagesize])
   fi
   gl_UNISTD_MODULE_INDICATOR([getpagesize])
+  gl_FUNC_GETPROGNAME
+  AC_REQUIRE([gl_USE_SYSTEM_EXTENSIONS])
+  AC_CHECK_DECLS([program_invocation_name], [], [], [#include <errno.h>])
+  AC_CHECK_DECLS([program_invocation_short_name], [], [], [#include <errno.h>])
+  AC_CHECK_DECLS([__argv], [], [], [#include <stdlib.h>])
   AC_SUBST([LIBINTL])
   AC_SUBST([LTLIBINTL])
   gl_FUNC_GETTIMEOFDAY
@@ -620,6 +632,7 @@ AC_DEFUN([gl_INIT],
   gl_WCTYPE_MODULE_INDICATOR([iswctype])
   gl_LANGINFO_H
   AC_REQUIRE([gl_LARGEFILE])
+  gl_LIMITS_H
   gl_LOCALCHARSET
   LOCALCHARSET_TESTS_ENVIRONMENT="CHARSETALIASDIR=\"\$(abs_top_builddir)/$gl_source_base\""
   AC_SUBST([LOCALCHARSET_TESTS_ENVIRONMENT])
@@ -752,8 +765,6 @@ AC_DEFUN([gl_INIT],
   gl_DIRENT_MODULE_INDICATOR([opendir])
   gl_PATHMAX
   gl_PERL
-  AC_CHECK_DECLS([program_invocation_name], [], [], [#include <errno.h>])
-  AC_CHECK_DECLS([program_invocation_short_name], [], [], [#include <errno.h>])
   m4_ifdef([AM_XGETTEXT_OPTION],
     [AM_][XGETTEXT_OPTION([--keyword='proper_name:1,\"This is a proper name. See the gettext manual, section Names.\"'])
      AM_][XGETTEXT_OPTION([--keyword='proper_name_utf8:1,\"This is a proper name. See the gettext manual, section Names.\"'])])
@@ -1220,6 +1231,8 @@ AC_DEFUN([gl_FILE_LIST], [
   lib/cycle-check.c
   lib/cycle-check.h
   lib/dev-ino.h
+  lib/dfa.c
+  lib/dfa.h
   lib/dirent--.h
   lib/dirent-private.h
   lib/dirent-safer.h
@@ -1250,6 +1263,7 @@ AC_DEFUN([gl_FILE_LIST], [
   lib/filename.h
   lib/filenamecat-lgpl.c
   lib/filenamecat.h
+  lib/flexmember.h
   lib/fnmatch.c
   lib/fnmatch.in.h
   lib/fnmatch_loop.c
@@ -1267,6 +1281,8 @@ AC_DEFUN([gl_FILE_LIST], [
   lib/getopt1.c
   lib/getopt_int.h
   lib/getpagesize.c
+  lib/getprogname.c
+  lib/getprogname.h
   lib/gettext.h
   lib/gettimeofday.c
   lib/glthread/lock.c
@@ -1296,10 +1312,13 @@ AC_DEFUN([gl_FILE_LIST], [
   lib/iswctype-impl.h
   lib/iswctype.c
   lib/langinfo.in.h
+  lib/limits.in.h
   lib/localcharset.c
   lib/localcharset.h
   lib/locale.in.h
   lib/localeconv.c
+  lib/localeinfo.c
+  lib/localeinfo.h
   lib/lseek.c
   lib/lstat.c
   lib/malloc.c
@@ -1350,8 +1369,6 @@ AC_DEFUN([gl_FILE_LIST], [
   lib/opendir.c
   lib/pathmax.h
   lib/pipe-safer.c
-  lib/progname.c
-  lib/progname.h
   lib/propername.c
   lib/propername.h
   lib/quote.h
@@ -1448,6 +1465,7 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/00gnulib.m4
   m4/absolute-header.m4
   m4/alloca.m4
+  m4/assert.m4
   m4/btowc.m4
   m4/chdir-long.m4
   m4/close-stream.m4
@@ -1494,6 +1512,7 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/getdtablesize.m4
   m4/getopt.m4
   m4/getpagesize.m4
+  m4/getprogname.m4
   m4/gettimeofday.m4
   m4/glibc21.m4
   m4/gnulib-common.m4
@@ -1521,6 +1540,7 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/lib-link.m4
   m4/lib-prefix.m4
   m4/libunistring-base.m4
+  m4/limits-h.m4
   m4/localcharset.m4
   m4/locale-fr.m4
   m4/locale-ja.m4
@@ -1625,6 +1645,9 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/xalloc.m4
   m4/xsize.m4
   m4/xstrtol.m4
+  tests/dfa-invalid-char-class.sh
+  tests/dfa-match-aux.c
+  tests/dfa-match.sh
   tests/init.sh
   tests/macros.h
   tests/signature.h
@@ -1682,6 +1705,7 @@ AC_DEFUN([gl_FILE_LIST], [
   tests/test-getopt.c
   tests/test-getopt.h
   tests/test-getopt_long.h
+  tests/test-getprogname.c
   tests/test-gettimeofday.c
   tests/test-hash.c
   tests/test-i-ring.c
@@ -1696,6 +1720,7 @@ AC_DEFUN([gl_FILE_LIST], [
   tests/test-isblank.c
   tests/test-iswblank.c
   tests/test-langinfo.c
+  tests/test-limits-h.c
   tests/test-locale.c
   tests/test-localeconv.c
   tests/test-localename.c

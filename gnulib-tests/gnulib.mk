@@ -162,6 +162,18 @@ EXTRA_DIST += test-ctype.c
 
 ## end   gnulib module ctype-tests
 
+## begin gnulib module dfa-tests
+
+TESTS +=			\
+  dfa-invalid-char-class.sh	\
+  dfa-match.sh
+
+check_PROGRAMS += dfa-match-aux
+dfa_match_aux_LDADD = $(LDADD) @LIBINTL@
+EXTRA_DIST += dfa-match.sh dfa-match-aux.c dfa-invalid-char-class.sh
+
+## end   gnulib module dfa-tests
+
 ## begin gnulib module dirent-safer-tests
 
 TESTS += test-dirent-safer
@@ -436,6 +448,16 @@ EXTRA_DIST += macros.h signature.h test-getopt.c test-getopt.h test-getopt_long.
 
 ## end   gnulib module getopt-posix-tests
 
+## begin gnulib module getprogname-tests
+
+DEFS += -DEXEEXT=\"@EXEEXT@\"
+TESTS += test-getprogname
+check_PROGRAMS += test-getprogname
+test_getprogname_LDADD = $(LDADD)
+EXTRA_DIST += test-getprogname.c
+
+## end   gnulib module getprogname-tests
+
 ## begin gnulib module gettimeofday-tests
 
 TESTS += test-gettimeofday
@@ -563,6 +585,14 @@ check_PROGRAMS += test-langinfo
 EXTRA_DIST += test-langinfo.c
 
 ## end   gnulib module langinfo-tests
+
+## begin gnulib module limits-h-tests
+
+TESTS += test-limits-h
+check_PROGRAMS += test-limits-h
+EXTRA_DIST += test-limits-h.c
+
+## end   gnulib module limits-h-tests
 
 ## begin gnulib module locale-tests
 
@@ -1311,7 +1341,6 @@ EXTRA_DIST += test-wctype-h.c macros.h
 
 TESTS += test-wcwidth
 check_PROGRAMS += test-wcwidth
-
 EXTRA_DIST += test-wcwidth.c signature.h macros.h
 
 ## end   gnulib module wcwidth-tests

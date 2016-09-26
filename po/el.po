@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grep 2.11.11-pre1\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2016-04-21 21:37-0700\n"
+"POT-Creation-Date: 2016-09-25 16:36-0700\n"
 "PO-Revision-Date: 2012-05-05 23:23+0100\n"
 "Last-Translator: Savvas Radevic <vicedar@gmail.com>\n"
 "Language-Team: Greek <team@lists.gnome.gr>\n"
@@ -16,27 +16,87 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Bugs: Report translation errors to the Language-Team address.\n"
 "X-Poedit-Language: Greek\n"
 "X-Poedit-Country: GREECE\n"
 
-#: lib/argmatch.c:133
+#: lib/argmatch.c:134
 #, c-format
 msgid "invalid argument %s for %s"
 msgstr "άκυρη επιλογή %s για %s"
 
-#: lib/argmatch.c:134
+#: lib/argmatch.c:135
 #, c-format
 msgid "ambiguous argument %s for %s"
 msgstr "διφορούμενη επιλογή %s για %s"
 
-#: lib/argmatch.c:153
+#: lib/argmatch.c:154
 msgid "Valid arguments are:"
 msgstr "Έγκυρες επιλογές είναι οι εξής:"
 
-#: lib/closeout.c:112 src/grep.c:1238
+#: lib/closeout.c:112 src/grep.c:1312
 #, c-format
 msgid "write error"
 msgstr "σφάλμα εγγραφής"
+
+# src/dfa.c:652 src/dfa.c:655 src/dfa.c:682 src/dfa.c:686 src/dfa.c:687
+# src/dfa.c:690 src/dfa.c:703 src/dfa.c:704
+# src/dfa.c:660 src/dfa.c:663 src/dfa.c:690 src/dfa.c:694 src/dfa.c:695
+# src/dfa.c:698 src/dfa.c:711 src/dfa.c:712
+#: lib/dfa.c:948 lib/dfa.c:951 lib/dfa.c:970 lib/dfa.c:980 lib/dfa.c:993
+#: lib/dfa.c:1021 lib/dfa.c:1030 lib/dfa.c:1033 lib/dfa.c:1038 lib/dfa.c:1060
+#: lib/dfa.c:1063
+#, fuzzy
+msgid "unbalanced ["
+msgstr "Μη ισορροπημένο ["
+
+#: lib/dfa.c:1006
+msgid "invalid character class"
+msgstr "άκυρη κατηγορία χαρακτήρων"
+
+#: lib/dfa.c:1129
+msgid "character class syntax is [[:space:]], not [:space:]"
+msgstr "η σύνταξη κατηγορίας χαρακτήρων είναι [[:space:]], όχι [:space:]"
+
+# src/dfa.c:444
+# src/dfa.c:452
+#: lib/dfa.c:1198
+#, fuzzy
+msgid "unfinished \\ escape"
+msgstr "Μη τερματισμένος χαρακτήρας διαφυγής \\"
+
+# src/dfa.c:556 src/dfa.c:562 src/dfa.c:573 src/dfa.c:584
+# src/dfa.c:564 src/dfa.c:570 src/dfa.c:581 src/dfa.c:592
+#: lib/dfa.c:1359
+#, fuzzy
+msgid "invalid content of \\{\\}"
+msgstr "μη έγκυρος μέγιστος μετρητής"
+
+#: lib/dfa.c:1362
+#, fuzzy
+msgid "regular expression too big"
+msgstr "Υπερβολικά μεγάλη η κανονική έκφραση"
+
+# src/dfa.c:841
+# src/dfa.c:849
+#: lib/dfa.c:1777
+#, fuzzy
+msgid "unbalanced ("
+msgstr "Μη ισορροπημένο ("
+
+# src/dfa.c:962
+# src/dfa.c:970
+#: lib/dfa.c:1904
+#, fuzzy
+msgid "no syntax specified"
+msgstr "Δεν ορίστηκε συντακτικό"
+
+# src/dfa.c:970
+# src/dfa.c:978
+#: lib/dfa.c:1912
+#, fuzzy
+msgid "unbalanced )"
+msgstr "Μη ισορροπημένο )"
 
 #: lib/error.c:191
 msgid "Unknown system error"
@@ -437,71 +497,12 @@ msgstr "άκυρη κατάληξη στην %s%s επιλογή «%s»"
 msgid "%s%s argument '%s' too large"
 msgstr "η %s%s επιλογή «%s» είναι υπερβολικά μεγάλη"
 
-# src/dfa.c:652 src/dfa.c:655 src/dfa.c:682 src/dfa.c:686 src/dfa.c:687
-# src/dfa.c:690 src/dfa.c:703 src/dfa.c:704
-# src/dfa.c:660 src/dfa.c:663 src/dfa.c:690 src/dfa.c:694 src/dfa.c:695
-# src/dfa.c:698 src/dfa.c:711 src/dfa.c:712
-#: src/dfa.c:990 src/dfa.c:993 src/dfa.c:1012 src/dfa.c:1022 src/dfa.c:1034
-#: src/dfa.c:1061 src/dfa.c:1070 src/dfa.c:1073 src/dfa.c:1078 src/dfa.c:1099
-#: src/dfa.c:1102
-#, fuzzy
-msgid "unbalanced ["
-msgstr "Μη ισορροπημένο ["
-
-#: src/dfa.c:1046
-msgid "invalid character class"
-msgstr "άκυρη κατηγορία χαρακτήρων"
-
-#: src/dfa.c:1168
-msgid "character class syntax is [[:space:]], not [:space:]"
-msgstr "η σύνταξη κατηγορίας χαρακτήρων είναι [[:space:]], όχι [:space:]"
-
-# src/dfa.c:444
-# src/dfa.c:452
-#: src/dfa.c:1230
-#, fuzzy
-msgid "unfinished \\ escape"
-msgstr "Μη τερματισμένος χαρακτήρας διαφυγής \\"
-
-# src/dfa.c:556 src/dfa.c:562 src/dfa.c:573 src/dfa.c:584
-# src/dfa.c:564 src/dfa.c:570 src/dfa.c:581 src/dfa.c:592
-#: src/dfa.c:1377
-#, fuzzy
-msgid "invalid content of \\{\\}"
-msgstr "μη έγκυρος μέγιστος μετρητής"
-
-#: src/dfa.c:1380
-#, fuzzy
-msgid "regular expression too big"
-msgstr "Υπερβολικά μεγάλη η κανονική έκφραση"
-
-# src/dfa.c:841
-# src/dfa.c:849
-#: src/dfa.c:1796
-#, fuzzy
-msgid "unbalanced ("
-msgstr "Μη ισορροπημένο ("
-
-# src/dfa.c:962
-# src/dfa.c:970
-#: src/dfa.c:1922
-#, fuzzy
-msgid "no syntax specified"
-msgstr "Δεν ορίστηκε συντακτικό"
-
-# src/dfa.c:970
-# src/dfa.c:978
-#: src/dfa.c:1930
-#, fuzzy
-msgid "unbalanced )"
-msgstr "Μη ισορροπημένο )"
-
 #. This is a proper name. See the gettext manual, section Names.
-#: src/grep.c:58
+#: src/grep.c:57
 msgid "Mike Haertel"
 msgstr "Mike Haertel"
 
-#: src/grep.c:59
+#: src/grep.c:58
 msgid "others, see <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
 msgstr ""
 "άλλοι, κοιτάξτε τον σύνδεσμο <http://git.sv.gnu.org/cgit/grep.git/tree/"
@@ -509,73 +510,73 @@ msgstr ""
 
 # src/grep.c:785 src/grep.c:792
 # src/grep.c:1060 src/grep.c:1067 src/grep.c:1076
-#: src/grep.c:689
+#: src/grep.c:767
 msgid "invalid context length argument"
 msgstr "μη έγκυρο όρισμα μήκους περιεχομένου"
 
-#: src/grep.c:753
+#: src/grep.c:831
 #, c-format
 msgid "input is too large to count"
 msgstr "η είσοδος είναι πολύ μεγάλη για να μετρηθεί"
 
-#: src/grep.c:795
+#: src/grep.c:863
 msgid "lseek failed"
 msgstr "αποτυχία του lseek"
 
 # src/grep.c:715
-#: src/grep.c:1539
+#: src/grep.c:1611
 #, c-format
 msgid "Binary file %s matches\n"
 msgstr "Το δυαδικό αρχείο %s ταιριάζει\n"
 
 # src/grep.c:293
 # src/grep.c:366
-#: src/grep.c:1588
+#: src/grep.c:1659
 #, fuzzy, c-format
 msgid "warning: %s: %s"
 msgstr "προειδοποίηση: %s: %s\n"
 
 # src/grep.c:844
-#: src/grep.c:1589
+#: src/grep.c:1660
 msgid "recursive directory loop"
 msgstr "αναδρομική αλληλοδιαδοχή καταλόγων"
 
-#: src/grep.c:1758
+#: src/grep.c:1825
 #, c-format
 msgid "input file %s is also the output"
 msgstr "το αρχείο εισαγωγής %s είναι επίσης το αρχείο εξόδου"
 
 # src/grep.c:964 src/grep.c:1015
 # src/grep.c:730
-#: src/grep.c:1820
+#: src/grep.c:1882
 msgid "(standard input)"
 msgstr "(κανονική είσοδος)"
 
 # src/grep.c:597
 # src/grep.c:862
-#: src/grep.c:1836 src/grep.c:1843
+#: src/grep.c:1898 src/grep.c:1905
 #, c-format
 msgid "Usage: %s [OPTION]... PATTERN [FILE]...\n"
 msgstr "Χρήση: %s [ΕΠΙΛΟΓΗ]... ΥΠΟΔΕΙΓΜΑ [ΑΡΧΕΙΟ]...\n"
 
 # src/grep.c:598
 # src/grep.c:863
-#: src/grep.c:1838
+#: src/grep.c:1900
 #, c-format
 msgid "Try '%s --help' for more information.\n"
 msgstr "Δοκιμάστε «%s --help» για περισσότερες πληροφορίες.\n"
 
-#: src/grep.c:1844
+#: src/grep.c:1906
 #, c-format
 msgid "Search for PATTERN in each FILE or standard input.\n"
 msgstr ""
 
-#: src/grep.c:1845
+#: src/grep.c:1907
 #, c-format
 msgid "PATTERN is, by default, a basic regular expression (BRE).\n"
 msgstr ""
 
-#: src/grep.c:1846
+#: src/grep.c:1908
 #, c-format
 msgid ""
 "Example: %s -i 'hello world' menu.h main.c\n"
@@ -587,7 +588,7 @@ msgstr ""
 "\n"
 "Επιλογή κανονικής έκφρασης και ερμηνεία:\n"
 
-#: src/grep.c:1850
+#: src/grep.c:1912
 #, fuzzy, c-format
 msgid ""
 "  -E, --extended-regexp     PATTERN is an extended regular expression (ERE)\n"
@@ -603,7 +604,7 @@ msgstr ""
 
 # src/grep.c:603
 # src/grep.c:868
-#: src/grep.c:1856
+#: src/grep.c:1918
 #, c-format
 msgid ""
 "  -e, --regexp=PATTERN      use PATTERN for matching\n"
@@ -625,7 +626,7 @@ msgstr ""
 
 # src/grep.c:615
 # src/grep.c:880
-#: src/grep.c:1863
+#: src/grep.c:1925
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -644,7 +645,7 @@ msgstr ""
 "      --mmap                χρήση εισόδου απεικονισμένη-στη-μνήμη αν\n"
 "                              υπάρχει τέτοια δυνατότητα\n"
 
-#: src/grep.c:1870
+#: src/grep.c:1932
 #, c-format
 msgid ""
 "\n"
@@ -659,7 +660,7 @@ msgid ""
 "prefix\n"
 msgstr ""
 
-#: src/grep.c:1881
+#: src/grep.c:1943
 #, c-format
 msgid ""
 "  -o, --only-matching       show only the part of a line matching PATTERN\n"
@@ -669,7 +670,7 @@ msgid ""
 "  -a, --text                equivalent to --binary-files=text\n"
 msgstr ""
 
-#: src/grep.c:1888
+#: src/grep.c:1950
 #, c-format
 msgid ""
 "  -I                        equivalent to --binary-files=without-match\n"
@@ -681,7 +682,7 @@ msgid ""
 "  -R, --dereference-recursive  likewise, but follow all symlinks\n"
 msgstr ""
 
-#: src/grep.c:1897
+#: src/grep.c:1959
 #, c-format
 msgid ""
 "      --include=FILE_PATTERN  search only files that match FILE_PATTERN\n"
@@ -692,7 +693,7 @@ msgid ""
 "skipped.\n"
 msgstr ""
 
-#: src/grep.c:1904
+#: src/grep.c:1966
 #, c-format
 msgid ""
 "  -L, --files-without-match  print only names of FILEs containing no match\n"
@@ -702,7 +703,7 @@ msgid ""
 "  -Z, --null                print 0 byte after FILE name\n"
 msgstr ""
 
-#: src/grep.c:1910
+#: src/grep.c:1972
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -722,7 +723,7 @@ msgstr ""
 
 # src/grep.c:633
 # src/grep.c:902
-#: src/grep.c:1917
+#: src/grep.c:1979
 #, fuzzy, c-format
 msgid ""
 "  -NUM                      same as --context=NUM\n"
@@ -745,7 +746,7 @@ msgstr ""
 "                              χαρακτήρες CR (MSDOS)\n"
 "\n"
 
-#: src/grep.c:1926
+#: src/grep.c:1988
 #, c-format
 msgid ""
 "'egrep' means 'grep -E'.  'fgrep' means 'grep -F'.\n"
@@ -755,7 +756,7 @@ msgstr ""
 "«grep -F».\n"
 "Η άμεση επίκληση ως «egrep» ή «fgrep» έχει καταργηθεί.\n"
 
-#: src/grep.c:1929
+#: src/grep.c:1991
 #, fuzzy, c-format
 msgid ""
 "When FILE is -, read standard input.  With no FILE, read . if a command-"
@@ -771,37 +772,37 @@ msgstr ""
 
 # src/grep.c:829
 # src/grep.c:1112
-#: src/grep.c:1996
+#: src/grep.c:2058
 #, c-format
 msgid "conflicting matchers specified"
 msgstr "ορίστηκαν αντικρουόμενα στοιχεία αναζήτησης"
 
 # src/dfa.c:556 src/dfa.c:562 src/dfa.c:573 src/dfa.c:584
 # src/dfa.c:564 src/dfa.c:570 src/dfa.c:581 src/dfa.c:592
-#: src/grep.c:2007
+#: src/grep.c:2069
 #, fuzzy, c-format
 msgid "invalid matcher %s"
 msgstr "μη έγκυρος μέγιστος μετρητής"
 
-#: src/grep.c:2290
+#: src/grep.c:2393
 #, c-format
 msgid "warning: GREP_OPTIONS is deprecated; please use an alias or script"
 msgstr ""
 
 # src/grep.c:1133
-#: src/grep.c:2320
+#: src/grep.c:2423
 #, c-format
 msgid "unknown devices method"
 msgstr "άγνωστη μέθοδος συσκευών"
 
 # src/dfa.c:556 src/dfa.c:562 src/dfa.c:573 src/dfa.c:584
 # src/dfa.c:564 src/dfa.c:570 src/dfa.c:581 src/dfa.c:592
-#: src/grep.c:2447
+#: src/grep.c:2552
 #, c-format
 msgid "invalid max count"
 msgstr "μη έγκυρος μέγιστος μετρητής"
 
-#: src/grep.c:2504
+#: src/grep.c:2609
 #, c-format
 msgid "unknown binary-files type"
 msgstr "άγνωστο είδος δυαδικών αρχείων"
@@ -863,24 +864,6 @@ msgstr ""
 #, fuzzy, c-format
 msgid "internal PCRE error: %d"
 msgstr "εσωτερικό σφάλμα"
-
-# src/grep.c:597
-# src/grep.c:862
-#, fuzzy
-#~ msgid ""
-#~ "Usage: %s [OPTION]... PATTERN [FILE]...\n"
-#~ "  or:  %s [OPTION]... --files0-from=F PATTERN\n"
-#~ msgstr "Χρήση: %s [ΕΠΙΛΟΓΗ]... ΥΠΟΔΕΙΓΜΑ [ΑΡΧΕΙΟ]...\n"
-
-#, fuzzy
-#~ msgid "%s: read error"
-#~ msgstr "σφάλμα εγγραφής"
-
-# src/grep.c:785 src/grep.c:792
-# src/grep.c:1060 src/grep.c:1067 src/grep.c:1076
-#, fuzzy
-#~ msgid "invalid zero-length file name"
-#~ msgstr "μη έγκυρο όρισμα μήκους περιεχομένου"
 
 #~ msgid "PATTERN is an extended regular expression (ERE).\n"
 #~ msgstr "Το ΠΡΟΤΥΠΟ είναι μια εκτεταμένη κανονική έκφραση (ΕΚΕ).\n"

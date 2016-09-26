@@ -22,7 +22,13 @@
 #include <stdbool.h>
 #include <stddef.h>
 
-#include "xalloc.h" /* for _GL_ATTRIBUTE_MALLOC */
+#if 3 <= __GNUC__
+# define _GL_ATTRIBUTE_MALLOC __attribute__ ((__malloc__))
+#else
+# define _GL_ATTRIBUTE_MALLOC
+#endif
+
+struct localeinfo; /* See localeinfo.h.  */
 
 /* Element of a list of strings, at least one of which is known to
    appear in any R.E. matching the DFA. */
@@ -44,21 +50,40 @@ struct dfa;
    calling dfafree() on it. */
 extern struct dfa *dfaalloc (void) _GL_ATTRIBUTE_MALLOC;
 
+/* DFA options that can be ORed together, for dfasyntax's 4th arg.  */
+enum
+  {
+    /* ^ and $ match only the start and end of data, and do not match
+       end-of-line within data.  This is always false for grep, but
+       possibly true for other apps.  */
+    DFA_ANCHOR = 1 << 0,
+
+    /* Ignore case while matching.  */
+    DFA_CASE_FOLD = 1 << 1,
+
+    /* '\0' in data is end-of-line, instead of the traditional '\n'.  */
+    DFA_EOL_NUL = 1 << 2
+  };
+
+/* Initialize or reinitialize a DFA.  This must be called before
+   any of the routines below.  The arguments are:
+   1. The DFA to operate on.
+   2. Information about the current locale.
+   3. Syntax bits described in regex.h.
+   4. Additional DFA options described above.  */
+extern void dfasyntax (struct dfa *, struct localeinfo const *,
+                       reg_syntax_t, int);
+
 /* Build and return the struct dfamust from the given struct dfa. */
 extern struct dfamust *dfamust (struct dfa const *);
 
 /* Free the storage held by the components of a struct dfamust. */
 extern void dfamustfree (struct dfamust *);
 
-/* dfasyntax() takes three arguments; the first sets the syntax bits described
-   earlier in this file, the second sets the case-folding flag, and the
-   third specifies the line terminator. */
-extern void dfasyntax (reg_syntax_t, int, unsigned char);
-
 /* Compile the given string of the given length into the given struct dfa.
    Final argument is a flag specifying whether to build a searching or an
    exact matcher. */
-extern void dfacomp (char const *, size_t, struct dfa *, int);
+extern void dfacomp (char const *, size_t, struct dfa *, bool);
 
 /* Search through a buffer looking for a match to the given struct dfa.
    Find the first occurrence of a string matching the regexp in the
@@ -67,13 +92,13 @@ extern void dfacomp (char const *, size_t, struct dfa *, int);
    points to the beginning of the buffer, and END points to the first byte
    after its end.  Note however that we store a sentinel byte (usually
    newline) in *END, so the actual buffer must be one byte longer.
-   When NEWLINE is nonzero, newlines may appear in the matching string.
+   When ALLOW_NL is true, newlines may appear in the matching string.
    If COUNT is non-NULL, increment *COUNT once for each newline processed.
    Finally, if BACKREF is non-NULL set *BACKREF to indicate whether we
-   encountered a back-reference (1) or not (0).  The caller may use this
-   to decide whether to fall back on a backtracking matcher. */
+   encountered a back-reference.  The caller can use this to decide
+   whether to fall back on a backtracking matcher.  */
 extern char *dfaexec (struct dfa *d, char const *begin, char *end,
-                      int newline, size_t *count, int *backref);
+                      bool allow_nl, size_t *count, bool *backref);
 
 /* Return a superset for D.  The superset matches everything that D
    matches, along with some other strings (though the latter should be
@@ -87,22 +112,6 @@ extern bool dfaisfast (struct dfa const *) _GL_ATTRIBUTE_PURE;
 /* Free the storage held by the components of a struct dfa. */
 extern void dfafree (struct dfa *);
 
-/* Entry points for people who know what they're doing. */
-
-/* Initialize the components of a struct dfa. */
-extern void dfainit (struct dfa *);
-
-/* Incrementally parse a string of given length into a struct dfa. */
-extern void dfaparse (char const *, size_t, struct dfa *);
-
-/* Analyze a parsed regexp; second argument tells whether to build a searching
-   or an exact matcher. */
-extern void dfaanalyze (struct dfa *, int);
-
-/* Compute, for each possible character, the transitions out of a given
-   state, storing them in an array of integers. */
-extern void dfastate (ptrdiff_t, struct dfa *, ptrdiff_t []);
-
 /* Error handling. */
 
 /* dfawarn() is called by the regexp routines whenever a regex is compiled
@@ -115,5 +124,3 @@ extern void dfawarn (const char *);
    takes a single argument, a NUL-terminated string describing the error.
    The user must supply a dfaerror.  */
 extern _Noreturn void dfaerror (const char *);
-
-extern int using_utf8 (void);

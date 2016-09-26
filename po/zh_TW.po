@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grep 2.23.7\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2016-04-21 21:37-0700\n"
+"POT-Creation-Date: 2016-09-25 16:36-0700\n"
 "PO-Revision-Date: 2016-03-26 04:25+0800\n"
 "Last-Translator: Webber Liao <wpliao@gmail.com>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -18,27 +18,66 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Bugs: Report translation errors to the Language-Team address.\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 1.8\n"
 
-#: lib/argmatch.c:133
+#: lib/argmatch.c:134
 #, c-format
 msgid "invalid argument %s for %s"
 msgstr "%2$s 的引數 %1$s 無效"
 
-#: lib/argmatch.c:134
+#: lib/argmatch.c:135
 #, c-format
 msgid "ambiguous argument %s for %s"
 msgstr "%2$s 的引數 %1$s 不明確"
 
-#: lib/argmatch.c:153
+#: lib/argmatch.c:154
 msgid "Valid arguments are:"
 msgstr "有效的引數為:"
 
-#: lib/closeout.c:112 src/grep.c:1238
+#: lib/closeout.c:112 src/grep.c:1312
 #, c-format
 msgid "write error"
 msgstr "寫入發生錯誤"
+
+#: lib/dfa.c:948 lib/dfa.c:951 lib/dfa.c:970 lib/dfa.c:980 lib/dfa.c:993
+#: lib/dfa.c:1021 lib/dfa.c:1030 lib/dfa.c:1033 lib/dfa.c:1038 lib/dfa.c:1060
+#: lib/dfa.c:1063
+msgid "unbalanced ["
+msgstr "不對稱的 ["
+
+#: lib/dfa.c:1006
+msgid "invalid character class"
+msgstr "無效的字元類別"
+
+#: lib/dfa.c:1129
+msgid "character class syntax is [[:space:]], not [:space:]"
+msgstr "字元類別的語法為 [[:space:]], 非 [:space:]"
+
+#: lib/dfa.c:1198
+msgid "unfinished \\ escape"
+msgstr "不完整的 \\ 逸出"
+
+#: lib/dfa.c:1359
+msgid "invalid content of \\{\\}"
+msgstr "\\{\\} 的內容無效"
+
+#: lib/dfa.c:1362
+msgid "regular expression too big"
+msgstr "正規表示式過長"
+
+#: lib/dfa.c:1777
+msgid "unbalanced ("
+msgstr "不對稱的 ("
+
+#: lib/dfa.c:1904
+msgid "no syntax specified"
+msgstr "沒有指定的語法"
+
+#: lib/dfa.c:1912
+msgid "unbalanced )"
+msgstr "不對稱的 )"
 
 #: lib/error.c:191
 msgid "Unknown system error"
@@ -407,110 +446,72 @@ msgstr "%s%s 引數 \"%s\" 中有無效的尾綴"
 msgid "%s%s argument '%s' too large"
 msgstr "%s%s 引數 \"%s\" 過大"
 
-#: src/dfa.c:990 src/dfa.c:993 src/dfa.c:1012 src/dfa.c:1022 src/dfa.c:1034
-#: src/dfa.c:1061 src/dfa.c:1070 src/dfa.c:1073 src/dfa.c:1078 src/dfa.c:1099
-#: src/dfa.c:1102
-msgid "unbalanced ["
-msgstr "不對稱的 ["
-
-#: src/dfa.c:1046
-msgid "invalid character class"
-msgstr "無效的字元類別"
-
-#: src/dfa.c:1168
-msgid "character class syntax is [[:space:]], not [:space:]"
-msgstr "字元類別的語法為 [[:space:]], 非 [:space:]"
-
-#: src/dfa.c:1230
-msgid "unfinished \\ escape"
-msgstr "不完整的 \\ 逸出"
-
-#: src/dfa.c:1377
-msgid "invalid content of \\{\\}"
-msgstr "\\{\\} 的內容無效"
-
-#: src/dfa.c:1380
-msgid "regular expression too big"
-msgstr "正規表示式過長"
-
-#: src/dfa.c:1796
-msgid "unbalanced ("
-msgstr "不對稱的 ("
-
-#: src/dfa.c:1922
-msgid "no syntax specified"
-msgstr "沒有指定的語法"
-
-#: src/dfa.c:1930
-msgid "unbalanced )"
-msgstr "不對稱的 )"
-
 #. This is a proper name. See the gettext manual, section Names.
-#: src/grep.c:58
+#: src/grep.c:57
 msgid "Mike Haertel"
 msgstr "Mike Haertel"
 
-#: src/grep.c:59
+#: src/grep.c:58
 msgid "others, see <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
 msgstr "其他作者，請見 <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
 
-#: src/grep.c:689
+#: src/grep.c:767
 msgid "invalid context length argument"
 msgstr "無效的內容列數值"
 
-#: src/grep.c:753
+#: src/grep.c:831
 #, c-format
 msgid "input is too large to count"
 msgstr "輸入過長無法計數"
 
-#: src/grep.c:795
+#: src/grep.c:863
 msgid "lseek failed"
 msgstr "lseek 失敗"
 
-#: src/grep.c:1539
+#: src/grep.c:1611
 #, c-format
 msgid "Binary file %s matches\n"
 msgstr "二進位格式檔案 %s 符合\n"
 
-#: src/grep.c:1588
+#: src/grep.c:1659
 #, c-format
 msgid "warning: %s: %s"
 msgstr "警告: %s: %s"
 
-#: src/grep.c:1589
+#: src/grep.c:1660
 msgid "recursive directory loop"
 msgstr "遞迴的目錄結構"
 
-#: src/grep.c:1758
+#: src/grep.c:1825
 #, c-format
 msgid "input file %s is also the output"
 msgstr "輸入檔 %s 也是輸出對象"
 
-#: src/grep.c:1820
+#: src/grep.c:1882
 msgid "(standard input)"
 msgstr "(標準輸入)"
 
-#: src/grep.c:1836 src/grep.c:1843
+#: src/grep.c:1898 src/grep.c:1905
 #, c-format
 msgid "Usage: %s [OPTION]... PATTERN [FILE]...\n"
 msgstr "用法: %s [選項]… PATTERN [檔案]…\n"
 
-#: src/grep.c:1838
+#: src/grep.c:1900
 #, c-format
 msgid "Try '%s --help' for more information.\n"
 msgstr "請使用 \"%s --help\" 以閱讀更多的資訊。\n"
 
-#: src/grep.c:1844
+#: src/grep.c:1906
 #, c-format
 msgid "Search for PATTERN in each FILE or standard input.\n"
 msgstr "對每個 檔案 或標準輸入搜尋 PATTERN。\n"
 
-#: src/grep.c:1845
+#: src/grep.c:1907
 #, c-format
 msgid "PATTERN is, by default, a basic regular expression (BRE).\n"
 msgstr "PATTERN 原則上是一個基本正規表示式 (BRE)。\n"
 
-#: src/grep.c:1846
+#: src/grep.c:1908
 #, c-format
 msgid ""
 "Example: %s -i 'hello world' menu.h main.c\n"
@@ -521,7 +522,7 @@ msgstr ""
 "\n"
 "正規表示式選項及解釋:\n"
 
-#: src/grep.c:1850
+#: src/grep.c:1912
 #, c-format
 msgid ""
 "  -E, --extended-regexp     PATTERN is an extended regular expression (ERE)\n"
@@ -534,7 +535,7 @@ msgstr ""
 "  -G, --basic-regexp        PATTERN 是一個基本正規表示式 (BRE)\n"
 "  -P, --perl-regexp         PATTERN 是一個 Perl 的正規表示式\n"
 
-#: src/grep.c:1856
+#: src/grep.c:1918
 #, c-format
 msgid ""
 "  -e, --regexp=PATTERN      use PATTERN for matching\n"
@@ -551,7 +552,7 @@ msgstr ""
 "  -x, --line-regexp         限制整列符合 PATTERN\n"
 "  -z, --null-data           設定資料列結尾為空白位元組，非換列符號\n"
 
-#: src/grep.c:1863
+#: src/grep.c:1925
 #, c-format
 msgid ""
 "\n"
@@ -568,7 +569,7 @@ msgstr ""
 "  -V, --version             印出版本資訊然後結束\n"
 "      --help                顯示此說明然後結束\n"
 
-#: src/grep.c:1870
+#: src/grep.c:1932
 #, c-format
 msgid ""
 "\n"
@@ -592,7 +593,7 @@ msgstr ""
 "  -h, --no-filename         抑制輸出列的檔名前綴\n"
 "      --label=LABEL         以 LABEL 作標準輸入的檔名前綴\n"
 
-#: src/grep.c:1881
+#: src/grep.c:1943
 #, c-format
 msgid ""
 "  -o, --only-matching       show only the part of a line matching PATTERN\n"
@@ -608,7 +609,7 @@ msgstr ""
 "\"\n"
 "  -a, --text                等同於 --binary-files=text\n"
 
-#: src/grep.c:1888
+#: src/grep.c:1950
 #, c-format
 msgid ""
 "  -I                        equivalent to --binary-files=without-match\n"
@@ -626,7 +627,7 @@ msgstr ""
 "                            ACTION 為 \"read\" 或 \"skip\"\n"
 "  -R, -r, --recursive       等同於 --directories=recurse\n"
 
-#: src/grep.c:1897
+#: src/grep.c:1959
 #, c-format
 msgid ""
 "      --include=FILE_PATTERN  search only files that match FILE_PATTERN\n"
@@ -641,7 +642,7 @@ msgstr ""
 "      --exclude-from=FILE     跳過檔名符合 FILE 中樣式的檔案\n"
 "      --exclude-dir=PATTERN   跳過名字符合 PATTERN 的檔案目錄。\n"
 
-#: src/grep.c:1904
+#: src/grep.c:1966
 #, c-format
 msgid ""
 "  -L, --files-without-match  print only names of FILEs containing no match\n"
@@ -656,7 +657,7 @@ msgstr ""
 "  -T, --initial-tab         (需要時) 對齊欄標符號\n"
 "  -Z, --null                在 檔案 名稱後印出空白位元組\n"
 
-#: src/grep.c:1910
+#: src/grep.c:1972
 #, c-format
 msgid ""
 "\n"
@@ -671,7 +672,7 @@ msgstr ""
 "  -A, --after-context=NUM   印出 NUM 列的後文\n"
 "  -C, --context=NUM         印出 NUM 列的內容\n"
 
-#: src/grep.c:1917
+#: src/grep.c:1979
 #, c-format
 msgid ""
 "  -NUM                      same as --context=NUM\n"
@@ -693,7 +694,7 @@ msgstr ""
 "                            (MSDOS/Windows)\n"
 "\n"
 
-#: src/grep.c:1926
+#: src/grep.c:1988
 #, c-format
 msgid ""
 "'egrep' means 'grep -E'.  'fgrep' means 'grep -F'.\n"
@@ -702,7 +703,7 @@ msgstr ""
 "\"egrep\" 等同於 \"grep -E\".  \"fgrep\" 等同於 \"grep -F\"。\n"
 "直接呼叫 \"egrep\" 或 \"fgrep\" 的做法已被廢除。\n"
 
-#: src/grep.c:1929
+#: src/grep.c:1991
 #, c-format
 msgid ""
 "When FILE is -, read standard input.  With no FILE, read . if a command-"
@@ -716,32 +717,32 @@ msgstr ""
 "如果有符合的行列時，結束狀態為 0，否則為 1;\n"
 "如果有任何錯誤且沒有採用 -q 選項時，結束狀態則為 2。\n"
 
-#: src/grep.c:1996
+#: src/grep.c:2058
 #, c-format
 msgid "conflicting matchers specified"
 msgstr "指定了互相衝突的配對選項"
 
-#: src/grep.c:2007
+#: src/grep.c:2069
 #, c-format
 msgid "invalid matcher %s"
 msgstr "無效的配對選項 %s"
 
-#: src/grep.c:2290
+#: src/grep.c:2393
 #, c-format
 msgid "warning: GREP_OPTIONS is deprecated; please use an alias or script"
 msgstr "警告: GREP_OPTIONS 已經被廢除。請使用別名或腳本取代。"
 
-#: src/grep.c:2320
+#: src/grep.c:2423
 #, c-format
 msgid "unknown devices method"
 msgstr "未知的裝置方法"
 
-#: src/grep.c:2447
+#: src/grep.c:2552
 #, c-format
 msgid "invalid max count"
 msgstr "無效的最大計次"
 
-#: src/grep.c:2504
+#: src/grep.c:2609
 #, c-format
 msgid "unknown binary-files type"
 msgstr "未知的二進位檔案類別"

@@ -14,8 +14,8 @@
 m4_ifndef([AC_CONFIG_MACRO_DIRS], [m4_defun([_AM_CONFIG_MACRO_DIRS], [])m4_defun([AC_CONFIG_MACRO_DIRS], [_AM_CONFIG_MACRO_DIRS($@)])])
 m4_ifndef([AC_AUTOCONF_VERSION],
   [m4_copy([m4_PACKAGE_VERSION], [AC_AUTOCONF_VERSION])])dnl
-m4_if(m4_defn([AC_AUTOCONF_VERSION]), [2.69.147-5ad35],,
-[m4_warning([this file was generated for autoconf 2.69.147-5ad35.
+m4_if(m4_defn([AC_AUTOCONF_VERSION]), [2.69.168-2b48],,
+[m4_warning([this file was generated for autoconf 2.69.168-2b48.
 You have another version of autoconf.  It may work, but is not guaranteed to.
 If you have problems, you may need to regenerate the build system entirely.
 To do so, use the procedure documented by the package, typically 'autoreconf'.])])
@@ -1170,6 +1170,7 @@ AC_SUBST([am__untar])
 m4_include([m4/00gnulib.m4])
 m4_include([m4/absolute-header.m4])
 m4_include([m4/alloca.m4])
+m4_include([m4/assert.m4])
 m4_include([m4/btowc.m4])
 m4_include([m4/chdir-long.m4])
 m4_include([m4/close-stream.m4])
@@ -1216,6 +1217,7 @@ m4_include([m4/getcwd.m4])
 m4_include([m4/getdtablesize.m4])
 m4_include([m4/getopt.m4])
 m4_include([m4/getpagesize.m4])
+m4_include([m4/getprogname.m4])
 m4_include([m4/gettext.m4])
 m4_include([m4/gettimeofday.m4])
 m4_include([m4/glibc21.m4])
@@ -1245,6 +1247,7 @@ m4_include([m4/lib-ld.m4])
 m4_include([m4/lib-link.m4])
 m4_include([m4/lib-prefix.m4])
 m4_include([m4/libunistring-base.m4])
+m4_include([m4/limits-h.m4])
 m4_include([m4/localcharset.m4])
 m4_include([m4/locale-fr.m4])
 m4_include([m4/locale-ja.m4])
