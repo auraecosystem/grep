@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grep-2.5.4-pre3\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2016-04-21 21:37-0700\n"
+"POT-Creation-Date: 2016-09-25 16:36-0700\n"
 "PO-Revision-Date: 2008-07-09 13:28+0300\n"
 "Last-Translator: Gintautas Miliauskas <gintas@akl.lt>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
@@ -15,28 +15,73 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Bugs: Report translation errors to the Language-Team address.\n"
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
 "%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: lib/argmatch.c:133
+#: lib/argmatch.c:134
 #, c-format
 msgid "invalid argument %s for %s"
 msgstr ""
 
-#: lib/argmatch.c:134
+#: lib/argmatch.c:135
 #, c-format
 msgid "ambiguous argument %s for %s"
 msgstr ""
 
-#: lib/argmatch.c:153
+#: lib/argmatch.c:154
 msgid "Valid arguments are:"
 msgstr ""
 
-#: lib/closeout.c:112 src/grep.c:1238
+#: lib/closeout.c:112 src/grep.c:1312
 #, c-format
 msgid "write error"
 msgstr ""
+
+#: lib/dfa.c:948 lib/dfa.c:951 lib/dfa.c:970 lib/dfa.c:980 lib/dfa.c:993
+#: lib/dfa.c:1021 lib/dfa.c:1030 lib/dfa.c:1033 lib/dfa.c:1038 lib/dfa.c:1060
+#: lib/dfa.c:1063
+#, fuzzy
+msgid "unbalanced ["
+msgstr "Nesubalansuotas ["
+
+#: lib/dfa.c:1006
+msgid "invalid character class"
+msgstr ""
+
+#: lib/dfa.c:1129
+msgid "character class syntax is [[:space:]], not [:space:]"
+msgstr ""
+
+#: lib/dfa.c:1198
+#, fuzzy
+msgid "unfinished \\ escape"
+msgstr "Nebaigta \\ kaitos seka"
+
+#: lib/dfa.c:1359
+#, fuzzy
+msgid "invalid content of \\{\\}"
+msgstr "netaisyklingas maksimalus skaičius"
+
+#: lib/dfa.c:1362
+msgid "regular expression too big"
+msgstr ""
+
+#: lib/dfa.c:1777
+#, fuzzy
+msgid "unbalanced ("
+msgstr "Nesubalansuotas ("
+
+#: lib/dfa.c:1904
+#, fuzzy
+msgid "no syntax specified"
+msgstr "Nenurodyta sintaksė"
+
+#: lib/dfa.c:1912
+#, fuzzy
+msgid "unbalanced )"
+msgstr "Nesubalansuotas )"
 
 #: lib/error.c:191
 msgid "Unknown system error"
@@ -50,7 +95,7 @@ msgstr "%s: parametras `%s' dviprasmis\n"
 #: lib/getopt.c:619
 #, fuzzy, c-format
 msgid "%s: option '%s' is ambiguous\n"
-msgstr "%s: parametras „-W %s“ dviprasmis\n"
+msgstr "%s: parametras `%s' dviprasmis\n"
 
 #: lib/getopt.c:654 lib/getopt.c:658
 #, fuzzy, c-format
@@ -390,117 +435,73 @@ msgstr ""
 msgid "%s%s argument '%s' too large"
 msgstr ""
 
-#: src/dfa.c:990 src/dfa.c:993 src/dfa.c:1012 src/dfa.c:1022 src/dfa.c:1034
-#: src/dfa.c:1061 src/dfa.c:1070 src/dfa.c:1073 src/dfa.c:1078 src/dfa.c:1099
-#: src/dfa.c:1102
-#, fuzzy
-msgid "unbalanced ["
-msgstr "Nesubalansuotas ["
-
-#: src/dfa.c:1046
-msgid "invalid character class"
-msgstr ""
-
-#: src/dfa.c:1168
-msgid "character class syntax is [[:space:]], not [:space:]"
-msgstr ""
-
-#: src/dfa.c:1230
-#, fuzzy
-msgid "unfinished \\ escape"
-msgstr "Nebaigta \\ kaitos seka"
-
-#: src/dfa.c:1377
-#, fuzzy
-msgid "invalid content of \\{\\}"
-msgstr "netaisyklingas maksimalus skaičius"
-
-#: src/dfa.c:1380
-msgid "regular expression too big"
-msgstr ""
-
-#: src/dfa.c:1796
-#, fuzzy
-msgid "unbalanced ("
-msgstr "Nesubalansuotas ("
-
-#: src/dfa.c:1922
-#, fuzzy
-msgid "no syntax specified"
-msgstr "Nenurodyta sintaksė"
-
-#: src/dfa.c:1930
-#, fuzzy
-msgid "unbalanced )"
-msgstr "Nesubalansuotas )"
-
 #. This is a proper name. See the gettext manual, section Names.
-#: src/grep.c:58
+#: src/grep.c:57
 msgid "Mike Haertel"
 msgstr ""
 
-#: src/grep.c:59
+#: src/grep.c:58
 msgid "others, see <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
 msgstr ""
 
-#: src/grep.c:689
+#: src/grep.c:767
 msgid "invalid context length argument"
 msgstr "netaisyklingas konteksto ilgio argumentas"
 
-#: src/grep.c:753
+#: src/grep.c:831
 #, c-format
 msgid "input is too large to count"
 msgstr "įvedimas per didelis skaičiavimui"
 
-#: src/grep.c:795
+#: src/grep.c:863
 msgid "lseek failed"
 msgstr ""
 
-#: src/grep.c:1539
+#: src/grep.c:1611
 #, c-format
 msgid "Binary file %s matches\n"
 msgstr "Dvejetainis failas %s atitinka\n"
 
-#: src/grep.c:1588
+#: src/grep.c:1659
 #, fuzzy, c-format
 msgid "warning: %s: %s"
 msgstr "įspėjimas: %s: %s\n"
 
-#: src/grep.c:1589
+#: src/grep.c:1660
 msgid "recursive directory loop"
 msgstr "rekursyvus aplankų ciklas"
 
-#: src/grep.c:1758
+#: src/grep.c:1825
 #, c-format
 msgid "input file %s is also the output"
 msgstr ""
 
-#: src/grep.c:1820
+#: src/grep.c:1882
 msgid "(standard input)"
 msgstr "(standartinis įvedimas)"
 
-#: src/grep.c:1836 src/grep.c:1843
+#: src/grep.c:1898 src/grep.c:1905
 #, c-format
 msgid "Usage: %s [OPTION]... PATTERN [FILE]...\n"
 msgstr "Naudojimas: %s [ARGUMENTAS]... ŠABLONAS [FAILAS]...\n"
 
-#: src/grep.c:1838
+#: src/grep.c:1900
 #, fuzzy, c-format
 msgid "Try '%s --help' for more information.\n"
 msgstr "Pabandykite „%s --help“, jei norite gauti daugiau informacijos.\n"
 
-#: src/grep.c:1844
+#: src/grep.c:1906
 #, c-format
 msgid "Search for PATTERN in each FILE or standard input.\n"
 msgstr "Ieškoti ŠABLONO kiekviename faile arba standartiniame įėjime.\n"
 
-#: src/grep.c:1845
+#: src/grep.c:1907
 #, c-format
 msgid "PATTERN is, by default, a basic regular expression (BRE).\n"
 msgstr ""
 "ŠABLONAS numatytuoju atveju yra paprasta reguliarioji išraiška (BRE).\n"
 
-#: src/grep.c:1846
+#: src/grep.c:1908
 #, c-format
 msgid ""
 "Example: %s -i 'hello world' menu.h main.c\n"
@@ -511,7 +512,7 @@ msgstr ""
 "\n"
 "Reguliariųjų išraiškų parinkimas ir interpretacija:\n"
 
-#: src/grep.c:1850
+#: src/grep.c:1912
 #, fuzzy, c-format
 msgid ""
 "  -E, --extended-regexp     PATTERN is an extended regular expression (ERE)\n"
@@ -526,7 +527,7 @@ msgstr ""
 "(BRE)\n"
 "  -P, --perl-regexp         ŠABLONAS yra Perl reguliarioji išraiška\n"
 
-#: src/grep.c:1856
+#: src/grep.c:1918
 #, c-format
 msgid ""
 "  -e, --regexp=PATTERN      use PATTERN for matching\n"
@@ -544,7 +545,7 @@ msgstr ""
 "  -z, --null-data           duomenų eilutė baigiasi 0 baitu, o ne nauja "
 "eil.\n"
 
-#: src/grep.c:1863
+#: src/grep.c:1925
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -562,7 +563,7 @@ msgstr ""
 "      --help                parodyti šią informaciją ir išeiti\n"
 "      --mmap                naudoti mmap įvedimą, jei tai įmanoma\n"
 
-#: src/grep.c:1870
+#: src/grep.c:1932
 #, c-format
 msgid ""
 "\n"
@@ -577,7 +578,7 @@ msgid ""
 "prefix\n"
 msgstr ""
 
-#: src/grep.c:1881
+#: src/grep.c:1943
 #, c-format
 msgid ""
 "  -o, --only-matching       show only the part of a line matching PATTERN\n"
@@ -587,7 +588,7 @@ msgid ""
 "  -a, --text                equivalent to --binary-files=text\n"
 msgstr ""
 
-#: src/grep.c:1888
+#: src/grep.c:1950
 #, c-format
 msgid ""
 "  -I                        equivalent to --binary-files=without-match\n"
@@ -599,7 +600,7 @@ msgid ""
 "  -R, --dereference-recursive  likewise, but follow all symlinks\n"
 msgstr ""
 
-#: src/grep.c:1897
+#: src/grep.c:1959
 #, c-format
 msgid ""
 "      --include=FILE_PATTERN  search only files that match FILE_PATTERN\n"
@@ -610,7 +611,7 @@ msgid ""
 "skipped.\n"
 msgstr ""
 
-#: src/grep.c:1904
+#: src/grep.c:1966
 #, c-format
 msgid ""
 "  -L, --files-without-match  print only names of FILEs containing no match\n"
@@ -620,7 +621,7 @@ msgid ""
 "  -Z, --null                print 0 byte after FILE name\n"
 msgstr ""
 
-#: src/grep.c:1910
+#: src/grep.c:1972
 #, c-format
 msgid ""
 "\n"
@@ -630,7 +631,7 @@ msgid ""
 "  -C, --context=NUM         print NUM lines of output context\n"
 msgstr ""
 
-#: src/grep.c:1917
+#: src/grep.c:1979
 #, fuzzy, c-format
 msgid ""
 "  -NUM                      same as --context=NUM\n"
@@ -657,7 +658,7 @@ msgstr ""
 "(MSDOS)\n"
 "\n"
 
-#: src/grep.c:1926
+#: src/grep.c:1988
 #, fuzzy, c-format
 msgid ""
 "'egrep' means 'grep -E'.  'fgrep' means 'grep -F'.\n"
@@ -666,7 +667,7 @@ msgstr ""
 "„egrep“ reiškia „grep -E“. „fgrep“ reiškia „grep -F“.\n"
 "Tiesioginiai kvietimai vardais „egrep“ arba „fgrep“ nebenaudotini.\n"
 
-#: src/grep.c:1929
+#: src/grep.c:1991
 #, fuzzy, c-format
 msgid ""
 "When FILE is -, read standard input.  With no FILE, read . if a command-"
@@ -680,32 +681,32 @@ msgstr ""
 "0, jei rasta bent viena eilutė, 1 kitais atvejais;\n"
 "jei įvyksta klaida ir nenurodytas -q, klaidos kodas yra 2.\n"
 
-#: src/grep.c:1996
+#: src/grep.c:2058
 #, c-format
 msgid "conflicting matchers specified"
 msgstr "nurodyti nesuderinami atitikimo mechanizmai"
 
-#: src/grep.c:2007
+#: src/grep.c:2069
 #, fuzzy, c-format
 msgid "invalid matcher %s"
 msgstr "netaisyklingas maksimalus skaičius"
 
-#: src/grep.c:2290
+#: src/grep.c:2393
 #, c-format
 msgid "warning: GREP_OPTIONS is deprecated; please use an alias or script"
 msgstr ""
 
-#: src/grep.c:2320
+#: src/grep.c:2423
 #, c-format
 msgid "unknown devices method"
 msgstr "nežinomas įrenginių metodas"
 
-#: src/grep.c:2447
+#: src/grep.c:2552
 #, c-format
 msgid "invalid max count"
 msgstr "netaisyklingas maksimalus skaičius"
 
-#: src/grep.c:2504
+#: src/grep.c:2609
 #, c-format
 msgid "unknown binary-files type"
 msgstr "nežinomas dvejetainių failų tipas"
@@ -767,16 +768,6 @@ msgstr ""
 #, c-format
 msgid "internal PCRE error: %d"
 msgstr ""
-
-#, fuzzy
-#~ msgid ""
-#~ "Usage: %s [OPTION]... PATTERN [FILE]...\n"
-#~ "  or:  %s [OPTION]... --files0-from=F PATTERN\n"
-#~ msgstr "Naudojimas: %s [ARGUMENTAS]... ŠABLONAS [FAILAS]...\n"
-
-#, fuzzy
-#~ msgid "invalid zero-length file name"
-#~ msgstr "netaisyklingas konteksto ilgio argumentas"
 
 #~ msgid "unfinished repeat count"
 #~ msgstr "nebaigtas pakartojimų skaičius"

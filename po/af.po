@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grep 2.5g\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2016-04-21 21:37-0700\n"
+"POT-Creation-Date: 2016-09-25 16:36-0700\n"
 "PO-Revision-Date: 2004-03-03 13:33+0200\n"
 "Last-Translator: Petri Jooste <rkwjpj@puk.ac.za>\n"
 "Language-Team: Afrikaans <i18n@af.org.za>\n"
@@ -14,25 +14,70 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Bugs: Report translation errors to the Language-Team address.\n"
 
-#: lib/argmatch.c:133
+#: lib/argmatch.c:134
 #, c-format
 msgid "invalid argument %s for %s"
 msgstr ""
 
-#: lib/argmatch.c:134
+#: lib/argmatch.c:135
 #, c-format
 msgid "ambiguous argument %s for %s"
 msgstr ""
 
-#: lib/argmatch.c:153
+#: lib/argmatch.c:154
 msgid "Valid arguments are:"
 msgstr ""
 
-#: lib/closeout.c:112 src/grep.c:1238
+#: lib/closeout.c:112 src/grep.c:1312
 #, c-format
 msgid "write error"
 msgstr ""
+
+#: lib/dfa.c:948 lib/dfa.c:951 lib/dfa.c:970 lib/dfa.c:980 lib/dfa.c:993
+#: lib/dfa.c:1021 lib/dfa.c:1030 lib/dfa.c:1033 lib/dfa.c:1038 lib/dfa.c:1060
+#: lib/dfa.c:1063
+#, fuzzy
+msgid "unbalanced ["
+msgstr "Ongebalanseerde ["
+
+#: lib/dfa.c:1006
+msgid "invalid character class"
+msgstr ""
+
+#: lib/dfa.c:1129
+msgid "character class syntax is [[:space:]], not [:space:]"
+msgstr ""
+
+#: lib/dfa.c:1198
+#, fuzzy
+msgid "unfinished \\ escape"
+msgstr "Onbeëindigde \\-ontsnapstring"
+
+#: lib/dfa.c:1359
+#, fuzzy
+msgid "invalid content of \\{\\}"
+msgstr "ongeldige maks-telling"
+
+#: lib/dfa.c:1362
+msgid "regular expression too big"
+msgstr ""
+
+#: lib/dfa.c:1777
+#, fuzzy
+msgid "unbalanced ("
+msgstr "Ongebalanseerde ("
+
+#: lib/dfa.c:1904
+#, fuzzy
+msgid "no syntax specified"
+msgstr "Geen sintaks gespesifiseer"
+
+#: lib/dfa.c:1912
+#, fuzzy
+msgid "unbalanced )"
+msgstr "Ongebalanseerde )"
 
 #: lib/error.c:191
 msgid "Unknown system error"
@@ -46,7 +91,7 @@ msgstr "%s: opsie `%s' is dubbelsinnig\n"
 #: lib/getopt.c:619
 #, fuzzy, c-format
 msgid "%s: option '%s' is ambiguous\n"
-msgstr "%s: opsie `-W %s' is dubbelsinnig\n"
+msgstr "%s: opsie `%s' is dubbelsinnig\n"
 
 #: lib/getopt.c:654 lib/getopt.c:658
 #, fuzzy, c-format
@@ -392,116 +437,72 @@ msgstr ""
 msgid "%s%s argument '%s' too large"
 msgstr ""
 
-#: src/dfa.c:990 src/dfa.c:993 src/dfa.c:1012 src/dfa.c:1022 src/dfa.c:1034
-#: src/dfa.c:1061 src/dfa.c:1070 src/dfa.c:1073 src/dfa.c:1078 src/dfa.c:1099
-#: src/dfa.c:1102
-#, fuzzy
-msgid "unbalanced ["
-msgstr "Ongebalanseerde ["
-
-#: src/dfa.c:1046
-msgid "invalid character class"
-msgstr ""
-
-#: src/dfa.c:1168
-msgid "character class syntax is [[:space:]], not [:space:]"
-msgstr ""
-
-#: src/dfa.c:1230
-#, fuzzy
-msgid "unfinished \\ escape"
-msgstr "Onbeëindigde \\-ontsnapstring"
-
-#: src/dfa.c:1377
-#, fuzzy
-msgid "invalid content of \\{\\}"
-msgstr "ongeldige maks-telling"
-
-#: src/dfa.c:1380
-msgid "regular expression too big"
-msgstr ""
-
-#: src/dfa.c:1796
-#, fuzzy
-msgid "unbalanced ("
-msgstr "Ongebalanseerde ("
-
-#: src/dfa.c:1922
-#, fuzzy
-msgid "no syntax specified"
-msgstr "Geen sintaks gespesifiseer"
-
-#: src/dfa.c:1930
-#, fuzzy
-msgid "unbalanced )"
-msgstr "Ongebalanseerde )"
-
 #. This is a proper name. See the gettext manual, section Names.
-#: src/grep.c:58
+#: src/grep.c:57
 msgid "Mike Haertel"
 msgstr ""
 
-#: src/grep.c:59
+#: src/grep.c:58
 msgid "others, see <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
 msgstr ""
 
-#: src/grep.c:689
+#: src/grep.c:767
 msgid "invalid context length argument"
 msgstr "ongeldige konteks-lengte-parameter"
 
-#: src/grep.c:753
+#: src/grep.c:831
 #, c-format
 msgid "input is too large to count"
 msgstr "toevoer is te veel om te tel"
 
-#: src/grep.c:795
+#: src/grep.c:863
 msgid "lseek failed"
 msgstr ""
 
-#: src/grep.c:1539
+#: src/grep.c:1611
 #, c-format
 msgid "Binary file %s matches\n"
 msgstr "Binêre lêer %s pas\n"
 
-#: src/grep.c:1588
+#: src/grep.c:1659
 #, fuzzy, c-format
 msgid "warning: %s: %s"
 msgstr "waarskuwing: %s: %s\n"
 
-#: src/grep.c:1589
+#: src/grep.c:1660
 msgid "recursive directory loop"
 msgstr "rekursiewe lus van gidsinskrywings"
 
-#: src/grep.c:1758
+#: src/grep.c:1825
 #, c-format
 msgid "input file %s is also the output"
 msgstr ""
 
-#: src/grep.c:1820
+#: src/grep.c:1882
 msgid "(standard input)"
 msgstr "(standaardtoevoer)"
 
-#: src/grep.c:1836 src/grep.c:1843
+#: src/grep.c:1898 src/grep.c:1905
 #, c-format
 msgid "Usage: %s [OPTION]... PATTERN [FILE]...\n"
 msgstr "Gebruik so: %s [OPSIE]... PATROON [LÊER]...\n"
 
-#: src/grep.c:1838
+#: src/grep.c:1900
 #, fuzzy, c-format
 msgid "Try '%s --help' for more information.\n"
 msgstr "Probeer `%s --help' vir meer inligting.\n"
 
-#: src/grep.c:1844
+#: src/grep.c:1906
 #, c-format
 msgid "Search for PATTERN in each FILE or standard input.\n"
 msgstr ""
 
-#: src/grep.c:1845
+#: src/grep.c:1907
 #, c-format
 msgid "PATTERN is, by default, a basic regular expression (BRE).\n"
 msgstr ""
 
-#: src/grep.c:1846
+#: src/grep.c:1908
 #, fuzzy, c-format
 msgid ""
 "Example: %s -i 'hello world' menu.h main.c\n"
@@ -513,7 +514,7 @@ msgstr ""
 "\n"
 "Reëlmatige uitdrukking-seleksie en -interpretasie:\n"
 
-#: src/grep.c:1850
+#: src/grep.c:1912
 #, fuzzy, c-format
 msgid ""
 "  -E, --extended-regexp     PATTERN is an extended regular expression (ERE)\n"
@@ -528,7 +529,7 @@ msgstr ""
 "  -G, --basic-regexp        PATROON is 'n basic regular expression\n"
 "  -P, --perl-regexp         PATROON is 'n  Perl regular expression\n"
 
-#: src/grep.c:1856
+#: src/grep.c:1918
 #, fuzzy, c-format
 msgid ""
 "  -e, --regexp=PATTERN      use PATTERN for matching\n"
@@ -546,7 +547,7 @@ msgstr ""
 "  -z, --null-data           elke datareël eindig met 'n 0-greep, nie 'n "
 "nuwereëlkarakter nie\n"
 
-#: src/grep.c:1863
+#: src/grep.c:1925
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -564,7 +565,7 @@ msgstr ""
 "      --help                wys hierdie hulpboodskap en stop\n"
 "      --mmap                gebruik geheue-gebonde toevoer indien moontlik\n"
 
-#: src/grep.c:1870
+#: src/grep.c:1932
 #, c-format
 msgid ""
 "\n"
@@ -579,7 +580,7 @@ msgid ""
 "prefix\n"
 msgstr ""
 
-#: src/grep.c:1881
+#: src/grep.c:1943
 #, c-format
 msgid ""
 "  -o, --only-matching       show only the part of a line matching PATTERN\n"
@@ -589,7 +590,7 @@ msgid ""
 "  -a, --text                equivalent to --binary-files=text\n"
 msgstr ""
 
-#: src/grep.c:1888
+#: src/grep.c:1950
 #, c-format
 msgid ""
 "  -I                        equivalent to --binary-files=without-match\n"
@@ -601,7 +602,7 @@ msgid ""
 "  -R, --dereference-recursive  likewise, but follow all symlinks\n"
 msgstr ""
 
-#: src/grep.c:1897
+#: src/grep.c:1959
 #, c-format
 msgid ""
 "      --include=FILE_PATTERN  search only files that match FILE_PATTERN\n"
@@ -612,7 +613,7 @@ msgid ""
 "skipped.\n"
 msgstr ""
 
-#: src/grep.c:1904
+#: src/grep.c:1966
 #, c-format
 msgid ""
 "  -L, --files-without-match  print only names of FILEs containing no match\n"
@@ -622,7 +623,7 @@ msgid ""
 "  -Z, --null                print 0 byte after FILE name\n"
 msgstr ""
 
-#: src/grep.c:1910
+#: src/grep.c:1972
 #, c-format
 msgid ""
 "\n"
@@ -632,7 +633,7 @@ msgid ""
 "  -C, --context=NUM         print NUM lines of output context\n"
 msgstr ""
 
-#: src/grep.c:1917
+#: src/grep.c:1979
 #, fuzzy, c-format
 msgid ""
 "  -NUM                      same as --context=NUM\n"
@@ -665,14 +666,14 @@ msgstr ""
 "Indien minder as twee LÊERs gegee is, aanvaar -h. Uittreestatus is\n"
 " 0 vir passing, 1 vir geen passing, en 2 vir probleemgevalle.\n"
 
-#: src/grep.c:1926
+#: src/grep.c:1988
 #, c-format
 msgid ""
 "'egrep' means 'grep -E'.  'fgrep' means 'grep -F'.\n"
 "Direct invocation as either 'egrep' or 'fgrep' is deprecated.\n"
 msgstr ""
 
-#: src/grep.c:1929
+#: src/grep.c:1991
 #, c-format
 msgid ""
 "When FILE is -, read standard input.  With no FILE, read . if a command-"
@@ -682,32 +683,32 @@ msgid ""
 "if any error occurs and -q is not given, the exit status is 2.\n"
 msgstr ""
 
-#: src/grep.c:1996
+#: src/grep.c:2058
 #, c-format
 msgid "conflicting matchers specified"
 msgstr "teenstrydige passers is gespesifiseer"
 
-#: src/grep.c:2007
+#: src/grep.c:2069
 #, fuzzy, c-format
 msgid "invalid matcher %s"
 msgstr "ongeldige maks-telling"
 
-#: src/grep.c:2290
+#: src/grep.c:2393
 #, c-format
 msgid "warning: GREP_OPTIONS is deprecated; please use an alias or script"
 msgstr ""
 
-#: src/grep.c:2320
+#: src/grep.c:2423
 #, c-format
 msgid "unknown devices method"
 msgstr "onbekende metode vir toestelle"
 
-#: src/grep.c:2447
+#: src/grep.c:2552
 #, c-format
 msgid "invalid max count"
 msgstr "ongeldige maks-telling"
 
-#: src/grep.c:2504
+#: src/grep.c:2609
 #, c-format
 msgid "unknown binary-files type"
 msgstr "onbekende binêre-lêertipe"
@@ -768,16 +769,6 @@ msgstr ""
 msgid "internal PCRE error: %d"
 msgstr ""
 
-#, fuzzy
-#~ msgid ""
-#~ "Usage: %s [OPTION]... PATTERN [FILE]...\n"
-#~ "  or:  %s [OPTION]... --files0-from=F PATTERN\n"
-#~ msgstr "Gebruik so: %s [OPSIE]... PATROON [LÊER] ...\n"
-
-#, fuzzy
-#~ msgid "invalid zero-length file name"
-#~ msgstr "ongeldige konteks-lengte-parameter"
-
 #  Cases:
 #  {M} - exact count
 #  {M,} - minimum count, maximum is infinity
@@ -793,6 +784,9 @@ msgstr ""
 
 #~ msgid "writing output"
 #~ msgstr "afvoer word geskryf"
+
+#~ msgid "Usage: %s [OPTION]... PATTERN [FILE] ...\n"
+#~ msgstr "Gebruik so: %s [OPSIE]... PATROON [LÊER] ...\n"
 
 #~ msgid ""
 #~ "\n"
