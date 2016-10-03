@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grep-2.25.92\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2016-09-25 16:36-0700\n"
+"POT-Creation-Date: 2016-10-02 17:05-0700\n"
 "PO-Revision-Date: 2016-09-18 17:27+0200\n"
 "Last-Translator: Božidar Putanec <bozidarp@yahoo.com>\n"
 "Language-Team: Croatian <lokalizacija@linux.hr>\n"
@@ -159,8 +159,7 @@ msgstr "%s: opcija „-W %s“ ne dopušta argument\n"
 msgid "%s: option '-W %s' requires an argument\n"
 msgstr "%s: opcija „-W %s“ zahtijeva argument\n"
 
-#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34 src/pcresearch.c:340
-#, c-format
+#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34 src/pcresearch.c:353
 msgid "memory exhausted"
 msgstr "nema dovoljno memorije"
 
@@ -803,14 +802,14 @@ msgid "unknown binary-files type"
 msgstr "nepoznata vrsta binarnih datoteka"
 
 # bp: novi msgid
-#: src/pcresearch.c:71
+#: src/pcresearch.c:84
 #, c-format
 msgid "failed to allocate memory for the PCRE JIT stack"
 msgstr ""
 "failed to allocate memory for the PCRE JIT stack\\n\n"
 "dodjela memorije za PCRE JIT stog nije uspjela"
 
-#: src/pcresearch.c:96
+#: src/pcresearch.c:109
 msgid ""
 "support for the -P option is not compiled into this --disable-perl-regexp "
 "binary"
@@ -819,51 +818,49 @@ msgstr ""
 "datoteku"
 
 # bp: novi msgid
-#: src/pcresearch.c:119
+#: src/pcresearch.c:132
 #, c-format
 msgid "-P supports only unibyte and UTF-8 locales"
 msgstr "-P podržava samo jednobajtne kodove i UTF-8 locale"
 
-#: src/pcresearch.c:126
+#: src/pcresearch.c:139
 #, c-format
 msgid "the -P option only supports a single pattern"
 msgstr "opcija -P podržava samo jedan uzorak"
 
 # bp: novi msgid
 # escape > cause (a subsequent character or characters) to be interpreted differently.
-#: src/pcresearch.c:138
+#: src/pcresearch.c:151
 #, c-format
 msgid "unescaped ^ or $ not supported with -Pz"
 msgstr "znakovi ^ ili $ bez prethodne ‘\\’ (unescaped) nisu podržani s -Pz"
 
 # bp: novi msgid
-#: src/pcresearch.c:184
+#: src/pcresearch.c:197
 #, c-format
 msgid "internal error (should never happen)"
 msgstr "interna greška (ne bi se smjela dogoditi)"
 
-#: src/pcresearch.c:206
+#: src/pcresearch.c:219
 #, c-format
 msgid "internal error"
 msgstr "interna greška"
 
-#: src/pcresearch.c:250
+#: src/pcresearch.c:263
 #, c-format
 msgid "exceeded PCRE's line length limit"
 msgstr "prekoračeno ograničenje PCRE duljine retka"
 
-#: src/pcresearch.c:344
-#, c-format
+#: src/pcresearch.c:357
 msgid "exhausted PCRE JIT stack"
 msgstr "PCRE JIT stog je iscrpljen"
 
-#: src/pcresearch.c:348
-#, c-format
+#: src/pcresearch.c:361
 msgid "exceeded PCRE's backtracking limit"
 msgstr "prekoračeno ograničenje PCRE praćenja"
 
 # bp:fuzzy popravljen
-#: src/pcresearch.c:355
+#: src/pcresearch.c:368
 #, c-format
 msgid "internal PCRE error: %d"
 msgstr "interna PCRE greška: %d"

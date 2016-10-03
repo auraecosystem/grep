@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grep 2.19.12\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2016-09-25 16:36-0700\n"
+"POT-Creation-Date: 2016-10-02 17:05-0700\n"
 "PO-Revision-Date: 2014-08-05 07:00+0700\n"
 "Last-Translator: Arif E. Nugroho <arif_endro@yahoo.com>\n"
 "Language-Team: Indonesian <translation-team-id@lists.sourceforge.net>\n"
@@ -140,8 +140,7 @@ msgstr "%s: opsi `-W %s' tidak mengijinkan sebuah argumen\n"
 msgid "%s: option '-W %s' requires an argument\n"
 msgstr "%s: opsi `-W %s' membutuhkan sebuah argumen\n"
 
-#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34 src/pcresearch.c:340
-#, c-format
+#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34 src/pcresearch.c:353
 msgid "memory exhausted"
 msgstr "kehabisan memori"
 
@@ -759,12 +758,12 @@ msgstr "jumlah maksimal tidak valid"
 msgid "unknown binary-files type"
 msgstr "tipe berkas binari tidak dikenal"
 
-#: src/pcresearch.c:71
+#: src/pcresearch.c:84
 #, c-format
 msgid "failed to allocate memory for the PCRE JIT stack"
 msgstr "failed to allocate memory for the PCRE JIT stack"
 
-#: src/pcresearch.c:96
+#: src/pcresearch.c:109
 msgid ""
 "support for the -P option is not compiled into this --disable-perl-regexp "
 "binary"
@@ -772,47 +771,45 @@ msgstr ""
 "Dukungan untuk opsi -P tidak dikompile kedalam ini --disable-perl-regexp "
 "binari"
 
-#: src/pcresearch.c:119
+#: src/pcresearch.c:132
 #, c-format
 msgid "-P supports only unibyte and UTF-8 locales"
 msgstr ""
 
-#: src/pcresearch.c:126
+#: src/pcresearch.c:139
 #, c-format
 msgid "the -P option only supports a single pattern"
 msgstr "Opsi -P hanya mendukung sebuah pola tunggal"
 
-#: src/pcresearch.c:138
+#: src/pcresearch.c:151
 #, c-format
 msgid "unescaped ^ or $ not supported with -Pz"
 msgstr ""
 
-#: src/pcresearch.c:184
+#: src/pcresearch.c:197
 #, c-format
 msgid "internal error (should never happen)"
 msgstr "internal error (should never happen)"
 
-#: src/pcresearch.c:206
+#: src/pcresearch.c:219
 #, c-format
 msgid "internal error"
 msgstr "penulisan error"
 
-#: src/pcresearch.c:250
+#: src/pcresearch.c:263
 #, c-format
 msgid "exceeded PCRE's line length limit"
 msgstr "exceeded PCRE's line length limit"
 
-#: src/pcresearch.c:344
-#, c-format
+#: src/pcresearch.c:357
 msgid "exhausted PCRE JIT stack"
 msgstr ""
 
-#: src/pcresearch.c:348
-#, c-format
+#: src/pcresearch.c:361
 msgid "exceeded PCRE's backtracking limit"
 msgstr "exceeded PCRE's backtracking limit"
 
-#: src/pcresearch.c:355
+#: src/pcresearch.c:368
 #, c-format
 msgid "internal PCRE error: %d"
 msgstr "penulisan error PCRE: %d"

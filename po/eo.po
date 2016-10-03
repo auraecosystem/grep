@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GNU grep 2.23.7\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2016-09-25 16:36-0700\n"
+"POT-Creation-Date: 2016-10-02 17:05-0700\n"
 "PO-Revision-Date: 2016-03-05 17:40+0100\n"
 "Last-Translator: Benno Schulenberg <benno@vertaalt.nl>\n"
 "Language-Team: Esperanto <translation-team-eo@lists.sourceforge.net>\n"
@@ -145,8 +145,7 @@ msgstr "%s: opcio «-W %s» ne toleras argumenton\n"
 msgid "%s: option '-W %s' requires an argument\n"
 msgstr "%s: opcio «-W %s» bezonas argumenton\n"
 
-#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34 src/pcresearch.c:340
-#, c-format
+#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34 src/pcresearch.c:353
 msgid "memory exhausted"
 msgstr "mankas sufiĉa memoro"
 
@@ -761,12 +760,12 @@ msgstr "nevalida maksimuma nombro"
 msgid "unknown binary-files type"
 msgstr "nekonata ago por duumaj dosieroj"
 
-#: src/pcresearch.c:71
+#: src/pcresearch.c:84
 #, c-format
 msgid "failed to allocate memory for the PCRE JIT stack"
 msgstr "mankas sufiĉa memoro por la PCRE-JIT-stako"
 
-#: src/pcresearch.c:96
+#: src/pcresearch.c:109
 msgid ""
 "support for the -P option is not compiled into this --disable-perl-regexp "
 "binary"
@@ -774,47 +773,45 @@ msgstr ""
 "opcio «-P» ne funkcias en ĉi tiu programo ĉar ĝi kompiliĝis kun «--disable-"
 "perl-regexp»"
 
-#: src/pcresearch.c:119
+#: src/pcresearch.c:132
 #, c-format
 msgid "-P supports only unibyte and UTF-8 locales"
 msgstr "opcio «-P» subtenas nur unubajtajn kaj UTF-8-ajn lokaĵojn"
 
-#: src/pcresearch.c:126
+#: src/pcresearch.c:139
 #, c-format
 msgid "the -P option only supports a single pattern"
 msgstr "opcio «-P» akceptas nur unuopan ŝablonon"
 
-#: src/pcresearch.c:138
+#: src/pcresearch.c:151
 #, c-format
 msgid "unescaped ^ or $ not supported with -Pz"
 msgstr "seneskapa ^ aŭ $ ne subtenatas kun opcio «-Pz»"
 
-#: src/pcresearch.c:184
+#: src/pcresearch.c:197
 #, c-format
 msgid "internal error (should never happen)"
 msgstr "**interna eraro** (devus neniam okazi)"
 
-#: src/pcresearch.c:206
+#: src/pcresearch.c:219
 #, c-format
 msgid "internal error"
 msgstr "**interna eraro**"
 
-#: src/pcresearch.c:250
+#: src/pcresearch.c:263
 #, c-format
 msgid "exceeded PCRE's line length limit"
 msgstr "transpasiĝis linilongecan limon de PCRE"
 
-#: src/pcresearch.c:344
-#, c-format
+#: src/pcresearch.c:357
 msgid "exhausted PCRE JIT stack"
 msgstr "la PCRE-JIT-stako tute pleniĝis"
 
-#: src/pcresearch.c:348
-#, c-format
+#: src/pcresearch.c:361
 msgid "exceeded PCRE's backtracking limit"
 msgstr "transpasiĝis retroreferencan limon de PCRE"
 
-#: src/pcresearch.c:355
+#: src/pcresearch.c:368
 #, c-format
 msgid "internal PCRE error: %d"
 msgstr "**interna eraro** en PCRE: %d"

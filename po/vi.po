@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grep 2.23.7\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2016-09-25 16:36-0700\n"
+"POT-Creation-Date: 2016-10-02 17:05-0700\n"
 "PO-Revision-Date: 2016-03-05 07:45+0700\n"
 "Last-Translator: Trần Ngọc Quân <vnwildman@gmail.com>\n"
 "Language-Team: Vietnamese <translation-team-vi@lists.sourceforge.net>\n"
@@ -143,8 +143,7 @@ msgstr "%s: tùy chọn “-W %s” không cho phép đối số\n"
 msgid "%s: option '-W %s' requires an argument\n"
 msgstr "%s: tùy chọn “-W %s” yêu cầu một đối số\n"
 
-#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34 src/pcresearch.c:340
-#, c-format
+#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34 src/pcresearch.c:353
 msgid "memory exhausted"
 msgstr "hết bộ nhớ"
 
@@ -771,12 +770,12 @@ msgstr "số lượng tối đa không hợp lệ"
 msgid "unknown binary-files type"
 msgstr "không rõ kiểu tập tin nhị phân (binary-files)"
 
-#: src/pcresearch.c:71
+#: src/pcresearch.c:84
 #, c-format
 msgid "failed to allocate memory for the PCRE JIT stack"
 msgstr "gặp lỗi khi cấp phát bộ nhớ cho stack (ngăn xếp) PCRE JIT"
 
-#: src/pcresearch.c:96
+#: src/pcresearch.c:109
 msgid ""
 "support for the -P option is not compiled into this --disable-perl-regexp "
 "binary"
@@ -784,47 +783,45 @@ msgstr ""
 "khả năng hỗ trợ tùy chọn -P không được biên dịch vào tập tin nhị phân --"
 "disable-perl-regexp này"
 
-#: src/pcresearch.c:119
+#: src/pcresearch.c:132
 #, c-format
 msgid "-P supports only unibyte and UTF-8 locales"
 msgstr "-P chỉ hỗ trợ miền địa phương unibyte và UTF-8"
 
-#: src/pcresearch.c:126
+#: src/pcresearch.c:139
 #, c-format
 msgid "the -P option only supports a single pattern"
 msgstr "tùy chọn “-P” chỉ hỗ trợ một mẫu đơn lẻ"
 
-#: src/pcresearch.c:138
+#: src/pcresearch.c:151
 #, c-format
 msgid "unescaped ^ or $ not supported with -Pz"
 msgstr "không thoát ^ hay $ không được hỗ trợ với -Pz"
 
-#: src/pcresearch.c:184
+#: src/pcresearch.c:197
 #, c-format
 msgid "internal error (should never happen)"
 msgstr "lỗi nội bộ (không nên xảy ra như thế)"
 
-#: src/pcresearch.c:206
+#: src/pcresearch.c:219
 #, c-format
 msgid "internal error"
 msgstr "lỗi nội bộ"
 
-#: src/pcresearch.c:250
+#: src/pcresearch.c:263
 #, c-format
 msgid "exceeded PCRE's line length limit"
 msgstr "đã vượt quá giới hạn chiều dài dòng của PCRE"
 
-#: src/pcresearch.c:344
-#, c-format
+#: src/pcresearch.c:357
 msgid "exhausted PCRE JIT stack"
 msgstr "ngăn xếp “PCRE JIT” đã hết"
 
-#: src/pcresearch.c:348
-#, c-format
+#: src/pcresearch.c:361
 msgid "exceeded PCRE's backtracking limit"
 msgstr "đã vượt quá giới hạn tìm ngược của PCRE"
 
-#: src/pcresearch.c:355
+#: src/pcresearch.c:368
 #, c-format
 msgid "internal PCRE error: %d"
 msgstr "lỗi nội bộ PCRE: %d"

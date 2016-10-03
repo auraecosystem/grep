@@ -1,3 +1,65 @@
+2016-10-02  Jim Meyering  <meyering@fb.com>
+
+	version 2.26
+	* NEWS: Record release date.
+
+2016-10-01  Jim Meyering  <meyering@fb.com>
+
+	gnulib: update to latest; for getprogname fix
+
+2016-10-01  Paul Eggert  <eggert@cs.ucla.edu>
+
+	tests/grep-dir: port to Solaris 10
+	* tests/grep-dir: Port to Solaris 10 'cat', which
+	exits with status 0 even after 'read' fails from a directory.
+
+2016-09-28  Jim Meyering  <meyering@fb.com>
+
+	build: placate GCC 7's -Wimplicit-fallthrough
+	* src/pcresearch.c (die): New macro.
+	(Pexecute): Use it in place of offending uses of error,
+	to placate GCC 7's -Wimplicit-fallthrough.
+	Include verify.h.  Since this is grep's first explicit use of this
+	gnulib module, ...
+	* bootstrap.conf (gnulib_modules): Add verify.
+
+	gnulib: update to latest; for ...
+	This includes the following:
+	 - a getprogname-vs-openbsd-5.1 portability fix
+	 - "fallthru" comment-adding changes for dfa and unistr/u8-uctomb-aux.c
+	 - another getprograme fix to avoid breaking newer glibc
+
+2016-09-27  Paul Eggert  <eggert@cs.ucla.edu>
+
+	build: reword .git old-GCC warning
+	* configure.ac (gl_gcc_warnings): Reword diagnostic.
+	Suggested by Assaf Gordon in:
+	http://lists.gnu.org/archive/html/grep-devel/2016-09/msg00024.html
+
+	build: port .git builds to newer GCC
+	* configure.ac (gl_gcc_warnings): Omit duplicate copy of 'main'.
+	Problem reported by Assaf Gordon in:
+	http://lists.gnu.org/archive/html/grep-devel/2016-09/msg00024.html
+
+	build: port .git builds to older GCC
+	Problem reported by Dagobert Michelsen in:
+	http://lists.gnu.org/archive/html/grep-devel/2016-09/msg00018.html
+	* configure.ac (gl_gcc_warnings): Default to false if .git
+	exists but GCC is too old.
+
+2016-09-27  Jim Meyering  <meyering@fb.com>
+
+	tests/long-pattern-perf: avoid false-failure due to cache speed
+	* tests/long-pattern-perf: This test would fail semi-consistently
+	on some systems, probably because the smaller regexp fit well
+	within cache, yet the larger one did not.  In that case, there
+	was a relative speed difference greater than 20x and the test
+	would fail.  Quadruple the sizes, to make that less likely.
+	Also, construct the 10x larger regexp directly from the smaller,
+	rather than relying on seq with endpoints to induce that
+	approximate size ratio.  Reported by Bruce Dubbs in
+	https://lists.gnu.org/archive/html/grep-devel/2016-09/msg00013.html
+
 2016-09-24  Jim Meyering  <meyering@fb.com>
 
 	build: avoid "./configure && make dist" missing-dep. failure

@@ -47,6 +47,14 @@ getprogname (void)
 # elif HAVE_DECL___ARGV
   const char *p = __argv && __argv[0] ? __argv[0] : "?";
   return last_component (p);
+# elif HAVE_VAR___PROGNAME
+  /* Be careful to declare this only when we absolutely need it
+     (OpenBSD 5.1), rather than when it's available.  Otherwise,
+     its mere declaration makes program_invocation_short_name
+     malfunction (have zero length) with Fedora 25's glibc.  */
+  extern char *__progname;
+  const char *p = __progname;
+  return p && p[0] ? p : "?";
 # elif _AIX
   /* Idea by Bastien ROUCARIÈS <address@hidden>,
      http://lists.gnu.org/archive/html/bug-gnulib/2010-12/msg00095.html

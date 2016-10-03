@@ -1481,6 +1481,9 @@
 /* Define to 1 if you have the `uselocale' function. */
 #undef HAVE_USELOCALE
 
+/* Define if you have a global __progname variable */
+#undef HAVE_VAR___PROGNAME
+
 /* Define to 1 if you have the 'vasnprintf' function. */
 #undef HAVE_VASNPRINTF
 
