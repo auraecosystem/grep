@@ -1,11 +1,9 @@
-grep (2.25-7~1) UNRELEASED; urgency=medium
+grep (2.26-1~0) UNRELEASE; urgency=low
 
-  * Add upstream-525214-tests-coreutils-perl-driven-test-framework.patch
-  * Add debian/patches/upstream-525214-grep-report-error-line-number.patch: to
-    help diagnosing errors in regexps provided through -f.
-    (Closes: #525214)
+  * New upstraem release.
+  * Fix diagnosing errors in regexps provided through -f (Closes: #525214).
 
- -- Santiago Ruano Rincón <santiagorr@debian.org>  Mon, 25 Jul 2016 18:24:42 +0200
+ -- Santiago Ruano Rincón <santiagorr@debian.org>  Mon, 03 Oct 2016 06:44:16 +0200
 
 grep (2.25-6) unstable; urgency=medium
 
