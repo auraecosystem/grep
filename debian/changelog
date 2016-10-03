@@ -1,4 +1,4 @@
-grep (2.26-1~0) UNRELEASE; urgency=low
+grep (2.26-1) unstable; urgency=low
 
   * New upstraem release.
   * Fix diagnosing errors in regexps provided through -f (Closes: #525214).
