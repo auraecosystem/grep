@@ -2,6 +2,3 @@
 03-397262-dlopen-pcre.patch
 05-grep-wrapper-sh.patch
 81-356120-document-multiple-e.patch
-upstream-90-language-test-suite.patch
-upstream-525214-tests-coreutils-perl-driven-test-framework.patch
-upstream-525214-grep-report-error-line-number.patch
