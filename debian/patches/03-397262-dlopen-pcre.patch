@@ -5,9 +5,11 @@ Patch by Reuben Thomas <rrt@sc3d.org>
 Modified by Aníbal Monsalve Salazar <anibal@debian.org>
 Modified by Marco d'Itri <md@Linux.IT>
 
---- a/src/pcresearch.c
-+++ b/src/pcresearch.c
-@@ -23,6 +23,9 @@
+Index: grep/src/pcresearch.c
+===================================================================
+--- grep.orig/src/pcresearch.c
++++ grep/src/pcresearch.c
+@@ -24,6 +24,9 @@
  
  #if HAVE_LIBPCRE
  # include <pcre.h>
@@ -17,8 +19,8 @@ Modified by Marco d'Itri <md@Linux.IT>
  
  /* This must be at least 2; everything after that is for performance
     in pcre_exec.  */
-@@ -88,6 +91,67 @@
- static bool multibyte_locale;
+@@ -87,6 +90,67 @@ jit_exec (char const *subject, int searc
+ static int empty_match[2];
  #endif
  
 +#ifdef HAVE_DYNAMIC_LIBPCRE
@@ -85,14 +87,14 @@ Modified by Marco d'Itri <md@Linux.IT>
  void
  Pcompile (char const *pattern, size_t size)
  {
-@@ -121,6 +185,10 @@
+@@ -117,6 +181,10 @@ Pcompile (char const *pattern, size_t si
        flags |= PCRE_UTF8;
      }
  
 +  if (!map_pcre ())
-+    error (EXIT_TROUBLE, 0, "%s",
-+	   _("The -P option is not supported: libpcre.so.3 is not available"));
++    die (EXIT_TROUBLE, 0, "%s",
++      _("The -P option is not supported: libpcre.so.3 is not available"));
 +
-   /* FIXME: Remove these restrictions.  */
+   /* FIXME: Remove this restriction.  */
    if (memchr (pattern, '\n', size))
-     error (EXIT_TROUBLE, 0, _("the -P option only supports a single pattern"));
+     die (EXIT_TROUBLE, 0, _("the -P option only supports a single pattern"));
