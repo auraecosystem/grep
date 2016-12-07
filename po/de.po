@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GNU grep 2.23.7\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2016-10-02 17:05-0700\n"
+"POT-Creation-Date: 2016-12-06 23:17-0800\n"
 "PO-Revision-Date: 2016-03-08 10:01+0100\n"
 "Last-Translator: Philipp Thomas <pth@suse.de>\n"
 "Language-Team: German <translation-team-de@lists.sourceforge.net>\n"
@@ -33,48 +33,47 @@ msgstr "mehrdeutiges Argument %s für %s"
 msgid "Valid arguments are:"
 msgstr "Gültige Argumente sind:"
 
-#: lib/closeout.c:112 src/grep.c:1312
-#, c-format
+#: lib/closeout.c:112 src/grep.c:1290
 msgid "write error"
 msgstr "Schreibfehler"
 
 # Is this message used only for [ without matching ],
 # or for ] without [ as well?
-#: lib/dfa.c:948 lib/dfa.c:951 lib/dfa.c:970 lib/dfa.c:980 lib/dfa.c:993
-#: lib/dfa.c:1021 lib/dfa.c:1030 lib/dfa.c:1033 lib/dfa.c:1038 lib/dfa.c:1060
-#: lib/dfa.c:1063
+#: lib/dfa.c:961 lib/dfa.c:964 lib/dfa.c:983 lib/dfa.c:993 lib/dfa.c:1006
+#: lib/dfa.c:1034 lib/dfa.c:1043 lib/dfa.c:1046 lib/dfa.c:1051 lib/dfa.c:1073
+#: lib/dfa.c:1076
 msgid "unbalanced ["
 msgstr "[ ohne schließendes Gegenstück"
 
-#: lib/dfa.c:1006
+#: lib/dfa.c:1019
 msgid "invalid character class"
 msgstr "Ungültige Zeichenklasse %s"
 
-#: lib/dfa.c:1129
+#: lib/dfa.c:1142
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr "die Syntax für Zeichenklassen ist [[:space:]], nicht [:space:]"
 
-#: lib/dfa.c:1198
+#: lib/dfa.c:1211
 msgid "unfinished \\ escape"
 msgstr "unbeendete \\-Escape-Sequenz"
 
-#: lib/dfa.c:1359
+#: lib/dfa.c:1372
 msgid "invalid content of \\{\\}"
 msgstr "Ungültiger Inhalt von \\{\\}"
 
-#: lib/dfa.c:1362
+#: lib/dfa.c:1375
 msgid "regular expression too big"
 msgstr "Der reguläre Ausdruck ist zu groß"
 
-#: lib/dfa.c:1777
+#: lib/dfa.c:1789
 msgid "unbalanced ("
 msgstr "( ohne schließendes Gegenstück"
 
-#: lib/dfa.c:1904
+#: lib/dfa.c:1916
 msgid "no syntax specified"
 msgstr "es wurde keine Syntax angegeben"
 
-#: lib/dfa.c:1912
+#: lib/dfa.c:1924
 msgid "unbalanced )"
 msgstr "Schließende ) ohne öffnendes Gegenstück"
 
@@ -142,7 +141,7 @@ msgstr "%s: Option „-W %s“ erlaubt kein Argument\n"
 msgid "%s: option '-W %s' requires an argument\n"
 msgstr "%s: Option „-W %s“ erfordert ein Argument\n"
 
-#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34 src/pcresearch.c:353
+#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34 src/pcresearch.c:284
 msgid "memory exhausted"
 msgstr "Speicher ausgeschöpft"
 
@@ -177,11 +176,11 @@ msgstr "die Rückkehr in das ursprüngliche Arbeitsverzeichnis war nicht möglic
 #. If you don't know what to put here, please see
 #. <http://en.wikipedia.org/wiki/Quotation_marks_in_other_languages>
 #. and use glyphs suitable for your language.
-#: lib/quotearg.c:347
+#: lib/quotearg.c:352
 msgid "`"
 msgstr "„"
 
-#: lib/quotearg.c:348
+#: lib/quotearg.c:353
 msgid "'"
 msgstr "“"
 
@@ -450,71 +449,66 @@ msgid "%s%s argument '%s' too large"
 msgstr "%s%s-Argument „%s“ ist zu groß"
 
 #. This is a proper name. See the gettext manual, section Names.
-#: src/grep.c:57
+#: src/grep.c:58
 msgid "Mike Haertel"
 msgstr "Mike Haertel"
 
-#: src/grep.c:58
+#: src/grep.c:59
 msgid "others, see <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
 msgstr "für weitere siehe <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
 
-#: src/grep.c:767
+#: src/grep.c:600
+msgid "(standard input)"
+msgstr "(Standardeingabe)"
+
+#: src/grep.c:778
 msgid "invalid context length argument"
 msgstr "ungültiges Argument für die Kontextlänge"
 
-#: src/grep.c:831
-#, c-format
+#: src/grep.c:841
 msgid "input is too large to count"
 msgstr "die Eingabe ist zu groß, um gezählt zu werden"
 
-#: src/grep.c:863
-msgid "lseek failed"
-msgstr "lseek ist fehlgeschlagen"
-
-#: src/grep.c:1611
+#: src/grep.c:1603
 #, c-format
 msgid "Binary file %s matches\n"
 msgstr "Übereinstimmungen in Binärdatei %s\n"
 
-#: src/grep.c:1659
+#: src/grep.c:1651
 #, c-format
 msgid "warning: %s: %s"
 msgstr "Warnung: %s: %s"
 
-#: src/grep.c:1660
+#: src/grep.c:1652
 msgid "recursive directory loop"
 msgstr "rekursive Verzeichnisschleife"
 
-#: src/grep.c:1825
+#: src/grep.c:1874
 #, c-format
 msgid "input file %s is also the output"
 msgstr "die Eingabedatei %s ist auch die Ausgabedatei"
 
-#: src/grep.c:1882
-msgid "(standard input)"
-msgstr "(Standardeingabe)"
-
-#: src/grep.c:1898 src/grep.c:1905
+#: src/grep.c:1940 src/grep.c:1947
 #, c-format
 msgid "Usage: %s [OPTION]... PATTERN [FILE]...\n"
 msgstr "Aufruf: %s [OPTION]... MUSTER [DATEI]...\n"
 
-#: src/grep.c:1900
+#: src/grep.c:1942
 #, c-format
 msgid "Try '%s --help' for more information.\n"
 msgstr "„%s --help“ liefert weitere Informationen.\n"
 
-#: src/grep.c:1906
+#: src/grep.c:1948
 #, c-format
 msgid "Search for PATTERN in each FILE or standard input.\n"
 msgstr "Suche nach MUSTER in jeder DATEI oder der Standardeingabe.\n"
 
-#: src/grep.c:1907
+#: src/grep.c:1949
 #, c-format
 msgid "PATTERN is, by default, a basic regular expression (BRE).\n"
 msgstr "MUSTER ist normalerweise ein regulärer Standardausdruck (BRE).\n"
 
-#: src/grep.c:1908
+#: src/grep.c:1950
 #, c-format
 msgid ""
 "Example: %s -i 'hello world' menu.h main.c\n"
@@ -525,7 +519,7 @@ msgstr ""
 "\n"
 "Auswahl und Interpretation regulärer Ausdrücke:\n"
 
-#: src/grep.c:1912
+#: src/grep.c:1954
 #, c-format
 msgid ""
 "  -E, --extended-regexp     PATTERN is an extended regular expression (ERE)\n"
@@ -540,7 +534,7 @@ msgstr ""
 "  -P, --perl-regexp         MUSTER ist ein regulärer Ausdruck, wie Perl\n"
 "                            ihn akzeptiert\n"
 
-#: src/grep.c:1918
+#: src/grep.c:1960
 #, c-format
 msgid ""
 "  -e, --regexp=PATTERN      use PATTERN for matching\n"
@@ -558,7 +552,7 @@ msgstr ""
 "  -x, --line-regexp         MUSTER passt nur auf ganze Zeilen\n"
 "  -z, --null-data           Eine Zeile endet mit Nullbyte, nicht Newline\n"
 
-#: src/grep.c:1925
+#: src/grep.c:1967
 #, c-format
 msgid ""
 "\n"
@@ -575,7 +569,7 @@ msgstr ""
 "  -V, --version             Versionsnummer ausgeben und beenden\n"
 "      --help                Diese Hilfe ausgeben und beenden\n"
 
-#: src/grep.c:1932
+#: src/grep.c:1974
 #, c-format
 msgid ""
 "\n"
@@ -603,7 +597,7 @@ msgstr ""
 "      --label=BEZEICHNUNG   verwendet BEZEICHNUNG als Präfix für Dateinamen\n"
 "                            der Standardeingabe\n"
 
-#: src/grep.c:1943
+#: src/grep.c:1985
 #, c-format
 msgid ""
 "  -o, --only-matching       show only the part of a line matching PATTERN\n"
@@ -620,7 +614,7 @@ msgstr ""
 "sein\n"
 "  -a, --text                gleichbedeutend mit --binary-files=text\n"
 
-#: src/grep.c:1950
+#: src/grep.c:1992
 #, c-format
 msgid ""
 "  -I                        equivalent to --binary-files=without-match\n"
@@ -641,7 +635,7 @@ msgstr ""
 "  -r, --recursive           wie --directories=recurse\n"
 "  -R, --dereference-recursive  ebenso, folgt aber allen symbolischen Links\n"
 
-#: src/grep.c:1959
+#: src/grep.c:2001
 #, c-format
 msgid ""
 "      --include=FILE_PATTERN  search only files that match FILE_PATTERN\n"
@@ -660,7 +654,7 @@ msgstr ""
 "      --exclude-dir=MUSTER   Verzeichnisse, die MUSTER entsprechen, werden "
 "übersprungen\n"
 
-#: src/grep.c:1966
+#: src/grep.c:2008
 #, c-format
 msgid ""
 "  -L, --files-without-match  print only names of FILEs containing no match\n"
@@ -678,7 +672,7 @@ msgstr ""
 "  -T, --initial-tab         Tabulatoren (wenn nötig) ausrichten\n"
 "  -Z, --null                ein 0-Byte nach einem Dateinamen ausgeben\n"
 
-#: src/grep.c:1972
+#: src/grep.c:2014
 #, c-format
 msgid ""
 "\n"
@@ -695,7 +689,7 @@ msgstr ""
 "ausgeben\n"
 "  -C, --context=ANZAHL         ANZAHL Zeilen Kontext ausgeben\n"
 
-#: src/grep.c:1979
+#: src/grep.c:2021
 #, c-format
 msgid ""
 "  -NUM                      same as --context=NUM\n"
@@ -717,7 +711,7 @@ msgstr ""
 "(MSDOS)\n"
 "\n"
 
-#: src/grep.c:1988
+#: src/grep.c:2030
 #, c-format
 msgid ""
 "'egrep' means 'grep -E'.  'fgrep' means 'grep -F'.\n"
@@ -726,7 +720,7 @@ msgstr ""
 "„egrep“ bedeutet „grep -E“ und „fgrep“ bedeutet „grep -F“.\n"
 "Der direkte Aufruf als entweder „egrep“ oder „fgrep“ ist veraltet.\n"
 
-#: src/grep.c:1991
+#: src/grep.c:2033
 #, c-format
 msgid ""
 "When FILE is -, read standard input.  With no FILE, read . if a command-"
@@ -742,44 +736,39 @@ msgstr ""
 "Wenn ein Fehler auftrat und -q nicht angegeben wurde, ist der Rückgabewert "
 "2.\n"
 
-#: src/grep.c:2058
-#, c-format
+#: src/grep.c:2100
 msgid "conflicting matchers specified"
 msgstr "die angegebenen Suchmuster stehen in Konflikt zueinander"
 
-#: src/grep.c:2069
+#: src/grep.c:2111
 #, c-format
 msgid "invalid matcher %s"
 msgstr "ungültige Entsprechung %s"
 
-#: src/grep.c:2393
+#: src/grep.c:2432
 #, c-format
 msgid "warning: GREP_OPTIONS is deprecated; please use an alias or script"
 msgstr ""
 "Warnung: GREP_OPTIONS sind veraltet. Bitte benutzen Sie ein Alias oder ein "
 "Skript"
 
-#: src/grep.c:2423
-#, c-format
+#: src/grep.c:2462
 msgid "unknown devices method"
 msgstr "Unbekannte Methode für Gerätedateien"
 
-#: src/grep.c:2552
-#, c-format
+#: src/grep.c:2594
 msgid "invalid max count"
 msgstr "ungültige Maximalanzahl"
 
-#: src/grep.c:2609
-#, c-format
+#: src/grep.c:2651
 msgid "unknown binary-files type"
 msgstr "unbekannter Typ für Binärdateien"
 
-#: src/pcresearch.c:84
-#, c-format
+#: src/pcresearch.c:72
 msgid "failed to allocate memory for the PCRE JIT stack"
 msgstr "es konnte kein Speicher für den PCRE-JIT-Stack reserviert werden"
 
-#: src/pcresearch.c:109
+#: src/pcresearch.c:95
 msgid ""
 "support for the -P option is not compiled into this --disable-perl-regexp "
 "binary"
@@ -787,48 +776,44 @@ msgstr ""
 "Unterstützung für die Option -P wurde in dieses --disable-perl-regexp-Binary "
 "nicht einkompiliert"
 
-#: src/pcresearch.c:132
-#, c-format
+#: src/pcresearch.c:116
 msgid "-P supports only unibyte and UTF-8 locales"
 msgstr "-P unterstützt nur Unibyte- oder UTF-8 Locales"
 
-#: src/pcresearch.c:139
-#, c-format
+#: src/pcresearch.c:122
 msgid "the -P option only supports a single pattern"
 msgstr "Die Option -P unterstützt nur ein einzelnes Suchmuster"
 
-#: src/pcresearch.c:151
-#, c-format
-msgid "unescaped ^ or $ not supported with -Pz"
-msgstr "ein nicht geschütztes ^ oder $ wird mit -Pz nicht unterstützt"
-
-#: src/pcresearch.c:197
-#, c-format
+#: src/pcresearch.c:164
 msgid "internal error (should never happen)"
 msgstr "Interner Fehler (sollte nie vorkommen)"
 
-#: src/pcresearch.c:219
-#, c-format
+#: src/pcresearch.c:186
 msgid "internal error"
 msgstr "Interner Fehler"
 
-#: src/pcresearch.c:263
-#, c-format
+#: src/pcresearch.c:208
 msgid "exceeded PCRE's line length limit"
 msgstr "Überschreitung der zulässigen Zeilenlänge von PCREs"
 
-#: src/pcresearch.c:357
+#: src/pcresearch.c:288
 msgid "exhausted PCRE JIT stack"
 msgstr "Kellerspeicher für PCRE JIT ist erschöpft"
 
-#: src/pcresearch.c:361
+#: src/pcresearch.c:292
 msgid "exceeded PCRE's backtracking limit"
 msgstr "Überschreitung der Zurückverfolgungsbeschränkung des PCREs"
 
-#: src/pcresearch.c:368
+#: src/pcresearch.c:299
 #, c-format
 msgid "internal PCRE error: %d"
 msgstr "interner PCRE-Fehler: %d"
+
+#~ msgid "lseek failed"
+#~ msgstr "lseek ist fehlgeschlagen"
+
+#~ msgid "unescaped ^ or $ not supported with -Pz"
+#~ msgstr "ein nicht geschütztes ^ oder $ wird mit -Pz nicht unterstützt"
 
 #~ msgid "GNU Grep home page: <%s>\n"
 #~ msgstr "GNU Grep Homepage: <%s>\n"

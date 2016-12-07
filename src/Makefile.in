@@ -216,9 +216,9 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)" "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
-am_grep_OBJECTS = grep.$(OBJEXT) searchutils.$(OBJEXT) \
-	dfasearch.$(OBJEXT) kwset.$(OBJEXT) kwsearch.$(OBJEXT) \
-	pcresearch.$(OBJEXT)
+am_grep_OBJECTS = dfasearch.$(OBJEXT) grep.$(OBJEXT) \
+	kwsearch.$(OBJEXT) kwset.$(OBJEXT) pcresearch.$(OBJEXT) \
+	searchutils.$(OBJEXT)
 grep_OBJECTS = $(am_grep_OBJECTS)
 am__DEPENDENCIES_1 =
 am__DEPENDENCIES_2 = ../lib/libgreputils.a $(am__DEPENDENCIES_1) \
@@ -747,6 +747,7 @@ HAVE_PREAD = @HAVE_PREAD@
 HAVE_PTSNAME = @HAVE_PTSNAME@
 HAVE_PTSNAME_R = @HAVE_PTSNAME_R@
 HAVE_PWRITE = @HAVE_PWRITE@
+HAVE_QSORT_R = @HAVE_QSORT_R@
 HAVE_RANDOM = @HAVE_RANDOM@
 HAVE_RANDOM_H = @HAVE_RANDOM_H@
 HAVE_RANDOM_R = @HAVE_RANDOM_R@
@@ -1195,10 +1196,14 @@ AM_CFLAGS = $(WARN_CFLAGS) $(WERROR_CFLAGS) $(PCRE_CFLAGS)
 # Tell the linker to omit references to unused shared libraries.
 AM_LDFLAGS = $(IGNORE_UNUSED_LIBRARIES_CFLAGS)
 bin_SCRIPTS = egrep fgrep
-grep_SOURCES = grep.c searchutils.c \
-          dfasearch.c \
-          kwset.c kwsearch.c \
-          pcresearch.c
+grep_SOURCES = \
+  dfasearch.c					\
+  die.h						\
+  grep.c					\
+  kwsearch.c					\
+  kwset.c					\
+  pcresearch.c					\
+  searchutils.c
 
 noinst_HEADERS = grep.h kwset.h search.h system.h
 

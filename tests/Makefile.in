@@ -922,6 +922,7 @@ HAVE_PREAD = @HAVE_PREAD@
 HAVE_PTSNAME = @HAVE_PTSNAME@
 HAVE_PTSNAME_R = @HAVE_PTSNAME_R@
 HAVE_PWRITE = @HAVE_PWRITE@
+HAVE_QSORT_R = @HAVE_QSORT_R@
 HAVE_RANDOM = @HAVE_RANDOM@
 HAVE_RANDOM_H = @HAVE_RANDOM_H@
 HAVE_RANDOM_R = @HAVE_RANDOM_R@
@@ -1416,6 +1417,7 @@ TESTS = \
   count-newline					\
   dfa-coverage					\
   dfa-heap-overrun				\
+  dfa-infloop					\
   dfaexec-multibyte				\
   empty						\
   empty-line					\
@@ -1425,6 +1427,7 @@ TESTS = \
   equiv-classes					\
   ere						\
   euc-mb					\
+  false-match-mb-non-utf8			\
   fedora					\
   fgrep-infloop					\
   file						\
@@ -1439,6 +1442,7 @@ TESTS = \
   in-eq-out-infloop				\
   include-exclude				\
   inconsistent-range				\
+  initial-tab					\
   invalid-multibyte-infloop			\
   khadafy					\
   kwset-abuse					\
@@ -1474,6 +1478,7 @@ TESTS = \
   reversed-range-endpoints			\
   sjis-mb					\
   skip-device					\
+  skip-read					\
   spencer1					\
   spencer1-locale				\
   status					\
@@ -2003,6 +2008,13 @@ dfa-heap-overrun.log: dfa-heap-overrun
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
 	"$$tst" $(AM_TESTS_FD_REDIRECT)
+dfa-infloop.log: dfa-infloop
+	@p='dfa-infloop'; \
+	b='dfa-infloop'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
 dfaexec-multibyte.log: dfaexec-multibyte
 	@p='dfaexec-multibyte'; \
 	b='dfaexec-multibyte'; \
@@ -2062,6 +2074,13 @@ ere.log: ere
 euc-mb.log: euc-mb
 	@p='euc-mb'; \
 	b='euc-mb'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+false-match-mb-non-utf8.log: false-match-mb-non-utf8
+	@p='false-match-mb-non-utf8'; \
+	b='false-match-mb-non-utf8'; \
 	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
@@ -2153,6 +2172,13 @@ include-exclude.log: include-exclude
 inconsistent-range.log: inconsistent-range
 	@p='inconsistent-range'; \
 	b='inconsistent-range'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+initial-tab.log: initial-tab
+	@p='initial-tab'; \
+	b='initial-tab'; \
 	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
@@ -2398,6 +2424,13 @@ sjis-mb.log: sjis-mb
 skip-device.log: skip-device
 	@p='skip-device'; \
 	b='skip-device'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+skip-read.log: skip-read
+	@p='skip-read'; \
+	b='skip-read'; \
 	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \

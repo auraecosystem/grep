@@ -23,7 +23,7 @@ grep
 
 ‘grep’ prints lines that contain a match for a pattern.
 
-   This manual is for version 2.26 of GNU Grep.
+   This manual is for version 2.27 of GNU Grep.
 
    This manual is for ‘grep’, a pattern matching engine.
 
@@ -264,7 +264,9 @@ File: grep.info-t,  Node: General Output Control,  Next: Output Line Prefix Cont
 ‘-o’
 ‘--only-matching’
      Print only the matched (non-empty) parts of matching lines, with
-     each such part on a separate output line.
+     each such part on a separate output line.  Output lines use the
+     same delimiters as input, and delimiters are null bytes if ‘-z’
+     (‘--null-data’) is also used (*note Other Options::).
 
 ‘-q’
 ‘--quiet’
@@ -335,10 +337,9 @@ these options were specified.
      Make sure that the first character of actual line content lies on a
      tab stop, so that the alignment of tabs looks normal.  This is
      useful with options that prefix their output to the actual content:
-     ‘-H’, ‘-n’, and ‘-b’.  In order to improve the probability that
-     lines from a single file will all start at the same column, this
-     also causes the line number and byte offset (if present) to be
-     printed in a minimum-size field width.
+     ‘-H’, ‘-n’, and ‘-b’.  This may also prepend spaces to output line
+     numbers and byte offsets so that lines from a single file all start
+     at the same column.
 
 ‘-u’
 ‘--unix-byte-offsets’
@@ -805,8 +806,9 @@ are four major variants of ‘grep’, controlled by the following options.
 ‘-P’
 ‘--perl-regexp’
      Interpret the pattern as a Perl-compatible regular expression
-     (PCRE). This is highly experimental and ‘grep -P’ may warn of
-     unimplemented features.
+     (PCRE). This is highly experimental, particularly when combined
+     with the ‘-z’ (‘--null-data’) option, and ‘grep -P’ may warn of
+     unimplemented features.  *Note Other Options::.
 
    In addition, two variant programs ‘egrep’ and ‘fgrep’ are available.
 ‘egrep’ is the same as ‘grep -E’.  ‘fgrep’ is the same as ‘grep -F’.
@@ -1275,10 +1277,10 @@ to match the line ‘Hello, world!’, which it would not otherwise match.
      Therefore, merely using the ‘[:space:]’ character class does not
      match newlines in the way you might expect.
 
-     With the GNU ‘grep’ option ‘-z’ (‘--null-data’), each input “line”
-     is terminated by a null byte; *note Other Options::.  Thus, you can
-     match newlines in the input, but typically if there is a match the
-     entire input is output, so this usage is often combined with
+     With the GNU ‘grep’ option ‘-z’ (‘--null-data’), each input and
+     output “line” is null-terminated; *note Other Options::.  Thus, you
+     can match newlines in the input, but typically if there is a match
+     the entire input is output, so this usage is often combined with
      output-suppressing options like ‘-q’, e.g.:
 
           printf 'foo\nbar\n' | grep -z -q 'foo[[:space:]]\+bar'
@@ -1905,24 +1907,24 @@ Index
 * --no-filename:                         Output Line Prefix Control.
                                                               (line  25)
 * --no-messages:                         General Output Control.
-                                                              (line  87)
+                                                              (line  89)
 * --null:                                Output Line Prefix Control.
-                                                              (line  63)
+                                                              (line  62)
 * --null-data:                           Other Options.       (line  25)
 * --only-matching:                       General Output Control.
                                                               (line  74)
 * --perl-regexp:                         grep Programs.       (line  31)
 * --quiet:                               General Output Control.
-                                                              (line  80)
+                                                              (line  82)
 * --recursive:                           File and Directory Selection.
                                                               (line 101)
 * --regexp=PATTERN:                      Matching Control.    (line   8)
 * --silent:                              General Output Control.
-                                                              (line  80)
+                                                              (line  82)
 * --text:                                File and Directory Selection.
                                                               (line   8)
 * --unix-byte-offsets:                   Output Line Prefix Control.
-                                                              (line  53)
+                                                              (line  52)
 * --version:                             Generic Program Information.
                                                               (line  12)
 * --with-filename:                       Output Line Prefix Control.
@@ -1968,17 +1970,17 @@ Index
                                                               (line  74)
 * -P:                                    grep Programs.       (line  31)
 * -q:                                    General Output Control.
-                                                              (line  80)
+                                                              (line  82)
 * -r:                                    File and Directory Selection.
                                                               (line 101)
 * -R:                                    File and Directory Selection.
                                                               (line 109)
 * -s:                                    General Output Control.
-                                                              (line  87)
+                                                              (line  89)
 * -T:                                    Output Line Prefix Control.
                                                               (line  43)
 * -u:                                    Output Line Prefix Control.
-                                                              (line  53)
+                                                              (line  52)
 * -U:                                    Other Options.       (line  12)
 * -V:                                    Generic Program Information.
                                                               (line  12)
@@ -1987,7 +1989,7 @@ Index
 * -x:                                    Matching Control.    (line  57)
 * -y:                                    Matching Control.    (line  23)
 * -Z:                                    Output Line Prefix Control.
-                                                              (line  63)
+                                                              (line  62)
 * -z:                                    Other Options.       (line  25)
 * .:                                     Fundamental Structure.
                                                               (line  15)
@@ -2049,7 +2051,7 @@ Index
 * byte offset:                           Output Line Prefix Control.
                                                               (line  12)
 * byte offsets, on MS-DOS/MS-Windows:    Output Line Prefix Control.
-                                                              (line  53)
+                                                              (line  52)
 * case insensitive search:               Matching Control.    (line  23)
 * changing name of standard input:       Output Line Prefix Control.
                                                               (line  30)
@@ -2205,7 +2207,7 @@ Index
                                                               (line 108)
 * MS-DOS/MS-Windows binary files:        Other Options.       (line  12)
 * MS-DOS/MS-Windows byte offsets:        Output Line Prefix Control.
-                                                              (line  53)
+                                                              (line  52)
 * mt GREP_COLORS capability:             Environment Variables.
                                                               (line 100)
 * names of matching files:               General Output Control.
@@ -2245,7 +2247,7 @@ Index
 * question mark:                         Fundamental Structure.
                                                               (line  18)
 * quiet, silent:                         General Output Control.
-                                                              (line  80)
+                                                              (line  82)
 * range expression:                      Character Classes and Bracket Expressions.
                                                               (line  12)
 * recursive search:                      File and Directory Selection.
@@ -2278,7 +2280,7 @@ Index
 * suppress binary data:                  File and Directory Selection.
                                                               (line   8)
 * suppress error messages:               General Output Control.
-                                                              (line  87)
+                                                              (line  89)
 * symbolic links:                        File and Directory Selection.
                                                               (line  62)
 * symbolic links <1>:                    File and Directory Selection.
@@ -2309,7 +2311,7 @@ Index
 * xdigit class:                          Character Classes and Bracket Expressions.
                                                               (line  74)
 * zero-terminated file names:            Output Line Prefix Control.
-                                                              (line  63)
+                                                              (line  62)
 * zero-terminated lines:                 Other Options.       (line  25)
 
 
@@ -2322,27 +2324,27 @@ Node: Command-line Options3414
 Node: Generic Program Information4299
 Node: Matching Control4775
 Node: General Output Control7498
-Ref: General Output Control-Footnote-111629
-Node: Output Line Prefix Control11698
-Node: Context Line Control14760
-Node: File and Directory Selection16825
-Node: Other Options22332
-Node: Environment Variables23640
-Node: Exit Status33919
-Node: grep Programs34399
-Node: Regular Expressions35976
-Node: Fundamental Structure37179
-Node: Character Classes and Bracket Expressions38987
-Ref: invalid-bracket-expr42409
-Node: The Backslash Character and Special Expressions43649
-Node: Anchoring44723
-Node: Back-references and Subexpressions45184
-Node: Basic vs Extended45924
-Node: Usage47017
-Node: Reporting Bugs54497
-Node: Copying55181
-Node: GNU Free Documentation License56309
-Node: Index81614
+Ref: General Output Control-Footnote-111787
+Node: Output Line Prefix Control11856
+Node: Context Line Control14837
+Node: File and Directory Selection16902
+Node: Other Options22409
+Node: Environment Variables23717
+Node: Exit Status33996
+Node: grep Programs34476
+Node: Regular Expressions36156
+Node: Fundamental Structure37359
+Node: Character Classes and Bracket Expressions39167
+Ref: invalid-bracket-expr42589
+Node: The Backslash Character and Special Expressions43829
+Node: Anchoring44903
+Node: Back-references and Subexpressions45364
+Node: Basic vs Extended46104
+Node: Usage47197
+Node: Reporting Bugs54678
+Node: Copying55362
+Node: GNU Free Documentation License56490
+Node: Index81795
 
 End Tag Table
 

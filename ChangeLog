@@ -1,4 +1,306 @@
+2016-12-06  Jim Meyering  <meyering@fb.com>
+
+	version 2.27
+	* NEWS: Record release date.
+
+2016-11-29  Jim Meyering  <meyering@fb.com>
+
+	grep: fix DFA-induced infloop
+	* gnulib: Update to latest, for the DFA infloop fix.
+	* tests/dfa-infloop: New test, to trigger an infinite loop
+	in the DFA matcher.
+	* tests/Makefile.am (TESTS): Add it.
+
+2016-11-28  Jim Meyering  <meyering@fb.com>
+
+	tests: use "returns_ N env VAR=val ..."
+	rather than "VAR=val returns_ N ..."
+	Some shells do not propagate envvar settings through our use
+	of the "returns_" function, so set any envvar via use of "env".
+	This was an issue at least on Ubuntu and Debian-based systems,
+	presumably due to their common use of "dash" as /bin/sh.
+	Reported by Assaf Gordon.
+	* tests/char-class-multibyte: As above.
+	* tests/euc-mb: Likewise.
+	* tests/false-match-mb-non-utf8: Likewise.
+	* tests/pcre-infloop: Likewise.
+	* tests/pcre-jitstack: Likewise.
+	* tests/sjis-mb: Likewise.
+	* tests/warn-char-classes: Likewise.
+
+2016-11-28  Paul Eggert  <eggert@cs.ucla.edu>
+
+	tests: revert check for unibyte French range bug
+	The test wasn't portable, as it assumed that rational ranges
+	were not in effect.  Problem reported by Eric Blake (Bug#25048#8).
+	There doesn't seem to be a portable way to do the test, so omit it.
+	* tests/init.cfg, tests/unibyte-bracket-expr:
+	Revert previous change.
+
+	build: update gnulib submodule to latest
+
+2016-11-27  Jim Meyering  <meyering@fb.com>
+
+	grep: avoid false matches in non-UTF8 multibyte locales
+	* gnulib: Update to latest, for the dfa.c fix.
+	* NEWS (Bug fixes): Mention it.
+	* tests/false-match-mb-non-utf8: New file, with tests for this.
+	Based on tests from Stephane Chazelas.
+	* tests/Makefile.am (TESTS): Add it.
+	Introduced by commit v2.18-54-g3ef4c8e, a change that made grep use
+	its DFA matcher more aggressively.  The malfunction arises only with
+	the DFA matcher, not with regex.
+	Reported by Stephane Chazelas in https://bugs.gnu.org/24975
+
+2016-11-20  Paul Eggert  <eggert@cs.ucla.edu>
+
+	tests: check for unibyte French range bug
+	Problem reported by Stephane Chazelas (Bug#24973).
+	This bug was fixed in Gnulib.
+	* NEWS: Document the fix.
+	* tests/init.cfg (require_ru_RU_koi8_r): Remove.
+	* tests/unibyte-bracket-expr: Add a test for the bug.
+	Call get-mb-cur-max directly instead of bothering with
+	require_ru_RU_koi8_r.
+
+	build: update gnulib submodule to latest
+
+2016-11-19  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: further -P performance fix
+	Problem reported by Stephane Chazelas in:
+	http://bugs.gnu.org/22655#103
+	* src/pcresearch.c (Pexecute): Set the subject to the start of
+	each line as it is found.
+
+	grep: -P no longer uses PCRE_MULTILINE
+	This reverts commit f6603c4e1e04dbb87a7232c4b44acc6afdf65fef,
+	as the extra performance is not worth the trouble for PCRE users.
+	Problem reported by Stephane Chazelas in:
+	http://bugs.gnu.org/22655#103
+	* NEWS: Document this and the next patch.
+	* src/dfasearch.c (EGexecute):
+	* src/grep.c (execute_fp_t):
+	* src/kwsearch.c (Fexecute):
+	* src/pcresearch.c (Pexecute):
+	First arg is now a const pointer again.
+	* src/grep.c (buf_has_encoding_errors): Now static.
+	* src/grep.h (buf_has_encoding_errors): Remove decl.
+	* src/search.h: Adjust decls.
+	* src/pcresearch.c (reflags): Remove.  All uses removed.
+	(Pcompile, Pexecute): Do not use PCRE_MULTILINE.
+
+2016-11-19  Jim Meyering  <meyering@fb.com>
+
+	doc: fix a doubled "the"
+	* doc/grep.texi (--perl-regexp): s/the\nthe/the/
+
+2016-11-19  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: fix -zxP bug
+	* NEWS: Document this.
+	* src/pcresearch.c (Pcompile): Search a line at a time if -x is
+	used, since -x uses ^ and $.
+	* tests/pcre: Test this.
+
+	grep: simplify by using PRIuMAX
+	* configure.ac (HAVE_PRINTF_C99_SIZES): Remove; no longer needed.
+	* src/grep.c (print_offset): Simplify (Bug#24451).
+
+	grep: -T now adjusts number widths for worst case
+	* NEWS, doc/grep.texi (Output Line Prefix Control):
+	Document this (Bug#24451).
+	* src/grep.c (offset_width): New static var.
+	(print_offset): Use it instead of arg.  All callers changed.
+	(grep): Set it.
+	* tests/initial-tab: Test this.
+
+	grep: -T no longer outputs BS
+	* NEWS: Document this (Bug#24451).
+	* src/grep.c (print_line_head): Do not attempt to backspace output.
+	* tests/initial-tab: New test.
+	* tests/Makefile.am (TESTS): Add it.
+
+	grep: document -oz better
+	* doc/grep.texi (General Output Control, Usage): Tweak (Bug#24961).
+
+	grep: fix performance typo with -P
+	Reported by Zev Weiss in: http://bugs.gnu.org/22655#88
+	* src/pcresearch.c (Pcompile): Initialize reflags.
+
+	tests: use "returns_" rather than "$?"
+	* tests/grep-dev-null-out: Use "returns_ 124" rather than testing
+	$? = 124.
+
+	grep -f /dev/null -L PAT FILE outputs FILE
+	* NEWS: Document this.
+	* src/grep.c (main): Do not exit right away with -L.
+	* tests/skip-read: Test for the fix.
+
+	grep: tune -f /dev/null
+	* src/grep.c (main): Do the -f /dev/null early-exit checks before
+	more-expensive tests that involve syscalls.
+
+	grep: treat -f /dev/null like -m0
+	* NEWS: Document this.
+	* src/grep.c (main): With -f /dev/null, don't bother to read the
+	input.  This is what FreeBSD grep does.
+	* tests/Makefile.am (TESTS): Add skip-read.
+	* tests/skip-read: New file.
+
+	grep: avoid O(N**2) buffer reallocation
+	* src/grep.c (main): Use x2realloc to avoid O(N**2) performance as
+	pattern buffers grow.
+
+	grep: avoid unnecessary gettext call
+	Translate "(standard input)" lazily.
+	* src/grep.c (input_filename): New function.
+	(suppressible_error): Remove 1st arg, since it is always
+	input_filename ().  All callers changed.
+	(suppressible_error, print_filename, grep, grepdesc): Use it.
+	(grep_command_line_arg): Set filename to NULL if standard
+	input has no label.  Often, this avoids all calls to gettext,
+	which can be a win as the first call can be expensive.
+
+	grep: drain the input pipe faster
+	* src/grep.c (dev_null_output): Now static.
+	(drain_input): New function, using 'splice' if that makes sense.
+	(finalize_input): Use it.
+	(main): Omit now-unnecessary initialization.
+
+	grep: scale back /dev/null speedup
+	The performance improvement when output is /dev/null (commit
+	af6af288eac28951b5eee1eaaf373e22b2193b7b dated 2016-05-01)
+	breaks scripts that run "PROGRAM | grep PATTERN >/dev/null"
+	where PROGRAM dies when writing into a broken pipe.
+	Suppress the improvement if standard input is not seekable.
+	Problem reported by Gary Johnson (Bug#24941).
+	* NEWS: Document this.
+	* src/grep.c (seek_failed): New static var.
+	(seek_data_failed): Move decl earlier, to be next to seek_failed.
+	(file_must_have_nulls): Skip useless syscalls if seek_failed.
+	Lessen source-code nesting.
+	(reset): Set seek_failed and seek_data_failed.
+	Try lseek even on non-regular files.
+	(grep): New arg INEOF.  All callers changed.
+	Do not clear seek_data_failed here, since 'reset' now does this.
+	(finalize_input): New static function.
+	(grepdesc): Use it.
+	(main): Do not exit on first match merely because output is
+	/dev/null.
+	* tests/grep-dev-null-out: Adjust to new behavior.
+
+	grep: improve diagnostic on lseek failure
+	* src/grep.c (reset): Mention the file name in the (unlikely)
+	chance of an lseek failure.
+
+	grep: avoid unnecessary isatty calls
+	This fixes an inefficiency that was mistakenly introduced a while
+	back, when the macro SET_BINARY became defined on all platforms.
+	* src/grep.c (grepdesc, main): Do not unecessarily call isatty on
+	POSIXish platforms.
+
+	grep: -Pz no longer rejects ^, $
+	Problem reported by Stephane Chazelas (Bug#22655).
+	* NEWS: Document this.
+	* doc/grep.texi (grep Programs): Warn about -Pz.
+	* src/pcresearch.c (reflags): New static var.
+	(multibyte_locale): Remove static var; now local to Pcompile.
+	(Pcompile): Check for (? and (* too.  Set reflags instead of
+	dying when problematic operators are found.
+	(Pexecute): Use reflags to decide whether searches should
+	be multiline.
+	* tests/pcre: Test new behavior.
+
+2016-11-14  Jim Meyering  <meyering@fb.com>
+
+	tests: use "returns_" rather than explicit comparison with "$?"
+	* tests/sjis-mb (encode): Rearrange to emit desired input into
+	a file, rather than piping directly into grep.  That permits
+	the use of returns_ 1 to verify timeout's exit status.
+	* tests/euc-mb: Use "returns_ 1" rather than testing $? = 1
+	* tests/char-class-multibyte: Likewise.
+	* tests/dfa-heap-overrun: Likewise.
+	* tests/encoding-error: Likewise.
+	* tests/fedora: Likewise.
+	* tests/grep-dev-null: Likewise.
+	* tests/init.cfg (envvar_check_fail): Likewise.
+	* tests/kwset-abuse: Likewise.
+	* tests/mb-non-UTF8-overrun: Likewise.
+	* tests/multibyte-white-space: Likewise.
+	* tests/pcre-infloop: Likewise.
+	* tests/surrogate-pair: Likewise.
+	* tests/warn-char-classes: Likewise.
+	Do the same for other values:
+	* tests/backref-multibyte-slow: Likewise.
+	* tests/euc-mb: Likewise.
+	* tests/pcre-abort: Likewise.
+	* tests/pcre-jitstack: Likewise.
+	* tests/repetition-overflow: Likewise.
+	* tests/reversed-range-endpoints: Likewise.
+	* tests/warn-char-classes: Likewise.
+
+2016-10-26  Jim Meyering  <meyering@fb.com>
+
+	doc: grep builds on HP-UX once again
+	* NEWS (Bug fixes): Mention the HP-UX fix.
+
+	gnulib: update to latest, for getprogname HPUX port
+
+2016-10-22  Mark Veltzer  <mark.veltzer@gmail.com>
+
+	ignore coverage generated files
+
+	ignore ar-lib in build-aux
+
+2016-10-20  Zev Weiss  <zev@bewilderbeest.net>
+
+	grep: use 'j' intmax_t printf length modifier if supported
+	* configure.ac: Use gl_PRINTF_SIZES_C99 to test printf and
+	(conditionally) define HAVE_PRINTF_C99_SIZES.
+	* src/grep.c (print_offset): Use printf("%j...") for printing
+	[u]intmax_t if HAVE_PRINTF_C99_SIZES is defined; otherwise continue
+	using the existing hand-rolled loop.
+
+2016-10-15  Jim Meyering  <meyering@fb.com>
+
+	build: distribute new file, die.h, so "make distcheck" passes
+	* src/Makefile.am (grep_SOURCES): Add die.h.
+	Also, sort these file names.
+
+2016-10-10  Paul Eggert  <eggert@cs.ucla.edu>
+
+	build: update gnulib submodule to latest
+
+2016-10-09  Jim Meyering  <meyering@fb.com>
+
+	maint: die.h: add the "#define ..." part of double inclusion guard
+	* src/die.h (DIE_H): Define to 1.
+
+2016-10-04  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: don't assume stdbool.h before die call
+	* src/die.h: Include stdbool.h, since 'die' uses 'false'
+
+	grep: die more systematically
+	* src/die.h: New file.
+	* src/dfasearch.c, src/grep.c, src/pcresearch.c: Include die.h.
+	* src/dfasearch.c (dfaerror):
+	* src/grep.c (context_length_arg, add_count, prline, setmatcher, main):
+	* src/pcresearch.c (jit_exec, Pcompile, Pexecute):
+	Use 'die' instead of 'error' when exiting.
+	* src/pcresearch.c: Do not include verify.h.
+	(die): Remove; now in die.h.
+	* src/search.h: Do not include error.h here, since this file does
+	not use anything defined in error.h.  Instead, dfasearch.c, which
+	uses error.h's symbols, now includes error.h directly.
+
 2016-10-02  Jim Meyering  <meyering@fb.com>
+
+	maint: post-release administrivia
+	* NEWS: Add header line for next release.
+	* .prev-version: Record previous version.
+	* cfg.mk (old_NEWS_hash): Auto-update.
 
 	version 2.26
 	* NEWS: Record release date.

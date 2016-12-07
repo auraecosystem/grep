@@ -1,6 +1,5 @@
-/* grep.h - interface to grep driver for searching subroutines.
-   Copyright (C) 1992, 1998, 2001, 2007, 2009-2016 Free Software Foundation,
-   Inc.
+/* Report an error and exit.
+   Copyright 2016 Free Software Foundation, Inc.
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -17,18 +16,16 @@
    Foundation, Inc., 51 Franklin Street - Fifth Floor, Boston, MA
    02110-1301, USA.  */
 
-#ifndef GREP_GREP_H
-#define GREP_GREP_H 1
+#ifndef DIE_H
+#define DIE_H
 
+#include <error.h>
 #include <stdbool.h>
+#include <verify.h>
 
-/* The following flags are exported from grep for the matchers
-   to look at. */
-extern bool match_icase;	/* -i */
-extern bool match_words;	/* -w */
-extern bool match_lines;	/* -x */
-extern char eolbyte;		/* -z */
+/* Like 'error (STATUS, ...)', except STATUS must be a nonzero constant.
+   This may pacify the compiler or help it generate better code.  */
+#define die(status, ...) \
+  verify_expr (status, (error (status, __VA_ARGS__), assume (false)))
 
-extern char const *pattern_file_name (size_t, size_t *);
-
-#endif
+#endif /* DIE_H */

@@ -1,7 +1,7 @@
 #!/bin/sh
-# Trigger a segfault-inducing bug with -i in grep-2.14 on Cygwin.
+# Exercise -T.
 
-# Copyright (C) 2013-2016 Free Software Foundation, Inc.
+# Copyright 2016 Free Software Foundation, Inc.
 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -18,26 +18,20 @@
 
 . "${srcdir=.}/init.sh"; path_prepend_ ../src
 
-require_en_utf8_locale_
-require_compiled_in_MB_support
-
 fail=0
 
-printf '\360\220\220\205\n' > in || framework_failure_
+printf 'x\n\n' > in || framework_failure_
 
-LC_ALL=en_US.UTF-8
-export LC_ALL
+grep -T '^' in > out || fail=1
+compare in out || fail=1
 
-# On Cygwin, before grep-2.15, this would segfault.
-# Require not just non-zero exit status, but exactly 1.
-returns_ 1 grep -i anything-else in > out 2>&1 || fail=1
-# Expect no output.
-compare /dev/null out || fail=1
+printf 'in:\tx\nin:\n' > exp || framework_failure_
+grep -T '^' in /dev/null > out || fail=1
+compare exp out || fail=1
 
-# Also test whether a surrogate-pair in the search string works.
-for opt in '' -i -E -F -iE -iF; do
-  grep --file=in $opt in > out 2>&1 || fail=1
-  compare out in || fail=1
-done
+printf '%s\n' a b c d e f g h i j > in1 || framework_failure_
+printf 'in1: 1:\ta\n' > exp1 || framework_failure_
+grep -Tn 'a' in1 /dev/null > out1 || fail=1
+compare exp1 out1 || fail=1
 
 Exit $fail
