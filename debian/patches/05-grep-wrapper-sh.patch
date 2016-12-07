@@ -5,8 +5,10 @@ Removes needless call to bash.
 
 Closes: #762427, #762917
 
---- a/src/Makefile.am
-+++ b/src/Makefile.am
+Index: grep/src/Makefile.am
+===================================================================
+--- grep.orig/src/Makefile.am
++++ grep/src/Makefile.am
 @@ -15,6 +15,7 @@
  # along with this program.  If not, see <http://www.gnu.org/licenses/>.
  
@@ -15,7 +17,7 @@ Closes: #762427, #762917
  
  AM_CFLAGS = $(WARN_CFLAGS) $(WERROR_CFLAGS) $(PCRE_CFLAGS)
  
-@@ -47,14 +48,7 @@
+@@ -52,14 +53,7 @@ EXTRA_DIST = dosbuf.c egrep.sh
  egrep fgrep: egrep.sh Makefile
  	$(AM_V_GEN)grep=`echo grep | sed -e '$(transform)'` &&		\
  	case $@ in egrep) option=-E;; fgrep) option=-F;; esac &&	\
