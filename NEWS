@@ -1,5 +1,48 @@
 GNU grep NEWS                                    -*- outline -*-
 
+* Noteworthy changes in release 2.27 (2016-12-06) [stable]
+
+** Bug fixes
+
+  grep no longer reports a false match in a multibyte, non-UTF8 locale
+  like zh_CN.gb18030, with a regular expression like ".*7" that just
+  happens to match the 4-byte representation of gb18030's \uC9, the
+  final byte of which is the digit "7".
+  [bug introduced in grep-2.19]
+
+  grep by default now reads all of standard input if it is a pipe,
+  even if this cannot affect grep's output or exit status.  This works
+  better with nonportable scripts that run "PROGRAM | grep PATTERN
+  >/dev/null" where PROGRAM dies when writing into a broken pipe.
+  [bug introduced in grep-2.26]
+
+  grep no longer mishandles ranges in nontrivial unibyte locales.
+  [bug introduced in grep-2.26]
+
+  grep -P no longer attempts multiline matches.  This works more
+  intuitively with unusual patterns, and means that grep -Pz no longer
+  rejects patterns containing ^ and $ and works when combined with -x.
+  [bugs introduced in grep-2.23] A downside is that grep -P is now
+  significantly slower, albeit typically still faster than pcregrep.
+
+  grep -m0 -L PAT FILE now outputs "FILE".  [bug introduced in grep-2.5]
+
+  To output ':' and tab-align the following character C, grep -T no
+  longer outputs tab-backspace-':'-C, an approach that has problems if
+  run inside an Emacs shell window.  [bug introduced in grep-2.5.2]
+
+  grep -T now uses worst-case widths of line numbers and byte offsets
+  instead of guessing widths that might not work with larger files.
+  [bug introduced in grep-2.5.2]
+
+  grep's use of getprogname no longer causes a build failure on HP-UX.
+
+** Improvements
+
+  grep no longer reads the input in a few more cases when it is easy
+  to see that matching cannot succeed, e.g., 'grep -f /dev/null'.
+
+
 * Noteworthy changes in release 2.26 (2016-10-02) [stable]
 
 ** Bug fixes

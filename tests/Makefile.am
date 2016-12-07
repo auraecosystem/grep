@@ -85,6 +85,7 @@ TESTS =						\
   count-newline					\
   dfa-coverage					\
   dfa-heap-overrun				\
+  dfa-infloop					\
   dfaexec-multibyte				\
   empty						\
   empty-line					\
@@ -94,6 +95,7 @@ TESTS =						\
   equiv-classes					\
   ere						\
   euc-mb					\
+  false-match-mb-non-utf8			\
   fedora					\
   fgrep-infloop					\
   file						\
@@ -108,6 +110,7 @@ TESTS =						\
   in-eq-out-infloop				\
   include-exclude				\
   inconsistent-range				\
+  initial-tab					\
   invalid-multibyte-infloop			\
   khadafy					\
   kwset-abuse					\
@@ -143,6 +146,7 @@ TESTS =						\
   reversed-range-endpoints			\
   sjis-mb					\
   skip-device					\
+  skip-read					\
   spencer1					\
   spencer1-locale				\
   status					\
