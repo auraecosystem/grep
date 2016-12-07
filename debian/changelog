@@ -1,9 +1,18 @@
+grep (2.27-1) unstable; urgency=low
+
+  * New upstream release.
+  * Improve documentation on context and matching lines. (Closes: #831673).
+  * Fix non-deterministic behavior when output redirected to /dev/null
+    (Closes: #844286).
+
+ -- Santiago Ruano Rincón <santiago@debian.org>  Wed, 07 Dec 2016 17:31:23 +0100
+
 grep (2.26-1) unstable; urgency=low
 
   * New upstraem release.
   * Fix diagnosing errors in regexps provided through -f (Closes: #525214).
 
- -- Santiago Ruano Rincón <santiagorr@debian.org>  Mon, 03 Oct 2016 06:44:16 +0200
+ -- Santiago Ruano Rincón <santiago@debian.org>  Mon, 03 Oct 2016 06:44:16 +0200
 
 grep (2.25-6) unstable; urgency=medium
 
