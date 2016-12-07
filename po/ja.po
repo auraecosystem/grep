@@ -458,11 +458,11 @@ msgid "%s%s argument '%s' too large"
 msgstr "引数 '%3$s' に対する %1$s%2$s が大きすぎます"
 
 #. This is a proper name. See the gettext manual, section Names.
-#: src/grep.c:57
+#: src/grep.c:58
 msgid "Mike Haertel"
 msgstr "Mike Haertel"
 
-#: src/grep.c:58
+#: src/grep.c:59
 msgid "others, see <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
 msgstr ""
 "その他の方々は <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS> を参照して"

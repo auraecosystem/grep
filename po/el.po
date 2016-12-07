@@ -496,11 +496,11 @@ msgid "%s%s argument '%s' too large"
 msgstr "η %s%s επιλογή «%s» είναι υπερβολικά μεγάλη"
 
 #. This is a proper name. See the gettext manual, section Names.
-#: src/grep.c:57
+#: src/grep.c:58
 msgid "Mike Haertel"
 msgstr "Mike Haertel"
 
-#: src/grep.c:58
+#: src/grep.c:59
 msgid "others, see <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
 msgstr ""
 "άλλοι, κοιτάξτε τον σύνδεσμο <http://git.sv.gnu.org/cgit/grep.git/tree/"

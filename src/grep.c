@@ -2732,7 +2732,6 @@ main (int argc, char **argv)
                    (char *) NULL);
       return EXIT_SUCCESS;
     }
-  out_quiet = count_matches | done_on_match;
 
   if (show_help)
     usage (EXIT_SUCCESS);
@@ -2848,18 +2847,6 @@ main (int argc, char **argv)
      NL to CR-LF pairs, especially when grepping binary files.  */
   if (O_BINARY && !isatty (STDOUT_FILENO))
     set_binary_mode (STDOUT_FILENO, O_BINARY);
-
-  /* Prefer sysconf for page size, as getpagesize typically returns int.  */
-#ifdef _SC_PAGESIZE
-  long psize = sysconf (_SC_PAGESIZE);
-#else
-  long psize = getpagesize ();
-#endif
-  if (! (0 < psize && psize <= (SIZE_MAX - sizeof (uword)) / 2))
-    abort ();
-  pagesize = psize;
-  bufalloc = ALIGN_TO (INITIAL_BUFSIZE, pagesize) + pagesize + sizeof (uword);
-  buffer = xmalloc (bufalloc);
 
   /* Prefer sysconf for page size, as getpagesize typically returns int.  */
 #ifdef _SC_PAGESIZE

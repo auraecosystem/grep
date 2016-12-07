@@ -26,8 +26,6 @@
 
 struct localeinfo localeinfo;
 
-struct localeinfo localeinfo;
-
 /* Whether -w considers WC to be a word constituent.  */
 static bool
 wordchar (wint_t wc)

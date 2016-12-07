@@ -91,45 +91,6 @@ msgstr "sintaksa nije navedena"
 msgid "unbalanced )"
 msgstr "nesparena )"
 
-#: lib/dfa.c:948 lib/dfa.c:951 lib/dfa.c:970 lib/dfa.c:980 lib/dfa.c:993
-#: lib/dfa.c:1021 lib/dfa.c:1030 lib/dfa.c:1033 lib/dfa.c:1038 lib/dfa.c:1060
-#: lib/dfa.c:1063
-msgid "unbalanced ["
-msgstr "nesparena ["
-
-#: lib/dfa.c:1006
-msgid "invalid character class"
-msgstr "neispravan razred znakova"
-
-#: lib/dfa.c:1129
-msgid "character class syntax is [[:space:]], not [:space:]"
-msgstr "sintaksa razreda znakova je [[:space]], ne [:space:]"
-
-#: lib/dfa.c:1198
-msgid "unfinished \\ escape"
-msgstr "nedovršeni \\ izlaz (escape znak)"
-
-#: lib/dfa.c:1359
-msgid "invalid content of \\{\\}"
-msgstr "neispravan sadržaj \\{\\}"
-
-#: lib/dfa.c:1362
-msgid "regular expression too big"
-msgstr "regularni izraz je prevelik"
-
-#: lib/dfa.c:1777
-msgid "unbalanced ("
-msgstr "nesparena ("
-
-# „zadano“ je često „default“, pa radije „navedena“ ili „imenovana“
-#: lib/dfa.c:1904
-msgid "no syntax specified"
-msgstr "sintaksa nije navedena"
-
-#: lib/dfa.c:1912
-msgid "unbalanced )"
-msgstr "nesparena )"
-
 #: lib/error.c:191
 msgid "Unknown system error"
 msgstr "Nepoznata greška sustava"
@@ -512,11 +473,11 @@ msgid "%s%s argument '%s' too large"
 msgstr "%s%s argument „%s“ je prevelik"
 
 #. This is a proper name. See the gettext manual, section Names.
-#: src/grep.c:57
+#: src/grep.c:58
 msgid "Mike Haertel"
 msgstr "Mike Haertel"
 
-#: src/grep.c:58
+#: src/grep.c:59
 msgid "others, see <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
 msgstr "ostali, pogledajte <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
 

@@ -10740,16 +10740,6 @@ printf "%s\n" "#define HAVE_DECL_GETENV $ac_have_decl" >>confdefs.h
 
 
 
-
-
-
-
-
-
-
-
-
-
 { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for C/C++ restrict keyword" >&5
 printf %s "checking for C/C++ restrict keyword... " >&6; }
 if test ${ac_cv_c_restrict+y}
