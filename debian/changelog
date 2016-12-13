@@ -1,3 +1,12 @@
+grep (2.27-2~1) UNRELEASED; urgency=medium
+
+  * Import patches from upstream master. grep 2.27 failed when standard input
+    is a file in the Linux /proc file system and standard output is /dev/null.
+    - upstream-grep-simplify-finalize_input.patch
+    - upstream-grep-work-around-proc-lseek-glitch.patch
+
+ -- Santiago Ruano Rincón <santiago@debian.org>  Tue, 13 Dec 2016 10:14:39 +0100
+
 grep (2.27-1) unstable; urgency=low
 
   * New upstream release.
