@@ -2,3 +2,5 @@
 03-397262-dlopen-pcre.patch
 05-grep-wrapper-sh.patch
 81-356120-document-multiple-e.patch
+upstream-grep-simplify-finalize_input.patch
+upstream-grep-work-around-proc-lseek-glitch.patch
