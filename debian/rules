@@ -47,9 +47,10 @@ include /usr/share/cdbs/1/rules/autoreconf.mk
 include /usr/share/cdbs/1/rules/debhelper.mk
 include /usr/share/cdbs/1/class/autotools.mk
 
-# Workaround while waiting for grep 2.26 upstream release.
+# Fix permissions in test files not yet included in upstream released
+# tarballs
 configure/grep::
-	chmod +x tests/filename-lineno.pl
+	chmod +x tests/proc
 
 binary-fixup/grep::
 	rm -f debian/grep/usr/share/info/dir.gz
