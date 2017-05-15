@@ -1,6 +1,6 @@
 ## DO NOT EDIT! GENERATED AUTOMATICALLY!
 ## Process this file with automake to produce Makefile.in.
-# Copyright (C) 2002-2016 Free Software Foundation, Inc.
+# Copyright (C) 2002-2017 Free Software Foundation, Inc.
 #
 # This file is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -439,12 +439,21 @@ EXTRA_DIST += test-getdtablesize.c signature.h macros.h
 
 ## end   gnulib module getdtablesize-tests
 
+## begin gnulib module getopt-gnu-tests
+
+TESTS += test-getopt-gnu
+check_PROGRAMS += test-getopt-gnu
+test_getopt_gnu_LDADD = $(LDADD) $(LIBINTL)
+EXTRA_DIST += macros.h signature.h test-getopt-gnu.c test-getopt-main.h test-getopt.h test-getopt_long.h
+
+## end   gnulib module getopt-gnu-tests
+
 ## begin gnulib module getopt-posix-tests
 
-TESTS += test-getopt
-check_PROGRAMS += test-getopt
-test_getopt_LDADD = $(LDADD) $(LIBINTL)
-EXTRA_DIST += macros.h signature.h test-getopt.c test-getopt.h test-getopt_long.h
+TESTS += test-getopt-posix
+check_PROGRAMS += test-getopt-posix
+test_getopt_posix_LDADD = $(LDADD) $(LIBINTL)
+EXTRA_DIST += macros.h signature.h test-getopt-posix.c test-getopt-main.h test-getopt.h
 
 ## end   gnulib module getopt-posix-tests
 

@@ -14,7 +14,7 @@
 
 @SET_MAKE@
 
-# Copyright 1997-1998, 2005-2016 Free Software Foundation, Inc.
+# Copyright 1997-1998, 2005-2017 Free Software Foundation, Inc.
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -30,7 +30,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-# Copyright (C) 2002-2016 Free Software Foundation, Inc.
+# Copyright (C) 2002-2017 Free Software Foundation, Inc.
 #
 # This file is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -134,6 +134,7 @@ ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/00gnulib.m4 \
 	$(top_srcdir)/m4/absolute-header.m4 $(top_srcdir)/m4/alloca.m4 \
 	$(top_srcdir)/m4/assert.m4 $(top_srcdir)/m4/btowc.m4 \
+	$(top_srcdir)/m4/builtin-expect.m4 \
 	$(top_srcdir)/m4/chdir-long.m4 \
 	$(top_srcdir)/m4/close-stream.m4 $(top_srcdir)/m4/close.m4 \
 	$(top_srcdir)/m4/closedir.m4 $(top_srcdir)/m4/closeout.m4 \
@@ -200,14 +201,16 @@ am__aclocal_m4_deps = $(top_srcdir)/m4/00gnulib.m4 \
 	$(top_srcdir)/m4/pcre.m4 $(top_srcdir)/m4/perl.m4 \
 	$(top_srcdir)/m4/pipe.m4 $(top_srcdir)/m4/pkg.m4 \
 	$(top_srcdir)/m4/po.m4 $(top_srcdir)/m4/printf.m4 \
-	$(top_srcdir)/m4/progtest.m4 $(top_srcdir)/m4/putenv.m4 \
-	$(top_srcdir)/m4/quote.m4 $(top_srcdir)/m4/quotearg.m4 \
-	$(top_srcdir)/m4/read.m4 $(top_srcdir)/m4/readdir.m4 \
-	$(top_srcdir)/m4/realloc.m4 $(top_srcdir)/m4/regex.m4 \
-	$(top_srcdir)/m4/safe-read.m4 $(top_srcdir)/m4/save-cwd.m4 \
-	$(top_srcdir)/m4/setenv.m4 $(top_srcdir)/m4/setlocale.m4 \
-	$(top_srcdir)/m4/size_max.m4 $(top_srcdir)/m4/snprintf.m4 \
-	$(top_srcdir)/m4/ssize_t.m4 $(top_srcdir)/m4/stat.m4 \
+	$(top_srcdir)/m4/progtest.m4 \
+	$(top_srcdir)/m4/pthread_rwlock_rdlock.m4 \
+	$(top_srcdir)/m4/putenv.m4 $(top_srcdir)/m4/quote.m4 \
+	$(top_srcdir)/m4/quotearg.m4 $(top_srcdir)/m4/read.m4 \
+	$(top_srcdir)/m4/readdir.m4 $(top_srcdir)/m4/realloc.m4 \
+	$(top_srcdir)/m4/regex.m4 $(top_srcdir)/m4/safe-read.m4 \
+	$(top_srcdir)/m4/save-cwd.m4 $(top_srcdir)/m4/setenv.m4 \
+	$(top_srcdir)/m4/setlocale.m4 $(top_srcdir)/m4/size_max.m4 \
+	$(top_srcdir)/m4/snprintf.m4 $(top_srcdir)/m4/ssize_t.m4 \
+	$(top_srcdir)/m4/stat.m4 $(top_srcdir)/m4/std-gnu11.m4 \
 	$(top_srcdir)/m4/stdalign.m4 $(top_srcdir)/m4/stdarg.m4 \
 	$(top_srcdir)/m4/stdbool.m4 $(top_srcdir)/m4/stddef_h.m4 \
 	$(top_srcdir)/m4/stdint.m4 $(top_srcdir)/m4/stdint_h.m4 \
@@ -601,6 +604,7 @@ GNULIB_OBSTACK_PRINTF_POSIX = @GNULIB_OBSTACK_PRINTF_POSIX@
 GNULIB_OPEN = @GNULIB_OPEN@
 GNULIB_OPENAT = @GNULIB_OPENAT@
 GNULIB_OPENDIR = @GNULIB_OPENDIR@
+GNULIB_OVERRIDES_WINT_T = @GNULIB_OVERRIDES_WINT_T@
 GNULIB_PCLOSE = @GNULIB_PCLOSE@
 GNULIB_PERROR = @GNULIB_PERROR@
 GNULIB_PIPE = @GNULIB_PIPE@
@@ -753,6 +757,7 @@ HAVE_DECL_GETDELIM = @HAVE_DECL_GETDELIM@
 HAVE_DECL_GETDOMAINNAME = @HAVE_DECL_GETDOMAINNAME@
 HAVE_DECL_GETLINE = @HAVE_DECL_GETLINE@
 HAVE_DECL_GETLOADAVG = @HAVE_DECL_GETLOADAVG@
+HAVE_DECL_GETLOGIN = @HAVE_DECL_GETLOGIN@
 HAVE_DECL_GETLOGIN_R = @HAVE_DECL_GETLOGIN_R@
 HAVE_DECL_GETPAGESIZE = @HAVE_DECL_GETPAGESIZE@
 HAVE_DECL_GETUSERSHELL = @HAVE_DECL_GETUSERSHELL@
@@ -1342,8 +1347,8 @@ EXTRA_DIST = alignof.h alloca.c alloca.in.h \
 	dup.c dup2.c errno.in.h error.c error.h exclude.h exitfail.h \
 	fchdir.c fcntl.c fcntl.in.h fcntl--.h fcntl-safer.h fd-hook.h \
 	fdopendir.c filename.h filenamecat.h flexmember.h fnmatch.c \
-	fnmatch.in.h fnmatch_loop.c fpending.c fpending.h fstat.c \
-	at-func.c fstatat.c fts-cycle.c fts.c fts_.h \
+	fnmatch.in.h fnmatch_loop.c fpending.c fpending.h stdio-impl.h \
+	fstat.c at-func.c fstatat.c fts-cycle.c fts.c fts_.h \
 	$(top_srcdir)/build-aux/gendocs.sh getcwd-lgpl.c \
 	getdtablesize.c getopt.c getopt.in.h getopt1.c getopt_int.h \
 	getpagesize.c gettimeofday.c \
@@ -2734,6 +2739,7 @@ warn-on-use.h: $(top_srcdir)/build-aux/snippet/warn-on-use.h
 @GL_GENERATE_STDINT_H_TRUE@	      -e 's/@''BITSIZEOF_WINT_T''@/$(BITSIZEOF_WINT_T)/g' \
 @GL_GENERATE_STDINT_H_TRUE@	      -e 's/@''HAVE_SIGNED_WINT_T''@/$(HAVE_SIGNED_WINT_T)/g' \
 @GL_GENERATE_STDINT_H_TRUE@	      -e 's/@''WINT_T_SUFFIX''@/$(WINT_T_SUFFIX)/g' \
+@GL_GENERATE_STDINT_H_TRUE@	      -e 's/@''GNULIB_OVERRIDES_WINT_T''@/$(GNULIB_OVERRIDES_WINT_T)/g' \
 @GL_GENERATE_STDINT_H_TRUE@	      < $(srcdir)/stdint.in.h; \
 @GL_GENERATE_STDINT_H_TRUE@	} > $@-t && \
 @GL_GENERATE_STDINT_H_TRUE@	mv $@-t $@
@@ -3254,7 +3260,6 @@ unistd.h: unistd.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(ARG_NONNULL_H
 	      -e 's|@''HAVE_GETDTABLESIZE''@|$(HAVE_GETDTABLESIZE)|g' \
 	      -e 's|@''HAVE_GETGROUPS''@|$(HAVE_GETGROUPS)|g' \
 	      -e 's|@''HAVE_GETHOSTNAME''@|$(HAVE_GETHOSTNAME)|g' \
-	      -e 's|@''HAVE_GETLOGIN''@|$(HAVE_GETLOGIN)|g' \
 	      -e 's|@''HAVE_GETPAGESIZE''@|$(HAVE_GETPAGESIZE)|g' \
 	      -e 's|@''HAVE_GROUP_MEMBER''@|$(HAVE_GROUP_MEMBER)|g' \
 	      -e 's|@''HAVE_LCHOWN''@|$(HAVE_LCHOWN)|g' \
@@ -3276,6 +3281,7 @@ unistd.h: unistd.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(ARG_NONNULL_H
 	      -e 's|@''HAVE_DECL_FCHDIR''@|$(HAVE_DECL_FCHDIR)|g' \
 	      -e 's|@''HAVE_DECL_FDATASYNC''@|$(HAVE_DECL_FDATASYNC)|g' \
 	      -e 's|@''HAVE_DECL_GETDOMAINNAME''@|$(HAVE_DECL_GETDOMAINNAME)|g' \
+	      -e 's|@''HAVE_DECL_GETLOGIN''@|$(HAVE_DECL_GETLOGIN)|g' \
 	      -e 's|@''HAVE_DECL_GETLOGIN_R''@|$(HAVE_DECL_GETLOGIN_R)|g' \
 	      -e 's|@''HAVE_DECL_GETPAGESIZE''@|$(HAVE_DECL_GETPAGESIZE)|g' \
 	      -e 's|@''HAVE_DECL_GETUSERSHELL''@|$(HAVE_DECL_GETUSERSHELL)|g' \
@@ -3356,6 +3362,7 @@ wchar.h: wchar.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(ARG_NONNULL_H) 
 	      -e 's|@''HAVE_FEATURES_H''@|$(HAVE_FEATURES_H)|g' \
 	      -e 's|@''NEXT_WCHAR_H''@|$(NEXT_WCHAR_H)|g' \
 	      -e 's|@''HAVE_WCHAR_H''@|$(HAVE_WCHAR_H)|g' \
+	      -e 's/@''GNULIB_OVERRIDES_WINT_T''@/$(GNULIB_OVERRIDES_WINT_T)/g' \
 	      -e 's/@''GNULIB_BTOWC''@/$(GNULIB_BTOWC)/g' \
 	      -e 's/@''GNULIB_WCTOB''@/$(GNULIB_WCTOB)/g' \
 	      -e 's/@''GNULIB_MBSINIT''@/$(GNULIB_MBSINIT)/g' \
@@ -3467,6 +3474,7 @@ wctype.h: wctype.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(WARN_ON_USE_H
 	      -e 's|@''PRAGMA_SYSTEM_HEADER''@|@PRAGMA_SYSTEM_HEADER@|g' \
 	      -e 's|@''PRAGMA_COLUMNS''@|@PRAGMA_COLUMNS@|g' \
 	      -e 's|@''NEXT_WCTYPE_H''@|$(NEXT_WCTYPE_H)|g' \
+	      -e 's/@''GNULIB_OVERRIDES_WINT_T''@/$(GNULIB_OVERRIDES_WINT_T)/g' \
 	      -e 's/@''GNULIB_ISWBLANK''@/$(GNULIB_ISWBLANK)/g' \
 	      -e 's/@''GNULIB_WCTYPE''@/$(GNULIB_WCTYPE)/g' \
 	      -e 's/@''GNULIB_ISWCTYPE''@/$(GNULIB_ISWCTYPE)/g' \

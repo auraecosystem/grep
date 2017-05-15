@@ -1,5 +1,5 @@
 /* searchutils.c - helper subroutines for grep's matchers.
-   Copyright 1992, 1998, 2000, 2007, 2009-2016 Free Software Foundation, Inc.
+   Copyright 1992, 1998, 2000, 2007, 2009-2017 Free Software Foundation, Inc.
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -22,16 +22,32 @@
 #define SYSTEM_INLINE _GL_EXTERN_INLINE
 #include "search.h"
 
-#define NCHAR (UCHAR_MAX + 1)
+/* For each byte B, sbwordchar[B] is true if B is a single-byte
+   character that is a word constituent, and is false otherwise.  */
+static bool sbwordchar[NCHAR];
+
+/* Whether -w considers WC to be a word constituent.  */
+static bool
+wordchar (wint_t wc)
+{
+  return wc == L'_' || iswalnum (wc);
+}
+
+void
+wordinit (void)
+{
+  for (int i = 0; i < NCHAR; i++)
+    sbwordchar[i] = wordchar (localeinfo.sbctowc[i]);
+}
 
 kwset_t
 kwsinit (bool mb_trans)
 {
-  static char trans[NCHAR];
-  char *transptr = NULL;
+  char *trans = NULL;
 
   if (match_icase && (MB_CUR_MAX == 1 || mb_trans))
     {
+      trans = xmalloc (NCHAR);
       if (MB_CUR_MAX == 1)
         for (int i = 0; i < NCHAR; i++)
           trans[i] = toupper (i);
@@ -50,10 +66,9 @@ kwsinit (bool mb_trans)
             else
               trans[i] = i;
           }
-      transptr = trans;
     }
 
-  return kwsalloc (transptr, false);
+  return kwsalloc (trans);
 }
 
 /* In the buffer *MB_START, return the number of bytes needed to go
@@ -61,7 +76,7 @@ kwsinit (bool mb_trans)
    start of a multibyte character or is an error-encoding byte.  The
    buffer ends at END (i.e., one past the address of the buffer's last
    byte).  If CUR is already at a boundary, return 0.  If *MB_START is
-   greater than or equal to CUR, return the negative value CUR - *MB_START.
+   greater than CUR, return the negative value CUR - *MB_START.
 
    When returning zero, set *MB_START to CUR.  When returning a
    positive value, set *MB_START to the next boundary after CUR, or to
@@ -72,50 +87,111 @@ mb_goback (char const **mb_start, char const *cur, char const *end)
 {
   const char *p = *mb_start;
   const char *p0 = p;
-  mbstate_t cur_state;
 
-  memset (&cur_state, 0, sizeof cur_state);
+  if (cur <= p)
+    return cur - p;
 
-  while (p < cur)
+  if (localeinfo.using_utf8)
     {
-      size_t clen = mb_clen (p, end - p, &cur_state);
+      p = cur;
 
-      if ((size_t) -2 <= clen)
+      if (cur < end && (*cur & 0xc0) == 0x80)
+        for (int i = 1; i <= 3; i++)
+          if ((cur[-i] & 0xc0) != 0x80)
+            {
+              mbstate_t mbs = { 0 };
+              size_t clen = mb_clen (cur - i, end - (cur - i), &mbs);
+              if (i < clen && clen < (size_t) -2)
+                {
+                  p0 = cur - i;
+                  p = p0 + clen;
+                }
+              break;
+            }
+    }
+  else
+    {
+      mbstate_t mbs = { 0 };
+      do
         {
-          /* An invalid sequence, or a truncated multibyte character.
-             Treat it as a single byte character.  */
-          clen = 1;
-          memset (&cur_state, 0, sizeof cur_state);
+          size_t clen = mb_clen (p, end - p, &mbs);
+
+          if ((size_t) -2 <= clen)
+            {
+              /* An invalid sequence, or a truncated multibyte character.
+                 Treat it as a single byte character.  */
+              clen = 1;
+              memset (&mbs, 0, sizeof mbs);
+            }
+          p0 = p;
+          p += clen;
         }
-      p0 = p;
-      p += clen;
+      while (p < cur);
     }
 
   *mb_start = p;
   return p == cur ? 0 : cur - p0;
 }
 
-/* In the buffer BUF, return the wide character that is encoded just
-   before CUR.  The buffer ends at END.  Return WEOF if there is no
-   wide character just before CUR.  */
-wint_t
-mb_prev_wc (char const *buf, char const *cur, char const *end)
+/* Examine the start of BUF (which goes to END) for word constituents.
+   If COUNTALL, examine as many as possible; otherwise, examine at most one.
+   Return the total number of bytes in the examined characters.  */
+static size_t
+wordchars_count (char const *buf, char const *end, bool countall)
 {
-  if (cur == buf)
-    return WEOF;
-  char const *p = buf;
-  cur--;
-  cur -= mb_goback (&p, cur, end);
-  return mb_next_wc (cur, end);
+  size_t n = 0;
+  mbstate_t mbs = { 0 };
+  while (n < end - buf)
+    {
+      unsigned char b = buf[n];
+      if (sbwordchar[b])
+        n++;
+      else if (localeinfo.sbclen[b] != -2)
+        break;
+      else
+        {
+          wchar_t wc = 0;
+          size_t wcbytes = mbrtowc (&wc, buf + n, end - buf - n, &mbs);
+          if (!wordchar (wc))
+            break;
+          n += wcbytes + !wcbytes;
+        }
+      if (!countall)
+        break;
+    }
+  return n;
 }
 
-/* Return the wide character that is encoded at CUR.  The buffer ends
-   at END.  Return WEOF if there is no wide character encoded at CUR.  */
-wint_t
-mb_next_wc (char const *cur, char const *end)
+/* Examine the start of BUF for the longest prefix containing just
+   word constituents.  Return the total number of bytes in the prefix.
+   The buffer ends at END.  */
+size_t
+wordchars_size (char const *buf, char const *end)
 {
-  wchar_t wc;
-  mbstate_t mbs = { 0 };
-  return (end - cur != 0 && mbrtowc (&wc, cur, end - cur, &mbs) < (size_t) -2
-          ? wc : WEOF);
+  return wordchars_count (buf, end, true);
+}
+
+/* If BUF starts with a word constituent, return the number of bytes
+   used to represent it; otherwise, return zero.  The buffer ends at END.  */
+size_t
+wordchar_next (char const *buf, char const *end)
+{
+  return wordchars_count (buf, end, false);
+}
+
+/* In the buffer BUF, return nonzero if the character whose encoding
+   contains the byte before CUR is a word constituent.  The buffer
+   ends at END.  */
+size_t
+wordchar_prev (char const *buf, char const *cur, char const *end)
+{
+  if (buf == cur)
+    return 0;
+  unsigned char b = *--cur;
+  if (! localeinfo.multibyte
+      || (localeinfo.using_utf8 && localeinfo.sbclen[b] != -2))
+    return sbwordchar[b];
+  char const *p = buf;
+  cur -= mb_goback (&p, cur, end);
+  return wordchar_next (cur, end);
 }

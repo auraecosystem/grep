@@ -209,9 +209,6 @@
 /* Define to 1 when the gnulib module getdtablesize should be tested. */
 #undef GNULIB_TEST_GETDTABLESIZE
 
-/* Define to 1 when the gnulib module getopt-gnu should be tested. */
-#undef GNULIB_TEST_GETOPT_GNU
-
 /* Define to 1 when the gnulib module getpagesize should be tested. */
 #undef GNULIB_TEST_GETPAGESIZE
 
@@ -772,6 +769,10 @@
 
 /* Define if the POSIX multithreading library has read/write locks. */
 #undef HAVE_PTHREAD_RWLOCK
+
+/* Define if the 'pthread_rwlock_rdlock' function prefers a writer to a
+   reader. */
+#undef HAVE_PTHREAD_RWLOCK_RDLOCK_PREFER_WRITER
 
 /* Define to 1 if alphasort is declared even after undefining macros. */
 #undef HAVE_RAW_DECL_ALPHASORT
@@ -1551,6 +1552,16 @@
 /* Define to 1 if you have the '_set_invalid_parameter_handler' function. */
 #undef HAVE__SET_INVALID_PARAMETER_HANDLER
 
+/* Define to 1 if the compiler supports __builtin_expect,
+   and to 2 if <builtins.h> does.  */
+#undef HAVE___BUILTIN_EXPECT
+#ifndef HAVE___BUILTIN_EXPECT
+# define __builtin_expect(e, c) (e)
+#elif HAVE___BUILTIN_EXPECT == 2
+# include <builtins.h>
+#endif
+    
+
 /* Define as const if the declaration of iconv() needs const. */
 #undef ICONV_CONST
 
@@ -1628,9 +1639,6 @@
 
 /* Define to the version of this package. */
 #undef PACKAGE_VERSION
-
-/* the number of pending output bytes on stream 'fp' */
-#undef PENDING_OUTPUT_N_BYTES
 
 /* Define if <inttypes.h> exists and defines unusable PRI* macros. */
 #undef PRI_MACROS_BROKEN

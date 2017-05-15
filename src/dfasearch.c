@@ -1,5 +1,5 @@
 /* dfasearch.c - searching subroutines using dfa and regex for grep.
-   Copyright 1992, 1998, 2000, 2007, 2009-2016 Free Software Foundation, Inc.
+   Copyright 1992, 1998, 2000, 2007, 2009-2017 Free Software Foundation, Inc.
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -24,33 +24,28 @@
 #include "die.h"
 #include <error.h>
 
-struct localeinfo localeinfo;
-
-/* Whether -w considers WC to be a word constituent.  */
-static bool
-wordchar (wint_t wc)
+struct dfa_comp
 {
-  return wc == L'_' || iswalnum (wc);
-}
+  /* KWset compiled pattern.  For Ecompile and Gcompile, we compile
+     a list of strings, at least one of which is known to occur in
+     any string matching the regexp. */
+  kwset_t kwset;
 
-/* KWset compiled pattern.  For Ecompile and Gcompile, we compile
-   a list of strings, at least one of which is known to occur in
-   any string matching the regexp. */
-static kwset_t kwset;
+  /* DFA compiled regexp. */
+  struct dfa *dfa;
 
-/* DFA compiled regexp. */
-static struct dfa *dfa;
+  /* Regex compiled regexps. */
+  struct re_pattern_buffer* patterns;
+  size_t pcount;
+  struct re_registers regs;
 
-/* The Regex compiled patterns.  */
-static struct re_pattern_buffer *patterns;
-static size_t pcount;
+  /* Number of compiled fixed strings known to exactly match the regexp.
+     If kwsexec returns < kwset_exact_matches, then we don't need to
+     call the regexp matcher at all. */
+  ptrdiff_t kwset_exact_matches;
 
-/* Number of compiled fixed strings known to exactly match the regexp.
-   If kwsexec returns < kwset_exact_matches, then we don't need to
-   call the regexp matcher at all. */
-static size_t kwset_exact_matches;
-
-static bool begline;
+  bool begline;
+};
 
 void
 dfaerror (char const *mesg)
@@ -64,10 +59,7 @@ dfaerror (char const *mesg)
 void
 dfawarn (char const *mesg)
 {
-  static enum { DW_NONE = 0, DW_POSIX, DW_GNU } mode;
-  if (mode == DW_NONE)
-    mode = (getenv ("POSIXLY_CORRECT") ? DW_POSIX : DW_GNU);
-  if (mode == DW_GNU)
+  if (!getenv ("POSIXLY_CORRECT"))
     dfaerror (mesg);
 }
 
@@ -76,54 +68,54 @@ dfawarn (char const *mesg)
    to find those strings, and thus quickly filter out impossible
    matches. */
 static void
-kwsmusts (void)
+kwsmusts (struct dfa_comp *dc)
 {
-  struct dfamust *dm = dfamust (dfa);
+  struct dfamust *dm = dfamust (dc->dfa);
   if (!dm)
     return;
-  kwset = kwsinit (false);
+  dc->kwset = kwsinit (false);
   if (dm->exact)
     {
       /* Prepare a substring whose presence implies a match.
          The kwset matcher will return the index of the matching
          string that it chooses. */
-      ++kwset_exact_matches;
-      size_t old_len = strlen (dm->must);
-      size_t new_len = old_len + dm->begline + dm->endline;
+      ++dc->kwset_exact_matches;
+      ptrdiff_t old_len = strlen (dm->must);
+      ptrdiff_t new_len = old_len + dm->begline + dm->endline;
       char *must = xmalloc (new_len);
       char *mp = must;
       *mp = eolbyte;
       mp += dm->begline;
-      begline |= dm->begline;
+      dc->begline |= dm->begline;
       memcpy (mp, dm->must, old_len);
       if (dm->endline)
         mp[old_len] = eolbyte;
-      kwsincr (kwset, must, new_len);
+      kwsincr (dc->kwset, must, new_len);
       free (must);
     }
   else
     {
       /* Otherwise, filtering with this substring should help reduce the
          search space, but we'll still have to use the regexp matcher.  */
-      kwsincr (kwset, dm->must, strlen (dm->must));
+      kwsincr (dc->kwset, dm->must, strlen (dm->must));
     }
-  kwsprep (kwset);
+  kwsprep (dc->kwset);
   dfamustfree (dm);
 }
 
-void
-GEAcompile (char const *pattern, size_t size, reg_syntax_t syntax_bits)
+void *
+GEAcompile (char *pattern, size_t size, reg_syntax_t syntax_bits)
 {
   char *motif;
+  struct dfa_comp *dc = xcalloc (1, sizeof (*dc));
 
-  dfa = dfaalloc ();
+  dc->dfa = dfaalloc ();
 
   if (match_icase)
     syntax_bits |= RE_ICASE;
   re_set_syntax (syntax_bits);
-  int dfaopts = ((match_icase ? DFA_CASE_FOLD : 0)
-                 | (eolbyte ? 0 : DFA_EOL_NUL));
-  dfasyntax (dfa, &localeinfo, syntax_bits, dfaopts);
+  int dfaopts = eolbyte ? 0 : DFA_EOL_NUL;
+  dfasyntax (dc->dfa, &localeinfo, syntax_bits, dfaopts);
 
   /* For GNU regex, pass the patterns separately to detect errors like
      "[\nallo\n]\n", where the patterns are "[", "allo" and "]", and
@@ -146,9 +138,9 @@ GEAcompile (char const *pattern, size_t size, reg_syntax_t syntax_bits)
       else
         len = patlim - p;
 
-      if (palloc <= pcount)
-        patterns = x2nrealloc (patterns, &palloc, sizeof *patterns);
-      struct re_pattern_buffer *pat = &patterns[pcount];
+      if (palloc <= dc->pcount)
+        dc->patterns = x2nrealloc (dc->patterns, &palloc, sizeof *dc->patterns);
+      struct re_pattern_buffer *pat = &dc->patterns[dc->pcount];
       pat->buffer = NULL;
       pat->allocated = 0;
 
@@ -163,14 +155,15 @@ GEAcompile (char const *pattern, size_t size, reg_syntax_t syntax_bits)
           /* With patterns specified only on the command line, emit the bare
              diagnostic.  Otherwise, include a filename:lineno: prefix.  */
           size_t lineno;
-          char const *pat_filename = pattern_file_name (pcount + 1, &lineno);
+          char const *pat_filename = pattern_file_name (dc->pcount + 1,
+                                                        &lineno);
           if (*pat_filename == '\0')
             error (0, 0, "%s", err);
           else
             error (0, 0, "%s:%zu: %s", pat_filename, lineno, err);
           compilation_failed = true;
         }
-      pcount++;
+      dc->pcount++;
       p = sep;
     }
   while (p);
@@ -209,14 +202,16 @@ GEAcompile (char const *pattern, size_t size, reg_syntax_t syntax_bits)
   else
     motif = NULL;
 
-  dfacomp (pattern, size, dfa, 1);
-  kwsmusts ();
+  dfacomp (pattern, size, dc->dfa, 1);
+  kwsmusts (dc);
 
   free (motif);
+
+  return dc;
 }
 
 size_t
-EGexecute (char const *buf, size_t size, size_t *match_size,
+EGexecute (void *vdc, char const *buf, size_t size, size_t *match_size,
            char const *start_ptr)
 {
   char const *buflim, *beg, *end, *ptr, *match, *best_match, *mb_start;
@@ -225,8 +220,9 @@ EGexecute (char const *buf, size_t size, size_t *match_size,
   size_t len, best_len;
   struct kwsmatch kwsm;
   size_t i;
-  struct dfa *superset = dfasuperset (dfa);
-  bool dfafast = dfaisfast (dfa);
+  struct dfa_comp *dc = vdc;
+  struct dfa *superset = dfasuperset (dc->dfa);
+  bool dfafast = dfaisfast (dc->dfa);
 
   mb_start = buf;
   buflim = buf + size;
@@ -243,14 +239,15 @@ EGexecute (char const *buf, size_t size, size_t *match_size,
           bool backref = false;
 
           /* Try matching with KWset, if it's defined.  */
-          if (kwset)
+          if (dc->kwset)
             {
               char const *prev_beg;
 
               /* Find a possible match using the KWset matcher.  */
-              size_t offset = kwsexec (kwset, beg - begline,
-                                       buflim - beg + begline, &kwsm, true);
-              if (offset == (size_t) -1)
+              ptrdiff_t offset = kwsexec (dc->kwset, beg - dc->begline,
+                                          buflim - beg + dc->begline,
+                                          &kwsm, true);
+              if (offset < 0)
                 goto failure;
               match = beg + offset;
               prev_beg = beg;
@@ -266,7 +263,7 @@ EGexecute (char const *buf, size_t size, size_t *match_size,
                  PREV_BEG is less than 64 or (MATCH - PREV_BEG), this is the
                  greater of the latter two values; this temporarily prefers
                  the DFA to KWset.  */
-              exact_kwset_match = kwsm.index < kwset_exact_matches;
+              exact_kwset_match = kwsm.index < dc->kwset_exact_matches;
               end = ((exact_kwset_match || !dfafast
                       || MAX (16, match - beg) < (match - prev_beg) >> 2)
                      ? match
@@ -278,7 +275,7 @@ EGexecute (char const *buf, size_t size, size_t *match_size,
 
               if (exact_kwset_match)
                 {
-                  if (MB_CUR_MAX == 1 || localeinfo.using_utf8)
+                  if (!localeinfo.multibyte | localeinfo.using_utf8)
                     goto success;
                   if (mb_start < beg)
                     mb_start = beg;
@@ -316,7 +313,8 @@ EGexecute (char const *buf, size_t size, size_t *match_size,
             }
 
           /* Try matching with DFA.  */
-          next_beg = dfaexec (dfa, dfa_beg, (char *) end, 0, &count, &backref);
+          next_beg = dfaexec (dc->dfa, dfa_beg, (char *) end, 0, &count,
+                              &backref);
 
           /* If there's no match, or if we've matched the sentinel,
              we're done.  */
@@ -352,26 +350,17 @@ EGexecute (char const *buf, size_t size, size_t *match_size,
       /* Run the possible match through Regex.  */
       best_match = end;
       best_len = 0;
-      for (i = 0; i < pcount; i++)
+      for (i = 0; i < dc->pcount; i++)
         {
-          /* This is static because of a BRAIN-DEAD Q@#%!# library
-             interface in regex.c, as later calls reuse the
-             dynamically allocated storage that REGS members point at
-             and the API provides no way to free this storage.
-             If grep is ever made multithreaded, REGS would have to be
-             per-thread or the library API changed or the library
-             encapsulation violated.  */
-          static struct re_registers regs;
-
-          patterns[i].not_eol = 0;
-          patterns[i].newline_anchor = eolbyte == '\n';
-          start = re_search (&patterns[i], beg, end - beg - 1,
-                             ptr - beg, end - ptr - 1, &regs);
+          dc->patterns[i].not_eol = 0;
+          dc->patterns[i].newline_anchor = eolbyte == '\n';
+          start = re_search (&dc->patterns[i], beg, end - beg - 1,
+                             ptr - beg, end - ptr - 1, &dc->regs);
           if (start < -1)
             xalloc_die ();
           else if (0 <= start)
             {
-              len = regs.end[0] - start;
+              len = dc->regs.end[0] - start;
               match = beg + start;
               if (match > best_match)
                 continue;
@@ -395,17 +384,17 @@ EGexecute (char const *buf, size_t size, size_t *match_size,
                 while (match <= best_match)
                   {
                     regoff_t shorter_len = 0;
-                    if (!wordchar (mb_prev_wc (beg, match, end - 1))
-                        && !wordchar (mb_next_wc (match + len, end - 1)))
+                    if (! wordchar_next (match + len, end - 1)
+                        && ! wordchar_prev (beg, match, end - 1))
                       goto assess_pattern_match;
                     if (len > 0)
                       {
                         /* Try a shorter length anchored at the same place. */
                         --len;
-                        patterns[i].not_eol = 1;
-                        shorter_len = re_match (&patterns[i], beg,
+                        dc->patterns[i].not_eol = 1;
+                        shorter_len = re_match (&dc->patterns[i], beg,
                                                 match + len - ptr, match - beg,
-                                                &regs);
+                                                &dc->regs);
                         if (shorter_len < -1)
                           xalloc_die ();
                       }
@@ -417,17 +406,17 @@ EGexecute (char const *buf, size_t size, size_t *match_size,
                         if (match == end - 1)
                           break;
                         match++;
-                        patterns[i].not_eol = 0;
-                        start = re_search (&patterns[i], beg, end - beg - 1,
+                        dc->patterns[i].not_eol = 0;
+                        start = re_search (&dc->patterns[i], beg, end - beg - 1,
                                            match - beg, end - match - 1,
-                                           &regs);
+                                           &dc->regs);
                         if (start < 0)
                           {
                             if (start < -1)
                               xalloc_die ();
                             break;
                           }
-                        len = regs.end[0] - start;
+                        len = dc->regs.end[0] - start;
                         match = beg + start;
                       }
                   } /* while (match <= best_match) */

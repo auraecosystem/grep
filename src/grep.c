@@ -1,5 +1,5 @@
 /* grep.c - main driver file for grep.
-   Copyright (C) 1992, 1997-2002, 2004-2016 Free Software Foundation, Inc.
+   Copyright (C) 1992, 1997-2002, 2004-2017 Free Software Foundation, Inc.
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -50,9 +50,9 @@
 #include "xalloc.h"
 #include "xstrtol.h"
 
-#define SEP_CHAR_SELECTED ':'
-#define SEP_CHAR_REJECTED '-'
-#define SEP_STR_GROUP    "--"
+enum { SEP_CHAR_SELECTED = ':' };
+enum { SEP_CHAR_REJECTED = '-' };
+static char const SEP_STR_GROUP[] = "--";
 
 #define AUTHORS \
   proper_name ("Mike Haertel"), \
@@ -104,46 +104,35 @@ static size_t n_fl_pair_slots;
    and any command-line argument that serves as a regular expression.  */
 static size_t n_pattern_files;
 
-/* Given the concatenation of all patterns, one per line, be they
-   specified via -e, a lone command-line argument or -f, this is the
-   number of the first line of each entity, in that concatenation.
+/* The number of patterns seen so far.
    It is advanced by fl_add and, when needed, used in pattern_file_name
    to derive a file-relative line number.  */
-static uintmax_t patfile_lineno = 1;
+static size_t n_patterns;
 
-/* Return the number of newline bytes in BUF starting at offset BEG
-   and up to and not including offset END.  */
+/* Return the number of newline bytes in BUF with size SIZE.  */
 static size_t _GL_ATTRIBUTE_PURE
-count_nl_bytes (char const *buf, size_t beg, size_t end)
+count_nl_bytes (char const *buf, size_t size)
 {
-  char const *p = buf + beg;
-  char const *end_p = buf + end;
-  uintmax_t n = 0;
-  while (true)
-    {
-      p = memchr (p, '\n', end_p - p);
-      if (!p)
-        break;
-      p++;
-      n++;
-    }
+  char const *p = buf;
+  char const *end_p = buf + size;
+  size_t n = 0;
+  while ((p = memchr (p, '\n', end_p - p)))
+    p++, n++;
   return n;
 }
 
-/* Append a FILENAME,line-number pair to FL_PAIR.  The line number we save
-   with FILENAME is the initial value of the global PATFILE_LINENO.
-   PATFILE_LINENO is then incremented by the number of newlines in BUF
-   from offset BEG up to but not including offset END.  */
+/* Append a FILENAME,line-number pair to FL_PAIR, and update
+   pattern-related counts from the contents of BUF with SIZE bytes.  */
 static void
-fl_add (char const *buf, size_t beg, size_t end, char const *filename)
+fl_add (char const *buf, size_t size, char const *filename)
 {
   if (n_fl_pair_slots <= n_pattern_files)
     fl_pair = x2nrealloc (fl_pair, &n_fl_pair_slots, sizeof *fl_pair);
 
-  fl_pair[n_pattern_files].lineno = patfile_lineno;
+  fl_pair[n_pattern_files].lineno = n_patterns + 1;
   fl_pair[n_pattern_files].filename = filename;
   n_pattern_files++;
-  patfile_lineno += count_nl_bytes (buf, beg, end);
+  n_patterns += count_nl_bytes (buf, size);
 }
 
 /* Map the line number, LINENO, of one of the input patterns to the
@@ -502,8 +491,6 @@ bool match_words;
 bool match_lines;
 char eolbyte;
 
-static char const *matcher;
-
 /* For error messages. */
 /* The input file name, or (if standard input) null or a --label argument.  */
 static char const *filename;
@@ -588,10 +575,11 @@ static bool seek_failed;
 static bool seek_data_failed;
 
 /* Functions we'll use to search. */
-typedef void (*compile_fp_t) (char const *, size_t);
-typedef size_t (*execute_fp_t) (char const *, size_t, size_t *, char const *);
-static compile_fp_t compile;
+typedef void *(*compile_fp_t) (char *, size_t, reg_syntax_t);
+typedef size_t (*execute_fp_t) (void *, char const *, size_t, size_t *,
+                                char const *);
 static execute_fp_t execute;
+static void *compiled_pattern;
 
 static char const *
 input_filename (void)
@@ -636,6 +624,8 @@ clean_up_stdout (void)
 
 /* An unsigned type suitable for fast matching.  */
 typedef uintmax_t uword;
+
+struct localeinfo localeinfo;
 
 /* A mask to test for unibyte characters, with the pattern repeated to
    fill a uword.  For a multibyte character encoding where
@@ -811,7 +801,7 @@ skipped_file (char const *name, bool command_line, bool is_dir)
 
 static char *buffer;		/* Base of buffer. */
 static size_t bufalloc;		/* Allocated buffer size, counting slop. */
-#define INITIAL_BUFSIZE 32768	/* Initial buffer size, not counting slop. */
+enum { INITIAL_BUFSIZE = 32768 }; /* Initial buffer size, not counting slop. */
 static int bufdesc;		/* File descriptor. */
 static char *bufbeg;		/* Beginning of user-visible stuff. */
 static char *buflim;		/* Limit of user-visible stuff. */
@@ -1160,8 +1150,8 @@ print_line_middle (char *beg, char *lim,
 
   for (cur = beg;
        (cur < lim
-        && ((match_offset = execute (beg, lim - beg, &match_size, cur))
-            != (size_t) -1));
+        && ((match_offset = execute (compiled_pattern, beg, lim - beg,
+                                     &match_size, cur)) != (size_t) -1));
        cur = b + match_size)
     {
       b = beg + match_offset;
@@ -1305,7 +1295,7 @@ prpending (char const *lim)
       size_t match_size;
       --pending;
       if (outleft
-          || ((execute (lastout, nl + 1 - lastout,
+          || ((execute (compiled_pattern, lastout, nl + 1 - lastout,
                         &match_size, NULL) == (size_t) -1)
               == !out_invert))
         prline (lastout, nl + 1, SEP_CHAR_REJECTED);
@@ -1418,7 +1408,8 @@ grepbuf (char *beg, char const *lim)
   for (char *p = beg; p < lim; p = endp)
     {
       size_t match_size;
-      size_t match_offset = execute (p, lim - p, &match_size, NULL);
+      size_t match_offset = execute (compiled_pattern, p, lim - p,
+                                     &match_size, NULL);
       if (match_offset == (size_t) -1)
         {
           if (!out_invert)
@@ -1737,11 +1728,15 @@ drain_input (int fd, struct stat const *st)
     {
 #ifdef SPLICE_F_MOVE
       /* Should be faster, since it need not copy data to user space.  */
-      while ((nbytes = splice (fd, NULL, STDOUT_FILENO, NULL,
-                               INITIAL_BUFSIZE, SPLICE_F_MOVE)))
-        if (nbytes < 0)
-          return false;
-      return true;
+      nbytes = splice (fd, NULL, STDOUT_FILENO, NULL,
+                       INITIAL_BUFSIZE, SPLICE_F_MOVE);
+      if (0 <= nbytes || errno != EINVAL)
+        {
+          while (0 < nbytes)
+            nbytes = splice (fd, NULL, STDOUT_FILENO, NULL,
+                             INITIAL_BUFSIZE, SPLICE_F_MOVE);
+          return nbytes == 0;
+        }
 #endif
     }
   while ((nbytes = safe_read (fd, buffer, bufalloc)))
@@ -1758,29 +1753,17 @@ drain_input (int fd, struct stat const *st)
 static void
 finalize_input (int fd, struct stat const *st, bool ineof)
 {
-  if (fd != STDIN_FILENO)
-    return;
-
-  if (outleft)
-    {
-      if (ineof)
-        return;
-      if (seek_failed)
-        {
-          if (drain_input (fd, st))
-            return;
-        }
-      else if (0 <= lseek (fd, 0, SEEK_END))
-        return;
-    }
-  else
-    {
-      if (seek_failed || bufoffset == after_last_match
-          || 0 <= lseek (fd, after_last_match, SEEK_SET))
-        return;
-    }
-
-  suppressible_error (errno);
+  if (fd == STDIN_FILENO
+      && (outleft
+          ? (!ineof
+             && (seek_failed
+                 || (lseek (fd, 0, SEEK_END) < 0
+                     /* Linux proc file system has EINVAL (Bug#25180).  */
+                     && errno != EINVAL))
+             && ! drain_input (fd, st))
+          : (bufoffset != after_last_match && !seek_failed
+             && lseek (fd, after_last_match, SEEK_SET) < 0)))
+    suppressible_error (errno);
 }
 
 static bool
@@ -1938,19 +1921,19 @@ usage (int status)
   if (status != 0)
     {
       fprintf (stderr, _("Usage: %s [OPTION]... PATTERN [FILE]...\n"),
-               getprogname());
+               getprogname ());
       fprintf (stderr, _("Try '%s --help' for more information.\n"),
-               getprogname());
+               getprogname ());
     }
   else
     {
-      printf (_("Usage: %s [OPTION]... PATTERN [FILE]...\n"), getprogname());
+      printf (_("Usage: %s [OPTION]... PATTERN [FILE]...\n"), getprogname ());
       printf (_("Search for PATTERN in each FILE or standard input.\n"));
       printf (_("PATTERN is, by default, a basic regular expression (BRE).\n"));
       printf (_("\
 Example: %s -i 'hello world' menu.h main.c\n\
 \n\
-Regexp selection and interpretation:\n"), getprogname());
+Regexp selection and interpretation:\n"), getprogname ());
       printf (_("\
   -E, --extended-regexp     PATTERN is an extended regular expression (ERE)\n\
   -F, --fixed-strings       PATTERN is a set of newline-separated strings\n\
@@ -2042,70 +2025,36 @@ if any error occurs and -q is not given, the exit status is 2.\n"));
 
 /* Pattern compilers and matchers.  */
 
-static void
-Gcompile (char const *pattern, size_t size)
+static struct
 {
-  GEAcompile (pattern, size, RE_SYNTAX_GREP);
-}
-
-static void
-Ecompile (char const *pattern, size_t size)
-{
-  GEAcompile (pattern, size, RE_SYNTAX_EGREP);
-}
-
-static void
-Acompile (char const *pattern, size_t size)
-{
-  GEAcompile (pattern, size, RE_SYNTAX_AWK);
-}
-
-static void
-GAcompile (char const *pattern, size_t size)
-{
-  GEAcompile (pattern, size, RE_SYNTAX_GNU_AWK);
-}
-
-static void
-PAcompile (char const *pattern, size_t size)
-{
-  GEAcompile (pattern, size, RE_SYNTAX_POSIX_AWK);
-}
-
-struct matcher
-{
-  char const name[16];
+  char const name[12];
+  int syntax; /* used if compile == GEAcompile */
   compile_fp_t compile;
   execute_fp_t execute;
+} const matchers[] = {
+  { "grep", RE_SYNTAX_GREP, GEAcompile, EGexecute },
+  { "egrep", RE_SYNTAX_EGREP, GEAcompile, EGexecute },
+  { "fgrep", 0, Fcompile, Fexecute, },
+  { "awk", RE_SYNTAX_AWK, GEAcompile, EGexecute },
+  { "gawk", RE_SYNTAX_GNU_AWK, GEAcompile, EGexecute },
+  { "posixawk", RE_SYNTAX_POSIX_AWK, GEAcompile, EGexecute },
+  { "perl", 0, Pcompile, Pexecute, },
 };
-static struct matcher const matchers[] = {
-  { "grep",      Gcompile, EGexecute },
-  { "egrep",     Ecompile, EGexecute },
-  { "fgrep",     Fcompile,  Fexecute },
-  { "awk",       Acompile, EGexecute },
-  { "gawk",     GAcompile, EGexecute },
-  { "posixawk", PAcompile, EGexecute },
-  { "perl",      Pcompile,  Pexecute },
-  { "", NULL, NULL },
-};
+/* Keep these in sync with the 'matchers' table.  */
+enum { E_MATCHER_INDEX = 1, F_MATCHER_INDEX = 2, G_MATCHER_INDEX = 0 };
 
-/* Set the matcher to M if available.  Exit in case of conflicts or if
-   M is not available.  */
-static void
-setmatcher (char const *m)
+/* Return the index of the matcher corresponding to M if available.
+   MATCHER is the index of the previous matcher, or -1 if none.
+   Exit in case of conflicts or if M is not available.  */
+static int
+setmatcher (char const *m, int matcher)
 {
-  struct matcher const *p;
-
-  if (matcher && !STREQ (matcher, m))
-    die (EXIT_TROUBLE, 0, _("conflicting matchers specified"));
-
-  for (p = matchers; p->compile; p++)
-    if (STREQ (m, p->name))
+  for (int i = 0; i < sizeof matchers / sizeof *matchers; i++)
+    if (STREQ (m, matchers[i].name))
       {
-        matcher = p->name;
-        compile = p->compile;
-        execute = p->execute;
-        return;
+        if (0 <= matcher && matcher != i)
+          die (EXIT_TROUBLE, 0, _("conflicting matchers specified"));
+        return i;
       }
 
   die (EXIT_TROUBLE, 0, _("invalid matcher %s"), m);
@@ -2305,45 +2254,58 @@ contains_encoding_error (char const *pat, size_t patlen)
   return false;
 }
 
-/* Return true if the fgrep pattern PAT, of size PATLEN, matches only
-   single-byte characters including case folding, and so is suitable
-   to be converted to a grep pattern.  */
+/* Return the number of bytes in the initial character of PAT, of size
+   PATLEN, if Fcompile can handle that character.  Return -1 if
+   Fcompile cannot handle it.  MBS is the multibyte conversion state.
+
+   Fcompile can handle a character C if C is single-byte, or if C has no
+   case folded counterparts and toupper translates none of its bytes.  */
+
+static int
+fgrep_icase_charlen (char const *pat, size_t patlen, mbstate_t *mbs)
+{
+  int n = localeinfo.sbclen[to_uchar (*pat)];
+  if (n < 0)
+    {
+      wchar_t wc;
+      wchar_t folded[CASE_FOLDED_BUFSIZE];
+      size_t wn = mbrtowc (&wc, pat, patlen, mbs);
+      if (MB_LEN_MAX < wn || case_folded_counterparts (wc, folded))
+        return -1;
+      for (int i = wn; 0 < --i; )
+        {
+          unsigned char c = pat[i];
+          if (toupper (c) != c)
+            return -1;
+        }
+      n = wn;
+    }
+  return n;
+}
+
+/* Return true if the -F patterns PAT, of size PATLEN, contain only
+   single-byte characters or characters not subject to case folding,
+   and so can be processed by Fcompile.  */
 
 static bool
 fgrep_icase_available (char const *pat, size_t patlen)
 {
-  bool used[UCHAR_MAX + 1] = { 0, };
+  mbstate_t mbs = {0,};
 
-  for (size_t i = 0; i < patlen; i++)
+  for (size_t i = 0; i < patlen; )
     {
-      unsigned char c = pat[i];
-      if (localeinfo.sbctowc[c] == WEOF)
+      int n = fgrep_icase_charlen (pat + i, patlen - i, &mbs);
+      if (n < 0)
         return false;
-      used[c] = true;
+      i += n;
     }
-
-  for (int c = 0; c <= UCHAR_MAX; c++)
-    if (used[c])
-      {
-        wint_t wc = localeinfo.sbctowc[c];
-        wchar_t folded[CASE_FOLDED_BUFSIZE];
-        size_t nfolded = case_folded_counterparts (wc, folded);
-
-        for (size_t i = 0; i < nfolded; i++)
-          {
-            char s[MB_LEN_MAX];
-            mbstate_t mb_state = { 0 };
-            if (1 < wcrtomb (s, folded[i], &mb_state))
-              return false;
-          }
-      }
 
   return true;
 }
 
 /* Change the pattern *KEYS_P, of size *LEN_P, from fgrep to grep style.  */
 
-static void
+void
 fgrep_to_grep_pattern (char **keys_p, size_t *len_p)
 {
   size_t len = *len_p;
@@ -2385,11 +2347,97 @@ fgrep_to_grep_pattern (char **keys_p, size_t *len_p)
   *len_p = p - new_keys;
 }
 
+/* If it is easy, convert the MATCHER-style patterns KEYS (of size
+   *LEN_P) to -F style, update *LEN_P to a possibly-smaller value, and
+   return F_MATCHER_INDEX.  If not, leave KEYS and *LEN_P alone and
+   return MATCHER.  This function is conservative and sometimes misses
+   conversions, e.g., it does not convert the -E pattern "(a|a|[aa])"
+   to the -F pattern "a".  */
+
+static int
+try_fgrep_pattern (int matcher, char *keys, size_t *len_p)
+{
+  int result = matcher;
+  size_t len = *len_p;
+  char *new_keys = xmalloc (len + 1);
+  char *p = new_keys;
+  char const *q = keys;
+  mbstate_t mb_state = { 0 };
+
+  while (len != 0)
+    {
+      switch (*q)
+        {
+        case '$': case '*': case '.': case '[': case '^':
+          goto fail;
+
+        case '(': case '+': case '?': case '{': case '|':
+          if (matcher != G_MATCHER_INDEX)
+            goto fail;
+          break;
+
+        case '\\':
+          if (1 < len)
+            switch (q[1])
+              {
+              case '\n':
+              case 'B': case 'S': case 'W': case'\'': case '<':
+              case 'b': case 's': case 'w': case '`': case '>':
+              case '1': case '2': case '3': case '4':
+              case '5': case '6': case '7': case '8': case '9':
+                goto fail;
+
+              case '(': case '+': case '?': case '{': case '|':
+                if (matcher == G_MATCHER_INDEX)
+                  goto fail;
+                /* Fall through.  */
+              default:
+                q++, len--;
+                break;
+              }
+          break;
+        }
+
+      {
+        size_t n;
+        if (match_icase)
+          {
+            int ni = fgrep_icase_charlen (q, len, &mb_state);
+            if (ni < 0)
+              goto fail;
+            n = ni;
+          }
+        else
+          {
+            n = mb_clen (q, len, &mb_state);
+            if (MB_LEN_MAX < n)
+              goto fail;
+          }
+
+        p = mempcpy (p, q, n);
+        q += n;
+        len -= n;
+      }
+    }
+
+  if (*len_p != p - new_keys)
+    {
+      *len_p = p - new_keys;
+      memcpy (keys, new_keys, p - new_keys);
+    }
+  result = F_MATCHER_INDEX;
+
+ fail:
+  free (new_keys);
+  return result;
+}
+
 int
 main (int argc, char **argv)
 {
   char *keys = NULL;
   size_t keycc = 0, oldcc, keyalloc = 0;
+  int matcher = -1;
   bool with_filenames = false;
   size_t cc;
   int opt, prepended;
@@ -2432,9 +2480,6 @@ main (int argc, char **argv)
     error (0, 0, _("warning: GREP_OPTIONS is deprecated;"
                    " please use an alias or script"));
 
-  compile = matchers[0].compile;
-  execute = matchers[0].execute;
-
   while (prev_optind = optind,
          (opt = get_nondigit_option (argc, argv, &default_context)) != -1)
     switch (opt)
@@ -2463,23 +2508,23 @@ main (int argc, char **argv)
         break;
 
       case 'E':
-        setmatcher ("egrep");
+        matcher = setmatcher ("egrep", matcher);
         break;
 
       case 'F':
-        setmatcher ("fgrep");
+        matcher = setmatcher ("fgrep", matcher);
         break;
 
       case 'P':
-        setmatcher ("perl");
+        matcher = setmatcher ("perl", matcher);
         break;
 
       case 'G':
-        setmatcher ("grep");
+        matcher = setmatcher ("grep", matcher);
         break;
 
       case 'X': /* undocumented on purpose */
-        setmatcher (optarg);
+        matcher = setmatcher (optarg, matcher);
         break;
 
       case 'H':
@@ -2533,10 +2578,11 @@ main (int argc, char **argv)
             keyalloc = keycc + cc + 1;
             keys = x2realloc (keys, &keyalloc);
           }
-        memcpy (&keys[keycc], optarg, cc);
+        oldcc = keycc;
+        memcpy (keys + oldcc, optarg, cc);
         keycc += cc;
         keys[keycc++] = '\n';
-        fl_add (keys, keycc - cc - 1, keycc, "");
+        fl_add (keys + oldcc, cc + 1, "");
         break;
 
       case 'f':
@@ -2560,7 +2606,7 @@ main (int argc, char **argv)
         /* Append final newline if file ended in non-newline. */
         if (oldcc != keycc && keys[keycc - 1] != '\n')
           keys[keycc++] = '\n';
-        fl_add (keys, oldcc, keycc, xstrdup (optarg));
+        fl_add (keys + oldcc, keycc - oldcc, optarg);
         break;
 
       case 'h':
@@ -2625,6 +2671,7 @@ main (int argc, char **argv)
         break;
 
       case 'w':
+        wordinit ();
         match_words = true;
         break;
 
@@ -2728,7 +2775,7 @@ main (int argc, char **argv)
 
   if (show_version)
     {
-      version_etc (stdout, getprogname(), PACKAGE_NAME, VERSION, AUTHORS,
+      version_etc (stdout, getprogname (), PACKAGE_NAME, VERSION, AUTHORS,
                    (char *) NULL);
       return EXIT_SUCCESS;
     }
@@ -2753,7 +2800,8 @@ main (int argc, char **argv)
       /* Make a copy so that it can be reallocated or freed later.  */
       keycc = strlen (argv[optind]);
       keys = xmemdup (argv[optind++], keycc + 1);
-      fl_add (keys, 0, keycc, "");
+      fl_add (keys, keycc, "");
+      n_patterns++;
     }
   else
     usage (EXIT_TROUBLE);
@@ -2815,29 +2863,37 @@ main (int argc, char **argv)
 
   initialize_unibyte_mask ();
 
-  /* In a unibyte locale, switch from fgrep to grep if
-     the pattern matches words (where grep is typically faster).
-     In a multibyte locale, switch from fgrep to grep if either
-     (1) the pattern has an encoding error (where fgrep might not work), or
-     (2) case is ignored and a fast fgrep ignore-case is not available.  */
-  if (compile == Fcompile
-      && (MB_CUR_MAX <= 1
-          ? match_words
+  if (matcher < 0)
+    matcher = G_MATCHER_INDEX;
+
+  /* In a single-byte locale, switch from -F to -G if it is a single
+     pattern that matches words, where -G is typically faster.  In a
+     multi-byte locale, switch if the patterns have an encoding error
+     (where -F does not work) or if -i and the patterns will not work
+     for -iF.  */
+  if (matcher == F_MATCHER_INDEX
+      && (! localeinfo.multibyte
+          ? n_patterns == 1 && match_words
           : (contains_encoding_error (keys, keycc)
              || (match_icase && !fgrep_icase_available (keys, keycc)))))
     {
       fgrep_to_grep_pattern (&keys, &keycc);
-      matcher = "grep";
-      compile = Gcompile;
-      execute = EGexecute;
+      matcher = G_MATCHER_INDEX;
     }
+  /* With two or more patterns, if -F works then switch from either -E
+     or -G, as -F is probably faster then.  */
+  else if ((matcher == G_MATCHER_INDEX || matcher == E_MATCHER_INDEX)
+           && 1 < n_patterns)
+    matcher = try_fgrep_pattern (matcher, keys, &keycc);
 
-  compile (keys, keycc);
-  free (keys);
+  execute = matchers[matcher].execute;
+  compiled_pattern = matchers[matcher].compile (keys, keycc,
+                                                matchers[matcher].syntax);
   /* We need one byte prior and one after.  */
   char eolbytes[3] = { 0, eolbyte, 0 };
   size_t match_size;
-  skip_empty_lines = ((execute (eolbytes + 1, 1, &match_size, NULL) == 0)
+  skip_empty_lines = ((execute (compiled_pattern, eolbytes + 1, 1,
+                                &match_size, NULL) == 0)
                       == out_invert);
 
   if ((argc - optind > 1 && !no_filenames) || with_filenames)
@@ -2885,6 +2941,6 @@ main (int argc, char **argv)
     status &= grep_command_line_arg (*files++);
   while (*files != NULL);
 
-  /* We register via atexit() to test stdout.  */
+  /* We register via atexit to test stdout.  */
   return errseen ? EXIT_TROUBLE : status;
 }

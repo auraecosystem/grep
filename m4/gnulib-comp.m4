@@ -1,5 +1,5 @@
 # DO NOT EDIT! GENERATED AUTOMATICALLY!
-# Copyright (C) 2002-2016 Free Software Foundation, Inc.
+# Copyright (C) 2002-2017 Free Software Foundation, Inc.
 #
 # This file is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -61,11 +61,13 @@ AC_DEFUN([gl_EARLY],
   # Code from module bitrotate-tests:
   # Code from module btowc:
   # Code from module btowc-tests:
+  # Code from module builtin-expect:
   # Code from module c-ctype:
   # Code from module c-ctype-tests:
   # Code from module c-strcase:
   # Code from module c-strcase-tests:
   # Code from module c-strcaseeq:
+  # Code from module c99:
   # Code from module chdir:
   # Code from module chdir-long:
   # Code from module chdir-tests:
@@ -150,6 +152,7 @@ AC_DEFUN([gl_EARLY],
   # Code from module getdtablesize:
   # Code from module getdtablesize-tests:
   # Code from module getopt-gnu:
+  # Code from module getopt-gnu-tests:
   # Code from module getopt-posix:
   # Code from module getopt-posix-tests:
   # Code from module getpagesize:
@@ -296,6 +299,7 @@ AC_DEFUN([gl_EARLY],
   # Code from module ssize_t:
   # Code from module stat:
   # Code from module stat-tests:
+  # Code from module std-gnu11:
   # Code from module stdalign:
   # Code from module stdalign-tests:
   # Code from module stdarg:
@@ -428,6 +432,7 @@ AC_DEFUN([gl_INIT],
     gl_PREREQ_BTOWC
   fi
   gl_WCHAR_MODULE_INDICATOR([btowc])
+  gl___BUILTIN_EXPECT
   gl_UNISTD_MODULE_INDICATOR([chdir])
   gl_FUNC_CHDIR_LONG
   if test $gl_cv_have_arbitrary_file_name_length_limit = yes; then
@@ -513,7 +518,6 @@ AC_DEFUN([gl_INIT],
   gl_FUNC_FPENDING
   if test $gl_cv_func___fpending = no; then
     AC_LIBOBJ([fpending])
-    gl_PREREQ_FPENDING
   fi
   gl_FUNC_FSTAT
   if test $REPLACE_FSTAT = 1; then
@@ -550,7 +554,6 @@ AC_DEFUN([gl_INIT],
     GNULIB_GL_UNISTD_H_GETOPT=1
   fi
   AC_SUBST([GNULIB_GL_UNISTD_H_GETOPT])
-  gl_MODULE_INDICATOR_FOR_TESTS([getopt-gnu])
   gl_FUNC_GETOPT_POSIX
   if test $REPLACE_GETOPT = 1; then
     AC_LIBOBJ([getopt])
@@ -1392,6 +1395,7 @@ AC_DEFUN([gl_FILE_LIST], [
   lib/stdbool.in.h
   lib/stddef.in.h
   lib/stdint.in.h
+  lib/stdio-impl.h
   lib/stdio.in.h
   lib/stdlib.in.h
   lib/stpcpy.c
@@ -1463,6 +1467,7 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/alloca.m4
   m4/assert.m4
   m4/btowc.m4
+  m4/builtin-expect.m4
   m4/chdir-long.m4
   m4/close-stream.m4
   m4/close.m4
@@ -1583,6 +1588,7 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/perl.m4
   m4/pipe.m4
   m4/printf.m4
+  m4/pthread_rwlock_rdlock.m4
   m4/putenv.m4
   m4/quote.m4
   m4/quotearg.m4
@@ -1598,6 +1604,7 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/snprintf.m4
   m4/ssize_t.m4
   m4/stat.m4
+  m4/std-gnu11.m4
   m4/stdalign.m4
   m4/stdarg.m4
   m4/stdbool.m4
@@ -1698,7 +1705,9 @@ AC_DEFUN([gl_FILE_LIST], [
   tests/test-fwrite.c
   tests/test-getcwd-lgpl.c
   tests/test-getdtablesize.c
-  tests/test-getopt.c
+  tests/test-getopt-gnu.c
+  tests/test-getopt-main.h
+  tests/test-getopt-posix.c
   tests/test-getopt.h
   tests/test-getopt_long.h
   tests/test-getprogname.c

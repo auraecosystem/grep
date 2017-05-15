@@ -1,5 +1,5 @@
 /* Portability cruft.  Include after config.h and sys/types.h.
-   Copyright 1996, 1998-2000, 2007, 2009-2016 Free Software Foundation, Inc.
+   Copyright 1996, 1998-2000, 2007, 2009-2017 Free Software Foundation, Inc.
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -37,6 +37,7 @@
 #include <ctype.h>
 
 enum { EXIT_TROUBLE = 2 };
+enum { NCHAR = UCHAR_MAX + 1 };
 
 #include <gettext.h>
 #define N_(String) gettext_noop(String)
