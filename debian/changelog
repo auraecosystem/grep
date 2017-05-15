@@ -1,11 +1,18 @@
-grep (2.27-2~1) UNRELEASED; urgency=medium
+grep (2.27-2) unstable; urgency=low
 
-  * Import patches from upstream master. grep 2.27 failed when standard input
-    is a file in the Linux /proc file system and standard output is /dev/null.
+  * Upstream patches to solve issues when standard input is a file in Linux
+    /proc file system and standard output is /dev/null:
     - upstream-grep-simplify-finalize_input.patch
     - upstream-grep-work-around-proc-lseek-glitch.patch
+    - upstream-grep-fix-bug-dev-null-output.patch
+  * Minor upstream patch to clarify in NEWS the new early-exit 
+    options.
+    upstream-clarify-early-exit-news-for-2.27.patch
+  * When grep -Fo finds matches of differing length, it could
+    mistakenly print a shorter one. Import the patch to fix it:
+    upstream-grep-Fo-could-report-a-match-that-is-not-the-longest.patch
 
- -- Santiago Ruano Rincón <santiago@debian.org>  Tue, 13 Dec 2016 10:14:39 +0100
+ -- Santiago Ruano Rincón <santiago@debian.org>  Mon, 23 Jan 2017 19:18:59 +0100
 
 grep (2.27-1) unstable; urgency=low
 

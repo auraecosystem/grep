@@ -4,3 +4,6 @@
 81-356120-document-multiple-e.patch
 upstream-grep-simplify-finalize_input.patch
 upstream-grep-work-around-proc-lseek-glitch.patch
+upstream-grep-fix-bug-dev-null-output.patch
+upstream-clarify-early-exit-news-for-2.27.patch
+upstream-grep-Fo-could-report-a-match-that-is-not-the-longest.patch
