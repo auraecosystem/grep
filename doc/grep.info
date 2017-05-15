@@ -2,7 +2,7 @@ This is grep.info-t, produced by makeinfo version 6.3 from grep.texi.
 
 This manual is for ‘grep’, a pattern matching engine.
 
-   Copyright © 1999-2002, 2005, 2008-2016 Free Software Foundation, Inc.
+   Copyright © 1999-2002, 2005, 2008-2017 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -23,11 +23,11 @@ grep
 
 ‘grep’ prints lines that contain a match for a pattern.
 
-   This manual is for version 2.27 of GNU Grep.
+   This manual is for version 3.0 of GNU Grep.
 
    This manual is for ‘grep’, a pattern matching engine.
 
-   Copyright © 1999-2002, 2005, 2008-2016 Free Software Foundation, Inc.
+   Copyright © 1999-2002, 2005, 2008-2017 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -2318,33 +2318,33 @@ Index
 
 Tag Table:
 Node: Top771
-Node: Introduction1899
-Node: Invoking2641
-Node: Command-line Options3414
-Node: Generic Program Information4299
-Node: Matching Control4775
-Node: General Output Control7498
-Ref: General Output Control-Footnote-111787
-Node: Output Line Prefix Control11856
-Node: Context Line Control14837
-Node: File and Directory Selection16902
-Node: Other Options22409
-Node: Environment Variables23717
-Node: Exit Status33996
-Node: grep Programs34476
-Node: Regular Expressions36156
-Node: Fundamental Structure37359
-Node: Character Classes and Bracket Expressions39167
-Ref: invalid-bracket-expr42589
-Node: The Backslash Character and Special Expressions43829
-Node: Anchoring44903
-Node: Back-references and Subexpressions45364
-Node: Basic vs Extended46104
-Node: Usage47197
-Node: Reporting Bugs54678
-Node: Copying55362
-Node: GNU Free Documentation License56490
-Node: Index81795
+Node: Introduction1898
+Node: Invoking2640
+Node: Command-line Options3413
+Node: Generic Program Information4298
+Node: Matching Control4774
+Node: General Output Control7497
+Ref: General Output Control-Footnote-111786
+Node: Output Line Prefix Control11855
+Node: Context Line Control14836
+Node: File and Directory Selection16901
+Node: Other Options22408
+Node: Environment Variables23716
+Node: Exit Status33995
+Node: grep Programs34475
+Node: Regular Expressions36155
+Node: Fundamental Structure37358
+Node: Character Classes and Bracket Expressions39166
+Ref: invalid-bracket-expr42588
+Node: The Backslash Character and Special Expressions43828
+Node: Anchoring44902
+Node: Back-references and Subexpressions45363
+Node: Basic vs Extended46103
+Node: Usage47196
+Node: Reporting Bugs54677
+Node: Copying55361
+Node: GNU Free Documentation License56489
+Node: Index81794
 
 End Tag Table
 

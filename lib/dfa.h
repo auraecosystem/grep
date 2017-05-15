@@ -1,5 +1,5 @@
 /* dfa.h - declarations for GNU deterministic regexp compiler
-   Copyright (C) 1988, 1998, 2007, 2009-2016 Free Software Foundation, Inc.
+   Copyright (C) 1988, 1998, 2007, 2009-2017 Free Software Foundation, Inc.
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -58,11 +58,8 @@ enum
        possibly true for other apps.  */
     DFA_ANCHOR = 1 << 0,
 
-    /* Ignore case while matching.  */
-    DFA_CASE_FOLD = 1 << 1,
-
     /* '\0' in data is end-of-line, instead of the traditional '\n'.  */
-    DFA_EOL_NUL = 1 << 2
+    DFA_EOL_NUL = 1 << 1
   };
 
 /* Initialize or reinitialize a DFA.  This must be called before

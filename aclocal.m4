@@ -14,8 +14,8 @@
 m4_ifndef([AC_CONFIG_MACRO_DIRS], [m4_defun([_AM_CONFIG_MACRO_DIRS], [])m4_defun([AC_CONFIG_MACRO_DIRS], [_AM_CONFIG_MACRO_DIRS($@)])])
 m4_ifndef([AC_AUTOCONF_VERSION],
   [m4_copy([m4_PACKAGE_VERSION], [AC_AUTOCONF_VERSION])])dnl
-m4_if(m4_defn([AC_AUTOCONF_VERSION]), [2.69.171-527f1],,
-[m4_warning([this file was generated for autoconf 2.69.171-527f1.
+m4_if(m4_defn([AC_AUTOCONF_VERSION]), [2.69.185-b502e],,
+[m4_warning([this file was generated for autoconf 2.69.185-b502e.
 You have another version of autoconf.  It may work, but is not guaranteed to.
 If you have problems, you may need to regenerate the build system entirely.
 To do so, use the procedure documented by the package, typically 'autoreconf'.])])
@@ -1172,6 +1172,7 @@ m4_include([m4/absolute-header.m4])
 m4_include([m4/alloca.m4])
 m4_include([m4/assert.m4])
 m4_include([m4/btowc.m4])
+m4_include([m4/builtin-expect.m4])
 m4_include([m4/chdir-long.m4])
 m4_include([m4/close-stream.m4])
 m4_include([m4/close.m4])
@@ -1298,6 +1299,7 @@ m4_include([m4/pkg.m4])
 m4_include([m4/po.m4])
 m4_include([m4/printf.m4])
 m4_include([m4/progtest.m4])
+m4_include([m4/pthread_rwlock_rdlock.m4])
 m4_include([m4/putenv.m4])
 m4_include([m4/quote.m4])
 m4_include([m4/quotearg.m4])
@@ -1313,6 +1315,7 @@ m4_include([m4/size_max.m4])
 m4_include([m4/snprintf.m4])
 m4_include([m4/ssize_t.m4])
 m4_include([m4/stat.m4])
+m4_include([m4/std-gnu11.m4])
 m4_include([m4/stdalign.m4])
 m4_include([m4/stdarg.m4])
 m4_include([m4/stdbool.m4])

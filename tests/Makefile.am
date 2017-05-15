@@ -1,5 +1,5 @@
 ## Process this file with automake to create Makefile.in
-# Copyright 1997-1998, 2005-2016 Free Software Foundation, Inc.
+# Copyright 1997-1998, 2005-2017 Free Software Foundation, Inc.
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -98,6 +98,7 @@ TESTS =						\
   false-match-mb-non-utf8			\
   fedora					\
   fgrep-infloop					\
+  fgrep-longest					\
   file						\
   filename-lineno.pl				\
   fmbtest					\
@@ -141,6 +142,7 @@ TESTS =						\
   pcre-z					\
   posix-bracket					\
   prefix-of-multibyte				\
+  proc						\
   r-dot						\
   repetition-overflow				\
   reversed-range-endpoints			\

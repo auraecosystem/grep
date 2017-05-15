@@ -14,7 +14,7 @@
 
 @SET_MAKE@
 
-# Copyright (C) 2002-2016 Free Software Foundation, Inc.
+# Copyright (C) 2002-2017 Free Software Foundation, Inc.
 #
 # This file is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -129,20 +129,21 @@ TESTS = test-alignof$(EXEEXT) test-alloca-opt$(EXEEXT) \
 	test-fpending.sh test-fputc$(EXEEXT) test-fread$(EXEEXT) \
 	test-fstat$(EXEEXT) test-fstatat$(EXEEXT) test-fwrite$(EXEEXT) \
 	test-getcwd-lgpl$(EXEEXT) test-getdtablesize$(EXEEXT) \
-	test-getopt$(EXEEXT) test-getprogname$(EXEEXT) \
-	test-gettimeofday$(EXEEXT) test-hash$(EXEEXT) \
-	test-i-ring$(EXEEXT) test-iconv-h$(EXEEXT) test-iconv$(EXEEXT) \
-	test-ignore-value$(EXEEXT) test-intprops$(EXEEXT) \
-	test-inttostr$(EXEEXT) test-inttypes$(EXEEXT) \
-	test-isatty$(EXEEXT) test-isblank$(EXEEXT) \
-	test-iswblank$(EXEEXT) test-langinfo$(EXEEXT) \
-	test-limits-h$(EXEEXT) test-locale$(EXEEXT) \
-	test-localeconv$(EXEEXT) test-localename$(EXEEXT) \
-	test-lseek.sh test-lstat$(EXEEXT) test-malloc-gnu$(EXEEXT) \
-	test-malloca$(EXEEXT) test-mbscasecmp.sh test-mbsinit.sh \
-	test-mbsrtowcs1.sh test-mbsrtowcs2.sh test-mbsrtowcs3.sh \
-	test-mbsrtowcs4.sh test-mbsstr1$(EXEEXT) test-mbsstr2.sh \
-	test-mbsstr3.sh test-memchr$(EXEEXT) test-memchr2$(EXEEXT) \
+	test-getopt-gnu$(EXEEXT) test-getopt-posix$(EXEEXT) \
+	test-getprogname$(EXEEXT) test-gettimeofday$(EXEEXT) \
+	test-hash$(EXEEXT) test-i-ring$(EXEEXT) test-iconv-h$(EXEEXT) \
+	test-iconv$(EXEEXT) test-ignore-value$(EXEEXT) \
+	test-intprops$(EXEEXT) test-inttostr$(EXEEXT) \
+	test-inttypes$(EXEEXT) test-isatty$(EXEEXT) \
+	test-isblank$(EXEEXT) test-iswblank$(EXEEXT) \
+	test-langinfo$(EXEEXT) test-limits-h$(EXEEXT) \
+	test-locale$(EXEEXT) test-localeconv$(EXEEXT) \
+	test-localename$(EXEEXT) test-lseek.sh test-lstat$(EXEEXT) \
+	test-malloc-gnu$(EXEEXT) test-malloca$(EXEEXT) \
+	test-mbscasecmp.sh test-mbsinit.sh test-mbsrtowcs1.sh \
+	test-mbsrtowcs2.sh test-mbsrtowcs3.sh test-mbsrtowcs4.sh \
+	test-mbsstr1$(EXEEXT) test-mbsstr2.sh test-mbsstr3.sh \
+	test-memchr$(EXEEXT) test-memchr2$(EXEEXT) \
 	test-memrchr$(EXEEXT) test-nl_langinfo.sh test-open$(EXEEXT) \
 	test-openat-safer$(EXEEXT) test-openat$(EXEEXT) \
 	test-pathmax$(EXEEXT) test-pipe$(EXEEXT) \
@@ -190,24 +191,25 @@ check_PROGRAMS = test-alignof$(EXEEXT) test-alloca-opt$(EXEEXT) \
 	test-fpending$(EXEEXT) test-fputc$(EXEEXT) test-fread$(EXEEXT) \
 	test-fstat$(EXEEXT) test-fstatat$(EXEEXT) test-fwrite$(EXEEXT) \
 	test-getcwd-lgpl$(EXEEXT) test-getdtablesize$(EXEEXT) \
-	test-getopt$(EXEEXT) test-getprogname$(EXEEXT) \
-	test-gettimeofday$(EXEEXT) test-hash$(EXEEXT) \
-	test-i-ring$(EXEEXT) test-iconv-h$(EXEEXT) test-iconv$(EXEEXT) \
-	test-ignore-value$(EXEEXT) test-intprops$(EXEEXT) \
-	test-inttostr$(EXEEXT) test-inttypes$(EXEEXT) \
-	test-isatty$(EXEEXT) test-isblank$(EXEEXT) \
-	test-iswblank$(EXEEXT) test-langinfo$(EXEEXT) \
-	test-limits-h$(EXEEXT) test-locale$(EXEEXT) \
-	test-localeconv$(EXEEXT) test-localename$(EXEEXT) \
-	test-lseek$(EXEEXT) test-lstat$(EXEEXT) \
-	test-malloc-gnu$(EXEEXT) test-malloca$(EXEEXT) \
-	test-mbscasecmp$(EXEEXT) test-mbsinit$(EXEEXT) \
-	test-mbsrtowcs$(EXEEXT) test-mbsstr1$(EXEEXT) \
-	test-mbsstr2$(EXEEXT) test-mbsstr3$(EXEEXT) \
-	test-memchr$(EXEEXT) test-memchr2$(EXEEXT) \
-	test-memrchr$(EXEEXT) test-nl_langinfo$(EXEEXT) \
-	test-open$(EXEEXT) test-openat-safer$(EXEEXT) \
-	test-openat$(EXEEXT) test-pathmax$(EXEEXT) test-pipe$(EXEEXT) \
+	test-getopt-gnu$(EXEEXT) test-getopt-posix$(EXEEXT) \
+	test-getprogname$(EXEEXT) test-gettimeofday$(EXEEXT) \
+	test-hash$(EXEEXT) test-i-ring$(EXEEXT) test-iconv-h$(EXEEXT) \
+	test-iconv$(EXEEXT) test-ignore-value$(EXEEXT) \
+	test-intprops$(EXEEXT) test-inttostr$(EXEEXT) \
+	test-inttypes$(EXEEXT) test-isatty$(EXEEXT) \
+	test-isblank$(EXEEXT) test-iswblank$(EXEEXT) \
+	test-langinfo$(EXEEXT) test-limits-h$(EXEEXT) \
+	test-locale$(EXEEXT) test-localeconv$(EXEEXT) \
+	test-localename$(EXEEXT) test-lseek$(EXEEXT) \
+	test-lstat$(EXEEXT) test-malloc-gnu$(EXEEXT) \
+	test-malloca$(EXEEXT) test-mbscasecmp$(EXEEXT) \
+	test-mbsinit$(EXEEXT) test-mbsrtowcs$(EXEEXT) \
+	test-mbsstr1$(EXEEXT) test-mbsstr2$(EXEEXT) \
+	test-mbsstr3$(EXEEXT) test-memchr$(EXEEXT) \
+	test-memchr2$(EXEEXT) test-memrchr$(EXEEXT) \
+	test-nl_langinfo$(EXEEXT) test-open$(EXEEXT) \
+	test-openat-safer$(EXEEXT) test-openat$(EXEEXT) \
+	test-pathmax$(EXEEXT) test-pipe$(EXEEXT) \
 	test-quotearg-simple$(EXEEXT) test-read$(EXEEXT) \
 	test-realloc-gnu$(EXEEXT) test-regex$(EXEEXT) \
 	test-setenv$(EXEEXT) test-setlocale1$(EXEEXT) \
@@ -237,6 +239,7 @@ ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/00gnulib.m4 \
 	$(top_srcdir)/m4/absolute-header.m4 $(top_srcdir)/m4/alloca.m4 \
 	$(top_srcdir)/m4/assert.m4 $(top_srcdir)/m4/btowc.m4 \
+	$(top_srcdir)/m4/builtin-expect.m4 \
 	$(top_srcdir)/m4/chdir-long.m4 \
 	$(top_srcdir)/m4/close-stream.m4 $(top_srcdir)/m4/close.m4 \
 	$(top_srcdir)/m4/closedir.m4 $(top_srcdir)/m4/closeout.m4 \
@@ -303,14 +306,16 @@ am__aclocal_m4_deps = $(top_srcdir)/m4/00gnulib.m4 \
 	$(top_srcdir)/m4/pcre.m4 $(top_srcdir)/m4/perl.m4 \
 	$(top_srcdir)/m4/pipe.m4 $(top_srcdir)/m4/pkg.m4 \
 	$(top_srcdir)/m4/po.m4 $(top_srcdir)/m4/printf.m4 \
-	$(top_srcdir)/m4/progtest.m4 $(top_srcdir)/m4/putenv.m4 \
-	$(top_srcdir)/m4/quote.m4 $(top_srcdir)/m4/quotearg.m4 \
-	$(top_srcdir)/m4/read.m4 $(top_srcdir)/m4/readdir.m4 \
-	$(top_srcdir)/m4/realloc.m4 $(top_srcdir)/m4/regex.m4 \
-	$(top_srcdir)/m4/safe-read.m4 $(top_srcdir)/m4/save-cwd.m4 \
-	$(top_srcdir)/m4/setenv.m4 $(top_srcdir)/m4/setlocale.m4 \
-	$(top_srcdir)/m4/size_max.m4 $(top_srcdir)/m4/snprintf.m4 \
-	$(top_srcdir)/m4/ssize_t.m4 $(top_srcdir)/m4/stat.m4 \
+	$(top_srcdir)/m4/progtest.m4 \
+	$(top_srcdir)/m4/pthread_rwlock_rdlock.m4 \
+	$(top_srcdir)/m4/putenv.m4 $(top_srcdir)/m4/quote.m4 \
+	$(top_srcdir)/m4/quotearg.m4 $(top_srcdir)/m4/read.m4 \
+	$(top_srcdir)/m4/readdir.m4 $(top_srcdir)/m4/realloc.m4 \
+	$(top_srcdir)/m4/regex.m4 $(top_srcdir)/m4/safe-read.m4 \
+	$(top_srcdir)/m4/save-cwd.m4 $(top_srcdir)/m4/setenv.m4 \
+	$(top_srcdir)/m4/setlocale.m4 $(top_srcdir)/m4/size_max.m4 \
+	$(top_srcdir)/m4/snprintf.m4 $(top_srcdir)/m4/ssize_t.m4 \
+	$(top_srcdir)/m4/stat.m4 $(top_srcdir)/m4/std-gnu11.m4 \
 	$(top_srcdir)/m4/stdalign.m4 $(top_srcdir)/m4/stdarg.m4 \
 	$(top_srcdir)/m4/stdbool.m4 $(top_srcdir)/m4/stddef_h.m4 \
 	$(top_srcdir)/m4/stdint.m4 $(top_srcdir)/m4/stdint_h.m4 \
@@ -539,9 +544,14 @@ test_getdtablesize_OBJECTS = test-getdtablesize.$(OBJEXT)
 test_getdtablesize_LDADD = $(LDADD)
 test_getdtablesize_DEPENDENCIES = libtests.a ../lib/libgreputils.a \
 	libtests.a $(am__DEPENDENCIES_1)
-test_getopt_SOURCES = test-getopt.c
-test_getopt_OBJECTS = test-getopt.$(OBJEXT)
-test_getopt_DEPENDENCIES = $(am__DEPENDENCIES_2) $(am__DEPENDENCIES_1)
+test_getopt_gnu_SOURCES = test-getopt-gnu.c
+test_getopt_gnu_OBJECTS = test-getopt-gnu.$(OBJEXT)
+test_getopt_gnu_DEPENDENCIES = $(am__DEPENDENCIES_2) \
+	$(am__DEPENDENCIES_1)
+test_getopt_posix_SOURCES = test-getopt-posix.c
+test_getopt_posix_OBJECTS = test-getopt-posix.$(OBJEXT)
+test_getopt_posix_DEPENDENCIES = $(am__DEPENDENCIES_2) \
+	$(am__DEPENDENCIES_1)
 test_getprogname_SOURCES = test-getprogname.c
 test_getprogname_OBJECTS = test-getprogname.$(OBJEXT)
 test_getprogname_DEPENDENCIES = $(am__DEPENDENCIES_2)
@@ -973,7 +983,9 @@ am__depfiles_remade = ./$(DEPDIR)/anytostr.Po ./$(DEPDIR)/asnprintf.Po \
 	./$(DEPDIR)/test-fread.Po ./$(DEPDIR)/test-fstat.Po \
 	./$(DEPDIR)/test-fstatat.Po ./$(DEPDIR)/test-fwrite.Po \
 	./$(DEPDIR)/test-getcwd-lgpl.Po \
-	./$(DEPDIR)/test-getdtablesize.Po ./$(DEPDIR)/test-getopt.Po \
+	./$(DEPDIR)/test-getdtablesize.Po \
+	./$(DEPDIR)/test-getopt-gnu.Po \
+	./$(DEPDIR)/test-getopt-posix.Po \
 	./$(DEPDIR)/test-getprogname.Po \
 	./$(DEPDIR)/test-gettimeofday.Po ./$(DEPDIR)/test-hash.Po \
 	./$(DEPDIR)/test-i-ring.Po ./$(DEPDIR)/test-iconv-h.Po \
@@ -1046,17 +1058,17 @@ SOURCES = $(libtests_a_SOURCES) $(EXTRA_libtests_a_SOURCES) \
 	test-fdopen.c test-fdopendir.c test-fgetc.c test-float.c \
 	test-fnmatch.c test-fpending.c test-fputc.c test-fread.c \
 	test-fstat.c test-fstatat.c test-fwrite.c test-getcwd-lgpl.c \
-	test-getdtablesize.c test-getopt.c test-getprogname.c \
-	test-gettimeofday.c test-hash.c test-i-ring.c test-iconv.c \
-	test-iconv-h.c test-ignore-value.c test-intprops.c \
-	test-inttostr.c test-inttypes.c test-isatty.c test-isblank.c \
-	test-iswblank.c test-langinfo.c test-limits-h.c test-locale.c \
-	test-localeconv.c test-localename.c test-lseek.c test-lstat.c \
-	test-malloc-gnu.c test-malloca.c test-mbscasecmp.c \
-	test-mbsinit.c test-mbsrtowcs.c test-mbsstr1.c test-mbsstr2.c \
-	test-mbsstr3.c test-memchr.c test-memchr2.c test-memrchr.c \
-	test-nl_langinfo.c test-open.c test-openat.c \
-	test-openat-safer.c test-pathmax.c test-pipe.c \
+	test-getdtablesize.c test-getopt-gnu.c test-getopt-posix.c \
+	test-getprogname.c test-gettimeofday.c test-hash.c \
+	test-i-ring.c test-iconv.c test-iconv-h.c test-ignore-value.c \
+	test-intprops.c test-inttostr.c test-inttypes.c test-isatty.c \
+	test-isblank.c test-iswblank.c test-langinfo.c test-limits-h.c \
+	test-locale.c test-localeconv.c test-localename.c test-lseek.c \
+	test-lstat.c test-malloc-gnu.c test-malloca.c \
+	test-mbscasecmp.c test-mbsinit.c test-mbsrtowcs.c \
+	test-mbsstr1.c test-mbsstr2.c test-mbsstr3.c test-memchr.c \
+	test-memchr2.c test-memrchr.c test-nl_langinfo.c test-open.c \
+	test-openat.c test-openat-safer.c test-pathmax.c test-pipe.c \
 	test-quotearg-simple.c test-read.c test-realloc-gnu.c \
 	test-regex.c test-setenv.c test-setlocale1.c test-setlocale2.c \
 	test-snprintf.c test-stat.c test-stdalign.c test-stdbool.c \
@@ -1083,17 +1095,17 @@ DIST_SOURCES = $(libtests_a_SOURCES) $(EXTRA_libtests_a_SOURCES) \
 	test-fdopen.c test-fdopendir.c test-fgetc.c test-float.c \
 	test-fnmatch.c test-fpending.c test-fputc.c test-fread.c \
 	test-fstat.c test-fstatat.c test-fwrite.c test-getcwd-lgpl.c \
-	test-getdtablesize.c test-getopt.c test-getprogname.c \
-	test-gettimeofday.c test-hash.c test-i-ring.c test-iconv.c \
-	test-iconv-h.c test-ignore-value.c test-intprops.c \
-	test-inttostr.c test-inttypes.c test-isatty.c test-isblank.c \
-	test-iswblank.c test-langinfo.c test-limits-h.c test-locale.c \
-	test-localeconv.c test-localename.c test-lseek.c test-lstat.c \
-	test-malloc-gnu.c test-malloca.c test-mbscasecmp.c \
-	test-mbsinit.c test-mbsrtowcs.c test-mbsstr1.c test-mbsstr2.c \
-	test-mbsstr3.c test-memchr.c test-memchr2.c test-memrchr.c \
-	test-nl_langinfo.c test-open.c test-openat.c \
-	test-openat-safer.c test-pathmax.c test-pipe.c \
+	test-getdtablesize.c test-getopt-gnu.c test-getopt-posix.c \
+	test-getprogname.c test-gettimeofday.c test-hash.c \
+	test-i-ring.c test-iconv.c test-iconv-h.c test-ignore-value.c \
+	test-intprops.c test-inttostr.c test-inttypes.c test-isatty.c \
+	test-isblank.c test-iswblank.c test-langinfo.c test-limits-h.c \
+	test-locale.c test-localeconv.c test-localename.c test-lseek.c \
+	test-lstat.c test-malloc-gnu.c test-malloca.c \
+	test-mbscasecmp.c test-mbsinit.c test-mbsrtowcs.c \
+	test-mbsstr1.c test-mbsstr2.c test-mbsstr3.c test-memchr.c \
+	test-memchr2.c test-memrchr.c test-nl_langinfo.c test-open.c \
+	test-openat.c test-openat-safer.c test-pathmax.c test-pipe.c \
 	test-quotearg-simple.c test-read.c test-realloc-gnu.c \
 	test-regex.c test-setenv.c test-setlocale1.c test-setlocale2.c \
 	test-snprintf.c test-stat.c test-stdalign.c test-stdbool.c \
@@ -1557,6 +1569,7 @@ GNULIB_OBSTACK_PRINTF_POSIX = @GNULIB_OBSTACK_PRINTF_POSIX@
 GNULIB_OPEN = @GNULIB_OPEN@
 GNULIB_OPENAT = @GNULIB_OPENAT@
 GNULIB_OPENDIR = @GNULIB_OPENDIR@
+GNULIB_OVERRIDES_WINT_T = @GNULIB_OVERRIDES_WINT_T@
 GNULIB_PCLOSE = @GNULIB_PCLOSE@
 GNULIB_PERROR = @GNULIB_PERROR@
 GNULIB_PIPE = @GNULIB_PIPE@
@@ -1709,6 +1722,7 @@ HAVE_DECL_GETDELIM = @HAVE_DECL_GETDELIM@
 HAVE_DECL_GETDOMAINNAME = @HAVE_DECL_GETDOMAINNAME@
 HAVE_DECL_GETLINE = @HAVE_DECL_GETLINE@
 HAVE_DECL_GETLOADAVG = @HAVE_DECL_GETLOADAVG@
+HAVE_DECL_GETLOGIN = @HAVE_DECL_GETLOGIN@
 HAVE_DECL_GETLOGIN_R = @HAVE_DECL_GETLOGIN_R@
 HAVE_DECL_GETPAGESIZE = @HAVE_DECL_GETPAGESIZE@
 HAVE_DECL_GETUSERSHELL = @HAVE_DECL_GETUSERSHELL@
@@ -2302,24 +2316,26 @@ EXTRA_DIST = test-alignof.c test-alloca-opt.c test-argmatch.c macros.h \
 	test-fstatat.c test-lstat.h test-stat.h signature.h macros.h \
 	test-fwrite.c signature.h macros.h test-getcwd-lgpl.c \
 	signature.h macros.h test-getdtablesize.c signature.h macros.h \
-	macros.h signature.h test-getopt.c test-getopt.h \
-	test-getopt_long.h test-getprogname.c signature.h \
-	test-gettimeofday.c test-hash.c macros.h test-i-ring.c \
-	macros.h test-iconv-h.c test-iconv.c signature.h macros.h \
-	test-ignore-value.c test-intprops.c macros.h anytostr.c \
-	inttostr.h macros.h test-inttostr.c test-inttypes.c \
-	test-isatty.c signature.h macros.h test-isblank.c signature.h \
-	macros.h test-iswblank.c macros.h test-langinfo.c \
-	test-limits-h.c test-locale.c test-localeconv.c signature.h \
-	macros.h localename.h test-localename.c macros.h test-lseek.c \
-	test-lseek.sh signature.h macros.h test-lstat.h test-lstat.c \
-	signature.h macros.h test-malloc-gnu.c test-malloca.c \
-	test-mbscasecmp.sh test-mbscasecmp.c macros.h test-mbsinit.sh \
-	test-mbsinit.c signature.h macros.h test-mbsrtowcs1.sh \
-	test-mbsrtowcs2.sh test-mbsrtowcs3.sh test-mbsrtowcs4.sh \
-	test-mbsrtowcs.c signature.h macros.h test-mbsstr1.c \
-	test-mbsstr2.sh test-mbsstr2.c test-mbsstr3.sh test-mbsstr3.c \
-	macros.h test-memchr.c zerosize-ptr.h signature.h macros.h \
+	macros.h signature.h test-getopt-gnu.c test-getopt-main.h \
+	test-getopt.h test-getopt_long.h macros.h signature.h \
+	test-getopt-posix.c test-getopt-main.h test-getopt.h \
+	test-getprogname.c signature.h test-gettimeofday.c test-hash.c \
+	macros.h test-i-ring.c macros.h test-iconv-h.c test-iconv.c \
+	signature.h macros.h test-ignore-value.c test-intprops.c \
+	macros.h anytostr.c inttostr.h macros.h test-inttostr.c \
+	test-inttypes.c test-isatty.c signature.h macros.h \
+	test-isblank.c signature.h macros.h test-iswblank.c macros.h \
+	test-langinfo.c test-limits-h.c test-locale.c \
+	test-localeconv.c signature.h macros.h localename.h \
+	test-localename.c macros.h test-lseek.c test-lseek.sh \
+	signature.h macros.h test-lstat.h test-lstat.c signature.h \
+	macros.h test-malloc-gnu.c test-malloca.c test-mbscasecmp.sh \
+	test-mbscasecmp.c macros.h test-mbsinit.sh test-mbsinit.c \
+	signature.h macros.h test-mbsrtowcs1.sh test-mbsrtowcs2.sh \
+	test-mbsrtowcs3.sh test-mbsrtowcs4.sh test-mbsrtowcs.c \
+	signature.h macros.h test-mbsstr1.c test-mbsstr2.sh \
+	test-mbsstr2.c test-mbsstr3.sh test-mbsstr3.c macros.h \
+	test-memchr.c zerosize-ptr.h signature.h macros.h \
 	test-memchr2.c zerosize-ptr.h macros.h test-memrchr.c \
 	zerosize-ptr.h signature.h macros.h test-nl_langinfo.sh \
 	test-nl_langinfo.c signature.h macros.h test-open.h \
@@ -2421,7 +2437,8 @@ test_fchdir_LDADD = $(LDADD) $(LIBINTL)
 test_fdopendir_LDADD = $(LDADD) @LIBINTL@
 test_fstatat_LDADD = $(LDADD) @LIBINTL@
 test_getcwd_lgpl_LDADD = $(LDADD) $(LIBINTL)
-test_getopt_LDADD = $(LDADD) $(LIBINTL)
+test_getopt_gnu_LDADD = $(LDADD) $(LIBINTL)
+test_getopt_posix_LDADD = $(LDADD) $(LIBINTL)
 test_getprogname_LDADD = $(LDADD)
 test_iconv_LDADD = $(LDADD) @LIBICONV@
 test_localename_LDADD = $(LDADD) @INTL_MACOSX_LIBS@ $(LIBTHREAD)
@@ -2662,9 +2679,13 @@ test-getdtablesize$(EXEEXT): $(test_getdtablesize_OBJECTS) $(test_getdtablesize_
 	@rm -f test-getdtablesize$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(test_getdtablesize_OBJECTS) $(test_getdtablesize_LDADD) $(LIBS)
 
-test-getopt$(EXEEXT): $(test_getopt_OBJECTS) $(test_getopt_DEPENDENCIES) $(EXTRA_test_getopt_DEPENDENCIES) 
-	@rm -f test-getopt$(EXEEXT)
-	$(AM_V_CCLD)$(LINK) $(test_getopt_OBJECTS) $(test_getopt_LDADD) $(LIBS)
+test-getopt-gnu$(EXEEXT): $(test_getopt_gnu_OBJECTS) $(test_getopt_gnu_DEPENDENCIES) $(EXTRA_test_getopt_gnu_DEPENDENCIES) 
+	@rm -f test-getopt-gnu$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(test_getopt_gnu_OBJECTS) $(test_getopt_gnu_LDADD) $(LIBS)
+
+test-getopt-posix$(EXEEXT): $(test_getopt_posix_OBJECTS) $(test_getopt_posix_DEPENDENCIES) $(EXTRA_test_getopt_posix_DEPENDENCIES) 
+	@rm -f test-getopt-posix$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(test_getopt_posix_OBJECTS) $(test_getopt_posix_LDADD) $(LIBS)
 
 test-getprogname$(EXEEXT): $(test_getprogname_OBJECTS) $(test_getprogname_DEPENDENCIES) $(EXTRA_test_getprogname_DEPENDENCIES) 
 	@rm -f test-getprogname$(EXEEXT)
@@ -3089,7 +3110,8 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-fwrite.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-getcwd-lgpl.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-getdtablesize.Po@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-getopt.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-getopt-gnu.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-getopt-posix.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-getprogname.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-gettimeofday.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-hash.Po@am__quote@ # am--include-marker
@@ -3766,9 +3788,16 @@ test-getdtablesize.log: test-getdtablesize$(EXEEXT)
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
 	"$$tst" $(AM_TESTS_FD_REDIRECT)
-test-getopt.log: test-getopt$(EXEEXT)
-	@p='test-getopt$(EXEEXT)'; \
-	b='test-getopt'; \
+test-getopt-gnu.log: test-getopt-gnu$(EXEEXT)
+	@p='test-getopt-gnu$(EXEEXT)'; \
+	b='test-getopt-gnu'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+test-getopt-posix.log: test-getopt-posix$(EXEEXT)
+	@p='test-getopt-posix$(EXEEXT)'; \
+	b='test-getopt-posix'; \
 	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
@@ -4625,7 +4654,8 @@ distclean: distclean-recursive
 	-rm -f ./$(DEPDIR)/test-fwrite.Po
 	-rm -f ./$(DEPDIR)/test-getcwd-lgpl.Po
 	-rm -f ./$(DEPDIR)/test-getdtablesize.Po
-	-rm -f ./$(DEPDIR)/test-getopt.Po
+	-rm -f ./$(DEPDIR)/test-getopt-gnu.Po
+	-rm -f ./$(DEPDIR)/test-getopt-posix.Po
 	-rm -f ./$(DEPDIR)/test-getprogname.Po
 	-rm -f ./$(DEPDIR)/test-gettimeofday.Po
 	-rm -f ./$(DEPDIR)/test-hash.Po
@@ -4819,7 +4849,8 @@ maintainer-clean: maintainer-clean-recursive
 	-rm -f ./$(DEPDIR)/test-fwrite.Po
 	-rm -f ./$(DEPDIR)/test-getcwd-lgpl.Po
 	-rm -f ./$(DEPDIR)/test-getdtablesize.Po
-	-rm -f ./$(DEPDIR)/test-getopt.Po
+	-rm -f ./$(DEPDIR)/test-getopt-gnu.Po
+	-rm -f ./$(DEPDIR)/test-getopt-posix.Po
 	-rm -f ./$(DEPDIR)/test-getprogname.Po
 	-rm -f ./$(DEPDIR)/test-gettimeofday.Po
 	-rm -f ./$(DEPDIR)/test-hash.Po

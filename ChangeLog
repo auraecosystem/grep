@@ -1,4 +1,448 @@
+2017-02-09  Jim Meyering  <meyering@fb.com>
+
+	version 3.0
+	* NEWS: Record release date.
+
+2017-02-08  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: do not mishandle \. in multiple patterns
+	Problem reported by Lars Wendler (Bug#25655).
+	* NEWS: Document this.
+	* src/grep.c (try_fgrep_pattern): Fix typo that prevented
+	keys from being properly updated.
+	* tests/foad1: Test for the bug.
+
+2017-02-07  Paul Eggert  <eggert@cs.ucla.edu>
+
+	Do not assume PCRE 8.20 or later
+	Problem reported by Zube (Bug#25647)
+	* NEWS: Document this.
+	* src/pcresearch.c (struct pcre.com.jit_stack):
+	Declare only if PCRE_STUDY_JIT_COMPILE.
+
+2017-02-06  Jim Meyering  <meyering@fb.com>
+
+	maint: post-release administrivia
+	* NEWS: Add header line for next release.
+	* .prev-version: Record previous version.
+	* cfg.mk (old_NEWS_hash): Auto-update.
+
+	version 2.28
+	* NEWS: Record release date.
+
+2017-02-02  Jim Meyering  <meyering@fb.com>
+
+	gnulib: update to latest
+
+2017-02-01  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: tune to avoid memchr2 sometimes
+	Problem noted by Norihiro Tanaka in:
+	http://lists.gnu.org/archive/html/grep-devel/2017-01/msg00027.html
+	Although not enough to restore all the previous performance in the
+	case he noted, it helps significantly.
+	* src/kwset.c (memchr_kwset): Bring back small_heuristic,
+	in a somewhat different form.
+
+2017-01-29  Jim Meyering  <meyering@fb.com>
+
+	gnulib: update to latest
+
+2017-01-23  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: simplify recent kwset change
+	* src/kwset.c (acexec_trans): Simplify.
+
+2017-01-23  Jim Meyering  <meyering@fb.com>
+
+	tests: really add the new test name
+	* tests/Makefile.am (TESTS): Add fgrep-longest.
+
+2017-01-21  Norihiro Tanaka  <noritnk@kcn.ne.jp>
+
+	grep -Fo could report a match that is not the longest
+	* src/kwset.c (acexec): Fix it.
+	* tests/fgrep-longest: New test.
+	* tests/Makefile.am: Add the test.
+	* NEWS: Mention it.
+
+2017-01-18  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: speed up Aho-Corasick when at most 2 bytes
+	When using Aho-Corasick and all matched strings either begin with
+	the same byte, or begin with one of at most two bytes, use memchr2
+	to search for these matching bytes and apply the Aho-Corasick
+	algorithm only when a memchr2 match is found.  On my platform,
+	this speeds up 'grep -F -e aa -e ba in' by a factor of 7, where
+	the file 'in' was created by 'seq -f %040.0f 10000000 >in'.
+	* src/kwset.c (struct kwset.gc1): Now int, not char.
+	If negative, there is no single terminal byte.  All uses changed.
+	(struct kwset.gc1help): Now int, not char.
+	If negative, memchr2 cannot be used.
+	(kwsprep): Set up gc1 and gc1help from kwset->next, with
+	the new (slightly changed) interpretation.
+	(memchr_kwset): Use memchr2 if possible.
+	Adjust to match new meaning of gc1, gc1help.
+	(memoff2_kwset): Remove; no longer needed.
+	(acexec_trans): Use memchr_kwset when possible, for speed.
+	It now supersedes memoff2_kwset.
+
+	grep: remove Commentz-Walter code
+	This code was not being used, and complicated maintenance.
+	We can bring it back from the repository if it turns out
+	to be useful later.
+	* src/kwset.c (struct kwset.reverse): Remove.  All uses of
+	FOO->reverse replaced by (FOO->kwsexec == bmexec).
+	(kwsalloc): Remove 'reverse' arg, as callers outside this
+	module do not care about algorithm choice.  All callers changed.
+	(kwsprep): When deciding whether to use Boyer-Moore, do not worry
+	about being called twice on the same kwset, as that is not allowed.
+	(cwexec): Remove; it was never called.  All uses removed.
+
+2017-01-17  Jim Meyering  <meyering@fb.com>
+
+	maint: avoid new syntax-check failures
+	* src/kwset.c (struct kwset): Split a line longer than 80.
+	* bootstrap: Update from gnulib. This fixes a new syntax-check
+	failure due to its use of "time stamp".
+
+2017-01-17  Paul Eggert  <eggert@cs.ucla.edu>
+
+	* NEWS: Fix typo.
+
+	* src/kwset.c: Fix comment typo.
+
+	Improve -i performance in typical UTF-8 searches
+	Currently ‘grep -i i’ is slow in a UTF-8 locale, because ‘i’ in
+	the pattern matches the two-byte character 'ı' (U+0131, LATIN
+	SMALL LETTER DOTLESS I) in data, and kwset handles only
+	single-byte character translations, so grep falls back on a slower
+	DFA-based search for all searches.  Improve -i performance in the
+	typical case by using kwset when data are free of troublesome
+	characters like 'ı', falling back on the DFA only when data
+	contain troublesome characters.
+	* src/dfasearch.c (GEAcompile):
+	* src/grep.c (compile_fp_t):
+	* src/kwsearch.c (Fcompile):
+	* src/pcresearch.c (Pcompile):
+	Pattern arg is now char *, not char const *, since Fcompile
+	now reallocates it sometimes.
+	* src/grep.c (all_single_byte_after_folding): Remove.
+	All callers removed.
+	(fgrep_icase_charlen): New function.
+	(fgrep_icase_available, try_fgrep_pattern):
+	Use it, for more-generous semantics.
+	(fgrep_to_grep_pattern): Now extern.
+	(main): Do not free keys, since Fexecute may use them.
+	* src/kwsearch.c (struct kwsearch): New struct.
+	(Fcompile): Return it.  If -i, be more generous about patterns.
+	(Fexecute): Use it.  Fall back on DFA when the data contain
+	troublesome characters; this should be rare in practice.
+	* src/kwset.c, src/kwset.h (kwswords): New function.
+
+	build: update gnulib submodule to latest
+
+2017-01-15  Paul Eggert  <eggert@cs.ucla.edu>
+
+	dfa: prefer ptrdiff_t to size_t
+	The code already cannot handle objects with size greater than
+	SIZE_MAX / 2, so be more honest about it and use ptrdiff_t instead
+	of size_t.  ptrdiff_t arithmetic is signed, which allows for more
+	checking via -fsanitize=undefined.  It also makes the code a tad
+	smaller on x86-64, since it can test for < 0 rather than for ==
+	SIZE_MAX.
+	* src/dfasearch.c (struct dfa_comp.kwset_exact_matches):
+	(kwsmusts, EGexecute):
+	* src/kwsearch.c (Fcompile, Fexecute):
+	* src/kwset.c (struct kwset.kwsexec, kwsincr, memchr_kwset)
+	(memoff2_kwset, bmexec_trans, bmexec, cwexec, acexec_trans)
+	(acexec, kwsexec):
+	* src/kwset.h (struct kwsmatch.index, .offset, .size):
+	Prefer ptrdiff_t to size_t where either will do.
+
+2017-01-11  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: improve comments, mostly in kwset
+	Remove kwset.h comments that are obsolete and seemingly not
+	maintained anyway; people can look in kwset.c instead.
+	Update comments to reflect current behavior better.
+	Cite Faro & Lecroq 2013.  Use GNU style for end-of-sentence.
+
+2017-01-01  Jim Meyering  <meyering@fb.com>
+
+	maint: update gnulib and copyright dates for 2017
+	* gnulib: Update to latest.
+	* all files: Run "make update-copyright".
+
+2016-12-31  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: speed up -x with many patterns
+	* src/kwsearch.c (Fcompile): Improve buffer allocation overhead
+	with -x and multiple patterns.  In the common case where '\n' is
+	the end-of-line byte, avoid copying other than the first and last
+	patterns.
+
+2016-12-31  Jim Meyering  <meyering@fb.com>
+
+	gnulib: update to latest, fixing a parallel getopt test failure
+
+2016-12-29  Paul Eggert  <eggert@cs.ucla.edu>
+
+	maint: space before paren
+
+	grep: int cleanup in kwset.c
+	This should affect only theoretical bugs with very large inputs.
+	On my platform, this patch shrinks the grep text by 136 bytes.
+	* src/kwset.c: Include intprops.h, for INT_MULTIPLY_WRAPV.
+	(struct trie, struct kwset, kwsalloc, kwsincr, treedelta, kwsprep)
+	(bm_delta2_search, bmexec_trans, cwexec): Prefer ptrdiff_t to int
+	when counts can exceed INT_MAX in large inputs, at least in theory.
+	(hasevery): Use bool for booleans.
+	(bmexec_trans): Avoid undefined behavior on integer overflow.
+
+2016-12-27  Norihiro Tanaka  <noritnk@kcn.ne.jp>
+
+	grep: improve performance with multiple patterns
+	* src/grep.c (main): Avoid fgrep-to-grep conversion for word matching
+	with multiple patterns in single byte locales.
+
+2016-12-27  Paul Eggert  <eggert@cs.ucla.edu>
+
+	* NEWS: Fix typo.
+
+	grep: fix bug with '... | grep pat >> /dev/null'
+	Problem reported by Benno Fünfstück (Bug#25283).
+	* NEWS: Document this.
+	* src/grep.c (drain_input) [SPLICE_F_MOVE]:
+	Don't assume /dev/null is always acceptable output to splice.
+	* tests/grep-dev-null-out: Test for the bug.
+
+2016-12-26  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: minor performance tweak for pure functions
+	* src/search.h (wordchars_size, wordchar_next, wordchar_prev):
+	Declare to be pure.
+
+2016-12-25  Zev Weiss  <zev@bewilderbeest.net>
+
+	grep: move localeinfo to grep.c
+	It's not really dfasearch-specific, and grep.c initializes it, so it
+	seems like the most appropriate "owner".
+
+	* src/dfasearch.c (localeinfo): Remove.
+	* src/grep.c (localeinfo): Add.
+	* src/search.h (localeinfo): Move to new commented section.
+
+2016-12-25  Zev Weiss  <zev@bewilderbeest.net>
+
+	pcresearch: thread safety
+	* src/pcresearch.c (pcre_comp): New struct to hold previously-global
+	state.
+	(jit_exec): Operate on a pcre_comp parameter instead of global state.
+	(Pcompile): Allocate and return a pcre_comp instead of setting global
+	variables.
+	(Pexecute): Operate on a pcre_comp parameter instead of global state.
+
+	kwsearch: thread safety
+	* src/kwsearch.c (Fcompile): Return a kwset_t instead of setting a
+	global variable.
+	(Fexecute): Use a passed-in kwset_t instead of a global variable.
+	(kwset): Remove global variable.
+
+	dfasearch: thread safety
+	* src/dfasearch.c (struct dfa_comp): New struct to hold
+	previously-global variables.
+	(dfawarn): Remove static variable.
+	(kwsmusts): Operate on a dfa_comp parameter instead of global
+	variables.
+	(GEAcompile): Allocate and return a dfa_comp struct instead of setting
+	global variables.
+	(EGexecute): Operate on a dfa_comp parameter instead of global
+	variables.
+	* src/searchutils.c (kwsinit): Replace a static array with a
+	dynamically-allocated one.
+
+2016-12-25  Zev Weiss  <zev@bewilderbeest.net>
+
+	grep: prepare search backends for thread-safety
+	To facilitate removing mutable global state from search backends,
+	compile() functions will return an opaque pointer to backend-specific
+	data, which must then be passed back into the corresponding execute()
+	function.  This is merely a preparatory step changing function
+	signatures and call sites, so the pointers passed & returned are
+	dummies for now and not (yet) actually used.
+
+	* src/grep.c (compile_fp_t): Now returns an opaque pointer (the
+	compiled pattern).
+	(execute_fp_t): Now passed the pointer returned by a compile_fp_t.
+	All call sites updated accordingly.
+	(compiled_pattern): New static variable.
+	* src/dfasearch.c (GEAcompile): Return a void pointer (dummy NULL).
+	(EGexecute): Receive a void pointer argument (unused).
+	* src/kwsearch.c (Fcompile): Return a void pointer (dummy NULL).
+	(Fexecute): Receive a void pointer argument (unused).
+	* src/pcresearch.c (Pcompile): Return a void pointer (dummy NULL).
+	(Pexecute): Receive a void pointer argument (unused).
+	* src/search.h: Update compile/execute function prototypes.
+
+2016-12-24  Jim Meyering  <meyering@fb.com>
+
+	maint: fix "syntax-check" failure
+	* src/grep.c (SEP_STR_GROUP): Declare "static".
+
+2016-12-23  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: fix comment in searchutils.c
+
+	grep: improve word checking with UTF-8
+	* src/searchutils.c: Do not include <verify.h>.
+	(word_start): Remove, replacing with ...
+	(sbwordchar): New static var.  All uses changed.
+	(wordchar_prev): Return size_t, not bool, as this generates
+	slightly better code.  Go back faster if UTF-8.
+
+	grep: standardize on localeinfo.multibyte
+	* src/dfasearch.c (EGexecute):
+	* src/grep.c (main):
+	* src/kwsearch.c (Fexecute):
+	* src/pcresearch.c (Pcompile):
+	Prefer localeinfo.multibyte to (MB_CUR_MAX > 1).
+
+	grep: speed up -wf in C locale
+	Problem reported by Norihiro Tanaka (Bug#22357#100).
+	This patch improves the performance on that benchmark on my
+	platform so that grep is now only about 2x slower than grep 2.26,
+	which means it is considerably faster than grep 2.25 and earlier.
+	* src/kwsearch.c (Fexecute):
+	Use wordchars_size to boost performance for this case.
+	* src/search.h, src/searchutils.c (wordchars_size): New function.
+
+	grep: specialize word-finding functions
+	This improves performance a bit.
+	* src/dfasearch.c, src/kwsearch.c (wordchar):
+	Remove; now in searchutils.c.
+	* src/grep.c (main): Call wordinit if -w.
+	* src/search.h: Adjust.
+	* src/searchutils.c: Include verify.h.
+	(word_start): New static var.
+	(wordchar): Move here from dfasearch.c and kwsearch.c.
+	(wordinit, wordchars_count, wordchar_next, wordchar_prev):
+	New functions.
+	(mb_prev_wc, mb_next_wc): Remove.
+	All callers changed to use the new functions instead.
+
+	grep: simplify Fexecute
+	* src/kwsearch.c (Fexecute): Avoid the need for a 'try' local or
+	for a 'goto success'.  Update mb_start to reflect newline found.
+
+	grep: remove C label
+	* src/kwsearch.c (Fexecute): Remove label.
+
+	maint: rewrite to avoid some macros
+	These days, the dangerous powers of C macros are not needed if
+	constants or functions will do just as well.
+	* src/grep.c (SEP_CHAR_SELECTED, SEP_CHAR_REJECTED, SEP_STR_GROUP)
+	(INITIAL_BUFSIZE):
+	* src/kwset.c (DEPTH_SIZE):
+	Now constants, not macros.
+	* src/kwset.c (link): Remove macro. Instead, rename local vars
+	from 'link' to 'cur'.
+	(malloc) [GREP]: Remove macro.  All uses of malloc changed to xmalloc.
+	Omit double-inclusion of xalloc.h.  Do not depend on 'GREP'.
+	(U): Now a function, not a macro.
+	* src/kwset.c, src/searchutils.c (NCHAR): Move this macro to ...
+	* src/system.h: ... here, and make it a constant.
+
+2016-12-20  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: fix performance with multiple patterns
+	Problem reported by Jaroslav Skarvada (Bug#22357).
+	* NEWS: Document this and other recent performance fixes.
+	* src/grep.c (E_MATCHER_INDEX): New constant.
+	(all_single_byte_after_folding):
+	New function, split out from fgrep_icase_available.
+	(fgrep_icase_available): Use it.
+	(try_fgrep_pattern): New function, which also uses it.
+	(main): With two or more patterns, use try_fgrep_pattern to fix
+	performance regression.  The number "two" here is just a heuristic.
+
+	grep: simplify matcher configuration
+	* src/grep.c (matcher, compile): Remove static vars.
+	(compile_fp_t): Now takes a 3rd syntax argument.
+	(Gcomppile, Ecompile, Acompile, GAcompile, PAcompile): Remove.
+	(struct matcher): Now nameless, since it is used only once.
+	Make 'name' a bit shorter.  New member 'syntax'.
+	(matchers): Initialize it, and change removed functions to GEAcompile.
+	(F_MATCHER_INDEX, G_MATCHER_INDEX): New constants.
+	(setmatcher): New arg MATCHER, and return new matcher index.
+	Avoid unnecessary call to strcmp.
+	(main): Keep matcher as a local int, not a global pointer.
+	* src/kwsearch.c (Fcompile):
+	* src/pcresearch.c (Pcompile): Ignore the 3rd syntax argument.
+
+	grep: simplify line counting in patterns
+	* src/grep.c (n_patterns): Rename from patfile_lineno,
+	as it is now origin-zero.  Now size_t, not uintmax_t.
+	(count_nl_bytes, fl_add): Simplify to just buffer and size.
+	All callers changed.
+
+2016-12-19  Paul Eggert  <eggert@cs.ucla.edu>
+
+	build: update gnulib submodule to latest
+
+2016-12-18  Paul Eggert  <eggert@cs.ucla.edu>
+
+	build: update gnulib submodule to latest
+
+	build: update gnulib submodule to latest
+
+2016-12-13  Jim Meyering  <meyering@fb.com>
+
+	tests: use just-built grep in more places
+	* cfg.mk (PATH): Prepend $(srcdir)/src, so that we use the just-
+	built grep also when running commands like those of "make distcheck".
+	This would have avoided the recently-luckily-noticed infloop bug.
+	Tested by running this in a just-built directory:
+	f=src/grep; printf '%s\n' '#!/bin/sh' 'sleep 9h' > $f; chmod a+x $f
+	and then verifying that nearly every "make syntax-check" rule hangs.
+
+	maint: tell "syntax-check" not to worry about the NEWS update
+	Whenever we change "old" NEWS, we have to update this checksum.
+	Otherwise, a "make syntax-check" test that guards against a class
+	of logical merge conflicts will fail.
+	* cfg.mk (old_NEWS_hash): Update this hash to accommodate the
+	recent clarification of a 2.27 NEWS entry.
+
+2016-12-13  Arnold D. Robbins  <arnold@skeeve.com>
+
+	build: update gnulib submodule to latest
+	* src/dfasearch.c (GEAcompile): Remove use of flag, RE_ICASE covers it.
+
+2016-12-12  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: work around proc lseek glitch
+	Problem reported by Andreas Schwab (Bug#25180).
+	* NEWS: Document this.
+	* src/grep.c (finalize_input): Ignore EINVAL lseek failures.
+	* tests/Makefile.am (TESTS): Add proc.
+	* tests/proc: New file.
+
+2016-12-07  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: simplify finalize_input
+	* src/grep.c (finalize_input): Simplify without changing behavior.
+	It's still a bit of a rat's-nest, but it's a cozier rat's-nest.
+
+	maint: clarify early-exit news for 2.27
+	* NEWS: Mention early-exit options to avoid confusion.  See:
+	http://lists.gnu.org/archive/html/grep-devel/2016-12/msg00007.html
+
 2016-12-06  Jim Meyering  <meyering@fb.com>
+
+	maint: post-release administrivia
+	* NEWS: Add header line for next release.
+	* .prev-version: Record previous version.
+	* cfg.mk (old_NEWS_hash): Auto-update.
 
 	version 2.27
 	* NEWS: Record release date.

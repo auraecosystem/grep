@@ -1,5 +1,5 @@
 # Customize maint.mk                           -*- makefile -*-
-# Copyright (C) 2009-2016 Free Software Foundation, Inc.
+# Copyright (C) 2009-2017 Free Software Foundation, Inc.
 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -13,6 +13,11 @@
 
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+# Cause the tool(s) built by this package to be used also when running
+# commands via e.g., "make syntax-check".  Doing this a little sooner
+# would have avoided a grep infloop bug.
+export PATH := $(srcdir)/src:${PATH}
 
 # Used in maint.mk's web-manual rule
 manual_title = GNU Grep: Print lines matching a pattern
@@ -55,7 +60,7 @@ export VERBOSE = yes
 # 1127556 9e
 export XZ_OPT = -6e
 
-old_NEWS_hash = 8fb34ff43c84222d1cd9d571eb0c4a03
+old_NEWS_hash = 80a4ad23530a69afb0f6d27cb39b5ff5
 
 # Many m4 macros names once began with 'jm_'.
 # Make sure that none are inadvertently reintroduced.
