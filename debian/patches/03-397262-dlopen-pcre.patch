@@ -19,8 +19,8 @@ Index: grep/src/pcresearch.c
  
  /* This must be at least 2; everything after that is for performance
     in pcre_exec.  */
-@@ -87,6 +90,67 @@ jit_exec (char const *subject, int searc
- static int empty_match[2];
+@@ -89,6 +92,67 @@ jit_exec (struct pcre_comp *pc, char con
+ 
  #endif
  
 +#ifdef HAVE_DYNAMIC_LIBPCRE
@@ -84,10 +84,10 @@ Index: grep/src/pcresearch.c
 +#define map_pcre() (1)
 +#endif /* HAVE_DYNAMIC_LIBPCRE */
 +
- void
- Pcompile (char const *pattern, size_t size)
+ void *
+ Pcompile (char *pattern, size_t size, reg_syntax_t ignored)
  {
-@@ -117,6 +181,10 @@ Pcompile (char const *pattern, size_t si
+@@ -120,6 +184,10 @@ Pcompile (char *pattern, size_t size, re
        flags |= PCRE_UTF8;
      }
  
