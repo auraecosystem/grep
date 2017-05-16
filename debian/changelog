@@ -1,4 +1,4 @@
-grep (3.0-1~1) UNRELEASED-experimental; urgency=medium
+grep (3.0-1) experimental; urgency=low
 
   * New upstream version 3.0
   * Remove no longer needed upstream patches:
@@ -9,7 +9,7 @@ grep (3.0-1~1) UNRELEASED-experimental; urgency=medium
     - upstream-grep-Fo-could-report-a-match-that-is-not-the-longest.patch
   * Refresh 03-397262-dlopen-pcre.patch
 
- -- Santiago Ruano Rincón <santiago@debian.org>  Mon, 15 May 2017 14:59:58 +0200
+ -- Santiago Ruano Rincón <santiago@debian.org>  Tue, 16 May 2017 11:27:45 +0200
 
 grep (2.27-2) unstable; urgency=low
 
