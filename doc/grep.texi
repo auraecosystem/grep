@@ -64,6 +64,7 @@ This manual is for version @value{VERSION} of GNU Grep.
 * Invoking::                    Command-line options, environment, exit status.
 * Regular Expressions::         Regular Expressions.
 * Usage::                       Examples.
+* Performance::                 Performance tuning.
 * Reporting Bugs::              Reporting Bugs.
 * Copying::                     License terms for this manual.
 * Index::                       Combined index.
@@ -310,11 +311,11 @@ The scanning of each file stops on the first match.
 @opindex -m
 @opindex --max-count
 @cindex max-count
-Stop reading a file after @var{num} matching lines.
+Stop after the first @var{num} selected lines.
 If the input is standard input from a regular file,
-and @var{num} matching lines are output,
+and @var{num} selected lines are output,
 @command{grep} ensures that the standard input is positioned
-just after the last matching line before exiting,
+just after the last selected line before exiting,
 regardless of the presence of trailing context lines.
 This enables a calling process to resume a search.
 For example, the following shell script makes use of it:
@@ -339,10 +340,8 @@ done
 @end example
 
 @cindex context lines
-When @command{grep} stops after @var{num} matching lines,
+When @command{grep} stops after @var{num} selected lines,
 it outputs any trailing context lines.
-Since context does not include matching lines,
-@command{grep} will stop when it encounters another matching line.
 When the @option{-c} or @option{--count} option is also used,
 @command{grep} does not output a count greater than @var{num}.
 When the @option{-v} or @option{--invert-match} option is also used,
@@ -412,10 +411,6 @@ Print the 0-based byte offset within the input file
 before each line of output.
 If @option{-o} (@option{--only-matching}) is specified,
 print the offset of the matching part itself.
-When @command{grep} runs on MS-DOS or MS-Windows,
-the printed byte offsets depend on whether
-the @option{-u} (@option{--unix-byte-offsets}) option is used;
-see below.
 
 @item -H
 @itemx --with-filename
@@ -465,21 +460,6 @@ This is useful with options that prefix their output to the actual content:
 @option{-H}, @option{-n}, and @option{-b}.
 This may also prepend spaces to output line numbers and byte offsets
 so that lines from a single file all start at the same column.
-
-@item -u
-@itemx --unix-byte-offsets
-@opindex -u
-@opindex --unix-byte-offsets
-@cindex MS-DOS/MS-Windows byte offsets
-@cindex byte offsets, on MS-DOS/MS-Windows
-Report Unix-style byte offsets.
-This option causes @command{grep} to report byte offsets
-as if the file were a Unix-style text file,
-i.e., the byte offsets ignore carriage returns that were stripped.
-This will produce results identical
-to running @command{grep} on a Unix machine.
-This option has no effect unless the @option{-b} option is also used;
-it has no effect on platforms other than MS-DOS and MS-Windows.
 
 @item -Z
 @itemx --null
@@ -612,7 +592,7 @@ Variables}), or null input bytes when the
 Options}).
 
 By default, @var{type} is @samp{binary}, and @command{grep}
-suppresses output afer null input binary data is discovered,
+suppresses output after null input binary data is discovered,
 and suppresses output lines that contain improperly encoded data.
 When some output is suppressed, @command{grep} follows any output
 with a one-line message saying that a binary file matches.
@@ -759,21 +739,27 @@ This can cause a performance penalty.
 @itemx --binary
 @opindex -U
 @opindex --binary
-@cindex MS-DOS/MS-Windows binary files
-@cindex binary files, MS-DOS/MS-Windows
-Treat the file(s) as binary.
-By default, under MS-DOS and MS-Windows,
-@command{grep} guesses whether a file is text or binary
-as described for the @option{--binary-files} option.
-If @command{grep} decides the file is a text file,
-it strips carriage returns from the original file contents
-(to make regular expressions with @code{^} and @code{$} work correctly).
-Specifying @option{-U} overrules this guesswork,
-causing all files to be read and passed to the matching mechanism verbatim;
-if the file is a text file with @code{CR/LF} pairs at the end of each line,
-this will cause some regular expressions to fail.
-This option has no effect
-on platforms other than MS-DOS and MS-Windows.
+@cindex MS-Windows binary I/O
+@cindex binary I/O
+On platforms that distinguish between text and binary I/O,
+use the latter when reading and writing files other
+than the user's terminal, so that all input bytes are read and written
+as-is.  This overrides the default behavior where @command{grep}
+follows the operating system's advice whether to use text or binary
+I/O@.  On MS-Windows when @command{grep} uses text I/O it reads a
+carriage return--newline pair as a newline and a Control-Z as
+end-of-file, and it writes a newline as a carriage return--newline
+pair.
+
+When using text I/O @option{--byte-offset} (@option{-b}) counts and
+@option{--binary-files} heuristics apply to input data after text-I/O
+processing.  Also, the @option{--binary-files} heuristics need not agree
+with the @option{--binary} option; that is, they may treat the data as
+text even if @option{--binary} is given, or vice versa.
+@xref{File and Directory Selection}.
+
+This option has no effect on GNU and other POSIX-compatible platforms,
+which do not distinguish text from binary I/O.
 
 @item -z
 @itemx --null-data
@@ -1126,7 +1112,7 @@ expressions), separated by newlines, any of which is to be matched.
 @opindex --perl-regexp
 @cindex matching Perl-compatible regular expressions
 Interpret the pattern as a Perl-compatible regular expression (PCRE).
-This is highly experimental, particularly when combined with
+This is experimental, particularly when combined with
 the @option{-z} (@option{--null-data}) option, and
 @samp{grep@ -P} may warn of unimplemented features.
 @xref{Other Options}.
@@ -1152,7 +1138,7 @@ Regular expressions are constructed analogously to arithmetic expressions,
 by using various operators to combine smaller expressions.
 @command{grep} understands
 three different versions of regular expression syntax:
-``basic'' (BRE), ``extended'' (ERE) and ``perl'' (PCRE).
+basic (BRE), extended (ERE), and Perl-compatible (PCRE).
 In GNU @command{grep},
 there is no difference in available functionality between the basic and
 extended syntaxes.
@@ -1802,6 +1788,93 @@ g/re/p
 @end enumerate
 
 
+@node Performance
+@chapter Performance
+
+@cindex performance
+Typically @command{grep} is an efficient way to search text.  However,
+it can be quite slow in some cases, and it can search large files
+where even minor performance tweaking can help significantly.
+Although the algorithm used by @command{grep} is an implementation
+detail that can change from release to release, understanding its
+basic strengths and weaknesses can help you improve its performance.
+
+The @command{grep} command operates partly via a set of automata that
+are designed for efficiency, and partly via a slower matcher that
+takes over when the fast matchers run into unusual features like
+back-references.  When feasible, the Boyer--Moore fast string
+searching algorithm is used to match a single fixed pattern, and the
+Aho--Corasick algorithm is used to match multiple fixed patterns.
+
+@cindex locales
+Generally speaking @command{grep} operates more efficiently in
+single-byte locales, since it can avoid the special processing needed
+for multi-byte characters.  If your pattern will work just as well
+that way, setting @env{LC_ALL} to a single-byte locale can help
+performance considerably.  Setting @samp{LC_ALL='C'} can be
+particularly efficient, as @command{grep} is tuned for that locale.
+
+@cindex case insensitive search
+Outside the @samp{C} locale, case-insensitive search, and search for
+bracket expressions like @samp{[a-z]} and @samp{[[=a=]b]}, can be
+surprisingly inefficient due to difficulties in fast portable access to
+concepts like multi-character collating elements.
+
+@cindex back-references
+A back-reference such as @samp{\1} can hurt performance significantly
+in some cases, since back-references cannot in general be implemented
+via a finite state automaton, and instead trigger a backtracking
+algorithm that can be quite inefficient.  For example, although the
+pattern @samp{^(.*)\1@{14@}(.*)\2@{13@}$} matches only lines whose
+lengths can be written as a sum @math{15x + 14y} for nonnegative
+integers @math{x} and @math{y}, the pattern matcher does not perform
+linear Diophantine analysis and instead backtracks through all
+possible matching strings, using an algorithm that is exponential in
+the worst case.
+
+@cindex holes in files
+On some operating systems that support files with holes---large
+regions of zeros that are not physically present on secondary
+storage---@command{grep} can skip over the holes efficiently without
+needing to read the zeros.  This optimization is not available if the
+@option{-a} (@option{--text}) option is used (@pxref{File and
+Directory Selection}), unless the @option{-z} (@option{--null-data})
+option is also used (@pxref{Other Options}).
+
+For more about the algorithms used by @command{grep} and about
+related string matching algorithms, see:
+
+@frenchspacing on
+@itemize @bullet
+@item
+Aho AV. Algorithms for finding patterns in strings.
+In: van Leeuwen J. @emph{Handbook of Theoretical Computer Science}, vol. A.
+New York: Elsevier; 1990. p. 255--300.
+This surveys classic string matching algorithms, some of which are
+used by @command{grep}.
+
+@item
+Aho AV, Corasick MJ. Efficient string matching: an aid to bibliographic search.
+@emph{CACM}. 1975;18(6):333--40.
+@url{http://dx.doi.org/10.1145/360825.360855}.
+This introduces the Aho--Corasick algorithm.
+
+@item
+Boyer RS, Moore JS. A fast string searching algorithm.
+@emph{CACM}. 1977;20(10):762--72.
+@url{http://dx.doi.org/10.1145/359842.359859}.
+This introduces the Boyer--Moore algorithm.
+
+@item
+Faro S, Lecroq T. The exact online string matching problem: a review
+of the most recent results.
+@emph{ACM Comput Surv}. 2013;45(2):13.
+@url{http://dx.doi.org/10.1145/2431211.2431212}.
+This surveys string matching algorithms that might help improve the
+performance of @command{grep} in the future.
+@end itemize
+@frenchspacing off
+
 @node Reporting Bugs
 @chapter Reporting bugs
 
@@ -1831,7 +1904,7 @@ Back-references are very slow, and may require exponential time.
 GNU @command{grep} is licensed under the GNU GPL, which makes it @dfn{free
 software}.
 
-The ``free'' in ``free software'' refers to liberty, not price. As
+The ``free'' in ``free software'' refers to liberty, not price.  As
 some GNU project advocates like to point out, think of ``free speech''
 rather than ``free beer''.  In short, you have the right (freedom) to
 run and change @command{grep} and distribute it to other people, and---if you

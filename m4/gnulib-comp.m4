@@ -159,8 +159,6 @@ AC_DEFUN([gl_EARLY],
   # Code from module getprogname:
   # Code from module getprogname-tests:
   # Code from module gettext-h:
-  # Code from module gettimeofday:
-  # Code from module gettimeofday-tests:
   # Code from module git-version-gen:
   # Code from module gitlog-to-changelog:
   # Code from module gnu-web-doc-update:
@@ -346,8 +344,6 @@ AC_DEFUN([gl_EARLY],
   # Code from module symlink-tests:
   # Code from module sys_stat:
   # Code from module sys_stat-tests:
-  # Code from module sys_time:
-  # Code from module sys_time-tests:
   # Code from module sys_types:
   # Code from module sys_types-tests:
   # Code from module test-framework-sh:
@@ -399,6 +395,7 @@ AC_DEFUN([gl_EARLY],
   # Code from module xalloc-die:
   # Code from module xalloc-die-tests:
   # Code from module xalloc-oversized:
+  # Code from module xbinary-io:
   # Code from module xsize:
   # Code from module xstriconv:
   # Code from module xstrtoimax:
@@ -522,6 +519,7 @@ AC_DEFUN([gl_INIT],
   gl_FUNC_FSTAT
   if test $REPLACE_FSTAT = 1; then
     AC_LIBOBJ([fstat])
+    AC_LIBOBJ([stat-w32])
     gl_PREREQ_FSTAT
   fi
   gl_SYS_STAT_MODULE_INDICATOR([fstat])
@@ -546,19 +544,13 @@ AC_DEFUN([gl_INIT],
   fi
   gl_UNISTD_MODULE_INDICATOR([getdtablesize])
   gl_FUNC_GETOPT_GNU
-  if test $REPLACE_GETOPT = 1; then
-    AC_LIBOBJ([getopt])
-    AC_LIBOBJ([getopt1])
-    gl_PREREQ_GETOPT
-    dnl Arrange for unistd.h to include getopt.h.
-    GNULIB_GL_UNISTD_H_GETOPT=1
-  fi
-  AC_SUBST([GNULIB_GL_UNISTD_H_GETOPT])
+  dnl Because of the way gl_FUNC_GETOPT_GNU is implemented (the gl_getopt_required
+  dnl mechanism), there is no need to do any AC_LIBOBJ or AC_SUBST here; they are
+  dnl done in the getopt-posix module.
   gl_FUNC_GETOPT_POSIX
   if test $REPLACE_GETOPT = 1; then
     AC_LIBOBJ([getopt])
     AC_LIBOBJ([getopt1])
-    gl_PREREQ_GETOPT
     dnl Arrange for unistd.h to include getopt.h.
     GNULIB_GL_UNISTD_H_GETOPT=1
   fi
@@ -571,12 +563,6 @@ AC_DEFUN([gl_INIT],
   gl_FUNC_GETPROGNAME
   AC_SUBST([LIBINTL])
   AC_SUBST([LTLIBINTL])
-  gl_FUNC_GETTIMEOFDAY
-  if test $HAVE_GETTIMEOFDAY = 0 || test $REPLACE_GETTIMEOFDAY = 1; then
-    AC_LIBOBJ([gettimeofday])
-    gl_PREREQ_GETTIMEOFDAY
-  fi
-  gl_SYS_TIME_MODULE_INDICATOR([gettimeofday])
   # Autoconf 2.61a.99 and earlier don't support linking a file only
   # in VPATH builds.  But since GNUmakefile is for maintainer use
   # only, it does not matter if we skip the link with older autoconf.
@@ -734,6 +720,7 @@ AC_DEFUN([gl_INIT],
   if test $HAVE_MSVC_INVALID_PARAMETER_HANDLER = 1; then
     AC_LIBOBJ([msvc-nothrow])
   fi
+  gl_MODULE_INDICATOR([msvc-nothrow])
   gl_MULTIARCH
   gl_FUNC_NL_LANGINFO
   if test $HAVE_NL_LANGINFO = 0 || test $REPLACE_NL_LANGINFO = 1; then
@@ -801,6 +788,7 @@ AC_DEFUN([gl_INIT],
   gl_FUNC_STAT
   if test $REPLACE_STAT = 1; then
     AC_LIBOBJ([stat])
+    AC_LIBOBJ([stat-w32])
     gl_PREREQ_STAT
   fi
   gl_SYS_STAT_MODULE_INDICATOR([stat])
@@ -880,8 +868,6 @@ AC_DEFUN([gl_INIT],
   fi
   gl_INTTYPES_MODULE_INDICATOR([strtoumax])
   gl_HEADER_SYS_STAT_H
-  AC_PROG_MKDIR_P
-  gl_HEADER_SYS_TIME_H
   AC_PROG_MKDIR_P
   gl_SYS_TYPES_H
   AC_PROG_MKDIR_P
@@ -1184,20 +1170,17 @@ AC_DEFUN([gl_FILE_LIST], [
   build-aux/gitlog-to-changelog
   build-aux/gnu-web-doc-update
   build-aux/gnupload
-  build-aux/snippet/_Noreturn.h
-  build-aux/snippet/arg-nonnull.h
-  build-aux/snippet/c++defs.h
-  build-aux/snippet/unused-parameter.h
-  build-aux/snippet/warn-on-use.h
   build-aux/update-copyright
   build-aux/useless-if-before-free
   build-aux/vc-list-files
   doc/fdl.texi
   doc/gendocs_template
   doc/gendocs_template_min
+  lib/_Noreturn.h
   lib/alignof.h
   lib/alloca.c
   lib/alloca.in.h
+  lib/arg-nonnull.h
   lib/argmatch.c
   lib/argmatch.h
   lib/assure.h
@@ -1208,6 +1191,7 @@ AC_DEFUN([gl_FILE_LIST], [
   lib/bitrotate.c
   lib/bitrotate.h
   lib/btowc.c
+  lib/c++defs.h
   lib/c-ctype.c
   lib/c-ctype.h
   lib/c-strcase.h
@@ -1275,6 +1259,11 @@ AC_DEFUN([gl_FILE_LIST], [
   lib/fts_.h
   lib/getcwd-lgpl.c
   lib/getdtablesize.c
+  lib/getopt-cdefs.in.h
+  lib/getopt-core.h
+  lib/getopt-ext.h
+  lib/getopt-pfx-core.h
+  lib/getopt-pfx-ext.h
   lib/getopt.c
   lib/getopt.in.h
   lib/getopt1.c
@@ -1283,7 +1272,6 @@ AC_DEFUN([gl_FILE_LIST], [
   lib/getprogname.c
   lib/getprogname.h
   lib/gettext.h
-  lib/gettimeofday.c
   lib/glthread/lock.c
   lib/glthread/lock.h
   lib/glthread/threadlib.c
@@ -1389,6 +1377,8 @@ AC_DEFUN([gl_FILE_LIST], [
   lib/same-inode.h
   lib/save-cwd.c
   lib/save-cwd.h
+  lib/stat-w32.c
+  lib/stat-w32.h
   lib/stat.c
   lib/stdalign.in.h
   lib/stdarg.in.h
@@ -1421,7 +1411,6 @@ AC_DEFUN([gl_FILE_LIST], [
   lib/strtoull.c
   lib/strtoumax.c
   lib/sys_stat.in.h
-  lib/sys_time.in.h
   lib/sys_types.in.h
   lib/time.in.h
   lib/trim.c
@@ -1439,10 +1428,12 @@ AC_DEFUN([gl_FILE_LIST], [
   lib/uniwidth/cjk.h
   lib/uniwidth/width.c
   lib/unlocked-io.h
+  lib/unused-parameter.h
   lib/verify.h
   lib/version-etc-fsf.c
   lib/version-etc.c
   lib/version-etc.h
+  lib/warn-on-use.h
   lib/wchar.in.h
   lib/wcrtomb.c
   lib/wctob.c
@@ -1454,6 +1445,8 @@ AC_DEFUN([gl_FILE_LIST], [
   lib/xalloc-die.c
   lib/xalloc-oversized.h
   lib/xalloc.h
+  lib/xbinary-io.c
+  lib/xbinary-io.h
   lib/xmalloc.c
   lib/xstriconv.c
   lib/xstriconv.h
@@ -1514,7 +1507,6 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/getopt.m4
   m4/getpagesize.m4
   m4/getprogname.m4
-  m4/gettimeofday.m4
   m4/glibc21.m4
   m4/gnulib-common.m4
   m4/hard-locale.m4
@@ -1626,7 +1618,6 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/symlink.m4
   m4/sys_socket_h.m4
   m4/sys_stat_h.m4
-  m4/sys_time_h.m4
   m4/sys_types_h.m4
   m4/threadlib.m4
   m4/time_h.m4
@@ -1711,7 +1702,6 @@ AC_DEFUN([gl_FILE_LIST], [
   tests/test-getopt.h
   tests/test-getopt_long.h
   tests/test-getprogname.c
-  tests/test-gettimeofday.c
   tests/test-hash.c
   tests/test-i-ring.c
   tests/test-iconv-h.c
@@ -1791,7 +1781,6 @@ AC_DEFUN([gl_FILE_LIST], [
   tests/test-symlink.c
   tests/test-symlink.h
   tests/test-sys_stat.c
-  tests/test-sys_time.c
   tests/test-sys_types.c
   tests/test-sys_wait.h
   tests/test-time.c
@@ -1800,6 +1789,7 @@ AC_DEFUN([gl_FILE_LIST], [
   tests/test-vasnprintf.c
   tests/test-vc-list-files-cvs.sh
   tests/test-vc-list-files-git.sh
+  tests/test-verify-try.c
   tests/test-verify.c
   tests/test-verify.sh
   tests/test-version-etc.c
@@ -1828,8 +1818,11 @@ AC_DEFUN([gl_FILE_LIST], [
   tests/uniwidth/test-uc_width2.c
   tests/uniwidth/test-uc_width2.sh
   tests/zerosize-ptr.h
+  tests=lib/_Noreturn.h
   tests=lib/anytostr.c
+  tests=lib/arg-nonnull.h
   tests=lib/asnprintf.c
+  tests=lib/c++defs.h
   tests=lib/dup-safer-flag.c
   tests=lib/fd-safer-flag.c
   tests=lib/fdopen.c
@@ -1860,8 +1853,10 @@ AC_DEFUN([gl_FILE_LIST], [
   tests=lib/uinttostr.c
   tests=lib/umaxtostr.c
   tests=lib/unsetenv.c
+  tests=lib/unused-parameter.h
   tests=lib/vasnprintf.c
   tests=lib/vasnprintf.h
+  tests=lib/warn-on-use.h
   tests=lib/xsize.c
   tests=lib/xsize.h
   top/GNUmakefile

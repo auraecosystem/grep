@@ -3,14 +3,14 @@
 # Copyright © 2016 Free Software Foundation, Inc.
 # This file is distributed under the same license as the grep package.
 # Clytie Siddall <clytie@riverland.net.au>, 2005-2010.
-# Trần Ngọc Quân <vnwildman@gmail.com>, 2012-2014, 2015, 2016.
+# Trần Ngọc Quân <vnwildman@gmail.com>, 2012-2014, 2015, 2016, 2017.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: grep 2.23.7\n"
+"Project-Id-Version: grep 3.0.23-b00\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2017-02-09 20:23-0800\n"
-"PO-Revision-Date: 2016-03-05 07:45+0700\n"
+"POT-Creation-Date: 2017-07-02 13:21-0700\n"
+"PO-Revision-Date: 2017-06-26 06:48+0700\n"
 "Last-Translator: Trần Ngọc Quân <vnwildman@gmail.com>\n"
 "Language-Team: Vietnamese <translation-team-vi@lists.sourceforge.net>\n"
 "Language: vi\n"
@@ -36,109 +36,84 @@ msgstr "đối số %s không rõ ràng đối với %s"
 msgid "Valid arguments are:"
 msgstr "Các đối số hợp lệ là:"
 
-#: lib/closeout.c:112 src/grep.c:1280
+#: lib/closeout.c:122 src/grep.c:1274
 msgid "write error"
 msgstr "lỗi ghi"
 
-#: lib/dfa.c:949
+#: lib/dfa.c:958
 msgid "unbalanced ["
 msgstr "thiếu dấu ngoặc vuông mở ["
 
-#: lib/dfa.c:1071
+#: lib/dfa.c:1079
 msgid "invalid character class"
 msgstr "sai lớp ký tự"
 
-#: lib/dfa.c:1207
+#: lib/dfa.c:1205
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr "cú pháp lớp ký tự là [[:space:]], không phải [:space:]"
 
-#: lib/dfa.c:1275
+#: lib/dfa.c:1272
 msgid "unfinished \\ escape"
 msgstr "chưa kết thúc thoát chuỗi \\"
 
-#: lib/dfa.c:1436
+#: lib/dfa.c:1433
 msgid "invalid content of \\{\\}"
 msgstr "nội dung của \\{\\} không hợp lệ"
 
-#: lib/dfa.c:1439
+#: lib/dfa.c:1436
 msgid "regular expression too big"
 msgstr "biểu thức chính quy quá lớn"
 
-#: lib/dfa.c:1853
+#: lib/dfa.c:1850
 msgid "unbalanced ("
 msgstr "thiếu dấu ngoặc đơn mở ("
 
-#: lib/dfa.c:1971
+#: lib/dfa.c:1968
 msgid "no syntax specified"
 msgstr "chưa đưa ra cú pháp"
 
-#: lib/dfa.c:1979
+#: lib/dfa.c:1976
 msgid "unbalanced )"
 msgstr "thiếu dấu ngoặc đơn đóng )"
 
-#: lib/error.c:191
+#: lib/error.c:195
 msgid "Unknown system error"
 msgstr "Lỗi hệ thống không rõ"
 
-#: lib/getopt.c:575 lib/getopt.c:604
+#: lib/getopt.c:278
 #, c-format
-msgid "%s: option '%s' is ambiguous; possibilities:"
-msgstr "%s: tùy chọn “%s” chưa rõ ràng; khả năng là:"
+msgid "%s: option '%s%s' is ambiguous\n"
+msgstr "%s: tùy chọn “%s%s” chưa rõ ràng\n"
 
-#: lib/getopt.c:619
+#: lib/getopt.c:284
 #, c-format
-msgid "%s: option '%s' is ambiguous\n"
-msgstr "%s: tùy chọn “%s” chưa rõ ràng\n"
+msgid "%s: option '%s%s' is ambiguous; possibilities:"
+msgstr "%s: tùy chọn “%s%s” chưa rõ ràng; khả năng là:"
 
-#: lib/getopt.c:654 lib/getopt.c:658
+#: lib/getopt.c:319
 #, c-format
-msgid "%s: option '--%s' doesn't allow an argument\n"
-msgstr "%s: tùy chọn “--%s” không cho phép có đối số\n"
+msgid "%s: unrecognized option '%s%s'\n"
+msgstr "%s: không nhận ra tùy chọn “%s%s”\n"
 
-#: lib/getopt.c:667 lib/getopt.c:672
+#: lib/getopt.c:345
 #, c-format
-msgid "%s: option '%c%s' doesn't allow an argument\n"
-msgstr "%s: tùy chọn “%c%s” không cho phép đối số\n"
+msgid "%s: option '%s%s' doesn't allow an argument\n"
+msgstr "%s: tùy chọn “%s%s” không không cho phép một đối số\n"
 
-#: lib/getopt.c:715 lib/getopt.c:734
+#: lib/getopt.c:360
 #, c-format
-msgid "%s: option '--%s' requires an argument\n"
-msgstr "%s: tùy chọn “--%s” yêu cầu một đối số\n"
+msgid "%s: option '%s%s' requires an argument\n"
+msgstr "%s: tùy chọn “%s%s” cần một đối số\n"
 
-#: lib/getopt.c:772 lib/getopt.c:775
-#, c-format
-msgid "%s: unrecognized option '--%s'\n"
-msgstr "%s: không nhận ra tùy chọn “--%s”\n"
-
-#: lib/getopt.c:783 lib/getopt.c:786
-#, c-format
-msgid "%s: unrecognized option '%c%s'\n"
-msgstr "%s: không nhận ra tùy chọn “%c%s”\n"
-
-#: lib/getopt.c:835 lib/getopt.c:838
+#: lib/getopt.c:621
 #, c-format
 msgid "%s: invalid option -- '%c'\n"
 msgstr "%s: tùy chọn không hợp lệ -- “%c”\n"
 
-#: lib/getopt.c:891 lib/getopt.c:908 lib/getopt.c:1118 lib/getopt.c:1136
+#: lib/getopt.c:636 lib/getopt.c:682
 #, c-format
 msgid "%s: option requires an argument -- '%c'\n"
 msgstr "%s: tùy chọn yêu cầu một đối số -- “%c”\n"
-
-#: lib/getopt.c:964 lib/getopt.c:980
-#, c-format
-msgid "%s: option '-W %s' is ambiguous\n"
-msgstr "%s: tùy chọn “-W %s” chưa rõ ràng\n"
-
-#: lib/getopt.c:1004 lib/getopt.c:1022
-#, c-format
-msgid "%s: option '-W %s' doesn't allow an argument\n"
-msgstr "%s: tùy chọn “-W %s” không cho phép đối số\n"
-
-#: lib/getopt.c:1043 lib/getopt.c:1061
-#, c-format
-msgid "%s: option '-W %s' requires an argument\n"
-msgstr "%s: tùy chọn “-W %s” yêu cầu một đối số\n"
 
 #: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34 src/pcresearch.c:291
 msgid "memory exhausted"
@@ -153,6 +128,11 @@ msgstr "không thể ghi nhớ được thư mục làm việc hiện thời"
 #, c-format
 msgid "failed to return to initial working directory"
 msgstr "gặp lỗi khi quay trở về thư mục làm việc khởi đầu"
+
+#: lib/xbinary-io.c:37
+#, c-format
+msgid "failed to set file descriptor text/binary mode"
+msgstr "gặp lỗi khi đặt chế độ văn bản/nhị phân cho bộ mô tả tập tin"
 
 #. TRANSLATORS:
 #. Get translations for open and closing quotation marks.
@@ -175,11 +155,11 @@ msgstr "gặp lỗi khi quay trở về thư mục làm việc khởi đầu"
 #. If you don't know what to put here, please see
 #. <http://en.wikipedia.org/wiki/Quotation_marks_in_other_languages>
 #. and use glyphs suitable for your language.
-#: lib/quotearg.c:354
+#: lib/quotearg.c:362
 msgid "`"
 msgstr "“"
 
-#: lib/quotearg.c:355
+#: lib/quotearg.c:363
 msgid "'"
 msgstr "”"
 
@@ -448,92 +428,88 @@ msgid "%s%s argument '%s' too large"
 msgstr "%s%s đối số “%s” quá lớn"
 
 #. This is a proper name. See the gettext manual, section Names.
-#: src/grep.c:58
+#: src/grep.c:59
 msgid "Mike Haertel"
 msgstr "Mike Haertel"
 
-#: src/grep.c:59
+#: src/grep.c:60
 msgid "others, see <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
 msgstr ""
 "nhiều người khác, xem tại <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
 
-#: src/grep.c:588
+#: src/grep.c:585
 msgid "(standard input)"
 msgstr "(đầu vào tiêu chuẩn)"
 
-#: src/grep.c:768
+#: src/grep.c:765
 msgid "invalid context length argument"
 msgstr "đối số chiều dài ngữ cảnh không hợp lệ"
 
-#: src/grep.c:831
+#: src/grep.c:828
 msgid "input is too large to count"
 msgstr "dữ liệu đầu vào quá lớn nên không thể đếm được"
 
-#: src/grep.c:1594
+#: src/grep.c:1579
 #, c-format
 msgid "Binary file %s matches\n"
 msgstr "Tập tin nhị phân “%s” khớp mẫu tìm kiếm\n"
 
-#: src/grep.c:1642
+#: src/grep.c:1627
 #, c-format
 msgid "warning: %s: %s"
 msgstr "cảnh báo: %s: %s"
 
-#: src/grep.c:1643
+#: src/grep.c:1628
 msgid "recursive directory loop"
 msgstr "vòng lặp thư mục đệ quy"
 
-#: src/grep.c:1857
+#: src/grep.c:1844
 #, c-format
 msgid "input file %s is also the output"
 msgstr "tập tin đầu vào “%s” cũng là kết xuất"
 
-#: src/grep.c:1923 src/grep.c:1930
+#: src/grep.c:1907 src/grep.c:1914
 #, c-format
 msgid "Usage: %s [OPTION]... PATTERN [FILE]...\n"
 msgstr "Cách dùng: %s [TÙY_CHỌN]… MẪU [TẬP_TIN]…\n"
 
-#: src/grep.c:1925
+#: src/grep.c:1909
 #, c-format
 msgid "Try '%s --help' for more information.\n"
 msgstr "Hãy chạy lệnh “%s --help” để biết thêm thông tin.\n"
 
-#: src/grep.c:1931
+#: src/grep.c:1915
 #, c-format
-msgid "Search for PATTERN in each FILE or standard input.\n"
-msgstr "Tìm kiếm MẪU trong mỗi TẬP_TIN hay từ đầu vào tiêu chuẩn.\n"
+msgid "Search for PATTERN in each FILE.\n"
+msgstr "Tìm kiếm MẪU trong từng TẬP_TIN.\n"
 
-#: src/grep.c:1932
-#, c-format
-msgid "PATTERN is, by default, a basic regular expression (BRE).\n"
-msgstr "MẪU, theo mặc định, là một biểu thức chính quy cơ bản (BRE).\n"
-
-#: src/grep.c:1933
+#: src/grep.c:1916
 #, c-format
 msgid ""
 "Example: %s -i 'hello world' menu.h main.c\n"
 "\n"
-"Regexp selection and interpretation:\n"
+"Pattern selection and interpretation:\n"
 msgstr ""
 "Ví dụ: %s -i \"chào thế giới\" menu.h main.c\n"
 "\n"
-"Chọn và biên dịch biểu thức chính quy:\n"
+"Chọn và biên dịch mẫu:\n"
 
-#: src/grep.c:1937
+#: src/grep.c:1920
 #, c-format
 msgid ""
-"  -E, --extended-regexp     PATTERN is an extended regular expression (ERE)\n"
+"  -E, --extended-regexp     PATTERN is an extended regular expression\n"
 "  -F, --fixed-strings       PATTERN is a set of newline-separated strings\n"
-"  -G, --basic-regexp        PATTERN is a basic regular expression (BRE)\n"
+"  -G, --basic-regexp        PATTERN is a basic regular expression (default)\n"
 "  -P, --perl-regexp         PATTERN is a Perl regular expression\n"
 msgstr ""
-"  -E, --extended-regexp     MẪU là một biểu thức chính quy mở rộng (ERE)\n"
+"  -E, --extended-regexp     MẪU là một biểu thức chính quy mở rộng\n"
 "  -F, --fixed-strings       MẪU là một tập hợp các chuỗi phân cách\n"
-"                            bằng ký tự dòng mới.\n"
-"  -G, --basic-regexp        MẪU là một biểu thức chính quy cơ bản (BRE).\n"
+"                              bằng ký tự dòng mới.\n"
+"  -G, --basic-regexp        MẪU là một biểu thức chính quy cơ bản (mặc "
+"định).\n"
 "  -P, --perl-regexp         MẪU là một biểu thức chính quy Perl.\n"
 
-#: src/grep.c:1943
+#: src/grep.c:1926
 #, c-format
 msgid ""
 "  -e, --regexp=PATTERN      use PATTERN for matching\n"
@@ -551,7 +527,7 @@ msgstr ""
 "  -z, --null-data           một dòng dữ liệu kết thúc bằng byte 0,\n"
 "                            không phải ký tự dòng mới\n"
 
-#: src/grep.c:1950
+#: src/grep.c:1933
 #, c-format
 msgid ""
 "\n"
@@ -568,16 +544,16 @@ msgstr ""
 "  -V, --version             in ra thông tin phiên bản rồi thoát\n"
 "      --help                hiển thị trợ giúp này rồi thoát\n"
 
-#: src/grep.c:1957
+#: src/grep.c:1940
 #, c-format
 msgid ""
 "\n"
 "Output control:\n"
-"  -m, --max-count=NUM       stop after NUM matches\n"
+"  -m, --max-count=NUM       stop after NUM selected lines\n"
 "  -b, --byte-offset         print the byte offset with output lines\n"
 "  -n, --line-number         print line number with output lines\n"
 "      --line-buffered       flush output on every line\n"
-"  -H, --with-filename       print the file name for each match\n"
+"  -H, --with-filename       print file name with output lines\n"
 "  -h, --no-filename         suppress the file name prefix on output\n"
 "      --label=LABEL         use LABEL as the standard input file name "
 "prefix\n"
@@ -589,12 +565,12 @@ msgstr ""
 "                              cùng với dòng kết xuất\n"
 "  -n, --line-number         in ra số thứ tự dòng cùng với dòng kết xuất\n"
 "      --line-buffered       xóa sạch kết xuất trên từng dòng\n"
-"  -H, --with-filename       in ra tên tập tin cho từng lần khớp\n"
+"  -H, --with-filename       in ra tên tập tin cho từng dòng đầu ra\n"
 "  -h, --no-filename         chặn tiền tố tên tập tin khi xuất\n"
 "      --label=NHÃN          sử dụng NHÃN này làm tiền tố cho tập tin\n"
 "                              cho đầu ra tiêu chuẩn\n"
 
-#: src/grep.c:1968
+#: src/grep.c:1951
 #, c-format
 msgid ""
 "  -o, --only-matching       show only the part of a line matching PATTERN\n"
@@ -611,7 +587,7 @@ msgstr ""
 "                                  * “without-match”  không khớp\n"
 "  -a, --text                giống với tùy chọn “--binary-files=text”\n"
 
-#: src/grep.c:1975
+#: src/grep.c:1958
 #, c-format
 msgid ""
 "  -I                        equivalent to --binary-files=without-match\n"
@@ -634,7 +610,7 @@ msgstr ""
 "  -r, --recursive           giống với tùy chọn “--directories=recurse”\n"
 "  -R, --dereference-recursive  cũng vậy nhưng cho phép cả các liên kết mềm\n"
 
-#: src/grep.c:1984
+#: src/grep.c:1967
 #, c-format
 msgid ""
 "      --include=FILE_PATTERN  search only files that match FILE_PATTERN\n"
@@ -651,22 +627,23 @@ msgstr ""
 "                              tin trong tập tin này\n"
 "      --exclude-dir=MẪU     thư mục nào khớp với mẫu này thì bị bỏ qua\n"
 
-#: src/grep.c:1991
+#: src/grep.c:1974
 #, c-format
 msgid ""
-"  -L, --files-without-match  print only names of FILEs containing no match\n"
-"  -l, --files-with-matches  print only names of FILEs containing matches\n"
-"  -c, --count               print only a count of matching lines per FILE\n"
+"  -L, --files-without-match  print only names of FILEs with no selected "
+"lines\n"
+"  -l, --files-with-matches  print only names of FILEs with selected lines\n"
+"  -c, --count               print only a count of selected lines per FILE\n"
 "  -T, --initial-tab         make tabs line up (if needed)\n"
 "  -Z, --null                print 0 byte after FILE name\n"
 msgstr ""
-"  -L, --files-without-match chỉ in ra tên của các TẬP TIN không khớp mẫu\n"
+"  -L, --files-without-match  chỉ in ra tên của các TẬP TIN không khớp mẫu\n"
 "  -l, --files-with-matches  chỉ in ra tên của các TẬP TIN khớp mẫu\n"
 "  -c, --count               chỉ in ra số lượng dòng khớp trong mỗi TẬP TIN\n"
 "  -T, --initial-tab         sắp hàng cột tab (nếu cần)\n"
 "  -Z, --null                in ra byte 0 (null) đằng sau tên TẬP TIN\n"
 
-#: src/grep.c:1997
+#: src/grep.c:1980
 #, c-format
 msgid ""
 "\n"
@@ -681,7 +658,7 @@ msgstr ""
 "  -A, --after-context=SỐ    in ra SỐ dòng ngữ cảnh đi sau\n"
 "  -C, --context=SỐ          in ra SỐ dòng ngữ cảnh kết xuất\n"
 
-#: src/grep.c:2004
+#: src/grep.c:1987
 #, c-format
 msgid ""
 "  -NUM                      same as --context=NUM\n"
@@ -690,8 +667,6 @@ msgid ""
 "                            WHEN is 'always', 'never', or 'auto'\n"
 "  -U, --binary              do not strip CR characters at EOL (MSDOS/"
 "Windows)\n"
-"  -u, --unix-byte-offsets   report offsets as if CRs were not there\n"
-"                            (MSDOS/Windows)\n"
 "\n"
 msgstr ""
 "  -NUM                      giống với “--context=SỐ”\n"
@@ -702,59 +677,46 @@ msgstr ""
 "                                 * “auto”   tự động\n"
 "  -U, --binary              đừng gỡ bỏ các ký tự CR ở kết thúc dòng (EOL)\n"
 "                            (MSDOS/Windows)\n"
-"  -u, --unix-byte-offsets   thông báo khoảng bù như là không có CR ở đây\n"
-"                            (MSDOS/Windows)\n"
 "\n"
 
-#: src/grep.c:2013
+#: src/grep.c:1994
 #, c-format
 msgid ""
-"'egrep' means 'grep -E'.  'fgrep' means 'grep -F'.\n"
-"Direct invocation as either 'egrep' or 'fgrep' is deprecated.\n"
-msgstr ""
-"“egrep” nên là “grep -E”, “fgrep” nên là “grep -F”.\n"
-"Không tán thành gọi trực tiếp “egrep” cũng như “fgrep”.\n"
-
-#: src/grep.c:2016
-#, c-format
-msgid ""
-"When FILE is -, read standard input.  With no FILE, read . if a command-"
-"line\n"
-"-r is given, - otherwise.  If fewer than two FILEs are given, assume -h.\n"
+"When FILE is '-', read standard input.  With no FILE, read '.' if\n"
+"recursive, '-' otherwise.  With fewer than two FILEs, assume -h.\n"
 "Exit status is 0 if any line is selected, 1 otherwise;\n"
 "if any error occurs and -q is not given, the exit status is 2.\n"
 msgstr ""
-"Khi TẬP_TIN là “-” thì đọc từ đầu vào tiêu chuẩn. Không có TẬP_TIN, đọc . "
+"Khi TẬP_TIN là “-”, thì đọc từ đầu vào tiêu chuẩn. Không có TẬP_TIN, đọc “.” "
 "nếu\n"
-"dòng lệnh -r được đưa ra, - nếu không có. Nếu ít hơn hai TẬP_TIN thì coi là "
-"“-h”.\n"
-"Trạng thái thoát là 0 nếu dòng nào được chọn, không thì bằng 1.\n"
-"Nếu có lỗi phát sinh và “-q” không được đưa ra thì trạng thái thoát là 2.\n"
+"đệ quy, “-” nếu không có. Nếu ít hơn hai TẬP_TIN thì coi là “-h”.\n"
+"Trạng thái thoát là 0 nếu có dòng nào khớp mẫu, không thì bằng 1;\n"
+"nếu có lỗi phát sinh và “-q” không được đưa ra thì trạng thái thoát là 2.\n"
 
-#: src/grep.c:2056
+#: src/grep.c:2034
 msgid "conflicting matchers specified"
 msgstr "đã ghi rõ dữ liệu khớp mà xung đột"
 
-#: src/grep.c:2060
+#: src/grep.c:2038
 #, c-format
 msgid "invalid matcher %s"
 msgstr "sai mẫu so khớp %s"
 
-#: src/grep.c:2480
+#: src/grep.c:2458
 #, c-format
 msgid "warning: GREP_OPTIONS is deprecated; please use an alias or script"
 msgstr ""
 "cảnh báo: GREP_OPTIONS đã lỗi thời; vui lòng dòng một bí danh hoặc văn lệnh"
 
-#: src/grep.c:2507
+#: src/grep.c:2485
 msgid "unknown devices method"
 msgstr "không rõ phương thức thiết bị"
 
-#: src/grep.c:2640
+#: src/grep.c:2629
 msgid "invalid max count"
 msgstr "số lượng tối đa không hợp lệ"
 
-#: src/grep.c:2698
+#: src/grep.c:2687
 msgid "unknown binary-files type"
 msgstr "không rõ kiểu tập tin nhị phân (binary-files)"
 
@@ -803,8 +765,33 @@ msgstr "đã vượt quá giới hạn tìm ngược của PCRE"
 msgid "internal PCRE error: %d"
 msgstr "lỗi nội bộ PCRE: %d"
 
+#~ msgid "%s: option '--%s' doesn't allow an argument\n"
+#~ msgstr "%s: tùy chọn “--%s” không cho phép có đối số\n"
+
+#~ msgid "%s: unrecognized option '--%s'\n"
+#~ msgstr "%s: không nhận ra tùy chọn “--%s”\n"
+
+#~ msgid "%s: option '-W %s' is ambiguous\n"
+#~ msgstr "%s: tùy chọn “-W %s” chưa rõ ràng\n"
+
+#~ msgid "%s: option '-W %s' doesn't allow an argument\n"
+#~ msgstr "%s: tùy chọn “-W %s” không cho phép đối số\n"
+
+#~ msgid "%s: option '-W %s' requires an argument\n"
+#~ msgstr "%s: tùy chọn “-W %s” yêu cầu một đối số\n"
+
 #~ msgid "lseek failed"
 #~ msgstr "lseek gặp lỗi"
+
+#~ msgid "PATTERN is, by default, a basic regular expression (BRE).\n"
+#~ msgstr "MẪU, theo mặc định, là một biểu thức chính quy cơ bản (BRE).\n"
+
+#~ msgid ""
+#~ "'egrep' means 'grep -E'.  'fgrep' means 'grep -F'.\n"
+#~ "Direct invocation as either 'egrep' or 'fgrep' is deprecated.\n"
+#~ msgstr ""
+#~ "“egrep” nên là “grep -E”, “fgrep” nên là “grep -F”.\n"
+#~ "Không tán thành gọi trực tiếp “egrep” cũng như “fgrep”.\n"
 
 #~ msgid "unescaped ^ or $ not supported with -Pz"
 #~ msgstr "không thoát ^ hay $ không được hỗ trợ với -Pz"

@@ -17,7 +17,7 @@
 # Cause the tool(s) built by this package to be used also when running
 # commands via e.g., "make syntax-check".  Doing this a little sooner
 # would have avoided a grep infloop bug.
-export PATH := $(srcdir)/src:${PATH}
+export PATH := $(builddir)/src$(PATH_SEPARATOR)$(PATH)
 
 # Used in maint.mk's web-manual rule
 manual_title = GNU Grep: Print lines matching a pattern
@@ -32,6 +32,9 @@ local-checks-to-skip =			\
 
 # Tools used to bootstrap this package, used for "announcement".
 bootstrap-tools = autoconf,automake,gnulib
+
+# Override the default Cc: used in generating an announcement.
+announcement_Cc_ = $(translation_project_), $(PACKAGE)-devel@gnu.org
 
 # The tight_scope test gets confused about inline functions.
 # like 'to_uchar'.
@@ -60,7 +63,7 @@ export VERBOSE = yes
 # 1127556 9e
 export XZ_OPT = -6e
 
-old_NEWS_hash = 80a4ad23530a69afb0f6d27cb39b5ff5
+old_NEWS_hash = a708c1088278e4d60e8e4ad2759228de
 
 # Many m4 macros names once began with 'jm_'.
 # Make sure that none are inadvertently reintroduced.
@@ -81,10 +84,11 @@ sc_prohibit_echo_minus_en:
 # - tests involving long checksum lines, and
 # - the 'pr' test cases.
 LINE_LEN_MAX = 80
-FILTER_LONG_LINES =						\
-  /^[^:]*\.diff:[^:]*:@@ / d;					\
-  \|^[^:]*man/help2man:| d;			\
-  \|^[^:]*tests/misc/sha[0-9]*sum.*\.pl[-:]| d;			\
+FILTER_LONG_LINES =							\
+  /^[^:]*\.diff:[^:]*:@@ / d;						\
+  \|^[^:]*TODO:| d;							\
+  \|^[^:]*man/help2man:| d;						\
+  \|^[^:]*tests/misc/sha[0-9]*sum.*\.pl[-:]| d;				\
   \|^[^:]*tests/pr/|{ \|^[^:]*tests/pr/pr-tests:| !d; };
 sc_long_lines:
 	@files=$$($(VC_LIST_EXCEPT))					\

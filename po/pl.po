@@ -1,13 +1,13 @@
 # Polish translation of the GNU grep messages
-# Copyright (C) 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2005, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016 Free Software Foundation, Inc.
+# Copyright (C) 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2005, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017 Free Software Foundation, Inc.
 # This file is distributed under the same license as the grep package.
-# Rafał Maszkowski <rzm@icm.edu.pl>, 1996-2002, 2005, 2007-2016.
+# Rafał Maszkowski <rzm@icm.edu.pl>, 1996-2002, 2005, 2007-2017.
 msgid ""
 msgstr ""
-"Project-Id-Version: GNU grep 2.23.7\n"
+"Project-Id-Version: GNU grep 3.0.23-b00\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2017-02-09 20:23-0800\n"
-"PO-Revision-Date: 2016-03-04 13:30+0100\n"
+"POT-Creation-Date: 2017-07-02 13:21-0700\n"
+"PO-Revision-Date: 2017-06-26 01:25+0100\n"
 "Last-Translator: Rafał Maszkowski <rzm@icm.edu.pl>\n"
 "Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
 "Language: pl\n"
@@ -30,109 +30,84 @@ msgstr "dwuznaczny argument %s dla %s"
 msgid "Valid arguments are:"
 msgstr "Prawidłowe agrumenty to:"
 
-#: lib/closeout.c:112 src/grep.c:1280
+#: lib/closeout.c:122 src/grep.c:1274
 msgid "write error"
 msgstr "błąd zapisu"
 
-#: lib/dfa.c:949
+#: lib/dfa.c:958
 msgid "unbalanced ["
 msgstr "[ nie do pary"
 
-#: lib/dfa.c:1071
+#: lib/dfa.c:1079
 msgid "invalid character class"
 msgstr "błędna nazwa klasy znaków"
 
-#: lib/dfa.c:1207
+#: lib/dfa.c:1205
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr "składnia klasy znaków to [[:space:]], nie [:space:]"
 
-#: lib/dfa.c:1275
+#: lib/dfa.c:1272
 msgid "unfinished \\ escape"
 msgstr "niedokończona sekwencja \\"
 
-#: lib/dfa.c:1436
+#: lib/dfa.c:1433
 msgid "invalid content of \\{\\}"
 msgstr "błędna zawartość \\{\\}"
 
-#: lib/dfa.c:1439
+#: lib/dfa.c:1436
 msgid "regular expression too big"
 msgstr "za duże wyrażenie regularne"
 
-#: lib/dfa.c:1853
+#: lib/dfa.c:1850
 msgid "unbalanced ("
 msgstr "( nie do pary"
 
-#: lib/dfa.c:1971
+#: lib/dfa.c:1968
 msgid "no syntax specified"
 msgstr "brak specyfikacji składni"
 
-#: lib/dfa.c:1979
+#: lib/dfa.c:1976
 msgid "unbalanced )"
 msgstr ") nie do pary"
 
-#: lib/error.c:191
+#: lib/error.c:195
 msgid "Unknown system error"
 msgstr "Nieznany błąd systemowy"
 
-#: lib/getopt.c:575 lib/getopt.c:604
+#: lib/getopt.c:278
 #, c-format
-msgid "%s: option '%s' is ambiguous; possibilities:"
-msgstr "%s: opcja „%s” jest niejednoznaczna; możliwości:"
+msgid "%s: option '%s%s' is ambiguous\n"
+msgstr "%s: opcja „%s%s” jest niejednoznaczna\n"
 
-#: lib/getopt.c:619
+#: lib/getopt.c:284
 #, c-format
-msgid "%s: option '%s' is ambiguous\n"
-msgstr "%s: opcja „%s” jest niejednoznaczna\n"
+msgid "%s: option '%s%s' is ambiguous; possibilities:"
+msgstr "%s: opcja „%s%s” jest niejednoznaczna; możliwości:"
 
-#: lib/getopt.c:654 lib/getopt.c:658
+#: lib/getopt.c:319
 #, c-format
-msgid "%s: option '--%s' doesn't allow an argument\n"
-msgstr "%s: opcja „--%s” nie może mieć argumentu\n"
+msgid "%s: unrecognized option '%s%s'\n"
+msgstr "%s: nierozpoznana opcja „%s%s”\n"
 
-#: lib/getopt.c:667 lib/getopt.c:672
+#: lib/getopt.c:345
 #, c-format
-msgid "%s: option '%c%s' doesn't allow an argument\n"
-msgstr "%s: opcja „%c%s” nie może mieć argumentu\n"
+msgid "%s: option '%s%s' doesn't allow an argument\n"
+msgstr "%s: opcja „%s%s” nie może mieć argumentu\n"
 
-#: lib/getopt.c:715 lib/getopt.c:734
+#: lib/getopt.c:360
 #, c-format
-msgid "%s: option '--%s' requires an argument\n"
-msgstr "%s: opcja „--%s” wymaga argumentu\n"
+msgid "%s: option '%s%s' requires an argument\n"
+msgstr "%s: opcja „%s%s” wymaga argumentu\n"
 
-#: lib/getopt.c:772 lib/getopt.c:775
-#, c-format
-msgid "%s: unrecognized option '--%s'\n"
-msgstr "%s: nierozpoznana opcja „--%s”\n"
-
-#: lib/getopt.c:783 lib/getopt.c:786
-#, c-format
-msgid "%s: unrecognized option '%c%s'\n"
-msgstr "%s: nierozpoznana opcja „%c%s”\n"
-
-#: lib/getopt.c:835 lib/getopt.c:838
+#: lib/getopt.c:621
 #, c-format
 msgid "%s: invalid option -- '%c'\n"
 msgstr "%s: błędna opcja -- „%c”\n"
 
-#: lib/getopt.c:891 lib/getopt.c:908 lib/getopt.c:1118 lib/getopt.c:1136
+#: lib/getopt.c:636 lib/getopt.c:682
 #, c-format
 msgid "%s: option requires an argument -- '%c'\n"
 msgstr "%s: opcja wymaga argumentu -- „%c”\n"
-
-#: lib/getopt.c:964 lib/getopt.c:980
-#, c-format
-msgid "%s: option '-W %s' is ambiguous\n"
-msgstr "%s: opcja „-W %s” jest niejednoznaczna\n"
-
-#: lib/getopt.c:1004 lib/getopt.c:1022
-#, c-format
-msgid "%s: option '-W %s' doesn't allow an argument\n"
-msgstr "%s: opcja „-W %s” nie może mieć argumentu\n"
-
-#: lib/getopt.c:1043 lib/getopt.c:1061
-#, c-format
-msgid "%s: option '-W %s' requires an argument\n"
-msgstr "%s: opcja „-W %s” wymaga argumentu\n"
 
 #: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34 src/pcresearch.c:291
 msgid "memory exhausted"
@@ -147,6 +122,11 @@ msgstr "nie udało się zapisać bieżącego katalogu"
 #, c-format
 msgid "failed to return to initial working directory"
 msgstr "nie udało się powrócić do początkowego katalogu"
+
+#: lib/xbinary-io.c:37
+#, c-format
+msgid "failed to set file descriptor text/binary mode"
+msgstr "nie udało się ustawić trybu tekstowego/binarnego deskryptora pliku"
 
 #. TRANSLATORS:
 #. Get translations for open and closing quotation marks.
@@ -169,11 +149,11 @@ msgstr "nie udało się powrócić do początkowego katalogu"
 #. If you don't know what to put here, please see
 #. <http://en.wikipedia.org/wiki/Quotation_marks_in_other_languages>
 #. and use glyphs suitable for your language.
-#: lib/quotearg.c:354
+#: lib/quotearg.c:362
 msgid "`"
 msgstr "„"
 
-#: lib/quotearg.c:355
+#: lib/quotearg.c:363
 msgid "'"
 msgstr "”"
 
@@ -437,92 +417,87 @@ msgid "%s%s argument '%s' too large"
 msgstr "argument %s%s „%s” jest za duży"
 
 #. This is a proper name. See the gettext manual, section Names.
-#: src/grep.c:58
+#: src/grep.c:59
 msgid "Mike Haertel"
 msgstr "Mike'a Haertela"
 
-#: src/grep.c:59
+#: src/grep.c:60
 msgid "others, see <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
 msgstr "innych, zobacz: http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS"
 
-#: src/grep.c:588
+#: src/grep.c:585
 msgid "(standard input)"
 msgstr "(standardowe wejście)"
 
-#: src/grep.c:768
+#: src/grep.c:765
 msgid "invalid context length argument"
 msgstr "błędny argument długości kontekstowej"
 
-#: src/grep.c:831
+#: src/grep.c:828
 msgid "input is too large to count"
 msgstr "danych wejściowych jest zbyt dużo do policzenia"
 
-#: src/grep.c:1594
+#: src/grep.c:1579
 #, c-format
 msgid "Binary file %s matches\n"
 msgstr "Plik binarny %s pasuje do wzorca\n"
 
-#: src/grep.c:1642
+#: src/grep.c:1627
 #, c-format
 msgid "warning: %s: %s"
 msgstr "uwaga: %s: %s"
 
-#: src/grep.c:1643
+#: src/grep.c:1628
 msgid "recursive directory loop"
 msgstr "nieskończona pętla przeglądania katalogów"
 
-#: src/grep.c:1857
+#: src/grep.c:1844
 #, c-format
 msgid "input file %s is also the output"
 msgstr "plik wejściowy %s jest również plikiem wyjściowym"
 
-#: src/grep.c:1923 src/grep.c:1930
+#: src/grep.c:1907 src/grep.c:1914
 #, c-format
 msgid "Usage: %s [OPTION]... PATTERN [FILE]...\n"
 msgstr "Składnia: %s [OPCJA]... WZORZEC [PLIK] ...\n"
 
-#: src/grep.c:1925
+#: src/grep.c:1909
 #, c-format
 msgid "Try '%s --help' for more information.\n"
 msgstr "Napisz „%s --help” żeby dowiedzieć się więcej.\n"
 
-#: src/grep.c:1931
+#: src/grep.c:1915
 #, c-format
-msgid "Search for PATTERN in each FILE or standard input.\n"
-msgstr "Szukanie WZORCA w każdym PLIKU lub na standardowym wejściu\n"
+msgid "Search for PATTERN in each FILE.\n"
+msgstr "Szukanie WZORCA w PLIKACH.\n"
 
-#: src/grep.c:1932
-#, c-format
-msgid "PATTERN is, by default, a basic regular expression (BRE).\n"
-msgstr "WZORZEC domyślnie jest podstawowym wyrażeniem regularnym (BRE).\n"
-
-#: src/grep.c:1933
+#: src/grep.c:1916
 #, c-format
 msgid ""
 "Example: %s -i 'hello world' menu.h main.c\n"
 "\n"
-"Regexp selection and interpretation:\n"
+"Pattern selection and interpretation:\n"
 msgstr ""
 "Przykład: %s -i 'hello world' menu.h main.c\n"
 "\n"
-"Wybór i interpretacja wyrażeń regularnych:\n"
+"Wybór i interpretacja wzorców:\n"
 
-#: src/grep.c:1937
+#: src/grep.c:1920
 #, c-format
 msgid ""
-"  -E, --extended-regexp     PATTERN is an extended regular expression (ERE)\n"
+"  -E, --extended-regexp     PATTERN is an extended regular expression\n"
 "  -F, --fixed-strings       PATTERN is a set of newline-separated strings\n"
-"  -G, --basic-regexp        PATTERN is a basic regular expression (BRE)\n"
+"  -G, --basic-regexp        PATTERN is a basic regular expression (default)\n"
 "  -P, --perl-regexp         PATTERN is a Perl regular expression\n"
 msgstr ""
-"  -E, --extended-regexp     WZORZEC jest rozszerzonym wyr. regularnym (ERE)\n"
-"  -F, --fixed-strings       WZORZEC jest zestawem napisów oddzielonych "
-"przez\n"
-"                              znaki nowej linii\n"
-"  -G, --basic-regexp        WZORZEC jest podstawowym wyr. regularnym (BRE)\n"
+"  -E, --extended-regexp     WZORZEC jest rozszerzonym wyrażeniem regularnym\n"
+"  -F, --fixed-strings       WZORZEC to napisy oddzielone przez znaki\n"
+"                              nowej linii\n"
+"  -G, --basic-regexp        WZORZEC jest podstawowym wyrażeniem regularnym\n"
+"                              (domyślnie)\n"
 "  -P, --perl-regexp         WZORZEC jest wyrażeniem regularnym perla\n"
 
-#: src/grep.c:1943
+#: src/grep.c:1926
 #, c-format
 msgid ""
 "  -e, --regexp=PATTERN      use PATTERN for matching\n"
@@ -540,7 +515,7 @@ msgstr ""
 "  -z, --null-data           linie są zakończone bajtem 0, nie znakiem\n"
 "                            nowej linii\n"
 
-#: src/grep.c:1950
+#: src/grep.c:1933
 #, c-format
 msgid ""
 "\n"
@@ -558,23 +533,23 @@ msgstr ""
 "      --help                wypisanie tych informacji i zakończenie\n"
 "\n"
 
-#: src/grep.c:1957
+#: src/grep.c:1940
 #, c-format
 msgid ""
 "\n"
 "Output control:\n"
-"  -m, --max-count=NUM       stop after NUM matches\n"
+"  -m, --max-count=NUM       stop after NUM selected lines\n"
 "  -b, --byte-offset         print the byte offset with output lines\n"
 "  -n, --line-number         print line number with output lines\n"
 "      --line-buffered       flush output on every line\n"
-"  -H, --with-filename       print the file name for each match\n"
+"  -H, --with-filename       print file name with output lines\n"
 "  -h, --no-filename         suppress the file name prefix on output\n"
 "      --label=LABEL         use LABEL as the standard input file name "
 "prefix\n"
 msgstr ""
 "\n"
 "Sterowanie danymi wyjściowymi:\n"
-"  -m, --max-count=ILE       zatrzymanie po ILU dopasowaniach\n"
+"  -m, --max-count=ILE       zatrzymanie po ILU wybranych liniach\n"
 "  -b, --byte-offset         wypisanie pozycji bajtów w wyniku\n"
 "  -n, --line-number         wypisanie numerów linii w wyniku\n"
 "      --line-buffered       opróżnienie bufora po każdej linii\n"
@@ -582,7 +557,7 @@ msgstr ""
 "  -h, --no-filename         bez nazwy pliku w liniach wyjściowych\n"
 "      --label=ETYKIETA      w wyniku ETYKIETA zastępuje nazwe pliku\n"
 
-#: src/grep.c:1968
+#: src/grep.c:1951
 #, c-format
 msgid ""
 "  -o, --only-matching       show only the part of a line matching PATTERN\n"
@@ -597,7 +572,7 @@ msgstr ""
 "                            TYP to „binary”, „text” lub „without-match”.\n"
 "  -a, --text                równoważne --binary-files=text\n"
 
-#: src/grep.c:1975
+#: src/grep.c:1958
 #, c-format
 msgid ""
 "  -I                        equivalent to --binary-files=without-match\n"
@@ -620,7 +595,7 @@ msgstr ""
 "  -R, --dereference-recursive  podobnie, ale z podążaniem za dowiązaniami\n"
 "                              symbolicznymi\n"
 
-#: src/grep.c:1984
+#: src/grep.c:1967
 #, c-format
 msgid ""
 "      --include=FILE_PATTERN  search only files that match FILE_PATTERN\n"
@@ -635,23 +610,25 @@ msgstr ""
 "      --exclude-from=PLIK   pominięcie plików pasujących do WZORCÓW w PLIKU\n"
 "      --exclude-dir=WZORZEC  katalogi pasujące do WZORCA będą pominięte\n"
 
-#: src/grep.c:1991
+#: src/grep.c:1974
 #, c-format
 msgid ""
-"  -L, --files-without-match  print only names of FILEs containing no match\n"
-"  -l, --files-with-matches  print only names of FILEs containing matches\n"
-"  -c, --count               print only a count of matching lines per FILE\n"
+"  -L, --files-without-match  print only names of FILEs with no selected "
+"lines\n"
+"  -l, --files-with-matches  print only names of FILEs with selected lines\n"
+"  -c, --count               print only a count of selected lines per FILE\n"
 "  -T, --initial-tab         make tabs line up (if needed)\n"
 "  -Z, --null                print 0 byte after FILE name\n"
 msgstr ""
-"  -L, --files-without-match  wypisanie tylko nazw PLIKÓW bez trafień\n"
-"  -l, --files-with-matches  wypisanie tylko nazw PLIKÓW z trafieniami\n"
-"  -c, --count               wypisanie tylko liczby pasujących linii w "
-"PLIKACH\n"
+"  -L, --files-without-match  wypisanie tylko nazw PLIKÓW bez wybranych "
+"linii\n"
+"  -l, --files-with-matches  wypisanie tylko nazw PLIKÓW z wybranymi liniami\n"
+"  -c, --count               wypisanie tylko liczby wybranych linii w każdym\n"
+"                              PLIKU\n"
 "  -T, --initial-tab         wyrównanie linii przez TAB (jeżeli potrzebne)\n"
 "  -Z, --null                wypisanie bajtu 0 po każdej nazwie PLIKU\n"
 
-#: src/grep.c:1997
+#: src/grep.c:1980
 #, c-format
 msgid ""
 "\n"
@@ -666,7 +643,7 @@ msgstr ""
 "  -A, --after-context=ILE   wypisanie ILU linii kontekstu po\n"
 "  -C, --context=ILE         wypisanie ILU linii kontekstu\n"
 
-#: src/grep.c:2004
+#: src/grep.c:1987
 #, c-format
 msgid ""
 "  -NUM                      same as --context=NUM\n"
@@ -675,8 +652,6 @@ msgid ""
 "                            WHEN is 'always', 'never', or 'auto'\n"
 "  -U, --binary              do not strip CR characters at EOL (MSDOS/"
 "Windows)\n"
-"  -u, --unix-byte-offsets   report offsets as if CRs were not there\n"
-"                            (MSDOS/Windows)\n"
 "\n"
 msgstr ""
 "  -ILE                      to samo co --context=ILE\n"
@@ -686,35 +661,22 @@ msgstr ""
 "                            albo „auto” (automatycznie).\n"
 "  -U, --binary              bez usuwania znaków nowej linii na końcu\n"
 "                              (MSDOS/Windows)\n"
-"  -u, --unix-byte-offsets   podawanie pozycji tak jakby nie było CRów\n"
-"                              (MSDOS/Windows)\n"
 "\n"
 
-#: src/grep.c:2013
+#: src/grep.c:1994
 #, c-format
 msgid ""
-"'egrep' means 'grep -E'.  'fgrep' means 'grep -F'.\n"
-"Direct invocation as either 'egrep' or 'fgrep' is deprecated.\n"
-msgstr ""
-"„egrep” oznacza „grep -E”. „fgrep” oznacza „grep -F”.\n"
-"Używanie nazw „egrep” i „fgrep” nie jest już zalecane.\n"
-
-#: src/grep.c:2016
-#, c-format
-msgid ""
-"When FILE is -, read standard input.  With no FILE, read . if a command-"
-"line\n"
-"-r is given, - otherwise.  If fewer than two FILEs are given, assume -h.\n"
+"When FILE is '-', read standard input.  With no FILE, read '.' if\n"
+"recursive, '-' otherwise.  With fewer than two FILEs, assume -h.\n"
 "Exit status is 0 if any line is selected, 1 otherwise;\n"
 "if any error occurs and -q is not given, the exit status is 2.\n"
 msgstr ""
-"Jeżeli PLIK to -, czytane jest standardowe wejście. Jeżeli PLIK nie jest\n"
+"Jeżeli PLIK to „-”, czytane jest standardowe wejście. Jeżeli PLIK nie jest\n"
 "podany i użyta jest opcja -r, czytany jest katalog ., natomiast - gdy -r "
 "nie\n"
 "jest podane. Jeżeli podano mniej niż dwa PLIKI, program włącza opcję -h.\n"
-"Zakończenie działania z kodem wyjściowym 0, jeżeli WZORZEC pasuje; z 1, "
-"jeżeli\n"
-"nie; z 2, w razie błędów, gdy nie podano opcji -q.\n"
+"Zakończenie działania z kodem wyjściowym 0, jeżeli WZORZEC pasuje; z 1,\n"
+"jeżeli nie; z 2, w razie błędów, gdy nie podano opcji -q.\n"
 
 #  viendo los fuentes , hay varias opciones
 #  que hay sin documentar. O quiza es que getopt() lo he entendido mal
@@ -724,31 +686,31 @@ msgstr ""
 #  grep --help ->
 #  usage: grep [-[[AB] ]<num>] [-[CEFGVchilnqsvwx]] [-[ef]] <expr> [<files...>]
 #  La opción -X es a la que corresponde esta línea.
-#: src/grep.c:2056
+#: src/grep.c:2034
 msgid "conflicting matchers specified"
 msgstr "podano sprzeczne wzorce"
 
-#: src/grep.c:2060
+#: src/grep.c:2038
 #, c-format
 msgid "invalid matcher %s"
 msgstr "błędna dopasowanie %s"
 
-#: src/grep.c:2480
+#: src/grep.c:2458
 #, c-format
 msgid "warning: GREP_OPTIONS is deprecated; please use an alias or script"
 msgstr ""
 "uwaga: zmienna GREP_OPTIONS nie będzie już używana, proszę użyć aliasu albo "
 "skryptu"
 
-#: src/grep.c:2507
+#: src/grep.c:2485
 msgid "unknown devices method"
 msgstr "nieznany sposób przeglądania urządzeń"
 
-#: src/grep.c:2640
+#: src/grep.c:2629
 msgid "invalid max count"
 msgstr "błędna maksymalna liczba powtórzeń"
 
-#: src/grep.c:2698
+#: src/grep.c:2687
 msgid "unknown binary-files type"
 msgstr "nieznany typ pliku binarnego"
 
@@ -795,11 +757,3 @@ msgstr "przekroczony limit analizy wstecznej PCRE"
 #, c-format
 msgid "internal PCRE error: %d"
 msgstr "błąd wewnętrzny PCRE: %d"
-
-#~ msgid "lseek failed"
-#~ msgstr "błąd lseek"
-
-#~ msgid "unescaped ^ or $ not supported with -Pz"
-#~ msgstr ""
-#~ "^ i $ bez ochrony przed interpretacją jako znaki specjalne nie są "
-#~ "dozwolne z opcją -Pz"

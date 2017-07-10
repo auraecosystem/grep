@@ -1,4 +1,189 @@
+2017-07-02  Jim Meyering  <meyering@fb.com>
+
+	version 3.1
+	* NEWS: Record release date.
+
+2017-07-01  Jim Meyering  <meyering@fb.com>
+
+	tests: avoid false failures when run in qemu user mode
+	* tests/filename-lineno.pl: Derive the program name that grep
+	will use in diagnostics, based on a suggestion from Assaf Gordon.
+	* tests/in-eq-out-infloop: Similar: accept an arbitrary "command_name: "
+	prefix on checked diagnostics, rather than requiring "grep: ".
+	* tests/reversed-range-endpoints: Likewise.
+	* tests/write-error-msg: Likewise.
+	Reported by Bruno Haible in http://bugs.gnu.org/27532
+
+2017-06-25  Jim Meyering  <meyering@fb.com>
+
+	gnulib: update to latest
+	* gnulib: Update to latest for these portability fixes:
+	- stat: port to xlc 12.01
+	- xalloc-oversized: port to icc
+
+	doc: fix another typo
+	* doc/grep.texi (File and Directory Selection): Fix typo: s/afer/after/
+
+2017-06-24  Jim Meyering  <meyering@fb.com>
+
+	doc: stop calling --perl-regexp (-P) "highly" experimental
+	Use wording that is less likely to make readers think that
+	support for -P may be removed.
+	* doc/grep.in.1: s/highly experimental/experimental/
+	* doc/grep.texi: Likewise.
+	Suggested by Evan Sheahan.
+
+2017-06-21  Jim Meyering  <meyering@fb.com>
+
+	doc: correct typo
+	* doc/grep.texi (Performance): s/suprisingly/surprisingly/
+
+	gnulib: update to latest
+
+2017-06-21  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: -m no longer cuts off trailing context
+	Problem reported by Markus Jochim (Bug#26254).
+	* NEWS, doc/grep.texi (General Output Control): Document this.
+	* src/grep.c (prpending): Selected lines no longer cut off context.
+	(usage): Say "selected" instead of "matching", where appropriate.
+	* tests/foad1, tests/max-count-vs-context, tests/yesno:
+	Adjust to match new behavior.
+
+2017-05-31  Paul Eggert  <eggert@cs.ucla.edu>
+
+	Document grep performance
+	* doc/grep.texi (Performance): New section.
+
+	build: update gnulib submodule to latest
+
+2017-05-21  Jim Meyering  <meyering@fb.com>
+
+	maint: make the announcement template Cc the devel- list
+	* cfg.mk (announcement_Cc_): Define.
+
+	gnulib: update to latest; and update tests/init.sh
+
+	maint: accommodate GCC7's -Werror=duplicated-branches
+	* src/system.h (IGNORE_DUPLICATE_BRANCH_WARNING): Define.
+	* src/grep.c (grepfile): Use it.
+	* src/kwset.c (bmexec, acexec): Use it.
+
+	maint: update to work with GCC7's -Werror=implicit-fallthrough=
+	* src/system.h (FALLTHROUGH): Define.
+	* src/grep.c (context_length_arg): Use new FALLTHROUGH macro in place
+	of comments
+	(fgrep_to_grep_pattern, try_fgrep_pattern, main): Likewise.
+
+2017-05-13  Jim Meyering  <meyering@fb.com>
+
+	gnulib: update to latest and adapt src/kwset.c
+	* gnulib: Update to latest.
+	* src/kwset.c: Include "verify.h" for use of assume.
+
+2017-03-22  Jim Meyering  <meyering@fb.com>
+
+	gnulib: update to latest for dfa [0-9] performance improvement
+	This pulls in the following change that is very relevant to grep:
+
+	    commit 6afba02d7869d39ed7f61981045ddbdcb2814101
+	    Author: Paul Eggert <eggert@cs.ucla.edu>
+	    dfa: make [0-9] faster in non-C locales
+
+	* gnulib: Update to latest.
+	* NEWS (Improvements): Describe the effect on grep.
+
+2017-03-05  Jim Meyering  <meyering@fb.com>
+
+	build: use $(builddir), not $(srcdir)
+	* cfg.mk (PATH): Use $(builddir), so this also takes effect
+	in a non-srcdir build.  Also, switch ${PATH} syntax to $(PATH).
+
+2017-03-05  Juan Manuel Guerrero  <juan.guerrero@gmx.de>
+
+	build: use $(PATH_SEPARATOR), not ":" to augment PATH
+	* cfg.mk (PATH): Use $(PATH_SEPARATOR), for those systems that
+	use something other than ":".
+	* THANKS.in: Remove name, to avoid syntax-check failure due to
+	the duplicate, now that there is this commit.
+
+2017-02-17  Jim Meyering  <meyering@fb.com>
+
+	maint: fix distcheck failure: remove stale dosbuf.c reference
+	* src/Makefile.am (EXTRA_DIST): Do not attempt to distribute
+	the recently deleted file, dosbuf.c.
+
+	maint: fix new syntax-check errors
+	* po/POTFILES.in: Add lib/xbinary-io.c.
+	* cfg.mk (FILTER_LONG_LINES): Add TODO to the list of exempt files.
+
+2017-02-16  Paul Eggert  <eggert@cs.ucla.edu>
+
+	Fix up recent -U patches
+	Inspired by a suggestion by Eric Blake (Bug#25707#17).
+	* bootstrap.conf (gnulib_modules): Add xbinary-io,
+	and remove binary-io and xfreopen.
+	* doc/grep.texi (Other Options):
+	Fix typo and reword to be a bit more general.
+	* src/grep.c: Include xbinary-io.h instead of xfreopen.h.
+	(grepfile): Open with O_BINARY if binary.
+	(grepdesc): No need for set_binary_mode now.
+	(grep_command_line_arg, main): Set stdin to binary mode if binary.
+	(main): Avoid unnecessary test of stdin == NULL.
+	Use xsetmode instead of xfreopen.
+	* src/system.h: Do not include binary-io.h.
+
+	build: update gnulib submodule to latest
+
+	Simplify -U on MS-Windows by removing guesswork
+	Suggested by Eric Blake (Bug#25707#11).
+	* NEWS, doc/grep.texi: Document this.
+	* src/dosbuf.c: Remove.
+	* bootstrap.conf (gnulib_modules): Add xfreopen.
+	* src/grep.c: Include xfreopen.h, not dosbuf.c.
+	(fillbuf, print_line_head): Do not undossify input.
+	(binary): New static var.
+	(grepdesc): Apply BINARY to input file.
+	(usage): Remove -u help.
+	(main): Set BINARY if -U, and apply it to stdout.  Do nothing if -u.
+	With -f, apply BINARY to input file.
+
+2017-02-16  Eric Blake  <eblake@redhat.com>
+
+	grep: don't forcefully strip carriage returns
+	Commit 5c92a54 made the mistaken assumption that using fopen("rt")
+	on platforms where O_TEXT is non-zero makes sense.  However, POSIX
+	already requires fopen("r") to open a file in text mode, vs.
+	fopen("rb") when binary mode is wanted, and at least on Cygwin,
+	where it is possible to control whether a mount point is binary
+	or text by default (using just "r"), the use of fopen("rt") actively
+	breaks assumptions on a binary mount by silently corrupting any
+	carriage returns that are supposed to be preserved.
+
+	* src/grep.c (main): Never use fopen("rt") (Bug#25707).
+
+2017-02-13  Paul Eggert  <eggert@cs.ucla.edu>
+
+	Update TODO and doc
+	* TODO: Bring up-to-date and fix formatting glitches.
+	* doc/grep.in.1, doc/grep.texi: Fix minor glitches.
+	The above patches should address the same problems that recent
+	Debian doc patches address, albeit in a different way.
+
+2017-02-12  Paul Eggert  <eggert@cs.ucla.edu>
+
+	doc: clarify default input (Bug#25651)
+	* doc/grep.in.1:
+	* src/grep.c (usage): Clarify default input when -r.
+	* src/grep.c (usage): Do not bother documenting egrep and fgrep;
+	the manual is enough.
+
 2017-02-09  Jim Meyering  <meyering@fb.com>
+
+	maint: post-release administrivia
+	* NEWS: Add header line for next release.
+	* .prev-version: Record previous version.
+	* cfg.mk (old_NEWS_hash): Auto-update.
 
 	version 3.0
 	* NEWS: Record release date.
