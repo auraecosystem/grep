@@ -1,4 +1,3 @@
 02-man_rgrep.patch
 03-397262-dlopen-pcre.patch
 05-grep-wrapper-sh.patch
-81-356120-document-multiple-e.patch
