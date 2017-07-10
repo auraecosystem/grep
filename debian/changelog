@@ -1,3 +1,11 @@
+grep (3.1-1~1) UNRELEASED-unstable; urgency=low
+
+  * NOT RELEASE YET
+  * New upstream version 3.1
+  * Remove no longer needed debian/patches/81-356120-document-multiple-e.patch 
+
+ -- Santiago Ruano Rincón <santiagorr@riseup.net>  Mon, 10 Jul 2017 11:39:52 +0200
+
 grep (3.0-1) experimental; urgency=low
 
   * New upstream version 3.0
