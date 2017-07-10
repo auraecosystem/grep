@@ -30,6 +30,7 @@ XFAIL_TESTS =
 TESTS_ENVIRONMENT =
 noinst_PROGRAMS =
 check_PROGRAMS =
+EXTRA_PROGRAMS =
 noinst_HEADERS =
 noinst_LIBRARIES =
 check_LIBRARIES = libtests.a
@@ -467,15 +468,6 @@ EXTRA_DIST += test-getprogname.c
 
 ## end   gnulib module getprogname-tests
 
-## begin gnulib module gettimeofday-tests
-
-TESTS += test-gettimeofday
-check_PROGRAMS += test-gettimeofday
-
-EXTRA_DIST += signature.h test-gettimeofday.c
-
-## end   gnulib module gettimeofday-tests
-
 ## begin gnulib module hash-pjw
 
 libtests_a_SOURCES += hash-pjw.h hash-pjw.c
@@ -889,106 +881,60 @@ libtests_a_SOURCES += size_max.h
 ## begin gnulib module snippet/_Noreturn
 
 # Because this Makefile snippet defines a variable used by other
-# gnulib Makefile snippets, it must be present in all Makefile.am that
+# gnulib Makefile snippets, it must be present in all makefiles that
 # need it. This is ensured by the applicability 'all' defined above.
 
-_NORETURN_H=$(top_srcdir)/build-aux/snippet/_Noreturn.h
+_NORETURN_H=$(srcdir)/_Noreturn.h
 
-EXTRA_DIST += $(top_srcdir)/build-aux/snippet/_Noreturn.h
+EXTRA_DIST += _Noreturn.h
 
 ## end   gnulib module snippet/_Noreturn
 
 ## begin gnulib module snippet/arg-nonnull
 
-# The BUILT_SOURCES created by this Makefile snippet are not used via #include
-# statements but through direct file reference. Therefore this snippet must be
-# present in all Makefile.am that need it. This is ensured by the applicability
-# 'all' defined above.
+# Because this Makefile snippet defines a variable used by other
+# gnulib Makefile snippets, it must be present in all makefiles that
+# need it. This is ensured by the applicability 'all' defined above.
 
-BUILT_SOURCES += arg-nonnull.h
-# The arg-nonnull.h that gets inserted into generated .h files is the same as
-# build-aux/snippet/arg-nonnull.h, except that it has the copyright header cut
-# off.
-arg-nonnull.h: $(top_srcdir)/build-aux/snippet/arg-nonnull.h
-	$(AM_V_GEN)rm -f $@-t $@ && \
-	sed -n -e '/GL_ARG_NONNULL/,$$p' \
-	  < $(top_srcdir)/build-aux/snippet/arg-nonnull.h \
-	  > $@-t && \
-	mv $@-t $@
-MOSTLYCLEANFILES += arg-nonnull.h arg-nonnull.h-t
+ARG_NONNULL_H=$(srcdir)/arg-nonnull.h
 
-ARG_NONNULL_H=arg-nonnull.h
-
-EXTRA_DIST += $(top_srcdir)/build-aux/snippet/arg-nonnull.h
+EXTRA_DIST += arg-nonnull.h
 
 ## end   gnulib module snippet/arg-nonnull
 
 ## begin gnulib module snippet/c++defs
 
-# The BUILT_SOURCES created by this Makefile snippet are not used via #include
-# statements but through direct file reference. Therefore this snippet must be
-# present in all Makefile.am that need it. This is ensured by the applicability
-# 'all' defined above.
+# Because this Makefile snippet defines a variable used by other
+# gnulib Makefile snippets, it must be present in all makefiles that
+# need it. This is ensured by the applicability 'all' defined above.
 
-BUILT_SOURCES += c++defs.h
-# The c++defs.h that gets inserted into generated .h files is the same as
-# build-aux/snippet/c++defs.h, except that it has the copyright header cut off.
-c++defs.h: $(top_srcdir)/build-aux/snippet/c++defs.h
-	$(AM_V_GEN)rm -f $@-t $@ && \
-	sed -n -e '/_GL_CXXDEFS/,$$p' \
-	  < $(top_srcdir)/build-aux/snippet/c++defs.h \
-	  > $@-t && \
-	mv $@-t $@
-MOSTLYCLEANFILES += c++defs.h c++defs.h-t
+CXXDEFS_H=$(srcdir)/c++defs.h
 
-CXXDEFS_H=c++defs.h
-
-EXTRA_DIST += $(top_srcdir)/build-aux/snippet/c++defs.h
+EXTRA_DIST += c++defs.h
 
 ## end   gnulib module snippet/c++defs
 
 ## begin gnulib module snippet/unused-parameter
 
-# The BUILT_SOURCES created by this Makefile snippet are not used via #include
-# statements but through direct file reference. Therefore this snippet must be
-# present in all Makefile.am that need it. This is ensured by the applicability
-# 'all' defined above.
+# Because this Makefile snippet defines a variable used by other
+# gnulib Makefile snippets, it must be present in all makefiles that
+# need it. This is ensured by the applicability 'all' defined above.
 
-BUILT_SOURCES += unused-parameter.h
-# The unused-parameter.h that gets inserted into generated .h files is the same
-# as build-aux/snippet/unused-parameter.h, except that it has the copyright
-# header cut off.
-unused-parameter.h: $(top_srcdir)/build-aux/snippet/unused-parameter.h
-	$(AM_V_GEN)rm -f $@-t $@ && \
-	sed -n -e '/GL_UNUSED_PARAMETER/,$$p' \
-	  < $(top_srcdir)/build-aux/snippet/unused-parameter.h \
-	  > $@-t && \
-	mv $@-t $@
-MOSTLYCLEANFILES += unused-parameter.h unused-parameter.h-t
+UNUSED_PARAMETER_H=$(srcdir)/unused-parameter.h
 
-UNUSED_PARAMETER_H=unused-parameter.h
-
-EXTRA_DIST += $(top_srcdir)/build-aux/snippet/unused-parameter.h
+EXTRA_DIST += unused-parameter.h
 
 ## end   gnulib module snippet/unused-parameter
 
 ## begin gnulib module snippet/warn-on-use
 
-BUILT_SOURCES += warn-on-use.h
-# The warn-on-use.h that gets inserted into generated .h files is the same as
-# build-aux/snippet/warn-on-use.h, except that it has the copyright header cut
-# off.
-warn-on-use.h: $(top_srcdir)/build-aux/snippet/warn-on-use.h
-	$(AM_V_GEN)rm -f $@-t $@ && \
-	sed -n -e '/^.ifndef/,$$p' \
-	  < $(top_srcdir)/build-aux/snippet/warn-on-use.h \
-	  > $@-t && \
-	mv $@-t $@
-MOSTLYCLEANFILES += warn-on-use.h warn-on-use.h-t
+# Because this Makefile snippet defines a variable used by other
+# gnulib Makefile snippets, it must be present in all makefiles that
+# need it. This is ensured by the applicability 'all' defined above.
 
-WARN_ON_USE_H=warn-on-use.h
+WARN_ON_USE_H=$(srcdir)/warn-on-use.h
 
-EXTRA_DIST += $(top_srcdir)/build-aux/snippet/warn-on-use.h
+EXTRA_DIST += warn-on-use.h
 
 ## end   gnulib module snippet/warn-on-use
 
@@ -1166,14 +1112,6 @@ EXTRA_DIST += test-sys_stat.c
 
 ## end   gnulib module sys_stat-tests
 
-## begin gnulib module sys_time-tests
-
-TESTS += test-sys_time
-check_PROGRAMS += test-sys_time
-EXTRA_DIST += test-sys_time.c
-
-## end   gnulib module sys_time-tests
-
 ## begin gnulib module sys_types-tests
 
 TESTS += test-sys_types
@@ -1295,12 +1233,15 @@ EXTRA_DIST += test-vc-list-files-git.sh test-vc-list-files-cvs.sh
 TESTS_ENVIRONMENT += MAKE='$(MAKE)'
 TESTS += test-verify test-verify.sh
 check_PROGRAMS += test-verify
+# test-verify-try is never built, but test-verify.sh needs a rule to
+# build test-verify-try.o.
+EXTRA_PROGRAMS += test-verify-try
 
-# This test expects compilation of test-verify.c to fail, and
+# This test expects compilation of test-verify-try.c to fail, and
 # each time it fails, the makefile rule does not perform the usual
 #  "mv -f $name.Tpo $name.po, so tell make clean to remove that file.
-MOSTLYCLEANFILES += .deps/test-verify.Tpo
-EXTRA_DIST += test-verify.c test-verify.sh
+MOSTLYCLEANFILES += .deps/test-verify-try.Tpo
+EXTRA_DIST += test-verify.c test-verify-try.c test-verify.sh
 
 ## end   gnulib module verify-tests
 

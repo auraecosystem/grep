@@ -1,5 +1,25 @@
 GNU grep NEWS                                    -*- outline -*-
 
+* Noteworthy changes in release 3.1 (2017-07-02) [stable]
+
+** Improvements
+
+  grep '[0-9]' is now just as fast as grep '[[:digit:]]' when run
+  in a multi-byte locale.  Before, it was several times slower.
+
+** Changes in behavior
+
+  Context no longer excludes selected lines omitted because of -m.
+  For example, 'grep "^" -m1 -A1' now outputs the first two input
+  lines, not just the first line.  This fixes a glitch that has been
+  present since -m was added in grep 2.5.
+
+  The following changes affect only MS-Windows platforms.  First, the
+  --binary (-U) option now governs whether binary I/O is used, instead
+  of a heuristic that was sometimes incorrect.  Second, the
+  --unix-byte-offsets (-u) option now has no effect on MS-Windows too.
+
+
 * Noteworthy changes in release 3.0 (2017-02-09) [stable]
 
 ** Bug fixes

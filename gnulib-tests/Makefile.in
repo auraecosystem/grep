@@ -130,20 +130,19 @@ TESTS = test-alignof$(EXEEXT) test-alloca-opt$(EXEEXT) \
 	test-fstat$(EXEEXT) test-fstatat$(EXEEXT) test-fwrite$(EXEEXT) \
 	test-getcwd-lgpl$(EXEEXT) test-getdtablesize$(EXEEXT) \
 	test-getopt-gnu$(EXEEXT) test-getopt-posix$(EXEEXT) \
-	test-getprogname$(EXEEXT) test-gettimeofday$(EXEEXT) \
-	test-hash$(EXEEXT) test-i-ring$(EXEEXT) test-iconv-h$(EXEEXT) \
-	test-iconv$(EXEEXT) test-ignore-value$(EXEEXT) \
-	test-intprops$(EXEEXT) test-inttostr$(EXEEXT) \
-	test-inttypes$(EXEEXT) test-isatty$(EXEEXT) \
-	test-isblank$(EXEEXT) test-iswblank$(EXEEXT) \
-	test-langinfo$(EXEEXT) test-limits-h$(EXEEXT) \
-	test-locale$(EXEEXT) test-localeconv$(EXEEXT) \
-	test-localename$(EXEEXT) test-lseek.sh test-lstat$(EXEEXT) \
-	test-malloc-gnu$(EXEEXT) test-malloca$(EXEEXT) \
-	test-mbscasecmp.sh test-mbsinit.sh test-mbsrtowcs1.sh \
-	test-mbsrtowcs2.sh test-mbsrtowcs3.sh test-mbsrtowcs4.sh \
-	test-mbsstr1$(EXEEXT) test-mbsstr2.sh test-mbsstr3.sh \
-	test-memchr$(EXEEXT) test-memchr2$(EXEEXT) \
+	test-getprogname$(EXEEXT) test-hash$(EXEEXT) \
+	test-i-ring$(EXEEXT) test-iconv-h$(EXEEXT) test-iconv$(EXEEXT) \
+	test-ignore-value$(EXEEXT) test-intprops$(EXEEXT) \
+	test-inttostr$(EXEEXT) test-inttypes$(EXEEXT) \
+	test-isatty$(EXEEXT) test-isblank$(EXEEXT) \
+	test-iswblank$(EXEEXT) test-langinfo$(EXEEXT) \
+	test-limits-h$(EXEEXT) test-locale$(EXEEXT) \
+	test-localeconv$(EXEEXT) test-localename$(EXEEXT) \
+	test-lseek.sh test-lstat$(EXEEXT) test-malloc-gnu$(EXEEXT) \
+	test-malloca$(EXEEXT) test-mbscasecmp.sh test-mbsinit.sh \
+	test-mbsrtowcs1.sh test-mbsrtowcs2.sh test-mbsrtowcs3.sh \
+	test-mbsrtowcs4.sh test-mbsstr1$(EXEEXT) test-mbsstr2.sh \
+	test-mbsstr3.sh test-memchr$(EXEEXT) test-memchr2$(EXEEXT) \
 	test-memrchr$(EXEEXT) test-nl_langinfo.sh test-open$(EXEEXT) \
 	test-openat-safer$(EXEEXT) test-openat$(EXEEXT) \
 	test-pathmax$(EXEEXT) test-pipe$(EXEEXT) \
@@ -159,19 +158,18 @@ TESTS = test-alignof$(EXEEXT) test-alloca-opt$(EXEEXT) \
 	test-strtoimax$(EXEEXT) test-strtoll$(EXEEXT) \
 	test-strtoull$(EXEEXT) test-strtoumax$(EXEEXT) \
 	test-symlink$(EXEEXT) test-sys_stat$(EXEEXT) \
-	test-sys_time$(EXEEXT) test-sys_types$(EXEEXT) test-init.sh \
-	test-time$(EXEEXT) test-dup-safer$(EXEEXT) \
-	test-unistd$(EXEEXT) test-u8-mbtoucr$(EXEEXT) \
-	test-u8-uctomb$(EXEEXT) test-uc_width$(EXEEXT) \
-	uniwidth/test-uc_width2.sh test-unsetenv$(EXEEXT) \
-	test-vasnprintf$(EXEEXT) test-vc-list-files-git.sh \
-	test-vc-list-files-cvs.sh test-verify$(EXEEXT) test-verify.sh \
-	test-version-etc.sh test-wchar$(EXEEXT) test-wcrtomb.sh \
-	test-wcrtomb-w32-1.sh test-wcrtomb-w32-2.sh \
-	test-wcrtomb-w32-3.sh test-wcrtomb-w32-4.sh \
-	test-wcrtomb-w32-5.sh test-wctype-h$(EXEEXT) \
-	test-wcwidth$(EXEEXT) test-xalloc-die.sh test-xstrtoimax.sh \
-	test-xstrtol.sh
+	test-sys_types$(EXEEXT) test-init.sh test-time$(EXEEXT) \
+	test-dup-safer$(EXEEXT) test-unistd$(EXEEXT) \
+	test-u8-mbtoucr$(EXEEXT) test-u8-uctomb$(EXEEXT) \
+	test-uc_width$(EXEEXT) uniwidth/test-uc_width2.sh \
+	test-unsetenv$(EXEEXT) test-vasnprintf$(EXEEXT) \
+	test-vc-list-files-git.sh test-vc-list-files-cvs.sh \
+	test-verify$(EXEEXT) test-verify.sh test-version-etc.sh \
+	test-wchar$(EXEEXT) test-wcrtomb.sh test-wcrtomb-w32-1.sh \
+	test-wcrtomb-w32-2.sh test-wcrtomb-w32-3.sh \
+	test-wcrtomb-w32-4.sh test-wcrtomb-w32-5.sh \
+	test-wctype-h$(EXEEXT) test-wcwidth$(EXEEXT) \
+	test-xalloc-die.sh test-xstrtoimax.sh test-xstrtol.sh
 XFAIL_TESTS =
 noinst_PROGRAMS =
 check_PROGRAMS = test-alignof$(EXEEXT) test-alloca-opt$(EXEEXT) \
@@ -192,24 +190,23 @@ check_PROGRAMS = test-alignof$(EXEEXT) test-alloca-opt$(EXEEXT) \
 	test-fstat$(EXEEXT) test-fstatat$(EXEEXT) test-fwrite$(EXEEXT) \
 	test-getcwd-lgpl$(EXEEXT) test-getdtablesize$(EXEEXT) \
 	test-getopt-gnu$(EXEEXT) test-getopt-posix$(EXEEXT) \
-	test-getprogname$(EXEEXT) test-gettimeofday$(EXEEXT) \
-	test-hash$(EXEEXT) test-i-ring$(EXEEXT) test-iconv-h$(EXEEXT) \
-	test-iconv$(EXEEXT) test-ignore-value$(EXEEXT) \
-	test-intprops$(EXEEXT) test-inttostr$(EXEEXT) \
-	test-inttypes$(EXEEXT) test-isatty$(EXEEXT) \
-	test-isblank$(EXEEXT) test-iswblank$(EXEEXT) \
-	test-langinfo$(EXEEXT) test-limits-h$(EXEEXT) \
-	test-locale$(EXEEXT) test-localeconv$(EXEEXT) \
-	test-localename$(EXEEXT) test-lseek$(EXEEXT) \
-	test-lstat$(EXEEXT) test-malloc-gnu$(EXEEXT) \
-	test-malloca$(EXEEXT) test-mbscasecmp$(EXEEXT) \
-	test-mbsinit$(EXEEXT) test-mbsrtowcs$(EXEEXT) \
-	test-mbsstr1$(EXEEXT) test-mbsstr2$(EXEEXT) \
-	test-mbsstr3$(EXEEXT) test-memchr$(EXEEXT) \
-	test-memchr2$(EXEEXT) test-memrchr$(EXEEXT) \
-	test-nl_langinfo$(EXEEXT) test-open$(EXEEXT) \
-	test-openat-safer$(EXEEXT) test-openat$(EXEEXT) \
-	test-pathmax$(EXEEXT) test-pipe$(EXEEXT) \
+	test-getprogname$(EXEEXT) test-hash$(EXEEXT) \
+	test-i-ring$(EXEEXT) test-iconv-h$(EXEEXT) test-iconv$(EXEEXT) \
+	test-ignore-value$(EXEEXT) test-intprops$(EXEEXT) \
+	test-inttostr$(EXEEXT) test-inttypes$(EXEEXT) \
+	test-isatty$(EXEEXT) test-isblank$(EXEEXT) \
+	test-iswblank$(EXEEXT) test-langinfo$(EXEEXT) \
+	test-limits-h$(EXEEXT) test-locale$(EXEEXT) \
+	test-localeconv$(EXEEXT) test-localename$(EXEEXT) \
+	test-lseek$(EXEEXT) test-lstat$(EXEEXT) \
+	test-malloc-gnu$(EXEEXT) test-malloca$(EXEEXT) \
+	test-mbscasecmp$(EXEEXT) test-mbsinit$(EXEEXT) \
+	test-mbsrtowcs$(EXEEXT) test-mbsstr1$(EXEEXT) \
+	test-mbsstr2$(EXEEXT) test-mbsstr3$(EXEEXT) \
+	test-memchr$(EXEEXT) test-memchr2$(EXEEXT) \
+	test-memrchr$(EXEEXT) test-nl_langinfo$(EXEEXT) \
+	test-open$(EXEEXT) test-openat-safer$(EXEEXT) \
+	test-openat$(EXEEXT) test-pathmax$(EXEEXT) test-pipe$(EXEEXT) \
 	test-quotearg-simple$(EXEEXT) test-read$(EXEEXT) \
 	test-realloc-gnu$(EXEEXT) test-regex$(EXEEXT) \
 	test-setenv$(EXEEXT) test-setlocale1$(EXEEXT) \
@@ -222,18 +219,18 @@ check_PROGRAMS = test-alignof$(EXEEXT) test-alloca-opt$(EXEEXT) \
 	test-strstr$(EXEEXT) test-strtoimax$(EXEEXT) \
 	test-strtoll$(EXEEXT) test-strtoull$(EXEEXT) \
 	test-strtoumax$(EXEEXT) test-symlink$(EXEEXT) \
-	test-sys_stat$(EXEEXT) test-sys_time$(EXEEXT) \
-	test-sys_types$(EXEEXT) test-time$(EXEEXT) \
-	test-dup-safer$(EXEEXT) test-unistd$(EXEEXT) \
-	test-u8-mbtoucr$(EXEEXT) test-u8-uctomb$(EXEEXT) \
-	test-uc_width$(EXEEXT) test-uc_width2$(EXEEXT) \
-	test-unsetenv$(EXEEXT) test-vasnprintf$(EXEEXT) \
-	test-verify$(EXEEXT) test-version-etc$(EXEEXT) \
-	test-wchar$(EXEEXT) test-wcrtomb$(EXEEXT) \
-	test-wcrtomb-w32$(EXEEXT) test-wctype-h$(EXEEXT) \
-	test-wcwidth$(EXEEXT) test-xalloc-die$(EXEEXT) \
-	test-xstrtoimax$(EXEEXT) test-xstrtol$(EXEEXT) \
-	test-xstrtoul$(EXEEXT)
+	test-sys_stat$(EXEEXT) test-sys_types$(EXEEXT) \
+	test-time$(EXEEXT) test-dup-safer$(EXEEXT) \
+	test-unistd$(EXEEXT) test-u8-mbtoucr$(EXEEXT) \
+	test-u8-uctomb$(EXEEXT) test-uc_width$(EXEEXT) \
+	test-uc_width2$(EXEEXT) test-unsetenv$(EXEEXT) \
+	test-vasnprintf$(EXEEXT) test-verify$(EXEEXT) \
+	test-version-etc$(EXEEXT) test-wchar$(EXEEXT) \
+	test-wcrtomb$(EXEEXT) test-wcrtomb-w32$(EXEEXT) \
+	test-wctype-h$(EXEEXT) test-wcwidth$(EXEEXT) \
+	test-xalloc-die$(EXEEXT) test-xstrtoimax$(EXEEXT) \
+	test-xstrtol$(EXEEXT) test-xstrtoul$(EXEEXT)
+EXTRA_PROGRAMS = test-verify-try$(EXEEXT)
 subdir = gnulib-tests
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/00gnulib.m4 \
@@ -265,8 +262,7 @@ am__aclocal_m4_deps = $(top_srcdir)/m4/00gnulib.m4 \
 	$(top_srcdir)/m4/getdtablesize.m4 $(top_srcdir)/m4/getopt.m4 \
 	$(top_srcdir)/m4/getpagesize.m4 \
 	$(top_srcdir)/m4/getprogname.m4 $(top_srcdir)/m4/gettext.m4 \
-	$(top_srcdir)/m4/gettimeofday.m4 $(top_srcdir)/m4/glibc21.m4 \
-	$(top_srcdir)/m4/gnulib-common.m4 \
+	$(top_srcdir)/m4/glibc21.m4 $(top_srcdir)/m4/gnulib-common.m4 \
 	$(top_srcdir)/m4/gnulib-comp.m4 \
 	$(top_srcdir)/m4/hard-locale.m4 $(top_srcdir)/m4/i-ring.m4 \
 	$(top_srcdir)/m4/iconv.m4 $(top_srcdir)/m4/iconv_h.m4 \
@@ -326,11 +322,11 @@ am__aclocal_m4_deps = $(top_srcdir)/m4/00gnulib.m4 \
 	$(top_srcdir)/m4/strtoimax.m4 $(top_srcdir)/m4/strtoll.m4 \
 	$(top_srcdir)/m4/strtoull.m4 $(top_srcdir)/m4/strtoumax.m4 \
 	$(top_srcdir)/m4/symlink.m4 $(top_srcdir)/m4/sys_socket_h.m4 \
-	$(top_srcdir)/m4/sys_stat_h.m4 $(top_srcdir)/m4/sys_time_h.m4 \
-	$(top_srcdir)/m4/sys_types_h.m4 $(top_srcdir)/m4/threadlib.m4 \
-	$(top_srcdir)/m4/time_h.m4 $(top_srcdir)/m4/unistd-safer.m4 \
-	$(top_srcdir)/m4/unistd_h.m4 $(top_srcdir)/m4/unlocked-io.m4 \
-	$(top_srcdir)/m4/vasnprintf.m4 $(top_srcdir)/m4/version-etc.m4 \
+	$(top_srcdir)/m4/sys_stat_h.m4 $(top_srcdir)/m4/sys_types_h.m4 \
+	$(top_srcdir)/m4/threadlib.m4 $(top_srcdir)/m4/time_h.m4 \
+	$(top_srcdir)/m4/unistd-safer.m4 $(top_srcdir)/m4/unistd_h.m4 \
+	$(top_srcdir)/m4/unlocked-io.m4 $(top_srcdir)/m4/vasnprintf.m4 \
+	$(top_srcdir)/m4/version-etc.m4 \
 	$(top_srcdir)/m4/warn-on-use.m4 $(top_srcdir)/m4/warnings.m4 \
 	$(top_srcdir)/m4/wchar_h.m4 $(top_srcdir)/m4/wchar_t.m4 \
 	$(top_srcdir)/m4/wcrtomb.m4 $(top_srcdir)/m4/wctob.m4 \
@@ -555,11 +551,6 @@ test_getopt_posix_DEPENDENCIES = $(am__DEPENDENCIES_2) \
 test_getprogname_SOURCES = test-getprogname.c
 test_getprogname_OBJECTS = test-getprogname.$(OBJEXT)
 test_getprogname_DEPENDENCIES = $(am__DEPENDENCIES_2)
-test_gettimeofday_SOURCES = test-gettimeofday.c
-test_gettimeofday_OBJECTS = test-gettimeofday.$(OBJEXT)
-test_gettimeofday_LDADD = $(LDADD)
-test_gettimeofday_DEPENDENCIES = libtests.a ../lib/libgreputils.a \
-	libtests.a $(am__DEPENDENCIES_1)
 test_hash_SOURCES = test-hash.c
 test_hash_OBJECTS = test-hash.$(OBJEXT)
 test_hash_LDADD = $(LDADD)
@@ -850,11 +841,6 @@ test_sys_stat_OBJECTS = test-sys_stat.$(OBJEXT)
 test_sys_stat_LDADD = $(LDADD)
 test_sys_stat_DEPENDENCIES = libtests.a ../lib/libgreputils.a \
 	libtests.a $(am__DEPENDENCIES_1)
-test_sys_time_SOURCES = test-sys_time.c
-test_sys_time_OBJECTS = test-sys_time.$(OBJEXT)
-test_sys_time_LDADD = $(LDADD)
-test_sys_time_DEPENDENCIES = libtests.a ../lib/libgreputils.a \
-	libtests.a $(am__DEPENDENCIES_1)
 test_sys_types_SOURCES = test-sys_types.c
 test_sys_types_OBJECTS = test-sys_types.$(OBJEXT)
 test_sys_types_LDADD = $(LDADD)
@@ -898,6 +884,11 @@ test_verify_OBJECTS = test-verify.$(OBJEXT)
 test_verify_LDADD = $(LDADD)
 test_verify_DEPENDENCIES = libtests.a ../lib/libgreputils.a libtests.a \
 	$(am__DEPENDENCIES_1)
+test_verify_try_SOURCES = test-verify-try.c
+test_verify_try_OBJECTS = test-verify-try.$(OBJEXT)
+test_verify_try_LDADD = $(LDADD)
+test_verify_try_DEPENDENCIES = libtests.a ../lib/libgreputils.a \
+	libtests.a $(am__DEPENDENCIES_1)
 test_version_etc_SOURCES = test-version-etc.c
 test_version_etc_OBJECTS = test-version-etc.$(OBJEXT)
 test_version_etc_DEPENDENCIES = $(am__DEPENDENCIES_2)
@@ -986,8 +977,7 @@ am__depfiles_remade = ./$(DEPDIR)/anytostr.Po ./$(DEPDIR)/asnprintf.Po \
 	./$(DEPDIR)/test-getdtablesize.Po \
 	./$(DEPDIR)/test-getopt-gnu.Po \
 	./$(DEPDIR)/test-getopt-posix.Po \
-	./$(DEPDIR)/test-getprogname.Po \
-	./$(DEPDIR)/test-gettimeofday.Po ./$(DEPDIR)/test-hash.Po \
+	./$(DEPDIR)/test-getprogname.Po ./$(DEPDIR)/test-hash.Po \
 	./$(DEPDIR)/test-i-ring.Po ./$(DEPDIR)/test-iconv-h.Po \
 	./$(DEPDIR)/test-iconv.Po ./$(DEPDIR)/test-ignore-value.Po \
 	./$(DEPDIR)/test-intprops.Po ./$(DEPDIR)/test-inttostr.Po \
@@ -1018,9 +1008,9 @@ am__depfiles_remade = ./$(DEPDIR)/anytostr.Po ./$(DEPDIR)/asnprintf.Po \
 	./$(DEPDIR)/test-strtoimax.Po ./$(DEPDIR)/test-strtoll.Po \
 	./$(DEPDIR)/test-strtoull.Po ./$(DEPDIR)/test-strtoumax.Po \
 	./$(DEPDIR)/test-symlink.Po ./$(DEPDIR)/test-sys_stat.Po \
-	./$(DEPDIR)/test-sys_time.Po ./$(DEPDIR)/test-sys_types.Po \
-	./$(DEPDIR)/test-time.Po ./$(DEPDIR)/test-unistd.Po \
-	./$(DEPDIR)/test-unsetenv.Po ./$(DEPDIR)/test-vasnprintf.Po \
+	./$(DEPDIR)/test-sys_types.Po ./$(DEPDIR)/test-time.Po \
+	./$(DEPDIR)/test-unistd.Po ./$(DEPDIR)/test-unsetenv.Po \
+	./$(DEPDIR)/test-vasnprintf.Po ./$(DEPDIR)/test-verify-try.Po \
 	./$(DEPDIR)/test-verify.Po ./$(DEPDIR)/test-version-etc.Po \
 	./$(DEPDIR)/test-wchar.Po ./$(DEPDIR)/test-wcrtomb-w32.Po \
 	./$(DEPDIR)/test-wcrtomb.Po ./$(DEPDIR)/test-wctype-h.Po \
@@ -1059,16 +1049,16 @@ SOURCES = $(libtests_a_SOURCES) $(EXTRA_libtests_a_SOURCES) \
 	test-fnmatch.c test-fpending.c test-fputc.c test-fread.c \
 	test-fstat.c test-fstatat.c test-fwrite.c test-getcwd-lgpl.c \
 	test-getdtablesize.c test-getopt-gnu.c test-getopt-posix.c \
-	test-getprogname.c test-gettimeofday.c test-hash.c \
-	test-i-ring.c test-iconv.c test-iconv-h.c test-ignore-value.c \
-	test-intprops.c test-inttostr.c test-inttypes.c test-isatty.c \
-	test-isblank.c test-iswblank.c test-langinfo.c test-limits-h.c \
-	test-locale.c test-localeconv.c test-localename.c test-lseek.c \
-	test-lstat.c test-malloc-gnu.c test-malloca.c \
-	test-mbscasecmp.c test-mbsinit.c test-mbsrtowcs.c \
-	test-mbsstr1.c test-mbsstr2.c test-mbsstr3.c test-memchr.c \
-	test-memchr2.c test-memrchr.c test-nl_langinfo.c test-open.c \
-	test-openat.c test-openat-safer.c test-pathmax.c test-pipe.c \
+	test-getprogname.c test-hash.c test-i-ring.c test-iconv.c \
+	test-iconv-h.c test-ignore-value.c test-intprops.c \
+	test-inttostr.c test-inttypes.c test-isatty.c test-isblank.c \
+	test-iswblank.c test-langinfo.c test-limits-h.c test-locale.c \
+	test-localeconv.c test-localename.c test-lseek.c test-lstat.c \
+	test-malloc-gnu.c test-malloca.c test-mbscasecmp.c \
+	test-mbsinit.c test-mbsrtowcs.c test-mbsstr1.c test-mbsstr2.c \
+	test-mbsstr3.c test-memchr.c test-memchr2.c test-memrchr.c \
+	test-nl_langinfo.c test-open.c test-openat.c \
+	test-openat-safer.c test-pathmax.c test-pipe.c \
 	test-quotearg-simple.c test-read.c test-realloc-gnu.c \
 	test-regex.c test-setenv.c test-setlocale1.c test-setlocale2.c \
 	test-snprintf.c test-stat.c test-stdalign.c test-stdbool.c \
@@ -1076,10 +1066,10 @@ SOURCES = $(libtests_a_SOURCES) $(EXTRA_libtests_a_SOURCES) \
 	test-strerror.c test-striconv.c test-string.c test-strnlen.c \
 	test-strstr.c test-strtoimax.c test-strtoll.c test-strtoull.c \
 	test-strtoumax.c test-symlink.c test-sys_stat.c \
-	test-sys_time.c test-sys_types.c test-time.c \
-	$(test_u8_mbtoucr_SOURCES) $(test_u8_uctomb_SOURCES) \
-	$(test_uc_width_SOURCES) $(test_uc_width2_SOURCES) \
-	test-unistd.c test-unsetenv.c test-vasnprintf.c test-verify.c \
+	test-sys_types.c test-time.c $(test_u8_mbtoucr_SOURCES) \
+	$(test_u8_uctomb_SOURCES) $(test_uc_width_SOURCES) \
+	$(test_uc_width2_SOURCES) test-unistd.c test-unsetenv.c \
+	test-vasnprintf.c test-verify.c test-verify-try.c \
 	test-version-etc.c test-wchar.c test-wcrtomb.c \
 	test-wcrtomb-w32.c test-wctype-h.c test-wcwidth.c \
 	test-xalloc-die.c test-xstrtoimax.c test-xstrtol.c \
@@ -1096,16 +1086,16 @@ DIST_SOURCES = $(libtests_a_SOURCES) $(EXTRA_libtests_a_SOURCES) \
 	test-fnmatch.c test-fpending.c test-fputc.c test-fread.c \
 	test-fstat.c test-fstatat.c test-fwrite.c test-getcwd-lgpl.c \
 	test-getdtablesize.c test-getopt-gnu.c test-getopt-posix.c \
-	test-getprogname.c test-gettimeofday.c test-hash.c \
-	test-i-ring.c test-iconv.c test-iconv-h.c test-ignore-value.c \
-	test-intprops.c test-inttostr.c test-inttypes.c test-isatty.c \
-	test-isblank.c test-iswblank.c test-langinfo.c test-limits-h.c \
-	test-locale.c test-localeconv.c test-localename.c test-lseek.c \
-	test-lstat.c test-malloc-gnu.c test-malloca.c \
-	test-mbscasecmp.c test-mbsinit.c test-mbsrtowcs.c \
-	test-mbsstr1.c test-mbsstr2.c test-mbsstr3.c test-memchr.c \
-	test-memchr2.c test-memrchr.c test-nl_langinfo.c test-open.c \
-	test-openat.c test-openat-safer.c test-pathmax.c test-pipe.c \
+	test-getprogname.c test-hash.c test-i-ring.c test-iconv.c \
+	test-iconv-h.c test-ignore-value.c test-intprops.c \
+	test-inttostr.c test-inttypes.c test-isatty.c test-isblank.c \
+	test-iswblank.c test-langinfo.c test-limits-h.c test-locale.c \
+	test-localeconv.c test-localename.c test-lseek.c test-lstat.c \
+	test-malloc-gnu.c test-malloca.c test-mbscasecmp.c \
+	test-mbsinit.c test-mbsrtowcs.c test-mbsstr1.c test-mbsstr2.c \
+	test-mbsstr3.c test-memchr.c test-memchr2.c test-memrchr.c \
+	test-nl_langinfo.c test-open.c test-openat.c \
+	test-openat-safer.c test-pathmax.c test-pipe.c \
 	test-quotearg-simple.c test-read.c test-realloc-gnu.c \
 	test-regex.c test-setenv.c test-setlocale1.c test-setlocale2.c \
 	test-snprintf.c test-stat.c test-stdalign.c test-stdbool.c \
@@ -1113,10 +1103,10 @@ DIST_SOURCES = $(libtests_a_SOURCES) $(EXTRA_libtests_a_SOURCES) \
 	test-strerror.c test-striconv.c test-string.c test-strnlen.c \
 	test-strstr.c test-strtoimax.c test-strtoll.c test-strtoull.c \
 	test-strtoumax.c test-symlink.c test-sys_stat.c \
-	test-sys_time.c test-sys_types.c test-time.c \
-	$(test_u8_mbtoucr_SOURCES) $(test_u8_uctomb_SOURCES) \
-	$(test_uc_width_SOURCES) $(test_uc_width2_SOURCES) \
-	test-unistd.c test-unsetenv.c test-vasnprintf.c test-verify.c \
+	test-sys_types.c test-time.c $(test_u8_mbtoucr_SOURCES) \
+	$(test_u8_uctomb_SOURCES) $(test_uc_width_SOURCES) \
+	$(test_uc_width2_SOURCES) test-unistd.c test-unsetenv.c \
+	test-vasnprintf.c test-verify.c test-verify-try.c \
 	test-version-etc.c test-wchar.c test-wcrtomb.c \
 	test-wcrtomb-w32.c test-wctype-h.c test-wcwidth.c \
 	test-xalloc-die.c test-xstrtoimax.c test-xstrtol.c \
@@ -1437,6 +1427,7 @@ ERRNO_H = @ERRNO_H@
 EXEEXT = @EXEEXT@
 FLOAT_H = @FLOAT_H@
 FNMATCH_H = @FNMATCH_H@
+GETOPT_CDEFS_H = @GETOPT_CDEFS_H@
 GETOPT_H = @GETOPT_H@
 GETTEXT_MACRO_VERSION = @GETTEXT_MACRO_VERSION@
 GLIBC21 = @GLIBC21@
@@ -1451,6 +1442,7 @@ GNULIB_CHDIR = @GNULIB_CHDIR@
 GNULIB_CHOWN = @GNULIB_CHOWN@
 GNULIB_CLOSE = @GNULIB_CLOSE@
 GNULIB_CLOSEDIR = @GNULIB_CLOSEDIR@
+GNULIB_CTIME = @GNULIB_CTIME@
 GNULIB_DIRFD = @GNULIB_DIRFD@
 GNULIB_DPRINTF = @GNULIB_DPRINTF@
 GNULIB_DUP = @GNULIB_DUP@
@@ -1523,6 +1515,7 @@ GNULIB_LCHOWN = @GNULIB_LCHOWN@
 GNULIB_LINK = @GNULIB_LINK@
 GNULIB_LINKAT = @GNULIB_LINKAT@
 GNULIB_LOCALECONV = @GNULIB_LOCALECONV@
+GNULIB_LOCALTIME = @GNULIB_LOCALTIME@
 GNULIB_LSEEK = @GNULIB_LSEEK@
 GNULIB_LSTAT = @GNULIB_LSTAT@
 GNULIB_MALLOC_POSIX = @GNULIB_MALLOC_POSIX@
@@ -1569,6 +1562,7 @@ GNULIB_OBSTACK_PRINTF_POSIX = @GNULIB_OBSTACK_PRINTF_POSIX@
 GNULIB_OPEN = @GNULIB_OPEN@
 GNULIB_OPENAT = @GNULIB_OPENAT@
 GNULIB_OPENDIR = @GNULIB_OPENDIR@
+GNULIB_OVERRIDES_STRUCT_STAT = @GNULIB_OVERRIDES_STRUCT_STAT@
 GNULIB_OVERRIDES_WINT_T = @GNULIB_OVERRIDES_WINT_T@
 GNULIB_PCLOSE = @GNULIB_PCLOSE@
 GNULIB_PERROR = @GNULIB_PERROR@
@@ -1621,6 +1615,7 @@ GNULIB_STRCHRNUL = @GNULIB_STRCHRNUL@
 GNULIB_STRDUP = @GNULIB_STRDUP@
 GNULIB_STRERROR = @GNULIB_STRERROR@
 GNULIB_STRERROR_R = @GNULIB_STRERROR_R@
+GNULIB_STRFTIME = @GNULIB_STRFTIME@
 GNULIB_STRNCAT = @GNULIB_STRNCAT@
 GNULIB_STRNDUP = @GNULIB_STRNDUP@
 GNULIB_STRNLEN = @GNULIB_STRNLEN@
@@ -1644,7 +1639,9 @@ GNULIB_TIME_R = @GNULIB_TIME_R@
 GNULIB_TIME_RZ = @GNULIB_TIME_RZ@
 GNULIB_TMPFILE = @GNULIB_TMPFILE@
 GNULIB_TOWCTRANS = @GNULIB_TOWCTRANS@
+GNULIB_TRUNCATE = @GNULIB_TRUNCATE@
 GNULIB_TTYNAME_R = @GNULIB_TTYNAME_R@
+GNULIB_TZSET = @GNULIB_TZSET@
 GNULIB_UNISTD_H_NONBLOCKING = @GNULIB_UNISTD_H_NONBLOCKING@
 GNULIB_UNISTD_H_SIGPIPE = @GNULIB_UNISTD_H_SIGPIPE@
 GNULIB_UNLINK = @GNULIB_UNLINK@
@@ -1675,6 +1672,7 @@ GNULIB_WCSCOLL = @GNULIB_WCSCOLL@
 GNULIB_WCSCPY = @GNULIB_WCSCPY@
 GNULIB_WCSCSPN = @GNULIB_WCSCSPN@
 GNULIB_WCSDUP = @GNULIB_WCSDUP@
+GNULIB_WCSFTIME = @GNULIB_WCSFTIME@
 GNULIB_WCSLEN = @GNULIB_WCSLEN@
 GNULIB_WCSNCASECMP = @GNULIB_WCSNCASECMP@
 GNULIB_WCSNCAT = @GNULIB_WCSNCAT@
@@ -1710,6 +1708,7 @@ HAVE_C99_STDINT_H = @HAVE_C99_STDINT_H@
 HAVE_CANONICALIZE_FILE_NAME = @HAVE_CANONICALIZE_FILE_NAME@
 HAVE_CHOWN = @HAVE_CHOWN@
 HAVE_CLOSEDIR = @HAVE_CLOSEDIR@
+HAVE_CRTDEFS_H = @HAVE_CRTDEFS_H@
 HAVE_DECL_DIRFD = @HAVE_DECL_DIRFD@
 HAVE_DECL_ENVIRON = @HAVE_DECL_ENVIRON@
 HAVE_DECL_FCHDIR = @HAVE_DECL_FCHDIR@
@@ -1777,7 +1776,6 @@ HAVE_GETLOGIN = @HAVE_GETLOGIN@
 HAVE_GETOPT_H = @HAVE_GETOPT_H@
 HAVE_GETPAGESIZE = @HAVE_GETPAGESIZE@
 HAVE_GETSUBOPT = @HAVE_GETSUBOPT@
-HAVE_GETTIMEOFDAY = @HAVE_GETTIMEOFDAY@
 HAVE_GRANTPT = @HAVE_GRANTPT@
 HAVE_GROUP_MEMBER = @HAVE_GROUP_MEMBER@
 HAVE_INTTYPES_H = @HAVE_INTTYPES_H@
@@ -1861,18 +1859,19 @@ HAVE_STRTOD = @HAVE_STRTOD@
 HAVE_STRTOLL = @HAVE_STRTOLL@
 HAVE_STRTOULL = @HAVE_STRTOULL@
 HAVE_STRUCT_RANDOM_DATA = @HAVE_STRUCT_RANDOM_DATA@
-HAVE_STRUCT_TIMEVAL = @HAVE_STRUCT_TIMEVAL@
 HAVE_STRVERSCMP = @HAVE_STRVERSCMP@
 HAVE_SYMLINK = @HAVE_SYMLINK@
 HAVE_SYMLINKAT = @HAVE_SYMLINKAT@
 HAVE_SYS_BITYPES_H = @HAVE_SYS_BITYPES_H@
+HAVE_SYS_CDEFS_H = @HAVE_SYS_CDEFS_H@
 HAVE_SYS_INTTYPES_H = @HAVE_SYS_INTTYPES_H@
 HAVE_SYS_LOADAVG_H = @HAVE_SYS_LOADAVG_H@
 HAVE_SYS_PARAM_H = @HAVE_SYS_PARAM_H@
-HAVE_SYS_TIME_H = @HAVE_SYS_TIME_H@
 HAVE_SYS_TYPES_H = @HAVE_SYS_TYPES_H@
 HAVE_TIMEGM = @HAVE_TIMEGM@
 HAVE_TIMEZONE_T = @HAVE_TIMEZONE_T@
+HAVE_TRUNCATE = @HAVE_TRUNCATE@
+HAVE_TZSET = @HAVE_TZSET@
 HAVE_UNISTD_H = @HAVE_UNISTD_H@
 HAVE_UNLINKAT = @HAVE_UNLINKAT@
 HAVE_UNLOCKPT = @HAVE_UNLOCKPT@
@@ -1894,6 +1893,7 @@ HAVE_WCSCOLL = @HAVE_WCSCOLL@
 HAVE_WCSCPY = @HAVE_WCSCPY@
 HAVE_WCSCSPN = @HAVE_WCSCSPN@
 HAVE_WCSDUP = @HAVE_WCSDUP@
+HAVE_WCSFTIME = @HAVE_WCSFTIME@
 HAVE_WCSLEN = @HAVE_WCSLEN@
 HAVE_WCSNCASECMP = @HAVE_WCSNCASECMP@
 HAVE_WCSNCAT = @HAVE_WCSNCAT@
@@ -1986,7 +1986,6 @@ NEXT_AS_FIRST_DIRECTIVE_STDIO_H = @NEXT_AS_FIRST_DIRECTIVE_STDIO_H@
 NEXT_AS_FIRST_DIRECTIVE_STDLIB_H = @NEXT_AS_FIRST_DIRECTIVE_STDLIB_H@
 NEXT_AS_FIRST_DIRECTIVE_STRING_H = @NEXT_AS_FIRST_DIRECTIVE_STRING_H@
 NEXT_AS_FIRST_DIRECTIVE_SYS_STAT_H = @NEXT_AS_FIRST_DIRECTIVE_SYS_STAT_H@
-NEXT_AS_FIRST_DIRECTIVE_SYS_TIME_H = @NEXT_AS_FIRST_DIRECTIVE_SYS_TIME_H@
 NEXT_AS_FIRST_DIRECTIVE_SYS_TYPES_H = @NEXT_AS_FIRST_DIRECTIVE_SYS_TYPES_H@
 NEXT_AS_FIRST_DIRECTIVE_TIME_H = @NEXT_AS_FIRST_DIRECTIVE_TIME_H@
 NEXT_AS_FIRST_DIRECTIVE_UNISTD_H = @NEXT_AS_FIRST_DIRECTIVE_UNISTD_H@
@@ -2010,7 +2009,6 @@ NEXT_STDIO_H = @NEXT_STDIO_H@
 NEXT_STDLIB_H = @NEXT_STDLIB_H@
 NEXT_STRING_H = @NEXT_STRING_H@
 NEXT_SYS_STAT_H = @NEXT_SYS_STAT_H@
-NEXT_SYS_TIME_H = @NEXT_SYS_TIME_H@
 NEXT_SYS_TYPES_H = @NEXT_SYS_TYPES_H@
 NEXT_TIME_H = @NEXT_TIME_H@
 NEXT_UNISTD_H = @NEXT_UNISTD_H@
@@ -2045,6 +2043,7 @@ REPLACE_CANONICALIZE_FILE_NAME = @REPLACE_CANONICALIZE_FILE_NAME@
 REPLACE_CHOWN = @REPLACE_CHOWN@
 REPLACE_CLOSE = @REPLACE_CLOSE@
 REPLACE_CLOSEDIR = @REPLACE_CLOSEDIR@
+REPLACE_CTIME = @REPLACE_CTIME@
 REPLACE_DIRFD = @REPLACE_DIRFD@
 REPLACE_DPRINTF = @REPLACE_DPRINTF@
 REPLACE_DUP = @REPLACE_DUP@
@@ -2076,7 +2075,6 @@ REPLACE_GETGROUPS = @REPLACE_GETGROUPS@
 REPLACE_GETLINE = @REPLACE_GETLINE@
 REPLACE_GETLOGIN_R = @REPLACE_GETLOGIN_R@
 REPLACE_GETPAGESIZE = @REPLACE_GETPAGESIZE@
-REPLACE_GETTIMEOFDAY = @REPLACE_GETTIMEOFDAY@
 REPLACE_GMTIME = @REPLACE_GMTIME@
 REPLACE_ICONV = @REPLACE_ICONV@
 REPLACE_ICONV_OPEN = @REPLACE_ICONV_OPEN@
@@ -2148,6 +2146,7 @@ REPLACE_STRCHRNUL = @REPLACE_STRCHRNUL@
 REPLACE_STRDUP = @REPLACE_STRDUP@
 REPLACE_STRERROR = @REPLACE_STRERROR@
 REPLACE_STRERROR_R = @REPLACE_STRERROR_R@
+REPLACE_STRFTIME = @REPLACE_STRFTIME@
 REPLACE_STRNCAT = @REPLACE_STRNCAT@
 REPLACE_STRNDUP = @REPLACE_STRNDUP@
 REPLACE_STRNLEN = @REPLACE_STRNLEN@
@@ -2158,13 +2157,14 @@ REPLACE_STRTOIMAX = @REPLACE_STRTOIMAX@
 REPLACE_STRTOK_R = @REPLACE_STRTOK_R@
 REPLACE_STRTOUMAX = @REPLACE_STRTOUMAX@
 REPLACE_STRUCT_LCONV = @REPLACE_STRUCT_LCONV@
-REPLACE_STRUCT_TIMEVAL = @REPLACE_STRUCT_TIMEVAL@
 REPLACE_SYMLINK = @REPLACE_SYMLINK@
 REPLACE_SYMLINKAT = @REPLACE_SYMLINKAT@
 REPLACE_TIMEGM = @REPLACE_TIMEGM@
 REPLACE_TMPFILE = @REPLACE_TMPFILE@
 REPLACE_TOWLOWER = @REPLACE_TOWLOWER@
+REPLACE_TRUNCATE = @REPLACE_TRUNCATE@
 REPLACE_TTYNAME_R = @REPLACE_TTYNAME_R@
+REPLACE_TZSET = @REPLACE_TZSET@
 REPLACE_UNLINK = @REPLACE_UNLINK@
 REPLACE_UNLINKAT = @REPLACE_UNLINKAT@
 REPLACE_UNSETENV = @REPLACE_UNSETENV@
@@ -2177,6 +2177,7 @@ REPLACE_VPRINTF = @REPLACE_VPRINTF@
 REPLACE_VSNPRINTF = @REPLACE_VSNPRINTF@
 REPLACE_VSPRINTF = @REPLACE_VSPRINTF@
 REPLACE_WCRTOMB = @REPLACE_WCRTOMB@
+REPLACE_WCSFTIME = @REPLACE_WCSFTIME@
 REPLACE_WCSNRTOMBS = @REPLACE_WCSNRTOMBS@
 REPLACE_WCSRTOMBS = @REPLACE_WCSRTOMBS@
 REPLACE_WCSWIDTH = @REPLACE_WCSWIDTH@
@@ -2210,6 +2211,8 @@ WCHAR_T_SUFFIX = @WCHAR_T_SUFFIX@
 WERROR_CFLAGS = @WERROR_CFLAGS@
 WINDOWS_64_BIT_OFF_T = @WINDOWS_64_BIT_OFF_T@
 WINDOWS_64_BIT_ST_SIZE = @WINDOWS_64_BIT_ST_SIZE@
+WINDOWS_STAT_INODES = @WINDOWS_STAT_INODES@
+WINDOWS_STAT_TIMESPEC = @WINDOWS_STAT_TIMESPEC@
 WINT_T_SUFFIX = @WINT_T_SUFFIX@
 XGETTEXT = @XGETTEXT@
 XGETTEXT_015 = @XGETTEXT_015@
@@ -2219,7 +2222,6 @@ abs_builddir = @abs_builddir@
 abs_srcdir = @abs_srcdir@
 abs_top_builddir = @abs_top_builddir@
 abs_top_srcdir = @abs_top_srcdir@
-ac_ct_AR = @ac_ct_AR@
 ac_ct_CC = @ac_ct_CC@
 am__include = @am__include@
 am__quote = @am__quote@
@@ -2319,23 +2321,22 @@ EXTRA_DIST = test-alignof.c test-alloca-opt.c test-argmatch.c macros.h \
 	macros.h signature.h test-getopt-gnu.c test-getopt-main.h \
 	test-getopt.h test-getopt_long.h macros.h signature.h \
 	test-getopt-posix.c test-getopt-main.h test-getopt.h \
-	test-getprogname.c signature.h test-gettimeofday.c test-hash.c \
-	macros.h test-i-ring.c macros.h test-iconv-h.c test-iconv.c \
-	signature.h macros.h test-ignore-value.c test-intprops.c \
-	macros.h anytostr.c inttostr.h macros.h test-inttostr.c \
-	test-inttypes.c test-isatty.c signature.h macros.h \
-	test-isblank.c signature.h macros.h test-iswblank.c macros.h \
-	test-langinfo.c test-limits-h.c test-locale.c \
-	test-localeconv.c signature.h macros.h localename.h \
-	test-localename.c macros.h test-lseek.c test-lseek.sh \
-	signature.h macros.h test-lstat.h test-lstat.c signature.h \
-	macros.h test-malloc-gnu.c test-malloca.c test-mbscasecmp.sh \
-	test-mbscasecmp.c macros.h test-mbsinit.sh test-mbsinit.c \
-	signature.h macros.h test-mbsrtowcs1.sh test-mbsrtowcs2.sh \
-	test-mbsrtowcs3.sh test-mbsrtowcs4.sh test-mbsrtowcs.c \
-	signature.h macros.h test-mbsstr1.c test-mbsstr2.sh \
-	test-mbsstr2.c test-mbsstr3.sh test-mbsstr3.c macros.h \
-	test-memchr.c zerosize-ptr.h signature.h macros.h \
+	test-getprogname.c test-hash.c macros.h test-i-ring.c macros.h \
+	test-iconv-h.c test-iconv.c signature.h macros.h \
+	test-ignore-value.c test-intprops.c macros.h anytostr.c \
+	inttostr.h macros.h test-inttostr.c test-inttypes.c \
+	test-isatty.c signature.h macros.h test-isblank.c signature.h \
+	macros.h test-iswblank.c macros.h test-langinfo.c \
+	test-limits-h.c test-locale.c test-localeconv.c signature.h \
+	macros.h localename.h test-localename.c macros.h test-lseek.c \
+	test-lseek.sh signature.h macros.h test-lstat.h test-lstat.c \
+	signature.h macros.h test-malloc-gnu.c test-malloca.c \
+	test-mbscasecmp.sh test-mbscasecmp.c macros.h test-mbsinit.sh \
+	test-mbsinit.c signature.h macros.h test-mbsrtowcs1.sh \
+	test-mbsrtowcs2.sh test-mbsrtowcs3.sh test-mbsrtowcs4.sh \
+	test-mbsrtowcs.c signature.h macros.h test-mbsstr1.c \
+	test-mbsstr2.sh test-mbsstr2.c test-mbsstr3.sh test-mbsstr3.c \
+	macros.h test-memchr.c zerosize-ptr.h signature.h macros.h \
 	test-memchr2.c zerosize-ptr.h macros.h test-memrchr.c \
 	zerosize-ptr.h signature.h macros.h test-nl_langinfo.sh \
 	test-nl_langinfo.c signature.h macros.h test-open.h \
@@ -2347,22 +2348,18 @@ EXTRA_DIST = test-alignof.c test-alloca-opt.c test-argmatch.c macros.h \
 	test-regex.c macros.h setenv.c test-setenv.c signature.h \
 	macros.h setlocale.c test-setlocale1.sh test-setlocale1.c \
 	test-setlocale2.sh test-setlocale2.c signature.h macros.h \
-	$(top_srcdir)/build-aux/snippet/_Noreturn.h \
-	$(top_srcdir)/build-aux/snippet/arg-nonnull.h \
-	$(top_srcdir)/build-aux/snippet/c++defs.h \
-	$(top_srcdir)/build-aux/snippet/unused-parameter.h \
-	$(top_srcdir)/build-aux/snippet/warn-on-use.h snprintf.c \
-	test-snprintf.c signature.h macros.h test-stat.h test-stat.c \
-	signature.h macros.h test-stdalign.c macros.h test-stdbool.c \
-	test-stddef.c test-stdint.c test-stdio.c test-stdlib.c \
-	test-sys_wait.h test-strerror.c signature.h macros.h \
-	test-striconv.c macros.h test-string.c test-strnlen.c \
-	zerosize-ptr.h signature.h macros.h test-strstr.c \
-	zerosize-ptr.h signature.h macros.h test-strtoimax.c \
-	signature.h macros.h test-strtoll.c signature.h macros.h \
-	test-strtoull.c signature.h macros.h test-strtoumax.c \
-	signature.h macros.h symlink.c test-symlink.h test-symlink.c \
-	signature.h macros.h test-sys_stat.c test-sys_time.c \
+	_Noreturn.h arg-nonnull.h c++defs.h unused-parameter.h \
+	warn-on-use.h snprintf.c test-snprintf.c signature.h macros.h \
+	test-stat.h test-stat.c signature.h macros.h test-stdalign.c \
+	macros.h test-stdbool.c test-stddef.c test-stdint.c \
+	test-stdio.c test-stdlib.c test-sys_wait.h test-strerror.c \
+	signature.h macros.h test-striconv.c macros.h test-string.c \
+	test-strnlen.c zerosize-ptr.h signature.h macros.h \
+	test-strstr.c zerosize-ptr.h signature.h macros.h \
+	test-strtoimax.c signature.h macros.h test-strtoll.c \
+	signature.h macros.h test-strtoull.c signature.h macros.h \
+	test-strtoumax.c signature.h macros.h symlink.c test-symlink.h \
+	test-symlink.c signature.h macros.h test-sys_stat.c \
 	test-sys_types.c init.sh test-init.sh test-time.c \
 	test-dup-safer.c macros.h test-unistd.c \
 	unistr/test-u8-mbtoucr.c macros.h unistr/test-u8-uctomb.c \
@@ -2372,41 +2369,23 @@ EXTRA_DIST = test-alignof.c test-alloca-opt.c test-argmatch.c macros.h \
 	printf-args.h printf-parse.c printf-parse.h vasnprintf.c \
 	vasnprintf.h test-vasnprintf.c macros.h \
 	test-vc-list-files-git.sh test-vc-list-files-cvs.sh \
-	test-verify.c test-verify.sh test-version-etc.c \
-	test-version-etc.sh test-wchar.c test-wcrtomb.sh \
-	test-wcrtomb.c test-wcrtomb-w32-1.sh test-wcrtomb-w32-2.sh \
-	test-wcrtomb-w32-3.sh test-wcrtomb-w32-4.sh \
-	test-wcrtomb-w32-5.sh test-wcrtomb-w32.c signature.h macros.h \
-	test-wctype-h.c macros.h test-wcwidth.c signature.h macros.h \
-	test-xalloc-die.c test-xalloc-die.sh test-xstrtoimax.c \
-	test-xstrtoimax.sh test-xstrtol.c test-xstrtoul.c \
-	test-xstrtol.sh
-
-# The BUILT_SOURCES created by this Makefile snippet are not used via #include
-# statements but through direct file reference. Therefore this snippet must be
-# present in all Makefile.am that need it. This is ensured by the applicability
-# 'all' defined above.
-
-# The BUILT_SOURCES created by this Makefile snippet are not used via #include
-# statements but through direct file reference. Therefore this snippet must be
-# present in all Makefile.am that need it. This is ensured by the applicability
-# 'all' defined above.
-
-# The BUILT_SOURCES created by this Makefile snippet are not used via #include
-# statements but through direct file reference. Therefore this snippet must be
-# present in all Makefile.am that need it. This is ensured by the applicability
-# 'all' defined above.
-BUILT_SOURCES = $(FLOAT_H) arg-nonnull.h c++defs.h unused-parameter.h \
-	warn-on-use.h
+	test-verify.c test-verify-try.c test-verify.sh \
+	test-version-etc.c test-version-etc.sh test-wchar.c \
+	test-wcrtomb.sh test-wcrtomb.c test-wcrtomb-w32-1.sh \
+	test-wcrtomb-w32-2.sh test-wcrtomb-w32-3.sh \
+	test-wcrtomb-w32-4.sh test-wcrtomb-w32-5.sh test-wcrtomb-w32.c \
+	signature.h macros.h test-wctype-h.c macros.h test-wcwidth.c \
+	signature.h macros.h test-xalloc-die.c test-xalloc-die.sh \
+	test-xstrtoimax.c test-xstrtoimax.sh test-xstrtol.c \
+	test-xstrtoul.c test-xstrtol.sh
+BUILT_SOURCES = $(FLOAT_H)
 SUFFIXES = 
 
-# This test expects compilation of test-verify.c to fail, and
+# This test expects compilation of test-verify-try.c to fail, and
 # each time it fails, the makefile rule does not perform the usual
 #  "mv -f $name.Tpo $name.po, so tell make clean to remove that file.
 MOSTLYCLEANFILES = core *.stackdump float.h float.h-t test-fpending.t \
-	arg-nonnull.h arg-nonnull.h-t c++defs.h c++defs.h-t \
-	unused-parameter.h unused-parameter.h-t warn-on-use.h \
-	warn-on-use.h-t .deps/test-verify.Tpo
+	.deps/test-verify-try.Tpo
 MOSTLYCLEANDIRS = 
 CLEANFILES = 
 DISTCLEANFILES = 
@@ -2448,13 +2427,29 @@ test_quotearg_simple_LDADD = $(LDADD) @LIBINTL@
 test_regex_LDADD = $(LDADD) @LIBINTL@ $(LIBTHREAD) $(LIB_PTHREAD)
 
 # Because this Makefile snippet defines a variable used by other
-# gnulib Makefile snippets, it must be present in all Makefile.am that
+# gnulib Makefile snippets, it must be present in all makefiles that
 # need it. This is ensured by the applicability 'all' defined above.
-_NORETURN_H = $(top_srcdir)/build-aux/snippet/_Noreturn.h
-ARG_NONNULL_H = arg-nonnull.h
-CXXDEFS_H = c++defs.h
-UNUSED_PARAMETER_H = unused-parameter.h
-WARN_ON_USE_H = warn-on-use.h
+_NORETURN_H = $(srcdir)/_Noreturn.h
+
+# Because this Makefile snippet defines a variable used by other
+# gnulib Makefile snippets, it must be present in all makefiles that
+# need it. This is ensured by the applicability 'all' defined above.
+ARG_NONNULL_H = $(srcdir)/arg-nonnull.h
+
+# Because this Makefile snippet defines a variable used by other
+# gnulib Makefile snippets, it must be present in all makefiles that
+# need it. This is ensured by the applicability 'all' defined above.
+CXXDEFS_H = $(srcdir)/c++defs.h
+
+# Because this Makefile snippet defines a variable used by other
+# gnulib Makefile snippets, it must be present in all makefiles that
+# need it. This is ensured by the applicability 'all' defined above.
+UNUSED_PARAMETER_H = $(srcdir)/unused-parameter.h
+
+# Because this Makefile snippet defines a variable used by other
+# gnulib Makefile snippets, it must be present in all makefiles that
+# need it. This is ensured by the applicability 'all' defined above.
+WARN_ON_USE_H = $(srcdir)/warn-on-use.h
 test_stat_LDADD = $(LDADD) $(LIBINTL)
 test_striconv_LDADD = $(LDADD) @LIBICONV@
 test_u8_mbtoucr_SOURCES = unistr/test-u8-mbtoucr.c
@@ -2690,10 +2685,6 @@ test-getopt-posix$(EXEEXT): $(test_getopt_posix_OBJECTS) $(test_getopt_posix_DEP
 test-getprogname$(EXEEXT): $(test_getprogname_OBJECTS) $(test_getprogname_DEPENDENCIES) $(EXTRA_test_getprogname_DEPENDENCIES) 
 	@rm -f test-getprogname$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(test_getprogname_OBJECTS) $(test_getprogname_LDADD) $(LIBS)
-
-test-gettimeofday$(EXEEXT): $(test_gettimeofday_OBJECTS) $(test_gettimeofday_DEPENDENCIES) $(EXTRA_test_gettimeofday_DEPENDENCIES) 
-	@rm -f test-gettimeofday$(EXEEXT)
-	$(AM_V_CCLD)$(LINK) $(test_gettimeofday_OBJECTS) $(test_gettimeofday_LDADD) $(LIBS)
 
 test-hash$(EXEEXT): $(test_hash_OBJECTS) $(test_hash_DEPENDENCIES) $(EXTRA_test_hash_DEPENDENCIES) 
 	@rm -f test-hash$(EXEEXT)
@@ -2939,10 +2930,6 @@ test-sys_stat$(EXEEXT): $(test_sys_stat_OBJECTS) $(test_sys_stat_DEPENDENCIES) $
 	@rm -f test-sys_stat$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(test_sys_stat_OBJECTS) $(test_sys_stat_LDADD) $(LIBS)
 
-test-sys_time$(EXEEXT): $(test_sys_time_OBJECTS) $(test_sys_time_DEPENDENCIES) $(EXTRA_test_sys_time_DEPENDENCIES) 
-	@rm -f test-sys_time$(EXEEXT)
-	$(AM_V_CCLD)$(LINK) $(test_sys_time_OBJECTS) $(test_sys_time_LDADD) $(LIBS)
-
 test-sys_types$(EXEEXT): $(test_sys_types_OBJECTS) $(test_sys_types_DEPENDENCIES) $(EXTRA_test_sys_types_DEPENDENCIES) 
 	@rm -f test-sys_types$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(test_sys_types_OBJECTS) $(test_sys_types_LDADD) $(LIBS)
@@ -3002,6 +2989,10 @@ test-vasnprintf$(EXEEXT): $(test_vasnprintf_OBJECTS) $(test_vasnprintf_DEPENDENC
 test-verify$(EXEEXT): $(test_verify_OBJECTS) $(test_verify_DEPENDENCIES) $(EXTRA_test_verify_DEPENDENCIES) 
 	@rm -f test-verify$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(test_verify_OBJECTS) $(test_verify_LDADD) $(LIBS)
+
+test-verify-try$(EXEEXT): $(test_verify_try_OBJECTS) $(test_verify_try_DEPENDENCIES) $(EXTRA_test_verify_try_DEPENDENCIES) 
+	@rm -f test-verify-try$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(test_verify_try_OBJECTS) $(test_verify_try_LDADD) $(LIBS)
 
 test-version-etc$(EXEEXT): $(test_version_etc_OBJECTS) $(test_version_etc_DEPENDENCIES) $(EXTRA_test_version_etc_DEPENDENCIES) 
 	@rm -f test-version-etc$(EXEEXT)
@@ -3113,7 +3104,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-getopt-gnu.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-getopt-posix.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-getprogname.Po@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-gettimeofday.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-hash.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-i-ring.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-iconv-h.Po@am__quote@ # am--include-marker
@@ -3175,12 +3165,12 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-strtoumax.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-symlink.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-sys_stat.Po@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-sys_time.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-sys_types.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-time.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-unistd.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-unsetenv.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-vasnprintf.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-verify-try.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-verify.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-version-etc.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-wchar.Po@am__quote@ # am--include-marker
@@ -3809,13 +3799,6 @@ test-getprogname.log: test-getprogname$(EXEEXT)
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
 	"$$tst" $(AM_TESTS_FD_REDIRECT)
-test-gettimeofday.log: test-gettimeofday$(EXEEXT)
-	@p='test-gettimeofday$(EXEEXT)'; \
-	b='test-gettimeofday'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
 test-hash.log: test-hash$(EXEEXT)
 	@p='test-hash$(EXEEXT)'; \
 	b='test-hash'; \
@@ -4264,13 +4247,6 @@ test-sys_stat.log: test-sys_stat$(EXEEXT)
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
 	"$$tst" $(AM_TESTS_FD_REDIRECT)
-test-sys_time.log: test-sys_time$(EXEEXT)
-	@p='test-sys_time$(EXEEXT)'; \
-	b='test-sys_time'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
 test-sys_types.log: test-sys_types$(EXEEXT)
 	@p='test-sys_types$(EXEEXT)'; \
 	b='test-sys_types'; \
@@ -4657,7 +4633,6 @@ distclean: distclean-recursive
 	-rm -f ./$(DEPDIR)/test-getopt-gnu.Po
 	-rm -f ./$(DEPDIR)/test-getopt-posix.Po
 	-rm -f ./$(DEPDIR)/test-getprogname.Po
-	-rm -f ./$(DEPDIR)/test-gettimeofday.Po
 	-rm -f ./$(DEPDIR)/test-hash.Po
 	-rm -f ./$(DEPDIR)/test-i-ring.Po
 	-rm -f ./$(DEPDIR)/test-iconv-h.Po
@@ -4719,12 +4694,12 @@ distclean: distclean-recursive
 	-rm -f ./$(DEPDIR)/test-strtoumax.Po
 	-rm -f ./$(DEPDIR)/test-symlink.Po
 	-rm -f ./$(DEPDIR)/test-sys_stat.Po
-	-rm -f ./$(DEPDIR)/test-sys_time.Po
 	-rm -f ./$(DEPDIR)/test-sys_types.Po
 	-rm -f ./$(DEPDIR)/test-time.Po
 	-rm -f ./$(DEPDIR)/test-unistd.Po
 	-rm -f ./$(DEPDIR)/test-unsetenv.Po
 	-rm -f ./$(DEPDIR)/test-vasnprintf.Po
+	-rm -f ./$(DEPDIR)/test-verify-try.Po
 	-rm -f ./$(DEPDIR)/test-verify.Po
 	-rm -f ./$(DEPDIR)/test-version-etc.Po
 	-rm -f ./$(DEPDIR)/test-wchar.Po
@@ -4852,7 +4827,6 @@ maintainer-clean: maintainer-clean-recursive
 	-rm -f ./$(DEPDIR)/test-getopt-gnu.Po
 	-rm -f ./$(DEPDIR)/test-getopt-posix.Po
 	-rm -f ./$(DEPDIR)/test-getprogname.Po
-	-rm -f ./$(DEPDIR)/test-gettimeofday.Po
 	-rm -f ./$(DEPDIR)/test-hash.Po
 	-rm -f ./$(DEPDIR)/test-i-ring.Po
 	-rm -f ./$(DEPDIR)/test-iconv-h.Po
@@ -4914,12 +4888,12 @@ maintainer-clean: maintainer-clean-recursive
 	-rm -f ./$(DEPDIR)/test-strtoumax.Po
 	-rm -f ./$(DEPDIR)/test-symlink.Po
 	-rm -f ./$(DEPDIR)/test-sys_stat.Po
-	-rm -f ./$(DEPDIR)/test-sys_time.Po
 	-rm -f ./$(DEPDIR)/test-sys_types.Po
 	-rm -f ./$(DEPDIR)/test-time.Po
 	-rm -f ./$(DEPDIR)/test-unistd.Po
 	-rm -f ./$(DEPDIR)/test-unsetenv.Po
 	-rm -f ./$(DEPDIR)/test-vasnprintf.Po
+	-rm -f ./$(DEPDIR)/test-verify-try.Po
 	-rm -f ./$(DEPDIR)/test-verify.Po
 	-rm -f ./$(DEPDIR)/test-version-etc.Po
 	-rm -f ./$(DEPDIR)/test-wchar.Po
@@ -4996,41 +4970,6 @@ uninstall-am:
 @GL_GENERATE_FLOAT_H_TRUE@	mv $@-t $@
 @GL_GENERATE_FLOAT_H_FALSE@float.h: $(top_builddir)/config.status
 @GL_GENERATE_FLOAT_H_FALSE@	rm -f $@
-# The arg-nonnull.h that gets inserted into generated .h files is the same as
-# build-aux/snippet/arg-nonnull.h, except that it has the copyright header cut
-# off.
-arg-nonnull.h: $(top_srcdir)/build-aux/snippet/arg-nonnull.h
-	$(AM_V_GEN)rm -f $@-t $@ && \
-	sed -n -e '/GL_ARG_NONNULL/,$$p' \
-	  < $(top_srcdir)/build-aux/snippet/arg-nonnull.h \
-	  > $@-t && \
-	mv $@-t $@
-# The c++defs.h that gets inserted into generated .h files is the same as
-# build-aux/snippet/c++defs.h, except that it has the copyright header cut off.
-c++defs.h: $(top_srcdir)/build-aux/snippet/c++defs.h
-	$(AM_V_GEN)rm -f $@-t $@ && \
-	sed -n -e '/_GL_CXXDEFS/,$$p' \
-	  < $(top_srcdir)/build-aux/snippet/c++defs.h \
-	  > $@-t && \
-	mv $@-t $@
-# The unused-parameter.h that gets inserted into generated .h files is the same
-# as build-aux/snippet/unused-parameter.h, except that it has the copyright
-# header cut off.
-unused-parameter.h: $(top_srcdir)/build-aux/snippet/unused-parameter.h
-	$(AM_V_GEN)rm -f $@-t $@ && \
-	sed -n -e '/GL_UNUSED_PARAMETER/,$$p' \
-	  < $(top_srcdir)/build-aux/snippet/unused-parameter.h \
-	  > $@-t && \
-	mv $@-t $@
-# The warn-on-use.h that gets inserted into generated .h files is the same as
-# build-aux/snippet/warn-on-use.h, except that it has the copyright header cut
-# off.
-warn-on-use.h: $(top_srcdir)/build-aux/snippet/warn-on-use.h
-	$(AM_V_GEN)rm -f $@-t $@ && \
-	sed -n -e '/^.ifndef/,$$p' \
-	  < $(top_srcdir)/build-aux/snippet/warn-on-use.h \
-	  > $@-t && \
-	mv $@-t $@
 
 # Clean up after Solaris cc.
 clean-local:

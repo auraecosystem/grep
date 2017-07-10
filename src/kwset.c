@@ -46,6 +46,7 @@
 #include "memchr2.h"
 #include "obstack.h"
 #include "xalloc.h"
+#include "verify.h"
 
 #define obstack_chunk_alloc xmalloc
 #define obstack_chunk_free free
@@ -755,10 +756,10 @@ bmexec (kwset_t kwset, char const *text, ptrdiff_t size,
 {
   /* Help the compiler inline in two ways, depending on whether
      kwset->trans is null.  */
-  ptrdiff_t ret = (kwset->trans
-                   ? bmexec_trans (kwset, text, size)
-                   : bmexec_trans (kwset, text, size));
-
+  ptrdiff_t ret = (IGNORE_DUPLICATE_BRANCH_WARNING
+                   (kwset->trans
+                    ? bmexec_trans (kwset, text, size)
+                    : bmexec_trans (kwset, text, size)));
   if (0 <= ret)
     {
        kwsmatch->index = 0;
@@ -904,9 +905,10 @@ acexec (kwset_t kwset, char const *text, ptrdiff_t size,
   assume (0 <= size);
   /* Help the compiler inline in two ways, depending on whether
      kwset->trans is null.  */
-  return (kwset->trans
-          ? acexec_trans (kwset, text, size, kwsmatch, longest)
-          : acexec_trans (kwset, text, size, kwsmatch, longest));
+  return (IGNORE_DUPLICATE_BRANCH_WARNING
+          (kwset->trans
+           ? acexec_trans (kwset, text, size, kwsmatch, longest)
+           : acexec_trans (kwset, text, size, kwsmatch, longest)));
 }
 
 /* Find the first instance of a KWSET member in TEXT, which has SIZE bytes.

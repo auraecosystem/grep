@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GNU grep 2.21.78\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2017-02-09 20:23-0800\n"
+"POT-Creation-Date: 2017-07-02 13:21-0700\n"
 "PO-Revision-Date: 2015-12-13 22:32+0100\n"
 "Last-Translator: Primož Peterlin <primozz.peterlin@gmail.com>\n"
 "Language-Team: Slovenian <translation-team-sl@lists.sourceforge.net>\n"
@@ -35,109 +35,84 @@ msgstr "dvoumni argument %s za %s"
 msgid "Valid arguments are:"
 msgstr "Veljavni argumenti so:"
 
-#: lib/closeout.c:112 src/grep.c:1280
+#: lib/closeout.c:122 src/grep.c:1274
 msgid "write error"
 msgstr "napaka pri pisanju"
 
-#: lib/dfa.c:949
+#: lib/dfa.c:958
 msgid "unbalanced ["
 msgstr "uklepaj [ brez zaklepaja"
 
-#: lib/dfa.c:1071
+#: lib/dfa.c:1079
 msgid "invalid character class"
 msgstr "neveljavno ime razreda znakov"
 
-#: lib/dfa.c:1207
+#: lib/dfa.c:1205
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr "skladnja imena razreda znakov je [[:space:]], ne [:space:]"
 
-#: lib/dfa.c:1275
+#: lib/dfa.c:1272
 msgid "unfinished \\ escape"
 msgstr "nedokončano ubežno zaporedje \\"
 
-#: lib/dfa.c:1436
+#: lib/dfa.c:1433
 msgid "invalid content of \\{\\}"
 msgstr "neveljavna vsebina \\{\\}"
 
-#: lib/dfa.c:1439
+#: lib/dfa.c:1436
 msgid "regular expression too big"
 msgstr "regularni izraz je preobsežen"
 
-#: lib/dfa.c:1853
+#: lib/dfa.c:1850
 msgid "unbalanced ("
 msgstr "uklepaj ( brez zaklepaja"
 
-#: lib/dfa.c:1971
+#: lib/dfa.c:1968
 msgid "no syntax specified"
 msgstr "skladnja ni podana"
 
-#: lib/dfa.c:1979
+#: lib/dfa.c:1976
 msgid "unbalanced )"
 msgstr "zaklepaj ) brez uklepaja"
 
-#: lib/error.c:191
+#: lib/error.c:195
 msgid "Unknown system error"
 msgstr "Neznana sistemska napaka"
 
-#: lib/getopt.c:575 lib/getopt.c:604
-#, c-format
-msgid "%s: option '%s' is ambiguous; possibilities:"
-msgstr "%s: izbira »%s« ni enopomenska; možnosti:"
-
-#: lib/getopt.c:619
-#, c-format
-msgid "%s: option '%s' is ambiguous\n"
+#: lib/getopt.c:278
+#, fuzzy, c-format
+msgid "%s: option '%s%s' is ambiguous\n"
 msgstr "%s: izbira »%s« ni enopomenska\n"
 
-#: lib/getopt.c:654 lib/getopt.c:658
-#, c-format
-msgid "%s: option '--%s' doesn't allow an argument\n"
-msgstr "%s: izbira »--%s« ne dovoljuje argumenta\n"
+#: lib/getopt.c:284
+#, fuzzy, c-format
+msgid "%s: option '%s%s' is ambiguous; possibilities:"
+msgstr "%s: izbira »%s« ni enopomenska; možnosti:"
 
-#: lib/getopt.c:667 lib/getopt.c:672
-#, c-format
-msgid "%s: option '%c%s' doesn't allow an argument\n"
-msgstr "%s: izbira »%c%s« ne dovoljuje argumenta\n"
-
-#: lib/getopt.c:715 lib/getopt.c:734
-#, c-format
-msgid "%s: option '--%s' requires an argument\n"
-msgstr "%s: izbira »--%s« zahteva argument\n"
-
-#: lib/getopt.c:772 lib/getopt.c:775
-#, c-format
-msgid "%s: unrecognized option '--%s'\n"
-msgstr "%s: neprepoznana izbira »--%s«\n"
-
-#: lib/getopt.c:783 lib/getopt.c:786
-#, c-format
-msgid "%s: unrecognized option '%c%s'\n"
+#: lib/getopt.c:319
+#, fuzzy, c-format
+msgid "%s: unrecognized option '%s%s'\n"
 msgstr "%s: neprepoznana izbira »%c%s«\n"
 
-#: lib/getopt.c:835 lib/getopt.c:838
+#: lib/getopt.c:345
+#, fuzzy, c-format
+msgid "%s: option '%s%s' doesn't allow an argument\n"
+msgstr "%s: izbira »%c%s« ne dovoljuje argumenta\n"
+
+#: lib/getopt.c:360
+#, fuzzy, c-format
+msgid "%s: option '%s%s' requires an argument\n"
+msgstr "%s: izbira »--%s« zahteva argument\n"
+
+#: lib/getopt.c:621
 #, c-format
 msgid "%s: invalid option -- '%c'\n"
 msgstr "%s: neveljavna izbira -- »%c«\n"
 
-#: lib/getopt.c:891 lib/getopt.c:908 lib/getopt.c:1118 lib/getopt.c:1136
+#: lib/getopt.c:636 lib/getopt.c:682
 #, c-format
 msgid "%s: option requires an argument -- '%c'\n"
 msgstr "%s: izbira zahteva argument -- »%c«\n"
-
-#: lib/getopt.c:964 lib/getopt.c:980
-#, c-format
-msgid "%s: option '-W %s' is ambiguous\n"
-msgstr "%s: izbira »-W %s« ni enopomenska\n"
-
-#: lib/getopt.c:1004 lib/getopt.c:1022
-#, c-format
-msgid "%s: option '-W %s' doesn't allow an argument\n"
-msgstr "%s: izbira »-W %s« ne dovoljuje argumenta\n"
-
-#: lib/getopt.c:1043 lib/getopt.c:1061
-#, c-format
-msgid "%s: option '-W %s' requires an argument\n"
-msgstr "%s: izbira »-W %s« zahteva argument\n"
 
 #: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34 src/pcresearch.c:291
 msgid "memory exhausted"
@@ -152,6 +127,11 @@ msgstr "trenutnega delovnega imenika ni mogoče zabeležiti"
 #, c-format
 msgid "failed to return to initial working directory"
 msgstr "vrnitev v začetni delovni imenik ni mogoča"
+
+#: lib/xbinary-io.c:37
+#, c-format
+msgid "failed to set file descriptor text/binary mode"
+msgstr ""
 
 #. TRANSLATORS:
 #. Get translations for open and closing quotation marks.
@@ -174,11 +154,11 @@ msgstr "vrnitev v začetni delovni imenik ni mogoča"
 #. If you don't know what to put here, please see
 #. <http://en.wikipedia.org/wiki/Quotation_marks_in_other_languages>
 #. and use glyphs suitable for your language.
-#: lib/quotearg.c:354
+#: lib/quotearg.c:362
 msgid "`"
 msgstr "»"
 
-#: lib/quotearg.c:355
+#: lib/quotearg.c:363
 msgid "'"
 msgstr "«"
 
@@ -446,82 +426,77 @@ msgid "%s%s argument '%s' too large"
 msgstr "%s%s: argument '%s' je prevelik"
 
 #. This is a proper name. See the gettext manual, section Names.
-#: src/grep.c:58
+#: src/grep.c:59
 msgid "Mike Haertel"
 msgstr "Mike Haertel"
 
-#: src/grep.c:59
+#: src/grep.c:60
 msgid "others, see <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
 msgstr "drugi, glejte <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
 
-#: src/grep.c:588
+#: src/grep.c:585
 msgid "(standard input)"
 msgstr "(standardni vhod)"
 
-#: src/grep.c:768
+#: src/grep.c:765
 msgid "invalid context length argument"
 msgstr "velikost konteksta ni veljavna"
 
-#: src/grep.c:831
+#: src/grep.c:828
 msgid "input is too large to count"
 msgstr "vhod je prevelik, da bi ga mogli prešteti"
 
-#: src/grep.c:1594
+#: src/grep.c:1579
 #, c-format
 msgid "Binary file %s matches\n"
 msgstr "Binarna datoteka %s ustreza\n"
 
-#: src/grep.c:1642
+#: src/grep.c:1627
 #, c-format
 msgid "warning: %s: %s"
 msgstr "opozorilo: %s: %s"
 
-#: src/grep.c:1643
+#: src/grep.c:1628
 msgid "recursive directory loop"
 msgstr "rekurzivna zanka imenikov"
 
-#: src/grep.c:1857
+#: src/grep.c:1844
 #, c-format
 msgid "input file %s is also the output"
 msgstr "vhodna datoteka %s je tudi izhodna"
 
-#: src/grep.c:1923 src/grep.c:1930
+#: src/grep.c:1907 src/grep.c:1914
 #, c-format
 msgid "Usage: %s [OPTION]... PATTERN [FILE]...\n"
 msgstr "Uporaba: %s [IZBIRA]... VZOREC [DATOTEKA]...\n"
 
-#: src/grep.c:1925
+#: src/grep.c:1909
 #, c-format
 msgid "Try '%s --help' for more information.\n"
 msgstr "Poskusite  »%s --help« za dodatna pojasnila.\n"
 
-#: src/grep.c:1931
-#, c-format
-msgid "Search for PATTERN in each FILE or standard input.\n"
+#: src/grep.c:1915
+#, fuzzy, c-format
+msgid "Search for PATTERN in each FILE.\n"
 msgstr "V DATOTEKI ali na standardnem vhodu se išče VZOREC.\n"
 
-#: src/grep.c:1932
-#, c-format
-msgid "PATTERN is, by default, a basic regular expression (BRE).\n"
-msgstr "VZOREC je privzeto osnovni regularni izraz (ORI).\n"
-
-#: src/grep.c:1933
-#, c-format
+#: src/grep.c:1916
+#, fuzzy, c-format
 msgid ""
 "Example: %s -i 'hello world' menu.h main.c\n"
 "\n"
-"Regexp selection and interpretation:\n"
+"Pattern selection and interpretation:\n"
 msgstr ""
 "Zgled: %s -i 'hello world' menu.h main.c\n"
 "\n"
 "Izbira in tolmačenje regularnih izrazov:\n"
 
-#: src/grep.c:1937
-#, c-format
+#: src/grep.c:1920
+#, fuzzy, c-format
 msgid ""
-"  -E, --extended-regexp     PATTERN is an extended regular expression (ERE)\n"
+"  -E, --extended-regexp     PATTERN is an extended regular expression\n"
 "  -F, --fixed-strings       PATTERN is a set of newline-separated strings\n"
-"  -G, --basic-regexp        PATTERN is a basic regular expression (BRE)\n"
+"  -G, --basic-regexp        PATTERN is a basic regular expression (default)\n"
 "  -P, --perl-regexp         PATTERN is a Perl regular expression\n"
 msgstr ""
 "  -E, --extended-regexp     VZOREC je razširjeni regularni izraz (RRI)\n"
@@ -529,7 +504,7 @@ msgstr ""
 "  -G, --basic-regexp        VZOREC je osnovni regularni izraz (ORI)\n"
 "  -P, --perl-regexp         VZOREC je regularni izraz z razširitvami perla\n"
 
-#: src/grep.c:1943
+#: src/grep.c:1926
 #, c-format
 msgid ""
 "  -e, --regexp=PATTERN      use PATTERN for matching\n"
@@ -547,7 +522,7 @@ msgstr ""
 "  -z, --null-data           vrstica podatkov je končana z znakom NUL, ne z\n"
 "                            znakom za skok v novo vrstico\n"
 
-#: src/grep.c:1950
+#: src/grep.c:1933
 #, c-format
 msgid ""
 "\n"
@@ -564,16 +539,16 @@ msgstr ""
 "  -V, --version             verzija programa\n"
 "      --help                ta pomoč\n"
 
-#: src/grep.c:1957
-#, c-format
+#: src/grep.c:1940
+#, fuzzy, c-format
 msgid ""
 "\n"
 "Output control:\n"
-"  -m, --max-count=NUM       stop after NUM matches\n"
+"  -m, --max-count=NUM       stop after NUM selected lines\n"
 "  -b, --byte-offset         print the byte offset with output lines\n"
 "  -n, --line-number         print line number with output lines\n"
 "      --line-buffered       flush output on every line\n"
-"  -H, --with-filename       print the file name for each match\n"
+"  -H, --with-filename       print file name with output lines\n"
 "  -h, --no-filename         suppress the file name prefix on output\n"
 "      --label=LABEL         use LABEL as the standard input file name "
 "prefix\n"
@@ -589,7 +564,7 @@ msgstr ""
 "      --label=OZNAKA        z navedeno OZNAKO, kadar beremo s standardnega "
 "vhoda\n"
 
-#: src/grep.c:1968
+#: src/grep.c:1951
 #, c-format
 msgid ""
 "  -o, --only-matching       show only the part of a line matching PATTERN\n"
@@ -605,7 +580,7 @@ msgstr ""
 "match«\n"
 "  -a, --text                isto kot --binary-type=text\n"
 
-#: src/grep.c:1975
+#: src/grep.c:1958
 #, c-format
 msgid ""
 "  -I                        equivalent to --binary-files=without-match\n"
@@ -625,7 +600,7 @@ msgstr ""
 "  -R, --dereference-recursive  podobno, vendar s sledenjem vseh simbolnih \n"
 "                               povezav\n"
 
-#: src/grep.c:1984
+#: src/grep.c:1967
 #, c-format
 msgid ""
 "      --include=FILE_PATTERN  search only files that match FILE_PATTERN\n"
@@ -641,12 +616,13 @@ msgstr ""
 "DATOTEKI\n"
 "      --exclude-dir=VZOREC  izpusti imenike, ki ustrezajo VZORCU\n"
 
-#: src/grep.c:1991
-#, c-format
+#: src/grep.c:1974
+#, fuzzy, c-format
 msgid ""
-"  -L, --files-without-match  print only names of FILEs containing no match\n"
-"  -l, --files-with-matches  print only names of FILEs containing matches\n"
-"  -c, --count               print only a count of matching lines per FILE\n"
+"  -L, --files-without-match  print only names of FILEs with no selected "
+"lines\n"
+"  -l, --files-with-matches  print only names of FILEs with selected lines\n"
+"  -c, --count               print only a count of selected lines per FILE\n"
 "  -T, --initial-tab         make tabs line up (if needed)\n"
 "  -Z, --null                print 0 byte after FILE name\n"
 msgstr ""
@@ -659,7 +635,7 @@ msgstr ""
 "  -T, --initial-tab         dodaj začetni tabulator (če je potrebno)\n"
 "  -Z, --null                izpiši znak NUL za imenom DATOTEKE\n"
 
-#: src/grep.c:1997
+#: src/grep.c:1980
 #, c-format
 msgid ""
 "\n"
@@ -675,8 +651,8 @@ msgstr ""
 "  -C, --context=ŠT          ŠT vrstic konteksta pred in za vrstico z "
 "VZORCEM\n"
 
-#: src/grep.c:2004
-#, c-format
+#: src/grep.c:1987
+#, fuzzy, c-format
 msgid ""
 "  -NUM                      same as --context=NUM\n"
 "      --color[=WHEN],\n"
@@ -684,8 +660,6 @@ msgid ""
 "                            WHEN is 'always', 'never', or 'auto'\n"
 "  -U, --binary              do not strip CR characters at EOL (MSDOS/"
 "Windows)\n"
-"  -u, --unix-byte-offsets   report offsets as if CRs were not there\n"
-"                            (MSDOS/Windows)\n"
 "\n"
 msgstr ""
 "  -ŠT                       isto kot --context=ŠT\n"
@@ -697,21 +671,11 @@ msgstr ""
 "  -u, --unix-byte-offsets   v odmikih ne štejemo znakov CR (MS-DOS/Windows)\n"
 "\n"
 
-#: src/grep.c:2013
-#, c-format
+#: src/grep.c:1994
+#, fuzzy, c-format
 msgid ""
-"'egrep' means 'grep -E'.  'fgrep' means 'grep -F'.\n"
-"Direct invocation as either 'egrep' or 'fgrep' is deprecated.\n"
-msgstr ""
-"Ukaz »egrep« pomeni isto kot »grep -E«, »fgrep« pa isto kot  »grep -F«.\n"
-"Neposredna raba ukazov »egrep« ali »fgrep« je odsvetovana.\n"
-
-#: src/grep.c:2016
-#, c-format
-msgid ""
-"When FILE is -, read standard input.  With no FILE, read . if a command-"
-"line\n"
-"-r is given, - otherwise.  If fewer than two FILEs are given, assume -h.\n"
+"When FILE is '-', read standard input.  With no FILE, read '.' if\n"
+"recursive, '-' otherwise.  With fewer than two FILEs, assume -h.\n"
 "Exit status is 0 if any line is selected, 1 otherwise;\n"
 "if any error occurs and -q is not given, the exit status is 2.\n"
 msgstr ""
@@ -726,30 +690,30 @@ msgstr ""
 #  opt = getopt(argc, argv, "0123456789A:B:CEFGVX:bce:f:hiLlnqsvwxy"
 #  grep --help ->
 #  usage: grep [-[[AB] ]<num>] [-[CEFGVchilnqsvwx]] [-[ef]] <expr> [<files...>]
-#: src/grep.c:2056
+#: src/grep.c:2034
 msgid "conflicting matchers specified"
 msgstr "podana navodila si nasprotujejo"
 
-#: src/grep.c:2060
+#: src/grep.c:2038
 #, c-format
 msgid "invalid matcher %s"
 msgstr "neveljaven ujemalnik %s"
 
-#: src/grep.c:2480
+#: src/grep.c:2458
 #, c-format
 msgid "warning: GREP_OPTIONS is deprecated; please use an alias or script"
 msgstr ""
 "opozorilo: uporabo GREP_OPTIONS odsvetujemo; uporabite alias ali skript"
 
-#: src/grep.c:2507
+#: src/grep.c:2485
 msgid "unknown devices method"
 msgstr "neznana metoda datotek naprav"
 
-#: src/grep.c:2640
+#: src/grep.c:2629
 msgid "invalid max count"
 msgstr "neveljavno največje število"
 
-#: src/grep.c:2698
+#: src/grep.c:2687
 msgid "unknown binary-files type"
 msgstr "neznan tip binarne datoteke"
 
@@ -797,6 +761,31 @@ msgstr "prekoračena meja PCRE za iskanje s povratnim sledenjem"
 #, c-format
 msgid "internal PCRE error: %d"
 msgstr "interna napaka PCRE: %d"
+
+#~ msgid "%s: option '--%s' doesn't allow an argument\n"
+#~ msgstr "%s: izbira »--%s« ne dovoljuje argumenta\n"
+
+#~ msgid "%s: unrecognized option '--%s'\n"
+#~ msgstr "%s: neprepoznana izbira »--%s«\n"
+
+#~ msgid "%s: option '-W %s' is ambiguous\n"
+#~ msgstr "%s: izbira »-W %s« ni enopomenska\n"
+
+#~ msgid "%s: option '-W %s' doesn't allow an argument\n"
+#~ msgstr "%s: izbira »-W %s« ne dovoljuje argumenta\n"
+
+#~ msgid "%s: option '-W %s' requires an argument\n"
+#~ msgstr "%s: izbira »-W %s« zahteva argument\n"
+
+#~ msgid "PATTERN is, by default, a basic regular expression (BRE).\n"
+#~ msgstr "VZOREC je privzeto osnovni regularni izraz (ORI).\n"
+
+#~ msgid ""
+#~ "'egrep' means 'grep -E'.  'fgrep' means 'grep -F'.\n"
+#~ "Direct invocation as either 'egrep' or 'fgrep' is deprecated.\n"
+#~ msgstr ""
+#~ "Ukaz »egrep« pomeni isto kot »grep -E«, »fgrep« pa isto kot  »grep -F«.\n"
+#~ "Neposredna raba ukazov »egrep« ali »fgrep« je odsvetovana.\n"
 
 #~ msgid "lseek failed"
 #~ msgstr "klic lseek ni uspel"
