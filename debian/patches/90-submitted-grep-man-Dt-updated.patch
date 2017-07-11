@@ -1,0 +1,31 @@
+Index: grep/doc/Makefile.am
+===================================================================
+--- grep.orig/doc/Makefile.am
++++ grep/doc/Makefile.am
+@@ -24,9 +24,12 @@ man_MANS = grep.1 fgrep.1 egrep.1
+ EXTRA_DIST = grep.in.1
+ CLEANFILES = grep.1 egrep.1 fgrep.1
+ 
++MAN_PAGE_UPDATED=$(shell $(top_srcdir)/build-aux/mdate-sh $(srcdir)/grep.in.1)
++
+ grep.1: grep.in.1
+ 	$(AM_V_GEN)rm -f $@-t $@
+-	$(AM_V_at)sed 's/@''VERSION@/$(VERSION)/' $(srcdir)/grep.in.1 > $@-t
++	$(AM_V_at)sed -e 's/@UPDATED@/$(MAN_PAGE_UPDATED)/' \
++		-e 's/@''VERSION@/$(VERSION)/' $(srcdir)/grep.in.1 > $@-t
+ 	$(AM_V_at)chmod a=r $@-t
+ 	$(AM_V_at)mv -f $@-t $@
+ 
+Index: grep/doc/grep.in.1
+===================================================================
+--- grep.orig/doc/grep.in.1
++++ grep/doc/grep.in.1
+@@ -20,7 +20,7 @@
+ ..
+ .\}
+ .
+-.TH GREP 1 \*(Dt "GNU grep @VERSION@" "User Commands"
++.TH GREP 1 "@UPDATED@" "GNU grep @VERSION@" "User Commands"
+ .hy 0
+ .
+ .SH NAME
