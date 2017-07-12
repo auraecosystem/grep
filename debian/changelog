@@ -1,3 +1,10 @@
+grep (3.1-2~1) UNRELEASED; urgency=low
+
+  * Replace 90-submitted-grep-man-Dt-updated.patch with
+    90-upstream-doc-define-Dt-string-in-man-page.patch
+
+ -- Santiago Ruano Rincón <santiago@debian.org>  Wed, 12 Jul 2017 11:29:33 +0200
+
 grep (3.1-1) unstable; urgency=low
 
   * New upstream version 3.1
