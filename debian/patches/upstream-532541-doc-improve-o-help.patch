@@ -1,0 +1,28 @@
+From e183886892343200fc8aac871768a979f7842d4e Mon Sep 17 00:00:00 2001
+From: Paul Eggert <eggert@cs.ucla.edu>
+Date: Thu, 3 Aug 2017 13:07:01 -0700
+Subject: [PATCH] doc: improve -o help
+Bug-Debian: http://bugs.debian.org/532541
+
+* src/grep.c (usage): Document that -o outputs only nonempty
+matches (Bug#27931).
+---
+ src/grep.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/grep.c b/src/grep.c
+index 8d22aec3..dd338d9f 100644
+--- a/src/grep.c
++++ b/src/grep.c
+@@ -1949,7 +1949,7 @@ Output control:\n\
+       --label=LABEL         use LABEL as the standard input file name prefix\n\
+ "));
+       printf (_("\
+-  -o, --only-matching       show only the part of a line matching PATTERN\n\
++  -o, --only-matching       show only nonempty parts of lines matching PATTERN\n\
+   -q, --quiet, --silent     suppress all normal output\n\
+       --binary-files=TYPE   assume that binary files are TYPE;\n\
+                             TYPE is 'binary', 'text', or 'without-match'\n\
+-- 
+2.13.3
+
