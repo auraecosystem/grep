@@ -14,7 +14,7 @@ CPPFLAGS=-DHAVE_DYNAMIC_LIBPCRE
 LIBS=-Wl,--no-as-needed -ldl -Wl,--as-needed
 
 ##########################################################################
-# I need to investigate why CDBS doesn't export automatically build flags 
+# I need to investigate why CDBS doesn't export automatically build flags
 # needed for hardening. This block should be temporal.
 CFLAGS = `dpkg-buildflags --get CFLAGS`
 CFLAGS += -O3
@@ -32,7 +32,7 @@ DEB_UPSTREAM_TARBALL_EXTENSION = tar.xz
 DEB_CONFIGURE_EXTRA_FLAGS += --without-included-regex
 DEB_CONFIGURE_SCRIPT_ENV += LIBS="$(LIBS)"
 
-# FIXME: CDBS should include a specific var for this 
+# FIXME: CDBS should include a specific var for this
 # (e.g. DEB_CONFIGURE_EXECDIR in autotools-vars.mk)?
 DEB_CONFIGURE_EXTRA_FLAGS += --exec-prefix=/
 
