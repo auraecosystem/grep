@@ -8,7 +8,6 @@ Build-Depends: autotools-dev, cdbs, debhelper (>= 9), dh-autoreconf, gettext, li
 Homepage: http://www.gnu.org/software/grep/
 Vcs-Git: https://anonscm.debian.org/git/collab-maint/grep.git
 Vcs-Browser: https://anonscm.debian.org/gitweb/?p=collab-maint/grep.git
-Testsuite: autopkgtest
 
 Package: grep
 Architecture: any
