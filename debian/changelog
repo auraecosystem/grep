@@ -1,5 +1,6 @@
 grep (3.1-3~2) UNRELEASED; urgency=medium
 
+  [ Santiago Ruano Rincón  ]
   * NOT RELEASE YET
   * Add upstream-532541-doc-improve-o-help.patch: Improve help about -o.
     (Closes: #532541)
@@ -9,6 +10,13 @@ grep (3.1-3~2) UNRELEASED; urgency=medium
     longer supported. (Closes: #907651)
   * Add upstream-915206-0001-tests-backref-alt-works-with-glibc-2.28.patch.
     Fix FTBFS with glibc 2.28. (Closes: #915206)
+
+  [ Ondřej Nový ]
+  * d/copyright: Use https protocol in Format field
+  * d/control: Remove Testsuite field, not needed anymore
+  * d/changelog: Remove trailing whitespaces
+  * d/rules: Remove trailing whitespaces
+  * d/control: Set Vcs-* to salsa.debian.org
 
  -- Santiago Ruano Rincón <santiago@debian.org>  Sat, 01 Dec 2018 21:44:23 +0100
 
@@ -22,7 +30,7 @@ grep (3.1-2) unstable; urgency=low
 grep (3.1-1) unstable; urgency=low
 
   * New upstream version 3.1
-  * Remove no longer needed debian/patches/81-356120-document-multiple-e.patch 
+  * Remove no longer needed debian/patches/81-356120-document-multiple-e.patch
   * doc/grep.in.1: Fix undefined `Dt' macro. Add
     debian/patches/90-submitted-grep-man-Dt-updated.patch (Closes: #863437)
   * Bump Standards-Version to 4.0.0
@@ -49,7 +57,7 @@ grep (2.27-2) unstable; urgency=low
     - upstream-grep-simplify-finalize_input.patch
     - upstream-grep-work-around-proc-lseek-glitch.patch
     - upstream-grep-fix-bug-dev-null-output.patch
-  * Minor upstream patch to clarify in NEWS the new early-exit 
+  * Minor upstream patch to clarify in NEWS the new early-exit
     options.
     upstream-clarify-early-exit-news-for-2.27.patch
   * When grep -Fo finds matches of differing length, it could
@@ -216,14 +224,14 @@ grep (2.20-3) unstable; urgency=high
 
   * d/patches/0001-grep-P-invalid-utf8-non-matching-debian.patch From
     upstream: -P now treats invalid UTF-8 characters as non matching.
-    Thanks to Paul Eggert. (Closes: #758105). 
+    Thanks to Paul Eggert. (Closes: #758105).
 
  -- Santiago Ruano Rincón <santiago@debian.org>  Wed, 10 Sep 2014 13:10:32 +0200
 
 grep (2.20-2) unstable; urgency=low
 
   * Add 85-412370-F-x-documentation.patch to d/patches/series
-  * d/rules: 
+  * d/rules:
     - Correct hardening CPPFLAGS. Thanks to Simon Ruderich.
       (Closes: #758069)
     - Set DEB_MAKE_CHECK_TARGET = check to run make check after build.
@@ -245,8 +253,8 @@ grep (2.20-1) unstable; urgency=low
 
 grep (2.18-2) unstable; urgency=medium
 
-  * Depends on pcre3 >= 1:8.31-3. Since that revision, pcre3 enables to 
-    compile JIT regexes (Closes: 736919) 
+  * Depends on pcre3 >= 1:8.31-3. Since that revision, pcre3 enables to
+    compile JIT regexes (Closes: 736919)
 
  -- Santiago Ruano Rincón <santiago@debian.org>  Tue, 15 Apr 2014 19:40:35 +0200
 
@@ -254,7 +262,7 @@ grep (2.18-1) unstable; urgency=low
 
   * New upstream release
   * Move to CDBS. Jointly with included patches, makes grep build twice in a
-    row (Closes: #736977) 
+    row (Closes: #736977)
   * d/patches/
     - 03-397262-dlopen-pcre.patch: removed unneeded changes in configure
     - 99-autotools-changes.patch: included modifications made by autotools
@@ -276,18 +284,18 @@ grep (2.16-1) unstable; urgency=low
 grep (2.15-2) unstable; urgency=high
 
   * d/patches/92-730472-PCRE-no-check-UTF8.patch flags PCRE with
-    PCRE_NO_UTF8_CHECK instead of PCRE_UTF8 to avoid checking if input is 
+    PCRE_NO_UTF8_CHECK instead of PCRE_UTF8 to avoid checking if input is
     UTF8 valid (Closes: #730472).
 
  -- Santiago Ruano Rincón <santiago@debian.org>  Wed, 27 Nov 2013 23:39:35 +0100
 
 grep (2.15-1) unstable; urgency=high
 
-  * New upstream release. 
+  * New upstream release.
   * d/patches/
     - 85-automake-warnings-bc9c23a4350598db4ec04225e1e0194a7b17175d.patch
       "avoid automake deprecation warning re ACLOCAL_AMFLAGS"
-    - 90-729581-multibyte-s.patch fixes a regresion bug, the \s 
+    - 90-729581-multibyte-s.patch fixes a regresion bug, the \s
       was not working on UTF-8 systems. (Closes: #729581)
     - 91-P-regression-9a9b4c59babc60e15a79cf7db8167d42e68e44b9.patch
       improves handling of PCRE errors and invalid UTF-8 inputs
@@ -296,9 +304,9 @@ grep (2.15-1) unstable; urgency=high
  -- Santiago Ruano Rincón <santiago@debian.org>  Sun, 24 Nov 2013 17:53:03 +0100
 
 grep (2.15~pre-2.14.54-37f7-1) experimental; urgency=low
-  
+
   * New upstream release
-  * d/control: 
+  * d/control:
     - Multi-Arch: foreign (Closes: #726391)
     - Removed Build-deps: dh-autoreconf
     - Added Build-deps: texinfo
@@ -317,7 +325,7 @@ grep (2.14-4) unstable; urgency=low
 
 grep (2.14-3) unstable; urgency=low
 
-  * Updating 80-587930-man-ere-reference.patch to improve documentation 
+  * Updating 80-587930-man-ere-reference.patch to improve documentation
     regarding -P (Closes: #203109)
   * Correcting a formating issue in grep.in.1. Thanks to David Prévot
     (Closes: #692760)
@@ -344,8 +352,8 @@ grep (2.14-1) unstable; urgency=low
 
 grep (2.12-2) unstable; urgency=low
 
-  * Updated debian/watch to match .tar.xz files 
-  * Added 90-672240-exclude.patch so that --exclude excludes again 
+  * Updated debian/watch to match .tar.xz files
+  * Added 90-672240-exclude.patch so that --exclude excludes again
     (Closes: #672240)
 
  -- Santiago Ruano Rincón <santiago@debian.org>  Sun, 13 May 2012 14:08:01 +0200
@@ -361,7 +369,7 @@ grep (2.12-1) unstable; urgency=low
 
 grep (2.11-3) unstable; urgency=low
 
-  * --devices=ACTION (-D) no longer affects stdin 
+  * --devices=ACTION (-D) no longer affects stdin
     Add 82-669084-stdin-exemption.patch
     Closes: #669084
 
@@ -408,7 +416,7 @@ grep (2.9-2) unstable; urgency=low
 
 grep (2.9-1) unstable; urgency=low
 
-  * 60-76011-main.c.patch: `grep -lc' does not show files with no occurrences. 
+  * 60-76011-main.c.patch: `grep -lc' does not show files with no occurrences.
     Thanks to Peter Samuelson. (Closes: #76011)
   * New upstream release.
     - Fixes locales and brackets-related bug (Closes: #624387)
@@ -418,7 +426,7 @@ grep (2.9-1) unstable; urgency=low
 
 grep (2.8-2) unstable; urgency=low
 
-  * Applying patch to improve reference acronyms in man page. Thanks to 
+  * Applying patch to improve reference acronyms in man page. Thanks to
     Chris Butler. (Closes: #587930)
   * Bump Standars-Version to 3.9.2. No changes needed
 
@@ -436,7 +444,7 @@ grep (2.8-1) experimental; urgency=low
 
 grep (2.7-2) experimental; urgency=low
 
-  * Adding 90-dfasearch-hurd.patch to avoid error 
+  * Adding 90-dfasearch-hurd.patch to avoid error
     when compiling on hurd.
 
  -- Santiago Ruano Rincón <santiago@debian.org>  Tue, 19 Apr 2011 21:17:27 +0200
@@ -444,11 +452,11 @@ grep (2.7-2) experimental; urgency=low
 grep (2.7-1) experimental; urgency=low
 
   * New upstream version, 2.7
-    - Updated patches: 
+    - Updated patches:
       03-397262-dlopen-pcre.patch
       55-185208-bigfile.patch
       80-495993-catalan_translation.patch
-    - Not longer needed, now included in upstream: 
+    - Not longer needed, now included in upstream:
       05-kwset.c.patch
       06-578709-ignore-MMAP_OPTION.patch
   * Merging with Ubuntu:
@@ -515,7 +523,7 @@ grep (2.6.3-1) unstable; urgency=low
 
 grep (2.5.4-4) unstable; urgency=low
 
-  * dlopen PCRE so we can have -P; 03-dlopen-pcre.patch by Reuben Thomas 
+  * dlopen PCRE so we can have -P; 03-dlopen-pcre.patch by Reuben Thomas
     closes: #238237, #318680, #364998, #397262, #441373, #443103
     - Remove --disable-perl-regexp as configure parameter
   * Suggests libpcre3
@@ -559,7 +567,7 @@ grep (2.5.4-1) experimental; urgency=low
 
 grep (2.5.3~dfsg-6) unstable; urgency=low
 
-  * Corrected Catalan translation. Thanks to Carles Pina i Estany. 
+  * Corrected Catalan translation. Thanks to Carles Pina i Estany.
     (Closes: #495993)
 
  -- Santiago Ruano Rincón <santiago@debian.org>  Sun, 31 Aug 2008 17:32:17 +0200
@@ -573,11 +581,11 @@ grep (2.5.3~dfsg-5) unstable; urgency=low
 
 grep (2.5.3~dfsg-4) unstable; urgency=low
 
-  * rgrep: Make . the default when no file or directory names given. 
+  * rgrep: Make . the default when no file or directory names given.
     Thanks to Magnus Holmgren <holmgren@lysator.liu.se> (Closes: 414168)
   * grep.1: using \(aq instead of '. Thanks to Andrew Moise
     <chops@demiurgestudios.com>. (Closes: #226881)
-  * egrep: using calloc() instead of malloc() 
+  * egrep: using calloc() instead of malloc()
     Thanks to Johan Walles <johan.walles@gmail.com> (Closes: #450649)
   * Updated watch file.
   * Bump Standard-version to 3.7.3. (No changes needed)
@@ -650,7 +658,7 @@ grep (2.5.1.ds2-4) unstable; urgency=low
 
 grep (2.5.1.ds2-3) unstable; urgency=low
 
-  * Compiled with libpcre3 to enable perl regular expressions. 
+  * Compiled with libpcre3 to enable perl regular expressions.
     Closes: #203109: perl mode non-functional, should not be documented
     Closes: #238237: -P option doesn't work.
   * Closes: #190551: br0ken manpage: Uses 'Egrep' instead of 'egrep'.
@@ -732,7 +740,7 @@ grep (2.5.1.ds1-3.1) unstable; urgency=low
 
   * NMU to fix RC bug
   * 60-dfa.c-case_fold.patch: new patch by Fumitoshi UKAI
-    to fix case_fold match on [:upper:] and [:lower:] in 
+    to fix case_fold match on [:upper:] and [:lower:] in
     multibyte locales (UTF-8, CJK, ...)
     closes: Bug#276202
 
@@ -748,17 +756,17 @@ grep (2.5.1.ds1-2) unstable; urgency=low
 
   * Fixed pre-depends (Closes: #222655)
 
- -- Ryan M. Golbeck <rmgolbeck@debian.org>  Sun, 07 Dec 2003 18:09:00 -0400	
+ -- Ryan M. Golbeck <rmgolbeck@debian.org>  Sun, 07 Dec 2003 18:09:00 -0400
 
 grep (2.5.1.ds1-1) unstable; urgency=low
-  
+
   * Fixed manpage typo (Closes: #207703)
 
   * Makefile.in info patch (Closes: #218969)
     - Thanks Andreas Metzler
 
   * Fixed misspelled month in changelog.
-  
+
  -- Ryan M. Golbeck <rmgolbeck@debian.org>  Tue, 18 Nov 2003 01:02:03 -0400
 
 grep (2.5.1-7) unstable; urgency=low
@@ -769,25 +777,25 @@ grep (2.5.1-7) unstable; urgency=low
  -- Jeff Bailey <jbailey@nisa.net>  Tue, 19 Aug 2003 01:07:31 -0400
 
 grep (2.5.1-6) unstable; urgency=low
-  
+
   * Consolidated manpage patches
    + Fixed line-buffering typo (Closes: #198947)
    + Re-ordered options, perl regexp note (Closes: #203109)
-  
+
   * Applied patch for bigfiles w/o newlines (Closes: #185208)
     - Thanks Jim Meyering
-  
+
  -- Ryan M. Golbeck <rmgolbeck@debian.org>  Sun, 17 Aug 2003 00:10:00 -0500
 
 grep (2.5.1-5) unstable; urgency=low
 
   * applied i18n patch for LSB test suite (Closes: #184884)
   * fixed misspelling in manpage (Closes: #187477)
-  
+
  -- Ryan M. Golbeck <rmgolbeck@debian.org>  Sat, 29 Mar 2003 00:10:00 -0500
 
 grep (2.5.1-4) unstable; urgency=low
-  
+
   * New Maintainer (thanks Robert and Clint)
   * New uploader: Jeff Bailey <jbailey@nisa.net>
   * Converted to CBS.
@@ -796,7 +804,7 @@ grep (2.5.1-4) unstable; urgency=low
   * Cleaned up copyright file.
   * Added #!/bin/sh to rgrep.
   * Added dircategory to grep.texi
-  
+
  -- Ryan M. Golbeck <rmgolbeck@debian.org>  Mon, 17 Feb 2003 00:10:00 -0500
 
 grep (2.5.1-3) unstable; urgency=medium
@@ -807,13 +815,13 @@ grep (2.5.1-3) unstable; urgency=medium
 
 grep (2.5.1-2) unstable; urgency=low
 
-  * Call install with INSTALL_PROGRAM, not initial make. 
+  * Call install with INSTALL_PROGRAM, not initial make.
 
  -- Clint Adams <schizo@debian.org>  Sun, 16 Feb 2003 00:07:50 -0500
 
 grep (2.5.1-1) unstable; urgency=low
 
-  * Hijack. 
+  * Hijack.
   * Update config.{guess,sub}.  closes: #174898, #179702.
   * New upstream version.  closes: #152204.
   * Update to Standards-Version 3.5.8.
@@ -856,7 +864,7 @@ grep (2.4.2-2) frozen unstable; urgency=low
 
   * New maintainer
   * Replaced config.sub and config.guess for newer ones. (Closes: #98034)
-  * Fixed french language bug. (Closes: #95349) 
+  * Fixed french language bug. (Closes: #95349)
 
  -- Robert van der Meulen <rvdm@debian.org>  Mon, 25 Jun 2001 14:31:38 +0200
 
@@ -880,7 +888,7 @@ grep (2.4-1) unstable; urgency=low
   * New upstream version
 
  -- Wichert Akkerman <wakkerma@debian.org>  Wed,  8 Dec 1999 02:05:48 +0100
- 
+
 grep (2.3-8) unstable; urgency=low
 
   * Add a rgrep-script and add Conflicts and Provides for it
@@ -935,7 +943,7 @@ grep (2.3-1) unstable; urgency=low
   * New upstream version
 
  -- Wichert Akkerman <wakkerma@debian.org>  Tue, 23 Feb 1999 02:16:01 +0100
- 
+
 grep (2.2-1) unstable; urgency=low
 
   * New upstream version
