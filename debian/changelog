@@ -1,10 +1,11 @@
-grep (3.1-3~1) UNRELEASED; urgency=medium
+grep (3.1-3~2) UNRELEASED; urgency=medium
 
   * NOT RELEASE YET
   * Add upstream-532541-doc-improve-o-help.patch: Improve help about -o.
     (Closes: #532541)
+  * remove debian/patches/03-397262-dlopen-pcre.patch (Closes: #907651)
 
- -- Santiago Ruano Rincón  <santiago@debian.org>  Fri, 04 Aug 2017 16:06:43 +0200
+ -- Santiago Ruano Rincón <santiago@debian.org>  Sat, 01 Dec 2018 21:44:23 +0100
 
 grep (3.1-2) unstable; urgency=low
 
