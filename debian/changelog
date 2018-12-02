@@ -1,7 +1,6 @@
-grep (3.1-3~2) UNRELEASED; urgency=medium
+grep (3.1-3) unstable; urgency=low
 
-  [ Santiago Ruano Rincón  ]
-  * NOT RELEASE YET
+  [ Santiago Ruano Rincón ]
   * Add upstream-532541-doc-improve-o-help.patch: Improve help about -o.
     (Closes: #532541)
   * Remove debian/patches/03-397262-dlopen-pcre.patch: dlopen libpcre.so.3 has
@@ -10,6 +9,8 @@ grep (3.1-3~2) UNRELEASED; urgency=medium
     longer supported. (Closes: #907651)
   * Add upstream-915206-0001-tests-backref-alt-works-with-glibc-2.28.patch.
     Fix FTBFS with glibc 2.28. (Closes: #915206)
+  * d/source/options: remove compression = "bzip2", let dpkg-deb select
+    suitable defaults.
 
   [ Ondřej Nový ]
   * d/copyright: Use https protocol in Format field
@@ -18,7 +19,7 @@ grep (3.1-3~2) UNRELEASED; urgency=medium
   * d/rules: Remove trailing whitespaces
   * d/control: Set Vcs-* to salsa.debian.org
 
- -- Santiago Ruano Rincón <santiago@debian.org>  Sat, 01 Dec 2018 21:44:23 +0100
+ -- Santiago Ruano Rincón <santiago@debian.org>  Sun, 02 Dec 2018 18:58:48 +0100
 
 grep (3.1-2) unstable; urgency=low
 
