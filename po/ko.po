@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GNU grep 2.0f\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2017-07-02 13:21-0700\n"
+"POT-Creation-Date: 2018-12-20 20:39-0800\n"
 "PO-Revision-Date: 1997-09-03 11:19+0900\n"
 "Last-Translator: Bang Jun-Young <bangjy@geocities.com>\n"
 "Language-Team: Korean <ko@li.org>\n"
@@ -30,47 +30,55 @@ msgstr ""
 msgid "Valid arguments are:"
 msgstr ""
 
-#: lib/closeout.c:122 src/grep.c:1274
+#: lib/c-stack.c:208 lib/c-stack.c:301
+msgid "program error"
+msgstr ""
+
+#: lib/c-stack.c:209 lib/c-stack.c:302
+msgid "stack overflow"
+msgstr ""
+
+#: lib/closeout.c:122 src/grep.c:1273
 msgid "write error"
 msgstr ""
 
-#: lib/dfa.c:958
+#: lib/dfa.c:970
 #, fuzzy
 msgid "unbalanced ["
 msgstr "짝이 맞지 않는 ["
 
-#: lib/dfa.c:1079
+#: lib/dfa.c:1091
 msgid "invalid character class"
 msgstr ""
 
-#: lib/dfa.c:1205
+#: lib/dfa.c:1217
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr ""
 
-#: lib/dfa.c:1272
+#: lib/dfa.c:1284
 #, fuzzy
 msgid "unfinished \\ escape"
 msgstr "완결되지 않은 \\ 이스케이프"
 
-#: lib/dfa.c:1433
+#: lib/dfa.c:1445
 msgid "invalid content of \\{\\}"
 msgstr ""
 
-#: lib/dfa.c:1436
+#: lib/dfa.c:1448
 msgid "regular expression too big"
 msgstr ""
 
-#: lib/dfa.c:1850
+#: lib/dfa.c:1863
 #, fuzzy
 msgid "unbalanced ("
 msgstr "짝이 맞지 않는 ("
 
-#: lib/dfa.c:1968
+#: lib/dfa.c:1981
 #, fuzzy
 msgid "no syntax specified"
 msgstr "문법이 지정되지 않았음"
 
-#: lib/dfa.c:1976
+#: lib/dfa.c:1992
 #, fuzzy
 msgid "unbalanced )"
 msgstr "짝이 맞지 않는 )"
@@ -114,7 +122,7 @@ msgstr "%s: 부적절한 옵션 -- %c\n"
 msgid "%s: option requires an argument -- '%c'\n"
 msgstr "%s: 이 옵션은 인수가 필요합니다 -- %c\n"
 
-#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34 src/pcresearch.c:291
+#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34 src/pcresearch.c:313
 msgid "memory exhausted"
 msgstr "메모리가 바닥남"
 
@@ -152,7 +160,7 @@ msgstr ""
 #. for your locale.
 #.
 #. If you don't know what to put here, please see
-#. <http://en.wikipedia.org/wiki/Quotation_marks_in_other_languages>
+#. <https://en.wikipedia.org/wiki/Quotation_marks_in_other_languages>
 #. and use glyphs suitable for your language.
 #: lib/quotearg.c:362
 msgid "`"
@@ -230,16 +238,16 @@ msgstr ""
 msgid "Unmatched ) or \\)"
 msgstr ""
 
-#: lib/regcomp.c:687
+#: lib/regcomp.c:688
 msgid "No previous regular expression"
 msgstr ""
 
-#: lib/version-etc.c:74
+#: lib/version-etc.c:73
 #, c-format
 msgid "Packaged by %s (%s)\n"
 msgstr ""
 
-#: lib/version-etc.c:77
+#: lib/version-etc.c:76
 #, c-format
 msgid "Packaged by %s\n"
 msgstr ""
@@ -247,14 +255,14 @@ msgstr ""
 #. TRANSLATORS: Translate "(C)" to the copyright symbol
 #. (C-in-a-circle), if this symbol is available in the user's
 #. locale.  Otherwise, do not translate "(C)"; leave it as-is.
-#: lib/version-etc.c:84
+#: lib/version-etc.c:83
 msgid "(C)"
 msgstr ""
 
-#: lib/version-etc.c:86
+#: lib/version-etc.c:85
 msgid ""
 "\n"
-"License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl."
+"License GPLv3+: GNU GPL version 3 or later <https://gnu.org/licenses/gpl."
 "html>.\n"
 "This is free software: you are free to change and redistribute it.\n"
 "There is NO WARRANTY, to the extent permitted by law.\n"
@@ -375,11 +383,11 @@ msgstr ""
 
 #: lib/version-etc.c:253
 #, c-format
-msgid "%s home page: <http://www.gnu.org/software/%s/>\n"
+msgid "%s home page: <https://www.gnu.org/software/%s/>\n"
 msgstr ""
 
 #: lib/version-etc.c:256
-msgid "General help using GNU software: <http://www.gnu.org/gethelp/>\n"
+msgid "General help using GNU software: <https://www.gnu.org/gethelp/>\n"
 msgstr ""
 
 #: lib/xstrtol-error.c:63
@@ -397,65 +405,57 @@ msgstr ""
 msgid "%s%s argument '%s' too large"
 msgstr ""
 
-#. This is a proper name. See the gettext manual, section Names.
-#: src/grep.c:59
-msgid "Mike Haertel"
-msgstr ""
-
-#: src/grep.c:60
-msgid "others, see <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
-msgstr ""
-
-#: src/grep.c:585
+#: src/grep.c:582
 msgid "(standard input)"
 msgstr "(표준 입력)"
 
-#: src/grep.c:765
+#: src/grep.c:762
 msgid "invalid context length argument"
 msgstr ""
 
-#: src/grep.c:828
+#: src/grep.c:827
 msgid "input is too large to count"
 msgstr ""
 
-#: src/grep.c:1579
+#: src/grep.c:1578
 #, c-format
 msgid "Binary file %s matches\n"
 msgstr ""
 
-#: src/grep.c:1627
+#: src/grep.c:1626
 #, fuzzy, c-format
 msgid "warning: %s: %s"
 msgstr "%s: 경고: %s: %s\n"
 
-#: src/grep.c:1628
+#: src/grep.c:1627
 msgid "recursive directory loop"
 msgstr ""
 
-#: src/grep.c:1844
+#: src/grep.c:1843
 #, c-format
 msgid "input file %s is also the output"
 msgstr ""
 
-#: src/grep.c:1907 src/grep.c:1914
-#, c-format
-msgid "Usage: %s [OPTION]... PATTERN [FILE]...\n"
+#: src/grep.c:1906 src/grep.c:1913
+#, fuzzy, c-format
+msgid "Usage: %s [OPTION]... PATTERNS [FILE]...\n"
 msgstr "사용법: %s [옵션]... 패턴 [파일]...\n"
 
-#: src/grep.c:1909
+#: src/grep.c:1908
 #, fuzzy, c-format
 msgid "Try '%s --help' for more information.\n"
 msgstr "더 많은 정보를 보려면 `%s --help' 하십시오.\n"
 
-#: src/grep.c:1915
+#: src/grep.c:1914
 #, c-format
-msgid "Search for PATTERN in each FILE.\n"
+msgid "Search for PATTERNS in each FILE.\n"
 msgstr ""
 
-#: src/grep.c:1916
+#: src/grep.c:1915
 #, fuzzy, c-format
 msgid ""
 "Example: %s -i 'hello world' menu.h main.c\n"
+"PATTERNS can contain multiple patterns separated by newlines.\n"
 "\n"
 "Pattern selection and interpretation:\n"
 msgstr "정규식 선택과 해석:\n"
@@ -463,20 +463,20 @@ msgstr "정규식 선택과 해석:\n"
 #: src/grep.c:1920
 #, c-format
 msgid ""
-"  -E, --extended-regexp     PATTERN is an extended regular expression\n"
-"  -F, --fixed-strings       PATTERN is a set of newline-separated strings\n"
-"  -G, --basic-regexp        PATTERN is a basic regular expression (default)\n"
-"  -P, --perl-regexp         PATTERN is a Perl regular expression\n"
+"  -E, --extended-regexp     PATTERNS are extended regular expressions\n"
+"  -F, --fixed-strings       PATTERNS are strings\n"
+"  -G, --basic-regexp        PATTERNS are basic regular expressions\n"
+"  -P, --perl-regexp         PATTERNS are Perl regular expressions\n"
 msgstr ""
 
 #: src/grep.c:1926
 #, c-format
 msgid ""
-"  -e, --regexp=PATTERN      use PATTERN for matching\n"
-"  -f, --file=FILE           obtain PATTERN from FILE\n"
+"  -e, --regexp=PATTERNS     use PATTERNS for matching\n"
+"  -f, --file=FILE           take PATTERNS from FILE\n"
 "  -i, --ignore-case         ignore case distinctions\n"
-"  -w, --word-regexp         force PATTERN to match only whole words\n"
-"  -x, --line-regexp         force PATTERN to match only whole lines\n"
+"  -w, --word-regexp         match only whole words\n"
+"  -x, --line-regexp         match only whole lines\n"
 "  -z, --null-data           a data line ends in 0 byte, not newline\n"
 msgstr ""
 
@@ -509,7 +509,7 @@ msgstr ""
 #: src/grep.c:1951
 #, c-format
 msgid ""
-"  -o, --only-matching       show only the part of a line matching PATTERN\n"
+"  -o, --only-matching       show only nonempty parts of lines that match\n"
 "  -q, --quiet, --silent     suppress all normal output\n"
 "      --binary-files=TYPE   assume that binary files are TYPE;\n"
 "                            TYPE is 'binary', 'text', or 'without-match'\n"
@@ -531,12 +531,11 @@ msgstr ""
 #: src/grep.c:1967
 #, c-format
 msgid ""
-"      --include=FILE_PATTERN  search only files that match FILE_PATTERN\n"
-"      --exclude=FILE_PATTERN  skip files and directories matching "
-"FILE_PATTERN\n"
+"      --include=GLOB        search only files that match GLOB (a file "
+"pattern)\n"
+"      --exclude=GLOB        skip files and directories matching GLOB\n"
 "      --exclude-from=FILE   skip files matching any file pattern from FILE\n"
-"      --exclude-dir=PATTERN  directories that match PATTERN will be "
-"skipped.\n"
+"      --exclude-dir=GLOB    skip directories that match GLOB\n"
 msgstr ""
 
 #: src/grep.c:1974
@@ -577,7 +576,7 @@ msgstr ""
 msgid ""
 "When FILE is '-', read standard input.  With no FILE, read '.' if\n"
 "recursive, '-' otherwise.  With fewer than two FILEs, assume -h.\n"
-"Exit status is 0 if any line is selected, 1 otherwise;\n"
+"Exit status is 0 if any line (or file if -L) is selected, 1 otherwise;\n"
 "if any error occurs and -q is not given, the exit status is 2.\n"
 msgstr ""
 
@@ -591,63 +590,69 @@ msgstr "짝이 이미 지정되었음"
 msgid "invalid matcher %s"
 msgstr ""
 
-#: src/grep.c:2458
+#: src/grep.c:2459
 #, c-format
 msgid "warning: GREP_OPTIONS is deprecated; please use an alias or script"
 msgstr ""
 
-#: src/grep.c:2485
+#: src/grep.c:2486
 msgid "unknown devices method"
 msgstr ""
 
-#: src/grep.c:2629
+#: src/grep.c:2630
 #, fuzzy
 msgid "invalid max count"
 msgstr "완결되지 않은 반복 회수"
 
-#: src/grep.c:2687
+#: src/grep.c:2688
 msgid "unknown binary-files type"
 msgstr ""
 
-#: src/pcresearch.c:80
+#: src/grep.c:2770
+msgid ""
+"Written by Mike Haertel and others; see\n"
+"<https://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>."
+msgstr ""
+
+#: src/pcresearch.c:86
 msgid "failed to allocate memory for the PCRE JIT stack"
 msgstr ""
 
-#: src/pcresearch.c:97
+#: src/pcresearch.c:118
 msgid ""
 "support for the -P option is not compiled into this --disable-perl-regexp "
 "binary"
 msgstr ""
 
-#: src/pcresearch.c:119
+#: src/pcresearch.c:140
 msgid "-P supports only unibyte and UTF-8 locales"
 msgstr ""
 
-#: src/pcresearch.c:125
+#: src/pcresearch.c:146
 msgid "the -P option only supports a single pattern"
 msgstr ""
 
-#: src/pcresearch.c:167
+#: src/pcresearch.c:189
 msgid "internal error (should never happen)"
 msgstr ""
 
-#: src/pcresearch.c:192
+#: src/pcresearch.c:214
 msgid "internal error"
 msgstr ""
 
-#: src/pcresearch.c:215
+#: src/pcresearch.c:237
 msgid "exceeded PCRE's line length limit"
 msgstr ""
 
-#: src/pcresearch.c:295
+#: src/pcresearch.c:317
 msgid "exhausted PCRE JIT stack"
 msgstr ""
 
-#: src/pcresearch.c:299
+#: src/pcresearch.c:321
 msgid "exceeded PCRE's backtracking limit"
 msgstr ""
 
-#: src/pcresearch.c:306
+#: src/pcresearch.c:328
 #, c-format
 msgid "internal PCRE error: %d"
 msgstr ""

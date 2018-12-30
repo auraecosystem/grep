@@ -1,5 +1,5 @@
 /* fstat() replacement.
-   Copyright (C) 2011-2017 Free Software Foundation, Inc.
+   Copyright (C) 2011-2018 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -12,7 +12,7 @@
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
+   along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
 
 /* If the user's config.h happens to include <sys/stat.h>, let it include only
    the system's <sys/stat.h> here, so that orig_fstat doesn't recurse to
@@ -25,7 +25,7 @@
 #include <sys/stat.h>
 #undef __need_system_sys_stat_h
 
-#if (defined _WIN32 || defined __WIN32__) && ! defined __CYGWIN__
+#if defined _WIN32 && ! defined __CYGWIN__
 # define WINDOWS_NATIVE
 #endif
 
@@ -44,6 +44,8 @@ orig_fstat (int fd, struct stat *buf)
    eliminates this include because of the preliminary #include <sys/stat.h>
    above.  */
 #include "sys/stat.h"
+
+#include "stat-time.h"
 
 #include <errno.h>
 #include <unistd.h>
@@ -73,7 +75,7 @@ rpl_fstat (int fd, struct stat *buf)
   /* Fill the fields ourselves, because the original fstat function returns
      values for st_atime, st_mtime, st_ctime that depend on the current time
      zone.  See
-     <https://lists.gnu.org/archive/html/bug-gnulib/2017-04/msg00134.html>  */
+     <https://lists.gnu.org/r/bug-gnulib/2017-04/msg00134.html>  */
   HANDLE h = (HANDLE) _get_osfhandle (fd);
 
   if (h == INVALID_HANDLE_VALUE)
@@ -83,6 +85,6 @@ rpl_fstat (int fd, struct stat *buf)
     }
   return _gl_fstat_by_handle (h, NULL, buf);
 #else
-  return orig_fstat (fd, buf);
+  return stat_time_normalize (orig_fstat (fd, buf), buf);
 #endif
 }

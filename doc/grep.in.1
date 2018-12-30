@@ -1,57 +1,175 @@
 .\" GNU grep man page
-.if !\n(.g \{\
-.	if !\w|\*(lq| \{\
-.		ds lq ``
-.		if \w'\(lq' .ds lq "\(lq
-.	\}
-.	if !\w|\*(rq| \{\
-.		ds rq ''
-.		if \w'\(rq' .ds rq "\(rq
-.	\}
-.\}
-.
-.ie \n[.g] .mso www.tmac
-.el \{\
-. de MTO
-\\$2 \(laemail: \\$1 \(ra\\$3
+.de dT
+.ds Dt \\$2
 ..
-. de URL
-\\$2 \(laURL: \\$1 \(ra\\$3
-..
-.\}
+.dT Time-stamp: "2018-05-11"
+.\" Update the above date whenever a change to either this file or
+.\" grep.c's 'usage' function results in a nontrivial change to the man page.
+.\" In Emacs, you can update the date by running 'M-x time-stamp'
+.\" after you make a change that you decide is nontrivial.
+.\" It is no big deal to forget to update the date.
 .
 .TH GREP 1 \*(Dt "GNU grep @VERSION@" "User Commands"
+.
+.if !\w|\*(lq| \{\
+.\" groff an-old.tmac does not seem to be in use, so define lq and rq.
+.	ie \n(.g \{\
+.		ds lq \(lq\"
+.		ds rq \(rq\"
+.	\}
+.	el \{\
+.		ds lq ``
+.		ds rq ''
+.	\}
+.\}
+.
+.if !\w|\*(la| \{\
+.\" groff an-ext.tmac does not seem to be in use, so define the parts of
+.\" it that are used below.  For a copy of groff an-ext.tmac, please see:
+.\" https://git.savannah.gnu.org/cgit/groff.git/plain/tmac/an-ext.tmac
+.\" --- Start of lines taken from groff an-ext.tmac
+.
+.\" Check whether we are using grohtml.
+.nr mH 0
+.if \n(.g \
+.  if '\*(.T'html' \
+.    nr mH 1
+.
+.
+.\" Map mono-width fonts to standard fonts for groff's TTY device.
+.if n \{\
+.  do ftr CR R
+.  do ftr CI I
+.  do ftr CB B
+.\}
+.
+.\" groff has glyph entities for angle brackets.
+.ie \n(.g \{\
+.  ds la \(la\"
+.  ds ra \(ra\"
+.\}
+.el \{\
+.  ds la <\"
+.  ds ra >\"
+.  \" groff's man macros control hyphenation with this register.
+.  nr HY 1
+.\}
+.
+.\" Start URL.
+.de UR
+.  ds m1 \\$1\"
+.  nh
+.  if \\n(mH \{\
+.    \" Start diversion in a new environment.
+.    do ev URL-div
+.    do di URL-div
+.  \}
+..
+.
+.
+.\" End URL.
+.de UE
+.  ie \\n(mH \{\
+.    br
+.    di
+.    ev
+.
+.    \" Has there been one or more input lines for the link text?
+.    ie \\n(dn \{\
+.      do HTML-NS "<a href=""\\*(m1"">"
+.      \" Yes, strip off final newline of diversion and emit it.
+.      do chop URL-div
+.      do URL-div
+\c
+.      do HTML-NS </a>
+.    \}
+.    el \
+.      do HTML-NS "<a href=""\\*(m1"">\\*(m1</a>"
+\&\\$*\"
+.  \}
+.  el \
+\\*(la\\*(m1\\*(ra\\$*\"
+.
+.  hy \\n(HY
+..
+.
+.
+.\" Start email address.
+.de MT
+.  ds m1 \\$1\"
+.  nh
+.  if \\n(mH \{\
+.    \" Start diversion in a new environment.
+.    do ev URL-div
+.    do di URL-div
+.  \}
+..
+.
+.
+.\" End email address.
+.de ME
+.  ie \\n(mH \{\
+.    br
+.    di
+.    ev
+.
+.    \" Has there been one or more input lines for the link text?
+.    ie \\n(dn \{\
+.      do HTML-NS "<a href=""mailto:\\*(m1"">"
+.      \" Yes, strip off final newline of diversion and emit it.
+.      do chop URL-div
+.      do URL-div
+\c
+.      do HTML-NS </a>
+.    \}
+.    el \
+.      do HTML-NS "<a href=""mailto:\\*(m1"">\\*(m1</a>"
+\&\\$*\"
+.  \}
+.  el \
+\\*(la\\*(m1\\*(ra\\$*\"
+.
+.  hy \\n(HY
+..
+.\" --- End of lines taken from groff an-ext.tmac
+.\}
+.
 .hy 0
 .
 .SH NAME
-grep, egrep, fgrep \- print lines matching a pattern
+grep, egrep, fgrep \- print lines that match patterns
 .
 .SH SYNOPSIS
 .B grep
-.RI [ OPTIONS ]
-.I PATTERN
+.RI [ OPTION .\|.\|.]\&
+.I PATTERNS
 .RI [ FILE .\|.\|.]
 .br
 .B grep
-.RI [ OPTIONS ]
+.RI [ OPTION .\|.\|.]\&
 .B \-e
-.I PATTERN
+.I PATTERNS
 \&.\|.\|.\&
 .RI [ FILE .\|.\|.]
 .br
 .B grep
-.RI [ OPTIONS ]
+.RI [ OPTION .\|.\|.]\&
 .B \-f
-.I FILE
+.I PATTERN_FILE
 \&.\|.\|.\&
 .RI [ FILE .\|.\|.]
 .
 .SH DESCRIPTION
 .B grep
 searches for
-.I PATTERN
+.I PATTERNS
 in each
 .IR FILE .
+.I PATTERNS
+is one or patterns separated by newline characters, and
+.B grep
+prints each line that matches a pattern.
+.PP
 A
 .I FILE
 of
@@ -61,9 +179,6 @@ If no
 .I FILE
 is given, recursive searches examine the working directory,
 and nonrecursive searches read standard input.
-By default,
-.B grep
-prints the matching lines.
 .PP
 In addition, the variant programs
 .B egrep
@@ -90,36 +205,37 @@ and exit.
 .TP
 .BR \-E ", " \-\^\-extended\-regexp
 Interpret
-.I PATTERN
-as an extended regular expression (ERE, see below).
+.I PATTERNS
+as extended regular expressions (EREs, see below).
 .TP
 .BR \-F ", " \-\^\-fixed\-strings
 Interpret
-.I PATTERN
-as a list of fixed strings (instead of regular expressions),
-separated by newlines,
-any of which is to be matched.
+.I PATTERNS
+as fixed strings, not regular expressions.
 .TP
 .BR \-G ", " \-\^\-basic\-regexp
 Interpret
-.I PATTERN
-as a basic regular expression (BRE, see below).
+.I PATTERNS
+as basic regular expressions (BREs, see below).
 This is the default.
 .TP
 .BR \-P ", " \-\^\-perl\-regexp
-Interpret the pattern as a Perl-compatible regular expression (PCRE).
-This is experimental and
+Interpret PATTERNS as Perl-compatible regular expressions (PCREs).
+This option is experimental when combined with the
+.B \-z
+.RB ( \-\^\-null\-data )
+option, and
 .B "grep \-P"
 may warn of unimplemented features.
 .SS "Matching Control"
 .TP
-.BI \-e " PATTERN" "\fR,\fP \-\^\-regexp=" PATTERN
+.BI \-e " PATTERNS" "\fR,\fP \-\^\-regexp=" PATTERNS
 Use
-.I PATTERN
-as the pattern.
+.I PATTERNS
+as the patterns.
 If this option is used multiple times or is combined with the
 .B \-f
-.RB ( \-\-file )
+.RB ( \-\^\-file )
 option, search for all patterns given.
 This option can be used to protect a pattern beginning with \*(lq\-\*(rq.
 .TP
@@ -129,7 +245,7 @@ Obtain patterns from
 one per line.
 If this option is used multiple times or is combined with the
 .B \-e
-.RB ( \-\-regexp )
+.RB ( \-\^\-regexp )
 option, search for all patterns given.
 The empty file contains zero patterns, and therefore matches nothing.
 .TP
@@ -276,7 +392,7 @@ Display input actually coming from standard input as input coming from file
 This is especially useful when implementing tools like
 .BR zgrep ,
 e.g.,
-.BR "gzip -cd foo.gz | grep --label=foo -H something" .
+.BR "gzip \-cd foo.gz | grep \-\^\-label=foo \-H something" .
 See also the
 .B \-H
 option.
@@ -398,7 +514,7 @@ matches, or no message if there is no match.
 If
 .I TYPE
 is
-.BR without-match ,
+.BR without\-match ,
 when
 .B grep
 discovers that a file is binary it assumes that the rest of the file
@@ -507,7 +623,8 @@ Skip any command-line file with a name suffix that matches the pattern
 using wildcard matching; a name suffix is either the whole
 name, or any suffix starting after a
 .B /
-and before a +non-\fB/\fP.
+and before a
+.RB non- / .
 When searching recursively, skip any subfile whose base name matches
 .IR GLOB ;
 the base name is the part after the last
@@ -516,18 +633,18 @@ A pattern can use
 .BR * ,
 .BR ? ,
 and
-.BR [ ... ]
+.BR [ .\|.\|. ]\&
 as wildcards, and
 .B \e
 to quote a wildcard or backslash character literally.
 .TP
-.BI \-\^\-exclude-from= FILE
+.BI \-\^\-exclude\-from= FILE
 Skip files whose base name matches any of the file-name globs read from
 .I FILE
 (using wildcard matching as described under
 .BR \-\^\-exclude ).
 .TP
-.BI \-\^\-exclude-dir= GLOB
+.BI \-\^\-exclude\-dir= GLOB
 Skip any command-line directory with a name suffix that matches the
 pattern
 .IR GLOB .
@@ -540,7 +657,7 @@ Ignore any redundant trailing slashes in
 .BR \-I
 Process a binary file as if it did not contain matching data; this is
 equivalent to the
-.B \-\^\-binary\-files=without-match
+.B \-\^\-binary\-files=without\-match
 option.
 .TP
 .BI \-\^\-include= GLOB
@@ -631,6 +748,7 @@ may be quoted by preceding it with a backslash.
 The period
 .B .\&
 matches any single character.
+It is unspecified whether it matches an encoding error.
 .SS "Character Classes and Bracket Expressions"
 A
 .I "bracket expression"
@@ -639,12 +757,13 @@ is a list of characters enclosed by
 and
 .BR ] .
 It matches any single
-character in that list; if the first character of the list
+character in that list.
+If the first character of the list
 is the caret
 .B ^
 then it matches any character
 .I not
-in the list.
+in the list; it is unspecified whether it matches an encoding error.
 For example, the regular expression
 .B [0123456789]
 matches any single digit.
@@ -685,7 +804,7 @@ Their names are self explanatory, and they are
 .BR [:space:] ,
 .BR [:upper:] ,
 and
-.BR [:xdigit:].
+.BR [:xdigit:] .
 For example,
 .B [[:alnum:]]
 means the character class of numbers and
@@ -871,10 +990,10 @@ have priority over it.
 It can only specify the color used to highlight
 the matching non-empty text in any matching line
 (a selected line when the
-.B -v
+.B \-v
 command-line option is omitted,
 or a context line when
-.B -v
+.B \-v
 is specified).
 The default is
 .BR 01;31 ,
@@ -1011,7 +1130,7 @@ The default is a cyan text foreground over the terminal's default background.
 .B ne
 Boolean value that prevents clearing to the end of line
 using Erase in Line (EL) to Right
-.RB ( \\\\\\33[K )
+.RB ( \e33[K )
 each time a colorized item ends.
 This is needed on terminals on which EL is not supported.
 It is otherwise useful on terminals
@@ -1024,7 +1143,7 @@ or when EL is too slow or causes too much flicker.
 The default is false (i.e., the capability is omitted).
 .PP
 Note that boolean capabilities have no
-.BR = ...
+.BR = .\|.\|.\&
 part.
 They are omitted (i.e., false) by default and become true when specified.
 .PP
@@ -1036,7 +1155,7 @@ and can be concatenated with semicolons.
 .B grep
 takes care of assembling the result
 into a complete SGR sequence
-.RB ( \\\\\\33[ ... m ).
+.RB ( \e33[ .\|.\|. m ).
 Common values to concatenate include
 .B 1
 for bold,
@@ -1154,7 +1273,7 @@ is used and a line is selected, the exit status is 0 even if an error
 occurred.
 .
 .SH COPYRIGHT
-Copyright 1998\(en2000, 2002, 2005\(en2017 Free Software Foundation, Inc.
+Copyright 1998\(en2000, 2002, 2005\(en2018 Free Software Foundation, Inc.
 .PP
 This is free software;
 see the source for copying conditions.
@@ -1164,11 +1283,17 @@ not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 .SH BUGS
 .SS "Reporting Bugs"
 Email bug reports to
-.MTO bug-grep@gnu.org "the bug-reporting address" .
+.MT bug-grep@gnu.org
+the bug-reporting address
+.ME .
 An
-.URL http://lists.gnu.org/mailman/listinfo/bug-grep "email archive"
+.UR https://lists.gnu.org/mailman/listinfo/bug-grep
+email archive
+.UE
 and a
-.URL http://debbugs.gnu.org/cgi/pkgreport.cgi?package=grep "bug tracker"
+.UR https://debbugs.gnu.org/cgi/pkgreport.cgi?package=grep
+bug tracker
+.UE
 are available.
 .SS "Known Bugs"
 Large repetition counts in the
@@ -1196,7 +1321,9 @@ glob(7), regex(7).
 grep(1p).
 .SS "Full Documentation"
 A
-.URL http://www.gnu.org/software/grep/manual/ "complete manual"
+.UR https://www.gnu.org/software/grep/manual/
+complete manual
+.UE
 is available.
 If the
 .B info
@@ -1213,3 +1340,8 @@ This man page is maintained only fitfully;
 the full documentation is often more up-to-date.
 .\" Work around problems with some troff -man implementations.
 .br
+.
+.\" Format for Emacs-maintained Dt string defined at this file's start.
+.\" Local variables:
+.\" time-stamp-format: "%:y-%02m-%02d"
+.\" End:

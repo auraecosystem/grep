@@ -1,5 +1,5 @@
 ## Process this file with automake to create Makefile.in
-# Copyright 1997-1998, 2005-2017 Free Software Foundation, Inc.
+# Copyright 1997-1998, 2005-2018 Free Software Foundation, Inc.
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -12,7 +12,7 @@
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 TEST_EXTENSIONS = .sh .pl
 
@@ -56,9 +56,9 @@ XFAIL_TESTS = triple-backref
 if USE_INCLUDED_REGEX
 XFAIL_TESTS += equiv-classes
 else
-# The backslash-alt test fails for glibc, which needs to be fixed.
-# FIXME-2015: Remove this once the glibc bug is fixed.
-XFAIL_TESTS += backref-alt
+# The backref-alt test fails for glibc 2.27 and earlier.
+# If you're using older glibc you can upgrade to glibc 2.28 or later,
+# configure --with-included-regex, or ignore the test failure.
 endif
 
 TESTS =						\
@@ -151,6 +151,7 @@ TESTS =						\
   skip-read					\
   spencer1					\
   spencer1-locale				\
+  stack-overflow				\
   status					\
   surrogate-pair				\
   symlink					\
@@ -192,7 +193,7 @@ EXTRA_DIST =					\
   spencer1-locale.awk
 
 # Default to a nonzero value.  Environment overrides.
-# http://udrepper.livejournal.com/11429.html
+# https://udrepper.livejournal.com/11429.html
 MALLOC_PERTURB_ = 1
 
 TESTS_ENVIRONMENT =				\

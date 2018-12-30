@@ -1,20 +1,22 @@
 # Simplified Chinese(zh_CN) messages for grep.
 # This file is distributed under the same license as the grep package.
 # Copyright (C) 2008 Free Software Foundation, Inc.
-# Ji ZhengYu <zhengyuji@gmail.com>, 2016
+# Ji ZhengYu <zhengyuji@gmail.com>, 2016.
+# Boyuan Yang <073plan@gmail.com>, 2018.
 msgid ""
 msgstr ""
-"Project-Id-Version: grep 2.23.7\n"
+"Project-Id-Version: grep 3.0.23-b00\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2017-07-02 13:21-0700\n"
-"PO-Revision-Date: 2016-03-30 16:53China Standard Time\n"
-"Last-Translator: Ji ZhengYu <zhengyuji@gmail.com>\n"
+"POT-Creation-Date: 2018-12-20 20:39-0800\n"
+"PO-Revision-Date: 2018-05-30 14:35+0800\n"
+"Last-Translator: Boyuan Yang <073plan@gmail.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Bugs: Report translation errors to the Language-Team address.\n"
+"X-Generator: Poedit 2.0.7\n"
 
 #: lib/argmatch.c:134
 #, c-format
@@ -30,43 +32,51 @@ msgstr "%2$s 的参数 %1$s 有歧义"
 msgid "Valid arguments are:"
 msgstr "有效参数是:"
 
-#: lib/closeout.c:122 src/grep.c:1274
+#: lib/c-stack.c:208 lib/c-stack.c:301
+msgid "program error"
+msgstr ""
+
+#: lib/c-stack.c:209 lib/c-stack.c:302
+msgid "stack overflow"
+msgstr ""
+
+#: lib/closeout.c:122 src/grep.c:1273
 msgid "write error"
 msgstr "写错误"
 
-#: lib/dfa.c:958
+#: lib/dfa.c:970
 msgid "unbalanced ["
 msgstr "有未匹配的 ["
 
-#: lib/dfa.c:1079
+#: lib/dfa.c:1091
 msgid "invalid character class"
 msgstr "无效的字符类名"
 
-#: lib/dfa.c:1205
+#: lib/dfa.c:1217
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr "字符类的语法是 [[:space:]],而非 [:space:]"
 
-#: lib/dfa.c:1272
+#: lib/dfa.c:1284
 msgid "unfinished \\ escape"
 msgstr "未做好 \\ 转义"
 
-#: lib/dfa.c:1433
+#: lib/dfa.c:1445
 msgid "invalid content of \\{\\}"
 msgstr "\\{\\}中内容无效"
 
-#: lib/dfa.c:1436
+#: lib/dfa.c:1448
 msgid "regular expression too big"
 msgstr "正则表达式太长"
 
-#: lib/dfa.c:1850
+#: lib/dfa.c:1863
 msgid "unbalanced ("
 msgstr "有未匹配的 ("
 
-#: lib/dfa.c:1968
+#: lib/dfa.c:1981
 msgid "no syntax specified"
 msgstr "未指定语法"
 
-#: lib/dfa.c:1976
+#: lib/dfa.c:1992
 msgid "unbalanced )"
 msgstr "有未匹配的 )"
 
@@ -75,41 +85,41 @@ msgid "Unknown system error"
 msgstr "未知的系统错误"
 
 #: lib/getopt.c:278
-#, fuzzy, c-format
+#, c-format
 msgid "%s: option '%s%s' is ambiguous\n"
-msgstr "%s: 选项'%s' 有歧义\n"
+msgstr "%s：选项“%s%s”有歧义\n"
 
 #: lib/getopt.c:284
-#, fuzzy, c-format
+#, c-format
 msgid "%s: option '%s%s' is ambiguous; possibilities:"
-msgstr "%s: 选项'%s' 有歧义; 可能原因:"
+msgstr "%s：选项“%s%s”有歧义；可能原因："
 
 #: lib/getopt.c:319
-#, fuzzy, c-format
+#, c-format
 msgid "%s: unrecognized option '%s%s'\n"
-msgstr "%s: 未知选项'%c%s' \n"
+msgstr "%s：无法识别的选项“%s%s”\n"
 
 #: lib/getopt.c:345
-#, fuzzy, c-format
+#, c-format
 msgid "%s: option '%s%s' doesn't allow an argument\n"
-msgstr "%s: 选项'%c%s' 不允许带参数\n"
+msgstr "%s：选项“%s%s”不允许带参数\n"
 
 #: lib/getopt.c:360
-#, fuzzy, c-format
+#, c-format
 msgid "%s: option '%s%s' requires an argument\n"
-msgstr "%s: 选项'--%s' 必须带参数\n"
+msgstr "%s：选项“%s%s”需要一个参数\n"
 
 #: lib/getopt.c:621
 #, c-format
 msgid "%s: invalid option -- '%c'\n"
-msgstr "%s: 无效选项 -- '%c' \n"
+msgstr "%s：无效选项 -- “%c”\n"
 
 #: lib/getopt.c:636 lib/getopt.c:682
 #, c-format
 msgid "%s: option requires an argument -- '%c'\n"
-msgstr "%s: 选项必须带有一个参数 -- '%c'\n"
+msgstr "%s：选项需要一个参数 -- “%c”\n"
 
-#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34 src/pcresearch.c:291
+#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34 src/pcresearch.c:313
 msgid "memory exhausted"
 msgstr "内存耗尽"
 
@@ -126,7 +136,7 @@ msgstr "无法返回起始工作目录"
 #: lib/xbinary-io.c:37
 #, c-format
 msgid "failed to set file descriptor text/binary mode"
-msgstr ""
+msgstr "设置文件描述符文本/二进制模式失败"
 
 #. TRANSLATORS:
 #. Get translations for open and closing quotation marks.
@@ -147,7 +157,7 @@ msgstr ""
 #. for your locale.
 #.
 #. If you don't know what to put here, please see
-#. <http://en.wikipedia.org/wiki/Quotation_marks_in_other_languages>
+#. <https://en.wikipedia.org/wiki/Quotation_marks_in_other_languages>
 #. and use glyphs suitable for your language.
 #: lib/quotearg.c:362
 msgid "`"
@@ -225,16 +235,16 @@ msgstr "正则表达式太大"
 msgid "Unmatched ) or \\)"
 msgstr ") 或 \\) 不匹配"
 
-#: lib/regcomp.c:687
+#: lib/regcomp.c:688
 msgid "No previous regular expression"
 msgstr "没有之前的正则表达式"
 
-#: lib/version-etc.c:74
+#: lib/version-etc.c:73
 #, c-format
 msgid "Packaged by %s (%s)\n"
 msgstr "由 %s (%s) 打包\n"
 
-#: lib/version-etc.c:77
+#: lib/version-etc.c:76
 #, c-format
 msgid "Packaged by %s\n"
 msgstr "由 %s 打包\n"
@@ -242,14 +252,15 @@ msgstr "由 %s 打包\n"
 #. TRANSLATORS: Translate "(C)" to the copyright symbol
 #. (C-in-a-circle), if this symbol is available in the user's
 #. locale.  Otherwise, do not translate "(C)"; leave it as-is.
-#: lib/version-etc.c:84
+#: lib/version-etc.c:83
 msgid "(C)"
 msgstr "©"
 
-#: lib/version-etc.c:86
+#: lib/version-etc.c:85
+#, fuzzy
 msgid ""
 "\n"
-"License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl."
+"License GPLv3+: GNU GPL version 3 or later <https://gnu.org/licenses/gpl."
 "html>.\n"
 "This is free software: you are free to change and redistribute it.\n"
 "There is NO WARRANTY, to the extent permitted by law.\n"
@@ -395,12 +406,13 @@ msgid "%s home page: <%s>\n"
 msgstr "%s 主页: <%s>\n"
 
 #: lib/version-etc.c:253
-#, c-format
-msgid "%s home page: <http://www.gnu.org/software/%s/>\n"
+#, fuzzy, c-format
+msgid "%s home page: <https://www.gnu.org/software/%s/>\n"
 msgstr "%s 主页: <http://www.gnu.org/software/%s/>\n"
 
 #: lib/version-etc.c:256
-msgid "General help using GNU software: <http://www.gnu.org/gethelp/>\n"
+#, fuzzy
+msgid "General help using GNU software: <https://www.gnu.org/gethelp/>\n"
 msgstr "GNU 软件的通用帮助: <http://www.gnu.org/gethelp/>\n"
 
 #: lib/xstrtol-error.c:63
@@ -416,103 +428,95 @@ msgstr "%s%s 参数'%s' 的后缀无效"
 #: lib/xstrtol-error.c:72
 #, c-format
 msgid "%s%s argument '%s' too large"
-msgstr "%s%s 参数'%s' 过多"
+msgstr "%s%s 参数“%s”过大"
 
-#. This is a proper name. See the gettext manual, section Names.
-#: src/grep.c:59
-msgid "Mike Haertel"
-msgstr "Mike Haertel"
-
-#: src/grep.c:60
-msgid "others, see <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
-msgstr "其余作者请参看 <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
-
-#: src/grep.c:585
+#: src/grep.c:582
 msgid "(standard input)"
-msgstr "(标准输入)"
+msgstr "（标准输入）"
 
-#: src/grep.c:765
+#: src/grep.c:762
 msgid "invalid context length argument"
 msgstr "无效的文本长度参数"
 
-#: src/grep.c:828
+#: src/grep.c:827
 msgid "input is too large to count"
 msgstr "输入太多无法计数"
 
-#: src/grep.c:1579
+#: src/grep.c:1578
 #, c-format
 msgid "Binary file %s matches\n"
 msgstr "匹配到二进制文件 %s\n"
 
-#: src/grep.c:1627
+#: src/grep.c:1626
 #, c-format
 msgid "warning: %s: %s"
 msgstr "警告: %s: %s"
 
-#: src/grep.c:1628
+#: src/grep.c:1627
 msgid "recursive directory loop"
 msgstr "嵌套目录循环"
 
-#: src/grep.c:1844
+#: src/grep.c:1843
 #, c-format
 msgid "input file %s is also the output"
 msgstr "输入文件 %s 同时也作输出"
 
-#: src/grep.c:1907 src/grep.c:1914
-#, c-format
-msgid "Usage: %s [OPTION]... PATTERN [FILE]...\n"
-msgstr "用法: %s [选项]... PATTERN [FILE]...\n"
+#: src/grep.c:1906 src/grep.c:1913
+#, fuzzy, c-format
+msgid "Usage: %s [OPTION]... PATTERNS [FILE]...\n"
+msgstr "用法: %s [选项]... 模式 [文件]...\n"
 
-#: src/grep.c:1909
+#: src/grep.c:1908
 #, c-format
 msgid "Try '%s --help' for more information.\n"
 msgstr "试用'%s --help' 来获得更多信息。\n"
 
-#: src/grep.c:1915
+#: src/grep.c:1914
 #, fuzzy, c-format
-msgid "Search for PATTERN in each FILE.\n"
-msgstr "在每个 FILE 或是标准输入中查找 PATTERN。\n"
+msgid "Search for PATTERNS in each FILE.\n"
+msgstr "在每个<文件>中查找给定<模式>。\n"
 
-#: src/grep.c:1916
+#: src/grep.c:1915
 #, fuzzy, c-format
 msgid ""
 "Example: %s -i 'hello world' menu.h main.c\n"
+"PATTERNS can contain multiple patterns separated by newlines.\n"
 "\n"
 "Pattern selection and interpretation:\n"
 msgstr ""
-"例如: %s -i 'hello world' menu.h main.c\n"
+"例如：%s -i 'hello world' menu.h main.c\n"
 "\n"
-"正则表达式选择与解释:\n"
+"模式选择与解释：\n"
 
 #: src/grep.c:1920
 #, fuzzy, c-format
 msgid ""
-"  -E, --extended-regexp     PATTERN is an extended regular expression\n"
-"  -F, --fixed-strings       PATTERN is a set of newline-separated strings\n"
-"  -G, --basic-regexp        PATTERN is a basic regular expression (default)\n"
-"  -P, --perl-regexp         PATTERN is a Perl regular expression\n"
+"  -E, --extended-regexp     PATTERNS are extended regular expressions\n"
+"  -F, --fixed-strings       PATTERNS are strings\n"
+"  -G, --basic-regexp        PATTERNS are basic regular expressions\n"
+"  -P, --perl-regexp         PATTERNS are Perl regular expressions\n"
 msgstr ""
-"  -E, --extended-regexp     PATTERN 是一个可扩展的正则表达式(缩写为 ERE)\n"
-"  -F, --fixed-strings       PATTERN 是一组由断行符分隔的字符串。\n"
-"  -G, --basic-regexp        PATTERN 是一个基本正则表达式(缩写为 BRE)\n"
-"  -P, --perl-regexp         PATTERN 是一个 Perl 正则表达式\n"
+"  -E, --extended-regexp     <模式> 是一个扩展正则表达式\n"
+"  -F, --fixed-strings       <模式> 是一组由换行符分隔的字符串\n"
+"  -G, --basic-regexp        <模式> 是一个基本正则表达式\n"
+"  -P, --perl-regexp         <模式> 是一个 Perl 正则表达式\n"
 
 #: src/grep.c:1926
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"  -e, --regexp=PATTERN      use PATTERN for matching\n"
-"  -f, --file=FILE           obtain PATTERN from FILE\n"
+"  -e, --regexp=PATTERNS     use PATTERNS for matching\n"
+"  -f, --file=FILE           take PATTERNS from FILE\n"
 "  -i, --ignore-case         ignore case distinctions\n"
-"  -w, --word-regexp         force PATTERN to match only whole words\n"
-"  -x, --line-regexp         force PATTERN to match only whole lines\n"
+"  -w, --word-regexp         match only whole words\n"
+"  -x, --line-regexp         match only whole lines\n"
 "  -z, --null-data           a data line ends in 0 byte, not newline\n"
 msgstr ""
-"  -e, --regexp=PATTERN      用 PATTERN 来进行匹配操作\n"
-"  -f, --file=FILE           从 FILE 中取得 PATTERN\n"
+"  -e, --regexp=<模式>       用指定的<模式>字符串来进行匹配操作\n"
+"  -f, --file=<文件>         从给定<文件>中取得<模式>\n"
 "  -i, --ignore-case         忽略大小写\n"
-"  -w, --word-regexp         强制 PATTERN 仅完全匹配字词\n"
-"  -x, --line-regexp         强制 PATTERN 仅完全匹配一行\n"
-"  -z, --null-data           一个 0 字节的数据行，但不是空行\n"
+"  -w, --word-regexp         强制<模式>仅完全匹配字词\n"
+"  -x, --line-regexp         强制<模式>仅完全匹配整行\n"
+"  -z, --null-data           数据行以一个 0 字节结束，而非换行符\n"
 
 #: src/grep.c:1933
 #, c-format
@@ -532,7 +536,7 @@ msgstr ""
 "      --help                显示此帮助并退出\n"
 
 #: src/grep.c:1940
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "Output control:\n"
@@ -546,19 +550,19 @@ msgid ""
 "prefix\n"
 msgstr ""
 "\n"
-"输出控制:\n"
-"  -m, --max-count=NUM       NUM 次匹配后停止\n"
+"输出控制：\n"
+"  -m, --max-count=<次数>    得到给定<次数>次匹配后停止\n"
 "  -b, --byte-offset         输出的同时打印字节偏移\n"
 "  -n, --line-number         输出的同时打印行号\n"
-"      --line-buffered       每行输出清空\n"
-"  -H, --with-filename       为每一匹配项打印文件名\n"
+"      --line-buffered       每行输出后刷新输出缓冲区\n"
+"  -H, --with-filename       为输出行打印文件名\n"
 "  -h, --no-filename         输出时不显示文件名前缀\n"
-"      --label=LABEL         将LABEL 作为标准输入文件名前缀\n"
+"      --label=<标签>        将给定<标签>作为标准输入文件名前缀\n"
 
 #: src/grep.c:1951
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"  -o, --only-matching       show only the part of a line matching PATTERN\n"
+"  -o, --only-matching       show only nonempty parts of lines that match\n"
 "  -q, --quiet, --silent     suppress all normal output\n"
 "      --binary-files=TYPE   assume that binary files are TYPE;\n"
 "                            TYPE is 'binary', 'text', or 'without-match'\n"
@@ -590,14 +594,13 @@ msgstr ""
 "  -R, --dereference-recursive       同上，但遍历所有符号链接\n"
 
 #: src/grep.c:1967
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"      --include=FILE_PATTERN  search only files that match FILE_PATTERN\n"
-"      --exclude=FILE_PATTERN  skip files and directories matching "
-"FILE_PATTERN\n"
+"      --include=GLOB        search only files that match GLOB (a file "
+"pattern)\n"
+"      --exclude=GLOB        skip files and directories matching GLOB\n"
 "      --exclude-from=FILE   skip files matching any file pattern from FILE\n"
-"      --exclude-dir=PATTERN  directories that match PATTERN will be "
-"skipped.\n"
+"      --exclude-dir=GLOB    skip directories that match GLOB\n"
 msgstr ""
 "      --include=FILE_PATTERN  只查找匹配FILE_PATTERN 的文件\n"
 "      --exclude=FILE_PATTERN  跳过匹配FILE_PATTERN 的文件和目录\n"
@@ -605,7 +608,7 @@ msgstr ""
 "      --exclude-dir=PATTERN  跳过所有匹配PATTERN 的目录。\n"
 
 #: src/grep.c:1974
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "  -L, --files-without-match  print only names of FILEs with no selected "
 "lines\n"
@@ -614,11 +617,11 @@ msgid ""
 "  -T, --initial-tab         make tabs line up (if needed)\n"
 "  -Z, --null                print 0 byte after FILE name\n"
 msgstr ""
-"  -L, --files-without-match  只打印不匹配FILEs 的文件名\n"
-"  -l, --files-with-matches  只打印匹配FILES 的文件名\n"
-"  -c, --count               只打印每个FILE 中的匹配行数目\n"
-"  -T, --initial-tab         行首tabs 分隔（如有必要）\n"
-"  -Z, --null                在FILE 文件最后打印空字符\n"
+"  -L, --files-without-match  只打印没有匹配上的<文件>的名称\n"
+"  -l, --files-with-matches  只打印有匹配的<文件>的名称\n"
+"  -c, --count               只打印每个<文件>中的匹配行数目\n"
+"  -T, --initial-tab         行首制表符对齐（如有必要）\n"
+"  -Z, --null                在<文件>名最后打印空字符\n"
 
 #: src/grep.c:1980
 #, c-format
@@ -636,7 +639,7 @@ msgstr ""
 "  -C, --context=NUM         打印NUM 行输出文本\n"
 
 #: src/grep.c:1987
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "  -NUM                      same as --context=NUM\n"
 "      --color[=WHEN],\n"
@@ -649,10 +652,8 @@ msgstr ""
 "  -NUM                      等同于 --context=NUM\n"
 "      --color[=WHEN],\n"
 "      --colour[=WHEN]       使用标记高亮匹配字串；\n"
-"                            WHEN 可以是`always', `never'或`auto'\n"
-"  -U, --binary              不要清除行尾的CR 字符(MSDOS/Windows)\n"
-"  -u, --unix-byte-offsets   忽略CR 字符，报告字节偏移\n"
-"\t\t\t     (MSDOS/Windows)\n"
+"                            WHEN 可以是“always”、“never”或“auto”\n"
+"  -U, --binary              不要清除行尾的 CR 字符（MSDOS/Windows）\n"
 "\n"
 
 #: src/grep.c:1994
@@ -660,14 +661,13 @@ msgstr ""
 msgid ""
 "When FILE is '-', read standard input.  With no FILE, read '.' if\n"
 "recursive, '-' otherwise.  With fewer than two FILEs, assume -h.\n"
-"Exit status is 0 if any line is selected, 1 otherwise;\n"
+"Exit status is 0 if any line (or file if -L) is selected, 1 otherwise;\n"
 "if any error occurs and -q is not given, the exit status is 2.\n"
 msgstr ""
-"若FILE 为 -，将读取标准输入。不带FILE，读取当前目录，除非命令行中指定了-r 选"
-"项。\n"
-"如果少于两个FILE 参数，就要默认使用-h 参数。\n"
-"如果有任意行被匹配，那退出状态为 0，否则为 1；\n"
-"如果有错误产生，且未指定 -q 参数，那退出状态为 2。\n"
+"若给定<文件>为“-”，则从读取标准输入。  若无<文件>参数，则除非处于\n"
+"递归工作模式，一律视为从“-”读取。如果提供了少于两个<文件>参数，\n"
+"则默认启用 -h 选项。如果有任意行被匹配，则退出状态为 0，否则为 1；\n"
+"如果有错误产生，且未指定 -q 参数，则退出状态为 2。\n"
 
 #: src/grep.c:2034
 msgid "conflicting matchers specified"
@@ -678,65 +678,75 @@ msgstr "指定了互相冲突的比较程序"
 msgid "invalid matcher %s"
 msgstr "无效匹配 %s"
 
-#: src/grep.c:2458
+#: src/grep.c:2459
 #, c-format
 msgid "warning: GREP_OPTIONS is deprecated; please use an alias or script"
-msgstr "警告: GREP_OPTIONS 已被废除; 请使用别名或脚本"
+msgstr "警告: GREP_OPTIONS 已被废弃；请使用别名或脚本"
 
-#: src/grep.c:2485
+#: src/grep.c:2486
 msgid "unknown devices method"
 msgstr "未知的设备处理方式"
 
-#: src/grep.c:2629
+#: src/grep.c:2630
 msgid "invalid max count"
 msgstr "无效的最大计数"
 
-#: src/grep.c:2687
+#: src/grep.c:2688
 msgid "unknown binary-files type"
 msgstr "未知的二进制文件类型"
 
-#: src/pcresearch.c:80
-msgid "failed to allocate memory for the PCRE JIT stack"
-msgstr "为PCRE JIT 栈分配内存时出错"
+#: src/grep.c:2770
+#, fuzzy
+msgid ""
+"Written by Mike Haertel and others; see\n"
+"<https://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>."
+msgstr "其余作者请参看 <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
 
-#: src/pcresearch.c:97
+#: src/pcresearch.c:86
+msgid "failed to allocate memory for the PCRE JIT stack"
+msgstr "为 PCRE JIT 栈分配内存时出错"
+
+#: src/pcresearch.c:118
 msgid ""
 "support for the -P option is not compiled into this --disable-perl-regexp "
 "binary"
-msgstr "-P 选项的支持未编译入 --disable-perl-regexp binary"
+msgstr "-P 选项的支持未编译入 --disable-perl-regexp 二进制文件"
 
-#: src/pcresearch.c:119
+#: src/pcresearch.c:140
 msgid "-P supports only unibyte and UTF-8 locales"
 msgstr "-P 仅支持单字节及UTF-8 语言环境"
 
-#: src/pcresearch.c:125
+#: src/pcresearch.c:146
 msgid "the -P option only supports a single pattern"
 msgstr "-P 选项仅支持单一匹配字词"
 
-#: src/pcresearch.c:167
+#: src/pcresearch.c:189
 msgid "internal error (should never happen)"
 msgstr "内部错误(本应不可能发生)"
 
-#: src/pcresearch.c:192
+#: src/pcresearch.c:214
 msgid "internal error"
 msgstr "内部错误"
 
-#: src/pcresearch.c:215
+#: src/pcresearch.c:237
 msgid "exceeded PCRE's line length limit"
-msgstr "超过PCRE 的行长度限制"
+msgstr "超过 PCRE 的行长度限制"
 
-#: src/pcresearch.c:295
+#: src/pcresearch.c:317
 msgid "exhausted PCRE JIT stack"
-msgstr "PCRE JIT栈已经用尽"
+msgstr "PCRE JIT 栈已经用尽"
 
-#: src/pcresearch.c:299
+#: src/pcresearch.c:321
 msgid "exceeded PCRE's backtracking limit"
-msgstr "超过PCRE 的回溯限制"
+msgstr "超过 PCRE 的回溯限制"
 
-#: src/pcresearch.c:306
+#: src/pcresearch.c:328
 #, c-format
 msgid "internal PCRE error: %d"
-msgstr "内部PCRE 错误: %d"
+msgstr "PCRE 内部错误：%d"
+
+#~ msgid "Mike Haertel"
+#~ msgstr "Mike Haertel"
 
 #~ msgid "%s: option '--%s' doesn't allow an argument\n"
 #~ msgstr "%s: 选项'--%s' 不允许带参数\n"
@@ -753,6 +763,9 @@ msgstr "内部PCRE 错误: %d"
 #~ msgid "%s: option '-W %s' requires an argument\n"
 #~ msgstr "%s: 选项'-W %s' 必须带参数\n"
 
+#~ msgid "lseek failed"
+#~ msgstr "lseek 失败"
+
 #~ msgid "PATTERN is, by default, a basic regular expression (BRE).\n"
 #~ msgstr "默认的 PATTERN 是一个基本正则表达式(缩写为 BRE)。\n"
 
@@ -762,9 +775,6 @@ msgstr "内部PCRE 错误: %d"
 #~ msgstr ""
 #~ "'egrep' 即'grep -E'。'fgrep' 即'grep -F'。\n"
 #~ "直接调用'egrep' 或是'fgrep' 均已被废弃。\n"
-
-#~ msgid "lseek failed"
-#~ msgstr "lseek 失败"
 
 #~ msgid "unescaped ^ or $ not supported with -Pz"
 #~ msgstr "-Pz 不支持未经转义的字符^ 或$"

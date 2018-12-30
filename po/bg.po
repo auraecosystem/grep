@@ -1,14 +1,14 @@
 # Bulgarian translation of GNU grep po-file.
-# Copyright (C) 2002, 2015, 2016, 2017 Free Software Foundation, Inc.
+# Copyright (C) 2002, 2015, 2016, 2017, 2018 Free Software Foundation, Inc.
 # This file is distributed under the same license as the grep package.
 # Pavel Mihaylov <avatarbg@bulgaria.com>, 2002.
-# Alexander Shopov <ash@kambanaria.org>, 2015, 2016, 2017.
+# Alexander Shopov <ash@kambanaria.org>, 2015, 2016, 2017, 2018.
 msgid ""
 msgstr ""
-"Project-Id-Version: grep-3.0.23-b00\n"
+"Project-Id-Version: grep 3.1.48\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2017-07-02 13:21-0700\n"
-"PO-Revision-Date: 2017-06-26 13:30+0300\n"
+"POT-Creation-Date: 2018-12-20 20:39-0800\n"
+"PO-Revision-Date: 2018-12-17 06:43+0100\n"
 "Last-Translator: Alexander Shopov <ash@kambanaria.org>\n"
 "Language-Team: Bulgarian <dict@ludost.net>\n"
 "Language: bg\n"
@@ -32,43 +32,51 @@ msgstr "аргументът „%s“ на опцията „%s“ не е ед�
 msgid "Valid arguments are:"
 msgstr "Възможните аргументи са:"
 
-#: lib/closeout.c:122 src/grep.c:1274
+#: lib/c-stack.c:208 lib/c-stack.c:301
+msgid "program error"
+msgstr "програмна грешка"
+
+#: lib/c-stack.c:209 lib/c-stack.c:302
+msgid "stack overflow"
+msgstr "препълване на стека"
+
+#: lib/closeout.c:122 src/grep.c:1273
 msgid "write error"
 msgstr "грешка при запис"
 
-#: lib/dfa.c:958
+#: lib/dfa.c:970
 msgid "unbalanced ["
 msgstr "„[“ без еш"
 
-#: lib/dfa.c:1079
+#: lib/dfa.c:1091
 msgid "invalid character class"
 msgstr "неправилен клас знаци"
 
-#: lib/dfa.c:1205
+#: lib/dfa.c:1217
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr "клас знаци се указва чрез „[[:ИМЕ:]]“, а не „[:ИМЕ:]“"
 
-#: lib/dfa.c:1272
+#: lib/dfa.c:1284
 msgid "unfinished \\ escape"
 msgstr "незавършена екранираща последователност чрез „\\“"
 
-#: lib/dfa.c:1433
+#: lib/dfa.c:1445
 msgid "invalid content of \\{\\}"
 msgstr "неправилно съдържание в „\\{\\}“"
 
-#: lib/dfa.c:1436
+#: lib/dfa.c:1448
 msgid "regular expression too big"
 msgstr "прекалено голям регулярен израз"
 
-#: lib/dfa.c:1850
+#: lib/dfa.c:1863
 msgid "unbalanced ("
 msgstr "„(“ без еш"
 
-#: lib/dfa.c:1968
+#: lib/dfa.c:1981
 msgid "no syntax specified"
 msgstr "не е зададен синтаксис"
 
-#: lib/dfa.c:1976
+#: lib/dfa.c:1992
 msgid "unbalanced )"
 msgstr "„)“ без еш"
 
@@ -111,7 +119,7 @@ msgstr "%s: неправилна опция — „%c“\n"
 msgid "%s: option requires an argument -- '%c'\n"
 msgstr "%s: опцията изисква аргумент — „%c“\n"
 
-#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34 src/pcresearch.c:291
+#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34 src/pcresearch.c:313
 msgid "memory exhausted"
 msgstr "паметта е изчерпана"
 
@@ -149,7 +157,7 @@ msgstr "неуспешно задаване на вид на файла като
 #. for your locale.
 #.
 #. If you don't know what to put here, please see
-#. <http://en.wikipedia.org/wiki/Quotation_marks_in_other_languages>
+#. <https://en.wikipedia.org/wiki/Quotation_marks_in_other_languages>
 #. and use glyphs suitable for your language.
 #: lib/quotearg.c:362
 msgid "`"
@@ -227,16 +235,16 @@ msgstr "Регулярният израз е прекалено голям"
 msgid "Unmatched ) or \\)"
 msgstr "„)“ или „\\)“ без еш"
 
-#: lib/regcomp.c:687
+#: lib/regcomp.c:688
 msgid "No previous regular expression"
 msgstr "Няма предхождащ регулярен израз"
 
-#: lib/version-etc.c:74
+#: lib/version-etc.c:73
 #, c-format
 msgid "Packaged by %s (%s)\n"
 msgstr "Пакетирано от %s (%s)\n"
 
-#: lib/version-etc.c:77
+#: lib/version-etc.c:76
 #, c-format
 msgid "Packaged by %s\n"
 msgstr "Пакетирано от %s\n"
@@ -244,14 +252,14 @@ msgstr "Пакетирано от %s\n"
 #. TRANSLATORS: Translate "(C)" to the copyright symbol
 #. (C-in-a-circle), if this symbol is available in the user's
 #. locale.  Otherwise, do not translate "(C)"; leave it as-is.
-#: lib/version-etc.c:84
+#: lib/version-etc.c:83
 msgid "(C)"
 msgstr "©"
 
-#: lib/version-etc.c:86
+#: lib/version-etc.c:85
 msgid ""
 "\n"
-"License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl."
+"License GPLv3+: GNU GPL version 3 or later <https://gnu.org/licenses/gpl."
 "html>.\n"
 "This is free software: you are free to change and redistribute it.\n"
 "There is NO WARRANTY, to the extent permitted by law.\n"
@@ -262,7 +270,7 @@ msgstr ""
 "Фондацията\n"
 "за свободен софтуер — версия 3 на лиценза или (по ваше решение) по-късна "
 "версия.\n"
-"<http://gnu.org/licenses/gpl.html>\n"
+"<https://gnu.org/licenses/gpl.html>\n"
 "Тази програма е свободен софтуер. Можете да я разпространявате и/или "
 "променяте.\n"
 "Тя се разпространява БЕЗ НИКАКВИ ГАРАНЦИИ доколкото е позволено от закона.\n"
@@ -401,12 +409,12 @@ msgstr "Уеб страница на „%s“: <%s>\n"
 
 #: lib/version-etc.c:253
 #, c-format
-msgid "%s home page: <http://www.gnu.org/software/%s/>\n"
-msgstr "Уеб страница на „%s“: <http://www.gnu.org/software/%s/>\n"
+msgid "%s home page: <https://www.gnu.org/software/%s/>\n"
+msgstr "Уеб страница на „%s“: <https://www.gnu.org/software/%s/>\n"
 
 #: lib/version-etc.c:256
-msgid "General help using GNU software: <http://www.gnu.org/gethelp/>\n"
-msgstr "Обща помощ за програмите на GNU: <http://www.gnu.org/gethelp/>\n"
+msgid "General help using GNU software: <https://www.gnu.org/gethelp/>\n"
+msgstr "Обща помощ за програмите на GNU: <https://www.gnu.org/gethelp/>\n"
 
 #: lib/xstrtol-error.c:63
 #, c-format
@@ -423,101 +431,94 @@ msgstr "неправилен суфикс в аргумента „%3$s“ за 
 msgid "%s%s argument '%s' too large"
 msgstr "прекалено дълъг аргумент „%3$s“ за опцията „%1$s%2$s“"
 
-#. This is a proper name. See the gettext manual, section Names.
-#: src/grep.c:59
-msgid "Mike Haertel"
-msgstr "Mike Haertel"
-
-#: src/grep.c:60
-msgid "others, see <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
-msgstr "и др., вижте <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
-
-#: src/grep.c:585
+#: src/grep.c:582
 msgid "(standard input)"
 msgstr "(стандартен вход)"
 
-#: src/grep.c:765
+#: src/grep.c:762
 msgid "invalid context length argument"
 msgstr "неправилен размер на контекста"
 
-#: src/grep.c:828
+#: src/grep.c:827
 msgid "input is too large to count"
 msgstr "входните данни са прекалено големи, за да бъдат преброени"
 
-#: src/grep.c:1579
+#: src/grep.c:1578
 #, c-format
 msgid "Binary file %s matches\n"
 msgstr "Двоичният файл „%s“ напасва\n"
 
-#: src/grep.c:1627
+#: src/grep.c:1626
 #, c-format
 msgid "warning: %s: %s"
 msgstr "предупреждение: %s: %s"
 
-#: src/grep.c:1628
+#: src/grep.c:1627
 msgid "recursive directory loop"
 msgstr "зацикляне при рекурсивна обработка на директориите"
 
-#: src/grep.c:1844
+#: src/grep.c:1843
 #, c-format
 msgid "input file %s is also the output"
 msgstr "входният файл „%s“ е и изходен"
 
-#: src/grep.c:1907 src/grep.c:1914
+#: src/grep.c:1906 src/grep.c:1913
 #, c-format
-msgid "Usage: %s [OPTION]... PATTERN [FILE]...\n"
-msgstr "Употреба: %s [ОПЦИЯ]… ШАБЛОН [ФАЙЛ]…\n"
+msgid "Usage: %s [OPTION]... PATTERNS [FILE]...\n"
+msgstr "Употреба: %s [ОПЦИЯ]… ШАБЛОН… [ФАЙЛ]…\n"
 
-#: src/grep.c:1909
+#: src/grep.c:1908
 #, c-format
 msgid "Try '%s --help' for more information.\n"
-msgstr "Вижте „%s --help“ за повече информация.\n"
+msgstr "За повече информация изпълнете „%s --help“.\n"
+
+#: src/grep.c:1914
+#, c-format
+msgid "Search for PATTERNS in each FILE.\n"
+msgstr "Търсене на текст, напасващ с ШАБЛОНите във всеки зададен ФАЙЛ.\n"
 
 #: src/grep.c:1915
 #, c-format
-msgid "Search for PATTERN in each FILE.\n"
-msgstr "Търсене на текст, напасващ с ШАБЛОНа във всеки зададен ФАЙЛ.\n"
-
-#: src/grep.c:1916
-#, c-format
 msgid ""
 "Example: %s -i 'hello world' menu.h main.c\n"
+"PATTERNS can contain multiple patterns separated by newlines.\n"
 "\n"
 "Pattern selection and interpretation:\n"
 msgstr ""
 "Пример: %s -i 'hello world' menu.h main.c\n"
+"Може да използвате по един ШАБЛОН на ред.\n"
 "\n"
 "Избор на шаблона и интерпретация:\n"
 
 #: src/grep.c:1920
 #, c-format
 msgid ""
-"  -E, --extended-regexp     PATTERN is an extended regular expression\n"
-"  -F, --fixed-strings       PATTERN is a set of newline-separated strings\n"
-"  -G, --basic-regexp        PATTERN is a basic regular expression (default)\n"
-"  -P, --perl-regexp         PATTERN is a Perl regular expression\n"
+"  -E, --extended-regexp     PATTERNS are extended regular expressions\n"
+"  -F, --fixed-strings       PATTERNS are strings\n"
+"  -G, --basic-regexp        PATTERNS are basic regular expressions\n"
+"  -P, --perl-regexp         PATTERNS are Perl regular expressions\n"
 msgstr ""
-"  -E, --extended-regexp     ШАБЛОНът е разширен регулярен израз\n"
-"  -F, --fixed-regexp        ШАБЛОНът е от дословни низове, разделени с\n"
-"                            нови редове\n"
-"  -G, --basic-regexp        ШАБЛОНът е основен регулярен израз (стандартно)\n"
-"  -P, --perl-regexp         ШАБЛОНът е регулярен израз на Perl\n"
+"  -E, --extended-regexp     ШАБЛОНите са разширени регулярни изрази\n"
+"  -F, --fixed-regexp        ШАБЛОНите са дословни низове\n"
+"  -G, --basic-regexp        ШАБЛОНите са основни регулярни изрази "
+"(стандартно)\n"
+"  -P, --perl-regexp         ШАБЛОНите са регулярни изрази на Perl\n"
 
 #: src/grep.c:1926
 #, c-format
 msgid ""
-"  -e, --regexp=PATTERN      use PATTERN for matching\n"
-"  -f, --file=FILE           obtain PATTERN from FILE\n"
+"  -e, --regexp=PATTERNS     use PATTERNS for matching\n"
+"  -f, --file=FILE           take PATTERNS from FILE\n"
 "  -i, --ignore-case         ignore case distinctions\n"
-"  -w, --word-regexp         force PATTERN to match only whole words\n"
-"  -x, --line-regexp         force PATTERN to match only whole lines\n"
+"  -w, --word-regexp         match only whole words\n"
+"  -x, --line-regexp         match only whole lines\n"
 "  -z, --null-data           a data line ends in 0 byte, not newline\n"
 msgstr ""
 "  -e, --regexp=ШАБЛОН       ШАБЛОН за регулярен израз\n"
-"  -f, --file=ФАЙЛ           изчитане на ШАБЛОНа от ФАЙЛ\n"
+"  -f, --file=ФАЙЛ           изчитане на ШАБЛОНите от ФАЙЛ\n"
 "  -i, --ignore-case         без разлика между главни и малки букви\n"
-"  -w, --word-regexp         ШАБЛОНът да съвпада само с цели думи\n"
-"  -x, --line-regexp         ШАБЛОНът да съвпада само с цели редове\n"
+"  -w, --word-regexp         съвпадане само с цели думи\n"
+"  -x, --line-regexp         съвпадане само с цели редове\n"
 "  -z, --null-data           редовете завършват с NULL, а не със знак за нов "
 "ред\n"
 
@@ -569,7 +570,7 @@ msgstr ""
 #: src/grep.c:1951
 #, c-format
 msgid ""
-"  -o, --only-matching       show only the part of a line matching PATTERN\n"
+"  -o, --only-matching       show only nonempty parts of lines that match\n"
 "  -q, --quiet, --silent     suppress all normal output\n"
 "      --binary-files=TYPE   assume that binary files are TYPE;\n"
 "                            TYPE is 'binary', 'text', or 'without-match'\n"
@@ -609,12 +610,11 @@ msgstr ""
 #: src/grep.c:1967
 #, c-format
 msgid ""
-"      --include=FILE_PATTERN  search only files that match FILE_PATTERN\n"
-"      --exclude=FILE_PATTERN  skip files and directories matching "
-"FILE_PATTERN\n"
+"      --include=GLOB        search only files that match GLOB (a file "
+"pattern)\n"
+"      --exclude=GLOB        skip files and directories matching GLOB\n"
 "      --exclude-from=FILE   skip files matching any file pattern from FILE\n"
-"      --exclude-dir=PATTERN  directories that match PATTERN will be "
-"skipped.\n"
+"      --exclude-dir=GLOB    skip directories that match GLOB\n"
 msgstr ""
 "      --include=ШАБЛОН_ЗА_ИМЕ\n"
 "                            търсене само във файлове с имена, напасващи\n"
@@ -688,14 +688,15 @@ msgstr ""
 msgid ""
 "When FILE is '-', read standard input.  With no FILE, read '.' if\n"
 "recursive, '-' otherwise.  With fewer than two FILEs, assume -h.\n"
-"Exit status is 0 if any line is selected, 1 otherwise;\n"
+"Exit status is 0 if any line (or file if -L) is selected, 1 otherwise;\n"
 "if any error occurs and -q is not given, the exit status is 2.\n"
 msgstr ""
 "Когато ФАЙЛът е „-“ се чете стандартният вход.  Без ФАЙЛ се чете текущата\n"
 "директория „.“.  Ако са зададени по-малко от два ФАЙЛа, се предполага „-h“.\n"
-"Изходният код на grep е 0 при поне един избран ред и 1 във всички останали\n"
-"случаи.  Ако не е зададена опцията „-q“ и възникне грешка, изходният код е "
-"2.\n"
+"Изходният код на grep е 0 при поне един напаснат ред (или файл, при "
+"ползването\n"
+"на опцията „-L“) и 1 във всички останали случаи.  Ако не е зададена опцията\n"
+"„-q“ и възникне грешка, изходният код е 2.\n"
 
 #: src/grep.c:2034
 msgid "conflicting matchers specified"
@@ -706,7 +707,7 @@ msgstr "зададените изрази за съвпадение са в ко
 msgid "invalid matcher %s"
 msgstr "неправилен израз „%s“"
 
-#: src/grep.c:2458
+#: src/grep.c:2459
 #, c-format
 msgid "warning: GREP_OPTIONS is deprecated; please use an alias or script"
 msgstr ""
@@ -714,24 +715,31 @@ msgstr ""
 "на\n"
 "обвивката или скрипт"
 
-#: src/grep.c:2485
+#: src/grep.c:2486
 msgid "unknown devices method"
 msgstr "неизвестен метод за обработка на специалните файлове"
 
-#: src/grep.c:2629
+#: src/grep.c:2630
 msgid "invalid max count"
 msgstr "неправилен максимален брой"
 
-#: src/grep.c:2687
+#: src/grep.c:2688
 msgid "unknown binary-files type"
 msgstr "непознат вид двоичен файл"
 
-#: src/pcresearch.c:80
+#: src/grep.c:2770
+#, fuzzy
+msgid ""
+"Written by Mike Haertel and others; see\n"
+"<https://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>."
+msgstr "и др., вижте <https://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
+
+#: src/pcresearch.c:86
 msgid "failed to allocate memory for the PCRE JIT stack"
 msgstr ""
 "неуспешно заделяне на памет за стека за изпълнение на шаблоните за „PCRE“"
 
-#: src/pcresearch.c:97
+#: src/pcresearch.c:118
 msgid ""
 "support for the -P option is not compiled into this --disable-perl-regexp "
 "binary"
@@ -740,35 +748,38 @@ msgstr ""
 "с\n"
 "опцията „--disable-perl-regexp“."
 
-#: src/pcresearch.c:119
+#: src/pcresearch.c:140
 msgid "-P supports only unibyte and UTF-8 locales"
 msgstr "опцията „-P“ изисква локалът да е с еднобайтово кодиране или UTF-8"
 
-#: src/pcresearch.c:125
+#: src/pcresearch.c:146
 msgid "the -P option only supports a single pattern"
 msgstr "опцията „-P“ поддържа само един шаблон"
 
-#: src/pcresearch.c:167
+#: src/pcresearch.c:189
 msgid "internal error (should never happen)"
 msgstr "вътрешна грешка, която не трябва да възниква — молим да я докладвате"
 
-#: src/pcresearch.c:192
+#: src/pcresearch.c:214
 msgid "internal error"
 msgstr "вътрешна грешка, която не трябва да възниква — молим да я докладвате"
 
-#: src/pcresearch.c:215
+#: src/pcresearch.c:237
 msgid "exceeded PCRE's line length limit"
 msgstr "максималният размер на реда за „PCRE“ е превишен"
 
-#: src/pcresearch.c:295
+#: src/pcresearch.c:317
 msgid "exhausted PCRE JIT stack"
 msgstr "паметта за стека за изпълнение на шаблоните за „PCRE“ свърши"
 
-#: src/pcresearch.c:299
+#: src/pcresearch.c:321
 msgid "exceeded PCRE's backtracking limit"
 msgstr "максималният брой връщания при рекурсия на „PCRE“ е превишен"
 
-#: src/pcresearch.c:306
+#: src/pcresearch.c:328
 #, c-format
 msgid "internal PCRE error: %d"
 msgstr "вътрешна грешка на „PCRE“: %d"
+
+#~ msgid "Mike Haertel"
+#~ msgstr "Mike Haertel"
