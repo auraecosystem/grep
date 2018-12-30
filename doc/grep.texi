@@ -18,7 +18,7 @@
 @copying
 This manual is for @command{grep}, a pattern matching engine.
 
-Copyright @copyright{} 1999-2002, 2005, 2008-2017 Free Software Foundation,
+Copyright @copyright{} 1999-2002, 2005, 2008-2018 Free Software Foundation,
 Inc.
 
 @quotation
@@ -33,11 +33,11 @@ Texts.  A copy of the license is included in the section entitled
 
 @dircategory Text creation and manipulation
 @direntry
-* grep: (grep).                 Print lines matching a pattern.
+* grep: (grep).                 Print lines that match patterns.
 @end direntry
 
 @titlepage
-@title GNU Grep: Print lines matching a pattern
+@title GNU Grep: Print lines that match patterns
 @subtitle version @value{VERSION}, @value{UPDATED}
 @author Alain Magloire et al.
 @page
@@ -52,7 +52,7 @@ Texts.  A copy of the license is included in the section entitled
 @node Top
 @top grep
 
-@command{grep} prints lines that contain a match for a pattern.
+@command{grep} prints lines that contain a match for one or more patterns.
 
 This manual is for version @value{VERSION} of GNU Grep.
 
@@ -74,10 +74,10 @@ This manual is for version @value{VERSION} of GNU Grep.
 @node Introduction
 @chapter Introduction
 
-@cindex searching for a pattern
+@cindex searching for patterns
 
-@command{grep} searches input files
-for lines containing a match to a given pattern list.
+Given one or more patterns, @command{grep} searches input files
+for matches to the patterns.
 When it finds a match in a line,
 it copies the line to standard output (by default),
 or produces whatever other sort of output you have requested with options.
@@ -97,17 +97,16 @@ there is no way to match newline characters in a text.
 The general synopsis of the @command{grep} command line is
 
 @example
-grep @var{options} @var{pattern} @var{input_file_names}
+grep [@var{option}...] [@var{patterns}] [@var{file}...]
 @end example
 
 @noindent
-There can be zero or more @var{options}.
-@var{pattern} will only be seen as such
-(and not as an @var{input_file_name})
-if it wasn't already specified within @var{options}
-(by using the @samp{-e@ @var{pattern}}
-or @samp{-f@ @var{file}} options).
-There can be zero or more @var{input_file_names}.
+
+There can be zero or more @var{option} arguments, and zero or more
+@var{file} arguments.  The @var{patterns} argument contains one or
+more patterns separated by newlines, and is omitted when patterns are
+given via the @samp{-e@ @var{patterns}} or @samp{-f@ @var{file}}
+options.
 
 @menu
 * Command-line Options::        Short and long names, grouped by category.
@@ -170,12 +169,13 @@ This version number should be included in all bug reports.
 
 @table @option
 
-@item -e @var{pattern}
-@itemx --regexp=@var{pattern}
+@item -e @var{patterns}
+@itemx --regexp=@var{patterns}
 @opindex -e
-@opindex --regexp=@var{pattern}
-@cindex pattern list
-Use @var{pattern} as the pattern.
+@opindex --regexp=@var{patterns}
+@cindex patterns option
+Use @var{patterns} as one or more patterns; newlines within
+@var{patterns} separate each pattern from the next.
 If this option is used multiple times or is combined with the
 @option{-f} (@option{--file}) option, search for all patterns given.
 (@option{-e} is specified by POSIX.)
@@ -184,7 +184,7 @@ If this option is used multiple times or is combined with the
 @itemx --file=@var{file}
 @opindex -f
 @opindex --file
-@cindex pattern from file
+@cindex patterns from file
 Obtain patterns from @var{file}, one per line.
 If this option is used multiple times or is combined with the
 @option{-e} (@option{--regexp}) option, search for all patterns given.
@@ -235,8 +235,16 @@ or preceded by a non-word constituent character.
 Similarly,
 it must be either at the end of the line
 or followed by a non-word constituent character.
-Word-constituent characters are letters, digits, and the underscore.
+Word constituent characters are letters, digits, and the underscore.
 This option has no effect if @option{-x} is also specified.
+
+Because the @option{-w} option can match a substring that does not
+begin and end with word constituents, it differs from surrounding a
+regular expression with @samp{\<} and @samp{\>}.  For example, although
+@samp{grep -w @@} matches a line containing only @samp{@@}, @samp{grep
+'\<@@\>'} cannot match any line because @samp{@@} is not a
+word constituent.  @xref{The Backslash Character and Special
+Expressions}.
 
 @item -x
 @itemx --line-regexp
@@ -244,7 +252,7 @@ This option has no effect if @option{-x} is also specified.
 @opindex --line-regexp
 @cindex match the whole line
 Select only those matches that exactly match the whole line.
-For a regular expression pattern, this is like parenthesizing the
+For regular expression patterns, this is like parenthesizing each
 pattern and then surrounding it with @samp{^} and @samp{$}.
 (@option{-x} is specified by POSIX.)
 
@@ -729,6 +737,14 @@ directory, recursively, following all symbolic links.
 
 @table @option
 
+@item --
+@opindex --
+@cindex option delimiter
+Delimit the option list.  Later arguments, if any, are treated as
+operands even if they begin with @samp{-}.  For example, @samp{grep PAT --
+-file1 file2} searches for the pattern PAT in the files named @file{-file1}
+and @file{file2}.
+
 @item --line-buffered
 @opindex --line-buffered
 @cindex line buffering
@@ -1000,6 +1016,8 @@ interpreted.
 @vindex LC_ALL @r{environment variable}
 @vindex LC_CTYPE @r{environment variable}
 @vindex LANG @r{environment variable}
+@cindex encoding error
+@cindex null character
 These variables specify the locale for the @env{LC_CTYPE} category,
 which determines the type of characters,
 e.g., which characters are whitespace.
@@ -1007,6 +1025,18 @@ This category also determines the character encoding, that is, whether
 text is encoded in UTF-8, ASCII, or some other encoding.  In the
 @samp{C} or @samp{POSIX} locale, all characters are encoded as a
 single byte and every byte is a valid character.
+In more-complex encodings such as UTF-8, a sequence of multiple bytes
+may be needed to represent a character, and some bytes may be encoding
+errors that do not contribute to the representation of any character.
+POSIX does not specify the behavior of @command{grep} when patterns or
+input data contain encoding errors or null characters, so portable
+scripts should avoid such usage.  As an extension to POSIX, GNU
+@command{grep} treats null characters like any other character.
+However, unless the @option{-a} (@option{--binary-files=text}) option
+is used, the presence of null characters in input or of encoding
+errors in output causes GNU @command{grep} to treat the file as binary
+and suppress details about matches.  @xref{File and Directory
+Selection}.
 
 @item LANGUAGE
 @itemx LC_ALL
@@ -1059,6 +1089,9 @@ and only when @env{POSIXLY_CORRECT} is not set.
 
 Normally the exit status is 0 if a line is selected, 1 if no lines
 were selected, and 2 if an error occurred.  However, if the
+@option{-L} or @option{--files-without-match} is used, the exit status
+is 0 if a file is listed, 1 if no files were listed, and 2 if an error
+occurred.  Also, if the
 @option{-q} or @option{--quiet} or @option{--silent} option is used
 and a line is selected, the exit status is 0 even if an error
 occurred.  Other @command{grep} implementations may exit with status
@@ -1070,7 +1103,7 @@ greater than 2 on error.
 @cindex variants of @command{grep}
 
 @command{grep} searches the named input files
-for lines containing a match to the given pattern.
+for lines containing a match to the given patterns.
 By default, @command{grep} prints the matching lines.
 A file named @file{-} stands for standard input.
 If no input is specified, @command{grep} searches the working
@@ -1086,7 +1119,7 @@ controlled by the following options.
 @opindex -G
 @opindex --basic-regexp
 @cindex matching basic regular expressions
-Interpret the pattern as a basic regular expression (BRE).
+Interpret patterns as basic regular expressions (BREs).
 This is the default.
 
 @item -E
@@ -1094,7 +1127,7 @@ This is the default.
 @opindex -E
 @opindex --extended-regexp
 @cindex matching extended regular expressions
-Interpret the pattern as an extended regular expression (ERE).
+Interpret patterns as extended regular expressions (EREs).
 (@option{-E} is specified by POSIX.)
 
 @item -F
@@ -1102,8 +1135,7 @@ Interpret the pattern as an extended regular expression (ERE).
 @opindex -F
 @opindex --fixed-strings
 @cindex matching fixed strings
-Interpret the pattern as a list of fixed strings (instead of regular
-expressions), separated by newlines, any of which is to be matched.
+Interpret patterns as fixed strings, not regular expressions.
 (@option{-F} is specified by POSIX.)
 
 @item -P
@@ -1111,9 +1143,9 @@ expressions), separated by newlines, any of which is to be matched.
 @opindex -P
 @opindex --perl-regexp
 @cindex matching Perl-compatible regular expressions
-Interpret the pattern as a Perl-compatible regular expression (PCRE).
-This is experimental, particularly when combined with
-the @option{-z} (@option{--null-data}) option, and
+Interpret patterns as Perl-compatible regular expressions (PCREs).
+PCRE support is here to stay, but consider this option experimental when
+combined with the @option{-z} (@option{--null-data}) option, and note that
 @samp{grep@ -P} may warn of unimplemented features.
 @xref{Other Options}.
 
@@ -1168,16 +1200,16 @@ are regular expressions that match themselves.
 Any meta-character
 with special meaning may be quoted by preceding it with a backslash.
 
-A regular expression may be followed by one of several
-repetition operators:
-
-@table @samp
-
-@item .
 @opindex .
 @cindex dot
 @cindex period
 The period @samp{.} matches any single character.
+It is unspecified whether @samp{.} matches an encoding error.
+
+A regular expression may be followed by one of several
+repetition operators:
+
+@table @samp
 
 @item ?
 @opindex ?
@@ -1248,11 +1280,15 @@ An unmatched @samp{)} matches just itself.
 @cindex character class
 A @dfn{bracket expression} is a list of characters enclosed by @samp{[} and
 @samp{]}.
-It matches any single character in that list;
-if the first character of the list is the caret @samp{^},
-then it matches any character @strong{not} in the list.
+It matches any single character in that list.
+If the first character of the list is the caret @samp{^},
+then it matches any character @strong{not} in the list,
+and it is unspecified whether it matches an encoding error.
 For example, the regular expression
-@samp{[0123456789]} matches any single digit.
+@samp{[0123456789]} matches any single digit,
+whereas @samp{[^()]} matches any single character that is not
+an opening or closing parenthesis, and might or might not match an
+encoding error.
 
 @cindex range expression
 Within a bracket expression, a @dfn{range expression} consists of two
@@ -1809,7 +1845,7 @@ Aho--Corasick algorithm is used to match multiple fixed patterns.
 @cindex locales
 Generally speaking @command{grep} operates more efficiently in
 single-byte locales, since it can avoid the special processing needed
-for multi-byte characters.  If your pattern will work just as well
+for multi-byte characters.  If your patterns will work just as well
 that way, setting @env{LC_ALL} to a single-byte locale can help
 performance considerably.  Setting @samp{LC_ALL='C'} can be
 particularly efficient, as @command{grep} is tuned for that locale.
@@ -1837,7 +1873,7 @@ On some operating systems that support files with holes---large
 regions of zeros that are not physically present on secondary
 storage---@command{grep} can skip over the holes efficiently without
 needing to read the zeros.  This optimization is not available if the
-@option{-a} (@option{--text}) option is used (@pxref{File and
+@option{-a} (@option{--binary-files=text}) option is used (@pxref{File and
 Directory Selection}), unless the @option{-z} (@option{--null-data})
 option is also used (@pxref{Other Options}).
 
@@ -1856,20 +1892,20 @@ used by @command{grep}.
 @item
 Aho AV, Corasick MJ. Efficient string matching: an aid to bibliographic search.
 @emph{CACM}. 1975;18(6):333--40.
-@url{http://dx.doi.org/10.1145/360825.360855}.
+@url{https://dx.doi.org/10.1145/360825.360855}.
 This introduces the Aho--Corasick algorithm.
 
 @item
 Boyer RS, Moore JS. A fast string searching algorithm.
 @emph{CACM}. 1977;20(10):762--72.
-@url{http://dx.doi.org/10.1145/359842.359859}.
+@url{https://dx.doi.org/10.1145/359842.359859}.
 This introduces the Boyer--Moore algorithm.
 
 @item
 Faro S, Lecroq T. The exact online string matching problem: a review
 of the most recent results.
 @emph{ACM Comput Surv}. 2013;45(2):13.
-@url{http://dx.doi.org/10.1145/2431211.2431212}.
+@url{https://dx.doi.org/10.1145/2431211.2431212}.
 This surveys string matching algorithms that might help improve the
 performance of @command{grep} in the future.
 @end itemize
@@ -1880,7 +1916,7 @@ performance of @command{grep} in the future.
 
 @cindex bugs, reporting
 Bug reports can be found at the
-@url{http://debbugs.gnu.org/cgi/pkgreport.cgi?package=grep,
+@url{https://debbugs.gnu.org/cgi/pkgreport.cgi?package=grep,
 GNU bug report logs for @command{grep}}.
 If you find a bug not listed there, please email it to
 @email{bug-grep@@gnu.org} to create a new bug report.
@@ -1915,12 +1951,12 @@ same restrictions.
 This general method of licensing software is sometimes called
 @dfn{open source}.  The GNU project prefers the term ``free software''
 for reasons outlined at
-@url{http://www.gnu.org/philosophy/open-source-misses-the-point.html}.
+@url{https://www.gnu.org/philosophy/open-source-misses-the-point.html}.
 
 This manual is free documentation in the same sense.  The
 documentation license is included below.  The license for the program
 is available with the source code, or at
-@url{http://www.gnu.org/licenses/gpl.html}.
+@url{https://www.gnu.org/licenses/gpl.html}.
 
 @menu
 * GNU Free Documentation License::

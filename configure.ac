@@ -1,7 +1,7 @@
 dnl
 dnl autoconf input file for GNU grep
 dnl
-dnl Copyright (C) 1997-2006, 2009-2017 Free Software Foundation, Inc.
+dnl Copyright (C) 1997-2006, 2009-2018 Free Software Foundation, Inc.
 dnl
 dnl This file is part of GNU grep.
 dnl
@@ -16,7 +16,7 @@ dnl MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 dnl GNU General Public License for more details.
 dnl
 dnl You should have received a copy of the GNU General Public License
-dnl along with this program.  If not, see <http://www.gnu.org/licenses/>.
+dnl along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 AC_INIT([GNU grep],
         m4_esyscmd([build-aux/git-version-gen .tarball-version]),
@@ -65,7 +65,7 @@ ac_cv_path_EGREP=$EGREP
 AC_CONFIG_AUX_DIR(build-aux)
 AC_CONFIG_SRCDIR(src/grep.c)
 AC_DEFINE([GREP], 1, [We are building grep])
-AC_PREREQ(2.59)
+AC_PREREQ([2.63])
 AC_CONFIG_MACRO_DIRS([m4])
 
 dnl Automake stuff.
@@ -149,6 +149,7 @@ if test "$gl_gcc_warnings" = yes; then
   gl_WARN_ADD([-Wno-missing-field-initializers]) # We need this one
   gl_WARN_ADD([-Wno-sign-compare])     # Too many warnings for now
   gl_WARN_ADD([-Wno-unused-parameter]) # Too many warnings for now
+  gl_WARN_ADD([-Wno-cast-function-type]) # sig-handler.h's sa_handler_t cast
 
   # In spite of excluding -Wlogical-op above, it is enabled, as of
   # gcc 4.5.0 20090517, and it provokes warnings in cat.c, dd.c, truncate.c

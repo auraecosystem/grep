@@ -1,5 +1,5 @@
 /* grep.c - main driver file for grep.
-   Copyright (C) 1992, 1997-2002, 2004-2017 Free Software Foundation, Inc.
+   Copyright (C) 1992, 1997-2002, 2004-2018 Free Software Foundation, Inc.
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -30,6 +30,7 @@
 
 #include "argmatch.h"
 #include "c-ctype.h"
+#include "c-stack.h"
 #include "closeout.h"
 #include "colorize.h"
 #include "die.h"
@@ -54,10 +55,6 @@
 enum { SEP_CHAR_SELECTED = ':' };
 enum { SEP_CHAR_REJECTED = '-' };
 static char const SEP_STR_GROUP[] = "--";
-
-#define AUTHORS \
-  proper_name ("Mike Haertel"), \
-  _("others, see <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>")
 
 /* When stdout is connected to a regular file, save its stat
    information here, so that we can automatically skip it, thus
@@ -798,7 +795,6 @@ skipped_file (char const *name, bool command_line, bool is_dir)
 
 static char *buffer;		/* Base of buffer. */
 static size_t bufalloc;		/* Allocated buffer size, counting slop. */
-enum { INITIAL_BUFSIZE = 32768 }; /* Initial buffer size, not counting slop. */
 static int bufdesc;		/* File descriptor. */
 static char *bufbeg;		/* Beginning of user-visible stuff. */
 static char *buflim;		/* Limit of user-visible stuff. */
@@ -810,6 +806,9 @@ static off_t after_last_match;	/* Pointer after last matching line that
 static bool skip_nuls;		/* Skip '\0' in data.  */
 static bool skip_empty_lines;	/* Skip empty lines in data.  */
 static uintmax_t totalnl;	/* Total newline count before lastnl. */
+
+/* Initial buffer size, not counting slop. */
+enum { INITIAL_BUFSIZE = 96 * 1024 };
 
 /* Return VAL aligned to the next multiple of ALIGNMENT.  VAL can be
    an integer or a pointer.  Both args must be free of side effects.  */
@@ -1863,11 +1862,11 @@ grepdesc (int desc, bool command_line)
         fflush_errno ();
     }
 
-  status = !count;
+  status = !count == !(list_files == LISTFILES_NONMATCHING);
 
   if (list_files == LISTFILES_NONE)
     finalize_input (desc, &st, ineof);
-  else if (list_files == (status ? LISTFILES_NONMATCHING : LISTFILES_MATCHING))
+  else if (status == 0)
     {
       print_filename ();
       putchar_errno ('\n' & filename_mask);
@@ -1904,31 +1903,32 @@ usage (int status)
 {
   if (status != 0)
     {
-      fprintf (stderr, _("Usage: %s [OPTION]... PATTERN [FILE]...\n"),
+      fprintf (stderr, _("Usage: %s [OPTION]... PATTERNS [FILE]...\n"),
                getprogname ());
       fprintf (stderr, _("Try '%s --help' for more information.\n"),
                getprogname ());
     }
   else
     {
-      printf (_("Usage: %s [OPTION]... PATTERN [FILE]...\n"), getprogname ());
-      printf (_("Search for PATTERN in each FILE.\n"));
+      printf (_("Usage: %s [OPTION]... PATTERNS [FILE]...\n"), getprogname ());
+      printf (_("Search for PATTERNS in each FILE.\n"));
       printf (_("\
 Example: %s -i 'hello world' menu.h main.c\n\
+PATTERNS can contain multiple patterns separated by newlines.\n\
 \n\
 Pattern selection and interpretation:\n"), getprogname ());
       printf (_("\
-  -E, --extended-regexp     PATTERN is an extended regular expression\n\
-  -F, --fixed-strings       PATTERN is a set of newline-separated strings\n\
-  -G, --basic-regexp        PATTERN is a basic regular expression (default)\n\
-  -P, --perl-regexp         PATTERN is a Perl regular expression\n"));
+  -E, --extended-regexp     PATTERNS are extended regular expressions\n\
+  -F, --fixed-strings       PATTERNS are strings\n\
+  -G, --basic-regexp        PATTERNS are basic regular expressions\n\
+  -P, --perl-regexp         PATTERNS are Perl regular expressions\n"));
   /* -X is deliberately undocumented.  */
       printf (_("\
-  -e, --regexp=PATTERN      use PATTERN for matching\n\
-  -f, --file=FILE           obtain PATTERN from FILE\n\
+  -e, --regexp=PATTERNS     use PATTERNS for matching\n\
+  -f, --file=FILE           take PATTERNS from FILE\n\
   -i, --ignore-case         ignore case distinctions\n\
-  -w, --word-regexp         force PATTERN to match only whole words\n\
-  -x, --line-regexp         force PATTERN to match only whole lines\n\
+  -w, --word-regexp         match only whole words\n\
+  -x, --line-regexp         match only whole lines\n\
   -z, --null-data           a data line ends in 0 byte, not newline\n"));
       printf (_("\
 \n\
@@ -1949,7 +1949,7 @@ Output control:\n\
       --label=LABEL         use LABEL as the standard input file name prefix\n\
 "));
       printf (_("\
-  -o, --only-matching       show only the part of a line matching PATTERN\n\
+  -o, --only-matching       show only nonempty parts of lines that match\n\
   -q, --quiet, --silent     suppress all normal output\n\
       --binary-files=TYPE   assume that binary files are TYPE;\n\
                             TYPE is 'binary', 'text', or 'without-match'\n\
@@ -1965,11 +1965,11 @@ Output control:\n\
   -R, --dereference-recursive  likewise, but follow all symlinks\n\
 "));
       printf (_("\
-      --include=FILE_PATTERN  search only files that match FILE_PATTERN\n\
-      --exclude=FILE_PATTERN  skip files and directories matching\
- FILE_PATTERN\n\
+      --include=GLOB        search only files that match GLOB (a file pattern)"
+                "\n\
+      --exclude=GLOB        skip files and directories matching GLOB\n\
       --exclude-from=FILE   skip files matching any file pattern from FILE\n\
-      --exclude-dir=PATTERN  directories that match PATTERN will be skipped.\n\
+      --exclude-dir=GLOB    skip directories that match GLOB\n\
 "));
       printf (_("\
   -L, --files-without-match  print only names of FILEs with no selected lines\n\
@@ -1994,7 +1994,7 @@ Context control:\n\
       printf (_("\
 When FILE is '-', read standard input.  With no FILE, read '.' if\n\
 recursive, '-' otherwise.  With fewer than two FILEs, assume -h.\n\
-Exit status is 0 if any line is selected, 1 otherwise;\n\
+Exit status is 0 if any line (or file if -L) is selected, 1 otherwise;\n\
 if any error occurs and -q is not given, the exit status is 2.\n"));
       emit_bug_reporting_address ();
     }
@@ -2005,7 +2005,7 @@ if any error occurs and -q is not given, the exit status is 2.\n"));
 
 static struct
 {
-  char const name[12];
+  char name[12];
   int syntax; /* used if compile == GEAcompile */
   compile_fp_t compile;
   execute_fp_t execute;
@@ -2450,6 +2450,7 @@ main (int argc, char **argv)
   init_localeinfo (&localeinfo);
 
   atexit (clean_up_stdout);
+  c_stack_action (NULL);
 
   last_recursive = 0;
 
@@ -2764,8 +2765,10 @@ main (int argc, char **argv)
 
   if (show_version)
     {
-      version_etc (stdout, getprogname (), PACKAGE_NAME, VERSION, AUTHORS,
+      version_etc (stdout, getprogname (), PACKAGE_NAME, VERSION,
                    (char *) NULL);
+      puts (_("Written by Mike Haertel and others; see\n"
+              "<https://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>."));
       return EXIT_SUCCESS;
     }
 

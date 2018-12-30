@@ -1,7 +1,7 @@
 # Process this file with automake to create Makefile.in
 # Makefile.am for grep/doc.
 #
-# Copyright 2008-2017 Free Software Foundation, Inc.
+# Copyright 2008-2018 Free Software Foundation, Inc.
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -14,7 +14,7 @@
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 info_TEXINFOS = grep.texi
 grep_TEXINFOS = fdl.texi

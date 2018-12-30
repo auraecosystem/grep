@@ -1,4 +1,400 @@
+2018-12-20  Jim Meyering  <meyering@fb.com>
+
+	version 3.3
+	* NEWS: Record release date.
+
+	grep: fix \b DFA-bug in C locale
+	Under some conditions, \b would mistakenly fail to match, e.g.
+	  echo 123-x|LC_ALL=C grep '.\bx'
+	* NEWS (Bug fixes): Mention it
+	* gnulib: Update to latest, for DFA regression fix.
+	* tests/word-delim-multibyte: Add a test for the dfa.c regression.
+
+2018-12-20  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: fit --version authorship into 80
+	* src/grep.c (AUTHORS): Remove.
+	(main): Output the authorship info ourselves instead of having
+	version_etc do it.  This is better for i18n anyway.
+
+	build: update gnulib submodule to latest
+
+2018-12-20  Jim Meyering  <meyering@fb.com>
+
+	maint: post-release administrivia
+	* NEWS: Add header line for next release.
+	* .prev-version: Record previous version.
+	* cfg.mk (old_NEWS_hash): Auto-update.
+
+	version 3.2
+	* NEWS: Record release date.
+
+2018-12-18  Jim Meyering  <meyering@fb.com>
+
+	build: update gnulib for c-stack fix
+
+2018-12-17  Bruno Haible  <bruno@clisp.org>
+
+	tests: stack-overflow: avoid unwarranted test failure on some hosts
+	* tests/stack-overflow: Use ulimit to limit stack size. Otherwise,
+	at least on gcc113, grep would fail to overflow its stack, so this
+	test would fail to find the required diagnostic and would fail.
+
+2018-12-16  Jim Meyering  <meyering@fb.com>
+
+	tests: reenable the surrogate-pair test
+	This reverts commit bdb98cec2e7bf255e1d00eaf8be16299f7bf571e,
+	but adding the comment changes suggested by Bruno Haible in
+	https://lists.gnu.org/r/grep-devel/2018-12/msg00037.html
+	* tests/surrogate-pair: New file.
+	* tests/Makefile.am (TESTS): List it.
+
+2018-12-16  Bruno Haible  <bruno@clisp.org>
+
+	tests: stackoverflow: fix test failure on HardenedBSD 11
+	* tests/stack-overflow: Try up to 10 million opening parentheses.
+
+2018-12-16  Jim Meyering  <meyering@fb.com>
+
+	tests: remove stale surrogate-pair test
+	The cygwin-specific code for surrogate pairs was first disconnected
+	via v2.21-62-g936c904 and later removed as part of a then-unused
+	function via v2.24-12-g704de87. So now I'm removing the test, too.
+	If someone thinks it important and would like to revive it, please do.
+	* tests/surrogate-pair: Remove file.
+	* tests/Makefile.am (TESTS): Remove it.
+
+2018-12-16  Paul Eggert  <eggert@cs.ucla.edu>
+
+	build: update gnulib submodule to latest
+
+2018-12-15  Jim Meyering  <meyering@fb.com>
+
+	tests: stack-overflow: handle the case of success without the diagnostic
+	* tests/stack-overflow: Do not always require a stack
+	overflow diagnostic.
+
+	build: update gnulib to latest
+	* gnulib: Update to latest, to pull in code that now compensates for
+	a bug in glibc-2.27 and prior.
+
+	build: make the autoconf-2.63 requirement explicit
+	* configure.ac: AC_PREREQ: Require 2.63, not 2.59. And quote properly.
+	Autoconf-2.63 has been required for some time via gnulib.
+	This merely makes it explicit.
+
+2018-12-15  Paul Eggert  <eggert@cs.ucla.edu>
+
+	tests: fix diagnostic typo
+	Fix by Bruno Haible in:
+	https://lists.gnu.org/r/grep-devel/2018-12/msg00003.html
+	* tests/init.cfg (envvar_check_fail): Fix diagnostic.
+
+2018-11-24  Jim Meyering  <meyering@fb.com>
+
+	tests: stack-overflow: avoid false failure
+	* tests/stack-overflow: This test would fail to elicit a stack overflow
+	diagnostic on some OS X systems. Rewrite to iterate, gradually increasing
+	the size of the input regex, stopping when grep emits the desired diagnostic
+	or the size reaches a reasonable limit.
+
+2018-10-16  Jim Meyering  <meyering@fb.com>
+
+	tests: reduce the sole failing test
+	* tests/backref-alt: Significantly reduce abort-inducing input.
+
+	build: update gnulib to latest; also update bootstrap and init.sh
+
+2018-10-13  Jim Meyering  <meyering@fb.com>
+
+	doc: NEWS: mention performance improvements
+	* NEWS (Improvements): Mention them.
+
+2018-10-13  Jim Meyering  <meyering@fb.com>
+
+	grep: triple initial buffer size: 32k->96k
+	Changing 32k to 96k gives a 3-23% performance improvement.
+	All timings ran with this diff on top of commit v3.1-39-g7179b21:
+
+	for n in 32 64 96 128; do
+	  echo n=$n
+	  perl -pi -e 's/(INITIAL_BUFSIZE =) \d+/$1 '$n/ src/grep.c &&
+	    make AM_CFLAGS=-O3 WERROR_CFLAGS= >& makerr-$n &&
+	    for needle in 1f2 1f298lkjskjhahjklkj34; do
+	      echo "  needle=$needle"
+	      for i in $(seq 10); do
+	         env MALLOC_PERTURB_= time -qf%e src/grep $needle w2000
+	      done 2>&1 |sort -g | tee >(head -1|sed 's/^/    /') > .time-${n}KB-$needle
+	    done
+	done
+
+	Tested searchs: search for a short literal pattern that is not
+	present in 9.3GB file containing 2000 copies of /usr/dict/words
+	created via this:
+	  ln -s /usr/share/dict/words k && cat $(yes k|head -2000) > w2000
+	I ran this command:
+	  env MALLOC_PERTURB_= time src/grep 1f2 w2000
+	old(32k) vs new elapsed time, best of 10 trials (gcc-9.0.0 20180831, -O3):
+	 32k  64k  96k(%incr) 128k CPU
+	1.25 1.18 1.16( 7.2) 1.20 i7-4770S@3.10GHz cache=8MB
+	1.21 1.16 1.17( 3.3) 1.19 Xeon(R) E3-1505M v5 @ 2.80GHz cache=8MB
+	2.36 2.29 2.29( 3.0) 2.36 Xeon(R) E5-2680 v4 @ 2.40GHz cache=32MB
+	1.40 1.32 1.31( 6.4) 1.33 i5-6260U @ 1.80GHz cache=4MB
+	1.31 1.26 1.24( 5.3) 1.23 AMD FX(tm)-4100 cache=2MB (with only 1000 copies)
+
+	Searching for a longer string: 1f298lkjskjhahjklkj34
+	2.03 1.76 1.61(20.7) 1.53 i7-4770S@3.10GHz cache=8MB
+	1.95 1.70 1.56(20.0) 1.51 Xeon(R) E3-1505M v5 @ 2.80GHz
+	3.27 2.98 2.84(13.1) 3.02 Xeon(R) E5-2680 v4 @ 2.40GHz
+	2.48 2.12 1.91(23.0) 1.80 i5-6260U @ 1.80GHz cache=4MB
+	1.72 1.54 1.46(15.1) 1.41 AMD FX(tm)-4100 cache=2MB
+
+	* src/grep.c (INITIAL_BUFSIZE): Triple it: 32kB -> 96kB
+
+2018-09-28  Barret Rhoden  <brho@cs.berkeley.edu>  (tiny change)
+
+	maint: fix cross-compiling problem
+	* cfg.mk (PATH): Omit if cross-compiling (Bug#32866).
+
+2018-09-28  Paul Eggert  <eggert@cs.ucla.edu>
+
+	build: update gnulib submodule to latest
+
+	grep: fix usage 80-column glitch
+	* src/grep.c (usage): Do not go over 80 columns in the source
+	code, to pacify "make dist".
+
+2018-09-19  Paul Eggert  <eggert@cs.ucla.edu>
+
+	maint: update bootstrap
+	* bootstrap: Copy from Gnulib.
+
+	maint: fix build failure
+	Problem found by OpenCSW buildbot; the bug also occurs on GNU/Linux
+	build platforms.  The symptom is “system.h:26:24: fatal error:
+	configmake.h: No such file or directory”.  See:
+	https://buildfarm.opencsw.org/buildbot/builders/ggrep-solaris10-sparc/builds/107
+	* bootstrap.conf: Add configmake, a dependency that was formerly brought
+	in only by accident.
+
+2018-09-18  Paul Eggert  <eggert@cs.ucla.edu>
+
+	build: update gnulib submodule to latest
+
+2018-08-09  Paul Eggert  <eggert@cs.ucla.edu>
+
+	tests: fix comment
+
+	tests: backref-alt works with glibc 2.28
+	Problem reported by Jaroslav Skarvada (Bug#32409).
+	* tests/Makefile.am (XFAIL_TESTS) [!USE_INCLUDED_REGEX]:
+	Don’t add backref-alt, since this bug is fixed in glibc 2.28.
+
+2018-05-11  Paul Eggert  <eggert@cs.ucla.edu>
+
+	doc: “pattern” vs “patterns”
+	* doc/grep.in.1, doc/grep.texi, src/grep.c (usage): Be more
+	careful about saying that an argument or option specifies one or
+	more patterns, not just a single pattern.  Problem reported by Kaz
+	Kylheku (Bug#31400).
+
+	build: update gnulib submodule to latest
+
+2018-04-21  Jim Meyering  <meyering@fb.com>
+
+	maint: fix new syntax-check (sc_long_lines) failure
+	* HACKING: Shorten line by one byte to fit in 80 columns.
+
+	build: update gnulib to latest
+
+2018-04-21  Paul Eggert  <eggert@cs.ucla.edu>
+
+	doc: fix font typo
+
+	maint: update URLs
+	Mostly this is just changing http: to https:.
+	In one or two places it removes no-longer-useful URLs.
+
+	doc: man-page format fixes
+	* doc/grep.in.1: Fix minor formatting glitches, e.g., extra
+	space after [...] because groff thought it was a sentence end.
+	Problem reported by Ingo Schwarze (Bug#31228#11).
+
+2018-04-20  Paul Eggert  <eggert@cs.ucla.edu>
+
+	doc: mention encoding errors
+	This attempts to document the encoding-error problem more
+	precisely (Bug#30326).
+	* doc/grep.in.1, doc/grep.texi: Mention that the behavior of
+	patterns like ‘.’ is not specified on encoding errors.
+
+	doc: port better to mandoc
+	* doc/grep.in.1: Check for groff and its macro packages
+	independently, as groff can be used with non-groff macro packages.
+	Use an-ext style macros rather than www.tmac style, as this should
+	be more portable to mandoc.  Problem reported by Laura Morales and
+	Ingo Schwarze (Bug#31228).
+
+2018-02-16  Jim Meyering  <meyering@fb.com>
+
+	maint: avoid new syntax-check failure
+	* cfg.mk (old_NEWS_hash): Update, to accommodate v3.1-20-g63d4174's
+	typo fix.
+
+	doc: clarify that PCRE support is here to stay
+	* doc/grep.texi (grep Programs): Clarify: it's not PCRE support
+	that is experimental, but its combination with --null-data (-z).
+
+2018-02-05  Paul Eggert  <eggert@cs.ucla.edu>
+
+	maint: fix typo
+
+2018-01-06  Jim Meyering  <meyering@fb.com>
+
+	maint: update gnulib and copyright dates for 2018
+	* gnulib: Update to latest.
+	* all files: Run "make update-copyright".
+	* bootstrap: Update from gnulib.
+
+2017-12-17  Jim Meyering  <meyering@fb.com>
+
+	build: link with -lsigsegv, when c-stack module requires it
+	* src/Makefile.am (grep_LDADD): Add $(LIBCSTACK).
+	Otherwise, on at least Debian and Arch-based systems, linking would
+	fail with diagnostics like these:
+	  c-stack.c:207: undefined reference to `stackoverflow_install_handler'
+	  c-stack.c:216: undefined reference to `sigsegv_install_handler'
+	Reported by Jeremy Feusi.
+
+	build: suppress sig-handler.h's -Wcast-function-type warning
+	* configure.ac (WERROR_CFLAGS): Add -Wno-cast-function-type
+	to suppress warning about sig-handler.h's sa_handler_t cast:
+	sig-handler.h: In function 'get_handler':
+	sig-handler.h:47:12: error: cast between incompatible function\
+	  types from 'void (* const)(int,  siginfo_t *, void *)'\
+	  {aka 'void (* const)(int,  struct <anonymous> *, void *)'}\
+	  to 'void (*)(int)' [-Werror=cast-function-type]
+	     return (sa_handler_t) a->sa_sigaction;
+
+2017-12-16  Jim Meyering  <meyering@fb.com>
+
+	grep: diagnose stack overflow rather than segfaulting
+	* bootstrap.conf (gnulib_modules): Add c-stack.
+	* src/grep.c: Include "c-stack.h".
+	(main): Call c_stack_action (NULL);
+	* tests/stack-overflow: New file.
+	* tests/Makefile.am (TESTS): Add name of new file.
+	* NEWS (Improvements): Mention it.
+	Interestingly, this bug does not afflict grep-2.5.4 or prior,
+	so it appeared to have been introduced with grep-2.6.  However,
+	the origin is in glibc's regexp compiler, and I tracked it to
+	stack-aware parsing that was removed from glibc's regexp in 2002.
+	However, grep-2.5.4 was released in 2009.  That version worked
+	(and still works, now) because it included and (by default) used
+	an old copy of glibc's regexp code.
+	Jeremy Feusi reported the grep segfault in https://bugs.gnu.org/29666.
+	I reported the glibc regexp bug in
+	https://sourceware.org/bugzilla/show_bug.cgi?id=22620
+
+2017-11-26  Stephan T. Lavavej  <stl@nuwen.net>
+
+	grep: fix directory recursion on MS-Windows
+	gnulib recently gained a module, windows-stat-inodes, that fixes
+	directory recursion on MS-Windows. No changes to grep's C sources are
+	required; grep simply needs to request the module during configuration.
+
+	When grep requests this module, its configure script will gain the
+	behavior that was implemented in windows-stat-inodes.m4. This detects
+	mingw and sets WINDOWS_STAT_INODES=1. All other platforms are
+	unaffected, setting WINDOWS_STAT_INODES=0 (which is what's happening
+	in the absence of this patch).
+
+	* bootstrap.conf (gnulib_modules): Add windows-stat-inodes.
+	* NEWS (Bug fixes): Mention it.
+	Thanks to Pär Björklund who diagnosed the problem as involving inodes,
+	and thanks to Václav Haisman who provided the bootstrap.conf patch.
+
+2017-11-25  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: port better to Adélie GNU/Linux 64-bit ppc
+	Problem reported by A. Wilcox (Bug#29446).
+	* src/pcresearch.c (PCRE_EXTRA_MATCH_LIMIT_RECURSION)
+	(PCRE_STUDY_EXTRA_NEEDED): Default to 0.
+	(jit_exec): If we run up against the recursion limit,
+	double it (if possible) and try again.
+	(Pcompile): Also specify PCRE_STUDY_EXTRA_NEEDED so that
+	pc->extra is not null.
+
+2017-11-03  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: omit a dup 'const'
+	* src/grep.c (matchers): Omit duplicate 'const'.
+
+2017-10-13  Bernhard Voelker  <mail@bernhard-voelker.de>
+
+	doc: document the option delimiter '--'
+	* doc/grep.texi (Other options): Do the above.
+	Reported in https://lists.opensuse.org/opensuse/2017-03/msg00411.html
+	This addresses http://bugs.gnu.org/26139
+
+2017-08-21  Paul Eggert  <eggert@cs.ucla.edu>
+
+	build: update gnulib submodule to latest
+
+	Pacify GCC 5.4
+	* src/grep.c (grepdesc): Rework to pacify GCC 5.4 warning
+	about logical not.
+
+2017-08-20  Paul Eggert  <eggert@cs.ucla.edu>
+
+	build: update gnulib submodule to latest
+
+2017-08-17  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: -L exits with status 0 if a file is selected
+	Problem reported by Anthony Sottile (Bug#28105).
+	* NEWS, doc/grep.texi (Exit Status), src/grep.c (usage): Document this.
+	* src/grep.c (grepdesc): Implement it.
+	* tests/skip-read: Test it.
+
+	build: update gnulib submodule to latest
+
+2017-08-13  Jim Meyering  <meyering@fb.com>
+
+	maint: avoid newly-introduced syntax-check failure
+	* src/grep.c (usage): Shorten --help line to 80, so
+	"make syntax-check" passes once again.
+
+2017-08-03  Paul Eggert  <eggert@cs.ucla.edu>
+
+	doc: improve -o help
+	* src/grep.c (usage): Document that -o outputs only nonempty
+	matches (Bug#27931).
+
+2017-07-26  Paul Eggert  <eggert@cs.ucla.edu>
+
+	tests: add Bug#27838 test case
+	* tests/backref-alt: New test case from a fuzzer.
+
+2017-07-25  Paul Eggert  <eggert@cs.ucla.edu>
+
+	doc: distinguish -w from \<...\>
+	* doc/grep.texi (Matching Control):
+	Give example of why -w differs from \<...\> (Bug#27813).
+
+2017-07-11  Paul Eggert  <eggert@cs.ucla.edu>
+
+	doc: define Dt string in man page
+	Problem reported by Bjarni I. Gislason via Santiago R.R. (Bug#27651).
+	* doc/grep.in.1 (dT): New macro.
+	(Dt): Define this string.
+
 2017-07-02  Jim Meyering  <meyering@fb.com>
+
+	maint: post-release administrivia
+	* NEWS: Add header line for next release.
+	* .prev-version: Record previous version.
+	* cfg.mk (old_NEWS_hash): Auto-update.
 
 	version 3.1
 	* NEWS: Record release date.
