@@ -1,0 +1,34 @@
+From c505b0bce73c712f1297bc5f424e0de5e4ec3137 Mon Sep 17 00:00:00 2001
+From: Paul Eggert <eggert@cs.ucla.edu>
+Date: Thu, 9 Aug 2018 10:52:48 -0700
+Subject: [PATCH] tests: backref-alt works with glibc 2.28
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Problem reported by Jaroslav Skarvada (Bug#32409).
+* tests/Makefile.am (XFAIL_TESTS) [!USE_INCLUDED_REGEX]:
+Don’t add backref-alt, since this bug is fixed in glibc 2.28.
+
+Origin: upstream, http://git.savannah.gnu.org/cgit/grep.git/commit/tests/Makefile.am?id=c505b0bce73c712f1297bc5f424e0de5e4ec3137
+Bug-Debian: https://bugs.debian.org/15206
+Reviewed-by: Santiago R.R. <santiagorr@riseup.net>
+---
+ tests/Makefile.am | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+Index: grep/tests/Makefile.am
+===================================================================
+--- grep.orig/tests/Makefile.am
++++ grep/tests/Makefile.am
+@@ -57,8 +57,8 @@ if USE_INCLUDED_REGEX
+ XFAIL_TESTS += equiv-classes
+ else
+ # The backref-alt test fails for glibc 2.27 and earlier.
+-# If you're using older glibc you can upgrade to glibc 2.28 or later,
+-# configure --with-included-regex, or ignore the test failure.
++# We need this for Debian stretch
++XFAIL_TESTS += backref-alt
+ endif
+ 
+ TESTS =						\
