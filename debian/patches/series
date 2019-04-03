@@ -1,3 +1,4 @@
 02-man_rgrep.patch
 05-grep-wrapper-sh.patch
 upstream-915206-0001-tests-backref-alt-works-with-glibc-2.28.patch
+gnulib-disable-test-regex.patch
