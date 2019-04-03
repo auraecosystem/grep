@@ -1,0 +1,22 @@
+Description: disable gnulib test-regex for stretch-backports. It fails
+  with stretch's glibc
+Index: grep/gnulib-tests/gnulib.mk
+===================================================================
+--- grep.orig/gnulib-tests/gnulib.mk
++++ grep/gnulib-tests/gnulib.mk
+@@ -1110,15 +1110,6 @@ EXTRA_DIST += test-realloc-gnu.c
+ 
+ ## end   gnulib module realloc-gnu-tests
+ 
+-## begin gnulib module regex-tests
+-
+-TESTS += test-regex
+-check_PROGRAMS += test-regex
+-test_regex_LDADD = $(LDADD) @LIBINTL@ $(LIBTHREAD) $(LIB_PTHREAD)
+-EXTRA_DIST += test-regex.c macros.h
+-
+-## end   gnulib module regex-tests
+-
+ ## begin gnulib module select
+ 
+ 
