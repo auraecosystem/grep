@@ -1,6 +1,9 @@
-grep (3.3-1~bpo9+1~) UNRELEASED-stretch-backports; urgency=medium
+grep (3.3-1~bpo9+1) stretch-backports; urgency=medium
 
   * Rebuild for stretch-backports.
+  * Backport d/p/upstream-915206-0001-tests-backref-alt-works-with-glibc-2.28.patch.
+    backref-alt fails with stretch's glibc.
+  * d/p/gnulib-disable-test-regex.patch: it fails with stretch's glibc.
 
  -- Santiago Ruano Rincón <santiago@debian.org>  Wed, 03 Apr 2019 15:53:53 +0200
 
