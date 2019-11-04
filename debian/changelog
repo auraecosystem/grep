@@ -1,3 +1,11 @@
+grep (3.3-2~1.gbp7d4111) UNRELEASED; urgency=medium
+
+  ** SNAPSHOT build @7d411133e9f4de7f1be49f19178d288beef76352 **
+
+  * Include debian/salsa-ci.yml
+
+ -- Santiago Ruano Rincón <santiago@debian.org>  Mon, 04 Nov 2019 14:32:09 +0100
+
 grep (3.3-1) unstable; urgency=low
 
   * New upstream version 3.3.
