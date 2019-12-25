@@ -1,8 +1,12 @@
 grep (3.3-2~1.gbp7d4111) UNRELEASED; urgency=medium
 
+  [ Santiago Ruano Rincón ]
   ** SNAPSHOT build @7d411133e9f4de7f1be49f19178d288beef76352 **
 
   * Include debian/salsa-ci.yml
+
+  [ Debian Janitor ]
+  * Use secure URI in Homepage field.
 
  -- Santiago Ruano Rincón <santiago@debian.org>  Mon, 04 Nov 2019 14:32:09 +0100
 
