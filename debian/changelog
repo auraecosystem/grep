@@ -8,6 +8,8 @@ grep (3.3-2~1.gbp7d4111) UNRELEASED; urgency=medium
   [ Debian Janitor ]
   * Use secure URI in Homepage field.
   * Bump debhelper from old 9 to 10.
+  * Set upstream metadata fields: Bug-Submit (from ./configure),
+    Repository.
 
  -- Santiago Ruano Rincón <santiago@debian.org>  Mon, 04 Nov 2019 14:32:09 +0100
 
