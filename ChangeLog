@@ -1,4 +1,478 @@
+2020-01-02  Jim Meyering  <meyering@fb.com>
+
+	version 3.4
+	* NEWS: Record release date.
+
+	build: update gnulib to latest, for mbrtowc-vs-Irix build fix
+
+2020-01-02  Paul Eggert  <eggert@cs.ucla.edu>
+
+	doc: fix --exclude description in man page
+	Problem reported by Duncan Moore (Bug#37212).
+	* src/grep.c (usage): Fix incorrect statement about --exclude
+	and directories.  Standardize on “that match GLOB” instead
+	of “matching GLOB”.
+
+	doc: fix missing “more” in man page
+	Problem reported by Philippe Schnoebelen (Bug#34078).
+	* doc/grep.in.1: Add missing “more”.
+
+2020-01-01  Paul Eggert  <eggert@cs.ucla.edu>
+
+	doc: add [:blank:] to man page
+	* doc/grep.in.1: Mention [:blank:] (Bug#33291).
+
+2020-01-01  Jim Meyering  <meyering@fb.com>
+
+	maint: update all copyright year number ranges
+	Run "make update-copyright" and then...
+	* gnulib: Update to latest with copyright year adjusted.
+	* tests/init.sh: Sync with gnulib to pick up copyright year.
+	* bootstrap: Likewise.
+	* doc/grep.in.1: Use "-" in copyright year ranges, not \en.
+
+2019-12-31  Jim Meyering  <meyering@fb.com>
+
+	tests: avoid unwarranted failure in a netbsd 8.1 VM
+	* tests/mb-non-UTF8-perf-Fw: Run twice, to avoid first-read penalty.
+	Reported by Nelson H.F. Beebe.
+
+2019-12-30  Jim Meyering  <meyering@fb.com>
+
+	build: update gnulib to latest (for localeinfo perf fix)
+
+	maint: add syntax-check rule to prohibit "backreference" spelling
+	* cfg.mk (sc_prohibit_backref): New rule.
+
+2019-12-30  Paul Eggert  <eggert@cs.ucla.edu>
+
+	maint: remove too-long line from AUTHORS
+	* AUTHORS: Remove URL that’s too long.
+
+	maint: update AUTHORS
+	* AUTHORS: Update to better reflect current authorship.
+
+2019-12-30  Jim Meyering  <meyering@fb.com>
+
+	avoid new syntax-check failures
+	* cfg.mk (old_NEWS_hash): Updating old news, we must also udpate this.
+
+2019-12-30  Paul Eggert  <eggert@cs.ucla.edu>
+
+	doc: don’t encourage back-references
+	* doc/grep.texi (Usage): Remove palindrome question.  Bondioni’s
+	RE makes grep issue a ‘grep: stack overflow’ diagnostic, and we
+	shouldn’t be encouraging fancy back-references anyway, due to all
+	the bugs in this area (Bug#26864).  Plus, the allusion to
+	“GNU extensions” doesn't seem to be correct here.
+
+	doc: robustify some examples
+	Prompted by suggestions by Stephane Chazelas (Bug#38792#20).
+	* doc/grep.texi (Usage): Make examples more robust.
+
+	doc: fix bug# typo
+
+	doc: spell "back-reference" more consistently
+
+	doc: mention back-reference bugs
+	Inspired by Bug#26864.
+	* doc/grep.texi (Known Bugs): New section.
+	Mention back-reference issues.
+
+2019-12-29  Paul Eggert  <eggert@cs.ucla.edu>
+
+	doc: Add -- to more-complex example
+	Suggested by Stephane Chazelas (Bug#38792).
+	* doc/grep.in.1, doc/grep.texi: Add ‘--’ to recently-added example.
+
+	doc: improve subsection title (Bug#26132)
+	* doc/grep.in.1: Rename "Matcher Selection" to "Pattern Syntax".
+
+	doc: fix typo in previous patch
+
+	doc: document quoting better
+	Problem reported by Martin Simons (Bug#38792).
+	* doc/grep.texi: Fix quoting used in examples.  Say that patterns
+	should be quoted, use quoting more consistently in examples, and
+	give an example illustrating the difference between patterns and
+	globbing.  Don’t assume zgrep expertise in example.
+	* doc/grep.in.1: Likewise.  Also, reorder sections
+	to match GNU/Linux man-pages style.
+
+2019-12-26  Jim Meyering  <meyering@fb.com>
+
+	maint: tweak NEWS wording
+	* NEWS: Minor wording change.
+
+	build: update gnulib to latest; and sync tests/init.sh
+	* gnulib: update
+	* tests/init.sh: Sync from gnulib (this removes the LC_ALL=C setting).
+
+	tests: avoid spurious failure due to 1-second timeout
+	* tests/grep-dev-null-out: Use a 10-second timeout, rather than
+	a 1-second one.  This avoids false failure on slow systems.
+	Reported by Assaf Gordon in
+	https://lists.gnu.org/r/grep-devel/2019-12/msg00018.html
+
+2019-12-26  Paul Eggert  <eggert@cs.ucla.edu>
+
+	build: update gnulib submodule to latest
+
+	maint: adjust surrogate-pair for 16-bit wchar_t
+	* tests/surrogate-pair: Adjust to match fixed behavior
+	on AIX 7.2, where wchar_t is 16 bits and cannot represent
+	the test case data.
+
+2019-12-25  Jim Meyering  <meyering@fb.com>
+
+	tests: fix typo in name of test file
+	* tests/backslash-s-vs-invalid-multitype: Rename to...
+	* tests/backslash-s-vs-invalid-multibyte: ...this.
+	* tests/Makefile.am (TESTS): Reflect renaming.
+
+	tests: ensure we use require_timeout_ when needed
+	* cfg.mk (sc_timeout_prereq): New syntax-check rule.
+
+	tests: require timeout
+	* tests/mb-non-UTF8-perf-Fw: This test uses "timeout",
+	so must first call require_timeout_.
+	This avoids test spurious failure when running with
+	no timeout program. Reported by Bruno Haible in
+	https://lists.gnu.org/r/grep-devel/2019-12/msg00008.html
+
+2019-12-25  Paul Eggert  <eggert@cs.ucla.edu>
+
+	tests: work around AIX 7.2 sh printf bug
+	AIX 7.2 /bin/sh’s printf command mishandles octal escapes
+	in multibyte locales: it treats them as characters, not bytes.
+	* tests/backslash-s-vs-invalid-multitype, tests/encoding-error:
+	Use the C locale when employing the printf command with an octal
+	escape that AIX 7.2 sh might mishandle.
+	* tests/init.sh (setup_): Use the C locale for tests.
+	This has the side benefit of making them more reproducible.
+
+2019-12-22  Jim Meyering  <meyering@fb.com>
+
+	maint: adjust new comments
+	* src/dfasearch.c (possible_backrefs_in_pattern): Remove a
+	duplicate "a", insert a "be" and a comma, and reformat.
+
+	build: update gnulib to latest
+	* gnulib: Update submodule to latest.
+	* bootstrap: Copy from gnulib.
+	* tests/init.sh: Likewise.
+
+2019-12-22  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: fix some bugs in pattern-grouping speedup
+	This fixes some bugs in the previous commit,
+	and should finish the fix for Bug#33249.
+	* NEWS: Mention fix for Bug#33249.
+	* src/dfasearch.c (possible_backrefs_in_pattern, regex_compile)
+	(GEAcompile): In new code, prefer ptrdiff_t to size_t when either
+	will do, since ptrdiff_t has better error checking.  At some point
+	we should adjust the old code too.
+	(possible_backrefs_in_pattern): Rename from
+	find_backref_in_pattern.  New arg BS_SAFE.  All uses changed.
+	Fix false negative if a multibyte character ends in a single
+	'\\' byte, followed by the two bytes '\\', '1'.
+	(regex_compile): Simplify.
+	(GEAcompile): Avoid quadratic behavior when reallocating growing
+	buffers.  Fix a couple of bugs in copying pattern data involving
+	backreferences.  Fix another bug in copying pattern metadata
+	involving backreferences, by removing the need to copy it.
+
+2019-12-22  Norihiro Tanaka  <noritnk@kcn.ne.jp>
+
+	grep: grouping of a pattern with multiple lines
+	When grep uses regex, it splits a pattern with multiple lines by
+	newline character into fragments.  Compilation and execution run for
+	each fragment.  That causes slowdown.  By this change, each fragment is
+	divided into groups by whether the fragment includes back references.
+	A fragment with back references constitutes group, and all fragments
+	that lack back references also constitute a group.
+
+	This change extremely speeds-up following case.
+
+	  $ seq -f '%040g' 0 9999 | sed '1s/$/\\(0\\)\\1/' >pat
+	  $ yes 00000000000000000000000000000000000000000x | head -10000 >in
+	  $ time -p env LC_ALL=C src/grep -f pat in
+
+	* src/dfasearch.c (find_backref_in_pattern, regex_compile):
+	New functions.
+	(GEAcompile): Use the new functions to group fragments
+	as mentioned above.
+
+2019-12-19  Paul Eggert  <eggert@cs.ucla.edu>
+
+	maint: add NEWS for Bug#34951 fix
+	* NEWS: Mention Bug#34951.
+
+2019-12-19  Norihiro Tanaka  <noritnk@kcn.ne.jp>
+
+	dfa: separate parse and compile phase
+	DFAMUST() must be called after parse and before tokens re-order which is
+	introduced in commit 5c7a0371823876cca7a1347fa09ca26bbbff0c98, but both are
+	executed in compilation phase.
+
+	* lib/dfa.c (dfaparse): Change it to global function.
+	(dfacomp): If first argument is NULL, skip parse.
+	* lib/dfa.h: (dfaparse): Add a prototype.
+
+2019-12-19  Paul Eggert  <eggert@cs.ucla.edu>
+
+	build: update gnulib submodule to latest
+
+2019-12-19  Norihiro Tanaka  <noritnk@kcn.ne.jp>
+
+	grep: speed up multiple word matching
+	grep uses its KWset matcher for multiple word matching, but that is
+	very slow when most of the parts matched to a pattern are not words.
+	So, if the first match to a pattern is not a word, use the grep matcher
+	to match for its line.
+
+	Note that when START_PTR is set, the grep matcher uses the regex matcher
+	which is very slow to match words.  Therefore, we use the grep matcher
+	when only START_PTR is NULL.
+
+	* src/kwsearch.c (Fexecute): If an initial match is incomplete because
+	not on a word boundary, use the grep matcher to find a matching line.
+
+2019-12-18  Jim Meyering  <meyering@fb.com>
+
+	maint: sort test names
+	* tests/Makefile.am (TESTS): Alphabetize the new addition,
+	mb-non-UTF8-perf-Fw to placate syntax-check's sc_sorted_tests.
+
+2019-12-18  Paul Eggert  <eggert@cs.ucla.edu>
+
+	maint: adjust to recent Gnulib change
+	* po/POTFILES.in: Remove lib/xstrtol-error.c.
+
+2019-12-17  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: do not match invalid UTF-8
+	Update Gnulib to latest.  Also:
+	* src/dfasearch.c (EGexecute): Use ptrdiff_t, not size_t,
+	to match new Gnulib API.
+	* tests/Makefile.am (TESTS): Add dfa-invalid-utf8.
+	* tests/dfa-invalid-utf8: New file.
+
+2019-11-30  Jim Meyering  <meyering@fb.com>
+
+	tests: add test that would have detected -Fw perf regression
+	* tests/mb-non-UTF8-perf-Fw: New file. Detect v3.3-22-g090a4db's
+	performance regression.
+	* tests/Makefile.am (TESTS): Add it.
+
+2019-11-29  Jim Meyering  <meyering@fb.com>
+
+	maint: fix test comment
+	* tests/mb-non-UTF8-word-boundary: Also correct "introduced-in"
+	version number in a comment here.
+
+2019-11-25  Jim Meyering  <meyering@fb.com>
+
+	maint: correct NEWS blurb
+	* NEWS (Bug fixes): Correction: the -Fw bug was introduced
+	in 2.28, not in 3.0. Reported by Paul Eggert.
+
+2019-11-17  Norihiro Tanaka  <noritnk@kcn.ne.jp>
+
+	grep: improve grep -Fw performance in non-UTF8 multibyte locales
+	* src/searchutils.c (mb_goback): New parameter.  All callers changed.
+	* src/search.h (mb_goback): Update prototype.
+	* src/kwsearch.c (Fexecute): Use mb_goback's MBCLEN to detect a
+	word-boundary even more efficiently.
+
+	grep: fix performance regression with previous patch
+	* src/kwsearch.c (Fexecute): Avoid unnecessary back-up in non-UTF8
+	multibyte locales.
+
+2019-11-16  Jim Meyering  <meyering@fb.com>
+
+	maint: rename a variable: bol -> nl
+	* src/kwsearch.c (Fexecute): Change misleading name: s/bol/nl/
+
+	build: update gnulib to latest
+
+	maint: correct and clarify a comment
+	* src/kwsearch.c (Fexecute): Logic was reversed.
+
+	grep: avoid false -Fw match in non-UTF8 multibyte locales
+	For example, this command would erroneously print its input line:
+	  echo ab | LC_CTYPE=ja_JP.eucjp grep -Fw b
+	This arose when the "memrchr" search for a preceding newline failed:
+	in that case, MB_START was not adjusted and was initially the same
+	as BEG, so wordchar_prev mistakenly returned 0.
+	* src/kwsearch.c (Fexecute): Set MB_START also when there is no
+	preceding newline.
+	* NEWS (Bug fixes): Mention it.
+	* tests/mb-non-UTF8-word-boundary: New file. Test for the bug.
+	* tests/Makefile.am (TESTS): Add it.
+	Reported by NIDE, Naoyuki in https://bugs.gnu.org/38223.
+
+2019-11-08  Jim Meyering  <meyering@fb.com>
+
+	build: update gnulib to latest
+	* po/POTFILES.in: Add lib/argmatch.h.
+
+2019-11-05  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: new --no-ignore-case option
+	Suggested by Karl Berry and mostly implemented by Arnold Robbins
+	(Bug#37907).
+	* NEWS:
+	* doc/grep.in.1:
+	* doc/grep.texi (Matching Control):
+	* src/grep.c (usage):
+	Document the new option.
+	* src/grep.c (NO_IGNORE_CASE_OPTION): New constant.
+	(long_options, main): Support new option.
+
+	grep: simplify previous patch
+	* src/grep.c (main): Use an int rather than an enum for a local
+	var, which is overkill here.
+
+	grep: further simplify out_file handling
+	* src/grep.c (print_filenames): Make this a local variable instead
+	of static.  Rename it to filename_option, to avoid confusion with
+	the print_filename function, and rename the enum values for the
+	same reason.  All uses changed.
+	(out_file): Now -1, 0, 1 to represent unknown, false, true.
+	All uses changed.
+	(single_command_line_arg): Remove.  This static variable’s
+	function is now accomplished by a local variable ‘num_operands’.
+	(grepdesc): Simplify adjustment of out_file accordingly.
+	(main): Initialize out_file to -1 if not known yet.
+
+2019-11-05  Zev Weiss  <zev@bewilderbeest.net>
+
+	grep: simplify out_file handling
+	* src/grep.c (print_filenames): New tristate enum (-H, -h, or
+	neither); supplants with_filenames and no_filenames.
+	(single_command_line_arg): New variable indicating if grep was run
+	with a single command-line argument.
+	(no_filenames): Remove variable.
+	(grepdirent): Don't twiddle out_file back and forth during recursion.
+	(grepdesc): Turn off out_file on 'grep -r foo nondirectory'.
+	(main): Replace with_filenames and no_filenames with print_filenames.
+	Enable out_file when both -r/-R and multiple arguments are given.
+
+2019-10-12  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: fix ‘grep -L ... >/dev/null’ bug
+	Problem reported by Adam Sampson (Bug#37716).
+	* NEWS: Mention this.
+	* src/grep.c (grepdesc): Don’t assume that stdout being /dev/null
+	means list_files == LISTFILES_NONE.
+	(main): Do not change list_files merely because stdout is /dev/null.
+	* tests/skip-read: Test for this bug.
+
+2019-10-03  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: tighten -i doc
+	* doc/grep.in.1:
+	* doc/grep.texi (Matching Control):
+	* src/grep.c (usage):
+	Make it clearer that -i affects patterns and data, but not
+	file names (Bug#37604).
+
+2019-03-10  Paul Eggert  <eggert@cs.ucla.edu>
+
+	maint: fix “/src/grep: No such file or directory”
+	Problem reported by Jim Meyering in:
+	https://lists.gnu.org/r/grep-devel/2019-02/msg00000.html
+	* NEWS: Mention the change.
+	* configure.ac (fn_grep): Remove.  This old attempt to fix
+	<https://savannah.gnu.org/bugs/?31646> wasn’t working anyway,
+	since subprograms didn’t grok fn_grep.  People building on Solaris
+	will need a working grep, which is reasonably standard nowadays.
+	(GREP, EGREP): Do not override.  This way, we test the
+	newly-built grep only when running ‘make test’ and suchlike.
+	Instead, output a hopefully-helpful diagnostic if the
+	system 'grep' does not work.
+
+2019-02-18  Jim Meyering  <meyering@fb.com>
+
+	tests: avoid false positive upon stack overflow
+	* tests/pcre-jitstack: Don't let a stack overflow evoke a false
+	failure.  This test is to ensure there is no internal PCRE error.
+	Reported by Andreas Schwab in http://bugs.gnu.org/34370
+
+2019-02-16  Jim Meyering  <meyering@fb.com>
+
+	build: avoid build failure with --enable-gcc-warnings
+	* src/kwset.c (bmexec_trans): Define with _GL_ATTRIBUTE_PURE,
+	per suggestion from recent gcc snapshot.
+
+2019-02-03  Paul Eggert  <eggert@cs.ucla.edu>
+
+	doc: clarify --exclude globbing
+	Problem reported by Paul Jackson.
+	* doc/grep.in.1:
+	* doc/grep.texi (File and Directory Selection):
+	Clarify how --exclude globbing works.
+
+	grep: parse --color arg independent of locale
+	This is a better fix for Bug#34285.
+	* bootstrap.conf (gnulib_modules): Add c-strcase.
+	* src/grep.c: Include c-strcase.h, not strings.h.
+	(main): Use c_strcasecmp, not strcasecmp.
+
+2019-02-02  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: fix grep.c includes
+	* src/grep.c: Include strings.h; problem reported by David
+	Monniaux (Bug#34285).  Do not include fcntl.h, as system.h does
+	that for us.h
+
+	build: update gnulib submodule to latest
+
+2019-01-20  Jim Meyering  <meyering@fb.com>
+
+	build: ensure no VLA is used
+	Cause developer builds to fail for any use of a VLA.
+	VLAs (variable length arrays) limit portability.
+	* configure.ac (nw): Remove -Wvla from the list of disabled warnings,
+	thus enabling the warning when configured with --enable-gcc-warnings.
+	(GNULIB_NO_VLA) Define, disabling use of VLAs in gnulib.  This commit
+	is functionally equivalent to coreutils' v8.30-44-gd26dece5d.
+
+	build: update gnulib to latest
+
+2019-01-20  Paul Eggert  <eggert@cs.ucla.edu>
+
+	doc: --binary-files update in man page
+	* doc/grep.in.1: Adjust --binary-files description to match that
+	in doc/grep.texi.  When I updated the documentation in
+	2016-09-09T01:33:14!eggert@cs.ucla.edu I forgot to update the man
+	page accordingly (Bug#33898).
+
+	grep: simplify pcresearch.c ifdefs
+	This fixes a warning if PCRE is not used (Bug#34054).
+	* configure.ac (USE_PCRE): New conditional.
+	* src/Makefile.am (grep_SOURCES) [!USE_PCRE]: Omit pcresearch.c.
+	* src/grep.c (matchers) [!HAVE_LIBPCRE]: Omit perl matcher.
+	(setmatcher) [!HAVE_LIBPCRE]: If helpful, mention
+	--disable-perl-regexp in diagnostic.
+	* src/pcresearch.c: Simplify by assuming HAVE_LIBPCRE.
+
+2019-01-01  Jim Meyering  <meyering@fb.com>
+
+	maint: update all copyright dates via "make update-copyright"
+	* gnulib: Also update submodule for its copyright updates.
+
 2018-12-20  Jim Meyering  <meyering@fb.com>
+
+	doc: fix the bug-introduced version in 3.3's announcement
+	* NEWS: Correct bug-introduced version (s/2.3/3.2/).
+	* cfg.mk (old_NEWS_hash): Updating old news, we must also udpate this.
+
+	maint: post-release administrivia
+	* NEWS: Add header line for next release.
+	* .prev-version: Record previous version.
+	* cfg.mk (old_NEWS_hash): Auto-update.
 
 	version 3.3
 	* NEWS: Record release date.

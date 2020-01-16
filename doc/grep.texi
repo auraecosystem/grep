@@ -14,11 +14,23 @@
 @c %**end of header
 
 @documentencoding UTF-8
+@c These two require Texinfo 5.0 or later, so use the older
+@c equivalent @set variables supported in 4.11 and later.
+@ignore
+@codequotebacktick on
+@codequoteundirected on
+@end ignore
+@set txicodequoteundirected
+@set txicodequotebacktick
+@iftex
+@c TeX sometimes fails to hyphenate, so help it here.
+@hyphenation{spec-i-fied}
+@end iftex
 
 @copying
 This manual is for @command{grep}, a pattern matching engine.
 
-Copyright @copyright{} 1999-2002, 2005, 2008-2018 Free Software Foundation,
+Copyright @copyright{} 1999--2002, 2005, 2008--2020 Free Software Foundation,
 Inc.
 
 @quotation
@@ -101,12 +113,12 @@ grep [@var{option}...] [@var{patterns}] [@var{file}...]
 @end example
 
 @noindent
-
 There can be zero or more @var{option} arguments, and zero or more
 @var{file} arguments.  The @var{patterns} argument contains one or
 more patterns separated by newlines, and is omitted when patterns are
 given via the @samp{-e@ @var{patterns}} or @samp{-f@ @var{file}}
-options.
+options.  Typically @var{patterns} should be quoted when
+@command{grep} is used in a shell command.
 
 @menu
 * Command-line Options::        Short and long names, grouped by category.
@@ -178,6 +190,8 @@ Use @var{patterns} as one or more patterns; newlines within
 @var{patterns} separate each pattern from the next.
 If this option is used multiple times or is combined with the
 @option{-f} (@option{--file}) option, search for all patterns given.
+Typically @var{patterns} should be quoted when @command{grep} is used
+in a shell command.
 (@option{-e} is specified by POSIX.)
 
 @item -f @var{file}
@@ -198,7 +212,8 @@ The empty file contains zero patterns, and therefore matches nothing.
 @opindex -y
 @opindex --ignore-case
 @cindex case insensitive search
-Ignore case distinctions, so that characters that differ only in case
+Ignore case distinctions in patterns and input data,
+so that characters that differ only in case
 match each other.  Although this is straightforward when letters
 differ in case only via lowercase-uppercase pairs, the behavior is
 unspecified in other situations.  For example, uppercase ``S'' has an
@@ -213,6 +228,13 @@ SHARP S) even though lowercasing the latter yields the former.
 
 @option{-y} is an obsolete synonym that is provided for compatibility.
 (@option{-i} is specified by POSIX.)
+
+@item --no-ignore-case
+@opindex --no-ignore-case
+Do not ignore case distinctions in patterns and input data.  This is
+the default.  This option is useful for passing to shell scripts that
+already use @option{-i}, in order to cancel its effects because the
+two options override each other.
 
 @item -v
 @itemx --invert-match
@@ -329,7 +351,7 @@ This enables a calling process to resume a search.
 For example, the following shell script makes use of it:
 
 @example
-while grep -m 1 PATTERN
+while grep -m 1 'PATTERN'
 do
   echo xxxx
 done < FILE
@@ -341,7 +363,7 @@ file:
 @example
 # This probably will not work.
 cat FILE |
-while grep -m 1 PATTERN
+while grep -m 1 'PATTERN'
 do
   echo xxxx
 done
@@ -441,12 +463,12 @@ This is the default when there is only one file
 @opindex --label
 @cindex changing name of standard input
 Display input actually coming from standard input
-as input coming from file @var{LABEL}.  This is
-especially useful when implementing tools like
-@command{zgrep}; e.g.:
+as input coming from file @var{LABEL}.
+This can be useful for commands that transform a file's contents
+before searching; e.g.:
 
 @example
-gzip -cd foo.gz | grep --label=foo -H something
+gzip -cd foo.gz | grep --label=foo -H 'some pattern'
 @end example
 
 @item -n
@@ -672,10 +694,11 @@ this is equivalent to the @option{-r} option.
 @cindex searching directory trees
 Skip any command-line file with a name suffix that matches the pattern
 @var{glob}, using wildcard matching; a name suffix is either the whole
-name, or any suffix starting after a @samp{/} and before a
-non-@samp{/}.  When searching recursively, skip any subfile whose base
+name, or a trailing part that starts with a non-slash character
+immediately after a slash (@samp{/}) in the name.
+When searching recursively, skip any subfile whose base
 name matches @var{glob}; the base name is the part after the last
-@samp{/}.  A pattern can use
+slash.  A pattern can use
 @samp{*}, @samp{?}, and @samp{[}...@samp{]} as wildcards,
 and @code{\} to quote a wildcard or backslash character literally.
 
@@ -1513,6 +1536,8 @@ When multiple regular expressions are given with
 @option{-e} or from a file (@samp{-f @var{file}}),
 back-references are local to each expression.
 
+@xref{Known Bugs}, for some known problems with back-references.
+
 @node Basic vs Extended
 @section Basic vs Extended Regular Expressions
 @cindex basic regular expressions
@@ -1556,6 +1581,27 @@ this is because @samp{.*} matches zero or more characters within a line.
 The @option{-i} option causes @command{grep}
 to ignore case, causing it to match the line @samp{Hello, world!}, which
 it would not otherwise match.
+
+Here is a more complex example session,
+showing the location and contents of any line
+containing @samp{f} and ending in @samp{.c},
+within all files in the current directory whose names
+contain @samp{g} and end in @samp{.h}.
+The @option{-n} option outputs line numbers, the @option{--} argument
+treats any later arguments starting with @samp{-} as file names not
+options, and the empty file @file{/dev/null} causes file names to be output
+even if only one file name happens to be of the form @samp{*g*.h}.
+
+@example
+$ @kbd{grep -n -- 'f.*\.c$' *g*.h /dev/null}
+argmatch.h:1:/* definitions and prototypes for argmatch.c
+@end example
+
+@noindent
+The only line that contains a match is line 1 of @file{argmatch.h}.
+Note that the regular expression syntax used in the pattern differs
+from the globbing syntax that the shell uses to match file names.
+
 @xref{Invoking}, for more details about
 how to invoke @command{grep}.
 
@@ -1569,11 +1615,11 @@ Here are some common questions and answers about @command{grep} usage.
 How can I list just the names of matching files?
 
 @example
-grep -l 'main' *.c
+grep -l 'main' test-*.c
 @end example
 
 @noindent
-lists the names of all C files in the current directory whose contents
+lists names of @samp{test-*.c} files in the current directory whose contents
 mention @samp{main}.
 
 @item
@@ -1587,45 +1633,54 @@ grep -r 'hello' /home/gigi
 searches for @samp{hello} in all files
 under the @file{/home/gigi} directory.
 For more control over which files are searched,
-use @command{find}, @command{grep}, and @command{xargs}.
+use @command{find} and @command{grep}.
 For example, the following command searches only C files:
 
 @example
-find /home/gigi -name '*.c' -print0 | xargs -0r grep -H 'hello'
+find /home/gigi -name '*.c' ! -type d \
+  -exec grep -H 'hello' '@{@}' +
 @end example
 
 This differs from the command:
 
 @example
-grep -H 'hello' *.c
+grep -H 'hello' /home/gigi/*.c
 @end example
 
-which merely looks for @samp{hello} in all files in the current
-directory whose names end in @samp{.c}.
-The @samp{find ...} command line above is more similar to the command:
+which merely looks for @samp{hello} in non-hidden C files in
+@file{/home/gigi} whose names end in @samp{.c}.
+The @command{find} command line above is more similar to the command:
 
 @example
-grep -rH --include='*.c' 'hello' /home/gigi
+grep -r --include='*.c' 'hello' /home/gigi
 @end example
 
 @item
-What if a pattern has a leading @samp{-}?
+What if a pattern or file has a leading @samp{-}?
 
 @example
-grep -e '--cut here--' *
+grep -- '--cut here--' *
 @end example
 
 @noindent
 searches for all lines matching @samp{--cut here--}.
-Without @option{-e},
+Without @option{--},
 @command{grep} would attempt to parse @samp{--cut here--} as a list of
-options.
+options, and there would be similar problems with any file names
+beginning with @samp{-}.
+
+Alternatively, you can prevent misinterpretation of leading @samp{-}
+by using @option{-e} for patterns and leading @samp{./} for files:
+
+@example
+grep -e '--cut here--' ./*
+@end example
 
 @item
 Suppose I want to search for a whole word, not a part of a word?
 
 @example
-grep -w 'hello' *
+grep -w 'hello' test*.log
 @end example
 
 @noindent
@@ -1636,7 +1691,7 @@ For more control, use @samp{\<} and
 For example:
 
 @example
-grep 'hello\>' *
+grep 'hello\>' test*.log
 @end example
 
 @noindent
@@ -1647,7 +1702,7 @@ searches only for words ending in @samp{hello}, so it matches the word
 How do I output context around the matching lines?
 
 @example
-grep -C 2 'hello' *
+grep -C 2 'hello' test*.log
 @end example
 
 @noindent
@@ -1729,7 +1784,7 @@ Why does the empty pattern match every input line?
 The @command{grep} command searches for lines that contain strings
 that match a pattern.  Every line contains the empty string, so an
 empty pattern causes @command{grep} to find a match on each line.  It
-is not the only such pattern: @samp{^}, @samp{$}, @samp{.*}, and many
+is not the only such pattern: @samp{^}, @samp{$}, and many
 other patterns cause @command{grep} to match every line.
 
 To match empty lines, use the pattern @samp{^$}.  To match blank
@@ -1744,31 +1799,6 @@ Use the special file name @samp{-}:
 @example
 cat /etc/passwd | grep 'alain' - /etc/motd
 @end example
-
-@item
-@cindex palindromes
-How to express palindromes in a regular expression?
-
-It can be done by using back-references;
-for example,
-a palindrome of 4 characters can be written with a BRE:
-
-@example
-grep -w -e '\(.\)\(.\).\2\1' file
-@end example
-
-It matches the word ``radar'' or ``civic.''
-
-Guglielmo Bondioni proposed a single RE
-that finds all palindromes up to 19 characters long
-using @w{9 subexpressions} and @w{9 back-references}:
-
-@smallexample
-grep -E -e '^(.?)(.?)(.?)(.?)(.?)(.?)(.?)(.?)(.?).?\9\8\7\6\5\4\3\2\1$' file
-@end smallexample
-
-Note this is done by using GNU ERE extensions;
-it might not be portable to other implementations of @command{grep}.
 
 @item
 Why is this back-reference failing?
@@ -1921,6 +1951,11 @@ GNU bug report logs for @command{grep}}.
 If you find a bug not listed there, please email it to
 @email{bug-grep@@gnu.org} to create a new bug report.
 
+@menu
+* Known Bugs::
+@end menu
+
+@node Known Bugs
 @section Known Bugs
 @cindex Bugs, known
 
@@ -1930,7 +1965,17 @@ In addition, certain other
 obscure regular expressions require exponential time and
 space, and may cause @command{grep} to run out of memory.
 
-Back-references are very slow, and may require exponential time.
+Back-references can greatly slow down matching, as they can generate
+exponentially many matching possibilities that can consume both time
+and memory to explore.  Also, the POSIX specification for
+back-references is at times unclear.  Furthermore, many regular
+expression implementations have back-reference bugs that can cause
+programs to return incorrect answers or even crash, and fixing these
+bugs has often been low-priority---for example, as of 2019 the GNU C
+library bug database contained back-reference bugs 52, 10844, 11053,
+and 25322, with little sign of forthcoming fixes.  Luckily,
+back-references are rarely useful and it should be little trouble to
+avoid them in practical applications.
 
 
 @node Copying

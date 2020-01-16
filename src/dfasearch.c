@@ -1,5 +1,5 @@
 /* dfasearch.c - searching subroutines using dfa and regex for grep.
-   Copyright 1992, 1998, 2000, 2007, 2009-2018 Free Software Foundation, Inc.
+   Copyright 1992, 1998, 2000, 2007, 2009-2020 Free Software Foundation, Inc.
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -35,7 +35,7 @@ struct dfa_comp
   struct dfa *dfa;
 
   /* Regex compiled regexps. */
-  struct re_pattern_buffer* patterns;
+  struct re_pattern_buffer *patterns;
   size_t pcount;
   struct re_registers regs;
 
@@ -103,6 +103,77 @@ kwsmusts (struct dfa_comp *dc)
   dfamustfree (dm);
 }
 
+/* Return true if KEYS, of length LEN, might contain a back-reference.
+   Return false if KEYS cannot contain a back-reference.
+   BS_SAFE is true of encodings where a backslash cannot appear as the
+   last byte of a multibyte character.  */
+static bool _GL_ATTRIBUTE_PURE
+possible_backrefs_in_pattern (char const *keys, ptrdiff_t len, bool bs_safe)
+{
+  /* Normally a backslash, but in an unsafe encoding this is a non-char
+     value so that the comparison below always fails, because if there
+     are two adjacent '\' bytes, the first might be the last byte of a
+     multibyte character.  */
+  int second_backslash = bs_safe ? '\\' : CHAR_MAX + 1;
+
+  /* This code can return true even if KEYS lacks a back-reference, for
+     patterns like [\2], or for encodings where '\' appears as the last
+     byte of a multibyte character.  However, false alarms should be
+     rare and do not affect correctness.  */
+
+  /* Do not look for a backslash in the pattern's last byte, since it
+     can't be part of a back-reference and this streamlines the code.  */
+  len--;
+
+  if (0 <= len)
+    {
+      char const *lim = keys + len;
+      for (char const *p = keys; (p = memchr (p, '\\', lim - p)); p++)
+        {
+          if ('1' <= p[1] && p[1] <= '9')
+            return true;
+          if (p[1] == second_backslash)
+            {
+              p++;
+              if (p == lim)
+                break;
+            }
+        }
+    }
+  return false;
+}
+
+static bool
+regex_compile (struct dfa_comp *dc, char const *p, ptrdiff_t len,
+               ptrdiff_t pcount, ptrdiff_t lineno, bool syntax_only)
+{
+  struct re_pattern_buffer pat0;
+  struct re_pattern_buffer *pat = syntax_only ? &pat0 : &dc->patterns[pcount];
+  pat->buffer = NULL;
+  pat->allocated = 0;
+
+  /* Do not use a fastmap with -i, to work around glibc Bug#20381.  */
+  pat->fastmap = syntax_only | match_icase ? NULL : xmalloc (UCHAR_MAX + 1);
+
+  pat->translate = NULL;
+
+  char const *err = re_compile_pattern (p, len, pat);
+  if (!err)
+    return true;
+
+  /* Emit a filename:lineno: prefix for patterns taken from files.  */
+  size_t pat_lineno = lineno;
+  char const *pat_filename
+    = lineno < 0 ? "\0" : pattern_file_name (lineno + 1, &pat_lineno);
+
+  if (*pat_filename == '\0')
+    error (0, 0, "%s", err);
+  else
+    error (0, 0, "%s:%zu: %s", pat_filename, pat_lineno, err);
+
+  return false;
+}
+
 void *
 GEAcompile (char *pattern, size_t size, reg_syntax_t syntax_bits)
 {
@@ -116,6 +187,7 @@ GEAcompile (char *pattern, size_t size, reg_syntax_t syntax_bits)
   re_set_syntax (syntax_bits);
   int dfaopts = eolbyte ? 0 : DFA_EOL_NUL;
   dfasyntax (dc->dfa, &localeinfo, syntax_bits, dfaopts);
+  bool bs_safe = !localeinfo.multibyte | localeinfo.using_utf8;
 
   /* For GNU regex, pass the patterns separately to detect errors like
      "[\nallo\n]\n", where the patterns are "[", "allo" and "]", and
@@ -124,7 +196,20 @@ GEAcompile (char *pattern, size_t size, reg_syntax_t syntax_bits)
   char const *p = pattern;
   char const *patlim = pattern + size;
   bool compilation_failed = false;
-  size_t palloc = 0;
+
+  dc->patterns = xmalloc (sizeof *dc->patterns);
+  dc->patterns++;
+  dc->pcount = 0;
+  size_t palloc = 1;
+
+  char const *prev = pattern;
+
+  /* Buffer containing back-reference-free patterns.  */
+  char *buf = NULL;
+  ptrdiff_t buflen = 0;
+  size_t bufalloc = 0;
+
+  ptrdiff_t lineno = 0;
 
   do
     {
@@ -138,38 +223,71 @@ GEAcompile (char *pattern, size_t size, reg_syntax_t syntax_bits)
       else
         len = patlim - p;
 
-      if (palloc <= dc->pcount)
-        dc->patterns = x2nrealloc (dc->patterns, &palloc, sizeof *dc->patterns);
-      struct re_pattern_buffer *pat = &dc->patterns[dc->pcount];
-      pat->buffer = NULL;
-      pat->allocated = 0;
+      bool backref = possible_backrefs_in_pattern (p, len, bs_safe);
 
-      /* Do not use a fastmap with -i, to work around glibc Bug#20381.  */
-      pat->fastmap = match_icase ? NULL : xmalloc (UCHAR_MAX + 1);
-
-      pat->translate = NULL;
-
-      char const *err = re_compile_pattern (p, len, pat);
-      if (err)
+      if (backref && prev < p)
         {
-          /* With patterns specified only on the command line, emit the bare
-             diagnostic.  Otherwise, include a filename:lineno: prefix.  */
-          size_t lineno;
-          char const *pat_filename = pattern_file_name (dc->pcount + 1,
-                                                        &lineno);
-          if (*pat_filename == '\0')
-            error (0, 0, "%s", err);
-          else
-            error (0, 0, "%s:%zu: %s", pat_filename, lineno, err);
-          compilation_failed = true;
+          ptrdiff_t prevlen = p - prev;
+          while (bufalloc < buflen + prevlen)
+            buf = x2realloc (buf, &bufalloc);
+          memcpy (buf + buflen, prev, prevlen);
+          buflen += prevlen;
         }
-      dc->pcount++;
+
+      /* Ensure room for at least two more patterns.  The extra one is
+         for the regex_compile that may be executed after this loop
+         exits, and its (unused) slot is patterns[-1] until then.  */
+      while (palloc <= dc->pcount + 1)
+        {
+          dc->patterns = x2nrealloc (dc->patterns - 1, &palloc,
+                                     sizeof *dc->patterns);
+          dc->patterns++;
+        }
+
+      if (!regex_compile (dc, p, len, dc->pcount, lineno, !backref))
+        compilation_failed = true;
+
       p = sep;
+      lineno++;
+
+      if (backref)
+        {
+          dc->pcount++;
+          prev = p;
+        }
     }
   while (p);
 
   if (compilation_failed)
     exit (EXIT_TROUBLE);
+
+  if (prev != NULL)
+    {
+      if (pattern < prev)
+        {
+          ptrdiff_t prevlen = patlim - prev;
+          buf = xrealloc (buf, buflen + prevlen);
+          memcpy (buf + buflen, prev, prevlen);
+          buflen += prevlen;
+        }
+      else
+        {
+          buf = pattern;
+          buflen = size;
+        }
+    }
+
+  if (buf != NULL)
+    {
+      dc->patterns--;
+      dc->pcount++;
+
+      if (!regex_compile (dc, buf, buflen, 0, -1, false))
+        abort ();
+
+      if (buf != pattern)
+        free (buf);
+    }
 
   /* In the match_words and match_lines cases, we use a different pattern
      for the DFA matcher that will quickly throw out cases that won't work.
@@ -202,8 +320,9 @@ GEAcompile (char *pattern, size_t size, reg_syntax_t syntax_bits)
   else
     motif = NULL;
 
-  dfacomp (pattern, size, dc->dfa, 1);
+  dfaparse (pattern, size, dc->dfa);
   kwsmusts (dc);
+  dfacomp (NULL, 0, dc->dfa, 1);
 
   free (motif);
 
@@ -234,7 +353,7 @@ EGexecute (void *vdc, char const *buf, size_t size, size_t *match_size,
       if (!start_ptr)
         {
           char const *next_beg, *dfa_beg = beg;
-          size_t count = 0;
+          ptrdiff_t count = 0;
           bool exact_kwset_match = false;
           bool backref = false;
 
@@ -279,7 +398,7 @@ EGexecute (void *vdc, char const *buf, size_t size, size_t *match_size,
                     goto success;
                   if (mb_start < beg)
                     mb_start = beg;
-                  if (mb_goback (&mb_start, match, buflim) == 0)
+                  if (mb_goback (&mb_start, NULL, match, buflim) == 0)
                     goto success;
                   /* The matched line starts in the middle of a multibyte
                      character.  Perform the DFA search starting from the
@@ -330,7 +449,7 @@ EGexecute (void *vdc, char const *buf, size_t size, size_t *match_size,
           end = memchr (next_beg, eol, buflim - next_beg);
           end = end ? end + 1 : buflim;
 
-          /* Successful, no backreferences encountered! */
+          /* Successful, no back-references encountered! */
           if (!backref)
             goto success;
           ptr = beg;

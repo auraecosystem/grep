@@ -1,7 +1,7 @@
 #! /bin/sh
 # Ensure that neither \s nor \S matches an invalid multibyte character.
 #
-# Copyright (C) 2013-2018 Free Software Foundation, Inc.
+# Copyright (C) 2013-2020 Free Software Foundation, Inc.
 #
 # Copying and distribution of this file, with or without modification,
 # are permitted in any medium without royalty provided the copyright
@@ -11,10 +11,10 @@
 
 require_en_utf8_locale_
 
+printf '\202\n' > in || framework_failure_
+
 LC_ALL=en_US.UTF-8
 export LC_ALL
-
-printf '\202\n' > in || framework_failure_
 
 fail=0
 grep '^\S$' in > out-S && fail=1
