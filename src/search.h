@@ -1,5 +1,5 @@
 /* search.c - searching subroutines using dfa, kwset and regex for grep.
-   Copyright 1992, 1998, 2000, 2007, 2009-2018 Free Software Foundation, Inc.
+   Copyright 1992, 1998, 2000, 2007, 2009-2020 Free Software Foundation, Inc.
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -52,7 +52,8 @@ extern size_t wordchars_size (char const *, char const *) _GL_ATTRIBUTE_PURE;
 extern size_t wordchar_next (char const *, char const *) _GL_ATTRIBUTE_PURE;
 extern size_t wordchar_prev (char const *, char const *, char const *)
   _GL_ATTRIBUTE_PURE;
-extern ptrdiff_t mb_goback (char const **, char const *, char const *);
+extern ptrdiff_t mb_goback (char const **, size_t *, char const *,
+                            char const *);
 
 /* dfasearch.c */
 extern void *GEAcompile (char *, size_t, reg_syntax_t);

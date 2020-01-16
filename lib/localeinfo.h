@@ -1,6 +1,6 @@
 /* locale information
 
-   Copyright 2016-2018 Free Software Foundation, Inc.
+   Copyright 2016-2020 Free Software Foundation, Inc.
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -27,6 +27,12 @@ struct localeinfo
 {
   /* MB_CUR_MAX > 1.  */
   bool multibyte;
+
+  /* The locale is simple, like the C locale.  These locales can be
+     processed more efficiently, as they are single-byte, their native
+     character set is in collating-sequence order, and they do not
+     have multi-character collating elements.  */
+  bool simple;
 
   /* The locale uses UTF-8.  */
   bool using_utf8;

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GNU grep 2.19.12\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2018-12-20 20:39-0800\n"
+"POT-Creation-Date: 2020-01-02 13:16-0800\n"
 "PO-Revision-Date: 2014-07-11 18:53+0200\n"
 "Last-Translator: Santiago Vila Doncel <sanvila@unex.es>\n"
 "Language-Team: Spanish <es@tp.org.es>\n"
@@ -18,65 +18,65 @@ msgstr ""
 "Content-Transfer-Encoding: 8-bit\n"
 "X-Bugs: Report translation errors to the Language-Team address.\n"
 
-#: lib/argmatch.c:134
+#: lib/argmatch.c:132
 #, c-format
 msgid "invalid argument %s for %s"
 msgstr "argumento %s inválido %s"
 
-#: lib/argmatch.c:135
+#: lib/argmatch.c:133
 #, c-format
 msgid "ambiguous argument %s for %s"
 msgstr "argumento %s ambiguo para %s"
 
-#: lib/argmatch.c:154
+#: lib/argmatch.c:152 lib/argmatch.h:223
 msgid "Valid arguments are:"
 msgstr "Los argumentos válidos son:"
 
-#: lib/c-stack.c:208 lib/c-stack.c:301
+#: lib/c-stack.c:211 lib/c-stack.c:304
 msgid "program error"
 msgstr ""
 
-#: lib/c-stack.c:209 lib/c-stack.c:302
+#: lib/c-stack.c:212 lib/c-stack.c:305
 msgid "stack overflow"
 msgstr ""
 
-#: lib/closeout.c:122 src/grep.c:1273
+#: lib/closeout.c:122 src/grep.c:1278
 msgid "write error"
 msgstr "error de escritura"
 
-#: lib/dfa.c:970
+#: lib/dfa.c:923
 msgid "unbalanced ["
 msgstr "[ desemparejado"
 
-#: lib/dfa.c:1091
+#: lib/dfa.c:1044
 msgid "invalid character class"
 msgstr "clase de caracteres inválida"
 
-#: lib/dfa.c:1217
+#: lib/dfa.c:1170
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr "la sintaxis de la clase de caracteres es [[:space:]], no [:space:]"
 
-#: lib/dfa.c:1284
+#: lib/dfa.c:1237
 msgid "unfinished \\ escape"
 msgstr "secuencia de escape \\ sin terminar"
 
-#: lib/dfa.c:1445
+#: lib/dfa.c:1398
 msgid "invalid content of \\{\\}"
 msgstr "contenido inválido de \\{\\}"
 
-#: lib/dfa.c:1448
+#: lib/dfa.c:1401
 msgid "regular expression too big"
 msgstr "la expresión regular es demasiado grande"
 
-#: lib/dfa.c:1863
+#: lib/dfa.c:1872
 msgid "unbalanced ("
 msgstr "( desemparejado"
 
-#: lib/dfa.c:1981
+#: lib/dfa.c:1989
 msgid "no syntax specified"
 msgstr "no se ha especificado ninguna sintaxis"
 
-#: lib/dfa.c:1992
+#: lib/dfa.c:2000
 msgid "unbalanced )"
 msgstr ") desemparejado"
 
@@ -119,7 +119,7 @@ msgstr "%s: opción inválida -- '%c'\n"
 msgid "%s: option requires an argument -- '%c'\n"
 msgstr "%s: la opción requiere un argumento -- '%c'\n"
 
-#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34 src/pcresearch.c:313
+#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34 src/pcresearch.c:300
 msgid "memory exhausted"
 msgstr "memoria agotada"
 
@@ -236,7 +236,7 @@ msgstr "La expresión regular es demasiado grande"
 msgid "Unmatched ) or \\)"
 msgstr ") o \\) desemparejado"
 
-#: lib/regcomp.c:688
+#: lib/regcomp.c:676
 msgid "No previous regular expression"
 msgstr "No hay ninguna expresión regular anterior"
 
@@ -257,15 +257,13 @@ msgstr "Empaquetado por %s\n"
 msgid "(C)"
 msgstr "(C)"
 
-#: lib/version-etc.c:85
-#, fuzzy
+#. TRANSLATORS: The %s placeholder is the web address of the GPL license.
+#: lib/version-etc.c:88
+#, fuzzy, c-format
 msgid ""
-"\n"
-"License GPLv3+: GNU GPL version 3 or later <https://gnu.org/licenses/gpl."
-"html>.\n"
+"License GPLv3+: GNU GPL version 3 or later <%s>.\n"
 "This is free software: you are free to change and redistribute it.\n"
 "There is NO WARRANTY, to the extent permitted by law.\n"
-"\n"
 msgstr ""
 "\n"
 "Licencia GPLv3+: GPL de GNU versión 3 o posterior\n"
@@ -274,19 +272,19 @@ msgstr ""
 "No hay NINGUNA GARANTÍA, hasta donde permite la ley.\n"
 
 #. TRANSLATORS: %s denotes an author name.
-#: lib/version-etc.c:102
+#: lib/version-etc.c:105
 #, c-format
 msgid "Written by %s.\n"
 msgstr "Escrito por %s.\n"
 
 #. TRANSLATORS: Each %s denotes an author name.
-#: lib/version-etc.c:106
+#: lib/version-etc.c:109
 #, c-format
 msgid "Written by %s and %s.\n"
 msgstr "Escrito por %s y %s.\n"
 
 #. TRANSLATORS: Each %s denotes an author name.
-#: lib/version-etc.c:110
+#: lib/version-etc.c:113
 #, c-format
 msgid "Written by %s, %s, and %s.\n"
 msgstr "Escrito por %s, %s, y %s.\n"
@@ -294,7 +292,7 @@ msgstr "Escrito por %s, %s, y %s.\n"
 #. TRANSLATORS: Each %s denotes an author name.
 #. You can use line breaks, estimating that each author name occupies
 #. ca. 16 screen columns and that a screen line has ca. 80 columns.
-#: lib/version-etc.c:117
+#: lib/version-etc.c:120
 #, c-format
 msgid ""
 "Written by %s, %s, %s,\n"
@@ -306,7 +304,7 @@ msgstr ""
 #. TRANSLATORS: Each %s denotes an author name.
 #. You can use line breaks, estimating that each author name occupies
 #. ca. 16 screen columns and that a screen line has ca. 80 columns.
-#: lib/version-etc.c:124
+#: lib/version-etc.c:127
 #, c-format
 msgid ""
 "Written by %s, %s, %s,\n"
@@ -318,7 +316,7 @@ msgstr ""
 #. TRANSLATORS: Each %s denotes an author name.
 #. You can use line breaks, estimating that each author name occupies
 #. ca. 16 screen columns and that a screen line has ca. 80 columns.
-#: lib/version-etc.c:131
+#: lib/version-etc.c:134
 #, c-format
 msgid ""
 "Written by %s, %s, %s,\n"
@@ -330,7 +328,7 @@ msgstr ""
 #. TRANSLATORS: Each %s denotes an author name.
 #. You can use line breaks, estimating that each author name occupies
 #. ca. 16 screen columns and that a screen line has ca. 80 columns.
-#: lib/version-etc.c:139
+#: lib/version-etc.c:142
 #, c-format
 msgid ""
 "Written by %s, %s, %s,\n"
@@ -342,7 +340,7 @@ msgstr ""
 #. TRANSLATORS: Each %s denotes an author name.
 #. You can use line breaks, estimating that each author name occupies
 #. ca. 16 screen columns and that a screen line has ca. 80 columns.
-#: lib/version-etc.c:147
+#: lib/version-etc.c:150
 #, c-format
 msgid ""
 "Written by %s, %s, %s,\n"
@@ -356,7 +354,7 @@ msgstr ""
 #. TRANSLATORS: Each %s denotes an author name.
 #. You can use line breaks, estimating that each author name occupies
 #. ca. 16 screen columns and that a screen line has ca. 80 columns.
-#: lib/version-etc.c:156
+#: lib/version-etc.c:159
 #, c-format
 msgid ""
 "Written by %s, %s, %s,\n"
@@ -370,7 +368,7 @@ msgstr ""
 #. TRANSLATORS: Each %s denotes an author name.
 #. You can use line breaks, estimating that each author name occupies
 #. ca. 16 screen columns and that a screen line has ca. 80 columns.
-#: lib/version-etc.c:167
+#: lib/version-etc.c:170
 #, c-format
 msgid ""
 "Written by %s, %s, %s,\n"
@@ -385,99 +383,77 @@ msgstr ""
 #. for this package.  Please add _another line_ saying
 #. "Report translation bugs to <...>\n" with the address for translation
 #. bugs (typically your translation team's web or email address).
-#: lib/version-etc.c:245
-#, c-format
-msgid ""
-"\n"
-"Report bugs to: %s\n"
+#: lib/version-etc.c:249
+#, fuzzy, c-format
+msgid "Report bugs to: %s\n"
 msgstr ""
 "\n"
 "Comunicar errores en el programa a: %s\n"
 
-#: lib/version-etc.c:247
+#: lib/version-etc.c:251
 #, c-format
 msgid "Report %s bugs to: %s\n"
 msgstr "Comunicar errores sobre %s a: %s\n"
 
-#: lib/version-etc.c:251
+#: lib/version-etc.c:255 lib/version-etc.c:257
 #, c-format
 msgid "%s home page: <%s>\n"
 msgstr "Página inicial de %s: <%s>\n"
 
-#: lib/version-etc.c:253
+#: lib/version-etc.c:260
 #, fuzzy, c-format
-msgid "%s home page: <https://www.gnu.org/software/%s/>\n"
-msgstr "página inicial de %s: <http://www.gnu.org/software/%s/>\n"
-
-#: lib/version-etc.c:256
-#, fuzzy
-msgid "General help using GNU software: <https://www.gnu.org/gethelp/>\n"
+msgid "General help using GNU software: <%s>\n"
 msgstr ""
 "Ayuda general sobre el uso de software de GNU: <http://www.gnu.org/gethelp/"
 ">\n"
 
-#: lib/xstrtol-error.c:63
-#, c-format
-msgid "invalid %s%s argument '%s'"
-msgstr "argumento %s%s inválido '%s'"
-
-#: lib/xstrtol-error.c:68
-#, c-format
-msgid "invalid suffix in %s%s argument '%s'"
-msgstr "sufijo inválido en el argumento %s%s '%s'"
-
-#: lib/xstrtol-error.c:72
-#, c-format
-msgid "%s%s argument '%s' too large"
-msgstr "%s%s argumento '%s' demasiado grande"
-
-#: src/grep.c:582
+#: src/grep.c:584
 msgid "(standard input)"
 msgstr "(entrada estándar)"
 
-#: src/grep.c:762
+#: src/grep.c:764
 msgid "invalid context length argument"
 msgstr "longitud de contexto inválida"
 
-#: src/grep.c:827
+#: src/grep.c:829
 msgid "input is too large to count"
 msgstr "la entrada es demasiado grande para contar"
 
-#: src/grep.c:1578
+#: src/grep.c:1583
 #, c-format
 msgid "Binary file %s matches\n"
 msgstr "Coincidencia en el fichero binario %s\n"
 
-#: src/grep.c:1626
+#: src/grep.c:1624
 #, c-format
 msgid "warning: %s: %s"
 msgstr "atención: %s: %s"
 
-#: src/grep.c:1627
+#: src/grep.c:1625
 msgid "recursive directory loop"
 msgstr "bucle de directorio recursivo"
 
-#: src/grep.c:1843
+#: src/grep.c:1845
 #, c-format
 msgid "input file %s is also the output"
 msgstr "el fichero de entrada %s también es el de salida"
 
-#: src/grep.c:1906 src/grep.c:1913
+#: src/grep.c:1908 src/grep.c:1915
 #, fuzzy, c-format
 msgid "Usage: %s [OPTION]... PATTERNS [FILE]...\n"
 msgstr "Modo de empleo: %s [OPCIÓN]... PATRÓN [FICHERO]...\n"
 
-#: src/grep.c:1908
+#: src/grep.c:1910
 #, c-format
 msgid "Try '%s --help' for more information.\n"
 msgstr "Pruebe '%s --help' para más información.\n"
 
-#: src/grep.c:1914
+#: src/grep.c:1916
 #, fuzzy, c-format
 msgid "Search for PATTERNS in each FILE.\n"
 msgstr "Busca PATRÓN en cada FICHERO o en la entrada estándar.\n"
 
-#: src/grep.c:1915
+#: src/grep.c:1917
 #, fuzzy, c-format
 msgid ""
 "Example: %s -i 'hello world' menu.h main.c\n"
@@ -489,7 +465,7 @@ msgstr ""
 "\n"
 "Selección e interpretación de Expreg:\n"
 
-#: src/grep.c:1920
+#: src/grep.c:1922
 #, fuzzy, c-format
 msgid ""
 "  -E, --extended-regexp     PATTERNS are extended regular expressions\n"
@@ -503,12 +479,13 @@ msgstr ""
 "  -G, --basic-regexp        PATRÓN es una expresión regular básica (BRE)\n"
 "  -P, --perl-regexp         PATRÓN es una expresión regular en Perl\n"
 
-#: src/grep.c:1926
+#: src/grep.c:1928
 #, fuzzy, c-format
 msgid ""
 "  -e, --regexp=PATTERNS     use PATTERNS for matching\n"
 "  -f, --file=FILE           take PATTERNS from FILE\n"
-"  -i, --ignore-case         ignore case distinctions\n"
+"  -i, --ignore-case         ignore case distinctions in patterns and data\n"
+"      --no-ignore-case      do not ignore case distinctions (default)\n"
 "  -w, --word-regexp         match only whole words\n"
 "  -x, --line-regexp         match only whole lines\n"
 "  -z, --null-data           a data line ends in 0 byte, not newline\n"
@@ -523,7 +500,7 @@ msgstr ""
 "  -z, --null-data           una línea de datos termina en un byte 0, no\n"
 "                            en un carácter de nueva línea\n"
 
-#: src/grep.c:1933
+#: src/grep.c:1936
 #, c-format
 msgid ""
 "\n"
@@ -540,7 +517,7 @@ msgstr ""
 "  -V, --version             muestra la versión y finaliza\n"
 "      --help                muestra este texto de ayuda y finaliza\n"
 
-#: src/grep.c:1940
+#: src/grep.c:1943
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -570,7 +547,7 @@ msgstr ""
 "      --label=ETIQUETA      utiliza ETIQUETA como nombre de fichero prefijo\n"
 "                            para la entrada estándar\n"
 
-#: src/grep.c:1951
+#: src/grep.c:1954
 #, fuzzy, c-format
 msgid ""
 "  -o, --only-matching       show only nonempty parts of lines that match\n"
@@ -586,7 +563,7 @@ msgstr ""
 "                            TIPO es 'binary', 'text', o 'without-match'\n"
 "  -a, --text                equivalente a --binary-files=text\n"
 
-#: src/grep.c:1958
+#: src/grep.c:1961
 #, c-format
 msgid ""
 "  -I                        equivalent to --binary-files=without-match\n"
@@ -606,13 +583,14 @@ msgstr ""
 "  -R, --dereference-recursive  similar, pero sigue todos los enlaces "
 "simbólicos\n"
 
-#: src/grep.c:1967
+#: src/grep.c:1970
 #, fuzzy, c-format
 msgid ""
 "      --include=GLOB        search only files that match GLOB (a file "
 "pattern)\n"
-"      --exclude=GLOB        skip files and directories matching GLOB\n"
-"      --exclude-from=FILE   skip files matching any file pattern from FILE\n"
+"      --exclude=GLOB        skip files that match GLOB\n"
+"      --exclude-from=FILE   skip files that match any file pattern from "
+"FILE\n"
 "      --exclude-dir=GLOB    skip directories that match GLOB\n"
 msgstr ""
 "      --include=PATRÓN      examina los ficheros que encajan con PATRÓN\n"
@@ -622,7 +600,7 @@ msgstr ""
 "                             de FICHERO\n"
 "      --exclude-dir=PATRÓN  se salta los directorios que encajan con PATRÓN\n"
 
-#: src/grep.c:1974
+#: src/grep.c:1977
 #, fuzzy, c-format
 msgid ""
 "  -L, --files-without-match  print only names of FILEs with no selected "
@@ -642,7 +620,7 @@ msgstr ""
 "  -Z, --null                imprime un byte 0 después del nombre del "
 "FICHERO\n"
 
-#: src/grep.c:1980
+#: src/grep.c:1983
 #, c-format
 msgid ""
 "\n"
@@ -657,7 +635,7 @@ msgstr ""
 "  -A, --after-context=NÚM   muestra NÚM líneas de contexto posterior\n"
 "  -C, --context=NÚM         muestra NÚM líneas de contexto\n"
 
-#: src/grep.c:1987
+#: src/grep.c:1990
 #, fuzzy, c-format
 msgid ""
 "  -NUM                      same as --context=NUM\n"
@@ -677,7 +655,7 @@ msgstr ""
 "  -u, --unix-byte-offsets   cuenta los desplazamientos como si no hubiera\n"
 "                            retornos de carro (MSDOS/Windows)\n"
 
-#: src/grep.c:1994
+#: src/grep.c:1997
 #, fuzzy, c-format
 msgid ""
 "When FILE is '-', read standard input.  With no FILE, read '.' if\n"
@@ -702,83 +680,94 @@ msgstr ""
 #
 # No me gusta nada lo de opción "a buscar".
 # Se admiten sugerencias. sv
-#: src/grep.c:2034
+#: src/grep.c:2039
 msgid "conflicting matchers specified"
 msgstr "se han especificado expresiones conflictivas"
 
-#: src/grep.c:2038
+#: src/grep.c:2046
+#, fuzzy
+msgid "Perl matching not supported in a --disable-perl-regexp build"
+msgstr ""
+"el soporte para la opción -P no está compilado en este ejecutable --disable-"
+"perl-regexp"
+
+#: src/grep.c:2048
 #, c-format
 msgid "invalid matcher %s"
 msgstr "expresión inválida %s"
 
-#: src/grep.c:2459
+#: src/grep.c:2472
 #, c-format
 msgid "warning: GREP_OPTIONS is deprecated; please use an alias or script"
 msgstr ""
 
-#: src/grep.c:2486
+#: src/grep.c:2499
 msgid "unknown devices method"
 msgstr "método de dispositivos desconocido"
 
-#: src/grep.c:2630
+#: src/grep.c:2645
 msgid "invalid max count"
 msgstr "contador máximo inválido"
 
-#: src/grep.c:2688
+#: src/grep.c:2703
 msgid "unknown binary-files type"
 msgstr "tipo binary-files desconocido"
 
-#: src/grep.c:2770
+#: src/grep.c:2788
 #, fuzzy
 msgid ""
 "Written by Mike Haertel and others; see\n"
 "<https://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>."
 msgstr "otros, véase <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
 
-#: src/pcresearch.c:86
+#: src/pcresearch.c:85
 msgid "failed to allocate memory for the PCRE JIT stack"
 msgstr "fallo al asignar memoria para la pila JIT de PCRE"
 
-#: src/pcresearch.c:118
-msgid ""
-"support for the -P option is not compiled into this --disable-perl-regexp "
-"binary"
-msgstr ""
-"el soporte para la opción -P no está compilado en este ejecutable --disable-"
-"perl-regexp"
-
-#: src/pcresearch.c:140
+#: src/pcresearch.c:132
 msgid "-P supports only unibyte and UTF-8 locales"
 msgstr ""
 
-#: src/pcresearch.c:146
+#: src/pcresearch.c:138
 msgid "the -P option only supports a single pattern"
 msgstr "la opción -P solamente admite un patrón"
 
-#: src/pcresearch.c:189
+#: src/pcresearch.c:181
 msgid "internal error (should never happen)"
 msgstr "error interno (no debería ocurrir nunca)"
 
-#: src/pcresearch.c:214
-msgid "internal error"
-msgstr "error interno"
-
-#: src/pcresearch.c:237
+#: src/pcresearch.c:224
 msgid "exceeded PCRE's line length limit"
 msgstr "se ha excedido el límite de longitud de línea de las PCREs"
 
-#: src/pcresearch.c:317
+#: src/pcresearch.c:304
 msgid "exhausted PCRE JIT stack"
 msgstr ""
 
-#: src/pcresearch.c:321
+#: src/pcresearch.c:308
 msgid "exceeded PCRE's backtracking limit"
 msgstr "se ha excedido el límite de vuelta atrás de las PCREs"
 
-#: src/pcresearch.c:328
+#: src/pcresearch.c:315
 #, c-format
 msgid "internal PCRE error: %d"
 msgstr "error interno de PCRE: %d"
+
+#~ msgid "invalid %s%s argument '%s'"
+#~ msgstr "argumento %s%s inválido '%s'"
+
+#~ msgid "invalid suffix in %s%s argument '%s'"
+#~ msgstr "sufijo inválido en el argumento %s%s '%s'"
+
+#~ msgid "%s%s argument '%s' too large"
+#~ msgstr "%s%s argumento '%s' demasiado grande"
+
+#, fuzzy
+#~ msgid "%s home page: <https://www.gnu.org/software/%s/>\n"
+#~ msgstr "página inicial de %s: <http://www.gnu.org/software/%s/>\n"
+
+#~ msgid "internal error"
+#~ msgstr "error interno"
 
 #~ msgid "Mike Haertel"
 #~ msgstr "Mike Haertel"

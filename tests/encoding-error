@@ -1,7 +1,7 @@
 #! /bin/sh
 # Test grep's behavior on encoding errors.
 #
-# Copyright 2015-2018 Free Software Foundation, Inc.
+# Copyright 2015-2020 Free Software Foundation, Inc.
 #
 # Copying and distribution of this file, with or without modification,
 # are permitted in any medium without royalty provided the copyright
@@ -11,13 +11,13 @@
 
 require_en_utf8_locale_
 
-LC_ALL=en_US.UTF-8
-export LC_ALL
-
 printf 'Alfred Jones\n' > a || framework_failure_
 printf 'John Smith\n' >j || framework_failure_
 printf 'Pedro P\351rez\n' >p || framework_failure_
 cat a p j >in || framework_failure_
+
+LC_ALL=en_US.UTF-8
+export LC_ALL
 
 fail=0
 

@@ -1,7 +1,7 @@
 dnl
 dnl autoconf input file for GNU grep
 dnl
-dnl Copyright (C) 1997-2006, 2009-2018 Free Software Foundation, Inc.
+dnl Copyright (C) 1997-2006, 2009-2020 Free Software Foundation, Inc.
 dnl
 dnl This file is part of GNU grep.
 dnl
@@ -22,45 +22,14 @@ AC_INIT([GNU grep],
         m4_esyscmd([build-aux/git-version-gen .tarball-version]),
         [bug-grep@gnu.org])
 
-# Set the GREP and EGREP variables to a dummy replacement for the 'grep'
-# command, so that AC_PROG_GREP and AC_PROG_EGREP don't fail when no good
-# 'grep' program is found. This makes it possible to build GNU grep on a
-# Solaris machine that has only /usr/bin/grep and no /usr/xpg4/bin/grep.
-# This function supports only restricted arguments:
-#   - No file names as arguments, process only standard input.
-#   - Only literal strings without backslashes, no regular expressions.
-#   - The only options are -e and -E (and -Ee).
-# This function also does not support long lines beyond what the shell
-# supports), and backslash-processes the input.
-fn_grep () {
-  test "$1" = -E && shift
-  case $@%:@:$1 in
-    0:*) AC_MSG_ERROR([fn_grep: expected pattern]) ;;
-    1:-*) AC_MSG_ERROR([fn_grep: invalid command line]) ;;
-    1:*) pattern=$1 ;;
-    2:--|2:-e|2:-Ee) pattern=$2 ;;
-    *) AC_MSG_ERROR([fn_grep: invalid command line]) ;;
-  esac
-
-  case $pattern in
-    [*['].^$\*[']*]) dnl The outer brackets are for M4.
-      AC_MSG_ERROR([fn_grep: regular expressions not supported])  ;;
-  esac
-
-  rc=1
-  while read line; do
-    case $line in
-      *$pattern*)
-        rc=0
-        AS_ECHO([$line]) ;;
-    esac
-  done
-  return $rc
-}
-
-test -n "$GREP" || GREP=fn_grep
-test -n "$EGREP" || EGREP=fn_grep
-ac_cv_path_EGREP=$EGREP
+if test -n "$GREP" || test -n "$EGREP"; then
+  AC_MSG_ERROR(
+    [no working 'grep' found
+  A working 'grep' command is needed to build GNU Grep.
+  This 'grep' should support -e and long lines.
+  On Solaris 10, install the package SUNWggrp or SUNWxcu4.
+  On Solaris 11, install the package text/gnu-grep or system/xopen/xcu4.])
+fi
 
 AC_CONFIG_AUX_DIR(build-aux)
 AC_CONFIG_SRCDIR(src/grep.c)
@@ -93,6 +62,10 @@ dnl Checks for typedefs, structures, and compiler characteristics.
 AC_TYPE_SIZE_T
 AC_C_CONST
 gl_INIT
+
+# Ensure VLAs are not used.
+# Note -Wvla is implicitly added by gl_MANYWARN_ALL_GCC
+AC_DEFINE([GNULIB_NO_VLA], [1], [Define to 1 to disable use of VLAs])
 
 # The test suite needs to know if we have a working perl.
 # FIXME: this is suboptimal.  Ideally, we would be able to call gl_PERL
@@ -134,7 +107,6 @@ if test "$gl_gcc_warnings" = yes; then
   nw="$nw -Wundef"                  # Warns on '#if GNULIB_FOO' etc in gnulib
   nw="$nw -Wsystem-headers"         # Don't let system headers trigger warnings
   nw="$nw -Wpadded"                 # Our structs are not padded
-  nw="$nw -Wvla"                    # warnings in gettext.h
   nw="$nw -Wstack-protector"        # generates false alarms for useful code
   nw="$nw -Wswitch-default"         # Too many warnings for now
   nw="$nw -Wunsafe-loop-optimizations" # OK to suppress unsafe optimizations
@@ -206,6 +178,7 @@ if test "$ac_use_included_regex" = no; then
 fi
 
 gl_FUNC_PCRE
+AM_CONDITIONAL([USE_PCRE], [test $use_pcre = yes])
 
 case $host_os in
   mingw*) suffix=w32 ;;
@@ -223,6 +196,4 @@ AC_CONFIG_FILES([
   doc/Makefile
   gnulib-tests/Makefile
 ])
-GREP="$ac_abs_top_builddir/src/grep"
-EGREP="$ac_abs_top_builddir/src/grep -E"
 AC_OUTPUT

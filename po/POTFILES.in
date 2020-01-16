@@ -1,6 +1,6 @@
 # List of files which containing translatable strings.
 #
-# Copyright 1997-1998, 2005-2018 Free Software Foundation, Inc.
+# Copyright 1997-1998, 2005-2020 Free Software Foundation, Inc.
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -16,6 +16,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 lib/argmatch.c
+lib/argmatch.h
 lib/c-stack.c
 lib/closeout.c
 lib/dfa.c
@@ -28,6 +29,5 @@ lib/quotearg.c
 lib/regcomp.c
 lib/version-etc.c
 lib/xalloc-die.c
-lib/xstrtol-error.c
 src/grep.c
 src/pcresearch.c

@@ -1,7 +1,7 @@
 #!/bin/sh
 # This would fail with grep-2.21's dfa.c.
 
-# Copyright 2014-2018 Free Software Foundation, Inc.
+# Copyright 2014-2020 Free Software Foundation, Inc.
 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -33,11 +33,11 @@ fi
 
 fail=0
 
-dfa-match-aux a ba 0 > out || fail=1
+${CHECKER} dfa-match-aux a ba 0 > out || fail=1
 compare /dev/null out || fail=1
 
 in=$(printf "bb\nbb")
-$timeout_10 dfa-match-aux a "$in" 1 > out || fail=1
+$timeout_10 ${CHECKER} dfa-match-aux a "$in" 1 > out || fail=1
 compare /dev/null out || fail=1
 
 Exit $fail
