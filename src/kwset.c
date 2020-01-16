@@ -1,5 +1,5 @@
 /* kwset.c - search for any of a set of keywords.
-   Copyright (C) 1989, 1998, 2000, 2005, 2007, 2009-2018 Free Software
+   Copyright (C) 1989, 1998, 2000, 2005, 2007, 2009-2020 Free Software
    Foundation, Inc.
 
    This program is free software; you can redistribute it and/or modify
@@ -664,7 +664,7 @@ memchr_kwset (char const *s, ptrdiff_t n, kwset_t kwset)
 }
 
 /* Fast Boyer-Moore search (inlinable version).  */
-static inline ptrdiff_t
+static inline ptrdiff_t _GL_ATTRIBUTE_PURE
 bmexec_trans (kwset_t kwset, char const *text, ptrdiff_t size)
 {
   assume (0 <= size);

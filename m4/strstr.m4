@@ -1,5 +1,5 @@
-# strstr.m4 serial 20
-dnl Copyright (C) 2008-2018 Free Software Foundation, Inc.
+# strstr.m4 serial 21
+dnl Copyright (C) 2008-2020 Free Software Foundation, Inc.
 dnl This file is free software; the Free Software Foundation
 dnl gives unlimited permission to copy and/or distribute it,
 dnl with or without modifications, as long as this notice is preserved.
@@ -56,7 +56,7 @@ AC_DEFUN([gl_FUNC_STRSTR_SIMPLE],
 #endif
             ],
             [gl_cv_func_strstr_works_always="guessing yes"],
-            [gl_cv_func_strstr_works_always="guessing no"])
+            [gl_cv_func_strstr_works_always="$gl_cross_guess_normal"])
          ])
       ])
     case "$gl_cv_func_strstr_works_always" in
@@ -135,7 +135,7 @@ static void quit (int sig) { _exit (sig + 128); }
 #endif
            ],
            [gl_cv_func_strstr_linear="guessing yes"],
-           [gl_cv_func_strstr_linear="guessing no"])
+           [gl_cv_func_strstr_linear="$gl_cross_guess_normal"])
         ])
       ])
     case "$gl_cv_func_strstr_linear" in

@@ -1,5 +1,5 @@
 /* grep.c - main driver file for grep.
-   Copyright (C) 1992, 1997-2002, 2004-2018 Free Software Foundation, Inc.
+   Copyright (C) 1992, 1997-2002, 2004-2020 Free Software Foundation, Inc.
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -22,7 +22,6 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <wchar.h>
-#include <fcntl.h>
 #include <inttypes.h>
 #include <stdarg.h>
 #include <stdio.h>
@@ -47,6 +46,7 @@
 #include "quote.h"
 #include "safe-read.h"
 #include "search.h"
+#include "c-strcase.h"
 #include "version-etc.h"
 #include "xalloc.h"
 #include "xbinary-io.h"
@@ -424,7 +424,8 @@ enum
   GROUP_SEPARATOR_OPTION,
   INCLUDE_OPTION,
   LINE_BUFFERED_OPTION,
-  LABEL_OPTION
+  LABEL_OPTION,
+  NO_IGNORE_CASE_OPTION
 };
 
 /* Long options equivalences. */
@@ -455,6 +456,7 @@ static struct option const long_options[] =
   {"help", no_argument, &show_help, 1},
   {"include", required_argument, NULL, INCLUDE_OPTION},
   {"ignore-case", no_argument, NULL, 'i'},
+  {"no-ignore-case", no_argument, NULL, NO_IGNORE_CASE_OPTION},
   {"initial-tab", no_argument, NULL, 'T'},
   {"label", required_argument, NULL, LABEL_OPTION},
   {"line-buffered", no_argument, NULL, LINE_BUFFERED_OPTION},
@@ -1000,16 +1002,19 @@ static enum
   LISTFILES_NONMATCHING,
 } list_files;
 
+/* Whether to output filenames.  1 means yes, 0 means no, and -1 means
+   'grep -r PATTERN FILE' was used and it is not known yet whether
+   FILE is a directory (which means yes) or not (which means no).  */
+static int out_file;
+
 static int filename_mask;	/* If zero, output nulls after filenames.  */
 static bool out_quiet;		/* Suppress all normal output. */
 static bool out_invert;		/* Print nonmatching stuff. */
-static int out_file;		/* Print filenames. */
 static bool out_line;		/* Print line numbers. */
 static bool out_byte;		/* Print byte offsets. */
 static intmax_t out_before;	/* Lines of leading context. */
 static intmax_t out_after;	/* Lines of trailing context. */
 static bool count_matches;	/* Count matching lines.  */
-static bool no_filenames;	/* Suppress file names.  */
 static intmax_t max_count;	/* Max number of selected
                                    lines from an input file.  */
 static bool line_buffered;	/* Use line buffering.  */
@@ -1589,11 +1594,7 @@ grepdirent (FTS *fts, FTSENT *ent, bool command_line)
   command_line &= ent->fts_level == FTS_ROOTLEVEL;
 
   if (ent->fts_info == FTS_DP)
-    {
-      if (directories == RECURSE_DIRECTORIES && command_line)
-        out_file &= ~ (2 * !no_filenames);
-      return true;
-    }
+    return true;
 
   if (!command_line
       && skipped_file (ent->fts_name, false,
@@ -1614,10 +1615,7 @@ grepdirent (FTS *fts, FTSENT *ent, bool command_line)
     {
     case FTS_D:
       if (directories == RECURSE_DIRECTORIES)
-        {
-          out_file |= 2 * !no_filenames;
-          return true;
-        }
+        return true;
       fts_set (fts, ent, FTS_SKIP);
       break;
 
@@ -1780,6 +1778,10 @@ grepdesc (int desc, bool command_line)
       && skipped_file (filename, true, S_ISDIR (st.st_mode) != 0))
     goto closeout;
 
+  /* Don't output file names if invoked as 'grep -r PATTERN NONDIRECTORY'.  */
+  if (out_file < 0)
+    out_file = !!S_ISDIR (st.st_mode);
+
   if (desc != STDIN_FILENO
       && directories == RECURSE_DIRECTORIES && S_ISDIR (st.st_mode))
     {
@@ -1864,7 +1866,7 @@ grepdesc (int desc, bool command_line)
 
   status = !count == !(list_files == LISTFILES_NONMATCHING);
 
-  if (list_files == LISTFILES_NONE)
+  if (list_files == LISTFILES_NONE || dev_null_output)
     finalize_input (desc, &st, ineof);
   else if (status == 0)
     {
@@ -1926,7 +1928,8 @@ Pattern selection and interpretation:\n"), getprogname ());
       printf (_("\
   -e, --regexp=PATTERNS     use PATTERNS for matching\n\
   -f, --file=FILE           take PATTERNS from FILE\n\
-  -i, --ignore-case         ignore case distinctions\n\
+  -i, --ignore-case         ignore case distinctions in patterns and data\n\
+      --no-ignore-case      do not ignore case distinctions (default)\n\
   -w, --word-regexp         match only whole words\n\
   -x, --line-regexp         match only whole lines\n\
   -z, --null-data           a data line ends in 0 byte, not newline\n"));
@@ -1967,8 +1970,8 @@ Output control:\n\
       printf (_("\
       --include=GLOB        search only files that match GLOB (a file pattern)"
                 "\n\
-      --exclude=GLOB        skip files and directories matching GLOB\n\
-      --exclude-from=FILE   skip files matching any file pattern from FILE\n\
+      --exclude=GLOB        skip files that match GLOB\n\
+      --exclude-from=FILE   skip files that match any file pattern from FILE\n\
       --exclude-dir=GLOB    skip directories that match GLOB\n\
 "));
       printf (_("\
@@ -2016,7 +2019,9 @@ static struct
   { "awk", RE_SYNTAX_AWK, GEAcompile, EGexecute },
   { "gawk", RE_SYNTAX_GNU_AWK, GEAcompile, EGexecute },
   { "posixawk", RE_SYNTAX_POSIX_AWK, GEAcompile, EGexecute },
+#if HAVE_LIBPCRE
   { "perl", 0, Pcompile, Pexecute, },
+#endif
 };
 /* Keep these in sync with the 'matchers' table.  */
 enum { E_MATCHER_INDEX = 1, F_MATCHER_INDEX = 2, G_MATCHER_INDEX = 0 };
@@ -2035,6 +2040,11 @@ setmatcher (char const *m, int matcher)
         return i;
       }
 
+#if !HAVE_LIBPCRE
+  if (STREQ (m, "perl"))
+    die (EXIT_TROUBLE, 0,
+         _("Perl matching not supported in a --disable-perl-regexp build"));
+#endif
   die (EXIT_TROUBLE, 0, _("invalid matcher %s"), m);
 }
 
@@ -2416,7 +2426,6 @@ main (int argc, char **argv)
   char *keys = NULL;
   size_t keycc = 0, oldcc, keyalloc = 0;
   int matcher = -1;
-  bool with_filenames = false;
   size_t cc;
   int opt, prepended;
   int prev_optind, last_recursive;
@@ -2425,6 +2434,10 @@ main (int argc, char **argv)
   FILE *fp;
   exit_failure = EXIT_TROUBLE;
   initialize_main (&argc, &argv);
+
+  /* Which command-line options have been specified for filename output.
+     -1 for -h, 1 for -H, 0 for neither.  */
+  int filename_option = 0;
 
   eolbyte = '\n';
   filename_mask = ~0;
@@ -2507,8 +2520,7 @@ main (int argc, char **argv)
         break;
 
       case 'H':
-        with_filenames = true;
-        no_filenames = false;
+        filename_option = 1;
         break;
 
       case 'I':
@@ -2600,13 +2612,16 @@ main (int argc, char **argv)
         break;
 
       case 'h':
-        with_filenames = false;
-        no_filenames = true;
+        filename_option = -1;
         break;
 
       case 'i':
       case 'y':			/* For old-timers . . . */
         match_icase = true;
+        break;
+
+      case NO_IGNORE_CASE_OPTION:
+        match_icase = false;
         break;
 
       case 'L':
@@ -2691,14 +2706,17 @@ main (int argc, char **argv)
       case COLOR_OPTION:
         if (optarg)
           {
-            if (!strcasecmp (optarg, "always") || !strcasecmp (optarg, "yes")
-                || !strcasecmp (optarg, "force"))
+            if (!c_strcasecmp (optarg, "always")
+                || !c_strcasecmp (optarg, "yes")
+                || !c_strcasecmp (optarg, "force"))
               color_option = 1;
-            else if (!strcasecmp (optarg, "never") || !strcasecmp (optarg, "no")
-                     || !strcasecmp (optarg, "none"))
+            else if (!c_strcasecmp (optarg, "never")
+                     || !c_strcasecmp (optarg, "no")
+                     || !c_strcasecmp (optarg, "none"))
               color_option = 0;
-            else if (!strcasecmp (optarg, "auto") || !strcasecmp (optarg, "tty")
-                     || !strcasecmp (optarg, "if-tty"))
+            else if (!c_strcasecmp (optarg, "auto")
+                     || !c_strcasecmp (optarg, "tty")
+                     || !c_strcasecmp (optarg, "if-tty"))
               color_option = 2;
             else
               show_help = 1;
@@ -2817,7 +2835,7 @@ main (int argc, char **argv)
 
   /* POSIX says -c, -l and -q are mutually exclusive.  In this
      implementation, -q overrides -l and -L, which in turn override -c.  */
-  if (exit_on_match | dev_null_output)
+  if (exit_on_match)
     list_files = LISTFILES_NONE;
   if ((exit_on_match | dev_null_output) || list_files != LISTFILES_NONE)
     {
@@ -2888,8 +2906,10 @@ main (int argc, char **argv)
                                 &match_size, NULL) == 0)
                       == out_invert);
 
-  if ((argc - optind > 1 && !no_filenames) || with_filenames)
-    out_file = 1;
+  int num_operands = argc - optind;
+  out_file = (filename_option == 0 && num_operands <= 1
+              ? - (directories == RECURSE_DIRECTORIES)
+              : 0 <= filename_option);
 
   if (binary)
     xset_binary_mode (STDOUT_FILENO, O_BINARY);
@@ -2910,7 +2930,7 @@ main (int argc, char **argv)
     devices = READ_DEVICES;
 
   char *const *files;
-  if (optind < argc)
+  if (0 < num_operands)
     {
       files = argv + optind;
     }

@@ -1,5 +1,5 @@
-# mbrtowc.m4 serial 31  -*- coding: utf-8 -*-
-dnl Copyright (C) 2001-2002, 2004-2005, 2008-2018 Free Software Foundation,
+# mbrtowc.m4 serial 35  -*- coding: utf-8 -*-
+dnl Copyright (C) 2001-2002, 2004-2005, 2008-2020 Free Software Foundation,
 dnl Inc.
 dnl This file is free software; the Free Software Foundation
 dnl gives unlimited permission to copy and/or distribute it,
@@ -77,10 +77,10 @@ AC_DEFUN([gl_FUNC_MBRTOWC],
            REPLACE_MBRTOWC=1
            ;;
       esac
-      case $gl_cv_C_locale_sans_EILSEQ in
+      case "$gl_cv_func_mbrtowc_C_locale_sans_EILSEQ" in
         *yes) ;;
-        *) AC_DEFINE([C_LOCALE_MAYBE_EILSEQ], [1],
-             [Define to 1 if the C locale may have encoding errors.])
+        *) AC_DEFINE([MBRTOWC_IN_C_LOCALE_MAYBE_EILSEQ], [1],
+             [Define if the mbrtowc function may signal encoding errors in the C locale.])
            REPLACE_MBRTOWC=1
            ;;
       esac
@@ -97,11 +97,19 @@ dnl avoid inconsistencies.
 AC_DEFUN([gl_MBSTATE_T_BROKEN],
 [
   AC_REQUIRE([gl_WCHAR_H_DEFAULTS])
+  AC_REQUIRE([AC_CANONICAL_HOST])
 
   AC_REQUIRE([AC_TYPE_MBSTATE_T])
   AC_CHECK_FUNCS_ONCE([mbsinit])
   AC_CHECK_FUNCS_ONCE([mbrtowc])
-  if test $ac_cv_func_mbsinit = yes && test $ac_cv_func_mbrtowc = yes; then
+  dnl On native Windows, we know exactly how mbsinit() behaves and don't need
+  dnl to override it, even if - like on MSVC - mbsinit() is only defined as
+  dnl an inline function, not as a global function.
+  if case "$host_os" in
+       mingw*) true ;;
+       *) test $ac_cv_func_mbsinit = yes ;;
+     esac \
+    && test $ac_cv_func_mbrtowc = yes; then
     gl_MBRTOWC_INCOMPLETE_STATE
     gl_MBRTOWC_SANITYCHECK
     REPLACE_MBSTATE_T=0
@@ -126,6 +134,7 @@ AC_DEFUN([gl_MBRTOWC_INCOMPLETE_STATE],
 [
   AC_REQUIRE([AC_PROG_CC])
   AC_REQUIRE([gt_LOCALE_JA])
+  AC_REQUIRE([gt_LOCALE_FR_UTF8])
   AC_REQUIRE([AC_CANONICAL_HOST]) dnl for cross-compiles
   AC_CACHE_CHECK([whether mbrtowc handles incomplete characters],
     [gl_cv_func_mbrtowc_incomplete_state],
@@ -171,6 +180,39 @@ int main ()
           [gl_cv_func_mbrtowc_incomplete_state=yes],
           [gl_cv_func_mbrtowc_incomplete_state=no],
           [:])
+      else
+        if test $LOCALE_FR_UTF8 != none; then
+          AC_RUN_IFELSE(
+            [AC_LANG_SOURCE([[
+#include <locale.h>
+#include <string.h>
+/* Tru64 with Desktop Toolkit C has a bug: <stdio.h> must be included before
+   <wchar.h>.
+   BSD/OS 4.0.1 has a bug: <stddef.h>, <stdio.h> and <time.h> must be
+   included before <wchar.h>.  */
+#include <stddef.h>
+#include <stdio.h>
+#include <time.h>
+#include <wchar.h>
+int main ()
+{
+  if (setlocale (LC_ALL, "$LOCALE_FR_UTF8") != NULL)
+    {
+      const char input[] = "B\303\274\303\237er"; /* "Büßer" */
+      mbstate_t state;
+      wchar_t wc;
+
+      memset (&state, '\0', sizeof (mbstate_t));
+      if (mbrtowc (&wc, input + 1, 1, &state) == (size_t)(-2))
+        if (mbsinit (&state))
+          return 2;
+    }
+  return 0;
+}]])],
+          [gl_cv_func_mbrtowc_incomplete_state=yes],
+          [gl_cv_func_mbrtowc_incomplete_state=no],
+          [:])
+        fi
       fi
     ])
 ])
@@ -595,11 +637,11 @@ AC_DEFUN([gl_MBRTOWC_C_LOCALE],
 [
   AC_REQUIRE([AC_CANONICAL_HOST]) dnl for cross-compiles
   AC_CACHE_CHECK([whether the C locale is free of encoding errors],
-    [gl_cv_C_locale_sans_EILSEQ],
+    [gl_cv_func_mbrtowc_C_locale_sans_EILSEQ],
     [
      dnl Initial guess, used when cross-compiling or when no suitable locale
      dnl is present.
-     gl_cv_C_locale_sans_EILSEQ="guessing no"
+     gl_cv_func_mbrtowc_C_locale_sans_EILSEQ="$gl_cross_guess_normal"
 
      AC_RUN_IFELSE(
        [AC_LANG_PROGRAM(
@@ -622,11 +664,11 @@ AC_DEFUN([gl_MBRTOWC_C_LOCALE],
               }
             return 0;
           ]])],
-      [gl_cv_C_locale_sans_EILSEQ=yes],
-      [gl_cv_C_locale_sans_EILSEQ=no],
+      [gl_cv_func_mbrtowc_C_locale_sans_EILSEQ=yes],
+      [gl_cv_func_mbrtowc_C_locale_sans_EILSEQ=no],
       [case "$host_os" in
                  # Guess yes on native Windows.
-         mingw*) gl_cv_C_locale_sans_EILSEQ="guessing yes" ;;
+         mingw*) gl_cv_func_mbrtowc_C_locale_sans_EILSEQ="guessing yes" ;;
        esac
       ])
     ])

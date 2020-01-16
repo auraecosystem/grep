@@ -1,6 +1,6 @@
 /* Stack overflow handling.
 
-   Copyright (C) 2002, 2004, 2008-2018 Free Software Foundation, Inc.
+   Copyright (C) 2002, 2004, 2008-2020 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -41,4 +41,4 @@
    This function may install a handler for the SIGSEGV signal or for the SIGBUS
    signal or exercise other system dependent exception handling APIs.  */
 
-extern int c_stack_action (void (* /*action*/) (int));
+extern int c_stack_action (_GL_ASYNC_SAFE void (* /*action*/) (int));

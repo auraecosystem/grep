@@ -1,5 +1,5 @@
 ## Process this file with automake to create Makefile.in
-# Copyright 1997-1998, 2005-2018 Free Software Foundation, Inc.
+# Copyright 1997-1998, 2005-2020 Free Software Foundation, Inc.
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -29,8 +29,10 @@ grep_SOURCES =					\
   grep.c					\
   kwsearch.c					\
   kwset.c					\
-  pcresearch.c					\
   searchutils.c
+if USE_PCRE
+grep_SOURCES += pcresearch.c
+endif
 
 noinst_HEADERS = grep.h kwset.h search.h system.h
 

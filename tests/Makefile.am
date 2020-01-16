@@ -1,5 +1,5 @@
 ## Process this file with automake to create Makefile.in
-# Copyright 1997-1998, 2005-2018 Free Software Foundation, Inc.
+# Copyright 1997-1998, 2005-2020 Free Software Foundation, Inc.
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -67,7 +67,7 @@ TESTS =						\
   backref-multibyte-slow			\
   backref-word					\
   backslash-s-and-repetition-operators		\
-  backslash-s-vs-invalid-multitype		\
+  backslash-s-vs-invalid-multibyte		\
   big-hole					\
   big-match					\
   bogus-wctob					\
@@ -86,6 +86,7 @@ TESTS =						\
   dfa-coverage					\
   dfa-heap-overrun				\
   dfa-infloop					\
+  dfa-invalid-utf8				\
   dfaexec-multibyte				\
   empty						\
   empty-line					\
@@ -122,7 +123,9 @@ TESTS =						\
   max-count-vs-context				\
   mb-dot-newline				\
   mb-non-UTF8-overrun				\
+  mb-non-UTF8-perf-Fw				\
   mb-non-UTF8-performance			\
+  mb-non-UTF8-word-boundary			\
   multibyte-white-space				\
   multiple-begin-or-end-line			\
   null-byte					\

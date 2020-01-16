@@ -1,5 +1,5 @@
 /* kwsearch.c - searching subroutines using kwset for grep.
-   Copyright 1992, 1998, 2000, 2007, 2009-2018 Free Software Foundation, Inc.
+   Copyright 1992, 1998, 2000, 2007, 2009-2020 Free Software Foundation, Inc.
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -161,6 +161,7 @@ Fexecute (void *vcp, char const *buf, size_t size, size_t *match_size,
   bool longest;
   struct kwsearch *kwsearch = vcp;
   kwset_t kwset = kwsearch->kwset;
+  size_t mbclen;
 
   if (match_lines)
     mb_check = longest = false;
@@ -194,7 +195,9 @@ Fexecute (void *vcp, char const *buf, size_t size, size_t *match_size,
           return EGexecute (kwsearch->re, buf, size, match_size, start_ptr);
         }
 
-      if (mb_check && mb_goback (&mb_start, beg + offset, buf + size) != 0)
+      mbclen = 0;
+      if (mb_check
+          && mb_goback (&mb_start, &mbclen, beg + offset, buf + size) != 0)
         {
           /* We have matched a single byte that is not at the beginning of a
              multibyte character.  mb_goback has advanced MB_START past that
@@ -223,13 +226,21 @@ Fexecute (void *vcp, char const *buf, size_t size, size_t *match_size,
       if (! match_words)
         goto success;
 
-      /* Succeed if the preceding and following characters are word
-         constituents.  If the following character is not a word
-         constituent, keep trying with shorter matches.  */
-      char const *bol = memrchr (mb_start, eol, beg - mb_start);
-      if (bol)
-        mb_start = bol + 1;
-      if (! wordchar_prev (mb_start, beg, buf + size))
+      /* We need a preceding mb_start pointer.  Use the beginning of line
+         if there is a preceding newline.  */
+      if (mbclen == 0)
+        {
+          char const *nl = memrchr (mb_start, eol, beg - mb_start);
+          if (nl)
+            mb_start = nl + 1;
+        }
+
+      /* Succeed if neither the preceding nor the following character is a
+         word constituent.  If the preceding is not, yet the following
+         character IS a word constituent, keep trying with shorter matches.  */
+      if (mbclen > 0
+          ? ! wordchar_next (beg - mbclen, buf + size)
+          : ! wordchar_prev (mb_start, beg, buf + size))
         for (;;)
           {
             if (! wordchar_next (beg + len, buf + size))
@@ -238,6 +249,23 @@ Fexecute (void *vcp, char const *buf, size_t size, size_t *match_size,
                   goto success_in_beg_and_len;
                 else
                   goto success;
+              }
+            if (!start_ptr && !localeinfo.multibyte)
+              {
+                if (! kwsearch->re)
+                  {
+                    fgrep_to_grep_pattern (&kwsearch->pattern, &kwsearch->size);
+                    kwsearch->re = GEAcompile (kwsearch->pattern,
+                                               kwsearch->size,
+                                               RE_SYNTAX_GREP);
+                  }
+                end = memchr (beg + len, eol, (buf + size) - (beg + len));
+                end = end ? end + 1 : buf + size;
+                if (EGexecute (kwsearch->re, beg, end - beg, match_size, NULL)
+                    != (size_t) -1)
+                  goto success_match_words;
+                beg = end - 1;
+                break;
               }
             if (!len)
               break;
@@ -259,6 +287,7 @@ Fexecute (void *vcp, char const *buf, size_t size, size_t *match_size,
  success:
   end = memchr (beg + len, eol, (buf + size) - (beg + len));
   end = end ? end + 1 : buf + size;
+ success_match_words:
   beg = memrchr (buf, eol, beg - buf);
   beg = beg ? beg + 1 : buf;
   len = end - beg;

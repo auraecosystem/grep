@@ -1,5 +1,5 @@
 # Customize maint.mk                           -*- makefile -*-
-# Copyright (C) 2009-2018 Free Software Foundation, Inc.
+# Copyright (C) 2009-2020 Free Software Foundation, Inc.
 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -65,7 +65,13 @@ export VERBOSE = yes
 # 1127556 9e
 export XZ_OPT = -6e
 
-old_NEWS_hash = 7623f45d6e457629257ff9a9f8237673
+old_NEWS_hash = 1cecbfe717381ff5abaf2f871b74b8db
+
+# We prefer to spell it back-reference, as POSIX does.
+sc_prohibit_backref:
+	@prohibit=back''reference					\
+	halt='spell it "back-reference"'				\
+	  $(_sc_search_regexp)
 
 # Many m4 macros names once began with 'jm_'.
 # Make sure that none are inadvertently reintroduced.
@@ -159,3 +165,16 @@ exclude_file_name_regexp--sc_prohibit_tab_based_indentation = \
 exclude_file_name_regexp--sc_prohibit_doubled_word = ^tests/count-newline$$
 
 exclude_file_name_regexp--sc_long_lines = ^tests/.*$$
+
+# If a test uses timeout, it must also use require_timeout_.
+# Grandfather-exempt the fedora test, since it ensures timeout works
+# as expected before using it.
+sc_timeout_prereq:
+	@$(VC_LIST_EXCEPT)						\
+	  | grep '^tests/'						\
+	  | grep -v '^tests/fedora$$'					\
+	  | xargs grep -lw timeout					\
+	  | xargs grep -FLw require_timeout_				\
+	  | $(GREP) .							\
+	  && { echo '$(ME): timeout withtout use of require_timeout_'	\
+	    1>&2; exit 1; } || :

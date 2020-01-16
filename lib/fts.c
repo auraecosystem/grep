@@ -1,6 +1,6 @@
 /* Traverse a file hierarchy.
 
-   Copyright (C) 2004-2018 Free Software Foundation, Inc.
+   Copyright (C) 2004-2020 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -381,9 +381,9 @@ fts_open (char * const *argv,
         }
 
         /* Allocate/initialize the stream */
-        if ((sp = malloc(sizeof(FTS))) == NULL)
+        sp = calloc (1, sizeof *sp);
+        if (sp == NULL)
                 return (NULL);
-        memset(sp, 0, sizeof(FTS));
         sp->fts_compar = compar;
         sp->fts_options = options;
 
@@ -653,7 +653,7 @@ enum leaf_optimization
     NOSTAT_LEAF_OPTIMIZATION
   };
 
-#if defined __linux__ \
+#if (defined __linux__ || defined __ANDROID__) \
   && HAVE_SYS_VFS_H && HAVE_FSTATFS && HAVE_STRUCT_STATFS_F_TYPE
 
 # include <sys/vfs.h>
@@ -2069,7 +2069,6 @@ fts_safe_changedir (FTS *sp, FTSENT *p, int fd, char const *dir)
                 int parent_fd;
                 fd_ring_print (sp, stderr, "pre-pop");
                 parent_fd = i_ring_pop (&sp->fts_fd_ring);
-                is_dotdot = true;
                 if (0 <= parent_fd)
                   {
                     fd = parent_fd;

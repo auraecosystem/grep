@@ -1,5 +1,5 @@
 /* Test that openat_safer leave standard fds alone.
-   Copyright (C) 2009-2018 Free Software Foundation, Inc.
+   Copyright (C) 2009-2020 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -96,7 +96,7 @@ main (void)
           errno = 0;
           ASSERT (openat (dfd, witness "/", O_RDONLY) == -1);
           ASSERT (errno == ENOTDIR || errno == EISDIR || errno == EINVAL);
-#ifdef __linux__
+#if defined __linux__ || defined __ANDROID__
           /* Using a bad directory is okay for absolute paths.  */
           fd = openat (-1, "/dev/null", O_WRONLY);
           ASSERT (STDERR_FILENO < fd);
