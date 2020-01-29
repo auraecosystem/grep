@@ -1,6 +1,15 @@
 grep (3.4-2~1.gbpb89db6) UNRELEASED; urgency=medium
 
-  ** SNAPSHOT build @b89db6f2dcb8a55456ebde5c34c873656a50cefa **
+ ** SNAPSHOT build @b89db6f2dcb8a55456ebde5c34c873656a50cefa **
+
+   [ Debian Janitor ]
+  * Use secure URI in Homepage field.
+  * Bump debhelper from old 9 to 10.
+  * Set upstream metadata fields: Bug-Submit (from ./configure),
+    Repository.
+  * Set upstream metadata fields: Repository, Repository-Browse.
+
+  [ Santiago Ruano Rincón ]
 
   * UNRELEASED
 
