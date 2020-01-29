@@ -1,11 +1,10 @@
-grep (3.4-1~1.gbpaed9e0) UNRELEASED; urgency=medium
-
-  ** SNAPSHOT build @aed9e0325c34d8605d07717e7d56d2e97ebfabe2 **
+grep (3.4-1) unstable; urgency=low
 
   * New upstream version 3.4
   * Include debian/salsa-ci.yml
+  * Bump Standards-Version to 4.5.0
 
- -- Santiago Ruano Rincón <santiago@debian.org>  Thu, 16 Jan 2020 11:27:36 +0100
+ -- Santiago Ruano Rincón <santiago@debian.org>  Wed, 29 Jan 2020 10:31:53 +0100
 
 grep (3.3-1) unstable; urgency=low
 
