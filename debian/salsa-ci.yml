@@ -1,3 +1,3 @@
 include:
-  - https://salsa.debian.org/salsa-ci-team/pipeline/raw/master/salsa-ci.yml
-  - https://salsa.debian.org/salsa-ci-team/pipeline/raw/master/pipeline-jobs.yml
+  - https://salsa.debian.org/santiago/pipeline/raw/build-bin-on-base-tmp/salsa-ci.yml
+  - https://salsa.debian.org/santiago/pipeline/raw/build-bin-on-base-tmp/pipeline-jobs.yml
