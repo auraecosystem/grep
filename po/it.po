@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grep-3.3.42\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2020-01-02 13:16-0800\n"
+"POT-Creation-Date: 2020-09-27 19:41-0700\n"
 "PO-Revision-Date: 2020-01-02 10:43+0100\n"
 "Last-Translator: Milo Casagrande <milo@milo.name>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
@@ -37,51 +37,51 @@ msgstr "argomento %s ambiguo per %s"
 msgid "Valid arguments are:"
 msgstr "Gli argomenti validi sono:"
 
-#: lib/c-stack.c:211 lib/c-stack.c:304
+#: lib/c-stack.c:227 lib/c-stack.c:340
 msgid "program error"
 msgstr "errore del programma"
 
-#: lib/c-stack.c:212 lib/c-stack.c:305
+#: lib/c-stack.c:228 lib/c-stack.c:341
 msgid "stack overflow"
 msgstr "overflow dello stack"
 
-#: lib/closeout.c:122 src/grep.c:1278
+#: lib/closeout.c:122 src/grep.c:1341
 msgid "write error"
 msgstr "errore di scrittura"
 
-#: lib/dfa.c:923
+#: lib/dfa.c:954
 msgid "unbalanced ["
 msgstr "[ non bilanciata"
 
-#: lib/dfa.c:1044
+#: lib/dfa.c:1075
 msgid "invalid character class"
 msgstr "Classe del carattere non valido"
 
-#: lib/dfa.c:1170
+#: lib/dfa.c:1201
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr "La sintassi per la classe di caratteri è [[:space:]], non [:space:]"
 
-#: lib/dfa.c:1237
+#: lib/dfa.c:1268
 msgid "unfinished \\ escape"
 msgstr "Escape \\ incompleto"
 
-#: lib/dfa.c:1398
+#: lib/dfa.c:1429
 msgid "invalid content of \\{\\}"
 msgstr "Contenuto di \\{\\} non valido"
 
-#: lib/dfa.c:1401
+#: lib/dfa.c:1432
 msgid "regular expression too big"
 msgstr "Espressione regolare troppo grande"
 
-#: lib/dfa.c:1872
+#: lib/dfa.c:1916
 msgid "unbalanced ("
 msgstr "( non bilanciata"
 
-#: lib/dfa.c:1989
+#: lib/dfa.c:2033
 msgid "no syntax specified"
 msgstr "Nessuna sintassi specificata"
 
-#: lib/dfa.c:2000
+#: lib/dfa.c:2044
 msgid "unbalanced )"
 msgstr ") non bilanciata"
 
@@ -124,7 +124,7 @@ msgstr "%s: opzione non valida -- \"%c\"\n"
 msgid "%s: option requires an argument -- '%c'\n"
 msgstr "%s: l'opzione richiede un argomento -- \"%c\"\n"
 
-#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34 src/pcresearch.c:300
+#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34 src/pcresearch.c:306
 msgid "memory exhausted"
 msgstr "memoria esaurita"
 
@@ -165,11 +165,11 @@ msgstr ""
 #. If you don't know what to put here, please see
 #. <https://en.wikipedia.org/wiki/Quotation_marks_in_other_languages>
 #. and use glyphs suitable for your language.
-#: lib/quotearg.c:362
+#: lib/quotearg.c:355
 msgid "`"
 msgstr "\""
 
-#: lib/quotearg.c:363
+#: lib/quotearg.c:356
 msgid "'"
 msgstr "\""
 
@@ -409,53 +409,49 @@ msgstr "Sito web di %s: <%s>\n"
 msgid "General help using GNU software: <%s>\n"
 msgstr "Pagina di aiuto per l'utilizzo di software GNU: <%s>\n"
 
-#: src/grep.c:584
+#: src/grep.c:648
 msgid "(standard input)"
 msgstr "(standard input)"
 
-#: src/grep.c:764
+#: src/grep.c:828
 msgid "invalid context length argument"
 msgstr "argomento della lunghezza del contesto non valido"
 
-#: src/grep.c:829
+#: src/grep.c:893
 msgid "input is too large to count"
 msgstr "l'input è troppo grande per essere contato"
 
-#: src/grep.c:1583
-#, c-format
-msgid "Binary file %s matches\n"
+#: src/grep.c:1646
+#, fuzzy, c-format
+msgid "%s: binary file matches"
 msgstr "Il file binario %s corrisponde\n"
 
-#: src/grep.c:1624
-#, c-format
-msgid "warning: %s: %s"
-msgstr "attenzione: %s: %s"
-
-#: src/grep.c:1625
-msgid "recursive directory loop"
+#: src/grep.c:1684
+#, fuzzy, c-format
+msgid "%s: warning: recursive directory loop"
 msgstr "ciclo ricorsivo di directory"
 
-#: src/grep.c:1845
-#, c-format
-msgid "input file %s is also the output"
+#: src/grep.c:1904
+#, fuzzy, c-format
+msgid "%s: input file is also the output"
 msgstr "il file di input %s è anche l'output"
 
-#: src/grep.c:1908 src/grep.c:1915
+#: src/grep.c:1966 src/grep.c:1973
 #, c-format
 msgid "Usage: %s [OPTION]... PATTERNS [FILE]...\n"
 msgstr "Uso: %s [OPZIONE]... MODELLI [FILE]...\n"
 
-#: src/grep.c:1910
+#: src/grep.c:1968
 #, c-format
 msgid "Try '%s --help' for more information.\n"
 msgstr "Usare \"%s --help\" per ulteriori informazioni.\n"
 
-#: src/grep.c:1916
+#: src/grep.c:1974
 #, c-format
 msgid "Search for PATTERNS in each FILE.\n"
 msgstr "Cerca MODELLI in ogni FILE\n"
 
-#: src/grep.c:1917
+#: src/grep.c:1975
 #, c-format
 msgid ""
 "Example: %s -i 'hello world' menu.h main.c\n"
@@ -468,7 +464,7 @@ msgstr ""
 "\n"
 "Selezione e interpretazione del modello:\n"
 
-#: src/grep.c:1922
+#: src/grep.c:1980
 #, c-format
 msgid ""
 "  -E, --extended-regexp     PATTERNS are extended regular expressions\n"
@@ -481,7 +477,7 @@ msgstr ""
 "  -G, --basic-regexp        MODELLI sono espressioni regolari semplici\n"
 "  -P, --perl-regexp         MODELLI sono espressioni regolari Perl\n"
 
-#: src/grep.c:1928
+#: src/grep.c:1986
 #, c-format
 msgid ""
 "  -e, --regexp=PATTERNS     use PATTERNS for matching\n"
@@ -503,7 +499,7 @@ msgstr ""
 "che\n"
 "                            newline\n"
 
-#: src/grep.c:1936
+#: src/grep.c:1994
 #, c-format
 msgid ""
 "\n"
@@ -520,7 +516,7 @@ msgstr ""
 "  -V, --version             Stampa la versione ed esce\n"
 "      --help                Visualizza questo aiuto ed esce\n"
 
-#: src/grep.c:1943
+#: src/grep.c:2001
 #, c-format
 msgid ""
 "\n"
@@ -546,7 +542,7 @@ msgstr ""
 "      --label=ETICH         Usa ETICH come nome del file per lo standard "
 "input\n"
 
-#: src/grep.c:1954
+#: src/grep.c:2012
 #, c-format
 msgid ""
 "  -o, --only-matching       show only nonempty parts of lines that match\n"
@@ -562,7 +558,7 @@ msgstr ""
 "                            \"text\" oppure \"without-match\"\n"
 "  -a, --text                Equivale a --binary-files=text\n"
 
-#: src/grep.c:1961
+#: src/grep.c:2019
 #, c-format
 msgid ""
 "  -I                        equivalent to --binary-files=without-match\n"
@@ -583,7 +579,7 @@ msgstr ""
 "                            Simile al precedente, ma segue i collegamenti\n"
 "                            simbolici\n"
 
-#: src/grep.c:1970
+#: src/grep.c:2028
 #, fuzzy, c-format
 msgid ""
 "      --include=GLOB        search only files that match GLOB (a file "
@@ -599,7 +595,7 @@ msgstr ""
 "      --exclude-from=FILE   Salta i file corrispondenti ai modelli nel FILE\n"
 "      --exclude-dir=GLOB    Salta le directory corrispondenti a GLOB\n"
 
-#: src/grep.c:1977
+#: src/grep.c:2035
 #, c-format
 msgid ""
 "  -L, --files-without-match  print only names of FILEs with no selected "
@@ -619,7 +615,7 @@ msgstr ""
 "  -T, --initial-tab         Allinea le tabulazioni (se necessario)\n"
 "  -Z, --null                Stampa il byte 0 dopo ogni nome di FILE\n"
 
-#: src/grep.c:1983
+#: src/grep.c:2041
 #, c-format
 msgid ""
 "\n"
@@ -634,7 +630,7 @@ msgstr ""
 "  -A, --after-context=NUM   Stampa NUM righe di contesto seguente\n"
 "  -C, --context=NUM         Stampa NUM righe di contesto dell'output\n"
 
-#: src/grep.c:1990
+#: src/grep.c:2048
 #, c-format
 msgid ""
 "  -NUM                      same as --context=NUM\n"
@@ -655,12 +651,12 @@ msgstr ""
 "Windows)\n"
 "\n"
 
-#: src/grep.c:1997
-#, c-format
+#: src/grep.c:2055
+#, fuzzy, c-format
 msgid ""
 "When FILE is '-', read standard input.  With no FILE, read '.' if\n"
 "recursive, '-' otherwise.  With fewer than two FILEs, assume -h.\n"
-"Exit status is 0 if any line (or file if -L) is selected, 1 otherwise;\n"
+"Exit status is 0 if any line is selected, 1 otherwise;\n"
 "if any error occurs and -q is not given, the exit status is 2.\n"
 msgstr ""
 "Se FILE è \"-\", legge lo standard input; se non c'è alcun FILE, legge \".\" "
@@ -672,39 +668,39 @@ msgstr ""
 "è\n"
 "stata usata, lo stato di uscita è 2.\n"
 
-#: src/grep.c:2039
+#: src/grep.c:2097
 msgid "conflicting matchers specified"
 msgstr "specificate corrispondenze in conflitto"
 
-#: src/grep.c:2046
+#: src/grep.c:2104
 msgid "Perl matching not supported in a --disable-perl-regexp build"
 msgstr ""
 "Corrispondenze Perl non supportate: questo binario è compilato con --disable-"
 "perl-regexp"
 
-#: src/grep.c:2048
+#: src/grep.c:2106
 #, c-format
 msgid "invalid matcher %s"
 msgstr "corrispondenza %s non valida"
 
-#: src/grep.c:2472
+#: src/grep.c:2579
 #, c-format
 msgid "warning: GREP_OPTIONS is deprecated; please use an alias or script"
 msgstr "attenzione: GREP_OPTIONS è deprecata, utilizzare un alias o uno script"
 
-#: src/grep.c:2499
+#: src/grep.c:2606
 msgid "unknown devices method"
 msgstr "metodo per i device sconosciuto"
 
-#: src/grep.c:2645
+#: src/grep.c:2754
 msgid "invalid max count"
 msgstr "numero massimo non valido"
 
-#: src/grep.c:2703
+#: src/grep.c:2812
 msgid "unknown binary-files type"
 msgstr "tipo di file binario sconosciuto"
 
-#: src/grep.c:2788
+#: src/grep.c:2897
 msgid ""
 "Written by Mike Haertel and others; see\n"
 "<https://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>."
@@ -716,31 +712,40 @@ msgstr ""
 msgid "failed to allocate memory for the PCRE JIT stack"
 msgstr "impossibile allocare memoria per lo stack PCRE JIT"
 
-#: src/pcresearch.c:132
+#: src/pcresearch.c:137
 msgid "-P supports only unibyte and UTF-8 locales"
 msgstr "-P supporta solamente lingue unibyte e UTF-8"
 
-#: src/pcresearch.c:138
+#: src/pcresearch.c:143
 msgid "the -P option only supports a single pattern"
 msgstr "l'opzione -P supporta un solo modello"
 
-#: src/pcresearch.c:181
+#: src/pcresearch.c:187
 msgid "internal error (should never happen)"
 msgstr "errore interno (non si dovrebbe mai verificare)"
 
-#: src/pcresearch.c:224
+#: src/pcresearch.c:230
 msgid "exceeded PCRE's line length limit"
 msgstr "limite di lunghezza riga PCRE raggiunto"
 
-#: src/pcresearch.c:304
+#: src/pcresearch.c:310
 msgid "exhausted PCRE JIT stack"
 msgstr "stack JIT PCRE esaurito"
 
-#: src/pcresearch.c:308
+#: src/pcresearch.c:314
 msgid "exceeded PCRE's backtracking limit"
 msgstr "limite di backtrack PCRE raggiunto"
 
-#: src/pcresearch.c:315
+#: src/pcresearch.c:317
+#, fuzzy
+msgid "exceeded PCRE's recursion limit"
+msgstr "limite di backtrack PCRE raggiunto"
+
+#: src/pcresearch.c:324
 #, c-format
 msgid "internal PCRE error: %d"
 msgstr "errore interno PCRE: %d"
+
+#, c-format
+#~ msgid "warning: %s: %s"
+#~ msgstr "attenzione: %s: %s"

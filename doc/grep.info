@@ -23,7 +23,7 @@ grep
 
 ‘grep’ prints lines that contain a match for one or more patterns.
 
-   This manual is for version 3.4 of GNU Grep.
+   This manual is for version 3.5 of GNU Grep.
 
    This manual is for ‘grep’, a pattern matching engine.
 
@@ -548,8 +548,12 @@ File: grep.info,  Node: Other Options,  Prev: File and Directory Selection,  Up:
      ‘-file1’ and ‘file2’.
 
 ‘--line-buffered’
-     Use line buffering on output.  This can cause a performance
-     penalty.
+     Use line buffering for standard output, regardless of output
+     device.  By default, standard output is line buffered for
+     interactive devices, and is fully buffered otherwise.  With full
+     buffering, the output buffer is flushed when full; with line
+     buffering, the buffer is also flushed after every output line.  The
+     buffer size is system dependent.
 
 ‘-U’
 ‘--binary’
@@ -749,21 +753,8 @@ capabilities are stored in an online database and accessed by the
 ‘LANG’
      These variables specify the locale for the ‘LC_CTYPE’ category,
      which determines the type of characters, e.g., which characters are
-     whitespace.  This category also determines the character encoding,
-     that is, whether text is encoded in UTF-8, ASCII, or some other
-     encoding.  In the ‘C’ or ‘POSIX’ locale, all characters are encoded
-     as a single byte and every byte is a valid character.  In
-     more-complex encodings such as UTF-8, a sequence of multiple bytes
-     may be needed to represent a character, and some bytes may be
-     encoding errors that do not contribute to the representation of any
-     character.  POSIX does not specify the behavior of ‘grep’ when
-     patterns or input data contain encoding errors or null characters,
-     so portable scripts should avoid such usage.  As an extension to
-     POSIX, GNU ‘grep’ treats null characters like any other character.
-     However, unless the ‘-a’ (‘--binary-files=text’) option is used,
-     the presence of null characters in input or of encoding errors in
-     output causes GNU ‘grep’ to treat the file as binary and suppress
-     details about matches.  *Note File and Directory Selection::.
+     whitespace.  This category also determines the character encoding.
+     *Note Character Encoding::.
 
 ‘LANGUAGE’
 ‘LC_ALL’
@@ -799,12 +790,10 @@ File: grep.info,  Node: Exit Status,  Next: grep Programs,  Prev: Environment Va
 ===============
 
 Normally the exit status is 0 if a line is selected, 1 if no lines were
-selected, and 2 if an error occurred.  However, if the ‘-L’ or
-‘--files-without-match’ is used, the exit status is 0 if a file is
-listed, 1 if no files were listed, and 2 if an error occurred.  Also, if
-the ‘-q’ or ‘--quiet’ or ‘--silent’ option is used and a line is
-selected, the exit status is 0 even if an error occurred.  Other ‘grep’
-implementations may exit with status greater than 2 on error.
+selected, and 2 if an error occurred.  However, if the ‘-q’ or ‘--quiet’
+or ‘--silent’ option is used and a line is selected, the exit status is
+0 even if an error occurred.  Other ‘grep’ implementations may exit with
+status greater than 2 on error.
 
 
 File: grep.info,  Node: grep Programs,  Prev: Exit Status,  Up: Invoking
@@ -876,6 +865,8 @@ system.
 * Anchoring::
 * Back-references and Subexpressions::
 * Basic vs Extended::
+* Character Encoding::
+* Matching Non-ASCII::
 
 
 File: grep.info,  Node: Fundamental Structure,  Next: Character Classes and Bracket Expressions,  Up: Regular Expressions
@@ -1119,7 +1110,7 @@ expression.
    *Note Known Bugs::, for some known problems with back-references.
 
 
-File: grep.info,  Node: Basic vs Extended,  Prev: Back-references and Subexpressions,  Up: Regular Expressions
+File: grep.info,  Node: Basic vs Extended,  Next: Character Encoding,  Prev: Back-references and Subexpressions,  Up: Regular Expressions
 
 3.6 Basic vs Extended Regular Expressions
 =========================================
@@ -1139,6 +1130,70 @@ specification.  For example, the command ‘grep -E '{1'’ searches for the
 two-character string ‘{1’ instead of reporting a syntax error in the
 regular expression.  POSIX allows this behavior as an extension, but
 portable scripts should avoid it.
+
+
+File: grep.info,  Node: Character Encoding,  Next: Matching Non-ASCII,  Prev: Basic vs Extended,  Up: Regular Expressions
+
+3.7 Character Encoding
+======================
+
+The ‘LC_CTYPE’ locale specifies the encoding of characters in patterns
+and data, that is, whether text is encoded in UTF-8, ASCII, or some
+other encoding.  *Note Environment Variables::.
+
+   In the ‘C’ or ‘POSIX’ locale, every character is encoded as a single
+byte and every byte is a valid character.  In more-complex encodings
+such as UTF-8, a sequence of multiple bytes may be needed to represent a
+character, and some bytes may be encoding errors that do not contribute
+to the representation of any character.  POSIX does not specify the
+behavior of ‘grep’ when patterns or input data contain encoding errors
+or null characters, so portable scripts should avoid such usage.  As an
+extension to POSIX, GNU ‘grep’ treats null characters like any other
+character.  However, unless the ‘-a’ (‘--binary-files=text’) option is
+used, the presence of null characters in input or of encoding errors in
+output causes GNU ‘grep’ to treat the file as binary and suppress
+details about matches.  *Note File and Directory Selection::.
+
+   Regardless of locale, the 103 characters in the POSIX Portable
+Character Set (a subset of ASCII) are always encoded as a single byte,
+and the 128 ASCII characters have their usual single-byte encodings on
+all but oddball platforms.
+
+
+File: grep.info,  Node: Matching Non-ASCII,  Prev: Character Encoding,  Up: Regular Expressions
+
+3.8 Matching Non-ASCII and Non-printable Characters
+===================================================
+
+In a regular expression, non-ASCII and non-printable characters other
+than newline are not special, and represent themselves.  For example, in
+a locale using UTF-8 the command ‘grep 'Λ ω'’ (where the white space
+between ‘Λ’ and the ‘ω’ is a tab character) searches for ‘Λ’ (Unicode
+character U+039B GREEK CAPITAL LETTER LAMBDA), followed by a tab (U+0009
+TAB), followed by ‘ω’ (U+03C9 GREEK SMALL LETTER OMEGA).
+
+   Suppose you want to limit your pattern to only printable characters
+(or even only printable ASCII characters) to keep your script readable
+or portable, but you also want to match specific non-ASCII or non-null
+non-printable characters.  If you are using the ‘-P’ (‘--perl-regexp’)
+option, PCREs give you several ways to do this.  Otherwise, if you are
+using Bash, the GNU project’s shell, you can represent these characters
+via ANSI-C quoting.  For example, the Bash commands ‘grep $'Λ\tω'’ and
+‘grep $'\u039B\t\u03C9'’ both search for the same three-character string
+‘Λ ω’ mentioned earlier.  However, because Bash translates ANSI-C
+quoting before ‘grep’ sees the pattern, this technique should not be
+used to match printable ASCII characters; for example, ‘grep $'\u005E'’
+is equivalent to ‘grep '^'’ and matches any line, not just lines
+containing the character ‘^’ (U+005E CIRCUMFLEX ACCENT).
+
+   Since PCREs and ANSI-C quoting are GNU extensions to POSIX, portable
+shell scripts written in ASCII should use other methods to match
+specific non-ASCII characters.  For example, in a UTF-8 locale the
+command ‘grep "$(printf '\316\233\t\317\211\n')"’ is a portable albeit
+hard-to-read alternative to Bash’s ‘grep $'Λ\tω'’.  However, none of
+these techniques will let you put a null character directly into a
+command-line pattern; null characters can appear only in a pattern
+specified via the ‘-f’ (‘--file’) option.
 
 
 File: grep.info,  Node: Usage,  Next: Performance,  Prev: Regular Expressions,  Up: Top
@@ -1269,7 +1324,7 @@ globbing syntax that the shell uses to match file names.
      even from files that appear to be binary, use the ‘-a’ or
      ‘--binary-files=text’ option.  To eliminate the “Binary file
      matches” messages, use the ‘-I’ or ‘--binary-files=without-match’
-     option.
+     option, or the ‘-s’ or ‘--no-messages’ option.
 
   9. Why doesn’t ‘grep -lv’ print non-matching file names?
 
@@ -1446,10 +1501,11 @@ memory to explore.  Also, the POSIX specification for back-references is
 at times unclear.  Furthermore, many regular expression implementations
 have back-reference bugs that can cause programs to return incorrect
 answers or even crash, and fixing these bugs has often been
-low-priority—for example, as of 2019 the GNU C library bug database
-contained back-reference bugs 52, 10844, 11053, and 25322, with little
-sign of forthcoming fixes.  Luckily, back-references are rarely useful
-and it should be little trouble to avoid them in practical applications.
+low-priority: for example, as of 2020 the GNU C library bug database
+(https://sourceware.org/bugzilla/) contained back-reference bugs 52,
+10844, 11053, 24269 and 25322, with little sign of forthcoming fixes.
+Luckily, back-references are rarely useful and it should be little
+trouble to avoid them in practical applications.
 
 
 File: grep.info,  Node: Copying,  Next: Index,  Prev: Reporting Bugs,  Up: Top
@@ -1887,7 +1943,7 @@ File: grep.info,  Node: GNU Free Documentation License,  Up: Copying
      the GNU Free Documentation License from time to time.  Such new
      versions will be similar in spirit to the present version, but may
      differ in detail to address new problems or concerns.  See
-     <https://www.gnu.org/copyleft/>.
+     <https://www.gnu.org/licenses/>.
 
      Each version of the License is given a distinguishing version
      number.  If the Document specifies that a particular numbered
@@ -1982,7 +2038,7 @@ Index
 * --basic-regexp:                        grep Programs.       (line  15)
 * --before-context:                      Context Line Control.
                                                               (line  19)
-* --binary:                              Other Options.       (line  18)
+* --binary:                              Other Options.       (line  22)
 * --binary-files:                        File and Directory Selection.
                                                               (line  12)
 * --byte-offset:                         Output Line Prefix Control.
@@ -2041,7 +2097,7 @@ Index
                                                               (line  87)
 * --null:                                Output Line Prefix Control.
                                                               (line  50)
-* --null-data:                           Other Options.       (line  39)
+* --null-data:                           Other Options.       (line  43)
 * --only-matching:                       General Output Control.
                                                               (line  72)
 * --perl-regexp:                         grep Programs.       (line  30)
@@ -2108,7 +2164,7 @@ Index
                                                               (line  87)
 * -T:                                    Output Line Prefix Control.
                                                               (line  41)
-* -U:                                    Other Options.       (line  18)
+* -U:                                    Other Options.       (line  22)
 * -V:                                    Generic Program Information.
                                                               (line  12)
 * -v:                                    Matching Control.    (line  51)
@@ -2117,13 +2173,13 @@ Index
 * -y:                                    Matching Control.    (line  26)
 * -Z:                                    Output Line Prefix Control.
                                                               (line  50)
-* -z:                                    Other Options.       (line  39)
+* -z:                                    Other Options.       (line  43)
 * .:                                     Fundamental Structure.
                                                               (line  11)
 * ?:                                     Fundamental Structure.
                                                               (line  18)
 * _N_GNU_nonoption_argv_flags_ environment variable: Environment Variables.
-                                                              (line 204)
+                                                              (line 191)
 * {,M}:                                  Fundamental Structure.
                                                               (line  33)
 * {N,M}:                                 Fundamental Structure.
@@ -2157,7 +2213,7 @@ Index
                                                               (line   8)
 * binary files <1>:                      File and Directory Selection.
                                                               (line  12)
-* binary I/O:                            Other Options.       (line  18)
+* binary I/O:                            Other Options.       (line  22)
 * blank character class:                 Character Classes and Bracket Expressions.
                                                               (line  41)
 * blank characters:                      Character Classes and Bracket Expressions.
@@ -2186,6 +2242,7 @@ Index
                                                               (line   6)
 * character classes:                     Character Classes and Bracket Expressions.
                                                               (line  30)
+* character encoding:                    Character Encoding.  (line   6)
 * character type:                        Environment Variables.
                                                               (line 161)
 * classes of characters:                 Character Classes and Bracket Expressions.
@@ -2274,13 +2331,13 @@ Index
 * LANG environment variable <2>:         Environment Variables.
                                                               (line 168)
 * LANG environment variable <3>:         Environment Variables.
-                                                              (line 190)
+                                                              (line 177)
 * LANGUAGE environment variable:         Environment Variables.
                                                               (line   9)
 * LANGUAGE environment variable <1>:     Environment Variables.
-                                                              (line 190)
+                                                              (line 177)
 * language of messages:                  Environment Variables.
-                                                              (line 190)
+                                                              (line 177)
 * LC_ALL environment variable:           Environment Variables.
                                                               (line   9)
 * LC_ALL environment variable <1>:       Environment Variables.
@@ -2288,7 +2345,7 @@ Index
 * LC_ALL environment variable <2>:       Environment Variables.
                                                               (line 168)
 * LC_ALL environment variable <3>:       Environment Variables.
-                                                              (line 190)
+                                                              (line 177)
 * LC_COLLATE environment variable:       Environment Variables.
                                                               (line 161)
 * LC_CTYPE environment variable:         Environment Variables.
@@ -2296,7 +2353,7 @@ Index
 * LC_MESSAGES environment variable:      Environment Variables.
                                                               (line   9)
 * LC_MESSAGES environment variable <1>:  Environment Variables.
-                                                              (line 190)
+                                                              (line 177)
 * line buffering:                        Other Options.       (line  13)
 * line numbering:                        Output Line Prefix Control.
                                                               (line  36)
@@ -2333,10 +2390,10 @@ Index
 * mc GREP_COLORS capability:             Environment Variables.
                                                               (line 116)
 * message language:                      Environment Variables.
-                                                              (line 190)
+                                                              (line 177)
 * ms GREP_COLORS capability:             Environment Variables.
                                                               (line 108)
-* MS-Windows binary I/O:                 Other Options.       (line  18)
+* MS-Windows binary I/O:                 Other Options.       (line  22)
 * mt GREP_COLORS capability:             Environment Variables.
                                                               (line 100)
 * names of matching files:               General Output Control.
@@ -2344,13 +2401,15 @@ Index
 * national language support:             Environment Variables.
                                                               (line 161)
 * national language support <1>:         Environment Variables.
-                                                              (line 190)
+                                                              (line 177)
 * ne GREP_COLORS capability:             Environment Variables.
                                                               (line 146)
 * NLS:                                   Environment Variables.
                                                               (line 161)
 * no filename prefix:                    Output Line Prefix Control.
                                                               (line  23)
+* non-ASCII matching:                    Matching Non-ASCII.  (line   6)
+* non-printable matching:                Matching Non-ASCII.  (line   6)
 * null character:                        Environment Variables.
                                                               (line 168)
 * numeric characters:                    Character Classes and Bracket Expressions.
@@ -2366,7 +2425,7 @@ Index
 * plus sign:                             Fundamental Structure.
                                                               (line  24)
 * POSIXLY_CORRECT environment variable:  Environment Variables.
-                                                              (line 195)
+                                                              (line 182)
 * print character class:                 Character Classes and Bracket Expressions.
                                                               (line  59)
 * print non-matching lines:              Matching Control.    (line  51)
@@ -2422,7 +2481,7 @@ Index
 * tab-aligned content lines:             Output Line Prefix Control.
                                                               (line  41)
 * translation of message language:       Environment Variables.
-                                                              (line 190)
+                                                              (line 177)
 * upper character class:                 Character Classes and Bracket Expressions.
                                                               (line  72)
 * upper-case letters:                    Character Classes and Bracket Expressions.
@@ -2444,7 +2503,7 @@ Index
                                                               (line  76)
 * zero-terminated file names:            Output Line Prefix Control.
                                                               (line  50)
-* zero-terminated lines:                 Other Options.       (line  39)
+* zero-terminated lines:                 Other Options.       (line  43)
 
 
 
@@ -2461,24 +2520,26 @@ Node: Output Line Prefix Control12771
 Node: Context Line Control15127
 Node: File and Directory Selection17190
 Node: Other Options22741
-Node: Environment Variables24657
-Node: Exit Status35731
-Node: grep Programs36369
-Node: Regular Expressions38000
-Node: Fundamental Structure39195
-Node: Character Classes and Bracket Expressions41053
-Ref: invalid-bracket-expr44678
-Node: The Backslash Character and Special Expressions45918
-Node: Anchoring46990
-Node: Back-references and Subexpressions47449
-Node: Basic vs Extended48257
-Node: Usage49348
-Node: Performance57302
-Node: Reporting Bugs61002
-Node: Known Bugs61379
-Node: Copying62411
-Node: GNU Free Documentation License63539
-Node: Index88844
+Node: Environment Variables24954
+Node: Exit Status35055
+Node: grep Programs35533
+Node: Regular Expressions37164
+Node: Fundamental Structure38405
+Node: Character Classes and Bracket Expressions40263
+Ref: invalid-bracket-expr43888
+Node: The Backslash Character and Special Expressions45128
+Node: Anchoring46200
+Node: Back-references and Subexpressions46659
+Node: Basic vs Extended47467
+Node: Character Encoding48585
+Node: Matching Non-ASCII50051
+Node: Usage52178
+Node: Performance60179
+Node: Reporting Bugs63879
+Node: Known Bugs64256
+Node: Copying65327
+Node: GNU Free Documentation License66455
+Node: Index91760
 
 End Tag Table
 

@@ -66,10 +66,12 @@ TESTS =						\
   backref-alt					\
   backref-multibyte-slow			\
   backref-word					\
+  backslash-dot					\
   backslash-s-and-repetition-operators		\
   backslash-s-vs-invalid-multibyte		\
   big-hole					\
   big-match					\
+  binary-file-matches				\
   bogus-wctob					\
   bre						\
   c-locale					\
@@ -118,6 +120,7 @@ TESTS =						\
   kwset-abuse					\
   long-line-vs-2GiB-read			\
   long-pattern-perf				\
+  many-regex-performance			\
   match-lines					\
   max-count-overread				\
   max-count-vs-context				\
@@ -240,6 +243,7 @@ TESTS_ENVIRONMENT =				\
   abs_top_srcdir='$(abs_top_srcdir)'		\
   abs_srcdir='$(abs_srcdir)'			\
   built_programs="$$built_programs"		\
+  host_triplet='$(host_triplet)'		\
   srcdir='$(srcdir)'				\
   top_srcdir='$(top_srcdir)'			\
   CC='$(CC)'					\

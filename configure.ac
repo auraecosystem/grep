@@ -34,11 +34,11 @@ fi
 AC_CONFIG_AUX_DIR(build-aux)
 AC_CONFIG_SRCDIR(src/grep.c)
 AC_DEFINE([GREP], 1, [We are building grep])
-AC_PREREQ([2.63])
+AC_PREREQ([2.64])
 AC_CONFIG_MACRO_DIRS([m4])
 
 dnl Automake stuff.
-AM_INIT_AUTOMAKE([1.11 no-dist-gzip dist-xz color-tests parallel-tests
+AM_INIT_AUTOMAKE([1.11 dist-xz color-tests parallel-tests
                   subdir-objects])
 AM_SILENT_RULES([yes]) # make --enable-silent-rules the default.
 
@@ -156,7 +156,6 @@ AC_DEFINE([ARGMATCH_DIE_DECL], [void usage (int _e)],
           [Define to the declaration of the xargmatch failure function.])
 
 dnl Checks for header files.
-AC_HEADER_STDC
 AC_HEADER_DIRENT
 
 dnl Checks for functions.

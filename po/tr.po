@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grep 2.5.1a\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2020-01-02 13:16-0800\n"
+"POT-Creation-Date: 2020-09-27 19:41-0700\n"
 "PO-Revision-Date: 2005-03-04 16:37+0300\n"
 "Last-Translator: Nilgün Belma Bugüner <nilgun@superonline.com>\n"
 "Language-Team: Turkish <gnu-tr-u12a@lists.sourceforge.net>\n"
@@ -31,56 +31,56 @@ msgstr ""
 msgid "Valid arguments are:"
 msgstr ""
 
-#: lib/c-stack.c:211 lib/c-stack.c:304
+#: lib/c-stack.c:227 lib/c-stack.c:340
 msgid "program error"
 msgstr ""
 
-#: lib/c-stack.c:212 lib/c-stack.c:305
+#: lib/c-stack.c:228 lib/c-stack.c:341
 msgid "stack overflow"
 msgstr ""
 
-#: lib/closeout.c:122 src/grep.c:1278
+#: lib/closeout.c:122 src/grep.c:1341
 msgid "write error"
 msgstr ""
 
-#: lib/dfa.c:923
+#: lib/dfa.c:954
 #, fuzzy
 msgid "unbalanced ["
 msgstr "Karşılıksız ["
 
-#: lib/dfa.c:1044
+#: lib/dfa.c:1075
 msgid "invalid character class"
 msgstr ""
 
-#: lib/dfa.c:1170
+#: lib/dfa.c:1201
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr ""
 
-#: lib/dfa.c:1237
+#: lib/dfa.c:1268
 #, fuzzy
 msgid "unfinished \\ escape"
 msgstr "Tamamlanmamış \\ öncelemi"
 
-#: lib/dfa.c:1398
+#: lib/dfa.c:1429
 #, fuzzy
 msgid "invalid content of \\{\\}"
 msgstr "en çok miktarı geçersiz"
 
-#: lib/dfa.c:1401
+#: lib/dfa.c:1432
 msgid "regular expression too big"
 msgstr ""
 
-#: lib/dfa.c:1872
+#: lib/dfa.c:1916
 #, fuzzy
 msgid "unbalanced ("
 msgstr "Karşılıksız ("
 
-#: lib/dfa.c:1989
+#: lib/dfa.c:2033
 #, fuzzy
 msgid "no syntax specified"
 msgstr "Sözdizimi belirtilmemiş"
 
-#: lib/dfa.c:2000
+#: lib/dfa.c:2044
 #, fuzzy
 msgid "unbalanced )"
 msgstr "Karşılıksız )"
@@ -124,7 +124,7 @@ msgstr "%s: geçersiz seçenek -- %c\n"
 msgid "%s: option requires an argument -- '%c'\n"
 msgstr "%s: seçenek bir argümanla kullanılır -- %c\n"
 
-#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34 src/pcresearch.c:300
+#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34 src/pcresearch.c:306
 msgid "memory exhausted"
 msgstr "bellek tükendi"
 
@@ -164,11 +164,11 @@ msgstr ""
 #. If you don't know what to put here, please see
 #. <https://en.wikipedia.org/wiki/Quotation_marks_in_other_languages>
 #. and use glyphs suitable for your language.
-#: lib/quotearg.c:362
+#: lib/quotearg.c:355
 msgid "`"
 msgstr "`"
 
-#: lib/quotearg.c:363
+#: lib/quotearg.c:356
 msgid "'"
 msgstr "'"
 
@@ -388,53 +388,49 @@ msgstr ""
 msgid "General help using GNU software: <%s>\n"
 msgstr ""
 
-#: src/grep.c:584
+#: src/grep.c:648
 msgid "(standard input)"
 msgstr "(standart girdi)"
 
-#: src/grep.c:764
+#: src/grep.c:828
 msgid "invalid context length argument"
 msgstr "bağlam uzunluk değeri geçersiz"
 
-#: src/grep.c:829
+#: src/grep.c:893
 msgid "input is too large to count"
 msgstr "girdi sayılamayacak kadar büyük"
 
-#: src/grep.c:1583
-#, c-format
-msgid "Binary file %s matches\n"
+#: src/grep.c:1646
+#, fuzzy, c-format
+msgid "%s: binary file matches"
 msgstr "İkilik dosya %s eşleşir\n"
 
-#: src/grep.c:1624
+#: src/grep.c:1684
 #, fuzzy, c-format
-msgid "warning: %s: %s"
-msgstr "uyarı: %s: %s\n"
-
-#: src/grep.c:1625
-msgid "recursive directory loop"
+msgid "%s: warning: recursive directory loop"
 msgstr "ardışık dizin çevrimi"
 
-#: src/grep.c:1845
+#: src/grep.c:1904
 #, c-format
-msgid "input file %s is also the output"
+msgid "%s: input file is also the output"
 msgstr ""
 
-#: src/grep.c:1908 src/grep.c:1915
+#: src/grep.c:1966 src/grep.c:1973
 #, fuzzy, c-format
 msgid "Usage: %s [OPTION]... PATTERNS [FILE]...\n"
 msgstr "Kullanımı: %s [SEÇENEK]... MASKE [DOSYA]...\n"
 
-#: src/grep.c:1910
+#: src/grep.c:1968
 #, fuzzy, c-format
 msgid "Try '%s --help' for more information.\n"
 msgstr "Daha fazla bilgi için `%s --help' yazın.\n"
 
-#: src/grep.c:1916
+#: src/grep.c:1974
 #, c-format
 msgid "Search for PATTERNS in each FILE.\n"
 msgstr ""
 
-#: src/grep.c:1917
+#: src/grep.c:1975
 #, fuzzy, c-format
 msgid ""
 "Example: %s -i 'hello world' menu.h main.c\n"
@@ -447,7 +443,7 @@ msgstr ""
 "\n"
 "Düzenli ifade seçimi ve yorumlanması:\n"
 
-#: src/grep.c:1922
+#: src/grep.c:1980
 #, fuzzy, c-format
 msgid ""
 "  -E, --extended-regexp     PATTERNS are extended regular expressions\n"
@@ -460,7 +456,7 @@ msgstr ""
 "  -G, --basic-regexp        KALIP bir temel düzenli ifadedir\n"
 "  -P, --perl-regexp         KALIP bir Perl düzenli ifadesidir\n"
 
-#: src/grep.c:1928
+#: src/grep.c:1986
 #, fuzzy, c-format
 msgid ""
 "  -e, --regexp=PATTERNS     use PATTERNS for matching\n"
@@ -478,7 +474,7 @@ msgstr ""
 "  -x, --line-regexp      KALIP bir bütün satır olarak ele alınır\n"
 "  -z, --null-data        satır sonu içermeyen 0 baytlık satır\n"
 
-#: src/grep.c:1936
+#: src/grep.c:1994
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -496,7 +492,7 @@ msgstr ""
 "      --help                bu iletileri gösterir ve çıkar\n"
 "      --mmap                mümkünse bellek-eşlemli girdi kullanılır\n"
 
-#: src/grep.c:1943
+#: src/grep.c:2001
 #, c-format
 msgid ""
 "\n"
@@ -511,7 +507,7 @@ msgid ""
 "prefix\n"
 msgstr ""
 
-#: src/grep.c:1954
+#: src/grep.c:2012
 #, c-format
 msgid ""
 "  -o, --only-matching       show only nonempty parts of lines that match\n"
@@ -521,7 +517,7 @@ msgid ""
 "  -a, --text                equivalent to --binary-files=text\n"
 msgstr ""
 
-#: src/grep.c:1961
+#: src/grep.c:2019
 #, c-format
 msgid ""
 "  -I                        equivalent to --binary-files=without-match\n"
@@ -533,7 +529,7 @@ msgid ""
 "  -R, --dereference-recursive  likewise, but follow all symlinks\n"
 msgstr ""
 
-#: src/grep.c:1970
+#: src/grep.c:2028
 #, c-format
 msgid ""
 "      --include=GLOB        search only files that match GLOB (a file "
@@ -544,7 +540,7 @@ msgid ""
 "      --exclude-dir=GLOB    skip directories that match GLOB\n"
 msgstr ""
 
-#: src/grep.c:1977
+#: src/grep.c:2035
 #, c-format
 msgid ""
 "  -L, --files-without-match  print only names of FILEs with no selected "
@@ -555,7 +551,7 @@ msgid ""
 "  -Z, --null                print 0 byte after FILE name\n"
 msgstr ""
 
-#: src/grep.c:1983
+#: src/grep.c:2041
 #, c-format
 msgid ""
 "\n"
@@ -565,7 +561,7 @@ msgid ""
 "  -C, --context=NUM         print NUM lines of output context\n"
 msgstr ""
 
-#: src/grep.c:1990
+#: src/grep.c:2048
 #, fuzzy, c-format
 msgid ""
 "  -NUM                      same as --context=NUM\n"
@@ -594,46 +590,46 @@ msgstr ""
 "İki DOSYAdan az verilmişse -h varsayılır.\n"
 "Çıkışta durum eşleşme varsa 0, yoksa 1, belirsizlik varsa 2 dir.\n"
 
-#: src/grep.c:1997
+#: src/grep.c:2055
 #, c-format
 msgid ""
 "When FILE is '-', read standard input.  With no FILE, read '.' if\n"
 "recursive, '-' otherwise.  With fewer than two FILEs, assume -h.\n"
-"Exit status is 0 if any line (or file if -L) is selected, 1 otherwise;\n"
+"Exit status is 0 if any line is selected, 1 otherwise;\n"
 "if any error occurs and -q is not given, the exit status is 2.\n"
 msgstr ""
 
-#: src/grep.c:2039
+#: src/grep.c:2097
 msgid "conflicting matchers specified"
 msgstr "birbiriyle çatışan eşleştiriciler belirtildi"
 
-#: src/grep.c:2046
+#: src/grep.c:2104
 msgid "Perl matching not supported in a --disable-perl-regexp build"
 msgstr ""
 
-#: src/grep.c:2048
+#: src/grep.c:2106
 #, fuzzy, c-format
 msgid "invalid matcher %s"
 msgstr "en çok miktarı geçersiz"
 
-#: src/grep.c:2472
+#: src/grep.c:2579
 #, c-format
 msgid "warning: GREP_OPTIONS is deprecated; please use an alias or script"
 msgstr ""
 
-#: src/grep.c:2499
+#: src/grep.c:2606
 msgid "unknown devices method"
 msgstr "bilinmeyen aygıt yöntemi"
 
-#: src/grep.c:2645
+#: src/grep.c:2754
 msgid "invalid max count"
 msgstr "en çok miktarı geçersiz"
 
-#: src/grep.c:2703
+#: src/grep.c:2812
 msgid "unknown binary-files type"
 msgstr "bilinmeyen ikilik dosya türü"
 
-#: src/grep.c:2788
+#: src/grep.c:2897
 msgid ""
 "Written by Mike Haertel and others; see\n"
 "<https://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>."
@@ -643,35 +639,43 @@ msgstr ""
 msgid "failed to allocate memory for the PCRE JIT stack"
 msgstr ""
 
-#: src/pcresearch.c:132
+#: src/pcresearch.c:137
 msgid "-P supports only unibyte and UTF-8 locales"
 msgstr ""
 
-#: src/pcresearch.c:138
+#: src/pcresearch.c:143
 #, fuzzy
 msgid "the -P option only supports a single pattern"
 msgstr "-P seçeneği desteklenmiyor"
 
-#: src/pcresearch.c:181
+#: src/pcresearch.c:187
 msgid "internal error (should never happen)"
 msgstr ""
 
-#: src/pcresearch.c:224
+#: src/pcresearch.c:230
 msgid "exceeded PCRE's line length limit"
 msgstr ""
 
-#: src/pcresearch.c:304
+#: src/pcresearch.c:310
 msgid "exhausted PCRE JIT stack"
 msgstr ""
 
-#: src/pcresearch.c:308
+#: src/pcresearch.c:314
 msgid "exceeded PCRE's backtracking limit"
 msgstr ""
 
-#: src/pcresearch.c:315
+#: src/pcresearch.c:317
+msgid "exceeded PCRE's recursion limit"
+msgstr ""
+
+#: src/pcresearch.c:324
 #, c-format
 msgid "internal PCRE error: %d"
 msgstr ""
+
+#, fuzzy, c-format
+#~ msgid "warning: %s: %s"
+#~ msgstr "uyarı: %s: %s\n"
 
 #, fuzzy
 #~ msgid "%s: option '--%s' doesn't allow an argument\n"
