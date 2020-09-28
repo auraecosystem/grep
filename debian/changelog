@@ -1,6 +1,6 @@
-grep (3.4-2~1.gbpb89db6) UNRELEASED; urgency=medium
+grep (3.5-1~1.gbp4249aa) UNRELEASED; urgency=medium
 
- ** SNAPSHOT build @b89db6f2dcb8a55456ebde5c34c873656a50cefa **
+  ** SNAPSHOT build @4249aa22a4525e33e2dc1edfe0567065e7b4b2dc **
 
    [ Debian Janitor ]
   * Use secure URI in Homepage field.
@@ -10,10 +10,10 @@ grep (3.4-2~1.gbpb89db6) UNRELEASED; urgency=medium
   * Set upstream metadata fields: Repository, Repository-Browse.
 
   [ Santiago Ruano Rincón ]
+  * New upstream version 3.5
+  * update debian/gbp.conf
 
-  * UNRELEASED
-
- -- Santiago Ruano Rincón <santiago@debian.org>  Wed, 29 Jan 2020 15:43:22 +0100
+ -- Santiago Ruano Rincón <santiago@bartik>  Mon, 28 Sep 2020 11:26:58 +0200
 
 grep (3.4-1) unstable; urgency=low
 
