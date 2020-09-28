@@ -20,8 +20,11 @@
 
 #include <locale.h>
 #include <limits.h>
+#include <stdarg.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <wctype.h>
 #if HAVE_DECL_ALARM
 # include <unistd.h>
 # include <signal.h>
@@ -29,10 +32,32 @@
 
 #include "localcharset.h"
 
+static int exit_status;
+
+static void
+report_error (char const *format, ...)
+{
+  va_list args;
+  va_start (args, format);
+  fprintf (stderr, "test-regex: ");
+  vfprintf (stderr, format, args);
+  fprintf (stderr, "\n");
+  va_end (args);
+  exit_status = 1;
+}
+
+/* Check whether it's really a UTF-8 locale.
+   On mingw, setlocale (LC_ALL, "en_US.UTF-8") succeeds but returns
+   "English_United States.1252", with locale_charset () returning "CP1252".  */
+static int
+really_utf8 (void)
+{
+  return strcmp (locale_charset (), "UTF-8") == 0;
+}
+
 int
 main (void)
 {
-  int result = 0;
   static struct re_pattern_buffer regex;
   unsigned char folded_chars[UCHAR_MAX + 1];
   int i;
@@ -61,25 +86,22 @@ main (void)
         memset (&regex, 0, sizeof regex);
         s = re_compile_pattern (pat, sizeof pat - 1, &regex);
         if (s)
-          result |= 1;
+          report_error ("%s: %s", pat, s);
         else
           {
             memset (&regs, 0, sizeof regs);
-            if (re_search (&regex, data, sizeof data - 1,
-                           0, sizeof data - 1, &regs)
-                != -1)
-              result |= 1;
+            i = re_search (&regex, data, sizeof data - 1,
+                           0, sizeof data - 1, &regs);
+            if (i != -1)
+              report_error ("re_search '%s' on '%s' returned %d",
+                            pat, data, i);
             regfree (&regex);
             free (regs.start);
             free (regs.end);
           }
       }
 
-      /* Check whether it's really a UTF-8 locale.
-         On mingw, the setlocale call succeeds but returns
-         "English_United States.1252", with locale_charset() returning
-         "CP1252".  */
-      if (strcmp (locale_charset (), "UTF-8") == 0)
+      if (really_utf8 ())
         {
           /* This test is from glibc bug 15078.
              The test case is from Andreas Schwab in
@@ -101,14 +123,15 @@ main (void)
           memset (&regex, 0, sizeof regex);
           s = re_compile_pattern (pat, sizeof pat - 1, &regex);
           if (s)
-            result |= 1;
+            report_error ("%s: %s", pat, s);
           else
             {
               memset (&regs, 0, sizeof regs);
               i = re_search (&regex, data, sizeof data - 1,
                              0, sizeof data - 1, 0);
               if (i != 0 && i != 21)
-                result |= 1;
+                report_error ("re_search '%s' on '%s' returned %d",
+                              pat, data, i);
               regfree (&regex);
               free (regs.start);
               free (regs.end);
@@ -116,21 +139,65 @@ main (void)
         }
 
       if (! setlocale (LC_ALL, "C"))
-        return 1;
+        {
+          report_error ("setlocale \"C\" failed");
+          return exit_status;
+        }
+    }
+
+  if (setlocale (LC_ALL, "tr_TR.UTF-8"))
+    {
+      if (really_utf8 () && towupper (L'i') == 0x0130 /* U+0130; see below.  */)
+        {
+          re_set_syntax (RE_SYNTAX_GREP | RE_ICASE);
+          memset (&regex, 0, sizeof regex);
+          static char const pat[] = "i";
+          s = re_compile_pattern (pat, sizeof pat - 1, &regex);
+          if (s)
+            report_error ("%s: %s", pat, s);
+          else
+            {
+              /* UTF-8 encoding of U+0130 LATIN CAPITAL LETTER I WITH DOT ABOVE.
+                 In Turkish, this is the upper-case equivalent of ASCII "i".
+                 Older versions of Gnulib failed to match "i" to U+0130 when
+                 ignoring case in Turkish <https://bugs.gnu.org/43577>.  */
+              static char const data[] = "\xc4\xb0";
+
+              memset (&regs, 0, sizeof regs);
+              i = re_search (&regex, data, sizeof data - 1, 0, sizeof data - 1,
+                             &regs);
+              if (i != 0)
+                report_error ("re_search '%s' on '%s' returned %d",
+                              pat, data, i);
+              regfree (&regex);
+              free (regs.start);
+              free (regs.end);
+            }
+        }
+
+      if (! setlocale (LC_ALL, "C"))
+        {
+          report_error ("setlocale \"C\" failed");
+          return exit_status;
+        }
     }
 
   /* This test is from glibc bug 3957, reported by Andrew Mackey.  */
   re_set_syntax (RE_SYNTAX_EGREP | RE_HAT_LISTS_NOT_NEWLINE);
   memset (&regex, 0, sizeof regex);
-  s = re_compile_pattern ("a[^x]b", 6, &regex);
+  static char const pat_3957[] = "a[^x]b";
+  s = re_compile_pattern (pat_3957, sizeof pat_3957 - 1, &regex);
   if (s)
-    result |= 2;
-  /* This should fail, but succeeds for glibc-2.5.  */
+    report_error ("%s: %s", pat_3957, s);
   else
     {
+      /* This should fail, but succeeds for glibc-2.5.  */
       memset (&regs, 0, sizeof regs);
-      if (re_search (&regex, "a\nb", 3, 0, 3, &regs) != -1)
-        result |= 2;
+      static char const data[] = "a\nb";
+      i = re_search (&regex, data, sizeof data - 1, 0, sizeof data - 1, &regs);
+      if (i != -1)
+        report_error ("re_search '%s' on '%s' returned %d",
+                      pat_3957, data, i);
       regfree (&regex);
       free (regs.start);
       free (regs.end);
@@ -143,11 +210,12 @@ main (void)
   for (i = 0; i <= UCHAR_MAX; i++)
     folded_chars[i] = i;
   regex.translate = folded_chars;
-  s = re_compile_pattern ("a[[:@:>@:]]b\n", 11, &regex);
+  static char const pat75[] = "a[[:@:>@:]]b\n";
+  s = re_compile_pattern (pat75, sizeof pat75 - 1, &regex);
   /* This should fail with _Invalid character class name_ error.  */
   if (!s)
     {
-      result |= 4;
+      report_error ("re_compile_pattern: failed to reject '%s'", pat75);
       regfree (&regex);
     }
 
@@ -155,48 +223,57 @@ main (void)
      using RE_NO_EMPTY_RANGES. */
   re_set_syntax (RE_SYNTAX_POSIX_EGREP | RE_NO_EMPTY_RANGES);
   memset (&regex, 0, sizeof regex);
-  s = re_compile_pattern ("a[b-a]", 6, &regex);
+  static char const pat_b_a[] = "a[b-a]";
+  s = re_compile_pattern (pat_b_a, sizeof pat_b_a - 1, &regex);
   if (s == 0)
     {
-      result |= 8;
+      report_error ("re_compile_pattern: failed to reject '%s'", pat_b_a);
       regfree (&regex);
     }
 
   /* This should succeed, but does not for glibc-2.1.3.  */
   memset (&regex, 0, sizeof regex);
-  s = re_compile_pattern ("{1", 2, &regex);
+  static char const pat_213[] = "{1";
+  s = re_compile_pattern (pat_213, sizeof pat_213 - 1, &regex);
   if (s)
-    result |= 8;
+    report_error ("%s: %s", pat_213, s);
   else
     regfree (&regex);
 
   /* The following example is derived from a problem report
      against gawk from Jorge Stolfi <stolfi@ic.unicamp.br>.  */
   memset (&regex, 0, sizeof regex);
-  s = re_compile_pattern ("[an\371]*n", 7, &regex);
+  static char const pat_stolfi[] = "[an\371]*n";
+  s = re_compile_pattern (pat_stolfi, sizeof pat_stolfi - 1, &regex);
   if (s)
-    result |= 8;
+    report_error ("%s: %s", pat_stolfi, s);
   /* This should match, but does not for glibc-2.2.1.  */
   else
     {
       memset (&regs, 0, sizeof regs);
-      if (re_match (&regex, "an", 2, 0, &regs) != 2)
-        result |= 8;
+      static char const data[] = "an";
+      i = re_match (&regex, data, sizeof data - 1, 0, &regs);
+      if (i != 2)
+        report_error ("re_match '%s' on '%s' at 2 returned %d",
+                      pat_stolfi, data, i);
       regfree (&regex);
       free (regs.start);
       free (regs.end);
     }
 
   memset (&regex, 0, sizeof regex);
-  s = re_compile_pattern ("x", 1, &regex);
+  static char const pat_x[] = "x";
+  s = re_compile_pattern (pat_x, sizeof pat_x - 1, &regex);
   if (s)
-    result |= 8;
+    report_error ("%s: %s", pat_x, s);
   /* glibc-2.2.93 does not work with a negative RANGE argument.  */
   else
     {
       memset (&regs, 0, sizeof regs);
-      if (re_search (&regex, "wxy", 3, 2, -2, &regs) != 1)
-        result |= 8;
+      static char const data[] = "wxy";
+      i = re_search (&regex, data, sizeof data - 1, 2, -2, &regs);
+      if (i != 1)
+        report_error ("re_search '%s' on '%s' returned %d", pat_x, data, i);
       regfree (&regex);
       free (regs.start);
       free (regs.end);
@@ -206,14 +283,15 @@ main (void)
      ignored RE_ICASE.  Detect that problem too.  */
   re_set_syntax (RE_SYNTAX_EMACS | RE_ICASE);
   memset (&regex, 0, sizeof regex);
-  s = re_compile_pattern ("x", 1, &regex);
+  s = re_compile_pattern (pat_x, 1, &regex);
   if (s)
-    result |= 16;
+    report_error ("%s: %s", pat_x, s);
   else
     {
       memset (&regs, 0, sizeof regs);
-      if (re_search (&regex, "WXY", 3, 0, 3, &regs) < 0)
-        result |= 16;
+      static char const data[] = "WXY";
+      if (re_search (&regex, data, sizeof data - 1, 0, 3, &regs) < 0)
+        report_error ("re_search '%s' on '%s' returned %d", pat_x, data, i);
       regfree (&regex);
       free (regs.start);
       free (regs.end);
@@ -225,17 +303,17 @@ main (void)
   re_set_syntax (RE_SYNTAX_POSIX_BASIC
                  & ~RE_CONTEXT_INVALID_DUP
                  & ~RE_NO_EMPTY_RANGES);
-  memset (&regex, 0, sizeof regex);
-  s = re_compile_pattern ("[[:alnum:]_-]\\\\+$", 16, &regex);
+  static char const pat_shelton[] = "[[:alnum:]_-]\\\\+$";
+  s = re_compile_pattern (pat_shelton, sizeof pat_shelton - 1, &regex);
   if (s)
-    result |= 32;
+    report_error ("%s: %s", pat_shelton, s);
   else
     regfree (&regex);
 
   /* REG_STARTEND was added to glibc on 2004-01-15.
      Reject older versions.  */
   if (! REG_STARTEND)
-    result |= 64;
+    report_error ("REG_STARTEND is zero");
 
   /* Matching with the compiled form of this regexp would provoke
      an assertion failure prior to glibc-2.28:
@@ -244,9 +322,12 @@ main (void)
      back reference.  */
   re_set_syntax (RE_SYNTAX_POSIX_EGREP);
   memset (&regex, 0, sizeof regex);
-  s = re_compile_pattern ("0|()0|\\1|0", 10, &regex);
-  if (!s || strcmp (s, "Invalid back reference"))
-    result |= 64;
+  static char const pat_badback[] = "0|()0|\\1|0";
+  s = re_compile_pattern (pat_badback, sizeof pat_badback, &regex);
+  if (!s)
+    s = "failed to report invalid back reference";
+  if (strcmp (s, "Invalid back reference") != 0)
+    report_error ("%s: %s", pat_badback, s);
 
 #if 0
   /* It would be nice to reject hosts whose regoff_t values are too
@@ -257,8 +338,8 @@ main (void)
      when compiling --without-included-regex.   */
   if (sizeof (regoff_t) < sizeof (ptrdiff_t)
       || sizeof (regoff_t) < sizeof (ssize_t))
-    result |= 64;
+    report_error ("regoff_t values are too narrow");
 #endif
 
-  return result;
+  return exit_status;
 }

@@ -26,7 +26,7 @@
 
 struct dfa_comp
 {
-  /* KWset compiled pattern.  For Ecompile and Gcompile, we compile
+  /* KWset compiled pattern.  For GEAcompile, we compile
      a list of strings, at least one of which is known to occur in
      any string matching the regexp. */
   kwset_t kwset;
@@ -162,9 +162,9 @@ regex_compile (struct dfa_comp *dc, char const *p, ptrdiff_t len,
     return true;
 
   /* Emit a filename:lineno: prefix for patterns taken from files.  */
-  size_t pat_lineno = lineno;
+  size_t pat_lineno;
   char const *pat_filename
-    = lineno < 0 ? "\0" : pattern_file_name (lineno + 1, &pat_lineno);
+    = lineno < 0 ? "" : pattern_file_name (lineno, &pat_lineno);
 
   if (*pat_filename == '\0')
     error (0, 0, "%s", err);
@@ -174,8 +174,13 @@ regex_compile (struct dfa_comp *dc, char const *p, ptrdiff_t len,
   return false;
 }
 
+/* Compile PATTERN, containing SIZE bytes that are followed by '\n'.
+   SYNTAX_BITS specifies whether PATTERN uses style -G, -E, or -A.
+   Return a description of the compiled pattern.  */
+
 void *
-GEAcompile (char *pattern, size_t size, reg_syntax_t syntax_bits)
+GEAcompile (char *pattern, size_t size, reg_syntax_t syntax_bits,
+            bool exact)
 {
   char *motif;
   struct dfa_comp *dc = xcalloc (1, sizeof (*dc));
@@ -213,15 +218,8 @@ GEAcompile (char *pattern, size_t size, reg_syntax_t syntax_bits)
 
   do
     {
-      size_t len;
-      char const *sep = memchr (p, '\n', patlim - p);
-      if (sep)
-        {
-          len = sep - p;
-          sep++;
-        }
-      else
-        len = patlim - p;
+      char const *sep = rawmemchr (p, '\n');
+      ptrdiff_t len = sep - p;
 
       bool backref = possible_backrefs_in_pattern (p, len, bs_safe);
 
@@ -247,7 +245,7 @@ GEAcompile (char *pattern, size_t size, reg_syntax_t syntax_bits)
       if (!regex_compile (dc, p, len, dc->pcount, lineno, !backref))
         compilation_failed = true;
 
-      p = sep;
+      p = sep + 1;
       lineno++;
 
       if (backref)
@@ -256,12 +254,12 @@ GEAcompile (char *pattern, size_t size, reg_syntax_t syntax_bits)
           prev = p;
         }
     }
-  while (p);
+  while (p <= patlim);
 
   if (compilation_failed)
     exit (EXIT_TROUBLE);
 
-  if (prev != NULL)
+  if (prev <= patlim)
     {
       if (pattern < prev)
         {
@@ -275,18 +273,6 @@ GEAcompile (char *pattern, size_t size, reg_syntax_t syntax_bits)
           buf = pattern;
           buflen = size;
         }
-    }
-
-  if (buf != NULL)
-    {
-      dc->patterns--;
-      dc->pcount++;
-
-      if (!regex_compile (dc, buf, buflen, 0, -1, false))
-        abort ();
-
-      if (buf != pattern)
-        free (buf);
     }
 
   /* In the match_words and match_lines cases, we use a different pattern
@@ -323,6 +309,21 @@ GEAcompile (char *pattern, size_t size, reg_syntax_t syntax_bits)
   dfaparse (pattern, size, dc->dfa);
   kwsmusts (dc);
   dfacomp (NULL, 0, dc->dfa, 1);
+
+  if (buf != NULL)
+    {
+      if (exact || !dfasupported (dc->dfa))
+        {
+          dc->patterns--;
+          dc->pcount++;
+
+          if (!regex_compile (dc, buf, buflen, 0, -1, false))
+            abort ();
+        }
+
+      if (buf != pattern)
+        free (buf);
+    }
 
   free (motif);
 
@@ -383,14 +384,19 @@ EGexecute (void *vdc, char const *buf, size_t size, size_t *match_size,
                  greater of the latter two values; this temporarily prefers
                  the DFA to KWset.  */
               exact_kwset_match = kwsm.index < dc->kwset_exact_matches;
-              end = ((exact_kwset_match || !dfafast
-                      || MAX (16, match - beg) < (match - prev_beg) >> 2)
-                     ? match
-                     : MAX (16, match - beg) < (buflim - prev_beg) >> 2
-                     ? prev_beg + 4 * MAX (16, match - beg)
-                     : buflim);
-              end = memchr (end, eol, buflim - end);
-              end = end ? end + 1 : buflim;
+              if (exact_kwset_match || !dfafast
+                  || MAX (16, match - beg) < (match - prev_beg) >> 2)
+                {
+                  end = rawmemchr (match, eol);
+                  end++;
+                }
+              else if (MAX (16, match - beg) < (buflim - prev_beg) >> 2)
+                {
+                  end = rawmemchr (prev_beg + 4 * MAX (16, match - beg), eol);
+                  end++;
+                }
+              else
+                end = buflim;
 
               if (exact_kwset_match)
                 {
@@ -425,8 +431,8 @@ EGexecute (void *vdc, char const *buf, size_t size, size_t *match_size,
                   beg++;
                   dfa_beg = beg;
                 }
-              end = memchr (next_beg, eol, buflim - next_beg);
-              end = end ? end + 1 : buflim;
+              end = rawmemchr (next_beg, eol);
+              end++;
 
               count = 0;
             }
@@ -446,8 +452,8 @@ EGexecute (void *vdc, char const *buf, size_t size, size_t *match_size,
               beg = memrchr (buf, eol, next_beg - buf);
               beg++;
             }
-          end = memchr (next_beg, eol, buflim - next_beg);
-          end = end ? end + 1 : buflim;
+          end = rawmemchr (next_beg, eol);
+          end++;
 
           /* Successful, no back-references encountered! */
           if (!backref)

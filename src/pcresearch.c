@@ -90,16 +90,18 @@ jit_exec (struct pcre_comp *pc, char const *subject, int search_bytes,
 
 #if PCRE_EXTRA_MATCH_LIMIT_RECURSION
       if (e == PCRE_ERROR_RECURSIONLIMIT
-          && (PCRE_STUDY_EXTRA_NEEDED || pc->extra)
-          && pc->extra->match_limit_recursion <= ULONG_MAX / 2)
+          && (PCRE_STUDY_EXTRA_NEEDED || pc->extra))
         {
-          pc->extra->match_limit_recursion *= 2;
-          if (pc->extra->match_limit_recursion == 0)
+          unsigned long lim
+            = (pc->extra->flags & PCRE_EXTRA_MATCH_LIMIT_RECURSION
+               ? pc->extra->match_limit_recursion
+               : 0);
+          if (lim <= ULONG_MAX / 2)
             {
-              pc->extra->match_limit_recursion = (1 << 24) - 1;
+              pc->extra->match_limit_recursion = lim ? 2 * lim : (1 << 24) - 1;
               pc->extra->flags |= PCRE_EXTRA_MATCH_LIMIT_RECURSION;
+              continue;
             }
-          continue;
         }
 #endif
 
@@ -107,8 +109,11 @@ jit_exec (struct pcre_comp *pc, char const *subject, int search_bytes,
     }
 }
 
+/* Compile the -P style PATTERN, containing SIZE bytes that are
+   followed by '\n'.  Return a description of the compiled pattern.  */
+
 void *
-Pcompile (char *pattern, size_t size, reg_syntax_t ignored)
+Pcompile (char *pattern, size_t size, reg_syntax_t ignored, bool exact)
 {
   int e;
   char const *ep;
@@ -120,7 +125,7 @@ Pcompile (char *pattern, size_t size, reg_syntax_t ignored)
                          sizeof xprefix - 1 + sizeof xsuffix - 1);
   char *re = xnmalloc (4, size + (fix_len_max + 4 - 1) / 4);
   int flags = PCRE_DOLLAR_ENDONLY | (match_icase ? PCRE_CASELESS : 0);
-  char const *patlim = pattern + size;
+  char *patlim = pattern + size;
   char *n = re;
   char const *p;
   char const *pnul;
@@ -134,7 +139,7 @@ Pcompile (char *pattern, size_t size, reg_syntax_t ignored)
     }
 
   /* FIXME: Remove this restriction.  */
-  if (memchr (pattern, '\n', size))
+  if (rawmemchr (pattern, '\n') != patlim)
     die (EXIT_TROUBLE, 0, _("the -P option only supports a single pattern"));
 
   *n = '\0';
@@ -148,7 +153,8 @@ Pcompile (char *pattern, size_t size, reg_syntax_t ignored)
      replace each NUL byte in the pattern with the four characters
      "\000", removing a preceding backslash if there are an odd
      number of backslashes before the NUL.  */
-  for (p = pattern; (pnul = memchr (p, '\0', patlim - p)); p = pnul + 1)
+  *patlim = '\0';
+  for (p = pattern; (pnul = p + strlen (p)) < patlim; p = pnul + 1)
     {
       memcpy (n, p, pnul - p);
       n += pnul - p;
@@ -158,10 +164,10 @@ Pcompile (char *pattern, size_t size, reg_syntax_t ignored)
       strcpy (n, "\\000");
       n += 4;
     }
-
-  memcpy (n, p, patlim - p);
+  memcpy (n, p, patlim - p + 1);
   n += patlim - p;
-  *n = '\0';
+  *patlim = '\n';
+
   if (match_words)
     strcpy (n, wsuffix);
   if (match_lines)
@@ -219,7 +225,7 @@ Pexecute (void *vcp, char const *buf, size_t size, size_t *match_size,
          PCRE_MULTILINE for performance, the performance wasn't always
          better and the correctness issues were too puzzling.  See
          Bug#22655.  */
-      line_end = memchr (p, eolbyte, buf + size - p);
+      line_end = rawmemchr (p, eolbyte);
       if (INT_MAX < line_end - p)
         die (EXIT_TROUBLE, 0, _("exceeded PCRE's line length limit"));
 
@@ -306,6 +312,9 @@ Pexecute (void *vcp, char const *buf, size_t size, size_t *match_size,
 
         case PCRE_ERROR_MATCHLIMIT:
           die (EXIT_TROUBLE, 0, _("exceeded PCRE's backtracking limit"));
+
+        case PCRE_ERROR_RECURSIONLIMIT:
+          die (EXIT_TROUBLE, 0, _("exceeded PCRE's recursion limit"));
 
         default:
           /* For now, we lump all remaining PCRE failures into this basket.

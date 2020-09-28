@@ -1,4 +1,357 @@
+2020-09-27  Jim Meyering  <meyering@fb.com>
+
+	version 3.5
+	* NEWS: Record release date.
+
+	maint: avoid autoconf warnings * configure.ac (AC_HEADER_STDC): Remove.  It's been assumed for ages. * m4/pcre.m4 (gl_FUNC_PCRE): Use AS_HELP_STRING, not AC_HELP_STRING.
+
+	build: update gnulib to latest
+
+2020-09-26  Jim Meyering  <meyering@fb.com>
+
+	build: update gnulib to latest
+
+	tests: skip stack-overflow test when built with ASAN
+	* tests/stack-overflow: Skip this test when the binary was built
+	with ASAN, to avoid spurious failures.
+
+2020-09-25  Paul Eggert  <eggert@cs.ucla.edu>
+
+	build: update gnulib submodule to latest
+
+	build: update gnulib submodule to latest
+
+2020-09-24  Jim Meyering  <meyering@fb.com>
+
+	tests: fix surrogate-pair test to work on 16-bit wchar_t systems
+	* tests/surrogate-pair: Avoid new failure on systems with
+	16-bit wchar_t.  Detect the condition and exit before the
+	otherwise-failing tests.  Remove the now-incorrect in-loop
+	test for that alternate failure mode.  This was exposed by
+	testing on gcc119.fsffrance.org, a power8 AIX 7.2 system.
+
+2020-09-23  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: don't assume PCRE in tests
+	* tests/filename-lineno.pl: Remove invalid-re-P-paren and
+	invalid-re-P-star-paren as they assume PCRE support, which
+	causes a false alarm "grep: Perl matching not supported in a
+	--disable-perl-regexp build" on platforms without PCRE.
+
+	grep: pacify Sun C 5.15
+	This suppresses a false alarm '"grep.c", line 720: warning:
+	initializer will be sign-extended: -1'.
+	* src/grep.c (uword_max): New static constant.
+	(initialize_unibyte_mask): Use it.
+
+2020-09-23  Paul Eggert  <eggert@cs.ucla.edu>
+	    Norihiro Tanaka  <noritnk@kcn.ne.jp>
+
+	grep: fix more Turkish-eyes bugs
+	Fix more bugs recently uncovered by Norihiro Tanaka (Bug#43577).
+	* NEWS: Mention new bug report.
+	* src/grep.c (ok_fold): New static var.
+	(setup_ok_fold): New function.
+	(fgrep_icase_charlen): Reject single-byte characters
+	if they match some multibyte characters when ignoring case.
+	This part of the patch is partly derived from
+	<https://bugs.gnu.org/43577#14>, which means it is:
+	(main): Call setup_ok_fold if ok_fold might be needed.
+	* src/searchutils.c (kwsinit): With the grep.c changes,
+	this code can now revert to classic 7th Edition Unix style;
+	aborting would be wrong.
+	* tests/turkish-eyes: Add tests for these bugs.
+
+2020-09-23  Paul Eggert  <eggert@cs.ucla.edu>
+
+	build: update gnulib submodule to latest
+	* NEWS: Mention Bug#43577, which this fixes.
+
+	grep: fix recently-introduced performance glitch
+	* src/grep.c (main): Do not double-increment update_patterns.
+	update_patterns increments n_patterns now; do not increment it
+	again, as the incorrect count would hurt performance heuristics later.
+
+2020-09-22  Paul Eggert  <eggert@cs.ucla.edu>
+
+	doc: improve --line-buffer doc
+	* doc/grep.texi (Other Options): Document --line-buffered more
+	carefully, and say what happens when it is not used.  Problem
+	reported by Dan Jacobson (Bug#35339).
+
+	tests: port timeout test to Alpine
+	Problem reported by Bruno Haible in:
+	https://lists.gnu.org/r/grep-devel/2020-09/msg00080.html
+	* tests/init.cfg (require_timeout_): Check that ‘timeout 0.01
+	sleep 0.02’ works as expected, to avoid spurious test failure
+	on Alpine.
+
+2020-09-22  Jim Meyering  <meyering@fb.com>
+
+	tests: test for many-regexp N^2 RSS regression
+	* tests/many-regex-performance: New test for this performance
+	regression.
+	* tests/Makefile.am: Add it.
+	* NEWS (Bug fixes): Describe it.
+
+2020-09-22  Norihiro Tanaka  <noritnk@kcn.ne.jp>
+
+	grep: avoid unnecessary regex compilation
+	Grep resorts to using the regex engine when the precision of either
+	-o or --color is required, or when the pattern is not supported by
+	our DFA engine (e.g., backref). Otherwise, grep would perform regex
+	compilation solely to check the syntax. This change makes grep skip
+	that compilation in the common case for which it is unnecessary.
+
+	The compilation we are avoiding is quite costly, consuming O(N^2)
+	RSS for N regular expressions.
+
+	* src/dfasearch.c (GEAcompile): Add new argument, and avoid unneeded
+	compilation of regex.
+	* src/grep.c (compile_fp_t): Update prototype.
+	(main): Update caller.
+	* src/kwsearch.c (Fcompile): Update caller and add new argument.
+	* src/pcresearch.c (Pcompile): Add new argument.
+	* src/search.h (GEAcompile, Fcompile, Pcompile): Update prototype.
+
+2020-09-22  Jim Meyering  <meyering@fb.com>
+
+	build: update gnulib to latest
+
+	tests: skip stack-overflow test on midnightbsd*
+	* tests/stack-overflow: skip_ when run on this OS. See details
+	in https://lists.gnu.org/r/grep-devel/2020-09/msg00062.html
+	* tests/Makefile.am (host_triplet): Export.
+
+2020-09-21  Paul Eggert  <eggert@cs.ucla.edu>
+
+	doc: say how to match chars by code
+	From a suggestion in Bug#41004.
+	* doc/grep.texi (Character Encoding, Matching Non-ASCII):
+	New sections.  Move some material from Environment Variables
+	into these sections.
+
+2020-09-18  Paul Eggert  <eggert@cs.ucla.edu>
+
+	* src/dfasearch.c (struct dfa_comp): Fix out-of-date comment.
+
+	grep: "grep '\)'" reports an error again
+	* src/grep.c (try_fgrep_pattern): With -G, pass \) through to
+	GEAcompile so that it can complain.  This fixes an unexpected
+	change in behavior from grep 3.4 and earlier.
+	* tests/filename-lineno.pl: Add tests for this sort of thing.
+
+	grep: tweak by using mempcpy
+	* src/grep.c (try_fgrep_pattern): Tweak previous change
+	by using mempcpy.
+
+2020-09-18  Jim Meyering  <meyering@fb.com>
+
+	grep: make echo .|grep '\.' match once again
+	The same applied for many other backslash-escaped bytes, not just
+	metacharacters.  The switch to rawmemchr in v3.4-almost-10-g9393b97
+	made some parts of the code require the usually-guaranteed newline
+	sentinel at the end of each pattern. Before, some consumers used a
+	(correct) pattern length and did not care that try_fgrep_pattern could
+	transform a pattern (with sentinel) like "\\.\n" to "..\n", thus
+	violating that assumption.
+	* src/grep.c (try_fgrep_pattern): Preserve the invariant
+	that each regexp is newline-terminated.
+	* tests/backslash-dot: New file. Test for this.
+	* tests/Makefile.am (TESTS): Add it.
+
+	tests: triple-backref: print a reference to glibc bug
+	* tests/triple-backref (MALLOC_CHECK_): And tell glibc not to
+	bother with a core dump.  Suggested by Pádraig Brady.
+
+2020-09-18  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: be more consistent about diagnostic format
+	* NEWS: Mention this.
+	* bootstrap.conf (gnulib_modules): Remove 'quote'.
+	* src/grep.c: Do not include quote.h.
+	(grep, grepdirent, grepdesc): Put the three unusual diagnostics
+	into the same "grep: FOO: message" form that grep uses elsewhere.
+	* tests/binary-file-matches, tests/in-eq-out-infloop:
+	Adjust tests to match new diagnostic format.
+
+2020-09-17  Jim Meyering  <meyering@fb.com>
+
+	build: update gnulib to latest
+
+2020-09-17  Paul Eggert  <eggert@cs.ucla.edu>
+
+	* tests/triple-backref: Add comment.
+
+2020-09-17  Jim Meyering  <meyering@fb.com>
+
+	tests: make new test executable, to placate distcheck
+	* tests/binary-file-matches: Make this executable.
+
+	tests: add coverage for code that emits the new diagnostic
+	* tests/binary-file-matches: New file.
+	* tests/Makefile.am (TESTS): Add it.
+
+	maint: avoid syntax-check failure
+	* src/grep.c (grep): Lower-case the "B" in "Binary file... matches"
+	diagnostic that we now emit to stderr. This avoids the following
+	when running "make syntax-check":
+	  maint.mk: found capitalized error message
+	  make: *** [maint.mk:469: sc_error_message_uppercase] Error 1
+
+2020-09-17  Paul Eggert  <eggert@cs.ucla.edu>
+
+	Send "Binary file FOO matches" to stderr
+	* NEWS, doc/grep.texi: Mention this change (Bug#29668).
+	* src/grep.c (grep): Send "Binary file FOO matches" to stderr
+	instead of stdout.
+	* tests/encoding-error, tests/invalid-multibyte-infloop:
+	* tests/null-byte, tests/pcre-count, tests/surrogate-pair:
+	* tests/symlink, tests/unibyte-binary:
+	Adjust tests to match new behavior.  In all cases this
+	simplifies the tests, which is a good sign.
+
+	Suppress "Binary file FOO matches" if -I
+	Problem reported by Jason Franklin (Bug#33552).
+	* NEWS: Mention this.
+	* src/grep.c (grep): Do not output "Binary file FOO matches" if -I.
+	* tests/encoding-error: Add test for this bug.
+
+2020-09-15  Jim Meyering  <meyering@fb.com>
+
+	maint: keep two blank lines before each old Noteworthy line.
+	* NEWS: Insert a blank line.
+
+2020-09-15  Paul Eggert  <eggert@cs.ucla.edu>
+
+	build: update gnulib submodule to latest
+
+2020-09-13  Paul Eggert  <eggert@cs.ucla.edu>
+
+	build: update gnulib submodule to latest
+
+2020-09-12  Paul Eggert  <eggert@cs.ucla.edu>
+
+	build: update gnulib submodule to latest
+
+2020-09-11  Jim Meyering  <meyering@fb.com>
+
+	build: update gnulib to latest
+
+2020-09-09  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: fix logic for growing PCRE JIT stack
+	* src/pcresearch.c (jit_exec) [PCRE_EXTRA_MATCH_LIMIT_RECURSION]:
+	When growing the match_limit_recursion limit, do not use the old
+	value if ! (flags & PCRE_EXTRA_MATCH_LIMIT_RECURSION), as it is
+	uninitialized in that case.
+
+	grep: fix PCRE JIT test when JIT not available
+	Problem reported by Thomas Deutschmann (Bug#29446#23).
+	* src/pcresearch.c (Pexecute): Diagnose PCRE_ERROR_RECURSIONLIMIT.
+	* tests/pcre-jitstack: Treat recursion limit overflow like stack
+	overflow.
+
+	grep: fix -w bug in UTF-8 locales
+	Problem reported by Mayo Fark (Bug#43225).
+	* src/searchutils.c (wordchar_prev): In a UTF-8 locale, do not
+	assume that an encoding-error byte cannot be part of a word
+	constituent, as this assumption is incorrect for the last byte
+	of a multibyte word constituent.
+	* tests/word-delim-multibyte: Add a test for the bug.
+
+	Distribute a gzip tarball again
+	Requested by Issam E. Maghni in:
+	https://lists.gnu.org/r/grep-devel/2020-09/msg00000.html
+	* configure.ac (AM_INIT_AUTOMAKE): Remove no-dist-gzip.
+
+	* README-prereq: Also mention xz.
+
+2020-09-07  Paul Eggert  <eggert@cs.ucla.edu>
+
+	Prefer rawmemchr to memchr when it’s easy
+	* bootstrap.conf (gnulib_modules): Add rawmemchr.
+	* src/dfasearch.c (GEAcompile, EGexecute):
+	* src/grep.c (update_patterns, prpending, prtext):
+	* src/kwsearch.c (Fcompile, Fexecute):
+	* src/pcresearch.c (Pcompile, Pexecute):
+	Simplify (and presumably speed up a little) by using rawmemchr
+	with a sentinel, instead of using memchr.
+
+	Simplify pattern_file_name
+	* src/grep.c (pattern_file_name): Make first argument
+	origin-0, not origin-1, as this simplifies both caller and
+	callee.  All uses changed.
+
+	Simplify regex_compile
+	* src/dfasearch.c (regex_compile): "" suffices; we don’t need "\0".
+	No need to initialize pat_lineno.
+
+	Omit duplicate regexps
+	Do not pass two copies of the same regexp to the
+	regular-expression engine.  Although the engines should
+	perform nearly as well even with the copies, in practice they do not.
+	Problem reported by Luca Borzacchiello (Bug#43040).
+	* bootstrap.conf (gnulib_modules): Add hash.
+	* src/grep.c: Include stdint.h, for SIZE_WIDTH.
+	Include hash.h.
+	(struct patloc, patloc, patlocs_allocated, patlocs_used):
+	Rename from struct FL_pair, fl_pair, n_fl_pair_slots, n_pattern_files,
+	respectively, since the data type is no longer a pair.
+	All uses changed.
+	(struct patloc): New member FILELINE.  The lineno member is now
+	ptrdiff_t since nowadays we prefer signed types.
+	(pattern_array, patterns_table): New static vars.
+	(count_nl_bytes, fl_add): Remove; no longer used.
+	(hash_pattern, compare_patterns, update_patterns): New functions.
+	update_patterns does what fl_add used to do, plus remove dups.
+	(pattern_file_name): Adjust to change from fl_pair to patloc.
+	(main): Move some variables to inner blocks for clarity.
+	Maintain the pattern_table hash of all patterns.
+	Update pattern_array to match keys, and use update_patterns
+	instead of fl_add to remove duplicate keys.
+	* tests/filename-lineno.pl (invalid-re-2-files)
+	(invalid-re-2-files2, invalid-re-2e): Ensure regexps are unique in
+	tests so that dups aren’t removed in diagnostics.
+	(invalid-re-line-numbers): New test.
+
+2020-08-23  Jim Meyering  <meyering@fb.com>
+
+	build: update gnulib to latest
+	* gnulib: Update submodule to latest.
+	* bootstrap.conf (gnulib_modules): Add explicit dependency on dirname-lgpl.
+	Before, we pulled this in via a dependency.
+	* bootstrap: Update from gnulib.
+
+	build: require autoconf-2.64
+	* configure.ac: Require autoconf-2.64, up from 2.63, to align with gnulib.
+
+2020-08-22  Paul Eggert  <eggert@cs.ucla.edu>
+
+	Revert -L exit status change introduced in grep 3.2
+	Problems reported by Antonio Diaz Diaz in:
+	https://bugs.gnu.org/28105#29
+	* NEWS, doc/grep.texi (Exit Status), src/grep.c (usage):
+	Adjust documentation accordingly.
+	* src/grep.c (grepdesc, main): Go back to old behavior.
+	* tests/skip-read: Adjust tests accordingly.
+
+2020-01-20  Paul Eggert  <eggert@cs.ucla.edu>
+
+	tests: fix permission issue in previous change
+
+	tests: work around GCC -fprofile-generate bug
+	* tests/triple-backref: Add a 10 s timeout to work around
+	what appears to be a GCC bug with -fprofile-generate.
+	Problem reported by Martin Liška, with diagnosis by
+	Andreas Schwab (Bug#21513).
+
 2020-01-02  Jim Meyering  <meyering@fb.com>
+
+	maint: post-release administrivia
+	* NEWS: Add header line for next release.
+	* .prev-version: Record previous version.
+	* cfg.mk (old_NEWS_hash): Auto-update.
 
 	version 3.4
 	* NEWS: Record release date.
@@ -6,6 +359,10 @@
 	build: update gnulib to latest, for mbrtowc-vs-Irix build fix
 
 2020-01-02  Paul Eggert  <eggert@cs.ucla.edu>
+
+	doc: mention glibc bug 24269
+	* doc/grep.texi (Known Bugs): Mention glibc bug 24269.
+	Merge formatting/URL changes from Gnulib regex.texi.
 
 	doc: fix --exclude description in man page
 	Problem reported by Duncan Moore (Bug#37212).

@@ -1,22 +1,22 @@
-# Localization for Portuguese
+# Portuguese (Portugal) translation for the grep package.
 # Copyright (C) 2018 Free Software Foundation, Inc.
 # This file is distributed under the same license as the grep package.
-# Pedro Albuquerque <palbuquerque73@gmail.com>, 2018, 2019.
+# Pedro Albuquerque <pmra@protonmail.com>, 2018, 2019, 2020.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: grep-3.3.42\n"
+"Project-Id-Version: grep 3.4.31\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2020-01-02 13:16-0800\n"
-"PO-Revision-Date: 2019-12-25 07:14+0000\n"
-"Last-Translator: Pedro Albuquerque <palbuquerque73@gmail.com>\n"
+"POT-Creation-Date: 2020-09-27 19:41-0700\n"
+"PO-Revision-Date: 2020-09-20 06:11+0100\n"
+"Last-Translator: Pedro Albuquerque <pmra@protonmail.com>\n"
 "Language-Team: Portuguese <translation-team-pt@lists.sourceforge.net>\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Bugs: Report translation errors to the Language-Team address.\n"
-"X-Generator: Gtranslator 2.91.7\n"
+"X-Generator: Geany / PoHelper 1.36\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: lib/argmatch.c:132
@@ -33,51 +33,51 @@ msgstr "argumento ambíguo %s para %s"
 msgid "Valid arguments are:"
 msgstr "Os argumentos válidos são:"
 
-#: lib/c-stack.c:211 lib/c-stack.c:304
+#: lib/c-stack.c:227 lib/c-stack.c:340
 msgid "program error"
 msgstr "erro de programa"
 
-#: lib/c-stack.c:212 lib/c-stack.c:305
+#: lib/c-stack.c:228 lib/c-stack.c:341
 msgid "stack overflow"
 msgstr "transporte da pilha"
 
-#: lib/closeout.c:122 src/grep.c:1278
+#: lib/closeout.c:122 src/grep.c:1341
 msgid "write error"
 msgstr "erro de escrita"
 
-#: lib/dfa.c:923
+#: lib/dfa.c:954
 msgid "unbalanced ["
 msgstr "[ sem par"
 
-#: lib/dfa.c:1044
+#: lib/dfa.c:1075
 msgid "invalid character class"
 msgstr "classe de carácter inválida"
 
-#: lib/dfa.c:1170
+#: lib/dfa.c:1201
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr "a sintaxe da classe de carácter é [[:espaço:]], não [:espaço:]"
 
-#: lib/dfa.c:1237
+#: lib/dfa.c:1268
 msgid "unfinished \\ escape"
 msgstr "não terminado\\escape"
 
-#: lib/dfa.c:1398
+#: lib/dfa.c:1429
 msgid "invalid content of \\{\\}"
 msgstr "Conteúdo inválido de \\{\\}"
 
-#: lib/dfa.c:1401
+#: lib/dfa.c:1432
 msgid "regular expression too big"
 msgstr "expressão regular muito grande"
 
-#: lib/dfa.c:1872
+#: lib/dfa.c:1916
 msgid "unbalanced ("
 msgstr "( sem par"
 
-#: lib/dfa.c:1989
+#: lib/dfa.c:2033
 msgid "no syntax specified"
 msgstr "Sintaxe não especificada"
 
-#: lib/dfa.c:2000
+#: lib/dfa.c:2044
 msgid "unbalanced )"
 msgstr ") sem par"
 
@@ -120,7 +120,7 @@ msgstr "%s: opção inválida -- \"%c\"\n"
 msgid "%s: option requires an argument -- '%c'\n"
 msgstr "%s: a opção requer um argumento -- \"%c\"\n"
 
-#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34 src/pcresearch.c:300
+#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34 src/pcresearch.c:306
 msgid "memory exhausted"
 msgstr "memória esgotada"
 
@@ -160,11 +160,11 @@ msgstr "falha ao definir modo texto/binário do descritor de ficheiro"
 #. If you don't know what to put here, please see
 #. <https://en.wikipedia.org/wiki/Quotation_marks_in_other_languages>
 #. and use glyphs suitable for your language.
-#: lib/quotearg.c:362
+#: lib/quotearg.c:355
 msgid "`"
 msgstr "\""
 
-#: lib/quotearg.c:363
+#: lib/quotearg.c:356
 msgid "'"
 msgstr "\""
 
@@ -402,53 +402,49 @@ msgstr "Página inicial %s: <%s>\n"
 msgid "General help using GNU software: <%s>\n"
 msgstr "Ajuda geral para uso de programas GNU: <%s>\n"
 
-#: src/grep.c:584
+#: src/grep.c:648
 msgid "(standard input)"
 msgstr "(entrada padrão)"
 
-#: src/grep.c:764
+#: src/grep.c:828
 msgid "invalid context length argument"
 msgstr "argumento de tamanho de contexto inválido"
 
-#: src/grep.c:829
+#: src/grep.c:893
 msgid "input is too large to count"
 msgstr "entrada muito grande para contar"
 
-#: src/grep.c:1583
+#: src/grep.c:1646
 #, c-format
-msgid "Binary file %s matches\n"
-msgstr "ficheiro binário %s coincide\n"
+msgid "%s: binary file matches"
+msgstr "%s: ficheiro binário coincide"
 
-#: src/grep.c:1624
+#: src/grep.c:1684
 #, c-format
-msgid "warning: %s: %s"
-msgstr "aviso: %s: %s"
+msgid "%s: warning: recursive directory loop"
+msgstr "%s: aviso: ciclo de pasta recursivo"
 
-#: src/grep.c:1625
-msgid "recursive directory loop"
-msgstr "ciclo de pasta recursivo"
-
-#: src/grep.c:1845
+#: src/grep.c:1904
 #, c-format
-msgid "input file %s is also the output"
-msgstr "ficheiro de entrada %s também é saída"
+msgid "%s: input file is also the output"
+msgstr "%s: ficheiro de entrada também é a saída"
 
-#: src/grep.c:1908 src/grep.c:1915
+#: src/grep.c:1966 src/grep.c:1973
 #, c-format
 msgid "Usage: %s [OPTION]... PATTERNS [FILE]...\n"
 msgstr "Uso: %s [OPÇÃO]... PADRÕES [FICHEIRO]...\n"
 
-#: src/grep.c:1910
+#: src/grep.c:1968
 #, c-format
 msgid "Try '%s --help' for more information.\n"
 msgstr "Tente \"%s --help\" para mais informação.\n"
 
-#: src/grep.c:1916
+#: src/grep.c:1974
 #, c-format
 msgid "Search for PATTERNS in each FILE.\n"
 msgstr "Procurar por PADRÕES em cada FICHEIRO\n"
 
-#: src/grep.c:1917
+#: src/grep.c:1975
 #, c-format
 msgid ""
 "Example: %s -i 'hello world' menu.h main.c\n"
@@ -461,7 +457,7 @@ msgstr ""
 "\n"
 "Selecção e interpretação de padrão:\n"
 
-#: src/grep.c:1922
+#: src/grep.c:1980
 #, c-format
 msgid ""
 "  -E, --extended-regexp     PATTERNS are extended regular expressions\n"
@@ -474,7 +470,7 @@ msgstr ""
 "  -G, --basic-regexp        PADRÕES são expressões regulares básicas\n"
 "  -P, --perl-regexp         PADRÕES são expressões regulares Perl\n"
 
-#: src/grep.c:1928
+#: src/grep.c:1986
 #, c-format
 msgid ""
 "  -e, --regexp=PATTERNS     use PATTERNS for matching\n"
@@ -496,7 +492,7 @@ msgstr ""
 "  -z, --null-data           uma linha de dados termina com o byte 0, não com "
 "newline\n"
 
-#: src/grep.c:1936
+#: src/grep.c:1994
 #, c-format
 msgid ""
 "\n"
@@ -513,7 +509,7 @@ msgstr ""
 "  -V, --version             mostra informação de versão e sai\n"
 "      --help                mostra esta mensagem e sai\n"
 
-#: src/grep.c:1943
+#: src/grep.c:2001
 #, c-format
 msgid ""
 "\n"
@@ -539,7 +535,7 @@ msgstr ""
 "      --label=RÓTULO        usa RÓTULO como prefixo de nome de ficheiro de "
 "entrada padrão\n"
 
-#: src/grep.c:1954
+#: src/grep.c:2012
 #, c-format
 msgid ""
 "  -o, --only-matching       show only nonempty parts of lines that match\n"
@@ -556,7 +552,7 @@ msgstr ""
 "\"\n"
 "  -a, --text                equivalente a --binary-files=text\n"
 
-#: src/grep.c:1961
+#: src/grep.c:2019
 #, c-format
 msgid ""
 "  -I                        equivalent to --binary-files=without-match\n"
@@ -575,8 +571,8 @@ msgstr ""
 "  -r, --recursive           como --directories=recurse\n"
 "  -R, --dereference-recursive  igual, mas segue todas as symlinks\n"
 
-#: src/grep.c:1970
-#, fuzzy, c-format
+#: src/grep.c:2028
+#, c-format
 msgid ""
 "      --include=GLOB        search only files that match GLOB (a file "
 "pattern)\n"
@@ -588,11 +584,11 @@ msgstr ""
 "      --include=GLOB        procura só em ficheiros que contêm GLOB (um "
 "padrão de ficheiro)\n"
 "      --exclude=GLOB        salta ficheiros e pastas que contêm GLOB\n"
-"      --exclude-from=FICHEIRO   salta ficheiros que contêm qualquer padrão "
-"de FICHEIRO\n"
-"      --exclude-dir=PADRÃO  salta pastas que contêm GLOB\n"
+"      --exclude-from=FICH   salta ficheiros que contêm qualquer padrão de "
+"FICHEIRO\n"
+"      --exclude-dir=GLOB    salta pastas que contêm GLOB\n"
 
-#: src/grep.c:1977
+#: src/grep.c:2035
 #, c-format
 msgid ""
 "  -L, --files-without-match  print only names of FILEs with no selected "
@@ -611,7 +607,7 @@ msgstr ""
 "  -T, --initial-tab         alinha tabulações (se necessário)\n"
 "  -Z, --null                imprime byte 0 após o nome de FICHEIRO\n"
 
-#: src/grep.c:1983
+#: src/grep.c:2041
 #, c-format
 msgid ""
 "\n"
@@ -626,7 +622,7 @@ msgstr ""
 "  -A, --after-context=NUM   imprime NUM linhas de contexto final\n"
 "  -C, --context=NUM         imprime NUM linhas de contexto de saída\n"
 
-#: src/grep.c:1990
+#: src/grep.c:2048
 #, c-format
 msgid ""
 "  -NUM                      same as --context=NUM\n"
@@ -646,52 +642,51 @@ msgstr ""
 "Windows)\n"
 "\n"
 
-#: src/grep.c:1997
+#: src/grep.c:2055
 #, c-format
 msgid ""
 "When FILE is '-', read standard input.  With no FILE, read '.' if\n"
 "recursive, '-' otherwise.  With fewer than two FILEs, assume -h.\n"
-"Exit status is 0 if any line (or file if -L) is selected, 1 otherwise;\n"
+"Exit status is 0 if any line is selected, 1 otherwise;\n"
 "if any error occurs and -q is not given, the exit status is 2.\n"
 msgstr ""
-"Quando FICHEIRO é '-', lê a entrada padrão. Sem FICHEIRO, lê '.' se\n"
-"recursivo, senão lê '-'. Com menos de dois FICHEIROs, assume -h.\n"
-"O estado da saída é 0 se qualquer linha (ou ficheiro se -L) for "
-"seleccionada,\n"
-"senão é 1; se ocorrer um erro e -q não for dado, o estado da saída é 2.\n"
+"Quando FICHEIRO é '-', lê a entrada padrão. Sem FICH, lê '.' se\n"
+"recursivo, senão lê '-'. Com menos de dois FICHs, assume -h.\n"
+"O estado da saída é 0 se qualquer linha for seleccionada, senão é 1;\n"
+"se ocorrer um erro e -q não for dado, o estado da saída é 2.\n"
 
-#: src/grep.c:2039
+#: src/grep.c:2097
 msgid "conflicting matchers specified"
 msgstr "especificou comparadores em conflito"
 
-#: src/grep.c:2046
+#: src/grep.c:2104
 msgid "Perl matching not supported in a --disable-perl-regexp build"
 msgstr ""
 "Comparação Perl não suportada numa compilação --disable-perl-regexp build"
 
-#: src/grep.c:2048
+#: src/grep.c:2106
 #, c-format
 msgid "invalid matcher %s"
 msgstr "comparador %s inválido"
 
-#: src/grep.c:2472
+#: src/grep.c:2579
 #, c-format
 msgid "warning: GREP_OPTIONS is deprecated; please use an alias or script"
 msgstr "aviso: GREP_OPTIONS é obsoleto; por favor, use um aliás ou um script"
 
-#: src/grep.c:2499
+#: src/grep.c:2606
 msgid "unknown devices method"
 msgstr "método dispositivos desconhecidos"
 
-#: src/grep.c:2645
+#: src/grep.c:2754
 msgid "invalid max count"
 msgstr "número máximo inválido"
 
-#: src/grep.c:2703
+#: src/grep.c:2812
 msgid "unknown binary-files type"
 msgstr "tipo de ficheiro binário desconhecido"
 
-#: src/grep.c:2788
+#: src/grep.c:2897
 msgid ""
 "Written by Mike Haertel and others; see\n"
 "<https://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>."
@@ -703,34 +698,41 @@ msgstr ""
 msgid "failed to allocate memory for the PCRE JIT stack"
 msgstr "falha ao alocar memória para a pilha PCRE JIT"
 
-#: src/pcresearch.c:132
+#: src/pcresearch.c:137
 msgid "-P supports only unibyte and UTF-8 locales"
 msgstr "-P só suporta idiomas unibyte e UTF-8"
 
-#: src/pcresearch.c:138
+#: src/pcresearch.c:143
 msgid "the -P option only supports a single pattern"
 msgstr "a opção -P só suporta um padrão"
 
-#: src/pcresearch.c:181
+#: src/pcresearch.c:187
 msgid "internal error (should never happen)"
 msgstr "erro interno (nunca devia acontecer)"
 
-#: src/pcresearch.c:224
+#: src/pcresearch.c:230
 msgid "exceeded PCRE's line length limit"
 msgstr "excedido o limite de tamanho da linha de PCRE"
 
-#: src/pcresearch.c:304
+#: src/pcresearch.c:310
 msgid "exhausted PCRE JIT stack"
 msgstr "Pilha PCRE JIT esgotada"
 
-#: src/pcresearch.c:308
+#: src/pcresearch.c:314
 msgid "exceeded PCRE's backtracking limit"
 msgstr "excedido o limite de retrocesso de PCRE"
 
-#: src/pcresearch.c:315
+#: src/pcresearch.c:317
+msgid "exceeded PCRE's recursion limit"
+msgstr "limite de recursividade de PCRE excedido"
+
+#: src/pcresearch.c:324
 #, c-format
 msgid "internal PCRE error: %d"
 msgstr "erro interno de PCRE: %d"
+
+#~ msgid "warning: %s: %s"
+#~ msgstr "aviso: %s: %s"
 
 #~ msgid "%s home page: <https://www.gnu.org/software/%s/>\n"
 #~ msgstr "Página inicial %s: <https://www.gnu.org/software/%s/>\n"

@@ -49,7 +49,7 @@ AM_CPPFLAGS = \
   -I.. -I$(srcdir)/.. \
   -I../lib -I$(srcdir)/../lib
 
-LDADD = libtests.a ../lib/libgreputils.a libtests.a $(LIBTESTS_LIBDEPS)
+LDADD = libtests.a ../lib/libgreputils.a libtests.a ../lib/libgreputils.a $(LIBTESTS_LIBDEPS)
 
 libtests_a_SOURCES =
 libtests_a_LIBADD = $(gltests_LIBOBJS)
@@ -99,7 +99,7 @@ EXTRA_DIST += test-alloca-opt.c
 
 TESTS += test-argmatch
 check_PROGRAMS += test-argmatch
-test_argmatch_LDADD = $(LDADD) @LIBINTL@ $(LIBTHREAD)
+test_argmatch_LDADD = $(LDADD) @LIBINTL@ $(LIB_MBRTOWC)
 
 EXTRA_DIST += test-argmatch.c macros.h
 
@@ -278,13 +278,13 @@ EXTRA_DIST += test-ctype.c
 
 ## begin gnulib module dfa-tests
 
-TESTS +=			\
-  dfa-invalid-char-class.sh	\
-  dfa-match.sh
+TESTS += \
+  test-dfa-invalid-char-class.sh \
+  test-dfa-match.sh
 
-check_PROGRAMS += dfa-match-aux
-dfa_match_aux_LDADD = $(LDADD) $(LIB_SETLOCALE) @LIBINTL@ $(LIBTHREAD)
-EXTRA_DIST += dfa-match.sh dfa-match-aux.c dfa-invalid-char-class.sh
+check_PROGRAMS += test-dfa-match-aux
+test_dfa_match_aux_LDADD = $(LDADD) $(LIB_SETLOCALE) @LIBINTL@ $(LIB_MBRTOWC)
+EXTRA_DIST += test-dfa-match.sh test-dfa-match-aux.c test-dfa-invalid-char-class.sh
 
 ## end   gnulib module dfa-tests
 
@@ -343,7 +343,7 @@ TESTS += \
  test-exclude8.sh
 
 check_PROGRAMS += test-exclude
-test_exclude_LDADD = $(LDADD) @LIBINTL@ $(LIBTHREAD)
+test_exclude_LDADD = $(LDADD) @LIBINTL@ $(LIB_MBRTOWC) $(LIBTHREAD)
 EXTRA_DIST += test-exclude.c test-exclude1.sh test-exclude2.sh test-exclude3.sh test-exclude4.sh test-exclude5.sh test-exclude6.sh test-exclude7.sh test-exclude8.sh
 
 ## end   gnulib module exclude-tests
@@ -466,10 +466,27 @@ EXTRA_DIST += test-fnmatch-h.c
 
 TESTS += test-fnmatch
 check_PROGRAMS += test-fnmatch
-test_fnmatch_LDADD = $(LDADD) $(LIBTHREAD)
+test_fnmatch_LDADD = $(LDADD) $(LIB_MBRTOWC)
 EXTRA_DIST += test-fnmatch.c signature.h macros.h
 
 ## end   gnulib module fnmatch-tests
+
+## begin gnulib module fopen-gnu-tests
+
+TESTS += test-fopen-gnu
+check_PROGRAMS += test-fopen-gnu
+EXTRA_DIST += test-fopen-gnu.c macros.h
+
+## end   gnulib module fopen-gnu-tests
+
+## begin gnulib module fopen-tests
+
+TESTS += test-fopen
+check_PROGRAMS += test-fopen
+
+EXTRA_DIST += test-fopen.h test-fopen.c signature.h macros.h
+
+## end   gnulib module fopen-tests
 
 ## begin gnulib module fpending-tests
 
@@ -776,6 +793,34 @@ EXTRA_DIST += test-iswblank.c macros.h
 
 ## end   gnulib module iswblank-tests
 
+## begin gnulib module iswdigit-tests
+
+TESTS += test-iswdigit.sh
+TESTS_ENVIRONMENT += \
+  LOCALE_FR='@LOCALE_FR@' \
+  LOCALE_FR_UTF8='@LOCALE_FR_UTF8@' \
+  LOCALE_JA='@LOCALE_JA@' \
+  LOCALE_ZH_CN='@LOCALE_ZH_CN@'
+check_PROGRAMS += test-iswdigit
+test_iswdigit_LDADD = $(LDADD) $(LIB_SETLOCALE) $(LIB_MBRTOWC)
+EXTRA_DIST += test-iswdigit.sh test-iswdigit.c signature.h macros.h
+
+## end   gnulib module iswdigit-tests
+
+## begin gnulib module iswxdigit-tests
+
+TESTS += test-iswxdigit.sh
+TESTS_ENVIRONMENT += \
+  LOCALE_FR='@LOCALE_FR@' \
+  LOCALE_FR_UTF8='@LOCALE_FR_UTF8@' \
+  LOCALE_JA='@LOCALE_JA@' \
+  LOCALE_ZH_CN='@LOCALE_ZH_CN@'
+check_PROGRAMS += test-iswxdigit
+test_iswxdigit_LDADD = $(LDADD) $(LIB_SETLOCALE) $(LIB_MBRTOWC)
+EXTRA_DIST += test-iswxdigit.sh test-iswxdigit.c signature.h macros.h
+
+## end   gnulib module iswxdigit-tests
+
 ## begin gnulib module langinfo-tests
 
 TESTS += test-langinfo
@@ -852,15 +897,6 @@ EXTRA_DIST += test-localename.c macros.h
 
 ## end   gnulib module localename-tests
 
-## begin gnulib module localtime-buffer
-
-
-EXTRA_DIST += localtime-buffer.c localtime-buffer.h
-
-EXTRA_libtests_a_SOURCES += localtime-buffer.c
-
-## end   gnulib module localtime-buffer
-
 ## begin gnulib module lseek-tests
 
 TESTS += test-lseek.sh
@@ -899,7 +935,7 @@ EXTRA_DIST += test-malloca.c
 TESTS += test-mbscasecmp.sh
 TESTS_ENVIRONMENT += LOCALE_TR_UTF8='@LOCALE_TR_UTF8@'
 check_PROGRAMS += test-mbscasecmp
-test_mbscasecmp_LDADD = $(LDADD) $(LIB_SETLOCALE) $(LIBTHREAD)
+test_mbscasecmp_LDADD = $(LDADD) $(LIB_SETLOCALE) $(LIB_MBRTOWC)
 EXTRA_DIST += test-mbscasecmp.sh test-mbscasecmp.c macros.h
 
 ## end   gnulib module mbscasecmp-tests
@@ -909,7 +945,7 @@ EXTRA_DIST += test-mbscasecmp.sh test-mbscasecmp.c macros.h
 TESTS += test-mbsinit.sh
 TESTS_ENVIRONMENT += LOCALE_FR_UTF8='@LOCALE_FR_UTF8@'
 check_PROGRAMS += test-mbsinit
-test_mbsinit_LDADD = $(LDADD) $(LIB_SETLOCALE) $(LIBTHREAD)
+test_mbsinit_LDADD = $(LDADD) $(LIB_SETLOCALE) $(LIB_MBRTOWC)
 EXTRA_DIST += test-mbsinit.sh test-mbsinit.c signature.h macros.h
 
 ## end   gnulib module mbsinit-tests
@@ -923,7 +959,7 @@ TESTS_ENVIRONMENT += \
   LOCALE_JA='@LOCALE_JA@' \
   LOCALE_ZH_CN='@LOCALE_ZH_CN@'
 check_PROGRAMS += test-mbsrtowcs
-test_mbsrtowcs_LDADD = $(LDADD) $(LIB_SETLOCALE) $(LIBTHREAD)
+test_mbsrtowcs_LDADD = $(LDADD) $(LIB_SETLOCALE) $(LIB_MBRTOWC)
 EXTRA_DIST += test-mbsrtowcs1.sh test-mbsrtowcs2.sh test-mbsrtowcs3.sh test-mbsrtowcs4.sh test-mbsrtowcs.c signature.h macros.h
 
 ## end   gnulib module mbsrtowcs-tests
@@ -933,9 +969,9 @@ EXTRA_DIST += test-mbsrtowcs1.sh test-mbsrtowcs2.sh test-mbsrtowcs3.sh test-mbsr
 TESTS += test-mbsstr1 test-mbsstr2.sh test-mbsstr3.sh
 TESTS_ENVIRONMENT += LOCALE_FR_UTF8='@LOCALE_FR_UTF8@' LOCALE_ZH_CN='@LOCALE_ZH_CN@'
 check_PROGRAMS += test-mbsstr1 test-mbsstr2 test-mbsstr3
-test_mbsstr1_LDADD = $(LDADD) $(LIBTHREAD)
-test_mbsstr2_LDADD = $(LDADD) $(LIB_SETLOCALE) $(LIBTHREAD)
-test_mbsstr3_LDADD = $(LDADD) $(LIB_SETLOCALE) $(LIBTHREAD)
+test_mbsstr1_LDADD = $(LDADD) $(LIB_MBRTOWC)
+test_mbsstr2_LDADD = $(LDADD) $(LIB_SETLOCALE) $(LIB_MBRTOWC)
+test_mbsstr3_LDADD = $(LDADD) $(LIB_SETLOCALE) $(LIB_MBRTOWC)
 EXTRA_DIST += test-mbsstr1.c test-mbsstr2.sh test-mbsstr2.c test-mbsstr3.sh test-mbsstr3.c macros.h
 
 ## end   gnulib module mbsstr-tests
@@ -1302,7 +1338,7 @@ EXTRA_libtests_a_SOURCES += putenv.c
 
 TESTS += test-quotearg-simple
 check_PROGRAMS += test-quotearg-simple
-test_quotearg_simple_LDADD = $(LDADD) @LIBINTL@ $(LIBTHREAD)
+test_quotearg_simple_LDADD = $(LDADD) @LIBINTL@ $(LIB_MBRTOWC)
 EXTRA_DIST += test-quotearg-simple.c test-quotearg.h macros.h zerosize-ptr.h
 
 ## end   gnulib module quotearg-simple-tests
@@ -1314,6 +1350,14 @@ check_PROGRAMS += test-raise
 EXTRA_DIST += test-raise.c signature.h macros.h
 
 ## end   gnulib module raise-tests
+
+## begin gnulib module rawmemchr-tests
+
+TESTS += test-rawmemchr
+check_PROGRAMS += test-rawmemchr
+EXTRA_DIST += test-rawmemchr.c zerosize-ptr.h signature.h macros.h
+
+## end   gnulib module rawmemchr-tests
 
 ## begin gnulib module read-tests
 
@@ -1335,7 +1379,7 @@ EXTRA_DIST += test-realloc-gnu.c
 
 TESTS += test-regex
 check_PROGRAMS += test-regex
-test_regex_LDADD = $(LDADD) $(LIB_SETLOCALE) @LIBINTL@ $(LIBTHREAD)
+test_regex_LDADD = $(LDADD) $(LIB_SETLOCALE) $(LIB_MBRTOWC) @LIBINTL@ $(LIBTHREAD)
 EXTRA_DIST += test-regex.c macros.h
 
 ## end   gnulib module regex-tests
@@ -2049,6 +2093,13 @@ libtests_a_SOURCES += glthread/thread.h glthread/thread.c
 
 ## end   gnulib module thread
 
+## begin gnulib module thread-optim
+
+
+EXTRA_DIST += thread-optim.h
+
+## end   gnulib module thread-optim
+
 ## begin gnulib module thread-tests
 
 TESTS += test-thread_self test-thread_create
@@ -2198,7 +2249,8 @@ EXTRA_DIST += test-wchar.c
 TESTS += \
   test-wcrtomb.sh \
   test-wcrtomb-w32-1.sh test-wcrtomb-w32-2.sh test-wcrtomb-w32-3.sh \
-  test-wcrtomb-w32-4.sh test-wcrtomb-w32-5.sh
+  test-wcrtomb-w32-4.sh test-wcrtomb-w32-5.sh test-wcrtomb-w32-6.sh \
+  test-wcrtomb-w32-7.sh
 TESTS_ENVIRONMENT += \
   LOCALE_FR='@LOCALE_FR@' \
   LOCALE_FR_UTF8='@LOCALE_FR_UTF8@' \
@@ -2206,7 +2258,7 @@ TESTS_ENVIRONMENT += \
   LOCALE_ZH_CN='@LOCALE_ZH_CN@'
 check_PROGRAMS += test-wcrtomb test-wcrtomb-w32
 test_wcrtomb_LDADD = $(LDADD) $(LIB_SETLOCALE)
-EXTRA_DIST += test-wcrtomb.sh test-wcrtomb.c test-wcrtomb-w32-1.sh test-wcrtomb-w32-2.sh test-wcrtomb-w32-3.sh test-wcrtomb-w32-4.sh test-wcrtomb-w32-5.sh test-wcrtomb-w32.c signature.h macros.h
+EXTRA_DIST += test-wcrtomb.sh test-wcrtomb.c test-wcrtomb-w32-1.sh test-wcrtomb-w32-2.sh test-wcrtomb-w32-3.sh test-wcrtomb-w32-4.sh test-wcrtomb-w32-5.sh test-wcrtomb-w32-6.sh test-wcrtomb-w32-7.sh test-wcrtomb-w32.c signature.h macros.h
 
 ## end   gnulib module wcrtomb-tests
 

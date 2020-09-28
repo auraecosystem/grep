@@ -4,13 +4,13 @@
 #
 # Volodymyr M. Lisivka <lvm@mystery.lviv.net>, 2001-2002.
 # Dmytro O. Redchuk <dor@kiev-online.net>, 2002.
-# Yuri Chornoivan <yurchor@ukr.net>, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019.
+# Yuri Chornoivan <yurchor@ukr.net>, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020.
 msgid ""
 msgstr ""
-"Project-Id-Version: grep-3.3.42\n"
+"Project-Id-Version: grep-3.4.31\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2020-01-02 13:16-0800\n"
-"PO-Revision-Date: 2019-12-24 11:41+0200\n"
+"POT-Creation-Date: 2020-09-27 19:41-0700\n"
+"PO-Revision-Date: 2020-09-19 12:48+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Bugs: Report translation errors to the Language-Team address.\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 19.11.70\n"
+"X-Generator: Lokalize 20.11.70\n"
 
 #: lib/argmatch.c:132
 #, c-format
@@ -35,53 +35,53 @@ msgstr "неоднозначний аргумент, %s, %s"
 msgid "Valid arguments are:"
 msgstr "Список коректних аргументів:"
 
-#: lib/c-stack.c:211 lib/c-stack.c:304
+#: lib/c-stack.c:227 lib/c-stack.c:340
 msgid "program error"
 msgstr "помилка програми"
 
-#: lib/c-stack.c:212 lib/c-stack.c:305
+#: lib/c-stack.c:228 lib/c-stack.c:341
 msgid "stack overflow"
 msgstr "переповнення стека"
 
-#: lib/closeout.c:122 src/grep.c:1278
+#: lib/closeout.c:122 src/grep.c:1341
 msgid "write error"
 msgstr "помилка запису"
 
-#: lib/dfa.c:923
+#: lib/dfa.c:954
 msgid "unbalanced ["
 msgstr "неврівноважена дужка ["
 
-#: lib/dfa.c:1044
+#: lib/dfa.c:1075
 msgid "invalid character class"
 msgstr "некоректний клас символів"
 
-#: lib/dfa.c:1170
+#: lib/dfa.c:1201
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr ""
 "синтаксичну конструкцію класу символів слід визначати так: [[:space:]], а не "
 "так: [:space:]"
 
-#: lib/dfa.c:1237
+#: lib/dfa.c:1268
 msgid "unfinished \\ escape"
 msgstr "незавершена \\-послідовність"
 
-#: lib/dfa.c:1398
+#: lib/dfa.c:1429
 msgid "invalid content of \\{\\}"
 msgstr "некоректний вміст \\{\\}"
 
-#: lib/dfa.c:1401
+#: lib/dfa.c:1432
 msgid "regular expression too big"
 msgstr "занадто об'ємний формальний вираз"
 
-#: lib/dfa.c:1872
+#: lib/dfa.c:1916
 msgid "unbalanced ("
 msgstr "неврівноважена дужка ("
 
-#: lib/dfa.c:1989
+#: lib/dfa.c:2033
 msgid "no syntax specified"
 msgstr "не вказано синтаксис"
 
-#: lib/dfa.c:2000
+#: lib/dfa.c:2044
 msgid "unbalanced )"
 msgstr "неврівноважена дужка )"
 
@@ -124,7 +124,7 @@ msgstr "%s: некоректний параметр — «%c»\n"
 msgid "%s: option requires an argument -- '%c'\n"
 msgstr "%s: до параметра слід додати аргумент — «%c»\n"
 
-#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34 src/pcresearch.c:300
+#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34 src/pcresearch.c:306
 msgid "memory exhausted"
 msgstr "пам'ять вичерпано"
 
@@ -165,11 +165,11 @@ msgstr ""
 #. If you don't know what to put here, please see
 #. <https://en.wikipedia.org/wiki/Quotation_marks_in_other_languages>
 #. and use glyphs suitable for your language.
-#: lib/quotearg.c:362
+#: lib/quotearg.c:355
 msgid "`"
 msgstr "«"
 
-#: lib/quotearg.c:363
+#: lib/quotearg.c:356
 msgid "'"
 msgstr "»"
 
@@ -410,53 +410,49 @@ msgstr ""
 "Загальна довідкова інформація щодо використання програмного забезпечення "
 "GNU: <%s>\n"
 
-#: src/grep.c:584
+#: src/grep.c:648
 msgid "(standard input)"
 msgstr "(стандартне джерело вхідних даних)"
 
-#: src/grep.c:764
+#: src/grep.c:828
 msgid "invalid context length argument"
 msgstr "помилковий аргумент довжини контексту"
 
-#: src/grep.c:829
+#: src/grep.c:893
 msgid "input is too large to count"
 msgstr "вхідні дані занадто довгі для обліку"
 
-#: src/grep.c:1583
+#: src/grep.c:1646
 #, c-format
-msgid "Binary file %s matches\n"
-msgstr "Двійковий файл %s містить збіжність\n"
+msgid "%s: binary file matches"
+msgstr "%s: двійковий файл містить збіжність"
 
-#: src/grep.c:1624
+#: src/grep.c:1684
 #, c-format
-msgid "warning: %s: %s"
-msgstr "попередження: %s: %s"
+msgid "%s: warning: recursive directory loop"
+msgstr "%s: попередження: зациклення рекурсивного проходу каталогів"
 
-#: src/grep.c:1625
-msgid "recursive directory loop"
-msgstr "зациклення рекурсивного проходу каталогів"
-
-#: src/grep.c:1845
+#: src/grep.c:1904
 #, c-format
-msgid "input file %s is also the output"
-msgstr "файл вхідних даних %s є також файлом вихідних даних"
+msgid "%s: input file is also the output"
+msgstr "%s: файл вхідних даних є також файлом вихідних даних"
 
-#: src/grep.c:1908 src/grep.c:1915
+#: src/grep.c:1966 src/grep.c:1973
 #, c-format
 msgid "Usage: %s [OPTION]... PATTERNS [FILE]...\n"
 msgstr "Використання: %s [ПАРАМЕТР]... ШАБЛОНИ [ФАЙЛ]...\n"
 
-#: src/grep.c:1910
+#: src/grep.c:1968
 #, c-format
 msgid "Try '%s --help' for more information.\n"
 msgstr "Віддайте команду «%s --help», щоб дізнатися більше.\n"
 
-#: src/grep.c:1916
+#: src/grep.c:1974
 #, c-format
 msgid "Search for PATTERNS in each FILE.\n"
 msgstr "Шукати ШАБЛОНИ у кожному ФАЙЛі.\n"
 
-#: src/grep.c:1917
+#: src/grep.c:1975
 #, c-format
 msgid ""
 "Example: %s -i 'hello world' menu.h main.c\n"
@@ -470,7 +466,7 @@ msgstr ""
 "\n"
 "Вибір за взірцем та інтерпретація:\n"
 
-#: src/grep.c:1922
+#: src/grep.c:1980
 #, c-format
 msgid ""
 "  -E, --extended-regexp     PATTERNS are extended regular expressions\n"
@@ -483,7 +479,7 @@ msgstr ""
 "  -G, --basic-regexp        ШАБЛОНИ є звичайними формальними виразами\n"
 "  -P, --perl-regexp         ШАБЛОНИ є формальними виразами Perl\n"
 
-#: src/grep.c:1928
+#: src/grep.c:1986
 #, c-format
 msgid ""
 "  -e, --regexp=PATTERNS     use PATTERNS for matching\n"
@@ -505,7 +501,7 @@ msgstr ""
 "символом\n"
 "                            кінця рядка (\\n)\n"
 
-#: src/grep.c:1936
+#: src/grep.c:1994
 #, c-format
 msgid ""
 "\n"
@@ -522,7 +518,7 @@ msgstr ""
 "  -V, --version             показати дані щодо версії і завершити роботу\n"
 "      --help                показати ці довідкові дані і завершити роботу\n"
 
-#: src/grep.c:1943
+#: src/grep.c:2001
 #, c-format
 msgid ""
 "\n"
@@ -550,7 +546,7 @@ msgstr ""
 "      --label=МІТКА         показувати МІТКУ замість назви файла для "
 "стандартного джерела вхідних даних\n"
 
-#: src/grep.c:1954
+#: src/grep.c:2012
 #, c-format
 msgid ""
 "  -o, --only-matching       show only nonempty parts of lines that match\n"
@@ -568,7 +564,7 @@ msgstr ""
 "match'\n"
 "  -a, --text                те саме, що і --binary-files=text\n"
 
-#: src/grep.c:1961
+#: src/grep.c:2019
 #, c-format
 msgid ""
 "  -I                        equivalent to --binary-files=without-match\n"
@@ -592,8 +588,8 @@ msgstr ""
 "символічними\n"
 "                            посиланнями\n"
 
-#: src/grep.c:1970
-#, fuzzy, c-format
+#: src/grep.c:2028
+#, c-format
 msgid ""
 "      --include=GLOB        search only files that match GLOB (a file "
 "pattern)\n"
@@ -604,14 +600,14 @@ msgid ""
 msgstr ""
 "      --include=ВЗІРЕЦЬ     шукати лише у файлах, назви яких відповідають "
 "ВЗІРЦЮ\n"
-"      --exclude=ВЗІРЕЦЬ     не шукати у файлах і каталогах, назви яких "
-"відповідають ВЗІРЦЮ\n"
+"      --exclude=ВЗІРЕЦЬ     не шукати у файлах, назви яких відповідають "
+"ВЗІРЦЮ\n"
 "      --exclude-from=ФАЙЛ   пропустити файли, назви яких відповідають будь-"
 "якому з шаблонів з ФАЙЛа\n"
 "      --exclude-dir=ВЗІРЕЦЬ пропустити каталоги, назви яких відповідають "
 "ВЗІРЦЮ.\n"
 
-#: src/grep.c:1977
+#: src/grep.c:2035
 #, c-format
 msgid ""
 "  -L, --files-without-match  print only names of FILEs with no selected "
@@ -631,7 +627,7 @@ msgstr ""
 "потрібно)\n"
 "  -Z, --null                вивести байти 0 після назви ФАЙЛа\n"
 
-#: src/grep.c:1983
+#: src/grep.c:2041
 #, c-format
 msgid ""
 "\n"
@@ -649,7 +645,7 @@ msgstr ""
 "  -C, --context=ЧИСЛО        показати ЧИСЛО рядків контексту виведених "
 "даних\n"
 
-#: src/grep.c:1990
+#: src/grep.c:2048
 #, c-format
 msgid ""
 "  -NUM                      same as --context=NUM\n"
@@ -669,56 +665,56 @@ msgstr ""
 "  -U, --binary               не вилучати символи CR на кінці рядка (MSDOS/"
 "Windows)\n"
 
-#: src/grep.c:1997
+#: src/grep.c:2055
 #, c-format
 msgid ""
 "When FILE is '-', read standard input.  With no FILE, read '.' if\n"
 "recursive, '-' otherwise.  With fewer than two FILEs, assume -h.\n"
-"Exit status is 0 if any line (or file if -L) is selected, 1 otherwise;\n"
+"Exit status is 0 if any line is selected, 1 otherwise;\n"
 "if any error occurs and -q is not given, the exit status is 2.\n"
 msgstr ""
 "Якщо ФАЙЛом є «-», читати дані зі стандартного джерела вхідних\n"
 "даних. Якщо не вказано ФАЙЛ, читати «.», якщо режим рекурсивний, і\n"
 "«-», якщо ні. Якщо вказано менше ніж два ФАЙЛи, буде використано -h.\n"
-"Код завершення 0 — якщо було виявлено відповідник рядка (або файла,\n"
-"якщо вказано -L), 1 — коли їх нема, 2 — якщо сталася помилка і не\n"
-"було використано параметр -q.\n"
+"Код завершення 0 — якщо було виявлено відповідник рядка,\n"
+"1 — коли їх нема, 2 — якщо сталася помилка і не було використано\n"
+"параметр -q.\n"
 
-#: src/grep.c:2039
+#: src/grep.c:2097
 msgid "conflicting matchers specified"
 msgstr "задані умови відповідності є суперечливими"
 
-#: src/grep.c:2046
+#: src/grep.c:2104
 msgid "Perl matching not supported in a --disable-perl-regexp build"
 msgstr ""
 "Підтримки встановлення відповідності за правилами Perl у збірках із --"
 "disable-perl-regexp не передбачено"
 
-#: src/grep.c:2048
+#: src/grep.c:2106
 #, c-format
 msgid "invalid matcher %s"
 msgstr "некоректний вираз порівняння %s"
 
-#: src/grep.c:2472
+#: src/grep.c:2579
 #, c-format
 msgid "warning: GREP_OPTIONS is deprecated; please use an alias or script"
 msgstr ""
 "попередження: GREP_OPTIONS вважається застарілою; будь ласка, скористайтеся "
 "альтернативною змінною або скриптом"
 
-#: src/grep.c:2499
+#: src/grep.c:2606
 msgid "unknown devices method"
 msgstr "невідомий спосіб обробки для пристроїв"
 
-#: src/grep.c:2645
+#: src/grep.c:2754
 msgid "invalid max count"
 msgstr "помилкова максимальна кількість"
 
-#: src/grep.c:2703
+#: src/grep.c:2812
 msgid "unknown binary-files type"
 msgstr "невідомий тип двійкових файлів"
 
-#: src/grep.c:2788
+#: src/grep.c:2897
 msgid ""
 "Written by Mike Haertel and others; see\n"
 "<https://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>."
@@ -730,231 +726,35 @@ msgstr ""
 msgid "failed to allocate memory for the PCRE JIT stack"
 msgstr "не вдалося отримати область пам’яті під стек JIT PCRE"
 
-#: src/pcresearch.c:132
+#: src/pcresearch.c:137
 msgid "-P supports only unibyte and UTF-8 locales"
 msgstr "у -P передбачено підтримку лише однобайтових локалей та UTF-8"
 
-#: src/pcresearch.c:138
+#: src/pcresearch.c:143
 msgid "the -P option only supports a single pattern"
 msgstr "аргументом параметра -P може бути лише один шаблон"
 
-#: src/pcresearch.c:181
+#: src/pcresearch.c:187
 msgid "internal error (should never happen)"
 msgstr "внутрішня помилка (такої помилки не повинно було статися)"
 
-#: src/pcresearch.c:224
+#: src/pcresearch.c:230
 msgid "exceeded PCRE's line length limit"
 msgstr "перевищено обмеження на довжину рядка PCRE"
 
-#: src/pcresearch.c:304
+#: src/pcresearch.c:310
 msgid "exhausted PCRE JIT stack"
 msgstr "вичерпано стек JIT PCRE"
 
-#: src/pcresearch.c:308
+#: src/pcresearch.c:314
 msgid "exceeded PCRE's backtracking limit"
 msgstr "перевищено обмеження на зворотне стеження у PCRE"
 
-#: src/pcresearch.c:315
+#: src/pcresearch.c:317
+msgid "exceeded PCRE's recursion limit"
+msgstr "перевищено обмеження на рекурсію у PCRE"
+
+#: src/pcresearch.c:324
 #, c-format
 msgid "internal PCRE error: %d"
 msgstr "внутрішня помилка PCRE: %d"
-
-#~ msgid "%s home page: <https://www.gnu.org/software/%s/>\n"
-#~ msgstr "Домашня сторінка %s: <https://www.gnu.org/software/%s/>\n"
-
-#~ msgid "invalid %s%s argument '%s'"
-#~ msgstr "некоректний аргумент %s%s — «%s»"
-
-#~ msgid "invalid suffix in %s%s argument '%s'"
-#~ msgstr "некоректний суфікс у аргументі %s%s «%s»"
-
-#~ msgid "%s%s argument '%s' too large"
-#~ msgstr "%s%s, аргумент «%s» є занадто об'ємним"
-
-#~ msgid "Mike Haertel"
-#~ msgstr "Mike Haertel"
-
-#~ msgid "internal error"
-#~ msgstr "внутрішня помилка"
-
-#~ msgid "%s: option '--%s' doesn't allow an argument\n"
-#~ msgstr "%s: додавання аргументів до параметра «--%s» не передбачено\n"
-
-#~ msgid "%s: unrecognized option '--%s'\n"
-#~ msgstr "%s: невідомий параметр «--%s»\n"
-
-#~ msgid "%s: option '-W %s' is ambiguous\n"
-#~ msgstr "%s: параметр «-W %s» не є однозначним\n"
-
-#~ msgid "%s: option '-W %s' doesn't allow an argument\n"
-#~ msgstr "%s: додавання аргументів до параметра «-W %s» не передбачено\n"
-
-#~ msgid "%s: option '-W %s' requires an argument\n"
-#~ msgstr "%s: до параметра «-W %s» слід додати аргумент\n"
-
-#~ msgid "lseek failed"
-#~ msgstr "помилка lseek"
-
-#~ msgid "PATTERN is, by default, a basic regular expression (BRE).\n"
-#~ msgstr "ШАБЛОНом, типово, є звичайний формальний вираз (BRE).\n"
-
-#~ msgid ""
-#~ "'egrep' means 'grep -E'.  'fgrep' means 'grep -F'.\n"
-#~ "Direct invocation as either 'egrep' or 'fgrep' is deprecated.\n"
-#~ msgstr ""
-#~ "«egrep» відповідає команді «grep -E». «fgrep» — «grep -F».\n"
-#~ "Безпосередній виклик команд «egrep» та «fgrep» використовувати не варто.\n"
-
-#~ msgid "unescaped ^ or $ not supported with -Pz"
-#~ msgstr ""
-#~ "підтримки неекранованих ^ чи $ при використанні з -Pz не передбачено"
-
-#~ msgid "GNU Grep home page: <%s>\n"
-#~ msgstr "Домашня сторінка GNU Grep: <%s>\n"
-
-#~ msgid "invalid UTF-8 byte sequence in input"
-#~ msgstr "некоректна послідовність байтів UTF-8 у вхідних даних"
-
-#~ msgid "PATTERN is an extended regular expression (ERE).\n"
-#~ msgstr "ШАБЛОНОМ є розширений формальний вираз (ERE).\n"
-
-#~ msgid "Invocation as 'egrep' is deprecated; use 'grep -E' instead.\n"
-#~ msgstr ""
-#~ "Виклик команди «egrep» вважається застарілим, скористайтеся командою "
-#~ "«grep -E».\n"
-
-#~ msgid "PATTERN is a set of newline-separated fixed strings.\n"
-#~ msgstr ""
-#~ "ШАБЛОН є набором незмінних рядків, відокремлених символом нового рядка.\n"
-
-#~ msgid "Invocation as 'fgrep' is deprecated; use 'grep -F' instead.\n"
-#~ msgstr ""
-#~ "Виклик команди «fgrep» вважається застарілим, скористайтеся командою "
-#~ "«grep -F».\n"
-
-#~ msgid "%s can only use the %s pattern syntax"
-#~ msgstr "У %s можна використовувати лише синтаксис шаблонів %s"
-
-#~ msgid "the --mmap option has been a no-op since 2010"
-#~ msgstr "параметр --mmap не обробляється з 2010 року"
-
-#~ msgid "unfinished repeat count"
-#~ msgstr "не завершено лічильник повторів"
-
-#~ msgid "malformed repeat count"
-#~ msgstr "помилкове форматування лічильника повторів"
-
-#~ msgid "writing output"
-#~ msgstr "запис до виводу"
-
-#~ msgid ""
-#~ "in GREP_COLORS=\"%s\", the \"%s\" capacity needs a value (\"=...\"); "
-#~ "skipped"
-#~ msgstr ""
-#~ "у GREP_COLORS=\"%s\" для властивості \"%s\" слід вказати значення (\"=..."
-#~ "\"); пропущено"
-
-#~ msgid ""
-#~ "in GREP_COLORS=\"%s\", the \"%s\" capacity is boolean and cannot take a "
-#~ "value (\"=%s\"); skipped"
-#~ msgstr ""
-#~ "у GREP_COLORS=\"%s\" властивість \"%s\" може приймати лише булеві "
-#~ "значення, а не інші значення (\"=%s\"); пропущено"
-
-#~ msgid "in GREP_COLORS=\"%s\", the \"%s\" capacity %s"
-#~ msgstr "у GREP_COLORS=\"%s\" значення \"%s\" надано властивості %s"
-
-#~ msgid ""
-#~ "stopped processing of ill-formed GREP_COLORS=\"%s\" at remaining "
-#~ "substring \"%s\""
-#~ msgstr ""
-#~ "припинено обробку виразу GREP_COLORS=\"%s\" з помилковим форматуванням, "
-#~ "залишковий підрядок з помилкою: \"%s\""
-
-#~ msgid "out of memory"
-#~ msgstr "недостатньо пам'яті"
-
-#~ msgid "Usage: %s [OPTION]... PATTERN [FILE] ...\n"
-#~ msgstr "Використання: %s [КЛЮЧ]... ШАБЛОН [ФАЙЛ] ...\n"
-
-#~ msgid ""
-#~ "\n"
-#~ "Output control:\n"
-#~ "  -m, --max-count=NUM       stop after NUM matches\n"
-#~ "  -b, --byte-offset         print the byte offset with output lines\n"
-#~ "  -n, --line-number         print line number with output lines\n"
-#~ "      --line-buffered       flush output on every line\n"
-#~ "  -H, --with-filename       print the filename for each match\n"
-#~ "  -h, --no-filename         suppress the prefixing filename on output\n"
-#~ "      --label=LABEL         print LABEL as filename for standard input\n"
-#~ "  -o, --only-matching       show only the part of a line matching "
-#~ "PATTERN\n"
-#~ "  -q, --quiet, --silent     suppress all normal output\n"
-#~ "      --binary-files=TYPE   assume that binary files are TYPE\n"
-#~ "                            TYPE is 'binary', 'text', or 'without-match'\n"
-#~ "  -a, --text                equivalent to --binary-files=text\n"
-#~ "  -I                        equivalent to --binary-files=without-match\n"
-#~ "  -d, --directories=ACTION  how to handle directories\n"
-#~ "                            ACTION is 'read', 'recurse', or 'skip'\n"
-#~ "  -D, --devices=ACTION      how to handle devices, FIFOs and sockets\n"
-#~ "                            ACTION is 'read' or 'skip'\n"
-#~ "  -R, -r, --recursive       equivalent to --directories=recurse\n"
-#~ "      --include=PATTERN     files that match PATTERN will be examined\n"
-#~ "      --exclude=PATTERN     files that match PATTERN will be skipped.\n"
-#~ "      --exclude-from=FILE   files that match PATTERN in FILE will be "
-#~ "skipped.\n"
-#~ "  -L, --files-without-match only print FILE names containing no match\n"
-#~ "  -l, --files-with-matches  only print FILE names containing matches\n"
-#~ "  -c, --count               only print a count of matching lines per "
-#~ "FILE\n"
-#~ "  -Z, --null                print 0 byte after FILE name\n"
-#~ msgstr ""
-#~ "\n"
-#~ "Керування виводом:\n"
-#~ "  -m, --max-count=ЧИСЛО     зупинитися після ЧИСЛа збіжностей\n"
-#~ "  -b, --byte-offset         друкувати зміщеня у байтах із рядками виводу\n"
-#~ "  -n, --line-number         друкувати номери рядків разом із рядками "
-#~ "виводу\n"
-#~ "      --line-buffered       спорожнювати буфер виводу на кожному рядку\n"
-#~ "  -H, --with-filename       друкувати ім'я файла для кожної збіжності\n"
-#~ "  -h, --no-filename         замовчувати ім'я файла для кожної збіжності\n"
-#~ "      --label=МІТКА         друкувати МІТКу як ім'я файлу для\n"
-#~ "                            стандартного вводу\n"
-#~ "  -o, --only-matching       показувати лише частину рядка, що містить "
-#~ "ШАБЛОН\n"
-#~ "  -q, --quiet, --silent     заборонити всі нормальні повідомлення\n"
-#~ "      --binary-files=ТИП    вважати, що двійкові файли є вказаного ТИПу\n"
-#~ "                            ТИП може бути \"binary\", \"text\",\n"
-#~ "                            чи \"without-match\"\n"
-#~ "  -a, --text                те ж саме, що й --binary-files=text\n"
-#~ "  -I                        те ж саме, що й --binary-files=without-match\n"
-#~ "  -d, --directories=ДІЯ     як опрацьовувати каталоги\n"
-#~ "                            ДІЯ може бути \"read\", \"recurse\", чи \"skip"
-#~ "\"\n"
-#~ "  -D, --devices=ДІЯ         як опрацьовувати пристрої, канали та гнізда\n"
-#~ "                            ДІЯ може бути \"read\" чи \"skip\"\n"
-#~ "  -R, -r, --recursive       те ж саме, що й --directories=recurse\n"
-#~ "      --include=ШАБЛОН      перевіряти файли, що відповідають ШАБЛОНу\n"
-#~ "      --exclude=ШАБЛОН      пропускати файли, що відповідають ШАБЛОНу\n"
-#~ "      --exclude-from=ФАЙЛ   пропускати файли, що відповідають ШАБЛОНу з "
-#~ "ФАЙЛу\n"
-#~ "  -L, --files-without-match друкувати лише імена ФАЙЛів, що не мають "
-#~ "збіжностей\n"
-#~ "  -l, --files-with-matches  друкувати лише імена ФАЙЛів, що мають "
-#~ "збіжності\n"
-#~ "  -c, --count               друкувати лише кількість рядків\n"
-#~ "                            зі збіжностями у ФАЙЛі\n"
-#~ "  -Z, --null                друкувати байт \"0\" після імені ФАЙЛа\n"
-
-#~ msgid ""
-#~ "\n"
-#~ "Report bugs to <bug-gnu-utils@gnu.org>.\n"
-#~ msgstr ""
-#~ "\n"
-#~ "Повідомляйте про помилки на <bug-gnu-utils@gnu.org>.\n"
-
-#~ msgid "The -P and -z options cannot be combined"
-#~ msgstr "Ключі -P та -z не можна поєднувати"
-
-#~ msgid "%s: illegal option -- %c\n"
-#~ msgstr "%s: неправильний ключ -- %c\n"

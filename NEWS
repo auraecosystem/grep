@@ -1,5 +1,64 @@
 GNU grep NEWS                                    -*- outline -*-
 
+* Noteworthy changes in release 3.5 (2020-09-27) [stable]
+
+** Changes in behavior
+
+  The message that a binary file matches is now sent to standard error
+  and the message has been reworded from "Binary file FOO matches" to
+  "grep: FOO: binary file matches", to avoid confusion with ordinary
+  output or when file names contain spaces and the like, and to be
+  more consistent with other diagnostics.  For example, commands
+  like 'grep PATTERN FILE | wc' no longer add 1 to the count of
+  matching text lines due to the presence of the message.  Like other
+  stderr messages, the message is now omitted if the --no-messages
+  (-s) option is given.
+
+  Two other stderr messages now use the typical form too.  They are
+  now "grep: FOO: warning: recursive directory loop" and "grep: FOO:
+  input file is also the output".
+
+  The --files-without-match (-L) option has reverted to its behavior
+  in grep 3.1 and earlier.  That is, grep -L again succeeds when a
+  line is selected, not when a file is listed.  The behavior in grep
+  3.2 through 3.4 was causing compatibility problems.
+
+** Bug fixes
+
+  grep -I no longer issues a spurious "Binary file FOO matches" line.
+  [Bug#33552 introduced in grep 2.23]
+
+  In UTF-8 locales, grep -w no longer ignores a multibyte word
+  constituent just before what would otherwise be a word match.
+  [Bug#43225 introduced in grep 2.28]
+
+  grep -i no longer mishandles ASCII characters that match multibyte
+  characters.  For example, 'LC_ALL=tr_TR.utf8 grep -i i' no longer
+  dumps core merely because 'i' matches 'İ' (U+0130 LATIN CAPITAL
+  LETTER I WITH DOT ABOVE) in Turkish when ignoring case.
+  [Bug#43577 introduced partly in grep 2.28 and partly in grep 3.4]
+
+  A performance regression with -E and many patterns has been mostly fixed.
+  "Mostly" as there is a performance tradeoff between Bug#22357 and Bug#40634.
+  [Bug#40634 introduced in grep 2.28]
+
+  A performance regression with many duplicate patterns has been fixed.
+  [Bug#43040 introduced in grep 3.4]
+
+  An N^2 RSS performance regression with many patterns has been fixed
+  in common cases (no backref, and no use of -o or --color).
+  With only 80,000 lines of /usr/share/dict/linux.words, the following
+  would use 100GB of RSS and take 3 minutes. With the fix, it used less
+  than 400MB and took less than one second:
+    head -80000 /usr/share/dict/linux.words > w; grep -vf w w
+  [Bug#43527 introduced in grep 3.4]
+
+** Build-related
+
+  "make dist" builds .tar.gz files again, as they are still used in
+  some barebones builds.
+
+
 * Noteworthy changes in release 3.4 (2020-01-02) [stable]
 
 ** New features

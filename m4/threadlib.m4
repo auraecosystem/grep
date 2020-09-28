@@ -1,4 +1,4 @@
-# threadlib.m4 serial 26
+# threadlib.m4 serial 28
 dnl Copyright (C) 2005-2020 Free Software Foundation, Inc.
 dnl This file is free software; the Free Software Foundation
 dnl gives unlimited permission to copy and/or distribute it,
@@ -81,6 +81,7 @@ dnl Checks whether the compiler and linker support weak declarations of symbols.
 
 AC_DEFUN([gl_WEAK_SYMBOLS],
 [
+  AC_REQUIRE([AC_CANONICAL_HOST])
   AC_CACHE_CHECK([whether imported symbols can be declared weak],
     [gl_cv_have_weak],
     [gl_cv_have_weak=no
@@ -118,6 +119,30 @@ int main ()
      dnl But when linking statically, weak symbols don't work.
      case " $LDFLAGS " in
        *" -static "*) gl_cv_have_weak=no ;;
+     esac
+     dnl Test for a bug in FreeBSD 11: A link error occurs when using a weak
+     dnl symbol and linking against a shared library that has a dependency on
+     dnl the shared library that defines the symbol.
+     case "$gl_cv_have_weak" in
+       *yes)
+         case "$host_os" in
+           freebsd* | dragonfly*)
+             : > conftest1.c
+             $CC $CPPFLAGS $CFLAGS $LDFLAGS -fPIC -shared -o libempty.so conftest1.c -lpthread >&AS_MESSAGE_LOG_FD 2>&1
+             cat <<EOF > conftest2.c
+#include <pthread.h>
+#pragma weak pthread_mutexattr_gettype
+int main ()
+{
+  return (pthread_mutexattr_gettype != NULL);
+}
+EOF
+             $CC $CPPFLAGS $CFLAGS $LDFLAGS -o conftest conftest2.c libempty.so >&AS_MESSAGE_LOG_FD 2>&1 \
+               || gl_cv_have_weak=no
+             rm -f conftest1.c libempty.so conftest2.c conftest
+             ;;
+         esac
+         ;;
      esac
     ])
   case "$gl_cv_have_weak" in
@@ -373,8 +398,8 @@ AC_DEFUN([gl_THREADLIB_EARLY_BODY],
     [m4_divert_text([DEFAULTS], [gl_use_threads_default=])])
   m4_divert_text([DEFAULTS], [gl_use_winpthreads_default=])
   AC_ARG_ENABLE([threads],
-AC_HELP_STRING([--enable-threads={isoc|posix|isoc+posix|windows}], [specify multithreading API])m4_ifdef([gl_THREADLIB_DEFAULT_NO], [], [
-AC_HELP_STRING([--disable-threads], [build without multithread safety])]),
+AS_HELP_STRING([--enable-threads={isoc|posix|isoc+posix|windows}], [specify multithreading API])m4_ifdef([gl_THREADLIB_DEFAULT_NO], [], [
+AS_HELP_STRING([--disable-threads], [build without multithread safety])]),
     [gl_use_threads=$enableval],
     [if test -n "$gl_use_threads_default"; then
        gl_use_threads="$gl_use_threads_default"
