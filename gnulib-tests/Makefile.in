@@ -118,19 +118,20 @@ TESTS = test-accept$(EXEEXT) test-alignof$(EXEEXT) \
 	test-c-ctype$(EXEEXT) test-c-stack.sh test-c-stack2.sh \
 	test-c-strcase.sh test-chdir$(EXEEXT) test-cloexec$(EXEEXT) \
 	test-close$(EXEEXT) test-connect$(EXEEXT) test-ctype$(EXEEXT) \
-	test-dfa-invalid-char-class.sh test-dfa-match.sh \
-	test-dirent$(EXEEXT) test-dup$(EXEEXT) test-dup2$(EXEEXT) \
-	test-environ$(EXEEXT) test-errno$(EXEEXT) test-exclude1.sh \
-	test-exclude2.sh test-exclude3.sh test-exclude4.sh \
-	test-exclude5.sh test-exclude6.sh test-exclude7.sh \
-	test-exclude8.sh test-fchdir$(EXEEXT) test-fcntl-h$(EXEEXT) \
-	test-fcntl-safer$(EXEEXT) test-fcntl$(EXEEXT) \
-	test-fdopen$(EXEEXT) test-fdopendir$(EXEEXT) \
-	test-fgetc$(EXEEXT) test-float$(EXEEXT) \
-	test-fnmatch-h$(EXEEXT) test-fnmatch$(EXEEXT) \
-	test-fopen-gnu$(EXEEXT) test-fopen$(EXEEXT) test-fpending.sh \
-	test-fputc$(EXEEXT) test-fread$(EXEEXT) test-fstat$(EXEEXT) \
-	test-fstatat$(EXEEXT) test-ftruncate.sh test-fwrite$(EXEEXT) \
+	test-dfa-invalid-char-class.sh test-dfa-invalid-merge.sh \
+	test-dfa-match.sh test-dirent$(EXEEXT) test-dup$(EXEEXT) \
+	test-dup2$(EXEEXT) test-environ$(EXEEXT) test-errno$(EXEEXT) \
+	test-exclude1.sh test-exclude2.sh test-exclude3.sh \
+	test-exclude4.sh test-exclude5.sh test-exclude6.sh \
+	test-exclude7.sh test-exclude8.sh test-fchdir$(EXEEXT) \
+	test-fcntl-h$(EXEEXT) test-fcntl-safer$(EXEEXT) \
+	test-fcntl$(EXEEXT) test-fdopen$(EXEEXT) \
+	test-fdopendir$(EXEEXT) test-fgetc$(EXEEXT) \
+	test-float$(EXEEXT) test-fnmatch-h$(EXEEXT) \
+	test-fnmatch$(EXEEXT) test-fopen-gnu$(EXEEXT) \
+	test-fopen$(EXEEXT) test-fpending.sh test-fputc$(EXEEXT) \
+	test-fread$(EXEEXT) test-fstat$(EXEEXT) test-fstatat$(EXEEXT) \
+	test-ftruncate.sh test-fwrite$(EXEEXT) \
 	test-getcwd-lgpl$(EXEEXT) test-getdtablesize$(EXEEXT) \
 	test-getopt-gnu$(EXEEXT) test-getopt-posix$(EXEEXT) \
 	test-getprogname$(EXEEXT) test-gettimeofday$(EXEEXT) \
@@ -1783,6 +1784,7 @@ GMSGFMT_015 = @GMSGFMT_015@
 GNULIB_ACCEPT = @GNULIB_ACCEPT@
 GNULIB_ACCEPT4 = @GNULIB_ACCEPT4@
 GNULIB_ACCESS = @GNULIB_ACCESS@
+GNULIB_ALIGNED_ALLOC = @GNULIB_ALIGNED_ALLOC@
 GNULIB_ALPHASORT = @GNULIB_ALPHASORT@
 GNULIB_ATOLL = @GNULIB_ATOLL@
 GNULIB_BIND = @GNULIB_BIND@
@@ -1939,6 +1941,7 @@ GNULIB_PERROR = @GNULIB_PERROR@
 GNULIB_PIPE = @GNULIB_PIPE@
 GNULIB_PIPE2 = @GNULIB_PIPE2@
 GNULIB_POPEN = @GNULIB_POPEN@
+GNULIB_POSIX_MEMALIGN = @GNULIB_POSIX_MEMALIGN@
 GNULIB_POSIX_OPENPT = @GNULIB_POSIX_OPENPT@
 GNULIB_PREAD = @GNULIB_PREAD@
 GNULIB_PRINTF = @GNULIB_PRINTF@
@@ -2102,6 +2105,7 @@ GNULIB_WRITE = @GNULIB_WRITE@
 GNULIB__EXIT = @GNULIB__EXIT@
 GREP = @GREP@
 HAVE_ACCEPT4 = @HAVE_ACCEPT4@
+HAVE_ALIGNED_ALLOC = @HAVE_ALIGNED_ALLOC@
 HAVE_ALLOCA_H = @HAVE_ALLOCA_H@
 HAVE_ALPHASORT = @HAVE_ALPHASORT@
 HAVE_ARPA_INET_H = @HAVE_ARPA_INET_H@
@@ -2243,6 +2247,7 @@ HAVE_PCLOSE = @HAVE_PCLOSE@
 HAVE_PIPE = @HAVE_PIPE@
 HAVE_PIPE2 = @HAVE_PIPE2@
 HAVE_POPEN = @HAVE_POPEN@
+HAVE_POSIX_MEMALIGN = @HAVE_POSIX_MEMALIGN@
 HAVE_POSIX_OPENPT = @HAVE_POSIX_OPENPT@
 HAVE_POSIX_SIGNALBLOCKING = @HAVE_POSIX_SIGNALBLOCKING@
 HAVE_PREAD = @HAVE_PREAD@
@@ -2584,6 +2589,7 @@ PTHREAD_H_DEFINES_STRUCT_TIMESPEC = @PTHREAD_H_DEFINES_STRUCT_TIMESPEC@
 PTRDIFF_T_SUFFIX = @PTRDIFF_T_SUFFIX@
 RANLIB = @RANLIB@
 REPLACE_ACCESS = @REPLACE_ACCESS@
+REPLACE_ALIGNED_ALLOC = @REPLACE_ALIGNED_ALLOC@
 REPLACE_BTOWC = @REPLACE_BTOWC@
 REPLACE_CALLOC = @REPLACE_CALLOC@
 REPLACE_CANONICALIZE_FILE_NAME = @REPLACE_CANONICALIZE_FILE_NAME@
@@ -2676,6 +2682,7 @@ REPLACE_OPENAT = @REPLACE_OPENAT@
 REPLACE_OPENDIR = @REPLACE_OPENDIR@
 REPLACE_PERROR = @REPLACE_PERROR@
 REPLACE_POPEN = @REPLACE_POPEN@
+REPLACE_POSIX_MEMALIGN = @REPLACE_POSIX_MEMALIGN@
 REPLACE_PREAD = @REPLACE_PREAD@
 REPLACE_PRINTF = @REPLACE_PRINTF@
 REPLACE_PSELECT = @REPLACE_PSELECT@
@@ -2939,9 +2946,9 @@ EXTRA_DIST = accept.c w32sock.h test-accept.c signature.h macros.h \
 	signature.h macros.h connect.c w32sock.h test-connect.c \
 	signature.h macros.h test-ctype.c test-dfa-match.sh \
 	test-dfa-match-aux.c test-dfa-invalid-char-class.sh \
-	test-dirent.c test-dup.c signature.h macros.h test-dup2.c \
-	signature.h macros.h test-environ.c test-errno.c \
-	test-exclude.c test-exclude1.sh test-exclude2.sh \
+	test-dfa-invalid-merge.sh test-dirent.c test-dup.c signature.h \
+	macros.h test-dup2.c signature.h macros.h test-environ.c \
+	test-errno.c test-exclude.c test-exclude1.sh test-exclude2.sh \
 	test-exclude3.sh test-exclude4.sh test-exclude5.sh \
 	test-exclude6.sh test-exclude7.sh test-exclude8.sh \
 	test-fchdir.c signature.h macros.h test-fcntl-h.c test-open.h \
@@ -4601,6 +4608,13 @@ test-dfa-invalid-char-class.sh.log: test-dfa-invalid-char-class.sh
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
 	"$$tst" $(AM_TESTS_FD_REDIRECT)
+test-dfa-invalid-merge.sh.log: test-dfa-invalid-merge.sh
+	@p='test-dfa-invalid-merge.sh'; \
+	b='test-dfa-invalid-merge.sh'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
 test-dfa-match.sh.log: test-dfa-match.sh
 	@p='test-dfa-match.sh'; \
 	b='test-dfa-match.sh'; \
@@ -5888,7 +5902,8 @@ installdirs: installdirs-recursive
 installdirs-am:
 install: $(BUILT_SOURCES)
 	$(MAKE) $(AM_MAKEFLAGS) install-recursive
-install-exec: install-exec-recursive
+install-exec: $(BUILT_SOURCES)
+	$(MAKE) $(AM_MAKEFLAGS) install-exec-recursive
 install-data: install-data-recursive
 uninstall: uninstall-recursive
 
@@ -6444,7 +6459,7 @@ ps-am:
 uninstall-am:
 
 .MAKE: $(am__recursive_targets) all check check-am install install-am \
-	install-strip
+	install-exec install-strip
 
 .PHONY: $(am__recursive_targets) CTAGS GTAGS TAGS all all-am \
 	am--depfiles check check-TESTS check-am clean \

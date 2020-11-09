@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GNU grep-3.1.48\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2020-09-27 19:41-0700\n"
+"POT-Creation-Date: 2020-11-08 20:37-0800\n"
 "PO-Revision-Date: 2019-07-18 22:11+0200\n"
 "Last-Translator: Àngel Mompó <mecatxis@mecatxis.cat>\n"
 "Language-Team: Catalan <ca@dodds.net>\n"
@@ -34,11 +34,11 @@ msgstr "l'argument %s és ambigu per %s"
 msgid "Valid arguments are:"
 msgstr "Els arguments vàlids són:"
 
-#: lib/c-stack.c:227 lib/c-stack.c:340
+#: lib/c-stack.c:225 lib/c-stack.c:338
 msgid "program error"
 msgstr "error del programa"
 
-#: lib/c-stack.c:228 lib/c-stack.c:341
+#: lib/c-stack.c:226 lib/c-stack.c:339
 msgid "stack overflow"
 msgstr "desbordament de la pila"
 
@@ -121,7 +121,7 @@ msgstr "%s: l'opció no és vàlida -- «%c»\n"
 msgid "%s: option requires an argument -- '%c'\n"
 msgstr "%s: l'opció necessita un argument -- «%c»\n"
 
-#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34 src/pcresearch.c:306
+#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34
 msgid "memory exhausted"
 msgstr "memòria exhaurida"
 
@@ -689,24 +689,19 @@ msgstr ""
 msgid "invalid matcher %s"
 msgstr "l'expressió %s no és vàlida"
 
-#: src/grep.c:2579
-#, c-format
-msgid "warning: GREP_OPTIONS is deprecated; please use an alias or script"
-msgstr "avís: GREP_OPTIONS està desfasat; feu servir un alies o un script"
-
-#: src/grep.c:2606
+#: src/grep.c:2541
 msgid "unknown devices method"
 msgstr "el mètode de dispositius és desconegut"
 
-#: src/grep.c:2754
+#: src/grep.c:2689
 msgid "invalid max count"
 msgstr "el comptador de màxims no és vàlid"
 
-#: src/grep.c:2812
+#: src/grep.c:2747
 msgid "unknown binary-files type"
 msgstr "el tipus de fitxer binari és desconegut"
 
-#: src/grep.c:2897
+#: src/grep.c:2832
 #, fuzzy
 msgid ""
 "Written by Mike Haertel and others; see\n"
@@ -734,25 +729,36 @@ msgstr "error intern (no hauria de passar mai)"
 msgid "exceeded PCRE's line length limit"
 msgstr "s'ha superat el límit de longitud de línia del PCRE"
 
+#: src/pcresearch.c:306
+#, fuzzy, c-format
+msgid "%s: memory exhausted"
+msgstr "memòria exhaurida"
+
 #: src/pcresearch.c:310
-msgid "exhausted PCRE JIT stack"
+#, fuzzy, c-format
+msgid "%s: exhausted PCRE JIT stack"
 msgstr "S'ha acabat la pila del PCRE JIT"
 
 # PCRE is 'Perl Compatible Regular Expression'
-#: src/pcresearch.c:314
-msgid "exceeded PCRE's backtracking limit"
+#: src/pcresearch.c:315
+#, fuzzy, c-format
+msgid "%s: exceeded PCRE's backtracking limit"
 msgstr "s'ha superat el límit de l'estratègia «tornada enrere» del PCRE"
 
 # PCRE is 'Perl Compatible Regular Expression'
-#: src/pcresearch.c:317
-#, fuzzy
-msgid "exceeded PCRE's recursion limit"
+#: src/pcresearch.c:319
+#, fuzzy, c-format
+msgid "%s: exceeded PCRE's recursion limit"
 msgstr "s'ha superat el límit de l'estratègia «tornada enrere» del PCRE"
 
-#: src/pcresearch.c:324
-#, c-format
-msgid "internal PCRE error: %d"
+#: src/pcresearch.c:327
+#, fuzzy, c-format
+msgid "%s: internal PCRE error: %d"
 msgstr "error intern del PCRE: %d"
+
+#, c-format
+#~ msgid "warning: GREP_OPTIONS is deprecated; please use an alias or script"
+#~ msgstr "avís: GREP_OPTIONS està desfasat; feu servir un alies o un script"
 
 #, c-format
 #~ msgid "warning: %s: %s"

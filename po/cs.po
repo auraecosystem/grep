@@ -8,10 +8,10 @@
 # Thanks to Stanislav Brabec <utx@k332.feld.cvut.cz>.
 msgid ""
 msgstr ""
-"Project-Id-Version: grep 3.4.31\n"
+"Project-Id-Version: grep 3.5.16\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2020-09-27 19:41-0700\n"
-"PO-Revision-Date: 2020-09-21 20:50+02:00\n"
+"POT-Creation-Date: 2020-11-08 20:37-0800\n"
+"PO-Revision-Date: 2020-11-04 18:53+01:00\n"
 "Last-Translator: Petr Pisar <petr.pisar@atlas.cz>\n"
 "Language-Team: Czech <translation-team-cs@lists.sourceforge.net>\n"
 "Language: cs\n"
@@ -34,11 +34,11 @@ msgstr "nejednoznačný argument %s u %s"
 msgid "Valid arguments are:"
 msgstr "Platné argumenty jsou:"
 
-#: lib/c-stack.c:227 lib/c-stack.c:340
+#: lib/c-stack.c:225 lib/c-stack.c:338
 msgid "program error"
 msgstr "chyba programu"
 
-#: lib/c-stack.c:228 lib/c-stack.c:341
+#: lib/c-stack.c:226 lib/c-stack.c:339
 msgid "stack overflow"
 msgstr "přetečení zásobníku"
 
@@ -122,7 +122,7 @@ msgstr "%s: neznámý přepínač – „%c“\n"
 msgid "%s: option requires an argument -- '%c'\n"
 msgstr "%s: přepínač vyžaduje argument – „%c“\n"
 
-#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34 src/pcresearch.c:306
+#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34
 msgid "memory exhausted"
 msgstr "paměť vyčerpána"
 
@@ -470,7 +470,7 @@ msgid ""
 "  -G, --basic-regexp        PATTERNS are basic regular expressions\n"
 "  -P, --perl-regexp         PATTERNS are Perl regular expressions\n"
 msgstr ""
-"  -E, --extended-regexp     VZORKY jsou rozšíření regulární výrazy\n"
+"  -E, --extended-regexp     VZORKY jsou rozšířené regulární výrazy\n"
 "  -F, --fixed-strings       VZORKY jsou řetězce\n"
 "  -G, --basic-regexp        VZORKY jsou základní regulární výrazy\n"
 "  -P, --perl-regexp         VZORKY jsou regulární výrazy jazyka Perl\n"
@@ -684,25 +684,19 @@ msgstr ""
 msgid "invalid matcher %s"
 msgstr "neplatný syntaxe vzorku %s"
 
-#: src/grep.c:2579
-#, c-format
-msgid "warning: GREP_OPTIONS is deprecated; please use an alias or script"
-msgstr ""
-"pozor: proměnná GREP_OPTIONS je zastaralá, prosím, použijte alias nebo skript"
-
-#: src/grep.c:2606
+#: src/grep.c:2541
 msgid "unknown devices method"
 msgstr "neznámá metoda obsluhy zařízení"
 
-#: src/grep.c:2754
+#: src/grep.c:2689
 msgid "invalid max count"
 msgstr "neplatný maximální počet"
 
-#: src/grep.c:2812
+#: src/grep.c:2747
 msgid "unknown binary-files type"
 msgstr "neznámý typ binárního souboru"
 
-#: src/grep.c:2897
+#: src/grep.c:2832
 msgid ""
 "Written by Mike Haertel and others; see\n"
 "<https://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>."
@@ -730,22 +724,35 @@ msgstr "vnitřní chyba (to by se nikdy nemělo stát)"
 msgid "exceeded PCRE's line length limit"
 msgstr "překročeno omezení PCRE na délku řádku"
 
-#: src/pcresearch.c:310
-msgid "exhausted PCRE JIT stack"
-msgstr "JIT zásobník knihovny PCRE vyčerpán"
-
-#: src/pcresearch.c:314
-msgid "exceeded PCRE's backtracking limit"
-msgstr "překročeno omezení PCRE na hloubku zanoření"
-
-#: src/pcresearch.c:317
-msgid "exceeded PCRE's recursion limit"
-msgstr "překročeno omezení PCRE na hloubku zanoření"
-
-#: src/pcresearch.c:324
+#: src/pcresearch.c:306
 #, c-format
-msgid "internal PCRE error: %d"
-msgstr "vnitřní chyba PCRE: %d"
+msgid "%s: memory exhausted"
+msgstr "%s: paměť vyčerpána"
+
+#: src/pcresearch.c:310
+#, c-format
+msgid "%s: exhausted PCRE JIT stack"
+msgstr "%s: JIT zásobník knihovny PCRE vyčerpán"
+
+#: src/pcresearch.c:315
+#, c-format
+msgid "%s: exceeded PCRE's backtracking limit"
+msgstr "%s: překročeno omezení PCRE na délku návratu"
+
+#: src/pcresearch.c:319
+#, c-format
+msgid "%s: exceeded PCRE's recursion limit"
+msgstr "%s: překročeno omezení PCRE na hloubku zanoření"
+
+#: src/pcresearch.c:327
+#, c-format
+msgid "%s: internal PCRE error: %d"
+msgstr "%s: vnitřní chyba PCRE: %d"
+
+#~ msgid "warning: GREP_OPTIONS is deprecated; please use an alias or script"
+#~ msgstr ""
+#~ "pozor: proměnná GREP_OPTIONS je zastaralá, prosím, použijte alias nebo "
+#~ "skript"
 
 #~ msgid "warning: %s: %s"
 #~ msgstr "varování: %s: %s"

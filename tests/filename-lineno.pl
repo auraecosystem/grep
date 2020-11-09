@@ -37,6 +37,8 @@ $prog = $full_prog_name if $full_prog_name;
 # Transform each to this: "Unmatched [..."
 my $err_subst = {ERR_SUBST => 's/(: Unmatched \[).*/$1.../'};
 
+my $no_pcre = "$prog: Perl matching not supported in a --disable-perl-regexp build\n";
+
 my @Tests =
   (
    # Show that grep now includes filename:lineno in the diagnostic:
@@ -97,6 +99,28 @@ my @Tests =
    ['invalid-re-G-star-paren', '-G "a.*\\)"', {EXIT=>2},
     {ERR => "$prog: Unmatched ) or \\)\n"},
    ],
+   ['invalid-re-P-paren', '-P ")"', {EXIT=>2},
+    {ERR => $ENV{PCRE_WORKS} == 1
+       ? "$prog: unmatched parentheses\n"
+       : $no_pcre
+    },
+   ],
+   ['invalid-re-P-star-paren', '-P "a.*)"', {EXIT=>2},
+    {ERR => $ENV{PCRE_WORKS} == 1
+       ? "$prog: unmatched parentheses\n"
+       : $no_pcre
+    },
+   ],
+
+   # Prior to grep-3.6, the name of the offending file was not printed.
+   ['backtracking-with-file', '-P "((a+)*)+$"', {EXIT=>2},
+    {IN=>{f=>"a"x20 ."b"}},
+    {ERR => $ENV{PCRE_WORKS} == 1
+       ? "$prog: f: exceeded PCRE's backtracking limit\n"
+       : $no_pcre
+    },
+   ],
+
   );
 
 my $save_temps = $ENV{DEBUG};

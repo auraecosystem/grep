@@ -447,6 +447,14 @@
    whether the gnulib module unistr/u8-uctomb shall be considered present. */
 #undef GNULIB_UNISTR_U8_UCTOMB
 
+/* Define to a C preprocessor expression that evaluates to 1 or 0, depending
+   whether the gnulib module xalloc shall be considered present. */
+#undef GNULIB_XALLOC
+
+/* Define to a C preprocessor expression that evaluates to 1 or 0, depending
+   whether the gnulib module xalloc-die shall be considered present. */
+#undef GNULIB_XALLOC_DIE
+
 /* We are building grep */
 #undef GREP
 
@@ -1022,6 +1030,10 @@
    bytes (excluding the terminating NUL) that would have been produced if the
    buffer had been large enough. */
 #undef HAVE_SNPRINTF_RETVAL_C99
+
+/* Define if the string produced by the snprintf function is always NUL
+   terminated. */
+#undef HAVE_SNPRINTF_TRUNCATION_C99
 
 /* Define if the locale_t type is as on Solaris 11.4. */
 #undef HAVE_SOLARIS114_LOCALES

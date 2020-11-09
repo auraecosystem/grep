@@ -1,4 +1,130 @@
+2020-11-08  Jim Meyering  <meyering@fb.com>
+
+	version 3.6
+	* NEWS: Record release date.
+
+2020-11-05  Jim Meyering  <meyering@fb.com>
+
+	build: update gnulib to latest for test improvements
+
+2020-11-03  Jim Meyering  <meyering@fb.com>
+
+	build: update gnulib to latest for C++-ready dfa.h and test-verify.c fix
+
+2020-11-03  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: remove GREP_OPTIONS
+	* NEWS: Mention this.
+	* doc/grep.in.1:
+	Remove GREP_OPTIONS documentation.
+	* doc/grep.texi (Environment Variables):
+	Move GREP_OPTIONS stuff into a “no longer implemented” paragraph.
+	* src/grep.c (prepend_args, prepend_default_options): Remove.
+	(main): Do not look at GREP_OPTIONS.
+	* tests/Makefile.am (TESTS_ENVIRONMENTS):
+	* tests/init.cfg (vars_): Remove GREP_OPTIONS.
+
+2020-11-01  Norihiro Tanaka  <noritnk@kcn.ne.jp>
+
+	grep: use RE_NO_SUB when calling regex solely to check syntax
+	* src/dfasearch.c (regex_compile): New parameter. All callers changed.
+	(GEAcompile): Move setting syntax for regex into regex_compile()
+	function.  This addresses a performance problem exposed by extreme
+	regular expressions, as described in https://bugs.gnu.org/43862 .
+
+	tests: add the test for bugfix in gnulib's dfa
+	* tests/ere.tests: Add new test.
+
+2020-11-01  Jim Meyering  <meyering@fb.com>
+
+	grep: avoid erroneous matches for e.g., a+a+a+
+	* gnulib: Update to latest, for dfa's invalid-merge fix.
+	* NEWS (Bug fixes): Mention this.
+
+2020-10-11  Jim Meyering  <meyering@fb.com>
+
+	grep: -P: report input filename upon PCRE execution failure
+	Without this, it could be tedious to determine which input
+	file evokes a PCRE-execution-time failure.
+	* src/pcresearch.c (Pexecute): When failing, include the
+	error-provoking file name in the diagnostic.
+	* src/grep.c (input_filename): Make extern, since used above.
+	* src/search.h (input_filename): Declare.
+	* tests/filename-lineno.pl: Test for this.
+	($no_pcre): Factor out.
+	* NEWS (Bug fixes): Mention this.
+
+2020-10-11  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: minor kwset cleanups
+	* src/kwsearch.c (Fexecute):
+	Assume C99 to put declarations nearer uses.
+	* src/kwset.c (bmexec): Omit unnecessary test.
+	* src/kwset.h (struct kwsmatch): Make OFFSET and SIZE individual
+	elements, not arrays of size 1 (a revenant of an earlier API).
+	All uses changed.
+
+2020-10-11  Norihiro Tanaka  <noritnk@kcn.ne.jp>
+
+	grep: remove unused code
+	* src/kwsearch.c (Fcompile, Fexecute): Remove unused code.  No longer these
+	are used after commit 016e590a8198009bce0e1078f6d4c7e037e2df3c.
+
+2020-10-05  Paul Eggert  <eggert@cs.ucla.edu>
+
+	build: update gnulib submodule to latest
+
+2020-10-05  Jim Meyering  <meyering@fb.com>
+
+	tests: correct filename-lineno.pl
+	* tests/filename-lineno.pl: Remove a stray envvar
+	that somehow slipped into expected output string.
+
+2020-10-05  Paul Eggert  <eggert@cs.ucla.edu>
+
+	tests: fix tests when PCRE is not used
+	* tests/Makefile.am (TESTS_ENVIRONMENT):
+	Set PATH before setting PCRE_WORKS, so that the latter test
+	uses the just-built grep.
+	* tests/filename-lineno.pl (invalid-re-P-paren)
+	(invalid-re-P-star-paren): Adjust non-PCRE case to match
+	recently-changed behavior.
+
+	build: update gnulib submodule to latest
+
+2020-10-03  Paul Eggert  <eggert@cs.ucla.edu>
+
+	doc: document --include/--exclude better
+	Problem reported by John Ruckstuhl (Bug#43782).
+	* doc/grep.texi (File and Directory Selection):
+	Document what happens if contradictory options are given,
+	or if no option matches a file name.
+	* doc/grep.in.1:
+
+2020-10-01  Jim Meyering  <meyering@fb.com>
+
+	maint: add technically-required quotes
+	* configure.ac: Quote args of AC_CONFIG_AUX_DIR, AC_CONFIG_SRCDIR
+	and AC_CHECK_FUNCS_ONCE.
+
+2020-09-28  Jim Meyering  <meyering@fb.com>
+
+	tests: restore deleted -P tests
+	v3.4-almost-45-g8577dda deleted these two -P-using tests because a
+	grep built without PCRE support would fail those tests. This sets
+	an envvar with the equivalent of the result from the require_pcre_
+	function and restores the now-guarded tests. Tested by running this:
+	  ./configure --disable-perl-regexp && make check
+	* tests/Makefile.am (PCRE_WORKS): Set this envvar.
+	* tests/filename-lineno.pl: Restore invalid-re-P-paren and
+	invalid-re-P-star-paren, now each with a guard.
+
 2020-09-27  Jim Meyering  <meyering@fb.com>
+
+	maint: post-release administrivia
+	* NEWS: Add header line for next release.
+	* .prev-version: Record previous version.
+	* cfg.mk (old_NEWS_hash): Auto-update.
 
 	version 3.5
 	* NEWS: Record release date.

@@ -1,5 +1,26 @@
 GNU grep NEWS                                    -*- outline -*-
 
+* Noteworthy changes in release 3.6 (2020-11-08) [stable]
+
+** Changes in behavior
+
+  The GREP_OPTIONS environment variable no longer affects grep's behavior.
+  The variable was declared obsolescent in grep 2.21 (2014), and since
+  then any use had caused grep to issue a diagnostic.
+
+** Bug fixes
+
+  grep's DFA matcher performed an invalid regex transformation
+  that would convert an ERE like a+a+a+ to a+a+, which would make
+  grep a+a+a+ mistakenly match "aa".
+  [Bug#44351 introduced in grep 3.2]
+
+  grep -P now reports the troublesome input filename upon PCRE execution
+  failure.  Before, searching many files for something rare might fail with
+  just "exceeded PCRE's backtracking limit".  Now, it also reports which file
+  triggered the failure.
+
+
 * Noteworthy changes in release 3.5 (2020-09-27) [stable]
 
 ** Changes in behavior

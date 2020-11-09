@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grep 2.5g\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2020-09-27 19:41-0700\n"
+"POT-Creation-Date: 2020-11-08 20:37-0800\n"
 "PO-Revision-Date: 2004-03-03 13:33+0200\n"
 "Last-Translator: Petri Jooste <rkwjpj@puk.ac.za>\n"
 "Language-Team: Afrikaans <i18n@af.org.za>\n"
@@ -30,11 +30,11 @@ msgstr ""
 msgid "Valid arguments are:"
 msgstr ""
 
-#: lib/c-stack.c:227 lib/c-stack.c:340
+#: lib/c-stack.c:225 lib/c-stack.c:338
 msgid "program error"
 msgstr ""
 
-#: lib/c-stack.c:228 lib/c-stack.c:341
+#: lib/c-stack.c:226 lib/c-stack.c:339
 msgid "stack overflow"
 msgstr ""
 
@@ -125,7 +125,7 @@ msgstr "%s: ongeldige opsie -- %c\n"
 msgid "%s: option requires an argument -- '%c'\n"
 msgstr "%s: opsie benodig 'n parameter -- %c\n"
 
-#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34 src/pcresearch.c:306
+#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34
 msgid "memory exhausted"
 msgstr "geheue uitgeput"
 
@@ -627,24 +627,19 @@ msgstr ""
 msgid "invalid matcher %s"
 msgstr "ongeldige maks-telling"
 
-#: src/grep.c:2579
-#, c-format
-msgid "warning: GREP_OPTIONS is deprecated; please use an alias or script"
-msgstr ""
-
-#: src/grep.c:2606
+#: src/grep.c:2541
 msgid "unknown devices method"
 msgstr "onbekende metode vir toestelle"
 
-#: src/grep.c:2754
+#: src/grep.c:2689
 msgid "invalid max count"
 msgstr "ongeldige maks-telling"
 
-#: src/grep.c:2812
+#: src/grep.c:2747
 msgid "unknown binary-files type"
 msgstr "onbekende binêre-lêertipe"
 
-#: src/grep.c:2897
+#: src/grep.c:2832
 msgid ""
 "Written by Mike Haertel and others; see\n"
 "<https://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>."
@@ -671,21 +666,29 @@ msgstr ""
 msgid "exceeded PCRE's line length limit"
 msgstr ""
 
+#: src/pcresearch.c:306
+#, fuzzy, c-format
+msgid "%s: memory exhausted"
+msgstr "geheue uitgeput"
+
 #: src/pcresearch.c:310
-msgid "exhausted PCRE JIT stack"
-msgstr ""
-
-#: src/pcresearch.c:314
-msgid "exceeded PCRE's backtracking limit"
-msgstr ""
-
-#: src/pcresearch.c:317
-msgid "exceeded PCRE's recursion limit"
-msgstr ""
-
-#: src/pcresearch.c:324
 #, c-format
-msgid "internal PCRE error: %d"
+msgid "%s: exhausted PCRE JIT stack"
+msgstr ""
+
+#: src/pcresearch.c:315
+#, c-format
+msgid "%s: exceeded PCRE's backtracking limit"
+msgstr ""
+
+#: src/pcresearch.c:319
+#, c-format
+msgid "%s: exceeded PCRE's recursion limit"
+msgstr ""
+
+#: src/pcresearch.c:327
+#, c-format
+msgid "%s: internal PCRE error: %d"
 msgstr ""
 
 #, fuzzy, c-format

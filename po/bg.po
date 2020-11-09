@@ -5,10 +5,10 @@
 # Alexander Shopov <ash@kambanaria.org>, 2015, 2016, 2017, 2018, 2019, 2020.
 msgid ""
 msgstr ""
-"Project-Id-Version: grep 3.4.31\n"
+"Project-Id-Version: grep 3.5.16\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2020-09-27 19:41-0700\n"
-"PO-Revision-Date: 2020-09-20 16:36+0200\n"
+"POT-Creation-Date: 2020-11-08 20:37-0800\n"
+"PO-Revision-Date: 2020-11-04 14:01+0100\n"
 "Last-Translator: Alexander Shopov <ash@kambanaria.org>\n"
 "Language-Team: Bulgarian <dict@ludost.net>\n"
 "Language: bg\n"
@@ -32,11 +32,11 @@ msgstr "аргументът „%s“ на опцията „%s“ не е ед�
 msgid "Valid arguments are:"
 msgstr "Възможните аргументи са:"
 
-#: lib/c-stack.c:227 lib/c-stack.c:340
+#: lib/c-stack.c:225 lib/c-stack.c:338
 msgid "program error"
 msgstr "програмна грешка"
 
-#: lib/c-stack.c:228 lib/c-stack.c:341
+#: lib/c-stack.c:226 lib/c-stack.c:339
 msgid "stack overflow"
 msgstr "препълване на стека"
 
@@ -119,7 +119,7 @@ msgstr "%s: неправилна опция — „%c“\n"
 msgid "%s: option requires an argument -- '%c'\n"
 msgstr "%s: опцията изисква аргумент — „%c“\n"
 
-#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34 src/pcresearch.c:306
+#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34
 msgid "memory exhausted"
 msgstr "паметта е изчерпана"
 
@@ -689,27 +689,19 @@ msgstr ""
 msgid "invalid matcher %s"
 msgstr "неправилен израз „%s“"
 
-#: src/grep.c:2579
-#, c-format
-msgid "warning: GREP_OPTIONS is deprecated; please use an alias or script"
-msgstr ""
-"предупреждение: променливата „GREP_OPTIONS“ е остаряла. Ползвайте синоним "
-"на\n"
-"обвивката или скрипт"
-
-#: src/grep.c:2606
+#: src/grep.c:2541
 msgid "unknown devices method"
 msgstr "неизвестен метод за обработка на специалните файлове"
 
-#: src/grep.c:2754
+#: src/grep.c:2689
 msgid "invalid max count"
 msgstr "неправилен максимален брой"
 
-#: src/grep.c:2812
+#: src/grep.c:2747
 msgid "unknown binary-files type"
 msgstr "непознат вид двоичен файл"
 
-#: src/grep.c:2897
+#: src/grep.c:2832
 msgid ""
 "Written by Mike Haertel and others; see\n"
 "<https://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>."
@@ -738,19 +730,27 @@ msgstr "вътрешна грешка, която не трябва да въз�
 msgid "exceeded PCRE's line length limit"
 msgstr "максималният размер на реда за „PCRE“ е превишен"
 
-#: src/pcresearch.c:310
-msgid "exhausted PCRE JIT stack"
-msgstr "паметта за стека за изпълнение на шаблоните за „PCRE“ свърши"
-
-#: src/pcresearch.c:314
-msgid "exceeded PCRE's backtracking limit"
-msgstr "максималният брой връщания при рекурсия на „PCRE“ е превишен"
-
-#: src/pcresearch.c:317
-msgid "exceeded PCRE's recursion limit"
-msgstr "превишен е максимумът за рекурсия на „PCRE“"
-
-#: src/pcresearch.c:324
+#: src/pcresearch.c:306
 #, c-format
-msgid "internal PCRE error: %d"
-msgstr "вътрешна грешка на „PCRE“: %d"
+msgid "%s: memory exhausted"
+msgstr "%s: паметта е изчерпана"
+
+#: src/pcresearch.c:310
+#, c-format
+msgid "%s: exhausted PCRE JIT stack"
+msgstr "%s: паметта за стека за изпълнение на шаблоните за „PCRE“ свърши"
+
+#: src/pcresearch.c:315
+#, c-format
+msgid "%s: exceeded PCRE's backtracking limit"
+msgstr "%s: максималният брой връщания при рекурсия на „PCRE“ е превишен"
+
+#: src/pcresearch.c:319
+#, c-format
+msgid "%s: exceeded PCRE's recursion limit"
+msgstr "%s: превишен е максимумът за рекурсия на „PCRE“"
+
+#: src/pcresearch.c:327
+#, c-format
+msgid "%s: internal PCRE error: %d"
+msgstr "%s: вътрешна грешка на „PCRE“: %d"
