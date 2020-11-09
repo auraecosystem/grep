@@ -1,6 +1,4 @@
-grep (3.6-1~1.gbp56567f) UNRELEASED; urgency=low
-
-  ** SNAPSHOT build @56567f2315323e46323c6074024ed8373e7fde88 **
+grep (3.6-1) unstable; urgency=low
 
    [ Debian Janitor ]
   * Use secure URI in Homepage field.
@@ -20,7 +18,7 @@ grep (3.6-1~1.gbp56567f) UNRELEASED; urgency=low
   * Add Description: to d/patches/02-man_rgrep.patch
   * Remove extra signatures in d/upstream/signing-key.asc
 
- -- Santiago Ruano Rincón <santiago@debian.org>  Mon, 09 Nov 2020 11:28:48 +0100
+ -- Santiago Ruano Rincón <santiago@debian.org>  Mon, 09 Nov 2020 21:37:02 +0100
 
 grep (3.4-1) unstable; urgency=low
 
