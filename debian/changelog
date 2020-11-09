@@ -1,6 +1,6 @@
-grep (3.5-1~1.gbp4249aa) UNRELEASED; urgency=medium
+grep (3.6-1~1.gbp56567f) UNRELEASED; urgency=low
 
-  ** SNAPSHOT build @4249aa22a4525e33e2dc1edfe0567065e7b4b2dc **
+  ** SNAPSHOT build @56567f2315323e46323c6074024ed8373e7fde88 **
 
    [ Debian Janitor ]
   * Use secure URI in Homepage field.
@@ -10,10 +10,17 @@ grep (3.5-1~1.gbp4249aa) UNRELEASED; urgency=medium
   * Set upstream metadata fields: Repository, Repository-Browse.
 
   [ Santiago Ruano Rincón ]
-  * New upstream version 3.5
+  * New upstream version 3.6
   * update debian/gbp.conf
+  * Add debian/NEWS to document that GREP_OPTIONS no longer affects grep's
+    behaviour
+  * Use https in the debian/watch URL
+  * Remove Build-Deps on autotools-dev and dh-autoreconf. debhelper=10 enables
+    them by default
+  * Add Description: to d/patches/02-man_rgrep.patch
+  * Remove extra signatures in d/upstream/signing-key.asc
 
- -- Santiago Ruano Rincón <santiago@bartik>  Mon, 28 Sep 2020 11:26:58 +0200
+ -- Santiago Ruano Rincón <santiago@debian.org>  Mon, 09 Nov 2020 11:28:48 +0100
 
 grep (3.4-1) unstable; urgency=low
 
