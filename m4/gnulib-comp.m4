@@ -228,7 +228,6 @@ AC_DEFUN([gl_EARLY],
   # Code from module largefile:
   AC_REQUIRE([AC_SYS_LARGEFILE])
   # Code from module libc-config:
-  # Code from module libsigsegv:
   # Code from module limits-h:
   # Code from module limits-h-tests:
   # Code from module listen:
@@ -756,7 +755,6 @@ AC_DEFUN([gl_INIT],
   gl_LANGINFO_H
   AC_REQUIRE([gl_LARGEFILE])
   gl___INLINE
-  gl_LIBSIGSEGV
   gl_LIMITS_H
   gl_LOCALCHARSET
   dnl For backward compatibility. Some packages still use this.
@@ -1140,6 +1138,8 @@ AC_DEFUN([gl_INIT],
   fi
   gl_WCHAR_MODULE_INDICATOR([wmempcpy])
   gl_XALLOC
+  gl_MODULE_INDICATOR([xalloc])
+  gl_MODULE_INDICATOR([xalloc-die])
   gl_XSTRTOL
   # End of code from modules
   m4_ifval(gl_LIBSOURCES_LIST, [
@@ -2134,6 +2134,7 @@ AC_DEFUN([gl_FILE_LIST], [
   tests/test-connect.c
   tests/test-ctype.c
   tests/test-dfa-invalid-char-class.sh
+  tests/test-dfa-invalid-merge.sh
   tests/test-dfa-match-aux.c
   tests/test-dfa-match.sh
   tests/test-dirent.c

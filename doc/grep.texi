@@ -728,6 +728,10 @@ this is equivalent to the @samp{--binary-files=without-match} option.
 @cindex searching directory trees
 Search only files whose name matches @var{glob},
 using wildcard matching as described under @option{--exclude}.
+If contradictory @option{--include} and @option{--exclude} options are
+given, the last matching one wins.  If no @option{--include} or
+@option{--exclude} options match, a file is included unless the first
+such option is @option{--include}.
 
 @item -r
 @itemx --recursive
@@ -882,24 +886,6 @@ the @code{terminfo} library.
 @cindex environment variables
 
 @table @env
-
-@item GREP_OPTIONS
-@vindex GREP_OPTIONS @r{environment variable}
-@cindex default options environment variable
-This variable specifies default options to be placed in front of any
-explicit options.
-As this causes problems when writing portable scripts, this feature
-will be removed in a future release of @command{grep}, and @command{grep}
-warns if it is used.  Please use an alias or script instead.
-For example, if @command{grep} is in the directory @samp{/usr/bin} you
-can prepend @file{$HOME/bin} to your @env{PATH} and create an
-executable script @file{$HOME/bin/grep} containing the following:
-
-@example
-#! /bin/sh
-export PATH=/usr/bin
-exec grep --color=auto --devices=skip "$@@"
-@end example
 
 @item GREP_COLOR
 @vindex GREP_COLOR @r{environment variable}
@@ -1092,6 +1078,20 @@ This behavior is available only with the GNU C library,
 and only when @env{POSIXLY_CORRECT} is not set.
 
 @end table
+
+The @env{GREP_OPTIONS} environment variable of @command{grep} 2.20 and
+earlier is no longer supported, as it caused problems when writing
+portable scripts.  To make arbitrary changes to how @command{grep}
+works, you can use an alias or script instead.  For example, if
+@command{grep} is in the directory @samp{/usr/bin} you can prepend
+@file{$HOME/bin} to your @env{PATH} and create an executable script
+@file{$HOME/bin/grep} containing the following:
+
+@example
+#! /bin/sh
+export PATH=/usr/bin
+exec grep --color=auto --devices=skip "$@@"
+@end example
 
 
 @node Exit Status

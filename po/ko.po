@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GNU grep 3.3.42\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2020-09-27 19:41-0700\n"
+"POT-Creation-Date: 2020-11-08 20:37-0800\n"
 "PO-Revision-Date: 2020-07-12 00:45+0900\n"
 "Last-Translator: Seong-ho Cho <darkcircle.0426@gmail.com>\n"
 "Language-Team: Korean <translation-team-ko@googlegroups.com>\n"
@@ -33,11 +33,11 @@ msgstr "%2$s 대상 모호한 인자 %1$s"
 msgid "Valid arguments are:"
 msgstr "유효한 인자는 다음과 같습니다:"
 
-#: lib/c-stack.c:227 lib/c-stack.c:340
+#: lib/c-stack.c:225 lib/c-stack.c:338
 msgid "program error"
 msgstr "프로그램 오류"
 
-#: lib/c-stack.c:228 lib/c-stack.c:341
+#: lib/c-stack.c:226 lib/c-stack.c:339
 msgid "stack overflow"
 msgstr "스택 오버플로우"
 
@@ -120,7 +120,7 @@ msgstr "%s: 잘못된 옵션 -- '%c'\n"
 msgid "%s: option requires an argument -- '%c'\n"
 msgstr "%s: 이 옵션은 인자가 필요합니다 -- '%c'\n"
 
-#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34 src/pcresearch.c:306
+#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34
 msgid "memory exhausted"
 msgstr "메모리가 바닥남"
 
@@ -674,26 +674,19 @@ msgstr ""
 msgid "invalid matcher %s"
 msgstr "잘못된 비교 기준 %s"
 
-#: src/grep.c:2579
-#, c-format
-msgid "warning: GREP_OPTIONS is deprecated; please use an alias or script"
-msgstr ""
-"경고: GREP_OPTIONS 변수는 더이상 지원하지 않습니다. alias 또는 스크립트를 활"
-"용하십시오"
-
-#: src/grep.c:2606
+#: src/grep.c:2541
 msgid "unknown devices method"
 msgstr "알 수 없는 장치 방식"
 
-#: src/grep.c:2754
+#: src/grep.c:2689
 msgid "invalid max count"
 msgstr "찰못된 최대 갯수"
 
-#: src/grep.c:2812
+#: src/grep.c:2747
 msgid "unknown binary-files type"
 msgstr "알 수 없는 바이너리 파일 형식"
 
-#: src/grep.c:2897
+#: src/grep.c:2832
 msgid ""
 "Written by Mike Haertel and others; see\n"
 "<https://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>."
@@ -721,23 +714,36 @@ msgstr "내부 오류 (나타나면 안됨)"
 msgid "exceeded PCRE's line length limit"
 msgstr "PCRE 행 길이 한계 초과"
 
+#: src/pcresearch.c:306
+#, fuzzy, c-format
+msgid "%s: memory exhausted"
+msgstr "메모리가 바닥남"
+
 #: src/pcresearch.c:310
-msgid "exhausted PCRE JIT stack"
+#, fuzzy, c-format
+msgid "%s: exhausted PCRE JIT stack"
 msgstr "PCRE JIT 스택 가득 참"
 
-#: src/pcresearch.c:314
-msgid "exceeded PCRE's backtracking limit"
+#: src/pcresearch.c:315
+#, fuzzy, c-format
+msgid "%s: exceeded PCRE's backtracking limit"
 msgstr "PCRE 후위 추적 한계 초과"
 
-#: src/pcresearch.c:317
-#, fuzzy
-msgid "exceeded PCRE's recursion limit"
+#: src/pcresearch.c:319
+#, fuzzy, c-format
+msgid "%s: exceeded PCRE's recursion limit"
 msgstr "PCRE 후위 추적 한계 초과"
 
-#: src/pcresearch.c:324
-#, c-format
-msgid "internal PCRE error: %d"
+#: src/pcresearch.c:327
+#, fuzzy, c-format
+msgid "%s: internal PCRE error: %d"
 msgstr "내부 PCRE 오류: %d"
+
+#, c-format
+#~ msgid "warning: GREP_OPTIONS is deprecated; please use an alias or script"
+#~ msgstr ""
+#~ "경고: GREP_OPTIONS 변수는 더이상 지원하지 않습니다. alias 또는 스크립트를 "
+#~ "활용하십시오"
 
 #, c-format
 #~ msgid "warning: %s: %s"

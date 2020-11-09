@@ -237,7 +237,6 @@ TESTS_ENVIRONMENT =				\
   LOCALE_FR='$(LOCALE_FR)'			\
   LOCALE_FR_UTF8='$(LOCALE_FR_UTF8)'		\
   AWK=$(AWK)					\
-  GREP_OPTIONS=''				\
   LC_ALL=C					\
   abs_top_builddir='$(abs_top_builddir)'	\
   abs_top_srcdir='$(abs_top_srcdir)'		\
@@ -255,7 +254,13 @@ TESTS_ENVIRONMENT =				\
   PERL='$(PERL)'				\
   SHELL='$(SHELL)'				\
   PATH='$(abs_top_builddir)/src$(PATH_SEPARATOR)'"$$PATH" \
-  ; 9>&2
+  ;						\
+						\
+  : 'set this envvar to indicate whether -P works';	\
+  m=0; if err=`echo .|grep -Pq . 2>&1`; then		\
+    test -z "$$err" && m=1; fi;				\
+  export PCRE_WORKS=$$m;				\
+  9>&2
 
 LOG_COMPILER = $(SHELL)
 

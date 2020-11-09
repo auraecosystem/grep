@@ -8,10 +8,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: grep-3.3.42\n"
+"Project-Id-Version: grep-3.4.31\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2020-09-27 19:41-0700\n"
-"PO-Revision-Date: 2020-01-02 10:43+0100\n"
+"POT-Creation-Date: 2020-11-08 20:37-0800\n"
+"PO-Revision-Date: 2020-09-28 09:18+0200\n"
 "Last-Translator: Milo Casagrande <milo@milo.name>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
 "Language: it\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Bugs: Report translation errors to the Language-Team address.\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
-"X-Generator: Poedit 2.2.3\n"
+"X-Generator: Poedit 2.4.1\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #: lib/argmatch.c:132
@@ -37,11 +37,11 @@ msgstr "argomento %s ambiguo per %s"
 msgid "Valid arguments are:"
 msgstr "Gli argomenti validi sono:"
 
-#: lib/c-stack.c:227 lib/c-stack.c:340
+#: lib/c-stack.c:225 lib/c-stack.c:338
 msgid "program error"
 msgstr "errore del programma"
 
-#: lib/c-stack.c:228 lib/c-stack.c:341
+#: lib/c-stack.c:226 lib/c-stack.c:339
 msgid "stack overflow"
 msgstr "overflow dello stack"
 
@@ -124,7 +124,7 @@ msgstr "%s: opzione non valida -- \"%c\"\n"
 msgid "%s: option requires an argument -- '%c'\n"
 msgstr "%s: l'opzione richiede un argomento -- \"%c\"\n"
 
-#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34 src/pcresearch.c:306
+#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34
 msgid "memory exhausted"
 msgstr "memoria esaurita"
 
@@ -422,19 +422,19 @@ msgid "input is too large to count"
 msgstr "l'input è troppo grande per essere contato"
 
 #: src/grep.c:1646
-#, fuzzy, c-format
+#, c-format
 msgid "%s: binary file matches"
-msgstr "Il file binario %s corrisponde\n"
+msgstr "%s: il file binario corrisponde"
 
 #: src/grep.c:1684
-#, fuzzy, c-format
+#, c-format
 msgid "%s: warning: recursive directory loop"
-msgstr "ciclo ricorsivo di directory"
+msgstr "%s: attenzione: ciclo ricorsivo di directory"
 
 #: src/grep.c:1904
-#, fuzzy, c-format
+#, c-format
 msgid "%s: input file is also the output"
-msgstr "il file di input %s è anche l'output"
+msgstr "%s: il file di input è anche l'output"
 
 #: src/grep.c:1966 src/grep.c:1973
 #, c-format
@@ -580,7 +580,7 @@ msgstr ""
 "                            simbolici\n"
 
 #: src/grep.c:2028
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "      --include=GLOB        search only files that match GLOB (a file "
 "pattern)\n"
@@ -589,9 +589,9 @@ msgid ""
 "FILE\n"
 "      --exclude-dir=GLOB    skip directories that match GLOB\n"
 msgstr ""
-"      --include=GLOB        Esamina i file corrispondenti a GLOB (modello di "
-"file)\n"
-"      --exclude=GLOB        Salta file e directory corrispondenti a GLOB\n"
+"      --include=GLOB        Esamina solo i file corrispondenti a GLOB "
+"(modello di file)\n"
+"      --exclude=GLOB        Salta file corrispondenti a GLOB\n"
 "      --exclude-from=FILE   Salta i file corrispondenti ai modelli nel FILE\n"
 "      --exclude-dir=GLOB    Salta le directory corrispondenti a GLOB\n"
 
@@ -652,7 +652,7 @@ msgstr ""
 "\n"
 
 #: src/grep.c:2055
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "When FILE is '-', read standard input.  With no FILE, read '.' if\n"
 "recursive, '-' otherwise.  With fewer than two FILEs, assume -h.\n"
@@ -663,9 +663,8 @@ msgstr ""
 "se in\n"
 "modalità ricorsiva, altrimenti \"-\". Se sono stati specificati meno di due "
 "FILE\n"
-"presume -h. Esce con lo stato 0 se è stata selezionata almeno una riga\n"
-"(o file con -L), 1 altrimenti. Se si verifica un errore e l'opzione -q non "
-"è\n"
+"presume -h. Esce con lo stato 0 se è stata selezionata almeno una riga,\n"
+"1 altrimenti. Se si verifica un errore e l'opzione -q non è\n"
 "stata usata, lo stato di uscita è 2.\n"
 
 #: src/grep.c:2097
@@ -683,24 +682,19 @@ msgstr ""
 msgid "invalid matcher %s"
 msgstr "corrispondenza %s non valida"
 
-#: src/grep.c:2579
-#, c-format
-msgid "warning: GREP_OPTIONS is deprecated; please use an alias or script"
-msgstr "attenzione: GREP_OPTIONS è deprecata, utilizzare un alias o uno script"
-
-#: src/grep.c:2606
+#: src/grep.c:2541
 msgid "unknown devices method"
 msgstr "metodo per i device sconosciuto"
 
-#: src/grep.c:2754
+#: src/grep.c:2689
 msgid "invalid max count"
 msgstr "numero massimo non valido"
 
-#: src/grep.c:2812
+#: src/grep.c:2747
 msgid "unknown binary-files type"
 msgstr "tipo di file binario sconosciuto"
 
-#: src/grep.c:2897
+#: src/grep.c:2832
 msgid ""
 "Written by Mike Haertel and others; see\n"
 "<https://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>."
@@ -728,24 +722,32 @@ msgstr "errore interno (non si dovrebbe mai verificare)"
 msgid "exceeded PCRE's line length limit"
 msgstr "limite di lunghezza riga PCRE raggiunto"
 
+#: src/pcresearch.c:306
+#, fuzzy, c-format
+msgid "%s: memory exhausted"
+msgstr "memoria esaurita"
+
 #: src/pcresearch.c:310
-msgid "exhausted PCRE JIT stack"
+#, fuzzy, c-format
+msgid "%s: exhausted PCRE JIT stack"
 msgstr "stack JIT PCRE esaurito"
 
-#: src/pcresearch.c:314
-msgid "exceeded PCRE's backtracking limit"
+#: src/pcresearch.c:315
+#, fuzzy, c-format
+msgid "%s: exceeded PCRE's backtracking limit"
 msgstr "limite di backtrack PCRE raggiunto"
 
-#: src/pcresearch.c:317
-#, fuzzy
-msgid "exceeded PCRE's recursion limit"
-msgstr "limite di backtrack PCRE raggiunto"
+#: src/pcresearch.c:319
+#, fuzzy, c-format
+msgid "%s: exceeded PCRE's recursion limit"
+msgstr "limite di ricorsione PCRE superato"
 
-#: src/pcresearch.c:324
-#, c-format
-msgid "internal PCRE error: %d"
+#: src/pcresearch.c:327
+#, fuzzy, c-format
+msgid "%s: internal PCRE error: %d"
 msgstr "errore interno PCRE: %d"
 
 #, c-format
-#~ msgid "warning: %s: %s"
-#~ msgstr "attenzione: %s: %s"
+#~ msgid "warning: GREP_OPTIONS is deprecated; please use an alias or script"
+#~ msgstr ""
+#~ "attenzione: GREP_OPTIONS è deprecata, utilizzare un alias o uno script"

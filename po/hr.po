@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grep-3.3.42\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2020-09-27 19:41-0700\n"
+"POT-Creation-Date: 2020-11-08 20:37-0800\n"
 "PO-Revision-Date: 2019-12-24 12:41-0800\n"
 "Last-Translator: Božidar Putanec <bozidarp@yahoo.com>\n"
 "Language-Team: Croatian <lokalizacija@linux.hr>\n"
@@ -45,11 +45,11 @@ msgstr "dvosmisleni argument %s za %s"
 msgid "Valid arguments are:"
 msgstr "Valjani argumenti su:"
 
-#: lib/c-stack.c:227 lib/c-stack.c:340
+#: lib/c-stack.c:225 lib/c-stack.c:338
 msgid "program error"
 msgstr "greška u programu"
 
-#: lib/c-stack.c:228 lib/c-stack.c:341
+#: lib/c-stack.c:226 lib/c-stack.c:339
 msgid "stack overflow"
 msgstr "prelijevanje stoga"
 
@@ -133,7 +133,7 @@ msgstr "%s: nevaljana opcija -- „%c“\n"
 msgid "%s: option requires an argument -- '%c'\n"
 msgstr "%s: opcija zahtijeva argument -- „%c“\n"
 
-#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34 src/pcresearch.c:306
+#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34
 msgid "memory exhausted"
 msgstr "nema dovoljno memorije"
 
@@ -695,27 +695,19 @@ msgstr ""
 msgid "invalid matcher %s"
 msgstr "nevaljana sintaksa uzorka %s"
 
-# bp: alias > pseudonim ? > nadimak ?
-# script > skripta
-#: src/grep.c:2579
-#, c-format
-msgid "warning: GREP_OPTIONS is deprecated; please use an alias or script"
-msgstr ""
-"Upozorenje: upotreba GREP_OPTIONS je zastarjela ; rabite alias ili script"
-
-#: src/grep.c:2606
+#: src/grep.c:2541
 msgid "unknown devices method"
 msgstr "nepoznata metoda uređaja"
 
-#: src/grep.c:2754
+#: src/grep.c:2689
 msgid "invalid max count"
 msgstr "nevaljani maksimalni broj"
 
-#: src/grep.c:2812
+#: src/grep.c:2747
 msgid "unknown binary-files type"
 msgstr "nepoznata vrsta binarnih datoteka"
 
-#: src/grep.c:2897
+#: src/grep.c:2832
 msgid ""
 "Written by Mike Haertel and others; see\n"
 "<https://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>."
@@ -746,24 +738,38 @@ msgstr "**interna greška** (nije se smjela dogoditi)"
 msgid "exceeded PCRE's line length limit"
 msgstr "prekoračeno je ograničenje duljine retka PCRE-a"
 
+#: src/pcresearch.c:306
+#, fuzzy, c-format
+msgid "%s: memory exhausted"
+msgstr "nema dovoljno memorije"
+
 #: src/pcresearch.c:310
-msgid "exhausted PCRE JIT stack"
+#, fuzzy, c-format
+msgid "%s: exhausted PCRE JIT stack"
 msgstr "PCRE JIT stog je iscrpljen"
 
-#: src/pcresearch.c:314
-msgid "exceeded PCRE's backtracking limit"
+#: src/pcresearch.c:315
+#, fuzzy, c-format
+msgid "%s: exceeded PCRE's backtracking limit"
 msgstr "prekoračeno je unatražno ograničenje praćenja PCRE-a"
 
-#: src/pcresearch.c:317
-#, fuzzy
-msgid "exceeded PCRE's recursion limit"
+#: src/pcresearch.c:319
+#, fuzzy, c-format
+msgid "%s: exceeded PCRE's recursion limit"
 msgstr "prekoračeno je unatražno ograničenje praćenja PCRE-a"
 
 # bp:fuzzy popravljen
-#: src/pcresearch.c:324
-#, c-format
-msgid "internal PCRE error: %d"
+#: src/pcresearch.c:327
+#, fuzzy, c-format
+msgid "%s: internal PCRE error: %d"
 msgstr "interna PCRE greška: %d"
+
+# bp: alias > pseudonim ? > nadimak ?
+# script > skripta
+#, c-format
+#~ msgid "warning: GREP_OPTIONS is deprecated; please use an alias or script"
+#~ msgstr ""
+#~ "Upozorenje: upotreba GREP_OPTIONS je zastarjela ; rabite alias ili script"
 
 #, c-format
 #~ msgid "warning: %s: %s"

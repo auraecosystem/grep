@@ -5,10 +5,10 @@
 # Мирослав Николић <miroslavnikolic@rocketmail.com>, 2011—2020.
 msgid ""
 msgstr ""
-"Project-Id-Version: grep-3.3.42\n"
+"Project-Id-Version: grep-3.5.16\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2020-09-27 19:41-0700\n"
-"PO-Revision-Date: 2020-04-01 13:12+0200\n"
+"POT-Creation-Date: 2020-11-08 20:37-0800\n"
+"PO-Revision-Date: 2020-11-05 13:11+0200\n"
 "Last-Translator: Мирослав Николић <miroslavnikolic@rocketmail.com>\n"
 "Language-Team: Serbian <(nothing)>\n"
 "Language: sr\n"
@@ -17,7 +17,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Virtaal 0.7.1\n"
 "X-Bugs: Report translation errors to the Language-Team address.\n"
 
 #: lib/argmatch.c:132
@@ -34,11 +33,11 @@ msgstr "нејасан аргумент „%s“ за „%s“"
 msgid "Valid arguments are:"
 msgstr "Исправни аргументи су:"
 
-#: lib/c-stack.c:227 lib/c-stack.c:340
+#: lib/c-stack.c:225 lib/c-stack.c:338
 msgid "program error"
 msgstr "грешка програма"
 
-#: lib/c-stack.c:228 lib/c-stack.c:341
+#: lib/c-stack.c:226 lib/c-stack.c:339
 msgid "stack overflow"
 msgstr "прекорачење спремника"
 
@@ -121,7 +120,7 @@ msgstr "%s: неисправна опција —— „%c“\n"
 msgid "%s: option requires an argument -- '%c'\n"
 msgstr "%s: опција захтева аргумент —— „%c“\n"
 
-#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34 src/pcresearch.c:306
+#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34
 msgid "memory exhausted"
 msgstr "меморија је потрошена"
 
@@ -416,19 +415,19 @@ msgid "input is too large to count"
 msgstr "улаз је превелик за пребројавање"
 
 #: src/grep.c:1646
-#, fuzzy, c-format
+#, c-format
 msgid "%s: binary file matches"
-msgstr "Бинарна датотека %s одговара\n"
+msgstr "%s: бинарна датотека одговара"
 
 #: src/grep.c:1684
-#, fuzzy, c-format
+#, c-format
 msgid "%s: warning: recursive directory loop"
-msgstr "дубинско вртење кроз директоријуме"
+msgstr "%s: дубинско вртење кроз директоријуме"
 
 #: src/grep.c:1904
-#, fuzzy, c-format
+#, c-format
 msgid "%s: input file is also the output"
-msgstr "улазна датотека %s је такође излаз"
+msgstr "%s: улазна датотека је такође излаз"
 
 #: src/grep.c:1966 src/grep.c:1973
 #, c-format
@@ -576,7 +575,7 @@ msgstr ""
 "  -R, --dereference-recursive     слично, али прати све симболичке везе\n"
 
 #: src/grep.c:2028
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "      --include=GLOB        search only files that match GLOB (a file "
 "pattern)\n"
@@ -587,10 +586,10 @@ msgid ""
 msgstr ""
 "      --include=ОПШТЕ             тражи само датотеке које се поклапају са "
 "ОПШТЕ (шаблон датотеке)\n"
-"      --exclude=ОПШТЕ             прескаче датотеке и директоријуме који се "
-"поклапају са ОПШТЕ\n"
+"      --exclude=ОПШТЕ             прескаче датотеке које се поклапају са "
+"ОПШТЕ\n"
 "      --exclude-from=ДАТОТЕКА     прескаче датотеке које се поклапају са "
-"било којим шаблоном датотеке из ДАТОТЕКЕ\n"
+"било којим шаблоном из ДАТОТЕКЕ\n"
 "      --exclude-dir=ОПШТЕ         прескаче директоријуме који се поклапају "
 "са ОПШТЕ\n"
 
@@ -650,7 +649,7 @@ msgstr ""
 "\n"
 
 #: src/grep.c:2055
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "When FILE is '-', read standard input.  With no FILE, read '.' if\n"
 "recursive, '-' otherwise.  With fewer than two FILEs, assume -h.\n"
@@ -660,8 +659,7 @@ msgstr ""
 "Када је ДАТОТЕКА „-“, чита стандардни улаз. Без ДАТОТЕКЕ, чита . ако је "
 "дубински,\n"
 "у супротном „-“. Са мање од две ДАТОТЕКЕ, подразумева се „-h“.\n"
-"Излазно стање је 0 ако је изабран неки ред (или је датотека „-L“), у "
-"супротном 1;\n"
+"Излазно стање је 0 ако је изабран неки ред, у супротном 1;\n"
 "ако је дошло до неке грешке а „-q“ није дато, онда је излазно стање 2.\n"
 
 #: src/grep.c:2097
@@ -677,29 +675,24 @@ msgstr "Поклапање за Перл није подржано у „--disab
 msgid "invalid matcher %s"
 msgstr "неисправан трагач %s"
 
-#: src/grep.c:2579
-#, c-format
-msgid "warning: GREP_OPTIONS is deprecated; please use an alias or script"
-msgstr "упозорење: „GREP_OPTIONS“ је застарело; користите алијас или скрипту"
-
-#: src/grep.c:2606
+#: src/grep.c:2541
 msgid "unknown devices method"
 msgstr "непознат метод уређаја"
 
-#: src/grep.c:2754
+#: src/grep.c:2689
 msgid "invalid max count"
 msgstr "неисправан највећи број"
 
-#: src/grep.c:2812
+#: src/grep.c:2747
 msgid "unknown binary-files type"
 msgstr "непозната врста бинарних датотека"
 
-#: src/grep.c:2897
+#: src/grep.c:2832
 msgid ""
 "Written by Mike Haertel and others; see\n"
 "<https://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>."
 msgstr ""
-"Написали су Мајк иртел и други; погледајте\n"
+"Написали су Мајк Хиртел и други; погледајте\n"
 "<https://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>."
 
 #: src/pcresearch.c:85
@@ -722,25 +715,35 @@ msgstr "унутрашња грешка (не треба никада да се 
 msgid "exceeded PCRE's line length limit"
 msgstr "прекорачено је ограничење дужине реда ПЦРЕ-а"
 
+#: src/pcresearch.c:306
+#, c-format
+msgid "%s: memory exhausted"
+msgstr "%s: меморија је потрошена"
+
 #: src/pcresearch.c:310
-msgid "exhausted PCRE JIT stack"
-msgstr "потрошени ПЦРЕ ЈИТ спремник"
-
-#: src/pcresearch.c:314
-msgid "exceeded PCRE's backtracking limit"
-msgstr "прекорачено је ПЦРЕ-ово ограничење тражења уназад"
-
-#: src/pcresearch.c:317
-#, fuzzy
-msgid "exceeded PCRE's recursion limit"
-msgstr "прекорачено је ПЦРЕ-ово ограничење тражења уназад"
-
-#: src/pcresearch.c:324
 #, c-format
-msgid "internal PCRE error: %d"
-msgstr "унутрашња грешка ПЦРЕ-а: %d"
+msgid "%s: exhausted PCRE JIT stack"
+msgstr "%s: потрошени ПЦРЕ ЈИТ спремник"
 
+#: src/pcresearch.c:315
 #, c-format
+msgid "%s: exceeded PCRE's backtracking limit"
+msgstr "%s: прекорачено је ПЦРЕ-ово ограничење тражења уназад"
+
+#: src/pcresearch.c:319
+#, c-format
+msgid "%s: exceeded PCRE's recursion limit"
+msgstr "%s: прекорачено је ограничење ПЦРЕ дубачења"
+
+#: src/pcresearch.c:327
+#, c-format
+msgid "%s: internal PCRE error: %d"
+msgstr "%s: унутрашња грешка ПЦРЕ-а: %d"
+
+#~ msgid "warning: GREP_OPTIONS is deprecated; please use an alias or script"
+#~ msgstr ""
+#~ "упозорење: „GREP_OPTIONS“ је застарело; користите алијас или скрипту"
+
 #~ msgid "warning: %s: %s"
 #~ msgstr "упозорење: %s: %s"
 

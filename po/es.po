@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GNU grep 2.19.12\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2020-09-27 19:41-0700\n"
+"POT-Creation-Date: 2020-11-08 20:37-0800\n"
 "PO-Revision-Date: 2014-07-11 18:53+0200\n"
 "Last-Translator: Santiago Vila Doncel <sanvila@unex.es>\n"
 "Language-Team: Spanish <es@tp.org.es>\n"
@@ -32,11 +32,11 @@ msgstr "argumento %s ambiguo para %s"
 msgid "Valid arguments are:"
 msgstr "Los argumentos válidos son:"
 
-#: lib/c-stack.c:227 lib/c-stack.c:340
+#: lib/c-stack.c:225 lib/c-stack.c:338
 msgid "program error"
 msgstr ""
 
-#: lib/c-stack.c:228 lib/c-stack.c:341
+#: lib/c-stack.c:226 lib/c-stack.c:339
 msgid "stack overflow"
 msgstr ""
 
@@ -119,7 +119,7 @@ msgstr "%s: opción inválida -- '%c'\n"
 msgid "%s: option requires an argument -- '%c'\n"
 msgstr "%s: la opción requiere un argumento -- '%c'\n"
 
-#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34 src/pcresearch.c:306
+#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34
 msgid "memory exhausted"
 msgstr "memoria agotada"
 
@@ -692,24 +692,19 @@ msgstr ""
 msgid "invalid matcher %s"
 msgstr "expresión inválida %s"
 
-#: src/grep.c:2579
-#, c-format
-msgid "warning: GREP_OPTIONS is deprecated; please use an alias or script"
-msgstr ""
-
-#: src/grep.c:2606
+#: src/grep.c:2541
 msgid "unknown devices method"
 msgstr "método de dispositivos desconocido"
 
-#: src/grep.c:2754
+#: src/grep.c:2689
 msgid "invalid max count"
 msgstr "contador máximo inválido"
 
-#: src/grep.c:2812
+#: src/grep.c:2747
 msgid "unknown binary-files type"
 msgstr "tipo binary-files desconocido"
 
-#: src/grep.c:2897
+#: src/grep.c:2832
 #, fuzzy
 msgid ""
 "Written by Mike Haertel and others; see\n"
@@ -736,22 +731,29 @@ msgstr "error interno (no debería ocurrir nunca)"
 msgid "exceeded PCRE's line length limit"
 msgstr "se ha excedido el límite de longitud de línea de las PCREs"
 
+#: src/pcresearch.c:306
+#, fuzzy, c-format
+msgid "%s: memory exhausted"
+msgstr "memoria agotada"
+
 #: src/pcresearch.c:310
-msgid "exhausted PCRE JIT stack"
+#, c-format
+msgid "%s: exhausted PCRE JIT stack"
 msgstr ""
 
-#: src/pcresearch.c:314
-msgid "exceeded PCRE's backtracking limit"
+#: src/pcresearch.c:315
+#, fuzzy, c-format
+msgid "%s: exceeded PCRE's backtracking limit"
 msgstr "se ha excedido el límite de vuelta atrás de las PCREs"
 
-#: src/pcresearch.c:317
-#, fuzzy
-msgid "exceeded PCRE's recursion limit"
+#: src/pcresearch.c:319
+#, fuzzy, c-format
+msgid "%s: exceeded PCRE's recursion limit"
 msgstr "se ha excedido el límite de vuelta atrás de las PCREs"
 
-#: src/pcresearch.c:324
-#, c-format
-msgid "internal PCRE error: %d"
+#: src/pcresearch.c:327
+#, fuzzy, c-format
+msgid "%s: internal PCRE error: %d"
 msgstr "error interno de PCRE: %d"
 
 #, c-format

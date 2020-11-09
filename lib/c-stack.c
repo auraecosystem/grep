@@ -66,19 +66,10 @@ typedef struct sigaltstack stack_t;
 
 /* Use libsigsegv only if needed; kernels like Solaris can detect
    stack overflow without the overhead of an external library.  */
-#define USE_LIBSIGSEGV (HAVE_XSI_STACK_OVERFLOW_HEURISTIC && HAVE_LIBSIGSEGV)
+#define USE_LIBSIGSEGV (!HAVE_XSI_STACK_OVERFLOW_HEURISTIC && HAVE_LIBSIGSEGV)
 
 #if USE_LIBSIGSEGV
 # include <sigsegv.h>
-/* libsigsegv 2.6 through 2.8 have a bug where some architectures use
-   more than the Linux default of an 8k alternate stack when deciding
-   if a fault was caused by stack overflow.  */
-# if LIBSIGSEGV_VERSION <= 0x0208 && SIGSTKSZ < 16384
-#  undef SIGSTKSZ
-# endif
-#endif
-#ifndef SIGSTKSZ
-# define SIGSTKSZ 16384
 #endif
 
 #include "exitfail.h"
@@ -95,6 +86,16 @@ typedef struct sigaltstack stack_t;
 # endif
 #endif
 
+/* Storage for the alternate signal stack.
+   64 KiB is not too large for Gnulib-using apps, and is large enough
+   for all known platforms.  Smaller sizes may run into trouble.
+   For example, libsigsegv 2.6 through 2.8 have a bug where some
+   architectures use more than the Linux default of an 8 KiB alternate
+   stack when deciding if a fault was caused by stack overflow.  */
+static max_align_t alternate_signal_stack[(64 * 1024
+                                           + sizeof (max_align_t) - 1)
+                                          / sizeof (max_align_t)];
+
 /* The user-specified action to take when a SEGV-related program error
    or stack overflow occurs.  */
 static _GL_ASYNC_SAFE void (* volatile segv_action) (int);
@@ -106,8 +107,7 @@ static char const * volatile program_error_message;
 static char const * volatile stack_overflow_message;
 
 #if (USE_LIBSIGSEGV                                           \
-     || (HAVE_SIGALTSTACK && HAVE_DECL_SIGALTSTACK            \
-         && HAVE_STACK_OVERFLOW_HANDLING))
+     || (HAVE_DECL_SIGALTSTACK && HAVE_STACK_OVERFLOW_HANDLING))
 
 /* Output an error message, then exit with status EXIT_FAILURE if it
    appears to have been a stack overflow, or with a core dump
@@ -133,7 +133,7 @@ die (int signo)
   size_t prognamelen = strlen (progname);
   size_t messagelen = strlen (message);
   static char const separator[] = {':', ' '};
-  char buf[SIGSTKSZ / 16 + sizeof separator];
+  char buf[sizeof alternate_signal_stack / 16 + sizeof separator];
   ptrdiff_t buflen;
   if (prognamelen + messagelen < sizeof buf - sizeof separator)
     {
@@ -159,13 +159,6 @@ die (int signo)
   abort ();
 }
 
-/* Storage for the alternate signal stack.  */
-static union
-{
-  char buffer[SIGSTKSZ];
-  max_align_t align;
-} alternate_signal_stack;
-
 static _GL_ASYNC_SAFE void
 null_action (int signo _GL_UNUSED)
 {
@@ -174,6 +167,11 @@ null_action (int signo _GL_UNUSED)
 #endif /* SIGALTSTACK || LIBSIGSEGV */
 
 #if USE_LIBSIGSEGV
+
+/* Pacify GCC 9.3.1, which otherwise would complain about segv_handler.  */
+# if __GNUC_PREREQ (4, 6)
+#  pragma GCC diagnostic ignored "-Wsuggest-attribute=pure"
+# endif
 
 /* Nonzero if general segv handler could not be installed.  */
 static volatile int segv_handler_missing;
@@ -230,8 +228,8 @@ c_stack_action (_GL_ASYNC_SAFE void (*action) (int))
 
   /* Always install the overflow handler.  */
   if (stackoverflow_install_handler (overflow_handler,
-                                     alternate_signal_stack.buffer,
-                                     sizeof alternate_signal_stack.buffer))
+                                     alternate_signal_stack,
+                                     sizeof alternate_signal_stack))
     {
       errno = ENOTSUP;
       return -1;
@@ -242,7 +240,7 @@ c_stack_action (_GL_ASYNC_SAFE void (*action) (int))
   return 0;
 }
 
-#elif HAVE_SIGALTSTACK && HAVE_DECL_SIGALTSTACK && HAVE_STACK_OVERFLOW_HANDLING
+#elif HAVE_DECL_SIGALTSTACK && HAVE_STACK_OVERFLOW_HANDLING
 
 # if SIGINFO_WORKS
 
@@ -323,14 +321,14 @@ c_stack_action (_GL_ASYNC_SAFE void (*action) (int))
 {
   stack_t st;
   st.ss_flags = 0;
+  st.ss_sp = alternate_signal_stack;
+  st.ss_size = sizeof alternate_signal_stack;
 # if SIGALTSTACK_SS_REVERSED
   /* Irix mistakenly treats ss_sp as the upper bound, rather than
      lower bound, of the alternate stack.  */
-  st.ss_sp = alternate_signal_stack.buffer + SIGSTKSZ - sizeof (void *);
-  st.ss_size = sizeof alternate_signal_stack.buffer - sizeof (void *);
-# else
-  st.ss_sp = alternate_signal_stack.buffer;
-  st.ss_size = sizeof alternate_signal_stack.buffer;
+  st.ss_size -= sizeof (void *);
+  char *ss_sp = st.ss_sp;
+  st.ss_sp = ss_sp + st.ss_size;
 # endif
   int r = sigaltstack (&st, NULL);
   if (r != 0)
@@ -367,8 +365,7 @@ c_stack_action (_GL_ASYNC_SAFE void (*action) (int))
 }
 
 #else /* ! (USE_LIBSIGSEGV
-            || (HAVE_SIGALTSTACK && HAVE_DECL_SIGALTSTACK
-                && HAVE_STACK_OVERFLOW_HANDLING)) */
+            || (HAVE_DECL_SIGALTSTACK && HAVE_STACK_OVERFLOW_HANDLING)) */
 
 int
 c_stack_action (_GL_ASYNC_SAFE void (*action) (int)  _GL_UNUSED)

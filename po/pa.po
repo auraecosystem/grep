@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grep 2.11.11-pre1\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2020-09-27 19:41-0700\n"
+"POT-Creation-Date: 2020-11-08 20:37-0800\n"
 "PO-Revision-Date: 2012-05-19 17:52+0530\n"
 "Last-Translator: A S Alam <aalam@users.sf.net>\n"
 "Language-Team: Punjabi <punjabi-l10n@lists.sourceforge.net>\n"
@@ -33,11 +33,11 @@ msgstr ""
 msgid "Valid arguments are:"
 msgstr "ਠੀਕ ਆਰਗੂਮੈਂਟ ਹਨ:"
 
-#: lib/c-stack.c:227 lib/c-stack.c:340
+#: lib/c-stack.c:225 lib/c-stack.c:338
 msgid "program error"
 msgstr ""
 
-#: lib/c-stack.c:228 lib/c-stack.c:341
+#: lib/c-stack.c:226 lib/c-stack.c:339
 msgid "stack overflow"
 msgstr ""
 
@@ -122,7 +122,7 @@ msgstr "%s: ਗਲਤ ਚੋਣ -- '%c'\n"
 msgid "%s: option requires an argument -- '%c'\n"
 msgstr "%s: ਚੋਣ ਲਈ ਆਰਗੂਮੈਂਟ ਚਾਹੀਦਾ ਹੈ --'%c'\n"
 
-#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34 src/pcresearch.c:306
+#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34
 msgid "memory exhausted"
 msgstr "ਮੈਮੋਰੀ ਖਤਮ ਹੋਈ"
 
@@ -592,24 +592,19 @@ msgstr ""
 msgid "invalid matcher %s"
 msgstr "ਗਲਤ ਮੈਚਰ %s"
 
-#: src/grep.c:2579
-#, c-format
-msgid "warning: GREP_OPTIONS is deprecated; please use an alias or script"
-msgstr ""
-
-#: src/grep.c:2606
+#: src/grep.c:2541
 msgid "unknown devices method"
 msgstr "ਅਣਜਾਣ ਜੰਤਰ ਢੰਗ"
 
-#: src/grep.c:2754
+#: src/grep.c:2689
 msgid "invalid max count"
 msgstr "ਗਲਤ ਵੱਧ ਤੋਂ ਵੱਧ ਗਿਣਤੀ"
 
-#: src/grep.c:2812
+#: src/grep.c:2747
 msgid "unknown binary-files type"
 msgstr "ਅਣਜਾਣ ਬਾਈਨਰੀ-ਫਾਇਲ ਕਿਸਮ"
 
-#: src/grep.c:2897
+#: src/grep.c:2832
 #, fuzzy
 msgid ""
 "Written by Mike Haertel and others; see\n"
@@ -636,21 +631,29 @@ msgstr ""
 msgid "exceeded PCRE's line length limit"
 msgstr ""
 
-#: src/pcresearch.c:310
-msgid "exhausted PCRE JIT stack"
-msgstr ""
-
-#: src/pcresearch.c:314
-msgid "exceeded PCRE's backtracking limit"
-msgstr ""
-
-#: src/pcresearch.c:317
-msgid "exceeded PCRE's recursion limit"
-msgstr ""
-
-#: src/pcresearch.c:324
+#: src/pcresearch.c:306
 #, fuzzy, c-format
-msgid "internal PCRE error: %d"
+msgid "%s: memory exhausted"
+msgstr "ਮੈਮੋਰੀ ਖਤਮ ਹੋਈ"
+
+#: src/pcresearch.c:310
+#, c-format
+msgid "%s: exhausted PCRE JIT stack"
+msgstr ""
+
+#: src/pcresearch.c:315
+#, c-format
+msgid "%s: exceeded PCRE's backtracking limit"
+msgstr ""
+
+#: src/pcresearch.c:319
+#, c-format
+msgid "%s: exceeded PCRE's recursion limit"
+msgstr ""
+
+#: src/pcresearch.c:327
+#, fuzzy, c-format
+msgid "%s: internal PCRE error: %d"
 msgstr "ਅੰਦਰੂਨੀ ਗਲਤੀ"
 
 #, c-format

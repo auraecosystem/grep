@@ -280,11 +280,12 @@ EXTRA_DIST += test-ctype.c
 
 TESTS += \
   test-dfa-invalid-char-class.sh \
+  test-dfa-invalid-merge.sh \
   test-dfa-match.sh
 
 check_PROGRAMS += test-dfa-match-aux
 test_dfa_match_aux_LDADD = $(LDADD) $(LIB_SETLOCALE) @LIBINTL@ $(LIB_MBRTOWC)
-EXTRA_DIST += test-dfa-match.sh test-dfa-match-aux.c test-dfa-invalid-char-class.sh
+EXTRA_DIST += test-dfa-match.sh test-dfa-match-aux.c test-dfa-invalid-char-class.sh test-dfa-invalid-merge.sh
 
 ## end   gnulib module dfa-tests
 
