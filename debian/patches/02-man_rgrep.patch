@@ -1,3 +1,5 @@
+Description: Include the Debian-specific rgrep in the man page
+
 Index: grep/doc/grep.in.1
 ===================================================================
 --- grep.orig/doc/grep.in.1
