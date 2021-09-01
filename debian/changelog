@@ -1,11 +1,9 @@
-grep (3.7-1~2.gbpe4cdf9) UNRELEASED; urgency=medium
-
-  ** SNAPSHOT build @e4cdf99a679647e7093ad6460db776e210aae39e **
+grep (3.7-1) unstable; urgency=low
 
   * New upstream version 3.7
   * Add d/patches/XFAIL-test-regex.patch
 
- -- Santiago Ruano Rincón <santiago@debian.org>  Wed, 01 Sep 2021 15:15:42 +0200
+ -- Santiago Ruano Rincón <santiago@debian.org>  Wed, 01 Sep 2021 17:39:21 +0200
 
 grep (3.6-1) unstable; urgency=low
 
