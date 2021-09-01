@@ -1,5 +1,5 @@
 /* dfasearch.c - searching subroutines using dfa and regex for grep.
-   Copyright 1992, 1998, 2000, 2007, 2009-2020 Free Software Foundation, Inc.
+   Copyright 1992, 1998, 2000, 2007, 2009-2021 Free Software Foundation, Inc.
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -154,7 +154,7 @@ regex_compile (struct dfa_comp *dc, char const *p, ptrdiff_t len,
   pat->allocated = 0;
 
   /* Do not use a fastmap with -i, to work around glibc Bug#20381.  */
-  pat->fastmap = syntax_only | match_icase ? NULL : xmalloc (UCHAR_MAX + 1);
+  pat->fastmap = (syntax_only | match_icase) ? NULL : xmalloc (UCHAR_MAX + 1);
 
   pat->translate = NULL;
 
@@ -376,7 +376,7 @@ EGexecute (void *vdc, char const *buf, size_t size, size_t *match_size,
                                           buflim - beg + dc->begline,
                                           &kwsm, true);
               if (offset < 0)
-                goto failure;
+                return offset;
               match = beg + offset;
               prev_beg = beg;
 
@@ -579,7 +579,6 @@ EGexecute (void *vdc, char const *buf, size_t size, size_t *match_size,
           }
     } /* for (beg = end ..) */
 
- failure:
   return -1;
 
  success:

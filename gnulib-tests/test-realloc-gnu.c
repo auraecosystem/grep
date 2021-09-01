@@ -1,5 +1,5 @@
 /* Test of realloc function.
-   Copyright (C) 2010-2020 Free Software Foundation, Inc.
+   Copyright (C) 2010-2021 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -16,15 +16,33 @@
 
 #include <config.h>
 
+/* Specification.  */
 #include <stdlib.h>
 
+#include <errno.h>
+#include <stdint.h>
+
+#include "macros.h"
+
 int
-main ()
+main (int argc, char **argv)
 {
   /* Check that realloc (NULL, 0) is not a NULL pointer.  */
-  char *p = realloc (NULL, 0);
-  if (p == NULL)
-    return 1;
+  void *volatile p = realloc (NULL, 0);
+  ASSERT (p != NULL);
+
+  /* Check that realloc (p, n) fails when p is non-null and n exceeds
+     PTRDIFF_MAX.  */
+  if (PTRDIFF_MAX < SIZE_MAX)
+    {
+      size_t one = argc != 12345;
+      p = realloc (p, PTRDIFF_MAX + one);
+      ASSERT (p == NULL);
+      /* Avoid a test failure due to glibc bug
+         <https://sourceware.org/bugzilla/show_bug.cgi?id=27870>.  */
+      if (!getenv ("MALLOC_CHECK_"))
+        ASSERT (errno == ENOMEM);
+    }
 
   free (p);
   return 0;

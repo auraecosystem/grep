@@ -1,14 +1,14 @@
 # Portuguese (Portugal) translation for the grep package.
 # Copyright (C) 2018 Free Software Foundation, Inc.
 # This file is distributed under the same license as the grep package.
-# Pedro Albuquerque <pmra@protonmail.com>, 2018, 2019, 2020.
+# Pedro Albuquerque <pmra@protonmail.com>, 2018, 2019, 2020, 2021.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: grep 3.5.16\n"
+"Project-Id-Version: grep 3.6.27\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2020-11-08 20:37-0800\n"
-"PO-Revision-Date: 2020-11-05 07:02+0000\n"
+"POT-Creation-Date: 2021-08-14 12:54-0700\n"
+"PO-Revision-Date: 2021-08-09 10:42+0100\n"
 "Last-Translator: Pedro Albuquerque <pmra@protonmail.com>\n"
 "Language-Team: Portuguese <translation-team-pt@lists.sourceforge.net>\n"
 "Language: pt\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Bugs: Report translation errors to the Language-Team address.\n"
-"X-Generator: Geany / PoHelper 1.37\n"
+"X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: lib/argmatch.c:132
@@ -33,51 +33,51 @@ msgstr "argumento ambíguo %s para %s"
 msgid "Valid arguments are:"
 msgstr "Os argumentos válidos são:"
 
-#: lib/c-stack.c:225 lib/c-stack.c:338
+#: lib/c-stack.c:187
 msgid "program error"
 msgstr "erro de programa"
 
-#: lib/c-stack.c:226 lib/c-stack.c:339
+#: lib/c-stack.c:188
 msgid "stack overflow"
 msgstr "transporte da pilha"
 
-#: lib/closeout.c:122 src/grep.c:1341
+#: lib/closeout.c:122 src/grep.c:1336
 msgid "write error"
 msgstr "erro de escrita"
 
-#: lib/dfa.c:954
+#: lib/dfa.c:896
 msgid "unbalanced ["
 msgstr "[ sem par"
 
-#: lib/dfa.c:1075
+#: lib/dfa.c:1017
 msgid "invalid character class"
 msgstr "classe de carácter inválida"
 
-#: lib/dfa.c:1201
+#: lib/dfa.c:1143
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr "a sintaxe da classe de carácter é [[:espaço:]], não [:espaço:]"
 
-#: lib/dfa.c:1268
+#: lib/dfa.c:1210
 msgid "unfinished \\ escape"
 msgstr "não terminado\\escape"
 
-#: lib/dfa.c:1429
+#: lib/dfa.c:1371
 msgid "invalid content of \\{\\}"
-msgstr "Conteúdo inválido de \\{\\}"
+msgstr "conteúdo inválido de \\{\\}"
 
-#: lib/dfa.c:1432
+#: lib/dfa.c:1374
 msgid "regular expression too big"
 msgstr "expressão regular muito grande"
 
-#: lib/dfa.c:1916
+#: lib/dfa.c:1858
 msgid "unbalanced ("
 msgstr "( sem par"
 
-#: lib/dfa.c:2033
+#: lib/dfa.c:1975
 msgid "no syntax specified"
-msgstr "Sintaxe não especificada"
+msgstr "sintaxe não especificada"
 
-#: lib/dfa.c:2044
+#: lib/dfa.c:1986
 msgid "unbalanced )"
 msgstr ") sem par"
 
@@ -120,7 +120,7 @@ msgstr "%s: opção inválida -- \"%c\"\n"
 msgid "%s: option requires an argument -- '%c'\n"
 msgstr "%s: a opção requer um argumento -- \"%c\"\n"
 
-#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34
+#: lib/obstack.c:337 lib/obstack.c:339 lib/xalloc-die.c:34
 msgid "memory exhausted"
 msgstr "memória esgotada"
 
@@ -402,49 +402,49 @@ msgstr "Página inicial %s: <%s>\n"
 msgid "General help using GNU software: <%s>\n"
 msgstr "Ajuda geral para uso de programas GNU: <%s>\n"
 
-#: src/grep.c:648
+#: src/grep.c:649
 msgid "(standard input)"
 msgstr "(entrada padrão)"
 
-#: src/grep.c:828
+#: src/grep.c:829
 msgid "invalid context length argument"
 msgstr "argumento de tamanho de contexto inválido"
 
-#: src/grep.c:893
+#: src/grep.c:894
 msgid "input is too large to count"
 msgstr "entrada muito grande para contar"
 
-#: src/grep.c:1646
+#: src/grep.c:1641
 #, c-format
 msgid "%s: binary file matches"
 msgstr "%s: ficheiro binário coincide"
 
-#: src/grep.c:1684
+#: src/grep.c:1679
 #, c-format
 msgid "%s: warning: recursive directory loop"
 msgstr "%s: aviso: ciclo de pasta recursivo"
 
-#: src/grep.c:1904
+#: src/grep.c:1899
 #, c-format
 msgid "%s: input file is also the output"
 msgstr "%s: ficheiro de entrada também é a saída"
 
-#: src/grep.c:1966 src/grep.c:1973
+#: src/grep.c:1961 src/grep.c:1968
 #, c-format
 msgid "Usage: %s [OPTION]... PATTERNS [FILE]...\n"
 msgstr "Uso: %s [OPÇÃO]... PADRÕES [FICHEIRO]...\n"
 
-#: src/grep.c:1968
+#: src/grep.c:1963
 #, c-format
 msgid "Try '%s --help' for more information.\n"
 msgstr "Tente \"%s --help\" para mais informação.\n"
 
-#: src/grep.c:1974
+#: src/grep.c:1969
 #, c-format
 msgid "Search for PATTERNS in each FILE.\n"
 msgstr "Procurar por PADRÕES em cada FICHEIRO\n"
 
-#: src/grep.c:1975
+#: src/grep.c:1970
 #, c-format
 msgid ""
 "Example: %s -i 'hello world' menu.h main.c\n"
@@ -457,7 +457,7 @@ msgstr ""
 "\n"
 "Selecção e interpretação de padrão:\n"
 
-#: src/grep.c:1980
+#: src/grep.c:1975
 #, c-format
 msgid ""
 "  -E, --extended-regexp     PATTERNS are extended regular expressions\n"
@@ -470,7 +470,7 @@ msgstr ""
 "  -G, --basic-regexp        PADRÕES são expressões regulares básicas\n"
 "  -P, --perl-regexp         PADRÕES são expressões regulares Perl\n"
 
-#: src/grep.c:1986
+#: src/grep.c:1981
 #, c-format
 msgid ""
 "  -e, --regexp=PATTERNS     use PATTERNS for matching\n"
@@ -492,7 +492,7 @@ msgstr ""
 "  -z, --null-data           uma linha de dados termina com o byte 0, não com "
 "newline\n"
 
-#: src/grep.c:1994
+#: src/grep.c:1989
 #, c-format
 msgid ""
 "\n"
@@ -509,7 +509,7 @@ msgstr ""
 "  -V, --version             mostra informação de versão e sai\n"
 "      --help                mostra esta mensagem e sai\n"
 
-#: src/grep.c:2001
+#: src/grep.c:1996
 #, c-format
 msgid ""
 "\n"
@@ -535,7 +535,7 @@ msgstr ""
 "      --label=RÓTULO        usa RÓTULO como prefixo de nome de ficheiro de "
 "entrada padrão\n"
 
-#: src/grep.c:2012
+#: src/grep.c:2007
 #, c-format
 msgid ""
 "  -o, --only-matching       show only nonempty parts of lines that match\n"
@@ -552,7 +552,7 @@ msgstr ""
 "\"\n"
 "  -a, --text                equivalente a --binary-files=text\n"
 
-#: src/grep.c:2019
+#: src/grep.c:2014
 #, c-format
 msgid ""
 "  -I                        equivalent to --binary-files=without-match\n"
@@ -571,7 +571,7 @@ msgstr ""
 "  -r, --recursive           como --directories=recurse\n"
 "  -R, --dereference-recursive  igual, mas segue todas as symlinks\n"
 
-#: src/grep.c:2028
+#: src/grep.c:2023
 #, c-format
 msgid ""
 "      --include=GLOB        search only files that match GLOB (a file "
@@ -588,7 +588,7 @@ msgstr ""
 "FICHEIRO\n"
 "      --exclude-dir=GLOB    salta pastas que contêm GLOB\n"
 
-#: src/grep.c:2035
+#: src/grep.c:2030
 #, c-format
 msgid ""
 "  -L, --files-without-match  print only names of FILEs with no selected "
@@ -607,7 +607,7 @@ msgstr ""
 "  -T, --initial-tab         alinha tabulações (se necessário)\n"
 "  -Z, --null                imprime byte 0 após o nome de FICHEIRO\n"
 
-#: src/grep.c:2041
+#: src/grep.c:2036
 #, c-format
 msgid ""
 "\n"
@@ -622,10 +622,12 @@ msgstr ""
 "  -A, --after-context=NUM   imprime NUM linhas de contexto final\n"
 "  -C, --context=NUM         imprime NUM linhas de contexto de saída\n"
 
-#: src/grep.c:2048
+#: src/grep.c:2043
 #, c-format
 msgid ""
 "  -NUM                      same as --context=NUM\n"
+"      --group-separator=SEP  print SEP on line between matches with context\n"
+"      --no-group-separator  do not print separator for matches with context\n"
 "      --color[=WHEN],\n"
 "      --colour[=WHEN]       use markers to highlight the matching strings;\n"
 "                            WHEN is 'always', 'never', or 'auto'\n"
@@ -634,15 +636,19 @@ msgid ""
 "\n"
 msgstr ""
 "  -NUM                      igual a --context=NUM\n"
+"      --group-separator=SEP  imprimir SEP na linha entre correspondências "
+"com contexto\n"
+"      --no-group-separator  não imprimir separador para correspondências com "
+"contexto\n"
 "      --color[=QUANDO],\n"
-"      --colour[=QUANDO]       usa marcadores para realçar as cadeias "
+"      --colour[=QUANDO]       usar marcadores para realçar as cadeias "
 "coincidentes;\n"
 "                            QUANDO é \"always\", \"never\" ou \"auto\"\n"
-"  -U, --binary              não elimina caracteres CR em EOL (MSDOS/"
+"  -U, --binary              não eliminar caracteres CR em EOL (MSDOS/"
 "Windows)\n"
 "\n"
 
-#: src/grep.c:2055
+#: src/grep.c:2052
 #, c-format
 msgid ""
 "When FILE is '-', read standard input.  With no FILE, read '.' if\n"
@@ -655,33 +661,38 @@ msgstr ""
 "O estado da saída é 0 se qualquer linha for seleccionada, senão é 1;\n"
 "se ocorrer um erro e -q não for dado, o estado da saída é 2.\n"
 
-#: src/grep.c:2097
+#: src/grep.c:2094
 msgid "conflicting matchers specified"
 msgstr "especificou comparadores em conflito"
 
-#: src/grep.c:2104
+#: src/grep.c:2101
 msgid "Perl matching not supported in a --disable-perl-regexp build"
 msgstr ""
 "Comparação Perl não suportada numa compilação --disable-perl-regexp build"
 
-#: src/grep.c:2106
+#: src/grep.c:2103
 #, c-format
 msgid "invalid matcher %s"
 msgstr "comparador %s inválido"
 
-#: src/grep.c:2541
+#: src/grep.c:2538
 msgid "unknown devices method"
 msgstr "método dispositivos desconhecidos"
 
-#: src/grep.c:2689
+#: src/grep.c:2580
+#, c-format
+msgid "warning: --unix-byte-offsets (-u) is obsolete"
+msgstr "aviso: --unix-byte-offsets (-u) está obsoleto"
+
+#: src/grep.c:2686
 msgid "invalid max count"
 msgstr "número máximo inválido"
 
-#: src/grep.c:2747
+#: src/grep.c:2744
 msgid "unknown binary-files type"
 msgstr "tipo de ficheiro binário desconhecido"
 
-#: src/grep.c:2832
+#: src/grep.c:2829
 msgid ""
 "Written by Mike Haertel and others; see\n"
 "<https://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>."

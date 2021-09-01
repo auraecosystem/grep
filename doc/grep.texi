@@ -30,7 +30,7 @@
 @copying
 This manual is for @command{grep}, a pattern matching engine.
 
-Copyright @copyright{} 1999--2002, 2005, 2008--2020 Free Software Foundation,
+Copyright @copyright{} 1999--2002, 2005, 2008--2021 Free Software Foundation,
 Inc.
 
 @quotation
@@ -323,7 +323,6 @@ which only covers the color for matched text.
 Suppress normal output;
 instead print the name of each input file from which
 no output would normally have been printed.
-The scanning of each file stops on the first match.
 
 @item -l
 @itemx --files-with-matches
@@ -333,7 +332,7 @@ The scanning of each file stops on the first match.
 Suppress normal output;
 instead print the name of each input file from which
 output would normally have been printed.
-The scanning of each file stops on the first match.
+Scanning each input file stops upon first match.
 (@option{-l} is specified by POSIX.)
 
 @item -m @var{num}
@@ -1204,12 +1203,12 @@ pages, but work only if PCRE is available in the system.
 @node Fundamental Structure
 @section Fundamental Structure
 
-The fundamental building blocks are the regular expressions that match
-a single character.
-Most characters, including all letters and digits,
-are regular expressions that match themselves.
-Any meta-character
-with special meaning may be quoted by preceding it with a backslash.
+@cindex ordinary characters
+@cindex special characters
+In regular expressions, the characters @samp{.?*+@{|()[\^$} are
+@dfn{special characters} and have uses described below.  All other
+characters are @dfn{ordinary characters}, and each ordinary character
+is a regular expression that matches itself.
 
 @opindex .
 @cindex dot
@@ -1217,8 +1216,10 @@ with special meaning may be quoted by preceding it with a backslash.
 The period @samp{.} matches any single character.
 It is unspecified whether @samp{.} matches an encoding error.
 
+@cindex interval expressions
 A regular expression may be followed by one of several
-repetition operators:
+repetition operators; the operators beginning with @samp{@{}
+are called @dfn{interval expressions}.
 
 @table @samp
 
@@ -1226,19 +1227,19 @@ repetition operators:
 @opindex ?
 @cindex question mark
 @cindex match expression at most once
-The preceding item is optional and will be matched at most once.
+The preceding item is optional and is matched at most once.
 
 @item *
 @opindex *
 @cindex asterisk
 @cindex match expression zero or more times
-The preceding item will be matched zero or more times.
+The preceding item is matched zero or more times.
 
 @item +
 @opindex +
 @cindex plus sign
 @cindex match expression one or more times
-The preceding item will be matched one or more times.
+The preceding item is matched one or more times.
 
 @item @{@var{n}@}
 @opindex @{@var{n}@}
@@ -1421,7 +1422,7 @@ the assumption that you did not intend to search for the nominally
 equivalent regular expression: @samp{[:epru]}.
 Set the @env{POSIXLY_CORRECT} environment variable to disable this feature.
 
-Most meta-characters lose their special meaning inside bracket expressions.
+Special characters lose their special meaning inside bracket expressions.
 
 @table @samp
 @item ]
@@ -1463,6 +1464,8 @@ character a list item, place it anywhere but first.
 @section The Backslash Character and Special Expressions
 @cindex backslash
 
+The @samp{\} character followed by a special character is a regular
+expression that matches the special character.
 The @samp{\} character,
 when followed by certain ordinary characters,
 takes a special meaning:
@@ -1476,10 +1479,10 @@ Match the empty string at the edge of a word.
 Match the empty string provided it's not at the edge of a word.
 
 @item \<
-Match the empty string at the beginning of word.
+Match the empty string at the beginning of a word.
 
 @item \>
-Match the empty string at the end of word.
+Match the empty string at the end of a word.
 
 @item \w
 Match word constituent, it is a synonym for @samp{[_[:alnum:]]}.
@@ -1502,7 +1505,7 @@ For example, @samp{\brat\b} matches the separate word @samp{rat},
 @section Anchoring
 @cindex anchoring
 
-The caret @samp{^} and the dollar sign @samp{$} are meta-characters that
+The caret @samp{^} and the dollar sign @samp{$} are special characters that
 respectively match the empty string at the beginning and end of a line.
 They are termed @dfn{anchors}, since they force the match to be ``anchored''
 to beginning or end of a line, respectively.
@@ -1512,14 +1515,17 @@ to beginning or end of a line, respectively.
 @cindex subexpression
 @cindex back-reference
 
-The back-reference @samp{\@var{n}}, where @var{n} is a single digit, matches
+The back-reference @samp{\@var{n}},
+where @var{n} is a single nonzero digit, matches
 the substring previously matched by the @var{n}th parenthesized subexpression
 of the regular expression.
 For example, @samp{(a)\1} matches @samp{aa}.
-When used with alternation, if the group does not participate in the match then
-the back-reference makes the whole match fail.
-For example, @samp{a(.)|b\1}
-will not match @samp{ba}.
+If the parenthesized subexpression does not participate in the match,
+the back-reference makes the whole match fail;
+for example, @samp{(a)*\1} fails to match @samp{a}.
+If the parenthesized subexpression matches more than one substring,
+the back-reference refers to the last matched substring;
+for example, @samp{^(ab*)*\1$} matches @samp{ababbabb} but not @samp{ababbab}.
 When multiple regular expressions are given with
 @option{-e} or from a file (@samp{-f @var{file}}),
 back-references are local to each expression.
@@ -1530,20 +1536,47 @@ back-references are local to each expression.
 @section Basic vs Extended Regular Expressions
 @cindex basic regular expressions
 
-In basic regular expressions the meta-characters @samp{?}, @samp{+},
+In basic regular expressions the characters @samp{?}, @samp{+},
 @samp{@{}, @samp{|}, @samp{(}, and @samp{)} lose their special meaning;
 instead use the backslashed versions @samp{\?}, @samp{\+}, @samp{\@{},
-@samp{\|}, @samp{\(}, and @samp{\)}.
+@samp{\|}, @samp{\(}, and @samp{\)}.  Also, a backslash is needed
+before an interval expression's closing @samp{@}}, and an unmatched
+@code{\)} is invalid.
 
-@cindex interval specifications
-Traditional @command{egrep} did not support the @samp{@{} meta-character,
-and some @command{egrep} implementations support @samp{\@{} instead, so
-portable scripts should avoid @samp{@{} in @samp{grep@ -E} patterns and
-should use @samp{[@{]} to match a literal @samp{@{}.
+Portable scripts should avoid the following constructs, as
+POSIX says they produce undefined results:
+
+@itemize @bullet
+@item
+Extended regular expressions that use back-references.
+@item
+Basic regular expressions that use @samp{\?}, @samp{\+}, or @samp{\|}.
+@item
+Empty parenthesized regular expressions like @samp{()}.
+@item
+Empty alternatives (as in, e.g, @samp{a|}).
+@item
+Repetition operators that immediately follow empty expressions,
+unescaped @samp{$}, or other repetition operators.
+@item
+A backslash escaping an ordinary character (e.g., @samp{\S}),
+unless it is a back-reference.
+@item
+An unescaped @samp{[} that is not part of a bracket expression.
+@item
+In extended regular expressions, an unescaped @samp{@{} that is not
+part of an interval expression.
+@end itemize
+
+@cindex interval expressions
+Traditional @command{egrep} did not support interval expressions and
+some @command{egrep} implementations use @samp{\@{} and @samp{\@}} instead, so
+portable scripts should avoid interval expressions in @samp{grep@ -E} patterns
+and should use @samp{[@{]} to match a literal @samp{@{}.
 
 GNU @command{grep@ -E} attempts to support traditional usage by
 assuming that @samp{@{} is not special if it would be the start of an
-invalid interval specification.
+invalid interval expression.
 For example, the command
 @samp{grep@ -E@ '@{1'} searches for the two-character string @samp{@{1}
 instead of reporting a syntax error in the regular expression.
@@ -1634,23 +1667,22 @@ The @option{-i} option causes @command{grep}
 to ignore case, causing it to match the line @samp{Hello, world!}, which
 it would not otherwise match.
 
-Here is a more complex example session,
+Here is a more complex example,
 showing the location and contents of any line
 containing @samp{f} and ending in @samp{.c},
 within all files in the current directory whose names
-contain @samp{g} and end in @samp{.h}.
+start with non-@samp{.}, contain @samp{g}, and end in @samp{.h}.
 The @option{-n} option outputs line numbers, the @option{--} argument
-treats any later arguments starting with @samp{-} as file names not
-options, and the empty file @file{/dev/null} causes file names to be output
+treats any later arguments as file names not options even if
+@code{*g*.h} expands to a file name that starts with @samp{-},
+and the empty file @file{/dev/null} causes file names to be output
 even if only one file name happens to be of the form @samp{*g*.h}.
 
 @example
-$ @kbd{grep -n -- 'f.*\.c$' *g*.h /dev/null}
-argmatch.h:1:/* definitions and prototypes for argmatch.c
+grep -n -- 'f.*\.c$' *g*.h /dev/null
 @end example
 
 @noindent
-The only line that contains a match is line 1 of @file{argmatch.h}.
 Note that the regular expression syntax used in the pattern differs
 from the globbing syntax that the shell uses to match file names.
 
@@ -1860,11 +1892,8 @@ Why is this back-reference failing?
 echo 'ba' | grep -E '(a)\1|b\1'
 @end example
 
-This gives no output, because the first alternate @samp{(a)\1} does not match,
-as there is no @samp{aa} in the input, so the @samp{\1} in the second alternate
+This outputs an error message, because the second @samp{\1}
 has nothing to refer back to, meaning it will never match anything.
-(The second alternate in this example can only match
-if the first alternate has matched---making the second one superfluous.)
 
 @item
 How can I match across lines?
@@ -2024,7 +2053,7 @@ and memory to explore.  Also, the POSIX specification for
 back-references is at times unclear.  Furthermore, many regular
 expression implementations have back-reference bugs that can cause
 programs to return incorrect answers or even crash, and fixing these
-bugs has often been low-priority: for example, as of 2020 the
+bugs has often been low-priority: for example, as of 2021 the
 @url{https://sourceware.org/bugzilla/,GNU C library bug database}
 contained back-reference bugs
 @url{https://sourceware.org/bugzilla/show_bug.cgi?id=52,,52},

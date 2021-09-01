@@ -1,5 +1,5 @@
 /* Test of exact or abbreviated match search.
-   Copyright (C) 1990, 1998-1999, 2001-2020 Free Software Foundation, Inc.
+   Copyright (C) 1990, 1998-1999, 2001-2021 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -18,6 +18,13 @@
    by David MacKenzie <djm@gnu.ai.mit.edu>.  */
 
 #include <config.h>
+
+/* As of GCC 11.2.1, gcc -Wanalyzer-too-complex reports that main's
+   use of CHECK macros expands to code that is too complicated for gcc
+   -fanalyzer.  Suppress the resulting bogus warnings.  */
+#if 10 <= __GNUC__
+# pragma GCC diagnostic ignored "-Wanalyzer-null-argument"
+#endif
 
 #include "argmatch.h"
 

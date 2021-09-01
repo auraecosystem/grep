@@ -225,7 +225,7 @@ as basic regular expressions (BREs, see below).
 This is the default.
 .TP
 .BR \-P ", " \-\^\-perl\-regexp
-Interpret PATTERNS as Perl-compatible regular expressions (PCREs).
+Interpret I<PATTERNS> as Perl-compatible regular expressions (PCREs).
 This option is experimental when combined with the
 .B \-z
 .RB ( \-\^\-null\-data )
@@ -319,13 +319,12 @@ is
 Suppress normal output; instead print the name
 of each input file from which no output would
 normally have been printed.
-The scanning will stop on the first match.
 .TP
 .BR \-l ", " \-\^\-files\-with\-matches
 Suppress normal output; instead print
 the name of each input file from which output
 would normally have been printed.
-The scanning will stop on the first match.
+Scanning each input file stops upon first match.
 .TP
 .BI \-m " NUM" "\fR,\fP \-\^\-max\-count=" NUM
 Stop reading a file after
@@ -393,6 +392,7 @@ print the offset of the matching part itself.
 .BR \-H ", " \-\^\-with\-filename
 Print the file name for each match.
 This is the default when there is more than one file to search.
+This is a GNU extension.
 .TP
 .BR \-h ", " \-\^\-no\-filename
 Suppress the prefixing of file names on output.
@@ -425,20 +425,6 @@ In order to improve the probability that lines
 from a single file will all start at the same column,
 this also causes the line number and byte offset (if present)
 to be printed in a minimum size field width.
-.TP
-.BR \-u ", " \-\^\-unix\-byte\-offsets
-Report Unix-style byte offsets.
-This switch causes
-.B grep
-to report byte offsets as if the file were a Unix-style text file,
-i.e., with CR characters stripped off.
-This will produce results identical to running
-.B grep
-on a Unix machine.
-This option has no effect unless
-.B \-b
-option is also used;
-it has no effect on platforms other than MS-DOS and MS-Windows.
 .TP
 .BR \-Z ", " \-\^\-null
 Output a zero byte (the ASCII
@@ -497,6 +483,26 @@ With the
 or
 .B \-\^\-only\-matching
 option, this has no effect and a warning is given.
+.TP
+.BI \-\^\-group\-separator= SEP
+When
+.BR \-A ,
+.BR \-B ,
+or
+.B \-C
+are in use, print
+.I SEP
+instead of
+.B \-\^\-
+between groups of lines.
+.TP
+.B \-\^\-no\-group\-separator
+When
+.BR \-A ,
+.BR \-B ,
+or
+.B \-C
+are in use, do not print a separator between groups of lines.
 .SS "File and Directory Selection"
 .TP
 .BR \-a ", " \-\^\-text
@@ -695,7 +701,7 @@ options match, a file is included unless the first such option is
 .BR \-r ", " \-\^\-recursive
 Read all files under each directory, recursively,
 following symbolic links only if they are on the command line.
-Note that if no file operand is given, grep searches the working directory.
+Note that if no file operand is given, B<grep> searches the working directory.
 This is equivalent to the
 .B "\-d recurse"
 option.
@@ -761,8 +767,8 @@ In other implementations, basic regular expressions are less powerful.
 The following description applies to extended regular expressions;
 differences for basic regular expressions are summarized afterwards.
 Perl-compatible regular expressions give additional functionality, and are
-documented in pcresyntax(3) and pcrepattern(3), but work only if
-PCRE is available in the system.
+documented in B<pcresyntax>(3) and B<pcrepattern>(3), but work only if
+PCRE support is enabled.
 .PP
 The fundamental building blocks are the regular expressions
 that match a single character.
@@ -1293,7 +1299,7 @@ This man page is maintained only fitfully;
 the full documentation is often more up-to-date.
 .
 .SH COPYRIGHT
-Copyright 1998-2000, 2002, 2005-2020 Free Software Foundation, Inc.
+Copyright 1998-2000, 2002, 2005-2021 Free Software Foundation, Inc.
 .PP
 This is free software;
 see the source for copying conditions.
@@ -1370,7 +1376,7 @@ from the globbing syntax that the shell uses to match file names.
 .BR pcrepattern (3),
 .BR terminfo (5),
 .BR glob (7),
-.BR regex (7).
+.BR regex (7)
 .SS "Full Documentation"
 A
 .UR https://www.gnu.org/software/grep/manual/

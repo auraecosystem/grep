@@ -1,5 +1,5 @@
 /* Test of malloc function.
-   Copyright (C) 2010-2020 Free Software Foundation, Inc.
+   Copyright (C) 2010-2021 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -16,16 +16,30 @@
 
 #include <config.h>
 
+/* Specification.  */
 #include <stdlib.h>
 
+#include <errno.h>
+#include <stdint.h>
+
+#include "macros.h"
+
 int
-main ()
+main (int argc, char **argv)
 {
   /* Check that malloc (0) is not a NULL pointer.  */
-  char *p = malloc (0);
-  if (p == NULL)
-    return 1;
-
+  void *volatile p = malloc (0);
+  ASSERT (p != NULL);
   free (p);
+
+  /* Check that malloc (n) fails when n exceeds PTRDIFF_MAX.  */
+  if (PTRDIFF_MAX < SIZE_MAX)
+    {
+      size_t one = argc != 12345;
+      p = malloc (PTRDIFF_MAX + one);
+      ASSERT (p == NULL);
+      ASSERT (errno == ENOMEM);
+    }
+
   return 0;
 }

@@ -1,5 +1,5 @@
 /* Test regular expressions
-   Copyright 1996-2001, 2003-2020 Free Software Foundation, Inc.
+   Copyright 1996-2001, 2003-2021 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -55,6 +55,115 @@ really_utf8 (void)
   return strcmp (locale_charset (), "UTF-8") == 0;
 }
 
+/* Tests supposed to match; copied from glibc posix/bug-regex11.c.  */
+static struct
+{
+  const char *pattern;
+  const char *string;
+  int flags, nmatch;
+  regmatch_t rm[5];
+} const tests[] = {
+  /* Test for newline handling in regex.  */
+  { "[^~]*~", "\nx~y", 0, 2, { { 0, 3 }, { -1, -1 } } },
+  /* Other tests.  */
+  { "a(.*)b", "a b", REG_EXTENDED, 2, { { 0, 3 }, { 1, 2 } } },
+  { ".*|\\([KIO]\\)\\([^|]*\\).*|?[KIO]", "10~.~|P|K0|I10|O16|?KSb", 0, 3,
+    { { 0, 21 }, { 15, 16 }, { 16, 18 } } },
+  { ".*|\\([KIO]\\)\\([^|]*\\).*|?\\1", "10~.~|P|K0|I10|O16|?KSb", 0, 3,
+    { { 0, 21 }, { 8, 9 }, { 9, 10 } } },
+  { "^\\(a*\\)\\1\\{9\\}\\(a\\{0,9\\}\\)\\([0-9]*;.*[^a]\\2\\([0-9]\\)\\)",
+    "a1;;0a1aa2aaa3aaaa4aaaaa5aaaaaa6aaaaaaa7aaaaaaaa8aaaaaaaaa9aa2aa1a0", 0,
+    5, { { 0, 67 }, { 0, 0 }, { 0, 1 }, { 1, 67 }, { 66, 67 } } },
+  /* Test for BRE expression anchoring.  POSIX says just that this may match;
+     in glibc regex it always matched, so avoid changing it.  */
+  { "\\(^\\|foo\\)bar", "bar", 0, 2, { { 0, 3 }, { -1, -1 } } },
+  { "\\(foo\\|^\\)bar", "bar", 0, 2, { { 0, 3 }, { -1, -1 } } },
+  /* In ERE this must be treated as an anchor.  */
+  { "(^|foo)bar", "bar", REG_EXTENDED, 2, { { 0, 3 }, { -1, -1 } } },
+  { "(foo|^)bar", "bar", REG_EXTENDED, 2, { { 0, 3 }, { -1, -1 } } },
+  /* Here ^ cannot be treated as an anchor according to POSIX.  */
+  { "(^|foo)bar", "(^|foo)bar", 0, 2, { { 0, 10 }, { -1, -1 } } },
+  { "(foo|^)bar", "(foo|^)bar", 0, 2, { { 0, 10 }, { -1, -1 } } },
+  /* More tests on backreferences.  */
+  { "()\\1", "x", REG_EXTENDED, 2, { { 0, 0 }, { 0, 0 } } },
+  { "()x\\1", "x", REG_EXTENDED, 2, { { 0, 1 }, { 0, 0 } } },
+  { "()\\1*\\1*", "", REG_EXTENDED, 2, { { 0, 0 }, { 0, 0 } } },
+  { "([0-9]).*\\1(a*)", "7;7a6", REG_EXTENDED, 3, { { 0, 4 }, { 0, 1 }, { 3, 4 } } },
+  { "([0-9]).*\\1(a*)", "7;7a", REG_EXTENDED, 3, { { 0, 4 }, { 0, 1 }, { 3, 4 } } },
+  { "(b)()c\\1", "bcb", REG_EXTENDED, 3, { { 0, 3 }, { 0, 1 }, { 1, 1 } } },
+  { "()(b)c\\2", "bcb", REG_EXTENDED, 3, { { 0, 3 }, { 0, 0 }, { 0, 1 } } },
+  { "a(b)()c\\1", "abcb", REG_EXTENDED, 3, { { 0, 4 }, { 1, 2 }, { 2, 2 } } },
+  { "a()(b)c\\2", "abcb", REG_EXTENDED, 3, { { 0, 4 }, { 1, 1 }, { 1, 2 } } },
+  { "()(b)\\1c\\2", "bcb", REG_EXTENDED, 3, { { 0, 3 }, { 0, 0 }, { 0, 1 } } },
+  { "(b())\\2\\1", "bbbb", REG_EXTENDED, 3, { { 0, 2 }, { 0, 1 }, { 1, 1 } } },
+  { "a()(b)\\1c\\2", "abcb", REG_EXTENDED, 3, { { 0, 4 }, { 1, 1 }, { 1, 2 } } },
+  { "a()d(b)\\1c\\2", "adbcb", REG_EXTENDED, 3, { { 0, 5 }, { 1, 1 }, { 2, 3 } } },
+  { "a(b())\\2\\1", "abbbb", REG_EXTENDED, 3, { { 0, 3 }, { 1, 2 }, { 2, 2 } } },
+  { "(bb())\\2\\1", "bbbb", REG_EXTENDED, 3, { { 0, 4 }, { 0, 2 }, { 2, 2 } } },
+  { "^([^,]*),\\1,\\1$", "a,a,a", REG_EXTENDED, 2, { { 0, 5 }, { 0, 1 } } },
+  { "^([^,]*),\\1,\\1$", "ab,ab,ab", REG_EXTENDED, 2, { { 0, 8 }, { 0, 2 } } },
+  { "^([^,]*),\\1,\\1,\\1$", "abc,abc,abc,abc", REG_EXTENDED, 2,
+    { { 0, 15 }, { 0, 3 } } },
+  { "^(.?)(.?)(.?)(.?)(.?).?\\5\\4\\3\\2\\1$",
+    "level", REG_NOSUB | REG_EXTENDED, 0, { { -1, -1 } } },
+  { "^(.?)(.?)(.?)(.?)(.?)(.?)(.?)(.?)(.).?\\9\\8\\7\\6\\5\\4\\3\\2\\1$|^.?$",
+    "level", REG_NOSUB | REG_EXTENDED, 0, { { -1, -1 } } },
+  { "^(.?)(.?)(.?)(.?)(.?)(.?)(.?)(.?)(.).?\\9\\8\\7\\6\\5\\4\\3\\2\\1$|^.?$",
+    "abcdedcba", REG_EXTENDED, 1, { { 0, 9 } } },
+  { "^(.?)(.?)(.?)(.?)(.?)(.?)(.?)(.?)(.).?\\9\\8\\7\\6\\5\\4\\3\\2\\1$|^.?$",
+    "ababababa", REG_EXTENDED, 1, { { 0, 9 } } },
+  { "^(.?)(.?)(.?)(.?)(.?)(.?)(.?)(.?)(.?).?\\9\\8\\7\\6\\5\\4\\3\\2\\1$",
+    "level", REG_NOSUB | REG_EXTENDED, 0, { { -1, -1 } } },
+  { "^(.?)(.?)(.?)(.?)(.?)(.?)(.?)(.?)(.?).?\\9\\8\\7\\6\\5\\4\\3\\2\\1$",
+    "ababababa", REG_EXTENDED, 1, { { 0, 9 } } },
+  /* Test for *+ match.  */
+  { "^a*+(.)", "ab", REG_EXTENDED, 2, { { 0, 2 }, { 1, 2 } } },
+  /* Test for ** match.  */
+  { "^(a*)*(.)", "ab", REG_EXTENDED, 3, { { 0, 2 }, { 0, 1 }, { 1, 2 } } },
+};
+
+static void
+bug_regex11 (void)
+{
+  regex_t re;
+  regmatch_t rm[5];
+  size_t i;
+  int n;
+
+  for (i = 0; i < sizeof (tests) / sizeof (tests[0]); ++i)
+    {
+      n = regcomp (&re, tests[i].pattern, tests[i].flags);
+      if (n != 0)
+	{
+	  char buf[500];
+	  regerror (n, &re, buf, sizeof (buf));
+	  report_error ("%s: regcomp %zd failed: %s", tests[i].pattern, i, buf);
+	  continue;
+	}
+
+      if (regexec (&re, tests[i].string, tests[i].nmatch, rm, 0))
+	{
+	  report_error ("%s: regexec %zd failed", tests[i].pattern, i);
+	  regfree (&re);
+	  continue;
+	}
+
+      for (n = 0; n < tests[i].nmatch; ++n)
+	if (rm[n].rm_so != tests[i].rm[n].rm_so
+              || rm[n].rm_eo != tests[i].rm[n].rm_eo)
+	  {
+	    if (tests[i].rm[n].rm_so == -1 && tests[i].rm[n].rm_eo == -1)
+	      break;
+	    report_error ("%s: regexec %zd match failure rm[%d] %d..%d",
+                          tests[i].pattern, i, n,
+                          (int) rm[n].rm_so, (int) rm[n].rm_eo);
+	    break;
+	  }
+
+      regfree (&re);
+    }
+}
+
 int
 main (void)
 {
@@ -65,11 +174,15 @@ main (void)
   struct re_registers regs;
 
 #if HAVE_DECL_ALARM
-  /* Some builds of glibc go into an infinite loop on this test.  */
-  int alarm_value = 2;
+  /* In case a bug causes glibc to go into an infinite loop.
+     The tests should take less than 10 s on a reasonably modern CPU.  */
+  int alarm_value = 1000;
   signal (SIGALRM, SIG_DFL);
   alarm (alarm_value);
 #endif
+
+  bug_regex11 ();
+
   if (setlocale (LC_ALL, "en_US.UTF-8"))
     {
       {
@@ -290,8 +403,38 @@ main (void)
     {
       memset (&regs, 0, sizeof regs);
       static char const data[] = "WXY";
-      if (re_search (&regex, data, sizeof data - 1, 0, 3, &regs) < 0)
+      i = re_search (&regex, data, sizeof data - 1, 0, 3, &regs);
+      if (i < 0)
         report_error ("re_search '%s' on '%s' returned %d", pat_x, data, i);
+      regfree (&regex);
+      free (regs.start);
+      free (regs.end);
+    }
+
+  /* glibc bug 11053.  */
+  re_set_syntax (RE_SYNTAX_POSIX_BASIC);
+  memset (&regex, 0, sizeof regex);
+  static char const pat_sub2[] = "\\(a*\\)*a*\\1";
+  s = re_compile_pattern (pat_sub2, sizeof pat_sub2 - 1, &regex);
+  if (s)
+    report_error ("%s: %s", pat_sub2, s);
+  else
+    {
+      memset (&regs, 0, sizeof regs);
+      static char const data[] = "a";
+      int datalen = sizeof data - 1;
+      i = re_search (&regex, data, datalen, 0, datalen, &regs);
+      if (i != 0)
+        report_error ("re_search '%s' on '%s' returned %d", pat_sub2, data, i);
+      else if (regs.num_regs < 2)
+        report_error ("re_search '%s' on '%s' returned only %d registers",
+                      pat_sub2, data, (int) regs.num_regs);
+      else if (! (regs.start[0] == 0 && regs.end[0] == 1))
+        report_error ("re_search '%s' on '%s' returned wrong match [%d,%d)",
+                      pat_sub2, data, (int) regs.start[0], (int) regs.end[0]);
+      else if (! (regs.start[1] == 0 && regs.end[1] == 0))
+        report_error ("re_search '%s' on '%s' returned wrong submatch [%d,%d)",
+                      pat_sub2, data, (int) regs.start[1], (int) regs.end[1]);
       regfree (&regex);
       free (regs.start);
       free (regs.end);
@@ -312,7 +455,7 @@ main (void)
 
   /* REG_STARTEND was added to glibc on 2004-01-15.
      Reject older versions.  */
-  if (! REG_STARTEND)
+  if (REG_STARTEND == 0)
     report_error ("REG_STARTEND is zero");
 
   /* Matching with the compiled form of this regexp would provoke
@@ -324,9 +467,9 @@ main (void)
   memset (&regex, 0, sizeof regex);
   static char const pat_badback[] = "0|()0|\\1|0";
   s = re_compile_pattern (pat_badback, sizeof pat_badback, &regex);
-  if (!s)
-    s = "failed to report invalid back reference";
-  if (strcmp (s, "Invalid back reference") != 0)
+  if (!s && re_search (&regex, "x", 1, 0, 1, &regs) != -1)
+    s = "mishandled invalid back reference";
+  if (s && strcmp (s, "Invalid back reference") != 0)
     report_error ("%s: %s", pat_badback, s);
 
 #if 0
