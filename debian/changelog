@@ -1,3 +1,11 @@
+grep (3.7-1~1.gbpd44c51) UNRELEASED; urgency=medium
+
+  ** SNAPSHOT build @d44c513a10eabab9963640c7fbc0a349cf0ed03c **
+
+  * New upstream version 3.7
+
+ -- Santiago Ruano Rincón <santiago@debian.org>  Wed, 01 Sep 2021 10:09:05 +0200
+
 grep (3.6-1) unstable; urgency=low
 
    [ Debian Janitor ]
