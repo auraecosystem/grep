@@ -1,4 +1,185 @@
+2021-08-14  Jim Meyering  <meyering@fb.com>
+
+	version 3.7
+	* NEWS: Record release date.
+
+2021-08-09  Jim Meyering  <meyering@fb.com>
+
+	tests: provide an awk-based seq replacement
+	...so we can continue to use seq, but the wrapper when needed.
+	* tests/init.cfg (seq): Some systems lask seq.
+	Provide a replacement.
+	* tests/hash-collision-perf: Use seq once again.
+	* tests/long-pattern-perf: Likewise. And remove a comment about seq.
+
+2021-08-09  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: simplify EGexecute
+	* src/dfasearch.c (EGexecute): Remove a label and goto.
+	This also makes the machine code a bit shorter, on x86-64 gcc.
+
+	grep: simplify data movement slightly
+	* src/grep.c (fillbuf): Simplify movement of saved data.
+
+	grep: pointer-integer cast nit
+	* src/grep.c (ALIGN_TO): When converting pointers to unsigned
+	integers, convert to uintptr_t not size_t, as size_t in theory
+	might be too narrow.
+
+	tests: use awk, not seq
+	Portability problem reported by Dagobert Michelsen in:
+	https://lists.gnu.org/r/grep-devel/2021-08/msg00004.html
+	* tests/hash-collision-perf, tests/long-pattern-perf:
+	Don’t assume seq is installed; use awk instead.
+
+2021-08-08  Jim Meyering  <meyering@fb.com>
+
+	build: update gnulib to latest
+
+	build: update gnulib to latest
+
+2021-08-06  Kevin Locke  <kevin@kevinlocke.name>
+
+	doc: usage: --group-separator/--no-group-separator
+	* src/grep.c (usage): Document --group-separator
+	and --no-group-separator.
+
+	doc: man: add --group-separator/--no-group-separator
+	* doc/grep.in.1:
+	Add copy of docs for --group-separator from doc/grep.texi.
+	Add copy of docs for --no-group-separator from doc/grep.texi.
+
+2021-08-06  Jim Meyering  <meyering@fb.com>
+
+	build: update gnulib to latest
+
+2021-06-19  Mateusz Okulus  <mmokulus@gmail.com>
+
+	doc: note that -H is a GNU extension in man page, too
+	* doc/grep.in.1 (-H): Mention that this is a GNU extension.
+
+2021-06-13  Paul Eggert  <eggert@cs.ucla.edu>
+
+	build: update gnulib submodule to latest
+
+2021-06-11  Paul Eggert  <eggert@cs.ucla.edu>
+
+	build: update gnulib submodule to latest
+
+2021-06-10  Paul Eggert  <eggert@cs.ucla.edu>
+
+	doc: improve examples and wording
+	* doc/grep.texi (The Backslash Character and Special Expressions)
+	(Usage): Improve doc (Bug#48948).
+
+2021-01-31  Jim Meyering  <meyering@fb.com>
+
+	doc: man: fix -L description and improve -l's
+	* doc/grep.texi (-L): Remove erroneous sentence about stopping early.
+	With -L, grep cannot stop scanning early.
+	(-l): Tweak existing wording.
+	* doc/grep.in.1: Remove the -L sentence here, too.
+	(-l): Copy the sentence from grep.texi, to clarify: it's only per-file
+	scanning that stops upon match.  Reported by Robert Bruntz
+	in http://debbugs.gnu.org/46179
+
+2021-01-05  Jim Meyering  <meyering@fb.com>
+
+	build: avoid long-string warnings in gnulib tests
+	* configure.ac (GNULIB_TEST_WARN_CFLAGS): Add
+	-Woverlength-strings to avoid clang warnings.
+
+2021-01-01  Paul Eggert  <eggert@cs.ucla.edu>
+
+	doc: further clarify regexp structure
+	* doc/grep.texi (Fundamental Structure)
+	(Back-references and Subexpressions, Basic vs Extended):
+	Further clarifications.
+
+	maint: copy bootstrap, tests/init.sh from Gnulib
+
+	doc: update grep.texi cite to 2021
+
+	maint: run "make update-copyright"
+
+	build: update gnulib submodule to latest
+
+2020-12-30  Jim Meyering  <meyering@fb.com>
+
+	build: update gnulib to latest
+	* gnulib: update for clang-10 warning warning-avoidance
+	fixes in hash and regex-tests.
+
+	maint: add parentheses to avoid new clang-10 warning
+	* src/dfasearch.c (regex_compile): Parenthesize arith-OR vs
+	ternary, to placate clang-10.
+
+2020-12-29  Paul Eggert  <eggert@cs.ucla.edu>
+
+	doc: clarify special chars and }
+	* doc/grep.texi (Fundamental Structure)
+	(Character Classes and Bracket Expressions)
+	(The Backslash Character and Special Expressions, Anchoring)
+	(Basic vs Extended): Clarify which characters are special,
+	and why \ is needed before } in grep even though } is not special.
+	Use Posix terminology for ordinary and special characters and for
+	interval expressions.
+
+2020-12-29  Marek Suppa  <mr@shu.io>
+
+	doc: fix missing right curly brace
+	* doc/grep.texi (Basic vs Extended Regular Expressions): Mention that
+	the right curly brace (}) meta-character must be backslash-escaped.
+	It had been omitted from the list.
+
+2020-12-25  Jim Meyering  <meyering@fb.com>
+
+	build: update gnulib to latest
+
+	grep: use of --unix-byte-offsets (-u) now elicits a warning
+	* NEWS (Change in behavior): Mention this.
+	* src/grep.c (main): Warn about each use of obsolete
+	--unix-byte-offsets (-u).
+	* doc/grep.in.1 (-u): Remove its documentation.
+
+2020-12-23  Helge Kreutzmann  <debian@helgefjell.de>
+
+	doc: adjust man page syntax
+	* doc/grep.in.1: Mark some manual names with B<...>.
+	Mark PATTERNS with I<...>.
+	Drop final period in SEE ALSO.
+	With suggestions from of several members of the manpage-l10n
+	translation community.  This resolves https://bugs.gnu.org/45353
+
+2020-11-26  Jim Meyering  <meyering@fb.com>
+
+	grep: avoid performance regression with many patterns
+	* src/grep.c (hash_pattern): Switch from PJW to DJB2, to avoid an
+	O(N) to O(N^2) performance regression due to hash collisions with
+	patterns from e.g., seq 500000|tr 0-9 A-J
+	Reported by Frank Heckenbach in https://bugs.gnu.org/44754
+	* NEWS (Bug fixes): Mention it.
+	* tests/hash-collision-perf: New file.
+	* tests/Makefile.am (TESTS): Add it.
+
+	build: update gnulib to latest for warning fixes
+	* gnulib: Update submodule to latest.
+	* src/grep.c (printf_errno): Reflect gnulib's renaming: change
+	_GL_ATTRIBUTE_FORMAT_PRINTF to
+	_GL_ATTRIBUTE_FORMAT_PRINTF_STANDARD
+
+	tests: enable warnings for the gnulib-tests subdir
+	* gnulib-tests/Makefile.am (AM_CFLAGS): Enable gnulib
+	warning options for these tests.
+	* configure.ac (GNULIB_TEST_WARN_CFLAGS): Disable the same three
+	warning options that coreutils does, and a few more for GCC11.
+
 2020-11-08  Jim Meyering  <meyering@fb.com>
+
+	maint: post-release administrivia
+	* NEWS: Add header line for next release.
+	* .prev-version: Record previous version.
+	* cfg.mk (old_NEWS_hash): Auto-update.
 
 	version 3.6
 	* NEWS: Record release date.

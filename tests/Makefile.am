@@ -1,5 +1,5 @@
 ## Process this file with automake to create Makefile.in
-# Copyright 1997-1998, 2005-2020 Free Software Foundation, Inc.
+# Copyright 1997-1998, 2005-2021 Free Software Foundation, Inc.
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -109,6 +109,7 @@ TESTS =						\
   grep-dev-null					\
   grep-dev-null-out				\
   grep-dir					\
+  hash-collision-perf				\
   help-version					\
   high-bit-range				\
   in-eq-out-infloop				\

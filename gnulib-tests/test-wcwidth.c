@@ -1,5 +1,5 @@
 /* Test of wcwidth() function.
-   Copyright (C) 2007-2020 Free Software Foundation, Inc.
+   Copyright (C) 2007-2021 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -35,7 +35,7 @@ main ()
 {
   wchar_t wc;
 
-#if !GNULIB_WCHAR_SINGLE
+#if !GNULIB_WCHAR_SINGLE_LOCALE
 # ifdef C_CTYPE_ASCII
   /* Test width of ASCII characters.  */
   for (wc = 0x20; wc < 0x7F; wc++)

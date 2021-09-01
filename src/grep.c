@@ -1,5 +1,5 @@
 /* grep.c - main driver file for grep.
-   Copyright (C) 1992, 1997-2002, 2004-2020 Free Software Foundation, Inc.
+   Copyright (C) 1992, 1997-2002, 2004-2021 Free Software Foundation, Inc.
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -128,8 +128,9 @@ hash_pattern (void const *pat, size_t n_buckets)
 {
   size_t h = 0;
   intptr_t pat_offset = (intptr_t) pat - 1;
-  for (char const *s = pattern_array + pat_offset; *s != '\n'; s++)
-    h = *s + ((h << 9) | (h >> (SIZE_WIDTH - 9)));
+  unsigned char const *s = (unsigned char const *) pattern_array + pat_offset;
+  for ( ; *s != '\n'; s++)
+    h = h * 33 ^ *s;
   return h % n_buckets;
 }
 static bool _GL_ATTRIBUTE_PURE
@@ -447,7 +448,7 @@ fputs_errno (char const *s)
     stdout_errno = errno;
 }
 
-static void _GL_ATTRIBUTE_FORMAT_PRINTF (1, 2)
+static void _GL_ATTRIBUTE_FORMAT_PRINTF_STANDARD (1, 2)
 printf_errno (char const *format, ...)
 {
   va_list ap;
@@ -879,9 +880,9 @@ enum { INITIAL_BUFSIZE = 96 * 1024 };
 /* Return VAL aligned to the next multiple of ALIGNMENT.  VAL can be
    an integer or a pointer.  Both args must be free of side effects.  */
 #define ALIGN_TO(val, alignment) \
-  ((size_t) (val) % (alignment) == 0 \
+  ((uintptr_t) (val) % (alignment) == 0 \
    ? (val) \
-   : (val) + ((alignment) - (size_t) (val) % (alignment)))
+   : (val) + ((alignment) - (uintptr_t) (val) % (alignment)))
 
 /* Add two numbers that count input bytes or lines, and report an
    error if the addition overflows.  */
@@ -942,15 +943,8 @@ fillbuf (size_t save, struct stat const *st)
   char *readbuf;
   size_t readsize;
 
-  /* Offset from start of buffer to start of old stuff
-     that we want to save.  */
-  size_t saved_offset = buflim - save - buffer;
-
   if (pagesize <= buffer + bufalloc - sizeof (uword) - buflim)
-    {
-      readbuf = buflim;
-      bufbeg = buflim - save;
-    }
+    readbuf = buflim;
   else
     {
       size_t minsize = save + pagesize;
@@ -988,15 +982,16 @@ fillbuf (size_t save, struct stat const *st)
 
       newbuf = bufalloc < newalloc ? xmalloc (bufalloc = newalloc) : buffer;
       readbuf = ALIGN_TO (newbuf + 1 + save, pagesize);
-      bufbeg = readbuf - save;
-      memmove (bufbeg, buffer + saved_offset, save);
-      bufbeg[-1] = eolbyte;
+      size_t moved = save + 1;  /* Move the preceding byte sentinel too.  */
+      memmove (readbuf - moved, buflim - moved, moved);
       if (newbuf != buffer)
         {
           free (buffer);
           buffer = newbuf;
         }
     }
+
+  bufbeg = readbuf - save;
 
   clear_asan_poison ();
 
@@ -2047,6 +2042,8 @@ Context control:\n\
 "));
       printf (_("\
   -NUM                      same as --context=NUM\n\
+      --group-separator=SEP  print SEP on line between matches with context\n\
+      --no-group-separator  do not print separator for matches with context\n\
       --color[=WHEN],\n\
       --colour[=WHEN]       use markers to highlight the matching strings;\n\
                             WHEN is 'always', 'never', or 'auto'\n\
@@ -2579,8 +2576,8 @@ main (int argc, char **argv)
         break;
 
       case 'u':
-        /* Obsolete option; it has no effect.  FIXME: Diagnose use of
-           this option starting in (say) the year 2020.  */
+        /* Obsolete option; it had no effect; FIXME: remove in 2023  */
+        error (0, 0, _("warning: --unix-byte-offsets (-u) is obsolete"));
         break;
 
       case 'V':

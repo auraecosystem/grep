@@ -1,5 +1,5 @@
 /* dfa.h - declarations for GNU deterministic regexp compiler
-   Copyright (C) 1988, 1998, 2007, 2009-2020 Free Software Foundation, Inc.
+   Copyright (C) 1988, 1998, 2007, 2009-2021 Free Software Foundation, Inc.
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -24,6 +24,7 @@
 #include <regex.h>
 #include <stdbool.h>
 #include <stddef.h>
+#include <stdlib.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -46,7 +47,9 @@ struct dfa;
 
 /* Needed when Gnulib is not used.  */
 #ifndef _GL_ATTRIBUTE_MALLOC
-# define  _GL_ATTRIBUTE_MALLOC
+# define _GL_ATTRIBUTE_MALLOC
+# define _GL_ATTRIBUTE_DEALLOC_FREE
+# define _GL_ATTRIBUTE_RETURNS_NONNULL
 #endif
 
 /* Entry points. */
@@ -55,7 +58,9 @@ struct dfa;
    It should be initialized via dfasyntax or dfacopysyntax before other use.
    The returned pointer should be passed directly to free() after
    calling dfafree() on it. */
-extern struct dfa *dfaalloc (void) _GL_ATTRIBUTE_MALLOC;
+extern struct dfa *dfaalloc (void)
+  _GL_ATTRIBUTE_MALLOC _GL_ATTRIBUTE_DEALLOC_FREE
+  _GL_ATTRIBUTE_RETURNS_NONNULL;
 
 /* DFA options that can be ORed together, for dfasyntax's 4th arg.  */
 enum
@@ -83,12 +88,15 @@ extern void dfacopysyntax (struct dfa *, struct dfa const *);
 /* Parse the given string of given length into the given struct dfa.  */
 extern void dfaparse (char const *, ptrdiff_t, struct dfa *);
 
-/* Allocate and return a struct dfamust from a struct dfa that was
-   initialized by dfaparse and not yet given to dfacomp.  */
-extern struct dfamust *dfamust (struct dfa const *);
+struct dfamust;
 
 /* Free the storage held by the components of a struct dfamust. */
 extern void dfamustfree (struct dfamust *);
+
+/* Allocate and return a struct dfamust from a struct dfa that was
+   initialized by dfaparse and not yet given to dfacomp.  */
+extern struct dfamust *dfamust (struct dfa const *)
+  _GL_ATTRIBUTE_DEALLOC (dfamustfree, 1);
 
 /* Compile the given string of the given length into the given struct dfa.
    The last argument says whether to build a searching or an exact matcher.

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grep 3.0.23-b00\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2020-11-08 20:37-0800\n"
+"POT-Creation-Date: 2021-08-14 12:54-0700\n"
 "PO-Revision-Date: 2017-06-25 05:18-0600\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -30,52 +30,52 @@ msgstr "argóint dhébhríoch %s le haghaidh %s"
 msgid "Valid arguments are:"
 msgstr "Na hargóintí bailí:"
 
-#: lib/c-stack.c:225 lib/c-stack.c:338
+#: lib/c-stack.c:187
 msgid "program error"
 msgstr ""
 
-#: lib/c-stack.c:226 lib/c-stack.c:339
+#: lib/c-stack.c:188
 msgid "stack overflow"
 msgstr ""
 
-#: lib/closeout.c:122 src/grep.c:1341
+#: lib/closeout.c:122 src/grep.c:1336
 msgid "write error"
 msgstr "earráid sa scríobh"
 
-#: lib/dfa.c:954
+#: lib/dfa.c:896
 msgid "unbalanced ["
 msgstr "[ corr"
 
-#: lib/dfa.c:1075
+#: lib/dfa.c:1017
 msgid "invalid character class"
 msgstr "Aicme charachtar neamhbhailí"
 
-#: lib/dfa.c:1201
+#: lib/dfa.c:1143
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr ""
 "Is é [[:space:]] an chomhréir cheart in aicme carachtar, in ionad [:space:]"
 
-#: lib/dfa.c:1268
+#: lib/dfa.c:1210
 msgid "unfinished \\ escape"
 msgstr "Seicheamh éalúcháin \\ gan chríochnú"
 
-#: lib/dfa.c:1429
+#: lib/dfa.c:1371
 msgid "invalid content of \\{\\}"
 msgstr "ábhar neamhbhailí laistigh de \\{\\}"
 
-#: lib/dfa.c:1432
+#: lib/dfa.c:1374
 msgid "regular expression too big"
 msgstr "slonn ionadaíochta rómhór"
 
-#: lib/dfa.c:1916
+#: lib/dfa.c:1858
 msgid "unbalanced ("
 msgstr "( corr"
 
-#: lib/dfa.c:2033
+#: lib/dfa.c:1975
 msgid "no syntax specified"
 msgstr "níor sonraíodh aon chomhréir"
 
-#: lib/dfa.c:2044
+#: lib/dfa.c:1986
 msgid "unbalanced )"
 msgstr ") corr"
 
@@ -118,7 +118,7 @@ msgstr "%s: rogha neamhbhailí -- '%c'\n"
 msgid "%s: option requires an argument -- '%c'\n"
 msgstr "%s: tá argóint de dhíth i ndiaidh na rogha -- '%c'\n"
 
-#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34
+#: lib/obstack.c:337 lib/obstack.c:339 lib/xalloc-die.c:34
 msgid "memory exhausted"
 msgstr "cuimhne ídithe"
 
@@ -404,50 +404,50 @@ msgid "General help using GNU software: <%s>\n"
 msgstr ""
 "Cabhair ghinearálta maidir le bogearraí GNU: <http://www.gnu.org/gethelp/>\n"
 
-#: src/grep.c:648
+#: src/grep.c:649
 msgid "(standard input)"
 msgstr "(gnáth-ionchur)"
 
-#: src/grep.c:828
+#: src/grep.c:829
 msgid "invalid context length argument"
 msgstr "tá an argóint a shonraíonn fad an chomhthéacs neamhbhailí"
 
-#: src/grep.c:893
+#: src/grep.c:894
 msgid "input is too large to count"
 msgstr "tá an t-ionchur rómhór le háireamh"
 
 # using lit. "matching string" throughout for "match" - KPS
-#: src/grep.c:1646
+#: src/grep.c:1641
 #, fuzzy, c-format
 msgid "%s: binary file matches"
 msgstr "Teaghrán comhoiriúnach sa chomhad dhénártha %s\n"
 
-#: src/grep.c:1684
+#: src/grep.c:1679
 #, fuzzy, c-format
 msgid "%s: warning: recursive directory loop"
 msgstr "lúb athchúrsach i gcomhadlann"
 
-#: src/grep.c:1904
+#: src/grep.c:1899
 #, fuzzy, c-format
 msgid "%s: input file is also the output"
 msgstr "is ionann an t-inchomhad %s agus an t-aschomhad"
 
-#: src/grep.c:1966 src/grep.c:1973
+#: src/grep.c:1961 src/grep.c:1968
 #, fuzzy, c-format
 msgid "Usage: %s [OPTION]... PATTERNS [FILE]...\n"
 msgstr "Úsáid: %s [ROGHA]... PATRÚN [COMHAD]...\n"
 
-#: src/grep.c:1968
+#: src/grep.c:1963
 #, c-format
 msgid "Try '%s --help' for more information.\n"
 msgstr "Bain triail as '%s --help' chun tuilleadh eolais a fháil.\n"
 
-#: src/grep.c:1974
+#: src/grep.c:1969
 #, fuzzy, c-format
 msgid "Search for PATTERNS in each FILE.\n"
 msgstr "Déan cuardach ar PATRÚN i ngach COMHAD.\n"
 
-#: src/grep.c:1975
+#: src/grep.c:1970
 #, fuzzy, c-format
 msgid ""
 "Example: %s -i 'hello world' menu.h main.c\n"
@@ -459,7 +459,7 @@ msgstr ""
 "\n"
 "Roghnú agus léirmhíniú patrún:\n"
 
-#: src/grep.c:1980
+#: src/grep.c:1975
 #, fuzzy, c-format
 msgid ""
 "  -E, --extended-regexp     PATTERNS are extended regular expressions\n"
@@ -472,7 +472,7 @@ msgstr ""
 "  -G, --basic-regexp        is slonn ion. bunúsach é PATRÚN (réamhshocrú)\n"
 "  -P, --perl-regexp         is slonn ionadaíochta Perl é PATRÚN\n"
 
-#: src/grep.c:1986
+#: src/grep.c:1981
 #, fuzzy, c-format
 msgid ""
 "  -e, --regexp=PATTERNS     use PATTERNS for matching\n"
@@ -490,7 +490,7 @@ msgstr ""
 "  -x, --line-regexp         meaitseálann PATRÚN línte iomlána amháin\n"
 "  -z, --null-data           léiríonn beart '0' deireadh na líne (vs. \\n)\n"
 
-#: src/grep.c:1994
+#: src/grep.c:1989
 #, c-format
 msgid ""
 "\n"
@@ -507,7 +507,7 @@ msgstr ""
 "  -V, --version             taispeáin eolas faoin leagan agus scoir\n"
 "      --help                taispeáin an chabhair seo agus scoir\n"
 
-#: src/grep.c:2001
+#: src/grep.c:1996
 #, c-format
 msgid ""
 "\n"
@@ -531,7 +531,7 @@ msgstr ""
 "  -h, --no-filename         ná taispeáin ainmneacha comhad mar réimír\n"
 "      --label=LIPÉAD        úsáid LIPÉAD mar ainm ar an ngnáth-ionchur\n"
 
-#: src/grep.c:2012
+#: src/grep.c:2007
 #, fuzzy, c-format
 msgid ""
 "  -o, --only-matching       show only nonempty parts of lines that match\n"
@@ -546,7 +546,7 @@ msgstr ""
 "                            CINEÁL = 'binary', 'text', nó 'without-match'\n"
 "  -a, --text                ar comhbhrí le '--binary-files=text'\n"
 
-#: src/grep.c:2019
+#: src/grep.c:2014
 #, c-format
 msgid ""
 "  -I                        equivalent to --binary-files=without-match\n"
@@ -565,7 +565,7 @@ msgstr ""
 "  -r, --recursive           ar comhbhrí le '--directories=recurse'\n"
 "  -R, --dereference-recursive  mar an gcéanna, ach lean naisc shiombalacha\n"
 
-#: src/grep.c:2028
+#: src/grep.c:2023
 #, fuzzy, c-format
 msgid ""
 "      --include=GLOB        search only files that match GLOB (a file "
@@ -582,7 +582,7 @@ msgstr ""
 "                              haon phatrún i gCOMHAD\n"
 "      --exclude-dir=PATRÚN  ná déan cuardach i gcomhadlanna comhoiriúnacha.\n"
 
-#: src/grep.c:2035
+#: src/grep.c:2030
 #, c-format
 msgid ""
 "  -L, --files-without-match  print only names of FILEs with no selected "
@@ -602,7 +602,7 @@ msgstr ""
 "  -T, --initial-tab         Ailínigh na táib (más gá)\n"
 "  -Z, --null                priontáil beart '0' i ndiaidh ainm an chomhaid\n"
 
-#: src/grep.c:2041
+#: src/grep.c:2036
 #, c-format
 msgid ""
 "\n"
@@ -617,10 +617,12 @@ msgstr ""
 "  -A, --after-context=UIMH  taispeáin UIMH líne de chomhthéacs deiridh\n"
 "  -C, --context=UIMHIR      taispeáin UIMHIR líne de chomhthéacs\n"
 
-#: src/grep.c:2048
-#, c-format
+#: src/grep.c:2043
+#, fuzzy, c-format
 msgid ""
 "  -NUM                      same as --context=NUM\n"
+"      --group-separator=SEP  print SEP on line between matches with context\n"
+"      --no-group-separator  do not print separator for matches with context\n"
 "      --color[=WHEN],\n"
 "      --colour[=WHEN]       use markers to highlight the matching strings;\n"
 "                            WHEN is 'always', 'never', or 'auto'\n"
@@ -635,7 +637,7 @@ msgstr ""
 "  -U, --binary              ná scrios carachtair CR (MSDOS/Windows)\n"
 "\n"
 
-#: src/grep.c:2055
+#: src/grep.c:2052
 #, fuzzy, c-format
 msgid ""
 "When FILE is '-', read standard input.  With no FILE, read '.' if\n"
@@ -648,35 +650,40 @@ msgstr ""
 "chomhad ann, úsáid '-h'. Stádas scortha: 0 má roghnaíodh líne ar bith,\n"
 "1 murar roghnaíodh, agus 2 má tharlaíonn earráid ar bith gan rogha -q.\n"
 
-#: src/grep.c:2097
+#: src/grep.c:2094
 msgid "conflicting matchers specified"
 msgstr "sonraíodh patrúin chontrártha"
 
-#: src/grep.c:2104
+#: src/grep.c:2101
 #, fuzzy
 msgid "Perl matching not supported in a --disable-perl-regexp build"
 msgstr ""
 "Tiomsaíodh an clár dénártha seo le --disable-perl-regexp agus gan tacaíocht "
 "do rogha -P"
 
-#: src/grep.c:2106
+#: src/grep.c:2103
 #, c-format
 msgid "invalid matcher %s"
 msgstr "meaitseálaí neamhbhailí %s"
 
-#: src/grep.c:2541
+#: src/grep.c:2538
 msgid "unknown devices method"
 msgstr "modh anaithnid gléasanna"
 
-#: src/grep.c:2689
+#: src/grep.c:2580
+#, c-format
+msgid "warning: --unix-byte-offsets (-u) is obsolete"
+msgstr ""
+
+#: src/grep.c:2686
 msgid "invalid max count"
 msgstr "uasmhéid neamhbhailí"
 
-#: src/grep.c:2747
+#: src/grep.c:2744
 msgid "unknown binary-files type"
 msgstr "cineál anaithnid de chomhad dénártha"
 
-#: src/grep.c:2832
+#: src/grep.c:2829
 #, fuzzy
 msgid ""
 "Written by Mike Haertel and others; see\n"

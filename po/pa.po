@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grep 2.11.11-pre1\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2020-11-08 20:37-0800\n"
+"POT-Creation-Date: 2021-08-14 12:54-0700\n"
 "PO-Revision-Date: 2012-05-19 17:52+0530\n"
 "Last-Translator: A S Alam <aalam@users.sf.net>\n"
 "Language-Team: Punjabi <punjabi-l10n@lists.sourceforge.net>\n"
@@ -33,53 +33,53 @@ msgstr ""
 msgid "Valid arguments are:"
 msgstr "ਠੀਕ ਆਰਗੂਮੈਂਟ ਹਨ:"
 
-#: lib/c-stack.c:225 lib/c-stack.c:338
+#: lib/c-stack.c:187
 msgid "program error"
 msgstr ""
 
-#: lib/c-stack.c:226 lib/c-stack.c:339
+#: lib/c-stack.c:188
 msgid "stack overflow"
 msgstr ""
 
-#: lib/closeout.c:122 src/grep.c:1341
+#: lib/closeout.c:122 src/grep.c:1336
 msgid "write error"
 msgstr "ਲਿਖਣ ਗਲਤੀ"
 
-#: lib/dfa.c:954
+#: lib/dfa.c:896
 msgid "unbalanced ["
 msgstr "ਅਧੂਰੀ ["
 
-#: lib/dfa.c:1075
+#: lib/dfa.c:1017
 msgid "invalid character class"
 msgstr "ਗਲਤ ਕਰੈਕਟਰ ਕਲਾਸ"
 
-#: lib/dfa.c:1201
+#: lib/dfa.c:1143
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr ""
 
-#: lib/dfa.c:1268
+#: lib/dfa.c:1210
 msgid "unfinished \\ escape"
 msgstr ""
 
-#: lib/dfa.c:1429
+#: lib/dfa.c:1371
 #, fuzzy
 msgid "invalid content of \\{\\}"
 msgstr "ਗਲਤ ਵੱਧ ਤੋਂ ਵੱਧ ਗਿਣਤੀ"
 
-#: lib/dfa.c:1432
+#: lib/dfa.c:1374
 #, fuzzy
 msgid "regular expression too big"
 msgstr "ਨਿਯਮਤ ਸਮੀਕਰਨ ਬਹੁਤ ਵੱਡੀ ਹੈ"
 
-#: lib/dfa.c:1916
+#: lib/dfa.c:1858
 msgid "unbalanced ("
 msgstr "ਅਧੂਰੀ ("
 
-#: lib/dfa.c:2033
+#: lib/dfa.c:1975
 msgid "no syntax specified"
 msgstr "ਕੋਈ ਸੰਟੈਕਸ ਨਹੀਂ ਦਿੱਤਾ"
 
-#: lib/dfa.c:2044
+#: lib/dfa.c:1986
 msgid "unbalanced )"
 msgstr "ਅਧੂਰੀ )"
 
@@ -122,7 +122,7 @@ msgstr "%s: ਗਲਤ ਚੋਣ -- '%c'\n"
 msgid "%s: option requires an argument -- '%c'\n"
 msgstr "%s: ਚੋਣ ਲਈ ਆਰਗੂਮੈਂਟ ਚਾਹੀਦਾ ਹੈ --'%c'\n"
 
-#: lib/obstack.c:338 lib/obstack.c:340 lib/xalloc-die.c:34
+#: lib/obstack.c:337 lib/obstack.c:339 lib/xalloc-die.c:34
 msgid "memory exhausted"
 msgstr "ਮੈਮੋਰੀ ਖਤਮ ਹੋਈ"
 
@@ -403,49 +403,49 @@ msgstr "%s ਮੁੱਖ ਪੇਜ਼: <%s>\n"
 msgid "General help using GNU software: <%s>\n"
 msgstr "ਗਨੂ ਸਾਫਟਵੇਅਰ ਦੀ ਵਰਤੋਂ ਲਈ ਆਮ ਮੱਦਦ ਵਾਸਤੇ: <http://www.gnu.org/gethelp/>\n"
 
-#: src/grep.c:648
+#: src/grep.c:649
 msgid "(standard input)"
 msgstr "(ਸਟੈਂਡਰਡ ਆਉਟਪੁੱਟ)"
 
-#: src/grep.c:828
+#: src/grep.c:829
 msgid "invalid context length argument"
 msgstr ""
 
-#: src/grep.c:893
+#: src/grep.c:894
 msgid "input is too large to count"
 msgstr "ਇੰਪੁੱਟ ਗਿਣਤੀ ਕਰਨ ਲਈ ਬਹੁਤ ਵੱਡੀ ਹੈ"
 
-#: src/grep.c:1646
+#: src/grep.c:1641
 #, fuzzy, c-format
 msgid "%s: binary file matches"
 msgstr "ਬਾਈਨਰੀ ਫਾਇਲ %s ਮਿਲਦੀ ਹੈ\n"
 
-#: src/grep.c:1684
+#: src/grep.c:1679
 #, fuzzy, c-format
 msgid "%s: warning: recursive directory loop"
 msgstr "ਲਗਾਤਾਰ ਡਾਇਰੈਕਟਰੀ ਲੂਪ"
 
-#: src/grep.c:1904
+#: src/grep.c:1899
 #, fuzzy, c-format
 msgid "%s: input file is also the output"
 msgstr "ਇੰਪੁੱਟ ਫਾਇਲ %s ਆਉਟਪੁੱਟ ਫਾਇਲ ਵੀ ਹੈ"
 
-#: src/grep.c:1966 src/grep.c:1973
+#: src/grep.c:1961 src/grep.c:1968
 #, fuzzy, c-format
 msgid "Usage: %s [OPTION]... PATTERNS [FILE]...\n"
 msgstr "ਵਰਤੋਂ: %s [ਚੋਣਾਂ]... ਪੈਟਰਨ [ਫਾਇਲ]...\n"
 
-#: src/grep.c:1968
+#: src/grep.c:1963
 #, c-format
 msgid "Try '%s --help' for more information.\n"
 msgstr "ਹੋਰ ਜਾਣਕਾਰੀ ਲਈ '%s --help' ਨਾਲ ਕੋਸ਼ਿਸ਼ ਕਰੋ।\n"
 
-#: src/grep.c:1974
+#: src/grep.c:1969
 #, fuzzy, c-format
 msgid "Search for PATTERNS in each FILE.\n"
 msgstr "ਹਰੇਕ ਫਾਇਲ (FILE) ਜਾਂ ਸਟੈਂਡਰਡ ਆਉਟਪੁੱਟ ਲਈ ਪੈਟਰਨ ਦੀ ਖੋਜ।\n"
 
-#: src/grep.c:1975
+#: src/grep.c:1970
 #, fuzzy, c-format
 msgid ""
 "Example: %s -i 'hello world' menu.h main.c\n"
@@ -457,7 +457,7 @@ msgstr ""
 "\n"
 "ਨਿਯਮਤ-ਸਮੀਕਰਨ (Regexp) ਚੋਣ ਅਤੇ ਚਲਾਉਣਾ:\n"
 
-#: src/grep.c:1980
+#: src/grep.c:1975
 #, c-format
 msgid ""
 "  -E, --extended-regexp     PATTERNS are extended regular expressions\n"
@@ -466,7 +466,7 @@ msgid ""
 "  -P, --perl-regexp         PATTERNS are Perl regular expressions\n"
 msgstr ""
 
-#: src/grep.c:1986
+#: src/grep.c:1981
 #, c-format
 msgid ""
 "  -e, --regexp=PATTERNS     use PATTERNS for matching\n"
@@ -478,7 +478,7 @@ msgid ""
 "  -z, --null-data           a data line ends in 0 byte, not newline\n"
 msgstr ""
 
-#: src/grep.c:1994
+#: src/grep.c:1989
 #, c-format
 msgid ""
 "\n"
@@ -489,7 +489,7 @@ msgid ""
 "      --help                display this help text and exit\n"
 msgstr ""
 
-#: src/grep.c:2001
+#: src/grep.c:1996
 #, c-format
 msgid ""
 "\n"
@@ -504,7 +504,7 @@ msgid ""
 "prefix\n"
 msgstr ""
 
-#: src/grep.c:2012
+#: src/grep.c:2007
 #, c-format
 msgid ""
 "  -o, --only-matching       show only nonempty parts of lines that match\n"
@@ -514,7 +514,7 @@ msgid ""
 "  -a, --text                equivalent to --binary-files=text\n"
 msgstr ""
 
-#: src/grep.c:2019
+#: src/grep.c:2014
 #, c-format
 msgid ""
 "  -I                        equivalent to --binary-files=without-match\n"
@@ -526,7 +526,7 @@ msgid ""
 "  -R, --dereference-recursive  likewise, but follow all symlinks\n"
 msgstr ""
 
-#: src/grep.c:2028
+#: src/grep.c:2023
 #, c-format
 msgid ""
 "      --include=GLOB        search only files that match GLOB (a file "
@@ -537,7 +537,7 @@ msgid ""
 "      --exclude-dir=GLOB    skip directories that match GLOB\n"
 msgstr ""
 
-#: src/grep.c:2035
+#: src/grep.c:2030
 #, c-format
 msgid ""
 "  -L, --files-without-match  print only names of FILEs with no selected "
@@ -548,7 +548,7 @@ msgid ""
 "  -Z, --null                print 0 byte after FILE name\n"
 msgstr ""
 
-#: src/grep.c:2041
+#: src/grep.c:2036
 #, c-format
 msgid ""
 "\n"
@@ -558,10 +558,12 @@ msgid ""
 "  -C, --context=NUM         print NUM lines of output context\n"
 msgstr ""
 
-#: src/grep.c:2048
+#: src/grep.c:2043
 #, c-format
 msgid ""
 "  -NUM                      same as --context=NUM\n"
+"      --group-separator=SEP  print SEP on line between matches with context\n"
+"      --no-group-separator  do not print separator for matches with context\n"
 "      --color[=WHEN],\n"
 "      --colour[=WHEN]       use markers to highlight the matching strings;\n"
 "                            WHEN is 'always', 'never', or 'auto'\n"
@@ -570,7 +572,7 @@ msgid ""
 "\n"
 msgstr ""
 
-#: src/grep.c:2055
+#: src/grep.c:2052
 #, c-format
 msgid ""
 "When FILE is '-', read standard input.  With no FILE, read '.' if\n"
@@ -579,32 +581,37 @@ msgid ""
 "if any error occurs and -q is not given, the exit status is 2.\n"
 msgstr ""
 
-#: src/grep.c:2097
+#: src/grep.c:2094
 msgid "conflicting matchers specified"
 msgstr ""
 
-#: src/grep.c:2104
+#: src/grep.c:2101
 msgid "Perl matching not supported in a --disable-perl-regexp build"
 msgstr ""
 
-#: src/grep.c:2106
+#: src/grep.c:2103
 #, c-format
 msgid "invalid matcher %s"
 msgstr "ਗਲਤ ਮੈਚਰ %s"
 
-#: src/grep.c:2541
+#: src/grep.c:2538
 msgid "unknown devices method"
 msgstr "ਅਣਜਾਣ ਜੰਤਰ ਢੰਗ"
 
-#: src/grep.c:2689
+#: src/grep.c:2580
+#, c-format
+msgid "warning: --unix-byte-offsets (-u) is obsolete"
+msgstr ""
+
+#: src/grep.c:2686
 msgid "invalid max count"
 msgstr "ਗਲਤ ਵੱਧ ਤੋਂ ਵੱਧ ਗਿਣਤੀ"
 
-#: src/grep.c:2747
+#: src/grep.c:2744
 msgid "unknown binary-files type"
 msgstr "ਅਣਜਾਣ ਬਾਈਨਰੀ-ਫਾਇਲ ਕਿਸਮ"
 
-#: src/grep.c:2832
+#: src/grep.c:2829
 #, fuzzy
 msgid ""
 "Written by Mike Haertel and others; see\n"

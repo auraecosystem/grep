@@ -1,7 +1,7 @@
 dnl
 dnl autoconf input file for GNU grep
 dnl
-dnl Copyright (C) 1997-2006, 2009-2020 Free Software Foundation, Inc.
+dnl Copyright (C) 1997-2006, 2009-2021 Free Software Foundation, Inc.
 dnl
 dnl This file is part of GNU grep.
 dnl
@@ -147,6 +147,27 @@ if test "$gl_gcc_warnings" = yes; then
   gl_WARN_ADD([-Wno-format-nonliteral])
   gl_MANYWARN_COMPLEMENT([GNULIB_WARN_CFLAGS], [$WARN_CFLAGS], [$nw])
   AC_SUBST([GNULIB_WARN_CFLAGS])
+
+  # For gnulib-tests, the set is slightly smaller still.
+  nw=
+  nw="$nw -Wstrict-prototypes"
+  # It's not worth being this picky about test programs.
+  nw="$nw -Wsuggest-attribute=const"
+  nw="$nw -Wsuggest-attribute=pure"
+  nw="$nw -Wsuggest-attribute=format"
+  nw="$nw -Wformat-truncation=2"    # False alarm in strerror_r.c
+  nw="$nw -Wold-style-definition"
+
+  # Disable to avoid warnings in e.g., test-intprops.c and test-limits-h.c
+  # due to overlong expansions like this:
+  # test-intprops.c:147:5: error: string literal of length 9531 exceeds \
+  # maximum length 4095 that ISO C99 compilers are required to support
+  nw="$nw -Woverlength-strings"
+
+  gl_MANYWARN_COMPLEMENT([GNULIB_TEST_WARN_CFLAGS],
+                         [$GNULIB_WARN_CFLAGS], [$nw])
+  gl_WARN_ADD([-Wno-return-type], [GNULIB_TEST_WARN_CFLAGS])
+  AC_SUBST([GNULIB_TEST_WARN_CFLAGS])
 fi
 
 # By default, argmatch should fail calling usage (EXIT_FAILURE).
