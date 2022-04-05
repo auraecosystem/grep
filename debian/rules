@@ -29,7 +29,13 @@ DEB_CONFIGURE_SCRIPT_ENV += CPPFLAGS="$(CPPFLAGS)"
 DEB_UPSTREAM_URL = http://ftp.gnu.org/gnu/grep/
 DEB_UPSTREAM_TARBALL_EXTENSION = tar.xz
 
-DEB_CONFIGURE_EXTRA_FLAGS += --without-included-regex
+include /usr/share/dpkg/architecture.mk
+
+ifeq (musl,$(DEB_HOST_ARCH_LIBC))
+	DEB_CONFIGURE_EXTRA_FLAGS += --with-included-regex
+else
+	DEB_CONFIGURE_EXTRA_FLAGS += --without-included-regex
+endif
 DEB_CONFIGURE_SCRIPT_ENV += LIBS="$(LIBS)"
 
 # FIXME: CDBS should include a specific var for this
