@@ -1,3 +1,36 @@
+grep (3.8-1) unstable; urgency=low
+
+  From upstream's NEWS:
+
+  The egrep and fgrep commands, which have been deprecated since
+  release 2.5.3 (2007), now warn that they are obsolescent and should
+  be replaced by grep -E and grep -F.
+
+  To follow upstream's behaviour, the Debian-specific rgrep command is
+  obsolescent. For the moment, it is just no longer documeted.
+
+  More upstream NEWS:
+
+  The confusing GREP_COLOR environment variable is now obsolescent.
+  Instead of GREP_COLOR='xxx', use GREP_COLORS='mt=xxx'.  grep now
+  warns if GREP_COLOR is used and is not overridden by GREP_COLORS.
+  Also, grep now treats GREP_COLOR like GREP_COLORS by silently
+  ignoring it if it attempts to inject ANSI terminal escapes.
+
+  Regular expressions with stray backslashes now cause warnings, as
+  their unspecified behavior can lead to unexpected results.
+  For example, '\a' and 'a' are not always equivalent
+  <https://bugs.gnu.org/39678>.  Similarly, regular expressions or
+  subexpressions that start with a repetition operator now also cause
+  warnings due to their unspecified behavior; for example, *a(+b|{1}c)
+  now has three reasons to warn.  The warnings are intended as a
+  transition aid; they are likely to be errors in future releases.
+
+  Regular expressions like [:space:] are now errors even if
+  POSIXLY_CORRECT is set, since POSIX now allows the GNU behavior.
+
+ -- Santiago Ruano Rincón <santiago@debian.org>  Mon, 05 Sep 2022 09:49:45 +0200
+
 grep (3.6-1) unstable; urgency=low
 
   From upstream's NEWS:
