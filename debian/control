@@ -4,7 +4,7 @@ Priority: required
 Maintainer: Anibal Monsalve Salazar <anibal@debian.org>
 Uploaders: Santiago Ruano Rincón <santiago@debian.org>
 Standards-Version: 4.5.0
-Build-Depends: cdbs, debhelper (>= 10~), gettext, libpcre3-dev (>= 1:8.31-3), quilt, texinfo
+Build-Depends: cdbs, debhelper (>= 10~), gettext, libpcre2-dev, quilt, texinfo
 Homepage: https://www.gnu.org/software/grep/
 Vcs-Git: https://salsa.debian.org/debian/grep.git
 Vcs-Browser: https://salsa.debian.org/debian/grep
@@ -17,7 +17,7 @@ Pre-Depends: ${shlibs:Depends}
 Depends: ${misc:Depends}, dpkg (>= 1.15.4) | install-info
 Conflicts: rgrep
 Provides: rgrep
-Suggests: libpcre3 (>= 7.7)
+Suggests: libpcre2-8-0
 Description: GNU grep, egrep and fgrep
  'grep' is a utility to search for text in files; it can be used from the
  command line or in scripts.  Even if you don't want to use it, other packages
