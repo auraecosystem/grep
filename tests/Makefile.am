@@ -1,5 +1,5 @@
 ## Process this file with automake to create Makefile.in
-# Copyright 1997-1998, 2005-2021 Free Software Foundation, Inc.
+# Copyright 1997-1998, 2005-2022 Free Software Foundation, Inc.
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -83,6 +83,7 @@ TESTS =						\
   case-fold-titlecase				\
   char-class-multibyte				\
   char-class-multibyte2				\
+  color-colors					\
   context-0					\
   count-newline					\
   dfa-coverage					\
@@ -104,11 +105,13 @@ TESTS =						\
   fgrep-longest					\
   file						\
   filename-lineno.pl				\
+  fillbuf-long-line				\
   fmbtest					\
   foad1						\
   grep-dev-null					\
   grep-dev-null-out				\
   grep-dir					\
+  hangul-syllable				\
   hash-collision-perf				\
   help-version					\
   high-bit-range				\
@@ -161,6 +164,7 @@ TESTS =						\
   stack-overflow				\
   status					\
   surrogate-pair				\
+  surrogate-search				\
   symlink					\
   triple-backref				\
   turkish-I					\

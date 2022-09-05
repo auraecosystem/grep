@@ -1,10 +1,10 @@
 /* Auxiliary program to test a DFA code path that cannot be triggered
    by grep or gawk.
-   Copyright 2014-2021 Free Software Foundation, Inc.
+   Copyright 2014-2022 Free Software Foundation, Inc.
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 3, or (at your option)
+   the Free Software Foundation, either version 3, or (at your option)
    any later version.
 
    This program is distributed in the hope that it will be useful,

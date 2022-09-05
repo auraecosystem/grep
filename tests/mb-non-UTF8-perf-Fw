@@ -1,7 +1,7 @@
 #!/bin/sh
 # Test for a performance regression with -Fw and a non-UTF8 multibyte locale.
 
-# Copyright 2019-2021 Free Software Foundation, Inc.
+# Copyright 2019-2022 Free Software Foundation, Inc.
 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@ fail=0
 require_timeout_
 require_JP_EUC_locale_
 
-yes 00 | head -10000000 > in || framework_failure_
+yes 00 | head -n 10000000 > in || framework_failure_
 
 # Since we're using an absolute timeout below and want to avoid any initial
 # disk read performance penalty, run first with a large timeout and no error

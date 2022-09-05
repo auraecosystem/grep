@@ -1,5 +1,5 @@
 /* Determine name of the currently selected locale.
-   Copyright (C) 1995-2021 Free Software Foundation, Inc.
+   Copyright (C) 1995-2022 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU Lesser General Public License as published by
@@ -3095,7 +3095,7 @@ freelocale (locale_t locale)
 static
 # endif
 const char *
-gl_locale_name_thread_unsafe (int category, const char *categoryname _GL_UNUSED)
+gl_locale_name_thread_unsafe (int category, _GL_UNUSED const char *categoryname)
 {
 # if HAVE_GOOD_USELOCALE
   {
@@ -3210,7 +3210,7 @@ gl_locale_name_thread_unsafe (int category, const char *categoryname _GL_UNUSED)
 #endif
 
 const char *
-gl_locale_name_thread (int category, const char *categoryname _GL_UNUSED)
+gl_locale_name_thread (int category, _GL_UNUSED const char *categoryname)
 {
 #if HAVE_GOOD_USELOCALE
   const char *name = gl_locale_name_thread_unsafe (category, categoryname);
@@ -3234,7 +3234,7 @@ gl_locale_name_thread (int category, const char *categoryname _GL_UNUSED)
 #endif
 
 const char *
-gl_locale_name_posix (int category, const char *categoryname _GL_UNUSED)
+gl_locale_name_posix (int category, _GL_UNUSED const char *categoryname)
 {
 #if defined WINDOWS_NATIVE
   if (LC_MIN <= category && category <= LC_MAX)
@@ -3299,7 +3299,7 @@ gl_locale_name_posix (int category, const char *categoryname _GL_UNUSED)
 }
 
 const char *
-gl_locale_name_environ (int category _GL_UNUSED, const char *categoryname)
+gl_locale_name_environ (_GL_UNUSED int category, const char *categoryname)
 {
   const char *retval;
 

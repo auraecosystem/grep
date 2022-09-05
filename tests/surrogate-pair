@@ -1,7 +1,7 @@
 #!/bin/sh
 # Check the handling of characters outside the Unicode BMP.
 
-# Copyright (C) 2013-2021 Free Software Foundation, Inc.
+# Copyright (C) 2013-2022 Free Software Foundation, Inc.
 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -50,11 +50,5 @@ case $io_pair in
   $s_pair:) ;;
   *) fail_ "unexpected output: $io_pair"; fail=1;;
 esac
-
-# Also test whether a surrogate-pair in the search string works.
-for opt in '' -i -E -F -iE -iF; do
-  grep --file=in $opt in > out 2>&1 || fail=1
-  compare out in || fail=1
-done
 
 Exit $fail

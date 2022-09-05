@@ -1,10 +1,10 @@
 ## DO NOT EDIT! GENERATED AUTOMATICALLY!
 ## Process this file with automake to produce Makefile.in.
-# Copyright (C) 2002-2021 Free Software Foundation, Inc.
+# Copyright (C) 2002-2022 Free Software Foundation, Inc.
 #
 # This file is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
-# the Free Software Foundation; either version 3 of the License, or
+# the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
 # This file is distributed in the hope that it will be useful,
@@ -37,7 +37,6 @@
 #  --avoid=lock-tests \
 #  --avoid=mbrtowc-tests \
 #  --avoid=update-copyright-tests \
-#  alloca \
 #  announce-gen \
 #  argmatch \
 #  c-ctype \
@@ -51,7 +50,6 @@
 #  error \
 #  exclude \
 #  fcntl-h \
-#  fdl \
 #  fnmatch \
 #  fstatat \
 #  fts \
@@ -64,12 +62,12 @@
 #  gnu-web-doc-update \
 #  gnupload \
 #  hash \
+#  idx \
 #  ignore-value \
 #  intprops \
 #  inttypes \
 #  isatty \
 #  isblank \
-#  iswctype \
 #  largefile \
 #  locale \
 #  lseek \
@@ -124,6 +122,7 @@ MOSTLYCLEANFILES += core *.stackdump
 noinst_LIBRARIES += libgreputils.a
 
 libgreputils_a_SOURCES =
+libgreputils_a_CFLAGS = $(AM_CFLAGS) $(GL_CFLAG_GNULIB_WARNINGS)
 libgreputils_a_LIBADD = $(gl_LIBOBJS)
 libgreputils_a_DEPENDENCIES = $(gl_LIBOBJS)
 EXTRA_libgreputils_a_SOURCES =
@@ -144,17 +143,6 @@ EXTRA_DIST += alignof.h
 
 ## end   gnulib module alignof
 
-## begin gnulib module alloca
-
-
-libgreputils_a_LIBADD += @ALLOCA@
-libgreputils_a_DEPENDENCIES += @ALLOCA@
-EXTRA_DIST += alloca.c
-
-EXTRA_libgreputils_a_SOURCES += alloca.c
-
-## end   gnulib module alloca
-
 ## begin gnulib module alloca-opt
 
 BUILT_SOURCES += $(ALLOCA_H)
@@ -163,11 +151,10 @@ BUILT_SOURCES += $(ALLOCA_H)
 # doesn't have one that works with the given compiler.
 if GL_GENERATE_ALLOCA_H
 alloca.h: alloca.in.h $(top_builddir)/config.status
-	$(AM_V_GEN)rm -f $@-t $@ && \
-	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
-	  sed -e 's|@''HAVE_ALLOCA_H''@|$(HAVE_ALLOCA_H)|g' < $(srcdir)/alloca.in.h; \
-	} > $@-t && \
-	mv -f $@-t $@
+	$(gl_V_at)$(SED_HEADER_STDOUT) \
+	  -e 's|@''HAVE_ALLOCA_H''@|$(HAVE_ALLOCA_H)|g' \
+	  $(srcdir)/alloca.in.h > $@-t
+	$(AM_V_at)mv $@-t $@
 else
 alloca.h: $(top_builddir)/config.status
 	rm -f $@
@@ -235,10 +222,9 @@ libgreputils_a_SOURCES += bitrotate.h bitrotate.c
 
 ## begin gnulib module btowc
 
-
-EXTRA_DIST += btowc.c
-
-EXTRA_libgreputils_a_SOURCES += btowc.c
+if GL_COND_OBJ_BTOWC
+libgreputils_a_SOURCES += btowc.c
+endif
 
 ## end   gnulib module btowc
 
@@ -287,10 +273,11 @@ EXTRA_libgreputils_a_SOURCES += calloc.c
 
 ## begin gnulib module chdir-long
 
+if GL_COND_OBJ_CHDIR_LONG
+libgreputils_a_SOURCES += chdir-long.c
+endif
 
-EXTRA_DIST += chdir-long.c chdir-long.h
-
-EXTRA_libgreputils_a_SOURCES += chdir-long.c
+EXTRA_DIST += chdir-long.h
 
 ## end   gnulib module chdir-long
 
@@ -304,10 +291,9 @@ EXTRA_DIST += cloexec.h
 
 ## begin gnulib module close
 
-
-EXTRA_DIST += close.c
-
-EXTRA_libgreputils_a_SOURCES += close.c
+if GL_COND_OBJ_CLOSE
+libgreputils_a_SOURCES += close.c
+endif
 
 ## end   gnulib module close
 
@@ -321,10 +307,11 @@ EXTRA_DIST += close-stream.h
 
 ## begin gnulib module closedir
 
+if GL_COND_OBJ_CLOSEDIR
+libgreputils_a_SOURCES += closedir.c
+endif
 
-EXTRA_DIST += closedir.c dirent-private.h
-
-EXTRA_libgreputils_a_SOURCES += closedir.c
+EXTRA_DIST += dirent-private.h
 
 ## end   gnulib module closedir
 
@@ -343,8 +330,7 @@ EXTRA_DIST += closeout.h
 # The Automake-defined pkg* macros are appended, in the order
 # listed in the Automake 1.10a+ documentation.
 configmake.h: Makefile
-	$(AM_V_GEN)rm -f $@-t && \
-	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+	$(gl_V_at){ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
 	  echo '#if HAVE_WINSOCK2_H'; \
 	  echo '# include <winsock2.h> /* avoid mingw pollution on DATADIR */'; \
 	  echo '#endif'; \
@@ -376,8 +362,8 @@ configmake.h: Makefile
 	  echo '#define PKGINCLUDEDIR "$(pkgincludedir)"'; \
 	  echo '#define PKGLIBDIR "$(pkglibdir)"'; \
 	  echo '#define PKGLIBEXECDIR "$(pkglibexecdir)"'; \
-	} | sed '/""/d' > $@-t && \
-	mv -f $@-t $@
+	} | sed '/""/d' > $@-t
+	$(AM_V_at)mv $@-t $@
 
 BUILT_SOURCES += configmake.h
 CLEANFILES += configmake.h configmake.h-t
@@ -391,9 +377,8 @@ BUILT_SOURCES += ctype.h
 # We need the following in order to create <ctype.h> when the system
 # doesn't have one that works with the given compiler.
 ctype.h: ctype.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(WARN_ON_USE_H)
-	$(AM_V_GEN)rm -f $@-t $@ && \
-	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
-	  sed -e 's|@''GUARD_PREFIX''@|GL|g' \
+	$(gl_V_at)$(SED_HEADER_STDOUT) \
+	      -e 's|@''GUARD_PREFIX''@|GL|g' \
 	      -e 's|@''INCLUDE_NEXT''@|$(INCLUDE_NEXT)|g' \
 	      -e 's|@''PRAGMA_SYSTEM_HEADER''@|@PRAGMA_SYSTEM_HEADER@|g' \
 	      -e 's|@''PRAGMA_COLUMNS''@|@PRAGMA_COLUMNS@|g' \
@@ -402,9 +387,8 @@ ctype.h: ctype.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(WARN_ON_USE_H)
 	      -e 's/@''HAVE_ISBLANK''@/$(HAVE_ISBLANK)/g' \
 	      -e '/definitions of _GL_FUNCDECL_RPL/r $(CXXDEFS_H)' \
 	      -e '/definition of _GL_WARN_ON_USE/r $(WARN_ON_USE_H)' \
-	      < $(srcdir)/ctype.in.h; \
-	} > $@-t && \
-	mv $@-t $@
+	      $(srcdir)/ctype.in.h > $@-t
+	$(AM_V_at)mv $@-t $@
 MOSTLYCLEANFILES += ctype.h ctype.h-t
 
 EXTRA_DIST += ctype.in.h
@@ -441,9 +425,8 @@ BUILT_SOURCES += dirent.h
 # We need the following in order to create <dirent.h> when the system
 # doesn't have one that works with the given compiler.
 dirent.h: dirent.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(ARG_NONNULL_H) $(WARN_ON_USE_H)
-	$(AM_V_GEN)rm -f $@-t $@ && \
-	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
-	  sed -e 's|@''GUARD_PREFIX''@|GL|g' \
+	$(gl_V_at)$(SED_HEADER_STDOUT) \
+	      -e 's|@''GUARD_PREFIX''@|GL|g' \
 	      -e 's|@''HAVE_DIRENT_H''@|$(HAVE_DIRENT_H)|g' \
 	      -e 's|@''INCLUDE_NEXT''@|$(INCLUDE_NEXT)|g' \
 	      -e 's|@''PRAGMA_SYSTEM_HEADER''@|@PRAGMA_SYSTEM_HEADER@|g' \
@@ -473,9 +456,8 @@ dirent.h: dirent.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(ARG_NONNULL_H
 	      -e '/definitions of _GL_FUNCDECL_RPL/r $(CXXDEFS_H)' \
 	      -e '/definition of _GL_ARG_NONNULL/r $(ARG_NONNULL_H)' \
 	      -e '/definition of _GL_WARN_ON_USE/r $(WARN_ON_USE_H)' \
-	      < $(srcdir)/dirent.in.h; \
-	} > $@-t && \
-	mv $@-t $@
+	      $(srcdir)/dirent.in.h > $@-t
+	$(AM_V_at)mv $@-t $@
 MOSTLYCLEANFILES += dirent.h dirent.h-t
 
 EXTRA_DIST += dirent.in.h
@@ -484,10 +466,9 @@ EXTRA_DIST += dirent.in.h
 
 ## begin gnulib module dirfd
 
-
-EXTRA_DIST += dirfd.c
-
-EXTRA_libgreputils_a_SOURCES += dirfd.c
+if GL_COND_OBJ_DIRFD
+libgreputils_a_SOURCES += dirfd.c
+endif
 
 ## end   gnulib module dirfd
 
@@ -508,19 +489,17 @@ EXTRA_DIST += $(top_srcdir)/build-aux/do-release-commit-and-tag
 
 ## begin gnulib module dup
 
-
-EXTRA_DIST += dup.c
-
-EXTRA_libgreputils_a_SOURCES += dup.c
+if GL_COND_OBJ_DUP
+libgreputils_a_SOURCES += dup.c
+endif
 
 ## end   gnulib module dup
 
 ## begin gnulib module dup2
 
-
-EXTRA_DIST += dup2.c
-
-EXTRA_libgreputils_a_SOURCES += dup2.c
+if GL_COND_OBJ_DUP2
+libgreputils_a_SOURCES += dup2.c
+endif
 
 ## end   gnulib module dup2
 
@@ -529,27 +508,24 @@ EXTRA_libgreputils_a_SOURCES += dup2.c
 BUILT_SOURCES += malloc/dynarray.gl.h malloc/dynarray-skeleton.gl.h
 
 malloc/dynarray.gl.h: malloc/dynarray.h
-	$(AM_V_at)$(MKDIR_P) malloc
-	$(AM_V_GEN)rm -f $@-t $@ && \
-	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
-	  sed -e '/libc_hidden_proto/d' < $(srcdir)/malloc/dynarray.h; \
-	} > $@-t && \
-	mv $@-t $@
+	$(AM_V_GEN)$(MKDIR_P) '%reldir%/malloc'
+	$(AM_V_at)$(SED_HEADER_STDOUT) \
+	  -e '/libc_hidden_proto/d' \
+	  $(srcdir)/malloc/dynarray.h > $@-t
+	$(AM_V_at)mv $@-t $@
 MOSTLYCLEANFILES += malloc/dynarray.gl.h malloc/dynarray.gl.h-t
 
 malloc/dynarray-skeleton.gl.h: malloc/dynarray-skeleton.c
-	$(AM_V_at)$(MKDIR_P) malloc
-	$(AM_V_GEN)rm -f $@-t $@ && \
-	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
-	  sed -e 's|<malloc/dynarray\.h>|<malloc/dynarray.gl.h>|g' \
+	$(AM_V_GEN)$(MKDIR_P) '%reldir%/malloc'
+	$(AM_V_at)$(SED_HEADER_STDOUT) \
+	      -e 's|<malloc/dynarray\.h>|<malloc/dynarray.gl.h>|g' \
 	      -e 's|__attribute_maybe_unused__|_GL_ATTRIBUTE_MAYBE_UNUSED|g' \
 	      -e 's|__attribute_nonnull__|_GL_ATTRIBUTE_NONNULL|g' \
 	      -e 's|__attribute_warn_unused_result__|_GL_ATTRIBUTE_NODISCARD|g' \
 	      -e 's|__glibc_likely|_GL_LIKELY|g' \
 	      -e 's|__glibc_unlikely|_GL_UNLIKELY|g' \
-	      < $(srcdir)/malloc/dynarray-skeleton.c; \
-	} > $@-t && \
-	mv $@-t $@
+	      $(srcdir)/malloc/dynarray-skeleton.c > $@-t
+	$(AM_V_at)mv $@-t $@
 MOSTLYCLEANFILES += malloc/dynarray-skeleton.gl.h malloc/dynarray-skeleton.gl.h-t
 
 libgreputils_a_SOURCES += malloc/dynarray_at_failure.c                 malloc/dynarray_emplace_enlarge.c                 malloc/dynarray_finalize.c                 malloc/dynarray_resize.c                 malloc/dynarray_resize_clear.c
@@ -568,9 +544,8 @@ BUILT_SOURCES += $(ERRNO_H)
 # doesn't have one that is POSIX compliant.
 if GL_GENERATE_ERRNO_H
 errno.h: errno.in.h $(top_builddir)/config.status
-	$(AM_V_GEN)rm -f $@-t $@ && \
-	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */' && \
-	  sed -e 's|@''GUARD_PREFIX''@|GL|g' \
+	$(gl_V_at)$(SED_HEADER_STDOUT) \
+	      -e 's|@''GUARD_PREFIX''@|GL|g' \
 	      -e 's|@''INCLUDE_NEXT''@|$(INCLUDE_NEXT)|g' \
 	      -e 's|@''PRAGMA_SYSTEM_HEADER''@|@PRAGMA_SYSTEM_HEADER@|g' \
 	      -e 's|@''PRAGMA_COLUMNS''@|@PRAGMA_COLUMNS@|g' \
@@ -581,9 +556,8 @@ errno.h: errno.in.h $(top_builddir)/config.status
 	      -e 's|@''ENOLINK_VALUE''@|$(ENOLINK_VALUE)|g' \
 	      -e 's|@''EOVERFLOW_HIDDEN''@|$(EOVERFLOW_HIDDEN)|g' \
 	      -e 's|@''EOVERFLOW_VALUE''@|$(EOVERFLOW_VALUE)|g' \
-	      < $(srcdir)/errno.in.h; \
-	} > $@-t && \
-	mv $@-t $@
+	      $(srcdir)/errno.in.h > $@-t
+	$(AM_V_at)mv $@-t $@
 else
 errno.h: $(top_builddir)/config.status
 	rm -f $@
@@ -596,10 +570,11 @@ EXTRA_DIST += errno.in.h
 
 ## begin gnulib module error
 
+if GL_COND_OBJ_ERROR
+libgreputils_a_SOURCES += error.c
+endif
 
-EXTRA_DIST += error.c error.h
-
-EXTRA_libgreputils_a_SOURCES += error.c
+EXTRA_DIST += error.h
 
 ## end   gnulib module error
 
@@ -621,19 +596,17 @@ EXTRA_DIST += exitfail.h
 
 ## begin gnulib module fchdir
 
-
-EXTRA_DIST += fchdir.c
-
-EXTRA_libgreputils_a_SOURCES += fchdir.c
+if GL_COND_OBJ_FCHDIR
+libgreputils_a_SOURCES += fchdir.c
+endif
 
 ## end   gnulib module fchdir
 
 ## begin gnulib module fcntl
 
-
-EXTRA_DIST += fcntl.c
-
-EXTRA_libgreputils_a_SOURCES += fcntl.c
+if GL_COND_OBJ_FCNTL
+libgreputils_a_SOURCES += fcntl.c
+endif
 
 ## end   gnulib module fcntl
 
@@ -644,9 +617,8 @@ BUILT_SOURCES += fcntl.h
 # We need the following in order to create <fcntl.h> when the system
 # doesn't have one that works with the given compiler.
 fcntl.h: fcntl.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(ARG_NONNULL_H) $(WARN_ON_USE_H)
-	$(AM_V_GEN)rm -f $@-t $@ && \
-	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
-	  sed -e 's|@''GUARD_PREFIX''@|GL|g' \
+	$(gl_V_at)$(SED_HEADER_STDOUT) \
+	      -e 's|@''GUARD_PREFIX''@|GL|g' \
 	      -e 's|@''INCLUDE_NEXT''@|$(INCLUDE_NEXT)|g' \
 	      -e 's|@''PRAGMA_SYSTEM_HEADER''@|@PRAGMA_SYSTEM_HEADER@|g' \
 	      -e 's|@''PRAGMA_COLUMNS''@|@PRAGMA_COLUMNS@|g' \
@@ -667,9 +639,8 @@ fcntl.h: fcntl.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(ARG_NONNULL_H) 
 	      -e '/definitions of _GL_FUNCDECL_RPL/r $(CXXDEFS_H)' \
 	      -e '/definition of _GL_ARG_NONNULL/r $(ARG_NONNULL_H)' \
 	      -e '/definition of _GL_WARN_ON_USE/r $(WARN_ON_USE_H)' \
-	      < $(srcdir)/fcntl.in.h; \
-	} > $@-t && \
-	mv $@-t $@
+	      $(srcdir)/fcntl.in.h > $@-t
+	$(AM_V_at)mv $@-t $@
 MOSTLYCLEANFILES += fcntl.h fcntl.h-t
 
 EXTRA_DIST += fcntl.in.h
@@ -700,10 +671,9 @@ libgreputils_a_SOURCES += fd-safer-flag.c dup-safer-flag.c
 
 ## begin gnulib module fdopendir
 
-
-EXTRA_DIST += fdopendir.c
-
-EXTRA_libgreputils_a_SOURCES += fdopendir.c
+if GL_COND_OBJ_FDOPENDIR
+libgreputils_a_SOURCES += fdopendir.c
+endif
 
 ## end   gnulib module fdopendir
 
@@ -745,9 +715,8 @@ BUILT_SOURCES += $(FNMATCH_H)
 # We need the following in order to create <fnmatch.h>.
 if GL_GENERATE_FNMATCH_H
 fnmatch.h: fnmatch.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(ARG_NONNULL_H) $(WARN_ON_USE_H)
-	$(AM_V_GEN)rm -f $@-t $@ && \
-	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */' && \
-	  sed -e 's|@''GUARD_PREFIX''@|GL|g' \
+	$(gl_V_at)$(SED_HEADER_STDOUT) \
+	      -e 's|@''GUARD_PREFIX''@|GL|g' \
 	      -e 's|@''HAVE_FNMATCH_H''@|$(HAVE_FNMATCH_H)|g' \
 	      -e 's|@''INCLUDE_NEXT''@|$(INCLUDE_NEXT)|g' \
 	      -e 's|@''PRAGMA_SYSTEM_HEADER''@|@PRAGMA_SYSTEM_HEADER@|g' \
@@ -759,9 +728,8 @@ fnmatch.h: fnmatch.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(ARG_NONNULL
 	      -e '/definitions of _GL_FUNCDECL_RPL/r $(CXXDEFS_H)' \
 	      -e '/definition of _GL_ARG_NONNULL/r $(ARG_NONNULL_H)' \
 	      -e '/definition of _GL_WARN_ON_USE/r $(WARN_ON_USE_H)' \
-	      < $(srcdir)/fnmatch.in.h; \
-	} > $@-t && \
-	mv $@-t $@
+	      $(srcdir)/fnmatch.in.h > $@-t
+	$(AM_V_at)mv $@-t $@
 else
 fnmatch.h: $(top_builddir)/config.status
 	rm -f $@
@@ -792,48 +760,76 @@ EXTRA_libgreputils_a_SOURCES += fopen.c
 
 ## begin gnulib module fpending
 
+if GL_COND_OBJ_FPENDING
+libgreputils_a_SOURCES += fpending.c
+endif
 
-EXTRA_DIST += fpending.c fpending.h stdio-impl.h
-
-EXTRA_libgreputils_a_SOURCES += fpending.c
+EXTRA_DIST += fpending.h stdio-impl.h
 
 ## end   gnulib module fpending
 
 ## begin gnulib module free-posix
 
-
-EXTRA_DIST += free.c
-
-EXTRA_libgreputils_a_SOURCES += free.c
+if GL_COND_OBJ_FREE
+libgreputils_a_SOURCES += free.c
+endif
 
 ## end   gnulib module free-posix
 
 ## begin gnulib module fstat
 
+if GL_COND_OBJ_FSTAT
+libgreputils_a_SOURCES += fstat.c
+endif
 
-EXTRA_DIST += fstat.c stat-w32.c stat-w32.h
+EXTRA_DIST += stat-w32.c stat-w32.h
 
-EXTRA_libgreputils_a_SOURCES += fstat.c stat-w32.c
+EXTRA_libgreputils_a_SOURCES += stat-w32.c
 
 ## end   gnulib module fstat
 
 ## begin gnulib module fstatat
 
+if GL_COND_OBJ_FSTATAT
+libgreputils_a_SOURCES += fstatat.c
+endif
 
-EXTRA_DIST += at-func.c fstatat.c
+EXTRA_DIST += at-func.c
 
-EXTRA_libgreputils_a_SOURCES += at-func.c fstatat.c
+EXTRA_libgreputils_a_SOURCES += at-func.c
 
 ## end   gnulib module fstatat
 
 ## begin gnulib module fts
 
+if GL_COND_OBJ_FTS
+libgreputils_a_SOURCES += fts.c
+endif
 
-EXTRA_DIST += fts-cycle.c fts.c fts_.h
+EXTRA_DIST += fts-cycle.c fts_.h
 
-EXTRA_libgreputils_a_SOURCES += fts-cycle.c fts.c
+EXTRA_libgreputils_a_SOURCES += fts-cycle.c
 
 ## end   gnulib module fts
+
+## begin gnulib module gen-header
+
+# In 'sed', replace the pattern space with a "DO NOT EDIT" comment.
+SED_HEADER_NOEDIT = s,.*,/* DO NOT EDIT! GENERATED AUTOMATICALLY! */,
+
+# '$(SED_HEADER_STDOUT) -e "..."' runs 'sed' but first outputs "DO NOT EDIT".
+SED_HEADER_STDOUT = sed -e 1h -e '1$(SED_HEADER_NOEDIT)' -e 1G
+
+# '$(SED_HEADER_TO_AT_t) FILE' copies FILE to $@-t, prepending a leading
+# "DO_NOT_EDIT".  Although this could be done more simply via:
+#	SED_HEADER_TO_AT_t = $(SED_HEADER_STDOUT) > $@-t
+# the -n and 'w' avoid a fork+exec, at least when GNU Make is used.
+SED_HEADER_TO_AT_t = $(SED_HEADER_STDOUT) -n -e 'w $@-t'
+
+# Use $(gl_V_at) instead of $(AM_V_GEN) or $(AM_V_at) on a line that
+gl_V_at = $(AM_V_GEN)
+
+## end   gnulib module gen-header
 
 ## begin gnulib module gendocs
 
@@ -844,19 +840,17 @@ EXTRA_DIST += $(top_srcdir)/build-aux/gendocs.sh
 
 ## begin gnulib module getcwd-lgpl
 
-
-EXTRA_DIST += getcwd-lgpl.c
-
-EXTRA_libgreputils_a_SOURCES += getcwd-lgpl.c
+if GL_COND_OBJ_GETCWD_LGPL
+libgreputils_a_SOURCES += getcwd-lgpl.c
+endif
 
 ## end   gnulib module getcwd-lgpl
 
 ## begin gnulib module getdtablesize
 
-
-EXTRA_DIST += getdtablesize.c
-
-EXTRA_libgreputils_a_SOURCES += getdtablesize.c
+if GL_COND_OBJ_GETDTABLESIZE
+libgreputils_a_SOURCES += getdtablesize.c
+endif
 
 ## end   gnulib module getdtablesize
 
@@ -866,42 +860,49 @@ BUILT_SOURCES += $(GETOPT_H) $(GETOPT_CDEFS_H)
 
 # We need the following in order to create <getopt.h> when the system
 # doesn't have one that works with the given compiler.
+if GL_GENERATE_GETOPT_H
 getopt.h: getopt.in.h $(top_builddir)/config.status $(ARG_NONNULL_H)
-	$(AM_V_GEN)rm -f $@-t $@ && \
-	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
-	  sed -e 's|@''GUARD_PREFIX''@|GL|g' \
+	$(gl_V_at)$(SED_HEADER_STDOUT) \
+	      -e 's|@''GUARD_PREFIX''@|GL|g' \
 	      -e 's|@''HAVE_GETOPT_H''@|$(HAVE_GETOPT_H)|g' \
 	      -e 's|@''INCLUDE_NEXT''@|$(INCLUDE_NEXT)|g' \
 	      -e 's|@''PRAGMA_SYSTEM_HEADER''@|@PRAGMA_SYSTEM_HEADER@|g' \
 	      -e 's|@''PRAGMA_COLUMNS''@|@PRAGMA_COLUMNS@|g' \
 	      -e 's|@''NEXT_GETOPT_H''@|$(NEXT_GETOPT_H)|g' \
 	      -e '/definition of _GL_ARG_NONNULL/r $(ARG_NONNULL_H)' \
-	      < $(srcdir)/getopt.in.h; \
-	} > $@-t && \
-	mv -f $@-t $@
+	      $(srcdir)/getopt.in.h > $@-t
+	$(AM_V_at)mv $@-t $@
+else
+getopt.h: $(top_builddir)/config.status
+	rm -f $@
+endif
 
+if GL_GENERATE_GETOPT_CDEFS_H
 getopt-cdefs.h: getopt-cdefs.in.h $(top_builddir)/config.status
-	$(AM_V_GEN)rm -f $@-t $@ && \
-	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
-          sed -e 's|@''HAVE_SYS_CDEFS_H''@|$(HAVE_SYS_CDEFS_H)|g' \
-	      < $(srcdir)/getopt-cdefs.in.h; \
-	} > $@-t && \
-	mv -f $@-t $@
+	$(AM_V_GEN)$(SED_HEADER_STDOUT) \
+	  -e 's|@''HAVE_SYS_CDEFS_H''@|$(HAVE_SYS_CDEFS_H)|g' \
+	  $(srcdir)/getopt-cdefs.in.h > $@-t
+	$(AM_V_at)mv $@-t $@
+else
+getopt-cdefs.h: $(top_builddir)/config.status
+	rm -f $@
+endif
 
 MOSTLYCLEANFILES += getopt.h getopt.h-t getopt-cdefs.h getopt-cdefs.h-t
 
-EXTRA_DIST += getopt-cdefs.in.h getopt-core.h getopt-ext.h getopt-pfx-core.h getopt-pfx-ext.h getopt.c getopt.in.h getopt1.c getopt_int.h
+if GL_COND_OBJ_GETOPT
+libgreputils_a_SOURCES += getopt.c getopt1.c
+endif
 
-EXTRA_libgreputils_a_SOURCES += getopt.c getopt1.c
+EXTRA_DIST += getopt-cdefs.in.h getopt-core.h getopt-ext.h getopt-pfx-core.h getopt-pfx-ext.h getopt.in.h getopt_int.h
 
 ## end   gnulib module getopt-posix
 
 ## begin gnulib module getpagesize
 
-
-EXTRA_DIST += getpagesize.c
-
-EXTRA_libgreputils_a_SOURCES += getpagesize.c
+if GL_COND_OBJ_GETPAGESIZE
+libgreputils_a_SOURCES += getpagesize.c
+endif
 
 ## end   gnulib module getpagesize
 
@@ -1010,9 +1011,8 @@ BUILT_SOURCES += $(ICONV_H)
 # doesn't have one that works with the given compiler.
 if GL_GENERATE_ICONV_H
 iconv.h: iconv.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(ARG_NONNULL_H) $(WARN_ON_USE_H)
-	$(AM_V_GEN)rm -f $@-t $@ && \
-	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */' && \
-	  sed -e 's|@''GUARD_PREFIX''@|GL|g' \
+	$(gl_V_at)$(SED_HEADER_STDOUT) \
+	      -e 's|@''GUARD_PREFIX''@|GL|g' \
 	      -e 's|@''INCLUDE_NEXT''@|$(INCLUDE_NEXT)|g' \
 	      -e 's|@''PRAGMA_SYSTEM_HEADER''@|@PRAGMA_SYSTEM_HEADER@|g' \
 	      -e 's|@''PRAGMA_COLUMNS''@|@PRAGMA_COLUMNS@|g' \
@@ -1025,9 +1025,8 @@ iconv.h: iconv.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(ARG_NONNULL_H) 
 	      -e '/definitions of _GL_FUNCDECL_RPL/r $(CXXDEFS_H)' \
 	      -e '/definition of _GL_ARG_NONNULL/r $(ARG_NONNULL_H)' \
 	      -e '/definition of _GL_WARN_ON_USE/r $(WARN_ON_USE_H)' \
-	      < $(srcdir)/iconv.in.h; \
-	} > $@-t && \
-	mv $@-t $@
+	      $(srcdir)/iconv.in.h > $@-t
+	$(AM_V_at)mv $@-t $@
 else
 iconv.h: $(top_builddir)/config.status
 	rm -f $@
@@ -1039,6 +1038,13 @@ EXTRA_DIST += iconv.in.h
 ## end   gnulib module iconv-h
 
 ## begin gnulib module iconv_open
+
+if GL_COND_OBJ_ICONV_OPEN
+libgreputils_a_SOURCES += iconv_open.c
+endif
+if GL_COND_OBJ_ICONV
+libgreputils_a_SOURCES += iconv.c iconv_close.c
+endif
 
 $(srcdir)/iconv_open-aix.h: $(srcdir)/iconv_open-aix.gperf
 	$(V_GPERF)$(GPERF) -m 10 $(srcdir)/iconv_open-aix.gperf > $(srcdir)/iconv_open-aix.h-t && \
@@ -1063,9 +1069,7 @@ MOSTLYCLEANFILES     += iconv_open-aix.h-t iconv_open-hpux.h-t iconv_open-irix.h
 MAINTAINERCLEANFILES += iconv_open-aix.h iconv_open-hpux.h iconv_open-irix.h iconv_open-osf.h iconv_open-solaris.h iconv_open-zos.h
 EXTRA_DIST           += iconv_open-aix.h iconv_open-hpux.h iconv_open-irix.h iconv_open-osf.h iconv_open-solaris.h iconv_open-zos.h
 
-EXTRA_DIST += iconv.c iconv_close.c iconv_open-aix.gperf iconv_open-hpux.gperf iconv_open-irix.gperf iconv_open-osf.gperf iconv_open-solaris.gperf iconv_open-zos.gperf iconv_open.c
-
-EXTRA_libgreputils_a_SOURCES += iconv.c iconv_close.c iconv_open.c
+EXTRA_DIST += iconv_open-aix.gperf iconv_open-hpux.gperf iconv_open-irix.gperf iconv_open-osf.gperf iconv_open-solaris.gperf iconv_open-zos.gperf
 
 ## end   gnulib module iconv_open
 
@@ -1096,9 +1100,8 @@ BUILT_SOURCES += inttypes.h
 # We need the following in order to create <inttypes.h> when the system
 # doesn't have one that works with the given compiler.
 inttypes.h: inttypes.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(WARN_ON_USE_H) $(ARG_NONNULL_H)
-	$(AM_V_GEN)rm -f $@-t $@ && \
-	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
-	  sed -e 's/@''HAVE_INTTYPES_H''@/$(HAVE_INTTYPES_H)/g' \
+	$(gl_V_at)$(SED_HEADER_STDOUT) \
+	      -e 's/@''HAVE_INTTYPES_H''@/$(HAVE_INTTYPES_H)/g' \
 	      -e 's|@''INCLUDE_NEXT''@|$(INCLUDE_NEXT)|g' \
 	      -e 's|@''PRAGMA_SYSTEM_HEADER''@|@PRAGMA_SYSTEM_HEADER@|g' \
 	      -e 's|@''PRAGMA_COLUMNS''@|@PRAGMA_COLUMNS@|g' \
@@ -1123,9 +1126,8 @@ inttypes.h: inttypes.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(WARN_ON_U
 	      -e '/definitions of _GL_FUNCDECL_RPL/r $(CXXDEFS_H)' \
 	      -e '/definition of _GL_ARG_NONNULL/r $(ARG_NONNULL_H)' \
 	      -e '/definition of _GL_WARN_ON_USE/r $(WARN_ON_USE_H)' \
-	      < $(srcdir)/inttypes.in.h; \
-	} > $@-t && \
-	mv $@-t $@
+	      $(srcdir)/inttypes.in.h > $@-t
+	$(AM_V_at)mv $@-t $@
 MOSTLYCLEANFILES += inttypes.h inttypes.h-t
 
 EXTRA_DIST += inttypes.in.h
@@ -1134,55 +1136,41 @@ EXTRA_DIST += inttypes.in.h
 
 ## begin gnulib module isatty
 
-
-EXTRA_DIST += isatty.c
-
-EXTRA_libgreputils_a_SOURCES += isatty.c
+if GL_COND_OBJ_ISATTY
+libgreputils_a_SOURCES += isatty.c
+endif
 
 ## end   gnulib module isatty
 
 ## begin gnulib module isblank
 
-
-EXTRA_DIST += isblank.c
-
-EXTRA_libgreputils_a_SOURCES += isblank.c
+if GL_COND_OBJ_ISBLANK
+libgreputils_a_SOURCES += isblank.c
+endif
 
 ## end   gnulib module isblank
 
 ## begin gnulib module iswblank
 
-
-EXTRA_DIST += iswblank.c
-
-EXTRA_libgreputils_a_SOURCES += iswblank.c
+if GL_COND_OBJ_ISWBLANK
+libgreputils_a_SOURCES += iswblank.c
+endif
 
 ## end   gnulib module iswblank
 
-## begin gnulib module iswctype
-
-
-EXTRA_DIST += iswctype-impl.h iswctype.c
-
-EXTRA_libgreputils_a_SOURCES += iswctype.c
-
-## end   gnulib module iswctype
-
 ## begin gnulib module iswdigit
 
-
-EXTRA_DIST += iswdigit.c
-
-EXTRA_libgreputils_a_SOURCES += iswdigit.c
+if GL_COND_OBJ_ISWDIGIT
+libgreputils_a_SOURCES += iswdigit.c
+endif
 
 ## end   gnulib module iswdigit
 
 ## begin gnulib module iswxdigit
 
-
-EXTRA_DIST += iswxdigit.c
-
-EXTRA_libgreputils_a_SOURCES += iswxdigit.c
+if GL_COND_OBJ_ISWXDIGIT
+libgreputils_a_SOURCES += iswxdigit.c
+endif
 
 ## end   gnulib module iswxdigit
 
@@ -1193,9 +1181,8 @@ BUILT_SOURCES += langinfo.h
 # We need the following in order to create an empty placeholder for
 # <langinfo.h> when the system doesn't have one.
 langinfo.h: langinfo.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(WARN_ON_USE_H)
-	$(AM_V_GEN)rm -f $@-t $@ && \
-	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
-	  sed -e 's|@''GUARD_PREFIX''@|GL|g' \
+	$(gl_V_at)$(SED_HEADER_STDOUT) \
+	      -e 's|@''GUARD_PREFIX''@|GL|g' \
 	      -e 's|@''HAVE_LANGINFO_H''@|$(HAVE_LANGINFO_H)|g' \
 	      -e 's|@''INCLUDE_NEXT''@|$(INCLUDE_NEXT)|g' \
 	      -e 's|@''PRAGMA_SYSTEM_HEADER''@|@PRAGMA_SYSTEM_HEADER@|g' \
@@ -1211,9 +1198,8 @@ langinfo.h: langinfo.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(WARN_ON_U
 	      -e 's|@''REPLACE_NL_LANGINFO''@|$(REPLACE_NL_LANGINFO)|g' \
 	      -e '/definitions of _GL_FUNCDECL_RPL/r $(CXXDEFS_H)' \
 	      -e '/definition of _GL_WARN_ON_USE/r $(WARN_ON_USE_H)' \
-	      < $(srcdir)/langinfo.in.h; \
-	} > $@-t && \
-	mv $@-t $@
+	      $(srcdir)/langinfo.in.h > $@-t
+	$(AM_V_at)mv $@-t $@
 MOSTLYCLEANFILES += langinfo.h langinfo.h-t
 
 EXTRA_DIST += langinfo.in.h
@@ -1235,16 +1221,14 @@ BUILT_SOURCES += $(LIMITS_H)
 # doesn't have one that is compatible with GNU.
 if GL_GENERATE_LIMITS_H
 limits.h: limits.in.h $(top_builddir)/config.status
-	$(AM_V_GEN)rm -f $@-t $@ && \
-	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */' && \
-	  sed -e 's|@''GUARD_PREFIX''@|GL|g' \
+	$(gl_V_at)$(SED_HEADER_STDOUT) \
+	      -e 's|@''GUARD_PREFIX''@|GL|g' \
 	      -e 's|@''INCLUDE_NEXT''@|$(INCLUDE_NEXT)|g' \
 	      -e 's|@''PRAGMA_SYSTEM_HEADER''@|@PRAGMA_SYSTEM_HEADER@|g' \
 	      -e 's|@''PRAGMA_COLUMNS''@|@PRAGMA_COLUMNS@|g' \
 	      -e 's|@''NEXT_LIMITS_H''@|$(NEXT_LIMITS_H)|g' \
-	      < $(srcdir)/limits.in.h; \
-	} > $@-t && \
-	mv $@-t $@
+	      $(srcdir)/limits.in.h > $@-t
+	$(AM_V_at)mv $@-t $@
 else
 limits.h: $(top_builddir)/config.status
 	rm -f $@
@@ -1270,9 +1254,8 @@ BUILT_SOURCES += locale.h
 # We need the following in order to create <locale.h> when the system
 # doesn't have one that provides all definitions.
 locale.h: locale.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(ARG_NONNULL_H) $(WARN_ON_USE_H)
-	$(AM_V_GEN)rm -f $@-t $@ && \
-	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */' && \
-	  sed -e 's|@''GUARD_PREFIX''@|GL|g' \
+	$(gl_V_at)$(SED_HEADER_STDOUT) \
+	      -e 's|@''GUARD_PREFIX''@|GL|g' \
 	      -e 's|@''INCLUDE_NEXT''@|$(INCLUDE_NEXT)|g' \
 	      -e 's|@''PRAGMA_SYSTEM_HEADER''@|@PRAGMA_SYSTEM_HEADER@|g' \
 	      -e 's|@''PRAGMA_COLUMNS''@|@PRAGMA_COLUMNS@|g' \
@@ -1296,9 +1279,8 @@ locale.h: locale.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(ARG_NONNULL_H
 	      -e '/definitions of _GL_FUNCDECL_RPL/r $(CXXDEFS_H)' \
 	      -e '/definition of _GL_ARG_NONNULL/r $(ARG_NONNULL_H)' \
 	      -e '/definition of _GL_WARN_ON_USE/r $(WARN_ON_USE_H)' \
-	      < $(srcdir)/locale.in.h; \
-	} > $@-t && \
-	mv $@-t $@
+	      $(srcdir)/locale.in.h > $@-t
+	$(AM_V_at)mv $@-t $@
 MOSTLYCLEANFILES += locale.h locale.h-t
 
 EXTRA_DIST += locale.in.h
@@ -1307,10 +1289,9 @@ EXTRA_DIST += locale.in.h
 
 ## begin gnulib module localeconv
 
-
-EXTRA_DIST += localeconv.c
-
-EXTRA_libgreputils_a_SOURCES += localeconv.c
+if GL_COND_OBJ_LOCALECONV
+libgreputils_a_SOURCES += localeconv.c
+endif
 
 ## end   gnulib module localeconv
 
@@ -1322,19 +1303,17 @@ libgreputils_a_SOURCES += glthread/lock.h glthread/lock.c
 
 ## begin gnulib module lseek
 
-
-EXTRA_DIST += lseek.c
-
-EXTRA_libgreputils_a_SOURCES += lseek.c
+if GL_COND_OBJ_LSEEK
+libgreputils_a_SOURCES += lseek.c
+endif
 
 ## end   gnulib module lseek
 
 ## begin gnulib module lstat
 
-
-EXTRA_DIST += lstat.c
-
-EXTRA_libgreputils_a_SOURCES += lstat.c
+if GL_COND_OBJ_LSTAT
+libgreputils_a_SOURCES += lstat.c
+endif
 
 ## end   gnulib module lstat
 
@@ -1386,19 +1365,21 @@ libgreputils_a_SOURCES += mbiter.h mbiter.c
 
 ## begin gnulib module mbrlen
 
-
-EXTRA_DIST += mbrlen.c
-
-EXTRA_libgreputils_a_SOURCES += mbrlen.c
+if GL_COND_OBJ_MBRLEN
+libgreputils_a_SOURCES += mbrlen.c
+endif
 
 ## end   gnulib module mbrlen
 
 ## begin gnulib module mbrtowc
 
+if GL_COND_OBJ_MBRTOWC
+libgreputils_a_SOURCES += mbrtowc.c
+endif
 
-EXTRA_DIST += lc-charset-dispatch.c lc-charset-dispatch.h mbrtowc-impl-utf8.h mbrtowc-impl.h mbrtowc.c mbtowc-lock.c mbtowc-lock.h windows-initguard.h
+EXTRA_DIST += lc-charset-dispatch.c lc-charset-dispatch.h mbrtowc-impl-utf8.h mbrtowc-impl.h mbtowc-lock.c mbtowc-lock.h windows-initguard.h
 
-EXTRA_libgreputils_a_SOURCES += lc-charset-dispatch.c mbrtowc.c mbtowc-lock.c
+EXTRA_libgreputils_a_SOURCES += lc-charset-dispatch.c mbtowc-lock.c
 
 ## end   gnulib module mbrtowc
 
@@ -1410,10 +1391,9 @@ libgreputils_a_SOURCES += mbscasecmp.c
 
 ## begin gnulib module mbsinit
 
-
-EXTRA_DIST += mbsinit.c
-
-EXTRA_libgreputils_a_SOURCES += mbsinit.c
+if GL_COND_OBJ_MBSINIT
+libgreputils_a_SOURCES += mbsinit.c
+endif
 
 ## end   gnulib module mbsinit
 
@@ -1425,10 +1405,13 @@ libgreputils_a_SOURCES += mbslen.c
 
 ## begin gnulib module mbsrtowcs
 
+if GL_COND_OBJ_MBSRTOWCS
+libgreputils_a_SOURCES += mbsrtowcs.c
+endif
 
-EXTRA_DIST += mbsrtowcs-impl.h mbsrtowcs-state.c mbsrtowcs.c
+EXTRA_DIST += mbsrtowcs-impl.h mbsrtowcs-state.c
 
-EXTRA_libgreputils_a_SOURCES += mbsrtowcs-state.c mbsrtowcs.c
+EXTRA_libgreputils_a_SOURCES += mbsrtowcs-state.c
 
 ## end   gnulib module mbsrtowcs
 
@@ -1442,10 +1425,11 @@ EXTRA_DIST += str-kmp.h
 
 ## begin gnulib module mbtowc
 
+if GL_COND_OBJ_MBTOWC
+libgreputils_a_SOURCES += mbtowc.c
+endif
 
-EXTRA_DIST += mbtowc-impl.h mbtowc.c
-
-EXTRA_libgreputils_a_SOURCES += mbtowc.c
+EXTRA_DIST += mbtowc-impl.h
 
 ## end   gnulib module mbtowc
 
@@ -1457,10 +1441,11 @@ libgreputils_a_SOURCES += mbuiter.h mbuiter.c
 
 ## begin gnulib module memchr
 
+if GL_COND_OBJ_MEMCHR
+libgreputils_a_SOURCES += memchr.c
+endif
 
-EXTRA_DIST += memchr.c memchr.valgrind
-
-EXTRA_libgreputils_a_SOURCES += memchr.c
+EXTRA_DIST += memchr.valgrind
 
 ## end   gnulib module memchr
 
@@ -1474,19 +1459,17 @@ EXTRA_DIST += memchr2.valgrind
 
 ## begin gnulib module mempcpy
 
-
-EXTRA_DIST += mempcpy.c
-
-EXTRA_libgreputils_a_SOURCES += mempcpy.c
+if GL_COND_OBJ_MEMPCPY
+libgreputils_a_SOURCES += mempcpy.c
+endif
 
 ## end   gnulib module mempcpy
 
 ## begin gnulib module memrchr
 
-
-EXTRA_DIST += memrchr.c
-
-EXTRA_libgreputils_a_SOURCES += memrchr.c
+if GL_COND_OBJ_MEMRCHR
+libgreputils_a_SOURCES += memrchr.c
+endif
 
 ## end   gnulib module memrchr
 
@@ -1498,55 +1481,60 @@ libgreputils_a_SOURCES += minmax.h
 
 ## begin gnulib module msvc-inval
 
+if GL_COND_OBJ_MSVC_INVAL
+libgreputils_a_SOURCES += msvc-inval.c
+endif
 
-EXTRA_DIST += msvc-inval.c msvc-inval.h
-
-EXTRA_libgreputils_a_SOURCES += msvc-inval.c
+EXTRA_DIST += msvc-inval.h
 
 ## end   gnulib module msvc-inval
 
 ## begin gnulib module msvc-nothrow
 
+if GL_COND_OBJ_MSVC_NOTHROW
+libgreputils_a_SOURCES += msvc-nothrow.c
+endif
 
-EXTRA_DIST += msvc-nothrow.c msvc-nothrow.h
-
-EXTRA_libgreputils_a_SOURCES += msvc-nothrow.c
+EXTRA_DIST += msvc-nothrow.h
 
 ## end   gnulib module msvc-nothrow
 
 ## begin gnulib module nl_langinfo
 
+if GL_COND_OBJ_NL_LANGINFO
+libgreputils_a_SOURCES += nl_langinfo.c
+endif
+if GL_COND_OBJ_NL_LANGINFO_LOCK
+libgreputils_a_SOURCES += nl_langinfo-lock.c
+endif
 
-EXTRA_DIST += nl_langinfo-lock.c nl_langinfo.c windows-initguard.h
-
-EXTRA_libgreputils_a_SOURCES += nl_langinfo-lock.c nl_langinfo.c
+EXTRA_DIST += windows-initguard.h
 
 ## end   gnulib module nl_langinfo
 
 ## begin gnulib module obstack
 
+if GL_COND_OBJ_OBSTACK
+libgreputils_a_SOURCES += obstack.c
+endif
 
-EXTRA_DIST += obstack.c obstack.h
-
-EXTRA_libgreputils_a_SOURCES += obstack.c
+EXTRA_DIST += obstack.h
 
 ## end   gnulib module obstack
 
 ## begin gnulib module open
 
-
-EXTRA_DIST += open.c
-
-EXTRA_libgreputils_a_SOURCES += open.c
+if GL_COND_OBJ_OPEN
+libgreputils_a_SOURCES += open.c
+endif
 
 ## end   gnulib module open
 
 ## begin gnulib module openat
 
-
-EXTRA_DIST += openat.c
-
-EXTRA_libgreputils_a_SOURCES += openat.c
+if GL_COND_OBJ_OPENAT
+libgreputils_a_SOURCES += openat.c
+endif
 
 ## end   gnulib module openat
 
@@ -1573,10 +1561,11 @@ EXTRA_DIST += fcntl--.h fcntl-safer.h
 
 ## begin gnulib module opendir
 
+if GL_COND_OBJ_OPENDIR
+libgreputils_a_SOURCES += opendir.c
+endif
 
-EXTRA_DIST += dirent-private.h opendir.c
-
-EXTRA_libgreputils_a_SOURCES += opendir.c
+EXTRA_DIST += dirent-private.h
 
 ## end   gnulib module opendir
 
@@ -1597,10 +1586,9 @@ EXTRA_DIST += pathmax.h
 
 ## begin gnulib module pipe-posix
 
-
-EXTRA_DIST += pipe.c
-
-EXTRA_libgreputils_a_SOURCES += pipe.c
+if GL_COND_OBJ_PIPE
+libgreputils_a_SOURCES += pipe.c
+endif
 
 ## end   gnulib module pipe-posix
 
@@ -1627,37 +1615,37 @@ EXTRA_DIST += quote.h quotearg.h
 
 ## begin gnulib module raise
 
-
-EXTRA_DIST += raise.c
-
-EXTRA_libgreputils_a_SOURCES += raise.c
+if GL_COND_OBJ_RAISE
+libgreputils_a_SOURCES += raise.c
+endif
 
 ## end   gnulib module raise
 
 ## begin gnulib module rawmemchr
 
+if GL_COND_OBJ_RAWMEMCHR
+libgreputils_a_SOURCES += rawmemchr.c
+endif
 
-EXTRA_DIST += rawmemchr.c rawmemchr.valgrind
-
-EXTRA_libgreputils_a_SOURCES += rawmemchr.c
+EXTRA_DIST += rawmemchr.valgrind
 
 ## end   gnulib module rawmemchr
 
 ## begin gnulib module read
 
-
-EXTRA_DIST += read.c
-
-EXTRA_libgreputils_a_SOURCES += read.c
+if GL_COND_OBJ_READ
+libgreputils_a_SOURCES += read.c
+endif
 
 ## end   gnulib module read
 
 ## begin gnulib module readdir
 
+if GL_COND_OBJ_READDIR
+libgreputils_a_SOURCES += readdir.c
+endif
 
-EXTRA_DIST += dirent-private.h readdir.c
-
-EXTRA_libgreputils_a_SOURCES += readdir.c
+EXTRA_DIST += dirent-private.h
 
 ## end   gnulib module readdir
 
@@ -1681,19 +1669,21 @@ EXTRA_libgreputils_a_SOURCES += realloc.c
 
 ## begin gnulib module reallocarray
 
-
-EXTRA_DIST += reallocarray.c
-
-EXTRA_libgreputils_a_SOURCES += reallocarray.c
+if GL_COND_OBJ_REALLOCARRAY
+libgreputils_a_SOURCES += reallocarray.c
+endif
 
 ## end   gnulib module reallocarray
 
 ## begin gnulib module regex
 
+if GL_COND_OBJ_REGEX
+libgreputils_a_SOURCES += regex.c
+endif
 
-EXTRA_DIST += regcomp.c regex.c regex.h regex_internal.c regex_internal.h regexec.c
+EXTRA_DIST += regcomp.c regex.h regex_internal.c regex_internal.h regexec.c
 
-EXTRA_libgreputils_a_SOURCES += regcomp.c regex.c regex_internal.c regexec.c
+EXTRA_libgreputils_a_SOURCES += regcomp.c regex_internal.c regexec.c
 
 ## end   gnulib module regex
 
@@ -1723,10 +1713,11 @@ EXTRA_DIST += save-cwd.h
 ## begin gnulib module setlocale-null
 
 libgreputils_a_SOURCES += setlocale_null.c
+if GL_COND_OBJ_SETLOCALE_LOCK
+libgreputils_a_SOURCES += setlocale-lock.c
+endif
 
-EXTRA_DIST += setlocale-lock.c setlocale_null.h windows-initguard.h
-
-EXTRA_libgreputils_a_SOURCES += setlocale-lock.c
+EXTRA_DIST += setlocale_null.h windows-initguard.h
 
 ## end   gnulib module setlocale-null
 
@@ -1737,9 +1728,8 @@ BUILT_SOURCES += signal.h
 # We need the following in order to create <signal.h> when the system
 # doesn't have a complete one.
 signal.h: signal.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(ARG_NONNULL_H) $(WARN_ON_USE_H)
-	$(AM_V_GEN)rm -f $@-t $@ && \
-	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */' && \
-	  sed -e 's|@''GUARD_PREFIX''@|GL|g' \
+	$(gl_V_at)$(SED_HEADER_STDOUT) \
+	      -e 's|@''GUARD_PREFIX''@|GL|g' \
 	      -e 's|@''INCLUDE_NEXT''@|$(INCLUDE_NEXT)|g' \
 	      -e 's|@''PRAGMA_SYSTEM_HEADER''@|@PRAGMA_SYSTEM_HEADER@|g' \
 	      -e 's|@''PRAGMA_COLUMNS''@|@PRAGMA_COLUMNS@|g' \
@@ -1763,9 +1753,8 @@ signal.h: signal.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(ARG_NONNULL_H
 	      -e '/definitions of _GL_FUNCDECL_RPL/r $(CXXDEFS_H)' \
 	      -e '/definition of _GL_ARG_NONNULL/r $(ARG_NONNULL_H)' \
 	      -e '/definition of _GL_WARN_ON_USE/r $(WARN_ON_USE_H)' \
-	      < $(srcdir)/signal.in.h; \
-	} > $@-t && \
-	mv $@-t $@
+	      $(srcdir)/signal.in.h > $@-t
+	$(AM_V_at)mv $@-t $@
 MOSTLYCLEANFILES += signal.h signal.h-t
 
 EXTRA_DIST += signal.in.h
@@ -1778,11 +1767,8 @@ BUILT_SOURCES += $(SIGSEGV_H)
 
 if GL_GENERATE_SIGSEGV_H
 sigsegv.h: sigsegv.in.h $(top_builddir)/config.status
-	$(AM_V_GEN)rm -f $@-t $@ && \
-	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
-	  cat $(srcdir)/sigsegv.in.h; \
-	} > $@-t && \
-	mv $@-t $@
+	$(gl_V_at)$(SED_HEADER_TO_AT_t) $(srcdir)/sigsegv.in.h
+	$(AM_V_at)mv $@-t $@
 else
 sigsegv.h: $(top_builddir)/config.status
 	rm -f $@
@@ -1847,10 +1833,13 @@ EXTRA_DIST += warn-on-use.h
 
 ## begin gnulib module stat
 
+if GL_COND_OBJ_STAT
+libgreputils_a_SOURCES += stat.c
+endif
 
-EXTRA_DIST += stat-w32.c stat-w32.h stat.c
+EXTRA_DIST += stat-w32.c stat-w32.h
 
-EXTRA_libgreputils_a_SOURCES += stat-w32.c stat.c
+EXTRA_libgreputils_a_SOURCES += stat-w32.c
 
 ## end   gnulib module stat
 
@@ -1870,11 +1859,8 @@ BUILT_SOURCES += $(STDALIGN_H)
 # doesn't have one that works.
 if GL_GENERATE_STDALIGN_H
 stdalign.h: stdalign.in.h $(top_builddir)/config.status
-	$(AM_V_GEN)rm -f $@-t $@ && \
-	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
-	  cat $(srcdir)/stdalign.in.h; \
-	} > $@-t && \
-	mv $@-t $@
+	$(gl_V_at)$(SED_HEADER_TO_AT_t) $(srcdir)/stdalign.in.h
+	$(AM_V_at)mv $@-t $@
 else
 stdalign.h: $(top_builddir)/config.status
 	rm -f $@
@@ -1893,16 +1879,14 @@ BUILT_SOURCES += $(STDARG_H)
 # doesn't have one that works with the given compiler.
 if GL_GENERATE_STDARG_H
 stdarg.h: stdarg.in.h $(top_builddir)/config.status
-	$(AM_V_GEN)rm -f $@-t $@ && \
-	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */' && \
-	  sed -e 's|@''GUARD_PREFIX''@|GL|g' \
+	$(gl_V_at)$(SED_HEADER_STDOUT) \
+	      -e 's|@''GUARD_PREFIX''@|GL|g' \
 	      -e 's|@''INCLUDE_NEXT''@|$(INCLUDE_NEXT)|g' \
 	      -e 's|@''PRAGMA_SYSTEM_HEADER''@|@PRAGMA_SYSTEM_HEADER@|g' \
 	      -e 's|@''PRAGMA_COLUMNS''@|@PRAGMA_COLUMNS@|g' \
 	      -e 's|@''NEXT_STDARG_H''@|$(NEXT_STDARG_H)|g' \
-	      < $(srcdir)/stdarg.in.h; \
-	} > $@-t && \
-	mv $@-t $@
+	      $(srcdir)/stdarg.in.h > $@-t
+	$(AM_V_at)mv $@-t $@
 else
 stdarg.h: $(top_builddir)/config.status
 	rm -f $@
@@ -1921,11 +1905,10 @@ BUILT_SOURCES += $(STDBOOL_H)
 # doesn't have one that works.
 if GL_GENERATE_STDBOOL_H
 stdbool.h: stdbool.in.h $(top_builddir)/config.status
-	$(AM_V_GEN)rm -f $@-t $@ && \
-	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
-	  sed -e 's/@''HAVE__BOOL''@/$(HAVE__BOOL)/g' < $(srcdir)/stdbool.in.h; \
-	} > $@-t && \
-	mv $@-t $@
+	$(gl_V_at)$(SED_HEADER_STDOUT) \
+	  -e 's/@''HAVE__BOOL''@/$(HAVE__BOOL)/g' \
+	  $(srcdir)/stdbool.in.h > $@-t
+	$(AM_V_at)mv $@-t $@
 else
 stdbool.h: $(top_builddir)/config.status
 	rm -f $@
@@ -1944,9 +1927,8 @@ BUILT_SOURCES += $(STDDEF_H)
 # doesn't have one that works with the given compiler.
 if GL_GENERATE_STDDEF_H
 stddef.h: stddef.in.h $(top_builddir)/config.status
-	$(AM_V_GEN)rm -f $@-t $@ && \
-	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */' && \
-	  sed -e 's|@''GUARD_PREFIX''@|GL|g' \
+	$(gl_V_at)$(SED_HEADER_STDOUT) \
+	      -e 's|@''GUARD_PREFIX''@|GL|g' \
 	      -e 's|@''INCLUDE_NEXT''@|$(INCLUDE_NEXT)|g' \
 	      -e 's|@''PRAGMA_SYSTEM_HEADER''@|@PRAGMA_SYSTEM_HEADER@|g' \
 	      -e 's|@''PRAGMA_COLUMNS''@|@PRAGMA_COLUMNS@|g' \
@@ -1954,9 +1936,8 @@ stddef.h: stddef.in.h $(top_builddir)/config.status
 	      -e 's|@''HAVE_MAX_ALIGN_T''@|$(HAVE_MAX_ALIGN_T)|g' \
 	      -e 's|@''HAVE_WCHAR_T''@|$(HAVE_WCHAR_T)|g' \
 	      -e 's|@''REPLACE_NULL''@|$(REPLACE_NULL)|g' \
-	      < $(srcdir)/stddef.in.h; \
-	} > $@-t && \
-	mv $@-t $@
+	      $(srcdir)/stddef.in.h > $@-t
+	$(AM_V_at)mv $@-t $@
 else
 stddef.h: $(top_builddir)/config.status
 	rm -f $@
@@ -1975,9 +1956,8 @@ BUILT_SOURCES += $(STDINT_H)
 # doesn't have one that works with the given compiler.
 if GL_GENERATE_STDINT_H
 stdint.h: stdint.in.h $(top_builddir)/config.status
-	$(AM_V_GEN)rm -f $@-t $@ && \
-	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
-	  sed -e 's|@''GUARD_PREFIX''@|GL|g' \
+	$(gl_V_at)$(SED_HEADER_STDOUT) \
+	      -e 's|@''GUARD_PREFIX''@|GL|g' \
 	      -e 's/@''HAVE_STDINT_H''@/$(HAVE_STDINT_H)/g' \
 	      -e 's|@''INCLUDE_NEXT''@|$(INCLUDE_NEXT)|g' \
 	      -e 's|@''PRAGMA_SYSTEM_HEADER''@|@PRAGMA_SYSTEM_HEADER@|g' \
@@ -2004,9 +1984,8 @@ stdint.h: stdint.in.h $(top_builddir)/config.status
 	      -e 's/@''HAVE_SIGNED_WINT_T''@/$(HAVE_SIGNED_WINT_T)/g' \
 	      -e 's/@''WINT_T_SUFFIX''@/$(WINT_T_SUFFIX)/g' \
 	      -e 's/@''GNULIBHEADERS_OVERRIDE_WINT_T''@/$(GNULIBHEADERS_OVERRIDE_WINT_T)/g' \
-	      < $(srcdir)/stdint.in.h; \
-	} > $@-t && \
-	mv $@-t $@
+	      $(srcdir)/stdint.in.h > $@-t
+	$(AM_V_at)mv $@-t $@
 else
 stdint.h: $(top_builddir)/config.status
 	rm -f $@
@@ -2024,9 +2003,8 @@ BUILT_SOURCES += stdio.h
 # We need the following in order to create <stdio.h> when the system
 # doesn't have one that works with the given compiler.
 stdio.h: stdio.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(ARG_NONNULL_H) $(WARN_ON_USE_H)
-	$(AM_V_GEN)rm -f $@-t $@ && \
-	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */' && \
-	  sed -e 's|@''GUARD_PREFIX''@|GL|g' \
+	$(gl_V_at)$(SED_HEADER_STDOUT) \
+	      -e 's|@''GUARD_PREFIX''@|GL|g' \
 	      -e 's|@''INCLUDE_NEXT''@|$(INCLUDE_NEXT)|g' \
 	      -e 's|@''PRAGMA_SYSTEM_HEADER''@|@PRAGMA_SYSTEM_HEADER@|g' \
 	      -e 's|@''PRAGMA_COLUMNS''@|@PRAGMA_COLUMNS@|g' \
@@ -2038,6 +2016,7 @@ stdio.h: stdio.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(ARG_NONNULL_H) 
 	      -e 's/@''GNULIB_FGETC''@/$(GL_GNULIB_FGETC)/g' \
 	      -e 's/@''GNULIB_FGETS''@/$(GL_GNULIB_FGETS)/g' \
 	      -e 's/@''GNULIB_FOPEN''@/$(GL_GNULIB_FOPEN)/g' \
+	      -e 's/@''GNULIB_FOPEN_GNU''@/$(GL_GNULIB_FOPEN_GNU)/g' \
 	      -e 's/@''GNULIB_FPRINTF''@/$(GL_GNULIB_FPRINTF)/g' \
 	      -e 's/@''GNULIB_FPRINTF_POSIX''@/$(GL_GNULIB_FPRINTF_POSIX)/g' \
 	      -e 's/@''GNULIB_FPURGE''@/$(GL_GNULIB_FPURGE)/g' \
@@ -2113,6 +2092,7 @@ stdio.h: stdio.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(ARG_NONNULL_H) 
 	      -e 's|@''REPLACE_FDOPEN''@|$(REPLACE_FDOPEN)|g' \
 	      -e 's|@''REPLACE_FFLUSH''@|$(REPLACE_FFLUSH)|g' \
 	      -e 's|@''REPLACE_FOPEN''@|$(REPLACE_FOPEN)|g' \
+	      -e 's|@''REPLACE_FOPEN_FOR_FOPEN_GNU''@|$(REPLACE_FOPEN_FOR_FOPEN_GNU)|g' \
 	      -e 's|@''REPLACE_FPRINTF''@|$(REPLACE_FPRINTF)|g' \
 	      -e 's|@''REPLACE_FPURGE''@|$(REPLACE_FPURGE)|g' \
 	      -e 's|@''REPLACE_FREOPEN''@|$(REPLACE_FREOPEN)|g' \
@@ -2143,10 +2123,17 @@ stdio.h: stdio.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(ARG_NONNULL_H) 
 	      -e 's|@''ASM_SYMBOL_PREFIX''@|$(ASM_SYMBOL_PREFIX)|g' \
 	      -e '/definitions of _GL_FUNCDECL_RPL/r $(CXXDEFS_H)' \
 	      -e '/definition of _GL_ARG_NONNULL/r $(ARG_NONNULL_H)' \
-	      -e '/definition of _GL_WARN_ON_USE/r $(WARN_ON_USE_H)'; \
-	} > $@-t && \
-	mv $@-t $@
+	      -e '/definition of _GL_WARN_ON_USE/r $(WARN_ON_USE_H)' \
+	      > $@-t
+	$(AM_V_at)mv $@-t $@
 MOSTLYCLEANFILES += stdio.h stdio.h-t
+
+if GL_COND_OBJ_STDIO_READ
+libgreputils_a_SOURCES += stdio-read.c
+endif
+if GL_COND_OBJ_STDIO_WRITE
+libgreputils_a_SOURCES += stdio-write.c
+endif
 
 EXTRA_DIST += stdio.in.h
 
@@ -2160,9 +2147,8 @@ BUILT_SOURCES += stdlib.h
 # doesn't have one that works with the given compiler.
 stdlib.h: stdlib.in.h $(top_builddir)/config.status $(CXXDEFS_H) \
   $(_NORETURN_H) $(ARG_NONNULL_H) $(WARN_ON_USE_H)
-	$(AM_V_GEN)rm -f $@-t $@ && \
-	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */' && \
-	  sed -e 's|@''GUARD_PREFIX''@|GL|g' \
+	$(gl_V_at)$(SED_HEADER_STDOUT) \
+	      -e 's|@''GUARD_PREFIX''@|GL|g' \
 	      -e 's|@''INCLUDE_NEXT''@|$(INCLUDE_NEXT)|g' \
 	      -e 's|@''PRAGMA_SYSTEM_HEADER''@|@PRAGMA_SYSTEM_HEADER@|g' \
 	      -e 's|@''PRAGMA_COLUMNS''@|@PRAGMA_COLUMNS@|g' \
@@ -2170,12 +2156,14 @@ stdlib.h: stdlib.in.h $(top_builddir)/config.status $(CXXDEFS_H) \
 	      -e 's/@''GNULIB__EXIT''@/$(GL_GNULIB__EXIT)/g' \
 	      -e 's/@''GNULIB_ALIGNED_ALLOC''@/$(GL_GNULIB_ALIGNED_ALLOC)/g' \
 	      -e 's/@''GNULIB_ATOLL''@/$(GL_GNULIB_ATOLL)/g' \
+	      -e 's/@''GNULIB_CALLOC_GNU''@/$(GL_GNULIB_CALLOC_GNU)/g' \
 	      -e 's/@''GNULIB_CALLOC_POSIX''@/$(GL_GNULIB_CALLOC_POSIX)/g' \
 	      -e 's/@''GNULIB_CANONICALIZE_FILE_NAME''@/$(GL_GNULIB_CANONICALIZE_FILE_NAME)/g' \
 	      -e 's/@''GNULIB_FREE_POSIX''@/$(GL_GNULIB_FREE_POSIX)/g' \
 	      -e 's/@''GNULIB_GETLOADAVG''@/$(GL_GNULIB_GETLOADAVG)/g' \
 	      -e 's/@''GNULIB_GETSUBOPT''@/$(GL_GNULIB_GETSUBOPT)/g' \
 	      -e 's/@''GNULIB_GRANTPT''@/$(GL_GNULIB_GRANTPT)/g' \
+	      -e 's/@''GNULIB_MALLOC_GNU''@/$(GL_GNULIB_MALLOC_GNU)/g' \
 	      -e 's/@''GNULIB_MALLOC_POSIX''@/$(GL_GNULIB_MALLOC_POSIX)/g' \
 	      -e 's/@''GNULIB_MBTOWC''@/$(GL_GNULIB_MBTOWC)/g' \
 	      -e 's/@''GNULIB_MKDTEMP''@/$(GL_GNULIB_MKDTEMP)/g' \
@@ -2191,6 +2179,7 @@ stdlib.h: stdlib.in.h $(top_builddir)/config.status $(CXXDEFS_H) \
 	      -e 's/@''GNULIB_QSORT_R''@/$(GL_GNULIB_QSORT_R)/g' \
 	      -e 's/@''GNULIB_RANDOM''@/$(GL_GNULIB_RANDOM)/g' \
 	      -e 's/@''GNULIB_RANDOM_R''@/$(GL_GNULIB_RANDOM_R)/g' \
+	      -e 's/@''GNULIB_REALLOC_GNU''@/$(GL_GNULIB_REALLOC_GNU)/g' \
 	      -e 's/@''GNULIB_REALLOC_POSIX''@/$(GL_GNULIB_REALLOC_POSIX)/g' \
 	      -e 's/@''GNULIB_REALLOCARRAY''@/$(GL_GNULIB_REALLOCARRAY)/g' \
 	      -e 's/@''GNULIB_REALPATH''@/$(GL_GNULIB_REALPATH)/g' \
@@ -2257,11 +2246,13 @@ stdlib.h: stdlib.in.h $(top_builddir)/config.status $(CXXDEFS_H) \
 	      -e 's|@''HAVE_UNLOCKPT''@|$(HAVE_UNLOCKPT)|g' \
 	      -e 's|@''HAVE_DECL_UNSETENV''@|$(HAVE_DECL_UNSETENV)|g' \
 	      -e 's|@''REPLACE_ALIGNED_ALLOC''@|$(REPLACE_ALIGNED_ALLOC)|g' \
-	      -e 's|@''REPLACE_CALLOC''@|$(REPLACE_CALLOC)|g' \
+	      -e 's|@''REPLACE_CALLOC_FOR_CALLOC_GNU''@|$(REPLACE_CALLOC_FOR_CALLOC_GNU)|g' \
+	      -e 's|@''REPLACE_CALLOC_FOR_CALLOC_POSIX''@|$(REPLACE_CALLOC_FOR_CALLOC_POSIX)|g' \
 	      -e 's|@''REPLACE_CANONICALIZE_FILE_NAME''@|$(REPLACE_CANONICALIZE_FILE_NAME)|g' \
 	      -e 's|@''REPLACE_FREE''@|$(REPLACE_FREE)|g' \
 	      -e 's|@''REPLACE_INITSTATE''@|$(REPLACE_INITSTATE)|g' \
-	      -e 's|@''REPLACE_MALLOC''@|$(REPLACE_MALLOC)|g' \
+	      -e 's|@''REPLACE_MALLOC_FOR_MALLOC_GNU''@|$(REPLACE_MALLOC_FOR_MALLOC_GNU)|g' \
+	      -e 's|@''REPLACE_MALLOC_FOR_MALLOC_POSIX''@|$(REPLACE_MALLOC_FOR_MALLOC_POSIX)|g' \
 	      -e 's|@''REPLACE_MBTOWC''@|$(REPLACE_MBTOWC)|g' \
 	      -e 's|@''REPLACE_MKSTEMP''@|$(REPLACE_MKSTEMP)|g' \
 	      -e 's|@''REPLACE_POSIX_MEMALIGN''@|$(REPLACE_POSIX_MEMALIGN)|g' \
@@ -2271,7 +2262,8 @@ stdlib.h: stdlib.in.h $(top_builddir)/config.status $(CXXDEFS_H) \
 	      -e 's|@''REPLACE_QSORT_R''@|$(REPLACE_QSORT_R)|g' \
 	      -e 's|@''REPLACE_RANDOM''@|$(REPLACE_RANDOM)|g' \
 	      -e 's|@''REPLACE_RANDOM_R''@|$(REPLACE_RANDOM_R)|g' \
-	      -e 's|@''REPLACE_REALLOC''@|$(REPLACE_REALLOC)|g' \
+	      -e 's|@''REPLACE_REALLOC_FOR_REALLOC_GNU''@|$(REPLACE_REALLOC_FOR_REALLOC_GNU)|g' \
+	      -e 's|@''REPLACE_REALLOC_FOR_REALLOC_POSIX''@|$(REPLACE_REALLOC_FOR_REALLOC_POSIX)|g' \
 	      -e 's|@''REPLACE_REALLOCARRAY''@|$(REPLACE_REALLOCARRAY)|g' \
 	      -e 's|@''REPLACE_REALPATH''@|$(REPLACE_REALPATH)|g' \
 	      -e 's|@''REPLACE_SETENV''@|$(REPLACE_SETENV)|g' \
@@ -2287,9 +2279,9 @@ stdlib.h: stdlib.in.h $(top_builddir)/config.status $(CXXDEFS_H) \
 	      -e '/definitions of _GL_FUNCDECL_RPL/r $(CXXDEFS_H)' \
 	      -e '/definition of _Noreturn/r $(_NORETURN_H)' \
 	      -e '/definition of _GL_ARG_NONNULL/r $(ARG_NONNULL_H)' \
-	      -e '/definition of _GL_WARN_ON_USE/r $(WARN_ON_USE_H)'; \
-	} > $@-t && \
-	mv $@-t $@
+	      -e '/definition of _GL_WARN_ON_USE/r $(WARN_ON_USE_H)' \
+	      > $@-t
+	$(AM_V_at)mv $@-t $@
 MOSTLYCLEANFILES += stdlib.h stdlib.h-t
 
 EXTRA_DIST += stdlib.in.h
@@ -2298,19 +2290,17 @@ EXTRA_DIST += stdlib.in.h
 
 ## begin gnulib module stpcpy
 
-
-EXTRA_DIST += stpcpy.c
-
-EXTRA_libgreputils_a_SOURCES += stpcpy.c
+if GL_COND_OBJ_STPCPY
+libgreputils_a_SOURCES += stpcpy.c
+endif
 
 ## end   gnulib module stpcpy
 
 ## begin gnulib module strdup-posix
 
-
-EXTRA_DIST += strdup.c
-
-EXTRA_libgreputils_a_SOURCES += strdup.c
+if GL_COND_OBJ_STRDUP
+libgreputils_a_SOURCES += strdup.c
+endif
 
 ## end   gnulib module strdup-posix
 
@@ -2323,19 +2313,19 @@ EXTRA_DIST += streq.h
 
 ## begin gnulib module strerror
 
-
-EXTRA_DIST += strerror.c
-
-EXTRA_libgreputils_a_SOURCES += strerror.c
+if GL_COND_OBJ_STRERROR
+libgreputils_a_SOURCES += strerror.c
+endif
 
 ## end   gnulib module strerror
 
 ## begin gnulib module strerror-override
 
+if GL_COND_OBJ_STRERROR_OVERRIDE
+libgreputils_a_SOURCES += strerror-override.c
+endif
 
-EXTRA_DIST += strerror-override.c strerror-override.h
-
-EXTRA_libgreputils_a_SOURCES += strerror-override.c
+EXTRA_DIST += strerror-override.h
 
 ## end   gnulib module strerror-override
 
@@ -2354,9 +2344,8 @@ BUILT_SOURCES += string.h
 # We need the following in order to create <string.h> when the system
 # doesn't have one that works with the given compiler.
 string.h: string.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(ARG_NONNULL_H) $(WARN_ON_USE_H)
-	$(AM_V_GEN)rm -f $@-t $@ && \
-	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */' && \
-	  sed -e 's|@''GUARD_PREFIX''@|GL|g' \
+	$(gl_V_at)$(SED_HEADER_STDOUT) \
+	      -e 's|@''GUARD_PREFIX''@|GL|g' \
 	      -e 's|@''INCLUDE_NEXT''@|$(INCLUDE_NEXT)|g' \
 	      -e 's|@''PRAGMA_SYSTEM_HEADER''@|@PRAGMA_SYSTEM_HEADER@|g' \
 	      -e 's|@''PRAGMA_COLUMNS''@|@PRAGMA_COLUMNS@|g' \
@@ -2404,6 +2393,7 @@ string.h: string.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(ARG_NONNULL_H
 	      -e 's/@''GNULIB_STRVERSCMP''@/$(GL_GNULIB_STRVERSCMP)/g' \
 	      -e 's/@''GNULIB_MDA_MEMCCPY''@/$(GL_GNULIB_MDA_MEMCCPY)/g' \
 	      -e 's/@''GNULIB_MDA_STRDUP''@/$(GL_GNULIB_MDA_STRDUP)/g' \
+	      -e 's/@''GNULIB_FREE_POSIX''@/$(GL_GNULIB_FREE_POSIX)/g' \
 	      < $(srcdir)/string.in.h | \
 	  sed -e 's|@''HAVE_EXPLICIT_BZERO''@|$(HAVE_EXPLICIT_BZERO)|g' \
 	      -e 's|@''HAVE_FFSL''@|$(HAVE_FFSL)|g' \
@@ -2432,6 +2422,7 @@ string.h: string.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(ARG_NONNULL_H
 	      -e 's|@''REPLACE_FFSLL''@|$(REPLACE_FFSLL)|g' \
 	      -e 's|@''REPLACE_MEMCHR''@|$(REPLACE_MEMCHR)|g' \
 	      -e 's|@''REPLACE_MEMMEM''@|$(REPLACE_MEMMEM)|g' \
+	      -e 's|@''REPLACE_FREE''@|$(REPLACE_FREE)|g' \
 	      -e 's|@''REPLACE_STPNCPY''@|$(REPLACE_STPNCPY)|g' \
 	      -e 's|@''REPLACE_STRCHRNUL''@|$(REPLACE_STRCHRNUL)|g' \
 	      -e 's|@''REPLACE_STRDUP''@|$(REPLACE_STRDUP)|g' \
@@ -2448,10 +2439,9 @@ string.h: string.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(ARG_NONNULL_H
 	      -e 's|@''UNDEFINE_STRTOK_R''@|$(UNDEFINE_STRTOK_R)|g' \
 	      -e '/definitions of _GL_FUNCDECL_RPL/r $(CXXDEFS_H)' \
 	      -e '/definition of _GL_ARG_NONNULL/r $(ARG_NONNULL_H)' \
-	      -e '/definition of _GL_WARN_ON_USE/r $(WARN_ON_USE_H)'; \
-	      < $(srcdir)/string.in.h; \
-	} > $@-t && \
-	mv $@-t $@
+	      -e '/definition of _GL_WARN_ON_USE/r $(WARN_ON_USE_H)' \
+	      > $@-t
+	$(AM_V_at)mv $@-t $@
 MOSTLYCLEANFILES += string.h string.h-t
 
 EXTRA_DIST += string.in.h
@@ -2460,10 +2450,9 @@ EXTRA_DIST += string.in.h
 
 ## begin gnulib module strnlen
 
-
-EXTRA_DIST += strnlen.c
-
-EXTRA_libgreputils_a_SOURCES += strnlen.c
+if GL_COND_OBJ_STRNLEN
+libgreputils_a_SOURCES += strnlen.c
+endif
 
 ## end   gnulib module strnlen
 
@@ -2493,37 +2482,45 @@ EXTRA_libgreputils_a_SOURCES += strstr.c
 
 ## begin gnulib module strtoimax
 
-
-EXTRA_DIST += strtoimax.c
-
-EXTRA_libgreputils_a_SOURCES += strtoimax.c
+if GL_COND_OBJ_STRTOIMAX
+libgreputils_a_SOURCES += strtoimax.c
+endif
 
 ## end   gnulib module strtoimax
 
 ## begin gnulib module strtoll
 
+if GL_COND_OBJ_STRTOLL
+libgreputils_a_SOURCES += strtoll.c
+endif
 
-EXTRA_DIST += strtol.c strtoll.c
+EXTRA_DIST += strtol.c
 
-EXTRA_libgreputils_a_SOURCES += strtol.c strtoll.c
+EXTRA_libgreputils_a_SOURCES += strtol.c
 
 ## end   gnulib module strtoll
 
 ## begin gnulib module strtoull
 
+if GL_COND_OBJ_STRTOULL
+libgreputils_a_SOURCES += strtoull.c
+endif
 
-EXTRA_DIST += strtol.c strtoul.c strtoull.c
+EXTRA_DIST += strtol.c strtoul.c
 
-EXTRA_libgreputils_a_SOURCES += strtol.c strtoul.c strtoull.c
+EXTRA_libgreputils_a_SOURCES += strtol.c strtoul.c
 
 ## end   gnulib module strtoull
 
 ## begin gnulib module strtoumax
 
+if GL_COND_OBJ_STRTOUMAX
+libgreputils_a_SOURCES += strtoumax.c
+endif
 
-EXTRA_DIST += strtoimax.c strtoumax.c
+EXTRA_DIST += strtoimax.c
 
-EXTRA_libgreputils_a_SOURCES += strtoimax.c strtoumax.c
+EXTRA_libgreputils_a_SOURCES += strtoimax.c
 
 ## end   gnulib module strtoumax
 
@@ -2534,16 +2531,16 @@ BUILT_SOURCES += sys/stat.h
 # We need the following in order to create <sys/stat.h> when the system
 # has one that is incomplete.
 sys/stat.h: sys_stat.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(ARG_NONNULL_H) $(WARN_ON_USE_H)
-	$(AM_V_at)$(MKDIR_P) sys
-	$(AM_V_GEN)rm -f $@-t $@ && \
-	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
-	  sed -e 's|@''GUARD_PREFIX''@|GL|g' \
+	$(AM_V_GEN)$(MKDIR_P) '%reldir%/sys'
+	$(AM_V_at)$(SED_HEADER_STDOUT) \
+	      -e 's|@''GUARD_PREFIX''@|GL|g' \
 	      -e 's|@''INCLUDE_NEXT''@|$(INCLUDE_NEXT)|g' \
 	      -e 's|@''PRAGMA_SYSTEM_HEADER''@|@PRAGMA_SYSTEM_HEADER@|g' \
 	      -e 's|@''PRAGMA_COLUMNS''@|@PRAGMA_COLUMNS@|g' \
 	      -e 's|@''NEXT_SYS_STAT_H''@|$(NEXT_SYS_STAT_H)|g' \
 	      -e 's|@''WINDOWS_64_BIT_ST_SIZE''@|$(WINDOWS_64_BIT_ST_SIZE)|g' \
 	      -e 's|@''WINDOWS_STAT_TIMESPEC''@|$(WINDOWS_STAT_TIMESPEC)|g' \
+	      -e 's/@''GNULIB_CHMOD''@/$(GL_GNULIB_CHMOD)/g' \
 	      -e 's/@''GNULIB_FCHMODAT''@/$(GL_GNULIB_FCHMODAT)/g' \
 	      -e 's/@''GNULIB_FSTAT''@/$(GL_GNULIB_FSTAT)/g' \
 	      -e 's/@''GNULIB_FSTATAT''@/$(GL_GNULIB_FSTATAT)/g' \
@@ -2575,6 +2572,7 @@ sys/stat.h: sys_stat.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(ARG_NONNU
 	      -e 's|@''HAVE_MKNOD''@|$(HAVE_MKNOD)|g' \
 	      -e 's|@''HAVE_MKNODAT''@|$(HAVE_MKNODAT)|g' \
 	      -e 's|@''HAVE_UTIMENSAT''@|$(HAVE_UTIMENSAT)|g' \
+	      -e 's|@''REPLACE_CHMOD''@|$(REPLACE_CHMOD)|g' \
 	      -e 's|@''REPLACE_FCHMODAT''@|$(REPLACE_FCHMODAT)|g' \
 	      -e 's|@''REPLACE_FSTAT''@|$(REPLACE_FSTAT)|g' \
 	      -e 's|@''REPLACE_FSTATAT''@|$(REPLACE_FSTATAT)|g' \
@@ -2590,9 +2588,8 @@ sys/stat.h: sys_stat.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(ARG_NONNU
 	      -e '/definitions of _GL_FUNCDECL_RPL/r $(CXXDEFS_H)' \
 	      -e '/definition of _GL_ARG_NONNULL/r $(ARG_NONNULL_H)' \
 	      -e '/definition of _GL_WARN_ON_USE/r $(WARN_ON_USE_H)' \
-	      < $(srcdir)/sys_stat.in.h; \
-	} > $@-t && \
-	mv $@-t $@
+	      $(srcdir)/sys_stat.in.h > $@-t
+	$(AM_V_at)mv $@-t $@
 MOSTLYCLEANFILES += sys/stat.h sys/stat.h-t
 MOSTLYCLEANDIRS += sys
 
@@ -2607,19 +2604,17 @@ BUILT_SOURCES += sys/types.h
 # We need the following in order to create <sys/types.h> when the system
 # doesn't have one that works with the given compiler.
 sys/types.h: sys_types.in.h $(top_builddir)/config.status
-	$(AM_V_at)$(MKDIR_P) sys
-	$(AM_V_GEN)rm -f $@-t $@ && \
-	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
-	  sed -e 's|@''GUARD_PREFIX''@|GL|g' \
+	$(AM_V_GEN)$(MKDIR_P) '%reldir%/sys'
+	$(AM_V_at)$(SED_HEADER_STDOUT) \
+	      -e 's|@''GUARD_PREFIX''@|GL|g' \
 	      -e 's|@''INCLUDE_NEXT''@|$(INCLUDE_NEXT)|g' \
 	      -e 's|@''PRAGMA_SYSTEM_HEADER''@|@PRAGMA_SYSTEM_HEADER@|g' \
 	      -e 's|@''PRAGMA_COLUMNS''@|@PRAGMA_COLUMNS@|g' \
 	      -e 's|@''NEXT_SYS_TYPES_H''@|$(NEXT_SYS_TYPES_H)|g' \
 	      -e 's|@''WINDOWS_64_BIT_OFF_T''@|$(WINDOWS_64_BIT_OFF_T)|g' \
 	      -e 's|@''WINDOWS_STAT_INODES''@|$(WINDOWS_STAT_INODES)|g' \
-	      < $(srcdir)/sys_types.in.h; \
-	} > $@-t && \
-	mv $@-t $@
+	      $(srcdir)/sys_types.in.h > $@-t
+	$(AM_V_at)mv $@-t $@
 MOSTLYCLEANFILES += sys/types.h sys/types.h-t
 
 EXTRA_DIST += sys_types.in.h
@@ -2639,9 +2634,8 @@ BUILT_SOURCES += time.h
 # We need the following in order to create <time.h> when the system
 # doesn't have one that works with the given compiler.
 time.h: time.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(ARG_NONNULL_H) $(WARN_ON_USE_H)
-	$(AM_V_GEN)rm -f $@-t $@ && \
-	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */' && \
-	  sed -e 's|@''GUARD_PREFIX''@|GL|g' \
+	$(gl_V_at)$(SED_HEADER_STDOUT) \
+	      -e 's|@''GUARD_PREFIX''@|GL|g' \
 	      -e 's|@''INCLUDE_NEXT''@|$(INCLUDE_NEXT)|g' \
 	      -e 's|@''PRAGMA_SYSTEM_HEADER''@|@PRAGMA_SYSTEM_HEADER@|g' \
 	      -e 's|@''PRAGMA_COLUMNS''@|@PRAGMA_COLUMNS@|g' \
@@ -2654,6 +2648,7 @@ time.h: time.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(ARG_NONNULL_H) $(
 	      -e 's/@''GNULIB_STRPTIME''@/$(GL_GNULIB_STRPTIME)/g' \
 	      -e 's/@''GNULIB_TIMEGM''@/$(GL_GNULIB_TIMEGM)/g' \
 	      -e 's/@''GNULIB_TIMESPEC_GET''@/$(GL_GNULIB_TIMESPEC_GET)/g' \
+	      -e 's/@''GNULIB_TIMESPEC_GETRES''@/$(GL_GNULIB_TIMESPEC_GETRES)/g' \
 	      -e 's/@''GNULIB_TIME_R''@/$(GL_GNULIB_TIME_R)/g' \
 	      -e 's/@''GNULIB_TIME_RZ''@/$(GL_GNULIB_TIME_RZ)/g' \
 	      -e 's/@''GNULIB_TZSET''@/$(GL_GNULIB_TZSET)/g' \
@@ -2663,6 +2658,7 @@ time.h: time.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(ARG_NONNULL_H) $(
 	      -e 's|@''HAVE_STRPTIME''@|$(HAVE_STRPTIME)|g' \
 	      -e 's|@''HAVE_TIMEGM''@|$(HAVE_TIMEGM)|g' \
 	      -e 's|@''HAVE_TIMESPEC_GET''@|$(HAVE_TIMESPEC_GET)|g' \
+	      -e 's|@''HAVE_TIMESPEC_GETRES''@|$(HAVE_TIMESPEC_GETRES)|g' \
 	      -e 's|@''HAVE_TIMEZONE_T''@|$(HAVE_TIMEZONE_T)|g' \
 	      -e 's|@''REPLACE_CTIME''@|$(REPLACE_CTIME)|g' \
 	      -e 's|@''REPLACE_GMTIME''@|$(REPLACE_GMTIME)|g' \
@@ -2681,9 +2677,8 @@ time.h: time.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(ARG_NONNULL_H) $(
 	      -e '/definitions of _GL_FUNCDECL_RPL/r $(CXXDEFS_H)' \
 	      -e '/definition of _GL_ARG_NONNULL/r $(ARG_NONNULL_H)' \
 	      -e '/definition of _GL_WARN_ON_USE/r $(WARN_ON_USE_H)' \
-	      < $(srcdir)/time.in.h; \
-	} > $@-t && \
-	mv $@-t $@
+	      $(srcdir)/time.in.h > $@-t
+	$(AM_V_at)mv $@-t $@
 MOSTLYCLEANFILES += time.h time.h-t
 
 EXTRA_DIST += time.in.h
@@ -2706,9 +2701,8 @@ libgreputils_a_SOURCES += unistd.c
 # We need the following in order to create an empty placeholder for
 # <unistd.h> when the system doesn't have one.
 unistd.h: unistd.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(ARG_NONNULL_H) $(WARN_ON_USE_H)
-	$(AM_V_GEN)rm -f $@-t $@ && \
-	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
-	  sed -e 's|@''GUARD_PREFIX''@|GL|g' \
+	$(gl_V_at)$(SED_HEADER_STDOUT) \
+	      -e 's|@''GUARD_PREFIX''@|GL|g' \
 	      -e 's|@''HAVE_UNISTD_H''@|$(HAVE_UNISTD_H)|g' \
 	      -e 's|@''INCLUDE_NEXT''@|$(INCLUDE_NEXT)|g' \
 	      -e 's|@''PRAGMA_SYSTEM_HEADER''@|@PRAGMA_SYSTEM_HEADER@|g' \
@@ -2749,6 +2743,7 @@ unistd.h: unistd.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(ARG_NONNULL_H
 	      -e 's/@''GNULIB_GETOPT_POSIX''@/$(GL_GNULIB_GETOPT_POSIX)/g' \
 	      -e 's/@''GNULIB_GETPAGESIZE''@/$(GL_GNULIB_GETPAGESIZE)/g' \
 	      -e 's/@''GNULIB_GETPASS''@/$(GL_GNULIB_GETPASS)/g' \
+	      -e 's/@''GNULIB_GETPASS_GNU''@/$(GL_GNULIB_GETPASS_GNU)/g' \
 	      -e 's/@''GNULIB_GETUSERSHELL''@/$(GL_GNULIB_GETUSERSHELL)/g' \
 	      -e 's/@''GNULIB_GROUP_MEMBER''@/$(GL_GNULIB_GROUP_MEMBER)/g' \
 	      -e 's/@''GNULIB_ISATTY''@/$(GL_GNULIB_ISATTY)/g' \
@@ -2850,6 +2845,7 @@ unistd.h: unistd.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(ARG_NONNULL_H
 	  sed -e 's|@''REPLACE_ACCESS''@|$(REPLACE_ACCESS)|g' \
 	      -e 's|@''REPLACE_CHOWN''@|$(REPLACE_CHOWN)|g' \
 	      -e 's|@''REPLACE_CLOSE''@|$(REPLACE_CLOSE)|g' \
+	      -e 's|@''REPLACE_COPY_FILE_RANGE''@|$(REPLACE_COPY_FILE_RANGE)|g' \
 	      -e 's|@''REPLACE_DUP''@|$(REPLACE_DUP)|g' \
 	      -e 's|@''REPLACE_DUP2''@|$(REPLACE_DUP2)|g' \
 	      -e 's|@''REPLACE_EXECL''@|$(REPLACE_EXECL)|g' \
@@ -2869,6 +2865,7 @@ unistd.h: unistd.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(ARG_NONNULL_H
 	      -e 's|@''REPLACE_GETGROUPS''@|$(REPLACE_GETGROUPS)|g' \
 	      -e 's|@''REPLACE_GETPAGESIZE''@|$(REPLACE_GETPAGESIZE)|g' \
 	      -e 's|@''REPLACE_GETPASS''@|$(REPLACE_GETPASS)|g' \
+	      -e 's|@''REPLACE_GETPASS_FOR_GETPASS_GNU''@|$(REPLACE_GETPASS_FOR_GETPASS_GNU)|g' \
 	      -e 's|@''REPLACE_ISATTY''@|$(REPLACE_ISATTY)|g' \
 	      -e 's|@''REPLACE_LCHOWN''@|$(REPLACE_LCHOWN)|g' \
 	      -e 's|@''REPLACE_LINK''@|$(REPLACE_LINK)|g' \
@@ -2894,9 +2891,9 @@ unistd.h: unistd.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(ARG_NONNULL_H
 	      -e 's|@''UNISTD_H_HAVE_WINSOCK2_H_AND_USE_SOCKETS''@|$(UNISTD_H_HAVE_WINSOCK2_H_AND_USE_SOCKETS)|g' \
 	      -e '/definitions of _GL_FUNCDECL_RPL/r $(CXXDEFS_H)' \
 	      -e '/definition of _GL_ARG_NONNULL/r $(ARG_NONNULL_H)' \
-	      -e '/definition of _GL_WARN_ON_USE/r $(WARN_ON_USE_H)'; \
-	} > $@-t && \
-	mv $@-t $@
+	      -e '/definition of _GL_WARN_ON_USE/r $(WARN_ON_USE_H)' \
+	      > $@-t
+	$(AM_V_at)mv $@-t $@
 MOSTLYCLEANFILES += unistd.h unistd.h-t
 
 EXTRA_DIST += unistd.in.h
@@ -2916,11 +2913,8 @@ EXTRA_DIST += unistd--.h unistd-safer.h
 BUILT_SOURCES += $(LIBUNISTRING_UNISTR_H)
 
 unistr.h: unistr.in.h
-	$(AM_V_GEN)rm -f $@-t $@ && \
-	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
-	  cat $(srcdir)/unistr.in.h; \
-	} > $@-t && \
-	mv -f $@-t $@
+	$(gl_V_at)$(SED_HEADER_TO_AT_t) $(srcdir)/unistr.in.h
+	$(AM_V_at)mv $@-t $@
 MOSTLYCLEANFILES += unistr.h unistr.h-t
 
 EXTRA_DIST += unistr.in.h
@@ -2948,11 +2942,8 @@ endif
 BUILT_SOURCES += $(LIBUNISTRING_UNITYPES_H)
 
 unitypes.h: unitypes.in.h
-	$(AM_V_GEN)rm -f $@-t $@ && \
-	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
-	  cat $(srcdir)/unitypes.in.h; \
-	} > $@-t && \
-	mv -f $@-t $@
+	$(gl_V_at)$(SED_HEADER_TO_AT_t) $(srcdir)/unitypes.in.h
+	$(AM_V_at)mv $@-t $@
 MOSTLYCLEANFILES += unitypes.h unitypes.h-t
 
 EXTRA_DIST += unitypes.in.h
@@ -2964,11 +2955,8 @@ EXTRA_DIST += unitypes.in.h
 BUILT_SOURCES += $(LIBUNISTRING_UNIWIDTH_H)
 
 uniwidth.h: uniwidth.in.h
-	$(AM_V_GEN)rm -f $@-t $@ && \
-	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
-	  cat $(srcdir)/uniwidth.in.h; \
-	} > $@-t && \
-	mv -f $@-t $@
+	$(gl_V_at)$(SED_HEADER_TO_AT_t) $(srcdir)/uniwidth.in.h
+	$(AM_V_at)mv $@-t $@
 MOSTLYCLEANFILES += uniwidth.h uniwidth.h-t
 
 EXTRA_DIST += localcharset.h uniwidth.in.h
@@ -2981,7 +2969,7 @@ if LIBUNISTRING_COMPILE_UNIWIDTH_WIDTH
 libgreputils_a_SOURCES += uniwidth/width.c
 endif
 
-EXTRA_DIST += uniwidth/cjk.h
+EXTRA_DIST += unictype/bitmap.h uniwidth/cjk.h uniwidth/width0.h uniwidth/width2.h
 
 ## end   gnulib module uniwidth/width
 
@@ -3039,9 +3027,8 @@ BUILT_SOURCES += wchar.h
 # We need the following in order to create <wchar.h> when the system
 # version does not work standalone.
 wchar.h: wchar.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(ARG_NONNULL_H) $(WARN_ON_USE_H)
-	$(AM_V_GEN)rm -f $@-t $@ && \
-	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
-	  sed -e 's|@''GUARD_PREFIX''@|GL|g' \
+	$(gl_V_at)$(SED_HEADER_STDOUT) \
+	      -e 's|@''GUARD_PREFIX''@|GL|g' \
 	      -e 's|@''INCLUDE_NEXT''@|$(INCLUDE_NEXT)|g' \
 	      -e 's|@''PRAGMA_SYSTEM_HEADER''@|@PRAGMA_SYSTEM_HEADER@|g' \
 	      -e 's|@''PRAGMA_COLUMNS''@|@PRAGMA_COLUMNS@|g' \
@@ -3092,6 +3079,7 @@ wchar.h: wchar.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(ARG_NONNULL_H) 
 	      -e 's/@''GNULIB_WCSWIDTH''@/$(GL_GNULIB_WCSWIDTH)/g' \
 	      -e 's/@''GNULIB_WCSFTIME''@/$(GL_GNULIB_WCSFTIME)/g' \
 	      -e 's/@''GNULIB_MDA_WCSDUP''@/$(GL_GNULIB_MDA_WCSDUP)/g' \
+	      -e 's/@''GNULIB_FREE_POSIX''@/$(GL_GNULIB_FREE_POSIX)/g' \
 	      < $(srcdir)/wchar.in.h | \
 	  sed -e 's|@''HAVE_WINT_T''@|$(HAVE_WINT_T)|g' \
 	      -e 's|@''HAVE_BTOWC''@|$(HAVE_BTOWC)|g' \
@@ -3140,6 +3128,7 @@ wchar.h: wchar.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(ARG_NONNULL_H) 
 	  sed -e 's|@''REPLACE_MBSTATE_T''@|$(REPLACE_MBSTATE_T)|g' \
 	      -e 's|@''REPLACE_BTOWC''@|$(REPLACE_BTOWC)|g' \
 	      -e 's|@''REPLACE_WCTOB''@|$(REPLACE_WCTOB)|g' \
+	      -e 's|@''REPLACE_FREE''@|$(REPLACE_FREE)|g' \
 	      -e 's|@''REPLACE_MBSINIT''@|$(REPLACE_MBSINIT)|g' \
 	      -e 's|@''REPLACE_MBRTOWC''@|$(REPLACE_MBRTOWC)|g' \
 	      -e 's|@''REPLACE_MBRLEN''@|$(REPLACE_MBRLEN)|g' \
@@ -3154,9 +3143,9 @@ wchar.h: wchar.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(ARG_NONNULL_H) 
 	      -e 's|@''REPLACE_WCSTOK''@|$(REPLACE_WCSTOK)|g' \
 	      -e '/definitions of _GL_FUNCDECL_RPL/r $(CXXDEFS_H)' \
 	      -e '/definition of _GL_ARG_NONNULL/r $(ARG_NONNULL_H)' \
-	      -e '/definition of _GL_WARN_ON_USE/r $(WARN_ON_USE_H)'; \
-	} > $@-t && \
-	mv $@-t $@
+	      -e '/definition of _GL_WARN_ON_USE/r $(WARN_ON_USE_H)' \
+	      > $@-t
+	$(AM_V_at)mv $@-t $@
 MOSTLYCLEANFILES += wchar.h wchar.h-t
 
 EXTRA_DIST += wchar.in.h
@@ -3165,28 +3154,27 @@ EXTRA_DIST += wchar.in.h
 
 ## begin gnulib module wcrtomb
 
-
-EXTRA_DIST += wcrtomb.c
-
-EXTRA_libgreputils_a_SOURCES += wcrtomb.c
+if GL_COND_OBJ_WCRTOMB
+libgreputils_a_SOURCES += wcrtomb.c
+endif
 
 ## end   gnulib module wcrtomb
 
 ## begin gnulib module wctob
 
-
-EXTRA_DIST += wctob.c
-
-EXTRA_libgreputils_a_SOURCES += wctob.c
+if GL_COND_OBJ_WCTOB
+libgreputils_a_SOURCES += wctob.c
+endif
 
 ## end   gnulib module wctob
 
 ## begin gnulib module wctomb
 
+if GL_COND_OBJ_WCTOMB
+libgreputils_a_SOURCES += wctomb.c
+endif
 
-EXTRA_DIST += wctomb-impl.h wctomb.c
-
-EXTRA_libgreputils_a_SOURCES += wctomb.c
+EXTRA_DIST += wctomb-impl.h
 
 ## end   gnulib module wctomb
 
@@ -3198,9 +3186,8 @@ libgreputils_a_SOURCES += wctype-h.c
 # We need the following in order to create <wctype.h> when the system
 # doesn't have one that works with the given compiler.
 wctype.h: wctype.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(WARN_ON_USE_H)
-	$(AM_V_GEN)rm -f $@-t $@ && \
-	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
-	  sed -e 's|@''GUARD_PREFIX''@|GL|g' \
+	$(gl_V_at)$(SED_HEADER_STDOUT) \
+	      -e 's|@''GUARD_PREFIX''@|GL|g' \
 	      -e 's/@''HAVE_WCTYPE_H''@/$(HAVE_WCTYPE_H)/g' \
 	      -e 's|@''INCLUDE_NEXT''@|$(INCLUDE_NEXT)|g' \
 	      -e 's|@''PRAGMA_SYSTEM_HEADER''@|@PRAGMA_SYSTEM_HEADER@|g' \
@@ -3227,9 +3214,8 @@ wctype.h: wctype.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(WARN_ON_USE_H
 	      -e 's/@''REPLACE_TOWLOWER''@/$(REPLACE_TOWLOWER)/g' \
 	      -e '/definitions of _GL_FUNCDECL_RPL/r $(CXXDEFS_H)' \
 	      -e '/definition of _GL_WARN_ON_USE/r $(WARN_ON_USE_H)' \
-	      < $(srcdir)/wctype.in.h; \
-	} > $@-t && \
-	mv $@-t $@
+	      $(srcdir)/wctype.in.h > $@-t
+	$(AM_V_at)mv $@-t $@
 MOSTLYCLEANFILES += wctype.h wctype.h-t
 
 EXTRA_DIST += wctype.in.h
@@ -3238,64 +3224,67 @@ EXTRA_DIST += wctype.in.h
 
 ## begin gnulib module wcwidth
 
-
-EXTRA_DIST += wcwidth.c
-
-EXTRA_libgreputils_a_SOURCES += wcwidth.c
+if GL_COND_OBJ_WCWIDTH
+libgreputils_a_SOURCES += wcwidth.c
+endif
 
 ## end   gnulib module wcwidth
 
 ## begin gnulib module windows-mutex
 
+if GL_COND_OBJ_WINDOWS_MUTEX
+libgreputils_a_SOURCES += windows-mutex.c
+endif
 
-EXTRA_DIST += windows-initguard.h windows-mutex.c windows-mutex.h
-
-EXTRA_libgreputils_a_SOURCES += windows-mutex.c
+EXTRA_DIST += windows-initguard.h windows-mutex.h
 
 ## end   gnulib module windows-mutex
 
 ## begin gnulib module windows-once
 
+if GL_COND_OBJ_WINDOWS_ONCE
+libgreputils_a_SOURCES += windows-once.c
+endif
 
-EXTRA_DIST += windows-once.c windows-once.h
-
-EXTRA_libgreputils_a_SOURCES += windows-once.c
+EXTRA_DIST += windows-once.h
 
 ## end   gnulib module windows-once
 
 ## begin gnulib module windows-recmutex
 
+if GL_COND_OBJ_WINDOWS_RECMUTEX
+libgreputils_a_SOURCES += windows-recmutex.c
+endif
 
-EXTRA_DIST += windows-initguard.h windows-recmutex.c windows-recmutex.h
-
-EXTRA_libgreputils_a_SOURCES += windows-recmutex.c
+EXTRA_DIST += windows-initguard.h windows-recmutex.h
 
 ## end   gnulib module windows-recmutex
 
 ## begin gnulib module windows-rwlock
 
+if GL_COND_OBJ_WINDOWS_RWLOCK
+libgreputils_a_SOURCES += windows-rwlock.c
+endif
 
-EXTRA_DIST += windows-initguard.h windows-rwlock.c windows-rwlock.h
-
-EXTRA_libgreputils_a_SOURCES += windows-rwlock.c
+EXTRA_DIST += windows-initguard.h windows-rwlock.h
 
 ## end   gnulib module windows-rwlock
 
 ## begin gnulib module wmemchr
 
+if GL_COND_OBJ_WMEMCHR
+libgreputils_a_SOURCES += wmemchr.c
+endif
 
-EXTRA_DIST += wmemchr-impl.h wmemchr.c
-
-EXTRA_libgreputils_a_SOURCES += wmemchr.c
+EXTRA_DIST += wmemchr-impl.h
 
 ## end   gnulib module wmemchr
 
 ## begin gnulib module wmempcpy
 
-
-EXTRA_DIST += wmempcpy.c
-
-EXTRA_libgreputils_a_SOURCES += wmempcpy.c
+if GL_COND_OBJ_WMEMPCPY
+libgreputils_a_SOURCES += wmempcpy.c
+endif
 
 ## end   gnulib module wmempcpy
 
@@ -3356,3 +3345,7 @@ mostlyclean-local: mostlyclean-generic
 	  fi; \
 	done; \
 	:
+distclean-local: distclean-gnulib-libobjs
+distclean-gnulib-libobjs:
+	-rm -f @gl_LIBOBJDEPS@
+maintainer-clean-local: distclean-gnulib-libobjs

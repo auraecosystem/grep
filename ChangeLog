@@ -1,4 +1,637 @@
+2022-09-02  Jim Meyering  <meyering@fb.com>
+
+	version 3.8
+	* NEWS: Record release date.
+
+2022-07-10  Jim Meyering  <meyering@fb.com>
+
+	build: update gnulib to latest
+
+2022-07-09  Jim Meyering  <meyering@fb.com>
+
+	tests: long-pattern-perf: avoid FP failure on unusual systems
+	* tests/long-pattern-perf: Skip this test whenever the base
+	case takes more than 800ms.  See comment for details.
+	Reported by Bruno Haible in
+	https://lists.gnu.org/r/grep-devel/2022-07/msg00004.html
+	https://lists.gnu.org/r/grep-devel/2022-07/msg00006.html
+
+2022-07-03  Jim Meyering  <meyering@fb.com>
+
+	tests: long-pattern-perf: better handle exhausted virtual memory
+	* tests/long-pattern-perf: Don't fail due to a syntax error
+	when one of the subtests exhausts virtual memory. The larger
+	test (with a 2MiB regexp) needs about 870MiB of virtual memory.
+	Require that each timing run exit with status 0, else fail with
+	a framework_failure_. Reported by Bruno Haible in
+	https://lists.gnu.org/r/grep-devel/2022-07/msg00006.html
+
+	tests: note that triple-backref is still not fixed
+	* tests/triple-backref: I noticed that our sole XFAIL is still
+	required, in spite of a glibc comment that bug 11053 is fixed,
+	so confirmed that it no longer evokes an abort, but still fails
+	to produce the expected match.  I.e., this prints nothing:
+	echo a | grep -E '(.?)(.?)(.?)\3\2\1' -- it should print its input.
+
+	tests: do not emit ratio of test durations
+	* tests/hash-collision-perf (ratio): Remove stray diagnostic.
+
+2022-06-30  Jim Meyering  <meyering@fb.com>
+
+	build: update gnulib to latest
+
+	maint: remove reference to gnulib module, alloca
+	* bootstrap.conf (gnulib_modules): Remove alloca; we do not
+	use it directly.
+
+2022-06-29  Jim Meyering  <meyering@fb.com>
+
+	build: add parentheses to placate clang-14
+	* src/dfasearch.c (regex_compile): Parenthesize to avoid
+	this warning:
+	  dfasearch.c:154:43: error: operator '?:' has lower precedence
+	  than '|'; '|' will be evaluated first
+	  [-Werror,-Wbitwise-conditional-parentheses]
+
+2022-06-24  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: fix regex compilation memory leaks
+	Problem reported by Jim Meyering in:
+	https://lists.gnu.org/r/grep-devel/2022-06/msg00012.html
+	* src/dfasearch.c (regex_compile): Fix memory leaks when SYNTAX_ONLY.
+
+2022-06-08  Jim Meyering  <meyering@fb.com>
+
+	build: update gnulib to latest
+
+	maint: stop using obsolete iswctype gnulib module
+	* bootstrap.conf (gnulib_modules): Remove iswctype, an unused and obsolete module.
+
+2022-06-06  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: don’t diagnose "grep '\-c'"
+	* src/grep.c (main): Skip past leading backslash of a pattern that
+	begins with "\-".  Inspired by a remark by Bruno Haible in:
+	https://lists.gnu.org/r/bug-gnulib/2022-06/msg00022.html
+
+2022-06-04  Paul Eggert  <eggert@cs.ucla.edu>
+
+	doc: document \] and \}
+	* doc/grep.texi (Special Backslash Expressions)
+	(Problematic Expressions): Document that grep supports
+	\] and \} as extensions to POSIX.
+
+	build: update gnulib submodule to latest
+
+2022-06-03  Paul Eggert  <eggert@cs.ucla.edu>
+
+	build: update bootstrap to gnulib latest
+
+	build: update gnulib submodule to latest
+
+	maint: spelling fixes
+
+2022-05-31  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: sanity-check GREP_COLOR
+	This patch closes a longstanding security issue with GREP_COLOR that I
+	just noticed, where if the attacker has control over GREP_COLOR's
+	settings the attacker can trash the victim's terminal or have 'grep'
+	generate misleading output.  For example, without the patch
+	the shell command:
+	GREP_COLOR="$(printf '31m\33[2J\33[31')" grep --color=always PATTERN
+	mucks with the screen, leaving behind only the trailing part of
+	the last matching line.  With the patch, this GREP_COLOR is ignored.
+	* src/grep.c (main): Sanity-check GREP_COLOR contents the same way
+	GREP_COLORS values are checked, to not trash the user's terminal.
+	This follows up the recent fix to Bug#55641.
+
+2022-05-29  Jim Meyering  <meyering@fb.com>
+
+	tests: placate syntax-check's sorted-test rule
+	* tests/Makefile.am (TESTS): Insert color-colors in sorted order.
+
+	maint: include fdl.texi in version control, per gnulib module advice
+	* bootstrap.conf (gnulib_modules): Remove fdl.
+	* doc/.gitignore: Do not list fdl.texi
+	* doc/fdl.texi: New file.
+	* cfg.mk (FILTER_LONG_LINES): Add doc/fdl.texi.
+
+	maint: po/POTFILES.in: add src/dfasearch.c to avoid syntax-check failure
+	* po/POTFILES.in: Add src/dfasearch.c.
+
+	build: sync init.sh from gnulib
+
+2022-05-29  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: document --color[=WHEN] more carefully
+
+	tests: new test color-colors
+	* tests/Makefile.am (TESTS): Add it.
+	* tests/color-colors: New file.
+
+	grep: deprecate GREP_COLOR
+	This is to avoid confusion such as that reported by Cholden in:
+	https://bugs.gnu.org/55641
+	* src/grep.c (main): Warn if GREP_COLOR has an effect.
+
+2022-05-24  Paul Eggert  <eggert@cs.ucla.edu>
+
+	maint: fix typo in bug number
+
+	grep: warn about ‘(+x)’ etc.
+	These expressions are not portable and don’t always work as
+	expected, so warn about them.  For example, “grep -E '(+)'”
+	doesn’t act like “grep '\(\+\)'”.
+	* src/dfasearch.c (GEAcompile): Warn about a repetition op at the
+	start of a regular expression or subexpression, except for ‘*’ in
+	BREs which is portable.
+
+	build: update gnulib submodule to latest
+
+2022-05-23  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: warn about stray backslashes
+	This papers over a problem reported by Benno Schulenberg and
+	Tomasz Dziendzielski <https://bugs.gnu.org/39678> involving
+	regular expressions like \a that have unspecified behavior.
+	* src/dfasearch.c (dfawarn): Just output a warning.
+	Don’t exit, as DFA_CONFUSING_BRACKETS_ERROR now
+	does that for us, and we need the ability to warn
+	without exiting to diagnose \a etc.
+	(GEAcompile): Use new dfa options DFA_CONFUSING_BRACKETS_ERROR and
+	DFA_STRAY_BACKSLASH_WARN.
+
+	build: update gnulib submodule to latest
+
+2022-05-22  Paul Eggert  <eggert@cs.ucla.edu>
+
+	doc: document regex corner cases better
+	* doc/grep.texi (Environment Variables)
+	(Fundamental Structure, Character Classes and Bracket Expressions)
+	(Special Backslash Expressions, Back-references and Subexpressions)
+	(Basic vs Extended): Say more precisely what happens with
+	problematic regular expressions.
+	(Problematic Expressions): New section.
+
+2022-05-21  Paul Eggert  <eggert@cs.ucla.edu>
+
+	tests: port to platforms lacking Perl
+	* tests/init.cfg (require_perl_): New function.
+	* tests/big-hole, tests/hash-collision-perf, tests/long-pattern-perf:
+	* tests/many-regex-performance, tests/mb-non-UTF8-performance:
+	Use it.
+
+	build: be more careful about Perl
+	Problem reported by Serge Belyshev for Coreutils (Bug#52844).
+	I observed the same problem with current Grep on Fedora 35
+	without Perl installed.
+	* configure.ac (HAVE_PERL): Rely on latest Gnulib gl_PERL, which
+	sets gl_cv_prog_perl.
+
+	doc: document regex corner cases better
+	* doc/grep.texi (Environment Variables)
+	(Fundamental Structure, Character Classes and Bracket Expressions)
+	(The Backslash Character and Special Expressions)
+	(Back-references and Subexpressions, Basic vs Extended)
+	(Basic vs Extended): Say more precisely what happens with oddball
+	regular expressions.
+
+	grep: assume POSIX.1-2017 for [:space:]
+	* src/dfasearch.c (dfawarn): Always call dfaerror now,
+	regardless of POSIXLY_CORRECT.
+	* tests/warn-char-classes: Omit test of POSIX.1-2008 behavior,
+	since POSIX.1-2017 allows the GNU behavior.
+
+	tests: make spencer1.tests more POSIX-compliant
+	* tests/spencer1.tests: Do not test the regular expression a\x as
+	POSIX says the interpretation of \x is undefined and we may want
+	to warn about it in the future, to allow for future extensions.
+	Instead, test a\\x, a[\]x, and ax.
+
+2022-05-19  Paul Eggert  <eggert@cs.ucla.edu>
+
+	doc: omit -y from grep man page
+	The obsolete -y option has been omitted from --help for a while, and
+	now’s a good time to omit it from the man page too.
+
+2022-05-17  Paul Eggert  <eggert@cs.ucla.edu>
+
+	tests: improve tests of ‘.’
+	* tests/hangul-syllable: Test some encoding errors too.
+
+2022-05-16  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: document -m better
+	* doc/grep.in.1, doc/grep.texi: Document behavior of -m 0 and -m -1.
+	This documents longstanding behavior, and is consistent with
+	how git grep -m will likely behave.
+
+2022-05-14  Paul Eggert  <eggert@cs.ucla.edu>
+
+	maint: spelling fixes
+
+2022-05-13  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: fix bug with . and some Hangul Syllables
+	* NEWS: Mention the fix, which comes from the recent Gnulib update.
+	* tests/hangul-syllable: New file.
+	* tests/Makefile.am (TESTS): Add it.
+
+	build: update gnulib submodule to latest
+
+2022-04-02  Jim Meyering  <meyering@fb.com>
+
+	build: update gnulib to latest, for glob improvements
+
+2022-03-22  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: Remove recent PCRE2 bug workarounds
+	* src/pcresearch.c (Pcompile): Remove recent workaround for PCRE2
+	bugs; apparently it’s not needed.  This reverts back to where
+	things were before today.  Suggested by Carlo Arenas in:
+	https://lists.gnu.org/r/grep-devel/2022-03/msg00006.html
+
+	grep: work around another potential PCRE2 bug
+	Potential problem reported by René Scharfe in:
+	https://lore.kernel.org/git/99b0adb6-26ba-293c-3a8f-679f59e7cb4d@web.de/T
+	* src/pcresearch.c (Pcompile): Mimic git grep’s workarounds
+	for PCRE2 bugs more closely; this is more conservative.
+
+	grep: work around PCRE2 bug 2642
+	Problem reported by Carlo Arenas in:
+	https://lists.gnu.org/r/grep-devel/2022-03/msg00004.html
+	* src/pcresearch.c (Pcompile) [PCRE2_MATCH_INVALID_UTF]:
+	In PCRE2 10.35 and earlier, disable start optimization if doing a
+	caseless UTF-8 search.
+
+	Pacify GCC 11.2.0
+	* configure.ac: Re-disable -Wstack-protector, to pacify GCC Ubuntu
+	11.2.0-7ubuntu2 x86-64 on knuth_morris_pratt and
+	knuth_morris_pratt_multibyte.
+
+2022-03-20  Jim Meyering  <meyering@fb.com>
+
+	build: update gnulib to latest, for bootstrap long-line fix
+
+	build: Re-disable -Winline
+	* configure.ac: Re-disable -Winline. It is still needed.
+
+	build: update gnulib to latest; also bootstrap and init.sh
+
+	build: avoid build failure on systems that must compile regexec.c
+	With --enable-gcc-warnings, compiling regexec.h would fail due to
+	its use of a single variable-length array.
+	* configure.ac: Add -Wvla to the list of disabled warnings and
+	remove most of the others, that no longer need to be disabled.
+
+	grep: very long lines no longer evoke unwarranted "memory exhausted"
+	When calling xpalloc (NULL, &n, incr_min, alloc_max, 1) with
+	nontrivial ALLOC_MAX, this must hold: N + INCR_MIN <= ALLOC_MAX.
+	With a very long line, it did not, and grep would mistakenly fail
+	with a report of "memory exhausted".
+	* src/grep.c (fillbuf): When using nontrivial ALLOC_MAX, ensure it
+	is at least N+INCR_MIN.
+	* tests/fillbuf-long-line: New file, to test for this.
+	* tests/Makefile.am (TESTS): Add its name.
+
+2022-02-27  Paul Eggert  <eggert@cs.ucla.edu>
+
+	doc: more on leading ‘-’
+	* doc/grep.texi (Usage): Expand on leading ‘-’ problems (Bug#54174).
+
+2022-02-24  Paul Eggert  <eggert@cs.ucla.edu>
+
+	doc: mention issues with set -e
+	* doc/grep.texi (Usage, Performance): Mention early exits (Bug#54035).
+
+2022-02-15  Ulrich Eckhardt  <ulrich.eckhardt@base-42.de>  (tiny change)
+
+	grep: Remove comment
+	The comment was introduced in 500f07fee50ab16a70fe2946b85318020c7f4017 and
+	relates to absent cleanup code at the end of main(), not the code following
+	it. It relates to fallible flushing of stdout and related error handling,
+	but even then it doesn't explain much.
+
+2022-02-15  Ulrich Eckhardt  <ulrich.eckhardt@base-42.de>
+
+	tests: remove redundant test
+	* tests/empty: Test #4 is identical to test #1. Remove it.
+
+2022-01-02  Ondřej Fiala  <temp.xanomes@volny.cz>  (tiny change)
+
+	bug#52958: [PATCH] doc: fix man page syntax errors
+	* doc/grep.in.1: Fix syntax errors.
+	Introduced by commit v3.6-5-g91ce9cd.
+
+2022-01-01  Jim Meyering  <meyering@fb.com>
+
+	maint: make update-copyright
+
+	build: update gnulib to latest; also bootstrap and init.sh
+
+2021-12-26  Jim Meyering  <meyering@fb.com>
+
+	build: disable some expensive compiler warnings by default
+	* configure.ac (gl_GCC_VERSION_IFELSE): Copy from coreutils.
+	(gcc-warnings): Update from coreutils.
+
+2021-12-24  Jim Meyering  <meyering@fb.com>
+
+	maint: avoid new syntax-check failures
+	* cfg.mk (local-checks-to-skip): Add sc_indent, to skip it.
+	Otherwise, "make syntax-check" would fail.
+	(_gl_TS_unmarked_extern_functions): Add imbrlen to the list.
+
+2021-12-20  Helge Kreutzmann  <debian@helgefjell.de>
+
+	doc: --invert-match is described "above" --count, not below
+	* doc/grep.in.1 (--count): s/below/above/.
+
+2021-11-24  Paul Eggert  <eggert@cs.ucla.edu>
+
+	build: update gnulib submodule to latest
+
+2021-11-23  Paul Eggert  <eggert@cs.ucla.edu>
+
+	tests: skip surrogate-search test on Cygwin
+	Cygwin does not support surrogate-pair search strings, so
+	skip the test there (Bug#27555).
+	* tests/Makefile.am (TESTS): Add surrogate-search.
+	* tests/surrogate-pair: Remove surrogate-search test,
+	which is now done by surrogate-search.
+	* tests/surrogate-search: New test, which is skipped on Cygwin.
+
+2021-11-22  Paul Eggert  <eggert@cs.ucla.edu>
+
+	doc: update to match recent "Binary files" change
+	Suggested by Duncan Roe (Bug#51860#25).
+
+2021-11-20  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: -s does not suppress “binary file matches”
+	* src/grep.c (grep): Implement this.
+	* tests/binary-file-matches: Add regression test.
+
+	doc: "binary file matches" -> stderr [Bug#51860]
+
+2021-11-14  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: port to PCRE2 10.20
+	* src/pcresearch.c (PCRE2_SIZE_MAX): Default to SIZE_MAX.
+
+	grep: fix minor -P memory leak
+	* src/pcresearch.c (Pcompile): Free ccontext when no longer needed.
+
+	grep: use ximalloc, not xcalloc
+	* src/pcresearch.c (Pcompile): Use ximalloc, not xcalloc,
+	and explicitly initialize the two slots that should be null.
+	This is more likely to catch future errors if we use valgrind.
+
+	grep: improve memory exhaustion checking with -P
+	* src/pcresearch.c (struct pcre_comp): New member gcontext.
+	(private_malloc, private_free): New functions.
+	(jit_exec): It is OK to call pcre2_jit_stack_free (NULL), so simplify.
+	Use gcontext for allocation.  Check for pcre2_jit_stack_create
+	failure, since sljit bypasses private_malloc.  Redo to avoid two
+	‘continue’s.
+	(Pcompile): Create and use gcontext.
+
+	grep: simplify JIT setup
+	* src/pcresearch.c (Pcompile): Simplify since ‘die’ cannot return.
+
+	grep: use PCRE2_EXTRA_MATCH_LINE
+	* src/pcresearch.c (Pcompile): If available, use
+	PCRE2_EXTRA_MATCH_LINE instead of doing it by hand.
+	Simplify construction of substitute regular expression.
+
+	grep: prefer signed integers
+	* src/pcresearch.c (struct pcre_comp, jit_exec, Pexecute):
+	Prefer signed to unsigned types when either will do.
+	(jit_exec): Use INT_MULTIPLY_WRAPV instead of doing it by hand.
+	(Pexecute): Omit line length limit test that is no longer
+	needed with PCRE2.
+
+	grep: speed up, fix bad-UTF8 check with -P
+	* src/pcresearch.c (bad_utf8_from_pcre2): New function.  Fix bug
+	where PCRE2_ERROR_UTF8_ERR1 was not treated as an encoding error.
+	Improve performance when PCRE2_MATCH_INVALID_UTF is defined.
+	(Pexecute): Use it.
+
+	grep: improve pcre2_get_error_message comments
+	* src/pcresearch.c (Pcompile): Improve comments re
+	pcre2_get_error_message buffer.
+
+	grep: Don’t limit jitstack_max to INT_MAX
+	* src/pcresearch.c (jit_exec): Remove arbitrary INT_MAX limit on JIT
+	stack size.
+
+	maint: minor rewording and reindenting
+
+2021-11-14  Carlo Marcelo Arenas Belón  <carenas@gmail.com>
+
+	grep: migrate to pcre2
+	Mostly a bug by bug translation of the original code to the PCRE2 API.
+	Code still could do with some optimizations but should be good as a
+	starting point.
+
+	The API changes the sign of some types and therefore some ugly casts
+	were needed, some of the changes are just to make sure all variables
+	fit into the newer types better.
+
+	Includes backward compatibility and could be made to build all the way
+	to 10.00, but assumes a recent enough version and has been tested with
+	10.23 (from CentOS 7, the oldest).
+
+	Performance seems equivalent, and it also seems functionally complete.
+
+	* m4/pcre.m4 (gl_FUNC_PCRE): Check for PCRE2, not the original PCRE.
+	* src/pcresearch.c (struct pcre_comp, jit_exec)
+	(Pcompile, Pexecute):
+	Use PCRE2, not the original PCRE.
+	* tests/filename-lineno.pl: Adjust to match PCRE2 diagnostics.
+
+2021-11-11  Paul Eggert  <eggert@cs.ucla.edu>
+
+	maint: update README-prereq for Gperf, Rsync, Wget
+
+2021-11-10  Paul Eggert  <eggert@cs.ucla.edu>
+
+	tests: fix pcre test typo
+	* tests/pcre-context: Initialize ‘fail’ earlier.
+
+2021-11-10  Carlo Marcelo Arenas Belón  <carenas@gmail.com>
+
+	tests: fix test logic for pcre-context
+	Included in the original bug #20957, but corrupted somehow in
+	transit as the required NUL characters are missing.
+
+	Add a simpler version of the test case that uses plain characters
+	and match the -z data and output to show the equivalence.
+
+	Note the output is still not correct as it is missing the expected
+	LF characters, but a full fix will have to wait until PCRE2.
+
+	Fixes Bug#51735.
+
+2021-11-09  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: work around PCRE bug
+	Problem reported by Carlo Marcelo Arenas Belón (Bug#51710).
+	* src/pcresearch.c (jit_exec): Don’t attempt to grow the JIT stack
+	over INT_MAX - 8 * 1024.
+
+	build: update gnulib submodule to latest
+
+2021-10-30  Paul Eggert  <eggert@cs.ucla.edu>
+
+	maint: modernize README-{hacking,prereq}
+
+2021-10-28  Paul Eggert  <eggert@cs.ucla.edu>
+
+	build: update gnulib submodule to latest
+
+2021-08-27  Paul Eggert  <eggert@cs.ucla.edu>
+
+	doc: document interval expression limitations
+	* doc/grep.texi (Basic vs Extended, Performance):
+	Document limitations of interval expressions (Bug#44538).
+
+	build: update gnulib submodule to latest
+	* src/system.h: Update decls to match current Gnulib.
+
+2021-08-25  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: prefer signed to unsigned integers
+	This improves runtime checking for integer overflow when compiling
+	with gcc -fsanitize=undefined and the like.  It also avoids
+	the need for some integer casts, which can be error-prone.
+	* bootstrap.conf (gnulib_modules): Add idx.
+	* src/dfasearch.c (struct dfa_comp, kwsmusts):
+	(possible_backrefs_in_pattern, regex_compile, GEAcompile)
+	(EGexecute):
+	* src/grep.c (struct patloc, patlocs_allocated, patlocs_used)
+	(n_patterns, update_patterns, pattern_file_name, poison_len)
+	(asan_poison, fwrite_errno, compile_fp_t, execute_fp_t)
+	(buf_has_encoding_errors, buf_has_nulls, file_must_have_nulls)
+	(bufalloc, pagesize, all_zeros, fillbuf, nlscan)
+	(print_line_head, print_line_middle, print_line_tail, grepbuf)
+	(grep, contains_encoding_error, fgrep_icase_available)
+	(fgrep_icase_charlen, fgrep_to_grep_pattern, try_fgrep_pattern)
+	(main):
+	* src/kwsearch.c (struct kwsearch, Fcompile, Fexecute):
+	* src/kwset.c (struct trie, struct kwset, kwsalloc, kwsincr)
+	(kwswords, treefails, memchr_kwset, acexec_trans, kwsexec)
+	(treedelta, kwsprep, bm_delta2_search, bmexec_trans, bmexec)
+	(acexec):
+	* src/kwset.h (struct kwsmatch):
+	* src/pcresearch.c (Pcompile, Pexecute):
+	* src/search.h (mb_clen):
+	* src/searchutils.c (kwsinit, mb_goback, wordchars_count)
+	(wordchars_size, wordchar_next, wordchar_prev):
+	Prefer idx_t to size_t or ptrdiff_t for nonnegative sizes,
+	and prefer ptrdiff_t to size_t for sizes plus error values.
+	* src/grep.c (uword_size): New constant, used for signed
+	size calculations.
+	(totalnl, add_count, totalcc, print_offset, print_line_head, grep):
+	Prefer intmax_t to uintmax_t for wide integer calculations.
+	(fgrep_icase_charlen): Prefer ptrdiff_t to int for size offsets.
+	* src/grep.h: Include idx.h.
+	* src/search.h (imbrlen): New function, like mbrlen except
+	with idx_t and ptrdiff_t.
+
+2021-08-24  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: scan back thru UTF-8 a bit faster
+	* src/searchutils.c (mb_goback): When scanning backward through
+	UTF-8, check the length implied by the putative byte 1 before
+	bothering to invoke mb_clen.  This length check also lets us use
+	mbrlen directly rather than calling mb_clen, which would
+	eventually defer to mbrlen anyway.
+
+	grep: tweak mb_goback performance
+	* src/searchutils.c (mb_goback): Set *MBCLEN only in
+	non-UTF-8 encodings, since that’s the only time it’s needed,
+	and this lets us see more clearly that the UTF-8 clen value
+	is not useful to the caller.
+
+	grep: tweak wordchar_prev performance
+	* src/searchutils.c (wordchar_prev): Tweak performance by using a
+	value already in a local variable rather than consulting a table.
+
+	grep: tweak mb_goback and comment it better
+	* src/searchutils.c (mb_goback): Improve the comment to better
+	describe this confusing function.  And remove an unnecessary
+	test of cur vs end.
+
+	grep: omit unused maxd member
+	* src/kwset.c (struct kwset.maxd): Remove.  All uses removed.
+
+	grep: avoid some size_t casts
+	This helps move the code away from unsigned types.
+	* src/grep.c (buf_has_encoding_errors, contains_encoding_error):
+	* src/searchutils.c (mb_goback):
+	Compare to MB_LEN_MAX, not to (size_t) -2.  This is a bit safer
+	anyway, as grep relies on MB_LEN_MAX limits elsewhere.
+	* src/search.h (mb_clen): Compare to -2 before converting to size_t.
+
+2021-08-22  Jim Meyering  <meyering@fb.com>
+
+	tests: mb-non-UTF8-perf-Fw: use head rather than sed
+	* tests/mb-non-UTF8-perf-Fw: Use head -n 10000000 rather than the
+	work-alike sed command.  This provides a 4x speedup and saves 0.5s.
+	* tests/null-byte: Likewise.
+
+2021-08-21  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: avoid sticky problem with ‘-f - -f -’
+	Inspired by bug#50129 even though this is a different bug.
+	* src/grep.c (main): For ‘-f -’, use clearerr (stdin) after
+	reading, so that ‘grep -f - -f -’ reads stdin twice even
+	when stdin is a tty.  Also, for ‘-f FILE’, report any
+	I/O error when closing FILE.
+
+2021-08-18  Paul Eggert  <eggert@cs.ucla.edu>
+
+	tests: port mb-non-UTF8-perf-Fw to strict POSIX
+	* tests/mb-non-UTF8-perf-Fw: Prefer ‘sed 10q’ to ‘head -10’,
+	which doesn’t conform to POSIX.
+
+	grep: djb2 correction
+	Problem reported by Alex Murray (bug#50093).
+	* src/grep.c (hash_pattern): Use a nonzero initial value.
+
+2021-08-16  Paul Eggert  <eggert@cs.ucla.edu>
+
+	doc: modernize portability advice
+	* doc/grep.texi (General Output Control, Basic vs Extended):
+	No need to complicate the portability advice by talking about 7th
+	edition grep, since it’s no longer a practical porting target.
+	Instead, mention only Solaris 10 grep, the last practical holdout
+	of somewhat-traditional grep.
+
+	egrep, fgrep: now obsolete
+	* NEWS: Mention this (see bug#49996).
+	* doc/Makefile.am (egrep.1 fgrep.1): Remove.  All uses removed.
+	* doc/grep.in.1, doc/grep.texi (grep Programs):
+	Remove documentation for egrep, fgrep.
+	* doc/grep.texi (Usage): Add FAQ for egrep and fgrep.
+	* src/Makefile.am (shell_does_substrings): Substitute for ${0##*/},
+	not for ${0%/\*} (which was not being used anyway).
+	* src/egrep.sh: Issue an obsolescence warning.
+	* tests/fedora: Use "grep -F" instead of "fgrep" in diagnostics,
+	as this tests "grep -F" not "fgrep".
+
+2021-08-14  Paul Eggert  <eggert@cs.ucla.edu>
+
+	doc: update cites and authors
+
 2021-08-14  Jim Meyering  <meyering@fb.com>
+
+	maint: post-release administrivia
+	* NEWS: Add header line for next release.
+	* .prev-version: Record previous version.
+	* cfg.mk (old_NEWS_hash): Auto-update.
 
 	version 3.7
 	* NEWS: Record release date.

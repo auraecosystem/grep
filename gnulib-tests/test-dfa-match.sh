@@ -1,7 +1,7 @@
 #!/bin/sh
 # This would fail with grep-2.21's dfa.c.
 
-# Copyright 2014-2021 Free Software Foundation, Inc.
+# Copyright 2014-2022 Free Software Foundation, Inc.
 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -41,5 +41,16 @@ compare /dev/null out || fail=1
 in=$(printf "bb\nbb")
 $timeout_10 ${CHECKER} test-dfa-match-aux a "$in" 1 > out || fail=1
 compare /dev/null out || fail=1
+
+# If the platform supports U+00E9 LATIN SMALL LETTER E WITH ACUTE,
+# test U+D45C HANGUL SYLLABLE PYO.
+U_00E9=$(printf '\303\251\n')
+U_D45C=$(printf '\355\221\234\n')
+if testout=$(LC_ALL=en_US.UTF-8 $CHECKER test-dfa-match-aux '^.$' "$U_00E9") &&
+   test "$testout" = 2
+then
+  testout=$(LC_ALL=en_US.UTF-8 $CHECKER test-dfa-match-aux '^.$' "$U_D45C") &&
+  test "$testout" = 3 || fail=1
+fi
 
 Exit $fail

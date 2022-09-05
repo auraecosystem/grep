@@ -1,9 +1,9 @@
 /* Set the current locale.  -*- coding: utf-8 -*-
-   Copyright (C) 2009, 2011-2021 Free Software Foundation, Inc.
+   Copyright (C) 2009, 2011-2022 Free Software Foundation, Inc.
 
    This file is free software: you can redistribute it and/or modify
    it under the terms of the GNU Lesser General Public License as
-   published by the Free Software Foundation; either version 3 of the
+   published by the Free Software Foundation, either version 3 of the
    License, or (at your option) any later version.
 
    This file is distributed in the hope that it will be useful,
@@ -1084,7 +1084,7 @@ static char const locales_with_principal_territory[][6 + 1] =
     "tl_PH",    /* Tagalog      Philippines */
     "to_TO",    /* Tonga        Tonga */
     "tpi_PG",   /* Tok Pisin    Papua New Guinea */
-    "tr_TR",    /* Turkish      Turkey */
+    "tr_TR",    /* Turkish      Türkiye */
     "tum_MW",   /* Tumbuka      Malawi */
     "ug_CN",    /* Uighur       China */
     "uk_UA",    /* Ukrainian    Ukraine */
@@ -1339,7 +1339,7 @@ static char const locales_with_principal_language[][6 + 1] =
     "tk_TM",    /* Turkmen      Turkmenistan */
     "ar_TN",    /* Arabic       Tunisia */
     "to_TO",    /* Tonga        Tonga */
-    "tr_TR",    /* Turkish      Turkey */
+    "tr_TR",    /* Turkish      Türkiye */
     "zh_TW",    /* Chinese      Taiwan */
     "sw_TZ",    /* Swahili      Tanzania */
     "uk_UA",    /* Ukrainian    Ukraine */

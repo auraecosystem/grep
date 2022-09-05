@@ -1,10 +1,10 @@
 /* Traverse a file hierarchy.
 
-   Copyright (C) 2004-2021 Free Software Foundation, Inc.
+   Copyright (C) 2004-2022 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 3 of the License, or
+   the Free Software Foundation, either version 3 of the License, or
    (at your option) any later version.
 
    This program is distributed in the hope that it will be useful,
@@ -813,13 +813,13 @@ leaf_optimization (FTSENT const *p, int dir_fd)
 
 #else
 static bool
-dirent_inode_sort_may_be_useful (FTSENT const *p _GL_UNUSED,
-                                 int dir_fd _GL_UNUSED)
+dirent_inode_sort_may_be_useful (_GL_UNUSED FTSENT const *p,
+                                 _GL_UNUSED int dir_fd)
 {
   return true;
 }
 static enum leaf_optimization
-leaf_optimization (FTSENT const *p _GL_UNUSED, int dir_fd _GL_UNUSED)
+leaf_optimization (_GL_UNUSED FTSENT const *p, _GL_UNUSED int dir_fd)
 {
   return NO_LEAF_OPTIMIZATION;
 }
@@ -1093,7 +1093,7 @@ cd_dot_dot:
  */
 /* ARGSUSED */
 int
-fts_set(FTS *sp _GL_UNUSED, FTSENT *p, int instr)
+fts_set(_GL_UNUSED FTS *sp, FTSENT *p, int instr)
 {
         if (instr != 0 && instr != FTS_AGAIN && instr != FTS_FOLLOW &&
             instr != FTS_NOINSTR && instr != FTS_SKIP) {
@@ -1766,7 +1766,8 @@ fts_stat(FTS *sp, register FTSENT *p, bool follow)
 {
         struct stat *sbp = p->fts_statp;
 
-        if (p->fts_level == FTS_ROOTLEVEL && ISSET(FTS_COMFOLLOW))
+        if (ISSET (FTS_LOGICAL)
+            || (ISSET (FTS_COMFOLLOW) && p->fts_level == FTS_ROOTLEVEL))
                 follow = true;
 
         /*
@@ -1774,22 +1775,21 @@ fts_stat(FTS *sp, register FTSENT *p, bool follow)
          * a stat(2).  If that fails, check for a non-existent symlink.  If
          * fail, set the errno from the stat call.
          */
-        if (ISSET(FTS_LOGICAL) || follow) {
-                if (stat(p->fts_accpath, sbp)) {
-                        if (errno == ENOENT
-                            && lstat(p->fts_accpath, sbp) == 0) {
-                                __set_errno (0);
-                                return (FTS_SLNONE);
-                        }
-                        p->fts_errno = errno;
-                        goto err;
-                }
-        } else if (fstatat(sp->fts_cwd_fd, p->fts_accpath, sbp,
-                           AT_SYMLINK_NOFOLLOW)) {
-                p->fts_errno = errno;
-err:            memset(sbp, 0, sizeof(struct stat));
-                return (FTS_NS);
-        }
+        int flags = follow ? 0 : AT_SYMLINK_NOFOLLOW;
+        if (fstatat (sp->fts_cwd_fd, p->fts_accpath, sbp, flags) < 0)
+          {
+            if (follow && errno == ENOENT
+                && 0 <= fstatat (sp->fts_cwd_fd, p->fts_accpath, sbp,
+                                 AT_SYMLINK_NOFOLLOW))
+              {
+                __set_errno (0);
+                return FTS_SLNONE;
+              }
+
+            p->fts_errno = errno;
+            memset (sbp, 0, sizeof *sbp);
+            return FTS_NS;
+          }
 
         if (S_ISDIR(sbp->st_mode)) {
                 if (ISDOT(p->fts_name)) {
