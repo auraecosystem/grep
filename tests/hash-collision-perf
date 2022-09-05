@@ -2,7 +2,7 @@
 # Test for this performance regression:
 # grep-3.5 and 3.6 would take O(N^2) time for some sets of input regexps.
 
-# Copyright 2020-2021 Free Software Foundation, Inc.
+# Copyright 2020-2022 Free Software Foundation, Inc.
 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -20,6 +20,8 @@
 . "${srcdir=.}/init.sh"; path_prepend_ ../src
 
 fail=0
+
+require_perl_
 
 : > empty || framework_failure_
 
@@ -42,7 +44,6 @@ large_ms=$(LC_ALL=C user_time_ 1 grep --file=in empty) || fail=1
 # Deliberately recording in an unused variable so it
 # shows up in set -x output, in case this test fails.
 ratio=$(expr "$large_ms" / "$small_ms")
-warn_ ratio=$ratio
 
 # The duration of the latter run must be no more than 10 times
 # that of the former.  Using recent versions prior to this fix,

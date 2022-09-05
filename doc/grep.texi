@@ -30,7 +30,7 @@
 @copying
 This manual is for @command{grep}, a pattern matching engine.
 
-Copyright @copyright{} 1999--2002, 2005, 2008--2021 Free Software Foundation,
+Copyright @copyright{} 1999--2002, 2005, 2008--2022 Free Software Foundation,
 Inc.
 
 @quotation
@@ -265,8 +265,7 @@ begin and end with word constituents, it differs from surrounding a
 regular expression with @samp{\<} and @samp{\>}.  For example, although
 @samp{grep -w @@} matches a line containing only @samp{@@}, @samp{grep
 '\<@@\>'} cannot match any line because @samp{@@} is not a
-word constituent.  @xref{The Backslash Character and Special
-Expressions}.
+word constituent.  @xref{Special Backslash Expressions}.
 
 @item -x
 @itemx --line-regexp
@@ -301,7 +300,7 @@ count non-matching lines.
 @opindex --color
 @opindex --colour
 @cindex highlight, color, colour
-Surround the matched (non-empty) strings, matching lines, context lines,
+Surround matched non-empty strings, matching lines, context lines,
 file names, line numbers, byte offsets, and separators (for fields and
 groups of context lines) with escape sequences to display them in color
 on the terminal.
@@ -309,11 +308,14 @@ The colors are defined by the environment variable @env{GREP_COLORS}
 and default to @samp{ms=01;31:mc=01;31:sl=:cx=:fn=35:ln=32:bn=32:se=36}
 for bold red matched text, magenta file names, green line numbers,
 green byte offsets, cyan separators, and default terminal colors otherwise.
-The deprecated environment variable @env{GREP_COLOR} is still supported,
-but its setting does not have priority;
-it defaults to @samp{01;31} (bold red)
-which only covers the color for matched text.
-@var{WHEN} is @samp{never}, @samp{always}, or @samp{auto}.
+@xref{Environment Variables}.
+
+@var{WHEN} is @samp{always} to use colors, @samp{never} to not use
+colors, or @samp{auto} to use colors if standard output is associated
+with a terminal device and the @env{TERM} environment variable's value
+suggests that the terminal supports colors.
+Plain @option{--color} is treated like @option{--color=auto};
+if no @option{--color} option is given, the default is @option{--color=never}.
 
 @item -L
 @itemx --files-without-match
@@ -341,6 +343,10 @@ Scanning each input file stops upon first match.
 @opindex --max-count
 @cindex max-count
 Stop after the first @var{num} selected lines.
+If @var{num} is zero, @command{grep} stops right away without reading input.
+A @var{num} of @minus{}1 is treated as infinity and @command{grep}
+does not stop; this is the default.
+
 If the input is standard input from a regular file,
 and @var{num} selected lines are output,
 @command{grep} ensures that the standard input is positioned
@@ -381,7 +387,7 @@ When the @option{-v} or @option{--invert-match} option is also used,
 @opindex -o
 @opindex --only-matching
 @cindex only matching
-Print only the matched (non-empty) parts of matching lines,
+Print only the matched non-empty parts of matching lines,
 with each such part on a separate output line.
 Output lines use the same delimiters as input, and delimiters are null
 bytes if @option{-z} (@option{--null-data}) is also used (@pxref{Other
@@ -398,6 +404,9 @@ Quiet; do not write anything to standard output.
 Exit immediately with zero status if any match is found,
 even if an error was detected.
 Also see the @option{-s} or @option{--no-messages} option.
+Portability note: Solaris 10 @command{grep} lacks @option{-q};
+portable shell scripts typically can redirect standard output to
+@file{/dev/null} instead of using @option{-q}.
 (@option{-q} is specified by POSIX.)
 
 @item -s
@@ -406,18 +415,6 @@ Also see the @option{-s} or @option{--no-messages} option.
 @opindex --no-messages
 @cindex suppress error messages
 Suppress error messages about nonexistent or unreadable files.
-Portability note:
-unlike GNU @command{grep},
-7th Edition Unix @command{grep} did not conform to POSIX,
-because it lacked @option{-q}
-and its @option{-s} option behaved like
-GNU @command{grep}'s @option{-q} option.@footnote{Of course, 7th Edition
-Unix predated POSIX by several years!}
-USG-style @command{grep} also lacked @option{-q}
-but its @option{-s} option behaved like GNU @command{grep}'s.
-Portable shell scripts should avoid both
-@option{-q} and @option{-s} and should redirect
-standard and error output to @file{/dev/null} instead.
 (@option{-s} is specified by POSIX.)
 
 @end table
@@ -624,7 +621,7 @@ By default, @var{type} is @samp{binary}, and @command{grep}
 suppresses output after null input binary data is discovered,
 and suppresses output lines that contain improperly encoded data.
 When some output is suppressed, @command{grep} follows any output
-with a one-line message saying that a binary file matches.
+with a message to standard error saying that a binary file matches.
 
 If @var{type} is @samp{without-match},
 when @command{grep} discovers null input binary data
@@ -822,8 +819,10 @@ this option can be used with commands like
 @node Environment Variables
 @section Environment Variables
 
-The behavior of @command{grep} is affected
-by the following environment variables.
+The behavior of @command{grep} is affected by several environment
+variables, the most important of which control the locale, which
+specifies how @command{grep} interprets characters in its patterns and
+data.
 
 @vindex LANGUAGE @r{environment variable}
 @vindex LC_ALL @r{environment variable}
@@ -835,8 +834,8 @@ is specified by examining the three environment variables
 in that order.
 The first of these variables that is set specifies the locale.
 For example, if @env{LC_ALL} is not set,
-but @env{LC_COLLATE} is set to @samp{pt_BR},
-then the Brazilian Portuguese locale is used
+but @env{LC_COLLATE} is set to @samp{pt_BR.UTF-8},
+then a Brazilian Portuguese locale is used
 for the @env{LC_COLLATE} category.
 As a special case for @env{LC_MESSAGES} only, the environment variable
 @env{LANGUAGE} can contain a colon-separated list of languages that
@@ -848,7 +847,34 @@ or if @command{grep} was not compiled
 with national language support (NLS).
 The shell command @code{locale -a} lists locales that are currently available.
 
-Many of the environment variables in the following list let you
+@cindex environment variables
+The following environment variables affect the behavior of @command{grep}.
+
+@table @env
+
+@item GREP_COLOR
+@vindex GREP_COLOR @r{environment variable}
+@cindex highlight markers
+This obsolescent variable interacts with @env{GREP_COLORS}
+confusingly, and @command{grep} warns if it is set and is not
+overridden by @env{GREP_COLORS}.  Instead of
+@samp{GREP_COLOR='@var{color}'}, you can use
+@samp{GREP_COLORS='mt=@var{color}'}.
+
+@item GREP_COLORS
+@vindex GREP_COLORS @r{environment variable}
+@cindex highlight markers
+This variable specifies the colors and other attributes
+used to highlight various parts of the output.
+Its value is a colon-separated list of @code{terminfo} capabilities
+that defaults to @samp{ms=01;31:mc=01;31:sl=:cx=:fn=35:ln=32:bn=32:se=36}
+with the @samp{rv} and @samp{ne} boolean capabilities omitted (i.e., false).
+The two-letter capability names
+refer to terminal ``capabilities,'' the ability
+of a terminal to highlight text, or change its color, and so on.
+These capabilities are stored in an online database and accessed by
+the @code{terminfo} library.
+Non-empty capability values
 control highlighting using
 Select Graphic Rendition (SGR)
 commands interpreted by the terminal or terminal emulator.
@@ -876,38 +902,6 @@ for 88-color and 256-color modes foreground colors,
 and @samp{48;5;0} to @samp{48;5;255}
 for 88-color and 256-color modes background colors.
 
-The two-letter names used in the @env{GREP_COLORS} environment variable
-(and some of the others) refer to terminal ``capabilities,'' the ability
-of a terminal to highlight text, or change its color, and so on.
-These capabilities are stored in an online database and accessed by
-the @code{terminfo} library.
-
-@cindex environment variables
-
-@table @env
-
-@item GREP_COLOR
-@vindex GREP_COLOR @r{environment variable}
-@cindex highlight markers
-This variable specifies the color used to highlight matched (non-empty) text.
-It is deprecated in favor of @env{GREP_COLORS}, but still supported.
-The @samp{mt}, @samp{ms}, and @samp{mc} capabilities of @env{GREP_COLORS}
-have priority over it.
-It can only specify the color used to highlight
-the matching non-empty text in any matching line
-(a selected line when the @option{-v} command-line option is omitted,
-or a context line when @option{-v} is specified).
-The default is @samp{01;31},
-which means a bold red foreground text on the terminal's default background.
-
-@item GREP_COLORS
-@vindex GREP_COLORS @r{environment variable}
-@cindex highlight markers
-This variable specifies the colors and other attributes
-used to highlight various parts of the output.
-Its value is a colon-separated list of @code{terminfo} capabilities
-that defaults to @samp{ms=01;31:mc=01;31:sl=:cx=:fn=35:ln=32:bn=32:se=36}
-with the @samp{rv} and @samp{ne} boolean capabilities omitted (i.e., false).
 Supported capabilities are as follows.
 
 @table @code
@@ -1018,7 +1012,7 @@ They are omitted (i.e., false) by default and become true when specified.
 @cindex national language support
 @cindex NLS
 These variables specify the locale for the @env{LC_COLLATE} category,
-which might affect how range expressions like @samp{[a-z]} are
+which might affect how range expressions like @samp{a-z} are
 interpreted.
 
 @item LC_ALL
@@ -1061,8 +1055,11 @@ follow file names must be treated as file names;
 by default,
 such options are permuted to the front of the operand list
 and are treated as options.
-Also, @env{POSIXLY_CORRECT} disables special handling of an
-invalid bracket expression.  @xref{invalid-bracket-expr}.
+
+@item TERM
+@vindex TERM @r{environment variable}
+This variable specifies the output terminal type, which can affect
+what the @option{--color} option does.  @xref{General Output Control}.
 
 @item _@var{N}_GNU_nonoption_argv_flags_
 @vindex _@var{N}_GNU_nonoption_argv_flags_ @r{environment variable}
@@ -1159,15 +1156,6 @@ combined with the @option{-z} (@option{--null-data}) option, and note that
 
 @end table
 
-In addition,
-two variant programs @command{egrep} and @command{fgrep} are available.
-@command{egrep} is the same as @samp{grep@ -E}.
-@command{fgrep} is the same as @samp{grep@ -F}.
-Direct invocation as either
-@command{egrep} or @command{fgrep} is deprecated,
-but is provided to allow historical applications
-that rely on them to run unmodified.
-
 
 @node Regular Expressions
 @chapter Regular Expressions
@@ -1180,22 +1168,23 @@ by using various operators to combine smaller expressions.
 three different versions of regular expression syntax:
 basic (BRE), extended (ERE), and Perl-compatible (PCRE).
 In GNU @command{grep},
-there is no difference in available functionality between the basic and
-extended syntaxes.
+there is no difference in available functionality between basic and
+extended syntax.
 In other implementations, basic regular expressions are less powerful.
 The following description applies to extended regular expressions;
 differences for basic regular expressions are summarized afterwards.
 Perl-compatible regular expressions give additional functionality, and
-are documented in the @i{pcresyntax}(3) and @i{pcrepattern}(3) manual
+are documented in the @i{pcre2syntax}(3) and @i{pcre2pattern}(3) manual
 pages, but work only if PCRE is available in the system.
 
 @menu
 * Fundamental Structure::
 * Character Classes and Bracket Expressions::
-* The Backslash Character and Special Expressions::
+* Special Backslash Expressions::
 * Anchoring::
 * Back-references and Subexpressions::
 * Basic vs Extended::
+* Problematic Expressions::
 * Character Encoding::
 * Matching Non-ASCII::
 @end menu
@@ -1275,15 +1264,19 @@ the resulting regular expression
 matches any string formed by concatenating two substrings
 that respectively match the concatenated expressions.
 
-Two regular expressions may be joined by the infix operator @samp{|};
-the resulting regular expression
-matches any string matching either alternate expression.
+@cindex alternatives in regular expressions
+Two regular expressions may be joined by the infix operator @samp{|}.
+The resulting regular expression matches any string matching either of
+the two expressions, which are called @dfn{alternatives}.
 
 Repetition takes precedence over concatenation,
 which in turn takes precedence over alternation.
 A whole expression may be enclosed in parentheses
 to override these precedence rules and form a subexpression.
 An unmatched @samp{)} matches just itself.
+
+Not every character string is a valid regular expression.
+@xref{Problematic Expressions}.
 
 @node Character Classes and Bracket Expressions
 @section Character Classes and Bracket Expressions
@@ -1312,7 +1305,7 @@ order; for example, @samp{[a-d]} is equivalent to @samp{[abcd]}.
 In other locales, the sorting sequence is not specified, and
 @samp{[a-d]} might be equivalent to @samp{[abcd]} or to
 @samp{[aBbCcDd]}, or it might fail to match any character, or the set of
-characters that it matches might even be erratic.
+characters that it matches might be erratic, or it might be invalid.
 To obtain the traditional interpretation
 of bracket expressions, you can use the @samp{C} locale by setting the
 @env{LC_ALL} environment variable to the value @samp{C}.
@@ -1415,12 +1408,10 @@ Note that the brackets in these class names are
 part of the symbolic names, and must be included in addition to
 the brackets delimiting the bracket expression.
 
-@anchor{invalid-bracket-expr}
 If you mistakenly omit the outer brackets, and search for say, @samp{[:upper:]},
 GNU @command{grep} prints a diagnostic and exits with status 2, on
-the assumption that you did not intend to search for the nominally
-equivalent regular expression: @samp{[:epru]}.
-Set the @env{POSIXLY_CORRECT} environment variable to disable this feature.
+the assumption that you did not intend to search for the
+regular expression @samp{[:epru]}.
 
 Special characters lose their special meaning inside bracket expressions.
 
@@ -1451,7 +1442,7 @@ represents the close character class symbol.
 
 @item -
 represents the range if it's not first or last in a list or the ending point
-of a range.
+of a range.  To make the @samp{-} a list item, it is best to put it last.
 
 @item ^
 represents the characters not in the list.
@@ -1460,8 +1451,8 @@ character a list item, place it anywhere but first.
 
 @end table
 
-@node The Backslash Character and Special Expressions
-@section The Backslash Character and Special Expressions
+@node Special Backslash Expressions
+@section Special Backslash Expressions
 @cindex backslash
 
 The @samp{\} character followed by a special character is a regular
@@ -1496,10 +1487,23 @@ Match whitespace, it is a synonym for @samp{[[:space:]]}.
 @item \S
 Match non-whitespace, it is a synonym for @samp{[^[:space:]]}.
 
+@item \]
+Match @samp{]}.
+
+@item \@}
+Match @samp{@}}.
+
 @end table
 
 For example, @samp{\brat\b} matches the separate word @samp{rat},
 @samp{\Brat\B} matches @samp{crate} but not @samp{furry rat}.
+
+The behavior of @command{grep} is unspecified if a unescaped backslash
+is not followed by a special character, a nonzero digit, or a
+character in the above list.  Although @command{grep} might issue a
+diagnostic and/or give the backslash an interpretation now, its
+behavior may change if the syntax of regular expressions is extended
+in future versions.
 
 @node Anchoring
 @section Anchoring
@@ -1536,52 +1540,181 @@ back-references are local to each expression.
 @section Basic vs Extended Regular Expressions
 @cindex basic regular expressions
 
-In basic regular expressions the characters @samp{?}, @samp{+},
+Basic regular expressions differ from extended regular expressions
+in the following ways:
+
+@itemize
+@item
+The characters @samp{?}, @samp{+},
 @samp{@{}, @samp{|}, @samp{(}, and @samp{)} lose their special meaning;
 instead use the backslashed versions @samp{\?}, @samp{\+}, @samp{\@{},
 @samp{\|}, @samp{\(}, and @samp{\)}.  Also, a backslash is needed
-before an interval expression's closing @samp{@}}, and an unmatched
-@code{\)} is invalid.
+before an interval expression's closing @samp{@}}.
 
-Portable scripts should avoid the following constructs, as
-POSIX says they produce undefined results:
+@item
+An unmatched @samp{\)} is invalid.
+
+@item
+If an unescaped @samp{^} appears neither first, nor directly after
+@samp{\(} or @samp{\|}, it is treated like an ordinary character and
+is not an anchor.
+
+@item
+If an unescaped @samp{$} appears neither last, nor directly before
+@samp{\|} or @samp{\)}, it is treated like an ordinary character and
+is not an anchor.
+
+@item
+If an unescaped @samp{*} appears first, or appears directly after
+@samp{\(} or @samp{\|} or anchoring @samp{^}, it is treated like an
+ordinary character and is not a repetition operator.
+@end itemize
+
+@node Problematic Expressions
+@section Problematic Regular Expressions
+
+@cindex invalid regular expressions
+@cindex unspecified behavior in regular expressions
+Some strings are @dfn{invalid regular expressions} and cause
+@command{grep} to issue a diagnostic and fail.  For example, @samp{xy\1}
+is invalid because there is no parenthesized subexpression for the
+back-reference @samp{\1} to refer to.
+
+Also, some regular expressions have @dfn{unspecified behavior} and
+should be avoided even if @command{grep} does not currently diagnose
+them.  For example, @samp{xy\0} has unspecified behavior because
+@samp{0} is not a special character and @samp{\0} is not a special
+backslash expression (@pxref{Special Backslash Expressions}).
+Unspecified behavior can be particularly problematic because the set
+of matched strings might be only partially specified, or not be
+specified at all, or the expression might even be invalid.
+
+The following regular expression constructs are invalid on all
+platforms conforming to POSIX, so portable scripts can assume that
+@command{grep} rejects these constructs:
 
 @itemize @bullet
 @item
-Extended regular expressions that use back-references.
+A basic regular expression containing a back-reference @samp{\@var{n}}
+preceded by fewer than @var{n} closing parentheses.  For example,
+@samp{\(a\)\2} is invalid.
+
 @item
-Basic regular expressions that use @samp{\?}, @samp{\+}, or @samp{\|}.
-@item
-Empty parenthesized regular expressions like @samp{()}.
-@item
-Empty alternatives (as in, e.g, @samp{a|}).
-@item
-Repetition operators that immediately follow empty expressions,
-unescaped @samp{$}, or other repetition operators.
-@item
-A backslash escaping an ordinary character (e.g., @samp{\S}),
-unless it is a back-reference.
-@item
-An unescaped @samp{[} that is not part of a bracket expression.
-@item
-In extended regular expressions, an unescaped @samp{@{} that is not
-part of an interval expression.
+A bracket expression containing @samp{[:} that does not start a
+character class; and similarly for @samp{[=} and @samp{[.}.  For
+example, @samp{[a[:b]} and @samp{[a[:ouch:]b]} are invalid.
 @end itemize
 
-@cindex interval expressions
-Traditional @command{egrep} did not support interval expressions and
-some @command{egrep} implementations use @samp{\@{} and @samp{\@}} instead, so
-portable scripts should avoid interval expressions in @samp{grep@ -E} patterns
-and should use @samp{[@{]} to match a literal @samp{@{}.
+GNU @command{grep} treats the following constructs as invalid.
+However, other @command{grep} implementations might allow them, so
+portable scripts should not rely on their being invalid:
 
-GNU @command{grep@ -E} attempts to support traditional usage by
-assuming that @samp{@{} is not special if it would be the start of an
-invalid interval expression.
-For example, the command
-@samp{grep@ -E@ '@{1'} searches for the two-character string @samp{@{1}
-instead of reporting a syntax error in the regular expression.
-POSIX allows this behavior as an extension, but portable scripts
-should avoid it.
+@itemize @bullet
+@item
+Unescaped @samp{\} at the end of a regular expression.
+
+@item
+Unescaped @samp{[} that does not start a bracket expression.
+
+@item
+A @samp{\@{} in a basic regular expression that does not start an
+interval expression.
+
+@item
+A basic regular expression with unbalanced @samp{\(} or @samp{\)},
+or an extended regular expression with unbalanced @samp{(}.
+
+@item
+In the POSIX locale, a range expression like @samp{z-a} that
+represents zero elements.  A non-GNU @command{grep} might treat it as
+a valid range that never matches.
+
+@item
+An interval expression with a repetition count greater than 32767.
+(The portable POSIX limit is 255, and even interval expressions with
+smaller counts can be impractically slow on all known implementations.)
+
+@item
+A bracket expression that contains at least three elements, the first
+and last of which are both @samp{:}, or both @samp{.}, or both
+@samp{=}.  For example, a non-GNU @command{grep} might treat
+@samp{[:alpha:]} like @samp{[[:alpha:]]}, or like @samp{[:ahlp]}.
+@end itemize
+
+The following constructs have well-defined behavior in GNU
+@command{grep}.  However, they have unspecified behavior elsewhere, so
+portable scripts should avoid them:
+
+@itemize @bullet
+@item
+Special backslash expressions like @samp{\b}, @samp{\<}, and @samp{\]}.
+@xref{Special Backslash Expressions}.
+
+@item
+A basic regular expression that uses @samp{\?}, @samp{\+}, or @samp{\|}.
+
+@item
+An extended regular expression that uses back-references.
+
+@item
+An empty regular expression, subexpression, or alternative.  For
+example, @samp{(a|bc|)} is not portable; a portable equivalent is
+@samp{(a|bc)?}.
+
+@item
+In a basic regular expression, an anchoring @samp{^} that appears
+directly after @samp{\(}, or an anchoring @samp{$} that appears
+directly before @samp{\)}.
+
+@item
+In a basic regular expression, a repetition operator that
+directly follows another repetition operator.
+
+@item
+In an extended regular expression, unescaped @samp{@{}
+that does not begin a valid interval expression.
+GNU @command{grep} treats the @samp{@{} as an ordinary character.
+
+@item
+A null character or an encoding error in either pattern or input data.
+@xref{Character Encoding}.
+
+@item
+An input file that ends in a non-newline character,
+where GNU @command{grep} silently supplies a newline.
+@end itemize
+
+The following constructs have unspecified behavior, in both GNU
+and other @command{grep} implementations.  Scripts should avoid
+them whenever possible.
+
+@itemize
+@item
+A backslash escaping an ordinary character, unless it is a
+back-reference like @samp{\1} or a special backslash expression like
+@samp{\<} or @samp{\b}.  @xref{Special Backslash Expressions}.  For
+example, @samp{\x} has unspecified behavior now, and a future version
+of @command{grep} might specify @samp{\x} to have a new behavior.
+
+@item
+A repetition operator that appears directly after an anchor, or at the
+start of a complete regular expression, parenthesized subexpression,
+or alternative.  For example, @samp{+|^*(+a|?-b)} has unspecified
+behavior, whereas @samp{\+|^\*(\+a|\?-b)} is portable.
+
+@item
+A range expression outside the POSIX locale.  For example, in some
+locales @samp{[a-z]} might match some characters that are not
+lowercase letters, or might not match some lowercase letters, or might
+be invalid.  With GNU @command{grep} it is not documented whether
+these range expressions use native code points, or use the collating
+sequence specified by the @env{LC_COLLATE} category, or have some
+other interpretation.  Outside the POSIX locale, it is portable to use
+@samp{[[:lower:]]} to match a lower-case letter, or
+@samp{[abcdefghijklmnopqrstuvwxyz]} to match an ASCII lower-case
+letter.
+
+@end itemize
 
 @node Character Encoding
 @section Character Encoding
@@ -1741,24 +1874,38 @@ grep -r --include='*.c' 'hello' /home/gigi
 
 @item
 What if a pattern or file has a leading @samp{-}?
+For example:
 
 @example
-grep -- '--cut here--' *
+grep "$pattern" *
 @end example
 
 @noindent
-searches for all lines matching @samp{--cut here--}.
-Without @option{--},
-@command{grep} would attempt to parse @samp{--cut here--} as a list of
-options, and there would be similar problems with any file names
-beginning with @samp{-}.
-
-Alternatively, you can prevent misinterpretation of leading @samp{-}
-by using @option{-e} for patterns and leading @samp{./} for files:
+can behave unexpectedly if the value of @samp{pattern} begins with @samp{-},
+or if the @samp{*} expands to a file name with leading @samp{-}.
+To avoid the problem, you can use @option{-e} for patterns and leading
+@samp{./} for files:
 
 @example
-grep -e '--cut here--' ./*
+grep -e "$pattern" ./*
 @end example
+
+@noindent
+searches for all lines matching the pattern in all the working
+directory's files whose names do not begin with @samp{.}.
+Without the @option{-e}, @command{grep} might treat the pattern as an
+option if it begins with @samp{-}.  Without the @samp{./}, there might
+be similar problems with file names beginning with @samp{-}.
+
+Alternatively, you can use @samp{--} before the pattern and file names:
+
+@example
+grep -- "$pattern" *
+@end example
+
+@noindent
+This also fixes the problem, except that if there is a file named @samp{-},
+@command{grep} misinterprets the @samp{-} as standard input.
 
 @item
 Suppose I want to search for a whole word, not a part of a word?
@@ -1841,8 +1988,7 @@ to output lines even from files that appear to be binary, use the
 @option{-a} or @samp{--binary-files=text} option.
 To eliminate the
 ``Binary file matches'' messages, use the @option{-I} or
-@samp{--binary-files=without-match} option,
-or the @option{-s} or @option{--no-messages} option.
+@samp{--binary-files=without-match} option.
 
 @item
 Why doesn't @samp{grep -lv} print non-matching file names?
@@ -1874,7 +2020,10 @@ other patterns cause @command{grep} to match every line.
 
 To match empty lines, use the pattern @samp{^$}.  To match blank
 lines, use the pattern @samp{^[[:blank:]]*$}.  To match no lines at
-all, use the command @samp{grep -f /dev/null}.
+all, use an extended regular expression like @samp{a^} or @samp{$a}.
+To match every line, a portable script should use a pattern like
+@samp{^} instead of the empty pattern, as POSIX does not specify the
+behavior of the empty pattern.
 
 @item
 How can I search in both standard input and in files?
@@ -1884,6 +2033,22 @@ Use the special file name @samp{-}:
 @example
 cat /etc/passwd | grep 'alain' - /etc/motd
 @end example
+
+@item
+Why can't I combine the shell's @samp{set -e} with @command{grep}?
+
+The @command{grep} command follows the convention of programs like
+@command{cmp} and @command{diff} where an exit status of 1 is not an
+error.  The shell command @samp{set -e} causes the shell to exit if
+any subcommand exits with nonzero status, and this will cause the
+shell to exit merely because @command{grep} selected no lines,
+which is ordinarily not what you want.
+
+There is a related problem with Bash's @command{set -e -o pipefail}.
+Since @command{grep} does not always read all its input, a command
+outputting to a pipe read by @command{grep} can fail when
+@command{grep} exits before reading all its input, and the command's
+failure can cause Bash to exit.
 
 @item
 Why is this back-reference failing?
@@ -1918,7 +2083,7 @@ before giving it to @command{grep}, or turn to @command{awk},
 designed to operate across lines.
 
 @item
-What do @command{grep}, @command{fgrep}, and @command{egrep} stand for?
+What do @command{grep}, @option{-E}, and @option{-F} stand for?
 
 The name @command{grep} comes from the way line editing was done on Unix.
 For example,
@@ -1930,8 +2095,29 @@ global/regular expression/print
 g/re/p
 @end example
 
-@command{fgrep} stands for Fixed @command{grep};
-@command{egrep} stands for Extended @command{grep}.
+The @option{-E} option stands for Extended @command{grep}.
+The @option{-F} option stands for Fixed @command{grep};
+
+@item
+What happened to @command{egrep} and @command{fgrep}?
+
+7th Edition Unix had commands @command{egrep} and @command{fgrep}
+that were the counterparts of the modern @samp{grep -E} and @samp{grep -F}.
+Although breaking up @command{grep} into three programs was perhaps
+useful on the small computers of the 1970s, @command{egrep} and
+@command{fgrep} were not standardized by POSIX and are no longer needed.
+In the current GNU implementation, @command{egrep} and @command{fgrep}
+issue a warning and then act like their modern counterparts;
+eventually, they are planned to be removed entirely.
+
+If you prefer the old names, you can use use your own substitutes,
+such as a shell script named @command{egrep} with the following
+contents:
+
+@example
+#!/bin/sh
+exec grep -E "$@@"
+@end example
 
 @end enumerate
 
@@ -1968,6 +2154,17 @@ bracket expressions like @samp{[a-z]} and @samp{[[=a=]b]}, can be
 surprisingly inefficient due to difficulties in fast portable access to
 concepts like multi-character collating elements.
 
+@cindex interval expressions
+Interval expressions may be implemented internally via repetition.
+For example, @samp{^(a|bc)@{2,4@}$} might be implemented as
+@samp{^(a|bc)(a|bc)((a|bc)(a|bc)?)?$}.  A large repetition count may
+exhaust memory or greatly slow matching.  Even small counts can cause
+problems if cascaded; for example, @samp{grep -E
+".*@{10,@}@{10,@}@{10,@}@{10,@}@{10,@}"} is likely to overflow a
+stack.  Fortunately, regular expressions like these are typically
+artificial, and cascaded repetitions do not conform to POSIX so cannot
+be used in portable programs anyway.
+
 @cindex back-references
 A back-reference such as @samp{\1} can hurt performance significantly
 in some cases, since back-references cannot in general be implemented
@@ -1989,6 +2186,14 @@ needing to read the zeros.  This optimization is not available if the
 Directory Selection}), unless the @option{-z} (@option{--null-data})
 option is also used (@pxref{Other Options}).
 
+@cindex pipelines and reading
+For efficiency @command{grep} does not always read all its input.
+For example, the shell command @samp{sed '/^...$/d' | grep -q X} can
+cause @command{grep} to exit immediately after reading a line
+containing @samp{X}, without bothering to read the rest of its input data.
+This in turn can cause @command{sed} to exit with a nonzero status because
+@command{sed} cannot write to its output pipe after @command{grep} exits.
+
 For more about the algorithms used by @command{grep} and about
 related string matching algorithms, see:
 
@@ -2004,22 +2209,37 @@ used by @command{grep}.
 @item
 Aho AV, Corasick MJ. Efficient string matching: an aid to bibliographic search.
 @emph{CACM}. 1975;18(6):333--40.
-@url{https://dx.doi.org/10.1145/360825.360855}.
+@url{https://doi.org/10.1145/360825.360855}.
 This introduces the Aho--Corasick algorithm.
 
 @item
 Boyer RS, Moore JS. A fast string searching algorithm.
 @emph{CACM}. 1977;20(10):762--72.
-@url{https://dx.doi.org/10.1145/359842.359859}.
+@url{https://doi.org/10.1145/359842.359859}.
 This introduces the Boyer--Moore algorithm.
 
 @item
 Faro S, Lecroq T. The exact online string matching problem: a review
 of the most recent results.
 @emph{ACM Comput Surv}. 2013;45(2):13.
-@url{https://dx.doi.org/10.1145/2431211.2431212}.
+@url{https://doi.org/10.1145/2431211.2431212}.
 This surveys string matching algorithms that might help improve the
 performance of @command{grep} in the future.
+
+@item
+Hakak SI, Kamsin A, Shivakumara P, Gilkar GA, Khan WZ, Imran M.
+Exact string matching algorithms: survey issues, and future research directions.
+@emph{IEEE Access}. 2019;7:69614--37.
+@url{https://doi.org/10.1109/ACCESS.2019.2914071}.
+This survey is more recent than Faro & Lecroq,
+and focuses on taxonomy instead of performance.
+
+@item
+Hume A, Sunday D. Fast string search.
+@emph{Software Pract Exper}. 1991;21(11):1221--48.
+@url{https://doi.org/10.1002/spe.4380211105}.
+This excellent albeit now-dated survey aided the initial development
+of @command{grep}.
 @end itemize
 @frenchspacing off
 

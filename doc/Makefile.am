@@ -1,7 +1,7 @@
 # Process this file with automake to create Makefile.in
 # Makefile.am for grep/doc.
 #
-# Copyright 2008-2021 Free Software Foundation, Inc.
+# Copyright 2008-2022 Free Software Foundation, Inc.
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -19,20 +19,13 @@
 info_TEXINFOS = grep.texi
 grep_TEXINFOS = fdl.texi
 
-man_MANS = grep.1 fgrep.1 egrep.1
+man_MANS = grep.1
 
 EXTRA_DIST = grep.in.1
-CLEANFILES = grep.1 egrep.1 fgrep.1
+CLEANFILES = grep.1
 
 grep.1: grep.in.1
 	$(AM_V_GEN)rm -f $@-t $@
 	$(AM_V_at)sed 's/@''VERSION@/$(VERSION)/' $(srcdir)/grep.in.1 > $@-t
-	$(AM_V_at)chmod a=r $@-t
-	$(AM_V_at)mv -f $@-t $@
-
-egrep.1 fgrep.1: Makefile.am
-	$(AM_V_GEN)rm -f $@-t $@
-	$(AM_V_at)inst=`echo grep | sed '$(transform)'`.1 \
-	  && echo ".so man1/$$inst" > $@-t
 	$(AM_V_at)chmod a=r $@-t
 	$(AM_V_at)mv -f $@-t $@

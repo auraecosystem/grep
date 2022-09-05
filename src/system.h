@@ -1,5 +1,5 @@
 /* Portability cruft.  Include after config.h and sys/types.h.
-   Copyright 1996, 1998-2000, 2007, 2009-2021 Free Software Foundation, Inc.
+   Copyright 1996, 1998-2000, 2007, 2009-2022 Free Software Foundation, Inc.
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -101,9 +101,9 @@ void __asan_unpoison_memory_region (void const volatile *addr, size_t size);
 
 #else
 
-static _GL_UNUSED void
+_GL_UNUSED static void
 __asan_poison_memory_region (void const volatile *addr, size_t size) { }
-static _GL_UNUSED void
+_GL_UNUSED static void
 __asan_unpoison_memory_region (void const volatile *addr, size_t size) { }
 #endif
 

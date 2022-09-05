@@ -137,7 +137,7 @@
 .hy 0
 .
 .SH NAME
-grep, egrep, fgrep \- print lines that match patterns
+grep \- print lines that match patterns
 .
 .SH SYNOPSIS
 .B grep
@@ -184,17 +184,6 @@ If no
 .I FILE
 is given, recursive searches examine the working directory,
 and nonrecursive searches read standard input.
-.PP
-In addition, the variant programs
-.B egrep
-and
-.B fgrep
-are the same as
-.B "grep\ \-E"
-and
-.BR "grep\ \-F" ,
-respectively.
-These variants are deprecated, but are provided for backward compatibility.
 .
 .SH OPTIONS
 .SS "Generic Program Information"
@@ -225,7 +214,9 @@ as basic regular expressions (BREs, see below).
 This is the default.
 .TP
 .BR \-P ", " \-\^\-perl\-regexp
-Interpret I<PATTERNS> as Perl-compatible regular expressions (PCREs).
+Interpret
+.I PATTERNS
+as Perl-compatible regular expressions (PCREs).
 This option is experimental when combined with the
 .B \-z
 .RB ( \-\^\-null\-data )
@@ -288,10 +279,6 @@ pattern and then surrounding it with
 .B ^
 and
 .BR $ .
-.TP
-.B \-y
-Obsolete synonym for
-.BR \-i .
 .SS "General Output Control"
 .TP
 .BR \-c ", " \-\^\-count
@@ -299,7 +286,7 @@ Suppress normal output; instead print a count of
 matching lines for each input file.
 With the
 .BR \-v ", " \-\^\-invert\-match
-option (see below), count non-matching lines.
+option (see above), count non-matching lines.
 .TP
 .BR \-\^\-color [ =\fIWHEN\fP "], " \-\^\-colour [ =\fIWHEN\fP ]
 Surround the matched (non-empty) strings, matching lines, context lines,
@@ -308,9 +295,6 @@ groups of context lines) with escape sequences to display them in color
 on the terminal.
 The colors are defined by the environment variable
 .BR GREP_COLORS .
-The deprecated environment variable
-.B GREP_COLOR
-is still supported, but its setting does not have priority.
 .I WHEN
 is
 .BR never ", " always ", or " auto .
@@ -330,6 +314,16 @@ Scanning each input file stops upon first match.
 Stop reading a file after
 .I NUM
 matching lines.
+If
+.I NUM
+is zero,
+.B grep
+stops right away without reading input.
+A
+.I NUM
+of \-1 is treated as infinity and
+.B grep
+does not stop; this is the default.
 If the input is standard input from a regular file,
 and
 .I NUM
@@ -531,7 +525,7 @@ and suppresses output lines that contain improperly encoded data.
 When some output is suppressed,
 .B grep
 follows any output
-with a one-line message saying that a binary file matches.
+with a message to standard error saying that a binary file matches.
 .IP
 If
 .I TYPE
@@ -701,7 +695,9 @@ options match, a file is included unless the first such option is
 .BR \-r ", " \-\^\-recursive
 Read all files under each directory, recursively,
 following symbolic links only if they are on the command line.
-Note that if no file operand is given, B<grep> searches the working directory.
+Note that if no file operand is given,
+.B grep
+searches the working directory.
 This is equivalent to the
 .B "\-d recurse"
 option.
@@ -762,13 +758,16 @@ understands three different versions of regular expression syntax:
 In GNU
 .B grep
 there is no difference in available functionality between basic and
-extended syntaxes.
+extended syntax.
 In other implementations, basic regular expressions are less powerful.
 The following description applies to extended regular expressions;
 differences for basic regular expressions are summarized afterwards.
 Perl-compatible regular expressions give additional functionality, and are
-documented in B<pcresyntax>(3) and B<pcrepattern>(3), but work only if
-PCRE support is enabled.
+documented in
+.BR pcre2syntax (3)
+and
+.BR pcre2pattern (3),
+but work only if PCRE support is enabled.
 .PP
 The fundamental building blocks are the regular expressions
 that match a single character.
@@ -1006,31 +1005,6 @@ was not compiled with national language support (NLS).
 The shell command
 .B "locale \-a"
 lists locales that are currently available.
-.TP
-.B GREP_COLOR
-This variable specifies the color used to highlight matched (non-empty) text.
-It is deprecated in favor of
-.BR GREP_COLORS ,
-but still supported.
-The
-.BR mt ,
-.BR ms ,
-and
-.B mc
-capabilities of
-.B GREP_COLORS
-have priority over it.
-It can only specify the color used to highlight
-the matching non-empty text in any matching line
-(a selected line when the
-.B \-v
-command-line option is omitted,
-or a context line when
-.B \-v
-is specified).
-The default is
-.BR 01;31 ,
-which means a bold red foreground text on the terminal's default background.
 .TP
 .B GREP_COLORS
 Specifies the colors and other attributes
@@ -1299,7 +1273,7 @@ This man page is maintained only fitfully;
 the full documentation is often more up-to-date.
 .
 .SH COPYRIGHT
-Copyright 1998-2000, 2002, 2005-2021 Free Software Foundation, Inc.
+Copyright 1998-2000, 2002, 2005-2022 Free Software Foundation, Inc.
 .PP
 This is free software;
 see the source for copying conditions.
@@ -1371,9 +1345,9 @@ from the globbing syntax that the shell uses to match file names.
 .BR sort (1),
 .BR xargs (1),
 .BR read (2),
-.BR pcre (3),
-.BR pcresyntax (3),
-.BR pcrepattern (3),
+.BR pcre2 (3),
+.BR pcre2syntax (3),
+.BR pcre2pattern (3),
 .BR terminfo (5),
 .BR glob (7),
 .BR regex (7)

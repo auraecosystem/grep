@@ -4,7 +4,7 @@
 # file or line number from which the offending regular expression came.
 # With 2.26, now, each such diagnostic has a "FILENAME:LINENO: " prefix.
 
-# Copyright (C) 2016-2021 Free Software Foundation, Inc.
+# Copyright (C) 2016-2022 Free Software Foundation, Inc.
 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -101,13 +101,13 @@ my @Tests =
    ],
    ['invalid-re-P-paren', '-P ")"', {EXIT=>2},
     {ERR => $ENV{PCRE_WORKS} == 1
-       ? "$prog: unmatched parentheses\n"
+       ? "$prog: unmatched closing parenthesis\n"
        : $no_pcre
     },
    ],
    ['invalid-re-P-star-paren', '-P "a.*)"', {EXIT=>2},
     {ERR => $ENV{PCRE_WORKS} == 1
-       ? "$prog: unmatched parentheses\n"
+       ? "$prog: unmatched closing parenthesis\n"
        : $no_pcre
     },
    ],

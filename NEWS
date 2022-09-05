@@ -1,5 +1,52 @@
 GNU grep NEWS                                    -*- outline -*-
 
+* Noteworthy changes in release 3.8 (2022-09-02) [stable]
+
+** Changes in behavior
+
+  The -P option is now based on PCRE2 instead of the older PCRE,
+  thanks to code contributed by Carlo Arenas.
+
+  The egrep and fgrep commands, which have been deprecated since
+  release 2.5.3 (2007), now warn that they are obsolescent and should
+  be replaced by grep -E and grep -F.
+
+  The confusing GREP_COLOR environment variable is now obsolescent.
+  Instead of GREP_COLOR='xxx', use GREP_COLORS='mt=xxx'.  grep now
+  warns if GREP_COLOR is used and is not overridden by GREP_COLORS.
+  Also, grep now treats GREP_COLOR like GREP_COLORS by silently
+  ignoring it if it attempts to inject ANSI terminal escapes.
+
+  Regular expressions with stray backslashes now cause warnings, as
+  their unspecified behavior can lead to unexpected results.
+  For example, '\a' and 'a' are not always equivalent
+  <https://bugs.gnu.org/39678>.  Similarly, regular expressions or
+  subexpressions that start with a repetition operator now also cause
+  warnings due to their unspecified behavior; for example, *a(+b|{1}c)
+  now has three reasons to warn.  The warnings are intended as a
+  transition aid; they are likely to be errors in future releases.
+
+  Regular expressions like [:space:] are now errors even if
+  POSIXLY_CORRECT is set, since POSIX now allows the GNU behavior.
+
+** Bug fixes
+
+  In locales using UTF-8 encoding, the regular expression '.' no
+  longer sometimes fails to match Unicode characters U+D400 through
+  U+D7FF (some Hangul Syllables, and Hangul Jamo Extended-B) and
+  Unicode characters U+108000 through U+10FFFF (half of Supplemental
+  Private Use Area plane B).
+  [bug introduced in grep 3.4]
+
+  The -s option no longer suppresses "binary file matches" messages.
+  [Bug#51860 introduced in grep 3.5]
+
+** Documentation improvements
+
+  The manual now covers unspecified behavior in patterns like \x, (+),
+  and range expressions outside the POSIX locale.
+
+
 * Noteworthy changes in release 3.7 (2021-08-14) [stable]
 
 ** Changes in behavior
@@ -1276,7 +1323,7 @@ necessary to track the evolution of the regex package, and since
 I was changing it anyway I decided to do a general cleanup.
 
 ========================================================================
-Copyright (C) 1992, 1997-2002, 2004-2021 Free Software Foundation, Inc.
+Copyright (C) 1992, 1997-2002, 2004-2022 Free Software Foundation, Inc.
 
   Copying and distribution of this file, with or without modification,
   are permitted in any medium without royalty provided the copyright

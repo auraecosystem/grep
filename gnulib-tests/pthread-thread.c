@@ -1,5 +1,5 @@
 /* Creating and controlling POSIX threads.
-   Copyright (C) 2010-2021 Free Software Foundation, Inc.
+   Copyright (C) 2010-2022 Free Software Foundation, Inc.
 
    This file is free software: you can redistribute it and/or modify
    it under the terms of the GNU Lesser General Public License as
@@ -57,7 +57,7 @@ pthread_attr_setdetachstate (pthread_attr_t *attr, int detachstate)
 }
 
 int
-pthread_attr_destroy (pthread_attr_t *attr _GL_UNUSED)
+pthread_attr_destroy (_GL_UNUSED pthread_attr_t *attr)
 {
   return 0;
 }

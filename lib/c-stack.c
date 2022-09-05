@@ -1,10 +1,10 @@
 /* Stack overflow handling.
 
-   Copyright (C) 2002, 2004, 2006, 2008-2021 Free Software Foundation, Inc.
+   Copyright (C) 2002, 2004, 2006, 2008-2022 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 3 of the License, or
+   the Free Software Foundation, either version 3 of the License, or
    (at your option) any later version.
 
    This program is distributed in the hope that it will be useful,
@@ -126,7 +126,7 @@ die (int signo)
 }
 
 static _GL_ASYNC_SAFE void
-null_action (int signo _GL_UNUSED)
+null_action (_GL_UNUSED int signo)
 {
 }
 
@@ -142,7 +142,7 @@ static volatile int segv_handler_missing;
    overflow.  This function is async-signal-safe.  */
 
 static _GL_ASYNC_SAFE int
-segv_handler (void *address _GL_UNUSED, int serious)
+segv_handler (_GL_UNUSED void *address, int serious)
 {
 # if DEBUG
   {
@@ -165,7 +165,7 @@ segv_handler (void *address _GL_UNUSED, int serious)
    overflow and exit.  This function is async-signal-safe.  */
 
 static _GL_ASYNC_SAFE _Noreturn void
-overflow_handler (int emergency, stackoverflow_context_t context _GL_UNUSED)
+overflow_handler (int emergency, _GL_UNUSED stackoverflow_context_t context)
 {
 # if DEBUG
   {
@@ -205,7 +205,7 @@ c_stack_action (_GL_ASYNC_SAFE void (*action) (int))
 #else /* !HAVE_STACK_OVERFLOW_RECOVERY */
 
 int
-c_stack_action (_GL_ASYNC_SAFE void (*action) (int)  _GL_UNUSED)
+c_stack_action (_GL_ASYNC_SAFE void (*action) (_GL_UNUSED int) )
 {
   errno = ENOTSUP;
   return -1;

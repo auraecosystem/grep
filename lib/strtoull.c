@@ -1,11 +1,11 @@
 /* Function to parse an 'unsigned long long int' from text.
-   Copyright (C) 1995-1997, 1999, 2009-2021 Free Software Foundation, Inc.
+   Copyright (C) 1995-1997, 1999, 2009-2022 Free Software Foundation, Inc.
    NOTE: The canonical source of this file is maintained with the GNU C
    Library.  Bugs can be reported to bug-glibc@gnu.org.
 
    This file is free software: you can redistribute it and/or modify
    it under the terms of the GNU Lesser General Public License as
-   published by the Free Software Foundation; either version 3 of the
+   published by the Free Software Foundation, either version 3 of the
    License, or (at your option) any later version.
 
    This file is distributed in the hope that it will be useful,

@@ -1,5 +1,5 @@
 ## Process this file with automake to create Makefile.in
-# Copyright 1997-1998, 2005-2021 Free Software Foundation, Inc.
+# Copyright 1997-1998, 2005-2022 Free Software Foundation, Inc.
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -54,11 +54,11 @@ EXTRA_DIST = egrep.sh
 egrep fgrep: egrep.sh Makefile
 	$(AM_V_GEN)grep=`echo grep | sed -e '$(transform)'` &&		\
 	case $@ in egrep) option=-E;; fgrep) option=-F;; esac &&	\
-	shell_does_substrings='set x/y && d=$${1%/*} && test "$$d" = x' && \
+	shell_does_substrings='set x/y && d=$${1##*/} && test "$$d" = y' && \
 	if $(SHELL) -c "$$shell_does_substrings" 2>/dev/null; then	\
 	  edit_substring='s,X,X,';					\
 	else								\
-	  edit_substring='s,\$${0%/\*},`expr "X$$0" : '\''X\\(.*\\)/'\''`,g'; \
+	  edit_substring='s,\$${0##\*/},`expr "X$$0" : '\''X\\(.*\\)/'\''`,g'; \
 	fi &&								\
 	sed -e 's|[@]SHELL@|$(SHELL)|g'					\
 	    -e "$$edit_substring"					\
