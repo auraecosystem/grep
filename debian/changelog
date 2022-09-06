@@ -1,4 +1,4 @@
-grep (3.8-1~2.gbpb2ac02) UNRELEASED; urgency=low
+grep (3.8-1) unstable; urgency=low
 
   [ Santiago Ruano Rincón ]
   * New upstream version, 3.8
@@ -15,7 +15,7 @@ grep (3.8-1~2.gbpb2ac02) UNRELEASED; urgency=low
   [ Sam Q ]
   * Change uscan version to 4
 
- -- Santiago Ruano Rincón <santiago@debian.org>  Tue, 06 Sep 2022 14:34:05 +0200
+ -- Santiago Ruano Rincón <santiago@debian.org>  Tue, 06 Sep 2022 15:29:49 +0200
 
 grep (3.7-1) unstable; urgency=low
 
