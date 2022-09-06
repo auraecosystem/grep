@@ -1,15 +1,21 @@
-grep (3.8-1~1.gbp1d2c58) UNRELEASED; urgency=low
+grep (3.8-1~2.gbpb2ac02) UNRELEASED; urgency=low
 
-  ** SNAPSHOT build @1d2c5831cce9789ce367d935bebfad5aad181602 **
-
+  [ Santiago Ruano Rincón ]
   * New upstream version, 3.8
     - Use libpcre2 instead of pcre3 (Closes: #907652)
+  * Stop Suggesting libpcre*
   * Enable builds on ARM in salsa-ci
   * Configure with included regex when building with musl (Closes: #1008952)
     Thanks to Helmut Grohne <helmut@subdivi.de>
-  * Remove 02-man_rgrep.patch and 05-grep-wrapper-sh.patch.
+  * Remove 05-grep-wrapper-sh.patch. Upstream has made egrep and fgrep
+    obsolecent.
+  * Remove 02-man_rgrep.patch to stop documenting rgrep.
+  * Declare compliance with Standards-Version 4.6.1.1
 
- -- Santiago Ruano Rincón <santiago@debian.org>  Mon, 05 Sep 2022 13:39:07 +0200
+  [ Sam Q ]
+  * Change uscan version to 4
+
+ -- Santiago Ruano Rincón <santiago@debian.org>  Tue, 06 Sep 2022 14:34:05 +0200
 
 grep (3.7-1) unstable; urgency=low
 
