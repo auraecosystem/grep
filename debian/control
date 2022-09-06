@@ -17,7 +17,6 @@ Pre-Depends: ${shlibs:Depends}
 Depends: ${misc:Depends}, dpkg (>= 1.15.4) | install-info
 Conflicts: rgrep
 Provides: rgrep
-Suggests: libpcre2-8-0
 Description: GNU grep, egrep and fgrep
  'grep' is a utility to search for text in files; it can be used from the
  command line or in scripts.  Even if you don't want to use it, other packages
