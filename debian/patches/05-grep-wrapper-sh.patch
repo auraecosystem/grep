@@ -1,0 +1,19 @@
+Removes needless call to bash.
+
+* src/Makefile.am: Specifies /bin/sh as shell, used for egrep and fgrep wrappers. 
+#* src/egrep.sh Stops adding the working directory in PATH if a ./grep exists 
+
+Closes: #762427, #762917
+
+Index: grep/src/Makefile.am
+===================================================================
+--- grep.orig/src/Makefile.am
++++ grep/src/Makefile.am
+@@ -15,6 +15,7 @@
+ # along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ 
+ LN = ln
++SHELL = /bin/sh
+ 
+ AM_CFLAGS = $(WARN_CFLAGS) $(WERROR_CFLAGS) $(PCRE_CFLAGS)
+ 
