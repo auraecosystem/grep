@@ -1,0 +1,39 @@
+Description: Include the Debian-specific egrep, fgrep, rgrep in the man page
+
+Index: grep/doc/grep.in.1
+===================================================================
+--- grep.orig/doc/grep.in.1
++++ grep/doc/grep.in.1
+@@ -137,7 +137,7 @@
+ .hy 0
+ .
+ .SH NAME
+-grep \- print lines that match patterns
++grep, egrep, fgrep, rgrep \- print lines that match patterns
+ .
+ .SH SYNOPSIS
+ .B grep
+@@ -184,6 +184,23 @@ If no
+ .I FILE
+ is given, recursive searches examine the working directory,
+ and nonrecursive searches read standard input.
++.PP
++Debian also includes the variant programs
++.BR egrep ,
++.B fgrep
++and
++.BR rgrep .
++These programs are the same as
++.BR "grep\ \-E" ,
++.BR "grep\ \-F" ,
++and
++.BR "grep\ \-r" ,
++respectively.
++These variants are deprecated upstream, but Debian provides for backward
++compatibility. For portability reasons, it is recommended to avoid the variant
++programs, and use
++.B grep
++with the related option instead.
+ .
+ .SH OPTIONS
+ .SS "Generic Program Information"
