@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# test availability of {e,f}grep
+
+printf 'aaaa' | egrep a
+printf 'aaaa' | fgrep a

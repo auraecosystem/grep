@@ -1,3 +1,12 @@
+grep (3.8-2) unstable; urgency=low
+
+  This Debian grep release removes the deprecation warning about egrep and
+  fgrep. These alternative programs will be still shipped by Debian. Although,
+  for portability reasons, users are encouraged to use grep with the concerned
+  options instead of those alternative programs.
+
+ -- Santiago Ruano Rincón <santiago@debian.org>  Fri, 09 Sep 2022 16:44:14 +0200
+
 grep (3.8-1) unstable; urgency=low
 
   From upstream's NEWS:
