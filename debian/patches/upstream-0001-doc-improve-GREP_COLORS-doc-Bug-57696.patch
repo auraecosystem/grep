@@ -1,0 +1,45 @@
+From b3cd2ee4aeaf01930c88ac6320afa347e74e91aa Mon Sep 17 00:00:00 2001
+From: Paul Eggert <eggert@cs.ucla.edu>
+Date: Fri, 9 Sep 2022 13:12:24 -0500
+Subject: [PATCH] doc: improve GREP_COLORS doc (Bug#57696)
+Origin: https://git.savannah.gnu.org/cgit/grep.git/commit/?id=b3cd2ee4aeaf01930c88ac6320afa347e74e91aa
+Bug-Debian: http://bugs.debian.org/792385
+
+---
+ doc/grep.in.1 | 5 +++--
+ doc/grep.texi | 3 +--
+ 2 files changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/doc/grep.in.1 b/doc/grep.in.1
+index 0423866..5b3123d 100644
+--- a/doc/grep.in.1
++++ b/doc/grep.in.1
+@@ -1007,8 +1007,9 @@ The shell command
+ lists locales that are currently available.
+ .TP
+ .B GREP_COLORS
+-Specifies the colors and other attributes
+-used to highlight various parts of the output.
++Controls how the
++.B \-\^\-color
++option highlights output.
+ Its value is a colon-separated list of capabilities
+ that defaults to
+ .B ms=01;31:mc=01;31:sl=:cx=:fn=35:ln=32:bn=32:se=36
+diff --git a/doc/grep.texi b/doc/grep.texi
+index c371172..a8089cc 100644
+--- a/doc/grep.texi
++++ b/doc/grep.texi
+@@ -864,8 +864,7 @@ overridden by @env{GREP_COLORS}.  Instead of
+ @item GREP_COLORS
+ @vindex GREP_COLORS @r{environment variable}
+ @cindex highlight markers
+-This variable specifies the colors and other attributes
+-used to highlight various parts of the output.
++This variable controls how the @option{--color} option highlights output.
+ Its value is a colon-separated list of @code{terminfo} capabilities
+ that defaults to @samp{ms=01;31:mc=01;31:sl=:cx=:fn=35:ln=32:bn=32:se=36}
+ with the @samp{rv} and @samp{ne} boolean capabilities omitted (i.e., false).
+-- 
+2.37.2
+
