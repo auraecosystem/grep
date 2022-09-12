@@ -1,3 +1,15 @@
+grep (3.8-2) unstable; urgency=low
+
+  * Add 01-disable-egrep-fgrep-warnings.patch (Closes: #1019335)
+  * Add 02-man_egrep_fgrep_rgrep.patch
+  * Reintroduce and updated 05-grep-wrapper-sh.patch
+  * Add test to check availability of egrep and fgrep
+  * Add links for egrep.1 and fgrep.1 man pages
+  * Add upstream-0001-doc-improve-GREP_COLORS-doc-Bug-57696.patch
+    (Closes: #792385)
+
+ -- Santiago Ruano Rincón <santiago@debian.org>  Mon, 12 Sep 2022 15:47:11 +0200
+
 grep (3.8-1) unstable; urgency=low
 
   [ Santiago Ruano Rincón ]
