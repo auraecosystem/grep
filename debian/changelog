@@ -1,3 +1,13 @@
+grep (3.8-3~1.gbp4d89e3) UNRELEASED; urgency=medium
+
+  ** SNAPSHOT build @4d89e3bc29dbd2999414925d982eec580a43bfcc **
+
+  * Temporarily add 1019724-handle-backslash-warning.patch to disable the stray backslash warning by defult
+    (Closes: #1019724)
+  * Add autopkgtest for the stray backslash warning
+
+ -- Santiago Ruano Rincón <santiago@debian.org>  Fri, 21 Oct 2022 14:12:32 +0200
+
 grep (3.8-2) unstable; urgency=low
 
   * Add 01-disable-egrep-fgrep-warnings.patch (Closes: #1019335)
