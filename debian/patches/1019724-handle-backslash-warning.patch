@@ -1,0 +1,26 @@
+Description: Temporarily disable the stray \ warnings. While the related
+  patters are wrong, these warnings are causing trouble in Debian package
+  builds and autopkgtests.
+  This patch should be removed after coordination with the rest of the project
+  to remove the erroneous patterns.
+  Setting the DEB_GREP_ENABLE_STRAY_BACKSLASH_WARN environement variable
+  restores the upstream beahviour, enabling the warning.
+Author: Santiago Ruano Rincón <santiago@debian.org>
+Bug-Debian: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1019724
+
+Index: grep/lib/dfa.c
+===================================================================
+--- grep.orig/lib/dfa.c
++++ grep/lib/dfa.c
+@@ -1547,7 +1547,10 @@ lex (struct dfa *dfa)
+           if (!backslash)
+             goto normal_char;
+         stray_backslash:
+-          if (dfa->syntax.dfaopts & DFA_STRAY_BACKSLASH_WARN)
++          char const *userevalwarn;
++          userevalwarn = getenv ("DEB_GREP_ENABLE_STRAY_BACKSLASH_WARN");
++          if ((dfa->syntax.dfaopts & DFA_STRAY_BACKSLASH_WARN) &&
++              !(userevalwarn == NULL || *userevalwarn == '\0'))
+             {
+               char const *msg;
+               char msgbuf[100];

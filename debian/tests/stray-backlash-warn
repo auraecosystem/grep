@@ -1,0 +1,10 @@
+#!/usr/bin/sh
+
+# In grep 3.8-3, the "stray backslash" warning has been temporarily disabled by
+# default. Upstream behaviour can be reenabled by setting the
+# DEB_GREP_ENABLE_STRAY_BACKSLASH_WARN variable.
+
+set -e
+
+printf foo | grep '\f'
+printf foo | DEB_GREP_ENABLE_STRAY_BACKSLASH_WARN=1 grep '\f' 2>&1 | grep stray
