@@ -1,3 +1,15 @@
+grep (3.8-3) unstable; urgency=low
+
+  To temporarily workaround some issues with the debian building and ci
+  infrastructure, this Debian grep release temporarily disables the stray
+  backlash warning. Upstream behaviour can be enabled back again by setting
+  the DEB_GREP_ENABLE_STRAY_BACKSLASH_WARN envvar.
+
+  Since regular expressions with stray backslashes could lead to unexpected
+  results, the patch applied in this release will be reverted in the future.
+
+ -- Santiago Ruano Rincón <santiago@debian.org>  Tue, 25 Oct 2022 17:55:14 +0200
+
 grep (3.8-2) unstable; urgency=low
 
   This Debian grep release removes the deprecation warning about egrep and
