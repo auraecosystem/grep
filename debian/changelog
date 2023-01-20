@@ -1,3 +1,10 @@
+grep (3.8-4) experimental; urgency=medium
+
+  * Fix sometimes mistakenly matches lines when last of multiple patterns
+    includes backref (Closes: #1029235)
+
+ -- Santiago Ruano Rincón <santiago@debian.org>  Fri, 20 Jan 2023 17:25:51 +0100
+
 grep (3.8-3) unstable; urgency=low
 
   * Temporarily add 1019724-handle-backslash-warning.patch to disable the
