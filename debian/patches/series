@@ -4,3 +4,4 @@ XFAIL-test-regex.patch
 05-grep-wrapper-sh.patch
 upstream-0001-doc-improve-GREP_COLORS-doc-Bug-57696.patch
 1019724-handle-backslash-warning.patch
+1029235-grep-bug-backref-in-last-of-multiple-patterns.patch
