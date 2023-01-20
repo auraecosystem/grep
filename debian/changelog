@@ -1,3 +1,12 @@
+grep (3.8-4~1.gbpf21f2e) UNRELEASED; urgency=medium
+
+  ** SNAPSHOT build @f21f2e14898cf2c7a8e970b2184239ecd0b58730 **
+
+  * Fix sometimes mistakenly matches lines when last of multiple patterns includes backref
+    (Closes: #1029235)
+
+ -- Santiago Ruano Rincón <santiago@debian.org>  Fri, 20 Jan 2023 16:38:36 +0100
+
 grep (3.8-3) unstable; urgency=low
 
   * Temporarily add 1019724-handle-backslash-warning.patch to disable the
