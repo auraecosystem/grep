@@ -1,3 +1,12 @@
+grep (3.6-1+deb11u1~1.gbp6709f8) UNRELEASED-bullseye; urgency=medium
+
+  ** SNAPSHOT build @6709f88244ae8762da8b38f36b7fd3cd6db248d4 **
+
+  * Fix sometimes mistakenly matches lines when last of multiple patterns includes backref
+    (Closes: #1029235)
+
+ -- Santiago Ruano Rincón <santiago@debian.org>  Tue, 24 Jan 2023 16:28:32 +0100
+
 grep (3.6-1) unstable; urgency=low
 
    [ Debian Janitor ]
