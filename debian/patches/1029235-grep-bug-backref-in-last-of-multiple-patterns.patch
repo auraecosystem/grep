@@ -3,6 +3,8 @@ From: Paul Eggert <eggert@cs.ucla.edu>
 Date: Mon, 5 Dec 2022 14:16:45 -0800
 Subject: [PATCH] grep: bug: backref in last of multiple patterns
 Bug-Debian: https://bugs.debian.org/1029235
+Author: Santiago Ruano Rincón <santiago@debian.org>
+Last-Update: 2023-01-24
 
 * NEWS: Mention this.
 * src/dfasearch.c (GEAcompile): Trim trailing newline from
@@ -19,7 +21,7 @@ Index: grep/src/dfasearch.c
 ===================================================================
 --- grep.orig/src/dfasearch.c
 +++ grep/src/dfasearch.c
-@@ -281,20 +281,19 @@ GEAcompile (char *pattern, idx_t size, r
+@@ -267,20 +267,19 @@ GEAcompile (char *pattern, size_t size,
    if (compilation_failed)
      exit (EXIT_TROUBLE);
  
@@ -30,8 +32,8 @@ Index: grep/src/dfasearch.c
      {
 -      if (pattern < prev)
 -        {
--          idx_t prevlen = patlim - prev;
--          buf = xirealloc (buf, buflen + prevlen);
+-          ptrdiff_t prevlen = patlim - prev;
+-          buf = xrealloc (buf, buflen + prevlen);
 -          memcpy (buf + buflen, prev, prevlen);
 -          buflen += prevlen;
 -        }
@@ -40,8 +42,8 @@ Index: grep/src/dfasearch.c
 -          buf = pattern;
 -          buflen = size;
 -        }
-+      idx_t prevlen = patlim - prev;
-+      buf = xirealloc (buf, buflen + prevlen);
++      ptrdiff_t prevlen = patlim - prev;
++      buf = xrealloc (buf, buflen + prevlen);
 +      memcpy (buf + buflen, prev, prevlen);
 +      buflen += prevlen;
 +    }
