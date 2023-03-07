@@ -1,5 +1,5 @@
-# fopen.m4 serial 13
-dnl Copyright (C) 2007-2022 Free Software Foundation, Inc.
+# fopen.m4 serial 14
+dnl Copyright (C) 2007-2023 Free Software Foundation, Inc.
 dnl This file is free software; the Free Software Foundation
 dnl gives unlimited permission to copy and/or distribute it,
 dnl with or without modifications, as long as this notice is preserved.
@@ -87,7 +87,7 @@ int main ()
        [gl_cv_func_fopen_mode_x=no],
        [case "$host_os" in
           # Guess yes on glibc and musl systems.
-          linux*-gnu* | gnu* | kfreebsd*-gnu | *-musl*)
+          linux*-gnu* | gnu* | kfreebsd*-gnu | *-musl* | midipix*)
             gl_cv_func_fopen_mode_x="guessing yes" ;;
           # If we don't know, obey --enable-cross-guesses.
           *)
@@ -124,7 +124,7 @@ int main ()
        [gl_cv_func_fopen_mode_e=no],
        [case "$host_os" in
           # Guess yes on glibc and musl systems.
-          linux*-gnu* | gnu* | kfreebsd*-gnu | *-musl*)
+          linux*-gnu* | gnu* | kfreebsd*-gnu | *-musl* | midipix*)
             gl_cv_func_fopen_mode_e="guessing yes" ;;
           # Guess no on native Windows.
           mingw*)

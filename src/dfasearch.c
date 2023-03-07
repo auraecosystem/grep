@@ -1,5 +1,5 @@
 /* dfasearch.c - searching subroutines using dfa and regex for grep.
-   Copyright 1992, 1998, 2000, 2007, 2009-2022 Free Software Foundation, Inc.
+   Copyright 1992, 1998, 2000, 2007, 2009-2023 Free Software Foundation, Inc.
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -149,7 +149,7 @@ regex_compile (struct dfa_comp *dc, char const *p, idx_t len,
   pat.allocated = 0;
 
   /* Do not use a fastmap with -i, to work around glibc Bug#20381.  */
-  verify (UCHAR_MAX < IDX_MAX);
+  static_assert (UCHAR_MAX < IDX_MAX);
   idx_t uchar_max = UCHAR_MAX;
   pat.fastmap = (syntax_only | match_icase) ? NULL : ximalloc (uchar_max + 1);
 
@@ -261,8 +261,6 @@ GEAcompile (char *pattern, idx_t size, reg_syntax_t syntax_bits,
           dc->patterns++;
         }
 
-      re_set_syntax (syntax_bits);
-
       if (!regex_compile (dc, p, len, dc->pcount, lineno, syntax_bits,
                           !backref))
         compilation_failed = true;
@@ -281,20 +279,19 @@ GEAcompile (char *pattern, idx_t size, reg_syntax_t syntax_bits,
   if (compilation_failed)
     exit (EXIT_TROUBLE);
 
-  if (prev <= patlim)
+  if (patlim < prev)
+    buflen--;
+  else if (pattern < prev)
     {
-      if (pattern < prev)
-        {
-          idx_t prevlen = patlim - prev;
-          buf = xirealloc (buf, buflen + prevlen);
-          memcpy (buf + buflen, prev, prevlen);
-          buflen += prevlen;
-        }
-      else
-        {
-          buf = pattern;
-          buflen = size;
-        }
+      idx_t prevlen = patlim - prev;
+      buf = xirealloc (buf, buflen + prevlen);
+      memcpy (buf + buflen, prev, prevlen);
+      buflen += prevlen;
+    }
+  else
+    {
+      buf = pattern;
+      buflen = size;
     }
 
   /* In the match_words and match_lines cases, we use a different pattern

@@ -1,5 +1,5 @@
 # Customize maint.mk                           -*- makefile -*-
-# Copyright (C) 2009-2022 Free Software Foundation, Inc.
+# Copyright (C) 2009-2023 Free Software Foundation, Inc.
 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -31,7 +31,8 @@ url_dir_list = https://ftp.gnu.org/gnu/$(PACKAGE)
 # Tests not to run as part of "make distcheck".
 local-checks-to-skip =			\
   sc_indent				\
-  sc_texinfo_acronym
+  sc_texinfo_acronym			\
+  sc_unportable_grep_q
 
 # Tools used to bootstrap this package, used for "announcement".
 bootstrap-tools = autoconf,automake,gnulib
@@ -67,7 +68,7 @@ export VERBOSE = yes
 # 1127556 9e
 export XZ_OPT = -6e
 
-old_NEWS_hash = f4973b8b2470d613d782203aac8e8304
+old_NEWS_hash = 5c1796327f2c4c7f40e10e58fd3a8019
 
 # We prefer to spell it back-reference, as POSIX does.
 sc_prohibit_backref:

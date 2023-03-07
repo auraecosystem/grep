@@ -1,5 +1,5 @@
 /* Test intprops.h.
-   Copyright (C) 2011-2022 Free Software Foundation, Inc.
+   Copyright (C) 2011-2023 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -30,10 +30,12 @@
 
 #include <config.h>
 
-#include "intprops.h"
-#include "verify.h"
+#ifdef TEST_STDCKDINT
+# include <stdckdint.h>
+#else
+# include "intprops.h"
+#endif
 
-#include <stdbool.h>
 #include <inttypes.h>
 #include <limits.h>
 
@@ -41,14 +43,17 @@
 
 /* Compile-time verification of expression X.
    In this file, we need it as a statement, rather than as a declaration.  */
-#define verify_stmt(x) do { verify (x); } while (0)
+#define verify_stmt(x) do { static_assert (x); } while (0)
 
 /* VERIFY (X) uses a static assertion for compilers that are known to work,
    and falls back on a dynamic assertion for other compilers.
+   But it ignores X if testing stdckdint.h.
    These tests should be checkable via 'verify' rather than 'ASSERT', but
    using 'verify' would run into a bug with HP-UX 11.23 cc; see
    <https://lists.gnu.org/r/bug-gnulib/2011-05/msg00401.html>.  */
-#if __GNUC__ || __clang__ || __SUNPRO_C
+#ifdef TEST_STDCKDINT
+# define VERIFY(x) ((void) 0)
+#elif __GNUC__ || __clang__ || __SUNPRO_C
 # define VERIFY(x) verify_stmt (x)
 #else
 # define VERIFY(x) ASSERT (x)
@@ -65,6 +70,7 @@ main (void)
   /* Use VERIFY for tests that must be integer constant expressions,
      ASSERT otherwise.  */
 
+#ifndef TEST_STDCKDINT
   /* TYPE_IS_INTEGER.  */
   ASSERT (TYPE_IS_INTEGER (bool));
   ASSERT (TYPE_IS_INTEGER (char));
@@ -161,6 +167,7 @@ main (void)
   VERIFY (INT_STRLEN_BOUND (int64_t) == sizeof ("-9223372036854775808") - 1);
   VERIFY (INT_BUFSIZE_BOUND (int64_t) == sizeof ("-9223372036854775808"));
   #endif
+#endif
 
   /* All the INT_<op>_RANGE_OVERFLOW tests are equally valid as
      INT_<op>_OVERFLOW tests, so define macros to do both.  OP is the

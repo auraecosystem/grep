@@ -1,6 +1,6 @@
 /* Traverse a file hierarchy.
 
-   Copyright (C) 2004-2022 Free Software Foundation, Inc.
+   Copyright (C) 2004-2023 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -62,9 +62,8 @@ static char sccsid[] = "@(#)fts.c       8.6 (Berkeley) 8/14/94";
 #endif
 #include <fcntl.h>
 #include <errno.h>
-#include <stdalign.h>
-#include <stdbool.h>
 #include <stddef.h>
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
@@ -115,6 +114,9 @@ static char sccsid[] = "@(#)fts.c       8.6 (Berkeley) 8/14/94";
 # define DT_SOCK 7
 #endif
 
+#ifndef S_IFBLK
+# define S_IFBLK 0
+#endif
 #ifndef S_IFLNK
 # define S_IFLNK 0
 #endif
@@ -234,7 +236,7 @@ static int      fts_safe_changedir (FTS *, FTSENT *, int, const char *)
 #define STREQ(a, b)     (strcmp (a, b) == 0)
 
 #define CLR(opt)        (sp->fts_options &= ~(opt))
-#define ISSET(opt)      (sp->fts_options & (opt))
+#define ISSET(opt)      ((sp->fts_options & (opt)) != 0)
 #define SET(opt)        (sp->fts_options |= (opt))
 
 /* FIXME: FTS_NOCHDIR is now misnamed.
@@ -251,13 +253,13 @@ static int      fts_safe_changedir (FTS *, FTSENT *, int, const char *)
 #define BNAMES          2               /* fts_children, names only */
 #define BREAD           3               /* fts_read */
 
-#if FTS_DEBUG
+#if GNULIB_FTS_DEBUG
 # include <inttypes.h>
-# include <stdint.h>
 # include <stdio.h>
-# include "getcwdat.h"
 bool fts_debug = false;
 # define Dprintf(x) do { if (fts_debug) printf x; } while (false)
+static void fd_ring_check (FTS const *);
+static void fd_ring_print (FTS const *, FILE *, char const *);
 #else
 # define Dprintf(x)
 # define fd_ring_check(x)
@@ -977,7 +979,11 @@ next:   tmp = p;
                         }
                         free_dir(sp);
                         fts_load(sp, p);
-                        setup_dir(sp);
+                        if (! setup_dir(sp)) {
+                                free_dir(sp);
+                                __set_errno (ENOMEM);
+                                return (NULL);
+                        }
                         goto check_for_dir;
                 }
 
@@ -1267,7 +1273,6 @@ fts_build (register FTS *sp, int type)
         register FTSENT *p, *head;
         register size_t nitems;
         FTSENT *tail;
-        void *oldaddr;
         int saved_errno;
         bool descend;
         bool doadjust;
@@ -1289,11 +1294,12 @@ fts_build (register FTS *sp, int type)
             dir_fd = dirfd (dp);
             if (dir_fd < 0)
               {
+                int dirfd_errno = errno;
                 closedir_and_clear (cur->fts_dirp);
                 if (type == BREAD)
                   {
                     cur->fts_info = FTS_DNR;
-                    cur->fts_errno = errno;
+                    cur->fts_errno = dirfd_errno;
                   }
                 return NULL;
               }
@@ -1314,19 +1320,35 @@ fts_build (register FTS *sp, int type)
             /* Rather than calling fts_stat for each and every entry encountered
                in the readdir loop (below), stat each directory only right after
                opening it.  */
-            if (cur->fts_info == FTS_NSOK)
-              cur->fts_info = fts_stat(sp, cur, false);
-            else if (sp->fts_options & FTS_TIGHT_CYCLE_CHECK)
-              {
-                /* Now read the stat info again after opening a directory to
+            bool stat_optimization = cur->fts_info == FTS_NSOK;
+
+            if (stat_optimization
+                /* Also read the stat info again after opening a directory to
                    reveal eventual changes caused by a submount triggered by
                    the traversal.  But do it only for utilities which use
                    FTS_TIGHT_CYCLE_CHECK.  Therefore, only find and du
                    benefit/suffer from this feature for now.  */
-                LEAVE_DIR (sp, cur, "4");
-                fts_stat (sp, cur, false);
-                if (! enter_dir (sp, cur))
+                || ISSET (FTS_TIGHT_CYCLE_CHECK))
+              {
+                if (!stat_optimization)
+                  LEAVE_DIR (sp, cur, "4");
+                if (fstat (dir_fd, cur->fts_statp) != 0)
                   {
+                    int fstat_errno = errno;
+                    closedir_and_clear (cur->fts_dirp);
+                    if (type == BREAD)
+                      {
+                        cur->fts_errno = fstat_errno;
+                        cur->fts_info = FTS_NS;
+                      }
+                    __set_errno (fstat_errno);
+                    return NULL;
+                  }
+                if (stat_optimization)
+                  cur->fts_info = FTS_D;
+                else if (! enter_dir (sp, cur))
+                  {
+                    closedir_and_clear (cur->fts_dirp);
                     __set_errno (ENOMEM);
                     return NULL;
                   }
@@ -1431,6 +1453,7 @@ fts_build (register FTS *sp, int type)
                                 cur->fts_info = (continue_readdir || nitems)
                                                 ? FTS_ERR : FTS_DNR;
                         }
+                        closedir_and_clear(cur->fts_dirp);
                         break;
                 }
                 if (!ISSET(FTS_SEEDOT) && ISDOT(dp->d_name))
@@ -1442,7 +1465,7 @@ fts_build (register FTS *sp, int type)
                         goto mem1;
                 if (d_namelen >= maxlen) {
                         /* include space for NUL */
-                        oldaddr = sp->fts_path;
+                        uintptr_t oldaddr = (uintptr_t) sp->fts_path;
                         if (! fts_palloc(sp, d_namelen + len + 1)) {
                                 /*
                                  * No more memory.  Save
@@ -1459,7 +1482,7 @@ mem1:                           saved_errno = errno;
                                 return (NULL);
                         }
                         /* Did realloc() change the pointer? */
-                        if (oldaddr != sp->fts_path) {
+                        if (oldaddr != (uintptr_t) sp->fts_path) {
                                 doadjust = true;
                                 if (ISSET(FTS_NOCHDIR))
                                         cp = sp->fts_path + len;
@@ -1551,14 +1574,9 @@ mem1:                           saved_errno = errno;
                         /* When there are too many dir entries, leave
                            fts_dirp open, so that a subsequent fts_read
                            can take up where we leave off.  */
-                        goto break_without_closedir;
+                        break;
                 }
         }
-
-        if (cur->fts_dirp)
-                closedir_and_clear(cur->fts_dirp);
-
- break_without_closedir:
 
         /*
          * If realloc() changed the address of the file name, adjust the
@@ -1615,7 +1633,23 @@ mem1:                           saved_errno = errno;
         return (head);
 }
 
-#if FTS_DEBUG
+#if GNULIB_FTS_DEBUG
+
+struct devino {
+  intmax_t dev, ino;
+};
+#define PRINT_DEVINO "(%jd,%jd)"
+
+static struct devino
+getdevino (int fd)
+{
+  struct stat st;
+  return (fd == AT_FDCWD
+          ? (struct devino) { -1, 0 }
+          : fstat (fd, &st) == 0
+          ? (struct devino) { st.st_dev, st.st_ino }
+          : (struct devino) { -1, errno });
+}
 
 /* Walk ->fts_parent links starting at E_CURR, until the root of the
    current hierarchy.  There should be a directory with dev/inode
@@ -1689,26 +1723,26 @@ same_fd (int fd1, int fd2)
 static void
 fd_ring_print (FTS const *sp, FILE *stream, char const *msg)
 {
+  if (!fts_debug)
+    return;
   I_ring const *fd_ring = &sp->fts_fd_ring;
-  unsigned int i = fd_ring->fts_front;
-  char *cwd = getcwdat (sp->fts_cwd_fd, NULL, 0);
-  fprintf (stream, "=== %s ========== %s\n", msg, cwd);
-  free (cwd);
+  unsigned int i = fd_ring->ir_front;
+  struct devino cwd = getdevino (sp->fts_cwd_fd);
+  fprintf (stream, "=== %s ========== "PRINT_DEVINO"\n", msg, cwd.dev, cwd.ino);
   if (i_ring_empty (fd_ring))
     return;
 
   while (true)
     {
-      int fd = fd_ring->fts_fd_ring[i];
+      int fd = fd_ring->ir_data[i];
       if (fd < 0)
         fprintf (stream, "%d: %d:\n", i, fd);
       else
         {
-          char *wd = getcwdat (fd, NULL, 0);
-          fprintf (stream, "%d: %d: %s\n", i, fd, wd);
-          free (wd);
+          struct devino wd = getdevino (fd);
+          fprintf (stream, "%d: %d: "PRINT_DEVINO"\n", i, fd, wd.dev, wd.ino);
         }
-      if (i == fd_ring->fts_back)
+      if (i == fd_ring->ir_back)
         break;
       i = (i + I_RING_SIZE - 1) % I_RING_SIZE;
     }
@@ -1727,9 +1761,9 @@ fd_ring_check (FTS const *sp)
 
   int cwd_fd = sp->fts_cwd_fd;
   cwd_fd = fcntl (cwd_fd, F_DUPFD_CLOEXEC, STDERR_FILENO + 1);
-  char *dot = getcwdat (cwd_fd, NULL, 0);
-  error (0, 0, "===== check ===== cwd: %s", dot);
-  free (dot);
+  struct devino dot = getdevino (cwd_fd);
+  fprintf (stderr, "===== check ===== cwd: "PRINT_DEVINO"\n",
+           dot.dev, dot.ino);
   while ( ! i_ring_empty (&fd_w))
     {
       int fd = i_ring_pop (&fd_w);
@@ -1744,12 +1778,10 @@ fd_ring_check (FTS const *sp)
             }
           if (!same_fd (fd, parent_fd))
             {
-              char *cwd = getcwdat (fd, NULL, 0);
-              error (0, errno, "ring  : %s", cwd);
-              char *c2 = getcwdat (parent_fd, NULL, 0);
-              error (0, errno, "parent: %s", c2);
-              free (cwd);
-              free (c2);
+              struct devino cwd = getdevino (fd);
+              fprintf (stderr, "ring  : "PRINT_DEVINO"\n", cwd.dev, cwd.ino);
+              struct devino c2 = getdevino (parent_fd);
+              fprintf (stderr, "parent: "PRINT_DEVINO"\n", c2.dev, c2.ino);
               fts_assert (0);
             }
           close (cwd_fd);
@@ -1960,10 +1992,15 @@ fts_padjust (FTS *sp, FTSENT *head)
         FTSENT *p;
         char *addr = sp->fts_path;
 
+        /* This code looks at bit-patterns of freed pointers to
+           relocate them, so it relies on undefined behavior.  If this
+           trick does not work on your platform, please report a bug.  */
+
 #define ADJUST(p) do {                                                  \
-        if ((p)->fts_accpath != (p)->fts_name) {                        \
+        uintptr_t old_accpath = (uintptr_t) (p)->fts_accpath;           \
+        if (old_accpath != (uintptr_t) (p)->fts_name) {                 \
                 (p)->fts_accpath =                                      \
-                    (char *)addr + ((p)->fts_accpath - (p)->fts_path);  \
+                  addr + (old_accpath - (uintptr_t) (p)->fts_path);     \
         }                                                               \
         (p)->fts_path = addr;                                           \
 } while (0)

@@ -1,5 +1,5 @@
 /* hash - hashing table processing.
-   Copyright (C) 1998-1999, 2001, 2003, 2009-2022 Free Software Foundation,
+   Copyright (C) 1998-1999, 2001, 2003, 2009-2023 Free Software Foundation,
    Inc.
    Written by Jim Meyering <meyering@ascend.com>, 1998.
 
@@ -25,7 +25,6 @@
 # define HASH_H_
 
 # include <stdio.h>
-# include <stdbool.h>
 
 # ifdef __cplusplus
 extern "C" {

@@ -1,5 +1,5 @@
 /* Substitute for and wrapper around <sys/ioctl.h>.
-   Copyright (C) 2008-2022 Free Software Foundation, Inc.
+   Copyright (C) 2008-2023 Free Software Foundation, Inc.
 
    This file is free software: you can redistribute it and/or modify
    it under the terms of the GNU Lesser General Public License as
@@ -62,7 +62,9 @@ _GL_FUNCDECL_SYS (ioctl, int,
 _GL_CXXALIAS_SYS (ioctl, int,
                   (int fd, int request, ... /* {void *,char *} arg */));
 # endif
+# if __GLIBC__ >= 2
 _GL_CXXALIASWARN (ioctl);
+# endif
 #elif @SYS_IOCTL_H_HAVE_WINSOCK2_H_AND_USE_SOCKETS@
 # undef ioctl
 # define ioctl ioctl_used_without_requesting_gnulib_module_ioctl

@@ -1,5 +1,5 @@
 /* Test of lstat() function.
-   Copyright (C) 2008-2022 Free Software Foundation, Inc.
+   Copyright (C) 2008-2023 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@ SIGNATURE_CHECK (lstat, int, (char const *, struct stat *));
 
 #include <fcntl.h>
 #include <errno.h>
-#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>

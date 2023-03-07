@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grep 2.5g\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2022-09-02 23:52-0700\n"
+"POT-Creation-Date: 2023-03-05 07:28-0800\n"
 "PO-Revision-Date: 2004-03-03 13:33+0200\n"
 "Last-Translator: Petri Jooste <rkwjpj@puk.ac.za>\n"
 "Language-Team: Afrikaans <i18n@af.org.za>\n"
@@ -16,108 +16,108 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Bugs: Report translation errors to the Language-Team address.\n"
 
-#: lib/argmatch.c:147
+#: lib/argmatch.c:145
 #, c-format
 msgid "invalid argument %s for %s"
 msgstr ""
 
-#: lib/argmatch.c:148
+#: lib/argmatch.c:146
 #, c-format
 msgid "ambiguous argument %s for %s"
 msgstr ""
 
-#: lib/argmatch.c:167 lib/argmatch.h:238
+#: lib/argmatch.c:165 lib/argmatch.h:237
 msgid "Valid arguments are:"
 msgstr ""
 
-#: lib/c-stack.c:187
+#: lib/c-stack.c:186
 msgid "program error"
 msgstr ""
 
-#: lib/c-stack.c:188
+#: lib/c-stack.c:187
 msgid "stack overflow"
 msgstr ""
 
-#: lib/closeout.c:122 src/grep.c:1346
+#: lib/closeout.c:121 src/grep.c:1346
 msgid "write error"
 msgstr ""
 
-#: lib/dfa.c:894
+#: lib/dfa.c:897
 #, fuzzy
 msgid "unbalanced ["
 msgstr "Ongebalanseerde ["
 
-#: lib/dfa.c:1015
+#: lib/dfa.c:1018
 msgid "invalid character class"
 msgstr ""
 
-#: lib/dfa.c:1143
+#: lib/dfa.c:1146
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr ""
 
-#: lib/dfa.c:1209
+#: lib/dfa.c:1217
 #, fuzzy
 msgid "unfinished \\ escape"
 msgstr "Onbeëindigde \\-ontsnapstring"
 
-#: lib/dfa.c:1319
+#: lib/dfa.c:1327
 msgid "? at start of expression"
 msgstr ""
 
-#: lib/dfa.c:1331
+#: lib/dfa.c:1339
 msgid "* at start of expression"
 msgstr ""
 
-#: lib/dfa.c:1345
+#: lib/dfa.c:1353
 msgid "+ at start of expression"
 msgstr ""
 
-#: lib/dfa.c:1400
+#: lib/dfa.c:1408
 msgid "{...} at start of expression"
 msgstr ""
 
-#: lib/dfa.c:1403
+#: lib/dfa.c:1411
 #, fuzzy
 msgid "invalid content of \\{\\}"
 msgstr "ongeldige maks-telling"
 
-#: lib/dfa.c:1405
+#: lib/dfa.c:1413
 msgid "regular expression too big"
 msgstr ""
 
-#: lib/dfa.c:1555
+#: lib/dfa.c:1563
 msgid "stray \\ before unprintable character"
 msgstr ""
 
-#: lib/dfa.c:1557
+#: lib/dfa.c:1565
 msgid "stray \\ before white space"
 msgstr ""
 
-#: lib/dfa.c:1561
+#: lib/dfa.c:1569
 #, c-format
 msgid "stray \\ before %lc"
 msgstr ""
 
-#: lib/dfa.c:1562
+#: lib/dfa.c:1570
 msgid "stray \\"
 msgstr ""
 
-#: lib/dfa.c:1917
+#: lib/dfa.c:1925
 #, fuzzy
 msgid "unbalanced ("
 msgstr "Ongebalanseerde ("
 
-#: lib/dfa.c:2034
+#: lib/dfa.c:2042
 #, fuzzy
 msgid "no syntax specified"
 msgstr "Geen sintaks gespesifiseer"
 
-#: lib/dfa.c:2045
+#: lib/dfa.c:2053
 #, fuzzy
 msgid "unbalanced )"
 msgstr "Ongebalanseerde )"
 
-#: lib/error.c:195
+#: lib/error.c:193
 msgid "Unknown system error"
 msgstr "Onbekende stelselfout"
 
@@ -172,7 +172,7 @@ msgstr ""
 msgid "failed to return to initial working directory"
 msgstr ""
 
-#: lib/xbinary-io.c:37
+#: lib/xbinary-io.c:36
 #, c-format
 msgid "failed to set file descriptor text/binary mode"
 msgstr ""
@@ -210,11 +210,11 @@ msgstr ""
 #. If you don't know what to put here, please see
 #. <https://en.wikipedia.org/wiki/Quotation_marks_in_other_languages>
 #. and use glyphs suitable for your language.
-#: lib/quotearg.c:355
+#: lib/quotearg.c:354
 msgid "`"
 msgstr "'"
 
-#: lib/quotearg.c:356
+#: lib/quotearg.c:355
 msgid "'"
 msgstr "'"
 
@@ -687,7 +687,7 @@ msgstr "onbekende binêre-lêertipe"
 #: src/grep.c:2831
 msgid ""
 "Written by Mike Haertel and others; see\n"
-"<https://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>."
+"<https://git.savannah.gnu.org/cgit/grep.git/tree/AUTHORS>."
 msgstr ""
 
 #: src/grep.c:2934
@@ -695,55 +695,59 @@ msgstr ""
 msgid "warning: GREP_COLOR='%s' is deprecated; use GREP_COLORS='mt=%s'"
 msgstr ""
 
-#: src/pcresearch.c:148
+#: src/pcresearch.c:153
+msgid "-P supports only unibyte locales on this platform"
+msgstr ""
+
+#: src/pcresearch.c:155
 msgid "-P supports only unibyte and UTF-8 locales"
 msgstr ""
 
-#: src/pcresearch.c:162
+#: src/pcresearch.c:169
 #, fuzzy
 msgid "the -P option only supports a single pattern"
 msgstr "Die -P opsie word nie ondersteun nie"
 
-#: src/pcresearch.c:215
+#: src/pcresearch.c:222
 #, c-format
 msgid "JIT internal error: %d"
 msgstr ""
 
-#: src/pcresearch.c:252
+#: src/pcresearch.c:259
 msgid "exceeded PCRE's line length limit"
 msgstr ""
 
-#: src/pcresearch.c:330
+#: src/pcresearch.c:337
 #, fuzzy, c-format
 msgid "%s: memory exhausted"
 msgstr "geheue uitgeput"
 
-#: src/pcresearch.c:333
+#: src/pcresearch.c:340
 #, c-format
 msgid "%s: exhausted PCRE JIT stack"
 msgstr ""
 
-#: src/pcresearch.c:337
+#: src/pcresearch.c:344
 #, c-format
 msgid "%s: exceeded PCRE's backtracking limit"
 msgstr ""
 
-#: src/pcresearch.c:342
+#: src/pcresearch.c:349
 #, c-format
 msgid "%s: exceeded PCRE's nested backtracking limit"
 msgstr ""
 
-#: src/pcresearch.c:346
+#: src/pcresearch.c:353
 #, c-format
 msgid "%s: PCRE detected recurse loop"
 msgstr ""
 
-#: src/pcresearch.c:351
+#: src/pcresearch.c:358
 #, c-format
 msgid "%s: exceeded PCRE's heap limit"
 msgstr ""
 
-#: src/pcresearch.c:360
+#: src/pcresearch.c:367
 #, c-format
 msgid "%s: internal PCRE error: %d"
 msgstr ""

@@ -1,5 +1,5 @@
 /* Test of fcntl(2).
-   Copyright (C) 2009-2022 Free Software Foundation, Inc.
+   Copyright (C) 2009-2023 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -27,7 +27,6 @@ SIGNATURE_CHECK (fcntl, int, (int, int, ...));
 /* Helpers.  */
 #include <errno.h>
 #include <stdarg.h>
-#include <stdbool.h>
 #include <unistd.h>
 
 #if defined _WIN32 && ! defined __CYGWIN__

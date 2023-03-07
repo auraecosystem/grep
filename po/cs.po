@@ -4,15 +4,15 @@
 # Vladimir Michl <Vladimir.Michl@seznam.cz>, 1998.
 # Petr Pisar <petr.pisar@atlas.cz>, 2008, 2009, 2010, 2011, 2012, 2013.
 # Petr Pisar <petr.pisar@atlas.cz>, 2014, 2015, 2016, 2018, 2020, 2021.
-# Petr Pisar <petr.pisar@atlas.cz>, 2022.
+# Petr Pisar <petr.pisar@atlas.cz>, 2022, 2023.
 #
 # Thanks to Stanislav Brabec <utx@k332.feld.cvut.cz>.
 msgid ""
 msgstr ""
-"Project-Id-Version: grep 3.7.98\n"
+"Project-Id-Version: grep 3.8.35\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2022-09-02 23:52-0700\n"
-"PO-Revision-Date: 2022-07-04 19:28+02:00\n"
+"POT-Creation-Date: 2023-03-05 07:28-0800\n"
+"PO-Revision-Date: 2023-02-27 19:59+01:00\n"
 "Last-Translator: Petr Pisar <petr.pisar@atlas.cz>\n"
 "Language-Team: Czech <translation-team-cs@lists.sourceforge.net>\n"
 "Language: cs\n"
@@ -21,103 +21,103 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Bugs: Report translation errors to the Language-Team address.\n"
 
-#: lib/argmatch.c:147
+#: lib/argmatch.c:145
 #, c-format
 msgid "invalid argument %s for %s"
 msgstr "neplatný argument %s u %s"
 
-#: lib/argmatch.c:148
+#: lib/argmatch.c:146
 #, c-format
 msgid "ambiguous argument %s for %s"
 msgstr "nejednoznačný argument %s u %s"
 
-#: lib/argmatch.c:167 lib/argmatch.h:238
+#: lib/argmatch.c:165 lib/argmatch.h:237
 msgid "Valid arguments are:"
 msgstr "Platné argumenty jsou:"
 
-#: lib/c-stack.c:187
+#: lib/c-stack.c:186
 msgid "program error"
 msgstr "chyba programu"
 
-#: lib/c-stack.c:188
+#: lib/c-stack.c:187
 msgid "stack overflow"
 msgstr "přetečení zásobníku"
 
-#: lib/closeout.c:122 src/grep.c:1346
+#: lib/closeout.c:121 src/grep.c:1346
 msgid "write error"
 msgstr "chyba při zápisu"
 
-#: lib/dfa.c:894
+#: lib/dfa.c:897
 msgid "unbalanced ["
 msgstr "nevyvážená ["
 
-#: lib/dfa.c:1015
+#: lib/dfa.c:1018
 msgid "invalid character class"
 msgstr "neplatný třída znaků"
 
-#: lib/dfa.c:1143
+#: lib/dfa.c:1146
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr "zápis třídy znaků je [[:space:]], ne [:space:]"
 
-#: lib/dfa.c:1209
+#: lib/dfa.c:1217
 msgid "unfinished \\ escape"
 msgstr "neukončená escape sekvence \\"
 
-#: lib/dfa.c:1319
+#: lib/dfa.c:1327
 msgid "? at start of expression"
 msgstr "? na začátku výrazu"
 
-#: lib/dfa.c:1331
+#: lib/dfa.c:1339
 msgid "* at start of expression"
 msgstr "* na začátku výrazu"
 
-#: lib/dfa.c:1345
+#: lib/dfa.c:1353
 msgid "+ at start of expression"
 msgstr "+ na začátku výrazu"
 
-#: lib/dfa.c:1400
+#: lib/dfa.c:1408
 msgid "{...} at start of expression"
 msgstr "{…} na začátku výrazu"
 
-#: lib/dfa.c:1403
+#: lib/dfa.c:1411
 msgid "invalid content of \\{\\}"
 msgstr "neplatný obsah \\{\\}"
 
-#: lib/dfa.c:1405
+#: lib/dfa.c:1413
 msgid "regular expression too big"
 msgstr "regulární výraz je příliš velký"
 
-#: lib/dfa.c:1555
+#: lib/dfa.c:1563
 msgid "stray \\ before unprintable character"
 msgstr "přebývající \\ před netisknutelným znakem"
 
-#: lib/dfa.c:1557
+#: lib/dfa.c:1565
 msgid "stray \\ before white space"
 msgstr "přebývající \\ před bílým místem"
 
-#: lib/dfa.c:1561
+#: lib/dfa.c:1569
 #, c-format
 msgid "stray \\ before %lc"
 msgstr "přebývající \\ před %lc"
 
-#: lib/dfa.c:1562
+#: lib/dfa.c:1570
 msgid "stray \\"
 msgstr "přebývající \\"
 
-#: lib/dfa.c:1917
+#: lib/dfa.c:1925
 msgid "unbalanced ("
 msgstr "nevyvážená ("
 
 # ? Není zadaná syntaxe
-#: lib/dfa.c:2034
+#: lib/dfa.c:2042
 msgid "no syntax specified"
 msgstr "syntaxe není určena"
 
-#: lib/dfa.c:2045
+#: lib/dfa.c:2053
 msgid "unbalanced )"
 msgstr "nevyvážená )"
 
-#: lib/error.c:195
+#: lib/error.c:193
 msgid "Unknown system error"
 msgstr "Neznámá systémová chyba"
 
@@ -170,7 +170,7 @@ msgstr "nelze zaznamenat aktuální pracovní adresář"
 msgid "failed to return to initial working directory"
 msgstr "návrat do prvotního pracovního adresáře se nezdařil"
 
-#: lib/xbinary-io.c:37
+#: lib/xbinary-io.c:36
 #, c-format
 msgid "failed to set file descriptor text/binary mode"
 msgstr "nastavení textového/binárního režimu deskriptoru souboru selhalo"
@@ -196,11 +196,11 @@ msgstr "nastavení textového/binárního režimu deskriptoru souboru selhalo"
 #. If you don't know what to put here, please see
 #. <https://en.wikipedia.org/wiki/Quotation_marks_in_other_languages>
 #. and use glyphs suitable for your language.
-#: lib/quotearg.c:355
+#: lib/quotearg.c:354
 msgid "`"
 msgstr "„"
 
-#: lib/quotearg.c:356
+#: lib/quotearg.c:355
 msgid "'"
 msgstr "“"
 
@@ -749,69 +749,73 @@ msgstr "neznámý typ binárního souboru"
 #: src/grep.c:2831
 msgid ""
 "Written by Mike Haertel and others; see\n"
-"<https://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>."
+"<https://git.savannah.gnu.org/cgit/grep.git/tree/AUTHORS>."
 msgstr ""
 "Napsal Mike Haertel a další, vizte\n"
-"<https://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>."
+"<https://git.savannah.gnu.org/cgit/grep.git/tree/AUTHORS>."
 
 #: src/grep.c:2934
 #, c-format
 msgid "warning: GREP_COLOR='%s' is deprecated; use GREP_COLORS='mt=%s'"
 msgstr "pozor: GREP_COLOR='%s' je zastaralé, použijte GREP_COLORS='mt=%s'"
 
-#: src/pcresearch.c:148
+#: src/pcresearch.c:153
+msgid "-P supports only unibyte locales on this platform"
+msgstr "-P podporuje na této platformě pouze jednobajtová národní prostředí"
+
+#: src/pcresearch.c:155
 msgid "-P supports only unibyte and UTF-8 locales"
 msgstr "-P podporuje pouze jednobajtová a UTF-8 národní prostředí"
 
-#: src/pcresearch.c:162
+#: src/pcresearch.c:169
 msgid "the -P option only supports a single pattern"
 msgstr "přepínač -P lze být použít pouze s jedním vzorkem"
 
-#: src/pcresearch.c:215
+#: src/pcresearch.c:222
 #, c-format
 msgid "JIT internal error: %d"
 msgstr "vnitřní chyba JIT: %d"
 
-#: src/pcresearch.c:252
+#: src/pcresearch.c:259
 msgid "exceeded PCRE's line length limit"
 msgstr "překročeno omezení PCRE na délku řádku"
 
-#: src/pcresearch.c:330
+#: src/pcresearch.c:337
 #, c-format
 msgid "%s: memory exhausted"
 msgstr "%s: paměť vyčerpána"
 
 # It corresponds to PCRE2_ERROR_JIT_STACKLIMIT error.
-#: src/pcresearch.c:333
+#: src/pcresearch.c:340
 #, c-format
 msgid "%s: exhausted PCRE JIT stack"
 msgstr "%s: JIT zásobník knihovny PCRE vyčerpán"
 
 # It corresponds to PCRE2_ERROR_MATCHLIMIT error.
-#: src/pcresearch.c:337
+#: src/pcresearch.c:344
 #, c-format
 msgid "%s: exceeded PCRE's backtracking limit"
 msgstr "%s: překročeno omezení PCRE na délku návratu"
 
 # It corresponds to PCRE2_ERROR_DEPTHLIMIT error.
-#: src/pcresearch.c:342
+#: src/pcresearch.c:349
 #, c-format
 msgid "%s: exceeded PCRE's nested backtracking limit"
 msgstr "%s: překročeno omezení PCRE na hloubku návratu ze zanoření"
 
 # It corresponds to PCRE2_ERROR_RECURSELOOP error.
-#: src/pcresearch.c:346
+#: src/pcresearch.c:353
 #, c-format
 msgid "%s: PCRE detected recurse loop"
 msgstr "%s: PCRE objevilo smyčku v zanoření"
 
 # It corresponds to PCRE2_ERROR_HEAPLIMIT error.
-#: src/pcresearch.c:351
+#: src/pcresearch.c:358
 #, c-format
 msgid "%s: exceeded PCRE's heap limit"
 msgstr "%s: překročeno omezení PCRE na velikost haldy"
 
-#: src/pcresearch.c:360
+#: src/pcresearch.c:367
 #, c-format
 msgid "%s: internal PCRE error: %d"
 msgstr "%s: vnitřní chyba PCRE: %d"

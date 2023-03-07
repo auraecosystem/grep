@@ -1,5 +1,5 @@
 /* Test suite for exclude.
-   Copyright (C) 2009-2022 Free Software Foundation, Inc.
+   Copyright (C) 2009-2023 Free Software Foundation, Inc.
    This file is part of the GNUlib Library.
 
    This program is free software: you can redistribute it and/or modify
@@ -20,7 +20,6 @@
 #include <stdlib.h>
 #include <errno.h>
 #include <string.h>
-#include <stdbool.h>
 #include <fnmatch.h>
 
 #include "exclude.h"
