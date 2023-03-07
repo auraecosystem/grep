@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grep 3.6.27\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2022-09-02 23:52-0700\n"
+"POT-Creation-Date: 2023-03-05 07:28-0800\n"
 "PO-Revision-Date: 2021-08-09 10:42+0100\n"
 "Last-Translator: Pedro Albuquerque <pmra@protonmail.com>\n"
 "Language-Team: Portuguese <translation-team-pt@lists.sourceforge.net>\n"
@@ -19,105 +19,105 @@ msgstr ""
 "X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: lib/argmatch.c:147
+#: lib/argmatch.c:145
 #, c-format
 msgid "invalid argument %s for %s"
 msgstr "argumento inválido %s para %s"
 
-#: lib/argmatch.c:148
+#: lib/argmatch.c:146
 #, c-format
 msgid "ambiguous argument %s for %s"
 msgstr "argumento ambíguo %s para %s"
 
-#: lib/argmatch.c:167 lib/argmatch.h:238
+#: lib/argmatch.c:165 lib/argmatch.h:237
 msgid "Valid arguments are:"
 msgstr "Os argumentos válidos são:"
 
-#: lib/c-stack.c:187
+#: lib/c-stack.c:186
 msgid "program error"
 msgstr "erro de programa"
 
-#: lib/c-stack.c:188
+#: lib/c-stack.c:187
 msgid "stack overflow"
 msgstr "transporte da pilha"
 
-#: lib/closeout.c:122 src/grep.c:1346
+#: lib/closeout.c:121 src/grep.c:1346
 msgid "write error"
 msgstr "erro de escrita"
 
-#: lib/dfa.c:894
+#: lib/dfa.c:897
 msgid "unbalanced ["
 msgstr "[ sem par"
 
-#: lib/dfa.c:1015
+#: lib/dfa.c:1018
 msgid "invalid character class"
 msgstr "classe de carácter inválida"
 
-#: lib/dfa.c:1143
+#: lib/dfa.c:1146
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr "a sintaxe da classe de carácter é [[:espaço:]], não [:espaço:]"
 
-#: lib/dfa.c:1209
+#: lib/dfa.c:1217
 msgid "unfinished \\ escape"
 msgstr "não terminado\\escape"
 
-#: lib/dfa.c:1319
+#: lib/dfa.c:1327
 #, fuzzy
 msgid "? at start of expression"
 msgstr "Expressão regular inválida"
 
-#: lib/dfa.c:1331
+#: lib/dfa.c:1339
 #, fuzzy
 msgid "* at start of expression"
 msgstr "Expressão regular inválida"
 
-#: lib/dfa.c:1345
+#: lib/dfa.c:1353
 #, fuzzy
 msgid "+ at start of expression"
 msgstr "Expressão regular inválida"
 
-#: lib/dfa.c:1400
+#: lib/dfa.c:1408
 msgid "{...} at start of expression"
 msgstr ""
 
-#: lib/dfa.c:1403
+#: lib/dfa.c:1411
 msgid "invalid content of \\{\\}"
 msgstr "conteúdo inválido de \\{\\}"
 
-#: lib/dfa.c:1405
+#: lib/dfa.c:1413
 msgid "regular expression too big"
 msgstr "expressão regular muito grande"
 
-#: lib/dfa.c:1555
+#: lib/dfa.c:1563
 msgid "stray \\ before unprintable character"
 msgstr ""
 
-#: lib/dfa.c:1557
+#: lib/dfa.c:1565
 msgid "stray \\ before white space"
 msgstr ""
 
-#: lib/dfa.c:1561
+#: lib/dfa.c:1569
 #, c-format
 msgid "stray \\ before %lc"
 msgstr ""
 
-#: lib/dfa.c:1562
+#: lib/dfa.c:1570
 msgid "stray \\"
 msgstr ""
 
-#: lib/dfa.c:1917
+#: lib/dfa.c:1925
 msgid "unbalanced ("
 msgstr "( sem par"
 
-#: lib/dfa.c:2034
+#: lib/dfa.c:2042
 msgid "no syntax specified"
 msgstr "sintaxe não especificada"
 
-#: lib/dfa.c:2045
+#: lib/dfa.c:2053
 msgid "unbalanced )"
 msgstr ") sem par"
 
-#: lib/error.c:195
+#: lib/error.c:193
 msgid "Unknown system error"
 msgstr "Erro de sistema desconhecido"
 
@@ -170,7 +170,7 @@ msgstr "impossível gravar a pasta de trabalho actual"
 msgid "failed to return to initial working directory"
 msgstr "falha ao voltar à pasta de trabalho inicial"
 
-#: lib/xbinary-io.c:37
+#: lib/xbinary-io.c:36
 #, c-format
 msgid "failed to set file descriptor text/binary mode"
 msgstr "falha ao definir modo texto/binário do descritor de ficheiro"
@@ -196,11 +196,11 @@ msgstr "falha ao definir modo texto/binário do descritor de ficheiro"
 #. If you don't know what to put here, please see
 #. <https://en.wikipedia.org/wiki/Quotation_marks_in_other_languages>
 #. and use glyphs suitable for your language.
-#: lib/quotearg.c:355
+#: lib/quotearg.c:354
 msgid "`"
 msgstr "\""
 
-#: lib/quotearg.c:356
+#: lib/quotearg.c:355
 msgid "'"
 msgstr "\""
 
@@ -734,9 +734,10 @@ msgid "unknown binary-files type"
 msgstr "tipo de ficheiro binário desconhecido"
 
 #: src/grep.c:2831
+#, fuzzy
 msgid ""
 "Written by Mike Haertel and others; see\n"
-"<https://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>."
+"<https://git.savannah.gnu.org/cgit/grep.git/tree/AUTHORS>."
 msgstr ""
 "Escrito por Mike Haertel e outros; veja\n"
 "<https://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>."
@@ -746,54 +747,59 @@ msgstr ""
 msgid "warning: GREP_COLOR='%s' is deprecated; use GREP_COLORS='mt=%s'"
 msgstr ""
 
-#: src/pcresearch.c:148
+#: src/pcresearch.c:153
+#, fuzzy
+msgid "-P supports only unibyte locales on this platform"
+msgstr "-P só suporta idiomas unibyte e UTF-8"
+
+#: src/pcresearch.c:155
 msgid "-P supports only unibyte and UTF-8 locales"
 msgstr "-P só suporta idiomas unibyte e UTF-8"
 
-#: src/pcresearch.c:162
+#: src/pcresearch.c:169
 msgid "the -P option only supports a single pattern"
 msgstr "a opção -P só suporta um padrão"
 
-#: src/pcresearch.c:215
+#: src/pcresearch.c:222
 #, fuzzy, c-format
 msgid "JIT internal error: %d"
 msgstr "erro interno"
 
-#: src/pcresearch.c:252
+#: src/pcresearch.c:259
 msgid "exceeded PCRE's line length limit"
 msgstr "excedido o limite de tamanho da linha de PCRE"
 
-#: src/pcresearch.c:330
+#: src/pcresearch.c:337
 #, c-format
 msgid "%s: memory exhausted"
 msgstr "%s: memória esgotada"
 
-#: src/pcresearch.c:333
+#: src/pcresearch.c:340
 #, c-format
 msgid "%s: exhausted PCRE JIT stack"
 msgstr "%s: pilha PCRE JIT esgotada"
 
-#: src/pcresearch.c:337
+#: src/pcresearch.c:344
 #, c-format
 msgid "%s: exceeded PCRE's backtracking limit"
 msgstr "%s: excedido o limite de retrocesso de PCRE"
 
-#: src/pcresearch.c:342
+#: src/pcresearch.c:349
 #, fuzzy, c-format
 msgid "%s: exceeded PCRE's nested backtracking limit"
 msgstr "%s: excedido o limite de retrocesso de PCRE"
 
-#: src/pcresearch.c:346
+#: src/pcresearch.c:353
 #, c-format
 msgid "%s: PCRE detected recurse loop"
 msgstr ""
 
-#: src/pcresearch.c:351
+#: src/pcresearch.c:358
 #, fuzzy, c-format
 msgid "%s: exceeded PCRE's heap limit"
 msgstr "%s: limite de recursividade de PCRE excedido"
 
-#: src/pcresearch.c:360
+#: src/pcresearch.c:367
 #, c-format
 msgid "%s: internal PCRE error: %d"
 msgstr "%s: erro interno de PCRE: %d"

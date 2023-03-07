@@ -18,8 +18,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grep-3.7.98\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2022-09-02 23:52-0700\n"
-"PO-Revision-Date: 2022-07-09 07:27+0200\n"
+"POT-Creation-Date: 2023-03-05 07:28-0800\n"
+"PO-Revision-Date: 2022-11-06 16:16-0800\n"
 "Last-Translator: Božidar Putanec <bozidarp@yahoo.com>\n"
 "Language-Team: Croatian <lokalizacija@linux.hr>\n"
 "Language: hr\n"
@@ -31,103 +31,103 @@ msgstr ""
 "X-Bugs: Report translation errors to the Language-Team address.\n"
 "X-Generator: Poedit 3.1.1\n"
 
-#: lib/argmatch.c:147
+#: lib/argmatch.c:145
 #, c-format
 msgid "invalid argument %s for %s"
 msgstr "nevaljani argument %s za %s"
 
-#: lib/argmatch.c:148
+#: lib/argmatch.c:146
 #, c-format
 msgid "ambiguous argument %s for %s"
 msgstr "višeznačni argument %s za %s"
 
-#: lib/argmatch.c:167 lib/argmatch.h:238
+#: lib/argmatch.c:165 lib/argmatch.h:237
 msgid "Valid arguments are:"
 msgstr "Valjani argumenti su:"
 
-#: lib/c-stack.c:187
+#: lib/c-stack.c:186
 msgid "program error"
 msgstr "greška u programu"
 
-#: lib/c-stack.c:188
+#: lib/c-stack.c:187
 msgid "stack overflow"
 msgstr "prelijevanje stȏga"
 
-#: lib/closeout.c:122 src/grep.c:1346
+#: lib/closeout.c:121 src/grep.c:1346
 msgid "write error"
 msgstr "greška pri pisanju"
 
-#: lib/dfa.c:894
+#: lib/dfa.c:897
 msgid "unbalanced ["
 msgstr "[ nema odgovarajući par"
 
-#: lib/dfa.c:1015
+#: lib/dfa.c:1018
 msgid "invalid character class"
 msgstr "nevaljana znakovna klasa"
 
-#: lib/dfa.c:1143
+#: lib/dfa.c:1146
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr "sintaksa znakovne klase je [[:space]], ne [:space:]"
 
-#: lib/dfa.c:1209
+#: lib/dfa.c:1217
 msgid "unfinished \\ escape"
 msgstr "nedovršena \\ escape sekvencija"
 
-#: lib/dfa.c:1319
+#: lib/dfa.c:1327
 msgid "? at start of expression"
 msgstr "? na početku izraza"
 
-#: lib/dfa.c:1331
+#: lib/dfa.c:1339
 msgid "* at start of expression"
 msgstr "* na početku izraza"
 
-#: lib/dfa.c:1345
+#: lib/dfa.c:1353
 msgid "+ at start of expression"
 msgstr "+ na kraju izraza"
 
-#: lib/dfa.c:1400
+#: lib/dfa.c:1408
 msgid "{...} at start of expression"
 msgstr "{...} na startu izraza"
 
-#: lib/dfa.c:1403
+#: lib/dfa.c:1411
 msgid "invalid content of \\{\\}"
 msgstr "nevaljani sadržaj u \\{\\}"
 
-#: lib/dfa.c:1405
+#: lib/dfa.c:1413
 msgid "regular expression too big"
 msgstr "preveliki regularni izraz"
 
-#: lib/dfa.c:1555
+#: lib/dfa.c:1563
 msgid "stray \\ before unprintable character"
 msgstr "zalutali \\ ispred neispisivog znaka"
 
-#: lib/dfa.c:1557
+#: lib/dfa.c:1565
 msgid "stray \\ before white space"
 msgstr "zalutali \\ ispred bijeline"
 
-#: lib/dfa.c:1561
+#: lib/dfa.c:1569
 #, c-format
 msgid "stray \\ before %lc"
 msgstr "zalutali \\ ispred %lc"
 
-#: lib/dfa.c:1562
+#: lib/dfa.c:1570
 msgid "stray \\"
 msgstr "zalutali \\"
 
-#: lib/dfa.c:1917
+#: lib/dfa.c:1925
 msgid "unbalanced ("
 msgstr "( nema odgovarajući par"
 
 # „zadano“ je često „default“, pa radije „navedena“ ili „imenovana“
-#: lib/dfa.c:2034
+#: lib/dfa.c:2042
 msgid "no syntax specified"
 msgstr "sintaksa nije navedena"
 
-#: lib/dfa.c:2045
+#: lib/dfa.c:2053
 msgid "unbalanced )"
 msgstr ") nema odgovarajući par"
 
-#: lib/error.c:195
+#: lib/error.c:193
 msgid "Unknown system error"
 msgstr "Nepoznata greška sustava"
 
@@ -181,7 +181,7 @@ msgstr "nije moguće registrirati trenutni radni direktorij"
 msgid "failed to return to initial working directory"
 msgstr "nije se uspjelo vratiti u početni radni direktorij"
 
-#: lib/xbinary-io.c:37
+#: lib/xbinary-io.c:36
 #, c-format
 msgid "failed to set file descriptor text/binary mode"
 msgstr "nije uspjelo postaviti deskriptor datoteke u tekst/binarni način"
@@ -207,11 +207,11 @@ msgstr "nije uspjelo postaviti deskriptor datoteke u tekst/binarni način"
 #. If you don't know what to put here, please see
 #. <https://en.wikipedia.org/wiki/Quotation_marks_in_other_languages>
 #. and use glyphs suitable for your language.
-#: lib/quotearg.c:355
+#: lib/quotearg.c:354
 msgid "`"
 msgstr "„"
 
-#: lib/quotearg.c:356
+#: lib/quotearg.c:355
 msgid "'"
 msgstr "“"
 
@@ -756,9 +756,10 @@ msgid "unknown binary-files type"
 msgstr "nepoznata vrsta binarnih datoteka"
 
 #: src/grep.c:2831
+#, fuzzy
 msgid ""
 "Written by Mike Haertel and others; see\n"
-"<https://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>."
+"<https://git.savannah.gnu.org/cgit/grep.git/tree/AUTHORS>."
 msgstr ""
 "Napisali Mike Haertel i ostali; vidi\n"
 "<https://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>."
@@ -770,55 +771,61 @@ msgstr ""
 "upozorenje: GREP_COLOR=‘%s’ je zastarjelo; koristite GREP_COLORS=‘mt=%s’"
 
 # bp: novi msgid
-#: src/pcresearch.c:148
+#: src/pcresearch.c:153
+#, fuzzy
+msgid "-P supports only unibyte locales on this platform"
+msgstr "-P podržava samo unibyte i UTF-8 locale"
+
+# bp: novi msgid
+#: src/pcresearch.c:155
 msgid "-P supports only unibyte and UTF-8 locales"
 msgstr "-P podržava samo unibyte i UTF-8 locale"
 
-#: src/pcresearch.c:162
+#: src/pcresearch.c:169
 msgid "the -P option only supports a single pattern"
 msgstr "opcija -P podržava samo jedan uzorak"
 
-#: src/pcresearch.c:215
+#: src/pcresearch.c:222
 #, c-format
 msgid "JIT internal error: %d"
 msgstr "JIT interna greška: %d"
 
-#: src/pcresearch.c:252
+#: src/pcresearch.c:259
 msgid "exceeded PCRE's line length limit"
 msgstr "prekoračeno je ograničenje duljine retka PCRE-a"
 
-#: src/pcresearch.c:330
+#: src/pcresearch.c:337
 #, c-format
 msgid "%s: memory exhausted"
 msgstr "%s: nema dovoljno memorije"
 
-#: src/pcresearch.c:333
+#: src/pcresearch.c:340
 #, c-format
 msgid "%s: exhausted PCRE JIT stack"
 msgstr "%s: PCRE JIT stȏg je iscrpljen"
 
-#: src/pcresearch.c:337
+#: src/pcresearch.c:344
 #, c-format
 msgid "%s: exceeded PCRE's backtracking limit"
 msgstr "%s: je premašio PCRE granicu broja pokušaja"
 
-#: src/pcresearch.c:342
+#: src/pcresearch.c:349
 #, c-format
 msgid "%s: exceeded PCRE's nested backtracking limit"
 msgstr "%s: je premašio PCRE granicu broja ugniježdenih pokušaja"
 
-#: src/pcresearch.c:346
+#: src/pcresearch.c:353
 #, c-format
 msgid "%s: PCRE detected recurse loop"
 msgstr "%s: PCRE je otkrio/naišao na rekurzivnu petlju"
 
-#: src/pcresearch.c:351
+#: src/pcresearch.c:358
 #, c-format
 msgid "%s: exceeded PCRE's heap limit"
 msgstr "%s: je premašio PCRE granicu za hrpe (heap)"
 
 # bp:fuzzy popravljen
-#: src/pcresearch.c:360
+#: src/pcresearch.c:367
 #, c-format
 msgid "%s: internal PCRE error: %d"
 msgstr "%s: interna PCRE greška: %d"

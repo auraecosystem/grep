@@ -1,6 +1,6 @@
 ## DO NOT EDIT! GENERATED AUTOMATICALLY!
 ## Process this file with automake to produce Makefile.in.
-# Copyright (C) 2002-2022 Free Software Foundation, Inc.
+# Copyright (C) 2002-2023 Free Software Foundation, Inc.
 #
 # This file is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -81,11 +81,18 @@ EXTRA_DIST += test-accept.c signature.h macros.h
 
 ## end   gnulib module accept-tests
 
+## begin gnulib module alignasof-tests
+
+TESTS += test-alignasof
+check_PROGRAMS += test-alignasof
+EXTRA_DIST += test-alignasof.c macros.h
+
+## end   gnulib module alignasof-tests
+
 ## begin gnulib module alignof-tests
 
 TESTS += test-alignof
 check_PROGRAMS += test-alignof
-
 EXTRA_DIST += test-alignof.c
 
 ## end   gnulib module alignof-tests
@@ -114,7 +121,7 @@ EXTRA_DIST += test-alloca-opt.c
 
 TESTS += test-argmatch
 check_PROGRAMS += test-argmatch
-test_argmatch_LDADD = $(LDADD) @LIBINTL@ $(LIB_MBRTOWC)
+test_argmatch_LDADD = $(LDADD) @LIBINTL@ $(MBRTOWC_LIB)
 
 EXTRA_DIST += test-argmatch.c macros.h
 
@@ -163,6 +170,14 @@ EXTRA_DIST += test-arpa_inet.c
 
 ## end   gnulib module arpa_inet-tests
 
+## begin gnulib module assert-h-tests
+
+TESTS += test-assert
+check_PROGRAMS += test-assert
+EXTRA_DIST += test-assert.c
+
+## end   gnulib module assert-h-tests
+
 ## begin gnulib module binary-io-tests
 
 TESTS += test-binary-io.sh
@@ -204,7 +219,7 @@ EXTRA_DIST += test-bitrotate.c macros.h
 TESTS += test-btowc1.sh test-btowc2.sh
 TESTS_ENVIRONMENT += LOCALE_FR='@LOCALE_FR@' LOCALE_FR_UTF8='@LOCALE_FR_UTF8@'
 check_PROGRAMS += test-btowc
-test_btowc_LDADD = $(LDADD) $(LIB_SETLOCALE)
+test_btowc_LDADD = $(LDADD) $(SETLOCALE_LIB)
 EXTRA_DIST += test-btowc1.sh test-btowc2.sh test-btowc.c signature.h macros.h
 
 ## end   gnulib module btowc-tests
@@ -213,7 +228,7 @@ EXTRA_DIST += test-btowc1.sh test-btowc2.sh test-btowc.c signature.h macros.h
 
 TESTS += test-c-ctype
 check_PROGRAMS += test-c-ctype
-test_c_ctype_LDADD = $(LDADD) $(LIB_SETLOCALE)
+test_c_ctype_LDADD = $(LDADD) $(SETLOCALE_LIB)
 EXTRA_DIST += test-c-ctype.c macros.h
 
 ## end   gnulib module c-ctype-tests
@@ -234,11 +249,28 @@ EXTRA_DIST += test-c-stack.c test-c-stack.sh test-c-stack2.sh macros.h
 TESTS += test-c-strcase.sh
 TESTS_ENVIRONMENT += LOCALE_FR='@LOCALE_FR@' LOCALE_TR_UTF8='@LOCALE_TR_UTF8@'
 check_PROGRAMS += test-c-strcasecmp test-c-strncasecmp
-test_c_strcasecmp_LDADD = $(LDADD) $(LIB_SETLOCALE)
-test_c_strncasecmp_LDADD = $(LDADD) $(LIB_SETLOCALE)
+test_c_strcasecmp_LDADD = $(LDADD) $(SETLOCALE_LIB)
+test_c_strncasecmp_LDADD = $(LDADD) $(SETLOCALE_LIB)
 EXTRA_DIST += test-c-strcase.sh test-c-strcasecmp.c test-c-strncasecmp.c macros.h
 
 ## end   gnulib module c-strcase-tests
+
+## begin gnulib module c-strcasestr
+
+libtests_a_SOURCES += c-strcasestr.h c-strcasestr.c
+
+EXTRA_DIST += str-two-way.h
+
+## end   gnulib module c-strcasestr
+
+## begin gnulib module c-strcasestr-tests
+
+TESTS += test-c-strcasestr
+check_PROGRAMS += test-c-strcasestr
+
+EXTRA_DIST += test-c-strcasestr.c macros.h
+
+## end   gnulib module c-strcasestr-tests
 
 ## begin gnulib module calloc-gnu-tests
 
@@ -307,7 +339,7 @@ TESTS += \
   test-dfa-match.sh
 
 check_PROGRAMS += test-dfa-match-aux
-test_dfa_match_aux_LDADD = $(LDADD) $(LIB_SETLOCALE) @LIBINTL@ $(LIB_MBRTOWC)
+test_dfa_match_aux_LDADD = $(LDADD) $(SETLOCALE_LIB) @LIBINTL@ $(MBRTOWC_LIB)
 EXTRA_DIST += test-dfa-match.sh test-dfa-match-aux.c test-dfa-invalid-char-class.sh test-dfa-invalid-merge.sh
 
 ## end   gnulib module dfa-tests
@@ -336,14 +368,6 @@ EXTRA_DIST += test-dup2.c signature.h macros.h
 
 ## end   gnulib module dup2-tests
 
-## begin gnulib module dynarray-tests
-
-TESTS += test-dynarray
-check_PROGRAMS += test-dynarray
-EXTRA_DIST += test-dynarray.c macros.h
-
-## end   gnulib module dynarray-tests
-
 ## begin gnulib module environ-tests
 
 TESTS += test-environ
@@ -362,6 +386,15 @@ EXTRA_DIST += test-errno.c
 
 ## end   gnulib module errno-tests
 
+## begin gnulib module error-tests
+
+TESTS += test-error.sh
+check_PROGRAMS += test-error
+test_error_LDADD = $(LDADD) $(LIBINTL)
+EXTRA_DIST += test-error.sh test-error.c macros.h
+
+## end   gnulib module error-tests
+
 ## begin gnulib module exclude-tests
 
 TESTS += \
@@ -375,7 +408,7 @@ TESTS += \
  test-exclude8.sh
 
 check_PROGRAMS += test-exclude
-test_exclude_LDADD = $(LDADD) $(LIBUNISTRING) @LIBINTL@ $(LIB_MBRTOWC) $(LIBTHREAD)
+test_exclude_LDADD = $(LDADD) $(LIBUNISTRING) @LIBINTL@ $(MBRTOWC_LIB) $(LIBTHREAD)
 EXTRA_DIST += test-exclude.c test-exclude1.sh test-exclude2.sh test-exclude3.sh test-exclude4.sh test-exclude5.sh test-exclude6.sh test-exclude7.sh test-exclude8.sh
 
 ## end   gnulib module exclude-tests
@@ -500,7 +533,7 @@ EXTRA_DIST += test-fnmatch-h.c
 
 TESTS += test-fnmatch
 check_PROGRAMS += test-fnmatch
-test_fnmatch_LDADD = $(LDADD) $(LIB_MBRTOWC)
+test_fnmatch_LDADD = $(LDADD) $(MBRTOWC_LIB)
 EXTRA_DIST += test-fnmatch.c signature.h macros.h
 
 ## end   gnulib module fnmatch-tests
@@ -684,6 +717,14 @@ EXTRA_DIST += signature.h test-gettimeofday.c
 
 ## end   gnulib module gettimeofday-tests
 
+## begin gnulib module glibc-internal/dynarray-tests
+
+TESTS += test-dynarray
+check_PROGRAMS += test-dynarray
+EXTRA_DIST += test-dynarray.c macros.h
+
+## end   gnulib module glibc-internal/dynarray-tests
+
 ## begin gnulib module gperf
 
 GPERF = gperf
@@ -697,7 +738,7 @@ V_GPERF_0 = @echo "  GPERF   " $@;
 
 TESTS += test-hard-locale
 check_PROGRAMS += test-hard-locale
-test_hard_locale_LDADD = $(LDADD) $(LIB_SETLOCALE) @LIB_HARD_LOCALE@
+test_hard_locale_LDADD = $(LDADD) $(SETLOCALE_LIB) @HARD_LOCALE_LIB@
 # We cannot call this program 'locale', because the C++ compiler on Mac OS X
 # would then barf upon '#include <locale>'. So, call it 'current-locale'.
 noinst_PROGRAMS += current-locale
@@ -856,7 +897,7 @@ TESTS_ENVIRONMENT += \
   LOCALE_JA='@LOCALE_JA@' \
   LOCALE_ZH_CN='@LOCALE_ZH_CN@'
 check_PROGRAMS += test-iswdigit
-test_iswdigit_LDADD = $(LDADD) $(LIB_SETLOCALE) $(LIB_MBRTOWC)
+test_iswdigit_LDADD = $(LDADD) $(SETLOCALE_LIB) $(MBRTOWC_LIB)
 EXTRA_DIST += test-iswdigit.sh test-iswdigit.c signature.h macros.h
 
 ## end   gnulib module iswdigit-tests
@@ -870,7 +911,7 @@ TESTS_ENVIRONMENT += \
   LOCALE_JA='@LOCALE_JA@' \
   LOCALE_ZH_CN='@LOCALE_ZH_CN@'
 check_PROGRAMS += test-iswxdigit
-test_iswxdigit_LDADD = $(LDADD) $(LIB_SETLOCALE) $(LIB_MBRTOWC)
+test_iswxdigit_LDADD = $(LDADD) $(SETLOCALE_LIB) $(MBRTOWC_LIB)
 EXTRA_DIST += test-iswxdigit.sh test-iswxdigit.c signature.h macros.h
 
 ## end   gnulib module iswxdigit-tests
@@ -913,7 +954,7 @@ EXTRA_DIST += test-listen.c signature.h macros.h
 ## begin gnulib module localcharset-tests
 
 noinst_PROGRAMS += test-localcharset
-test_localcharset_LDADD = $(LDADD) $(LIB_SETLOCALE)
+test_localcharset_LDADD = $(LDADD) $(SETLOCALE_LIB)
 EXTRA_DIST += test-localcharset.c
 
 ## end   gnulib module localcharset-tests
@@ -946,7 +987,7 @@ EXTRA_DIST += localename-table.h localename.h
 
 TESTS += test-localename
 check_PROGRAMS += test-localename
-test_localename_LDADD = $(LDADD) $(LIB_SETLOCALE) @INTL_MACOSX_LIBS@ $(LIBTHREAD)
+test_localename_LDADD = $(LDADD) $(SETLOCALE_LIB) @INTL_MACOSX_LIBS@ $(LIBTHREAD)
 
 EXTRA_DIST += test-localename.c macros.h
 
@@ -990,7 +1031,7 @@ EXTRA_DIST += test-malloca.c
 TESTS += test-mbscasecmp.sh
 TESTS_ENVIRONMENT += LOCALE_TR_UTF8='@LOCALE_TR_UTF8@'
 check_PROGRAMS += test-mbscasecmp
-test_mbscasecmp_LDADD = $(LDADD) $(LIBUNISTRING) $(LIB_SETLOCALE) $(LIB_MBRTOWC)
+test_mbscasecmp_LDADD = $(LDADD) $(LIBUNISTRING) $(SETLOCALE_LIB) $(MBRTOWC_LIB)
 EXTRA_DIST += test-mbscasecmp.sh test-mbscasecmp.c macros.h
 
 ## end   gnulib module mbscasecmp-tests
@@ -1000,7 +1041,7 @@ EXTRA_DIST += test-mbscasecmp.sh test-mbscasecmp.c macros.h
 TESTS += test-mbsinit.sh
 TESTS_ENVIRONMENT += LOCALE_FR_UTF8='@LOCALE_FR_UTF8@'
 check_PROGRAMS += test-mbsinit
-test_mbsinit_LDADD = $(LDADD) $(LIB_SETLOCALE) $(LIB_MBRTOWC)
+test_mbsinit_LDADD = $(LDADD) $(SETLOCALE_LIB) $(MBRTOWC_LIB)
 EXTRA_DIST += test-mbsinit.sh test-mbsinit.c signature.h macros.h
 
 ## end   gnulib module mbsinit-tests
@@ -1014,7 +1055,7 @@ TESTS_ENVIRONMENT += \
   LOCALE_JA='@LOCALE_JA@' \
   LOCALE_ZH_CN='@LOCALE_ZH_CN@'
 check_PROGRAMS += test-mbsrtowcs
-test_mbsrtowcs_LDADD = $(LDADD) $(LIB_SETLOCALE) $(LIB_MBRTOWC)
+test_mbsrtowcs_LDADD = $(LDADD) $(SETLOCALE_LIB) $(MBRTOWC_LIB)
 EXTRA_DIST += test-mbsrtowcs1.sh test-mbsrtowcs2.sh test-mbsrtowcs3.sh test-mbsrtowcs4.sh test-mbsrtowcs.c signature.h macros.h
 
 ## end   gnulib module mbsrtowcs-tests
@@ -1024,9 +1065,9 @@ EXTRA_DIST += test-mbsrtowcs1.sh test-mbsrtowcs2.sh test-mbsrtowcs3.sh test-mbsr
 TESTS += test-mbsstr1 test-mbsstr2.sh test-mbsstr3.sh
 TESTS_ENVIRONMENT += LOCALE_FR_UTF8='@LOCALE_FR_UTF8@' LOCALE_ZH_CN='@LOCALE_ZH_CN@'
 check_PROGRAMS += test-mbsstr1 test-mbsstr2 test-mbsstr3
-test_mbsstr1_LDADD = $(LDADD) $(LIBUNISTRING) $(LIB_MBRTOWC)
-test_mbsstr2_LDADD = $(LDADD) $(LIBUNISTRING) $(LIB_SETLOCALE) $(LIB_MBRTOWC)
-test_mbsstr3_LDADD = $(LDADD) $(LIBUNISTRING) $(LIB_SETLOCALE) $(LIB_MBRTOWC)
+test_mbsstr1_LDADD = $(LDADD) $(LIBUNISTRING) $(MBRTOWC_LIB)
+test_mbsstr2_LDADD = $(LDADD) $(LIBUNISTRING) $(SETLOCALE_LIB) $(MBRTOWC_LIB)
+test_mbsstr3_LDADD = $(LDADD) $(LIBUNISTRING) $(SETLOCALE_LIB) $(MBRTOWC_LIB)
 EXTRA_DIST += test-mbsstr1.c test-mbsstr2.sh test-mbsstr2.c test-mbsstr3.sh test-mbsstr3.c macros.h
 
 ## end   gnulib module mbsstr-tests
@@ -1067,7 +1108,7 @@ endif
 
 TESTS += test-nanosleep
 check_PROGRAMS += test-nanosleep
-test_nanosleep_LDADD = $(LDADD) $(LIB_NANOSLEEP)
+test_nanosleep_LDADD = $(LDADD) $(NANOSLEEP_LIB)
 EXTRA_DIST += test-nanosleep.c signature.h macros.h
 
 ## end   gnulib module nanosleep-tests
@@ -1111,12 +1152,13 @@ EXTRA_DIST += test-netinet_in.c
 
 ## begin gnulib module nl_langinfo-tests
 
-TESTS += test-nl_langinfo.sh test-nl_langinfo-mt
+TESTS += test-nl_langinfo1.sh test-nl_langinfo2.sh test-nl_langinfo-mt
 TESTS_ENVIRONMENT += LOCALE_FR='@LOCALE_FR@' LOCALE_FR_UTF8='@LOCALE_FR_UTF8@'
-check_PROGRAMS += test-nl_langinfo test-nl_langinfo-mt
-test_nl_langinfo_LDADD = $(LDADD) $(LIB_SETLOCALE)
-test_nl_langinfo_mt_LDADD = $(LDADD) $(LIB_SETLOCALE) $(LIBMULTITHREAD) $(LIB_NANOSLEEP)
-EXTRA_DIST += test-nl_langinfo.sh test-nl_langinfo.c test-nl_langinfo-mt.c signature.h macros.h
+check_PROGRAMS += test-nl_langinfo1 test-nl_langinfo2 test-nl_langinfo-mt
+test_nl_langinfo1_LDADD = $(LDADD) $(SETLOCALE_LIB)
+test_nl_langinfo2_LDADD = $(LDADD) $(SETLOCALE_LIB)
+test_nl_langinfo_mt_LDADD = $(LDADD) $(SETLOCALE_LIB) $(LIBMULTITHREAD) $(NANOSLEEP_LIB)
+EXTRA_DIST += test-nl_langinfo1.sh test-nl_langinfo2.sh test-nl_langinfo1.c test-nl_langinfo2.c test-nl_langinfo-mt.c signature.h macros.h
 
 ## end   gnulib module nl_langinfo-tests
 
@@ -1190,7 +1232,7 @@ endif
 
 TESTS += test-pselect
 check_PROGRAMS += test-pselect
-test_pselect_LDADD = $(LDADD) @LIB_SELECT@ @LIBSOCKET@ @LIB_PTHREAD_SIGMASK@ $(INET_PTON_LIB)
+test_pselect_LDADD = $(LDADD) @SELECT_LIB@ @LIBSOCKET@ @PTHREAD_SIGMASK_LIB@ $(INET_PTON_LIB)
 EXTRA_DIST += test-pselect.c test-select.h macros.h signature.h
 
 ## end   gnulib module pselect-tests
@@ -1375,8 +1417,8 @@ endif
 
 TESTS += test-pthread_sigmask1 test-pthread_sigmask2
 check_PROGRAMS += test-pthread_sigmask1 test-pthread_sigmask2
-test_pthread_sigmask1_LDADD = $(LDADD) @LIB_PTHREAD_SIGMASK@
-test_pthread_sigmask2_LDADD = $(LDADD) @LIB_PTHREAD_SIGMASK@ @LIBMULTITHREAD@
+test_pthread_sigmask1_LDADD = $(LDADD) @PTHREAD_SIGMASK_LIB@
+test_pthread_sigmask2_LDADD = $(LDADD) @PTHREAD_SIGMASK_LIB@ @LIBMULTITHREAD@
 EXTRA_DIST += test-pthread_sigmask1.c test-pthread_sigmask2.c signature.h macros.h
 
 ## end   gnulib module pthread_sigmask-tests
@@ -1393,7 +1435,7 @@ endif
 
 TESTS += test-quotearg-simple
 check_PROGRAMS += test-quotearg-simple
-test_quotearg_simple_LDADD = $(LDADD) @LIBINTL@ $(LIB_MBRTOWC)
+test_quotearg_simple_LDADD = $(LDADD) @LIBINTL@ $(MBRTOWC_LIB)
 EXTRA_DIST += test-quotearg-simple.c test-quotearg.h macros.h zerosize-ptr.h
 
 ## end   gnulib module quotearg-simple-tests
@@ -1442,7 +1484,7 @@ EXTRA_DIST += test-reallocarray.c signature.h macros.h
 
 TESTS += test-regex
 check_PROGRAMS += test-regex
-test_regex_LDADD = $(LDADD) $(LIB_SETLOCALE) $(LIB_MBRTOWC) @LIBINTL@ $(LIBTHREAD)
+test_regex_LDADD = $(LDADD) $(SETLOCALE_LIB) $(MBRTOWC_LIB) @LIBINTL@ $(LIBTHREAD)
 EXTRA_DIST += test-regex.c macros.h
 
 ## end   gnulib module regex-tests
@@ -1497,9 +1539,9 @@ endif
 TESTS += test-select test-select-in.sh test-select-out.sh
 # test-select-stdin has to be run by hand.
 check_PROGRAMS += test-select test-select-fd test-select-stdin
-test_select_LDADD = $(LDADD) @LIB_SELECT@ @LIBSOCKET@ $(INET_PTON_LIB)
-test_select_fd_LDADD = $(LDADD) @LIB_SELECT@
-test_select_stdin_LDADD = $(LDADD) @LIB_SELECT@
+test_select_LDADD = $(LDADD) @SELECT_LIB@ @LIBSOCKET@ $(INET_PTON_LIB)
+test_select_fd_LDADD = $(LDADD) @SELECT_LIB@
+test_select_stdin_LDADD = $(LDADD) @SELECT_LIB@
 EXTRA_DIST += macros.h signature.h test-select.c test-select.h test-select-fd.c test-select-in.sh test-select-out.sh test-select-stdin.c
 
 ## end   gnulib module select-tests
@@ -1538,9 +1580,9 @@ check_PROGRAMS += \
   test-setlocale_null \
   test-setlocale_null-mt-one \
   test-setlocale_null-mt-all
-test_setlocale_null_LDADD = $(LDADD) @LIB_SETLOCALE_NULL@
-test_setlocale_null_mt_one_LDADD = $(LDADD) @LIB_SETLOCALE_NULL@ $(LIBMULTITHREAD) $(LIB_NANOSLEEP)
-test_setlocale_null_mt_all_LDADD = $(LDADD) @LIB_SETLOCALE_NULL@ $(LIBMULTITHREAD) $(LIB_NANOSLEEP)
+test_setlocale_null_LDADD = $(LDADD) @SETLOCALE_NULL_LIB@
+test_setlocale_null_mt_one_LDADD = $(LDADD) @SETLOCALE_NULL_LIB@ $(LIBMULTITHREAD) $(NANOSLEEP_LIB)
+test_setlocale_null_mt_all_LDADD = $(LDADD) @SETLOCALE_NULL_LIB@ $(LIBMULTITHREAD) $(NANOSLEEP_LIB)
 EXTRA_DIST += test-setlocale_null.c test-setlocale_null-mt-one.c test-setlocale_null-mt-all.c
 
 ## end   gnulib module setlocale-null-tests
@@ -1554,8 +1596,8 @@ TESTS_ENVIRONMENT += \
   LOCALE_JA='@LOCALE_JA@' \
   LOCALE_ZH_CN='@LOCALE_ZH_CN@'
 check_PROGRAMS += test-setlocale1 test-setlocale2
-test_setlocale1_LDADD = $(LDADD) @LIB_SETLOCALE@
-test_setlocale2_LDADD = $(LDADD) @LIB_SETLOCALE@
+test_setlocale1_LDADD = $(LDADD) @SETLOCALE_LIB@
+test_setlocale2_LDADD = $(LDADD) @SETLOCALE_LIB@
 EXTRA_DIST += test-setlocale1.sh test-setlocale1.c test-setlocale2.sh test-setlocale2.c signature.h macros.h
 
 ## end   gnulib module setlocale-tests
@@ -1751,18 +1793,10 @@ EXTRA_DIST += test-stat.h test-stat.c signature.h macros.h
 
 TESTS += test-stat-time
 check_PROGRAMS += test-stat-time
-test_stat_time_LDADD = $(LDADD) $(LIB_NANOSLEEP)
+test_stat_time_LDADD = $(LDADD) $(NANOSLEEP_LIB)
 EXTRA_DIST += test-stat-time.c macros.h nap.h
 
 ## end   gnulib module stat-time-tests
-
-## begin gnulib module stdalign-tests
-
-TESTS += test-stdalign
-check_PROGRAMS += test-stdalign
-EXTRA_DIST += test-stdalign.c macros.h
-
-## end   gnulib module stdalign-tests
 
 ## begin gnulib module stdbool-tests
 
@@ -1771,6 +1805,14 @@ check_PROGRAMS += test-stdbool
 EXTRA_DIST += test-stdbool.c
 
 ## end   gnulib module stdbool-tests
+
+## begin gnulib module stdckdint-tests
+
+TESTS += test-stdckdint
+check_PROGRAMS += test-stdckdint
+EXTRA_DIST += macros.h test-intprops.c test-stdckdint.c
+
+## end   gnulib module stdckdint-tests
 
 ## begin gnulib module stddef-tests
 
@@ -2312,7 +2354,7 @@ TESTS_ENVIRONMENT += \
   LOCALE_JA='@LOCALE_JA@' \
   LOCALE_ZH_CN='@LOCALE_ZH_CN@'
 check_PROGRAMS += test-wcrtomb test-wcrtomb-w32
-test_wcrtomb_LDADD = $(LDADD) $(LIB_SETLOCALE)
+test_wcrtomb_LDADD = $(LDADD) $(SETLOCALE_LIB)
 EXTRA_DIST += test-wcrtomb.sh test-wcrtomb.c test-wcrtomb-w32-1.sh test-wcrtomb-w32-2.sh test-wcrtomb-w32-3.sh test-wcrtomb-w32-4.sh test-wcrtomb-w32-5.sh test-wcrtomb-w32-6.sh test-wcrtomb-w32-7.sh test-wcrtomb-w32.c signature.h macros.h
 
 ## end   gnulib module wcrtomb-tests
@@ -2329,7 +2371,7 @@ EXTRA_DIST += test-wctype-h.c macros.h
 
 TESTS += test-wcwidth
 check_PROGRAMS += test-wcwidth
-test_wcwidth_LDADD = $(LDADD) $(LIB_SETLOCALE) $(LIBUNISTRING)
+test_wcwidth_LDADD = $(LDADD) $(SETLOCALE_LIB) $(LIBUNISTRING)
 EXTRA_DIST += test-wcwidth.c signature.h macros.h
 
 ## end   gnulib module wcwidth-tests

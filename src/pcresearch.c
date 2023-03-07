@@ -1,5 +1,5 @@
 /* pcresearch.c - searching subroutines using PCRE for grep.
-   Copyright 2000, 2007, 2009-2022 Free Software Foundation, Inc.
+   Copyright 2000, 2007, 2009-2023 Free Software Foundation, Inc.
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -17,8 +17,11 @@
    02110-1301, USA.  */
 
 #include <config.h>
+
 #include "search.h"
 #include "die.h"
+
+#include <stdckdint.h>
 
 #define PCRE2_CODE_UNIT_WIDTH 8
 #include <pcre2.h>
@@ -104,7 +107,7 @@ jit_exec (struct pcre_comp *pc, char const *subject, idx_t search_bytes,
         {
           uint32_t lim;
           pcre2_config (PCRE2_CONFIG_DEPTHLIMIT, &lim);
-          if (INT_MULTIPLY_WRAPV (lim, 2, &lim))
+          if (ckd_mul (&lim, lim, 2))
             return e;
           if (!pc->mcontext)
             pc->mcontext = pcre2_match_context_create (pc->gcontext);
@@ -144,9 +147,13 @@ Pcompile (char *pattern, idx_t size, reg_syntax_t ignored, bool exact)
 
   if (localeinfo.multibyte)
     {
+      uint32_t unicode;
+      if (pcre2_config (PCRE2_CONFIG_UNICODE, &unicode) < 0 || !unicode)
+        die (EXIT_TROUBLE, 0,
+             _("-P supports only unibyte locales on this platform"));
       if (! localeinfo.using_utf8)
         die (EXIT_TROUBLE, 0, _("-P supports only unibyte and UTF-8 locales"));
-      flags |= PCRE2_UTF;
+      flags |= (PCRE2_UTF | PCRE2_UCP);
 #if 0
       /* Do not match individual code units but only UTF-8.  */
       flags |= PCRE2_NEVER_BACKSLASH_C;

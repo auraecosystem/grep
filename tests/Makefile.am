@@ -1,5 +1,5 @@
 ## Process this file with automake to create Makefile.in
-# Copyright 1997-1998, 2005-2022 Free Software Foundation, Inc.
+# Copyright 1997-1998, 2005-2023 Free Software Foundation, Inc.
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -147,6 +147,7 @@ TESTS =						\
   pcre-jitstack					\
   pcre-o					\
   pcre-utf8					\
+  pcre-utf8-w					\
   pcre-w					\
   pcre-wx-backref				\
   pcre-z					\

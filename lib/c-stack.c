@@ -1,6 +1,6 @@
 /* Stack overflow handling.
 
-   Copyright (C) 2002, 2004, 2006, 2008-2022 Free Software Foundation, Inc.
+   Copyright (C) 2002, 2004, 2006, 2008-2023 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -52,7 +52,6 @@
 #include <sigsegv.h>
 
 #include "exitfail.h"
-#include "getprogname.h"
 #include "idx.h"
 #include "ignore-value.h"
 

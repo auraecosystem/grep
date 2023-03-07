@@ -1,6 +1,6 @@
 /* xalloc.h -- malloc with out-of-memory checking
 
-   Copyright (C) 1990-2000, 2003-2004, 2006-2022 Free Software Foundation, Inc.
+   Copyright (C) 1990-2000, 2003-2004, 2006-2023 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -20,11 +20,9 @@
 
 #include <stddef.h>
 #include <stdlib.h>
-#include <stdint.h>
 
 #if GNULIB_XALLOC
 # include "idx.h"
-# include "intprops.h"
 #endif
 
 #ifndef _GL_INLINE_HEADER_BEGIN

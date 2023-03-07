@@ -1,5 +1,5 @@
 /* Report an error and exit.
-   Copyright 2016-2022 Free Software Foundation, Inc.
+   Copyright 2016-2023 Free Software Foundation, Inc.
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -20,7 +20,6 @@
 #define DIE_H
 
 #include <error.h>
-#include <stdbool.h>
 #include <verify.h>
 
 /* Like 'error (STATUS, ...)', except STATUS must be a nonzero constant.

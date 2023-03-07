@@ -1,5 +1,5 @@
 # DO NOT EDIT! GENERATED AUTOMATICALLY!
-# Copyright (C) 2002-2022 Free Software Foundation, Inc.
+# Copyright (C) 2002-2023 Free Software Foundation, Inc.
 #
 # This file is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -45,6 +45,8 @@ AC_DEFUN([gl_EARLY],
   # Code from module absolute-header:
   # Code from module accept:
   # Code from module accept-tests:
+  # Code from module alignasof:
+  # Code from module alignasof-tests:
   # Code from module alignof:
   # Code from module alignof-tests:
   # Code from module alloca:
@@ -56,6 +58,8 @@ AC_DEFUN([gl_EARLY],
   # Code from module arpa_inet:
   # Code from module arpa_inet-tests:
   # Code from module assert:
+  # Code from module assert-h:
+  # Code from module assert-h-tests:
   # Code from module assure:
   # Code from module at-internal:
   # Code from module attribute:
@@ -76,6 +80,8 @@ AC_DEFUN([gl_EARLY],
   # Code from module c-strcase:
   # Code from module c-strcase-tests:
   # Code from module c-strcaseeq:
+  # Code from module c-strcasestr:
+  # Code from module c-strcasestr-tests:
   # Code from module c99:
   # Code from module calloc-gnu:
   # Code from module calloc-gnu-tests:
@@ -111,13 +117,13 @@ AC_DEFUN([gl_EARLY],
   # Code from module dup-tests:
   # Code from module dup2:
   # Code from module dup2-tests:
-  # Code from module dynarray:
-  # Code from module dynarray-tests:
   # Code from module environ:
   # Code from module environ-tests:
   # Code from module errno:
   # Code from module errno-tests:
   # Code from module error:
+  # Code from module error-h:
+  # Code from module error-tests:
   # Code from module exclude:
   # Code from module exclude-tests:
   # Code from module exitfail:
@@ -186,6 +192,8 @@ AC_DEFUN([gl_EARLY],
   # Code from module gettimeofday-tests:
   # Code from module git-version-gen:
   # Code from module gitlog-to-changelog:
+  # Code from module glibc-internal/dynarray:
+  # Code from module glibc-internal/dynarray-tests:
   # Code from module gnu-web-doc-update:
   # Code from module gnumakefile:
   # Code from module gnupload:
@@ -235,7 +243,6 @@ AC_DEFUN([gl_EARLY],
   # Code from module langinfo-tests:
   # Code from module largefile:
   AC_REQUIRE([AC_SYS_LARGEFILE])
-  AC_REQUIRE([gl_YEAR2038_EARLY])
   # Code from module libc-config:
   # Code from module limits-h:
   # Code from module limits-h-tests:
@@ -383,8 +390,6 @@ AC_DEFUN([gl_EARLY],
   # Code from module stat-time:
   # Code from module stat-time-tests:
   # Code from module std-gnu11:
-  # Code from module stdalign:
-  # Code from module stdalign-tests:
   # Code from module stdarg:
   dnl Some compilers (e.g., AIX 5.3 cc) need to be in c99 mode
   dnl for the builtin va_copy to work.  gl_PROG_CC_C99 arranges for this.
@@ -392,6 +397,8 @@ AC_DEFUN([gl_EARLY],
   # Code from module stdarg-tests:
   # Code from module stdbool:
   # Code from module stdbool-tests:
+  # Code from module stdckdint:
+  # Code from module stdckdint-tests:
   # Code from module stddef:
   # Code from module stddef-tests:
   # Code from module stdint:
@@ -536,10 +543,14 @@ AC_DEFUN([gl_INIT],
   gl_COMMON
   gl_source_base='lib'
   gl_source_base_prefix=
+  gl_ALIGNASOF
   gl_FUNC_ALLOCA
   gl_CONDITIONAL_HEADER([alloca.h])
   AC_PROG_MKDIR_P
   gl_ASSERT
+  gl_ASSERT_H
+  gl_CONDITIONAL_HEADER([assert.h])
+  AC_PROG_MKDIR_P
   AC_REQUIRE([AC_CANONICAL_HOST])
   gl_FUNC_BTOWC
   gl_CONDITIONAL([GL_COND_OBJ_BTOWC],
@@ -576,7 +587,7 @@ AC_DEFUN([gl_INIT],
   gl_CONDITIONAL([GL_COND_OBJ_CLOSEDIR],
                  [test $HAVE_CLOSEDIR = 0 || test $REPLACE_CLOSEDIR = 1])
   gl_DIRENT_MODULE_INDICATOR([closedir])
-  gl_CONFIGMAKE_PREP
+  gl_CONFIGMAKE
   AC_PROG_MKDIR_P
   gl_CTYPE_H
   gl_CTYPE_H_REQUIRE_DEFAULTS
@@ -608,18 +619,21 @@ AC_DEFUN([gl_INIT],
     gl_PREREQ_DUP2
   ])
   gl_UNISTD_MODULE_INDICATOR([dup2])
-  AC_PROG_MKDIR_P
   gl_HEADER_ERRNO_H
   gl_CONDITIONAL_HEADER([errno.h])
   AC_PROG_MKDIR_P
+  AC_REQUIRE([gl_ERROR_H])
   gl_ERROR
-  gl_CONDITIONAL([GL_COND_OBJ_ERROR], [test "$ac_cv_lib_error_at_line" = no])
+  gl_CONDITIONAL([GL_COND_OBJ_ERROR], [test $GL_GENERATE_ERROR_H = true])
   AM_COND_IF([GL_COND_OBJ_ERROR], [
     gl_PREREQ_ERROR
   ])
   m4_ifdef([AM_XGETTEXT_OPTION],
     [AM_][XGETTEXT_OPTION([--flag=error:3:c-format])
      AM_][XGETTEXT_OPTION([--flag=error_at_line:5:c-format])])
+  gl_ERROR_H
+  gl_CONDITIONAL_HEADER([error.h])
+  AC_PROG_MKDIR_P
   AC_REQUIRE([gl_EXTERN_INLINE])
   gl_FUNC_FCHDIR
   gl_CONDITIONAL([GL_COND_OBJ_FCHDIR], [test $HAVE_FCHDIR = 0])
@@ -725,8 +739,15 @@ AC_DEFUN([gl_INIT],
   gl_CONDITIONAL([GL_COND_OBJ_GETPAGESIZE], [test $REPLACE_GETPAGESIZE = 1])
   gl_UNISTD_MODULE_INDICATOR([getpagesize])
   gl_FUNC_GETPROGNAME
+  gl_CONDITIONAL([GL_COND_OBJ_GETPROGNAME],
+                 [test $HAVE_GETPROGNAME = 0 || test $REPLACE_GETPROGNAME = 1])
+  AM_COND_IF([GL_COND_OBJ_GETPROGNAME], [
+    gl_PREREQ_GETPROGNAME
+  ])
+  gl_STDLIB_MODULE_INDICATOR([getprogname])
   AC_SUBST([LIBINTL])
   AC_SUBST([LTLIBINTL])
+  AC_PROG_MKDIR_P
   # Autoconf 2.61a.99 and earlier don't support linking a file only
   # in VPATH builds.  But since GNUmakefile is for maintainer use
   # only, it does not matter if we skip the link with older autoconf.
@@ -738,7 +759,10 @@ AC_DEFUN([gl_INIT],
         [AC_CONFIG_LINKS([$GNUmakefile:$GNUmakefile], [],
           [GNUmakefile=$GNUmakefile])])
   AC_REQUIRE([gl_FUNC_SETLOCALE_NULL])
-  LIB_HARD_LOCALE="$LIB_SETLOCALE_NULL"
+  HARD_LOCALE_LIB="$SETLOCALE_NULL_LIB"
+  AC_SUBST([HARD_LOCALE_LIB])
+  dnl For backward compatibility.
+  LIB_HARD_LOCALE="$HARD_LOCALE_LIB"
   AC_SUBST([LIB_HARD_LOCALE])
   AC_DEFUN([gl_HAVE_MODULE_HAVELIB])
   AC_REQUIRE([gl_HOST_CPU_C_ABI])
@@ -884,7 +908,8 @@ AC_DEFUN([gl_INIT],
   ])
   gl_STRING_MODULE_INDICATOR([memchr])
   gl_FUNC_MEMPCPY
-  gl_CONDITIONAL([GL_COND_OBJ_MEMPCPY], [test $HAVE_MEMPCPY = 0])
+  gl_CONDITIONAL([GL_COND_OBJ_MEMPCPY],
+                 [test $HAVE_MEMPCPY = 0 || test $REPLACE_MEMPCPY = 1])
   AM_COND_IF([GL_COND_OBJ_MEMPCPY], [
     gl_PREREQ_MEMPCPY
   ])
@@ -1047,14 +1072,17 @@ AC_DEFUN([gl_INIT],
   gl_SYS_STAT_MODULE_INDICATOR([stat])
   gl_STAT_TIME
   gl_STAT_BIRTHTIME
-  gl_STDALIGN_H
-  gl_CONDITIONAL_HEADER([stdalign.h])
-  AC_PROG_MKDIR_P
   gl_STDARG_H
   gl_CONDITIONAL_HEADER([stdarg.h])
   AC_PROG_MKDIR_P
-  gl_STDBOOL_H
-  gl_CONDITIONAL_HEADER([stdbool.h])
+  gl_C_BOOL
+  AC_CHECK_HEADERS_ONCE([stdckdint.h])
+  if test $ac_cv_header_stdckdint_h = yes; then
+    GL_GENERATE_STDCKDINT_H=false
+  else
+    GL_GENERATE_STDCKDINT_H=true
+  fi
+  gl_CONDITIONAL_HEADER([stdckdint.h])
   AC_PROG_MKDIR_P
   gl_STDDEF_H
   gl_STDDEF_H_REQUIRE_DEFAULTS
@@ -1097,7 +1125,8 @@ AC_DEFUN([gl_INIT],
   gl_STDLIB_H_REQUIRE_DEFAULTS
   AC_PROG_MKDIR_P
   gl_FUNC_STPCPY
-  gl_CONDITIONAL([GL_COND_OBJ_STPCPY], [test $HAVE_STPCPY = 0])
+  gl_CONDITIONAL([GL_COND_OBJ_STPCPY],
+                 [test $HAVE_STPCPY = 0 || test $REPLACE_STPCPY = 1])
   AM_COND_IF([GL_COND_OBJ_STPCPY], [
     gl_PREREQ_STPCPY
   ])
@@ -1209,7 +1238,7 @@ AC_DEFUN([gl_INIT],
   ])
   gl_LIBUNISTRING_LIBHEADER([0.9.11], [uniwidth.h])
   AC_PROG_MKDIR_P
-  gl_LIBUNISTRING_MODULE([0.9.11], [uniwidth/width])
+  gl_LIBUNISTRING_MODULE([1.1], [uniwidth/width])
   AC_DEFINE([GNULIB_STDIO_SINGLE_THREAD], [1],
     [Define to 1 if you want the FILE stream functions getc, putc, etc.
      to use unlocked I/O if available, throughout the package.
@@ -1278,7 +1307,8 @@ AC_DEFUN([gl_INIT],
   gl_CONDITIONAL([GL_COND_OBJ_WMEMCHR], [test $HAVE_WMEMCHR = 0])
   gl_WCHAR_MODULE_INDICATOR([wmemchr])
   gl_FUNC_WMEMPCPY
-  gl_CONDITIONAL([GL_COND_OBJ_WMEMPCPY], [test $HAVE_WMEMPCPY = 0])
+  gl_CONDITIONAL([GL_COND_OBJ_WMEMPCPY],
+                 [test $HAVE_WMEMPCPY = 0 || test $REPLACE_WMEMPCPY = 1])
   gl_WCHAR_MODULE_INDICATOR([wmempcpy])
   gl_XALLOC
   gl_MODULE_INDICATOR([xalloc])
@@ -1394,7 +1424,7 @@ changequote([, ])dnl
   gl_SYS_TIME_MODULE_INDICATOR([gettimeofday])
   gl_MUSL_LIBC
   dnl Distinguish OpenBSD >= 6.2 from OpenBSD < 6.2.
-  AC_CHECK_FUNCS_ONCE([duplocale])
+  gl_CHECK_FUNCS_ANDROID([duplocale], [[#include <locale.h>]])
   gl_FUNC_INET_PTON
   gl_CONDITIONAL([GL_COND_OBJ_INET_PTON],
                  [test $HAVE_INET_PTON = 0 || test $REPLACE_INET_PTON = 1])
@@ -1419,10 +1449,10 @@ changequote([, ])dnl
   AC_REQUIRE([gl_SYS_SOCKET_H])
   gl_CONDITIONAL([GL_COND_OBJ_LISTEN], [test "$ac_cv_header_winsock2_h" = yes])
   gl_SYS_SOCKET_MODULE_INDICATOR([listen])
-  AC_CHECK_FUNCS_ONCE([newlocale])
+  gl_CHECK_FUNCS_ANDROID([newlocale], [[#include <locale.h>]])
   gl_LOCALENAME
   gl_LOCALE_MODULE_INDICATOR([localename])
-  AC_CHECK_FUNCS_ONCE([newlocale])
+  gl_CHECK_FUNCS_ANDROID([newlocale], [[#include <locale.h>]])
   gt_LOCALE_TR_UTF8
   gt_LOCALE_FR_UTF8
   gt_LOCALE_FR
@@ -1451,6 +1481,7 @@ changequote([, ])dnl
   AC_PROG_MKDIR_P
   gt_LOCALE_FR
   gt_LOCALE_FR_UTF8
+  gt_FUNC_USELOCALE
   gl_FUNC_PERROR
   gl_CONDITIONAL([GL_COND_OBJ_PERROR], [test $REPLACE_PERROR = 1])
   gl_STRING_MODULE_INDICATOR([perror])
@@ -1737,6 +1768,7 @@ AC_DEFUN([gl_FILE_LIST], [
   lib/arg-nonnull.h
   lib/argmatch.c
   lib/argmatch.h
+  lib/assert.in.h
   lib/assure.h
   lib/at-func.c
   lib/attribute.h
@@ -1787,7 +1819,7 @@ AC_DEFUN([gl_FILE_LIST], [
   lib/dynarray.h
   lib/errno.in.h
   lib/error.c
-  lib/error.h
+  lib/error.in.h
   lib/exclude.c
   lib/exclude.h
   lib/exitfail.c
@@ -1856,6 +1888,7 @@ AC_DEFUN([gl_FILE_LIST], [
   lib/iconv_open.c
   lib/idx.h
   lib/ignore-value.h
+  lib/intprops-internal.h
   lib/intprops.h
   lib/inttypes.in.h
   lib/isatty.c
@@ -1973,9 +2006,8 @@ AC_DEFUN([gl_FILE_LIST], [
   lib/stat-w32.c
   lib/stat-w32.h
   lib/stat.c
-  lib/stdalign.in.h
   lib/stdarg.in.h
-  lib/stdbool.in.h
+  lib/stdckdint.in.h
   lib/stddef.in.h
   lib/stdint.in.h
   lib/stdio-impl.h
@@ -2071,8 +2103,11 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/arpa_inet_h.m4
   m4/asm-underscore.m4
   m4/assert.m4
+  m4/assert_h.m4
   m4/btowc.m4
+  m4/build-to-host.m4
   m4/builtin-expect.m4
+  m4/c-bool.m4
   m4/c-stack.m4
   m4/calloc.m4
   m4/chdir-long.m4
@@ -2093,6 +2128,7 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/environ.m4
   m4/errno_h.m4
   m4/error.m4
+  m4/error_h.m4
   m4/exponentd.m4
   m4/extensions.m4
   m4/extern-inline.m4
@@ -2244,7 +2280,6 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/std-gnu11.m4
   m4/stdalign.m4
   m4/stdarg.m4
-  m4/stdbool.m4
   m4/stddef_h.m4
   m4/stdint.m4
   m4/stdint_h.m4
@@ -2295,7 +2330,6 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/xalloc.m4
   m4/xsize.m4
   m4/xstrtol.m4
-  m4/year2038.m4
   m4/zzgnulib.m4
   tests/altstack-util.h
   tests/init.sh
@@ -2305,10 +2339,12 @@ AC_DEFUN([gl_FILE_LIST], [
   tests/nap.h
   tests/signature.h
   tests/test-accept.c
+  tests/test-alignasof.c
   tests/test-alignof.c
   tests/test-alloca-opt.c
   tests/test-argmatch.c
   tests/test-arpa_inet.c
+  tests/test-assert.c
   tests/test-binary-io.c
   tests/test-binary-io.sh
   tests/test-bind.c
@@ -2322,6 +2358,7 @@ AC_DEFUN([gl_FILE_LIST], [
   tests/test-c-stack2.sh
   tests/test-c-strcase.sh
   tests/test-c-strcasecmp.c
+  tests/test-c-strcasestr.c
   tests/test-c-strncasecmp.c
   tests/test-calloc-gnu.c
   tests/test-chdir.c
@@ -2340,6 +2377,8 @@ AC_DEFUN([gl_FILE_LIST], [
   tests/test-dynarray.c
   tests/test-environ.c
   tests/test-errno.c
+  tests/test-error.c
+  tests/test-error.sh
   tests/test-exclude.c
   tests/test-exclude1.sh
   tests/test-exclude2.sh
@@ -2433,8 +2472,10 @@ AC_DEFUN([gl_FILE_LIST], [
   tests/test-nanosleep.c
   tests/test-netinet_in.c
   tests/test-nl_langinfo-mt.c
-  tests/test-nl_langinfo.c
-  tests/test-nl_langinfo.sh
+  tests/test-nl_langinfo1.c
+  tests/test-nl_langinfo1.sh
+  tests/test-nl_langinfo2.c
+  tests/test-nl_langinfo2.sh
   tests/test-open.c
   tests/test-open.h
   tests/test-openat-safer.c
@@ -2485,8 +2526,8 @@ AC_DEFUN([gl_FILE_LIST], [
   tests/test-stat-time.c
   tests/test-stat.c
   tests/test-stat.h
-  tests/test-stdalign.c
   tests/test-stdbool.c
+  tests/test-stdckdint.c
   tests/test-stddef.c
   tests/test-stdint.c
   tests/test-stdio.c
@@ -2559,6 +2600,8 @@ AC_DEFUN([gl_FILE_LIST], [
   tests=lib/asnprintf.c
   tests=lib/bind.c
   tests=lib/c++defs.h
+  tests=lib/c-strcasestr.c
+  tests=lib/c-strcasestr.h
   tests=lib/connect.c
   tests=lib/fdopen.c
   tests=lib/float+.h
@@ -2607,6 +2650,7 @@ AC_DEFUN([gl_FILE_LIST], [
   tests=lib/socket.c
   tests=lib/sockets.c
   tests=lib/sockets.h
+  tests=lib/str-two-way.h
   tests=lib/strerror_r.c
   tests=lib/symlink.c
   tests=lib/sys_ioctl.in.h

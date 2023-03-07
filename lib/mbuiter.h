@@ -1,5 +1,5 @@
 /* Iterating through multibyte strings: macros for multi-byte encodings.
-   Copyright (C) 2001, 2005, 2007, 2009-2022 Free Software Foundation, Inc.
+   Copyright (C) 2001, 2005, 2007, 2009-2023 Free Software Foundation, Inc.
 
    This file is free software: you can redistribute it and/or modify
    it under the terms of the GNU Lesser General Public License as
@@ -90,7 +90,6 @@
 #define _MBUITER_H 1
 
 #include <assert.h>
-#include <stdbool.h>
 #include <stddef.h>
 #include <stdlib.h>
 #include <string.h>

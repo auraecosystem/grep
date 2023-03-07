@@ -2,13 +2,14 @@
 # Copyright © 2020 Free Software Foundation, Inc.
 # This file is distributed under the same license as the grep package.
 # Danilo Segan <dsegan@gmx.net>, 2003.
-# Мирослав Николић <miroslavnikolic@rocketmail.com>, 2011–2021.
+# Мирослав Николић <miroslavnikolic@rocketmail.com>, 2011–2022.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: grep-3.6.27\n"
+"Project-Id-Version: grep-3.7.98\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2022-09-02 23:52-0700\n"
-"PO-Revision-Date: 2021-10-01 21:45+0200\n"
+"POT-Creation-Date: 2023-03-05 07:28-0800\n"
+"PO-Revision-Date: 2022-09-08 05:08+0200\n"
 "Last-Translator: Мирослав Николић <miroslavnikolic@rocketmail.com>\n"
 "Language-Team: Serbian <(nothing)>\n"
 "Language: sr\n"
@@ -19,105 +20,102 @@ msgstr ""
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Bugs: Report translation errors to the Language-Team address.\n"
 
-#: lib/argmatch.c:147
+#: lib/argmatch.c:145
 #, c-format
 msgid "invalid argument %s for %s"
 msgstr "неисправан аргумент „%s“ за „%s“"
 
-#: lib/argmatch.c:148
+#: lib/argmatch.c:146
 #, c-format
 msgid "ambiguous argument %s for %s"
 msgstr "нејасан аргумент „%s“ за „%s“"
 
-#: lib/argmatch.c:167 lib/argmatch.h:238
+#: lib/argmatch.c:165 lib/argmatch.h:237
 msgid "Valid arguments are:"
 msgstr "Исправни аргументи су:"
 
-#: lib/c-stack.c:187
+#: lib/c-stack.c:186
 msgid "program error"
 msgstr "грешка програма"
 
-#: lib/c-stack.c:188
+#: lib/c-stack.c:187
 msgid "stack overflow"
 msgstr "прекорачење спремника"
 
-#: lib/closeout.c:122 src/grep.c:1346
+#: lib/closeout.c:121 src/grep.c:1346
 msgid "write error"
 msgstr "грешка писања"
 
-#: lib/dfa.c:894
+#: lib/dfa.c:897
 msgid "unbalanced ["
 msgstr "неуравнотежена ["
 
-#: lib/dfa.c:1015
+#: lib/dfa.c:1018
 msgid "invalid character class"
 msgstr "неисправна класа знака"
 
-#: lib/dfa.c:1143
+#: lib/dfa.c:1146
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr "синтакса класе знака је [[:размак:]], а не [:размак:]"
 
-#: lib/dfa.c:1209
+#: lib/dfa.c:1217
 msgid "unfinished \\ escape"
 msgstr "недовршена \\ излазим"
 
-#: lib/dfa.c:1319
-#, fuzzy
+#: lib/dfa.c:1327
 msgid "? at start of expression"
-msgstr "Неисправан регуларан израз"
+msgstr "? на почетку израза"
 
-#: lib/dfa.c:1331
-#, fuzzy
+#: lib/dfa.c:1339
 msgid "* at start of expression"
-msgstr "Неисправан регуларан израз"
+msgstr "* на почетку израза"
 
-#: lib/dfa.c:1345
-#, fuzzy
+#: lib/dfa.c:1353
 msgid "+ at start of expression"
-msgstr "Неисправан регуларан израз"
+msgstr "+ на почетку израза"
 
-#: lib/dfa.c:1400
+#: lib/dfa.c:1408
 msgid "{...} at start of expression"
-msgstr ""
+msgstr "{...} на почетку израза"
 
-#: lib/dfa.c:1403
+#: lib/dfa.c:1411
 msgid "invalid content of \\{\\}"
 msgstr "неисправан садржај \\{\\}"
 
-#: lib/dfa.c:1405
+#: lib/dfa.c:1413
 msgid "regular expression too big"
 msgstr "регуларни израз је превелик"
 
-#: lib/dfa.c:1555
+#: lib/dfa.c:1563
 msgid "stray \\ before unprintable character"
-msgstr ""
+msgstr "залутала \\ пре неисписивог знака"
 
-#: lib/dfa.c:1557
+#: lib/dfa.c:1565
 msgid "stray \\ before white space"
-msgstr ""
+msgstr "залутала \\ пре празнине"
 
-#: lib/dfa.c:1561
+#: lib/dfa.c:1569
 #, c-format
 msgid "stray \\ before %lc"
-msgstr ""
+msgstr "залутала \\ пре „%lc“"
 
-#: lib/dfa.c:1562
+#: lib/dfa.c:1570
 msgid "stray \\"
-msgstr ""
+msgstr "залутала \\"
 
-#: lib/dfa.c:1917
+#: lib/dfa.c:1925
 msgid "unbalanced ("
 msgstr "неуравнотежена ("
 
-#: lib/dfa.c:2034
+#: lib/dfa.c:2042
 msgid "no syntax specified"
 msgstr "синтакса није наведена"
 
-#: lib/dfa.c:2045
+#: lib/dfa.c:2053
 msgid "unbalanced )"
 msgstr "неуравнотежена )"
 
-#: lib/error.c:195
+#: lib/error.c:193
 msgid "Unknown system error"
 msgstr "Непозната системска грешка"
 
@@ -170,7 +168,7 @@ msgstr "не могу да снимим тренутни радни директ
 msgid "failed to return to initial working directory"
 msgstr "не могу да се вратим у почетни радни директоријум"
 
-#: lib/xbinary-io.c:37
+#: lib/xbinary-io.c:36
 #, c-format
 msgid "failed to set file descriptor text/binary mode"
 msgstr "нисам успео да подесим текстуални/бинарни режим описника датотеке"
@@ -196,11 +194,11 @@ msgstr "нисам успео да подесим текстуални/бина�
 #. If you don't know what to put here, please see
 #. <https://en.wikipedia.org/wiki/Quotation_marks_in_other_languages>
 #. and use glyphs suitable for your language.
-#: lib/quotearg.c:355
+#: lib/quotearg.c:354
 msgid "`"
 msgstr "„"
 
-#: lib/quotearg.c:356
+#: lib/quotearg.c:355
 msgid "'"
 msgstr "“"
 
@@ -439,9 +437,9 @@ msgid "General help using GNU software: <%s>\n"
 msgstr "Општа помоћ за Гнуов софтвер: <%s>\n"
 
 #: src/dfasearch.c:59
-#, fuzzy, c-format
+#, c-format
 msgid "warning: %s"
-msgstr "упозорење: %s: %s"
+msgstr "упозорење: %s"
 
 #: src/grep.c:656
 msgid "(standard input)"
@@ -740,9 +738,10 @@ msgid "unknown binary-files type"
 msgstr "непозната врста бинарних датотека"
 
 #: src/grep.c:2831
+#, fuzzy
 msgid ""
 "Written by Mike Haertel and others; see\n"
-"<https://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>."
+"<https://git.savannah.gnu.org/cgit/grep.git/tree/AUTHORS>."
 msgstr ""
 "Написали су Мајк Хиртел и други; погледајте\n"
 "<https://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>."
@@ -750,56 +749,61 @@ msgstr ""
 #: src/grep.c:2934
 #, c-format
 msgid "warning: GREP_COLOR='%s' is deprecated; use GREP_COLORS='mt=%s'"
-msgstr ""
+msgstr "упозорење: GREP_COLOR='%s' је застарело; користите GREP_COLORS='mt=%s'"
 
-#: src/pcresearch.c:148
+#: src/pcresearch.c:153
+#, fuzzy
+msgid "-P supports only unibyte locales on this platform"
+msgstr "„-P“ подржава само једнобајтне и УТФ-8 језике"
+
+#: src/pcresearch.c:155
 msgid "-P supports only unibyte and UTF-8 locales"
 msgstr "„-P“ подржава само једнобајтне и УТФ-8 језике"
 
-#: src/pcresearch.c:162
+#: src/pcresearch.c:169
 msgid "the -P option only supports a single pattern"
 msgstr "опција „-P“ подржава само самосталне шаблоне"
 
-#: src/pcresearch.c:215
-#, fuzzy, c-format
+#: src/pcresearch.c:222
+#, c-format
 msgid "JIT internal error: %d"
-msgstr "унутрашња грешка"
+msgstr "ЈИТ унутрашња грешка: %d"
 
-#: src/pcresearch.c:252
+#: src/pcresearch.c:259
 msgid "exceeded PCRE's line length limit"
 msgstr "прекорачено је ограничење дужине реда ПЦРЕ-а"
 
-#: src/pcresearch.c:330
+#: src/pcresearch.c:337
 #, c-format
 msgid "%s: memory exhausted"
 msgstr "%s: меморија је потрошена"
 
-#: src/pcresearch.c:333
+#: src/pcresearch.c:340
 #, c-format
 msgid "%s: exhausted PCRE JIT stack"
 msgstr "%s: потрошени ПЦРЕ ЈИТ спремник"
 
-#: src/pcresearch.c:337
+#: src/pcresearch.c:344
 #, c-format
 msgid "%s: exceeded PCRE's backtracking limit"
 msgstr "%s: прекорачено је ПЦРЕ-ово ограничење тражења уназад"
 
-#: src/pcresearch.c:342
-#, fuzzy, c-format
+#: src/pcresearch.c:349
+#, c-format
 msgid "%s: exceeded PCRE's nested backtracking limit"
 msgstr "%s: прекорачено је ПЦРЕ-ово ограничење тражења уназад"
 
-#: src/pcresearch.c:346
+#: src/pcresearch.c:353
 #, c-format
 msgid "%s: PCRE detected recurse loop"
-msgstr ""
+msgstr "%s: ПЦРЕ је открио дубинску петљу"
 
-#: src/pcresearch.c:351
-#, fuzzy, c-format
+#: src/pcresearch.c:358
+#, c-format
 msgid "%s: exceeded PCRE's heap limit"
-msgstr "%s: прекорачено је ограничење ПЦРЕ дубачења"
+msgstr "%s: прекорачено је ограничење ПЦРЕ гомиле"
 
-#: src/pcresearch.c:360
+#: src/pcresearch.c:367
 #, c-format
 msgid "%s: internal PCRE error: %d"
 msgstr "%s: унутрашња грешка ПЦРЕ-а: %d"

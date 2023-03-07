@@ -1,5 +1,5 @@
 /* Determine name of the currently selected locale.
-   Copyright (C) 1995-2022 Free Software Foundation, Inc.
+   Copyright (C) 1995-2023 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU Lesser General Public License as published by
@@ -18,13 +18,18 @@
 /* Native Windows code written by Tor Lillqvist <tml@iki.fi>.  */
 /* Mac OS X code written by Bruno Haible <bruno@clisp.org>.  */
 
+/* Don't use __attribute__ __nonnull__ in this compilation unit.  Otherwise gcc
+   optimizes away the locale == NULL tests below in duplocale() and freelocale(),
+   or xlclang reports -Wtautological-pointer-compare warnings for these tests.
+ */
+#define _GL_ARG_NONNULL(params)
+
 #include <config.h>
 
 /* Specification.  */
 #include "localename.h"
 
 #include <limits.h>
-#include <stdbool.h>
 #include <stddef.h>
 #include <stdlib.h>
 #include <locale.h>
