@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grep 3.5.16\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2023-03-05 07:28-0800\n"
+"POT-Creation-Date: 2023-05-13 01:14-0700\n"
 "PO-Revision-Date: 2020-11-09 12:44+0100\n"
 "Last-Translator: Francisco Javier Tsao Santín <tsao@members.fsf.org>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
@@ -34,7 +34,7 @@ msgstr "o argumento %s para %s é incorrecto"
 msgid "ambiguous argument %s for %s"
 msgstr "o argumento %s para %s é ambiguo"
 
-#: lib/argmatch.c:165 lib/argmatch.h:237
+#: lib/argmatch.c:165 lib/argmatch.h:242
 msgid "Valid arguments are:"
 msgstr "Os argumentos correctos son:"
 
@@ -62,51 +62,51 @@ msgstr "clase de caracteres incorrecta"
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr "a sintaxe da clase de caracteres é [[:space:]], non [:space:]"
 
-#: lib/dfa.c:1217
+#: lib/dfa.c:1222
 msgid "unfinished \\ escape"
 msgstr "secuencia de escape \\ sen rematar"
 
-#: lib/dfa.c:1327
+#: lib/dfa.c:1332
 #, fuzzy
 msgid "? at start of expression"
 msgstr "Expresión regular incorrecta"
 
-#: lib/dfa.c:1339
+#: lib/dfa.c:1344
 #, fuzzy
 msgid "* at start of expression"
 msgstr "Expresión regular incorrecta"
 
-#: lib/dfa.c:1353
+#: lib/dfa.c:1358
 #, fuzzy
 msgid "+ at start of expression"
 msgstr "Expresión regular incorrecta"
 
-#: lib/dfa.c:1408
+#: lib/dfa.c:1413
 msgid "{...} at start of expression"
 msgstr ""
 
-#: lib/dfa.c:1411
+#: lib/dfa.c:1416
 msgid "invalid content of \\{\\}"
 msgstr "contido incorrecto de \\{\\}"
 
-#: lib/dfa.c:1413
+#: lib/dfa.c:1418
 msgid "regular expression too big"
 msgstr "expresión regular demasiado grande"
 
-#: lib/dfa.c:1563
+#: lib/dfa.c:1568
 msgid "stray \\ before unprintable character"
 msgstr ""
 
-#: lib/dfa.c:1565
+#: lib/dfa.c:1570
 msgid "stray \\ before white space"
 msgstr ""
 
-#: lib/dfa.c:1569
+#: lib/dfa.c:1574
 #, c-format
 msgid "stray \\ before %lc"
 msgstr ""
 
-#: lib/dfa.c:1570
+#: lib/dfa.c:1575
 msgid "stray \\"
 msgstr ""
 
@@ -746,67 +746,73 @@ msgstr ""
 "Escrito por Mike Haertel e outros, véxase\n"
 "<https://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
 
-#: src/grep.c:2934
+#: src/grep.c:2937
 #, c-format
 msgid "warning: GREP_COLOR='%s' is deprecated; use GREP_COLORS='mt=%s'"
 msgstr ""
 
-#: src/pcresearch.c:153
+#: src/pcresearch.c:92
+#, c-format
+msgid ""
+"\n"
+"grep -P uses PCRE2 %s\n"
+msgstr ""
+
+#: src/pcresearch.c:169
 #, fuzzy
 msgid "-P supports only unibyte locales on this platform"
 msgstr "-P admite só locales unibyte e UTF-8"
 
-#: src/pcresearch.c:155
+#: src/pcresearch.c:171
 msgid "-P supports only unibyte and UTF-8 locales"
 msgstr "-P admite só locales unibyte e UTF-8"
 
-#: src/pcresearch.c:169
+#: src/pcresearch.c:194
 msgid "the -P option only supports a single pattern"
 msgstr "a opción -P admite só un patrón"
 
-#: src/pcresearch.c:222
-#, fuzzy, c-format
-msgid "JIT internal error: %d"
-msgstr "erro interno"
-
-#: src/pcresearch.c:259
+#: src/pcresearch.c:290
 msgid "exceeded PCRE's line length limit"
 msgstr "excedeuse o tamaño límite das liñas PCRE"
 
-#: src/pcresearch.c:337
+#: src/pcresearch.c:368
 #, c-format
 msgid "%s: memory exhausted"
 msgstr "%s: memoria esgotada"
 
-#: src/pcresearch.c:340
+#: src/pcresearch.c:371
 #, c-format
 msgid "%s: exhausted PCRE JIT stack"
 msgstr "%s: esgotouse a pila PCRE JIT"
 
-#: src/pcresearch.c:344
+#: src/pcresearch.c:375
 #, c-format
 msgid "%s: exceeded PCRE's backtracking limit"
 msgstr "%s: excedeuse o límite de volta atrás das PCREs"
 
-#: src/pcresearch.c:349
+#: src/pcresearch.c:380
 #, fuzzy, c-format
 msgid "%s: exceeded PCRE's nested backtracking limit"
 msgstr "%s: excedeuse o límite de volta atrás das PCREs"
 
-#: src/pcresearch.c:353
+#: src/pcresearch.c:384
 #, c-format
 msgid "%s: PCRE detected recurse loop"
 msgstr ""
 
-#: src/pcresearch.c:358
+#: src/pcresearch.c:389
 #, fuzzy, c-format
 msgid "%s: exceeded PCRE's heap limit"
 msgstr "%s: excedeuse o límite de recursividade das PCREs"
 
-#: src/pcresearch.c:367
+#: src/pcresearch.c:398
 #, c-format
 msgid "%s: internal PCRE error: %d"
 msgstr "%s: erro interno de PCRE: %d"
+
+#, fuzzy, c-format
+#~ msgid "JIT internal error: %d"
+#~ msgstr "erro interno"
 
 #~ msgid "failed to allocate memory for the PCRE JIT stack"
 #~ msgstr ""

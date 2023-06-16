@@ -2830,6 +2830,9 @@ main (int argc, char **argv)
                    (char *) NULL);
       puts (_("Written by Mike Haertel and others; see\n"
               "<https://git.savannah.gnu.org/cgit/grep.git/tree/AUTHORS>."));
+#if HAVE_LIBPCRE
+      Pprint_version ();
+#endif
       return EXIT_SUCCESS;
     }
 

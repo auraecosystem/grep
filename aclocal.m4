@@ -14,8 +14,8 @@
 m4_ifndef([AC_CONFIG_MACRO_DIRS], [m4_defun([_AM_CONFIG_MACRO_DIRS], [])m4_defun([AC_CONFIG_MACRO_DIRS], [_AM_CONFIG_MACRO_DIRS($@)])])
 m4_ifndef([AC_AUTOCONF_VERSION],
   [m4_copy([m4_PACKAGE_VERSION], [AC_AUTOCONF_VERSION])])dnl
-m4_if(m4_defn([AC_AUTOCONF_VERSION]), [2.72a.65-d081],,
-[m4_warning([this file was generated for autoconf 2.72a.65-d081.
+m4_if(m4_defn([AC_AUTOCONF_VERSION]), [2.72c.20-9c018],,
+[m4_warning([this file was generated for autoconf 2.72c.20-9c018.
 You have another version of autoconf.  It may work, but is not guaranteed to.
 If you have problems, you may need to regenerate the build system entirely.
 To do so, use the procedure documented by the package, typically 'autoreconf'.])])
@@ -1278,12 +1278,14 @@ m4_include([m4/exponentd.m4])
 m4_include([m4/extensions.m4])
 m4_include([m4/extern-inline.m4])
 m4_include([m4/fchdir.m4])
+m4_include([m4/fclose.m4])
 m4_include([m4/fcntl-o.m4])
 m4_include([m4/fcntl-safer.m4])
 m4_include([m4/fcntl.m4])
 m4_include([m4/fcntl_h.m4])
 m4_include([m4/fdopen.m4])
 m4_include([m4/fdopendir.m4])
+m4_include([m4/fflush.m4])
 m4_include([m4/filenamecat.m4])
 m4_include([m4/flexmember.m4])
 m4_include([m4/float_h.m4])
@@ -1454,6 +1456,7 @@ m4_include([m4/sys_types_h.m4])
 m4_include([m4/sys_uio_h.m4])
 m4_include([m4/thread.m4])
 m4_include([m4/threadlib.m4])
+m4_include([m4/time.m4])
 m4_include([m4/time_h.m4])
 m4_include([m4/unistd-safer.m4])
 m4_include([m4/unistd_h.m4])

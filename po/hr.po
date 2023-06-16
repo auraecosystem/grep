@@ -12,24 +12,24 @@
 # Matej Vela <mvela@public.srce.hr>, 1999.
 # Hrvoje Niksic <hniksic@xemacs.org>, 2002.
 # Tomislav Krznar <tomislav.krznar@gmail.com>, 2012.
-# Božidar Putanec <bozidarp@yahoo.com>, 2016-2019, 2021, 2022.
+# Božidar Putanec <bozidarp@yahoo.com>, 2016-2019, 2021, 2022, 2023.
 # bp, 2016-04-03.
 msgid ""
 msgstr ""
-"Project-Id-Version: grep-3.7.98\n"
+"Project-Id-Version: grep-3.10.12\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2023-03-05 07:28-0800\n"
-"PO-Revision-Date: 2022-11-06 16:16-0800\n"
+"POT-Creation-Date: 2023-05-13 01:14-0700\n"
+"PO-Revision-Date: 2023-05-01 12:00-0700\n"
 "Last-Translator: Božidar Putanec <bozidarp@yahoo.com>\n"
 "Language-Team: Croatian <lokalizacija@linux.hr>\n"
 "Language: hr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Bugs: Report translation errors to the Language-Team address.\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Bugs: Report translation errors to the Language-Team address.\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #: lib/argmatch.c:145
 #, c-format
@@ -41,7 +41,7 @@ msgstr "nevaljani argument %s za %s"
 msgid "ambiguous argument %s for %s"
 msgstr "višeznačni argument %s za %s"
 
-#: lib/argmatch.c:165 lib/argmatch.h:237
+#: lib/argmatch.c:165 lib/argmatch.h:242
 msgid "Valid arguments are:"
 msgstr "Valjani argumenti su:"
 
@@ -51,7 +51,7 @@ msgstr "greška u programu"
 
 #: lib/c-stack.c:187
 msgid "stack overflow"
-msgstr "prelijevanje stȏga"
+msgstr "prekoračenje stȏga"
 
 #: lib/closeout.c:121 src/grep.c:1346
 msgid "write error"
@@ -69,48 +69,48 @@ msgstr "nevaljana znakovna klasa"
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr "sintaksa znakovne klase je [[:space]], ne [:space:]"
 
-#: lib/dfa.c:1217
+#: lib/dfa.c:1222
 msgid "unfinished \\ escape"
 msgstr "nedovršena \\ escape sekvencija"
 
-#: lib/dfa.c:1327
+#: lib/dfa.c:1332
 msgid "? at start of expression"
 msgstr "? na početku izraza"
 
-#: lib/dfa.c:1339
+#: lib/dfa.c:1344
 msgid "* at start of expression"
 msgstr "* na početku izraza"
 
-#: lib/dfa.c:1353
+#: lib/dfa.c:1358
 msgid "+ at start of expression"
 msgstr "+ na kraju izraza"
 
-#: lib/dfa.c:1408
+#: lib/dfa.c:1413
 msgid "{...} at start of expression"
 msgstr "{...} na startu izraza"
 
-#: lib/dfa.c:1411
+#: lib/dfa.c:1416
 msgid "invalid content of \\{\\}"
 msgstr "nevaljani sadržaj u \\{\\}"
 
-#: lib/dfa.c:1413
+#: lib/dfa.c:1418
 msgid "regular expression too big"
 msgstr "preveliki regularni izraz"
 
-#: lib/dfa.c:1563
+#: lib/dfa.c:1568
 msgid "stray \\ before unprintable character"
 msgstr "zalutali \\ ispred neispisivog znaka"
 
-#: lib/dfa.c:1565
+#: lib/dfa.c:1570
 msgid "stray \\ before white space"
 msgstr "zalutali \\ ispred bijeline"
 
-#: lib/dfa.c:1569
+#: lib/dfa.c:1574
 #, c-format
 msgid "stray \\ before %lc"
 msgstr "zalutali \\ ispred %lc"
 
-#: lib/dfa.c:1570
+#: lib/dfa.c:1575
 msgid "stray \\"
 msgstr "zalutali \\"
 
@@ -246,8 +246,6 @@ msgstr "Zaostala obratna kosa crta"
 msgid "Invalid back reference"
 msgstr "Nevaljana povratna referencija"
 
-# bp: fuzzy > popravljen
-# razmotri: nema para za [, [^, [:, [., ili [=
 #: lib/regcomp.c:143
 msgid "Unmatched [, [^, [:, [., or [="
 msgstr "[, [^, [:, [., ili [= nema odgovarajući par"
@@ -632,7 +630,8 @@ msgstr ""
 "  -D, --devices=AKCIJA      kako rukovati uređajima, FIFO uređajima\n"
 "                              i utičnicama;  AKCIJA je „read“ ili „skip“\n"
 "  -r, --recursive           isto kao --directories=recurse\n"
-"  -R, --dereference-recursive  jednako, ali slijedi svaku simboličku vezu\n"
+"  -R, --dereference-recursive  jednako, ali slijedi svaku simboličku "
+"poveznicu\n"
 
 # http://hjp.znanje.hr/index.php?show=kosi_oblici&id=eVxhWxI%3D
 # podudaran > koji je sukladan s čim, koji se poklapa s kim/čim
@@ -703,9 +702,9 @@ msgstr ""
 "      --group-separator=SEP  ispiše SEP(arator) u retku između\n"
 "                               podudaranja s kontekstom\n"
 "      --no-group-separator  ne ispiše separator za podudaranja s kontektsom\n"
-"      --color[=KADA],\n"
-"      --colour[=KADA]       bojama istakne nađene stringove i markere;\n"
-"                            KADA može biti „always“ ili „never“ ili „auto“\n"
+"      --color[=KAD],\n"
+"      --colour[=KAD]       bojama istakne nađene stringove i markere;\n"
+"                            KAD može biti „always“ ili „never“ ili „auto“\n"
 "  -U, --binary              ne uklanja CqR znakove na EOL (MSDOS/Windows)\n"
 "\n"
 
@@ -756,79 +755,90 @@ msgid "unknown binary-files type"
 msgstr "nepoznata vrsta binarnih datoteka"
 
 #: src/grep.c:2831
-#, fuzzy
 msgid ""
 "Written by Mike Haertel and others; see\n"
 "<https://git.savannah.gnu.org/cgit/grep.git/tree/AUTHORS>."
 msgstr ""
-"Napisali Mike Haertel i ostali; vidi\n"
-"<https://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>."
+"Napisali Mike Haertel and others; see\n"
+"<https://git.savannah.gnu.org/cgit/grep.git/tree/AUTHORS>."
 
-#: src/grep.c:2934
+#: src/grep.c:2937
 #, c-format
 msgid "warning: GREP_COLOR='%s' is deprecated; use GREP_COLORS='mt=%s'"
 msgstr ""
 "upozorenje: GREP_COLOR=‘%s’ je zastarjelo; koristite GREP_COLORS=‘mt=%s’"
 
-# bp: novi msgid
-#: src/pcresearch.c:153
-#, fuzzy
-msgid "-P supports only unibyte locales on this platform"
-msgstr "-P podržava samo unibyte i UTF-8 locale"
+#: src/pcresearch.c:92
+#, c-format
+msgid ""
+"\n"
+"grep -P uses PCRE2 %s\n"
+msgstr ""
+"\n"
+"grep -P koristi PCRE2 %s\n"
 
 # bp: novi msgid
-#: src/pcresearch.c:155
+#: src/pcresearch.c:169
+msgid "-P supports only unibyte locales on this platform"
+msgstr "-P podržava samo unibyte locales na ovoj platformi"
+
+# bp: novi msgid
+#: src/pcresearch.c:171
 msgid "-P supports only unibyte and UTF-8 locales"
 msgstr "-P podržava samo unibyte i UTF-8 locale"
 
-#: src/pcresearch.c:169
+#: src/pcresearch.c:194
 msgid "the -P option only supports a single pattern"
 msgstr "opcija -P podržava samo jedan uzorak"
 
-#: src/pcresearch.c:222
-#, c-format
-msgid "JIT internal error: %d"
-msgstr "JIT interna greška: %d"
-
-#: src/pcresearch.c:259
+#: src/pcresearch.c:290
 msgid "exceeded PCRE's line length limit"
 msgstr "prekoračeno je ograničenje duljine retka PCRE-a"
 
-#: src/pcresearch.c:337
+#: src/pcresearch.c:368
 #, c-format
 msgid "%s: memory exhausted"
 msgstr "%s: nema dovoljno memorije"
 
-#: src/pcresearch.c:340
+#: src/pcresearch.c:371
 #, c-format
 msgid "%s: exhausted PCRE JIT stack"
 msgstr "%s: PCRE JIT stȏg je iscrpljen"
 
-#: src/pcresearch.c:344
+#: src/pcresearch.c:375
 #, c-format
 msgid "%s: exceeded PCRE's backtracking limit"
 msgstr "%s: je premašio PCRE granicu broja pokušaja"
 
-#: src/pcresearch.c:349
+#: src/pcresearch.c:380
 #, c-format
 msgid "%s: exceeded PCRE's nested backtracking limit"
 msgstr "%s: je premašio PCRE granicu broja ugniježdenih pokušaja"
 
-#: src/pcresearch.c:353
+#: src/pcresearch.c:384
 #, c-format
 msgid "%s: PCRE detected recurse loop"
 msgstr "%s: PCRE je otkrio/naišao na rekurzivnu petlju"
 
-#: src/pcresearch.c:358
+#: src/pcresearch.c:389
 #, c-format
 msgid "%s: exceeded PCRE's heap limit"
 msgstr "%s: je premašio PCRE granicu za hrpe (heap)"
 
-# bp:fuzzy popravljen
-#: src/pcresearch.c:367
+#: src/pcresearch.c:398
 #, c-format
 msgid "%s: internal PCRE error: %d"
 msgstr "%s: interna PCRE greška: %d"
+
+#~ msgid ""
+#~ "\n"
+#~ "Built with PCRE "
+#~ msgstr ""
+#~ "\n"
+#~ "Izgrađen (sastavljen) s PCRE "
+
+#~ msgid "JIT internal error: %d"
+#~ msgstr "JIT interna greška: %d"
 
 # bp: novi msgid
 #~ msgid "failed to allocate memory for the PCRE JIT stack"

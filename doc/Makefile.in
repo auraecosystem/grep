@@ -126,9 +126,10 @@ am__aclocal_m4_deps = $(top_srcdir)/m4/00gnulib.m4 \
 	$(top_srcdir)/m4/error.m4 $(top_srcdir)/m4/error_h.m4 \
 	$(top_srcdir)/m4/exponentd.m4 $(top_srcdir)/m4/extensions.m4 \
 	$(top_srcdir)/m4/extern-inline.m4 $(top_srcdir)/m4/fchdir.m4 \
-	$(top_srcdir)/m4/fcntl-o.m4 $(top_srcdir)/m4/fcntl-safer.m4 \
-	$(top_srcdir)/m4/fcntl.m4 $(top_srcdir)/m4/fcntl_h.m4 \
-	$(top_srcdir)/m4/fdopen.m4 $(top_srcdir)/m4/fdopendir.m4 \
+	$(top_srcdir)/m4/fclose.m4 $(top_srcdir)/m4/fcntl-o.m4 \
+	$(top_srcdir)/m4/fcntl-safer.m4 $(top_srcdir)/m4/fcntl.m4 \
+	$(top_srcdir)/m4/fcntl_h.m4 $(top_srcdir)/m4/fdopen.m4 \
+	$(top_srcdir)/m4/fdopendir.m4 $(top_srcdir)/m4/fflush.m4 \
 	$(top_srcdir)/m4/filenamecat.m4 $(top_srcdir)/m4/flexmember.m4 \
 	$(top_srcdir)/m4/float_h.m4 $(top_srcdir)/m4/fnmatch.m4 \
 	$(top_srcdir)/m4/fnmatch_h.m4 $(top_srcdir)/m4/fopen.m4 \
@@ -223,14 +224,15 @@ am__aclocal_m4_deps = $(top_srcdir)/m4/00gnulib.m4 \
 	$(top_srcdir)/m4/sys_stat_h.m4 $(top_srcdir)/m4/sys_time_h.m4 \
 	$(top_srcdir)/m4/sys_types_h.m4 $(top_srcdir)/m4/sys_uio_h.m4 \
 	$(top_srcdir)/m4/thread.m4 $(top_srcdir)/m4/threadlib.m4 \
-	$(top_srcdir)/m4/time_h.m4 $(top_srcdir)/m4/unistd-safer.m4 \
-	$(top_srcdir)/m4/unistd_h.m4 $(top_srcdir)/m4/unlocked-io.m4 \
-	$(top_srcdir)/m4/vasnprintf.m4 $(top_srcdir)/m4/version-etc.m4 \
-	$(top_srcdir)/m4/visibility.m4 $(top_srcdir)/m4/warn-on-use.m4 \
-	$(top_srcdir)/m4/warnings.m4 $(top_srcdir)/m4/wchar_h.m4 \
-	$(top_srcdir)/m4/wchar_t.m4 $(top_srcdir)/m4/wcrtomb.m4 \
-	$(top_srcdir)/m4/wctob.m4 $(top_srcdir)/m4/wctomb.m4 \
-	$(top_srcdir)/m4/wctype_h.m4 $(top_srcdir)/m4/wcwidth.m4 \
+	$(top_srcdir)/m4/time.m4 $(top_srcdir)/m4/time_h.m4 \
+	$(top_srcdir)/m4/unistd-safer.m4 $(top_srcdir)/m4/unistd_h.m4 \
+	$(top_srcdir)/m4/unlocked-io.m4 $(top_srcdir)/m4/vasnprintf.m4 \
+	$(top_srcdir)/m4/version-etc.m4 $(top_srcdir)/m4/visibility.m4 \
+	$(top_srcdir)/m4/warn-on-use.m4 $(top_srcdir)/m4/warnings.m4 \
+	$(top_srcdir)/m4/wchar_h.m4 $(top_srcdir)/m4/wchar_t.m4 \
+	$(top_srcdir)/m4/wcrtomb.m4 $(top_srcdir)/m4/wctob.m4 \
+	$(top_srcdir)/m4/wctomb.m4 $(top_srcdir)/m4/wctype_h.m4 \
+	$(top_srcdir)/m4/wcwidth.m4 \
 	$(top_srcdir)/m4/windows-stat-inodes.m4 \
 	$(top_srcdir)/m4/wint_t.m4 $(top_srcdir)/m4/wmemchr.m4 \
 	$(top_srcdir)/m4/wmempcpy.m4 $(top_srcdir)/m4/xalloc.m4 \
@@ -374,6 +376,7 @@ CTAGS = @CTAGS@
 CYGPATH_W = @CYGPATH_W@
 DEFS = @DEFS@
 DEPDIR = @DEPDIR@
+DIR_HAS_FD_MEMBER = @DIR_HAS_FD_MEMBER@
 ECHO_C = @ECHO_C@
 ECHO_N = @ECHO_N@
 ECHO_T = @ECHO_T@
@@ -537,6 +540,7 @@ GL_GNULIB_MBSSEP = @GL_GNULIB_MBSSEP@
 GL_GNULIB_MBSSPN = @GL_GNULIB_MBSSPN@
 GL_GNULIB_MBSSTR = @GL_GNULIB_MBSSTR@
 GL_GNULIB_MBSTOK_R = @GL_GNULIB_MBSTOK_R@
+GL_GNULIB_MBSTOWCS = @GL_GNULIB_MBSTOWCS@
 GL_GNULIB_MBTOWC = @GL_GNULIB_MBTOWC@
 GL_GNULIB_MDA_ACCESS = @GL_GNULIB_MDA_ACCESS@
 GL_GNULIB_MDA_CHDIR = @GL_GNULIB_MDA_CHDIR@
@@ -708,6 +712,7 @@ GL_GNULIB_STRVERSCMP = @GL_GNULIB_STRVERSCMP@
 GL_GNULIB_SYMLINK = @GL_GNULIB_SYMLINK@
 GL_GNULIB_SYMLINKAT = @GL_GNULIB_SYMLINKAT@
 GL_GNULIB_SYSTEM_POSIX = @GL_GNULIB_SYSTEM_POSIX@
+GL_GNULIB_TIME = @GL_GNULIB_TIME@
 GL_GNULIB_TIMEGM = @GL_GNULIB_TIMEGM@
 GL_GNULIB_TIMESPEC_GET = @GL_GNULIB_TIMESPEC_GET@
 GL_GNULIB_TIMESPEC_GETRES = @GL_GNULIB_TIMESPEC_GETRES@
@@ -829,6 +834,7 @@ HAVE_DECL_LOCALTIME_R = @HAVE_DECL_LOCALTIME_R@
 HAVE_DECL_MEMMEM = @HAVE_DECL_MEMMEM@
 HAVE_DECL_MEMRCHR = @HAVE_DECL_MEMRCHR@
 HAVE_DECL_OBSTACK_PRINTF = @HAVE_DECL_OBSTACK_PRINTF@
+HAVE_DECL_PROGRAM_INVOCATION_NAME = @HAVE_DECL_PROGRAM_INVOCATION_NAME@
 HAVE_DECL_PUTW = @HAVE_DECL_PUTW@
 HAVE_DECL_SETENV = @HAVE_DECL_SETENV@
 HAVE_DECL_SETHOSTNAME = @HAVE_DECL_SETHOSTNAME@
@@ -1084,6 +1090,7 @@ HAVE_TIMESPEC_GETRES = @HAVE_TIMESPEC_GETRES@
 HAVE_TIMEZONE_T = @HAVE_TIMEZONE_T@
 HAVE_TYPE_VOLATILE_SIG_ATOMIC_T = @HAVE_TYPE_VOLATILE_SIG_ATOMIC_T@
 HAVE_UNISTD_H = @HAVE_UNISTD_H@
+HAVE_UNISTRING_WOE32DLL_H = @HAVE_UNISTRING_WOE32DLL_H@
 HAVE_UNLINKAT = @HAVE_UNLINKAT@
 HAVE_UNLOCKPT = @HAVE_UNLOCKPT@
 HAVE_USLEEP = @HAVE_USLEEP@
@@ -1399,7 +1406,9 @@ REPLACE_MBSINIT = @REPLACE_MBSINIT@
 REPLACE_MBSNRTOWCS = @REPLACE_MBSNRTOWCS@
 REPLACE_MBSRTOWCS = @REPLACE_MBSRTOWCS@
 REPLACE_MBSTATE_T = @REPLACE_MBSTATE_T@
+REPLACE_MBSTOWCS = @REPLACE_MBSTOWCS@
 REPLACE_MBTOWC = @REPLACE_MBTOWC@
+REPLACE_MB_CUR_MAX = @REPLACE_MB_CUR_MAX@
 REPLACE_MEMCHR = @REPLACE_MEMCHR@
 REPLACE_MEMMEM = @REPLACE_MEMMEM@
 REPLACE_MEMPCPY = @REPLACE_MEMPCPY@
@@ -1489,6 +1498,7 @@ REPLACE_RAISE = @REPLACE_RAISE@
 REPLACE_RANDOM = @REPLACE_RANDOM@
 REPLACE_RANDOM_R = @REPLACE_RANDOM_R@
 REPLACE_READ = @REPLACE_READ@
+REPLACE_READDIR = @REPLACE_READDIR@
 REPLACE_READLINK = @REPLACE_READLINK@
 REPLACE_READLINKAT = @REPLACE_READLINKAT@
 REPLACE_REALLOCARRAY = @REPLACE_REALLOCARRAY@
@@ -1498,6 +1508,7 @@ REPLACE_REALPATH = @REPLACE_REALPATH@
 REPLACE_REMOVE = @REPLACE_REMOVE@
 REPLACE_RENAME = @REPLACE_RENAME@
 REPLACE_RENAMEAT = @REPLACE_RENAMEAT@
+REPLACE_REWINDDIR = @REPLACE_REWINDDIR@
 REPLACE_RMDIR = @REPLACE_RMDIR@
 REPLACE_SCHED_YIELD = @REPLACE_SCHED_YIELD@
 REPLACE_SELECT = @REPLACE_SELECT@
@@ -1538,6 +1549,7 @@ REPLACE_STRUCT_LCONV = @REPLACE_STRUCT_LCONV@
 REPLACE_STRUCT_TIMEVAL = @REPLACE_STRUCT_TIMEVAL@
 REPLACE_SYMLINK = @REPLACE_SYMLINK@
 REPLACE_SYMLINKAT = @REPLACE_SYMLINKAT@
+REPLACE_TIME = @REPLACE_TIME@
 REPLACE_TIMEGM = @REPLACE_TIMEGM@
 REPLACE_TIMESPEC_GET = @REPLACE_TIMESPEC_GET@
 REPLACE_TMPFILE = @REPLACE_TMPFILE@
@@ -1557,14 +1569,18 @@ REPLACE_VPRINTF = @REPLACE_VPRINTF@
 REPLACE_VSNPRINTF = @REPLACE_VSNPRINTF@
 REPLACE_VSPRINTF = @REPLACE_VSPRINTF@
 REPLACE_WCRTOMB = @REPLACE_WCRTOMB@
+REPLACE_WCSCMP = @REPLACE_WCSCMP@
 REPLACE_WCSFTIME = @REPLACE_WCSFTIME@
+REPLACE_WCSNCMP = @REPLACE_WCSNCMP@
 REPLACE_WCSNRTOMBS = @REPLACE_WCSNRTOMBS@
 REPLACE_WCSRTOMBS = @REPLACE_WCSRTOMBS@
+REPLACE_WCSSTR = @REPLACE_WCSSTR@
 REPLACE_WCSTOK = @REPLACE_WCSTOK@
 REPLACE_WCSWIDTH = @REPLACE_WCSWIDTH@
 REPLACE_WCTOB = @REPLACE_WCTOB@
 REPLACE_WCTOMB = @REPLACE_WCTOMB@
 REPLACE_WCWIDTH = @REPLACE_WCWIDTH@
+REPLACE_WMEMCMP = @REPLACE_WMEMCMP@
 REPLACE_WMEMPCPY = @REPLACE_WMEMPCPY@
 REPLACE_WRITE = @REPLACE_WRITE@
 REPLACE__EXIT = @REPLACE__EXIT@

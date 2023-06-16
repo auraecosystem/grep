@@ -1,16 +1,16 @@
 # Hungarian translation for grep.
-# Copyright (C) 2002, 2009, 2010, 2014, 2015, 2016, 2017, 2019, 2022 Free Software Foundation, Inc.
+# Copyright (C) 2002, 2009, 2010, 2014, 2015, 2016, 2017, 2019, 2022, 2023 Free Software Foundation, Inc.
 # This file is distributed under the same license as the grep package.
 #
 # Emese Kovács <emese@instantweb.hu>, 2002, 2010.
 # Gabor Kelemen <kelemeng@gnome.hu>, 2009, 2010, 2014, 2016, 2017.
-# Balázs Úr <ur.balazs@fsf.hu>, 2014, 2015, 2019, 2022.
+# Balázs Úr <ur.balazs@fsf.hu>, 2014, 2015, 2019, 2022, 2023.
 msgid ""
 msgstr ""
-"Project-Id-Version: grep 3.7.98\n"
+"Project-Id-Version: grep 3.10.7\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2023-03-05 07:28-0800\n"
-"PO-Revision-Date: 2022-10-21 19:26+0200\n"
+"POT-Creation-Date: 2023-05-13 01:14-0700\n"
+"PO-Revision-Date: 2023-04-18 19:59+0200\n"
 "Last-Translator: Balázs Úr <ur.balazs@fsf.hu>\n"
 "Language-Team: Hungarian <translation-team-hu@lists.sourceforge.net>\n"
 "Language: hu\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Bugs: Report translation errors to the Language-Team address.\n"
-"X-Generator: Lokalize 19.12.3\n"
+"X-Generator: Lokalize 22.08.2\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
 #: lib/argmatch.c:145
@@ -31,7 +31,7 @@ msgstr "a(z) %s argumentum érvénytelen a következőhöz: %s"
 msgid "ambiguous argument %s for %s"
 msgstr "a(z) „%s” argumentum nem egyértelmű a következőhöz: „%s”"
 
-#: lib/argmatch.c:165 lib/argmatch.h:237
+#: lib/argmatch.c:165 lib/argmatch.h:242
 msgid "Valid arguments are:"
 msgstr "Az érvényes argumentumok a következők:"
 
@@ -59,48 +59,48 @@ msgstr "érvénytelen karakterosztály"
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr "a karakterosztály szintaxisa [[:space:]], nem [:space:]"
 
-#: lib/dfa.c:1217
+#: lib/dfa.c:1222
 msgid "unfinished \\ escape"
 msgstr "befejezetlen \\ escape"
 
-#: lib/dfa.c:1327
+#: lib/dfa.c:1332
 msgid "? at start of expression"
 msgstr "? a kifejezés kezdetén"
 
-#: lib/dfa.c:1339
+#: lib/dfa.c:1344
 msgid "* at start of expression"
 msgstr "* a kifejezés kezdetén"
 
-#: lib/dfa.c:1353
+#: lib/dfa.c:1358
 msgid "+ at start of expression"
 msgstr "+ a kifejezés kezdetén"
 
-#: lib/dfa.c:1408
+#: lib/dfa.c:1413
 msgid "{...} at start of expression"
 msgstr "{...} a kifejezés kezdetén"
 
-#: lib/dfa.c:1411
+#: lib/dfa.c:1416
 msgid "invalid content of \\{\\}"
 msgstr "a \\{\\} tartalma érvénytelen"
 
-#: lib/dfa.c:1413
+#: lib/dfa.c:1418
 msgid "regular expression too big"
 msgstr "a reguláris kifejezés túl nagy"
 
-#: lib/dfa.c:1563
+#: lib/dfa.c:1568
 msgid "stray \\ before unprintable character"
 msgstr "felesleges \\ egy nem nyomtatható karakter előtt"
 
-#: lib/dfa.c:1565
+#: lib/dfa.c:1570
 msgid "stray \\ before white space"
 msgstr "felesleges \\ egy üres karakter előtt"
 
-#: lib/dfa.c:1569
+#: lib/dfa.c:1574
 #, c-format
 msgid "stray \\ before %lc"
 msgstr "felesleges \\ egy %lc karakter előtt"
 
-#: lib/dfa.c:1570
+#: lib/dfa.c:1575
 msgid "stray \\"
 msgstr "felesleges \\"
 
@@ -742,73 +742,84 @@ msgid "unknown binary-files type"
 msgstr "ismeretlen bináris fájl típus"
 
 #: src/grep.c:2831
-#, fuzzy
 msgid ""
 "Written by Mike Haertel and others; see\n"
 "<https://git.savannah.gnu.org/cgit/grep.git/tree/AUTHORS>."
 msgstr ""
 "Írta: Mike Haertel és mások, lásd:\n"
-"<https://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>."
+"<https://git.savannah.gnu.org/cgit/grep.git/tree/AUTHORS>."
 
-#: src/grep.c:2934
+#: src/grep.c:2937
 #, c-format
 msgid "warning: GREP_COLOR='%s' is deprecated; use GREP_COLORS='mt=%s'"
 msgstr ""
 "figyelmeztetés: a GREP_COLOR='%s' elavult, használja ezt: GREP_COLORS='mt=%s'"
 
-#: src/pcresearch.c:153
-#, fuzzy
-msgid "-P supports only unibyte locales on this platform"
-msgstr "a -P csak unibyte és UTF-8 területi beállításokat támogat"
+#: src/pcresearch.c:92
+#, c-format
+msgid ""
+"\n"
+"grep -P uses PCRE2 %s\n"
+msgstr ""
 
-#: src/pcresearch.c:155
+#: src/pcresearch.c:169
+msgid "-P supports only unibyte locales on this platform"
+msgstr "a -P csak unibyte területi beállításokat támogat ezen a platformon"
+
+#: src/pcresearch.c:171
 msgid "-P supports only unibyte and UTF-8 locales"
 msgstr "a -P csak unibyte és UTF-8 területi beállításokat támogat"
 
-#: src/pcresearch.c:169
+#: src/pcresearch.c:194
 msgid "the -P option only supports a single pattern"
 msgstr "a -P kapcsoló csak egy mintát támogat"
 
-#: src/pcresearch.c:222
-#, c-format
-msgid "JIT internal error: %d"
-msgstr "JIT belső hiba: %d"
-
-#: src/pcresearch.c:259
+#: src/pcresearch.c:290
 msgid "exceeded PCRE's line length limit"
 msgstr "a PCRE sorhossza túllépve"
 
-#: src/pcresearch.c:337
+#: src/pcresearch.c:368
 #, c-format
 msgid "%s: memory exhausted"
 msgstr "%s: elfogyott a memória"
 
-#: src/pcresearch.c:340
+#: src/pcresearch.c:371
 #, c-format
 msgid "%s: exhausted PCRE JIT stack"
 msgstr "%s: kifogyott a PCRE JIT verem"
 
-#: src/pcresearch.c:344
+#: src/pcresearch.c:375
 #, c-format
 msgid "%s: exceeded PCRE's backtracking limit"
 msgstr "%s: a PCRE visszakövetési korlátja túllépve"
 
-#: src/pcresearch.c:349
+#: src/pcresearch.c:380
 #, c-format
 msgid "%s: exceeded PCRE's nested backtracking limit"
 msgstr "%s: a PCRE egymásba ágyazott visszakövetési korlátja túllépve"
 
-#: src/pcresearch.c:353
+#: src/pcresearch.c:384
 #, c-format
 msgid "%s: PCRE detected recurse loop"
 msgstr "%s: a PCRE rekurzív hurkot észlelt"
 
-#: src/pcresearch.c:358
+#: src/pcresearch.c:389
 #, c-format
 msgid "%s: exceeded PCRE's heap limit"
 msgstr "%s: a PCRE memóriakupac korlátja túllépve"
 
-#: src/pcresearch.c:367
+#: src/pcresearch.c:398
 #, c-format
 msgid "%s: internal PCRE error: %d"
 msgstr "%s: belső PCRE hiba: %d"
+
+#~ msgid ""
+#~ "\n"
+#~ "Built with PCRE "
+#~ msgstr ""
+#~ "\n"
+#~ "Összeállítva ezzel: PCRE "
+
+#, c-format
+#~ msgid "JIT internal error: %d"
+#~ msgstr "JIT belső hiba: %d"

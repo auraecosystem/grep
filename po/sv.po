@@ -8,10 +8,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: grep 3.8.35\n"
+"Project-Id-Version: grep 3.10.12\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2023-03-05 07:28-0800\n"
-"PO-Revision-Date: 2023-02-27 09:24+0100\n"
+"POT-Creation-Date: 2023-05-13 01:14-0700\n"
+"PO-Revision-Date: 2023-04-23 12:03+0200\n"
 "Last-Translator: Anders Jonsson <anders.jonsson@norsjovallen.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "Language: sv\n"
@@ -31,7 +31,7 @@ msgstr "ogiltigt argument %s för %s"
 msgid "ambiguous argument %s for %s"
 msgstr "tvetydigt argument %s för %s"
 
-#: lib/argmatch.c:165 lib/argmatch.h:237
+#: lib/argmatch.c:165 lib/argmatch.h:242
 msgid "Valid arguments are:"
 msgstr "Giltiga argument är:"
 
@@ -59,48 +59,48 @@ msgstr "ogiltig teckenklass"
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr "syntax för teckenklass är [[:space:]], inte [:space:]"
 
-#: lib/dfa.c:1217
+#: lib/dfa.c:1222
 msgid "unfinished \\ escape"
 msgstr "oavslutad \\-sekvens"
 
-#: lib/dfa.c:1327
+#: lib/dfa.c:1332
 msgid "? at start of expression"
 msgstr "? i början på uttryck"
 
-#: lib/dfa.c:1339
+#: lib/dfa.c:1344
 msgid "* at start of expression"
 msgstr "* i början på uttryck"
 
-#: lib/dfa.c:1353
+#: lib/dfa.c:1358
 msgid "+ at start of expression"
 msgstr "+ i början på uttryck"
 
-#: lib/dfa.c:1408
+#: lib/dfa.c:1413
 msgid "{...} at start of expression"
 msgstr "{...} i början på uttryck"
 
-#: lib/dfa.c:1411
+#: lib/dfa.c:1416
 msgid "invalid content of \\{\\}"
 msgstr "ogiltigt innehåll i \\{\\}"
 
-#: lib/dfa.c:1413
+#: lib/dfa.c:1418
 msgid "regular expression too big"
 msgstr "reguljärt uttryck är för stort"
 
-#: lib/dfa.c:1563
+#: lib/dfa.c:1568
 msgid "stray \\ before unprintable character"
 msgstr "löst \\ före ej utskrivbart tecken"
 
-#: lib/dfa.c:1565
+#: lib/dfa.c:1570
 msgid "stray \\ before white space"
 msgstr "löst \\ före blanktecken"
 
-#: lib/dfa.c:1569
+#: lib/dfa.c:1574
 #, c-format
 msgid "stray \\ before %lc"
 msgstr "löst \\ före %lc"
 
-#: lib/dfa.c:1570
+#: lib/dfa.c:1575
 msgid "stray \\"
 msgstr "löst \\"
 
@@ -739,66 +739,80 @@ msgstr ""
 "Skrivet av Mike Haertel och andra, se\n"
 "<https://git.savannah.gnu.org/cgit/grep.git/tree/AUTHORS>."
 
-#: src/grep.c:2934
+#: src/grep.c:2937
 #, c-format
 msgid "warning: GREP_COLOR='%s' is deprecated; use GREP_COLORS='mt=%s'"
 msgstr "varning: GREP_COLOR='%s' är föråldrad; använd GREP_COLORS='mt=%s'"
 
-#: src/pcresearch.c:153
+#: src/pcresearch.c:92
+#, c-format
+msgid ""
+"\n"
+"grep -P uses PCRE2 %s\n"
+msgstr ""
+"\n"
+"grep -P använder PCRE2 %s\n"
+
+#: src/pcresearch.c:169
 msgid "-P supports only unibyte locales on this platform"
 msgstr "-P stöder endast unibyte-lokaler på denna plattform"
 
-#: src/pcresearch.c:155
+#: src/pcresearch.c:171
 msgid "-P supports only unibyte and UTF-8 locales"
 msgstr "-P stöder endast unibyte- och UTF-8-lokaler"
 
-#: src/pcresearch.c:169
+#: src/pcresearch.c:194
 msgid "the -P option only supports a single pattern"
 msgstr "flaggan -P har endast stöd för ett mönster"
 
-#: src/pcresearch.c:222
-#, c-format
-msgid "JIT internal error: %d"
-msgstr "internt JIT-fel: %d"
-
-#: src/pcresearch.c:259
+#: src/pcresearch.c:290
 msgid "exceeded PCRE's line length limit"
 msgstr "översteg radlängdsgräns för PCRE"
 
-#: src/pcresearch.c:337
+#: src/pcresearch.c:368
 #, c-format
 msgid "%s: memory exhausted"
 msgstr "%s: minnet är slut"
 
-#: src/pcresearch.c:340
+#: src/pcresearch.c:371
 #, c-format
 msgid "%s: exhausted PCRE JIT stack"
 msgstr "%s: fyllde JIT-stacken för PCRE"
 
-#: src/pcresearch.c:344
+#: src/pcresearch.c:375
 #, c-format
 msgid "%s: exceeded PCRE's backtracking limit"
 msgstr "%s: översteg gräns för PCRE-bakåtspårning"
 
-#: src/pcresearch.c:349
+#: src/pcresearch.c:380
 #, c-format
 msgid "%s: exceeded PCRE's nested backtracking limit"
 msgstr "%s: översteg gräns för nästlad PCRE-bakåtspårning"
 
-#: src/pcresearch.c:353
+#: src/pcresearch.c:384
 #, c-format
 msgid "%s: PCRE detected recurse loop"
 msgstr "%s: PCRE upptäckte rekursiv loop"
 
-#: src/pcresearch.c:358
+#: src/pcresearch.c:389
 #, c-format
 msgid "%s: exceeded PCRE's heap limit"
 msgstr "%s: översteg heap-gräns för PCRE"
 
-#: src/pcresearch.c:367
+#: src/pcresearch.c:398
 #, c-format
 msgid "%s: internal PCRE error: %d"
 msgstr "%s: internt PCRE-fel: %d"
+
+#~ msgid ""
+#~ "\n"
+#~ "Built with PCRE "
+#~ msgstr ""
+#~ "\n"
+#~ "Byggt med PCRE "
+
+#~ msgid "JIT internal error: %d"
+#~ msgstr "internt JIT-fel: %d"
 
 #~ msgid "failed to allocate memory for the PCRE JIT stack"
 #~ msgstr "misslyckades med att allokera minne för JIT-stacken för PCRE"

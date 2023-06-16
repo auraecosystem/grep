@@ -216,11 +216,11 @@ EXTRA_DIST += test-bitrotate.c macros.h
 
 ## begin gnulib module btowc-tests
 
-TESTS += test-btowc1.sh test-btowc2.sh
+TESTS += test-btowc1.sh test-btowc2.sh test-btowc3.sh
 TESTS_ENVIRONMENT += LOCALE_FR='@LOCALE_FR@' LOCALE_FR_UTF8='@LOCALE_FR_UTF8@'
 check_PROGRAMS += test-btowc
 test_btowc_LDADD = $(LDADD) $(SETLOCALE_LIB)
-EXTRA_DIST += test-btowc1.sh test-btowc2.sh test-btowc.c signature.h macros.h
+EXTRA_DIST += test-btowc1.sh test-btowc2.sh test-btowc3.sh test-btowc.c signature.h macros.h
 
 ## end   gnulib module btowc-tests
 
@@ -713,7 +713,7 @@ endif
 TESTS += test-gettimeofday
 check_PROGRAMS += test-gettimeofday
 
-EXTRA_DIST += signature.h test-gettimeofday.c
+EXTRA_DIST += test-gettimeofday.c signature.h macros.h
 
 ## end   gnulib module gettimeofday-tests
 
@@ -924,6 +924,14 @@ EXTRA_DIST += test-langinfo.c
 
 ## end   gnulib module langinfo-tests
 
+## begin gnulib module largefile-tests
+
+TESTS += test-largefile
+check_PROGRAMS += test-largefile
+EXTRA_DIST += test-largefile.c
+
+## end   gnulib module largefile-tests
+
 ## begin gnulib module limits-h-tests
 
 TESTS += test-limits-h
@@ -1026,6 +1034,25 @@ EXTRA_DIST += test-malloca.c
 
 ## end   gnulib module malloca-tests
 
+## begin gnulib module mbrlen-tests
+
+TESTS += \
+  test-mbrlen1.sh test-mbrlen2.sh test-mbrlen3.sh test-mbrlen4.sh \
+  test-mbrlen5.sh \
+  test-mbrlen-w32-1.sh test-mbrlen-w32-2.sh test-mbrlen-w32-3.sh \
+  test-mbrlen-w32-4.sh test-mbrlen-w32-5.sh test-mbrlen-w32-6.sh \
+  test-mbrlen-w32-7.sh
+TESTS_ENVIRONMENT += \
+  LOCALE_FR='@LOCALE_FR@' \
+  LOCALE_FR_UTF8='@LOCALE_FR_UTF8@' \
+  LOCALE_JA='@LOCALE_JA@' \
+  LOCALE_ZH_CN='@LOCALE_ZH_CN@'
+check_PROGRAMS += test-mbrlen test-mbrlen-w32
+test_mbrlen_LDADD = $(LDADD) $(SETLOCALE_LIB) $(MBRTOWC_LIB)
+EXTRA_DIST += test-mbrlen1.sh test-mbrlen2.sh test-mbrlen3.sh test-mbrlen4.sh test-mbrlen5.sh test-mbrlen.c test-mbrlen-w32-1.sh test-mbrlen-w32-2.sh test-mbrlen-w32-3.sh test-mbrlen-w32-4.sh test-mbrlen-w32-5.sh test-mbrlen-w32-6.sh test-mbrlen-w32-7.sh test-mbrlen-w32.c signature.h macros.h
+
+## end   gnulib module mbrlen-tests
+
 ## begin gnulib module mbscasecmp-tests
 
 TESTS += test-mbscasecmp.sh
@@ -1048,7 +1075,9 @@ EXTRA_DIST += test-mbsinit.sh test-mbsinit.c signature.h macros.h
 
 ## begin gnulib module mbsrtowcs-tests
 
-TESTS += test-mbsrtowcs1.sh test-mbsrtowcs2.sh test-mbsrtowcs3.sh test-mbsrtowcs4.sh
+TESTS += \
+  test-mbsrtowcs1.sh test-mbsrtowcs2.sh test-mbsrtowcs3.sh test-mbsrtowcs4.sh \
+  test-mbsrtowcs5.sh
 TESTS_ENVIRONMENT += \
   LOCALE_FR='@LOCALE_FR@' \
   LOCALE_FR_UTF8='@LOCALE_FR_UTF8@' \
@@ -1056,7 +1085,7 @@ TESTS_ENVIRONMENT += \
   LOCALE_ZH_CN='@LOCALE_ZH_CN@'
 check_PROGRAMS += test-mbsrtowcs
 test_mbsrtowcs_LDADD = $(LDADD) $(SETLOCALE_LIB) $(MBRTOWC_LIB)
-EXTRA_DIST += test-mbsrtowcs1.sh test-mbsrtowcs2.sh test-mbsrtowcs3.sh test-mbsrtowcs4.sh test-mbsrtowcs.c signature.h macros.h
+EXTRA_DIST += test-mbsrtowcs1.sh test-mbsrtowcs2.sh test-mbsrtowcs3.sh test-mbsrtowcs4.sh test-mbsrtowcs5.sh test-mbsrtowcs.c signature.h macros.h
 
 ## end   gnulib module mbsrtowcs-tests
 
@@ -1834,7 +1863,7 @@ EXTRA_DIST += test-stdint.c
 
 TESTS += test-stdio
 check_PROGRAMS += test-stdio
-EXTRA_DIST += test-stdio.c
+EXTRA_DIST += test-stdio.c nan.h macros.h
 
 ## end   gnulib module stdio-tests
 
@@ -2208,13 +2237,41 @@ EXTRA_DIST += test-thread_self.c test-thread_create.c macros.h
 
 ## end   gnulib module thread-tests
 
+## begin gnulib module time
+
+if GL_COND_OBJ_TIME
+libtests_a_SOURCES += time.c
+endif
+
+## end   gnulib module time
+
+## begin gnulib module time-h-tests
+
+TESTS += test-time-h
+check_PROGRAMS += test-time-h
+EXTRA_DIST += test-time-h.c
+
+## end   gnulib module time-h-tests
+
 ## begin gnulib module time-tests
 
 TESTS += test-time
 check_PROGRAMS += test-time
-EXTRA_DIST += test-time.c
+EXTRA_DIST += test-time.c signature.h macros.h
 
 ## end   gnulib module time-tests
+
+## begin gnulib module trim-tests
+
+TESTS += test-trim1.sh test-trim2.sh test-trim3.sh
+TESTS_ENVIRONMENT += \
+  LOCALE_FR_UTF8='@LOCALE_FR_UTF8@' \
+  LOCALE_ZH_CN='@LOCALE_ZH_CN@'
+check_PROGRAMS += test-trim
+test_trim_LDADD = $(LDADD) $(LIBUNISTRING) @LIBINTL@ $(MBRTOWC_LIB)
+EXTRA_DIST += test-trim1.sh test-trim2.sh test-trim3.sh test-trim.c macros.h
+
+## end   gnulib module trim-tests
 
 ## begin gnulib module unistd-safer-tests
 
@@ -2437,6 +2494,14 @@ test_xstrtoul_LDADD = $(LDADD) @LIBINTL@
 EXTRA_DIST += test-xstrtol.c test-xstrtoul.c test-xstrtol.sh
 
 ## end   gnulib module xstrtol-tests
+
+## begin gnulib module year2038-tests
+
+TESTS += test-year2038
+check_PROGRAMS += test-year2038
+EXTRA_DIST += test-year2038.c
+
+## end   gnulib module year2038-tests
 
 all: all-notice
 all-notice:

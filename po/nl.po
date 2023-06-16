@@ -12,10 +12,10 @@
 # Erick Branderhorst <branderh@debian.org>, 1996.
 msgid ""
 msgstr ""
-"Project-Id-Version: grep-3.8.35\n"
+"Project-Id-Version: grep-3.10.7\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2023-03-05 07:28-0800\n"
-"PO-Revision-Date: 2023-02-27 17:27+0100\n"
+"POT-Creation-Date: 2023-05-13 01:14-0700\n"
+"PO-Revision-Date: 2023-04-10 17:00+0200\n"
 "Last-Translator: Benno Schulenberg <vertaling@coevern.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
 "Language: nl\n"
@@ -35,7 +35,7 @@ msgstr "ongeldig argument %s van %s"
 msgid "ambiguous argument %s for %s"
 msgstr "argument %s van %s is niet eenduidig"
 
-#: lib/argmatch.c:165 lib/argmatch.h:237
+#: lib/argmatch.c:165 lib/argmatch.h:242
 msgid "Valid arguments are:"
 msgstr "Geldige argumenten zijn:"
 
@@ -63,48 +63,48 @@ msgstr "ongeldige tekenklasse"
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr "syntax van tekenklasse is [[:space:]], niet [:space:]"
 
-#: lib/dfa.c:1217
+#: lib/dfa.c:1222
 msgid "unfinished \\ escape"
 msgstr "onafgemaakte \\-stuurcode"
 
-#: lib/dfa.c:1327
+#: lib/dfa.c:1332
 msgid "? at start of expression"
 msgstr "? aan begin van expressie"
 
-#: lib/dfa.c:1339
+#: lib/dfa.c:1344
 msgid "* at start of expression"
 msgstr "* aan begin van expressie"
 
-#: lib/dfa.c:1353
+#: lib/dfa.c:1358
 msgid "+ at start of expression"
 msgstr "+ aan begin van expressie"
 
-#: lib/dfa.c:1408
+#: lib/dfa.c:1413
 msgid "{...} at start of expression"
 msgstr "{...} aan begin van expressie"
 
-#: lib/dfa.c:1411
+#: lib/dfa.c:1416
 msgid "invalid content of \\{\\}"
 msgstr "ongeldige inhoud van \\{\\}"
 
-#: lib/dfa.c:1413
+#: lib/dfa.c:1418
 msgid "regular expression too big"
 msgstr "reguliere expressie is te groot"
 
-#: lib/dfa.c:1563
+#: lib/dfa.c:1568
 msgid "stray \\ before unprintable character"
 msgstr "verdwaalde \\ voor ontoonbaar teken"
 
-#: lib/dfa.c:1565
+#: lib/dfa.c:1570
 msgid "stray \\ before white space"
 msgstr "verdwaalde \\ voor witruimte"
 
-#: lib/dfa.c:1569
+#: lib/dfa.c:1574
 #, c-format
 msgid "stray \\ before %lc"
 msgstr "verdwaalde \\ voor %lc"
 
-#: lib/dfa.c:1570
+#: lib/dfa.c:1575
 msgid "stray \\"
 msgstr "verdwaalde \\"
 
@@ -771,67 +771,80 @@ msgstr ""
 "Geschreven door Mike Haertel en anderen; zie\n"
 "<https://git.savannah.gnu.org/cgit/grep.git/tree/AUTHORS>."
 
-#: src/grep.c:2934
+#: src/grep.c:2937
 #, c-format
 msgid "warning: GREP_COLOR='%s' is deprecated; use GREP_COLORS='mt=%s'"
 msgstr ""
 "waarschuwing: GREP_COLOR='%s' is verouderd; gebruik GREP_COLORS='mt=%s'"
 
-#: src/pcresearch.c:153
+#: src/pcresearch.c:92
+#, c-format
+msgid ""
+"\n"
+"grep -P uses PCRE2 %s\n"
+msgstr ""
+
+#: src/pcresearch.c:169
 msgid "-P supports only unibyte locales on this platform"
 msgstr "optie '-P' ondersteunt alleen enkelbyte-taalregio's op dit platform"
 
-#: src/pcresearch.c:155
+#: src/pcresearch.c:171
 msgid "-P supports only unibyte and UTF-8 locales"
 msgstr "optie '-P' ondersteunt alleen enkelbyte- en UTF-8-taalregio's"
 
-#: src/pcresearch.c:169
+#: src/pcresearch.c:194
 msgid "the -P option only supports a single pattern"
 msgstr "optie '-P' accepteert slechts één patroon"
 
-#: src/pcresearch.c:222
-#, c-format
-msgid "JIT internal error: %d"
-msgstr "**interne programmafout** in JIT: %d"
-
-#: src/pcresearch.c:259
+#: src/pcresearch.c:290
 msgid "exceeded PCRE's line length limit"
 msgstr "de regellengtegrens van PCRE is overschreden"
 
-#: src/pcresearch.c:337
+#: src/pcresearch.c:368
 #, c-format
 msgid "%s: memory exhausted"
 msgstr "%s: onvoldoende geheugen beschikbaar"
 
-#: src/pcresearch.c:340
+#: src/pcresearch.c:371
 #, c-format
 msgid "%s: exhausted PCRE JIT stack"
 msgstr "%s: de PCRE-JIT-stack is volledig gebruikt"
 
-#: src/pcresearch.c:344
+#: src/pcresearch.c:375
 #, c-format
 msgid "%s: exceeded PCRE's backtracking limit"
 msgstr "%s: de terugverwijzingengrens van PCRE is overschreden"
 
-#: src/pcresearch.c:349
+#: src/pcresearch.c:380
 #, c-format
 msgid "%s: exceeded PCRE's nested backtracking limit"
 msgstr "%s: de genesteterugverwijzingengrens van PCRE is overschreden"
 
-#: src/pcresearch.c:353
+#: src/pcresearch.c:384
 #, c-format
 msgid "%s: PCRE detected recurse loop"
 msgstr "%s: PCRE heeft een recursielus gedetecteerd"
 
-#: src/pcresearch.c:358
+#: src/pcresearch.c:389
 #, c-format
 msgid "%s: exceeded PCRE's heap limit"
 msgstr "%s: de heap-geheugengrens van PCRE is overschreden"
 
-#: src/pcresearch.c:367
+#: src/pcresearch.c:398
 #, c-format
 msgid "%s: internal PCRE error: %d"
 msgstr "%s: **interne programmafout** in PCRE: %d"
+
+#, c-format
+#~ msgid "JIT internal error: %d"
+#~ msgstr "**interne programmafout** in JIT: %d"
+
+#~ msgid ""
+#~ "\n"
+#~ "Built with PCRE "
+#~ msgstr ""
+#~ "\n"
+#~ "Gecompileerd met PCRE "
 
 #~ msgid "failed to allocate memory for the PCRE JIT stack"
 #~ msgstr "onvoldoende geheugen beschikbaar voor de PCRE-JIT-stack"
@@ -848,15 +861,6 @@ msgstr "%s: **interne programmafout** in PCRE: %d"
 
 #~ msgid "%s: unrecognized option '--%s'\n"
 #~ msgstr "%s: onbekende optie '--%s'\n"
-
-#~ msgid "%s: option '-W %s' is ambiguous\n"
-#~ msgstr "%s: optie '-W %s' is niet eenduidig\n"
-
-#~ msgid "%s: option '-W %s' doesn't allow an argument\n"
-#~ msgstr "%s: optie '-W %s' staat geen argument toe\n"
-
-#~ msgid "%s: option '-W %s' requires an argument\n"
-#~ msgstr "%s: optie '-W %s' vereist een argument\n"
 
 #~ msgid "GNU Grep home page: <%s>\n"
 #~ msgstr "Webpagina van GNU grep: <%s>\n"

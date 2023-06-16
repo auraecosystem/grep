@@ -1,23 +1,23 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) 2022 Free Software Foundation, Inc.
+# Georgian translation for grep
+# Copyright (C) 2023 Free Software Foundation, Inc.
 # This file is distributed under the same license as the grep package.
-# Temuri Doghonadze <temuri.doghonadze@gmail.com>, 2022
+# Temuri Doghonadze <temuri.doghonadze@gmail.com>, 2023
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: grep 3.7.98\n"
+"Project-Id-Version: grep 3.10.12\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2023-03-05 07:28-0800\n"
-"PO-Revision-Date: 2022-09-06 16:46+0200\n"
+"POT-Creation-Date: 2023-05-13 01:14-0700\n"
+"PO-Revision-Date: 2023-04-21 16:25+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <(nothing)>\n"
 "Language: ka\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Bugs: Report translation errors to the Language-Team address.\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Bugs: Report translation errors to the Language-Team address.\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #: lib/argmatch.c:145
 #, c-format
@@ -29,7 +29,7 @@ msgstr "%s არასწორი არგუმენტია %s-თვი�
 msgid "ambiguous argument %s for %s"
 msgstr "%s გაურკვეველი არგუმენტია %s-თვის"
 
-#: lib/argmatch.c:165 lib/argmatch.h:237
+#: lib/argmatch.c:165 lib/argmatch.h:242
 msgid "Valid arguments are:"
 msgstr "სწორი არგუმენტებია:"
 
@@ -57,48 +57,48 @@ msgstr "სიმბოლოების არასწორი კლას�
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr "სიმბოლოების კლასის სწორი სინტაქსია [[:space:]] და არა [:space:]"
 
-#: lib/dfa.c:1217
+#: lib/dfa.c:1222
 msgid "unfinished \\ escape"
 msgstr "დაუსრულებელი დასრულების სიმბოლო \\"
 
-#: lib/dfa.c:1327
+#: lib/dfa.c:1332
 msgid "? at start of expression"
 msgstr "? გამოსახულების დასაწყისში"
 
-#: lib/dfa.c:1339
+#: lib/dfa.c:1344
 msgid "* at start of expression"
 msgstr "* გამოსახულების დასაწყისში"
 
-#: lib/dfa.c:1353
+#: lib/dfa.c:1358
 msgid "+ at start of expression"
 msgstr "+ გამოსახულების დასაწყისში"
 
-#: lib/dfa.c:1408
+#: lib/dfa.c:1413
 msgid "{...} at start of expression"
 msgstr "{...} გამოსახულების დასაწყისში"
 
-#: lib/dfa.c:1411
+#: lib/dfa.c:1416
 msgid "invalid content of \\{\\}"
 msgstr "\\{\\}-ის არასწორი შემცველობა"
 
-#: lib/dfa.c:1413
+#: lib/dfa.c:1418
 msgid "regular expression too big"
 msgstr "რეგულარული გამოსახულება ძალიან დიდია"
 
-#: lib/dfa.c:1563
+#: lib/dfa.c:1568
 msgid "stray \\ before unprintable character"
 msgstr "უცხო \\ დაუბეჭდავად  სიმბოლომდე"
 
-#: lib/dfa.c:1565
+#: lib/dfa.c:1570
 msgid "stray \\ before white space"
 msgstr "უცხო \\ თეთრ გამოტოვებამდე"
 
-#: lib/dfa.c:1569
+#: lib/dfa.c:1574
 #, c-format
 msgid "stray \\ before %lc"
 msgstr "უცხო \\ %lc-მდე"
 
-#: lib/dfa.c:1570
+#: lib/dfa.c:1575
 msgid "stray \\"
 msgstr "უცხო \\"
 
@@ -750,73 +750,85 @@ msgid "unknown binary-files type"
 msgstr "მანქანური ფაილის არასწორი ფორმატი"
 
 #: src/grep.c:2831
-#, fuzzy
 msgid ""
 "Written by Mike Haertel and others; see\n"
 "<https://git.savannah.gnu.org/cgit/grep.git/tree/AUTHORS>."
 msgstr ""
 "დაწერილია მაიკ ჰენთელისა და სხვების მიერ; იხ:\n"
-"<https://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>."
+"<https://git.savannah.gnu.org/cgit/grep.git/tree/AUTHORS>."
 
-#: src/grep.c:2934
+#: src/grep.c:2937
 #, c-format
 msgid "warning: GREP_COLOR='%s' is deprecated; use GREP_COLORS='mt=%s'"
 msgstr ""
 "გაფრთხილება: GREP_COLOR='%s' მოძველებულია; გამოიყენეთ GREP_COLORS='mt=%s'"
 
-#: src/pcresearch.c:153
-#, fuzzy
-msgid "-P supports only unibyte locales on this platform"
-msgstr "-P -ს მხოლოდ ერთბაიტიანი და UTF-8 ენების მხარდაჭერა გააჩნია"
+#: src/pcresearch.c:92
+#, c-format
+msgid ""
+"\n"
+"grep -P uses PCRE2 %s\n"
+msgstr ""
+"\n"
+"grep -P იყენებს PCRE2 %s\n"
 
-#: src/pcresearch.c:155
+#: src/pcresearch.c:169
+msgid "-P supports only unibyte locales on this platform"
+msgstr "-P -ს ამ პლატფორმაზე მხოლოდ ერთბაიტიანი ენების მხარდაჭერა გააჩნია"
+
+#: src/pcresearch.c:171
 msgid "-P supports only unibyte and UTF-8 locales"
 msgstr "-P -ს მხოლოდ ერთბაიტიანი და UTF-8 ენების მხარდაჭერა გააჩნია"
 
-#: src/pcresearch.c:169
+#: src/pcresearch.c:194
 msgid "the -P option only supports a single pattern"
 msgstr "-P-ს მხოლოდ ერთი შაბლონის მხარდაჭერა გააჩნია"
 
-#: src/pcresearch.c:222
-#, c-format
-msgid "JIT internal error: %d"
-msgstr "JIT-ის შიდა შეცდომა: %d"
-
-#: src/pcresearch.c:259
+#: src/pcresearch.c:290
 msgid "exceeded PCRE's line length limit"
 msgstr "გადაჭარბებულია PCRE-ის ხაზის სიგრძის ლიმიტი"
 
-#: src/pcresearch.c:337
+#: src/pcresearch.c:368
 #, c-format
 msgid "%s: memory exhausted"
 msgstr "%s: მეხსიერება გადავსებულია"
 
-#: src/pcresearch.c:340
+#: src/pcresearch.c:371
 #, c-format
 msgid "%s: exhausted PCRE JIT stack"
 msgstr "%s: PCRE JIT stack-ი გახარჯულია"
 
-#: src/pcresearch.c:344
+#: src/pcresearch.c:375
 #, c-format
 msgid "%s: exceeded PCRE's backtracking limit"
 msgstr "%s: PCRE-ის უკუდევნების ლიმიტი გადაჭარბებულია"
 
-#: src/pcresearch.c:349
+#: src/pcresearch.c:380
 #, c-format
 msgid "%s: exceeded PCRE's nested backtracking limit"
 msgstr "%s: PCRE-ის ჩალაგებული უკუდევნების ლიმიტი გადაჭარბებულია"
 
-#: src/pcresearch.c:353
+#: src/pcresearch.c:384
 #, c-format
 msgid "%s: PCRE detected recurse loop"
 msgstr "%s : PCRE-მ რეკურსიული მარყუჟი აღმოაჩინა"
 
-#: src/pcresearch.c:358
+#: src/pcresearch.c:389
 #, c-format
 msgid "%s: exceeded PCRE's heap limit"
 msgstr "%s: PCRE-ის გამოყოფილი მეხსიერების ლიმიტი გადაჭარბებულია"
 
-#: src/pcresearch.c:367
+#: src/pcresearch.c:398
 #, c-format
 msgid "%s: internal PCRE error: %d"
 msgstr "%s: PCRE-ის შიდა შეცდომა: %d"
+
+#~ msgid ""
+#~ "\n"
+#~ "Built with PCRE "
+#~ msgstr ""
+#~ "\n"
+#~ "აგებულია PCRE-ით "
+
+#~ msgid "JIT internal error: %d"
+#~ msgstr "JIT-ის შიდა შეცდომა: %d"

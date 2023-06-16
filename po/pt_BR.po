@@ -1,4 +1,4 @@
-# translation of grep-3.5.16.po to Brazilian Portuguese
+# translation of grep-3.10.12.po to Brazilian Portuguese
 # This file is distributed under the same license as the grep package.
 # grep: translation to Brazilian Portuguese (pt_BR)
 # Copyright (C) 2002, 2007, 2008, 2009, 2011, 2012, 2014 Free Software Foundation, Inc.
@@ -7,14 +7,14 @@
 # Rodrigo Stulzer Lopes <rodrigo@conectiva.com.br>, 1997.
 # Santiago Vila Doncel <sanvila@unex.es>, 1997, 1998, 1999, 2000, 2001, 2002.
 # Alexandre Folle de Menezes <afmenez@terra.com.br>, 2002.
-# Rodolfo Ribeiro Gomes <rodolforg@gmail.com>, 2007-2020.
+# Rodolfo Ribeiro Gomes <rodolforg@gmail.com>, 2007-2023.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: GNU grep-3.5.16\n"
+"Project-Id-Version: GNU grep-3.10.12\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2023-03-05 07:28-0800\n"
-"PO-Revision-Date: 2020-11-04 09:30-0300\n"
+"POT-Creation-Date: 2023-05-13 01:14-0700\n"
+"PO-Revision-Date: 2023-04-21 13:06-0300\n"
 "Last-Translator: Rodolfo Ribeiro Gomes <rodolforg@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <ldpbr-translation@lists.sourceforge."
 "net>\n"
@@ -23,8 +23,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Bugs: Report translation errors to the Language-Team address.\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Gtranslator 3.38.0\n"
+"Plural-Forms: nplurals=2; plural=(n > 1)\n"
+"X-Generator: Gtranslator 42.0\n"
 
 #: lib/argmatch.c:145
 #, c-format
@@ -36,7 +36,7 @@ msgstr "%s é um argumento inválido para %s"
 msgid "ambiguous argument %s for %s"
 msgstr "%s é um argumento ambíguo para %s"
 
-#: lib/argmatch.c:165 lib/argmatch.h:237
+#: lib/argmatch.c:165 lib/argmatch.h:242
 msgid "Valid arguments are:"
 msgstr "Os argumentos válidos são:"
 
@@ -64,53 +64,50 @@ msgstr "categoria de caracteres inválida"
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr "a sintaxe de categoria de caracteres é [[:space:]], e não [:space:]"
 
-#: lib/dfa.c:1217
+#: lib/dfa.c:1222
 msgid "unfinished \\ escape"
 msgstr "escape \\ não terminado"
 
-#: lib/dfa.c:1327
-#, fuzzy
+#: lib/dfa.c:1332
 msgid "? at start of expression"
-msgstr "Expressão regular inválida"
+msgstr "? no início da expressão"
 
-#: lib/dfa.c:1339
-#, fuzzy
+#: lib/dfa.c:1344
 msgid "* at start of expression"
-msgstr "Expressão regular inválida"
+msgstr "* no início da expressão"
 
-#: lib/dfa.c:1353
-#, fuzzy
+#: lib/dfa.c:1358
 msgid "+ at start of expression"
-msgstr "Expressão regular inválida"
+msgstr "+ no início da expressão"
 
-#: lib/dfa.c:1408
+#: lib/dfa.c:1413
 msgid "{...} at start of expression"
-msgstr ""
+msgstr "{...} no início da expressão"
 
-#: lib/dfa.c:1411
+#: lib/dfa.c:1416
 msgid "invalid content of \\{\\}"
 msgstr "conteúdo inválido de \\{\\}"
 
-#: lib/dfa.c:1413
+#: lib/dfa.c:1418
 msgid "regular expression too big"
 msgstr "expressão regular grande demais"
 
-#: lib/dfa.c:1563
+#: lib/dfa.c:1568
 msgid "stray \\ before unprintable character"
-msgstr ""
-
-#: lib/dfa.c:1565
-msgid "stray \\ before white space"
-msgstr ""
-
-#: lib/dfa.c:1569
-#, c-format
-msgid "stray \\ before %lc"
-msgstr ""
+msgstr "\\ perdida antes de caractere não imprimível"
 
 #: lib/dfa.c:1570
+msgid "stray \\ before white space"
+msgstr "\\ perdida antes de espaço"
+
+#: lib/dfa.c:1574
+#, c-format
+msgid "stray \\ before %lc"
+msgstr "\\ perdida antes de %lc"
+
+#: lib/dfa.c:1575
 msgid "stray \\"
-msgstr ""
+msgstr "\\ perdida"
 
 #: lib/dfa.c:1925
 msgid "unbalanced ("
@@ -445,9 +442,9 @@ msgid "General help using GNU software: <%s>\n"
 msgstr "Ajuda geral sobre uso de software GNU: <%s>\n"
 
 #: src/dfasearch.c:59
-#, fuzzy, c-format
+#, c-format
 msgid "warning: %s"
-msgstr "aviso: %s: %s"
+msgstr "aviso: %s:"
 
 #: src/grep.c:656
 msgid "(standard input)"
@@ -676,7 +673,7 @@ msgstr ""
 "  -C, --context=NÚM         emite NÚM linhas de contexto de saída\n"
 
 #: src/grep.c:2053
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "  -NUM                      same as --context=NUM\n"
 "      --group-separator=SEP  print SEP on line between matches with context\n"
@@ -689,6 +686,10 @@ msgid ""
 "\n"
 msgstr ""
 "  -NÚM                      o mesmo que --context=NÚM\n"
+"      --group-separator=SEP  emite SEP na linha entre ocorrências com "
+"contexto\n"
+"      --no-group-separator  não emite separados para ocorrências com "
+"contexto\n"
 "      --color[=QUANDO],\n"
 "      --colour[=QUANDO]     usa marcadores para destacar os textos "
 "coincidentes;\n"
@@ -735,7 +736,7 @@ msgstr "método desconhecido de dispositivos"
 #: src/grep.c:2576
 #, c-format
 msgid "warning: --unix-byte-offsets (-u) is obsolete"
-msgstr ""
+msgstr "aviso: --unix-byte-offsets (-u) está obsoleto"
 
 #: src/grep.c:2688
 msgid "invalid max count"
@@ -746,74 +747,77 @@ msgid "unknown binary-files type"
 msgstr "tipo de arquivo binário desconhecido"
 
 #: src/grep.c:2831
-#, fuzzy
 msgid ""
 "Written by Mike Haertel and others; see\n"
 "<https://git.savannah.gnu.org/cgit/grep.git/tree/AUTHORS>."
 msgstr ""
 "Escrito por Mike Haertel e outros; veja\n"
-"<http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
+"<https://git.savannah.gnu.org/cgit/grep.git/tree/AUTHORS>."
 
-#: src/grep.c:2934
+#: src/grep.c:2937
 #, c-format
 msgid "warning: GREP_COLOR='%s' is deprecated; use GREP_COLORS='mt=%s'"
-msgstr ""
+msgstr "aviso: GREP_COLOR='%s' está obsoleto; use GREP_COLORS='mt=%s'"
 
-#: src/pcresearch.c:153
-#, fuzzy
+#: src/pcresearch.c:92
+#, c-format
+msgid ""
+"\n"
+"grep -P uses PCRE2 %s\n"
+msgstr ""
+"\n"
+"grep -P usa PCRE2 %s\n"
+
+#: src/pcresearch.c:169
 msgid "-P supports only unibyte locales on this platform"
 msgstr ""
-"-P só oferece suporte a localidades unibyte (um caractere por byte) e UTF-8"
+"-P só oferece suporte a localidades unibyte (um caractere por byte) nesta "
+"plataforma"
 
-#: src/pcresearch.c:155
+#: src/pcresearch.c:171
 msgid "-P supports only unibyte and UTF-8 locales"
 msgstr ""
 "-P só oferece suporte a localidades unibyte (um caractere por byte) e UTF-8"
 
-#: src/pcresearch.c:169
+#: src/pcresearch.c:194
 msgid "the -P option only supports a single pattern"
 msgstr "a opção -P só oferece suporte a apenas um único padrão"
 
-#: src/pcresearch.c:222
-#, fuzzy, c-format
-msgid "JIT internal error: %d"
-msgstr "erro interno"
-
-#: src/pcresearch.c:259
+#: src/pcresearch.c:290
 msgid "exceeded PCRE's line length limit"
 msgstr "atingiu o limite de comprimento de linha das PCRE"
 
-#: src/pcresearch.c:337
+#: src/pcresearch.c:368
 #, c-format
 msgid "%s: memory exhausted"
 msgstr "%s: memória esgotada"
 
-#: src/pcresearch.c:340
+#: src/pcresearch.c:371
 #, c-format
 msgid "%s: exhausted PCRE JIT stack"
 msgstr "%s: pilha PCRE JIT estourada"
 
-#: src/pcresearch.c:344
+#: src/pcresearch.c:375
 #, c-format
 msgid "%s: exceeded PCRE's backtracking limit"
 msgstr "%s: atingiu o limite de backtracking das PCRE"
 
-#: src/pcresearch.c:349
-#, fuzzy, c-format
+#: src/pcresearch.c:380
+#, c-format
 msgid "%s: exceeded PCRE's nested backtracking limit"
-msgstr "%s: atingiu o limite de backtracking das PCRE"
+msgstr "%s: atingiu o limite de backtracking aninhados das PCRE"
 
-#: src/pcresearch.c:353
+#: src/pcresearch.c:384
 #, c-format
 msgid "%s: PCRE detected recurse loop"
-msgstr ""
+msgstr "%s: PCRE detectou laço recursivo"
 
-#: src/pcresearch.c:358
-#, fuzzy, c-format
+#: src/pcresearch.c:389
+#, c-format
 msgid "%s: exceeded PCRE's heap limit"
-msgstr "%s: atingiu o limite de recursão das PCRE"
+msgstr "%s: atingiu o limite de pilha das PCRE"
 
-#: src/pcresearch.c:367
+#: src/pcresearch.c:398
 #, c-format
 msgid "%s: internal PCRE error: %d"
 msgstr "%s: erro interno de PCRE: %d"
@@ -843,6 +847,9 @@ msgstr "%s: erro interno de PCRE: %d"
 
 #~ msgid "Mike Haertel"
 #~ msgstr "Mike Haertel"
+
+#~ msgid "internal error"
+#~ msgstr "erro interno"
 
 #~ msgid "%s: option '--%s' doesn't allow an argument\n"
 #~ msgstr "%s: a opção \"--%s\" não aceita argumentos\n"

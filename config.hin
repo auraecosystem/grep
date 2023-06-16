@@ -111,6 +111,10 @@
 #endif
 
 
+/* Witness that <config.h> has been included.  */
+#define _GL_CONFIG_H_INCLUDED 1
+
+
 /* Define if building universal (internal helper macro) */
 #undef AC_APPLE_UNIVERSAL_BUILD
 
@@ -180,6 +184,10 @@
 
 /* Define to 1 if fopen() fails to recognize a trailing slash. */
 #undef FOPEN_TRAILING_SLASH_BUG
+
+/* Define to 1 if fflush is known to work on stdin as per POSIX.1-2008, 0 if
+   fflush is known to not work, -1 if unknown. */
+#undef FUNC_FFLUSH_STDIN
 
 /* Define to 1 if nl_langinfo (YESEXPR) returns a non-empty string. */
 #undef FUNC_NL_LANGINFO_YESEXPR_WORKS
@@ -595,6 +603,9 @@
 
 /* Define to 1 when the gnulib module symlink should be tested. */
 #undef GNULIB_TEST_SYMLINK
+
+/* Define to 1 when the gnulib module time should be tested. */
+#undef GNULIB_TEST_TIME
 
 /* Define to 1 when the gnulib module unsetenv should be tested. */
 #undef GNULIB_TEST_UNSETENV
@@ -1325,6 +1336,9 @@
 /* Define to 1 if 'decimal_point' is a member of 'struct lconv'. */
 #undef HAVE_STRUCT_LCONV_DECIMAL_POINT
 
+/* Define to 1 if 'int_p_cs_precedes' is a member of 'struct lconv'. */
+#undef HAVE_STRUCT_LCONV_INT_P_CS_PRECEDES
+
 /* Define to 1 if the system has the type 'struct sockaddr_storage'. */
 #undef HAVE_STRUCT_SOCKADDR_STORAGE
 
@@ -1426,6 +1440,9 @@
 /* Define to 1 if you have the <unistd.h> header file. */
 #undef HAVE_UNISTD_H
 
+/* Define to 1 if you have the <unistring/woe32dll.h> header file. */
+#undef HAVE_UNISTRING_WOE32DLL_H
+
 /* Define to 1 if you have the 'unsetenv' function. */
 #undef HAVE_UNSETENV
 
@@ -1456,9 +1473,6 @@
 
 /* Define to 1 if you have the 'wcslen' function. */
 #undef HAVE_WCSLEN
-
-/* Define to 1 if you have the 'wcsnlen' function. */
-#undef HAVE_WCSNLEN
 
 /* Define to 1 if you have the 'wctob' function. */
 #undef HAVE_WCTOB
@@ -1762,9 +1776,6 @@
    'ptrdiff_t'. */
 #undef PTRDIFF_T_SUFFIX
 
-/* Define to 1 if gnulib's dirfd() replacement is used. */
-#undef REPLACE_DIRFD
-
 /* Define to 1 if gnulib's fchdir() replacement is used. */
 #undef REPLACE_FCHDIR
 
@@ -1833,6 +1844,9 @@
    timespec. */
 #undef TYPEOF_STRUCT_STAT_ST_ATIM_IS_STRUCT_TIMESPEC
 
+/* building with included regex code */
+#undef USE_INCLUDED_REGEX
+
 /* Define if the combination of the ISO C and POSIX multithreading APIs can be
    used. */
 #undef USE_ISOC_AND_POSIX_THREADS
@@ -1851,7 +1865,7 @@
    weak. */
 #undef USE_POSIX_THREADS_WEAK
 
-/* Enable extensions on AIX 3, Interix.  */
+/* Enable extensions on AIX, Interix, z/OS.  */
 #ifndef _ALL_SOURCE
 # undef _ALL_SOURCE
 #endif
@@ -2147,6 +2161,20 @@
 # pragma GCC diagnostic ignored "-Wpedantic"
 #endif
 
+/* Define if, in a function declaration, the attributes in bracket syntax
+   [[...]] must come before the attributes in __attribute__((...)) syntax.
+   If this is defined, it is best to avoid the bracket syntax, so that the
+   various _GL_ATTRIBUTE_* can be cumulated on the same declaration in any
+   order.  */
+#ifdef __cplusplus
+# if defined __clang__
+#  define _GL_BRACKET_BEFORE_ATTRIBUTE 1
+# endif
+#else
+# if defined __GNUC__ && !defined __clang__
+#  define _GL_BRACKET_BEFORE_ATTRIBUTE 1
+# endif
+#endif
 
 /* _GL_ATTRIBUTE_ALLOC_SIZE ((N)) declares that the Nth argument of the function
    is the size of the returned memory block.
@@ -2253,9 +2281,11 @@
      - typedef,
    in C++ also: namespace, class, template specialization.  */
 #ifndef _GL_ATTRIBUTE_DEPRECATED
-# ifdef __has_c_attribute
-#  if __has_c_attribute (__deprecated__)
-#   define _GL_ATTRIBUTE_DEPRECATED [[__deprecated__]]
+# ifndef _GL_BRACKET_BEFORE_ATTRIBUTE
+#  ifdef __has_c_attribute
+#   if __has_c_attribute (__deprecated__)
+#    define _GL_ATTRIBUTE_DEPRECATED [[__deprecated__]]
+#   endif
 #  endif
 # endif
 # if !defined _GL_ATTRIBUTE_DEPRECATED && _GL_HAS_ATTRIBUTE (deprecated)
@@ -2385,13 +2415,15 @@
    __has_c_attribute (__maybe_unused__) yields true but the use of
    [[__maybe_unused__]] nevertheless produces a warning.  */
 #ifndef _GL_ATTRIBUTE_MAYBE_UNUSED
-# if defined __clang__ && defined __cplusplus
-#  if !defined __apple_build_version__ && __clang_major__ >= 10
-#   define _GL_ATTRIBUTE_MAYBE_UNUSED [[__maybe_unused__]]
-#  endif
-# elif defined __has_c_attribute
-#  if __has_c_attribute (__maybe_unused__)
-#   define _GL_ATTRIBUTE_MAYBE_UNUSED [[__maybe_unused__]]
+# ifndef _GL_BRACKET_BEFORE_ATTRIBUTE
+#  if defined __clang__ && defined __cplusplus
+#   if !defined __apple_build_version__ && __clang_major__ >= 10
+#    define _GL_ATTRIBUTE_MAYBE_UNUSED [[__maybe_unused__]]
+#   endif
+#  elif defined __has_c_attribute
+#   if __has_c_attribute (__maybe_unused__)
+#    define _GL_ATTRIBUTE_MAYBE_UNUSED [[__maybe_unused__]]
+#   endif
 #  endif
 # endif
 # ifndef _GL_ATTRIBUTE_MAYBE_UNUSED
@@ -2409,18 +2441,20 @@
    the return value, unless the caller uses something like ignore_value.  */
 /* Applies to: function, enumeration, class.  */
 #ifndef _GL_ATTRIBUTE_NODISCARD
-# if defined __clang__ && defined __cplusplus
+# ifndef _GL_BRACKET_BEFORE_ATTRIBUTE
+#  if defined __clang__ && defined __cplusplus
   /* With clang up to 15.0.6 (at least), in C++ mode, [[__nodiscard__]] produces
      a warning.
      The 1000 below means a yet unknown threshold.  When clang++ version X
      starts supporting [[__nodiscard__]] without warning about it, you can
      replace the 1000 with X.  */
-#  if __clang_major__ >= 1000
-#   define _GL_ATTRIBUTE_NODISCARD [[__nodiscard__]]
-#  endif
-# elif defined __has_c_attribute
-#  if __has_c_attribute (__nodiscard__)
-#   define _GL_ATTRIBUTE_NODISCARD [[__nodiscard__]]
+#   if __clang_major__ >= 1000
+#    define _GL_ATTRIBUTE_NODISCARD [[__nodiscard__]]
+#   endif
+#  elif defined __has_c_attribute
+#   if __has_c_attribute (__nodiscard__)
+#    define _GL_ATTRIBUTE_NODISCARD [[__nodiscard__]]
+#   endif
 #  endif
 # endif
 # if !defined _GL_ATTRIBUTE_NODISCARD && _GL_HAS_ATTRIBUTE (warn_unused_result)
@@ -2558,6 +2592,18 @@
 #endif
 
 
+/* In C++, there is the concept of "language linkage", that encompasses
+    name mangling and function calling conventions.
+    The following macros start and end a block of "C" linkage.  */
+#ifdef __cplusplus
+# define _GL_BEGIN_C_LINKAGE extern "C" {
+# define _GL_END_C_LINKAGE }
+#else
+# define _GL_BEGIN_C_LINKAGE
+# define _GL_END_C_LINKAGE
+#endif
+
+
 /* Define to empty if 'const' does not conform to ANSI C. */
 #undef const
 
@@ -2579,7 +2625,7 @@
 /* Define to the overridden function name */
 #undef fts_set
 
-/* Define to 'int' if <sys/types.h> doesn't define. */
+/* Define as 'int' if <sys/types.h> doesn't define. */
 #undef gid_t
 
 /* A replacement for va_copy, if needed.  */
@@ -2702,7 +2748,7 @@
 # define __restrict__
 #endif
 
-/* Define to 'unsigned int' if <sys/types.h> does not define. */
+/* Define as 'unsigned int' if <stddef.h> doesn't define. */
 #undef size_t
 
 /* type to use in place of socklen_t if not defined */
@@ -2715,7 +2761,7 @@
    sigaltstack */
 #undef stack_t
 
-/* Define to 'int' if <sys/types.h> doesn't define. */
+/* Define as 'int' if <sys/types.h> doesn't define. */
 #undef uid_t
 
 
@@ -2820,22 +2866,22 @@
      - alignas (TYPE) is equivalent to alignas (alignof (TYPE)).
 
    */
-# if !HAVE_STDALIGN_H
-#  if !defined __STDC_VERSION__ || __STDC_VERSION__ < 201112
-#   if defined __cplusplus && (201103 <= __cplusplus || defined _MSC_VER)
-#    define _Alignas(a) alignas (a)
-#   elif (!defined __attribute__ \
-          && ((defined __APPLE__ && defined __MACH__ \
-               ? 4 < __GNUC__ + (1 <= __GNUC_MINOR__) \
-               : __GNUC__ && !defined __ibmxl__) \
-              || (4 <= __clang_major__) \
-              || (__ia64 && (61200 <= __HP_cc || 61200 <= __HP_aCC)) \
-              || __ICC || 0x590 <= __SUNPRO_C || 0x0600 <= __xlC__))
-#    define _Alignas(a) __attribute__ ((__aligned__ (a)))
-#   elif 1300 <= _MSC_VER
-#    define _Alignas(a) __declspec (align (a))
-#   endif
+# if !defined __STDC_VERSION__ || __STDC_VERSION__ < 201112
+#  if defined __cplusplus && (201103 <= __cplusplus || defined _MSC_VER)
+#   define _Alignas(a) alignas (a)
+#  elif (!defined __attribute__ \
+         && ((defined __APPLE__ && defined __MACH__ \
+              ? 4 < __GNUC__ + (1 <= __GNUC_MINOR__) \
+              : __GNUC__ && !defined __ibmxl__) \
+             || (4 <= __clang_major__) \
+             || (__ia64 && (61200 <= __HP_cc || 61200 <= __HP_aCC)) \
+             || __ICC || 0x590 <= __SUNPRO_C || 0x0600 <= __xlC__))
+#   define _Alignas(a) __attribute__ ((__aligned__ (a)))
+#  elif 1300 <= _MSC_VER
+#   define _Alignas(a) __declspec (align (a))
 #  endif
+# endif
+# if !HAVE_STDALIGN_H
 #  if ((defined _Alignas \
         && !(defined __cplusplus \
              && (201103 <= __cplusplus || defined _MSC_VER))) \

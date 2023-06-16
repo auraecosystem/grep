@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GNU grep 3.0.23-b00\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2023-03-05 07:28-0800\n"
+"POT-Creation-Date: 2023-05-13 01:14-0700\n"
 "PO-Revision-Date: 2018-07-28 23:40+0200\n"
 "Last-Translator: Primož Peterlin <primozz.peterlin@gmail.com>\n"
 "Language-Team: Slovenian <translation-team-sl@lists.sourceforge.net>\n"
@@ -31,7 +31,7 @@ msgstr "neveljavni argument %s za %s"
 msgid "ambiguous argument %s for %s"
 msgstr "dvoumni argument %s za %s"
 
-#: lib/argmatch.c:165 lib/argmatch.h:237
+#: lib/argmatch.c:165 lib/argmatch.h:242
 msgid "Valid arguments are:"
 msgstr "Veljavni argumenti so:"
 
@@ -59,51 +59,51 @@ msgstr "neveljavno ime razreda znakov"
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr "skladnja imena razreda znakov je [[:space:]], ne [:space:]"
 
-#: lib/dfa.c:1217
+#: lib/dfa.c:1222
 msgid "unfinished \\ escape"
 msgstr "nedokončano ubežno zaporedje \\"
 
-#: lib/dfa.c:1327
+#: lib/dfa.c:1332
 #, fuzzy
 msgid "? at start of expression"
 msgstr "Neveljaven regularen izraz"
 
-#: lib/dfa.c:1339
+#: lib/dfa.c:1344
 #, fuzzy
 msgid "* at start of expression"
 msgstr "Neveljaven regularen izraz"
 
-#: lib/dfa.c:1353
+#: lib/dfa.c:1358
 #, fuzzy
 msgid "+ at start of expression"
 msgstr "Neveljaven regularen izraz"
 
-#: lib/dfa.c:1408
+#: lib/dfa.c:1413
 msgid "{...} at start of expression"
 msgstr ""
 
-#: lib/dfa.c:1411
+#: lib/dfa.c:1416
 msgid "invalid content of \\{\\}"
 msgstr "neveljavna vsebina \\{\\}"
 
-#: lib/dfa.c:1413
+#: lib/dfa.c:1418
 msgid "regular expression too big"
 msgstr "regularni izraz je preobsežen"
 
-#: lib/dfa.c:1563
+#: lib/dfa.c:1568
 msgid "stray \\ before unprintable character"
 msgstr ""
 
-#: lib/dfa.c:1565
+#: lib/dfa.c:1570
 msgid "stray \\ before white space"
 msgstr ""
 
-#: lib/dfa.c:1569
+#: lib/dfa.c:1574
 #, c-format
 msgid "stray \\ before %lc"
 msgstr ""
 
-#: lib/dfa.c:1570
+#: lib/dfa.c:1575
 msgid "stray \\"
 msgstr ""
 
@@ -743,67 +743,73 @@ msgid ""
 "<https://git.savannah.gnu.org/cgit/grep.git/tree/AUTHORS>."
 msgstr "drugi, glejte <http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
 
-#: src/grep.c:2934
+#: src/grep.c:2937
 #, c-format
 msgid "warning: GREP_COLOR='%s' is deprecated; use GREP_COLORS='mt=%s'"
 msgstr ""
 
-#: src/pcresearch.c:153
+#: src/pcresearch.c:92
+#, c-format
+msgid ""
+"\n"
+"grep -P uses PCRE2 %s\n"
+msgstr ""
+
+#: src/pcresearch.c:169
 #, fuzzy
 msgid "-P supports only unibyte locales on this platform"
 msgstr "-P podpira samo enobajtna kodiranja in UTF-8"
 
-#: src/pcresearch.c:155
+#: src/pcresearch.c:171
 msgid "-P supports only unibyte and UTF-8 locales"
 msgstr "-P podpira samo enobajtna kodiranja in UTF-8"
 
-#: src/pcresearch.c:169
+#: src/pcresearch.c:194
 msgid "the -P option only supports a single pattern"
 msgstr "izbira -P podpira le en vzorec"
 
-#: src/pcresearch.c:222
-#, fuzzy, c-format
-msgid "JIT internal error: %d"
-msgstr "interna napaka"
-
-#: src/pcresearch.c:259
+#: src/pcresearch.c:290
 msgid "exceeded PCRE's line length limit"
 msgstr "prekoračena meja PCRE za dolžino vrstice"
 
-#: src/pcresearch.c:337
+#: src/pcresearch.c:368
 #, fuzzy, c-format
 msgid "%s: memory exhausted"
 msgstr "pomnilnik porabljen"
 
-#: src/pcresearch.c:340
+#: src/pcresearch.c:371
 #, fuzzy, c-format
 msgid "%s: exhausted PCRE JIT stack"
 msgstr "prekoračitev sklada PCRE JIT"
 
-#: src/pcresearch.c:344
+#: src/pcresearch.c:375
 #, fuzzy, c-format
 msgid "%s: exceeded PCRE's backtracking limit"
 msgstr "prekoračena meja PCRE za iskanje s povratnim sledenjem"
 
-#: src/pcresearch.c:349
+#: src/pcresearch.c:380
 #, fuzzy, c-format
 msgid "%s: exceeded PCRE's nested backtracking limit"
 msgstr "prekoračena meja PCRE za iskanje s povratnim sledenjem"
 
-#: src/pcresearch.c:353
+#: src/pcresearch.c:384
 #, c-format
 msgid "%s: PCRE detected recurse loop"
 msgstr ""
 
-#: src/pcresearch.c:358
+#: src/pcresearch.c:389
 #, fuzzy, c-format
 msgid "%s: exceeded PCRE's heap limit"
 msgstr "prekoračena meja PCRE za iskanje s povratnim sledenjem"
 
-#: src/pcresearch.c:367
+#: src/pcresearch.c:398
 #, fuzzy, c-format
 msgid "%s: internal PCRE error: %d"
 msgstr "interna napaka PCRE: %d"
+
+#, fuzzy, c-format
+#~ msgid "JIT internal error: %d"
+#~ msgstr "interna napaka"
 
 #~ msgid "failed to allocate memory for the PCRE JIT stack"
 #~ msgstr "pomnilnika za sklad PCRE JIT se ni uspelo dodeliti"
