@@ -1,5 +1,5 @@
 /* Test of <inttypes.h> substitute.
-   Copyright (C) 2006-2007, 2009-2022 Free Software Foundation, Inc.
+   Copyright (C) 2006-2007, 2009-2023 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -19,8 +19,6 @@
 #include <config.h>
 
 #include <inttypes.h>
-
-#include <stddef.h>
 
 /* Tests for macros supposed to be defined in inttypes.h.  */
 

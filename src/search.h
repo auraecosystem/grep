@@ -1,5 +1,5 @@
 /* search.c - searching subroutines using dfa, kwset and regex for grep.
-   Copyright 1992, 1998, 2000, 2007, 2009-2022 Free Software Foundation, Inc.
+   Copyright 1992, 1998, 2000, 2007, 2009-2023 Free Software Foundation, Inc.
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -65,6 +65,7 @@ extern ptrdiff_t Fexecute (void *, char const *, idx_t, idx_t *, char const *);
 /* pcresearch.c */
 extern void *Pcompile (char *, idx_t, reg_syntax_t, bool);
 extern ptrdiff_t Pexecute (void *, char const *, idx_t, idx_t *, char const *);
+extern void Pprint_version (void);
 
 /* grep.c */
 extern struct localeinfo localeinfo;

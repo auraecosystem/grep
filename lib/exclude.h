@@ -1,6 +1,6 @@
 /* exclude.h -- declarations for excluding file names
 
-   Copyright (C) 1992-1994, 1997, 1999, 2001-2003, 2005-2006, 2009-2022 Free
+   Copyright (C) 1992-1994, 1997, 1999, 2001-2003, 2005-2006, 2009-2023 Free
    Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
@@ -19,7 +19,12 @@
 #ifndef _GL_EXCLUDE_H
 #define _GL_EXCLUDE_H 1
 
-#include <stdbool.h>
+/* This file uses _GL_ATTRIBUTE_DEALLOC, _GL_ATTRIBUTE_MALLOC,
+   _GL_ATTRIBUTE_NONNULL, _GL_ATTRIBUTE_PURE, _GL_ATTRIBUTE_RETURNS_NONNULL.  */
+#if !_GL_CONFIG_H_INCLUDED
+ #error "Please include config.h first."
+#endif
+
 #include <stdio.h>
 
 /* Written by Paul Eggert <eggert@twinsun.com>

@@ -30,7 +30,7 @@
 @copying
 This manual is for @command{grep}, a pattern matching engine.
 
-Copyright @copyright{} 1999--2002, 2005, 2008--2022 Free Software Foundation,
+Copyright @copyright{} 1999--2002, 2005, 2008--2023 Free Software Foundation,
 Inc.
 
 @quotation
@@ -202,6 +202,7 @@ in a shell command.
 Obtain patterns from @var{file}, one per line.
 If this option is used multiple times or is combined with the
 @option{-e} (@option{--regexp}) option, search for all patterns given.
+When @var{file} is @samp{-}, read patterns from standard input.
 The empty file contains zero patterns, and therefore matches nothing.
 (@option{-f} is specified by POSIX.)
 
@@ -223,7 +224,13 @@ this unusual character matches ``S'' or ``s'' even though uppercasing
 it yields ``S''.  Another example: the lowercase German letter ``ß''
 (U+00DF, LATIN SMALL LETTER SHARP S) is normally capitalized as the
 two-character string ``SS'' but it does not match ``SS'', and it might
-not match the uppercase letter ``ẞ'' (U+1E9E, LATIN CAPITAL LETTER
+not match the uppercase letter
+@c texinfo version 2023-03-04.12 complains about the following, saying
+@c "Character missing, sorry: LONG S."  For now, omit it if tex.
+@ifnottex
+``ẞ''
+@end ifnottex
+(U+1E9E, LATIN CAPITAL LETTER
 SHARP S) even though lowercasing the latter yields the former.
 
 @option{-y} is an obsolete synonym that is provided for compatibility.
@@ -864,8 +871,7 @@ overridden by @env{GREP_COLORS}.  Instead of
 @item GREP_COLORS
 @vindex GREP_COLORS @r{environment variable}
 @cindex highlight markers
-This variable specifies the colors and other attributes
-used to highlight various parts of the output.
+This variable controls how the @option{--color} option highlights output.
 Its value is a colon-separated list of @code{terminfo} capabilities
 that defaults to @samp{ms=01;31:mc=01;31:sl=:cx=:fn=35:ln=32:bn=32:se=36}
 with the @samp{rv} and @samp{ne} boolean capabilities omitted (i.e., false).
@@ -1061,18 +1067,6 @@ and are treated as options.
 This variable specifies the output terminal type, which can affect
 what the @option{--color} option does.  @xref{General Output Control}.
 
-@item _@var{N}_GNU_nonoption_argv_flags_
-@vindex _@var{N}_GNU_nonoption_argv_flags_ @r{environment variable}
-(Here @code{@var{N}} is @command{grep}'s numeric process ID.)
-If the @var{i}th character of this environment variable's value is @samp{1},
-do not consider the @var{i}th operand of @command{grep} to be an option,
-even if it appears to be one.
-A shell can put this variable in the environment for each command it runs,
-specifying which operands are the results of file name wildcard expansion
-and therefore should not be treated as options.
-This behavior is available only with the GNU C library,
-and only when @env{POSIXLY_CORRECT} is not set.
-
 @end table
 
 The @env{GREP_OPTIONS} environment variable of @command{grep} 2.20 and
@@ -1154,6 +1148,38 @@ combined with the @option{-z} (@option{--null-data}) option, and note that
 @samp{grep@ -P} may warn of unimplemented features.
 @xref{Other Options}.
 
+For documentation, refer to @url{https://www.pcre.org/}, with these caveats:
+@itemize
+@item
+@samp{\d} matches only the ten ASCII digits
+(and @samp{\D} matches the complement), regardless of locale.
+Use @samp{\p@{Nd@}} to also match non-ASCII digits.
+(The behavior of @samp{\d} and @samp{\D} is unspecified after
+in-regexp directives like @samp{(?aD)}.)
+
+@item
+Although PCRE tracks the syntax and semantics of Perl's regular
+expressions, the match is not always exact.  For example, Perl
+evolves and a Perl installation may predate or postdate the PCRE2
+installation on the same host, or their Unicode versions may differ,
+or Perl and PCRE2 may disagree about an obscure construct.
+
+@item
+By default, @command{grep} applies each regexp to a line at a time,
+so the @samp{(?s)} directive (making @samp{.} match line breaks)
+is generally ineffective.
+However, with @option{-z} (@option{--null-data}) it can work:
+@example
+$ printf 'a\nb\n' |grep -zP '(?s)a.b'
+a
+b
+@end example
+But beware: with the @option{-z} (@option{--null-data}) and a file
+containing no NUL byte, grep must read the entire file into memory
+before processing any of it.
+Thus, it will exhaust memory and fail for some large files.
+@end itemize
+
 @end table
 
 
@@ -1168,12 +1194,13 @@ by using various operators to combine smaller expressions.
 three different versions of regular expression syntax:
 basic (BRE), extended (ERE), and Perl-compatible (PCRE).
 In GNU @command{grep},
-there is no difference in available functionality between basic and
-extended syntax.
-In other implementations, basic regular expressions are less powerful.
+basic and extended regular expressions are merely different notations
+for the same pattern-matching functionality.
+In other implementations, basic regular expressions are ordinarily
+less powerful than extended, though occasionally it is the other way around.
 The following description applies to extended regular expressions;
 differences for basic regular expressions are summarized afterwards.
-Perl-compatible regular expressions give additional functionality, and
+Perl-compatible regular expressions have different functionality, and
 are documented in the @i{pcre2syntax}(3) and @i{pcre2pattern}(3) manual
 pages, but work only if PCRE is available in the system.
 
@@ -2105,12 +2132,12 @@ What happened to @command{egrep} and @command{fgrep}?
 that were the counterparts of the modern @samp{grep -E} and @samp{grep -F}.
 Although breaking up @command{grep} into three programs was perhaps
 useful on the small computers of the 1970s, @command{egrep} and
-@command{fgrep} were not standardized by POSIX and are no longer needed.
-In the current GNU implementation, @command{egrep} and @command{fgrep}
-issue a warning and then act like their modern counterparts;
+@command{fgrep} were deemed obsolescent by POSIX in 1992,
+removed from POSIX in 2001, deprecated by GNU Grep 2.5.3 in 2007,
+and changed to issue obsolescence warnings by GNU Grep 3.8 in 2022;
 eventually, they are planned to be removed entirely.
 
-If you prefer the old names, you can use use your own substitutes,
+If you prefer the old names, you can use your own substitutes,
 such as a shell script named @command{egrep} with the following
 contents:
 

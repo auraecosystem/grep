@@ -1,5 +1,5 @@
 /* kwset.h - header declaring the keyword set library.
-   Copyright (C) 1989, 1998, 2005, 2007, 2009-2022 Free Software Foundation,
+   Copyright (C) 1989, 1998, 2005, 2007, 2009-2023 Free Software Foundation,
    Inc.
 
    This program is free software; you can redistribute it and/or modify
@@ -20,7 +20,6 @@
 /* Written August 1989 by Mike Haertel.  */
 
 #include <stddef.h>
-#include <stdbool.h>
 
 #include <idx.h>
 

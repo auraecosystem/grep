@@ -1,5 +1,5 @@
 /* Test of gl_locale_name function and its variants.
-   Copyright (C) 2007-2022 Free Software Foundation, Inc.
+   Copyright (C) 2007-2023 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -30,6 +30,15 @@
 # define HAVE_GOOD_USELOCALE 1
 #endif
 
+#ifdef __HAIKU__
+/* Work around Haiku bug <https://dev.haiku-os.org/ticket/18344>.  */
+# define freelocale(loc) ((void) (loc))
+#endif
+
+/* Suppress GCC false positive.  */
+#if __GNUC__ >= 12
+# pragma GCC diagnostic ignored "-Wanalyzer-use-of-uninitialized-value"
+#endif
 
 #if HAVE_GOOD_USELOCALE
 

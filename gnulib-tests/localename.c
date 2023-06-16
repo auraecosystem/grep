@@ -1,5 +1,5 @@
 /* Determine name of the currently selected locale.
-   Copyright (C) 1995-2022 Free Software Foundation, Inc.
+   Copyright (C) 1995-2023 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU Lesser General Public License as published by
@@ -18,13 +18,18 @@
 /* Native Windows code written by Tor Lillqvist <tml@iki.fi>.  */
 /* Mac OS X code written by Bruno Haible <bruno@clisp.org>.  */
 
+/* Don't use __attribute__ __nonnull__ in this compilation unit.  Otherwise gcc
+   optimizes away the locale == NULL tests below in duplocale() and freelocale(),
+   or xlclang reports -Wtautological-pointer-compare warnings for these tests.
+ */
+#define _GL_ARG_NONNULL(params)
+
 #include <config.h>
 
 /* Specification.  */
 #include "localename.h"
 
 #include <limits.h>
-#include <stdbool.h>
 #include <stddef.h>
 #include <stdlib.h>
 #include <locale.h>
@@ -53,6 +58,9 @@ extern char * getlocalename_l(int, locale_t);
 # endif
 # if HAVE_NAMELESS_LOCALES
 #  include "localename-table.h"
+# endif
+# if defined __HAIKU__
+#  include <dlfcn.h>
 # endif
 #endif
 
@@ -3198,6 +3206,68 @@ gl_locale_name_thread_unsafe (int category, _GL_UNUSED const char *categoryname)
         };
         return ((struct __locale_t *) thread_locale)->categories[category];
 #   endif
+#  elif defined __HAIKU__
+        /* Since 2022, Haiku has per-thread locales.  locale_t is 'void *',
+           but in fact a 'LocaleBackendData *'.  */
+        struct LocaleBackendData {
+          int magic;
+          void /*BPrivate::Libroot::LocaleBackend*/ *backend;
+          void /*BPrivate::Libroot::LocaleDataBridge*/ *databridge;
+        };
+        void *thread_locale_backend =
+          ((struct LocaleBackendData *) thread_locale)->backend;
+        if (thread_locale_backend != NULL)
+          {
+            /* The only existing concrete subclass of
+               BPrivate::Libroot::LocaleBackend is
+               BPrivate::Libroot::ICULocaleBackend.
+               Invoke the (non-virtual) method
+               BPrivate::Libroot::ICULocaleBackend::_QueryLocale on it.
+               This method is located in a separate shared library,
+               libroot-addon-icu.so.  */
+            static void * volatile querylocale_method /* = NULL */;
+            static int volatile querylocale_found /* = 0 */;
+            /* Attempt to open this shared library, the first time we get
+               here.  */
+            if (querylocale_found == 0)
+              {
+                void *handle =
+                  dlopen ("/boot/system/lib/libroot-addon-icu.so", 0);
+                if (handle != NULL)
+                  {
+                    void *sym =
+                      dlsym (handle, "_ZN8BPrivate7Libroot16ICULocaleBackend12_QueryLocaleEi");
+                    if (sym != NULL)
+                      {
+                        querylocale_method = sym;
+                        querylocale_found = 1;
+                      }
+                    else
+                      /* Could not find the symbol.  */
+                      querylocale_found = -1;
+                  }
+                else
+                  /* Could not open the separate shared library.  */
+                  querylocale_found = -1;
+              }
+            if (querylocale_found > 0)
+              {
+                /* The _QueryLocale method is a non-static C++ method with
+                   parameters (int category) and return type 'const char *'.
+                   See
+                     haiku/headers/private/libroot/locale/ICULocaleBackend.h
+                     haiku/src/system/libroot/add-ons/icu/ICULocaleBackend.cpp
+                   This is the same as a C function with parameters
+                     (BPrivate::Libroot::LocaleBackend* this, int category)
+                   and return type 'const char *'.  Invoke it.  */
+                const char * (*querylocale_func) (void *, int) =
+                  (const char * (*) (void *, int)) querylocale_method;
+                return querylocale_func (thread_locale_backend, category);
+              }
+          }
+        else
+          /* It's the "C" or "POSIX" locale.  */
+          return "C";
 #  elif defined __ANDROID__
         return MB_CUR_MAX == 4 ? "C.UTF-8" : "C";
 #  endif

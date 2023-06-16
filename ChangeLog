@@ -1,4 +1,464 @@
+2023-05-13  Jim Meyering  <meyering@meta.com>
+
+	version 3.11
+	* NEWS: Record release date.
+
+2023-05-10  Josh Soref  <jsoref@gmail.com>
+
+	doc: spelling fixes in doc/, comments and old ChangeLog
+	* ChangeLog-2009: Fix spelling errors.
+	* bootstrap: Likewise.
+	* doc/grep.texi: Likewise.
+
+2023-05-04  Jim Meyering  <meyering@fb.com>
+
+	tests: reenable gnulib's strtoll and strtoull tests
+	* bootstrap.conf (avoided_gnulib_modules): Restore those tests.
+	The failures I saw must have been due to a stale config.cache.
+
+2023-04-30  Jim Meyering  <meyering@fb.com>
+
+	tests: temporarily omit gnulib's strtoll and strtoull tests
+	* bootstrap.conf (avoided_gnulib_modules): Omit strtoll and strtoull
+	tests, because the edge-case 0[bx] tests fail on recent systems.
+
+2023-04-30  Jim Meyering  <meyering@meta.com>
+
+	build: update gnulib to latest
+
+2023-04-30  Carlo Marcelo Arenas Belón  <carenas@gmail.com>
+
+	pcre: work around a PCRE2_MATCH_INVALID_UTF bug
+	PCRE2 has a bug when using PCRE2_MATCH_INVALID_UTF: it would
+	sometimes fail to match patterns using negative classes
+	like \W and \D.
+
+	* NEWS (Bug fixes): Mention it.
+	* src/pcre2search.c: Restrict impact of the bug.
+	Do not use the problematic flag with broken versions of PCRE2.
+	Also, generate locale tables only for single-byte locales,
+	as the PCRE2 documentation recommends this.
+	* tests/Makefile.am (TESTS): Add the file name
+	* tests/pcre-utf8-bug224: New file, to test for this.
+
+2023-04-29  Paul Eggert  <eggert@cs.ucla.edu>
+
+	doc: improve doc for -P '\d'
+	This follows up to Carlo Marcelo Arenas Belón’s email
+	<https://lists.gnu.org/r/grep-devel/2023-04/msg00017.html>
+	that proposed changing the code too.  These patches change
+	only the documentation since we’re so near a release.
+	* NEWS: Be less optimistic about the fix for -P '\d',
+	and warn that behavior is likely to change again.
+	* doc/grep.texi (grep Programs): Be less specific about -P \d
+	behavior, since it’s still in flux.  Warn about mismatching
+	Unicode versions, or disagreements about obscure constructs.
+
+	build: support explicit ‘PCRE_CFLAGS= PCRE_LIBS=’
+	* m4/pcre.m4 (gl_FUNC_PCRE): Check whether PCRE_CFLAGS and
+	PCRE_LIBS are set, not whether they are set to a nonempty value.
+
+2023-04-29  Jim Meyering  <meyering@fb.com>
+
+	doc: say that `-f -` reads patterns from stdin
+	* doc/grep.texi (Matching Control): Mention that when -f's FILE is -,
+	grep reads patterns from stdin.
+	* doc/grep.in.1: Likewise.
+	* THANKS.in: Add the name.
+	Suggested by Sebastian Carlos in https://bugs.gnu.org/63146
+
+2023-04-22  Carlo Marcelo Arenas Belón  <carenas@gmail.com>
+
+	build: prevent pkg-config from overriding PCRE_* settings
+	The use of PCRE_CFLAGS and PCRE_LIBS, as documented in the output of
+	`--help`, is meant to override those settings from pkg-config.
+
+	* NEWS: mention this
+	* m4/pcre.m4: avoid overriding user provided settings
+
+2023-04-20  Jim Meyering  <meyering@fb.com>
+
+	doc: note when a bug was introduced
+	* NEWS: say that the \d bug was introduced in 3.10.
+
+2023-04-20  Jim Meyering  <meyering@meta.com>
+
+	build: update gnulib to latest
+
+2023-04-13  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: make -P survive JIT compilation failure
+	* src/pcresearch.c (Pcompile): Ignore failure returns
+	from pcre2_jit_compile.
+
+2023-04-10  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: improve PCRE2 version output
+	* src/grep.c: No need to include pcre2.h.
+	(main) [HAVE_LIBPCRE]: Call Pprint_version instead of
+	doing it ourselves.
+	* src/pcresearch.c (Pprint_version): New function.
+	It also checks belatedly for buffer overflow, and
+	says "grep -P uses PCRE2" instead of "Built with PCRE".
+	* tests/version-pcre: Adjust test to match.
+
+2023-04-10  Jim Meyering  <meyering@fb.com>
+
+	tests: skip y2038 test upon touch setup failure
+	* tests/y2038-vs-32-bit: Skip rather than fail, when
+	the touch -t 2039... setup fails.  That command failed
+	on a solaris10 sparc build farm host.
+
+2023-04-09  Jim Meyering  <meyering@meta.com>
+
+	build: update gnulib to latest
+
+2023-04-09  Jim Meyering  <meyering@fb.com>
+
+	tests: add a known-failing glibc-infloop test
+	* tests/glibc-infloop: New file.
+	Based on the command from Koen Claessen
+	reported in https://bugs.gnu.org/62483
+	* configure.ac (USE_INCLUDED_REGEX): define.
+	* tests/Makefile.am (TESTS): Add the file name
+	* THANKS.in: Add name of reporter.
+
+	grep: --version: print pcre version info
+	PCRE is integral to the functioning of grep's -P option, so it is in our
+	interest to make it easy to see which version of PCRE grep uses.
+	* src/grep.c [HAVE_LIBPCRE]: Include <pcre2.h>.
+	[HAVE_LIBPCRE] (main): Print pcre version info.
+	* tests/version-pcre: New test for this.
+	* tests/Makefile.am (TESTS): Add the file name.
+	* NEWS (Changes in behavior): Mention it.
+
+	tests: test for the year-2038 bug
+	* tests/y2038-vs-32-bit: New file.
+	* tests/Makefile.am (TESTS): Add the file name
+
+2023-04-03  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: re-fix Y2038 bug on glibc 2.34+ x86, ARM
+	The meaning of AC_SYS_LARGEFILE has changed to no longer even try
+	to use wider time_t if available.  So use AC_SYS_YEAR2038 as well.
+	A more-aggressive change would be to use the next Autoconf’s
+	AC_SYS_YEAR2038_REQUIRED but at least let’s restore the grep 3.8
+	behavior.
+	* NEWS: Mention this.
+	* bootstrap.conf: Add year2038.
+
+2023-04-02  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: fix -P [\d] by fixing \w only if PCRE2 10.43
+	Our prepass-based fixes for the -P \d bug have caused repeated
+	further bugs.  Avoid the need for a prepass, by using PCRE2_UCP
+	only if PCRE2_EXTRA_ASCII_BSD is also supported.  Since the -P \w
+	bug was present from grep 2.5 through 3.8 it’s OK if we wait a
+	little longer to fix it.
+	* NEWS: Mention this.
+	* src/pcresearch.c (pcre_pattern_expand_backslash_d}: Remove.
+	Remove its use.
+	(Pcompile): Use PCRE2_UCP only if PCRE2_EXTRA_ASCII_BSD.
+	* tests/pcre-ascii-digits, tests/pcre-utf8-w:
+	Skip tests on older PCRE2 implementations.
+
+2023-03-22  Jim Meyering  <meyering@meta.com>
+
+	maint: post-release administrivia
+	* NEWS: Add header line for next release.
+	* .prev-version: Record previous version.
+	* cfg.mk (old_NEWS_hash): Auto-update.
+
+	version 3.10
+	* NEWS: Record release date.
+
+2023-03-22  Paul Eggert  <eggert@cs.ucla.edu>
+
+	doc: avoid capital sharp S with TeX
+	Do not use “ẞ” (U+1E9E, LATIN CAPITAL LETTER SHARP S) in tex, as
+	texinfo version 2023-03-04.12 complains “Character missing, sorry:
+	LONG S.”
+
+2023-03-22  Jim Meyering  <meyering@meta.com>
+
+	build: update gnulib to latest
+
+2023-03-20  Jim Meyering  <meyering@meta.com>
+
+	build: update gnulib to latest
+
+2023-03-20  Paul Eggert  <eggert@cs.ucla.edu>
+
+	doc: clarify BRE vs ERE (bug#62272)
+
+2023-03-19  Jim Meyering  <meyering@fb.com>
+
+	grep: -P (--perl-regexp) \D once again works like [^0-9]
+	* NEWS: Mention \D, too.
+	* doc/grep.texi: Likewise
+	* src/pcresearch.c (pcre_pattern_expand_backslash_d): Handle \D.
+	Also, ifdef-out this new function and its call site when not needed.
+	* tests/pcre-ascii-digits: Test \D, too.
+	Tighten one test by using returns_ 1.
+	Add comments and tests that work only with 10.43 and newer.
+	Paul Eggert raised the issue of \D in https://bugs.gnu.org/62267#8
+
+2023-03-19  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: forward port to PCRE2 10.43
+	* doc/grep.texi: Document this.
+	* src/grep.c: Move recent changes into pcresearch.c.
+	(P_MATCHER_INDEX): Remove.
+	(pcre_pattern_expand_backslash_d): Move from here ...
+	* src/pcresearch.c: ... to here.
+	(PCRE2_EXTRA_ASCII_BSD): Default to 0.
+	(Pcompile): Use PCRE2_EXTRA_ASCII_BSD if available,
+	and expand \d to [0-9] otherwise.
+
+	doc: distinguish Perl from PCRE
+	* doc/grep.texi: Mention that PCRE might not match Perl exactly.
+
+2023-03-18  Jim Meyering  <meyering@fb.com>
+
+	grep: -P (--perl-regexp) \d: match only ASCII digits
+	Prior to grep-3.9, the PCRE matcher had always treated \d just
+	like [0-9]. grep-3.9's fix for \w and \b mistakenly relaxed \d
+	to also match multibyte digits.
+	* src/grep.c (P_MATCHER_INDEX): Define enum.
+	(pcre_pattern_expand_backslash_d): New function.
+	(main): Call it for -P.
+	* NEWS (Bug fixes): Mention it.
+	* doc/grep.texi: Document it: with -P, \d matches only ASCII digits.
+	Provide a PCRE documentation URL and an example of how
+	to use (?s) with -z.
+	* tests/pcre-ascii-digits: New test.
+	* tests/Makefile.am (TESTS): Add that file name.
+	Reported as https://bugs.gnu.org/62267
+
+2023-03-18  Jim Meyering  <meyering@meta.com>
+
+	build: update gnulib to latest
+
+2023-03-09  Jim Meyering  <meyering@fb.com>
+
+	doc: remove mention of unused _N_GNU_nonoption_argv_flags_ envvar
+	* doc/grep.texi (Environment Variables): This environment variable
+	has not been usable for decades. Remove its documentation.
+	* doc/grep.in.1: Likewise.
+	Reported by Emanuele Torre torreemanuele6@gmail.com
+	in https://bugs.gnu.org/62052
+	* THANKS.in: Add the name.
+
+2023-03-05  Jim Meyering  <meyering@meta.com>
+
+	maint: post-release administrivia
+	* NEWS: Add header line for next release.
+	* .prev-version: Record previous version.
+	* cfg.mk (old_NEWS_hash): Auto-update.
+
+	version 3.9
+	* NEWS: Record release date.
+
+	build: update gnulib to latest
+
+2023-03-05  Bruno Haible  <bruno@clisp.org>
+
+	tests: avoid failure on Alpine Linux 3.17, due to non-POSIX compliant tr
+	* tests/fmbtest: Don't use [x*n] syntax in the tr options, since tr from
+	BusyBox 1.35 does not support it.
+
+2023-02-26  Jim Meyering  <meyering@meta.com>
+
+	build: update gnulib to latest
+
+2023-02-19  Jim Meyering  <meyering@fb.com>
+
+	build: avoid --enable-gcc-warnings clang-vs-sprintf build failure
+	* configure.ac (WERROR_CFLAGS): Disable -Wdeprecated-declarations
+	to accommodate Apple's clang 14 that's installed as "gcc".
+
+2023-02-04  Jim Meyering  <meyering@fb.com>
+
+	maint: remove stray character
+	* HACKING: Remove a stray "[" alone on a line.
+
+	maint: prefer https: to git:
+	The idea is to defend against some adversary-in-the-middle attacks.
+	Also prefer git.savannah.gnu.org over its shorter alias, git.sv.gnu.org
+	to avoid a warning e.g., from git clone.
+	Also, drop any final ".git" suffix on the resulting URIs.
+	Inspired by Paul Eggert's nearly identical changes to coreutils.
+	Induced by running these commands:
+	git grep -l 'git clone git:'|xargs perl -pi -e \
+	  's{(git clone) git://(\S+)/([^/]+)\b}{$1 https://$2/git/$3}'
+	git grep -l git.sv.gn \
+	  |xargs perl -pi -e 's{git\.sv\.gnu}{git\.savannah\.gnu}'
+	perl -pi -e \
+	  's{(url =) git://(\S+)/([^/.]+)(\.git)?\b}{$1 https://$2/git/$3}'\
+	  .gitmodules
+	* .gitmodules: As above.
+	* HACKING: Likewise.
+	* README-hacking: Likewise.
+	* src/grep.c (main): Likewise.
+
+2023-01-30  Bruno Haible  <bruno@clisp.org>
+
+	Don't require 'rsync' as a prerequisite. It is no longer needed since 2018.
+	* bootstrap.conf (buildreq): Remove rsync.
+	* README-prereq: Likewise.
+
+2023-01-21  Paul Eggert  <eggert@cs.ucla.edu>
+
+	build: update gnulib submodule to latest
+
+	maint: stop including getprogname.h
+	It’s obsolete in bleeding-edge Gnulib.
+	* src/grep.c, tests/get-mb-cur-max.c: Don’t include getprogname.h.
+	Instead, rely on stdlib.h to declare getprogname.
+
+	build: update gnulib submodule to latest
+
+2023-01-18  Paul Eggert  <eggert@cs.ucla.edu>
+
+	build: update gnulib submodule to latest
+
+2023-01-16  Paul Eggert  <eggert@cs.ucla.edu>
+
+	maint: spelling fixes
+
+2023-01-15  Paul Eggert  <eggert@cs.ucla.edu>
+
+	tests: fix test -eq problem
+	Do not use ‘test "" -eq 1’ when get-mb-cur-max fails,
+	as Bash complains about this.  Problem found on AIX.
+
+	build: update gnulib submodule to latest
+
+	tests: port U+10000+ to AIX 7.2
+	* tests/hangul-syllable, tests/surrogate-search:
+	32-bit AIX has WCHAR_MAX == 0xFFFF, and so cannot handle
+	U+10000 and greater.  Skip tests involving such chars
+	on this platform.
+
+	tests: update tests/init.sh
+	* tests/init.sh: Update from Gnulib.
+
+	grep: fix rawmemrchr etc. comments
+	* src/grep.c: Fix comments.
+
+2023-01-14  Paul Eggert  <eggert@cs.ucla.edu>
+
+	tests: omit duplicate tests
+	* tests/skip-read: Omit duplicates.  Reported by Bruno Haible in:
+	https://lists.gnu.org/r/grep-devel/2023-01/msg00003.html
+
+	build: update gnulib submodule to latest
+
+2023-01-12  Paul Eggert  <eggert@cs.ucla.edu>
+
+	tests: better diagnostic for -P sans Unicode
+	* tests/init.cfg (require_pcre_): When in a UTF-8 locale, test
+	also for Unicode support so that it can be diagnosed differently
+	(Bug#60708).
+
+	grep: diagnose no UTF-8 support (Bug#60708)
+	* src/pcresearch.c (Pcompile): Issue a diagnostic and exit instead
+	of misbehaving if libpcre2 does not support the requested locale.
+
+2023-01-11  Carlo Marcelo Arenas Belón  <carenas@gmail.com>
+
+	pcre: use UTF only when available in the library
+	Before this change, if linked with a PCRE library without unicode
+	any invocations of grep when using a UTF locale will error with:
+
+	  grep: this version of PCRE2 does not have Unicode support
+
+	* src/pcresearch.c: Check whether Unicode was compiled in.
+	* tests/pcre-utf8-w: Add check to skip test.
+	* tests/pcre-utf8: Update check.
+
+2023-01-07  Carlo Marcelo Arenas Belón  <carenas@gmail.com>
+
+	pcre: use UCP in UTF mode
+	This fixes a serious bug affecting word-boundary and word-constituent regular
+	expressions when the desired match involves non-ASCII UTF8 characters.
+	* src/pcresearch.c: Set PCRE2_UCP together with PCRE2_UTF
+	* tests/pcre-utf8-w: New file.
+	* tests/Makefile.am (TESTS): Add it.
+	* NEWS (Bug fixes): Mention this.
+	* THANKS.in: Add Gro-Tsen and Karl Petterson.
+	Reported by Gro-Tsen https://twitter.com/gro_tsen/status/1610972356972875777
+	via Karl Pettersson in https://github.com/PCRE2Project/pcre2/issues/185
+	This bug was present from grep-2.5, when --perl-regexp (-P) support was added.
+
+2023-01-01  Jim Meyering  <meyering@fb.com>
+
+	maint: update copyright dates
+
+	build: update gnulib to latest
+
+	maint: avoid warnings about unportable grep -q
+	* cfg.mk (local-checks-to-skip): This is grep itself,
+	so using grep -q is not a problem here, as long as it
+	is running the just-built grep.
+
+2022-12-10  Jim Meyering  <meyering@fb.com>
+
+	maint: src/dfasearch.c: remove unnecessary re_set_syntax call
+	* src/dfasearch.c (GEAcompile): Don't call "re_set_syntax (syntax_bits)"
+	just before regex_compile; that function does the same thing already.
+
+2022-12-05  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: bug: backref in last of multiple patterns
+	* NEWS: Mention this.
+	* src/dfasearch.c (GEAcompile): Trim trailing newline from
+	the last pattern, even if it has back-references and follows
+	a pattern that lacks back-references.
+	* tests/backref: Add test for this bug.
+
+2022-10-11  Paul Eggert  <eggert@cs.ucla.edu>
+
+	maint: prefer stdckdint.h to intprops.h
+	Prefer the standard C23 ckd_* macros to Gnulib’s *_WRAPV macros.
+	* bootstrap.conf (gnulib_modules): Add stdckdint.
+	* src/grep.c, src/kwset.c, src/pcresearch.c:
+	Include stdckdint.h, and prefer ckd_* to *_WRAPV.
+	Include intprops.h only if needed.
+
+	maint: add missing include
+	* src/pcresearch.c: Include intprops.h.
+
+	maint: prefer C23 style for static_assert
+	* bootstrap.conf (gnulib_modules): Add assert-h,
+	for static_assert.
+	* src/dfasearch.c (regex_compile): Prefer static_assert to verify.
+
+	build: update gnulib submodule to latest
+
+2022-09-10  Paul Eggert  <eggert@cs.ucla.edu>
+
+	Assume C23-like bool
+	Gnulib’s stdbool module now provides C23-like semantics,
+	so there’s no longer any need to include stdbool.h.
+	* src/die.h, src/grep.h, src/kwset.h: Don’t include stdbool.h.
+
+	build: update gnulib submodule to latest
+
+2022-09-09  Paul Eggert  <eggert@cs.ucla.edu>
+
+	doc: improve GREP_COLORS doc (Bug#57696)
+
+2022-09-06  Paul Eggert  <eggert@cs.ucla.edu>
+
+	Fix obsolescence doc for egrep, fgrep
+
 2022-09-02  Jim Meyering  <meyering@fb.com>
+
+	maint: post-release administrivia
+	* NEWS: Add header line for next release.
+	* .prev-version: Record previous version.
+	* cfg.mk (old_NEWS_hash): Auto-update.
 
 	version 3.8
 	* NEWS: Record release date.

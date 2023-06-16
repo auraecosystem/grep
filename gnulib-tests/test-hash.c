@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2022 Free Software Foundation, Inc.
+ * Copyright (C) 2009-2023 Free Software Foundation, Inc.
  * Written by Jim Meyering
  *
  * This program is free software: you can redistribute it and/or modify
@@ -23,7 +23,6 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
 #include <string.h>
 #include <unistd.h>
 

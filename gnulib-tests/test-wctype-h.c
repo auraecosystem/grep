@@ -1,5 +1,5 @@
 /* Test of <wctype.h> substitute.
-   Copyright (C) 2007-2022 Free Software Foundation, Inc.
+   Copyright (C) 2007-2023 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -20,8 +20,6 @@
 
 #include <wctype.h>
 
-#include "macros.h"
-
 /* Check that the type wint_t is defined.  */
 wint_t a = 'x';
 /* Check that WEOF is defined.  */
@@ -32,6 +30,8 @@ wctype_t p;
 
 /* Check that the type wctrans_t is defined.  */
 wctrans_t q;
+
+#include "macros.h"
 
 int
 main (void)

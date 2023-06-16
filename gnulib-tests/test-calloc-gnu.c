@@ -1,5 +1,5 @@
 /* Test of calloc function.
-   Copyright (C) 2010-2022 Free Software Foundation, Inc.
+   Copyright (C) 2010-2023 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -63,7 +63,7 @@ main ()
         ASSERT (p == NULL);
         ASSERT (errno == ENOMEM);
 
-	p = calloc (SIZE_MAX / n + 1, identity (n));
+        p = calloc (SIZE_MAX / n + 1, identity (n));
         ASSERT (p == NULL);
         ASSERT (errno == ENOMEM);
       }

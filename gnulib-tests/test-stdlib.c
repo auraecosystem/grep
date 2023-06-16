@@ -1,5 +1,5 @@
 /* Test of <stdlib.h> substitute.
-   Copyright (C) 2007, 2009-2022 Free Software Foundation, Inc.
+   Copyright (C) 2007, 2009-2023 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -20,8 +20,6 @@
 
 #include <stdlib.h>
 
-#include "verify.h"
-
 /* Check that EXIT_SUCCESS is 0, per POSIX.  */
 static int exitcode = EXIT_SUCCESS;
 #if EXIT_SUCCESS
@@ -36,7 +34,7 @@ static int exitcode = EXIT_SUCCESS;
 
 /* Check that NULL can be passed through varargs as a pointer type,
    per POSIX 2008.  */
-verify (sizeof NULL == sizeof (void *));
+static_assert (sizeof NULL == sizeof (void *));
 
 #if GNULIB_TEST_SYSTEM_POSIX
 # include "test-sys_wait.h"
@@ -47,8 +45,19 @@ verify (sizeof NULL == sizeof (void *));
 int
 main (void)
 {
-  if (test_sys_wait_macros ())
+  /* POSIX:2018 says:
+     "In the POSIX locale the value of MB_CUR_MAX shall be 1."  */
+  /* On Android ≥ 5.0, the default locale is the "C.UTF-8" locale, not the
+     "C" locale.  Furthermore, when you attempt to set the "C" or "POSIX"
+     locale via setlocale(), what you get is a "C" locale with UTF-8 encoding,
+     that is, effectively the "C.UTF-8" locale.  */
+#ifndef __ANDROID__
+  if (MB_CUR_MAX != 1)
     return 1;
+#endif
+
+  if (test_sys_wait_macros ())
+    return 2;
 
   return exitcode;
 }

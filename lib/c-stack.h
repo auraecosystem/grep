@@ -1,6 +1,6 @@
 /* Stack overflow handling.
 
-   Copyright (C) 2002, 2004, 2008-2022 Free Software Foundation, Inc.
+   Copyright (C) 2002, 2004, 2008-2023 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -14,6 +14,11 @@
 
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
+
+/* This file uses _GL_ASYNC_SAFE.  */
+#if !_GL_CONFIG_H_INCLUDED
+ #error "Please include config.h first."
+#endif
 
 #ifdef __cplusplus
 extern "C"
@@ -52,6 +57,6 @@ extern "C"
 
 extern int c_stack_action (_GL_ASYNC_SAFE void (* /*action*/) (int));
 
-# ifdef __cplusplus
+#ifdef __cplusplus
 }
-# endif
+#endif

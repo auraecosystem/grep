@@ -6,10 +6,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: grep-3.7.62\n"
+"Project-Id-Version: grep-3.8.35\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2022-09-02 23:52-0700\n"
-"PO-Revision-Date: 2022-04-27 15:00+0300\n"
+"POT-Creation-Date: 2023-05-13 01:14-0700\n"
+"PO-Revision-Date: 2023-02-28 11:00+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <gnome-turk@gnome.org>\n"
 "Language: tr\n"
@@ -19,105 +19,102 @@ msgstr ""
 "X-Bugs: Report translation errors to the Language-Team address.\n"
 "X-Generator: KBabel 1.0\n"
 
-#: lib/argmatch.c:147
+#: lib/argmatch.c:145
 #, c-format
 msgid "invalid argument %s for %s"
 msgstr "%2$s için %1$s argümanı geçersiz"
 
-#: lib/argmatch.c:148
+#: lib/argmatch.c:146
 #, c-format
 msgid "ambiguous argument %s for %s"
 msgstr "`%2$s' için %1$s argümanı belirsiz"
 
-#: lib/argmatch.c:167 lib/argmatch.h:238
+#: lib/argmatch.c:165 lib/argmatch.h:242
 msgid "Valid arguments are:"
 msgstr "Geçerli argümanlar:"
 
-#: lib/c-stack.c:187
+#: lib/c-stack.c:186
 msgid "program error"
 msgstr "program hatası"
 
-#: lib/c-stack.c:188
+#: lib/c-stack.c:187
 msgid "stack overflow"
 msgstr "yığın taşması"
 
-#: lib/closeout.c:122 src/grep.c:1346
+#: lib/closeout.c:121 src/grep.c:1346
 msgid "write error"
 msgstr "yazma hatası"
 
-#: lib/dfa.c:894
+#: lib/dfa.c:897
 msgid "unbalanced ["
 msgstr "karşılıksız ["
 
-#: lib/dfa.c:1015
+#: lib/dfa.c:1018
 msgid "invalid character class"
 msgstr "geçersiz karakter sınıfı"
 
-#: lib/dfa.c:1143
+#: lib/dfa.c:1146
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr "karakter sınıfı sözdizimi [[:boşluk:]], [:boşluk] değil"
 
-#: lib/dfa.c:1209
+#: lib/dfa.c:1222
 msgid "unfinished \\ escape"
 msgstr "tamamlanmamış \\ kaçışı"
 
-#: lib/dfa.c:1319
-#, fuzzy
+#: lib/dfa.c:1332
 msgid "? at start of expression"
-msgstr "Geçersiz düzenli ifade"
+msgstr "ifadenin başlangıcında ?"
 
-#: lib/dfa.c:1331
-#, fuzzy
+#: lib/dfa.c:1344
 msgid "* at start of expression"
-msgstr "Geçersiz düzenli ifade"
+msgstr "ifadenin başlangıcında *"
 
-#: lib/dfa.c:1345
-#, fuzzy
+#: lib/dfa.c:1358
 msgid "+ at start of expression"
-msgstr "Geçersiz düzenli ifade"
+msgstr "ifadenin başlangıcında +"
 
-#: lib/dfa.c:1400
+#: lib/dfa.c:1413
 msgid "{...} at start of expression"
-msgstr ""
+msgstr "ifadenin başlangıcında {...}"
 
-#: lib/dfa.c:1403
+#: lib/dfa.c:1416
 msgid "invalid content of \\{\\}"
 msgstr "geçersiz \\{\\} içeriği"
 
-#: lib/dfa.c:1405
+#: lib/dfa.c:1418
 msgid "regular expression too big"
 msgstr "düzenli ifade pek büyük"
 
-#: lib/dfa.c:1555
+#: lib/dfa.c:1568
 msgid "stray \\ before unprintable character"
-msgstr ""
+msgstr "yazdırılamayan karakter öncesi başıboş \\"
 
-#: lib/dfa.c:1557
+#: lib/dfa.c:1570
 msgid "stray \\ before white space"
-msgstr ""
+msgstr "boşluk öncesi başıboş \\"
 
-#: lib/dfa.c:1561
+#: lib/dfa.c:1574
 #, c-format
 msgid "stray \\ before %lc"
-msgstr ""
+msgstr "%lc öncesi başıboş \\"
 
-#: lib/dfa.c:1562
+#: lib/dfa.c:1575
 msgid "stray \\"
-msgstr ""
+msgstr "başıboş \\"
 
-#: lib/dfa.c:1917
+#: lib/dfa.c:1925
 msgid "unbalanced ("
 msgstr "karşılıksız ("
 
-#: lib/dfa.c:2034
+#: lib/dfa.c:2042
 msgid "no syntax specified"
 msgstr "sözdizim belirtilmemiş"
 
-#: lib/dfa.c:2045
+#: lib/dfa.c:2053
 msgid "unbalanced )"
 msgstr "karşılıksız )"
 
-#: lib/error.c:195
+#: lib/error.c:193
 msgid "Unknown system error"
 msgstr "Bilinmeyen sistem hatası"
 
@@ -170,7 +167,7 @@ msgstr "geçerli çalışma dizini kaydedilemiyor"
 msgid "failed to return to initial working directory"
 msgstr "başlangıç çalışma dizinine dönülemedi"
 
-#: lib/xbinary-io.c:37
+#: lib/xbinary-io.c:36
 #, c-format
 msgid "failed to set file descriptor text/binary mode"
 msgstr "dosya tanımlayıcısı metin/ikili kipi ayarlanamadı"
@@ -196,11 +193,11 @@ msgstr "dosya tanımlayıcısı metin/ikili kipi ayarlanamadı"
 #. If you don't know what to put here, please see
 #. <https://en.wikipedia.org/wiki/Quotation_marks_in_other_languages>
 #. and use glyphs suitable for your language.
-#: lib/quotearg.c:355
+#: lib/quotearg.c:354
 msgid "`"
 msgstr "`"
 
-#: lib/quotearg.c:356
+#: lib/quotearg.c:355
 msgid "'"
 msgstr "'"
 
@@ -234,11 +231,11 @@ msgstr "Geçersiz geri başvuru"
 
 #: lib/regcomp.c:143
 msgid "Unmatched [, [^, [:, [., or [="
-msgstr "Eşleşmemiş [, [^, [:, [. veya [="
+msgstr "[, [^, [:, [. veya [= eşleşmiyor"
 
 #: lib/regcomp.c:146
 msgid "Unmatched ( or \\("
-msgstr "Eşleşmemiş ( veya \\("
+msgstr "( veya \\( eşleşmiyor"
 
 #: lib/regcomp.c:149
 msgid "Unmatched \\{"
@@ -440,7 +437,7 @@ msgstr "GNU yazılımı kullanımı genel yardımı: <%s>\n"
 #: src/dfasearch.c:59
 #, c-format
 msgid "warning: %s"
-msgstr ""
+msgstr "uyarı: %s"
 
 #: src/grep.c:656
 msgid "(standard input)"
@@ -728,64 +725,76 @@ msgstr "bilinmeyen ikili dosya türü"
 #: src/grep.c:2831
 msgid ""
 "Written by Mike Haertel and others; see\n"
-"<https://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>."
+"<https://git.savannah.gnu.org/cgit/grep.git/tree/AUTHORS>."
 msgstr ""
 "Mike Haertel ve diğerleri tarafından yazılmıştır; bkz.\n"
-"<https://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>."
+"<https://git.savannah.gnu.org/cgit/grep.git/tree/AUTHORS>."
 
-#: src/grep.c:2934
+#: src/grep.c:2937
 #, c-format
 msgid "warning: GREP_COLOR='%s' is deprecated; use GREP_COLORS='mt=%s'"
 msgstr ""
+"uyarı: GREP_COLOR='%s', artık kullanımdan kalkıyor; GREP_COLORS='mt=%s' "
+"kullanın"
 
-#: src/pcresearch.c:148
+#: src/pcresearch.c:92
+#, c-format
+msgid ""
+"\n"
+"grep -P uses PCRE2 %s\n"
+msgstr ""
+
+#: src/pcresearch.c:169
+msgid "-P supports only unibyte locales on this platform"
+msgstr "-P, bu platformda yalnızca unibyte yerelini destekler"
+
+#: src/pcresearch.c:171
 msgid "-P supports only unibyte and UTF-8 locales"
 msgstr "-P yalnızca unibyte ve UTF-8 yerellerini destekler"
 
-#: src/pcresearch.c:162
+#: src/pcresearch.c:194
 msgid "the -P option only supports a single pattern"
 msgstr "-P seçeneği yalnızca tek bir dizgiyi destekler"
 
-#: src/pcresearch.c:215
-#, c-format
-msgid "JIT internal error: %d"
-msgstr "JIT iç hatası: %d"
-
-#: src/pcresearch.c:252
+#: src/pcresearch.c:290
 msgid "exceeded PCRE's line length limit"
 msgstr "PCRE's satır uzunluğu limiti aşıldı"
 
-#: src/pcresearch.c:330
+#: src/pcresearch.c:368
 #, c-format
 msgid "%s: memory exhausted"
 msgstr "%s: Bellek tükendi"
 
-#: src/pcresearch.c:333
+#: src/pcresearch.c:371
 #, c-format
 msgid "%s: exhausted PCRE JIT stack"
 msgstr "%s: PCRE JIT yığını tükendi"
 
-#: src/pcresearch.c:337
+#: src/pcresearch.c:375
 #, c-format
 msgid "%s: exceeded PCRE's backtracking limit"
 msgstr "%s: PCRE'nin geri izleme limiti aşıldı"
 
-#: src/pcresearch.c:342
+#: src/pcresearch.c:380
 #, c-format
 msgid "%s: exceeded PCRE's nested backtracking limit"
 msgstr "%s: PCRE'nin iç içe geçmiş geri izleme limiti aşıldı"
 
-#: src/pcresearch.c:346
+#: src/pcresearch.c:384
 #, c-format
 msgid "%s: PCRE detected recurse loop"
 msgstr "%s: PCRE, özyineleme döngüsü algıladı"
 
-#: src/pcresearch.c:351
+#: src/pcresearch.c:389
 #, c-format
 msgid "%s: exceeded PCRE's heap limit"
 msgstr "%s: PCRE'nin öbek limiti aşıldı"
 
-#: src/pcresearch.c:360
+#: src/pcresearch.c:398
 #, c-format
 msgid "%s: internal PCRE error: %d"
 msgstr "%s: İç PCRE hatası: %d"
+
+#, c-format
+#~ msgid "JIT internal error: %d"
+#~ msgstr "JIT iç hatası: %d"

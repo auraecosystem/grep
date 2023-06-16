@@ -1,5 +1,67 @@
 GNU grep NEWS                                    -*- outline -*-
 
+* Noteworthy changes in release 3.11 (2023-05-13) [stable]
+
+** Bug fixes
+
+  With -P, patterns like [\d] now work again.  Fixing this has caused
+  grep to revert to the behavior of grep 3.8, in that patterns like \w
+  and \b go back to using ASCII rather than Unicode interpretations.
+  However, future versions of GNU grep and/or PCRE2 are likely to fix
+  this and change the behavior of \w and \b back to Unicode again,
+  without breaking [\d] as 3.10 did.
+  [bug introduced in grep 3.10]
+
+  grep no longer fails on files dated after the year 2038,
+  when running on 32-bit x86 and ARM hosts using glibc 2.34+.
+  [bug introduced in grep 3.9]
+
+  grep -P no longer fails to match patterns using negated classes
+  like \D or \W when linked with PCRE2 10.34 or newer.
+  [bug introduced in grep 3.8]
+
+
+** Changes in behavior
+
+  grep --version now prints a line describing the version of PCRE2 it uses.
+  For example, it prints this when built with the very latest from git:
+    grep -P uses PCRE2 10.43-DEV 2023-04-14
+  or this with what's currently available in Fedora 37:
+    grep -P uses PCRE2 10.40 2022-04-14
+
+  previous versions of grep wouldn't respect the user provided settings for
+  PCRE_CFLAGS and PCRE_LIBS when building if a libpcre2-8 pkg-config module
+  was found.
+
+
+* Noteworthy changes in release 3.10 (2023-03-22) [stable]
+
+** Bug fixes
+
+  With -P, \d now matches only ASCII digits, regardless of PCRE
+  options/modes. The changes in grep-3.9 to make \b and \w work
+  properly had the undesirable side effect of making \d also match
+  e.g., the Arabic digits: ٠١٢٣٤٥٦٧٨٩.  With grep-3.9, -P '\d+'
+  would match that ten-digit (20-byte) string. Now, to match such
+  a digit, you would use \p{Nd}. Similarly, \D is now mapped to [^0-9].
+  [bug introduced in grep 3.9]
+
+
+* Noteworthy changes in release 3.9 (2023-03-05) [stable]
+
+** Bug fixes
+
+  With -P, some non-ASCII UTF8 characters were not recognized as
+  word-constituent due to our omission of the PCRE2_UCP flag. E.g.,
+  given f(){ echo Perú|LC_ALL=en_US.UTF-8 grep -Po "$1"; } and
+  this command, echo $(f 'r\w'):$(f '.\b'), before it would print ":r".
+  After the fix, it prints the correct results: "rú:ú".
+
+  When given multiple patterns the last of which has a back-reference,
+  grep no longer sometimes mistakenly matches lines in some cases.
+  [Bug#36148#13 introduced in grep 3.4]
+
+
 * Noteworthy changes in release 3.8 (2022-09-02) [stable]
 
 ** Changes in behavior
@@ -1323,7 +1385,7 @@ necessary to track the evolution of the regex package, and since
 I was changing it anyway I decided to do a general cleanup.
 
 ========================================================================
-Copyright (C) 1992, 1997-2002, 2004-2022 Free Software Foundation, Inc.
+Copyright (C) 1992, 1997-2002, 2004-2023 Free Software Foundation, Inc.
 
   Copying and distribution of this file, with or without modification,
   are permitted in any medium without royalty provided the copyright

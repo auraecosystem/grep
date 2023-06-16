@@ -4,13 +4,13 @@
 # Martin von Löwis <martin@mira.isdn.cs.tu-berlin.de>, 1997-99, 2000-2002.
 # Philipp Thomas <pth@suse.de>, 2012-2013, 2015-2016.
 # Mario Blättermann <mario.blaettermann@gmail.com>, 2014, 2019-2021.
-# Roland Illig <roland.illig@gmx.de>, 2021-2022.
+# Roland Illig <roland.illig@gmx.de>, 2021-2023.
 msgid ""
 msgstr ""
-"Project-Id-Version: GNU grep 3.7.98\n"
+"Project-Id-Version: GNU grep 3.10.12\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2022-09-02 23:52-0700\n"
-"PO-Revision-Date: 2022-07-04 00:10+0200\n"
+"POT-Creation-Date: 2023-05-13 01:14-0700\n"
+"PO-Revision-Date: 2023-04-21 17:11+0200\n"
 "Last-Translator: Roland Illig <roland.illig@gmx.de>\n"
 "Language-Team: German <translation-team-de@lists.sourceforge.net>\n"
 "Language: de\n"
@@ -19,106 +19,106 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Bugs: Report translation errors to the Language-Team address.\n"
-"X-Generator: Poedit 3.1\n"
+"X-Generator: Poedit 3.2.2\n"
 
-#: lib/argmatch.c:147
+#: lib/argmatch.c:145
 #, c-format
 msgid "invalid argument %s for %s"
 msgstr "ungültiges Argument %s für %s"
 
-#: lib/argmatch.c:148
+#: lib/argmatch.c:146
 #, c-format
 msgid "ambiguous argument %s for %s"
 msgstr "mehrdeutiges Argument %s für %s"
 
-#: lib/argmatch.c:167 lib/argmatch.h:238
+#: lib/argmatch.c:165 lib/argmatch.h:242
 msgid "Valid arguments are:"
 msgstr "Gültige Argumente sind:"
 
-#: lib/c-stack.c:187
+#: lib/c-stack.c:186
 msgid "program error"
 msgstr "Programmfehler"
 
-#: lib/c-stack.c:188
+#: lib/c-stack.c:187
 msgid "stack overflow"
 msgstr "Stack-Überlauf"
 
-#: lib/closeout.c:122 src/grep.c:1346
+#: lib/closeout.c:121 src/grep.c:1346
 msgid "write error"
 msgstr "Schreibfehler"
 
 # Is this message used only for [ without matching ],
 # or for ] without [ as well?
-#: lib/dfa.c:894
+#: lib/dfa.c:897
 msgid "unbalanced ["
 msgstr "[ ohne schließendes Gegenstück"
 
-#: lib/dfa.c:1015
+#: lib/dfa.c:1018
 msgid "invalid character class"
 msgstr "Ungültige Zeichenklasse"
 
-#: lib/dfa.c:1143
+#: lib/dfa.c:1146
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr "die Syntax für Zeichenklassen ist [[:space:]], nicht [:space:]"
 
-#: lib/dfa.c:1209
+#: lib/dfa.c:1222
 msgid "unfinished \\ escape"
 msgstr "unbeendete \\-Escape-Sequenz"
 
-#: lib/dfa.c:1319
+#: lib/dfa.c:1332
 msgid "? at start of expression"
 msgstr "? am Anfang des Ausdrucks"
 
-#: lib/dfa.c:1331
+#: lib/dfa.c:1344
 msgid "* at start of expression"
 msgstr "* am Anfang des Ausdrucks"
 
-#: lib/dfa.c:1345
+#: lib/dfa.c:1358
 msgid "+ at start of expression"
 msgstr "+ am Anfang des Ausdrucks"
 
-#: lib/dfa.c:1400
+#: lib/dfa.c:1413
 msgid "{...} at start of expression"
 msgstr "{...} am Anfang des Ausdrucks"
 
-#: lib/dfa.c:1403
+#: lib/dfa.c:1416
 msgid "invalid content of \\{\\}"
 msgstr "Ungültiger Inhalt von \\{\\}"
 
-#: lib/dfa.c:1405
+#: lib/dfa.c:1418
 msgid "regular expression too big"
 msgstr "Der reguläre Ausdruck ist zu groß"
 
-#: lib/dfa.c:1555
+#: lib/dfa.c:1568
 msgid "stray \\ before unprintable character"
 msgstr "überzähliges \\ vor einem nicht druckbaren Zeichen"
 
-#: lib/dfa.c:1557
+#: lib/dfa.c:1570
 msgid "stray \\ before white space"
 msgstr "überzähliges \\ vor einem Leerzeichen"
 
-#: lib/dfa.c:1561
+#: lib/dfa.c:1574
 #, c-format
 msgid "stray \\ before %lc"
 msgstr "überzähliges \\ vor %lc"
 
-#: lib/dfa.c:1562
+#: lib/dfa.c:1575
 msgid "stray \\"
 msgstr "überzähliges \\"
 
-#: lib/dfa.c:1917
+#: lib/dfa.c:1925
 msgid "unbalanced ("
 msgstr "( ohne schließendes Gegenstück"
 
-#: lib/dfa.c:2034
+#: lib/dfa.c:2042
 msgid "no syntax specified"
 msgstr "es wurde keine Syntax angegeben"
 
-#: lib/dfa.c:2045
+#: lib/dfa.c:2053
 msgid "unbalanced )"
 msgstr "Schließende ) ohne öffnendes Gegenstück"
 
-#: lib/error.c:195
+#: lib/error.c:193
 msgid "Unknown system error"
 msgstr "Unbekannter Systemfehler"
 
@@ -171,7 +171,7 @@ msgstr "das aktuelle Verzeichnis kann nicht aufgezeichnet werden"
 msgid "failed to return to initial working directory"
 msgstr "die Rückkehr in das ursprüngliche Arbeitsverzeichnis war nicht möglich"
 
-#: lib/xbinary-io.c:37
+#: lib/xbinary-io.c:36
 #, c-format
 msgid "failed to set file descriptor text/binary mode"
 msgstr "Text-/Binärmodus des Dateideskriptors konnte nicht gesetzt werden"
@@ -197,11 +197,11 @@ msgstr "Text-/Binärmodus des Dateideskriptors konnte nicht gesetzt werden"
 #. If you don't know what to put here, please see
 #. <https://en.wikipedia.org/wiki/Quotation_marks_in_other_languages>
 #. and use glyphs suitable for your language.
-#: lib/quotearg.c:355
+#: lib/quotearg.c:354
 msgid "`"
 msgstr "„"
 
-#: lib/quotearg.c:356
+#: lib/quotearg.c:355
 msgid "'"
 msgstr "“"
 
@@ -750,68 +750,86 @@ msgstr "unbekannter Typ für Binärdateien"
 #: src/grep.c:2831
 msgid ""
 "Written by Mike Haertel and others; see\n"
-"<https://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>."
+"<https://git.savannah.gnu.org/cgit/grep.git/tree/AUTHORS>."
 msgstr ""
 "Geschrieben von Mike Haertel und anderen; siehe\n"
-"<https://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>."
+"<https://git.savannah.gnu.org/cgit/grep.git/tree/AUTHORS>."
 
-#: src/grep.c:2934
+#: src/grep.c:2937
 #, c-format
 msgid "warning: GREP_COLOR='%s' is deprecated; use GREP_COLORS='mt=%s'"
 msgstr ""
 "Warnung: GREP_COLOR=»%s« ist veraltet; verwenden Sie GREP_COLORS=»mt=%s«"
 
-#: src/pcresearch.c:148
+#: src/pcresearch.c:92
+#, c-format
+msgid ""
+"\n"
+"grep -P uses PCRE2 %s\n"
+msgstr ""
+"\n"
+"grep -P verwendet PCRE2 %s\n"
+
+#: src/pcresearch.c:169
+msgid "-P supports only unibyte locales on this platform"
+msgstr "-P unterstützt auf dieser Plattform nur Unibyte-Locales"
+
+#: src/pcresearch.c:171
 msgid "-P supports only unibyte and UTF-8 locales"
 msgstr "-P unterstützt nur Unibyte- oder UTF-8-Locales"
 
-#: src/pcresearch.c:162
+#: src/pcresearch.c:194
 msgid "the -P option only supports a single pattern"
 msgstr "Die Option -P unterstützt nur ein einzelnes Suchmuster"
 
-#: src/pcresearch.c:215
-#, c-format
-msgid "JIT internal error: %d"
-msgstr "interner JIT-Fehler: %d"
-
-#: src/pcresearch.c:252
+#: src/pcresearch.c:290
 msgid "exceeded PCRE's line length limit"
 msgstr "Überschreitung der zulässigen Zeilenlänge von PCREs"
 
-#: src/pcresearch.c:330
+#: src/pcresearch.c:368
 #, c-format
 msgid "%s: memory exhausted"
 msgstr "%s: Speicher ausgeschöpft"
 
-#: src/pcresearch.c:333
+#: src/pcresearch.c:371
 #, c-format
 msgid "%s: exhausted PCRE JIT stack"
 msgstr "%s: Kellerspeicher für PCRE JIT ist erschöpft"
 
-#: src/pcresearch.c:337
+#: src/pcresearch.c:375
 #, c-format
 msgid "%s: exceeded PCRE's backtracking limit"
 msgstr "%s: Überschreitung der Zurückverfolgungsbeschränkung des PCREs"
 
-#: src/pcresearch.c:342
+#: src/pcresearch.c:380
 #, c-format
 msgid "%s: exceeded PCRE's nested backtracking limit"
 msgstr "%s: Zurückverfolgungsbeschränkung der PCREs überschritten"
 
-#: src/pcresearch.c:346
+#: src/pcresearch.c:384
 #, c-format
 msgid "%s: PCRE detected recurse loop"
 msgstr "%s: Rekursionsschleife in PCRE entdeckt"
 
-#: src/pcresearch.c:351
+#: src/pcresearch.c:389
 #, c-format
 msgid "%s: exceeded PCRE's heap limit"
 msgstr "%s: Speicherverbrauch der PCRE überschritten"
 
-#: src/pcresearch.c:360
+#: src/pcresearch.c:398
 #, c-format
 msgid "%s: internal PCRE error: %d"
 msgstr "%s: interner PCRE-Fehler: %d"
+
+#~ msgid ""
+#~ "\n"
+#~ "Built with PCRE "
+#~ msgstr ""
+#~ "\n"
+#~ "Mit PCRE gebaut "
+
+#~ msgid "JIT internal error: %d"
+#~ msgstr "interner JIT-Fehler: %d"
 
 #~ msgid "failed to allocate memory for the PCRE JIT stack"
 #~ msgstr "es konnte kein Speicher für den PCRE-JIT-Stack reserviert werden"

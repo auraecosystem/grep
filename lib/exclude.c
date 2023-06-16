@@ -1,6 +1,6 @@
 /* exclude.c -- exclude file names
 
-   Copyright (C) 1992-1994, 1997, 1999-2007, 2009-2022 Free Software
+   Copyright (C) 1992-1994, 1997, 1999-2007, 2009-2023 Free Software
    Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
@@ -23,8 +23,6 @@
 
 #include <config.h>
 
-#include <stdbool.h>
-
 #include <ctype.h>
 #include <errno.h>
 #include <stddef.h>
@@ -39,7 +37,6 @@
 #include "mbuiter.h"
 #include "fnmatch.h"
 #include "xalloc.h"
-#include "verify.h"
 #include "filename.h"
 
 #if GNULIB_EXCLUDE_SINGLE_THREAD
@@ -57,10 +54,10 @@
 # define FNM_LEADING_DIR 0
 #endif
 
-verify (((EXCLUDE_ANCHORED | EXCLUDE_INCLUDE | EXCLUDE_WILDCARDS)
-         & (FNM_PATHNAME | FNM_NOESCAPE | FNM_PERIOD | FNM_LEADING_DIR
-            | FNM_CASEFOLD | FNM_EXTMATCH))
-        == 0);
+static_assert (((EXCLUDE_ANCHORED | EXCLUDE_INCLUDE | EXCLUDE_WILDCARDS)
+                & (FNM_PATHNAME | FNM_NOESCAPE | FNM_PERIOD | FNM_LEADING_DIR
+                   | FNM_CASEFOLD | FNM_EXTMATCH))
+               == 0);
 
 
 /* Exclusion patterns are grouped into a singly-linked list of

@@ -1,6 +1,6 @@
 # pcre.m4 - check for PCRE library support
 
-# Copyright (C) 2010-2022 Free Software Foundation, Inc.
+# Copyright (C) 2010-2023 Free Software Foundation, Inc.
 # This file is free software; the Free Software Foundation
 # gives unlimited permission to copy and/or distribute it,
 # with or without modifications, as long as this notice is preserved.
@@ -21,7 +21,10 @@ AC_DEFUN([gl_FUNC_PCRE],
   use_pcre=no
 
   if test $test_pcre != no; then
-    PKG_CHECK_MODULES([PCRE], [libpcre2-8], [], [: ${PCRE_LIBS=-lpcre2-8}])
+
+    if test -z "${PCRE_CFLAGS+set}" && test -z "${PCRE_LIBS+set}"; then
+      PKG_CHECK_MODULES([PCRE], [libpcre2-8], [], [: ${PCRE_LIBS=-lpcre2-8}])
+    fi
 
     AC_CACHE_CHECK([for pcre2_compile], [pcre_cv_have_pcre2_compile],
       [pcre_saved_CFLAGS=$CFLAGS
