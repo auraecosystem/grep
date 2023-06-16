@@ -1,3 +1,19 @@
+grep (3.11-1~1.gbpbd7ea5) UNRELEASED; urgency=medium
+
+  ** SNAPSHOT build @bd7ea5c5151f719950a9a84c308c67573dffaf1c **
+
+  [ Debian Janitor ]
+  * Remove constraints unnecessary since buster (oldstable)
+
+  [ Santiago Ruano Rincón ]
+  * New upstream version: 3.11
+  * Remove no longer needed:
+    upstream-0001-doc-improve-GREP_COLORS-doc-Bug-57696.patch
+    1029235-grep-bug-backref-in-last-of-multiple-patterns.patch
+  * Refresh 1019724-handle-backslash-warning.patch and XFAIL-test-regex.patch
+
+ -- Santiago Ruano Rincón <santiago@debian.org>  Fri, 16 Jun 2023 14:04:00 -0300
+
 grep (3.8-5) unstable; urgency=medium
 
   * Upload to unstable
