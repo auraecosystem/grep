@@ -12,7 +12,7 @@ Index: grep/lib/dfa.c
 ===================================================================
 --- grep.orig/lib/dfa.c
 +++ grep/lib/dfa.c
-@@ -1547,7 +1547,10 @@ lex (struct dfa *dfa)
+@@ -1560,7 +1560,10 @@ lex (struct dfa *dfa)
            if (!backslash)
              goto normal_char;
          stray_backslash:
