@@ -1,5 +1,5 @@
 # Esperanto translations for GNU grep.
-# Copyright (C) 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2013, 2014, 2015, 2016, 2018, 2020, 2021 Free Software Foundation, Inc.
+# Copyright (C) 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2013, 2014, 2015, 2016, 2018, 2020, 2021, 2023 Free Software Foundation, Inc.
 # This file is distributed under the same license as the grep package.
 #
 # “Jeder ist seines Glückes Schmied,
@@ -8,13 +8,13 @@
 # D. Dale Gulledge <dsplat@rochester.rr.com>, 1999.
 # Edmund GRIMLEY EVANS <edmundo@rano.org>, 2000-2009.
 # Benno Schulenberg <benno@vertaalt.nl>, 2013, 2014, 2015, 2016, 2018, 2020.
-# Felipe CASTRO <fefcas@gmail.com>, 2021.
+# Felipe CASTRO <fefcas@gmail.com>, 2021, 2023.
 msgid ""
 msgstr ""
-"Project-Id-Version: GNU grep 3.6.27\n"
+"Project-Id-Version: GNU grep 3.7.98\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2022-09-02 23:52-0700\n"
-"PO-Revision-Date: 2021-08-10 21:36-0300\n"
+"POT-Creation-Date: 2023-05-13 01:14-0700\n"
+"PO-Revision-Date: 2023-01-08 15:22-0300\n"
 "Last-Translator: Felipe Castro <fefcas@gmail.com>\n"
 "Language-Team: Esperanto <translation-team-eo@lists.sourceforge.net>\n"
 "Language: eo\n"
@@ -25,105 +25,102 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Poedit 2.4.2\n"
 
-#: lib/argmatch.c:147
+#: lib/argmatch.c:145
 #, c-format
 msgid "invalid argument %s for %s"
 msgstr "nevalida argumento %s por %s"
 
-#: lib/argmatch.c:148
+#: lib/argmatch.c:146
 #, c-format
 msgid "ambiguous argument %s for %s"
 msgstr "ambigua argumento %s por %s"
 
-#: lib/argmatch.c:167 lib/argmatch.h:238
+#: lib/argmatch.c:165 lib/argmatch.h:242
 msgid "Valid arguments are:"
 msgstr "Validaj argumentoj estas:"
 
-#: lib/c-stack.c:187
+#: lib/c-stack.c:186
 msgid "program error"
 msgstr "programeraro"
 
-#: lib/c-stack.c:188
+#: lib/c-stack.c:187
 msgid "stack overflow"
 msgstr "staktroo"
 
-#: lib/closeout.c:122 src/grep.c:1346
+#: lib/closeout.c:121 src/grep.c:1346
 msgid "write error"
 msgstr "skrib-eraro"
 
-#: lib/dfa.c:894
+#: lib/dfa.c:897
 msgid "unbalanced ["
 msgstr "senpara ["
 
-#: lib/dfa.c:1015
+#: lib/dfa.c:1018
 msgid "invalid character class"
 msgstr "nevalida signoklaso"
 
-#: lib/dfa.c:1143
+#: lib/dfa.c:1146
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr "sintakso de signoklaso estas ekzemple [[:spaco:]], ne [:spaco:]"
 
-#: lib/dfa.c:1209
+#: lib/dfa.c:1222
 msgid "unfinished \\ escape"
 msgstr "nefinita \\-eskapo"
 
-#: lib/dfa.c:1319
-#, fuzzy
+#: lib/dfa.c:1332
 msgid "? at start of expression"
-msgstr "Nevalida regulesprimo"
+msgstr "? ĉe komenco de esprimo"
 
-#: lib/dfa.c:1331
-#, fuzzy
+#: lib/dfa.c:1344
 msgid "* at start of expression"
-msgstr "Nevalida regulesprimo"
+msgstr "* ĉe komenco de esprimo"
 
-#: lib/dfa.c:1345
-#, fuzzy
+#: lib/dfa.c:1358
 msgid "+ at start of expression"
-msgstr "Nevalida regulesprimo"
+msgstr "+ ĉe komenco de esprimo"
 
-#: lib/dfa.c:1400
+#: lib/dfa.c:1413
 msgid "{...} at start of expression"
-msgstr ""
+msgstr "{...} ĉe komenco de esprimo"
 
-#: lib/dfa.c:1403
+#: lib/dfa.c:1416
 msgid "invalid content of \\{\\}"
 msgstr "nevalida enhavo de \\{\\}"
 
-#: lib/dfa.c:1405
+#: lib/dfa.c:1418
 msgid "regular expression too big"
 msgstr "regulesprimo tro grandas"
 
-#: lib/dfa.c:1555
+#: lib/dfa.c:1568
 msgid "stray \\ before unprintable character"
-msgstr ""
+msgstr "perdita \\ antaŭ neprintebla signo"
 
-#: lib/dfa.c:1557
+#: lib/dfa.c:1570
 msgid "stray \\ before white space"
-msgstr ""
+msgstr "perdita \\ before blankspaco"
 
-#: lib/dfa.c:1561
+#: lib/dfa.c:1574
 #, c-format
 msgid "stray \\ before %lc"
-msgstr ""
+msgstr "perdita \\ antaŭ ol %lc"
 
-#: lib/dfa.c:1562
+#: lib/dfa.c:1575
 msgid "stray \\"
-msgstr ""
+msgstr "perdita \\"
 
-#: lib/dfa.c:1917
+#: lib/dfa.c:1925
 msgid "unbalanced ("
 msgstr "senpara ("
 
-#: lib/dfa.c:2034
+#: lib/dfa.c:2042
 msgid "no syntax specified"
 msgstr "neniu sintakso indikatas"
 
-#: lib/dfa.c:2045
+#: lib/dfa.c:2053
 msgid "unbalanced )"
 msgstr "senpara )"
 
-#: lib/error.c:195
+#: lib/error.c:193
 msgid "Unknown system error"
 msgstr "Nekonata sistemeraro"
 
@@ -176,7 +173,7 @@ msgstr "ne eblas registri aktualan labordosierujon"
 msgid "failed to return to initial working directory"
 msgstr "malsukcesis reveni al komenca labordosierujo"
 
-#: lib/xbinary-io.c:37
+#: lib/xbinary-io.c:36
 #, c-format
 msgid "failed to set file descriptor text/binary mode"
 msgstr "malsukcesis agordi tekstan/duuman moduson de dosierpriaĵo"
@@ -202,11 +199,11 @@ msgstr "malsukcesis agordi tekstan/duuman moduson de dosierpriaĵo"
 #. If you don't know what to put here, please see
 #. <https://en.wikipedia.org/wiki/Quotation_marks_in_other_languages>
 #. and use glyphs suitable for your language.
-#: lib/quotearg.c:355
+#: lib/quotearg.c:354
 msgid "`"
 msgstr "«"
 
-#: lib/quotearg.c:356
+#: lib/quotearg.c:355
 msgid "'"
 msgstr "»"
 
@@ -447,9 +444,9 @@ msgid "General help using GNU software: <%s>\n"
 msgstr "Ĝenerala helpo por uzi GNU-programojn: <%s>\n"
 
 #: src/dfasearch.c:59
-#, fuzzy, c-format
+#, c-format
 msgid "warning: %s"
-msgstr "averto: %s: %s"
+msgstr "averto: %s"
 
 #: src/grep.c:656
 msgid "(standard input)"
@@ -741,69 +738,81 @@ msgid "unknown binary-files type"
 msgstr "nekonata ago por duumaj dosieroj"
 
 #: src/grep.c:2831
+#, fuzzy
 msgid ""
 "Written by Mike Haertel and others; see\n"
-"<https://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>."
+"<https://git.savannah.gnu.org/cgit/grep.git/tree/AUTHORS>."
 msgstr ""
 "Verkita de Majk HERTEL (Mike Haertel) kaj aliuloj; vidu\n"
 "<https://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>."
 
-#: src/grep.c:2934
+#: src/grep.c:2937
 #, c-format
 msgid "warning: GREP_COLOR='%s' is deprecated; use GREP_COLORS='mt=%s'"
+msgstr "averto: GREP_COLOR='%s' estas evitinda; uzu GREP_COLORS='mt=%s'"
+
+#: src/pcresearch.c:92
+#, c-format
+msgid ""
+"\n"
+"grep -P uses PCRE2 %s\n"
 msgstr ""
 
-#: src/pcresearch.c:148
+#: src/pcresearch.c:169
+#, fuzzy
+msgid "-P supports only unibyte locales on this platform"
+msgstr "opcio «-P» subtenas nur unubajtajn kaj UTF-8-ajn lokaĵojn"
+
+#: src/pcresearch.c:171
 msgid "-P supports only unibyte and UTF-8 locales"
 msgstr "opcio «-P» subtenas nur unubajtajn kaj UTF-8-ajn lokaĵojn"
 
-#: src/pcresearch.c:162
+#: src/pcresearch.c:194
 msgid "the -P option only supports a single pattern"
 msgstr "opcio «-P» akceptas nur unuopan ŝablonon"
 
-#: src/pcresearch.c:215
-#, fuzzy, c-format
-msgid "JIT internal error: %d"
-msgstr "%s: interna eraro en PCRE: %d"
-
-#: src/pcresearch.c:252
+#: src/pcresearch.c:290
 msgid "exceeded PCRE's line length limit"
 msgstr "transpasiĝis linilongecan limon de PCRE"
 
-#: src/pcresearch.c:330
+#: src/pcresearch.c:368
 #, c-format
 msgid "%s: memory exhausted"
 msgstr "%s: mankas sufiĉa memoro"
 
-#: src/pcresearch.c:333
+#: src/pcresearch.c:371
 #, c-format
 msgid "%s: exhausted PCRE JIT stack"
 msgstr "%s: la PCRE-JIT-stako tute pleniĝis"
 
-#: src/pcresearch.c:337
+#: src/pcresearch.c:375
 #, c-format
 msgid "%s: exceeded PCRE's backtracking limit"
 msgstr "%s: transpasiĝis retroreferencan limon de PCRE"
 
-#: src/pcresearch.c:342
-#, fuzzy, c-format
+#: src/pcresearch.c:380
+#, c-format
 msgid "%s: exceeded PCRE's nested backtracking limit"
-msgstr "%s: transpasiĝis retroreferencan limon de PCRE"
+msgstr "%s: transpasiĝis nestita retroreferenca limo de PCRE"
 
-#: src/pcresearch.c:346
+#: src/pcresearch.c:384
 #, c-format
 msgid "%s: PCRE detected recurse loop"
-msgstr ""
+msgstr "%s: PCRE detektis rikuran iteracion"
 
-#: src/pcresearch.c:351
-#, fuzzy, c-format
+#: src/pcresearch.c:389
+#, c-format
 msgid "%s: exceeded PCRE's heap limit"
-msgstr "%s: transpasiĝis rikuran limon de PCRE"
+msgstr "%s: transpasiĝis memorarea limo de PCRE"
 
-#: src/pcresearch.c:360
+#: src/pcresearch.c:398
 #, c-format
 msgid "%s: internal PCRE error: %d"
 msgstr "%s: interna eraro en PCRE: %d"
+
+#, c-format
+#~ msgid "JIT internal error: %d"
+#~ msgstr "JIT interna eraro: %d"
 
 #~ msgid "failed to allocate memory for the PCRE JIT stack"
 #~ msgstr "mankas sufiĉa memoro por la PCRE-JIT-stako"

@@ -1,5 +1,5 @@
 /* Test of fcntl(2).
-   Copyright (C) 2009-2022 Free Software Foundation, Inc.
+   Copyright (C) 2009-2023 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -27,7 +27,6 @@ SIGNATURE_CHECK (fcntl, int, (int, int, ...));
 /* Helpers.  */
 #include <errno.h>
 #include <stdarg.h>
-#include <stdbool.h>
 #include <unistd.h>
 
 #if defined _WIN32 && ! defined __CYGWIN__
@@ -44,6 +43,12 @@ SIGNATURE_CHECK (fcntl, int, (int, int, ...));
 
 #include "binary-io.h"
 #include "macros.h"
+
+/* Tell GCC not to warn about the specific edge cases tested here.  */
+#if __GNUC__ >= 13
+# pragma GCC diagnostic ignored "-Wanalyzer-fd-leak"
+# pragma GCC diagnostic ignored "-Wanalyzer-va-arg-type-mismatch"
+#endif
 
 #if !O_BINARY
 # define set_binary_mode(f,m) zero ()

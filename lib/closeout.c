@@ -1,6 +1,6 @@
 /* Close standard output and standard error, exiting with a diagnostic on error.
 
-   Copyright (C) 1998-2002, 2004, 2006, 2008-2022 Free Software Foundation,
+   Copyright (C) 1998-2002, 2004, 2006, 2008-2023 Free Software Foundation,
    Inc.
 
    This program is free software: you can redistribute it and/or modify
@@ -21,7 +21,6 @@
 #include "closeout.h"
 
 #include <errno.h>
-#include <stdbool.h>
 #include <stdio.h>
 #include <unistd.h>
 

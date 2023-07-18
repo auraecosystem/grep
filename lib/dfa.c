@@ -1,5 +1,5 @@
 /* dfa.c - deterministic extended regexp routines for GNU
-   Copyright (C) 1988, 1998, 2000, 2002, 2004-2005, 2007-2022 Free Software
+   Copyright (C) 1988, 1998, 2000, 2002, 2004-2005, 2007-2023 Free Software
    Foundation, Inc.
 
    This program is free software; you can redistribute it and/or modify
@@ -67,7 +67,10 @@ c_isdigit (char c)
 #ifndef FALLTHROUGH
 # if 201710L < __STDC_VERSION__
 #  define FALLTHROUGH [[__fallthrough__]]
-# elif (__GNUC__ >= 7) || (__clang_major__ >= 10)
+# elif ((__GNUC__ >= 7) \
+        || (defined __apple_build_version__ \
+            ? __apple_build_version__ >= 12000000 \
+            : __clang_major__ >= 10))
 #  define FALLTHROUGH __attribute__ ((__fallthrough__))
 # else
 #  define FALLTHROUGH ((void) 0)
@@ -1138,9 +1141,14 @@ parse_bracket_exp (struct dfa *dfa)
   while ((wc = wc1, (c = c1) != ']'));
 
   if (colon_warning_state == 7)
-    ((dfa->syntax.dfaopts & DFA_CONFUSING_BRACKETS_ERROR
-      ? dfaerror : dfawarn)
-     (_("character class syntax is [[:space:]], not [:space:]")));
+    {
+      char const *msg
+        = _("character class syntax is [[:space:]], not [:space:]");
+      if (dfa->syntax.dfaopts & DFA_CONFUSING_BRACKETS_ERROR)
+        dfaerror (msg);
+      else
+        dfawarn (msg);
+    }
 
   if (! known_bracket_exp)
     return BACKREF;
@@ -1194,8 +1202,13 @@ lex (struct dfa *dfa)
      On the plus side, this avoids having a duplicate of the
      main switch inside the backslash case.  On the minus side,
      it means that just about every case tests the backslash flag.  */
-  for (int i = 0; i < 2; ++i)
+  for (int i = 0; ; i++)
     {
+      /* This loop should consume at most a backslash and some other
+         character.  */
+      if (2 <= i)
+        abort ();
+
       if (! dfa->lex.left)
         return dfa->lex.lasttok = END;
       int c = fetch_wc (dfa);
@@ -1583,11 +1596,6 @@ lex (struct dfa *dfa)
           return dfa->lex.lasttok = c;
         }
     }
-
-  /* The above loop should consume at most a backslash
-     and some other character.  */
-  abort ();
-  return END;                   /* keeps pedantic compilers happy.  */
 }
 
 static void

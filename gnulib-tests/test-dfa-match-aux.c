@@ -1,6 +1,6 @@
 /* Auxiliary program to test a DFA code path that cannot be triggered
    by grep or gawk.
-   Copyright 2014-2022 Free Software Foundation, Inc.
+   Copyright 2014-2023 Free Software Foundation, Inc.
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -22,9 +22,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 #include <regex.h>
 #include <dfa.h>
 #include <localeinfo.h>
+
+#include "binary-io.h"
 
 _Noreturn void
 dfaerror (char const *mesg)
@@ -52,6 +55,11 @@ main (int argc, char **argv)
 
   if (argc < 3)
     exit (EXIT_FAILURE);
+
+  /* This test's fixture needs to compare this program's output with an expected
+     output.  On native Windows, the CR-LF newlines would cause this comparison
+     to fail.  But we don't want to postprocess this program's output.  */
+  set_binary_mode (STDOUT_FILENO, O_BINARY);
 
   setlocale (LC_ALL, "");
   init_localeinfo (&localeinfo);

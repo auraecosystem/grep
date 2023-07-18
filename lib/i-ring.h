@@ -1,5 +1,5 @@
 /* definitions for a simple ring buffer
-   Copyright (C) 2006, 2009-2022 Free Software Foundation, Inc.
+   Copyright (C) 2006, 2009-2023 Free Software Foundation, Inc.
 
    This file is free software: you can redistribute it and/or modify
    it under the terms of the GNU Lesser General Public License as
@@ -14,11 +14,14 @@
    You should have received a copy of the GNU Lesser General Public License
    along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
 
-#include <stdbool.h>
-#include "verify.h"
+
+/* This file uses _GL_ATTRIBUTE_PURE.  */
+#if !_GL_CONFIG_H_INCLUDED
+ #error "Please include config.h first."
+#endif
 
 enum { I_RING_SIZE = 4 };
-verify (1 <= I_RING_SIZE);
+static_assert (1 <= I_RING_SIZE);
 
 /* When ir_empty is true, the ring is empty.
    Otherwise, ir_data[B..F] are defined, where B..F is the contiguous

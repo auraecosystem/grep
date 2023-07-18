@@ -1,3 +1,17 @@
+grep (3.11-1) unstable; urgency=low
+
+  [ Debian Janitor ]
+  * Remove constraints unnecessary since buster (oldoldstable)
+
+  [ Santiago Ruano Rincón ]
+  * New upstream version: 3.11
+  * Remove no longer needed:
+    upstream-0001-doc-improve-GREP_COLORS-doc-Bug-57696.patch
+    1029235-grep-bug-backref-in-last-of-multiple-patterns.patch
+  * Refresh 1019724-handle-backslash-warning.patch and XFAIL-test-regex.patch
+
+ -- Santiago Ruano Rincón <santiago@debian.org>  Mon, 17 Jul 2023 21:29:46 -0300
+
 grep (3.8-5) unstable; urgency=medium
 
   * Upload to unstable

@@ -1,5 +1,5 @@
 /* Charset conversion with out-of-memory checking.
-   Copyright (C) 2001-2004, 2006-2007, 2009-2022 Free Software Foundation, Inc.
+   Copyright (C) 2001-2004, 2006-2007, 2009-2023 Free Software Foundation, Inc.
    Written by Bruno Haible and Simon Josefsson.
 
    This program is free software: you can redistribute it and/or modify
@@ -17,6 +17,11 @@
 
 #ifndef _XSTRICONV_H
 #define _XSTRICONV_H
+
+/* This file uses _GL_ATTRIBUTE_MALLOC, HAVE_ICONV.  */
+#if !_GL_CONFIG_H_INCLUDED
+ #error "Please include config.h first."
+#endif
 
 #include <stdlib.h>
 #if HAVE_ICONV

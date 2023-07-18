@@ -1,5 +1,5 @@
 ## Process this file with automake to create Makefile.in
-# Copyright 1997-1998, 2005-2022 Free Software Foundation, Inc.
+# Copyright 1997-1998, 2005-2023 Free Software Foundation, Inc.
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -46,13 +46,19 @@ LDADD = ../lib/libgreputils.a $(LIBINTL) ../lib/libgreputils.a
 # The triple-backref test is expected to fail with both the system
 # matcher (i.e., with glibc) and with the included matcher.
 # Both matchers need to be fixed.
-# FIXME-2015: Remove this once the glibc and gnulib bugs are fixed.
+# FIXME-2025: Remove this once the glibc and gnulib bugs are fixed.
 XFAIL_TESTS = triple-backref
+
+# The glibc-infloop test is expected to fail with both the system
+# matcher (i.e., with glibc) and with the included matcher.
+# Both matchers need to be fixed.
+# FIXME-2025: Remove this once the glibc and gnulib bugs are fixed.
+XFAIL_TESTS += glibc-infloop
 
 # Equivalence classes are only supported when using the system
 # matcher (which means only with glibc).
 # The included matcher needs to be fixed.
-# FIXME-2015: Remove this once the gnulib bug is fixed.
+# FIXME-2025: Remove this once the gnulib bug is fixed.
 if USE_INCLUDED_REGEX
 XFAIL_TESTS += equiv-classes
 else
@@ -108,6 +114,7 @@ TESTS =						\
   fillbuf-long-line				\
   fmbtest					\
   foad1						\
+  glibc-infloop					\
   grep-dev-null					\
   grep-dev-null-out				\
   grep-dir					\
@@ -139,6 +146,7 @@ TESTS =						\
   options					\
   pcre						\
   pcre-abort					\
+  pcre-ascii-digits				\
   pcre-context					\
   pcre-count					\
   pcre-infloop					\
@@ -147,6 +155,8 @@ TESTS =						\
   pcre-jitstack					\
   pcre-o					\
   pcre-utf8					\
+  pcre-utf8-bug224				\
+  pcre-utf8-w					\
   pcre-w					\
   pcre-wx-backref				\
   pcre-z					\
@@ -176,11 +186,13 @@ TESTS =						\
   unibyte-bracket-expr				\
   unibyte-negated-circumflex			\
   utf8-bracket					\
+  version-pcre					\
   warn-char-classes				\
   word-delim-multibyte				\
   word-multi-file				\
   word-multibyte				\
   write-error-msg				\
+  y2038-vs-32-bit				\
   yesno						\
   z-anchor-newline
 
@@ -251,6 +263,7 @@ TESTS_ENVIRONMENT =				\
   srcdir='$(srcdir)'				\
   top_srcdir='$(top_srcdir)'			\
   CC='$(CC)'					\
+  CONFIG_HEADER='$(abs_top_builddir)/$(CONFIG_INCLUDE)' \
   GREP_TEST_NAME=`echo $$tst|sed 's,^\./,,;s,/,-,g'` \
   MAKE=$(MAKE)					\
   MALLOC_PERTURB_=$(MALLOC_PERTURB_)		\

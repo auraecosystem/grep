@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2007-2022 Free Software Foundation, Inc.
+ * Copyright (C) 2004, 2007-2023 Free Software Foundation, Inc.
  * Written by Bruno Haible and Eric Blake
  *
  * This program is free software: you can redistribute it and/or modify
@@ -273,6 +273,14 @@ main (int argc, char *argv[])
         ASSERT (p - haystack == i);
       }
     free (haystack);
+  }
+
+  /* Test case from Yves Bastide.
+     <https://www.openwall.com/lists/musl/2014/04/18/2>  */
+  {
+    const char input[] = "playing play play play always";
+    const char *result = strstr (input, "play play play");
+    ASSERT (result == input + 8);
   }
 
   /* Test long needles.  */

@@ -1,5 +1,5 @@
-# setlocale.m4 serial 7
-dnl Copyright (C) 2011-2022 Free Software Foundation, Inc.
+# setlocale.m4 serial 9
+dnl Copyright (C) 2011-2023 Free Software Foundation, Inc.
 dnl This file is free software; the Free Software Foundation
 dnl gives unlimited permission to copy and/or distribute it,
 dnl with or without modifications, as long as this notice is preserved.
@@ -66,12 +66,15 @@ int main ()
   fi
 
   if test $NEED_SETLOCALE_MTSAFE = 1; then
-    LIB_SETLOCALE="$LIB_SETLOCALE_NULL"
+    SETLOCALE_LIB="$SETLOCALE_NULL_LIB"
   else
-    LIB_SETLOCALE=
+    SETLOCALE_LIB=
   fi
-  dnl LIB_SETLOCALE is expected to be '-pthread' or '-lpthread' on AIX with gcc
+  dnl SETLOCALE_LIB is expected to be '-pthread' or '-lpthread' on AIX with gcc
   dnl or xlc, and empty otherwise.
+  AC_SUBST([SETLOCALE_LIB])
+  dnl For backward compatibility.
+  LIB_SETLOCALE="$SETLOCALE_LIB"
   AC_SUBST([LIB_SETLOCALE])
 ])
 

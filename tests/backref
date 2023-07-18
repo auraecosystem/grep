@@ -1,7 +1,7 @@
 #! /bin/sh
 # Test for back-references and other things.
 #
-# Copyright (C) 2001, 2006, 2009-2022 Free Software Foundation, Inc.
+# Copyright (C) 2001, 2006, 2009-2023 Free Software Foundation, Inc.
 #
 # Copying and distribution of this file, with or without modification,
 # are permitted in any medium without royalty provided the copyright
@@ -40,6 +40,14 @@ fi
 echo "123" | grep -e '[' -e ']' > /dev/null 2>&1
 if test $? -ne 2 ; then
         echo "Backref: Compiled not local, test #4 failed"
+        failures=1
+fi
+
+# https://bugs.gnu.org/36148#13
+echo 'Total failed: 2 (1 ignored)' |
+    grep -e '^Total failed: 0$' -e '^Total failed: \([0-9]*\) (\1 ignored)$'
+if test $? -ne 1 ; then
+        echo "Backref: Multiple -e test, test #5 failed"
         failures=1
 fi
 

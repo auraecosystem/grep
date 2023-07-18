@@ -1,15 +1,15 @@
-This is grep.info, produced by makeinfo version 6.8 from grep.texi.
+This is grep.info, produced by makeinfo version 7.0dev from grep.texi.
 
 This manual is for ‘grep’, a pattern matching engine.
 
-   Copyright © 1999–2002, 2005, 2008–2022 Free Software Foundation, Inc.
+   Copyright © 1999-2002, 2005, 2008-2023 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
      Version 1.3 or any later version published by the Free Software
      Foundation; with no Invariant Sections, with no Front-Cover Texts,
-     and with no Back-Cover Texts. A copy of the license is included in
-     the section entitled “GNU Free Documentation License”.
+     and with no Back-Cover Texts.  A copy of the license is included in
+     the section entitled "GNU Free Documentation License".
 INFO-DIR-SECTION Text creation and manipulation
 START-INFO-DIR-ENTRY
 * grep: (grep).                 Print lines that match patterns.
@@ -23,18 +23,18 @@ grep
 
 ‘grep’ prints lines that contain a match for one or more patterns.
 
-   This manual is for version 3.8 of GNU Grep.
+   This manual is for version 3.11 of GNU Grep.
 
    This manual is for ‘grep’, a pattern matching engine.
 
-   Copyright © 1999–2002, 2005, 2008–2022 Free Software Foundation, Inc.
+   Copyright © 1999-2002, 2005, 2008-2023 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
      Version 1.3 or any later version published by the Free Software
      Foundation; with no Invariant Sections, with no Front-Cover Texts,
      and with no Back-Cover Texts.  A copy of the license is included in
-     the section entitled “GNU Free Documentation License”.
+     the section entitled "GNU Free Documentation License".
 
 * Menu:
 
@@ -148,9 +148,9 @@ File: grep.info,  Node: Matching Control,  Next: General Output Control,  Prev: 
 ‘--file=FILE’
      Obtain patterns from FILE, one per line.  If this option is used
      multiple times or is combined with the ‘-e’ (‘--regexp’) option,
-     search for all patterns given.  The empty file contains zero
-     patterns, and therefore matches nothing.  (‘-f’ is specified by
-     POSIX.)
+     search for all patterns given.  When FILE is ‘-’, read patterns
+     from standard input.  The empty file contains zero patterns, and
+     therefore matches nothing.  (‘-f’ is specified by POSIX.)
 
 ‘-i’
 ‘-y’
@@ -159,14 +159,14 @@ File: grep.info,  Node: Matching Control,  Next: General Output Control,  Prev: 
      characters that differ only in case match each other.  Although
      this is straightforward when letters differ in case only via
      lowercase-uppercase pairs, the behavior is unspecified in other
-     situations.  For example, uppercase “S” has an unusual lowercase
-     counterpart “ſ” (Unicode character U+017F, LATIN SMALL LETTER LONG
+     situations.  For example, uppercase "S" has an unusual lowercase
+     counterpart "ſ" (Unicode character U+017F, LATIN SMALL LETTER LONG
      S) in many locales, and it is unspecified whether this unusual
-     character matches “S” or “s” even though uppercasing it yields “S”.
-     Another example: the lowercase German letter “ß” (U+00DF, LATIN
+     character matches "S" or "s" even though uppercasing it yields "S".
+     Another example: the lowercase German letter "ß" (U+00DF, LATIN
      SMALL LETTER SHARP S) is normally capitalized as the two-character
-     string “SS” but it does not match “SS”, and it might not match the
-     uppercase letter “ẞ” (U+1E9E, LATIN CAPITAL LETTER SHARP S) even
+     string "SS" but it does not match "SS", and it might not match the
+     uppercase letter "ẞ" (U+1E9E, LATIN CAPITAL LETTER SHARP S) even
      though lowercasing the latter yields the former.
 
      ‘-y’ is an obsolete synonym that is provided for compatibility.
@@ -233,7 +233,7 @@ File: grep.info,  Node: General Output Control,  Next: Output Line Prefix Contro
 
      WHEN is ‘always’ to use colors, ‘never’ to not use colors, or
      ‘auto’ to use colors if standard output is associated with a
-     terminal device and the ‘TERM’ environment variable’s value
+     terminal device and the ‘TERM’ environment variable's value
      suggests that the terminal supports colors.  Plain ‘--color’ is
      treated like ‘--color=auto’; if no ‘--color’ option is given, the
      default is ‘--color=never’.
@@ -335,7 +335,7 @@ these options were specified.
 ‘--label=LABEL’
      Display input actually coming from standard input as input coming
      from file LABEL.  This can be useful for commands that transform a
-     file’s contents before searching; e.g.:
+     file's contents before searching; e.g.:
 
           gzip -cd foo.gz | grep --label=foo -H 'some pattern'
 
@@ -432,7 +432,7 @@ File: grep.info,  Node: File and Directory Selection,  Next: Other Options,  Pre
      ‘--binary-files=text’ option.
 
 ‘--binary-files=TYPE’
-     If a file’s data or metadata indicate that the file contains binary
+     If a file's data or metadata indicate that the file contains binary
      data, assume that the file is of type TYPE.  Non-text bytes
      indicate binary data; these are either output bytes that are
      improperly encoded for the current locale (*note Environment
@@ -559,13 +559,13 @@ File: grep.info,  Node: Other Options,  Prev: File and Directory Selection,  Up:
 ‘-U’
 ‘--binary’
      On platforms that distinguish between text and binary I/O, use the
-     latter when reading and writing files other than the user’s
+     latter when reading and writing files other than the user's
      terminal, so that all input bytes are read and written as-is.  This
      overrides the default behavior where ‘grep’ follows the operating
-     system’s advice whether to use text or binary I/O.  On MS-Windows
-     when ‘grep’ uses text I/O it reads a carriage return–newline pair
+     system's advice whether to use text or binary I/O.  On MS-Windows
+     when ‘grep’ uses text I/O it reads a carriage return-newline pair
      as a newline and a Control-Z as end-of-file, and it writes a
-     newline as a carriage return–newline pair.
+     newline as a carriage return-newline pair.
 
      When using text I/O ‘--byte-offset’ (‘-b’) counts and
      ‘--binary-files’ heuristics apply to input data after text-I/O
@@ -617,14 +617,13 @@ available.
      ‘GREP_COLORS='mt=COLOR'’.
 
 ‘GREP_COLORS’
-     This variable specifies the colors and other attributes used to
-     highlight various parts of the output.  Its value is a
-     colon-separated list of ‘terminfo’ capabilities that defaults to
-     ‘ms=01;31:mc=01;31:sl=:cx=:fn=35:ln=32:bn=32:se=36’ with the ‘rv’
-     and ‘ne’ boolean capabilities omitted (i.e., false).  The
-     two-letter capability names refer to terminal “capabilities,” the
-     ability of a terminal to highlight text, or change its color, and
-     so on.  These capabilities are stored in an online database and
+     This variable controls how the ‘--color’ option highlights output.
+     Its value is a colon-separated list of ‘terminfo’ capabilities that
+     defaults to ‘ms=01;31:mc=01;31:sl=:cx=:fn=35:ln=32:bn=32:se=36’
+     with the ‘rv’ and ‘ne’ boolean capabilities omitted (i.e., false).
+     The two-letter capability names refer to terminal "capabilities,"
+     the ability of a terminal to highlight text, or change its color,
+     and so on.  These capabilities are stored in an online database and
      accessed by the ‘terminfo’ library.  Non-empty capability values
      control highlighting using Select Graphic Rendition (SGR) commands
      interpreted by the terminal or terminal emulator.  (See the section
@@ -650,7 +649,7 @@ available.
           lines when ‘-v’ is specified).  If however the boolean ‘rv’
           capability and the ‘-v’ command-line option are both
           specified, it applies to context matching lines instead.  The
-          default is empty (i.e., the terminal’s default color pair).
+          default is empty (i.e., the terminal's default color pair).
 
      ‘cx=’
           SGR substring for whole context lines (i.e., non-matching
@@ -658,7 +657,7 @@ available.
           matching lines when ‘-v’ is specified).  If however the
           boolean ‘rv’ capability and the ‘-v’ command-line option are
           both specified, it applies to selected non-matching lines
-          instead.  The default is empty (i.e., the terminal’s default
+          instead.  The default is empty (i.e., the terminal's default
           color pair).
 
      ‘rv’
@@ -693,17 +692,17 @@ available.
 
      ‘fn=35’
           SGR substring for file names prefixing any content line.  The
-          default is a magenta text foreground over the terminal’s
+          default is a magenta text foreground over the terminal's
           default background.
 
      ‘ln=32’
           SGR substring for line numbers prefixing any content line.
-          The default is a green text foreground over the terminal’s
+          The default is a green text foreground over the terminal's
           default background.
 
      ‘bn=32’
           SGR substring for byte offsets prefixing any content line.
-          The default is a green text foreground over the terminal’s
+          The default is a green text foreground over the terminal's
           default background.
 
      ‘se=36’
@@ -711,7 +710,7 @@ available.
           selected line fields (‘:’), between context line fields (‘-’),
           and between groups of adjacent lines when nonzero context is
           specified (‘--’).  The default is a cyan text foreground over
-          the terminal’s default background.
+          the terminal's default background.
 
      ‘ne’
           Boolean value that prevents clearing to the end of line using
@@ -759,16 +758,6 @@ available.
 ‘TERM’
      This variable specifies the output terminal type, which can affect
      what the ‘--color’ option does.  *Note General Output Control::.
-
-‘_N_GNU_nonoption_argv_flags_’
-     (Here ‘N’ is ‘grep’’s numeric process ID.) If the Ith character of
-     this environment variable’s value is ‘1’, do not consider the Ith
-     operand of ‘grep’ to be an option, even if it appears to be one.  A
-     shell can put this variable in the environment for each command it
-     runs, specifying which operands are the results of file name
-     wildcard expansion and therefore should not be treated as options.
-     This behavior is available only with the GNU C library, and only
-     when ‘POSIXLY_CORRECT’ is not set.
 
    The ‘GREP_OPTIONS’ environment variable of ‘grep’ 2.20 and earlier is
 no longer supported, as it caused problems when writing portable
@@ -829,6 +818,32 @@ are four major variants of ‘grep’, controlled by the following options.
      ‘grep -P’ may warn of unimplemented features.  *Note Other
      Options::.
 
+     For documentation, refer to <https://www.pcre.org/>, with these
+     caveats:
+        • ‘\d’ matches only the ten ASCII digits (and ‘\D’ matches the
+          complement), regardless of locale.  Use ‘\p{Nd}’ to also match
+          non-ASCII digits.  (The behavior of ‘\d’ and ‘\D’ is
+          unspecified after in-regexp directives like ‘(?aD)’.)
+
+        • Although PCRE tracks the syntax and semantics of Perl's
+          regular expressions, the match is not always exact.  For
+          example, Perl evolves and a Perl installation may predate or
+          postdate the PCRE2 installation on the same host, or their
+          Unicode versions may differ, or Perl and PCRE2 may disagree
+          about an obscure construct.
+
+        • By default, ‘grep’ applies each regexp to a line at a time, so
+          the ‘(?s)’ directive (making ‘.’ match line breaks) is
+          generally ineffective.  However, with ‘-z’ (‘--null-data’) it
+          can work:
+               $ printf 'a\nb\n' |grep -zP '(?s)a.b'
+               a
+               b
+          But beware: with the ‘-z’ (‘--null-data’) and a file
+          containing no NUL byte, grep must read the entire file into
+          memory before processing any of it.  Thus, it will exhaust
+          memory and fail for some large files.
+
 
 File: grep.info,  Node: Regular Expressions,  Next: Usage,  Prev: Invoking,  Up: Top
 
@@ -840,14 +855,15 @@ Regular expressions are constructed analogously to arithmetic
 expressions, by using various operators to combine smaller expressions.
 ‘grep’ understands three different versions of regular expression
 syntax: basic (BRE), extended (ERE), and Perl-compatible (PCRE). In GNU
-‘grep’, there is no difference in available functionality between basic
-and extended syntax.  In other implementations, basic regular
-expressions are less powerful.  The following description applies to
-extended regular expressions; differences for basic regular expressions
-are summarized afterwards.  Perl-compatible regular expressions give
-additional functionality, and are documented in the pcre2syntax(3) and
-pcre2pattern(3) manual pages, but work only if PCRE is available in the
-system.
+‘grep’, basic and extended regular expressions are merely different
+notations for the same pattern-matching functionality.  In other
+implementations, basic regular expressions are ordinarily less powerful
+than extended, though occasionally it is the other way around.  The
+following description applies to extended regular expressions;
+differences for basic regular expressions are summarized afterwards.
+Perl-compatible regular expressions have different functionality, and
+are documented in the pcre2syntax(3) and pcre2pattern(3) manual pages,
+but work only if PCRE is available in the system.
 
 * Menu:
 
@@ -1011,7 +1027,7 @@ expression ‘[:epru]’.
 expressions.
 
 ‘]’
-     ends the bracket expression if it’s not the first list item.  So,
+     ends the bracket expression if it's not the first list item.  So,
      if you want to make the ‘]’ character a list item, you must put it
      first.
 
@@ -1035,7 +1051,7 @@ expressions.
      represents the close character class symbol.
 
 ‘-’
-     represents the range if it’s not first or last in a list or the
+     represents the range if it's not first or last in a list or the
      ending point of a range.  To make the ‘-’ a list item, it is best
      to put it last.
 
@@ -1057,7 +1073,7 @@ followed by certain ordinary characters, takes a special meaning:
      Match the empty string at the edge of a word.
 
 ‘\B’
-     Match the empty string provided it’s not at the edge of a word.
+     Match the empty string provided it's not at the edge of a word.
 
 ‘\<’
      Match the empty string at the beginning of a word.
@@ -1100,7 +1116,7 @@ File: grep.info,  Node: Anchoring,  Next: Back-references and Subexpressions,  P
 
 The caret ‘^’ and the dollar sign ‘$’ are special characters that
 respectively match the empty string at the beginning and end of a line.
-They are termed “anchors”, since they force the match to be “anchored”
+They are termed “anchors”, since they force the match to be "anchored"
 to beginning or end of a line, respectively.
 
 
@@ -1134,7 +1150,7 @@ the following ways:
    • The characters ‘?’, ‘+’, ‘{’, ‘|’, ‘(’, and ‘)’ lose their special
      meaning; instead use the backslashed versions ‘\?’, ‘\+’, ‘\{’,
      ‘\|’, ‘\(’, and ‘\)’.  Also, a backslash is needed before an
-     interval expression’s closing ‘}’.
+     interval expression's closing ‘}’.
 
    • An unmatched ‘\)’ is invalid.
 
@@ -1312,7 +1328,7 @@ TAB), followed by ‘ω’ (U+03C9 GREEK SMALL LETTER OMEGA).
 or portable, but you also want to match specific non-ASCII or non-null
 non-printable characters.  If you are using the ‘-P’ (‘--perl-regexp’)
 option, PCREs give you several ways to do this.  Otherwise, if you are
-using Bash, the GNU project’s shell, you can represent these characters
+using Bash, the GNU project's shell, you can represent these characters
 via ANSI-C quoting.  For example, the Bash commands ‘grep $'Λ\tω'’ and
 ‘grep $'\u039B\t\u03C9'’ both search for the same three-character string
 ‘Λ ω’ mentioned earlier.  However, because Bash translates ANSI-C
@@ -1325,7 +1341,7 @@ containing the character ‘^’ (U+005E CIRCUMFLEX ACCENT).
 shell scripts written in ASCII should use other methods to match
 specific non-ASCII characters.  For example, in a UTF-8 locale the
 command ‘grep "$(printf '\316\233\t\317\211\n')"’ is a portable albeit
-hard-to-read alternative to Bash’s ‘grep $'Λ\tω'’.  However, none of
+hard-to-read alternative to Bash's ‘grep $'Λ\tω'’.  However, none of
 these techniques will let you put a null character directly into a
 command-line pattern; null characters can appear only in a pattern
 specified via the ‘-f’ (‘--file’) option.
@@ -1404,7 +1420,7 @@ the globbing syntax that the shell uses to match file names.
           grep -e "$pattern" ./*
 
      searches for all lines matching the pattern in all the working
-     directory’s files whose names do not begin with ‘.’.  Without the
+     directory's files whose names do not begin with ‘.’.  Without the
      ‘-e’, ‘grep’ might treat the pattern as an option if it begins with
      ‘-’.  Without the ‘./’, there might be similar problems with file
      names beginning with ‘-’.
@@ -1459,25 +1475,25 @@ the globbing syntax that the shell uses to match file names.
      ‘ps’ limits the output to the width of the screen; ‘grep’ does not
      have any limit on the length of a line except the available memory.
 
-  8. Why does ‘grep’ report “Binary file matches”?
+  8. Why does ‘grep’ report "Binary file matches"?
 
-     If ‘grep’ listed all matching “lines” from a binary file, it would
+     If ‘grep’ listed all matching "lines" from a binary file, it would
      probably generate output that is not useful, and it might even muck
      up your display.  So GNU ‘grep’ suppresses output from files that
      appear to be binary files.  To force GNU ‘grep’ to output lines
      even from files that appear to be binary, use the ‘-a’ or
-     ‘--binary-files=text’ option.  To eliminate the “Binary file
-     matches” messages, use the ‘-I’ or ‘--binary-files=without-match’
+     ‘--binary-files=text’ option.  To eliminate the "Binary file
+     matches" messages, use the ‘-I’ or ‘--binary-files=without-match’
      option.
 
-  9. Why doesn’t ‘grep -lv’ print non-matching file names?
+  9. Why doesn't ‘grep -lv’ print non-matching file names?
 
      ‘grep -lv’ lists the names of all files containing one or more
      lines that do not match.  To list the names of all files that
      contain no matching lines, use the ‘-L’ or ‘--files-without-match’
      option.
 
-  10. I can do “OR” with ‘|’, but what about “AND”?
+  10. I can do "OR" with ‘|’, but what about "AND"?
 
           grep 'paul' /etc/motd | grep 'franc,ois'
 
@@ -1504,7 +1520,7 @@ the globbing syntax that the shell uses to match file names.
 
           cat /etc/passwd | grep 'alain' - /etc/motd
 
-  13. Why can’t I combine the shell’s ‘set -e’ with ‘grep’?
+  13. Why can't I combine the shell's ‘set -e’ with ‘grep’?
 
      The ‘grep’ command follows the convention of programs like ‘cmp’
      and ‘diff’ where an exit status of 1 is not an error.  The shell
@@ -1513,10 +1529,10 @@ the globbing syntax that the shell uses to match file names.
      because ‘grep’ selected no lines, which is ordinarily not what you
      want.
 
-     There is a related problem with Bash’s ‘set -e -o pipefail’.  Since
+     There is a related problem with Bash's ‘set -e -o pipefail’.  Since
      ‘grep’ does not always read all its input, a command outputting to
      a pipe read by ‘grep’ can fail when ‘grep’ exits before reading all
-     its input, and the command’s failure can cause Bash to exit.
+     its input, and the command's failure can cause Bash to exit.
 
   14. Why is this back-reference failing?
 
@@ -1532,7 +1548,7 @@ the globbing syntax that the shell uses to match file names.
      match newlines in the way you might expect.
 
      With the GNU ‘grep’ option ‘-z’ (‘--null-data’), each input and
-     output “line” is null-terminated; *note Other Options::.  Thus, you
+     output "line" is null-terminated; *note Other Options::.  Thus, you
      can match newlines in the input, but typically if there is a match
      the entire input is output, so this usage is often combined with
      output-suppressing options like ‘-q’, e.g.:
@@ -1560,14 +1576,14 @@ the globbing syntax that the shell uses to match file names.
      7th Edition Unix had commands ‘egrep’ and ‘fgrep’ that were the
      counterparts of the modern ‘grep -E’ and ‘grep -F’.  Although
      breaking up ‘grep’ into three programs was perhaps useful on the
-     small computers of the 1970s, ‘egrep’ and ‘fgrep’ were not
-     standardized by POSIX and are no longer needed.  In the current GNU
-     implementation, ‘egrep’ and ‘fgrep’ issue a warning and then act
-     like their modern counterparts; eventually, they are planned to be
-     removed entirely.
+     small computers of the 1970s, ‘egrep’ and ‘fgrep’ were deemed
+     obsolescent by POSIX in 1992, removed from POSIX in 2001,
+     deprecated by GNU Grep 2.5.3 in 2007, and changed to issue
+     obsolescence warnings by GNU Grep 3.8 in 2022; eventually, they are
+     planned to be removed entirely.
 
-     If you prefer the old names, you can use use your own substitutes,
-     such as a shell script named ‘egrep’ with the following contents:
+     If you prefer the old names, you can use your own substitutes, such
+     as a shell script named ‘egrep’ with the following contents:
 
           #!/bin/sh
           exec grep -E "$@"
@@ -1588,8 +1604,8 @@ you improve its performance.
    The ‘grep’ command operates partly via a set of automata that are
 designed for efficiency, and partly via a slower matcher that takes over
 when the fast matchers run into unusual features like back-references.
-When feasible, the Boyer–Moore fast string searching algorithm is used
-to match a single fixed pattern, and the Aho–Corasick algorithm is used
+When feasible, the Boyer-Moore fast string searching algorithm is used
+to match a single fixed pattern, and the Aho-Corasick algorithm is used
 to match multiple fixed patterns.
 
    Generally speaking ‘grep’ operates more efficiently in single-byte
@@ -1623,12 +1639,13 @@ does not perform linear Diophantine analysis and instead backtracks
 through all possible matching strings, using an algorithm that is
 exponential in the worst case.
 
-   On some operating systems that support files with holes—large regions
-of zeros that are not physically present on secondary storage—‘grep’ can
-skip over the holes efficiently without needing to read the zeros.  This
-optimization is not available if the ‘-a’ (‘--binary-files=text’) option
-is used (*note File and Directory Selection::), unless the ‘-z’
-(‘--null-data’) option is also used (*note Other Options::).
+   On some operating systems that support files with holes--large
+regions of zeros that are not physically present on secondary
+storage--‘grep’ can skip over the holes efficiently without needing to
+read the zeros.  This optimization is not available if the ‘-a’
+(‘--binary-files=text’) option is used (*note File and Directory
+Selection::), unless the ‘-z’ (‘--null-data’) option is also used (*note
+Other Options::).
 
    For efficiency ‘grep’ does not always read all its input.  For
 example, the shell command ‘sed '/^...$/d' | grep -q X’ can cause ‘grep’
@@ -1642,17 +1659,17 @@ matching algorithms, see:
 
    • Aho AV. Algorithms for finding patterns in strings. In: van Leeuwen
      J. _Handbook of Theoretical Computer Science_, vol. A. New York:
-     Elsevier; 1990. p. 255–300. This surveys classic string matching
+     Elsevier; 1990. p. 255-300. This surveys classic string matching
      algorithms, some of which are used by ‘grep’.
 
    • Aho AV, Corasick MJ. Efficient string matching: an aid to
-     bibliographic search. _CACM_. 1975;18(6):333–40.
+     bibliographic search. _CACM_. 1975;18(6):333-40.
      <https://doi.org/10.1145/360825.360855>. This introduces the
-     Aho–Corasick algorithm.
+     Aho-Corasick algorithm.
 
    • Boyer RS, Moore JS. A fast string searching algorithm. _CACM_.
-     1977;20(10):762–72. <https://doi.org/10.1145/359842.359859>. This
-     introduces the Boyer–Moore algorithm.
+     1977;20(10):762-72. <https://doi.org/10.1145/359842.359859>. This
+     introduces the Boyer-Moore algorithm.
 
    • Faro S, Lecroq T. The exact online string matching problem: a
      review of the most recent results. _ACM Comput Surv_.
@@ -1662,13 +1679,13 @@ matching algorithms, see:
 
    • Hakak SI, Kamsin A, Shivakumara P, Gilkar GA, Khan WZ, Imran M.
      Exact string matching algorithms: survey issues, and future
-     research directions. _IEEE Access_. 2019;7:69614–37.
+     research directions. _IEEE Access_. 2019;7:69614-37.
      <https://doi.org/10.1109/ACCESS.2019.2914071>. This survey is more
      recent than Faro & Lecroq, and focuses on taxonomy instead of
      performance.
 
    • Hume A, Sunday D. Fast string search. _Software Pract Exper_.
-     1991;21(11):1221–48. <https://doi.org/10.1002/spe.4380211105>. This
+     1991;21(11):1221-48. <https://doi.org/10.1002/spe.4380211105>. This
      excellent albeit now-dated survey aided the initial development of
      ‘grep’.
 
@@ -1719,15 +1736,16 @@ File: grep.info,  Node: Copying,  Next: Index,  Prev: Reporting Bugs,  Up: Top
 GNU ‘grep’ is licensed under the GNU GPL, which makes it “free
 software”.
 
-   The “free” in “free software” refers to liberty, not price.  As some
-GNU project advocates like to point out, think of “free speech” rather
-than “free beer”.  In short, you have the right (freedom) to run and
-change ‘grep’ and distribute it to other people, and—if you want—charge
-money for doing either.  The important restriction is that you have to
-grant your recipients the same rights and impose the same restrictions.
+   The "free" in "free software" refers to liberty, not price.  As some
+GNU project advocates like to point out, think of "free speech" rather
+than "free beer".  In short, you have the right (freedom) to run and
+change ‘grep’ and distribute it to other people, and--if you
+want--charge money for doing either.  The important restriction is that
+you have to grant your recipients the same rights and impose the same
+restrictions.
 
    This general method of licensing software is sometimes called “open
-source”.  The GNU project prefers the term “free software” for reasons
+source”.  The GNU project prefers the term "free software" for reasons
 outlined at
 <https://www.gnu.org/philosophy/open-source-misses-the-point.html>.
 
@@ -1748,7 +1766,8 @@ File: grep.info,  Node: GNU Free Documentation License,  Up: Copying
 
                      Version 1.3, 3 November 2008
 
-     Copyright © 2000, 2001, 2002, 2007, 2008 Free Software Foundation, Inc.
+     Copyright © 2000-2002, 2007-2008, 2023 Free Software Foundation,
+     Inc.
      <https://fsf.org/>
 
      Everyone is permitted to copy and distribute verbatim copies
@@ -1764,7 +1783,7 @@ File: grep.info,  Node: GNU Free Documentation License,  Up: Copying
      author and publisher a way to get credit for their work, while not
      being considered responsible for modifications made by others.
 
-     This License is a kind of “copyleft”, which means that derivative
+     This License is a kind of "copyleft", which means that derivative
      works of the document must themselves be free in the same sense.
      It complements the GNU General Public License, which is a copyleft
      license designed for free software.
@@ -1785,18 +1804,18 @@ File: grep.info,  Node: GNU Free Documentation License,  Up: Copying
      be distributed under the terms of this License.  Such a notice
      grants a world-wide, royalty-free license, unlimited in duration,
      to use that work under the conditions stated herein.  The
-     “Document”, below, refers to any such manual or work.  Any member
-     of the public is a licensee, and is addressed as “you”.  You accept
+     "Document", below, refers to any such manual or work.  Any member
+     of the public is a licensee, and is addressed as "you".  You accept
      the license if you copy, modify or distribute the work in a way
      requiring permission under copyright law.
 
-     A “Modified Version” of the Document means any work containing the
+     A "Modified Version" of the Document means any work containing the
      Document or a portion of it, either copied verbatim, or with
      modifications and/or translated into another language.
 
-     A “Secondary Section” is a named appendix or a front-matter section
+     A "Secondary Section" is a named appendix or a front-matter section
      of the Document that deals exclusively with the relationship of the
-     publishers or authors of the Document to the Document’s overall
+     publishers or authors of the Document to the Document's overall
      subject (or to related matters) and contains nothing that could
      fall directly within that overall subject.  (Thus, if the Document
      is in part a textbook of mathematics, a Secondary Section may not
@@ -1805,7 +1824,7 @@ File: grep.info,  Node: GNU Free Documentation License,  Up: Copying
      of legal, commercial, philosophical, ethical or political position
      regarding them.
 
-     The “Invariant Sections” are certain Secondary Sections whose
+     The "Invariant Sections" are certain Secondary Sections whose
      titles are designated, as being those of Invariant Sections, in the
      notice that says that the Document is released under this License.
      If a section does not fit the above definition of Secondary then it
@@ -1813,13 +1832,13 @@ File: grep.info,  Node: GNU Free Documentation License,  Up: Copying
      contain zero Invariant Sections.  If the Document does not identify
      any Invariant Sections then there are none.
 
-     The “Cover Texts” are certain short passages of text that are
+     The "Cover Texts" are certain short passages of text that are
      listed, as Front-Cover Texts or Back-Cover Texts, in the notice
      that says that the Document is released under this License.  A
      Front-Cover Text may be at most 5 words, and a Back-Cover Text may
      be at most 25 words.
 
-     A “Transparent” copy of the Document means a machine-readable copy,
+     A "Transparent" copy of the Document means a machine-readable copy,
      represented in a format whose specification is available to the
      general public, that is suitable for revising the document
      straightforwardly with generic text editors or (for images composed
@@ -1831,7 +1850,7 @@ File: grep.info,  Node: GNU Free Documentation License,  Up: Copying
      been arranged to thwart or discourage subsequent modification by
      readers is not Transparent.  An image format is not Transparent if
      used for any substantial amount of text.  A copy that is not
-     “Transparent” is called “Opaque”.
+     "Transparent" is called "Opaque".
 
      Examples of suitable formats for Transparent copies include plain
      ASCII without markup, Texinfo input format, LaTeX input format,
@@ -1844,23 +1863,23 @@ File: grep.info,  Node: GNU Free Documentation License,  Up: Copying
      the machine-generated HTML, PostScript or PDF produced by some word
      processors for output purposes only.
 
-     The “Title Page” means, for a printed book, the title page itself,
+     The "Title Page" means, for a printed book, the title page itself,
      plus such following pages as are needed to hold, legibly, the
      material this License requires to appear in the title page.  For
-     works in formats which do not have any title page as such, “Title
-     Page” means the text near the most prominent appearance of the
-     work’s title, preceding the beginning of the body of the text.
+     works in formats which do not have any title page as such, "Title
+     Page" means the text near the most prominent appearance of the
+     work's title, preceding the beginning of the body of the text.
 
-     The “publisher” means any person or entity that distributes copies
+     The "publisher" means any person or entity that distributes copies
      of the Document to the public.
 
-     A section “Entitled XYZ” means a named subunit of the Document
+     A section "Entitled XYZ" means a named subunit of the Document
      whose title either is precisely XYZ or contains XYZ in parentheses
      following text that translates XYZ in another language.  (Here XYZ
      stands for a specific section name mentioned below, such as
-     “Acknowledgements”, “Dedications”, “Endorsements”, or “History”.)
-     To “Preserve the Title” of such a section when you modify the
-     Document means that it remains a section “Entitled XYZ” according
+     "Acknowledgements", "Dedications", "Endorsements", or "History".)
+     To "Preserve the Title" of such a section when you modify the
+     Document means that it remains a section "Entitled XYZ" according
      to this definition.
 
      The Document may include Warranty Disclaimers next to the notice
@@ -1890,7 +1909,7 @@ File: grep.info,  Node: GNU Free Documentation License,  Up: Copying
 
      If you publish printed copies (or copies in media that commonly
      have printed covers) of the Document, numbering more than 100, and
-     the Document’s license notice requires Cover Texts, you must
+     the Document's license notice requires Cover Texts, you must
      enclose the copies in covers that carry, clearly and legibly, all
      these Cover Texts: Front-Cover Texts on the front cover, and
      Back-Cover Texts on the back cover.  Both covers must also clearly
@@ -1962,15 +1981,15 @@ File: grep.info,  Node: GNU Free Documentation License,  Up: Copying
           the Addendum below.
 
        G. Preserve in that license notice the full lists of Invariant
-          Sections and required Cover Texts given in the Document’s
+          Sections and required Cover Texts given in the Document's
           license notice.
 
        H. Include an unaltered copy of this License.
 
-       I. Preserve the section Entitled “History”, Preserve its Title,
+       I. Preserve the section Entitled "History", Preserve its Title,
           and add to it an item stating at least the title, year, new
           authors, and publisher of the Modified Version as given on the
-          Title Page.  If there is no section Entitled “History” in the
+          Title Page.  If there is no section Entitled "History" in the
           Document, create one stating the title, year, authors, and
           publisher of the Document as given on its Title Page, then add
           an item describing the Modified Version as stated in the
@@ -1980,12 +1999,12 @@ File: grep.info,  Node: GNU Free Documentation License,  Up: Copying
           for public access to a Transparent copy of the Document, and
           likewise the network locations given in the Document for
           previous versions it was based on.  These may be placed in the
-          “History” section.  You may omit a network location for a work
+          "History" section.  You may omit a network location for a work
           that was published at least four years before the Document
           itself, or if the original publisher of the version it refers
           to gives permission.
 
-       K. For any section Entitled “Acknowledgements” or “Dedications”,
+       K. For any section Entitled "Acknowledgements" or "Dedications",
           Preserve the Title of the section, and preserve in the section
           all the substance and tone of each of the contributor
           acknowledgements and/or dedications given therein.
@@ -1994,11 +2013,11 @@ File: grep.info,  Node: GNU Free Documentation License,  Up: Copying
           in their text and in their titles.  Section numbers or the
           equivalent are not considered part of the section titles.
 
-       M. Delete any section Entitled “Endorsements”.  Such a section
+       M. Delete any section Entitled "Endorsements".  Such a section
           may not be included in the Modified Version.
 
        N. Do not retitle any existing section to be Entitled
-          “Endorsements” or to conflict in title with any Invariant
+          "Endorsements" or to conflict in title with any Invariant
           Section.
 
        O. Preserve any Warranty Disclaimers.
@@ -2007,15 +2026,15 @@ File: grep.info,  Node: GNU Free Documentation License,  Up: Copying
      appendices that qualify as Secondary Sections and contain no
      material copied from the Document, you may at your option designate
      some or all of these sections as invariant.  To do this, add their
-     titles to the list of Invariant Sections in the Modified Version’s
+     titles to the list of Invariant Sections in the Modified Version's
      license notice.  These titles must be distinct from any other
      section titles.
 
-     You may add a section Entitled “Endorsements”, provided it contains
+     You may add a section Entitled "Endorsements", provided it contains
      nothing but endorsements of your Modified Version by various
-     parties—for example, statements of peer review or that the text has
-     been approved by an organization as the authoritative definition of
-     a standard.
+     parties--for example, statements of peer review or that the text
+     has been approved by an organization as the authoritative
+     definition of a standard.
 
      You may add a passage of up to five words as a Front-Cover Text,
      and a passage of up to 25 words as a Back-Cover Text, to the end of
@@ -2053,10 +2072,10 @@ File: grep.info,  Node: GNU Free Documentation License,  Up: Copying
      combined work.
 
      In the combination, you must combine any sections Entitled
-     “History” in the various original documents, forming one section
-     Entitled “History”; likewise combine any sections Entitled
-     “Acknowledgements”, and any sections Entitled “Dedications”.  You
-     must delete all sections Entitled “Endorsements.”
+     "History" in the various original documents, forming one section
+     Entitled "History"; likewise combine any sections Entitled
+     "Acknowledgements", and any sections Entitled "Dedications".  You
+     must delete all sections Entitled "Endorsements."
 
   6. COLLECTIONS OF DOCUMENTS
 
@@ -2077,16 +2096,16 @@ File: grep.info,  Node: GNU Free Documentation License,  Up: Copying
 
      A compilation of the Document or its derivatives with other
      separate and independent documents or works, in or on a volume of a
-     storage or distribution medium, is called an “aggregate” if the
+     storage or distribution medium, is called an "aggregate" if the
      copyright resulting from the compilation is not used to limit the
-     legal rights of the compilation’s users beyond what the individual
+     legal rights of the compilation's users beyond what the individual
      works permit.  When the Document is included in an aggregate, this
      License does not apply to the other works in the aggregate which
      are not themselves derivative works of the Document.
 
      If the Cover Text requirement of section 3 is applicable to these
      copies of the Document, then if the Document is less than one half
-     of the entire aggregate, the Document’s Cover Texts may be placed
+     of the entire aggregate, the Document's Cover Texts may be placed
      on covers that bracket the Document within the aggregate, or the
      electronic equivalent of covers if the Document is in electronic
      form.  Otherwise they must appear on printed covers that bracket
@@ -2108,8 +2127,8 @@ File: grep.info,  Node: GNU Free Documentation License,  Up: Copying
      this License or a notice or disclaimer, the original version will
      prevail.
 
-     If a section in the Document is Entitled “Acknowledgements”,
-     “Dedications”, or “History”, the requirement (section 4) to
+     If a section in the Document is Entitled "Acknowledgements",
+     "Dedications", or "History", the requirement (section 4) to
      Preserve its Title (section 1) will typically require changing the
      actual title.
 
@@ -2150,7 +2169,7 @@ File: grep.info,  Node: GNU Free Documentation License,  Up: Copying
 
      Each version of the License is given a distinguishing version
      number.  If the Document specifies that a particular numbered
-     version of this License “or any later version” applies to it, you
+     version of this License "or any later version" applies to it, you
      have the option of following the terms and conditions either of
      that specified version or of any later version that has been
      published (not as a draft) by the Free Software Foundation.  If the
@@ -2158,29 +2177,29 @@ File: grep.info,  Node: GNU Free Documentation License,  Up: Copying
      choose any version ever published (not as a draft) by the Free
      Software Foundation.  If the Document specifies that a proxy can
      decide which future versions of this License can be used, that
-     proxy’s public statement of acceptance of a version permanently
+     proxy's public statement of acceptance of a version permanently
      authorizes you to choose that version for the Document.
 
   11. RELICENSING
 
-     “Massive Multiauthor Collaboration Site” (or “MMC Site”) means any
+     "Massive Multiauthor Collaboration Site" (or "MMC Site") means any
      World Wide Web server that publishes copyrightable works and also
      provides prominent facilities for anybody to edit those works.  A
      public wiki that anybody can edit is an example of such a server.
-     A “Massive Multiauthor Collaboration” (or “MMC”) contained in the
+     A "Massive Multiauthor Collaboration" (or "MMC") contained in the
      site means any set of copyrightable works thus published on the MMC
      site.
 
-     “CC-BY-SA” means the Creative Commons Attribution-Share Alike 3.0
+     "CC-BY-SA" means the Creative Commons Attribution-Share Alike 3.0
      license published by Creative Commons Corporation, a not-for-profit
      corporation with a principal place of business in San Francisco,
      California, as well as future copyleft versions of that license
      published by that same organization.
 
-     “Incorporate” means to publish or republish a Document, in whole or
+     "Incorporate" means to publish or republish a Document, in whole or
      in part, as part of another Document.
 
-     An MMC is “eligible for relicensing” if it is licensed under this
+     An MMC is "eligible for relicensing" if it is licensed under this
      License, and if all works that were first published under this
      License somewhere other than this MMC, and subsequently
      incorporated in whole or in part into the MMC, (1) had no cover
@@ -2207,7 +2226,7 @@ notices just after the title page:
        Free Documentation License''.
 
    If you have Invariant Sections, Front-Cover Texts and Back-Cover
-Texts, replace the “with...Texts.” line with this:
+Texts, replace the "with...Texts." line with this:
 
          with the Invariant Sections being LIST THEIR TITLES, with
          the Front-Cover Texts being LIST, and with the Back-Cover Texts
@@ -2231,10 +2250,6 @@ Index
  [index ]
 * Menu:
 
-* *:                                     Fundamental Structure.
-                                                              (line  22)
-* +:                                     Fundamental Structure.
-                                                              (line  25)
 * --:                                    Other Options.       (line   7)
 * --after-context:                       Context Line Control.
                                                               (line  15)
@@ -2377,20 +2392,22 @@ Index
 * -Z:                                    Output Line Prefix Control.
                                                               (line  50)
 * -z:                                    Other Options.       (line  43)
-* .:                                     Fundamental Structure.
-                                                              (line  11)
 * ?:                                     Fundamental Structure.
                                                               (line  19)
-* _N_GNU_nonoption_argv_flags_ environment variable: Environment Variables.
-                                                              (line 177)
+* .:                                     Fundamental Structure.
+                                                              (line  11)
 * {,M}:                                  Fundamental Structure.
                                                               (line  34)
-* {N,M}:                                 Fundamental Structure.
-                                                              (line  38)
 * {N,}:                                  Fundamental Structure.
                                                               (line  31)
+* {N,M}:                                 Fundamental Structure.
+                                                              (line  38)
 * {N}:                                   Fundamental Structure.
                                                               (line  28)
+* *:                                     Fundamental Structure.
+                                                              (line  22)
+* +:                                     Fundamental Structure.
+                                                              (line  25)
 * after context:                         Context Line Control.
                                                               (line  15)
 * alnum character class:                 Character Classes and Bracket Expressions.
@@ -2424,7 +2441,7 @@ Index
 * blank characters:                      Character Classes and Bracket Expressions.
                                                               (line  42)
 * bn GREP_COLORS capability:             Environment Variables.
-                                                              (line 118)
+                                                              (line 117)
 * braces, first argument omitted:        Fundamental Structure.
                                                               (line  34)
 * braces, one argument:                  Fundamental Structure.
@@ -2449,7 +2466,7 @@ Index
                                                               (line  31)
 * character encoding:                    Character Encoding.  (line   6)
 * character type:                        Environment Variables.
-                                                              (line 145)
+                                                              (line 144)
 * classes of characters:                 Character Classes and Bracket Expressions.
                                                               (line  31)
 * cntrl character class:                 Character Classes and Bracket Expressions.
@@ -2470,7 +2487,7 @@ Index
 * counting lines:                        General Output Control.
                                                               (line   8)
 * cx GREP_COLORS capability:             Environment Variables.
-                                                              (line  69)
+                                                              (line  68)
 * device search:                         File and Directory Selection.
                                                               (line  51)
 * digit character class:                 Character Classes and Bracket Expressions.
@@ -2482,7 +2499,7 @@ Index
 * dot:                                   Fundamental Structure.
                                                               (line  11)
 * encoding error:                        Environment Variables.
-                                                              (line 152)
+                                                              (line 151)
 * environment variables:                 Environment Variables.
                                                               (line  24)
 * exclude directories:                   File and Directory Selection.
@@ -2493,12 +2510,12 @@ Index
                                                               (line  83)
 * exit status:                           Exit Status.         (line   6)
 * FAQ about grep usage:                  Usage.               (line  32)
-* files which don’t match:               General Output Control.
+* files which don't match:               General Output Control.
                                                               (line  33)
 * fn GREP_COLORS capability:             Environment Variables.
-                                                              (line 108)
+                                                              (line 107)
 * fn GREP_COLORS capability <1>:         Environment Variables.
-                                                              (line 123)
+                                                              (line 122)
 * graph character class:                 Character Classes and Bracket Expressions.
                                                               (line  53)
 * graphic characters:                    Character Classes and Bracket Expressions.
@@ -2532,38 +2549,38 @@ Index
 * LANG environment variable:             Environment Variables.
                                                               (line  10)
 * LANG environment variable <1>:         Environment Variables.
-                                                              (line 145)
+                                                              (line 144)
 * LANG environment variable <2>:         Environment Variables.
-                                                              (line 152)
+                                                              (line 151)
 * LANG environment variable <3>:         Environment Variables.
-                                                              (line 161)
+                                                              (line 160)
 * LANGUAGE environment variable:         Environment Variables.
                                                               (line  10)
 * LANGUAGE environment variable <1>:     Environment Variables.
-                                                              (line 161)
+                                                              (line 160)
 * language of messages:                  Environment Variables.
-                                                              (line 161)
+                                                              (line 160)
 * LC_ALL environment variable:           Environment Variables.
                                                               (line  10)
 * LC_ALL environment variable <1>:       Environment Variables.
-                                                              (line 145)
+                                                              (line 144)
 * LC_ALL environment variable <2>:       Environment Variables.
-                                                              (line 152)
+                                                              (line 151)
 * LC_ALL environment variable <3>:       Environment Variables.
-                                                              (line 161)
+                                                              (line 160)
 * LC_COLLATE environment variable:       Environment Variables.
-                                                              (line 145)
+                                                              (line 144)
 * LC_CTYPE environment variable:         Environment Variables.
-                                                              (line 152)
+                                                              (line 151)
 * LC_MESSAGES environment variable:      Environment Variables.
                                                               (line  10)
 * LC_MESSAGES environment variable <1>:  Environment Variables.
-                                                              (line 161)
+                                                              (line 160)
 * line buffering:                        Other Options.       (line  13)
 * line numbering:                        Output Line Prefix Control.
                                                               (line  36)
 * ln GREP_COLORS capability:             Environment Variables.
-                                                              (line 113)
+                                                              (line 112)
 * locales:                               Performance.         (line  20)
 * lower character class:                 Character Classes and Bracket Expressions.
                                                               (line  56)
@@ -2593,30 +2610,30 @@ Index
 * max-count:                             General Output Control.
                                                               (line  44)
 * mc GREP_COLORS capability:             Environment Variables.
-                                                              (line 100)
+                                                              (line  99)
 * message language:                      Environment Variables.
-                                                              (line 161)
+                                                              (line 160)
 * ms GREP_COLORS capability:             Environment Variables.
-                                                              (line  92)
+                                                              (line  91)
 * MS-Windows binary I/O:                 Other Options.       (line  22)
 * mt GREP_COLORS capability:             Environment Variables.
-                                                              (line  84)
+                                                              (line  83)
 * names of matching files:               General Output Control.
                                                               (line  38)
 * national language support:             Environment Variables.
-                                                              (line 145)
+                                                              (line 144)
 * national language support <1>:         Environment Variables.
-                                                              (line 161)
+                                                              (line 160)
 * ne GREP_COLORS capability:             Environment Variables.
-                                                              (line 130)
+                                                              (line 129)
 * NLS:                                   Environment Variables.
-                                                              (line 145)
+                                                              (line 144)
 * no filename prefix:                    Output Line Prefix Control.
                                                               (line  23)
 * non-ASCII matching:                    Matching Non-ASCII.  (line   6)
 * non-printable matching:                Matching Non-ASCII.  (line   6)
 * null character:                        Environment Variables.
-                                                              (line 152)
+                                                              (line 151)
 * numeric characters:                    Character Classes and Bracket Expressions.
                                                               (line  50)
 * only matching:                         General Output Control.
@@ -2629,11 +2646,11 @@ Index
 * performance:                           Performance.         (line   6)
 * period:                                Fundamental Structure.
                                                               (line  11)
-* pipelines and reading:                 Performance.         (line  58)
+* pipelines and reading:                 Performance.         (line  59)
 * plus sign:                             Fundamental Structure.
                                                               (line  25)
 * POSIXLY_CORRECT environment variable:  Environment Variables.
-                                                              (line 166)
+                                                              (line 165)
 * print character class:                 Character Classes and Bracket Expressions.
                                                               (line  60)
 * print non-matching lines:              Matching Control.    (line  51)
@@ -2656,7 +2673,7 @@ Index
 * regular expressions:                   Regular Expressions. (line   6)
 * return status:                         Exit Status.         (line   6)
 * rv GREP_COLORS capability:             Environment Variables.
-                                                              (line  78)
+                                                              (line  77)
 * searching directory trees:             File and Directory Selection.
                                                               (line  73)
 * searching directory trees <1>:         File and Directory Selection.
@@ -2669,7 +2686,7 @@ Index
                                                               (line 113)
 * searching for patterns:                Introduction.        (line   6)
 * sl GREP_COLORS capability:             Environment Variables.
-                                                              (line  61)
+                                                              (line  60)
 * space character class:                 Character Classes and Bracket Expressions.
                                                               (line  68)
 * space characters:                      Character Classes and Bracket Expressions.
@@ -2691,9 +2708,9 @@ Index
 * tab-aligned content lines:             Output Line Prefix Control.
                                                               (line  41)
 * TERM environment variable:             Environment Variables.
-                                                              (line 173)
+                                                              (line 172)
 * translation of message language:       Environment Variables.
-                                                              (line 161)
+                                                              (line 160)
 * unspecified behavior in regular expressions: Problematic Expressions.
                                                               (line   6)
 * upper character class:                 Character Classes and Bracket Expressions.
@@ -2722,37 +2739,37 @@ Index
 
 
 Tag Table:
-Node: Top773
-Node: Introduction1965
-Node: Invoking2708
-Node: Command-line Options3551
-Node: Generic Program Information4434
-Node: Matching Control4908
-Node: General Output Control8519
-Node: Output Line Prefix Control12629
-Node: Context Line Control14985
-Node: File and Directory Selection17048
-Node: Other Options22849
-Node: Environment Variables25062
-Node: Exit Status34915
-Node: grep Programs35393
-Node: Regular Expressions36702
-Node: Fundamental Structure37949
-Node: Character Classes and Bracket Expressions39969
-Node: Special Backslash Expressions44800
-Node: Anchoring46347
-Node: Back-references and Subexpressions46791
-Node: Basic vs Extended47795
-Node: Problematic Expressions49002
-Node: Character Encoding54445
-Node: Matching Non-ASCII55917
-Node: Usage58044
-Node: Performance67914
-Node: Reporting Bugs73141
-Node: Known Bugs73518
-Node: Copying74589
-Node: GNU Free Documentation License75717
-Node: Index101022
+Node: Top769
+Node: Introduction1954
+Node: Invoking2697
+Node: Command-line Options3540
+Node: Generic Program Information4423
+Node: Matching Control4897
+Node: General Output Control8530
+Node: Output Line Prefix Control12638
+Node: Context Line Control14992
+Node: File and Directory Selection17055
+Node: Other Options22854
+Node: Environment Variables25059
+Node: Exit Status34261
+Node: grep Programs34739
+Node: Regular Expressions37411
+Node: Fundamental Structure38759
+Node: Character Classes and Bracket Expressions40779
+Node: Special Backslash Expressions45606
+Node: Anchoring47151
+Node: Back-references and Subexpressions47591
+Node: Basic vs Extended48595
+Node: Problematic Expressions49800
+Node: Character Encoding55243
+Node: Matching Non-ASCII56715
+Node: Usage58838
+Node: Performance68662
+Node: Reporting Bugs73869
+Node: Known Bugs74246
+Node: Copying75317
+Node: GNU Free Documentation License76423
+Node: Index101530
 
 End Tag Table
 

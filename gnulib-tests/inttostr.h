@@ -1,6 +1,6 @@
 /* inttostr.h -- convert integers to printable strings
 
-   Copyright (C) 2001-2006, 2009-2022 Free Software Foundation, Inc.
+   Copyright (C) 2001-2006, 2009-2023 Free Software Foundation, Inc.
 
    This file is free software: you can redistribute it and/or modify
    it under the terms of the GNU Lesser General Public License as
@@ -16,6 +16,11 @@
    along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
 
 /* Written by Paul Eggert */
+
+/* This file uses _GL_ATTRIBUTE_NODISCARD.  */
+#if !_GL_CONFIG_H_INCLUDED
+ #error "Please include config.h first."
+#endif
 
 #include <stdint.h>
 #include <sys/types.h>

@@ -1,5 +1,5 @@
 /* grep.c - main driver file for grep.
-   Copyright (C) 1992, 1997-2002, 2004-2022 Free Software Foundation, Inc.
+   Copyright (C) 1992, 1997-2002, 2004-2023 Free Software Foundation, Inc.
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -24,6 +24,7 @@
 #include <wchar.h>
 #include <inttypes.h>
 #include <stdarg.h>
+#include <stdckdint.h>
 #include <stdint.h>
 #include <stdio.h>
 #include "system.h"
@@ -40,7 +41,6 @@
 #include "fcntl-safer.h"
 #include "fts_.h"
 #include "getopt.h"
-#include "getprogname.h"
 #include "grep.h"
 #include "hash.h"
 #include "intprops.h"
@@ -898,7 +898,7 @@ static intmax_t
 add_count (intmax_t a, idx_t b)
 {
   intmax_t sum;
-  if (!INT_ADD_OK (a, b, &sum))
+  if (ckd_add (&sum, a, b))
     die (EXIT_TROUBLE, 0, _("input is too large to count"));
   return sum;
 }
@@ -982,7 +982,7 @@ fillbuf (idx_t save, struct stat const *st)
               off_t to_be_read = st->st_size - bufoffset;
               ptrdiff_t a;
               if (0 <= to_be_read
-                  && INT_ADD_OK (to_be_read, save + min_after_buflim, &a))
+                  && !ckd_add (&a, to_be_read, save + min_after_buflim))
                 alloc_max = MAX (a, bufalloc + incr_min);
             }
 
@@ -1435,7 +1435,7 @@ prtext (char *beg, char *lim)
 /* Replace all NUL bytes in buffer P (which ends at LIM) with EOL.
    This avoids running out of memory when binary input contains a long
    sequence of zeros, which would otherwise be considered to be part
-   of a long line.  P[LIM] should be EOL.  */
+   of a long line.  *LIM should be EOL.  */
 static void
 zap_nuls (char *p, char *lim, char eol)
 {
@@ -1583,7 +1583,7 @@ grep (int fd, struct stat const *st, bool *ineof)
          the buffer, 0 means there is no incomplete last line).  */
       oldc = beg[-1];
       beg[-1] = eol;
-      /* FIXME: use rawmemrchr if/when it exists, since we have ensured
+      /* If rawmemrchr existed it could be used here, since we have ensured
          that this use of memrchr is guaranteed never to return NULL.  */
       lim = memrchr (beg - 1, eol, buflim - beg + 1);
       ++lim;
@@ -2829,7 +2829,10 @@ main (int argc, char **argv)
       version_etc (stdout, getprogname (), PACKAGE_NAME, VERSION,
                    (char *) NULL);
       puts (_("Written by Mike Haertel and others; see\n"
-              "<https://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>."));
+              "<https://git.savannah.gnu.org/cgit/grep.git/tree/AUTHORS>."));
+#if HAVE_LIBPCRE
+      Pprint_version ();
+#endif
       return EXIT_SUCCESS;
     }
 

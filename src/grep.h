@@ -1,5 +1,5 @@
 /* grep.h - interface to grep driver for searching subroutines.
-   Copyright (C) 1992, 1998, 2001, 2007, 2009-2022 Free Software Foundation,
+   Copyright (C) 1992, 1998, 2001, 2007, 2009-2023 Free Software Foundation,
    Inc.
 
    This program is free software; you can redistribute it and/or modify
@@ -20,7 +20,6 @@
 #ifndef GREP_GREP_H
 #define GREP_GREP_H 1
 
-#include <stdbool.h>
 #include <idx.h>
 
 /* The following flags are exported from grep for the matchers

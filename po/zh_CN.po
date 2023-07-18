@@ -3,13 +3,13 @@
 # Copyright (C) 2008 Free Software Foundation, Inc.
 # Ji ZhengYu <zhengyuji@gmail.com>, 2016.
 # Boyuan Yang <073plan@gmail.com>, 2018, 2019, 2020.
-# Wenbin Lv <wenbin816@gmail.com>. 2022.
+# Wenbin Lv <wenbin816@gmail.com>, 2022, 2023.
 msgid ""
 msgstr ""
-"Project-Id-Version: grep 3.7.98\n"
+"Project-Id-Version: grep 3.10.12\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2022-09-02 23:52-0700\n"
-"PO-Revision-Date: 2022-07-04 10:07+0800\n"
+"POT-Creation-Date: 2023-05-13 01:14-0700\n"
+"PO-Revision-Date: 2023-04-21 22:09+0800\n"
 "Last-Translator: Wenbin Lv <wenbin816@gmail.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
 "Language: zh_CN\n"
@@ -17,104 +17,104 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Bugs: Report translation errors to the Language-Team address.\n"
-"X-Generator: Poedit 3.1\n"
+"X-Generator: Poedit 3.2.2\n"
 
-#: lib/argmatch.c:147
+#: lib/argmatch.c:145
 #, c-format
 msgid "invalid argument %s for %s"
 msgstr "%2$s 的参数 %1$s 无效"
 
-#: lib/argmatch.c:148
+#: lib/argmatch.c:146
 #, c-format
 msgid "ambiguous argument %s for %s"
 msgstr "%2$s 的参数 %1$s 有歧义"
 
-#: lib/argmatch.c:167 lib/argmatch.h:238
+#: lib/argmatch.c:165 lib/argmatch.h:242
 msgid "Valid arguments are:"
 msgstr "有效的参数有："
 
-#: lib/c-stack.c:187
+#: lib/c-stack.c:186
 msgid "program error"
 msgstr "程序错误"
 
-#: lib/c-stack.c:188
+#: lib/c-stack.c:187
 msgid "stack overflow"
 msgstr "栈溢出"
 
-#: lib/closeout.c:122 src/grep.c:1346
+#: lib/closeout.c:121 src/grep.c:1346
 msgid "write error"
 msgstr "写入错误"
 
-#: lib/dfa.c:894
+#: lib/dfa.c:897
 msgid "unbalanced ["
 msgstr "有未匹配的 ["
 
-#: lib/dfa.c:1015
+#: lib/dfa.c:1018
 msgid "invalid character class"
 msgstr "无效的字符类"
 
-#: lib/dfa.c:1143
+#: lib/dfa.c:1146
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr "字符类的语法是 [[:space:]],而非 [:space:]"
 
-#: lib/dfa.c:1209
+#: lib/dfa.c:1222
 msgid "unfinished \\ escape"
 msgstr "未结束的 \\ 转义"
 
-#: lib/dfa.c:1319
+#: lib/dfa.c:1332
 msgid "? at start of expression"
 msgstr "表达式以 ? 开头"
 
-#: lib/dfa.c:1331
+#: lib/dfa.c:1344
 msgid "* at start of expression"
 msgstr "表达式以 * 开头"
 
-#: lib/dfa.c:1345
+#: lib/dfa.c:1358
 msgid "+ at start of expression"
 msgstr "表达式以 + 开头"
 
-#: lib/dfa.c:1400
+#: lib/dfa.c:1413
 msgid "{...} at start of expression"
 msgstr "表达式以 {...} 开头"
 
-#: lib/dfa.c:1403
+#: lib/dfa.c:1416
 msgid "invalid content of \\{\\}"
 msgstr "\\{\\}中内容无效"
 
-#: lib/dfa.c:1405
+#: lib/dfa.c:1418
 msgid "regular expression too big"
 msgstr "正则表达式太长"
 
-#: lib/dfa.c:1555
+#: lib/dfa.c:1568
 msgid "stray \\ before unprintable character"
 msgstr "不可打印字符前有多余的 \\"
 
-#: lib/dfa.c:1557
+#: lib/dfa.c:1570
 msgid "stray \\ before white space"
 msgstr "空白字符前有多余的 \\"
 
-#: lib/dfa.c:1561
+#: lib/dfa.c:1574
 #, c-format
 msgid "stray \\ before %lc"
 msgstr "%lc 前有多余的 \\"
 
-#: lib/dfa.c:1562
+#: lib/dfa.c:1575
 msgid "stray \\"
 msgstr "多余的 \\"
 
-#: lib/dfa.c:1917
+#: lib/dfa.c:1925
 msgid "unbalanced ("
 msgstr "有未匹配的 ("
 
-#: lib/dfa.c:2034
+#: lib/dfa.c:2042
 msgid "no syntax specified"
 msgstr "未指定语法"
 
-#: lib/dfa.c:2045
+#: lib/dfa.c:2053
 msgid "unbalanced )"
 msgstr "有未匹配的 )"
 
-#: lib/error.c:195
+#: lib/error.c:193
 msgid "Unknown system error"
 msgstr "未知的系统错误"
 
@@ -167,7 +167,7 @@ msgstr "无法记录当前工作目录"
 msgid "failed to return to initial working directory"
 msgstr "返回到初始工作目录失败"
 
-#: lib/xbinary-io.c:37
+#: lib/xbinary-io.c:36
 #, c-format
 msgid "failed to set file descriptor text/binary mode"
 msgstr "设置文件描述符为文本/二进制模式时失败"
@@ -193,11 +193,11 @@ msgstr "设置文件描述符为文本/二进制模式时失败"
 #. If you don't know what to put here, please see
 #. <https://en.wikipedia.org/wiki/Quotation_marks_in_other_languages>
 #. and use glyphs suitable for your language.
-#: lib/quotearg.c:355
+#: lib/quotearg.c:354
 msgid "`"
 msgstr "\""
 
-#: lib/quotearg.c:356
+#: lib/quotearg.c:355
 msgid "'"
 msgstr "\""
 
@@ -718,67 +718,85 @@ msgstr "未知的 --binary-files 类型"
 #: src/grep.c:2831
 msgid ""
 "Written by Mike Haertel and others; see\n"
-"<https://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>."
+"<https://git.savannah.gnu.org/cgit/grep.git/tree/AUTHORS>."
 msgstr ""
 "由 Mike Haerhtel 等人编写；作者信息请参见\n"
-"<https://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>。"
+"<https://git.savannah.gnu.org/cgit/grep.git/tree/AUTHORS>。"
 
-#: src/grep.c:2934
+#: src/grep.c:2937
 #, c-format
 msgid "warning: GREP_COLOR='%s' is deprecated; use GREP_COLORS='mt=%s'"
 msgstr "警告：GREP_COLOR='%s' 已弃用；请使用 GREP_COLORS='mt=%s'"
 
-#: src/pcresearch.c:148
+#: src/pcresearch.c:92
+#, c-format
+msgid ""
+"\n"
+"grep -P uses PCRE2 %s\n"
+msgstr ""
+"\n"
+"grep -P 使用 PCRE2 %s\n"
+
+#: src/pcresearch.c:169
+msgid "-P supports only unibyte locales on this platform"
+msgstr "-P 在此平台上仅支持单字节区域设置"
+
+#: src/pcresearch.c:171
 msgid "-P supports only unibyte and UTF-8 locales"
 msgstr "-P 仅支持单字节和 UTF-8 区域设置"
 
-#: src/pcresearch.c:162
+#: src/pcresearch.c:194
 msgid "the -P option only supports a single pattern"
 msgstr "-P 选项仅支持单个模式字符串"
 
-#: src/pcresearch.c:215
-#, c-format
-msgid "JIT internal error: %d"
-msgstr "JIT 内部错误：%d"
-
-#: src/pcresearch.c:252
+#: src/pcresearch.c:290
 msgid "exceeded PCRE's line length limit"
 msgstr "超过 PCRE 的行长度限制"
 
-#: src/pcresearch.c:330
+#: src/pcresearch.c:368
 #, c-format
 msgid "%s: memory exhausted"
 msgstr "%s: 内存耗尽"
 
-#: src/pcresearch.c:333
+#: src/pcresearch.c:371
 #, c-format
 msgid "%s: exhausted PCRE JIT stack"
 msgstr "%s: PCRE JIT 栈耗尽"
 
-#: src/pcresearch.c:337
+#: src/pcresearch.c:375
 #, c-format
 msgid "%s: exceeded PCRE's backtracking limit"
 msgstr "%s: 超过 PCRE 的回溯限制"
 
-#: src/pcresearch.c:342
+#: src/pcresearch.c:380
 #, c-format
 msgid "%s: exceeded PCRE's nested backtracking limit"
 msgstr "%s: 超过 PCRE 的嵌套回溯限制"
 
-#: src/pcresearch.c:346
+#: src/pcresearch.c:384
 #, c-format
 msgid "%s: PCRE detected recurse loop"
 msgstr "%s: PCRE 检测到递归循环"
 
-#: src/pcresearch.c:351
+#: src/pcresearch.c:389
 #, c-format
 msgid "%s: exceeded PCRE's heap limit"
 msgstr "%s: 超过 PCRE 的堆限制"
 
-#: src/pcresearch.c:360
+#: src/pcresearch.c:398
 #, c-format
 msgid "%s: internal PCRE error: %d"
 msgstr "%s: PCRE 内部错误：%d"
+
+#~ msgid ""
+#~ "\n"
+#~ "Built with PCRE "
+#~ msgstr ""
+#~ "\n"
+#~ "构建时使用 PCRE "
+
+#~ msgid "JIT internal error: %d"
+#~ msgstr "JIT 内部错误：%d"
 
 #~ msgid "failed to allocate memory for the PCRE JIT stack"
 #~ msgstr "为 PCRE JIT 栈分配内存时出错"

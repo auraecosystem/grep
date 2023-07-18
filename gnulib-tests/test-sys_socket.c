@@ -1,5 +1,5 @@
 /* Test of <sys/socket.h> substitute.
-   Copyright (C) 2007, 2009-2022 Free Software Foundation, Inc.
+   Copyright (C) 2007, 2009-2023 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -20,8 +20,6 @@
 
 #include <sys/socket.h>
 
-#include <errno.h>
-
 #if HAVE_SHUTDOWN
 /* Check some integer constant expressions.  */
 int a[] = { SHUT_RD, SHUT_WR, SHUT_RDWR };
@@ -39,6 +37,8 @@ struct iovec io;
 
 /* Check that a minimal set of 'struct msghdr' is defined.  */
 struct msghdr msg;
+
+#include <errno.h>
 
 int
 main (void)

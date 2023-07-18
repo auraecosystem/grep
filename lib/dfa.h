@@ -1,5 +1,5 @@
 /* dfa.h - declarations for GNU deterministic regexp compiler
-   Copyright (C) 1988, 1998, 2007, 2009-2022 Free Software Foundation, Inc.
+   Copyright (C) 1988, 1998, 2007, 2009-2023 Free Software Foundation, Inc.
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -21,9 +21,14 @@
 #ifndef DFA_H_
 #define DFA_H_
 
+/* This file uses _Noreturn, _GL_ATTRIBUTE_DEALLOC, _GL_ATTRIBUTE_MALLOC,
+   _GL_ATTRIBUTE_PURE, _GL_ATTRIBUTE_RETURNS_NONNULL.  */
+#if !_GL_CONFIG_H_INCLUDED
+ #error "Please include config.h first."
+#endif
+
 #include "idx.h"
 #include <regex.h>
-#include <stdbool.h>
 #include <stddef.h>
 #include <stdlib.h>
 

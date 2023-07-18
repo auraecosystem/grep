@@ -1,5 +1,5 @@
 /* Test of opening a file stream.
-   Copyright (C) 2007-2022 Free Software Foundation, Inc.
+   Copyright (C) 2007-2023 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -22,6 +22,11 @@
 #include <unistd.h>
 
 #include "macros.h"
+
+/* Tell GCC not to warn about the specific edge cases tested here.  */
+#if __GNUC__ >= 10
+# pragma GCC diagnostic ignored "-Wanalyzer-file-leak"
+#endif
 
 /* Test fopen.  Assumes BASE is defined.  */
 

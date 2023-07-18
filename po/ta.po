@@ -2,14 +2,15 @@
 # Copyright (C) 2021 Free Software Foundation, Inc.
 # This file is distributed under the same license as the grep package.
 # Nardhini <nardhini@systemreboot.net>, 2021.
-# Arun Isaac <arunisaac@systemreboot.net>, 2021.
+# Arun Isaac <arunisaac@systemreboot.net>, 2021, 2023.
+# Anbarasan Sivakumar <anbarasan80@proton.me>, 2023.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: GNU grep 3.6.27\n"
+"Project-Id-Version: GNU grep 3.10.12\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2022-09-02 23:52-0700\n"
-"PO-Revision-Date: 2021-08-28 03:18+0530\n"
+"POT-Creation-Date: 2023-05-13 01:14-0700\n"
+"PO-Revision-Date: 2023-04-26 00:29+0100\n"
 "Last-Translator: Arun Isaac <arunisaac@systemreboot.net>\n"
 "Language-Team: Tamil <tamil@systemreboot.net>\n"
 "Language: ta\n"
@@ -18,105 +19,102 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Bugs: Report translation errors to the Language-Team address.\n"
 
-#: lib/argmatch.c:147
+#: lib/argmatch.c:145
 #, c-format
 msgid "invalid argument %s for %s"
 msgstr "%2$s க்கு ஏற்கத்தகாச் செயலுருபு %1$s"
 
-#: lib/argmatch.c:148
+#: lib/argmatch.c:146
 #, c-format
 msgid "ambiguous argument %s for %s"
 msgstr "%2$s க்குத் தெளிவற்ற செயலுருபு %1$s"
 
-#: lib/argmatch.c:167 lib/argmatch.h:238
+#: lib/argmatch.c:165 lib/argmatch.h:242
 msgid "Valid arguments are:"
 msgstr "ஏற்கத்தகு செயலுருபுகள்:"
 
-#: lib/c-stack.c:187
+#: lib/c-stack.c:186
 msgid "program error"
 msgstr "நிரல் பிழை"
 
-#: lib/c-stack.c:188
+#: lib/c-stack.c:187
 msgid "stack overflow"
 msgstr "அடுக்கு வழிவு"
 
-#: lib/closeout.c:122 src/grep.c:1346
+#: lib/closeout.c:121 src/grep.c:1346
 msgid "write error"
 msgstr "எழுது பிழை"
 
-#: lib/dfa.c:894
+#: lib/dfa.c:897
 msgid "unbalanced ["
 msgstr "நிறைவுறா ["
 
-#: lib/dfa.c:1015
+#: lib/dfa.c:1018
 msgid "invalid character class"
 msgstr "ஏற்கத்தகா வரியுரு வகுப்பு"
 
-#: lib/dfa.c:1143
+#: lib/dfa.c:1146
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr "வரியுரு வகுப்பை [[:space:]] எனக் குறிப்பிடுக, [:space:] என்றல்ல"
 
-#: lib/dfa.c:1209
+#: lib/dfa.c:1222
 msgid "unfinished \\ escape"
 msgstr "நிறைவுறா \\ விடுவிப்பு"
 
-#: lib/dfa.c:1319
-#, fuzzy
+#: lib/dfa.c:1332
 msgid "? at start of expression"
-msgstr "ஏற்கத்தகா தேடுகுறித்தொடர்"
+msgstr "செங்குறித்தொடர் முன் ?"
 
-#: lib/dfa.c:1331
-#, fuzzy
+#: lib/dfa.c:1344
 msgid "* at start of expression"
-msgstr "ஏற்கத்தகா தேடுகுறித்தொடர்"
+msgstr "செங்குறித்தொடர் முன் *"
 
-#: lib/dfa.c:1345
-#, fuzzy
+#: lib/dfa.c:1358
 msgid "+ at start of expression"
-msgstr "ஏற்கத்தகா தேடுகுறித்தொடர்"
+msgstr "செங்குறித்தொடர் முன் +"
 
-#: lib/dfa.c:1400
+#: lib/dfa.c:1413
 msgid "{...} at start of expression"
-msgstr ""
+msgstr "செங்குறித்தொடர் முன் {...}"
 
-#: lib/dfa.c:1403
+#: lib/dfa.c:1416
 msgid "invalid content of \\{\\}"
 msgstr "ஏற்கத்தகா நெளி அடைப்பு \\{\\} உள்ளடக்கம்"
 
-#: lib/dfa.c:1405
+#: lib/dfa.c:1418
 msgid "regular expression too big"
-msgstr "தேடுகுறித்தொடர் அளவிற்கு மிஞ்சியது"
+msgstr "செங்குறித்தொடர் அளவிற்கு மிஞ்சியது"
 
-#: lib/dfa.c:1555
+#: lib/dfa.c:1568
 msgid "stray \\ before unprintable character"
-msgstr ""
+msgstr "எழுத்துவடிவில்லா வரியுரு முன் இடம் தவறிய \\"
 
-#: lib/dfa.c:1557
+#: lib/dfa.c:1570
 msgid "stray \\ before white space"
-msgstr ""
+msgstr "வெள்ளை இடைவெளி முன் இடம் தவறிய \\"
 
-#: lib/dfa.c:1561
+#: lib/dfa.c:1574
 #, c-format
 msgid "stray \\ before %lc"
-msgstr ""
+msgstr "%lc முன் இடம் தவறிய \\"
 
-#: lib/dfa.c:1562
+#: lib/dfa.c:1575
 msgid "stray \\"
-msgstr ""
+msgstr "இடம் தவறிய \\"
 
-#: lib/dfa.c:1917
+#: lib/dfa.c:1925
 msgid "unbalanced ("
 msgstr "நிறைவுறா ("
 
-#: lib/dfa.c:2034
+#: lib/dfa.c:2042
 msgid "no syntax specified"
 msgstr "தொடரமைப்பு குறிப்பிடப்படவில்லை"
 
-#: lib/dfa.c:2045
+#: lib/dfa.c:2053
 msgid "unbalanced )"
 msgstr "நிறைவுறா )"
 
-#: lib/error.c:195
+#: lib/error.c:193
 msgid "Unknown system error"
 msgstr "அறியப்படாக் கணிப்பொறிப் பிழை"
 
@@ -169,7 +167,7 @@ msgstr "பணியடைவைப் பதிக்க இயலவில்�
 msgid "failed to return to initial working directory"
 msgstr "முதல் பணியடைவிற்குத் திரும்ப இயலவில்லை"
 
-#: lib/xbinary-io.c:37
+#: lib/xbinary-io.c:36
 #, c-format
 msgid "failed to set file descriptor text/binary mode"
 msgstr "கோப்பு விவரிப்பிக்கு text/binary பாங்கை அளிக்க இயலவில்லை"
@@ -195,11 +193,11 @@ msgstr "கோப்பு விவரிப்பிக்கு text/binary �
 #. If you don't know what to put here, please see
 #. <https://en.wikipedia.org/wiki/Quotation_marks_in_other_languages>
 #. and use glyphs suitable for your language.
-#: lib/quotearg.c:355
+#: lib/quotearg.c:354
 msgid "`"
 msgstr "“"
 
-#: lib/quotearg.c:356
+#: lib/quotearg.c:355
 msgid "'"
 msgstr "”"
 
@@ -213,7 +211,7 @@ msgstr "பொருத்தம் இல்லை"
 
 #: lib/regcomp.c:128
 msgid "Invalid regular expression"
-msgstr "ஏற்கத்தகா தேடுகுறித்தொடர்"
+msgstr "ஏற்கத்தகா செங்குறித்தொடர்"
 
 #: lib/regcomp.c:131
 msgid "Invalid collation character"
@@ -257,15 +255,15 @@ msgstr "நினைவகம் தீர்ந்தது"
 
 #: lib/regcomp.c:161
 msgid "Invalid preceding regular expression"
-msgstr "ஏற்கத்தகா முந்தைய தேடுகுறித்தொடர்"
+msgstr "ஏற்கத்தகா முந்தைய செங்குறித்தொடர்"
 
 #: lib/regcomp.c:164
 msgid "Premature end of regular expression"
-msgstr "நிறைவுறாத் தேடுகுறித்தொடர்"
+msgstr "நிறைவுறாத் செங்குறித்தொடர்"
 
 #: lib/regcomp.c:167
 msgid "Regular expression too big"
-msgstr "தேடுகுறித்தொடர் அளவிற்கு மிஞ்சியது"
+msgstr "செங்குறித்தொடர் அளவிற்கு மிஞ்சியது"
 
 #: lib/regcomp.c:170
 msgid "Unmatched ) or \\)"
@@ -273,7 +271,7 @@ msgstr "நிறைவுறா ) அல்லது \\)"
 
 #: lib/regcomp.c:650
 msgid "No previous regular expression"
-msgstr "முந்தைய தேடுகுறித்தொடர் எதுவும் இல்லை"
+msgstr "முந்தைய செங்குறித்தொடர் எதுவும் இல்லை"
 
 #: lib/version-etc.c:73
 #, c-format
@@ -300,9 +298,9 @@ msgid ""
 "This is free software: you are free to change and redistribute it.\n"
 "There is NO WARRANTY, to the extent permitted by law.\n"
 msgstr ""
-"உரிமம் GPLv3+: GNU GPL பதிப்பு 3 அல்லது பிந்தைய பதிப்புகள் <%s>.\n"
-"இதுக் கட்டற்ற மென்பொருள்; இதை மாற்றவோ பரிமாறவோ தடையில்லை.\n"
-"சட்டத்தால் அனுமதிக்கப்பட்ட அளவிற்கு எந்த உத்தரவாதமும் இல்லை.\n"
+"GPLv3+ உரிமம்: GNU GPL பதிப்பு 3 அல்லது அதற்கு மேல் <%s>.\n"
+"இதுக் கட்டற்ற மென்பொருள்: இதை மாற்றவோ பகிரவோ தடையில்லை.\n"
+"சட்டத்தால் அனுமதிக்கப்பட்ட அளவிற்கு எந்த நம்புறுதியும் இல்லை.\n"
 
 #. TRANSLATORS: %s denotes an author name.
 #: lib/version-etc.c:105
@@ -441,7 +439,7 @@ msgstr "GNU மென்பொருள் பயன்பாட்டு உத
 #: src/dfasearch.c:59
 #, c-format
 msgid "warning: %s"
-msgstr ""
+msgstr "எச்சரிக்கை: %s"
 
 #: src/grep.c:656
 msgid "(standard input)"
@@ -449,7 +447,7 @@ msgstr "(இயல் உள்ளீடு)"
 
 #: src/grep.c:837
 msgid "invalid context length argument"
-msgstr "ஏற்கத்தகாச் சூழல் நீளம்"
+msgstr "ஏற்கத்தகாச் சூழல் மதிப்புரு நீளம்"
 
 #: src/grep.c:902
 msgid "input is too large to count"
@@ -506,10 +504,10 @@ msgid ""
 "  -G, --basic-regexp        PATTERNS are basic regular expressions\n"
 "  -P, --perl-regexp         PATTERNS are Perl regular expressions\n"
 msgstr ""
-"  -E, --extended-regexp      <தேடுதொடர்கள்> விரிவுபட்ட தேடுகுறித்தொடர்கள்\n"
+"  -E, --extended-regexp      <தேடுதொடர்கள்> விரிவுபட்ட செங்குறித்தொடர்கள்\n"
 "  -F, --fixed-strings        <தேடுதொடர்கள்> உருச்சரங்கள்\n"
-"  -G, --basic-regexp         <தேடுதொடர்கள்> அடிப்படை தேடுகுறித்தொடர்கள்\n"
-"  -P, --perl-regexp          <தேடுதொடர்கள்> Perl தேடுகுறித்தொடர்கள்\n"
+"  -G, --basic-regexp         <தேடுதொடர்கள்> அடிப்படை செங்குறித்தொடர்கள்\n"
+"  -P, --perl-regexp          <தேடுதொடர்கள்> Perl செங்குறித்தொடர்கள்\n"
 
 #: src/grep.c:1991
 #, c-format
@@ -730,64 +728,73 @@ msgstr "ஏற்கத்தகா இருமக்கோப்பு வக�
 #: src/grep.c:2831
 msgid ""
 "Written by Mike Haertel and others; see\n"
-"<https://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>."
+"<https://git.savannah.gnu.org/cgit/grep.git/tree/AUTHORS>."
 msgstr ""
 "மைக் ஏர்டெலும் பிறரும் எழுதியது;\n"
-"<https://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS> காண்க."
+"<https://git.savannah.gnu.org/cgit/grep.git/tree/AUTHORS> காண்க."
 
-#: src/grep.c:2934
+#: src/grep.c:2937
 #, c-format
 msgid "warning: GREP_COLOR='%s' is deprecated; use GREP_COLORS='mt=%s'"
-msgstr ""
+msgstr "எச்சரிக்கை: GREP_COLOR='%s' வழக்கொழிந்தது; GREP_COLORS='mt=%s' பயன்படுத்துக"
 
-#: src/pcresearch.c:148
+#: src/pcresearch.c:92
+#, c-format
+msgid ""
+"\n"
+"grep -P uses PCRE2 %s\n"
+msgstr ""
+"\n"
+"\n"
+"grep -P PCRE2 %s பயன்படுத்துகிறது\n"
+
+#: src/pcresearch.c:169
+msgid "-P supports only unibyte locales on this platform"
+msgstr "இத்தளத்தில் -P ஒற்றை எண்ணிருமி வட்டாரங்களில் மட்டுமே இயங்கும்"
+
+#: src/pcresearch.c:171
 msgid "-P supports only unibyte and UTF-8 locales"
 msgstr "-P ஒற்றை எண்ணிருமி வட்டாரங்களிலும் UTF-8 வட்டாரங்களிலும் மட்டுமே இயங்கும்"
 
-#: src/pcresearch.c:162
+#: src/pcresearch.c:194
 msgid "the -P option only supports a single pattern"
 msgstr "-P செயல்மாற்றிக்கு ஒருத் தேடுதொடர் தான் இருக்க வேண்டும்"
 
-#: src/pcresearch.c:215
-#, fuzzy, c-format
-msgid "JIT internal error: %d"
-msgstr "%s: PCRE அகப்பிழை: %d"
-
-#: src/pcresearch.c:252
+#: src/pcresearch.c:290
 msgid "exceeded PCRE's line length limit"
 msgstr "PCRE நிரலகத்தின் வரி நீள வரம்பு மீறப்பட்டது"
 
-#: src/pcresearch.c:330
+#: src/pcresearch.c:368
 #, c-format
 msgid "%s: memory exhausted"
 msgstr "%s: நினைவகம் தீர்ந்தது"
 
-#: src/pcresearch.c:333
+#: src/pcresearch.c:371
 #, c-format
 msgid "%s: exhausted PCRE JIT stack"
 msgstr "%s: PCRE நிரலகத்தின் JIT அடுக்கு தீர்ந்தது"
 
-#: src/pcresearch.c:337
+#: src/pcresearch.c:375
 #, c-format
 msgid "%s: exceeded PCRE's backtracking limit"
 msgstr "%s: PCRE நிரலகத்தின் பின்வாங்கல் வரம்பு மீறப்பட்டது"
 
-#: src/pcresearch.c:342
-#, fuzzy, c-format
+#: src/pcresearch.c:380
+#, c-format
 msgid "%s: exceeded PCRE's nested backtracking limit"
-msgstr "%s: PCRE நிரலகத்தின் பின்வாங்கல் வரம்பு மீறப்பட்டது"
+msgstr "%s: PCRE நிரலகத்தின் உள்ளமை பின்வாங்கல் வரம்பு மீறப்பட்டது"
 
-#: src/pcresearch.c:346
+#: src/pcresearch.c:384
 #, c-format
 msgid "%s: PCRE detected recurse loop"
-msgstr ""
+msgstr "%s: PCRE மீள்சுருள் சுற்று கண்டறியப்பட்டது"
 
-#: src/pcresearch.c:351
-#, fuzzy, c-format
+#: src/pcresearch.c:389
+#, c-format
 msgid "%s: exceeded PCRE's heap limit"
-msgstr "%s: PCRE நிரலகத்தின் மீள்சுருள் வரம்பு மீறப்பட்டது"
+msgstr "%s: PCRE நிரலகத்தின் குவியல் வரம்பு மீறப்பட்டது"
 
-#: src/pcresearch.c:360
+#: src/pcresearch.c:398
 #, c-format
 msgid "%s: internal PCRE error: %d"
 msgstr "%s: PCRE அகப்பிழை: %d"

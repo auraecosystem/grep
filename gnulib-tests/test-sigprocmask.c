@@ -1,5 +1,5 @@
 /* Test of sigprocmask.
-   Copyright (C) 2011-2022 Free Software Foundation, Inc.
+   Copyright (C) 2011-2023 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -24,6 +24,7 @@
 SIGNATURE_CHECK (sigprocmask, int, (int, const sigset_t *, sigset_t *));
 
 #include <errno.h>
+#include <limits.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -47,7 +48,7 @@ main (int argc, char *argv[])
   pid_t pid = getpid ();
   char command[80];
 
-  if (sizeof (int) < sizeof pid && 0x7fffffff < pid)
+  if (LONG_MAX < pid)
     {
       fputs ("Skipping test: pid too large\n", stderr);
       return 77;
@@ -66,7 +67,7 @@ main (int argc, char *argv[])
   ASSERT (sigprocmask (SIG_BLOCK, &set, NULL) == 0);
 
   /* Request a SIGINT signal from outside.  */
-  sprintf (command, "sh -c 'sleep 1; kill -%d %d' &", SIGINT, (int) pid);
+  sprintf (command, "sh -c 'sleep 1; kill -INT %ld' &", (long) pid);
   ASSERT (system (command) == 0);
 
   /* Wait.  */

@@ -1,5 +1,5 @@
 /* pcresearch.c - searching subroutines using PCRE for grep.
-   Copyright 2000, 2007, 2009-2022 Free Software Foundation, Inc.
+   Copyright 2000, 2007, 2009-2023 Free Software Foundation, Inc.
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -17,8 +17,11 @@
    02110-1301, USA.  */
 
 #include <config.h>
+
 #include "search.h"
 #include "die.h"
+
+#include <stdckdint.h>
 
 #define PCRE2_CODE_UNIT_WIDTH 8
 #include <pcre2.h>
@@ -31,6 +34,18 @@
 # define PCRE2_CONFIG_DEPTHLIMIT PCRE2_CONFIG_RECURSIONLIMIT
 # define PCRE2_ERROR_DEPTHLIMIT PCRE2_ERROR_RECURSIONLIMIT
 # define pcre2_set_depth_limit pcre2_set_recursion_limit
+#endif
+#ifndef PCRE2_EXTRA_ASCII_BSD
+# define PCRE2_EXTRA_ASCII_BSD 0
+#endif
+
+/* Use PCRE2_MATCH_INVALID_UTF if supported and not buggy;
+   see <https://github.com/PCRE2Project/pcre2/issues/224>.
+   Assume the bug will be fixed after PCRE2 10.42.  */
+#if defined PCRE2_MATCH_INVALID_UTF && 10 < PCRE2_MAJOR + (42 < PCRE2_MINOR)
+enum { MATCH_INVALID_UTF = PCRE2_MATCH_INVALID_UTF };
+#else
+enum { MATCH_INVALID_UTF = 0 };
 #endif
 
 struct pcre_comp
@@ -66,6 +81,15 @@ static void
 private_free (void *ptr, _GL_UNUSED void *unused)
 {
   free (ptr);
+}
+
+void
+Pprint_version (void)
+{
+  char buf[128];
+  if (sizeof buf <= pcre2_config (PCRE2_CONFIG_VERSION, buf))
+    abort ();
+  printf (_("\ngrep -P uses PCRE2 %s\n"), buf);
 }
 
 /* Match the already-compiled PCRE pattern against the data in SUBJECT,
@@ -104,7 +128,7 @@ jit_exec (struct pcre_comp *pc, char const *subject, idx_t search_bytes,
         {
           uint32_t lim;
           pcre2_config (PCRE2_CONFIG_DEPTHLIMIT, &lim);
-          if (INT_MULTIPLY_WRAPV (lim, 2, &lim))
+          if (ckd_mul (&lim, lim, 2))
             return e;
           if (!pc->mcontext)
             pc->mcontext = pcre2_match_context_create (pc->gcontext);
@@ -115,16 +139,11 @@ jit_exec (struct pcre_comp *pc, char const *subject, idx_t search_bytes,
     }
 }
 
-/* Return true if E is an error code for bad UTF-8, and if pcre2_match
-   could return E because PCRE lacks PCRE2_MATCH_INVALID_UTF.  */
+/* Return true if E is an error code for bad UTF-8.  */
 static bool
 bad_utf8_from_pcre2 (int e)
 {
-#ifdef PCRE2_MATCH_INVALID_UTF
-  return false;
-#else
   return PCRE2_ERROR_UTF8_ERR21 <= e && e <= PCRE2_ERROR_UTF8_ERR1;
-#endif
 }
 
 /* Compile the -P style PATTERN, containing SIZE bytes that are
@@ -144,16 +163,29 @@ Pcompile (char *pattern, idx_t size, reg_syntax_t ignored, bool exact)
 
   if (localeinfo.multibyte)
     {
+      uint32_t unicode;
+      if (pcre2_config (PCRE2_CONFIG_UNICODE, &unicode) < 0 || !unicode)
+        die (EXIT_TROUBLE, 0,
+             _("-P supports only unibyte locales on this platform"));
       if (! localeinfo.using_utf8)
         die (EXIT_TROUBLE, 0, _("-P supports only unibyte and UTF-8 locales"));
+
       flags |= PCRE2_UTF;
+
+      /* If supported, consider invalid UTF-8 as a barrier not an error.  */
+      flags |= MATCH_INVALID_UTF;
+
+      /* If PCRE2_EXTRA_ASCII_BSD is available, use PCRE2_UCP
+         so that \d does not have the undesirable effect of matching
+         non-ASCII digits.  Otherwise (i.e., with PCRE2 10.42 and earlier),
+         escapes like \w have only their ASCII interpretations,
+         but that's better than the confusion that would ensue if \d
+         matched non-ASCII digits.  */
+      flags |= PCRE2_EXTRA_ASCII_BSD ? PCRE2_UCP : 0;
+
 #if 0
       /* Do not match individual code units but only UTF-8.  */
       flags |= PCRE2_NEVER_BACKSLASH_C;
-#endif
-#ifdef PCRE2_MATCH_INVALID_UTF
-      /* Consider invalid UTF-8 as a barrier, instead of error.  */
-      flags |= PCRE2_MATCH_INVALID_UTF;
 #endif
     }
 
@@ -161,12 +193,16 @@ Pcompile (char *pattern, idx_t size, reg_syntax_t ignored, bool exact)
   if (rawmemchr (pattern, '\n') != patlim)
     die (EXIT_TROUBLE, 0, _("the -P option only supports a single pattern"));
 
+#ifdef PCRE2_EXTRA_MATCH_LINE
+  uint32_t extra_options = (PCRE2_EXTRA_ASCII_BSD
+                            | (match_lines ? PCRE2_EXTRA_MATCH_LINE : 0));
+  pcre2_set_compile_extra_options (ccontext, extra_options);
+#endif
+
   void *re_storage = NULL;
   if (match_lines)
     {
-#ifdef PCRE2_EXTRA_MATCH_LINE
-      pcre2_set_compile_extra_options (ccontext, PCRE2_EXTRA_MATCH_LINE);
-#else
+#ifndef PCRE2_EXTRA_MATCH_LINE
       static char const /* These sizes omit trailing NUL.  */
         xprefix[4] = "^(?:", xsuffix[2] = ")$";
       idx_t re_size = size + sizeof xprefix + sizeof xsuffix;
@@ -193,7 +229,9 @@ Pcompile (char *pattern, idx_t size, reg_syntax_t ignored, bool exact)
       size = re_size;
     }
 
-  pcre2_set_character_tables (ccontext, pcre2_maketables (gcontext));
+  if (!localeinfo.multibyte)
+    pcre2_set_character_tables (ccontext, pcre2_maketables (gcontext));
+
   pc->cre = pcre2_compile ((PCRE2_SPTR) pattern, size, flags,
                            &ec, &e, ccontext);
   if (!pc->cre)
@@ -210,9 +248,9 @@ Pcompile (char *pattern, idx_t size, reg_syntax_t ignored, bool exact)
   pc->mcontext = NULL;
   pc->data = pcre2_match_data_create_from_pattern (pc->cre, gcontext);
 
-  ec = pcre2_jit_compile (pc->cre, PCRE2_JIT_COMPLETE);
-  if (ec && ec != PCRE2_ERROR_JIT_BADOPTION && ec != PCRE2_ERROR_NOMEMORY)
-    die (EXIT_TROUBLE, 0, _("JIT internal error: %d"), ec);
+  /* Ignore any failure return from pcre2_jit_compile, as that merely
+     means JIT won't be used during matching.  */
+  pcre2_jit_compile (pc->cre, PCRE2_JIT_COMPLETE);
 
   /* The PCRE documentation says that a 32 KiB stack is the default.  */
   pc->jit_stack = NULL;
@@ -280,7 +318,7 @@ Pexecute (void *vcp, char const *buf, idx_t size, idx_t *match_size,
 
           e = jit_exec (pc, subject, line_end - subject,
                         search_offset, options);
-          if (!bad_utf8_from_pcre2 (e))
+          if (MATCH_INVALID_UTF || !bad_utf8_from_pcre2 (e))
             break;
 
           idx_t valid_bytes = pcre2_get_startchar (pc->data);
