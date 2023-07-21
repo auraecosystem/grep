@@ -1,3 +1,13 @@
+grep (3.11-2~1.gbp0e81a8) UNRELEASED; urgency=medium
+
+  ** SNAPSHOT build @0e81a8fcd8696fcea26cbac8895418b55a15da54 **
+
+  * Add d/patches/grep-dirfd.patch to fix gnulib bug that produces an
+    'Operation not supported' error when grep -r 100000+ files
+    (Closes: #1041588)
+
+ -- Santiago Ruano Rincón <santiago@debian.org>  Fri, 21 Jul 2023 17:49:54 -0300
+
 grep (3.11-1) unstable; urgency=low
 
   [ Debian Janitor ]
