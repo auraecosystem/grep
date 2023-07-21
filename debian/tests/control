@@ -4,4 +4,4 @@ Depends: @builddeps@, fakeroot, libpcre2-8-0, locales-all
 #       to ignore expensive checks and for ignore unavailable locale warnings.
 Restrictions: allow-stderr
 
-Tests: egrep-fgrep, stray-backlash-warn
+Tests: egrep-fgrep, stray-backlash-warn dirfd
