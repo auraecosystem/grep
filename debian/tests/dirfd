@@ -7,4 +7,5 @@ set -e
 
 TESTDIR=$(mktemp -d)
 for i in `seq 100000` ; do : > $TESTDIR/$i ; done
+printf x > $TESTDIR/a
 grep -r x $TESTDIR
