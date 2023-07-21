@@ -3,3 +3,4 @@ XFAIL-test-regex.patch
 02-man_egrep_fgrep_rgrep.patch
 05-grep-wrapper-sh.patch
 1019724-handle-backslash-warning.patch
+grep-dirfd.patch

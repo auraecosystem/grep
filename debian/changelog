@@ -1,3 +1,12 @@
+grep (3.11-2) unstable; urgency=low
+
+  * Add d/patches/grep-dirfd.patch to fix gnulib bug that produces an
+    'Operation not supported' error when grep -r 100000+ files.
+    Thanks to Vincent Lefèvre <vincent@vinc17.net>. (Closes: #1041588)
+    - Include debian/tests/dirfd to test the fix.
+
+ -- Santiago Ruano Rincón <santiago@debian.org>  Fri, 21 Jul 2023 18:33:27 -0300
+
 grep (3.11-1) unstable; urgency=low
 
   [ Debian Janitor ]
