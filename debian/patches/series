@@ -4,3 +4,4 @@ XFAIL-test-regex.patch
 05-grep-wrapper-sh.patch
 1019724-handle-backslash-warning.patch
 grep-dirfd.patch
+clean.patch
