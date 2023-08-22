@@ -1,3 +1,10 @@
+grep (3.11-3) unstable; urgency=medium
+
+  * Add patch to remove generated files in clean target. Patch by Bas
+    Couwenberg <sebastic@debian.org> (Closes: #1050294)
+
+ -- Santiago Ruano Rincón <santiago@debian.org>  Tue, 22 Aug 2023 14:49:07 -0300
+
 grep (3.11-2) unstable; urgency=low
 
   * Add d/patches/grep-dirfd.patch to fix gnulib bug that produces an
