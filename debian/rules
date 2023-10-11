@@ -3,6 +3,10 @@
 
 export DH_VERBOSE=1
 
+ifneq ($(filter nodoc,$(DEB_BUILD_PROFILES)),)
+export MAKEINFO = true
+endif
+
 export DEB_BUILD_MAINT_OPTIONS = hardening=+all
 export DEB_CFLAGS_MAINT_APPEND = -O3
 export DEB_CPPFLAGS_MAINT_APPEND = -DHAVE_DYNAMIC_LIBPCRE
