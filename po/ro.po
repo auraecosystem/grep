@@ -18,14 +18,16 @@
 # Actualizare a traducerii pentru versiunea 3.7.62, făcută de R-GC, apr-2022.
 # Actualizare a traducerii pentru versiunea 3.7.98, făcută de R-GC, iul-2022.
 # Actualizare a traducerii pentru versiunea 3.8.35, făcută de R-GC, feb-2023.
-# Actualizare a traducerii pentru versiunea Y, făcută de X, Z(anul).
+# Actualizare a traducerii pentru versiunea 3.10.7, făcută de R-GC, apr-2023.
+# Actualizare a traducerii pentru versiunea 3.10.12, făcută de R-GC, apr-2023.
+# Actualizare a traducerii pentru versiunea Y, făcută de X, Z(luna-anul).
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: grep 3.8.35\n"
+"Project-Id-Version: grep 3.10.12\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2023-03-05 07:28-0800\n"
-"PO-Revision-Date: 2023-02-28 15:41+0100\n"
+"POT-Creation-Date: 2023-05-13 01:14-0700\n"
+"PO-Revision-Date: 2023-04-21 16:56+0200\n"
 "Last-Translator: Remus-Gabriel Chelu <remusgabriel.chelu@disroot.org>\n"
 "Language-Team: Romanian <translation-team-ro@lists.sourceforge.net>\n"
 "Language: ro\n"
@@ -47,7 +49,7 @@ msgstr "argument nevalid %s pentru %s"
 msgid "ambiguous argument %s for %s"
 msgstr "argument ambiguu %s pentru %s"
 
-#: lib/argmatch.c:165 lib/argmatch.h:237
+#: lib/argmatch.c:165 lib/argmatch.h:242
 msgid "Valid arguments are:"
 msgstr "Argumentele valide sunt:"
 
@@ -83,48 +85,48 @@ msgstr "sintaxa de clasă de caractere este [[:spațiu:]], nu [:spațiu]"
 # a devenit:
 # „eludare « \ » neterminată”, adică,
 # mesajul actual.
-#: lib/dfa.c:1217
+#: lib/dfa.c:1222
 msgid "unfinished \\ escape"
 msgstr "eludare « \\ » neterminată"
 
-#: lib/dfa.c:1327
+#: lib/dfa.c:1332
 msgid "? at start of expression"
 msgstr "„?” la începutul expresiei"
 
-#: lib/dfa.c:1339
+#: lib/dfa.c:1344
 msgid "* at start of expression"
 msgstr "„*” la începutul expresiei"
 
-#: lib/dfa.c:1353
+#: lib/dfa.c:1358
 msgid "+ at start of expression"
 msgstr "„+” la începutul expresiei"
 
-#: lib/dfa.c:1408
+#: lib/dfa.c:1413
 msgid "{...} at start of expression"
 msgstr "„{...}” la începutul expresiei"
 
-#: lib/dfa.c:1411
+#: lib/dfa.c:1416
 msgid "invalid content of \\{\\}"
 msgstr "conținut nevalid al \\{\\}"
 
-#: lib/dfa.c:1413
+#: lib/dfa.c:1418
 msgid "regular expression too big"
 msgstr "expresia regulată este prea lungă"
 
-#: lib/dfa.c:1563
+#: lib/dfa.c:1568
 msgid "stray \\ before unprintable character"
 msgstr "caracter în plus „\\”, înainte de caracter neimprimabil"
 
-#: lib/dfa.c:1565
+#: lib/dfa.c:1570
 msgid "stray \\ before white space"
 msgstr "caracter în plus „\\”, înainte de spațiu în alb"
 
-#: lib/dfa.c:1569
+#: lib/dfa.c:1574
 #, c-format
 msgid "stray \\ before %lc"
 msgstr "caracter în plus „\\”, înainte de „%lc”"
 
-#: lib/dfa.c:1570
+#: lib/dfa.c:1575
 msgid "stray \\"
 msgstr "caracter în plus „\\”"
 
@@ -806,70 +808,84 @@ msgstr ""
 "Scris de Mike Haertel și alții; consultați\n"
 "<https://git.savannah.gnu.org/cgit/grep.git/tree/AUTHORS>."
 
-#: src/grep.c:2934
+#: src/grep.c:2937
 #, c-format
 msgid "warning: GREP_COLOR='%s' is deprecated; use GREP_COLORS='mt=%s'"
 msgstr ""
 "avertisment: variabila GREP_COLOR='%s' este depreciată; utilizați "
 "GREP_COLORS='mt=%s'"
 
-#: src/pcresearch.c:153
+#: src/pcresearch.c:92
+#, c-format
+msgid ""
+"\n"
+"grep -P uses PCRE2 %s\n"
+msgstr ""
+"\n"
+"«grep -P» utilizează PCRE2 %s\n"
+
+#: src/pcresearch.c:169
 msgid "-P supports only unibyte locales on this platform"
 msgstr ""
 "opțiunea „-P” acceptă doar configurări regionale unioctet pe această "
 "platformă"
 
-#: src/pcresearch.c:155
+#: src/pcresearch.c:171
 msgid "-P supports only unibyte and UTF-8 locales"
 msgstr "opțiunea „-P” suportă doar configurări regionale unioctet și UTF-8"
 
-#: src/pcresearch.c:169
+#: src/pcresearch.c:194
 msgid "the -P option only supports a single pattern"
 msgstr "opțiunea „-P” suportă doar un singur model"
 
-#: src/pcresearch.c:222
-#, c-format
-msgid "JIT internal error: %d"
-msgstr "eroare internă JIT: %d"
-
-#: src/pcresearch.c:259
+#: src/pcresearch.c:290
 msgid "exceeded PCRE's line length limit"
 msgstr "s-a depășit limita de lungime a liniei PCRE"
 
-#: src/pcresearch.c:337
+#: src/pcresearch.c:368
 #, c-format
 msgid "%s: memory exhausted"
 msgstr "%s: memorie epuizată"
 
-#: src/pcresearch.c:340
+#: src/pcresearch.c:371
 #, c-format
 msgid "%s: exhausted PCRE JIT stack"
 msgstr "%s: s-a epuizat stiva PCRE JIT"
 
-#: src/pcresearch.c:344
+#: src/pcresearch.c:375
 #, c-format
 msgid "%s: exceeded PCRE's backtracking limit"
 msgstr "%s: limita de referință inversă a PCRE a fost depășită"
 
-#: src/pcresearch.c:349
+#: src/pcresearch.c:380
 #, c-format
 msgid "%s: exceeded PCRE's nested backtracking limit"
 msgstr "%s: limita de referință inversă suprapusă a PCRE a fost depășită"
 
-#: src/pcresearch.c:353
+#: src/pcresearch.c:384
 #, c-format
 msgid "%s: PCRE detected recurse loop"
 msgstr "%s: PCRE a detectat o buclă recursivă"
 
-#: src/pcresearch.c:358
+#: src/pcresearch.c:389
 #, c-format
 msgid "%s: exceeded PCRE's heap limit"
 msgstr "%s: limita de stivă a PCRE a fost depășită"
 
-#: src/pcresearch.c:367
+#: src/pcresearch.c:398
 #, c-format
 msgid "%s: internal PCRE error: %d"
 msgstr "%s: eroare PCRE internă: %d"
+
+#~ msgid ""
+#~ "\n"
+#~ "Built with PCRE "
+#~ msgstr ""
+#~ "\n"
+#~ "Construit cu PCRE "
+
+#~ msgid "JIT internal error: %d"
+#~ msgstr "eroare internă JIT: %d"
 
 #~ msgid "failed to allocate memory for the PCRE JIT stack"
 #~ msgstr "nu s-a putut aloca memorie pentru stiva PCRE JIT"

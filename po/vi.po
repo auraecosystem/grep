@@ -3,23 +3,22 @@
 # Copyright © 2016 Free Software Foundation, Inc.
 # This file is distributed under the same license as the grep package.
 # Clytie Siddall <clytie@riverland.net.au>, 2005-2010.
-# Trần Ngọc Quân <vnwildman@gmail.com>, 2012-2018, 2022.
+# Trần Ngọc Quân <vnwildman@gmail.com>, 2012-2018, 2022-2023.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: grep 3.7.62\n"
+"Project-Id-Version: grep 3.10.12\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2023-03-05 07:28-0800\n"
-"PO-Revision-Date: 2022-04-30 08:40+0700\n"
+"POT-Creation-Date: 2023-05-13 01:14-0700\n"
+"PO-Revision-Date: 2023-04-23 15:06+0700\n"
 "Last-Translator: Trần Ngọc Quân <vnwildman@gmail.com>\n"
 "Language-Team: Vietnamese <translation-team-vi@lists.sourceforge.net>\n"
 "Language: vi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
 "X-Bugs: Report translation errors to the Language-Team address.\n"
-"X-Generator: Poedit 3.0.1\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: lib/argmatch.c:145
 #, c-format
@@ -31,7 +30,7 @@ msgstr "đối số %s không hợp lệ đối với %s"
 msgid "ambiguous argument %s for %s"
 msgstr "đối số %s không rõ ràng đối với %s"
 
-#: lib/argmatch.c:165 lib/argmatch.h:237
+#: lib/argmatch.c:165 lib/argmatch.h:242
 msgid "Valid arguments are:"
 msgstr "Các đối số hợp lệ là:"
 
@@ -59,53 +58,50 @@ msgstr "sai lớp ký tự"
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr "cú pháp lớp ký tự là [[:space:]], không phải [:space:]"
 
-#: lib/dfa.c:1217
+#: lib/dfa.c:1222
 msgid "unfinished \\ escape"
 msgstr "chưa kết thúc thoát chuỗi \\"
 
-#: lib/dfa.c:1327
-#, fuzzy
+#: lib/dfa.c:1332
 msgid "? at start of expression"
-msgstr "Biểu thức chính quy không hợp lệ"
+msgstr "? ở đầu biểu thức"
 
-#: lib/dfa.c:1339
-#, fuzzy
+#: lib/dfa.c:1344
 msgid "* at start of expression"
-msgstr "Biểu thức chính quy không hợp lệ"
+msgstr "* ở đầu biểu thức"
 
-#: lib/dfa.c:1353
-#, fuzzy
+#: lib/dfa.c:1358
 msgid "+ at start of expression"
-msgstr "Biểu thức chính quy không hợp lệ"
+msgstr "+ ở đầu biểu thức"
 
-#: lib/dfa.c:1408
+#: lib/dfa.c:1413
 msgid "{...} at start of expression"
-msgstr ""
+msgstr "{...} ở đầu của biểu thức"
 
-#: lib/dfa.c:1411
+#: lib/dfa.c:1416
 msgid "invalid content of \\{\\}"
 msgstr "nội dung của \\{\\} không hợp lệ"
 
-#: lib/dfa.c:1413
+#: lib/dfa.c:1418
 msgid "regular expression too big"
 msgstr "biểu thức chính quy quá lớn"
 
-#: lib/dfa.c:1563
+#: lib/dfa.c:1568
 msgid "stray \\ before unprintable character"
-msgstr ""
-
-#: lib/dfa.c:1565
-msgid "stray \\ before white space"
-msgstr ""
-
-#: lib/dfa.c:1569
-#, c-format
-msgid "stray \\ before %lc"
-msgstr ""
+msgstr "thừa \\ trước ký tự không in được"
 
 #: lib/dfa.c:1570
+msgid "stray \\ before white space"
+msgstr "thừa \\ trước ký tự khoảng trắng"
+
+#: lib/dfa.c:1574
+#, c-format
+msgid "stray \\ before %lc"
+msgstr "thừa \\ trước %lc"
+
+#: lib/dfa.c:1575
 msgid "stray \\"
-msgstr ""
+msgstr "thừa \\"
 
 #: lib/dfa.c:1925
 msgid "unbalanced ("
@@ -444,9 +440,9 @@ msgid "General help using GNU software: <%s>\n"
 msgstr "Trợ giúp chung về cách sử dụng phần mềm GNU: <%s>\n"
 
 #: src/dfasearch.c:59
-#, fuzzy, c-format
+#, c-format
 msgid "warning: %s"
-msgstr "cảnh báo: %s: %s"
+msgstr "cảnh báo: %s"
 
 #: src/grep.c:656
 msgid "(standard input)"
@@ -739,75 +735,80 @@ msgid "unknown binary-files type"
 msgstr "không rõ kiểu tập tin nhị phân (binary-files)"
 
 #: src/grep.c:2831
-#, fuzzy
 msgid ""
 "Written by Mike Haertel and others; see\n"
 "<https://git.savannah.gnu.org/cgit/grep.git/tree/AUTHORS>."
 msgstr ""
 "Được viết bởi Mike Haertel và nhiều người khác, xem tại\n"
-"<https://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>."
+"<https://git.savannah.gnu.org/cgit/grep.git/tree/AUTHORS>."
 
-#: src/grep.c:2934
+#: src/grep.c:2937
 #, c-format
 msgid "warning: GREP_COLOR='%s' is deprecated; use GREP_COLORS='mt=%s'"
+msgstr "cảnh báo: GREP_COLOR='%s' đã lạc hậu; dùng GREP_COLORS='mt=%s'"
+
+#: src/pcresearch.c:92
+#, c-format
+msgid ""
+"\n"
+"grep -P uses PCRE2 %s\n"
 msgstr ""
+"\n"
+"grep -P dùng PCRE2 %s\n"
 
-#: src/pcresearch.c:153
-#, fuzzy
+#: src/pcresearch.c:169
 msgid "-P supports only unibyte locales on this platform"
-msgstr "-P chỉ hỗ trợ miền địa phương unibyte và UTF-8"
+msgstr "-P chỉ hỗ trợ miền địa phương unibyte trên hệ thống này"
 
-#: src/pcresearch.c:155
+#: src/pcresearch.c:171
 msgid "-P supports only unibyte and UTF-8 locales"
 msgstr "-P chỉ hỗ trợ miền địa phương unibyte và UTF-8"
 
-#: src/pcresearch.c:169
+#: src/pcresearch.c:194
 msgid "the -P option only supports a single pattern"
 msgstr "tùy chọn “-P” chỉ hỗ trợ một mẫu đơn lẻ"
 
-#: src/pcresearch.c:222
-#, c-format
-msgid "JIT internal error: %d"
-msgstr "Lỗi nội bộ JIT: %d"
-
-#: src/pcresearch.c:259
+#: src/pcresearch.c:290
 msgid "exceeded PCRE's line length limit"
 msgstr "đã vượt quá giới hạn chiều dài dòng của PCRE"
 
-#: src/pcresearch.c:337
+#: src/pcresearch.c:368
 #, c-format
 msgid "%s: memory exhausted"
 msgstr "%s: hết bộ nhớ"
 
-#: src/pcresearch.c:340
+#: src/pcresearch.c:371
 #, c-format
 msgid "%s: exhausted PCRE JIT stack"
 msgstr "%s: ngăn xếp “PCRE JIT” đã hết"
 
-#: src/pcresearch.c:344
+#: src/pcresearch.c:375
 #, c-format
 msgid "%s: exceeded PCRE's backtracking limit"
 msgstr "%s: đã vượt quá giới hạn tìm ngược của PCRE"
 
-#: src/pcresearch.c:349
+#: src/pcresearch.c:380
 #, c-format
 msgid "%s: exceeded PCRE's nested backtracking limit"
 msgstr "%s: đã vượt quá giới hạn tìm ngược lồng nhau của PCRE"
 
-#: src/pcresearch.c:353
+#: src/pcresearch.c:384
 #, c-format
 msgid "%s: PCRE detected recurse loop"
 msgstr "%s : PCRE phát hiện vòng lặp quẩn tròn"
 
-#: src/pcresearch.c:358
+#: src/pcresearch.c:389
 #, c-format
 msgid "%s: exceeded PCRE's heap limit"
 msgstr "%s: đã vượt quá giới hạn bộ nhớ heap của PCRE"
 
-#: src/pcresearch.c:367
+#: src/pcresearch.c:398
 #, c-format
 msgid "%s: internal PCRE error: %d"
 msgstr "%s: lỗi nội bộ PCRE: %d"
+
+#~ msgid "JIT internal error: %d"
+#~ msgstr "Lỗi nội bộ JIT: %d"
 
 #~ msgid "warning: GREP_OPTIONS is deprecated; please use an alias or script"
 #~ msgstr ""

@@ -1,5 +1,5 @@
-/* Test of <time.h> substitute.
-   Copyright (C) 2007, 2009-2023 Free Software Foundation, Inc.
+/* Test of time() function.
+   Copyright (C) 2023 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -14,30 +14,36 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
 
-/* Written by Bruno Haible <bruno@clisp.org>, 2007.  */
+/* Written by Bruno Haible.  */
 
 #include <config.h>
 
 #include <time.h>
 
-/* Check that the types are all defined.  */
-struct timespec t1;
-#if 0
-/* POSIX:2008 does not require pid_t in <time.h> unconditionally, and indeed
-   it's missing on Mac OS X 10.5, FreeBSD 6.4, OpenBSD 4.9, mingw.  */
-pid_t t2;
-#endif
+#include "signature.h"
+SIGNATURE_CHECK (time, time_t, (time_t *));
 
-/* Check that NULL can be passed through varargs as a pointer type,
-   per POSIX 2008.  */
-static_assert (sizeof NULL == sizeof (void *));
+#include <sys/time.h>
 
-/* Check that TIME_UTC is defined and a positive integer.  */
-int t3 = TIME_UTC;
-static_assert (TIME_UTC > 0);
+#include "macros.h"
 
 int
 main (void)
 {
+  /* Check consistency of time() with gettimeofday().tv_sec.  */
+  struct timeval tv1;
+  struct timeval tv2;
+  time_t tt3;
+
+  /* Wait until gettimeofday() reports an increase in tv_sec.  */
+  ASSERT (gettimeofday (&tv1, NULL) == 0);
+  do
+    ASSERT (gettimeofday (&tv2, NULL) == 0);
+  while (tv2.tv_sec == tv1.tv_sec);
+  /* We are now at the beginning of a second.  Test whether time() reports
+     the new second or the previous one.  */
+  tt3 = time (NULL);
+  ASSERT (tt3 >= tv2.tv_sec);
+
   return 0;
 }

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GNU grep-3.1.48\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2023-03-05 07:28-0800\n"
+"POT-Creation-Date: 2023-05-13 01:14-0700\n"
 "PO-Revision-Date: 2019-07-18 22:11+0200\n"
 "Last-Translator: Àngel Mompó <mecatxis@mecatxis.cat>\n"
 "Language-Team: Catalan <ca@dodds.net>\n"
@@ -30,7 +30,7 @@ msgstr "l'argument %s no és vàlid per %s"
 msgid "ambiguous argument %s for %s"
 msgstr "l'argument %s és ambigu per %s"
 
-#: lib/argmatch.c:165 lib/argmatch.h:237
+#: lib/argmatch.c:165 lib/argmatch.h:242
 msgid "Valid arguments are:"
 msgstr "Els arguments vàlids són:"
 
@@ -58,51 +58,51 @@ msgstr "La classe de caràcter no és vàlida"
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr "La sintaxi de la classe de caràcter és [[:espai:]], no [:espai:]"
 
-#: lib/dfa.c:1217
+#: lib/dfa.c:1222
 msgid "unfinished \\ escape"
 msgstr "Codi d'escapada \\ inacabat"
 
-#: lib/dfa.c:1327
+#: lib/dfa.c:1332
 #, fuzzy
 msgid "? at start of expression"
 msgstr "L'expressió regular no és vàlida"
 
-#: lib/dfa.c:1339
+#: lib/dfa.c:1344
 #, fuzzy
 msgid "* at start of expression"
 msgstr "L'expressió regular no és vàlida"
 
-#: lib/dfa.c:1353
+#: lib/dfa.c:1358
 #, fuzzy
 msgid "+ at start of expression"
 msgstr "L'expressió regular no és vàlida"
 
-#: lib/dfa.c:1408
+#: lib/dfa.c:1413
 msgid "{...} at start of expression"
 msgstr ""
 
-#: lib/dfa.c:1411
+#: lib/dfa.c:1416
 msgid "invalid content of \\{\\}"
 msgstr "el context de \\{\\} no és vàlid"
 
-#: lib/dfa.c:1413
+#: lib/dfa.c:1418
 msgid "regular expression too big"
 msgstr "l'expressió regular és massa gran"
 
-#: lib/dfa.c:1563
+#: lib/dfa.c:1568
 msgid "stray \\ before unprintable character"
 msgstr ""
 
-#: lib/dfa.c:1565
+#: lib/dfa.c:1570
 msgid "stray \\ before white space"
 msgstr ""
 
-#: lib/dfa.c:1569
+#: lib/dfa.c:1574
 #, c-format
 msgid "stray \\ before %lc"
 msgstr ""
 
-#: lib/dfa.c:1570
+#: lib/dfa.c:1575
 msgid "stray \\"
 msgstr ""
 
@@ -756,71 +756,77 @@ msgid ""
 "<https://git.savannah.gnu.org/cgit/grep.git/tree/AUTHORS>."
 msgstr "la resta, vegeu <https://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>"
 
-#: src/grep.c:2934
+#: src/grep.c:2937
 #, c-format
 msgid "warning: GREP_COLOR='%s' is deprecated; use GREP_COLORS='mt=%s'"
 msgstr ""
 
-#: src/pcresearch.c:153
+#: src/pcresearch.c:92
+#, c-format
+msgid ""
+"\n"
+"grep -P uses PCRE2 %s\n"
+msgstr ""
+
+#: src/pcresearch.c:169
 #, fuzzy
 msgid "-P supports only unibyte locales on this platform"
 msgstr "-P només permet la configuració local en unibyte i en UTF-8"
 
-#: src/pcresearch.c:155
+#: src/pcresearch.c:171
 msgid "-P supports only unibyte and UTF-8 locales"
 msgstr "-P només permet la configuració local en unibyte i en UTF-8"
 
-#: src/pcresearch.c:169
+#: src/pcresearch.c:194
 msgid "the -P option only supports a single pattern"
 msgstr "l'opció -P només suporta un sol patró"
 
-#: src/pcresearch.c:222
-#, fuzzy, c-format
-msgid "JIT internal error: %d"
-msgstr "error intern"
-
 # PCRE is 'Perl Compatible Regular Expression'
-#: src/pcresearch.c:259
+#: src/pcresearch.c:290
 msgid "exceeded PCRE's line length limit"
 msgstr "s'ha superat el límit de longitud de línia del PCRE"
 
-#: src/pcresearch.c:337
+#: src/pcresearch.c:368
 #, fuzzy, c-format
 msgid "%s: memory exhausted"
 msgstr "memòria exhaurida"
 
-#: src/pcresearch.c:340
+#: src/pcresearch.c:371
 #, fuzzy, c-format
 msgid "%s: exhausted PCRE JIT stack"
 msgstr "S'ha acabat la pila del PCRE JIT"
 
 # PCRE is 'Perl Compatible Regular Expression'
-#: src/pcresearch.c:344
+#: src/pcresearch.c:375
 #, fuzzy, c-format
 msgid "%s: exceeded PCRE's backtracking limit"
 msgstr "s'ha superat el límit de l'estratègia «tornada enrere» del PCRE"
 
 # PCRE is 'Perl Compatible Regular Expression'
-#: src/pcresearch.c:349
+#: src/pcresearch.c:380
 #, fuzzy, c-format
 msgid "%s: exceeded PCRE's nested backtracking limit"
 msgstr "s'ha superat el límit de l'estratègia «tornada enrere» del PCRE"
 
-#: src/pcresearch.c:353
+#: src/pcresearch.c:384
 #, c-format
 msgid "%s: PCRE detected recurse loop"
 msgstr ""
 
 # PCRE is 'Perl Compatible Regular Expression'
-#: src/pcresearch.c:358
+#: src/pcresearch.c:389
 #, fuzzy, c-format
 msgid "%s: exceeded PCRE's heap limit"
 msgstr "s'ha superat el límit de l'estratègia «tornada enrere» del PCRE"
 
-#: src/pcresearch.c:367
+#: src/pcresearch.c:398
 #, fuzzy, c-format
 msgid "%s: internal PCRE error: %d"
 msgstr "error intern del PCRE: %d"
+
+#, fuzzy, c-format
+#~ msgid "JIT internal error: %d"
+#~ msgstr "error intern"
 
 #~ msgid "failed to allocate memory for the PCRE JIT stack"
 #~ msgstr "no s'ha pogut assignar memòria per la pila JIT del PCRE"

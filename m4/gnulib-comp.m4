@@ -243,6 +243,7 @@ AC_DEFUN([gl_EARLY],
   # Code from module langinfo-tests:
   # Code from module largefile:
   AC_REQUIRE([AC_SYS_LARGEFILE])
+  # Code from module largefile-tests:
   # Code from module libc-config:
   # Code from module limits-h:
   # Code from module limits-h-tests:
@@ -271,6 +272,7 @@ AC_DEFUN([gl_EARLY],
   # Code from module mbchar:
   # Code from module mbiter:
   # Code from module mbrlen:
+  # Code from module mbrlen-tests:
   # Code from module mbrtowc:
   # Code from module mbscasecmp:
   # Code from module mbscasecmp-tests:
@@ -404,6 +406,7 @@ AC_DEFUN([gl_EARLY],
   # Code from module stdint:
   # Code from module stdint-tests:
   # Code from module stdio:
+  gl_STDIO_H_EARLY
   # Code from module stdio-tests:
   # Code from module stdlib:
   # Code from module stdlib-tests:
@@ -457,8 +460,11 @@ AC_DEFUN([gl_EARLY],
   # Code from module threadlib:
   gl_THREADLIB_EARLY
   # Code from module time:
+  # Code from module time-h:
+  # Code from module time-h-tests:
   # Code from module time-tests:
   # Code from module trim:
+  # Code from module trim-tests:
   # Code from module unistd:
   # Code from module unistd-safer:
   # Code from module unistd-safer-tests:
@@ -521,6 +527,9 @@ AC_DEFUN([gl_EARLY],
   # Code from module xstrtol:
   # Code from module xstrtol-error:
   # Code from module xstrtol-tests:
+  # Code from module year2038:
+  AC_REQUIRE([AC_SYS_YEAR2038])
+  # Code from module year2038-tests:
 ])
 
 # This macro should be invoked from ./configure.ac, in the section
@@ -601,7 +610,7 @@ AC_DEFUN([gl_INIT],
   AC_PROG_MKDIR_P
   gl_FUNC_DIRFD
   gl_CONDITIONAL([GL_COND_OBJ_DIRFD],
-                 [test $ac_cv_func_dirfd = no && test $gl_cv_func_dirfd_macro = no || test $REPLACE_DIRFD = 1])
+                 [test $HAVE_DIRFD = 0 || test $REPLACE_DIRFD = 1])
   AM_COND_IF([GL_COND_OBJ_DIRFD], [
     gl_PREREQ_DIRFD
   ])
@@ -990,7 +999,8 @@ AC_DEFUN([gl_INIT],
   ])
   gl_UNISTD_MODULE_INDICATOR([read])
   gl_FUNC_READDIR
-  gl_CONDITIONAL([GL_COND_OBJ_READDIR], [test $HAVE_READDIR = 0])
+  gl_CONDITIONAL([GL_COND_OBJ_READDIR],
+                 [test $HAVE_READDIR = 0 || test $REPLACE_READDIR = 1])
   gl_DIRENT_MODULE_INDICATOR([readdir])
   gl_FUNC_REALLOC_GNU
   if test $REPLACE_REALLOC_FOR_REALLOC_GNU = 1; then
@@ -1453,6 +1463,10 @@ changequote([, ])dnl
   gl_LOCALENAME
   gl_LOCALE_MODULE_INDICATOR([localename])
   gl_CHECK_FUNCS_ANDROID([newlocale], [[#include <locale.h>]])
+  gt_LOCALE_FR
+  gt_LOCALE_FR_UTF8
+  gt_LOCALE_JA
+  gt_LOCALE_ZH_CN
   gt_LOCALE_TR_UTF8
   gt_LOCALE_FR_UTF8
   gt_LOCALE_FR
@@ -1578,6 +1592,7 @@ changequote([, ])dnl
   gl_TYPE_SOCKLEN_T
   AC_REQUIRE([gt_TYPE_WCHAR_T])
   AC_REQUIRE([gt_TYPE_WINT_T])
+  gl_DOUBLE_EXPONENT_LOCATION
   gl_FUNC_STRERROR_R
   AS_IF([test $HAVE_DECL_STRERROR_R = 0 || test $REPLACE_STRERROR_R = 1], [
     AC_LIBOBJ([strerror_r])
@@ -1616,6 +1631,12 @@ changequote([, ])dnl
   AC_PROG_MKDIR_P
   gl_THREAD
   AC_CHECK_HEADERS([sys/single_threaded.h])
+  gl_FUNC_TIME
+  gl_CONDITIONAL([GL_COND_OBJ_TIME], [test $REPLACE_TIME = 1])
+  AM_COND_IF([GL_COND_OBJ_TIME], [
+    gl_PREREQ_TIME
+  ])
+  gl_TIME_MODULE_INDICATOR([time])
   gl_FUNC_UNSETENV
   gl_CONDITIONAL([GL_COND_OBJ_UNSETENV],
                  [test $HAVE_UNSETENV = 0 || test $REPLACE_UNSETENV = 1])
@@ -2133,12 +2154,14 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/extensions.m4
   m4/extern-inline.m4
   m4/fchdir.m4
+  m4/fclose.m4
   m4/fcntl-o.m4
   m4/fcntl-safer.m4
   m4/fcntl.m4
   m4/fcntl_h.m4
   m4/fdopen.m4
   m4/fdopendir.m4
+  m4/fflush.m4
   m4/filenamecat.m4
   m4/flexmember.m4
   m4/float_h.m4
@@ -2306,6 +2329,7 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/sys_uio_h.m4
   m4/thread.m4
   m4/threadlib.m4
+  m4/time.m4
   m4/time_h.m4
   m4/unistd-safer.m4
   m4/unistd_h.m4
@@ -2336,6 +2360,7 @@ AC_DEFUN([gl_FILE_LIST], [
   tests/locale.c
   tests/macros.h
   tests/mmap-anon-util.h
+  tests/nan.h
   tests/nap.h
   tests/signature.h
   tests/test-accept.c
@@ -2352,6 +2377,7 @@ AC_DEFUN([gl_FILE_LIST], [
   tests/test-btowc.c
   tests/test-btowc1.sh
   tests/test-btowc2.sh
+  tests/test-btowc3.sh
   tests/test-c-ctype.c
   tests/test-c-stack.c
   tests/test-c-stack.sh
@@ -2440,6 +2466,7 @@ AC_DEFUN([gl_FILE_LIST], [
   tests/test-iswxdigit.c
   tests/test-iswxdigit.sh
   tests/test-langinfo.c
+  tests/test-largefile.c
   tests/test-limits-h.c
   tests/test-listen.c
   tests/test-localcharset.c
@@ -2452,6 +2479,20 @@ AC_DEFUN([gl_FILE_LIST], [
   tests/test-lstat.h
   tests/test-malloc-gnu.c
   tests/test-malloca.c
+  tests/test-mbrlen-w32-1.sh
+  tests/test-mbrlen-w32-2.sh
+  tests/test-mbrlen-w32-3.sh
+  tests/test-mbrlen-w32-4.sh
+  tests/test-mbrlen-w32-5.sh
+  tests/test-mbrlen-w32-6.sh
+  tests/test-mbrlen-w32-7.sh
+  tests/test-mbrlen-w32.c
+  tests/test-mbrlen.c
+  tests/test-mbrlen1.sh
+  tests/test-mbrlen2.sh
+  tests/test-mbrlen3.sh
+  tests/test-mbrlen4.sh
+  tests/test-mbrlen5.sh
   tests/test-mbscasecmp.c
   tests/test-mbscasecmp.sh
   tests/test-mbsinit.c
@@ -2461,6 +2502,7 @@ AC_DEFUN([gl_FILE_LIST], [
   tests/test-mbsrtowcs2.sh
   tests/test-mbsrtowcs3.sh
   tests/test-mbsrtowcs4.sh
+  tests/test-mbsrtowcs5.sh
   tests/test-mbsstr1.c
   tests/test-mbsstr2.c
   tests/test-mbsstr2.sh
@@ -2554,7 +2596,12 @@ AC_DEFUN([gl_FILE_LIST], [
   tests/test-sys_wait.h
   tests/test-thread_create.c
   tests/test-thread_self.c
+  tests/test-time-h.c
   tests/test-time.c
+  tests/test-trim.c
+  tests/test-trim1.sh
+  tests/test-trim2.sh
+  tests/test-trim3.sh
   tests/test-unistd.c
   tests/test-unsetenv.c
   tests/test-vasnprintf.c
@@ -2585,6 +2632,7 @@ AC_DEFUN([gl_FILE_LIST], [
   tests/test-xstrtol.c
   tests/test-xstrtol.sh
   tests/test-xstrtoul.c
+  tests/test-year2038.c
   tests/unistr/test-u8-mbtoucr.c
   tests/unistr/test-u8-uctomb.c
   tests/uniwidth/test-uc_width.c
@@ -2660,6 +2708,7 @@ AC_DEFUN([gl_FILE_LIST], [
   tests=lib/sys_time.in.h
   tests=lib/sys_uio.in.h
   tests=lib/thread-optim.h
+  tests=lib/time.c
   tests=lib/uinttostr.c
   tests=lib/umaxtostr.c
   tests=lib/unsetenv.c

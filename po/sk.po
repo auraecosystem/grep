@@ -2,14 +2,14 @@
 # Copyright (C) 1997-99, 2000, 2001, 2002 Free Software Foundation, Inc.
 # This file is distributed under the same license as the grep package.
 # Ivan Masár <helix84@centrum.sk>, 2007, 2008, 2009, 2010, 2011, 2012.
-# Ladislav Michnovič <ladislav.michnovic@gmail.com>, 2020, 2021, 2022.
+# Ladislav Michnovič <ladislav.michnovic@gmail.com>, 2020, 2021, 2022, 2023.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: grep 3.7.98\n"
+"Project-Id-Version: grep 3.10.12\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2023-03-05 07:28-0800\n"
-"PO-Revision-Date: 2022-08-18 14:34+0200\n"
+"POT-Creation-Date: 2023-05-13 01:14-0700\n"
+"PO-Revision-Date: 2023-04-21 16:22+0200\n"
 "Last-Translator: Ladislav Michnovič <ladislav.michnovic@gmail.com>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
 "Language: sk\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Bugs: Report translation errors to the Language-Team address.\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #: lib/argmatch.c:145
 #, c-format
@@ -29,9 +29,9 @@ msgstr "neplatný argument %s pre %s"
 msgid "ambiguous argument %s for %s"
 msgstr "nejednoznačný argument %s pre %s"
 
-#: lib/argmatch.c:165 lib/argmatch.h:237
+#: lib/argmatch.c:165 lib/argmatch.h:242
 msgid "Valid arguments are:"
-msgstr "Platné argumentu sú:"
+msgstr "Platné argumenty sú:"
 
 #: lib/c-stack.c:186
 msgid "program error"
@@ -57,48 +57,48 @@ msgstr "neplatná trieda znakov"
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr "syntax triedy znakov je [[:space:]], nie [:space:]"
 
-#: lib/dfa.c:1217
+#: lib/dfa.c:1222
 msgid "unfinished \\ escape"
 msgstr "nedokončená úniková klauzula \\"
 
-#: lib/dfa.c:1327
+#: lib/dfa.c:1332
 msgid "? at start of expression"
 msgstr "? na začiatku výrazu"
 
-#: lib/dfa.c:1339
+#: lib/dfa.c:1344
 msgid "* at start of expression"
 msgstr "* na začiatku výrazu"
 
-#: lib/dfa.c:1353
+#: lib/dfa.c:1358
 msgid "+ at start of expression"
 msgstr "+ na začiatku výrazu"
 
-#: lib/dfa.c:1408
+#: lib/dfa.c:1413
 msgid "{...} at start of expression"
 msgstr "{...} na začiatku výrazu"
 
-#: lib/dfa.c:1411
+#: lib/dfa.c:1416
 msgid "invalid content of \\{\\}"
 msgstr "neplatný obsah \\{\\}"
 
-#: lib/dfa.c:1413
+#: lib/dfa.c:1418
 msgid "regular expression too big"
 msgstr "regulárny výraz je príliš veľký"
 
-#: lib/dfa.c:1563
+#: lib/dfa.c:1568
 msgid "stray \\ before unprintable character"
 msgstr "zatúlaná \\ pred nevytlačitelným znakom"
 
-#: lib/dfa.c:1565
+#: lib/dfa.c:1570
 msgid "stray \\ before white space"
 msgstr "zatúlaná \\ pred bielym znakom"
 
-#: lib/dfa.c:1569
+#: lib/dfa.c:1574
 #, c-format
 msgid "stray \\ before %lc"
 msgstr "zatúlaná \\ pred %lc"
 
-#: lib/dfa.c:1570
+#: lib/dfa.c:1575
 msgid "stray \\"
 msgstr "zatúlaná \\"
 
@@ -165,7 +165,7 @@ msgstr "nepodarilo sa zaznamenať aktuálny adresár"
 #: lib/openat-die.c:57
 #, c-format
 msgid "failed to return to initial working directory"
-msgstr "zlyhalo navrátenie do pôvodného aktuálneho adresára"
+msgstr "zlyhal navrát do pôvodného aktuálneho adresára"
 
 #: lib/xbinary-io.c:36
 #, c-format
@@ -518,14 +518,14 @@ msgid ""
 "  -x, --line-regexp         match only whole lines\n"
 "  -z, --null-data           a data line ends in 0 byte, not newline\n"
 msgstr ""
-"  -e, --regexp=VZOR       použiť na hľadanie zhody VZOR\n"
+"  -e, --regexp=VZOR       použiť VZOR na hľadanie zhody\n"
 "  -f, --file=SÚBOR          získať VZOR zo SÚBORu\n"
 "  -i, --ignore-case         ignorovať rozdiely vo veľkosti písmen\n"
 "      --no-ignore-case      neignorovať rozdiely vo veľkosti písmen "
 "(predvolené)\n"
 "  -w, --word-regexp         vynútiť, aby VZOR zodpovedal len celým slovám\n"
 "  -x, --line-regexp         vynútiť, aby VZOR zodpovedal len celým riadkom\n"
-"  -z, --null-data           údaje končia bajtom 0, nie novým riadkom\n"
+"  -z, --null-data           údaje končia bajtom 0, nie odriadkovaním\n"
 
 #: src/grep.c:1999
 #, c-format
@@ -601,7 +601,7 @@ msgstr ""
 "  -d, --directories=OPERÁCIA ako pracovať s adresármi; kde OPERÁCIA je\n"
 "                            „read“ (čítať), „recurse“ (prechádzať) alebo\n"
 "                            „skip“ (preskočiť)\n"
-"  -D, --devices=OPERÁCIA    ako pracovať so zariadeniami, FIFO a socketmi;\n"
+"  -D, --devices=OPERÁCIA    ako pracovať so zariadeniami, FIFO a soketmi;\n"
 "                            OPERÁCIA je „read“ (čítať) alebo "
 "„skip“ (preskočiť)\n"
 "  -r, --recursive           ekvivalentné s --directories=recurse\n"
@@ -671,7 +671,7 @@ msgid ""
 "\n"
 msgstr ""
 "  -NUM                  rovnaké ako --context=NUM\n"
-"      --group-separator=SEP  vypíš oddeľovač SEP na riadok medzi zhodami s "
+"      --group-separator=ODD  vypíš oddeľovač ODD na riadok medzi zhodami s "
 "kontextom\n"
 "      --no-group-separator  nevypisuj oddeľovač pre zhody s kontextom\n"
 "      --color[=KEDY],\n"
@@ -688,10 +688,10 @@ msgid ""
 "Exit status is 0 if any line is selected, 1 otherwise;\n"
 "if any error occurs and -q is not given, the exit status is 2.\n"
 msgstr ""
-"Ak SÚBOR je -, číta sa zo štandardného vstupu. Bez SÚBORU číta sa . ak \n"
-"je rekurzia, v opačnom prípade -. Ak sú zadané menej ako dva SÚBORY "
+"Ak SÚBOR je “-“, číta sa zo štandardného vstupu. Bez SÚBORU, číta sa “.”,\n"
+"ak je rekurzia, v opačnom prípade “-“. Ak sú zadané menej ako dva SÚBORY, "
 "predpokladá sa -h.\n"
-"Výstupný chybový kód je 0 ak bol vybraný nejaký riadok,inak je 1;\n"
+"Výstupný chybový kód je 0, ak bol vybraný nejaký riadok,inak je 1;\n"
 "ak sa vyskytne nejaká chyba a nebolo zadané -q, výstupný chybový kód je 2.\n"
 
 #: src/grep.c:2104
@@ -726,76 +726,88 @@ msgid "unknown binary-files type"
 msgstr "neznámy typ binárneho súboru"
 
 #: src/grep.c:2831
-#, fuzzy
 msgid ""
 "Written by Mike Haertel and others; see\n"
 "<https://git.savannah.gnu.org/cgit/grep.git/tree/AUTHORS>."
 msgstr ""
-"Napísal Mike Haertel iní; pozri\n"
-"<https://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS>."
+"Napísal Mike Haertel a ďalší; pozri\n"
+"<https://git.savannah.gnu.org/cgit/grep.git/tree/AUTHORS>."
 
-#: src/grep.c:2934
+#: src/grep.c:2937
 #, c-format
 msgid "warning: GREP_COLOR='%s' is deprecated; use GREP_COLORS='mt=%s'"
 msgstr ""
 "upozornenie: GREP_COLOR='%s' sa už nepoužíva, použite GREP_COLORS='mt=%s'"
 
-#: src/pcresearch.c:153
-#, fuzzy
-msgid "-P supports only unibyte locales on this platform"
-msgstr "-P podporuje iba unibyte a UTF-8 locales"
+#: src/pcresearch.c:92
+#, c-format
+msgid ""
+"\n"
+"grep -P uses PCRE2 %s\n"
+msgstr ""
+"\n"
+"grep -P používa PCRE2 %s\n"
 
-#: src/pcresearch.c:155
+#: src/pcresearch.c:169
+msgid "-P supports only unibyte locales on this platform"
+msgstr "-P podporuje na tejto platforme iba unibyte locales"
+
+#: src/pcresearch.c:171
 msgid "-P supports only unibyte and UTF-8 locales"
 msgstr "-P podporuje iba unibyte a UTF-8 locales"
 
-#: src/pcresearch.c:169
+#: src/pcresearch.c:194
 msgid "the -P option only supports a single pattern"
 msgstr "voľba -P podporuje iba jediný vzor"
 
-#: src/pcresearch.c:222
-#, c-format
-msgid "JIT internal error: %d"
-msgstr "vnútorná chyba JIT: %d"
-
-#: src/pcresearch.c:259
+#: src/pcresearch.c:290
 msgid "exceeded PCRE's line length limit"
 msgstr "prekročenie limitu dĺžky riadka PCRE"
 
-#: src/pcresearch.c:337
+#: src/pcresearch.c:368
 #, c-format
 msgid "%s: memory exhausted"
 msgstr "%s: pamäť bola vyčerpaná"
 
-#: src/pcresearch.c:340
+#: src/pcresearch.c:371
 #, c-format
 msgid "%s: exhausted PCRE JIT stack"
 msgstr "%s: vyčerpaný zásobník PCRE JIT"
 
-#: src/pcresearch.c:344
+#: src/pcresearch.c:375
 #, c-format
 msgid "%s: exceeded PCRE's backtracking limit"
 msgstr "%s: prekročenie limitu backtrackingu PCRE"
 
-#: src/pcresearch.c:349
+#: src/pcresearch.c:380
 #, c-format
 msgid "%s: exceeded PCRE's nested backtracking limit"
 msgstr "%s: prekročenie limitu vnoreného spätného sledovania PCRE"
 
-#: src/pcresearch.c:353
+#: src/pcresearch.c:384
 #, c-format
 msgid "%s: PCRE detected recurse loop"
 msgstr "%s: PCRE zistilo rekurzívnu slučku"
 
-#: src/pcresearch.c:358
+#: src/pcresearch.c:389
 #, c-format
 msgid "%s: exceeded PCRE's heap limit"
 msgstr "%s: prekročenie limitu haldy PCRE"
 
-#: src/pcresearch.c:367
+#: src/pcresearch.c:398
 #, c-format
 msgid "%s: internal PCRE error: %d"
 msgstr "%s: vnútorná chyba PCRE: %d"
+
+#~ msgid ""
+#~ "\n"
+#~ "Built with PCRE "
+#~ msgstr ""
+#~ "\n"
+#~ "Zostavené s PCRE "
+
+#~ msgid "JIT internal error: %d"
+#~ msgstr "vnútorná chyba JIT: %d"
 
 #~ msgid "failed to allocate memory for the PCRE JIT stack"
 #~ msgstr "chyba pri alokácii pamäte pre zásobník PCRE JIT"

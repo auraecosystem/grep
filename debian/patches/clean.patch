@@ -1,0 +1,14 @@
+Description: Remove generated files in clean target.
+Author: Bas Couwenberg <sebastic@debian.org>
+
+--- a/doc/Makefile.am
++++ b/doc/Makefile.am
+@@ -22,7 +22,7 @@ grep_TEXINFOS = fdl.texi
+ man_MANS = grep.1
+ 
+ EXTRA_DIST = grep.in.1
+-CLEANFILES = grep.1
++CLEANFILES = grep.1 grep.info
+ 
+ grep.1: grep.in.1
+ 	$(AM_V_GEN)rm -f $@-t $@

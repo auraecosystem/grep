@@ -10,7 +10,7 @@ Index: grep/gnulib-tests/gnulib.mk
 ===================================================================
 --- grep.orig/gnulib-tests/gnulib.mk
 +++ grep/gnulib-tests/gnulib.mk
-@@ -1482,7 +1482,7 @@ EXTRA_DIST += test-reallocarray.c signat
+@@ -1511,7 +1511,7 @@ EXTRA_DIST += test-reallocarray.c signat
  
  ## begin gnulib module regex-tests
  

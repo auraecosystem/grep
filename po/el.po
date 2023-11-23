@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grep 2.11.11-pre1\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2023-03-05 07:28-0800\n"
+"POT-Creation-Date: 2023-05-13 01:14-0700\n"
 "PO-Revision-Date: 2012-05-05 23:23+0100\n"
 "Last-Translator: Savvas Radevic <vicedar@gmail.com>\n"
 "Language-Team: Greek <team@lists.gnome.gr>\n"
@@ -30,7 +30,7 @@ msgstr "άκυρη επιλογή %s για %s"
 msgid "ambiguous argument %s for %s"
 msgstr "διφορούμενη επιλογή %s για %s"
 
-#: lib/argmatch.c:165 lib/argmatch.h:237
+#: lib/argmatch.c:165 lib/argmatch.h:242
 msgid "Valid arguments are:"
 msgstr "Έγκυρες επιλογές είναι οι εξής:"
 
@@ -65,56 +65,56 @@ msgstr "η σύνταξη κατηγορίας χαρακτήρων είναι [
 
 # src/dfa.c:444
 # src/dfa.c:452
-#: lib/dfa.c:1217
+#: lib/dfa.c:1222
 #, fuzzy
 msgid "unfinished \\ escape"
 msgstr "Μη τερματισμένος χαρακτήρας διαφυγής \\"
 
-#: lib/dfa.c:1327
+#: lib/dfa.c:1332
 #, fuzzy
 msgid "? at start of expression"
 msgstr "Άκυρη κανονική έκφραση"
 
-#: lib/dfa.c:1339
+#: lib/dfa.c:1344
 #, fuzzy
 msgid "* at start of expression"
 msgstr "Άκυρη κανονική έκφραση"
 
-#: lib/dfa.c:1353
+#: lib/dfa.c:1358
 #, fuzzy
 msgid "+ at start of expression"
 msgstr "Άκυρη κανονική έκφραση"
 
-#: lib/dfa.c:1408
+#: lib/dfa.c:1413
 msgid "{...} at start of expression"
 msgstr ""
 
 # src/dfa.c:556 src/dfa.c:562 src/dfa.c:573 src/dfa.c:584
 # src/dfa.c:564 src/dfa.c:570 src/dfa.c:581 src/dfa.c:592
-#: lib/dfa.c:1411
+#: lib/dfa.c:1416
 #, fuzzy
 msgid "invalid content of \\{\\}"
 msgstr "μη έγκυρος μέγιστος μετρητής"
 
-#: lib/dfa.c:1413
+#: lib/dfa.c:1418
 #, fuzzy
 msgid "regular expression too big"
 msgstr "Υπερβολικά μεγάλη η κανονική έκφραση"
 
-#: lib/dfa.c:1563
+#: lib/dfa.c:1568
 msgid "stray \\ before unprintable character"
 msgstr ""
 
-#: lib/dfa.c:1565
+#: lib/dfa.c:1570
 msgid "stray \\ before white space"
 msgstr ""
 
-#: lib/dfa.c:1569
+#: lib/dfa.c:1574
 #, c-format
 msgid "stray \\ before %lc"
 msgstr ""
 
-#: lib/dfa.c:1570
+#: lib/dfa.c:1575
 msgid "stray \\"
 msgstr ""
 
@@ -779,29 +779,31 @@ msgstr ""
 "άλλοι, κοιτάξτε τον σύνδεσμο <http://git.sv.gnu.org/cgit/grep.git/tree/"
 "AUTHORS>"
 
-#: src/grep.c:2934
+#: src/grep.c:2937
 #, c-format
 msgid "warning: GREP_COLOR='%s' is deprecated; use GREP_COLORS='mt=%s'"
 msgstr ""
 
-#: src/pcresearch.c:153
-msgid "-P supports only unibyte locales on this platform"
-msgstr ""
-
-#: src/pcresearch.c:155
-msgid "-P supports only unibyte and UTF-8 locales"
+#: src/pcresearch.c:92
+#, c-format
+msgid ""
+"\n"
+"grep -P uses PCRE2 %s\n"
 msgstr ""
 
 #: src/pcresearch.c:169
+msgid "-P supports only unibyte locales on this platform"
+msgstr ""
+
+#: src/pcresearch.c:171
+msgid "-P supports only unibyte and UTF-8 locales"
+msgstr ""
+
+#: src/pcresearch.c:194
 msgid "the -P option only supports a single pattern"
 msgstr "Η επιλογή -P υποστηρίζει μόνο ένα υπόδειγμα"
 
-#: src/pcresearch.c:222
-#, fuzzy, c-format
-msgid "JIT internal error: %d"
-msgstr "εσωτερικό σφάλμα"
-
-#: src/pcresearch.c:259
+#: src/pcresearch.c:290
 msgid "exceeded PCRE's line length limit"
 msgstr ""
 
@@ -809,40 +811,44 @@ msgstr ""
 # src/kwset.c:190
 # src/grep.c:164 src/grep.c:181 src/grep.c:283 src/grep.c:338 src/kwset.c:184
 # src/kwset.c:190
-#: src/pcresearch.c:337
+#: src/pcresearch.c:368
 #, fuzzy, c-format
 msgid "%s: memory exhausted"
 msgstr "η μνήμη εξαντλήθηκε"
 
-#: src/pcresearch.c:340
+#: src/pcresearch.c:371
 #, c-format
 msgid "%s: exhausted PCRE JIT stack"
 msgstr ""
 
-#: src/pcresearch.c:344
+#: src/pcresearch.c:375
 #, c-format
 msgid "%s: exceeded PCRE's backtracking limit"
 msgstr ""
 
-#: src/pcresearch.c:349
+#: src/pcresearch.c:380
 #, c-format
 msgid "%s: exceeded PCRE's nested backtracking limit"
 msgstr ""
 
-#: src/pcresearch.c:353
+#: src/pcresearch.c:384
 #, c-format
 msgid "%s: PCRE detected recurse loop"
 msgstr ""
 
-#: src/pcresearch.c:358
+#: src/pcresearch.c:389
 #, c-format
 msgid "%s: exceeded PCRE's heap limit"
 msgstr ""
 
-#: src/pcresearch.c:367
+#: src/pcresearch.c:398
 #, fuzzy, c-format
 msgid "%s: internal PCRE error: %d"
 msgstr "εσωτερικό σφάλμα"
+
+#, fuzzy, c-format
+#~ msgid "JIT internal error: %d"
+#~ msgstr "εσωτερικό σφάλμα"
 
 #~ msgid "invalid %s%s argument '%s'"
 #~ msgstr "άκυρη %s%s επιλογή «%s»"

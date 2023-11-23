@@ -1,16 +1,16 @@
 # Belarusian messages for GNU grep.
-# Copyright (C) 2001, 2002, 2003, 2022 Free Software Foundation, Inc.
+# Copyright (C) 2001, 2002, 2003, 2022, 2023 Free Software Foundation, Inc.
 # This file is distributed under the same license as the grep package.
 #
 # Ales Nyakhaychyk <nab@mail.by>, 2001-2003.
-# Viachaslau Khalikin <viachaslau.vinegret@outlook.com>, 2022.
+# Viachaslau Khalikin <viachaslau.vinegret@outlook.com>, 2022, 2023.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: GNU grep 3.8.35\n"
+"Project-Id-Version: GNU grep 3.10.12\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2023-03-05 07:28-0800\n"
-"PO-Revision-Date: 2023-02-28 00:41+0300\n"
+"POT-Creation-Date: 2023-05-13 01:14-0700\n"
+"PO-Revision-Date: 2023-05-13 03:04+0300\n"
 "Last-Translator: Viachaslau Khalikin <viachaslau.vinegret@outlook.com>\n"
 "Language-Team: Belarusian <debian-l10n-belarusian@lists.debian.org>\n"
 "Language: be\n"
@@ -30,7 +30,7 @@ msgstr "няправільны аргумэнт %s для %s"
 msgid "ambiguous argument %s for %s"
 msgstr "неадназначны аргумэнт %s для %s"
 
-#: lib/argmatch.c:165 lib/argmatch.h:237
+#: lib/argmatch.c:165 lib/argmatch.h:242
 msgid "Valid arguments are:"
 msgstr "Сапраўдныя аргумэнты:"
 
@@ -58,48 +58,48 @@ msgstr "няправільная кляса сымбаляў"
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr "сынтаксіс клясы сымбаляў [[:space:]], а не [:space:]"
 
-#: lib/dfa.c:1217
+#: lib/dfa.c:1222
 msgid "unfinished \\ escape"
 msgstr "незавершаная \\ экраніруючая пасьлядоўнасьць"
 
-#: lib/dfa.c:1327
+#: lib/dfa.c:1332
 msgid "? at start of expression"
 msgstr "? у пачатку выразу"
 
-#: lib/dfa.c:1339
+#: lib/dfa.c:1344
 msgid "* at start of expression"
 msgstr "* у пачатку выразу"
 
-#: lib/dfa.c:1353
+#: lib/dfa.c:1358
 msgid "+ at start of expression"
 msgstr "+ у пачатку выразу"
 
-#: lib/dfa.c:1408
+#: lib/dfa.c:1413
 msgid "{...} at start of expression"
 msgstr "{...} у пачатку выразу"
 
-#: lib/dfa.c:1411
+#: lib/dfa.c:1416
 msgid "invalid content of \\{\\}"
 msgstr "няправільнае зьмесьціва ў \\{\\}"
 
-#: lib/dfa.c:1413
+#: lib/dfa.c:1418
 msgid "regular expression too big"
 msgstr "занадта вялікі рэгулярны выраз"
 
-#: lib/dfa.c:1563
+#: lib/dfa.c:1568
 msgid "stray \\ before unprintable character"
 msgstr "залішні \\ перад недрукаваным сымбалем"
 
-#: lib/dfa.c:1565
+#: lib/dfa.c:1570
 msgid "stray \\ before white space"
-msgstr "залішні \\ перад прабелам"
+msgstr "залішні \\ перад прагалам"
 
-#: lib/dfa.c:1569
+#: lib/dfa.c:1574
 #, c-format
 msgid "stray \\ before %lc"
 msgstr "залішні \\ перад %lc"
 
-#: lib/dfa.c:1570
+#: lib/dfa.c:1575
 msgid "stray \\"
 msgstr "залішні \\"
 
@@ -277,12 +277,12 @@ msgstr "Няма папярэдняга рэгулярнага выраза"
 #: lib/version-etc.c:73
 #, c-format
 msgid "Packaged by %s (%s)\n"
-msgstr "Упакоўшчык: %s (%s)\n"
+msgstr "Пакавальнік: %s (%s)\n"
 
 #: lib/version-etc.c:76
 #, c-format
 msgid "Packaged by %s\n"
-msgstr "Упакоўшчык: %s\n"
+msgstr "Пакавальнік: %s\n"
 
 #. TRANSLATORS: Translate "(C)" to the copyright symbol
 #. (C-in-a-circle), if this symbol is available in the user's
@@ -748,68 +748,82 @@ msgstr ""
 "Аўтары праграмы: Mike Haertel і іншыя; глядзіце\n"
 "<https://git.savannah.gnu.org/cgit/grep.git/tree/AUTHORS>."
 
-#: src/grep.c:2934
+#: src/grep.c:2937
 #, c-format
 msgid "warning: GREP_COLOR='%s' is deprecated; use GREP_COLORS='mt=%s'"
 msgstr ""
 "папярэджаньне: GREP_COLOR=«%s» састарэла;\n"
 "               выкарыстоўвайце GREP_COLORS=«mt=%s»"
 
-#: src/pcresearch.c:153
+#: src/pcresearch.c:92
+#, c-format
+msgid ""
+"\n"
+"grep -P uses PCRE2 %s\n"
+msgstr ""
+"\n"
+"grep -P ужывае PCRE2 %s\n"
+
+#: src/pcresearch.c:169
 msgid "-P supports only unibyte locales on this platform"
 msgstr "-P падтрымлівае толькі аднабайтавыя лякалі на гэтай плятформе"
 
-#: src/pcresearch.c:155
+#: src/pcresearch.c:171
 msgid "-P supports only unibyte and UTF-8 locales"
 msgstr "-P падтрымлівае толькі аднабайтавыя ды UTF-8 лякалі"
 
-#: src/pcresearch.c:169
+#: src/pcresearch.c:194
 msgid "the -P option only supports a single pattern"
 msgstr "опцыя -P падтрымлівае толькі адзін узор"
 
-#: src/pcresearch.c:222
-#, c-format
-msgid "JIT internal error: %d"
-msgstr "Унутраная памылка JIT: %d"
-
-#: src/pcresearch.c:259
+#: src/pcresearch.c:290
 msgid "exceeded PCRE's line length limit"
 msgstr "перавышана абмежаваньне даўжыні радка PCRE"
 
-#: src/pcresearch.c:337
+#: src/pcresearch.c:368
 #, c-format
 msgid "%s: memory exhausted"
 msgstr "%s: памяць вычарпана"
 
-#: src/pcresearch.c:340
+#: src/pcresearch.c:371
 #, c-format
 msgid "%s: exhausted PCRE JIT stack"
 msgstr "%s: вычарпаны стэк JIT PCRE"
 
-#: src/pcresearch.c:344
+#: src/pcresearch.c:375
 #, c-format
 msgid "%s: exceeded PCRE's backtracking limit"
 msgstr "%s: перавышаны ліміт пошуку зь вяртаньнем у PCRE"
 
-#: src/pcresearch.c:349
+#: src/pcresearch.c:380
 #, c-format
 msgid "%s: exceeded PCRE's nested backtracking limit"
 msgstr "%s: перавышаны ліміт укладзенага пошуку зь вяртаньнем у PCRE"
 
-#: src/pcresearch.c:353
+#: src/pcresearch.c:384
 #, c-format
 msgid "%s: PCRE detected recurse loop"
 msgstr "%s: выяўлены рэкурсіўны цыкл у PCRE"
 
-#: src/pcresearch.c:358
+#: src/pcresearch.c:389
 #, c-format
 msgid "%s: exceeded PCRE's heap limit"
 msgstr "%s: перавышаны ліміт кучы ў PCRE"
 
-#: src/pcresearch.c:367
+#: src/pcresearch.c:398
 #, c-format
 msgid "%s: internal PCRE error: %d"
 msgstr "%s: унутраная памылка PCRE: %d"
+
+#~ msgid ""
+#~ "\n"
+#~ "Built with PCRE "
+#~ msgstr ""
+#~ "\n"
+#~ "Сабраны з PCRE "
+
+#~ msgid "JIT internal error: %d"
+#~ msgstr "Унутраная памылка JIT: %d"
 
 #~ msgid "unfinished repeat count"
 #~ msgstr "незавершаная колькасьць паўтарэньняў"

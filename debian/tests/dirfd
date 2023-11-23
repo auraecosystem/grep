@@ -1,0 +1,11 @@
+#!/usr/bin/sh
+
+# Test to verify https://bugs.debian.org/1041588
+# Thanks to Vincent Lefevre <vincent@vinc17.net>
+
+set -e
+
+TESTDIR=$(mktemp -d)
+for i in `seq 100000` ; do : > $TESTDIR/$i ; done
+printf x > $TESTDIR/a
+grep -r x $TESTDIR

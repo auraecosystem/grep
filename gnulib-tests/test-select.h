@@ -37,8 +37,10 @@
 # include <sys/wait.h>
 #endif
 
-#define TEST_PORT       12345
-
+/* Tell GCC not to warn about the specific edge cases tested here.  */
+#if __GNUC__ >= 13
+# pragma GCC diagnostic ignored "-Wanalyzer-fd-use-without-check"
+#endif
 
 typedef int (*select_fn) (int, fd_set *, fd_set *, fd_set *, struct timeval *);
 
