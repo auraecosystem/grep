@@ -1,3 +1,14 @@
+grep (3.11-4~exp1) experimental; urgency=medium
+
+  [ Gioele Barabucci ]
+  * d/rules: Use debhelper 13 and standard dh sequence (Closes: #1053793)
+  * Support <nodoc> build profile (Closes: #1053794)
+
+  [ Santiago Ruano Rincón ]
+  * Add dh-sequence-movetousr to Build-Depends. Thanks to Helmut Grohne
+
+ -- Santiago Ruano Rincón <santiago@debian.org>  Thu, 23 Nov 2023 15:55:09 +0000
+
 grep (3.11-3) unstable; urgency=medium
 
   * Add patch to remove generated files in clean target. Patch by Bas
