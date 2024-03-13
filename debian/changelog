@@ -1,3 +1,11 @@
+grep (3.11-4~1.gbpbe0243) UNRELEASED; urgency=medium
+
+  ** SNAPSHOT build @be0243e401b60bc93a70dde7af0d8bce510e9b24 **
+
+  * Wrap-and-sort debian/ with -ast
+
+ -- Santiago Ruano Rincón <santiago@debian.org>  Wed, 13 Mar 2024 14:31:13 -0300
+
 grep (3.11-3) unstable; urgency=medium
 
   * Add patch to remove generated files in clean target. Patch by Bas
