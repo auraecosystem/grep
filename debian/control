@@ -2,9 +2,16 @@ Source: grep
 Section: utils
 Priority: required
 Maintainer: Anibal Monsalve Salazar <anibal@debian.org>
-Uploaders: Santiago Ruano Rincón <santiago@debian.org>
+Uploaders:
+ Santiago Ruano Rincón <santiago@debian.org>,
 Standards-Version: 4.6.1.1
-Build-Depends: cdbs, debhelper (>= 10~), gettext, libpcre2-dev, quilt, texinfo
+Build-Depends:
+ cdbs,
+ debhelper (>= 10~),
+ gettext,
+ libpcre2-dev,
+ quilt,
+ texinfo,
 Homepage: https://www.gnu.org/software/grep/
 Vcs-Git: https://salsa.debian.org/debian/grep.git
 Vcs-Browser: https://salsa.debian.org/debian/grep
@@ -13,10 +20,14 @@ Package: grep
 Architecture: any
 Multi-Arch: foreign
 Essential: yes
-Pre-Depends: ${shlibs:Depends}
-Depends: ${misc:Depends}
-Conflicts: rgrep
-Provides: rgrep
+Pre-Depends:
+ ${shlibs:Depends},
+Depends:
+ ${misc:Depends},
+Conflicts:
+ rgrep,
+Provides:
+ rgrep,
 Description: GNU grep, egrep and fgrep
  'grep' is a utility to search for text in files; it can be used from the
  command line or in scripts.  Even if you don't want to use it, other packages
