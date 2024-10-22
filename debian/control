@@ -6,12 +6,11 @@ Uploaders:
  Santiago Ruano Rincón <santiago@debian.org>,
 Standards-Version: 4.6.1.1
 Build-Depends:
- cdbs,
- debhelper (>= 10~),
+ debhelper-compat (=13),
+ dh-sequence-movetousr,
  gettext,
  libpcre2-dev,
- quilt,
- texinfo,
+ texinfo <!nodoc>,
 Homepage: https://www.gnu.org/software/grep/
 Vcs-Git: https://salsa.debian.org/debian/grep.git
 Vcs-Browser: https://salsa.debian.org/debian/grep
