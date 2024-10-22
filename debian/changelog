@@ -1,10 +1,28 @@
-grep (3.11-4~1.gbpbe0243) UNRELEASED; urgency=medium
+grep (3.11-5~1.gbpbe0243) UNRELEASED; urgency=medium
 
   ** SNAPSHOT build @be0243e401b60bc93a70dde7af0d8bce510e9b24 **
 
   * Wrap-and-sort debian/ with -ast
 
  -- Santiago Ruano Rincón <santiago@debian.org>  Wed, 13 Mar 2024 14:31:13 -0300
+
+grep (3.11-4) unstable; urgency=low
+
+  * Upload to unstable.
+  * Move files to /usr for DEP17 (Closes: #1059755)
+
+ -- Santiago Ruano Rincón <santiago@debian.org>  Thu, 04 Jan 2024 06:56:48 -0500
+
+grep (3.11-4~exp1) experimental; urgency=medium
+
+  [ Gioele Barabucci ]
+  * d/rules: Use debhelper 13 and standard dh sequence (Closes: #1053793)
+  * Support <nodoc> build profile (Closes: #1053794)
+
+  [ Santiago Ruano Rincón ]
+  * Add dh-sequence-movetousr to Build-Depends. Thanks to Helmut Grohne
+
+ -- Santiago Ruano Rincón <santiago@debian.org>  Thu, 23 Nov 2023 15:55:09 +0000
 
 grep (3.11-3) unstable; urgency=medium
 

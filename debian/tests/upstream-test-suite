@@ -1,8 +1,10 @@
 #!/bin/sh
 set -e
 
+export DEB_BUILD_PROFILES="nocheck nodoc" DEB_BUILD_OPTIONS="nocheck nodoc"
+
 dpkg-source --before-build `pwd`
-dpkg-buildpackage -rfakeroot --target=pre-build
-dpkg-buildpackage -rfakeroot --target=common-configure-arch 2>/dev/null
-make -C lib
+dpkg-buildpackage -rfakeroot --target=clean
+dpkg-buildpackage -rfakeroot --target=build
+
 make -C tests check-am
