@@ -1,10 +1,19 @@
-grep (3.11-5~1.gbpbe0243) UNRELEASED; urgency=medium
+grep (3.11-5~bpo12u1~1.gbpd86a68) UNRELEASED-bookworm-backports; urgency=medium
 
-  ** SNAPSHOT build @be0243e401b60bc93a70dde7af0d8bce510e9b24 **
+  ** SNAPSHOT build @d86a6846484478c256da03648a79419f1800b769 **
 
+  * Rebuild for bookworm-backports
+
+  [ Gioele Barabucci ]
+  * d/rules: Remove outdated fixup targets
+  * d/rules: Use debhelper 13 and standard dh sequence (Closes: #1053793)
+  * Support <nodoc> build profile (Closes: #1053794)
+
+  [ Santiago Ruano Rincón ]
   * Wrap-and-sort debian/ with -ast
+  * Remove dh-sequence-movetousr from the build-deps
 
- -- Santiago Ruano Rincón <santiago@debian.org>  Wed, 13 Mar 2024 14:31:13 -0300
+ -- Santiago Ruano Rincón <santiago@debian.org>  Mon, 30 Dec 2024 15:59:11 -0500
 
 grep (3.11-4) unstable; urgency=low
 
