@@ -3,7 +3,7 @@
 # a+a+a to a+a, thus possibly reporting a false match.
 # Introduced in v0.1-2111-g4299106ce
 
-# Copyright 2020-2023 Free Software Foundation, Inc.
+# Copyright 2020-2025 Free Software Foundation, Inc.
 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -25,7 +25,7 @@ path_prepend_ .
 
 fail=0
 
-LC_ALL=C returns_ 0 ${CHECKER} test-dfa-match-aux 'x+x+x+' xx > out 2>&1
+LC_ALL=C ${CHECKER} test-dfa-match-aux 'x+x+x+' xx > out 2>&1 || fail=1
 compare /dev/null out || fail=1
 
 Exit $fail

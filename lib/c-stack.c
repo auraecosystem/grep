@@ -1,6 +1,6 @@
 /* Stack overflow handling.
 
-   Copyright (C) 2002, 2004, 2006, 2008-2023 Free Software Foundation, Inc.
+   Copyright (C) 2002, 2004, 2006, 2008-2025 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -56,7 +56,11 @@
 #include "ignore-value.h"
 
 #include "gettext.h"
-#define _(msgid) gettext (msgid)
+#define _(msgid) dgettext ("gnulib", msgid)
+
+/* Here we need the original abort() function.  (Printing a stack trace
+   from within a signal handler is not going to work in most cases anyway.)  */
+#undef abort
 
 #if HAVE_STACK_OVERFLOW_RECOVERY
 
@@ -130,7 +134,7 @@ null_action (_GL_UNUSED int signo)
 }
 
 /* Pacify GCC 9.3.1, which otherwise would complain about segv_handler.  */
-# if 4 < __GNUC__ + (6 <= __GNUC_MINOR__)
+# if _GL_GNUC_PREREQ (4, 6)
 #  pragma GCC diagnostic ignored "-Wsuggest-attribute=pure"
 # endif
 

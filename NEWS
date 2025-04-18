@@ -1,5 +1,28 @@
 GNU grep NEWS                                    -*- outline -*-
 
+* Noteworthy changes in release 3.12 (2025-04-10) [stable]
+
+** Bug fixes
+
+  Searching a directory with at least 100,000 entries no longer fails
+  with "Operation not supported" and exit status 2. Now, this prints 1
+  and no diagnostic, as expected:
+    $ mkdir t && cd t && seq 100000|xargs touch && grep -r x .; echo $?
+    1
+  [bug introduced in grep 3.11]
+
+  -mN where 1 < N no longer mistakenly lseeks to end of input merely
+  because standard output is /dev/null.
+
+** Changes in behavior
+
+  The --unix-byte-offsets (-u) option is gone. In grep-3.7 (2021-08-14)
+  it became a warning-only no-op. Before then, it was a Windows-only no-op.
+
+  On Windows platforms and on AIX in 32-bit mode, grep in some cases
+  now supports Unicode characters outside the Basic Multilingual Plane.
+
+
 * Noteworthy changes in release 3.11 (2023-05-13) [stable]
 
 ** Bug fixes
@@ -1385,7 +1408,7 @@ necessary to track the evolution of the regex package, and since
 I was changing it anyway I decided to do a general cleanup.
 
 ========================================================================
-Copyright (C) 1992, 1997-2002, 2004-2023 Free Software Foundation, Inc.
+Copyright (C) 1992, 1997-2002, 2004-2025 Free Software Foundation, Inc.
 
   Copying and distribution of this file, with or without modification,
   are permitted in any medium without royalty provided the copyright

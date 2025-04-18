@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grep-3.8.35\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2023-05-13 01:14-0700\n"
+"POT-Creation-Date: 2025-04-10 09:02-0700\n"
 "PO-Revision-Date: 2023-02-28 11:00+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <gnome-turk@gnome.org>\n"
@@ -33,137 +33,135 @@ msgstr "`%2$s' için %1$s argümanı belirsiz"
 msgid "Valid arguments are:"
 msgstr "Geçerli argümanlar:"
 
-#: lib/c-stack.c:186
+#: lib/c-stack.c:190
 msgid "program error"
 msgstr "program hatası"
 
-#: lib/c-stack.c:187
+#: lib/c-stack.c:191
 msgid "stack overflow"
 msgstr "yığın taşması"
 
-#: lib/closeout.c:121 src/grep.c:1346
+#: lib/closeout.c:121 src/grep.c:1352
 msgid "write error"
 msgstr "yazma hatası"
 
-#: lib/dfa.c:897
+#: lib/dfa.c:910
 msgid "unbalanced ["
 msgstr "karşılıksız ["
 
-#: lib/dfa.c:1018
+#: lib/dfa.c:1031
 msgid "invalid character class"
 msgstr "geçersiz karakter sınıfı"
 
-#: lib/dfa.c:1146
+#: lib/dfa.c:1159
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr "karakter sınıfı sözdizimi [[:boşluk:]], [:boşluk] değil"
 
-#: lib/dfa.c:1222
+#: lib/dfa.c:1234
 msgid "unfinished \\ escape"
 msgstr "tamamlanmamış \\ kaçışı"
 
-#: lib/dfa.c:1332
+#: lib/dfa.c:1344
 msgid "? at start of expression"
 msgstr "ifadenin başlangıcında ?"
 
-#: lib/dfa.c:1344
+#: lib/dfa.c:1356
 msgid "* at start of expression"
 msgstr "ifadenin başlangıcında *"
 
-#: lib/dfa.c:1358
+#: lib/dfa.c:1370
 msgid "+ at start of expression"
 msgstr "ifadenin başlangıcında +"
 
-#: lib/dfa.c:1413
+#: lib/dfa.c:1425
 msgid "{...} at start of expression"
 msgstr "ifadenin başlangıcında {...}"
 
-#: lib/dfa.c:1416
+#: lib/dfa.c:1428
 msgid "invalid content of \\{\\}"
 msgstr "geçersiz \\{\\} içeriği"
 
-#: lib/dfa.c:1418
+#: lib/dfa.c:1430
 msgid "regular expression too big"
 msgstr "düzenli ifade pek büyük"
 
-#: lib/dfa.c:1568
+#: lib/dfa.c:1580
 msgid "stray \\ before unprintable character"
 msgstr "yazdırılamayan karakter öncesi başıboş \\"
 
-#: lib/dfa.c:1570
+#: lib/dfa.c:1582
 msgid "stray \\ before white space"
 msgstr "boşluk öncesi başıboş \\"
 
-#: lib/dfa.c:1574
-#, c-format
-msgid "stray \\ before %lc"
+#: lib/dfa.c:1593
+#, fuzzy, c-format
+msgid "stray \\ before %s"
 msgstr "%lc öncesi başıboş \\"
 
-#: lib/dfa.c:1575
+#: lib/dfa.c:1594 lib/dfa.c:1597
 msgid "stray \\"
 msgstr "başıboş \\"
 
-#: lib/dfa.c:1925
+#: lib/dfa.c:1948
 msgid "unbalanced ("
 msgstr "karşılıksız ("
 
-#: lib/dfa.c:2042
+#: lib/dfa.c:2065
 msgid "no syntax specified"
 msgstr "sözdizim belirtilmemiş"
 
-#: lib/dfa.c:2053
+#: lib/dfa.c:2076
 msgid "unbalanced )"
 msgstr "karşılıksız )"
 
-#: lib/error.c:193
+#: lib/error.c:208
 msgid "Unknown system error"
 msgstr "Bilinmeyen sistem hatası"
 
-#: lib/getopt.c:278
+#: lib/getopt.c:282
 #, c-format
 msgid "%s: option '%s%s' is ambiguous\n"
 msgstr "%s: '%s%s' seçeneği belirsiz\n"
 
-#: lib/getopt.c:284
+#: lib/getopt.c:288
 #, c-format
 msgid "%s: option '%s%s' is ambiguous; possibilities:"
 msgstr "%s: '%s%s' seçeneği belirsiz; olasılıklar:"
 
-#: lib/getopt.c:319
+#: lib/getopt.c:322
 #, c-format
 msgid "%s: unrecognized option '%s%s'\n"
 msgstr "%s: '%s%s' seçeneği tanımlanamıyor\n"
 
-#: lib/getopt.c:345
+#: lib/getopt.c:348
 #, c-format
 msgid "%s: option '%s%s' doesn't allow an argument\n"
 msgstr "%s: '%s%s' seçeneği argümana izin vermiyor\n"
 
-#: lib/getopt.c:360
+#: lib/getopt.c:363
 #, c-format
 msgid "%s: option '%s%s' requires an argument\n"
 msgstr "%s: '%s%s' seçeneği bir argüman gerektiriyor\n"
 
-#: lib/getopt.c:621
+#: lib/getopt.c:624
 #, c-format
 msgid "%s: invalid option -- '%c'\n"
 msgstr "%s: Geçersiz seçenek -- '%c'\n"
 
-#: lib/getopt.c:636 lib/getopt.c:682
+#: lib/getopt.c:639 lib/getopt.c:685
 #, c-format
 msgid "%s: option requires an argument -- '%c'\n"
 msgstr "%s: Seçenek bir argüman gerektiriyor -- '%c'\n"
 
-#: lib/obstack.c:337 lib/obstack.c:339 lib/xalloc-die.c:34
+#: lib/obstack.c:320 lib/obstack.c:322 lib/xalloc-die.c:34
 msgid "memory exhausted"
 msgstr "bellek tükendi"
 
 #: lib/openat-die.c:38
-#, c-format
 msgid "unable to record current working directory"
 msgstr "geçerli çalışma dizini kaydedilemiyor"
 
 #: lib/openat-die.c:57
-#, c-format
 msgid "failed to return to initial working directory"
 msgstr "başlangıç çalışma dizinine dönülemedi"
 
@@ -434,54 +432,54 @@ msgstr "%s ana sayfası: <%s>\n"
 msgid "General help using GNU software: <%s>\n"
 msgstr "GNU yazılımı kullanımı genel yardımı: <%s>\n"
 
-#: src/dfasearch.c:59
+#: src/dfasearch.c:57
 #, c-format
 msgid "warning: %s"
 msgstr "uyarı: %s"
 
-#: src/grep.c:656
+#: src/grep.c:657
 msgid "(standard input)"
 msgstr "(standart girdi)"
 
-#: src/grep.c:837
+#: src/grep.c:838
 msgid "invalid context length argument"
 msgstr "geçersiz bağlam uzunluk değeri"
 
-#: src/grep.c:902
+#: src/grep.c:911
 msgid "input is too large to count"
 msgstr "girdi sayılamayacak kadar büyük"
 
-#: src/grep.c:1651
+#: src/grep.c:1656
 #, c-format
 msgid "%s: binary file matches"
 msgstr "%s: İkili dosya eşleşiyor"
 
-#: src/grep.c:1689
+#: src/grep.c:1694
 #, c-format
 msgid "%s: warning: recursive directory loop"
 msgstr "%s: Uyarı: Özyineli dizin döngüsü"
 
-#: src/grep.c:1909
+#: src/grep.c:1914
 #, c-format
 msgid "%s: input file is also the output"
 msgstr "%s: Girdi dosyası aynı zamanda çıkış"
 
-#: src/grep.c:1971 src/grep.c:1978
+#: src/grep.c:1976 src/grep.c:1983
 #, c-format
 msgid "Usage: %s [OPTION]... PATTERNS [FILE]...\n"
 msgstr "Kullanım: %s [SEÇENEK]... DİZGİLER [DOSYA]...\n"
 
-#: src/grep.c:1973
+#: src/grep.c:1978
 #, c-format
 msgid "Try '%s --help' for more information.\n"
 msgstr "Daha fazla bilgi için '%s --help' deneyin.\n"
 
-#: src/grep.c:1979
+#: src/grep.c:1984
 #, c-format
 msgid "Search for PATTERNS in each FILE.\n"
 msgstr "Her DOSYA'da DİZGİLER ara.\n"
 
-#: src/grep.c:1980
+#: src/grep.c:1985
 #, c-format
 msgid ""
 "Example: %s -i 'hello world' menu.h main.c\n"
@@ -494,7 +492,7 @@ msgstr ""
 "\n"
 "Dizgi seçimi ve yorumlanması:\n"
 
-#: src/grep.c:1985
+#: src/grep.c:1990
 #, c-format
 msgid ""
 "  -E, --extended-regexp     PATTERNS are extended regular expressions\n"
@@ -507,7 +505,7 @@ msgstr ""
 "  -G, --basic-regexp        DİZGİLER, yalın düzenli ifadelerdir\n"
 "  -P, --perl-regexp         DİZGİLER, Perl düzenli ifadeleridir\n"
 
-#: src/grep.c:1991
+#: src/grep.c:1996
 #, c-format
 msgid ""
 "  -e, --regexp=PATTERNS     use PATTERNS for matching\n"
@@ -528,7 +526,7 @@ msgstr ""
 "  -z, --null-data           bir veri satırı yenisatır yerine 0 bayt ile "
 "biter\n"
 
-#: src/grep.c:1999
+#: src/grep.c:2004
 #, c-format
 msgid ""
 "\n"
@@ -545,7 +543,7 @@ msgstr ""
 "  -V, --version             sürüm bilgisini görüntüle ve çık\n"
 "      --help                bu yardım metnini görüntüle ve çık\n"
 
-#: src/grep.c:2006
+#: src/grep.c:2011
 #, c-format
 msgid ""
 "\n"
@@ -569,7 +567,7 @@ msgstr ""
 "  -h, --no-filename         çıktıda dosya adı önekini sustur\n"
 "      --label=ETİKET        standart çıktı dosya adı önekinde ETİKET kullan\n"
 
-#: src/grep.c:2017
+#: src/grep.c:2022
 #, c-format
 msgid ""
 "  -o, --only-matching       show only nonempty parts of lines that match\n"
@@ -585,7 +583,7 @@ msgstr ""
 "                            'binary', 'text' veya 'without-match'\n"
 "  -a, --text                --binary-files=text eşdeğeri\n"
 
-#: src/grep.c:2024
+#: src/grep.c:2029
 #, c-format
 msgid ""
 "  -I                        equivalent to --binary-files=without-match\n"
@@ -604,7 +602,7 @@ msgstr ""
 "  -r, --recursive           --directories=recurse gibi\n"
 "  -R, --dereference-recursive  benzer; ancak tüm sembolik bağları izle\n"
 
-#: src/grep.c:2033
+#: src/grep.c:2038
 #, c-format
 msgid ""
 "      --include=GLOB        search only files that match GLOB (a file "
@@ -621,7 +619,7 @@ msgstr ""
 "                              atla\n"
 "      --exclude-dir=GLOB    GLOB ile eşleşen dizinleri atla\n"
 
-#: src/grep.c:2040
+#: src/grep.c:2045
 #, c-format
 msgid ""
 "  -L, --files-without-match  print only names of FILEs with no selected "
@@ -638,7 +636,7 @@ msgstr ""
 "  -T, --initial-tab         sekmelerin hizalanması sağla (gerekirse)\n"
 "  -Z, --null                DOSYA adından sonra 0 bayt yazdır\n"
 
-#: src/grep.c:2046
+#: src/grep.c:2051
 #, c-format
 msgid ""
 "\n"
@@ -653,7 +651,7 @@ msgstr ""
 "  -A, --after-context=NUM   izleyen NUM satır bağlam yazdır\n"
 "  -C, --context=NUM         NUM satır çıktı bağlamı yazdır\n"
 
-#: src/grep.c:2053
+#: src/grep.c:2058
 #, c-format
 msgid ""
 "  -NUM                      same as --context=NUM\n"
@@ -678,13 +676,13 @@ msgstr ""
 "                              (MS-DOS/Windows)\n"
 "\n"
 
-#: src/grep.c:2062
-#, c-format
+#: src/grep.c:2067
+#, fuzzy, c-format
 msgid ""
-"When FILE is '-', read standard input.  With no FILE, read '.' if\n"
-"recursive, '-' otherwise.  With fewer than two FILEs, assume -h.\n"
-"Exit status is 0 if any line is selected, 1 otherwise;\n"
-"if any error occurs and -q is not given, the exit status is 2.\n"
+"When FILE is '-', read standard input.  If no FILE is given, read standard\n"
+"input, but with -r, recursively search the working directory instead.  With\n"
+"fewer than two FILEs, assume -h.  Exit status is 0 if any line is selected,\n"
+"1 otherwise; if any error occurs and -q is not given, the exit status is 2.\n"
 msgstr ""
 "DOSYA '-' iken, standart girdiyi oku. DOSYA olmadan, özyineliyse '.', "
 "değilse\n"
@@ -692,37 +690,32 @@ msgstr ""
 "çıkış kodu 0, değilse 1'dir; bir hata oluştur ve -q verilmemişse çıkış\n"
 "kodu 2'dir.\n"
 
-#: src/grep.c:2104
+#: src/grep.c:2110
 msgid "conflicting matchers specified"
 msgstr "birbiriyle çatışan eşleştiriciler belirtildi"
 
-#: src/grep.c:2111
+#: src/grep.c:2117
 msgid "Perl matching not supported in a --disable-perl-regexp build"
 msgstr "Bir --disable-perl-regexp yapısında Perl eşleşmesi desteklenmiyor"
 
-#: src/grep.c:2113
+#: src/grep.c:2119
 #, c-format
 msgid "invalid matcher %s"
 msgstr "geçersiz eşleştirici %s"
 
-#: src/grep.c:2534
+#: src/grep.c:2541
 msgid "unknown devices method"
 msgstr "bilinmeyen aygıt yöntemi"
 
-#: src/grep.c:2576
-#, c-format
-msgid "warning: --unix-byte-offsets (-u) is obsolete"
-msgstr "uyarı: --unix-byte-offsets (-u) artık kullanılmıyor"
-
-#: src/grep.c:2688
+#: src/grep.c:2690
 msgid "invalid max count"
 msgstr "en çok sayısı geçersiz"
 
-#: src/grep.c:2746
+#: src/grep.c:2747
 msgid "unknown binary-files type"
 msgstr "bilinmeyen ikili dosya türü"
 
-#: src/grep.c:2831
+#: src/grep.c:2832
 msgid ""
 "Written by Mike Haertel and others; see\n"
 "<https://git.savannah.gnu.org/cgit/grep.git/tree/AUTHORS>."
@@ -730,70 +723,74 @@ msgstr ""
 "Mike Haertel ve diğerleri tarafından yazılmıştır; bkz.\n"
 "<https://git.savannah.gnu.org/cgit/grep.git/tree/AUTHORS>."
 
-#: src/grep.c:2937
+#: src/grep.c:2939
 #, c-format
 msgid "warning: GREP_COLOR='%s' is deprecated; use GREP_COLORS='mt=%s'"
 msgstr ""
 "uyarı: GREP_COLOR='%s', artık kullanımdan kalkıyor; GREP_COLORS='mt=%s' "
 "kullanın"
 
-#: src/pcresearch.c:92
+#: src/pcresearch.c:89
 #, c-format
 msgid ""
 "\n"
 "grep -P uses PCRE2 %s\n"
 msgstr ""
 
-#: src/pcresearch.c:169
+#: src/pcresearch.c:167
 msgid "-P supports only unibyte locales on this platform"
 msgstr "-P, bu platformda yalnızca unibyte yerelini destekler"
 
-#: src/pcresearch.c:171
+#: src/pcresearch.c:169
 msgid "-P supports only unibyte and UTF-8 locales"
 msgstr "-P yalnızca unibyte ve UTF-8 yerellerini destekler"
 
-#: src/pcresearch.c:194
+#: src/pcresearch.c:192
 msgid "the -P option only supports a single pattern"
 msgstr "-P seçeneği yalnızca tek bir dizgiyi destekler"
 
-#: src/pcresearch.c:290
+#: src/pcresearch.c:288
 msgid "exceeded PCRE's line length limit"
 msgstr "PCRE's satır uzunluğu limiti aşıldı"
 
-#: src/pcresearch.c:368
+#: src/pcresearch.c:366
 #, c-format
 msgid "%s: memory exhausted"
 msgstr "%s: Bellek tükendi"
 
-#: src/pcresearch.c:371
+#: src/pcresearch.c:369
 #, c-format
 msgid "%s: exhausted PCRE JIT stack"
 msgstr "%s: PCRE JIT yığını tükendi"
 
-#: src/pcresearch.c:375
+#: src/pcresearch.c:373
 #, c-format
 msgid "%s: exceeded PCRE's backtracking limit"
 msgstr "%s: PCRE'nin geri izleme limiti aşıldı"
 
-#: src/pcresearch.c:380
+#: src/pcresearch.c:378
 #, c-format
 msgid "%s: exceeded PCRE's nested backtracking limit"
 msgstr "%s: PCRE'nin iç içe geçmiş geri izleme limiti aşıldı"
 
-#: src/pcresearch.c:384
+#: src/pcresearch.c:382
 #, c-format
 msgid "%s: PCRE detected recurse loop"
 msgstr "%s: PCRE, özyineleme döngüsü algıladı"
 
-#: src/pcresearch.c:389
+#: src/pcresearch.c:387
 #, c-format
 msgid "%s: exceeded PCRE's heap limit"
 msgstr "%s: PCRE'nin öbek limiti aşıldı"
 
-#: src/pcresearch.c:398
+#: src/pcresearch.c:396
 #, c-format
 msgid "%s: internal PCRE error: %d"
 msgstr "%s: İç PCRE hatası: %d"
+
+#, c-format
+#~ msgid "warning: --unix-byte-offsets (-u) is obsolete"
+#~ msgstr "uyarı: --unix-byte-offsets (-u) artık kullanılmıyor"
 
 #, c-format
 #~ msgid "JIT internal error: %d"

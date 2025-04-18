@@ -1,5 +1,5 @@
 /* Page fault handling library.
-   Copyright (C) 1998-2023 Free Software Foundation, Inc.
+   Copyright (C) 1998-2025 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -64,7 +64,7 @@
 
 /* HAVE_SIGSEGV_RECOVERY
    is defined if the system supports catching SIGSEGV.  */
-#if defined __linux__ || defined __ANDROID__ || defined __GNU__ \
+#if defined __linux__ || defined __ANDROID__ || defined __gnu_hurd__ \
     || defined __FreeBSD_kernel__ || (defined __FreeBSD__ && !(defined __sparc__ || defined __sparc64__)) || defined __DragonFly__ \
     || defined __NetBSD__ \
     || defined __OpenBSD__ \
@@ -77,7 +77,7 @@
 
 /* HAVE_STACK_OVERFLOW_RECOVERY
    is defined if stack overflow can be caught.  */
-#if defined __linux__ || defined __ANDROID__ || defined __GNU__ \
+#if defined __linux__ || defined __ANDROID__ || defined __gnu_hurd__ \
     || defined __FreeBSD_kernel__ || (defined __FreeBSD__ && !(defined __sparc__ || defined __sparc64__)) || defined __DragonFly__ \
     || (defined __NetBSD__ && !(defined __sparc__ || defined __sparc64__)) \
     || defined __OpenBSD__ \
@@ -105,7 +105,7 @@ extern int libsigsegv_version;       /* Likewise */
  * to a global SIGSEGV handler.
  * On some platforms, the precise fault address is not known, only the memory
  * page into which the fault address falls. This is apparently allowed by POSIX:
- * <http://pubs.opengroup.org/onlinepubs/9699919799/basedefs/signal.h.html>
+ * <https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/signal.h.html>
  * says: "For some implementations, the value of si_addr may be inaccurate."
  * In this case, the returned fault address is rounded down to a multiple of
  * getpagesize() = sysconf(_SC_PAGESIZE).
@@ -187,7 +187,7 @@ extern int sigsegv_leave_handler (void (*continuation) (void*, void*, void*), vo
      || defined _AIX || defined __sun \
      || defined __CYGWIN__ || defined __HAIKU__
 typedef ucontext_t *stackoverflow_context_t;
-# elif defined __GNU__ \
+# elif defined __gnu_hurd__ \
        || defined __FreeBSD_kernel__ || (defined __FreeBSD__ && !(defined __sparc__ || defined __sparc64__)) || defined __DragonFly__ \
        || defined __OpenBSD__ || defined __sgi
 typedef struct sigcontext *stackoverflow_context_t;
@@ -214,7 +214,7 @@ typedef void (*stackoverflow_handler_t) (int emergency, stackoverflow_context_t 
  * Installs a stack overflow handler.
  * The extra_stack argument is a pointer to a pre-allocated area used as a
  * stack for executing the handler. It typically comes from a static variable
- * or from heap-allocated memoty; placing it on the main stack may fail on
+ * or from heap-allocated memory; placing it on the main stack may fail on
  * some operating systems.
  * Its size, passed in extra_stack_size, should be sufficiently large.  The
  * following code determines an appropriate size:

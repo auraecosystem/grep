@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the grep package.
 # Copyright (C) 1996, 1997, 2019 Free Software Foundation, Inc.
 # Bang Jun-Young <bangjy@geocities.com>, 1996-1997.
-# Seong-ho Cho <darkcircle.0426@gmail.com>, 2019-2023.
+# Seong-ho Cho <darkcircle.0426@gmail.com>, 2019-2025.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: GNU grep 3.10.12\n"
+"Project-Id-Version: GNU grep 3.11.68\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2023-05-13 01:14-0700\n"
-"PO-Revision-Date: 2023-04-22 16:05+0900\n"
+"POT-Creation-Date: 2025-04-10 09:02-0700\n"
+"PO-Revision-Date: 2025-04-06 20:04+0900\n"
 "Last-Translator: Seong-ho Cho <darkcircle.0426@gmail.com>\n"
 "Language-Team: Korean <translation-team-ko@googlegroups.com>\n"
 "Language: ko\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Bugs: Report translation errors to the Language-Team address.\n"
-"X-Generator: Poedit 2.3.1\n"
+"X-Generator: Poedit 3.6\n"
 
 #: lib/argmatch.c:145
 #, c-format
@@ -33,137 +33,135 @@ msgstr "%2$s 대상 모호한 인자 %1$s"
 msgid "Valid arguments are:"
 msgstr "유효한 인자는 다음과 같습니다:"
 
-#: lib/c-stack.c:186
+#: lib/c-stack.c:190
 msgid "program error"
 msgstr "프로그램 오류"
 
-#: lib/c-stack.c:187
+#: lib/c-stack.c:191
 msgid "stack overflow"
 msgstr "스택 오버플로우"
 
-#: lib/closeout.c:121 src/grep.c:1346
+#: lib/closeout.c:121 src/grep.c:1352
 msgid "write error"
 msgstr "기록 오류"
 
-#: lib/dfa.c:897
+#: lib/dfa.c:910
 msgid "unbalanced ["
 msgstr "짝이 맞지 않는 [ 괄호"
 
-#: lib/dfa.c:1018
+#: lib/dfa.c:1031
 msgid "invalid character class"
 msgstr "잘못된 문자 클래스"
 
-#: lib/dfa.c:1146
+#: lib/dfa.c:1159
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr "문자 클래스 표기 방식은 [:space:]가 아닌 [[:space:]]입니다"
 
-#: lib/dfa.c:1222
+#: lib/dfa.c:1234
 msgid "unfinished \\ escape"
 msgstr "끝나지 않은 \\ 이스케이프 문자"
 
-#: lib/dfa.c:1332
+#: lib/dfa.c:1344
 msgid "? at start of expression"
 msgstr "정규 표현식 시작 부분에 ? 연산자"
 
-#: lib/dfa.c:1344
+#: lib/dfa.c:1356
 msgid "* at start of expression"
 msgstr "정규 표현식 시작 부분에 * 연산자"
 
-#: lib/dfa.c:1358
+#: lib/dfa.c:1370
 msgid "+ at start of expression"
 msgstr "정규 표현식 시작 부분에 + 연산자"
 
-#: lib/dfa.c:1413
+#: lib/dfa.c:1425
 msgid "{...} at start of expression"
 msgstr "정규 표현식 시작 부분에 {..}"
 
-#: lib/dfa.c:1416
+#: lib/dfa.c:1428
 msgid "invalid content of \\{\\}"
 msgstr "잘못된 \\{\\} 내용"
 
-#: lib/dfa.c:1418
+#: lib/dfa.c:1430
 msgid "regular expression too big"
 msgstr "정규 표현식이 너무 깁니다"
 
-#: lib/dfa.c:1568
+#: lib/dfa.c:1580
 msgid "stray \\ before unprintable character"
 msgstr "출력할 수 없는 문자 이전 위치를 벗어난 \\ 문자"
 
-#: lib/dfa.c:1570
+#: lib/dfa.c:1582
 msgid "stray \\ before white space"
 msgstr "공백 문자 이전 위치를 벗어난 \\ 문자"
 
-#: lib/dfa.c:1574
+#: lib/dfa.c:1593
 #, c-format
-msgid "stray \\ before %lc"
-msgstr "%lc 전 위치를 벗어난 \\ 문자"
+msgid "stray \\ before %s"
+msgstr "%s 전 위치를 벗어난 \\ 문자"
 
-#: lib/dfa.c:1575
+#: lib/dfa.c:1594 lib/dfa.c:1597
 msgid "stray \\"
 msgstr "위치를 벗어난 \\ 문자"
 
-#: lib/dfa.c:1925
+#: lib/dfa.c:1948
 msgid "unbalanced ("
 msgstr "짝이 맞지 않는 ( 괄호"
 
-#: lib/dfa.c:2042
+#: lib/dfa.c:2065
 msgid "no syntax specified"
 msgstr "문법을 지정하지 않았습니다"
 
-#: lib/dfa.c:2053
+#: lib/dfa.c:2076
 msgid "unbalanced )"
 msgstr "짝이 맞지 않는 ) 괄호"
 
-#: lib/error.c:193
+#: lib/error.c:208
 msgid "Unknown system error"
 msgstr "알 수 없는 시스템 오류"
 
-#: lib/getopt.c:278
+#: lib/getopt.c:282
 #, c-format
 msgid "%s: option '%s%s' is ambiguous\n"
 msgstr "%s: '%s%s' 옵션이 모호합니다\n"
 
-#: lib/getopt.c:284
+#: lib/getopt.c:288
 #, c-format
 msgid "%s: option '%s%s' is ambiguous; possibilities:"
 msgstr "%s: '%s%s' 옵션이 모호합니다 가능한 값:"
 
-#: lib/getopt.c:319
+#: lib/getopt.c:322
 #, c-format
 msgid "%s: unrecognized option '%s%s'\n"
 msgstr "%s: 인식할 수 없는 옵션 '%s%s'\n"
 
-#: lib/getopt.c:345
+#: lib/getopt.c:348
 #, c-format
 msgid "%s: option '%s%s' doesn't allow an argument\n"
 msgstr "%s: '%s%s' 옵션은 인자를 허용하지 않습니다\n"
 
-#: lib/getopt.c:360
+#: lib/getopt.c:363
 #, c-format
 msgid "%s: option '%s%s' requires an argument\n"
 msgstr "%s: '%s%s' 옵션은 인자가 필요합니다\n"
 
-#: lib/getopt.c:621
+#: lib/getopt.c:624
 #, c-format
 msgid "%s: invalid option -- '%c'\n"
 msgstr "%s: 잘못된 옵션 -- '%c'\n"
 
-#: lib/getopt.c:636 lib/getopt.c:682
+#: lib/getopt.c:639 lib/getopt.c:685
 #, c-format
 msgid "%s: option requires an argument -- '%c'\n"
 msgstr "%s: 이 옵션은 인자가 필요합니다 -- '%c'\n"
 
-#: lib/obstack.c:337 lib/obstack.c:339 lib/xalloc-die.c:34
+#: lib/obstack.c:320 lib/obstack.c:322 lib/xalloc-die.c:34
 msgid "memory exhausted"
 msgstr "메모리가 바닥남"
 
 #: lib/openat-die.c:38
-#, c-format
 msgid "unable to record current working directory"
 msgstr "현재 작업 디렉터리를 기록할 수 없습니다"
 
 #: lib/openat-die.c:57
-#, c-format
 msgid "failed to return to initial working directory"
 msgstr "초기 작업 디렉터리 반환에 실패했습니다"
 
@@ -437,54 +435,54 @@ msgstr "%s 홈 페이지: <%s>\n"
 msgid "General help using GNU software: <%s>\n"
 msgstr "GNU 소프트웨어 활용 일반 도움말: <%s>\n"
 
-#: src/dfasearch.c:59
+#: src/dfasearch.c:57
 #, c-format
 msgid "warning: %s"
 msgstr "경고: %s"
 
-#: src/grep.c:656
+#: src/grep.c:657
 msgid "(standard input)"
 msgstr "(표준 입력)"
 
-#: src/grep.c:837
+#: src/grep.c:838
 msgid "invalid context length argument"
 msgstr "잘못된 내용 길이 인자"
 
-#: src/grep.c:902
+#: src/grep.c:911
 msgid "input is too large to count"
 msgstr "입력 행 수를 세기에 너무 많습니다"
 
-#: src/grep.c:1651
+#: src/grep.c:1656
 #, c-format
 msgid "%s: binary file matches"
 msgstr "%s: 바이너리 파일 일치함"
 
-#: src/grep.c:1689
+#: src/grep.c:1694
 #, c-format
 msgid "%s: warning: recursive directory loop"
 msgstr "%s: 경고: 재귀 디렉터리 순환"
 
-#: src/grep.c:1909
+#: src/grep.c:1914
 #, c-format
 msgid "%s: input file is also the output"
 msgstr "%s: 입력 파일은 출력 대상이기도 합니다"
 
-#: src/grep.c:1971 src/grep.c:1978
+#: src/grep.c:1976 src/grep.c:1983
 #, c-format
 msgid "Usage: %s [OPTION]... PATTERNS [FILE]...\n"
 msgstr "사용법: %s [<옵션>]... <패턴> [<파일>]...\n"
 
-#: src/grep.c:1973
+#: src/grep.c:1978
 #, c-format
 msgid "Try '%s --help' for more information.\n"
 msgstr "자세한 정보는 '%s --help'를 입력하십시오.\n"
 
-#: src/grep.c:1979
+#: src/grep.c:1984
 #, c-format
 msgid "Search for PATTERNS in each FILE.\n"
 msgstr "각 <파일>에서 <패턴>에 일치하는 행을 검색합니다.\n"
 
-#: src/grep.c:1980
+#: src/grep.c:1985
 #, c-format
 msgid ""
 "Example: %s -i 'hello world' menu.h main.c\n"
@@ -498,7 +496,7 @@ msgstr ""
 "패턴 선택 및 해석:\n"
 "\n"
 
-#: src/grep.c:1985
+#: src/grep.c:1990
 #, c-format
 msgid ""
 "  -E, --extended-regexp     PATTERNS are extended regular expressions\n"
@@ -511,7 +509,7 @@ msgstr ""
 "  -G, --basic-regexp        <패턴>은 기본 정규 표현식입니다\n"
 "  -P, --perl-regexp         <패턴>은 펄 정규 표현식입니다\n"
 
-#: src/grep.c:1991
+#: src/grep.c:1996
 #, c-format
 msgid ""
 "  -e, --regexp=PATTERNS     use PATTERNS for matching\n"
@@ -531,7 +529,7 @@ msgstr ""
 "  -z, --null-data           데이터 행의 끝은 개행 문자가 아닌 0바이트 값으로 "
 "끝납니다\n"
 
-#: src/grep.c:1999
+#: src/grep.c:2004
 #, c-format
 msgid ""
 "\n"
@@ -548,7 +546,7 @@ msgstr ""
 "  -V, --version             버전 정보를 나타내고 빠져 나갑니다\n"
 "      --help                이 도움말 텍스트를 나타내고 빠져 나갑니다\n"
 
-#: src/grep.c:2006
+#: src/grep.c:2011
 #, c-format
 msgid ""
 "\n"
@@ -573,7 +571,7 @@ msgstr ""
 "      --label=<레이블>      <레이블>을 표준 입력 앞부분의 파일 이름으로 사용"
 "합니다\n"
 
-#: src/grep.c:2017
+#: src/grep.c:2022
 #, c-format
 msgid ""
 "  -o, --only-matching       show only nonempty parts of lines that match\n"
@@ -590,7 +588,7 @@ msgstr ""
 "하나입니다\n"
 "  -a, --text                --binary-files=text 옵션과 동일\n"
 
-#: src/grep.c:2024
+#: src/grep.c:2029
 #, c-format
 msgid ""
 "  -I                        equivalent to --binary-files=without-match\n"
@@ -611,7 +609,7 @@ msgstr ""
 "  -R, --dereference-recursive  위 옵션과 비슷하지만 모든 심볼릭 링크를 따라갑"
 "니다\n"
 
-#: src/grep.c:2033
+#: src/grep.c:2038
 #, c-format
 msgid ""
 "      --include=GLOB        search only files that match GLOB (a file "
@@ -628,7 +626,7 @@ msgstr ""
 "다\n"
 "      --exclude-dir=<글롭>    <글롭>과 일치하는 디렉터리를 건너뜁니다\n"
 
-#: src/grep.c:2040
+#: src/grep.c:2045
 #, c-format
 msgid ""
 "  -L, --files-without-match  print only names of FILEs with no selected "
@@ -644,7 +642,7 @@ msgstr ""
 "  -T, --initial-tab         (필요한 경우) 행 별로 탭을 표시합니다\n"
 "  -Z, --null                <파일> 이름 뒤에 0 바이트 값을 출력합니다\n"
 
-#: src/grep.c:2046
+#: src/grep.c:2051
 #, c-format
 msgid ""
 "\n"
@@ -662,7 +660,7 @@ msgstr ""
 "  -C, --context=<갯수>         <갯수> 줄 수 만큼 출력 내용 앞 뒤 부분을 모두 "
 "출력합니다 \n"
 
-#: src/grep.c:2053
+#: src/grep.c:2058
 #, c-format
 msgid ""
 "  -NUM                      same as --context=NUM\n"
@@ -687,53 +685,47 @@ msgstr ""
 "우)\n"
 "\n"
 
-#: src/grep.c:2062
+#: src/grep.c:2067
 #, c-format
 msgid ""
-"When FILE is '-', read standard input.  With no FILE, read '.' if\n"
-"recursive, '-' otherwise.  With fewer than two FILEs, assume -h.\n"
-"Exit status is 0 if any line is selected, 1 otherwise;\n"
-"if any error occurs and -q is not given, the exit status is 2.\n"
+"When FILE is '-', read standard input.  If no FILE is given, read standard\n"
+"input, but with -r, recursively search the working directory instead.  With\n"
+"fewer than two FILEs, assume -h.  Exit status is 0 if any line is selected,\n"
+"1 otherwise; if any error occurs and -q is not given, the exit status is 2.\n"
 msgstr ""
 "<파일> 값이 '-' 이면, 표준 입력을 읽습니다.  <파일>에 아무런 값이 없다면,\n"
-"재귀 탐색 옵션을 주었을 경우 현재 디렉터리를,  그렇지 않으면 '-' 값을 설정"
-"함\n"
-"으로 가정합니다. <파일> 갯수가 한개일 경우 -h 옵션을 준 것으로 가정합니다.\n"
-"조건 일치 행이 나오면, 끝내기 상태 값은 0을, 그렇지 않으면 1을 반환합니다.\n"
+"표준 입력을 읽어들이나, -r 옵션이 주어지면, 대신 작업 디렉터리를 재귀 탐색\n"
+"합니다.  <파일> 갯수가 한 개일 경우 -h 옵션을 준 것으로 가정합니다. 조건 \n"
+"일치 행이 나오면, 끝내기 상태 값은 0을, 그렇지 않으면 1을 반환합니다. \n"
 "오류가 나타났거나 -q 옵션을 주지 않았다면, 2를 반환합니다.\n"
 
-#: src/grep.c:2104
+#: src/grep.c:2110
 msgid "conflicting matchers specified"
 msgstr "비교 기준을 중복 지정했습니다"
 
-#: src/grep.c:2111
+#: src/grep.c:2117
 msgid "Perl matching not supported in a --disable-perl-regexp build"
 msgstr ""
 "--disable-perl-regexp 빌드에서는 Perl 문자열 일치 기능을 지원하지 않습니다"
 
-#: src/grep.c:2113
+#: src/grep.c:2119
 #, c-format
 msgid "invalid matcher %s"
 msgstr "잘못된 비교 기준 %s"
 
-#: src/grep.c:2534
+#: src/grep.c:2541
 msgid "unknown devices method"
 msgstr "알 수 없는 장치 방식"
 
-#: src/grep.c:2576
-#, c-format
-msgid "warning: --unix-byte-offsets (-u) is obsolete"
-msgstr "경고: --unix-byte-offsets (-u) 옵션은 오래되었습니다"
-
-#: src/grep.c:2688
+#: src/grep.c:2690
 msgid "invalid max count"
 msgstr "잘못된 최대 갯수"
 
-#: src/grep.c:2746
+#: src/grep.c:2747
 msgid "unknown binary-files type"
 msgstr "알 수 없는 바이너리 파일 형식"
 
-#: src/grep.c:2831
+#: src/grep.c:2832
 msgid ""
 "Written by Mike Haertel and others; see\n"
 "<https://git.savannah.gnu.org/cgit/grep.git/tree/AUTHORS>."
@@ -742,14 +734,14 @@ msgstr ""
 "<https://git.savannah.gnu.org/cgit/grep.git/tree/AUTHORS> 링크를 참고하십시"
 "오."
 
-#: src/grep.c:2937
+#: src/grep.c:2939
 #, c-format
 msgid "warning: GREP_COLOR='%s' is deprecated; use GREP_COLORS='mt=%s'"
 msgstr ""
 "경고: GREP_COLOR='%s' 환경 변수는 더 이상 사용하지 않습니다. "
 "GREP_COLORS='mt=%s' 변수를 사용하십시오."
 
-#: src/pcresearch.c:92
+#: src/pcresearch.c:89
 #, c-format
 msgid ""
 "\n"
@@ -758,56 +750,60 @@ msgstr ""
 "\n"
 "grep -P 옵션은 PCRE2 %s을(를) 활용합니다\n"
 
-#: src/pcresearch.c:169
+#: src/pcresearch.c:167
 msgid "-P supports only unibyte locales on this platform"
 msgstr "-P 옵션은 이 플랫폼에서 유니바이트 로캘만 지원합니다"
 
-#: src/pcresearch.c:171
+#: src/pcresearch.c:169
 msgid "-P supports only unibyte and UTF-8 locales"
 msgstr "-P 유니바이트, UTF-8 로캘만 지원합니다"
 
-#: src/pcresearch.c:194
+#: src/pcresearch.c:192
 msgid "the -P option only supports a single pattern"
 msgstr "-P 옵션은 단일 패턴만 지원합니다"
 
-#: src/pcresearch.c:290
+#: src/pcresearch.c:288
 msgid "exceeded PCRE's line length limit"
 msgstr "PCRE 행 길이 한계 초과"
 
-#: src/pcresearch.c:368
+#: src/pcresearch.c:366
 #, c-format
 msgid "%s: memory exhausted"
 msgstr "%s: 메모리가 바닥남"
 
-#: src/pcresearch.c:371
+#: src/pcresearch.c:369
 #, c-format
 msgid "%s: exhausted PCRE JIT stack"
 msgstr "%s: PCRE JIT 스택 가득 참"
 
-#: src/pcresearch.c:375
+#: src/pcresearch.c:373
 #, c-format
 msgid "%s: exceeded PCRE's backtracking limit"
 msgstr "%s: PCRE 후위 추적 한계 초과"
 
-#: src/pcresearch.c:380
+#: src/pcresearch.c:378
 #, c-format
 msgid "%s: exceeded PCRE's nested backtracking limit"
 msgstr "%s: PCRE 중첩 후위 추적 한계 초과"
 
-#: src/pcresearch.c:384
+#: src/pcresearch.c:382
 #, c-format
 msgid "%s: PCRE detected recurse loop"
 msgstr "%s: PCRE에서 재귀 순환 발견"
 
-#: src/pcresearch.c:389
+#: src/pcresearch.c:387
 #, c-format
 msgid "%s: exceeded PCRE's heap limit"
 msgstr "%s: PCRE 힙 영역 한계 초과"
 
-#: src/pcresearch.c:398
+#: src/pcresearch.c:396
 #, c-format
 msgid "%s: internal PCRE error: %d"
 msgstr "%s: 내부 PCRE 오류: %d"
+
+#, c-format
+#~ msgid "warning: --unix-byte-offsets (-u) is obsolete"
+#~ msgstr "경고: --unix-byte-offsets (-u) 옵션은 오래되었습니다"
 
 #~ msgid ""
 #~ "\n"

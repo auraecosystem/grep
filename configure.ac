@@ -1,7 +1,7 @@
 dnl
 dnl autoconf input file for GNU grep
 dnl
-dnl Copyright (C) 1997-2006, 2009-2023 Free Software Foundation, Inc.
+dnl Copyright (C) 1997-2006, 2009-2025 Free Software Foundation, Inc.
 dnl
 dnl This file is part of GNU grep.
 dnl
@@ -57,10 +57,9 @@ PKG_PROG_PKG_CONFIG([0.9.0])
 # so don't worry about this common bug,
 # as working around it would merely slow grep down.
 gl_cv_func_mbrtowc_empty_input='assume yes'
+gl_cv_func_mbrlen_empty_input='assume yes'
 
 dnl Checks for typedefs, structures, and compiler characteristics.
-AC_TYPE_SIZE_T
-AC_C_CONST
 gl_INIT
 
 # Ensure VLAs are not used.
@@ -166,14 +165,19 @@ if test $gl_gcc_warnings != no; then
   AC_SUBST([GNULIB_WARN_CFLAGS])
 
   # For gnulib-tests, the set is slightly smaller still.
-  nw=
-  nw="$nw -Wstrict-prototypes"
   # It's not worth being this picky about test programs.
-  nw="$nw -Wsuggest-attribute=const"
-  nw="$nw -Wsuggest-attribute=pure"
-  nw="$nw -Wsuggest-attribute=format"
+  nw=
   nw="$nw -Wformat-truncation=2"    # False alarm in strerror_r.c
+  nw="$nw -Wmissing-declarations"
+  nw="$nw -Wmissing-prototypes"
+  nw="$nw -Wmissing-variable-declarations"
+  nw="$nw -Wnull-dereference"
   nw="$nw -Wold-style-definition"
+  nw="$nw -Wstrict-prototypes"
+  nw="$nw -Wsuggest-attribute=cold"
+  nw="$nw -Wsuggest-attribute=const"
+  nw="$nw -Wsuggest-attribute=format"
+  nw="$nw -Wsuggest-attribute=pure"
 
   # Disable to avoid warnings in e.g., test-intprops.c and test-limits-h.c
   # due to overlong expansions like this:
@@ -193,13 +197,7 @@ AC_DEFINE([ARGMATCH_DIE], [usage (EXIT_FAILURE)],
 AC_DEFINE([ARGMATCH_DIE_DECL], [void usage (int _e)],
           [Define to the declaration of the xargmatch failure function.])
 
-dnl Checks for header files.
-AC_HEADER_DIRENT
-
-dnl Checks for functions.
-AC_FUNC_CLOSEDIR_VOID
-
-AC_CHECK_FUNCS_ONCE([isascii setlocale])
+AC_CHECK_FUNCS_ONCE([setlocale])
 
 dnl I18N feature
 AM_GNU_GETTEXT_VERSION([0.18.2])
@@ -212,6 +210,7 @@ dnl then the installer should configure --with-included-regex.
 AM_CONDITIONAL([USE_INCLUDED_REGEX], [test "$ac_use_included_regex" = yes])
 if test "$ac_use_included_regex" = no; then
   AC_MSG_WARN([Included lib/regex.c not used])
+else
   AC_DEFINE([USE_INCLUDED_REGEX], 1, [building with included regex code])
 fi
 

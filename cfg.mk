@@ -1,5 +1,5 @@
 # Customize maint.mk                           -*- makefile -*-
-# Copyright (C) 2009-2023 Free Software Foundation, Inc.
+# Copyright (C) 2009-2025 Free Software Foundation, Inc.
 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -45,6 +45,12 @@ announcement_Cc_ = $(translation_project_), $(PACKAGE)-devel@gnu.org
 _gl_TS_unmarked_extern_functions = \
   main usage mb_clen to_uchar dfaerror dfawarn imbrlen
 
+# Write base64-encoded (not hex) checksums into the announcement.
+announce_gen_args = --cksum-checksums
+
+# Add an exemption for sc_makefile_at_at_check.
+_makefile_at_at_check_exceptions = ' && !/MAKEINFO/'
+
 # Now that we have better tests, make this the default.
 export VERBOSE = yes
 
@@ -68,7 +74,7 @@ export VERBOSE = yes
 # 1127556 9e
 export XZ_OPT = -6e
 
-old_NEWS_hash = acc0cb77b06cc80cd3d8811590cdd5f0
+old_NEWS_hash = 2067ccba9ea30b38ca930e1098ef9364
 
 # We prefer to spell it back-reference, as POSIX does.
 sc_prohibit_backref:
@@ -182,3 +188,5 @@ sc_timeout_prereq:
 	  | $(GREP) .							\
 	  && { echo '$(ME): timeout without use of require_timeout_'	\
 	    1>&2; exit 1; } || :
+
+codespell_ignore_words_list = clen,allo,Nd,abd,alph,debbugs,wee,UE,ois,creche
