@@ -1,10 +1,12 @@
-grep (3.11-5~1.gbpbe0243) UNRELEASED; urgency=medium
+grep (3.12-1~exp1~1.gbpe388eb) UNRELEASED-experimental; urgency=medium
 
-  ** SNAPSHOT build @be0243e401b60bc93a70dde7af0d8bce510e9b24 **
+  ** SNAPSHOT build @e388ebaf81903b2c1e734a27b85d0ddc5ea88a50 **
 
+  * New upstream version: 3.12
   * Wrap-and-sort debian/ with -ast
+  * Remove no longer needed grep-dirfd.patch
 
- -- Santiago Ruano Rincón <santiago@debian.org>  Wed, 13 Mar 2024 14:31:13 -0300
+ -- Santiago Ruano Rincón <santiago@debian.org>  Thu, 17 Apr 2025 22:56:09 -0300
 
 grep (3.11-4) unstable; urgency=low
 
