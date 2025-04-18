@@ -1,7 +1,14 @@
-Tests: upstream-test-suite
-Depends: @builddeps@, fakeroot, libpcre2-8-0, locales-all
-# TODO: remove allow-stderr. For now it is needed since for being able
-#       to ignore expensive checks and for ignore unavailable locale warnings.
-Restrictions: allow-stderr
+Tests:
+ upstream-test-suite,
+Depends:
+ fakeroot,
+ libpcre2-8-0,
+ locales-all,
+ @builddeps@,
+Restrictions:
+ allow-stderr,
 
-Tests: egrep-fgrep, stray-backlash-warn dirfd
+Tests:
+ dirfd,
+ egrep-fgrep,
+ stray-backlash-warn,
