@@ -1,5 +1,5 @@
 /* Test suite for exclude.
-   Copyright (C) 2009-2023 Free Software Foundation, Inc.
+   Copyright (C) 2009-2025 Free Software Foundation, Inc.
    This file is part of the GNUlib Library.
 
    This program is free software: you can redistribute it and/or modify
@@ -22,8 +22,8 @@
 #include <string.h>
 #include <fnmatch.h>
 
+#include <error.h>
 #include "exclude.h"
-#include "error.h"
 #include "argmatch.h"
 
 #ifndef FNM_CASEFOLD

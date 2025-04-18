@@ -1,5 +1,5 @@
 /* pcresearch.c - searching subroutines using PCRE for grep.
-   Copyright 2000, 2007, 2009-2023 Free Software Foundation, Inc.
+   Copyright 2000, 2007, 2009-2025 Free Software Foundation, Inc.
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -12,13 +12,11 @@
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program; if not, write to the Free Software
-   Foundation, Inc., 51 Franklin Street - Fifth Floor, Boston, MA
-   02110-1301, USA.  */
+   along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
 
 #include <config.h>
 
-#include "search.h"
+#include <search.h>
 #include "die.h"
 
 #include <stdckdint.h>
@@ -86,10 +84,10 @@ private_free (void *ptr, _GL_UNUSED void *unused)
 void
 Pprint_version (void)
 {
-  char buf[128];
-  if (sizeof buf <= pcre2_config (PCRE2_CONFIG_VERSION, buf))
-    abort ();
+  char *buf = ximalloc (pcre2_config (PCRE2_CONFIG_VERSION, nullptr));
+  pcre2_config (PCRE2_CONFIG_VERSION, buf);
   printf (_("\ngrep -P uses PCRE2 %s\n"), buf);
+  free (buf);
 }
 
 /* Match the already-compiled PCRE pattern against the data in SUBJECT,
@@ -122,7 +120,7 @@ jit_exec (struct pcre_comp *pc, char const *subject, idx_t search_bytes,
             xalloc_die ();
           if (!pc->mcontext)
             pc->mcontext = pcre2_match_context_create (pc->gcontext);
-          pcre2_jit_stack_assign (pc->mcontext, NULL, pc->jit_stack);
+          pcre2_jit_stack_assign (pc->mcontext, nullptr, pc->jit_stack);
         }
       else if (e == PCRE2_ERROR_DEPTHLIMIT)
         {
@@ -158,7 +156,7 @@ Pcompile (char *pattern, idx_t size, reg_syntax_t ignored, bool exact)
   char *patlim = pattern + size;
   struct pcre_comp *pc = ximalloc (sizeof *pc);
   pcre2_general_context *gcontext = pc->gcontext
-    = pcre2_general_context_create (private_malloc, private_free, NULL);
+    = pcre2_general_context_create (private_malloc, private_free, nullptr);
   pcre2_compile_context *ccontext = pcre2_compile_context_create (gcontext);
 
   if (localeinfo.multibyte)
@@ -199,17 +197,17 @@ Pcompile (char *pattern, idx_t size, reg_syntax_t ignored, bool exact)
   pcre2_set_compile_extra_options (ccontext, extra_options);
 #endif
 
-  void *re_storage = NULL;
+  void *re_storage = nullptr;
   if (match_lines)
     {
 #ifndef PCRE2_EXTRA_MATCH_LINE
-      static char const /* These sizes omit trailing NUL.  */
-        xprefix[4] = "^(?:", xsuffix[2] = ")$";
-      idx_t re_size = size + sizeof xprefix + sizeof xsuffix;
+      static char const *const xprefix = "^(?:";
+      static char const *const xsuffix = ")$";
+      idx_t re_size = size + strlen (xprefix) + strlen (xsuffix);
       char *re = re_storage = ximalloc (re_size);
-      char *rez = mempcpy (re, xprefix, sizeof xprefix);
+      char *rez = mempcpy (re, xprefix, strlen (xprefix));
       rez = mempcpy (rez, pattern, size);
-      memcpy (rez, xsuffix, sizeof xsuffix);
+      memcpy (rez, xsuffix, strlen (xsuffix));
       pattern = re;
       size = re_size;
 #endif
@@ -218,13 +216,13 @@ Pcompile (char *pattern, idx_t size, reg_syntax_t ignored, bool exact)
     {
       /* PCRE2_EXTRA_MATCH_WORD is incompatible with grep -w;
          do things the grep way.  */
-      static char const /* These sizes omit trailing NUL.  */
-        wprefix[10] = "(?<!\\w)(?:", wsuffix[7] = ")(?!\\w)";
-      idx_t re_size = size + sizeof wprefix + sizeof wsuffix;
+      static char const *const wprefix = "(?<!\\w)(?:";
+      static char const *const wsuffix = ")(?!\\w)";
+      idx_t re_size = size + strlen (wprefix) + strlen (wsuffix);
       char *re = re_storage = ximalloc (re_size);
-      char *rez = mempcpy (re, wprefix, sizeof wprefix);
+      char *rez = mempcpy (re, wprefix, strlen (wprefix));
       rez = mempcpy (rez, pattern, size);
-      memcpy (rez, wsuffix, sizeof wsuffix);
+      memcpy (rez, wsuffix, strlen (wsuffix));
       pattern = re;
       size = re_size;
     }
@@ -245,7 +243,7 @@ Pcompile (char *pattern, idx_t size, reg_syntax_t ignored, bool exact)
   free (re_storage);
   pcre2_compile_context_free (ccontext);
 
-  pc->mcontext = NULL;
+  pc->mcontext = nullptr;
   pc->data = pcre2_match_data_create_from_pattern (pc->cre, gcontext);
 
   /* Ignore any failure return from pcre2_jit_compile, as that merely
@@ -253,7 +251,7 @@ Pcompile (char *pattern, idx_t size, reg_syntax_t ignored, bool exact)
   pcre2_jit_compile (pc->cre, PCRE2_JIT_COMPLETE);
 
   /* The PCRE documentation says that a 32 KiB stack is the default.  */
-  pc->jit_stack = NULL;
+  pc->jit_stack = nullptr;
   pc->jit_stack_size = 32 << 10;
 
   pc->empty_match[false] = jit_exec (pc, "", 0, 0, PCRE2_NOTBOL);

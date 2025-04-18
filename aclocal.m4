@@ -1,6 +1,6 @@
-# generated automatically by aclocal 1.16i -*- Autoconf -*-
+# generated automatically by aclocal 1.17.0.91 -*- Autoconf -*-
 
-# Copyright (C) 1996-2023 Free Software Foundation, Inc.
+# Copyright (C) 1996-2025 Free Software Foundation, Inc.
 
 # This file is free software; the Free Software Foundation
 # gives unlimited permission to copy and/or distribute it,
@@ -14,13 +14,13 @@
 m4_ifndef([AC_CONFIG_MACRO_DIRS], [m4_defun([_AM_CONFIG_MACRO_DIRS], [])m4_defun([AC_CONFIG_MACRO_DIRS], [_AM_CONFIG_MACRO_DIRS($@)])])
 m4_ifndef([AC_AUTOCONF_VERSION],
   [m4_copy([m4_PACKAGE_VERSION], [AC_AUTOCONF_VERSION])])dnl
-m4_if(m4_defn([AC_AUTOCONF_VERSION]), [2.72c.20-9c018],,
-[m4_warning([this file was generated for autoconf 2.72c.20-9c018.
+m4_if(m4_defn([AC_AUTOCONF_VERSION]), [2.72.76-2f64],,
+[m4_warning([this file was generated for autoconf 2.72.76-2f64.
 You have another version of autoconf.  It may work, but is not guaranteed to.
 If you have problems, you may need to regenerate the build system entirely.
 To do so, use the procedure documented by the package, typically 'autoreconf'.])])
 
-# Copyright (C) 2002-2023 Free Software Foundation, Inc.
+# Copyright (C) 2002-2025 Free Software Foundation, Inc.
 #
 # This file is free software; the Free Software Foundation
 # gives unlimited permission to copy and/or distribute it,
@@ -32,10 +32,10 @@ To do so, use the procedure documented by the package, typically 'autoreconf'.])
 # generated from the m4 files accompanying Automake X.Y.
 # (This private macro should not be called outside this file.)
 AC_DEFUN([AM_AUTOMAKE_VERSION],
-[am__api_version='1.16'
+[am__api_version='1.17'
 dnl Some users find AM_AUTOMAKE_VERSION and mistake it for a way to
 dnl require some minimum version.  Point them to the right macro.
-m4_if([$1], [1.16i], [],
+m4_if([$1], [1.17.0.91], [],
       [AC_FATAL([Do not call $0, use AM_INIT_AUTOMAKE([$1]).])])dnl
 ])
 
@@ -51,14 +51,14 @@ m4_define([_AM_AUTOCONF_VERSION], [])
 # Call AM_AUTOMAKE_VERSION and AM_AUTOMAKE_VERSION so they can be traced.
 # This function is AC_REQUIREd by AM_INIT_AUTOMAKE.
 AC_DEFUN([AM_SET_CURRENT_AUTOMAKE_VERSION],
-[AM_AUTOMAKE_VERSION([1.16i])dnl
+[AM_AUTOMAKE_VERSION([1.17.0.91])dnl
 m4_ifndef([AC_AUTOCONF_VERSION],
   [m4_copy([m4_PACKAGE_VERSION], [AC_AUTOCONF_VERSION])])dnl
 _AM_AUTOCONF_VERSION(m4_defn([AC_AUTOCONF_VERSION]))])
 
 # AM_AUX_DIR_EXPAND                                         -*- Autoconf -*-
 
-# Copyright (C) 2001-2023 Free Software Foundation, Inc.
+# Copyright (C) 2001-2025 Free Software Foundation, Inc.
 #
 # This file is free software; the Free Software Foundation
 # gives unlimited permission to copy and/or distribute it,
@@ -110,7 +110,7 @@ am_aux_dir=`cd "$ac_aux_dir" && pwd`
 
 # AM_COND_IF                                            -*- Autoconf -*-
 
-# Copyright (C) 2008-2023 Free Software Foundation, Inc.
+# Copyright (C) 2008-2025 Free Software Foundation, Inc.
 #
 # This file is free software; the Free Software Foundation
 # gives unlimited permission to copy and/or distribute it,
@@ -147,7 +147,7 @@ fi[]dnl
 
 # AM_CONDITIONAL                                            -*- Autoconf -*-
 
-# Copyright (C) 1997-2023 Free Software Foundation, Inc.
+# Copyright (C) 1997-2025 Free Software Foundation, Inc.
 #
 # This file is free software; the Free Software Foundation
 # gives unlimited permission to copy and/or distribute it,
@@ -178,7 +178,7 @@ AC_CONFIG_COMMANDS_PRE(
 Usually this means the macro was only invoked conditionally.]])
 fi])])
 
-# Copyright (C) 1999-2023 Free Software Foundation, Inc.
+# Copyright (C) 1999-2025 Free Software Foundation, Inc.
 #
 # This file is free software; the Free Software Foundation
 # gives unlimited permission to copy and/or distribute it,
@@ -310,7 +310,7 @@ AC_CACHE_CHECK([dependency style of $depcc],
       # icc doesn't choke on unknown options, it will just issue warnings
       # or remarks (even with -Werror).  So we grep stderr for any message
       # that says an option was ignored or not supported.
-      # When given -MP, icc 7.0 and 7.1 complain thusly:
+      # When given -MP, icc 7.0 and 7.1 complain thus:
       #   icc: Command line warning: ignoring option '-M'; no argument required
       # The diagnosis changed in icc 8.0:
       #   icc: Command line remark: option '-MP' not supported
@@ -369,7 +369,7 @@ _AM_SUBST_NOTMAKE([am__nodep])dnl
 
 # Generate code to set up dependency tracking.              -*- Autoconf -*-
 
-# Copyright (C) 1999-2023 Free Software Foundation, Inc.
+# Copyright (C) 1999-2025 Free Software Foundation, Inc.
 #
 # This file is free software; the Free Software Foundation
 # gives unlimited permission to copy and/or distribute it,
@@ -437,7 +437,7 @@ AC_DEFUN([AM_OUTPUT_DEPENDENCY_COMMANDS],
 
 # Do all the work for Automake.                             -*- Autoconf -*-
 
-# Copyright (C) 1996-2023 Free Software Foundation, Inc.
+# Copyright (C) 1996-2025 Free Software Foundation, Inc.
 #
 # This file is free software; the Free Software Foundation
 # gives unlimited permission to copy and/or distribute it,
@@ -614,7 +614,7 @@ for _am_header in $config_headers :; do
 done
 echo "timestamp for $_am_arg" >`AS_DIRNAME(["$_am_arg"])`/stamp-h[]$_am_stamp_count])
 
-# Copyright (C) 2001-2023 Free Software Foundation, Inc.
+# Copyright (C) 2001-2025 Free Software Foundation, Inc.
 #
 # This file is free software; the Free Software Foundation
 # gives unlimited permission to copy and/or distribute it,
@@ -635,7 +635,7 @@ if test x"${install_sh+set}" != xset; then
 fi
 AC_SUBST([install_sh])])
 
-# Copyright (C) 2003-2023 Free Software Foundation, Inc.
+# Copyright (C) 2003-2025 Free Software Foundation, Inc.
 #
 # This file is free software; the Free Software Foundation
 # gives unlimited permission to copy and/or distribute it,
@@ -656,7 +656,7 @@ AC_SUBST([am__leading_dot])])
 
 # Check to see how 'make' treats includes.	            -*- Autoconf -*-
 
-# Copyright (C) 2001-2023 Free Software Foundation, Inc.
+# Copyright (C) 2001-2025 Free Software Foundation, Inc.
 #
 # This file is free software; the Free Software Foundation
 # gives unlimited permission to copy and/or distribute it,
@@ -699,7 +699,7 @@ AC_SUBST([am__quote])])
 
 # Fake the existence of programs that GNU maintainers use.  -*- Autoconf -*-
 
-# Copyright (C) 1997-2023 Free Software Foundation, Inc.
+# Copyright (C) 1997-2025 Free Software Foundation, Inc.
 #
 # This file is free software; the Free Software Foundation
 # gives unlimited permission to copy and/or distribute it,
@@ -733,7 +733,7 @@ fi
 
 # Helper functions for option handling.                     -*- Autoconf -*-
 
-# Copyright (C) 2001-2023 Free Software Foundation, Inc.
+# Copyright (C) 2001-2025 Free Software Foundation, Inc.
 #
 # This file is free software; the Free Software Foundation
 # gives unlimited permission to copy and/or distribute it,
@@ -762,7 +762,7 @@ AC_DEFUN([_AM_SET_OPTIONS],
 AC_DEFUN([_AM_IF_OPTION],
 [m4_ifset(_AM_MANGLE_OPTION([$1]), [$2], [$3])])
 
-# Copyright (C) 1999-2023 Free Software Foundation, Inc.
+# Copyright (C) 1999-2025 Free Software Foundation, Inc.
 #
 # This file is free software; the Free Software Foundation
 # gives unlimited permission to copy and/or distribute it,
@@ -794,7 +794,10 @@ AC_CACHE_CHECK(
       break
     fi
   done
-  rm -f core conftest*
+  # aligned with autoconf, so not including core; see bug#72225.
+  rm -f -r a.out a.exe b.out conftest.$ac_ext conftest.$ac_objext \
+    conftest.dSYM conftest1.$ac_ext conftest1.$ac_objext conftest1.dSYM \
+    conftest2.$ac_ext conftest2.$ac_objext conftest2.dSYM
   unset am_i])
 if test "$am_cv_prog_cc_c_o" != yes; then
    # Losing compiler, so override with the script.
@@ -809,7 +812,7 @@ AC_LANG_POP([C])])
 # For backward compatibility.
 AC_DEFUN_ONCE([AM_PROG_CC_C_O], [AC_REQUIRE([AC_PROG_CC])])
 
-# Copyright (C) 2022-2023 Free Software Foundation, Inc.
+# Copyright (C) 2022-2025 Free Software Foundation, Inc.
 #
 # This file is free software; the Free Software Foundation
 # gives unlimited permission to copy and/or distribute it,
@@ -825,7 +828,7 @@ AS_IF([(rm -f && rm -fr && rm -rf) 2>/dev/null], [], [am__rm_f_notfound='""'])
 AC_SUBST(am__rm_f_notfound)
 ])
 
-# Copyright (C) 2001-2023 Free Software Foundation, Inc.
+# Copyright (C) 2001-2025 Free Software Foundation, Inc.
 #
 # This file is free software; the Free Software Foundation
 # gives unlimited permission to copy and/or distribute it,
@@ -844,7 +847,7 @@ AC_DEFUN([AM_RUN_LOG],
 
 # Check to make sure that the build environment is sane.    -*- Autoconf -*-
 
-# Copyright (C) 1996-2023 Free Software Foundation, Inc.
+# Copyright (C) 1996-2025 Free Software Foundation, Inc.
 #
 # This file is free software; the Free Software Foundation
 # gives unlimited permission to copy and/or distribute it,
@@ -853,61 +856,172 @@ AC_DEFUN([AM_RUN_LOG],
 # _AM_SLEEP_FRACTIONAL_SECONDS
 # ----------------------------
 AC_DEFUN([_AM_SLEEP_FRACTIONAL_SECONDS], [dnl
-AC_CACHE_CHECK([whether sleep supports fractional seconds], am_cv_sleep_fractional_seconds, [dnl
-AS_IF([sleep 0.001 2>/dev/null], [am_cv_sleep_fractional_seconds=true], [am_cv_sleep_fractional_seconds=false])
+AC_CACHE_CHECK([whether sleep supports fractional seconds],
+               am_cv_sleep_fractional_seconds, [dnl
+AS_IF([sleep 0.001 2>/dev/null], [am_cv_sleep_fractional_seconds=yes],
+                                 [am_cv_sleep_fractional_seconds=no])
 ])])
 
 # _AM_FILESYSTEM_TIMESTAMP_RESOLUTION
 # -----------------------------------
-# Determine the filesystem timestamp resolution.  Modern systems are nanosecond
-# capable, but historical systems could be millisecond, second, or even 2-second
-# resolution.
+# Determine the filesystem's resolution for file modification
+# timestamps.  The coarsest we know of is FAT, with a resolution
+# of only two seconds, even with the most recent "exFAT" extensions.
+# The finest (e.g. ext4 with large inodes, XFS, ZFS) is one
+# nanosecond, matching clock_gettime.  However, it is probably not
+# possible to delay execution of a shell script for less than one
+# millisecond, due to process creation overhead and scheduling
+# granularity, so we don't check for anything finer than that. (See below.)
 AC_DEFUN([_AM_FILESYSTEM_TIMESTAMP_RESOLUTION], [dnl
 AC_REQUIRE([_AM_SLEEP_FRACTIONAL_SECONDS])
-AC_CACHE_CHECK([the filesystem timestamp resolution], am_cv_filesystem_timestamp_resolution, [dnl
-# Use names that lexically sort older-first when the timestamps are equal.
-rm -f conftest.file.a conftest.file.b
-: > conftest.file.a
-AS_IF([$am_cv_sleep_fractional_seconds], [dnl
-  am_try_sleep=0.1 am_try_loops=20
-], [dnl
-  am_try_sleep=1   am_try_loops=2
-])
-am_try=0
-while :; do
-  AS_VAR_ARITH([am_try], [$am_try + 1])
-  echo "timestamp $am_try" > conftest.file.b
-  set X `ls -t conftest.file.a conftest.file.b`
-  if test "$[2]" = conftest.file.b || test $am_try -eq $am_try_loops; then
-    break
+AC_CACHE_CHECK([filesystem timestamp resolution],
+               am_cv_filesystem_timestamp_resolution, [dnl
+# Default to the worst case.
+am_cv_filesystem_timestamp_resolution=2
+
+# Only try to go finer than 1 sec if sleep can do it.
+# Don't try 1 sec, because if 0.01 sec and 0.1 sec don't work,
+# - 1 sec is not much of a win compared to 2 sec, and
+# - it takes 2 seconds to perform the test whether 1 sec works.
+# 
+# Instead, just use the default 2s on platforms that have 1s resolution,
+# accept the extra 1s delay when using $sleep in the Automake tests, in
+# exchange for not incurring the 2s delay for running the test for all
+# packages.
+#
+am_try_resolutions=
+if test "$am_cv_sleep_fractional_seconds" = yes; then
+  # Even a millisecond often causes a bunch of false positives,
+  # so just try a hundredth of a second. The time saved between .001 and
+  # .01 is not terribly consequential.
+  am_try_resolutions="0.01 0.1 $am_try_resolutions"
+fi
+
+# In order to catch current-generation FAT out, we must *modify* files
+# that already exist; the *creation* timestamp is finer.  Use names
+# that make ls -t sort them differently when they have equal
+# timestamps than when they have distinct timestamps, keeping
+# in mind that ls -t prints the *newest* file first.
+rm -f conftest.ts?
+: > conftest.ts1
+: > conftest.ts2
+: > conftest.ts3
+
+# Make sure ls -t actually works.  Do 'set' in a subshell so we don't
+# clobber the current shell's arguments. (Outer-level square brackets
+# are removed by m4; they're present so that m4 does not expand
+# <dollar><star>; be careful, easy to get confused.)
+if (
+     set X `[ls -t conftest.ts[12]]` &&
+     {
+       test "$[]*" != "X conftest.ts1 conftest.ts2" ||
+       test "$[]*" != "X conftest.ts2 conftest.ts1";
+     }
+); then :; else
+  # If neither matched, then we have a broken ls.  This can happen
+  # if, for instance, CONFIG_SHELL is bash and it inherits a
+  # broken ls alias from the environment.  This has actually
+  # happened.  Such a system could not be considered "sane".
+  _AS_ECHO_UNQUOTED(
+    ["Bad output from ls -t: \"`[ls -t conftest.ts[12]]`\""],
+    [AS_MESSAGE_LOG_FD])
+  AC_MSG_FAILURE([ls -t produces unexpected output.
+Make sure there is not a broken ls alias in your environment.])
+fi
+
+for am_try_res in $am_try_resolutions; do
+  # Any one fine-grained sleep might happen to cross the boundary
+  # between two values of a coarser actual resolution, but if we do
+  # two fine-grained sleeps in a row, at least one of them will fall
+  # entirely within a coarse interval.
+  echo alpha > conftest.ts1
+  sleep $am_try_res
+  echo beta > conftest.ts2
+  sleep $am_try_res
+  echo gamma > conftest.ts3
+
+  # We assume that 'ls -t' will make use of high-resolution
+  # timestamps if the operating system supports them at all.
+  if (set X `ls -t conftest.ts?` &&
+      test "$[]2" = conftest.ts3 &&
+      test "$[]3" = conftest.ts2 &&
+      test "$[]4" = conftest.ts1); then
+    #
+    # Ok, ls -t worked. If we're at a resolution of 1 second, we're done,
+    # because we don't need to test make.
+    make_ok=true
+    if test $am_try_res != 1; then
+      # But if we've succeeded so far with a subsecond resolution, we
+      # have one more thing to check: make. It can happen that
+      # everything else supports the subsecond mtimes, but make doesn't;
+      # notably on macOS, which ships make 3.81 from 2006 (the last one
+      # released under GPLv2). https://bugs.gnu.org/68808
+      # 
+      # We test $MAKE if it is defined in the environment, else "make".
+      # It might get overridden later, but our hope is that in practice
+      # it does not matter: it is the system "make" which is (by far)
+      # the most likely to be broken, whereas if the user overrides it,
+      # probably they did so with a better, or at least not worse, make.
+      # https://lists.gnu.org/archive/html/automake/2024-06/msg00051.html
+      #
+      # Create a Makefile (real tab character here):
+      rm -f conftest.mk
+      echo 'conftest.ts1: conftest.ts2' >conftest.mk
+      echo '	touch conftest.ts2' >>conftest.mk
+      #
+      # Now, running
+      #   touch conftest.ts1; touch conftest.ts2; make
+      # should touch ts1 because ts2 is newer. This could happen by luck,
+      # but most often, it will fail if make's support is insufficient. So
+      # test for several consecutive successes.
+      #
+      # (We reuse conftest.ts[12] because we still want to modify existing
+      # files, not create new ones, per above.)
+      n=0
+      make=${MAKE-make}
+      until test $n -eq 3; do
+        echo one > conftest.ts1
+        sleep $am_try_res
+        echo two > conftest.ts2 # ts2 should now be newer than ts1
+        if $make -f conftest.mk | grep 'up to date' >/dev/null; then
+          make_ok=false
+          break # out of $n loop
+        fi
+        n=`expr $n + 1`
+      done
+    fi
+    #
+    if $make_ok; then
+      # Everything we know to check worked out, so call this resolution good.
+      am_cv_filesystem_timestamp_resolution=$am_try_res
+      break # out of $am_try_res loop
+    fi
+    # Otherwise, we'll go on to check the next resolution.
   fi
-  sleep $am_try_sleep
 done
-rm -f conftest.file.a conftest.file.b
-am_cv_filesystem_timestamp_resolution=$am_try
-AS_IF([$am_cv_sleep_fractional_seconds], [dnl
-  AS_VAR_ARITH([am_cv_filesystem_timestamp_resolution], [$am_try / 10])
-  AS_VAR_ARITH([am_fraction], [$am_try % 10])
-  AS_VAR_APPEND([am_cv_filesystem_timestamp_resolution], [.$am_fraction])
-])
+rm -f conftest.ts?
+# (end _am_filesystem_timestamp_resolution)
 ])])
 
 # AM_SANITY_CHECK
 # ---------------
 AC_DEFUN([AM_SANITY_CHECK],
 [AC_REQUIRE([_AM_FILESYSTEM_TIMESTAMP_RESOLUTION])
-rm -f conftest.file
-AC_CACHE_CHECK([whether build environment is sane], am_cv_build_env_is_sane, [dnl
+# This check should not be cached, as it may vary across builds of
+# different projects.
+AC_MSG_CHECKING([whether build environment is sane])
 # Reject unsafe characters in $srcdir or the absolute working directory
 # name.  Accept space and tab only in the latter.
 am_lf='
 '
 case `pwd` in
   *[[\\\"\#\$\&\'\`$am_lf]]*)
+    AC_MSG_RESULT([no])
     AC_MSG_ERROR([unsafe absolute working directory name]);;
 esac
 case $srcdir in
   *[[\\\"\#\$\&\'\`$am_lf\ \	]]*)
+    AC_MSG_RESULT([no])
     AC_MSG_ERROR([unsafe srcdir value: '$srcdir']);;
 esac
 
@@ -916,48 +1030,40 @@ esac
 # symlink; some systems play weird games with the mod time of symlinks
 # (eg FreeBSD returns the mod time of the symlink's containing
 # directory).
-if (
-   am_has_slept=no
-   for am_try in 1 2; do
-     echo "timestamp, slept: $am_has_slept" > conftest.file
-     set X `ls -Lt "$srcdir/configure" conftest.file 2> /dev/null`
-     if test "$[*]" = "X"; then
-	# -L didn't work.
-	set X `ls -t "$srcdir/configure" conftest.file`
-     fi
-     if test "$[*]" != "X $srcdir/configure conftest.file" \
-	&& test "$[*]" != "X conftest.file $srcdir/configure"; then
+am_build_env_is_sane=no
+am_has_slept=no
+rm -f conftest.file
+for am_try in 1 2; do
+  echo "timestamp, slept: $am_has_slept" > conftest.file
+  if (
+    set X `ls -Lt "$srcdir/configure" conftest.file 2> /dev/null`
+    if test "$[]*" = "X"; then
+      # -L didn't work.
+      set X `ls -t "$srcdir/configure" conftest.file`
+    fi
+    test "$[]2" = conftest.file
+  ); then
+    am_build_env_is_sane=yes
+    break
+  fi
+  # Just in case.
+  sleep "$am_cv_filesystem_timestamp_resolution"
+  am_has_slept=yes
+done
 
-	# If neither matched, then we have a broken ls.  This can happen
-	# if, for instance, CONFIG_SHELL is bash and it inherits a
-	# broken ls alias from the environment.  This has actually
-	# happened.  Such a system could not be considered "sane".
-	AC_MSG_ERROR([ls -t appears to fail.  Make sure there is not a broken
-  alias in your environment])
-     fi
-     if test "$[2]" = conftest.file || test $am_try -eq 2; then
-       break
-     fi
-     # Just in case.
-     sleep $am_cv_filesystem_timestamp_resolution
-     am_has_slept=yes
-   done
-   test "$[2]" = conftest.file
-   )
-then
-  am_cv_build_env_is_sane=yes
-else
-   AC_MSG_ERROR([newly created file is older than distributed files!
+AC_MSG_RESULT([$am_build_env_is_sane])
+if test "$am_build_env_is_sane" = no; then
+  AC_MSG_ERROR([newly created file is older than distributed files!
 Check your system clock])
 fi
-])
+
 # If we didn't sleep, we still need to ensure time stamps of config.status and
 # generated files are strictly newer.
 am_sleep_pid=
-if ! test -e conftest.file || grep 'slept: no' conftest.file >/dev/null 2>&1; then
-  ( sleep $am_cv_filesystem_timestamp_resolution ) &
+AS_IF([test -e conftest.file || grep 'slept: no' conftest.file >/dev/null 2>&1],, [dnl
+  ( sleep "$am_cv_filesystem_timestamp_resolution" ) &
   am_sleep_pid=$!
-fi
+])
 AC_CONFIG_COMMANDS_PRE(
   [AC_MSG_CHECKING([that generated files are newer than configure])
    if test -n "$am_sleep_pid"; then
@@ -968,7 +1074,7 @@ AC_CONFIG_COMMANDS_PRE(
 rm -f conftest.file
 ])
 
-# Copyright (C) 2009-2023 Free Software Foundation, Inc.
+# Copyright (C) 2009-2025 Free Software Foundation, Inc.
 #
 # This file is free software; the Free Software Foundation
 # gives unlimited permission to copy and/or distribute it,
@@ -1037,9 +1143,13 @@ fi
 # empty being verbose).
 AC_DEFUN([AM_SILENT_RULES],
 [AC_REQUIRE([_AM_SILENT_RULES])
-AM_DEFAULT_VERBOSITY=m4_if([$1], [yes], [0], [1])])
+AM_DEFAULT_VERBOSITY=m4_if([$1], [yes], [0], [1])m4_newline
+dnl We intentionally force a newline after the assignment, since a) nothing
+dnl good can come of more text following, and b) that was the behavior
+dnl before 1.17. See https://bugs.gnu.org/72267.
+])
 
-# Copyright (C) 2001-2023 Free Software Foundation, Inc.
+# Copyright (C) 2001-2025 Free Software Foundation, Inc.
 #
 # This file is free software; the Free Software Foundation
 # gives unlimited permission to copy and/or distribute it,
@@ -1067,7 +1177,7 @@ fi
 INSTALL_STRIP_PROGRAM="\$(install_sh) -c -s"
 AC_SUBST([INSTALL_STRIP_PROGRAM])])
 
-# Copyright (C) 2006-2023 Free Software Foundation, Inc.
+# Copyright (C) 2006-2025 Free Software Foundation, Inc.
 #
 # This file is free software; the Free Software Foundation
 # gives unlimited permission to copy and/or distribute it,
@@ -1086,7 +1196,7 @@ AC_DEFUN([AM_SUBST_NOTMAKE], [_AM_SUBST_NOTMAKE($@)])
 
 # Check how to create a tarball.                            -*- Autoconf -*-
 
-# Copyright (C) 2004-2023 Free Software Foundation, Inc.
+# Copyright (C) 2004-2025 Free Software Foundation, Inc.
 #
 # This file is free software; the Free Software Foundation
 # gives unlimited permission to copy and/or distribute it,
@@ -1221,7 +1331,7 @@ AC_SUBST([am__tar])
 AC_SUBST([am__untar])
 ]) # _AM_PROG_TAR
 
-# Copyright (C) 2022-2023 Free Software Foundation, Inc.
+# Copyright (C) 2022-2025 Free Software Foundation, Inc.
 #
 # This file is free software; the Free Software Foundation
 # gives unlimited permission to copy and/or distribute it,
@@ -1254,6 +1364,7 @@ m4_include([m4/build-to-host.m4])
 m4_include([m4/builtin-expect.m4])
 m4_include([m4/c-bool.m4])
 m4_include([m4/c-stack.m4])
+m4_include([m4/c32rtomb.m4])
 m4_include([m4/calloc.m4])
 m4_include([m4/chdir-long.m4])
 m4_include([m4/close.m4])
@@ -1269,12 +1380,14 @@ m4_include([m4/dirfd.m4])
 m4_include([m4/double-slash-root.m4])
 m4_include([m4/dup.m4])
 m4_include([m4/dup2.m4])
-m4_include([m4/eealloc.m4])
 m4_include([m4/environ.m4])
 m4_include([m4/errno_h.m4])
 m4_include([m4/error.m4])
 m4_include([m4/error_h.m4])
 m4_include([m4/exponentd.m4])
+m4_include([m4/exponentf.m4])
+m4_include([m4/exponentl.m4])
+m4_include([m4/extensions-aix.m4])
 m4_include([m4/extensions.m4])
 m4_include([m4/extern-inline.m4])
 m4_include([m4/fchdir.m4])
@@ -1301,6 +1414,7 @@ m4_include([m4/ftruncate.m4])
 m4_include([m4/fts.m4])
 m4_include([m4/getcwd.m4])
 m4_include([m4/getdtablesize.m4])
+m4_include([m4/getlocalename_l.m4])
 m4_include([m4/getopt.m4])
 m4_include([m4/getpagesize.m4])
 m4_include([m4/getprogname.m4])
@@ -1308,11 +1422,10 @@ m4_include([m4/gettext.m4])
 m4_include([m4/gettimeofday.m4])
 m4_include([m4/gnulib-common.m4])
 m4_include([m4/gnulib-comp.m4])
+m4_include([m4/gnulib-i18n.m4])
 m4_include([m4/host-cpu-c-abi.m4])
 m4_include([m4/i-ring.m4])
 m4_include([m4/iconv.m4])
-m4_include([m4/iconv_h.m4])
-m4_include([m4/iconv_open.m4])
 m4_include([m4/include_next.m4])
 m4_include([m4/inet_pton.m4])
 m4_include([m4/inline.m4])
@@ -1325,8 +1438,13 @@ m4_include([m4/inttypes_h.m4])
 m4_include([m4/ioctl.m4])
 m4_include([m4/isatty.m4])
 m4_include([m4/isblank.m4])
+m4_include([m4/isnand.m4])
+m4_include([m4/isnanf.m4])
+m4_include([m4/isnanl.m4])
 m4_include([m4/iswblank.m4])
+m4_include([m4/iswctype.m4])
 m4_include([m4/iswdigit.m4])
+m4_include([m4/iswpunct.m4])
 m4_include([m4/iswxdigit.m4])
 m4_include([m4/langinfo_h.m4])
 m4_include([m4/largefile.m4])
@@ -1338,6 +1456,7 @@ m4_include([m4/libsigsegv.m4])
 m4_include([m4/libunistring-base.m4])
 m4_include([m4/limits-h.m4])
 m4_include([m4/localcharset.m4])
+m4_include([m4/locale-en.m4])
 m4_include([m4/locale-fr.m4])
 m4_include([m4/locale-ja.m4])
 m4_include([m4/locale-tr.m4])
@@ -1351,12 +1470,11 @@ m4_include([m4/lstat.m4])
 m4_include([m4/malloc.m4])
 m4_include([m4/malloca.m4])
 m4_include([m4/manywarnings.m4])
-m4_include([m4/mbchar.m4])
-m4_include([m4/mbiter.m4])
+m4_include([m4/math_h.m4])
 m4_include([m4/mbrlen.m4])
+m4_include([m4/mbrtoc32.m4])
 m4_include([m4/mbrtowc.m4])
 m4_include([m4/mbsinit.m4])
-m4_include([m4/mbslen.m4])
 m4_include([m4/mbsrtowcs.m4])
 m4_include([m4/mbstate_t.m4])
 m4_include([m4/mbtowc.m4])
@@ -1370,13 +1488,17 @@ m4_include([m4/msvc-inval.m4])
 m4_include([m4/msvc-nothrow.m4])
 m4_include([m4/multiarch.m4])
 m4_include([m4/musl.m4])
+m4_include([m4/nan-mips.m4])
 m4_include([m4/nanosleep.m4])
 m4_include([m4/netinet_in_h.m4])
 m4_include([m4/nl_langinfo.m4])
 m4_include([m4/nls.m4])
 m4_include([m4/nocrash.m4])
+m4_include([m4/nullptr.m4])
 m4_include([m4/obstack.m4])
+m4_include([m4/off64_t.m4])
 m4_include([m4/off_t.m4])
+m4_include([m4/once.m4])
 m4_include([m4/open-cloexec.m4])
 m4_include([m4/open-slash.m4])
 m4_include([m4/open.m4])
@@ -1392,14 +1514,22 @@ m4_include([m4/po.m4])
 m4_include([m4/printf.m4])
 m4_include([m4/progtest.m4])
 m4_include([m4/pselect.m4])
+m4_include([m4/pthread-cond.m4])
+m4_include([m4/pthread-mutex.m4])
+m4_include([m4/pthread-once.m4])
+m4_include([m4/pthread-rwlock.m4])
+m4_include([m4/pthread-spin.m4])
 m4_include([m4/pthread-thread.m4])
 m4_include([m4/pthread_h.m4])
+m4_include([m4/pthread_mutex_timedlock.m4])
 m4_include([m4/pthread_rwlock_rdlock.m4])
 m4_include([m4/pthread_sigmask.m4])
 m4_include([m4/putenv.m4])
 m4_include([m4/quote.m4])
 m4_include([m4/quotearg.m4])
 m4_include([m4/raise.m4])
+m4_include([m4/random.m4])
+m4_include([m4/random_r.m4])
 m4_include([m4/rawmemchr.m4])
 m4_include([m4/read.m4])
 m4_include([m4/readdir.m4])
@@ -1409,16 +1539,20 @@ m4_include([m4/regex.m4])
 m4_include([m4/safe-read.m4])
 m4_include([m4/save-cwd.m4])
 m4_include([m4/sched_h.m4])
+m4_include([m4/sched_yield.m4])
 m4_include([m4/select.m4])
+m4_include([m4/semaphore.m4])
 m4_include([m4/setenv.m4])
 m4_include([m4/setlocale.m4])
 m4_include([m4/setlocale_null.m4])
 m4_include([m4/sigaltstack.m4])
 m4_include([m4/signal_h.m4])
 m4_include([m4/signalblocking.m4])
+m4_include([m4/signbit.m4])
 m4_include([m4/sigsegv.m4])
 m4_include([m4/size_max.m4])
 m4_include([m4/sleep.m4])
+m4_include([m4/snan.m4])
 m4_include([m4/snprintf.m4])
 m4_include([m4/socketlib.m4])
 m4_include([m4/sockets.m4])
@@ -1444,9 +1578,8 @@ m4_include([m4/strnlen.m4])
 m4_include([m4/strstr.m4])
 m4_include([m4/strtoimax.m4])
 m4_include([m4/strtoll.m4])
-m4_include([m4/strtoull.m4])
-m4_include([m4/strtoumax.m4])
 m4_include([m4/symlink.m4])
+m4_include([m4/sys_cdefs_h.m4])
 m4_include([m4/sys_ioctl_h.m4])
 m4_include([m4/sys_select_h.m4])
 m4_include([m4/sys_socket_h.m4])
@@ -1458,6 +1591,10 @@ m4_include([m4/thread.m4])
 m4_include([m4/threadlib.m4])
 m4_include([m4/time.m4])
 m4_include([m4/time_h.m4])
+m4_include([m4/uchar_h.m4])
+m4_include([m4/unicase_h.m4])
+m4_include([m4/unictype_h.m4])
+m4_include([m4/uninorm_h.m4])
 m4_include([m4/unistd-safer.m4])
 m4_include([m4/unistd_h.m4])
 m4_include([m4/unlocked-io.m4])
@@ -1467,17 +1604,19 @@ m4_include([m4/visibility.m4])
 m4_include([m4/warn-on-use.m4])
 m4_include([m4/warnings.m4])
 m4_include([m4/wchar_h.m4])
-m4_include([m4/wchar_t.m4])
 m4_include([m4/wcrtomb.m4])
 m4_include([m4/wctob.m4])
 m4_include([m4/wctomb.m4])
+m4_include([m4/wctype.m4])
 m4_include([m4/wctype_h.m4])
-m4_include([m4/wcwidth.m4])
+m4_include([m4/windows-rc.m4])
 m4_include([m4/windows-stat-inodes.m4])
 m4_include([m4/wint_t.m4])
 m4_include([m4/wmemchr.m4])
 m4_include([m4/wmempcpy.m4])
 m4_include([m4/xalloc.m4])
+m4_include([m4/xgetcwd.m4])
 m4_include([m4/xsize.m4])
 m4_include([m4/xstrtol.m4])
+m4_include([m4/yield.m4])
 m4_include([m4/zzgnulib.m4])

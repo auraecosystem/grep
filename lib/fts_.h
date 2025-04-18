@@ -1,6 +1,6 @@
 /* Traverse a file hierarchy.
 
-   Copyright (C) 2004-2023 Free Software Foundation, Inc.
+   Copyright (C) 2004-2025 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -271,6 +271,11 @@ _GL_ATTRIBUTE_NODISCARD
 FTSENT  *fts_read (FTS *) __THROW;
 
 int      fts_set (FTS *, FTSENT *, int) __THROW;
+
+#if GNULIB_FTS_DEBUG
+extern bool fts_debug;
+void     fts_cross_check (FTS const *);
+#endif
 __END_DECLS
 
 #endif /* fts.h */

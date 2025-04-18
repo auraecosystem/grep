@@ -1,5 +1,5 @@
 ## Process this file with automake to create Makefile.in
-# Copyright 1997-1998, 2005-2023 Free Software Foundation, Inc.
+# Copyright 1997-1998, 2005-2025 Free Software Foundation, Inc.
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -42,7 +42,9 @@ noinst_HEADERS = grep.h kwset.h search.h system.h
 # But libgreputils.a must also follow $(LIBINTL), since libintl uses
 # replacement functions defined in libgreputils.a.
 LDADD = \
-  ../lib/libgreputils.a $(LIBINTL) ../lib/libgreputils.a $(LIBICONV) \
+  ../lib/libgreputils.a $(LIBINTL) ../lib/libgreputils.a \
+  $(HARD_LOCALE_LIB) $(LIBC32CONV) \
+  $(LIBSIGSEGV) $(LIBUNISTRING) $(MBRTOWC_LIB) $(SETLOCALE_NULL_LIB) \
   $(LIBTHREAD)
 
 grep_LDADD = $(LDADD) $(PCRE_LIBS) $(LIBCSTACK)

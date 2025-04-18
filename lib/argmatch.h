@@ -1,6 +1,6 @@
 /* argmatch.h -- definitions and prototypes for argmatch.c
 
-   Copyright (C) 1990, 1998-1999, 2001-2002, 2004-2005, 2009-2023 Free Software
+   Copyright (C) 1990, 1998-1999, 2001-2002, 2004-2005, 2009-2025 Free Software
    Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
@@ -239,7 +239,7 @@ char const *argmatch_to_argument (void const *value,
                                                                         \
     /* Try to put synonyms on the same line.  Synonyms are expected     \
        to follow each other. */                                         \
-    fputs (gettext ("Valid arguments are:"), out);                      \
+    fputs (dgettext ("gnulib", "Valid arguments are:"), out);           \
     for (int i = 0; g->args[i].arg; i++)                                \
       if (i == 0                                                        \
           || memcmp (&g->args[i-1].val, &g->args[i].val, size))         \

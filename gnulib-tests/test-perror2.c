@@ -1,5 +1,5 @@
 /* Test of perror() function.
-   Copyright (C) 2011-2023 Free Software Foundation, Inc.
+   Copyright (C) 2011-2025 Free Software Foundation, Inc.
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@
 #include <unistd.h>
 
 /* Tell GCC not to warn about myerr being leaked.  */
-#if __GNUC__ >= 13
+#if _GL_GNUC_PREREQ (13, 0)
 # pragma GCC diagnostic ignored "-Wanalyzer-fd-leak"
 #endif
 
@@ -134,5 +134,5 @@ main (void)
   ASSERT (fclose (stderr) == 0);
   ASSERT (remove (BASE ".tmp") == 0);
 
-  return 0;
+  return test_exit_status;
 }

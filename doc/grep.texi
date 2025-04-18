@@ -30,7 +30,7 @@
 @copying
 This manual is for @command{grep}, a pattern matching engine.
 
-Copyright @copyright{} 1999--2002, 2005, 2008--2023 Free Software Foundation,
+Copyright @copyright{} 1999--2002, 2005, 2008--2025 Free Software Foundation,
 Inc.
 
 @quotation
@@ -109,7 +109,7 @@ there is no way to match newline characters in a text.
 The general synopsis of the @command{grep} command line is
 
 @example
-grep [@var{option}...] [@var{patterns}] [@var{file}...]
+grep [@var{option}]@dots{} [@var{patterns}] [@var{file}]@dots{}
 @end example
 
 @noindent
@@ -218,19 +218,25 @@ so that characters that differ only in case
 match each other.  Although this is straightforward when letters
 differ in case only via lowercase-uppercase pairs, the behavior is
 unspecified in other situations.  For example, uppercase ``S'' has an
-unusual lowercase counterpart ``ſ'' (Unicode character U+017F, LATIN
+unusual lowercase counterpart
+@c This does not display correctly in PDF with texinfo 7.1
+@c and pdfTeX 3.141592653-2.6-1.40.25 (TeX Live 2023/Fedora 40).
+@ifnottex
+``ſ''
+@end ifnottex
+(Unicode character U+017F LATIN
 SMALL LETTER LONG S) in many locales, and it is unspecified whether
 this unusual character matches ``S'' or ``s'' even though uppercasing
 it yields ``S''.  Another example: the lowercase German letter ``ß''
-(U+00DF, LATIN SMALL LETTER SHARP S) is normally capitalized as the
+(U+00DF LATIN SMALL LETTER SHARP S) is normally capitalized as the
 two-character string ``SS'' but it does not match ``SS'', and it might
 not match the uppercase letter
-@c texinfo version 2023-03-04.12 complains about the following, saying
-@c "Character missing, sorry: LONG S."  For now, omit it if tex.
+@c This does not display correctly in PDF with texinfo 7.1
+@c and pdfTeX 3.141592653-2.6-1.40.25 (TeX Live 2023/Fedora 40).
 @ifnottex
 ``ẞ''
 @end ifnottex
-(U+1E9E, LATIN CAPITAL LETTER
+(U+1E9E LATIN CAPITAL LETTER
 SHARP S) even though lowercasing the latter yields the former.
 
 @option{-y} is an obsolete synonym that is provided for compatibility.
@@ -555,7 +561,7 @@ Print @var{num} lines of leading and trailing output context.
 @opindex --group-separator
 @cindex group separator
 When @option{-A}, @option{-B} or @option{-C} are in use,
-print @var{string} instead of @option{--} between groups of lines.
+print @var{string} instead of @samp{--} between groups of lines.
 
 @item --no-group-separator
 @opindex --group-separator
@@ -631,9 +637,11 @@ When some output is suppressed, @command{grep} follows any output
 with a message to standard error saying that a binary file matches.
 
 If @var{type} is @samp{without-match},
-when @command{grep} discovers null input binary data
-it assumes that the rest of the file does not match;
+when @command{grep} discovers null binary data in an input file
+it assumes that any unprocessed input does not match;
 this is equivalent to the @option{-I} option.
+In this case the region of unprocessed input starts no later than the
+null binary data, and continues to end of file.
 
 If @var{type} is @samp{text},
 @command{grep} processes binary data as if it were text;
@@ -648,6 +656,16 @@ match @samp{q} immediately followed by a null byte, even though this
 is not matched when @var{type} is @samp{text}.  Conversely, when
 @var{type} is @samp{binary} the pattern @samp{.} (period) might not
 match a null byte.
+
+The heuristic that @command{grep} uses to intuit whether input is
+binary is specific to @command{grep} and may well be unsuitable for
+other applications, as it depends on command-line options, on locale,
+and on hardware and operating system characteristics such as system
+page size and input buffering.  For example, if the input consists of
+a matching text line followed by nonmatching data that contains a null
+byte, @command{grep} might either output the matching line or treat
+the file as binary, depending on whether the unprocessed input happens
+to include the matching text line.
 
 @emph{Warning:} The @option{-a} (@option{--binary-files=text}) option
 might output binary garbage, which can have nasty side effects if the
@@ -702,7 +720,7 @@ immediately after a slash (@samp{/}) in the name.
 When searching recursively, skip any subfile whose base
 name matches @var{glob}; the base name is the part after the last
 slash.  A pattern can use
-@samp{*}, @samp{?}, and @samp{[}...@samp{]} as wildcards,
+@samp{*}, @samp{?}, and @samp{[}@dots{}@samp{]} as wildcards,
 and @code{\} to quote a wildcard or backslash character literally.
 
 @item --exclude-from=@var{file}
@@ -770,10 +788,10 @@ directory, recursively, following all symbolic links.
 @item --
 @opindex --
 @cindex option delimiter
-Delimit the option list.  Later arguments, if any, are treated as
-operands even if they begin with @samp{-}.  For example, @samp{grep PAT --
--file1 file2} searches for the pattern PAT in the files named @file{-file1}
-and @file{file2}.
+Delimit the option list.  Any later argument is not treated as an
+option even if it begins with @samp{-}.  For example,
+@samp{grep -- -PAT -file1 file2} searches for the pattern @samp{-PAT}
+in the files named @file{-file1} and @file{file2}.
 
 @item --line-buffered
 @opindex --line-buffered
@@ -891,7 +909,7 @@ for permitted values and their meanings as character attributes.)
 These substring values are integers in decimal representation
 and can be concatenated with semicolons.
 @command{grep} takes care of assembling the result
-into a complete SGR sequence (@samp{\33[}...@samp{m}).
+into a complete SGR sequence (@samp{\33[}@dots{}@samp{m}).
 Common values to concatenate include
 @samp{1} for bold,
 @samp{4} for underline,
@@ -1004,7 +1022,7 @@ or when EL is too slow or causes too much flicker.
 The default is false (i.e., the capability is omitted).
 @end table
 
-Note that boolean capabilities have no @samp{=}... part.
+Note that boolean capabilities have no @samp{=}@dots{} part.
 They are omitted (i.e., false) by default and become true when specified.
 
 
@@ -1143,23 +1161,55 @@ Interpret patterns as fixed strings, not regular expressions.
 @opindex --perl-regexp
 @cindex matching Perl-compatible regular expressions
 Interpret patterns as Perl-compatible regular expressions (PCREs).
-PCRE support is here to stay, but consider this option experimental when
-combined with the @option{-z} (@option{--null-data}) option, and note that
-@samp{grep@ -P} may warn of unimplemented features.
-@xref{Other Options}.
 
 For documentation, refer to @url{https://www.pcre.org/}, with these caveats:
 @itemize
 @item
-@samp{\d} matches only the ten ASCII digits
-(and @samp{\D} matches the complement), regardless of locale.
-Use @samp{\p@{Nd@}} to also match non-ASCII digits.
-(The behavior of @samp{\d} and @samp{\D} is unspecified after
-in-regexp directives like @samp{(?aD)}.)
+In a UTF-8 locale, Perl treats data as UTF-8 only under certain
+conditions, e.g., if @command{perl} is invoked with the @option{-C}
+option or the @env{PERL_UNICODE} environment variable set appropriately.
+Similarly, @command{pcre2grep} treats data as UTF-8 only if
+invoked with @option{-u} or @option{-U}.
+In contrast, in a UTF-8 locale @command{grep} and @command{git grep}
+always treat data as UTF-8.
+
+@item
+In Perl and @command{git grep -P}, @samp{\d} matches all Unicode digits,
+even if they are not ASCII.
+For example, @samp{\d} matches
+@ifnottex
+``٣''
+@end ifnottex
+(U+0663 ARABIC-INDIC DIGIT THREE).
+In contrast, in @samp{grep -P}, @samp{\d} matches only
+the ten ASCII digits, regardless of locale.
+In @command{pcre2grep}, @samp{\d} ordinarily behaves like Perl and
+@command{git grep -P}, but when given the @option{--posix-digit} option
+it behaves like @samp{grep -P}.
+(On all platforms, @samp{\D} matches the complement of @samp{\d}.)
+
+@item
+The pattern @samp{[[:digit:]]} matches all Unicode digits
+in Perl, @samp{grep -P}, @command{git grep -P}, and @command{pcre2grep},
+so you can use it
+to get the effect of Perl's @samp{\d} on all these platforms.
+In other words, in Perl and @command{git grep -P},
+@samp{\d} is equivalent to @samp{[[:digit:]]},
+whereas in @samp{grep -P}, @samp{\d} is equivalent to @samp{[0-9]},
+and @command{pcre2grep} ordinarily follows Perl but
+when given @option{--posix-digit} it follows @samp{grep -P}.
+
+(On all these platforms, @samp{[[:digit:]]} is equivalent to @samp{\p@{Nd@}}
+and to @samp{\p@{General_Category: Decimal_Number@}}.)
+
+@item
+If @command{grep} is built with PCRE2 version 10.43 (2024) or later,
+@samp{(?aD)} causes @samp{\d} to behave like @samp{[0-9]} and
+@samp{(?-aD)} causes it to behave like @samp{[[:digit:]]}.
 
 @item
 Although PCRE tracks the syntax and semantics of Perl's regular
-expressions, the match is not always exact.  For example, Perl
+expressions, the match is not always exact.  Perl
 evolves and a Perl installation may predate or postdate the PCRE2
 installation on the same host, or their Unicode versions may differ,
 or Perl and PCRE2 may disagree about an obscure construct.
@@ -1325,13 +1375,13 @@ encoding error.
 @cindex range expression
 Within a bracket expression, a @dfn{range expression} consists of two
 characters separated by a hyphen.
-It matches any single character that
-sorts between the two characters, inclusive.
-In the default C locale, the sorting sequence is the native character
-order; for example, @samp{[a-d]} is equivalent to @samp{[abcd]}.
-In other locales, the sorting sequence is not specified, and
-@samp{[a-d]} might be equivalent to @samp{[abcd]} or to
-@samp{[aBbCcDd]}, or it might fail to match any character, or the set of
+In the default C locale, it matches any single character that appears
+between the two characters in ASCII order, inclusive.
+For example, @samp{[a-d]} is equivalent to @samp{[abcd]}.
+In other locales the behavior is unspecified:
+@samp{[a-d]} might be equivalent to
+@samp{[abcd]} or @samp{[aBbCcDd]} or some other bracket expression,
+or it might fail to match any character, or the set of
 characters that it matches might be erratic, or it might be invalid.
 To obtain the traditional interpretation
 of bracket expressions, you can use the @samp{C} locale by setting the
@@ -1734,8 +1784,9 @@ A range expression outside the POSIX locale.  For example, in some
 locales @samp{[a-z]} might match some characters that are not
 lowercase letters, or might not match some lowercase letters, or might
 be invalid.  With GNU @command{grep} it is not documented whether
-these range expressions use native code points, or use the collating
-sequence specified by the @env{LC_COLLATE} category, or have some
+these range expressions use native code points, or use the collation
+sequence specified by the @env{LC_COLLATE} category, or use the
+collation ordering used by @command{sort} and @code{strcoll}, or have some
 other interpretation.  Outside the POSIX locale, it is portable to use
 @samp{[[:lower:]]} to match a lower-case letter, or
 @samp{[abcdefghijklmnopqrstuvwxyz]} to match an ASCII lower-case
@@ -2003,7 +2054,7 @@ Note that on some platforms,
 except the available memory.
 
 @item
-Why does @command{grep} report ``Binary file matches''?
+Why does @command{grep} report ``binary file matches''?
 
 If @command{grep} listed all matching ``lines'' from a binary file, it
 would probably generate output that is not useful, and it might even

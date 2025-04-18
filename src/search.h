@@ -1,5 +1,5 @@
 /* search.c - searching subroutines using dfa, kwset and regex for grep.
-   Copyright 1992, 1998, 2000, 2007, 2009-2023 Free Software Foundation, Inc.
+   Copyright 1992, 1998, 2000, 2007, 2009-2025 Free Software Foundation, Inc.
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -12,9 +12,7 @@
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program; if not, write to the Free Software
-   Foundation, Inc., 51 Franklin Street - Fifth Floor, Boston, MA
-   02110-1301, USA.  */
+   along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
 
 #ifndef GREP_SEARCH_H
 #define GREP_SEARCH_H 1
@@ -24,7 +22,6 @@
 #include <sys/types.h>
 #include <stdint.h>
 #include <wchar.h>
-#include <wctype.h>
 #include <regex.h>
 
 #include "system.h"

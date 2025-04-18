@@ -1,6 +1,6 @@
 ## DO NOT EDIT! GENERATED AUTOMATICALLY!
 ## Process this file with automake to produce Makefile.in.
-# Copyright (C) 2002-2023 Free Software Foundation, Inc.
+# Copyright (C) 2002-2025 Free Software Foundation, Inc.
 #
 # This file is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -34,6 +34,7 @@ EXTRA_PROGRAMS =
 noinst_HEADERS =
 noinst_LIBRARIES =
 check_LIBRARIES = libtests.a
+pkgdata_DATA =
 EXTRA_DIST =
 BUILT_SOURCES =
 SUFFIXES =
@@ -61,6 +62,7 @@ EXTRA_libtests_a_SOURCES =
 AM_LIBTOOLFLAGS = --preserve-dup-deps
 
 TESTS_ENVIRONMENT += EXEEXT='@EXEEXT@' srcdir='$(srcdir)'
+IGNORE_SKIPPED_LOGS = 1
 
 ## begin gnulib module accept
 
@@ -121,15 +123,16 @@ EXTRA_DIST += test-alloca-opt.c
 
 TESTS += test-argmatch
 check_PROGRAMS += test-argmatch
-test_argmatch_LDADD = $(LDADD) @LIBINTL@ $(MBRTOWC_LIB)
+test_argmatch_LDADD = $(LDADD) $(LIBUNISTRING) @LIBINTL@ $(MBRTOWC_LIB) $(LIBC32CONV)
 
 EXTRA_DIST += test-argmatch.c macros.h
 
 ## end   gnulib module argmatch-tests
 
-## begin gnulib module arpa_inet
+## begin gnulib module arpa_inet-h
 
 BUILT_SOURCES += arpa/inet.h
+libtests_a_SOURCES += arpa_inet.c
 
 # We need the following in order to create <arpa/inet.h> when the system
 # doesn't have one.
@@ -146,8 +149,12 @@ arpa/inet.h: arpa_inet.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(WARN_ON
 	      -e 's/@''GNULIB_INET_NTOP''@/$(GL_GNULIB_INET_NTOP)/g' \
 	      -e 's/@''GNULIB_INET_PTON''@/$(GL_GNULIB_INET_PTON)/g' \
 	      -e 's|@''HAVE_WS2TCPIP_H''@|$(HAVE_WS2TCPIP_H)|g' \
+	      -e 's|@''HAVE_DECL_HTONL''@|$(HAVE_DECL_HTONL)|g' \
+	      -e 's|@''HAVE_DECL_HTONS''@|$(HAVE_DECL_HTONS)|g' \
 	      -e 's|@''HAVE_DECL_INET_NTOP''@|$(HAVE_DECL_INET_NTOP)|g' \
 	      -e 's|@''HAVE_DECL_INET_PTON''@|$(HAVE_DECL_INET_PTON)|g' \
+	      -e 's|@''HAVE_DECL_NTOHL''@|$(HAVE_DECL_NTOHL)|g' \
+	      -e 's|@''HAVE_DECL_NTOHS''@|$(HAVE_DECL_NTOHS)|g' \
 	      -e 's|@''REPLACE_INET_NTOP''@|$(REPLACE_INET_NTOP)|g' \
 	      -e 's|@''REPLACE_INET_PTON''@|$(REPLACE_INET_PTON)|g' \
 	      -e '/definitions of _GL_FUNCDECL_RPL/r $(CXXDEFS_H)' \
@@ -160,15 +167,15 @@ MOSTLYCLEANDIRS += arpa
 
 EXTRA_DIST += arpa_inet.in.h
 
-## end   gnulib module arpa_inet
+## end   gnulib module arpa_inet-h
 
-## begin gnulib module arpa_inet-tests
+## begin gnulib module arpa_inet-h-tests
 
-TESTS += test-arpa_inet
-check_PROGRAMS += test-arpa_inet
-EXTRA_DIST += test-arpa_inet.c
+TESTS += test-arpa_inet-h
+check_PROGRAMS += test-arpa_inet-h
+EXTRA_DIST += test-arpa_inet-h.c
 
-## end   gnulib module arpa_inet-tests
+## end   gnulib module arpa_inet-h-tests
 
 ## begin gnulib module assert-h-tests
 
@@ -214,13 +221,37 @@ EXTRA_DIST += test-bitrotate.c macros.h
 
 ## end   gnulib module bitrotate-tests
 
+## begin gnulib module bool-tests
+
+TESTS += test-bool
+check_PROGRAMS += test-bool
+EXTRA_DIST += test-bool.c
+
+## end   gnulib module bool-tests
+
+## begin gnulib module btoc32-tests
+
+TESTS += test-btoc32-1.sh test-btoc32-2.sh test-btoc32-3.sh
+TESTS_ENVIRONMENT += \
+  LOCALE_EN_UTF8='@LOCALE_EN_UTF8@' \
+  LOCALE_FR='@LOCALE_FR@' \
+  LOCALE_FR_UTF8='@LOCALE_FR_UTF8@'
+check_PROGRAMS += test-btoc32
+test_btoc32_LDADD = $(LDADD) $(LIBUNISTRING) $(SETLOCALE_LIB) $(LIBC32CONV)
+EXTRA_DIST += test-btoc32-1.sh test-btoc32-2.sh test-btoc32-3.sh test-btoc32.c signature.h macros.h
+
+## end   gnulib module btoc32-tests
+
 ## begin gnulib module btowc-tests
 
-TESTS += test-btowc1.sh test-btowc2.sh test-btowc3.sh
-TESTS_ENVIRONMENT += LOCALE_FR='@LOCALE_FR@' LOCALE_FR_UTF8='@LOCALE_FR_UTF8@'
+TESTS += test-btowc-1.sh test-btowc-2.sh test-btowc-3.sh
+TESTS_ENVIRONMENT += \
+  LOCALE_EN_UTF8='@LOCALE_EN_UTF8@' \
+  LOCALE_FR='@LOCALE_FR@' \
+  LOCALE_FR_UTF8='@LOCALE_FR_UTF8@'
 check_PROGRAMS += test-btowc
 test_btowc_LDADD = $(LDADD) $(SETLOCALE_LIB)
-EXTRA_DIST += test-btowc1.sh test-btowc2.sh test-btowc3.sh test-btowc.c signature.h macros.h
+EXTRA_DIST += test-btowc-1.sh test-btowc-2.sh test-btowc-3.sh test-btowc.c signature.h macros.h
 
 ## end   gnulib module btowc-tests
 
@@ -244,16 +275,15 @@ EXTRA_DIST += test-c-stack.c test-c-stack.sh test-c-stack2.sh macros.h
 
 ## end   gnulib module c-stack-tests
 
-## begin gnulib module c-strcase-tests
+## begin gnulib module c-strcasecmp-tests
 
-TESTS += test-c-strcase.sh
+TESTS += test-c-strcasecmp.sh
 TESTS_ENVIRONMENT += LOCALE_FR='@LOCALE_FR@' LOCALE_TR_UTF8='@LOCALE_TR_UTF8@'
-check_PROGRAMS += test-c-strcasecmp test-c-strncasecmp
+check_PROGRAMS += test-c-strcasecmp
 test_c_strcasecmp_LDADD = $(LDADD) $(SETLOCALE_LIB)
-test_c_strncasecmp_LDADD = $(LDADD) $(SETLOCALE_LIB)
-EXTRA_DIST += test-c-strcase.sh test-c-strcasecmp.c test-c-strncasecmp.c macros.h
+EXTRA_DIST += test-c-strcasecmp.sh test-c-strcasecmp.c macros.h
 
-## end   gnulib module c-strcase-tests
+## end   gnulib module c-strcasecmp-tests
 
 ## begin gnulib module c-strcasestr
 
@@ -272,6 +302,271 @@ EXTRA_DIST += test-c-strcasestr.c macros.h
 
 ## end   gnulib module c-strcasestr-tests
 
+## begin gnulib module c-strncasecmp
+
+libtests_a_SOURCES += c-strncasecmp.c
+
+EXTRA_DIST += c-strcase.h
+
+## end   gnulib module c-strncasecmp
+
+## begin gnulib module c-strncasecmp-tests
+
+TESTS += test-c-strncasecmp.sh
+TESTS_ENVIRONMENT += LOCALE_FR='@LOCALE_FR@' LOCALE_TR_UTF8='@LOCALE_TR_UTF8@'
+check_PROGRAMS += test-c-strncasecmp
+test_c_strncasecmp_LDADD = $(LDADD) $(SETLOCALE_LIB)
+EXTRA_DIST += test-c-strncasecmp.sh test-c-strncasecmp.c macros.h
+
+## end   gnulib module c-strncasecmp-tests
+
+## begin gnulib module c32_apply_type_test-tests
+
+TESTS += test-c32_apply_type_test
+check_PROGRAMS += test-c32_apply_type_test
+test_c32_apply_type_test_LDADD = $(LDADD) $(LIBUNISTRING) $(LIBC32CONV)
+EXTRA_DIST += test-c32_apply_type_test.c signature.h macros.h
+
+## end   gnulib module c32_apply_type_test-tests
+
+## begin gnulib module c32_get_type_test-tests
+
+TESTS += test-c32_get_type_test
+check_PROGRAMS += test-c32_get_type_test
+test_c32_get_type_test_LDADD = $(LDADD) $(LIBUNISTRING) $(LIBC32CONV)
+EXTRA_DIST += test-c32_get_type_test.c signature.h macros.h
+
+## end   gnulib module c32_get_type_test-tests
+
+## begin gnulib module c32isalnum-tests
+
+TESTS += test-c32isalnum.sh
+TESTS_ENVIRONMENT += \
+  LOCALE_EN_UTF8='@LOCALE_EN_UTF8@' \
+  LOCALE_FR='@LOCALE_FR@' \
+  LOCALE_FR_UTF8='@LOCALE_FR_UTF8@' \
+  LOCALE_JA='@LOCALE_JA@' \
+  LOCALE_ZH_CN='@LOCALE_ZH_CN@'
+check_PROGRAMS += test-c32isalnum
+test_c32isalnum_LDADD = $(LDADD) $(SETLOCALE_LIB) $(MBRTOWC_LIB) $(LIBUNISTRING) $(LIBC32CONV)
+EXTRA_DIST += test-c32isalnum.sh test-c32isalnum.c signature.h macros.h
+
+## end   gnulib module c32isalnum-tests
+
+## begin gnulib module c32isalpha-tests
+
+TESTS += test-c32isalpha.sh
+TESTS_ENVIRONMENT += \
+  LOCALE_EN_UTF8='@LOCALE_EN_UTF8@' \
+  LOCALE_FR='@LOCALE_FR@' \
+  LOCALE_FR_UTF8='@LOCALE_FR_UTF8@' \
+  LOCALE_JA='@LOCALE_JA@' \
+  LOCALE_ZH_CN='@LOCALE_ZH_CN@'
+check_PROGRAMS += test-c32isalpha
+test_c32isalpha_LDADD = $(LDADD) $(SETLOCALE_LIB) $(MBRTOWC_LIB) $(LIBUNISTRING) $(LIBC32CONV)
+EXTRA_DIST += test-c32isalpha.sh test-c32isalpha.c signature.h macros.h
+
+## end   gnulib module c32isalpha-tests
+
+## begin gnulib module c32isblank-tests
+
+TESTS += test-c32isblank.sh
+TESTS_ENVIRONMENT += \
+  LOCALE_EN_UTF8='@LOCALE_EN_UTF8@' \
+  LOCALE_FR='@LOCALE_FR@' \
+  LOCALE_FR_UTF8='@LOCALE_FR_UTF8@' \
+  LOCALE_JA='@LOCALE_JA@' \
+  LOCALE_ZH_CN='@LOCALE_ZH_CN@'
+check_PROGRAMS += test-c32isblank
+test_c32isblank_LDADD = $(LDADD) $(SETLOCALE_LIB) $(MBRTOWC_LIB) $(LIBUNISTRING) $(LIBC32CONV)
+EXTRA_DIST += test-c32isblank.sh test-c32isblank.c signature.h macros.h
+
+## end   gnulib module c32isblank-tests
+
+## begin gnulib module c32iscntrl-tests
+
+TESTS += test-c32iscntrl.sh
+TESTS_ENVIRONMENT += \
+  LOCALE_EN_UTF8='@LOCALE_EN_UTF8@' \
+  LOCALE_FR='@LOCALE_FR@' \
+  LOCALE_FR_UTF8='@LOCALE_FR_UTF8@' \
+  LOCALE_JA='@LOCALE_JA@' \
+  LOCALE_ZH_CN='@LOCALE_ZH_CN@'
+check_PROGRAMS += test-c32iscntrl
+test_c32iscntrl_LDADD = $(LDADD) $(SETLOCALE_LIB) $(MBRTOWC_LIB) $(LIBUNISTRING) $(LIBC32CONV)
+EXTRA_DIST += test-c32iscntrl.sh test-c32iscntrl.c signature.h macros.h
+
+## end   gnulib module c32iscntrl-tests
+
+## begin gnulib module c32isdigit-tests
+
+TESTS += test-c32isdigit.sh
+TESTS_ENVIRONMENT += \
+  LOCALE_EN_UTF8='@LOCALE_EN_UTF8@' \
+  LOCALE_FR='@LOCALE_FR@' \
+  LOCALE_FR_UTF8='@LOCALE_FR_UTF8@' \
+  LOCALE_JA='@LOCALE_JA@' \
+  LOCALE_ZH_CN='@LOCALE_ZH_CN@'
+check_PROGRAMS += test-c32isdigit
+test_c32isdigit_LDADD = $(LDADD) $(SETLOCALE_LIB) $(MBRTOWC_LIB) $(LIBUNISTRING) $(LIBC32CONV)
+EXTRA_DIST += test-c32isdigit.sh test-c32isdigit.c signature.h macros.h
+
+## end   gnulib module c32isdigit-tests
+
+## begin gnulib module c32isgraph-tests
+
+TESTS += test-c32isgraph.sh
+TESTS_ENVIRONMENT += \
+  LOCALE_EN_UTF8='@LOCALE_EN_UTF8@' \
+  LOCALE_FR='@LOCALE_FR@' \
+  LOCALE_FR_UTF8='@LOCALE_FR_UTF8@' \
+  LOCALE_JA='@LOCALE_JA@' \
+  LOCALE_ZH_CN='@LOCALE_ZH_CN@'
+check_PROGRAMS += test-c32isgraph
+test_c32isgraph_LDADD = $(LDADD) $(SETLOCALE_LIB) $(MBRTOWC_LIB) $(LIBUNISTRING) $(LIBC32CONV)
+EXTRA_DIST += test-c32isgraph.sh test-c32isgraph.c signature.h macros.h
+
+## end   gnulib module c32isgraph-tests
+
+## begin gnulib module c32islower-tests
+
+TESTS += test-c32islower.sh
+TESTS_ENVIRONMENT += \
+  LOCALE_EN_UTF8='@LOCALE_EN_UTF8@' \
+  LOCALE_FR='@LOCALE_FR@' \
+  LOCALE_FR_UTF8='@LOCALE_FR_UTF8@' \
+  LOCALE_JA='@LOCALE_JA@' \
+  LOCALE_ZH_CN='@LOCALE_ZH_CN@'
+check_PROGRAMS += test-c32islower
+test_c32islower_LDADD = $(LDADD) $(SETLOCALE_LIB) $(MBRTOWC_LIB) $(LIBUNISTRING) $(LIBC32CONV)
+EXTRA_DIST += test-c32islower.sh test-c32islower.c signature.h macros.h
+
+## end   gnulib module c32islower-tests
+
+## begin gnulib module c32isprint-tests
+
+TESTS += test-c32isprint.sh
+TESTS_ENVIRONMENT += \
+  LOCALE_EN_UTF8='@LOCALE_EN_UTF8@' \
+  LOCALE_FR='@LOCALE_FR@' \
+  LOCALE_FR_UTF8='@LOCALE_FR_UTF8@' \
+  LOCALE_JA='@LOCALE_JA@' \
+  LOCALE_ZH_CN='@LOCALE_ZH_CN@'
+check_PROGRAMS += test-c32isprint
+test_c32isprint_LDADD = $(LDADD) $(SETLOCALE_LIB) $(MBRTOWC_LIB) $(LIBUNISTRING) $(LIBC32CONV)
+EXTRA_DIST += test-c32isprint.sh test-c32isprint.c signature.h macros.h
+
+## end   gnulib module c32isprint-tests
+
+## begin gnulib module c32ispunct-tests
+
+TESTS += test-c32ispunct.sh
+TESTS_ENVIRONMENT += \
+  LOCALE_EN_UTF8='@LOCALE_EN_UTF8@' \
+  LOCALE_FR='@LOCALE_FR@' \
+  LOCALE_FR_UTF8='@LOCALE_FR_UTF8@' \
+  LOCALE_JA='@LOCALE_JA@' \
+  LOCALE_ZH_CN='@LOCALE_ZH_CN@'
+check_PROGRAMS += test-c32ispunct
+test_c32ispunct_LDADD = $(LDADD) $(SETLOCALE_LIB) $(MBRTOWC_LIB) $(LIBUNISTRING) $(LIBC32CONV)
+EXTRA_DIST += test-c32ispunct.sh test-c32ispunct.c signature.h macros.h
+
+## end   gnulib module c32ispunct-tests
+
+## begin gnulib module c32isspace-tests
+
+TESTS += test-c32isspace.sh
+TESTS_ENVIRONMENT += \
+  LOCALE_EN_UTF8='@LOCALE_EN_UTF8@' \
+  LOCALE_FR='@LOCALE_FR@' \
+  LOCALE_FR_UTF8='@LOCALE_FR_UTF8@' \
+  LOCALE_JA='@LOCALE_JA@' \
+  LOCALE_ZH_CN='@LOCALE_ZH_CN@'
+check_PROGRAMS += test-c32isspace
+test_c32isspace_LDADD = $(LDADD) $(SETLOCALE_LIB) $(MBRTOWC_LIB) $(LIBUNISTRING) $(LIBC32CONV)
+EXTRA_DIST += test-c32isspace.sh test-c32isspace.c signature.h macros.h
+
+## end   gnulib module c32isspace-tests
+
+## begin gnulib module c32isupper-tests
+
+TESTS += test-c32isupper.sh
+TESTS_ENVIRONMENT += \
+  LOCALE_EN_UTF8='@LOCALE_EN_UTF8@' \
+  LOCALE_FR='@LOCALE_FR@' \
+  LOCALE_FR_UTF8='@LOCALE_FR_UTF8@' \
+  LOCALE_JA='@LOCALE_JA@' \
+  LOCALE_ZH_CN='@LOCALE_ZH_CN@'
+check_PROGRAMS += test-c32isupper
+test_c32isupper_LDADD = $(LDADD) $(SETLOCALE_LIB) $(MBRTOWC_LIB) $(LIBUNISTRING) $(LIBC32CONV)
+EXTRA_DIST += test-c32isupper.sh test-c32isupper.c signature.h macros.h
+
+## end   gnulib module c32isupper-tests
+
+## begin gnulib module c32isxdigit-tests
+
+TESTS += test-c32isxdigit.sh
+TESTS_ENVIRONMENT += \
+  LOCALE_EN_UTF8='@LOCALE_EN_UTF8@' \
+  LOCALE_FR='@LOCALE_FR@' \
+  LOCALE_FR_UTF8='@LOCALE_FR_UTF8@' \
+  LOCALE_JA='@LOCALE_JA@' \
+  LOCALE_ZH_CN='@LOCALE_ZH_CN@'
+check_PROGRAMS += test-c32isxdigit
+test_c32isxdigit_LDADD = $(LDADD) $(SETLOCALE_LIB) $(MBRTOWC_LIB) $(LIBUNISTRING) $(LIBC32CONV)
+EXTRA_DIST += test-c32isxdigit.sh test-c32isxdigit.c signature.h macros.h
+
+## end   gnulib module c32isxdigit-tests
+
+## begin gnulib module c32rtomb-tests
+
+TESTS += \
+  test-c32rtomb.sh \
+  test-c32rtomb-w32-2.sh test-c32rtomb-w32-3.sh test-c32rtomb-w32-4.sh \
+  test-c32rtomb-w32-5.sh test-c32rtomb-w32-6.sh test-c32rtomb-w32-7.sh \
+  test-c32rtomb-w32-8.sh
+TESTS_ENVIRONMENT += \
+  LOCALE_EN_UTF8='@LOCALE_EN_UTF8@' \
+  LOCALE_FR='@LOCALE_FR@' \
+  LOCALE_FR_UTF8='@LOCALE_FR_UTF8@' \
+  LOCALE_JA='@LOCALE_JA@' \
+  LOCALE_ZH_CN='@LOCALE_ZH_CN@'
+check_PROGRAMS += test-c32rtomb test-c32rtomb-w32
+test_c32rtomb_LDADD = $(LDADD) $(LIBUNISTRING) $(SETLOCALE_LIB) $(LIBC32CONV)
+EXTRA_DIST += test-c32rtomb.sh test-c32rtomb.c test-c32rtomb-w32-2.sh test-c32rtomb-w32-3.sh test-c32rtomb-w32-4.sh test-c32rtomb-w32-5.sh test-c32rtomb-w32-6.sh test-c32rtomb-w32-7.sh test-c32rtomb-w32-8.sh test-c32rtomb-w32.c signature.h macros.h
+
+## end   gnulib module c32rtomb-tests
+
+## begin gnulib module c32tolower-tests
+
+TESTS += test-c32tolower.sh
+TESTS_ENVIRONMENT += \
+  LOCALE_EN_UTF8='@LOCALE_EN_UTF8@' \
+  LOCALE_FR='@LOCALE_FR@' \
+  LOCALE_FR_UTF8='@LOCALE_FR_UTF8@' \
+  LOCALE_JA='@LOCALE_JA@' \
+  LOCALE_ZH_CN='@LOCALE_ZH_CN@'
+check_PROGRAMS += test-c32tolower
+test_c32tolower_LDADD = $(LDADD) $(SETLOCALE_LIB) $(MBRTOWC_LIB) $(LIBUNISTRING) $(LIBC32CONV)
+EXTRA_DIST += test-c32tolower.sh test-c32tolower.c signature.h macros.h
+
+## end   gnulib module c32tolower-tests
+
+## begin gnulib module c32toupper-tests
+
+TESTS += test-c32toupper.sh
+TESTS_ENVIRONMENT += \
+  LOCALE_EN_UTF8='@LOCALE_EN_UTF8@' \
+  LOCALE_FR='@LOCALE_FR@' \
+  LOCALE_FR_UTF8='@LOCALE_FR_UTF8@' \
+  LOCALE_JA='@LOCALE_JA@' \
+  LOCALE_ZH_CN='@LOCALE_ZH_CN@'
+check_PROGRAMS += test-c32toupper
+test_c32toupper_LDADD = $(LDADD) $(SETLOCALE_LIB) $(MBRTOWC_LIB) $(LIBUNISTRING) $(LIBC32CONV)
+EXTRA_DIST += test-c32toupper.sh test-c32toupper.c signature.h macros.h
+
+## end   gnulib module c32toupper-tests
+
 ## begin gnulib module calloc-gnu-tests
 
 TESTS += test-calloc-gnu
@@ -279,6 +574,14 @@ check_PROGRAMS += test-calloc-gnu
 EXTRA_DIST += test-calloc-gnu.c macros.h
 
 ## end   gnulib module calloc-gnu-tests
+
+## begin gnulib module calloc-posix-tests
+
+TESTS += test-calloc-posix
+check_PROGRAMS += test-calloc-posix
+EXTRA_DIST += test-calloc-posix.c macros.h
+
+## end   gnulib module calloc-posix-tests
 
 ## begin gnulib module chdir-tests
 
@@ -304,6 +607,14 @@ EXTRA_DIST += test-close.c signature.h macros.h
 
 ## end   gnulib module close-tests
 
+## begin gnulib module concat-filename
+
+libtests_a_SOURCES += concat-filename.c
+
+EXTRA_DIST += concat-filename.h
+
+## end   gnulib module concat-filename
+
 ## begin gnulib module connect
 
 if GL_COND_OBJ_CONNECT
@@ -323,13 +634,13 @@ EXTRA_DIST += test-connect.c signature.h macros.h
 
 ## end   gnulib module connect-tests
 
-## begin gnulib module ctype-tests
+## begin gnulib module ctype-h-tests
 
-TESTS += test-ctype
-check_PROGRAMS += test-ctype
-EXTRA_DIST += test-ctype.c
+TESTS += test-ctype-h
+check_PROGRAMS += test-ctype-h
+EXTRA_DIST += test-ctype-h.c
 
-## end   gnulib module ctype-tests
+## end   gnulib module ctype-h-tests
 
 ## begin gnulib module dfa-tests
 
@@ -339,18 +650,26 @@ TESTS += \
   test-dfa-match.sh
 
 check_PROGRAMS += test-dfa-match-aux
-test_dfa_match_aux_LDADD = $(LDADD) $(SETLOCALE_LIB) @LIBINTL@ $(MBRTOWC_LIB)
+test_dfa_match_aux_LDADD = $(LDADD) $(SETLOCALE_LIB) $(LIBUNISTRING) @LIBINTL@ $(MBRTOWC_LIB) $(LIBC32CONV)
 EXTRA_DIST += test-dfa-match.sh test-dfa-match-aux.c test-dfa-invalid-char-class.sh test-dfa-invalid-merge.sh
 
 ## end   gnulib module dfa-tests
 
-## begin gnulib module dirent-tests
+## begin gnulib module dirent-h-tests
 
-TESTS += test-dirent
-check_PROGRAMS += test-dirent
-EXTRA_DIST += test-dirent.c
+TESTS += test-dirent-h
+check_PROGRAMS += test-dirent-h
+EXTRA_DIST += test-dirent-h.c
 
-## end   gnulib module dirent-tests
+## end   gnulib module dirent-h-tests
+
+## begin gnulib module dirfd-tests
+
+TESTS += test-dirfd
+check_PROGRAMS += test-dirfd
+EXTRA_DIST += test-dirfd.c macros.h
+
+## end   gnulib module dirfd-tests
 
 ## begin gnulib module dup-tests
 
@@ -377,14 +696,13 @@ EXTRA_DIST += test-environ.c
 
 ## end   gnulib module environ-tests
 
-## begin gnulib module errno-tests
+## begin gnulib module errno-h-tests
 
-TESTS += test-errno
-check_PROGRAMS += test-errno
+TESTS += test-errno-h
+check_PROGRAMS += test-errno-h
+EXTRA_DIST += test-errno-h.c
 
-EXTRA_DIST += test-errno.c
-
-## end   gnulib module errno-tests
+## end   gnulib module errno-h-tests
 
 ## begin gnulib module error-tests
 
@@ -408,7 +726,7 @@ TESTS += \
  test-exclude8.sh
 
 check_PROGRAMS += test-exclude
-test_exclude_LDADD = $(LDADD) $(LIBUNISTRING) @LIBINTL@ $(MBRTOWC_LIB) $(LIBTHREAD)
+test_exclude_LDADD = $(LDADD) $(LIBUNISTRING) @LIBINTL@ $(MBRTOWC_LIB) $(LIBTHREAD) $(LIBC32CONV)
 EXTRA_DIST += test-exclude.c test-exclude1.sh test-exclude2.sh test-exclude3.sh test-exclude4.sh test-exclude5.sh test-exclude6.sh test-exclude7.sh test-exclude8.sh
 
 ## end   gnulib module exclude-tests
@@ -446,6 +764,12 @@ EXTRA_DIST += test-fcntl.c signature.h macros.h
 
 ## end   gnulib module fcntl-tests
 
+## begin gnulib module fd-safer-flag
+
+libtests_a_SOURCES += fd-safer-flag.c dup-safer-flag.c
+
+## end   gnulib module fd-safer-flag
+
 ## begin gnulib module fdopen
 
 if GL_COND_OBJ_FDOPEN
@@ -479,7 +803,7 @@ EXTRA_DIST += test-fgetc.c signature.h macros.h
 
 ## end   gnulib module fgetc-tests
 
-## begin gnulib module float
+## begin gnulib module float-h
 
 BUILT_SOURCES += $(FLOAT_H)
 
@@ -511,15 +835,15 @@ endif
 
 EXTRA_DIST += float.in.h
 
-## end   gnulib module float
+## end   gnulib module float-h
 
-## begin gnulib module float-tests
+## begin gnulib module float-h-tests
 
-TESTS += test-float
-check_PROGRAMS += test-float
-EXTRA_DIST += test-float.c macros.h
+TESTS += test-float-h
+check_PROGRAMS += test-float-h
+EXTRA_DIST += test-float-h.c macros.h
 
-## end   gnulib module float-tests
+## end   gnulib module float-h-tests
 
 ## begin gnulib module fnmatch-h-tests
 
@@ -531,10 +855,22 @@ EXTRA_DIST += test-fnmatch-h.c
 
 ## begin gnulib module fnmatch-tests
 
-TESTS += test-fnmatch
-check_PROGRAMS += test-fnmatch
-test_fnmatch_LDADD = $(LDADD) $(MBRTOWC_LIB)
-EXTRA_DIST += test-fnmatch.c signature.h macros.h
+TESTS += \
+  test-fnmatch-1.sh test-fnmatch-2.sh test-fnmatch-3.sh test-fnmatch-4.sh \
+  test-fnmatch-5.sh \
+  test-fnmatch-w32-2.sh test-fnmatch-w32-3.sh test-fnmatch-w32-4.sh \
+  test-fnmatch-w32-5.sh test-fnmatch-w32-6.sh test-fnmatch-w32-7.sh \
+  test-fnmatch-w32-8.sh
+TESTS_ENVIRONMENT += \
+  LOCALE_EN_UTF8='@LOCALE_EN_UTF8@' \
+  LOCALE_FR='@LOCALE_FR@' \
+  LOCALE_FR_UTF8='@LOCALE_FR_UTF8@' \
+  LOCALE_JA='@LOCALE_JA@' \
+  LOCALE_ZH_CN='@LOCALE_ZH_CN@'
+check_PROGRAMS += test-fnmatch test-fnmatch-w32
+test_fnmatch_LDADD = $(LDADD) $(SETLOCALE_LIB) $(LIBUNISTRING) $(MBRTOWC_LIB)
+test_fnmatch_w32_LDADD = $(LDADD) $(SETLOCALE_LIB) $(LIBUNISTRING) $(MBRTOWC_LIB)
+EXTRA_DIST += test-fnmatch-1.sh test-fnmatch-2.sh test-fnmatch-3.sh test-fnmatch-4.sh test-fnmatch-5.sh test-fnmatch.c test-fnmatch-w32-2.sh test-fnmatch-w32-3.sh test-fnmatch-w32-4.sh test-fnmatch-w32-5.sh test-fnmatch-w32-6.sh test-fnmatch-w32-7.sh test-fnmatch-w32-8.sh test-fnmatch-w32.c signature.h macros.h
 
 ## end   gnulib module fnmatch-tests
 
@@ -651,6 +987,7 @@ SED_HEADER_STDOUT = sed -e 1h -e '1$(SED_HEADER_NOEDIT)' -e 1G
 SED_HEADER_TO_AT_t = $(SED_HEADER_STDOUT) -n -e 'w $@-t'
 
 # Use $(gl_V_at) instead of $(AM_V_GEN) or $(AM_V_at) on a line that
+# is its recipe's first line if and only if @NMD@ lines are absent.
 gl_V_at = $(AM_V_GEN)
 
 ## end   gnulib module gen-header
@@ -671,6 +1008,27 @@ check_PROGRAMS += test-getdtablesize
 EXTRA_DIST += test-getdtablesize.c signature.h macros.h
 
 ## end   gnulib module getdtablesize-tests
+
+## begin gnulib module getlocalename_l-unsafe
+
+if !GL_COND_OBJ_GETLOCALENAME_L_UNSAFE_LIMITED
+libtests_a_SOURCES += getlocalename_l-unsafe.c
+endif
+libtests_a_SOURCES += localename-table.c
+
+EXTRA_DIST += getlocalename_l-unsafe.h localename-table.h struniq.h
+
+## end   gnulib module getlocalename_l-unsafe
+
+## begin gnulib module getlocalename_l-unsafe-limited
+
+if GL_COND_OBJ_GETLOCALENAME_L_UNSAFE_LIMITED
+libtests_a_SOURCES += getlocalename_l-unsafe.c
+endif
+
+EXTRA_DIST += getlocalename_l-unsafe.h
+
+## end   gnulib module getlocalename_l-unsafe-limited
 
 ## begin gnulib module getopt-gnu-tests
 
@@ -700,6 +1058,15 @@ EXTRA_DIST += test-getprogname.c
 
 ## end   gnulib module getprogname-tests
 
+## begin gnulib module gettext-h-tests
+
+TESTS += test-gettext-h
+check_PROGRAMS += test-gettext-h
+test_gettext_h_LDADD = $(LDADD) $(LIBINTL)
+EXTRA_DIST += test-gettext-h.c
+
+## end   gnulib module gettext-h-tests
+
 ## begin gnulib module gettimeofday
 
 if GL_COND_OBJ_GETTIMEOFDAY
@@ -724,15 +1091,6 @@ check_PROGRAMS += test-dynarray
 EXTRA_DIST += test-dynarray.c macros.h
 
 ## end   gnulib module glibc-internal/dynarray-tests
-
-## begin gnulib module gperf
-
-GPERF = gperf
-V_GPERF = $(V_GPERF_@AM_V@)
-V_GPERF_ = $(V_GPERF_@AM_DEFAULT_V@)
-V_GPERF_0 = @echo "  GPERF   " $@;
-
-## end   gnulib module gperf
 
 ## begin gnulib module hard-locale-tests
 
@@ -768,24 +1126,6 @@ check_PROGRAMS += test-i-ring
 EXTRA_DIST += test-i-ring.c macros.h
 
 ## end   gnulib module i-ring-tests
-
-## begin gnulib module iconv-h-tests
-
-TESTS += test-iconv-h
-check_PROGRAMS += test-iconv-h
-EXTRA_DIST += test-iconv-h.c
-
-## end   gnulib module iconv-h-tests
-
-## begin gnulib module iconv-tests
-
-TESTS += test-iconv
-check_PROGRAMS += test-iconv
-test_iconv_LDADD = $(LDADD) @LIBICONV@
-
-EXTRA_DIST += test-iconv.c signature.h macros.h
-
-## end   gnulib module iconv-tests
 
 ## begin gnulib module ignore-value-tests
 
@@ -838,13 +1178,13 @@ EXTRA_DIST += macros.h test-inttostr.c
 
 ## end   gnulib module inttostr-tests
 
-## begin gnulib module inttypes-tests
+## begin gnulib module inttypes-h-tests
 
-TESTS += test-inttypes
-check_PROGRAMS += test-inttypes
-EXTRA_DIST += test-inttypes.c
+TESTS += test-inttypes-h
+check_PROGRAMS += test-inttypes-h
+EXTRA_DIST += test-inttypes-h.c
 
-## end   gnulib module inttypes-tests
+## end   gnulib module inttypes-h-tests
 
 ## begin gnulib module ioctl
 
@@ -880,6 +1220,60 @@ EXTRA_DIST += test-isblank.c signature.h macros.h
 
 ## end   gnulib module isblank-tests
 
+## begin gnulib module isnand-nolibm
+
+
+EXTRA_DIST += float+.h isnan.c isnand-nolibm.h isnand.c
+
+EXTRA_libtests_a_SOURCES += isnan.c isnand.c
+
+## end   gnulib module isnand-nolibm
+
+## begin gnulib module isnand-nolibm-tests
+
+TESTS += test-isnand-nolibm
+check_PROGRAMS += test-isnand-nolibm
+
+EXTRA_DIST += test-isnand-nolibm.c test-isnand.h minus-zero.h infinity.h macros.h
+
+## end   gnulib module isnand-nolibm-tests
+
+## begin gnulib module isnanf-nolibm
+
+
+EXTRA_DIST += float+.h isnan.c isnanf-nolibm.h isnanf.c
+
+EXTRA_libtests_a_SOURCES += isnan.c isnanf.c
+
+## end   gnulib module isnanf-nolibm
+
+## begin gnulib module isnanf-nolibm-tests
+
+TESTS += test-isnanf-nolibm
+check_PROGRAMS += test-isnanf-nolibm
+
+EXTRA_DIST += test-isnanf-nolibm.c test-isnanf.h minus-zero.h infinity.h macros.h
+
+## end   gnulib module isnanf-nolibm-tests
+
+## begin gnulib module isnanl-nolibm
+
+
+EXTRA_DIST += float+.h isnan.c isnanl-nolibm.h isnanl.c
+
+EXTRA_libtests_a_SOURCES += isnan.c isnanl.c
+
+## end   gnulib module isnanl-nolibm
+
+## begin gnulib module isnanl-nolibm-tests
+
+TESTS += test-isnanl-nolibm
+check_PROGRAMS += test-isnanl-nolibm
+
+EXTRA_DIST += test-isnanl-nolibm.c test-isnanl.h minus-zero.h infinity.h macros.h
+
+## end   gnulib module isnanl-nolibm-tests
+
 ## begin gnulib module iswblank-tests
 
 TESTS += test-iswblank
@@ -888,10 +1282,19 @@ EXTRA_DIST += test-iswblank.c macros.h
 
 ## end   gnulib module iswblank-tests
 
+## begin gnulib module iswctype-tests
+
+TESTS += test-iswctype
+check_PROGRAMS += test-iswctype
+EXTRA_DIST += test-iswctype.c signature.h macros.h
+
+## end   gnulib module iswctype-tests
+
 ## begin gnulib module iswdigit-tests
 
 TESTS += test-iswdigit.sh
 TESTS_ENVIRONMENT += \
+  LOCALE_EN_UTF8='@LOCALE_EN_UTF8@' \
   LOCALE_FR='@LOCALE_FR@' \
   LOCALE_FR_UTF8='@LOCALE_FR_UTF8@' \
   LOCALE_JA='@LOCALE_JA@' \
@@ -902,10 +1305,20 @@ EXTRA_DIST += test-iswdigit.sh test-iswdigit.c signature.h macros.h
 
 ## end   gnulib module iswdigit-tests
 
+## begin gnulib module iswpunct-tests
+
+TESTS += test-iswpunct.sh
+check_PROGRAMS += test-iswpunct
+test_iswpunct_LDADD = $(LDADD) $(SETLOCALE_LIB) $(MBRTOWC_LIB)
+EXTRA_DIST += test-iswpunct.sh test-iswpunct.c signature.h macros.h
+
+## end   gnulib module iswpunct-tests
+
 ## begin gnulib module iswxdigit-tests
 
 TESTS += test-iswxdigit.sh
 TESTS_ENVIRONMENT += \
+  LOCALE_EN_UTF8='@LOCALE_EN_UTF8@' \
   LOCALE_FR='@LOCALE_FR@' \
   LOCALE_FR_UTF8='@LOCALE_FR_UTF8@' \
   LOCALE_JA='@LOCALE_JA@' \
@@ -916,13 +1329,13 @@ EXTRA_DIST += test-iswxdigit.sh test-iswxdigit.c signature.h macros.h
 
 ## end   gnulib module iswxdigit-tests
 
-## begin gnulib module langinfo-tests
+## begin gnulib module langinfo-h-tests
 
-TESTS += test-langinfo
-check_PROGRAMS += test-langinfo
-EXTRA_DIST += test-langinfo.c
+TESTS += test-langinfo-h
+check_PROGRAMS += test-langinfo-h
+EXTRA_DIST += test-langinfo-h.c
 
-## end   gnulib module langinfo-tests
+## end   gnulib module langinfo-h-tests
 
 ## begin gnulib module largefile-tests
 
@@ -963,17 +1376,26 @@ EXTRA_DIST += test-listen.c signature.h macros.h
 
 noinst_PROGRAMS += test-localcharset
 test_localcharset_LDADD = $(LDADD) $(SETLOCALE_LIB)
-EXTRA_DIST += test-localcharset.c
+
+if OS_IS_NATIVE_WINDOWS
+TESTS += test-localcharset-w32utf8.sh
+noinst_PROGRAMS += test-localcharset-w32utf8
+test_localcharset_w32utf8_LDADD = $(LDADD) test-localcharset-windows-utf8.res $(SETLOCALE_LIB)
+test-localcharset-windows-utf8.res : $(srcdir)/windows-utf8.rc
+	$(WINDRES) -i $(srcdir)/windows-utf8.rc -o test-localcharset-windows-utf8.res --output-format=coff
+MOSTLYCLEANFILES += test-localcharset-windows-utf8.res
+endif
+EXTRA_DIST += test-localcharset.c test-localcharset-w32utf8.sh test-localcharset-w32utf8.c windows-utf8.rc windows-utf8.manifest
 
 ## end   gnulib module localcharset-tests
 
-## begin gnulib module locale-tests
+## begin gnulib module locale-h-tests
 
-TESTS += test-locale
-check_PROGRAMS += test-locale
-EXTRA_DIST += test-locale.c
+TESTS += test-locale-h
+check_PROGRAMS += test-locale-h
+EXTRA_DIST += test-locale-h.c
 
-## end   gnulib module locale-tests
+## end   gnulib module locale-h-tests
 
 ## begin gnulib module localeconv-tests
 
@@ -985,11 +1407,19 @@ EXTRA_DIST += test-localeconv.c signature.h macros.h
 
 ## begin gnulib module localename
 
-libtests_a_SOURCES += localename.c localename-table.c
+libtests_a_SOURCES += localename.c
 
-EXTRA_DIST += localename-table.h localename.h
+EXTRA_DIST += localename.h struniq.h
 
 ## end   gnulib module localename
+
+## begin gnulib module localename-environ
+
+libtests_a_SOURCES += localename-environ.c
+
+EXTRA_DIST += localename.h
+
+## end   gnulib module localename-environ
 
 ## begin gnulib module localename-tests
 
@@ -997,9 +1427,37 @@ TESTS += test-localename
 check_PROGRAMS += test-localename
 test_localename_LDADD = $(LDADD) $(SETLOCALE_LIB) @INTL_MACOSX_LIBS@ $(LIBTHREAD)
 
-EXTRA_DIST += test-localename.c macros.h
+if OS_IS_NATIVE_WINDOWS
+TESTS += test-localename-w32utf8.sh
+noinst_PROGRAMS += test-localename-w32utf8
+test_localename_w32utf8_LDADD = $(LDADD) test-localename-windows-utf8.res $(SETLOCALE_LIB)
+test-localename-windows-utf8.res : $(srcdir)/windows-utf8.rc
+	$(WINDRES) -i $(srcdir)/windows-utf8.rc -o test-localename-windows-utf8.res --output-format=coff
+MOSTLYCLEANFILES += test-localename-windows-utf8.res
+endif
+EXTRA_DIST += test-localename.c test-localename-w32utf8.sh test-localename-w32utf8.c windows-utf8.rc windows-utf8.manifest macros.h
 
 ## end   gnulib module localename-tests
+
+## begin gnulib module localename-unsafe
+
+if !GL_COND_OBJ_LOCALENAME_UNSAFE_LIMITED
+libtests_a_SOURCES += localename-unsafe.c
+endif
+
+EXTRA_DIST += localename.h
+
+## end   gnulib module localename-unsafe
+
+## begin gnulib module localename-unsafe-limited
+
+if GL_COND_OBJ_LOCALENAME_UNSAFE_LIMITED
+libtests_a_SOURCES += localename-unsafe.c
+endif
+
+EXTRA_DIST += localename.h
+
+## end   gnulib module localename-unsafe-limited
 
 ## begin gnulib module lseek-tests
 
@@ -1025,6 +1483,14 @@ EXTRA_DIST += test-malloc-gnu.c macros.h
 
 ## end   gnulib module malloc-gnu-tests
 
+## begin gnulib module malloc-posix-tests
+
+TESTS += test-malloc-posix
+check_PROGRAMS += test-malloc-posix
+EXTRA_DIST += test-malloc-posix.c macros.h
+
+## end   gnulib module malloc-posix-tests
+
 ## begin gnulib module malloca-tests
 
 TESTS += test-malloca
@@ -1034,31 +1500,409 @@ EXTRA_DIST += test-malloca.c
 
 ## end   gnulib module malloca-tests
 
-## begin gnulib module mbrlen-tests
+## begin gnulib module math-h
+
+BUILT_SOURCES += math.h
+libtests_a_SOURCES += math.c
+
+# We need the following in order to create <math.h> when the system
+# doesn't have one that works with the given compiler.
+math.h: math.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(ARG_NONNULL_H) $(WARN_ON_USE_H)
+	$(gl_V_at)$(SED_HEADER_STDOUT) \
+	      -e 's|@''GUARD_PREFIX''@|GL|g' \
+	      -e 's|@''INCLUDE_NEXT_AS_FIRST_DIRECTIVE''@|$(INCLUDE_NEXT_AS_FIRST_DIRECTIVE)|g' \
+	      -e 's|@''PRAGMA_SYSTEM_HEADER''@|@PRAGMA_SYSTEM_HEADER@|g' \
+	      -e 's|@''PRAGMA_COLUMNS''@|@PRAGMA_COLUMNS@|g' \
+	      -e 's|@''NEXT_AS_FIRST_DIRECTIVE_MATH_H''@|$(NEXT_AS_FIRST_DIRECTIVE_MATH_H)|g' \
+	      -e 's/@''GNULIB_ACOSF''@/$(GL_GNULIB_ACOSF)/g' \
+	      -e 's/@''GNULIB_ACOSL''@/$(GL_GNULIB_ACOSL)/g' \
+	      -e 's/@''GNULIB_ASINF''@/$(GL_GNULIB_ASINF)/g' \
+	      -e 's/@''GNULIB_ASINL''@/$(GL_GNULIB_ASINL)/g' \
+	      -e 's/@''GNULIB_ATANF''@/$(GL_GNULIB_ATANF)/g' \
+	      -e 's/@''GNULIB_ATANL''@/$(GL_GNULIB_ATANL)/g' \
+	      -e 's/@''GNULIB_ATAN2F''@/$(GL_GNULIB_ATAN2F)/g' \
+	      -e 's/@''GNULIB_CBRT''@/$(GL_GNULIB_CBRT)/g' \
+	      -e 's/@''GNULIB_CBRTF''@/$(GL_GNULIB_CBRTF)/g' \
+	      -e 's/@''GNULIB_CBRTL''@/$(GL_GNULIB_CBRTL)/g' \
+	      -e 's/@''GNULIB_CEIL''@/$(GL_GNULIB_CEIL)/g' \
+	      -e 's/@''GNULIB_CEILF''@/$(GL_GNULIB_CEILF)/g' \
+	      -e 's/@''GNULIB_CEILL''@/$(GL_GNULIB_CEILL)/g' \
+	      -e 's/@''GNULIB_COPYSIGN''@/$(GL_GNULIB_COPYSIGN)/g' \
+	      -e 's/@''GNULIB_COPYSIGNF''@/$(GL_GNULIB_COPYSIGNF)/g' \
+	      -e 's/@''GNULIB_COPYSIGNL''@/$(GL_GNULIB_COPYSIGNL)/g' \
+	      -e 's/@''GNULIB_COSF''@/$(GL_GNULIB_COSF)/g' \
+	      -e 's/@''GNULIB_COSL''@/$(GL_GNULIB_COSL)/g' \
+	      -e 's/@''GNULIB_COSHF''@/$(GL_GNULIB_COSHF)/g' \
+	      -e 's/@''GNULIB_EXPF''@/$(GL_GNULIB_EXPF)/g' \
+	      -e 's/@''GNULIB_EXPL''@/$(GL_GNULIB_EXPL)/g' \
+	      -e 's/@''GNULIB_EXP2''@/$(GL_GNULIB_EXP2)/g' \
+	      -e 's/@''GNULIB_EXP2F''@/$(GL_GNULIB_EXP2F)/g' \
+	      -e 's/@''GNULIB_EXP2L''@/$(GL_GNULIB_EXP2L)/g' \
+	      -e 's/@''GNULIB_EXPM1''@/$(GL_GNULIB_EXPM1)/g' \
+	      -e 's/@''GNULIB_EXPM1F''@/$(GL_GNULIB_EXPM1F)/g' \
+	      -e 's/@''GNULIB_EXPM1L''@/$(GL_GNULIB_EXPM1L)/g' \
+	      -e 's/@''GNULIB_FABSF''@/$(GL_GNULIB_FABSF)/g' \
+	      -e 's/@''GNULIB_FABSL''@/$(GL_GNULIB_FABSL)/g' \
+	      -e 's/@''GNULIB_FLOOR''@/$(GL_GNULIB_FLOOR)/g' \
+	      -e 's/@''GNULIB_FLOORF''@/$(GL_GNULIB_FLOORF)/g' \
+	      -e 's/@''GNULIB_FLOORL''@/$(GL_GNULIB_FLOORL)/g' \
+	      -e 's/@''GNULIB_FMA''@/$(GL_GNULIB_FMA)/g' \
+	      -e 's/@''GNULIB_FMAF''@/$(GL_GNULIB_FMAF)/g' \
+	      -e 's/@''GNULIB_FMAL''@/$(GL_GNULIB_FMAL)/g' \
+	      -e 's/@''GNULIB_FMOD''@/$(GL_GNULIB_FMOD)/g' \
+	      -e 's/@''GNULIB_FMODF''@/$(GL_GNULIB_FMODF)/g' \
+	      -e 's/@''GNULIB_FMODL''@/$(GL_GNULIB_FMODL)/g' \
+	      -e 's/@''GNULIB_FREXPF''@/$(GL_GNULIB_FREXPF)/g' \
+	      -e 's/@''GNULIB_FREXP''@/$(GL_GNULIB_FREXP)/g' \
+	      -e 's/@''GNULIB_FREXPL''@/$(GL_GNULIB_FREXPL)/g' \
+	      -e 's/@''GNULIB_GETPAYLOAD''@/$(GL_GNULIB_GETPAYLOAD)/g' \
+	      -e 's/@''GNULIB_GETPAYLOADF''@/$(GL_GNULIB_GETPAYLOADF)/g' \
+	      -e 's/@''GNULIB_GETPAYLOADL''@/$(GL_GNULIB_GETPAYLOADL)/g' \
+	      -e 's/@''GNULIB_HYPOT''@/$(GL_GNULIB_HYPOT)/g' \
+	      -e 's/@''GNULIB_HYPOTF''@/$(GL_GNULIB_HYPOTF)/g' \
+	      -e 's/@''GNULIB_HYPOTL''@/$(GL_GNULIB_HYPOTL)/g' \
+	      < $(srcdir)/math.in.h > $@-t1
+	$(AM_V_at)sed \
+	      -e 's/@''GNULIB_ILOGB''@/$(GL_GNULIB_ILOGB)/g' \
+	      -e 's/@''GNULIB_ILOGBF''@/$(GL_GNULIB_ILOGBF)/g' \
+	      -e 's/@''GNULIB_ILOGBL''@/$(GL_GNULIB_ILOGBL)/g' \
+	      -e 's/@''GNULIB_ISFINITE''@/$(GL_GNULIB_ISFINITE)/g' \
+	      -e 's/@''GNULIB_ISINF''@/$(GL_GNULIB_ISINF)/g' \
+	      -e 's/@''GNULIB_ISNAN''@/$(GL_GNULIB_ISNAN)/g' \
+	      -e 's/@''GNULIB_ISNANF''@/$(GL_GNULIB_ISNANF)/g' \
+	      -e 's/@''GNULIB_ISNAND''@/$(GL_GNULIB_ISNAND)/g' \
+	      -e 's/@''GNULIB_ISNANL''@/$(GL_GNULIB_ISNANL)/g' \
+	      -e 's/@''GNULIB_LDEXP''@/$(GL_GNULIB_LDEXP)/g' \
+	      -e 's/@''GNULIB_LDEXPF''@/$(GL_GNULIB_LDEXPF)/g' \
+	      -e 's/@''GNULIB_LDEXPL''@/$(GL_GNULIB_LDEXPL)/g' \
+	      -e 's/@''GNULIB_LOG''@/$(GL_GNULIB_LOG)/g' \
+	      -e 's/@''GNULIB_LOGF''@/$(GL_GNULIB_LOGF)/g' \
+	      -e 's/@''GNULIB_LOGL''@/$(GL_GNULIB_LOGL)/g' \
+	      -e 's/@''GNULIB_LOG10''@/$(GL_GNULIB_LOG10)/g' \
+	      -e 's/@''GNULIB_LOG10F''@/$(GL_GNULIB_LOG10F)/g' \
+	      -e 's/@''GNULIB_LOG10L''@/$(GL_GNULIB_LOG10L)/g' \
+	      -e 's/@''GNULIB_LOG1P''@/$(GL_GNULIB_LOG1P)/g' \
+	      -e 's/@''GNULIB_LOG1PF''@/$(GL_GNULIB_LOG1PF)/g' \
+	      -e 's/@''GNULIB_LOG1PL''@/$(GL_GNULIB_LOG1PL)/g' \
+	      -e 's/@''GNULIB_LOG2''@/$(GL_GNULIB_LOG2)/g' \
+	      -e 's/@''GNULIB_LOG2F''@/$(GL_GNULIB_LOG2F)/g' \
+	      -e 's/@''GNULIB_LOG2L''@/$(GL_GNULIB_LOG2L)/g' \
+	      -e 's/@''GNULIB_LOGB''@/$(GL_GNULIB_LOGB)/g' \
+	      -e 's/@''GNULIB_LOGBF''@/$(GL_GNULIB_LOGBF)/g' \
+	      -e 's/@''GNULIB_LOGBL''@/$(GL_GNULIB_LOGBL)/g' \
+	      -e 's/@''GNULIB_LOGP1''@/$(GL_GNULIB_LOGP1)/g' \
+	      -e 's/@''GNULIB_LOGP1F''@/$(GL_GNULIB_LOGP1F)/g' \
+	      -e 's/@''GNULIB_LOGP1L''@/$(GL_GNULIB_LOGP1L)/g' \
+	      -e 's/@''GNULIB_MODF''@/$(GL_GNULIB_MODF)/g' \
+	      -e 's/@''GNULIB_MODFF''@/$(GL_GNULIB_MODFF)/g' \
+	      -e 's/@''GNULIB_MODFL''@/$(GL_GNULIB_MODFL)/g' \
+	      -e 's/@''GNULIB_POWF''@/$(GL_GNULIB_POWF)/g' \
+	      -e 's/@''GNULIB_REMAINDER''@/$(GL_GNULIB_REMAINDER)/g' \
+	      -e 's/@''GNULIB_REMAINDERF''@/$(GL_GNULIB_REMAINDERF)/g' \
+	      -e 's/@''GNULIB_REMAINDERL''@/$(GL_GNULIB_REMAINDERL)/g' \
+	      -e 's/@''GNULIB_RINT''@/$(GL_GNULIB_RINT)/g' \
+	      -e 's/@''GNULIB_RINTF''@/$(GL_GNULIB_RINTF)/g' \
+	      -e 's/@''GNULIB_RINTL''@/$(GL_GNULIB_RINTL)/g' \
+	      -e 's/@''GNULIB_ROUND''@/$(GL_GNULIB_ROUND)/g' \
+	      -e 's/@''GNULIB_ROUNDF''@/$(GL_GNULIB_ROUNDF)/g' \
+	      -e 's/@''GNULIB_ROUNDL''@/$(GL_GNULIB_ROUNDL)/g' \
+	      -e 's/@''GNULIB_SETPAYLOAD''@/$(GL_GNULIB_SETPAYLOAD)/g' \
+	      -e 's/@''GNULIB_SETPAYLOADF''@/$(GL_GNULIB_SETPAYLOADF)/g' \
+	      -e 's/@''GNULIB_SETPAYLOADL''@/$(GL_GNULIB_SETPAYLOADL)/g' \
+	      -e 's/@''GNULIB_SETPAYLOADSIG''@/$(GL_GNULIB_SETPAYLOADSIG)/g' \
+	      -e 's/@''GNULIB_SETPAYLOADSIGF''@/$(GL_GNULIB_SETPAYLOADSIGF)/g' \
+	      -e 's/@''GNULIB_SETPAYLOADSIGL''@/$(GL_GNULIB_SETPAYLOADSIGL)/g' \
+	      -e 's/@''GNULIB_SIGNBIT''@/$(GL_GNULIB_SIGNBIT)/g' \
+	      -e 's/@''GNULIB_SINF''@/$(GL_GNULIB_SINF)/g' \
+	      -e 's/@''GNULIB_SINL''@/$(GL_GNULIB_SINL)/g' \
+	      -e 's/@''GNULIB_SINHF''@/$(GL_GNULIB_SINHF)/g' \
+	      -e 's/@''GNULIB_SQRTF''@/$(GL_GNULIB_SQRTF)/g' \
+	      -e 's/@''GNULIB_SQRTL''@/$(GL_GNULIB_SQRTL)/g' \
+	      -e 's/@''GNULIB_TANF''@/$(GL_GNULIB_TANF)/g' \
+	      -e 's/@''GNULIB_TANL''@/$(GL_GNULIB_TANL)/g' \
+	      -e 's/@''GNULIB_TANHF''@/$(GL_GNULIB_TANHF)/g' \
+	      -e 's/@''GNULIB_TRUNC''@/$(GL_GNULIB_TRUNC)/g' \
+	      -e 's/@''GNULIB_TRUNCF''@/$(GL_GNULIB_TRUNCF)/g' \
+	      -e 's/@''GNULIB_TRUNCL''@/$(GL_GNULIB_TRUNCL)/g' \
+	      -e 's/@''GNULIB_TOTALORDER''@/$(GL_GNULIB_TOTALORDER)/g' \
+	      -e 's/@''GNULIB_TOTALORDERF''@/$(GL_GNULIB_TOTALORDERF)/g' \
+	      -e 's/@''GNULIB_TOTALORDERL''@/$(GL_GNULIB_TOTALORDERL)/g' \
+	      -e 's/@''GNULIB_TOTALORDERMAG''@/$(GL_GNULIB_TOTALORDERMAG)/g' \
+	      -e 's/@''GNULIB_TOTALORDERMAGF''@/$(GL_GNULIB_TOTALORDERMAGF)/g' \
+	      -e 's/@''GNULIB_TOTALORDERMAGL''@/$(GL_GNULIB_TOTALORDERMAGL)/g' \
+	      -e 's/@''GNULIB_MDA_J0''@/$(GL_GNULIB_MDA_J0)/g' \
+	      -e 's/@''GNULIB_MDA_J1''@/$(GL_GNULIB_MDA_J1)/g' \
+	      -e 's/@''GNULIB_MDA_JN''@/$(GL_GNULIB_MDA_JN)/g' \
+	      -e 's/@''GNULIB_MDA_Y0''@/$(GL_GNULIB_MDA_Y0)/g' \
+	      -e 's/@''GNULIB_MDA_Y1''@/$(GL_GNULIB_MDA_Y1)/g' \
+	      -e 's/@''GNULIB_MDA_YN''@/$(GL_GNULIB_MDA_YN)/g' \
+	      < $@-t1 > $@-t2
+	$(AM_V_at)sed \
+	      -e 's|@''HAVE_ACOSF''@|$(HAVE_ACOSF)|g' \
+	      -e 's|@''HAVE_ACOSL''@|$(HAVE_ACOSL)|g' \
+	      -e 's|@''HAVE_ASINF''@|$(HAVE_ASINF)|g' \
+	      -e 's|@''HAVE_ASINL''@|$(HAVE_ASINL)|g' \
+	      -e 's|@''HAVE_ATANF''@|$(HAVE_ATANF)|g' \
+	      -e 's|@''HAVE_ATANL''@|$(HAVE_ATANL)|g' \
+	      -e 's|@''HAVE_ATAN2F''@|$(HAVE_ATAN2F)|g' \
+	      -e 's|@''HAVE_CBRT''@|$(HAVE_CBRT)|g' \
+	      -e 's|@''HAVE_CBRTF''@|$(HAVE_CBRTF)|g' \
+	      -e 's|@''HAVE_CBRTL''@|$(HAVE_CBRTL)|g' \
+	      -e 's|@''HAVE_COPYSIGN''@|$(HAVE_COPYSIGN)|g' \
+	      -e 's|@''HAVE_COPYSIGNL''@|$(HAVE_COPYSIGNL)|g' \
+	      -e 's|@''HAVE_COSF''@|$(HAVE_COSF)|g' \
+	      -e 's|@''HAVE_COSL''@|$(HAVE_COSL)|g' \
+	      -e 's|@''HAVE_COSHF''@|$(HAVE_COSHF)|g' \
+	      -e 's|@''HAVE_EXPF''@|$(HAVE_EXPF)|g' \
+	      -e 's|@''HAVE_EXPL''@|$(HAVE_EXPL)|g' \
+	      -e 's|@''HAVE_EXPM1''@|$(HAVE_EXPM1)|g' \
+	      -e 's|@''HAVE_EXPM1F''@|$(HAVE_EXPM1F)|g' \
+	      -e 's|@''HAVE_FABSF''@|$(HAVE_FABSF)|g' \
+	      -e 's|@''HAVE_FABSL''@|$(HAVE_FABSL)|g' \
+	      -e 's|@''HAVE_FMA''@|$(HAVE_FMA)|g' \
+	      -e 's|@''HAVE_FMAF''@|$(HAVE_FMAF)|g' \
+	      -e 's|@''HAVE_FMAL''@|$(HAVE_FMAL)|g' \
+	      -e 's|@''HAVE_FMODF''@|$(HAVE_FMODF)|g' \
+	      -e 's|@''HAVE_FMODL''@|$(HAVE_FMODL)|g' \
+	      -e 's|@''HAVE_FREXPF''@|$(HAVE_FREXPF)|g' \
+	      -e 's|@''HAVE_GETPAYLOAD''@|$(HAVE_GETPAYLOAD)|g' \
+	      -e 's|@''HAVE_GETPAYLOADF''@|$(HAVE_GETPAYLOADF)|g' \
+	      -e 's|@''HAVE_GETPAYLOADL''@|$(HAVE_GETPAYLOADL)|g' \
+	      -e 's|@''HAVE_HYPOTF''@|$(HAVE_HYPOTF)|g' \
+	      -e 's|@''HAVE_HYPOTL''@|$(HAVE_HYPOTL)|g' \
+	      -e 's|@''HAVE_ILOGB''@|$(HAVE_ILOGB)|g' \
+	      -e 's|@''HAVE_ILOGBF''@|$(HAVE_ILOGBF)|g' \
+	      -e 's|@''HAVE_ILOGBL''@|$(HAVE_ILOGBL)|g' \
+	      -e 's|@''HAVE_ISNANF''@|$(HAVE_ISNANF)|g' \
+	      -e 's|@''HAVE_ISNAND''@|$(HAVE_ISNAND)|g' \
+	      -e 's|@''HAVE_ISNANL''@|$(HAVE_ISNANL)|g' \
+	      -e 's|@''HAVE_LDEXPF''@|$(HAVE_LDEXPF)|g' \
+	      -e 's|@''HAVE_LOGF''@|$(HAVE_LOGF)|g' \
+	      -e 's|@''HAVE_LOGL''@|$(HAVE_LOGL)|g' \
+	      -e 's|@''HAVE_LOG10F''@|$(HAVE_LOG10F)|g' \
+	      -e 's|@''HAVE_LOG10L''@|$(HAVE_LOG10L)|g' \
+	      -e 's|@''HAVE_LOG1P''@|$(HAVE_LOG1P)|g' \
+	      -e 's|@''HAVE_LOG1PF''@|$(HAVE_LOG1PF)|g' \
+	      -e 's|@''HAVE_LOG1PL''@|$(HAVE_LOG1PL)|g' \
+	      -e 's|@''HAVE_LOGBF''@|$(HAVE_LOGBF)|g' \
+	      -e 's|@''HAVE_LOGBL''@|$(HAVE_LOGBL)|g' \
+	      -e 's|@''HAVE_LOGP1''@|$(HAVE_LOGP1)|g' \
+	      -e 's|@''HAVE_LOGP1F''@|$(HAVE_LOGP1F)|g' \
+	      -e 's|@''HAVE_LOGP1L''@|$(HAVE_LOGP1L)|g' \
+	      -e 's|@''HAVE_MODFF''@|$(HAVE_MODFF)|g' \
+	      -e 's|@''HAVE_MODFL''@|$(HAVE_MODFL)|g' \
+	      -e 's|@''HAVE_POWF''@|$(HAVE_POWF)|g' \
+	      -e 's|@''HAVE_REMAINDER''@|$(HAVE_REMAINDER)|g' \
+	      -e 's|@''HAVE_REMAINDERF''@|$(HAVE_REMAINDERF)|g' \
+	      -e 's|@''HAVE_RINT''@|$(HAVE_RINT)|g' \
+	      -e 's|@''HAVE_RINTL''@|$(HAVE_RINTL)|g' \
+	      -e 's|@''HAVE_SETPAYLOAD''@|$(HAVE_SETPAYLOAD)|g' \
+	      -e 's|@''HAVE_SETPAYLOADF''@|$(HAVE_SETPAYLOADF)|g' \
+	      -e 's|@''HAVE_SETPAYLOADL''@|$(HAVE_SETPAYLOADL)|g' \
+	      -e 's|@''HAVE_SETPAYLOADSIG''@|$(HAVE_SETPAYLOADSIG)|g' \
+	      -e 's|@''HAVE_SETPAYLOADSIGF''@|$(HAVE_SETPAYLOADSIGF)|g' \
+	      -e 's|@''HAVE_SETPAYLOADSIGL''@|$(HAVE_SETPAYLOADSIGL)|g' \
+	      -e 's|@''HAVE_SINF''@|$(HAVE_SINF)|g' \
+	      -e 's|@''HAVE_SINL''@|$(HAVE_SINL)|g' \
+	      -e 's|@''HAVE_SINHF''@|$(HAVE_SINHF)|g' \
+	      -e 's|@''HAVE_SQRTF''@|$(HAVE_SQRTF)|g' \
+	      -e 's|@''HAVE_SQRTL''@|$(HAVE_SQRTL)|g' \
+	      -e 's|@''HAVE_TANF''@|$(HAVE_TANF)|g' \
+	      -e 's|@''HAVE_TANL''@|$(HAVE_TANL)|g' \
+	      -e 's|@''HAVE_TANHF''@|$(HAVE_TANHF)|g' \
+	      -e 's|@''HAVE_TOTALORDER''@|$(HAVE_TOTALORDER)|g' \
+	      -e 's|@''HAVE_TOTALORDERF''@|$(HAVE_TOTALORDERF)|g' \
+	      -e 's|@''HAVE_TOTALORDERL''@|$(HAVE_TOTALORDERL)|g' \
+	      -e 's|@''HAVE_TOTALORDERMAG''@|$(HAVE_TOTALORDERMAG)|g' \
+	      -e 's|@''HAVE_TOTALORDERMAGF''@|$(HAVE_TOTALORDERMAGF)|g' \
+	      -e 's|@''HAVE_TOTALORDERMAGL''@|$(HAVE_TOTALORDERMAGL)|g' \
+	      < $@-t2 > $@-t3
+	$(AM_V_at)sed \
+	      -e 's|@''HAVE_DECL_ACOSL''@|$(HAVE_DECL_ACOSL)|g' \
+	      -e 's|@''HAVE_DECL_ASINL''@|$(HAVE_DECL_ASINL)|g' \
+	      -e 's|@''HAVE_DECL_ATANL''@|$(HAVE_DECL_ATANL)|g' \
+	      -e 's|@''HAVE_DECL_CBRTF''@|$(HAVE_DECL_CBRTF)|g' \
+	      -e 's|@''HAVE_DECL_CBRTL''@|$(HAVE_DECL_CBRTL)|g' \
+	      -e 's|@''HAVE_DECL_CEILF''@|$(HAVE_DECL_CEILF)|g' \
+	      -e 's|@''HAVE_DECL_CEILL''@|$(HAVE_DECL_CEILL)|g' \
+	      -e 's|@''HAVE_DECL_COPYSIGNF''@|$(HAVE_DECL_COPYSIGNF)|g' \
+	      -e 's|@''HAVE_DECL_COSL''@|$(HAVE_DECL_COSL)|g' \
+	      -e 's|@''HAVE_DECL_EXPL''@|$(HAVE_DECL_EXPL)|g' \
+	      -e 's|@''HAVE_DECL_EXP2''@|$(HAVE_DECL_EXP2)|g' \
+	      -e 's|@''HAVE_DECL_EXP2F''@|$(HAVE_DECL_EXP2F)|g' \
+	      -e 's|@''HAVE_DECL_EXP2L''@|$(HAVE_DECL_EXP2L)|g' \
+	      -e 's|@''HAVE_DECL_EXPM1L''@|$(HAVE_DECL_EXPM1L)|g' \
+	      -e 's|@''HAVE_DECL_FLOORF''@|$(HAVE_DECL_FLOORF)|g' \
+	      -e 's|@''HAVE_DECL_FLOORL''@|$(HAVE_DECL_FLOORL)|g' \
+	      -e 's|@''HAVE_DECL_FREXPL''@|$(HAVE_DECL_FREXPL)|g' \
+	      -e 's|@''HAVE_DECL_LDEXPL''@|$(HAVE_DECL_LDEXPL)|g' \
+	      -e 's|@''HAVE_DECL_LOGL''@|$(HAVE_DECL_LOGL)|g' \
+	      -e 's|@''HAVE_DECL_LOG10L''@|$(HAVE_DECL_LOG10L)|g' \
+	      -e 's|@''HAVE_DECL_LOG2''@|$(HAVE_DECL_LOG2)|g' \
+	      -e 's|@''HAVE_DECL_LOG2F''@|$(HAVE_DECL_LOG2F)|g' \
+	      -e 's|@''HAVE_DECL_LOG2L''@|$(HAVE_DECL_LOG2L)|g' \
+	      -e 's|@''HAVE_DECL_LOGB''@|$(HAVE_DECL_LOGB)|g' \
+	      -e 's|@''HAVE_DECL_REMAINDER''@|$(HAVE_DECL_REMAINDER)|g' \
+	      -e 's|@''HAVE_DECL_REMAINDERL''@|$(HAVE_DECL_REMAINDERL)|g' \
+	      -e 's|@''HAVE_DECL_RINTF''@|$(HAVE_DECL_RINTF)|g' \
+	      -e 's|@''HAVE_DECL_ROUND''@|$(HAVE_DECL_ROUND)|g' \
+	      -e 's|@''HAVE_DECL_ROUNDF''@|$(HAVE_DECL_ROUNDF)|g' \
+	      -e 's|@''HAVE_DECL_ROUNDL''@|$(HAVE_DECL_ROUNDL)|g' \
+	      -e 's|@''HAVE_DECL_SINL''@|$(HAVE_DECL_SINL)|g' \
+	      -e 's|@''HAVE_DECL_SQRTL''@|$(HAVE_DECL_SQRTL)|g' \
+	      -e 's|@''HAVE_DECL_TANL''@|$(HAVE_DECL_TANL)|g' \
+	      -e 's|@''HAVE_DECL_TRUNC''@|$(HAVE_DECL_TRUNC)|g' \
+	      -e 's|@''HAVE_DECL_TRUNCF''@|$(HAVE_DECL_TRUNCF)|g' \
+	      -e 's|@''HAVE_DECL_TRUNCL''@|$(HAVE_DECL_TRUNCL)|g' \
+	      < $@-t3 > $@-t4
+	$(AM_V_at)sed \
+	      -e 's|@''REPLACE_ACOSF''@|$(REPLACE_ACOSF)|g' \
+	      -e 's|@''REPLACE_ASINF''@|$(REPLACE_ASINF)|g' \
+	      -e 's|@''REPLACE_ATANF''@|$(REPLACE_ATANF)|g' \
+	      -e 's|@''REPLACE_ATAN2F''@|$(REPLACE_ATAN2F)|g' \
+	      -e 's|@''REPLACE_CBRTF''@|$(REPLACE_CBRTF)|g' \
+	      -e 's|@''REPLACE_CBRTL''@|$(REPLACE_CBRTL)|g' \
+	      -e 's|@''REPLACE_CEIL''@|$(REPLACE_CEIL)|g' \
+	      -e 's|@''REPLACE_CEILF''@|$(REPLACE_CEILF)|g' \
+	      -e 's|@''REPLACE_CEILL''@|$(REPLACE_CEILL)|g' \
+	      -e 's|@''REPLACE_COSF''@|$(REPLACE_COSF)|g' \
+	      -e 's|@''REPLACE_COSHF''@|$(REPLACE_COSHF)|g' \
+	      -e 's|@''REPLACE_EXPF''@|$(REPLACE_EXPF)|g' \
+	      -e 's|@''REPLACE_EXPL''@|$(REPLACE_EXPL)|g' \
+	      -e 's|@''REPLACE_EXPM1''@|$(REPLACE_EXPM1)|g' \
+	      -e 's|@''REPLACE_EXPM1F''@|$(REPLACE_EXPM1F)|g' \
+	      -e 's|@''REPLACE_EXPM1L''@|$(REPLACE_EXPM1L)|g' \
+	      -e 's|@''REPLACE_EXP2''@|$(REPLACE_EXP2)|g' \
+	      -e 's|@''REPLACE_EXP2L''@|$(REPLACE_EXP2L)|g' \
+	      -e 's|@''REPLACE_FABSL''@|$(REPLACE_FABSL)|g' \
+	      -e 's|@''REPLACE_FLOOR''@|$(REPLACE_FLOOR)|g' \
+	      -e 's|@''REPLACE_FLOORF''@|$(REPLACE_FLOORF)|g' \
+	      -e 's|@''REPLACE_FLOORL''@|$(REPLACE_FLOORL)|g' \
+	      -e 's|@''REPLACE_FMA''@|$(REPLACE_FMA)|g' \
+	      -e 's|@''REPLACE_FMAF''@|$(REPLACE_FMAF)|g' \
+	      -e 's|@''REPLACE_FMAL''@|$(REPLACE_FMAL)|g' \
+	      -e 's|@''REPLACE_FMOD''@|$(REPLACE_FMOD)|g' \
+	      -e 's|@''REPLACE_FMODF''@|$(REPLACE_FMODF)|g' \
+	      -e 's|@''REPLACE_FMODL''@|$(REPLACE_FMODL)|g' \
+	      -e 's|@''REPLACE_FREXPF''@|$(REPLACE_FREXPF)|g' \
+	      -e 's|@''REPLACE_FREXP''@|$(REPLACE_FREXP)|g' \
+	      -e 's|@''REPLACE_FREXPL''@|$(REPLACE_FREXPL)|g' \
+	      -e 's|@''REPLACE_GETPAYLOAD''@|$(REPLACE_GETPAYLOAD)|g' \
+	      -e 's|@''REPLACE_GETPAYLOADF''@|$(REPLACE_GETPAYLOADF)|g' \
+	      -e 's|@''REPLACE_GETPAYLOADL''@|$(REPLACE_GETPAYLOADL)|g' \
+	      -e 's|@''REPLACE_HUGE_VAL''@|$(REPLACE_HUGE_VAL)|g' \
+	      -e 's|@''REPLACE_HYPOT''@|$(REPLACE_HYPOT)|g' \
+	      -e 's|@''REPLACE_HYPOTF''@|$(REPLACE_HYPOTF)|g' \
+	      -e 's|@''REPLACE_HYPOTL''@|$(REPLACE_HYPOTL)|g' \
+	      -e 's|@''REPLACE_ILOGB''@|$(REPLACE_ILOGB)|g' \
+	      -e 's|@''REPLACE_ILOGBF''@|$(REPLACE_ILOGBF)|g' \
+	      -e 's|@''REPLACE_ILOGBL''@|$(REPLACE_ILOGBL)|g' \
+	      -e 's|@''REPLACE_ISFINITE''@|$(REPLACE_ISFINITE)|g' \
+	      -e 's|@''REPLACE_ISINF''@|$(REPLACE_ISINF)|g' \
+	      -e 's|@''REPLACE_ISNAN''@|$(REPLACE_ISNAN)|g' \
+	      -e 's|@''REPLACE_ITOLD''@|$(REPLACE_ITOLD)|g' \
+	      < $@-t4 > $@-t5
+	$(AM_V_at)sed \
+	      -e 's|@''REPLACE_LDEXP''@|$(REPLACE_LDEXP)|g' \
+	      -e 's|@''REPLACE_LDEXPL''@|$(REPLACE_LDEXPL)|g' \
+	      -e 's|@''REPLACE_LOG''@|$(REPLACE_LOG)|g' \
+	      -e 's|@''REPLACE_LOGF''@|$(REPLACE_LOGF)|g' \
+	      -e 's|@''REPLACE_LOGL''@|$(REPLACE_LOGL)|g' \
+	      -e 's|@''REPLACE_LOG10''@|$(REPLACE_LOG10)|g' \
+	      -e 's|@''REPLACE_LOG10F''@|$(REPLACE_LOG10F)|g' \
+	      -e 's|@''REPLACE_LOG10L''@|$(REPLACE_LOG10L)|g' \
+	      -e 's|@''REPLACE_LOG1P''@|$(REPLACE_LOG1P)|g' \
+	      -e 's|@''REPLACE_LOG1PF''@|$(REPLACE_LOG1PF)|g' \
+	      -e 's|@''REPLACE_LOG1PL''@|$(REPLACE_LOG1PL)|g' \
+	      -e 's|@''REPLACE_LOG2''@|$(REPLACE_LOG2)|g' \
+	      -e 's|@''REPLACE_LOG2F''@|$(REPLACE_LOG2F)|g' \
+	      -e 's|@''REPLACE_LOG2L''@|$(REPLACE_LOG2L)|g' \
+	      -e 's|@''REPLACE_LOGB''@|$(REPLACE_LOGB)|g' \
+	      -e 's|@''REPLACE_LOGBF''@|$(REPLACE_LOGBF)|g' \
+	      -e 's|@''REPLACE_LOGBL''@|$(REPLACE_LOGBL)|g' \
+	      -e 's|@''REPLACE_MODF''@|$(REPLACE_MODF)|g' \
+	      -e 's|@''REPLACE_MODFF''@|$(REPLACE_MODFF)|g' \
+	      -e 's|@''REPLACE_MODFL''@|$(REPLACE_MODFL)|g' \
+	      -e 's|@''REPLACE_NAN''@|$(REPLACE_NAN)|g' \
+	      -e 's|@''REPLACE_REMAINDER''@|$(REPLACE_REMAINDER)|g' \
+	      -e 's|@''REPLACE_REMAINDERF''@|$(REPLACE_REMAINDERF)|g' \
+	      -e 's|@''REPLACE_REMAINDERL''@|$(REPLACE_REMAINDERL)|g' \
+	      -e 's|@''REPLACE_RINTL''@|$(REPLACE_RINTL)|g' \
+	      -e 's|@''REPLACE_ROUND''@|$(REPLACE_ROUND)|g' \
+	      -e 's|@''REPLACE_ROUNDF''@|$(REPLACE_ROUNDF)|g' \
+	      -e 's|@''REPLACE_ROUNDL''@|$(REPLACE_ROUNDL)|g' \
+	      -e 's|@''REPLACE_SIGNBIT''@|$(REPLACE_SIGNBIT)|g' \
+	      -e 's|@''REPLACE_SIGNBIT_USING_BUILTINS''@|$(REPLACE_SIGNBIT_USING_BUILTINS)|g' \
+	      -e 's|@''REPLACE_SINF''@|$(REPLACE_SINF)|g' \
+	      -e 's|@''REPLACE_SINHF''@|$(REPLACE_SINHF)|g' \
+	      -e 's|@''REPLACE_SQRTF''@|$(REPLACE_SQRTF)|g' \
+	      -e 's|@''REPLACE_SQRTL''@|$(REPLACE_SQRTL)|g' \
+	      -e 's|@''REPLACE_TANF''@|$(REPLACE_TANF)|g' \
+	      -e 's|@''REPLACE_TANHF''@|$(REPLACE_TANHF)|g' \
+	      -e 's|@''REPLACE_TOTALORDER''@|$(REPLACE_TOTALORDER)|g' \
+	      -e 's|@''REPLACE_TOTALORDERF''@|$(REPLACE_TOTALORDERF)|g' \
+	      -e 's|@''REPLACE_TOTALORDERL''@|$(REPLACE_TOTALORDERL)|g' \
+	      -e 's|@''REPLACE_TOTALORDERMAG''@|$(REPLACE_TOTALORDERMAG)|g' \
+	      -e 's|@''REPLACE_TOTALORDERMAGF''@|$(REPLACE_TOTALORDERMAGF)|g' \
+	      -e 's|@''REPLACE_TOTALORDERMAGL''@|$(REPLACE_TOTALORDERMAGL)|g' \
+	      -e 's|@''REPLACE_TRUNC''@|$(REPLACE_TRUNC)|g' \
+	      -e 's|@''REPLACE_TRUNCF''@|$(REPLACE_TRUNCF)|g' \
+	      -e 's|@''REPLACE_TRUNCL''@|$(REPLACE_TRUNCL)|g' \
+	      -e '/definitions of _GL_FUNCDECL_RPL/r $(CXXDEFS_H)' \
+	      -e '/definition of _GL_ARG_NONNULL/r $(ARG_NONNULL_H)' \
+	      -e '/definition of _GL_WARN_ON_USE/r $(WARN_ON_USE_H)' \
+	      < $@-t5 > $@-t6
+	$(AM_V_at)rm -f $@-t1 $@-t2 $@-t3 $@-t4 $@-t5
+	$(AM_V_at)mv $@-t6 $@
+MOSTLYCLEANFILES += math.h math.h-t1 math.h-t2 math.h-t3 math.h-t4 math.h-t5 math.h-t6
+
+EXTRA_DIST += math.in.h
+
+## end   gnulib module math-h
+
+## begin gnulib module math-h-tests
+
+TESTS += test-math-h
+check_PROGRAMS += test-math-h
+EXTRA_DIST += test-math-h.c macros.h
+
+## end   gnulib module math-h-tests
+
+## begin gnulib module mbrtoc32-regular-tests
+
+TESTS += test-mbrtoc32-regular
+check_PROGRAMS += test-mbrtoc32-regular
+test_mbrtoc32_regular_LDADD = $(LDADD) $(LIBUNISTRING) $(SETLOCALE_LIB) $(MBRTOWC_LIB) $(LIBC32CONV)
+EXTRA_DIST += test-mbrtoc32-regular.c macros.h
+
+## end   gnulib module mbrtoc32-regular-tests
+
+## begin gnulib module mbrtoc32-tests
 
 TESTS += \
-  test-mbrlen1.sh test-mbrlen2.sh test-mbrlen3.sh test-mbrlen4.sh \
-  test-mbrlen5.sh \
-  test-mbrlen-w32-1.sh test-mbrlen-w32-2.sh test-mbrlen-w32-3.sh \
-  test-mbrlen-w32-4.sh test-mbrlen-w32-5.sh test-mbrlen-w32-6.sh \
-  test-mbrlen-w32-7.sh
+  test-mbrtoc32-1.sh test-mbrtoc32-2.sh test-mbrtoc32-3.sh test-mbrtoc32-4.sh \
+  test-mbrtoc32-5.sh \
+  test-mbrtoc32-w32-2.sh test-mbrtoc32-w32-3.sh test-mbrtoc32-w32-4.sh \
+  test-mbrtoc32-w32-5.sh test-mbrtoc32-w32-6.sh test-mbrtoc32-w32-7.sh \
+  test-mbrtoc32-w32-8.sh
 TESTS_ENVIRONMENT += \
+  LOCALE_EN_UTF8='@LOCALE_EN_UTF8@' \
   LOCALE_FR='@LOCALE_FR@' \
   LOCALE_FR_UTF8='@LOCALE_FR_UTF8@' \
   LOCALE_JA='@LOCALE_JA@' \
   LOCALE_ZH_CN='@LOCALE_ZH_CN@'
-check_PROGRAMS += test-mbrlen test-mbrlen-w32
-test_mbrlen_LDADD = $(LDADD) $(SETLOCALE_LIB) $(MBRTOWC_LIB)
-EXTRA_DIST += test-mbrlen1.sh test-mbrlen2.sh test-mbrlen3.sh test-mbrlen4.sh test-mbrlen5.sh test-mbrlen.c test-mbrlen-w32-1.sh test-mbrlen-w32-2.sh test-mbrlen-w32-3.sh test-mbrlen-w32-4.sh test-mbrlen-w32-5.sh test-mbrlen-w32-6.sh test-mbrlen-w32-7.sh test-mbrlen-w32.c signature.h macros.h
+check_PROGRAMS += test-mbrtoc32 test-mbrtoc32-w32
+test_mbrtoc32_LDADD = $(LDADD) $(LIBUNISTRING) $(SETLOCALE_LIB) $(MBRTOWC_LIB) $(LIBC32CONV)
+EXTRA_DIST += test-mbrtoc32-1.sh test-mbrtoc32-2.sh test-mbrtoc32-3.sh test-mbrtoc32-4.sh test-mbrtoc32-5.sh test-mbrtoc32.c test-mbrtoc32-w32-2.sh test-mbrtoc32-w32-3.sh test-mbrtoc32-w32-4.sh test-mbrtoc32-w32-5.sh test-mbrtoc32-w32-6.sh test-mbrtoc32-w32-7.sh test-mbrtoc32-w32-8.sh test-mbrtoc32-w32.c signature.h macros.h
 
-## end   gnulib module mbrlen-tests
+## end   gnulib module mbrtoc32-tests
 
 ## begin gnulib module mbscasecmp-tests
 
 TESTS += test-mbscasecmp.sh
 TESTS_ENVIRONMENT += LOCALE_TR_UTF8='@LOCALE_TR_UTF8@'
 check_PROGRAMS += test-mbscasecmp
-test_mbscasecmp_LDADD = $(LDADD) $(LIBUNISTRING) $(SETLOCALE_LIB) $(MBRTOWC_LIB)
+test_mbscasecmp_LDADD = $(LDADD) $(LIBUNISTRING) $(SETLOCALE_LIB) $(MBRTOWC_LIB) $(LIBC32CONV)
 EXTRA_DIST += test-mbscasecmp.sh test-mbscasecmp.c macros.h
 
 ## end   gnulib module mbscasecmp-tests
@@ -1066,40 +1910,64 @@ EXTRA_DIST += test-mbscasecmp.sh test-mbscasecmp.c macros.h
 ## begin gnulib module mbsinit-tests
 
 TESTS += test-mbsinit.sh
-TESTS_ENVIRONMENT += LOCALE_FR_UTF8='@LOCALE_FR_UTF8@'
+TESTS_ENVIRONMENT += \
+  LOCALE_EN_UTF8='@LOCALE_EN_UTF8@' \
+  LOCALE_FR_UTF8='@LOCALE_FR_UTF8@'
 check_PROGRAMS += test-mbsinit
 test_mbsinit_LDADD = $(LDADD) $(SETLOCALE_LIB) $(MBRTOWC_LIB)
 EXTRA_DIST += test-mbsinit.sh test-mbsinit.c signature.h macros.h
 
 ## end   gnulib module mbsinit-tests
 
+## begin gnulib module mbsrtoc32s-tests
+
+TESTS += \
+  test-mbsrtoc32s-1.sh test-mbsrtoc32s-2.sh test-mbsrtoc32s-3.sh \
+  test-mbsrtoc32s-4.sh test-mbsrtoc32s-5.sh
+TESTS_ENVIRONMENT += \
+  LOCALE_EN_UTF8='@LOCALE_EN_UTF8@' \
+  LOCALE_FR='@LOCALE_FR@' \
+  LOCALE_FR_UTF8='@LOCALE_FR_UTF8@' \
+  LOCALE_JA='@LOCALE_JA@' \
+  LOCALE_ZH_CN='@LOCALE_ZH_CN@'
+check_PROGRAMS += test-mbsrtoc32s
+test_mbsrtoc32s_LDADD = $(LDADD) $(LIBUNISTRING) $(SETLOCALE_LIB) $(MBRTOWC_LIB) $(LIBC32CONV)
+EXTRA_DIST += test-mbsrtoc32s-1.sh test-mbsrtoc32s-2.sh test-mbsrtoc32s-3.sh test-mbsrtoc32s-4.sh test-mbsrtoc32s-5.sh test-mbsrtoc32s.c signature.h macros.h
+
+## end   gnulib module mbsrtoc32s-tests
+
 ## begin gnulib module mbsrtowcs-tests
 
 TESTS += \
-  test-mbsrtowcs1.sh test-mbsrtowcs2.sh test-mbsrtowcs3.sh test-mbsrtowcs4.sh \
-  test-mbsrtowcs5.sh
+  test-mbsrtowcs-1.sh test-mbsrtowcs-2.sh test-mbsrtowcs-3.sh \
+  test-mbsrtowcs-4.sh test-mbsrtowcs-5.sh
 TESTS_ENVIRONMENT += \
+  LOCALE_EN_UTF8='@LOCALE_EN_UTF8@' \
   LOCALE_FR='@LOCALE_FR@' \
   LOCALE_FR_UTF8='@LOCALE_FR_UTF8@' \
   LOCALE_JA='@LOCALE_JA@' \
   LOCALE_ZH_CN='@LOCALE_ZH_CN@'
 check_PROGRAMS += test-mbsrtowcs
 test_mbsrtowcs_LDADD = $(LDADD) $(SETLOCALE_LIB) $(MBRTOWC_LIB)
-EXTRA_DIST += test-mbsrtowcs1.sh test-mbsrtowcs2.sh test-mbsrtowcs3.sh test-mbsrtowcs4.sh test-mbsrtowcs5.sh test-mbsrtowcs.c signature.h macros.h
+EXTRA_DIST += test-mbsrtowcs-1.sh test-mbsrtowcs-2.sh test-mbsrtowcs-3.sh test-mbsrtowcs-4.sh test-mbsrtowcs-5.sh test-mbsrtowcs.c signature.h macros.h
 
 ## end   gnulib module mbsrtowcs-tests
 
-## begin gnulib module mbsstr-tests
+## begin gnulib module mcel-tests
 
-TESTS += test-mbsstr1 test-mbsstr2.sh test-mbsstr3.sh
-TESTS_ENVIRONMENT += LOCALE_FR_UTF8='@LOCALE_FR_UTF8@' LOCALE_ZH_CN='@LOCALE_ZH_CN@'
-check_PROGRAMS += test-mbsstr1 test-mbsstr2 test-mbsstr3
-test_mbsstr1_LDADD = $(LDADD) $(LIBUNISTRING) $(MBRTOWC_LIB)
-test_mbsstr2_LDADD = $(LDADD) $(LIBUNISTRING) $(SETLOCALE_LIB) $(MBRTOWC_LIB)
-test_mbsstr3_LDADD = $(LDADD) $(LIBUNISTRING) $(SETLOCALE_LIB) $(MBRTOWC_LIB)
-EXTRA_DIST += test-mbsstr1.c test-mbsstr2.sh test-mbsstr2.c test-mbsstr3.sh test-mbsstr3.c macros.h
+TESTS += \
+  test-mcel-1.sh test-mcel-2.sh test-mcel-3.sh test-mcel-4.sh test-mcel-5.sh
+TESTS_ENVIRONMENT += \
+  LOCALE_EN_UTF8='@LOCALE_EN_UTF8@' \
+  LOCALE_FR='@LOCALE_FR@' \
+  LOCALE_FR_UTF8='@LOCALE_FR_UTF8@' \
+  LOCALE_JA='@LOCALE_JA@' \
+  LOCALE_ZH_CN='@LOCALE_ZH_CN@'
+check_PROGRAMS += test-mcel
+test_mcel_LDADD = $(LDADD) $(LIBUNISTRING) $(SETLOCALE_LIB) $(MBRTOWC_LIB) $(LIBC32CONV)
+EXTRA_DIST += test-mcel-1.sh test-mcel-2.sh test-mcel-3.sh test-mcel-4.sh test-mcel-5.sh test-mcel.c macros.h
 
-## end   gnulib module mbsstr-tests
+## end   gnulib module mcel-tests
 
 ## begin gnulib module memchr-tests
 
@@ -1125,6 +1993,12 @@ EXTRA_DIST += test-memrchr.c zerosize-ptr.h signature.h macros.h
 
 ## end   gnulib module memrchr-tests
 
+## begin gnulib module nan
+
+libtests_a_SOURCES += nan.h
+
+## end   gnulib module nan
+
 ## begin gnulib module nanosleep
 
 if GL_COND_OBJ_NANOSLEEP
@@ -1142,7 +2016,7 @@ EXTRA_DIST += test-nanosleep.c signature.h macros.h
 
 ## end   gnulib module nanosleep-tests
 
-## begin gnulib module netinet_in
+## begin gnulib module netinet_in-h
 
 BUILT_SOURCES += $(NETINET_IN_H)
 
@@ -1169,15 +2043,15 @@ MOSTLYCLEANDIRS += netinet
 
 EXTRA_DIST += netinet_in.in.h
 
-## end   gnulib module netinet_in
+## end   gnulib module netinet_in-h
 
-## begin gnulib module netinet_in-tests
+## begin gnulib module netinet_in-h-tests
 
-TESTS += test-netinet_in
-check_PROGRAMS += test-netinet_in
-EXTRA_DIST += test-netinet_in.c
+TESTS += test-netinet_in-h
+check_PROGRAMS += test-netinet_in-h
+EXTRA_DIST += test-netinet_in-h.c
 
-## end   gnulib module netinet_in-tests
+## end   gnulib module netinet_in-h-tests
 
 ## begin gnulib module nl_langinfo-tests
 
@@ -1190,6 +2064,26 @@ test_nl_langinfo_mt_LDADD = $(LDADD) $(SETLOCALE_LIB) $(LIBMULTITHREAD) $(NANOSL
 EXTRA_DIST += test-nl_langinfo1.sh test-nl_langinfo2.sh test-nl_langinfo1.c test-nl_langinfo2.c test-nl_langinfo-mt.c signature.h macros.h
 
 ## end   gnulib module nl_langinfo-tests
+
+## begin gnulib module nullptr-tests
+
+TESTS += test-nullptr
+check_PROGRAMS += test-nullptr
+EXTRA_DIST += test-nullptr.c macros.h
+
+## end   gnulib module nullptr-tests
+
+## begin gnulib module once-tests
+
+TESTS += test-once1 test-once2
+check_PROGRAMS += test-once1 test-once2
+test_once1_SOURCES = test-once.c
+test_once1_LDADD = $(LDADD) @LIBTHREAD@
+test_once2_SOURCES = test-once.c
+test_once2_LDADD = $(LDADD) @LIBMULTITHREAD@
+EXTRA_DIST += test-once.c macros.h
+
+## end   gnulib module once-tests
 
 ## begin gnulib module open-tests
 
@@ -1266,148 +2160,22 @@ EXTRA_DIST += test-pselect.c test-select.h macros.h signature.h
 
 ## end   gnulib module pselect-tests
 
-## begin gnulib module pthread-h
+## begin gnulib module pthread-cond
 
-BUILT_SOURCES += pthread.h
+if GL_COND_OBJ_PTHREAD_COND
+libtests_a_SOURCES += pthread-cond.c
+endif
 
-# We need the following in order to create <pthread.h> when the system
-# doesn't have one that works with the given compiler.
-pthread.h: pthread.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(_NORETURN_H) $(ARG_NONNULL_H) $(WARN_ON_USE_H)
-	$(gl_V_at)$(SED_HEADER_STDOUT) \
-	      -e 's|@''GUARD_PREFIX''@|GL|g' \
-	      -e 's|@''HAVE_PTHREAD_H''@|$(HAVE_PTHREAD_H)|g' \
-	      -e 's|@''INCLUDE_NEXT''@|$(INCLUDE_NEXT)|g' \
-	      -e 's|@''PRAGMA_SYSTEM_HEADER''@|@PRAGMA_SYSTEM_HEADER@|g' \
-	      -e 's|@''PRAGMA_COLUMNS''@|@PRAGMA_COLUMNS@|g' \
-	      -e 's|@''NEXT_PTHREAD_H''@|$(NEXT_PTHREAD_H)|g' \
-	      -e 's/@''GNULIB_PTHREAD_THREAD''@/$(GL_GNULIB_PTHREAD_THREAD)/g' \
-	      -e 's/@''GNULIB_PTHREAD_ONCE''@/$(GL_GNULIB_PTHREAD_ONCE)/g' \
-	      -e 's/@''GNULIB_PTHREAD_MUTEX''@/$(GL_GNULIB_PTHREAD_MUTEX)/g' \
-	      -e 's/@''GNULIB_PTHREAD_RWLOCK''@/$(GL_GNULIB_PTHREAD_RWLOCK)/g' \
-	      -e 's/@''GNULIB_PTHREAD_COND''@/$(GL_GNULIB_PTHREAD_COND)/g' \
-	      -e 's/@''GNULIB_PTHREAD_TSS''@/$(GL_GNULIB_PTHREAD_TSS)/g' \
-	      -e 's/@''GNULIB_PTHREAD_SPIN''@/$(GL_GNULIB_PTHREAD_SPIN)/g' \
-	      -e 's/@''GNULIB_PTHREAD_MUTEX_TIMEDLOCK''@/$(GL_GNULIB_PTHREAD_MUTEX_TIMEDLOCK)/g' \
-	      -e 's|@''HAVE_PTHREAD_T''@|$(HAVE_PTHREAD_T)|g' \
-	      -e 's|@''HAVE_PTHREAD_SPINLOCK_T''@|$(HAVE_PTHREAD_SPINLOCK_T)|g' \
-	      -e 's|@''HAVE_PTHREAD_CREATE_DETACHED''@|$(HAVE_PTHREAD_CREATE_DETACHED)|g' \
-	      -e 's|@''HAVE_PTHREAD_MUTEX_RECURSIVE''@|$(HAVE_PTHREAD_MUTEX_RECURSIVE)|g' \
-	      -e 's|@''HAVE_PTHREAD_MUTEX_ROBUST''@|$(HAVE_PTHREAD_MUTEX_ROBUST)|g' \
-	      -e 's|@''HAVE_PTHREAD_PROCESS_SHARED''@|$(HAVE_PTHREAD_PROCESS_SHARED)|g' \
-	      -e 's|@''HAVE_PTHREAD_CREATE''@|$(HAVE_PTHREAD_CREATE)|g' \
-	      -e 's|@''HAVE_PTHREAD_ATTR_INIT''@|$(HAVE_PTHREAD_ATTR_INIT)|g' \
-	      -e 's|@''HAVE_PTHREAD_ATTR_GETDETACHSTATE''@|$(HAVE_PTHREAD_ATTR_GETDETACHSTATE)|g' \
-	      -e 's|@''HAVE_PTHREAD_ATTR_SETDETACHSTATE''@|$(HAVE_PTHREAD_ATTR_SETDETACHSTATE)|g' \
-	      -e 's|@''HAVE_PTHREAD_ATTR_DESTROY''@|$(HAVE_PTHREAD_ATTR_DESTROY)|g' \
-	      -e 's|@''HAVE_PTHREAD_SELF''@|$(HAVE_PTHREAD_SELF)|g' \
-	      -e 's|@''HAVE_PTHREAD_EQUAL''@|$(HAVE_PTHREAD_EQUAL)|g' \
-	      -e 's|@''HAVE_PTHREAD_DETACH''@|$(HAVE_PTHREAD_DETACH)|g' \
-	      -e 's|@''HAVE_PTHREAD_JOIN''@|$(HAVE_PTHREAD_JOIN)|g' \
-	      -e 's|@''HAVE_PTHREAD_EXIT''@|$(HAVE_PTHREAD_EXIT)|g' \
-	      -e 's|@''HAVE_PTHREAD_ONCE''@|$(HAVE_PTHREAD_ONCE)|g' \
-	      -e 's|@''HAVE_PTHREAD_MUTEX_INIT''@|$(HAVE_PTHREAD_MUTEX_INIT)|g' \
-	      -e 's|@''HAVE_PTHREAD_MUTEXATTR_INIT''@|$(HAVE_PTHREAD_MUTEXATTR_INIT)|g' \
-	      -e 's|@''HAVE_PTHREAD_MUTEXATTR_GETTYPE''@|$(HAVE_PTHREAD_MUTEXATTR_GETTYPE)|g' \
-	      -e 's|@''HAVE_PTHREAD_MUTEXATTR_SETTYPE''@|$(HAVE_PTHREAD_MUTEXATTR_SETTYPE)|g' \
-	      -e 's|@''HAVE_PTHREAD_MUTEXATTR_GETROBUST''@|$(HAVE_PTHREAD_MUTEXATTR_GETROBUST)|g' \
-	      -e 's|@''HAVE_PTHREAD_MUTEXATTR_SETROBUST''@|$(HAVE_PTHREAD_MUTEXATTR_SETROBUST)|g' \
-	      -e 's|@''HAVE_PTHREAD_MUTEXATTR_DESTROY''@|$(HAVE_PTHREAD_MUTEXATTR_DESTROY)|g' \
-	      -e 's|@''HAVE_PTHREAD_MUTEX_LOCK''@|$(HAVE_PTHREAD_MUTEX_LOCK)|g' \
-	      -e 's|@''HAVE_PTHREAD_MUTEX_TRYLOCK''@|$(HAVE_PTHREAD_MUTEX_TRYLOCK)|g' \
-	      -e 's|@''HAVE_PTHREAD_MUTEX_TIMEDLOCK''@|$(HAVE_PTHREAD_MUTEX_TIMEDLOCK)|g' \
-	      -e 's|@''HAVE_PTHREAD_MUTEX_UNLOCK''@|$(HAVE_PTHREAD_MUTEX_UNLOCK)|g' \
-	      -e 's|@''HAVE_PTHREAD_MUTEX_DESTROY''@|$(HAVE_PTHREAD_MUTEX_DESTROY)|g' \
-	      -e 's|@''HAVE_PTHREAD_RWLOCK_INIT''@|$(HAVE_PTHREAD_RWLOCK_INIT)|g' \
-	      -e 's|@''HAVE_PTHREAD_RWLOCKATTR_INIT''@|$(HAVE_PTHREAD_RWLOCKATTR_INIT)|g' \
-	      -e 's|@''HAVE_PTHREAD_RWLOCKATTR_DESTROY''@|$(HAVE_PTHREAD_RWLOCKATTR_DESTROY)|g' \
-	      -e 's|@''HAVE_PTHREAD_RWLOCK_RDLOCK''@|$(HAVE_PTHREAD_RWLOCK_RDLOCK)|g' \
-	      -e 's|@''HAVE_PTHREAD_RWLOCK_WRLOCK''@|$(HAVE_PTHREAD_RWLOCK_WRLOCK)|g' \
-	      -e 's|@''HAVE_PTHREAD_RWLOCK_TRYRDLOCK''@|$(HAVE_PTHREAD_RWLOCK_TRYRDLOCK)|g' \
-	      -e 's|@''HAVE_PTHREAD_RWLOCK_TRYWRLOCK''@|$(HAVE_PTHREAD_RWLOCK_TRYWRLOCK)|g' \
-	      -e 's|@''HAVE_PTHREAD_RWLOCK_TIMEDRDLOCK''@|$(HAVE_PTHREAD_RWLOCK_TIMEDRDLOCK)|g' \
-	      -e 's|@''HAVE_PTHREAD_RWLOCK_TIMEDWRLOCK''@|$(HAVE_PTHREAD_RWLOCK_TIMEDWRLOCK)|g' \
-	      -e 's|@''HAVE_PTHREAD_RWLOCK_UNLOCK''@|$(HAVE_PTHREAD_RWLOCK_UNLOCK)|g' \
-	      -e 's|@''HAVE_PTHREAD_RWLOCK_DESTROY''@|$(HAVE_PTHREAD_RWLOCK_DESTROY)|g' \
-	      -e 's|@''HAVE_PTHREAD_COND_INIT''@|$(HAVE_PTHREAD_COND_INIT)|g' \
-	      -e 's|@''HAVE_PTHREAD_CONDATTR_INIT''@|$(HAVE_PTHREAD_CONDATTR_INIT)|g' \
-	      -e 's|@''HAVE_PTHREAD_CONDATTR_DESTROY''@|$(HAVE_PTHREAD_CONDATTR_DESTROY)|g' \
-	      -e 's|@''HAVE_PTHREAD_COND_WAIT''@|$(HAVE_PTHREAD_COND_WAIT)|g' \
-	      -e 's|@''HAVE_PTHREAD_COND_TIMEDWAIT''@|$(HAVE_PTHREAD_COND_TIMEDWAIT)|g' \
-	      -e 's|@''HAVE_PTHREAD_COND_SIGNAL''@|$(HAVE_PTHREAD_COND_SIGNAL)|g' \
-	      -e 's|@''HAVE_PTHREAD_COND_BROADCAST''@|$(HAVE_PTHREAD_COND_BROADCAST)|g' \
-	      -e 's|@''HAVE_PTHREAD_COND_DESTROY''@|$(HAVE_PTHREAD_COND_DESTROY)|g' \
-	      -e 's|@''HAVE_PTHREAD_KEY_CREATE''@|$(HAVE_PTHREAD_KEY_CREATE)|g' \
-	      -e 's|@''HAVE_PTHREAD_SETSPECIFIC''@|$(HAVE_PTHREAD_SETSPECIFIC)|g' \
-	      -e 's|@''HAVE_PTHREAD_GETSPECIFIC''@|$(HAVE_PTHREAD_GETSPECIFIC)|g' \
-	      -e 's|@''HAVE_PTHREAD_KEY_DELETE''@|$(HAVE_PTHREAD_KEY_DELETE)|g' \
-	      -e 's|@''HAVE_PTHREAD_SPIN_INIT''@|$(HAVE_PTHREAD_SPIN_INIT)|g' \
-	      -e 's|@''HAVE_PTHREAD_SPIN_LOCK''@|$(HAVE_PTHREAD_SPIN_LOCK)|g' \
-	      -e 's|@''HAVE_PTHREAD_SPIN_TRYLOCK''@|$(HAVE_PTHREAD_SPIN_TRYLOCK)|g' \
-	      -e 's|@''HAVE_PTHREAD_SPIN_UNLOCK''@|$(HAVE_PTHREAD_SPIN_UNLOCK)|g' \
-	      -e 's|@''HAVE_PTHREAD_SPIN_DESTROY''@|$(HAVE_PTHREAD_SPIN_DESTROY)|g' \
-	      < $(srcdir)/pthread.in.h | \
-	  sed -e 's|@''REPLACE_PTHREAD_CREATE''@|$(REPLACE_PTHREAD_CREATE)|g' \
-	      -e 's|@''REPLACE_PTHREAD_ATTR_INIT''@|$(REPLACE_PTHREAD_ATTR_INIT)|g' \
-	      -e 's|@''REPLACE_PTHREAD_ATTR_GETDETACHSTATE''@|$(REPLACE_PTHREAD_ATTR_GETDETACHSTATE)|g' \
-	      -e 's|@''REPLACE_PTHREAD_ATTR_SETDETACHSTATE''@|$(REPLACE_PTHREAD_ATTR_SETDETACHSTATE)|g' \
-	      -e 's|@''REPLACE_PTHREAD_ATTR_DESTROY''@|$(REPLACE_PTHREAD_ATTR_DESTROY)|g' \
-	      -e 's|@''REPLACE_PTHREAD_SELF''@|$(REPLACE_PTHREAD_SELF)|g' \
-	      -e 's|@''REPLACE_PTHREAD_EQUAL''@|$(REPLACE_PTHREAD_EQUAL)|g' \
-	      -e 's|@''REPLACE_PTHREAD_DETACH''@|$(REPLACE_PTHREAD_DETACH)|g' \
-	      -e 's|@''REPLACE_PTHREAD_JOIN''@|$(REPLACE_PTHREAD_JOIN)|g' \
-	      -e 's|@''REPLACE_PTHREAD_EXIT''@|$(REPLACE_PTHREAD_EXIT)|g' \
-	      -e 's|@''REPLACE_PTHREAD_ONCE''@|$(REPLACE_PTHREAD_ONCE)|g' \
-	      -e 's|@''REPLACE_PTHREAD_MUTEX_INIT''@|$(REPLACE_PTHREAD_MUTEX_INIT)|g' \
-	      -e 's|@''REPLACE_PTHREAD_MUTEXATTR_INIT''@|$(REPLACE_PTHREAD_MUTEXATTR_INIT)|g' \
-	      -e 's|@''REPLACE_PTHREAD_MUTEXATTR_GETTYPE''@|$(REPLACE_PTHREAD_MUTEXATTR_GETTYPE)|g' \
-	      -e 's|@''REPLACE_PTHREAD_MUTEXATTR_SETTYPE''@|$(REPLACE_PTHREAD_MUTEXATTR_SETTYPE)|g' \
-	      -e 's|@''REPLACE_PTHREAD_MUTEXATTR_GETROBUST''@|$(REPLACE_PTHREAD_MUTEXATTR_GETROBUST)|g' \
-	      -e 's|@''REPLACE_PTHREAD_MUTEXATTR_SETROBUST''@|$(REPLACE_PTHREAD_MUTEXATTR_SETROBUST)|g' \
-	      -e 's|@''REPLACE_PTHREAD_MUTEXATTR_DESTROY''@|$(REPLACE_PTHREAD_MUTEXATTR_DESTROY)|g' \
-	      -e 's|@''REPLACE_PTHREAD_MUTEX_LOCK''@|$(REPLACE_PTHREAD_MUTEX_LOCK)|g' \
-	      -e 's|@''REPLACE_PTHREAD_MUTEX_TRYLOCK''@|$(REPLACE_PTHREAD_MUTEX_TRYLOCK)|g' \
-	      -e 's|@''REPLACE_PTHREAD_MUTEX_TIMEDLOCK''@|$(REPLACE_PTHREAD_MUTEX_TIMEDLOCK)|g' \
-	      -e 's|@''REPLACE_PTHREAD_MUTEX_UNLOCK''@|$(REPLACE_PTHREAD_MUTEX_UNLOCK)|g' \
-	      -e 's|@''REPLACE_PTHREAD_MUTEX_DESTROY''@|$(REPLACE_PTHREAD_MUTEX_DESTROY)|g' \
-	      -e 's|@''REPLACE_PTHREAD_RWLOCK_INIT''@|$(REPLACE_PTHREAD_RWLOCK_INIT)|g' \
-	      -e 's|@''REPLACE_PTHREAD_RWLOCKATTR_INIT''@|$(REPLACE_PTHREAD_RWLOCKATTR_INIT)|g' \
-	      -e 's|@''REPLACE_PTHREAD_RWLOCKATTR_DESTROY''@|$(REPLACE_PTHREAD_RWLOCKATTR_DESTROY)|g' \
-	      -e 's|@''REPLACE_PTHREAD_RWLOCK_RDLOCK''@|$(REPLACE_PTHREAD_RWLOCK_RDLOCK)|g' \
-	      -e 's|@''REPLACE_PTHREAD_RWLOCK_WRLOCK''@|$(REPLACE_PTHREAD_RWLOCK_WRLOCK)|g' \
-	      -e 's|@''REPLACE_PTHREAD_RWLOCK_TRYRDLOCK''@|$(REPLACE_PTHREAD_RWLOCK_TRYRDLOCK)|g' \
-	      -e 's|@''REPLACE_PTHREAD_RWLOCK_TRYWRLOCK''@|$(REPLACE_PTHREAD_RWLOCK_TRYWRLOCK)|g' \
-	      -e 's|@''REPLACE_PTHREAD_RWLOCK_TIMEDRDLOCK''@|$(REPLACE_PTHREAD_RWLOCK_TIMEDRDLOCK)|g' \
-	      -e 's|@''REPLACE_PTHREAD_RWLOCK_TIMEDWRLOCK''@|$(REPLACE_PTHREAD_RWLOCK_TIMEDWRLOCK)|g' \
-	      -e 's|@''REPLACE_PTHREAD_RWLOCK_UNLOCK''@|$(REPLACE_PTHREAD_RWLOCK_UNLOCK)|g' \
-	      -e 's|@''REPLACE_PTHREAD_RWLOCK_DESTROY''@|$(REPLACE_PTHREAD_RWLOCK_DESTROY)|g' \
-	      -e 's|@''REPLACE_PTHREAD_COND_INIT''@|$(REPLACE_PTHREAD_COND_INIT)|g' \
-	      -e 's|@''REPLACE_PTHREAD_CONDATTR_INIT''@|$(REPLACE_PTHREAD_CONDATTR_INIT)|g' \
-	      -e 's|@''REPLACE_PTHREAD_CONDATTR_DESTROY''@|$(REPLACE_PTHREAD_CONDATTR_DESTROY)|g' \
-	      -e 's|@''REPLACE_PTHREAD_COND_WAIT''@|$(REPLACE_PTHREAD_COND_WAIT)|g' \
-	      -e 's|@''REPLACE_PTHREAD_COND_TIMEDWAIT''@|$(REPLACE_PTHREAD_COND_TIMEDWAIT)|g' \
-	      -e 's|@''REPLACE_PTHREAD_COND_SIGNAL''@|$(REPLACE_PTHREAD_COND_SIGNAL)|g' \
-	      -e 's|@''REPLACE_PTHREAD_COND_BROADCAST''@|$(REPLACE_PTHREAD_COND_BROADCAST)|g' \
-	      -e 's|@''REPLACE_PTHREAD_COND_DESTROY''@|$(REPLACE_PTHREAD_COND_DESTROY)|g' \
-	      -e 's|@''REPLACE_PTHREAD_KEY_CREATE''@|$(REPLACE_PTHREAD_KEY_CREATE)|g' \
-	      -e 's|@''REPLACE_PTHREAD_SETSPECIFIC''@|$(REPLACE_PTHREAD_SETSPECIFIC)|g' \
-	      -e 's|@''REPLACE_PTHREAD_GETSPECIFIC''@|$(REPLACE_PTHREAD_GETSPECIFIC)|g' \
-	      -e 's|@''REPLACE_PTHREAD_KEY_DELETE''@|$(REPLACE_PTHREAD_KEY_DELETE)|g' \
-	      -e 's|@''REPLACE_PTHREAD_SPIN_INIT''@|$(REPLACE_PTHREAD_SPIN_INIT)|g' \
-	      -e 's|@''REPLACE_PTHREAD_SPIN_LOCK''@|$(REPLACE_PTHREAD_SPIN_LOCK)|g' \
-	      -e 's|@''REPLACE_PTHREAD_SPIN_TRYLOCK''@|$(REPLACE_PTHREAD_SPIN_TRYLOCK)|g' \
-	      -e 's|@''REPLACE_PTHREAD_SPIN_UNLOCK''@|$(REPLACE_PTHREAD_SPIN_UNLOCK)|g' \
-	      -e 's|@''REPLACE_PTHREAD_SPIN_DESTROY''@|$(REPLACE_PTHREAD_SPIN_DESTROY)|g' \
-	      -e '/definitions of _GL_FUNCDECL_RPL/r $(CXXDEFS_H)' \
-	      -e '/definition of _Noreturn/r $(_NORETURN_H)' \
-	      -e '/definition of _GL_ARG_NONNULL/r $(ARG_NONNULL_H)' \
-	      -e '/definition of _GL_WARN_ON_USE/r $(WARN_ON_USE_H)' \
-	      > $@-t
-	$(AM_V_at)mv $@-t $@
-MOSTLYCLEANFILES += pthread.h pthread.h-t
+## end   gnulib module pthread-cond
 
-EXTRA_DIST += pthread.in.h
+## begin gnulib module pthread-cond-tests
 
-## end   gnulib module pthread-h
+TESTS += test-pthread-cond
+check_PROGRAMS += test-pthread-cond
+test_pthread_cond_LDADD = $(LDADD) @LIBPMULTITHREAD@ @SCHED_YIELD_LIB@
+EXTRA_DIST += test-pthread-cond.c virtualbox.h macros.h
+
+## end   gnulib module pthread-cond-tests
 
 ## begin gnulib module pthread-h-tests
 
@@ -1416,6 +2184,53 @@ check_PROGRAMS += test-pthread
 EXTRA_DIST += test-pthread.c
 
 ## end   gnulib module pthread-h-tests
+
+## begin gnulib module pthread-mutex
+
+if GL_COND_OBJ_PTHREAD_MUTEX
+libtests_a_SOURCES += pthread-mutex.c
+endif
+
+## end   gnulib module pthread-mutex
+
+## begin gnulib module pthread-mutex-tests
+
+TESTS += test-pthread-mutex test-pthread-mutex-type
+check_PROGRAMS += test-pthread-mutex test-pthread-mutex-type
+test_pthread_mutex_LDADD = $(LDADD) @LIBPMULTITHREAD@ @SCHED_YIELD_LIB@ @LIB_SEMAPHORE@
+# If we were to link test-pthread-mutex-type only with @LIBPTHREAD@ instead of
+# @LIBPMULTITHREAD@, this test would fail on FreeBSD and NetBSD.
+test_pthread_mutex_type_LDADD = $(LDADD) @LIBPMULTITHREAD@
+EXTRA_DIST += test-pthread-mutex.c test-pthread-mutex-type.c atomic-int-posix.h macros.h
+
+## end   gnulib module pthread-mutex-tests
+
+## begin gnulib module pthread-once-tests
+
+TESTS += test-pthread-once1 test-pthread-once2
+check_PROGRAMS += test-pthread-once1 test-pthread-once2
+test_pthread_once1_LDADD = $(LDADD) @LIBPMULTITHREAD@
+test_pthread_once2_LDADD = $(LDADD) @LIBPMULTITHREAD@ @SCHED_YIELD_LIB@
+EXTRA_DIST += test-pthread-once1.c test-pthread-once2.c macros.h
+
+## end   gnulib module pthread-once-tests
+
+## begin gnulib module pthread-rwlock
+
+if GL_COND_OBJ_PTHREAD_RWLOCK
+libtests_a_SOURCES += pthread-rwlock.c
+endif
+
+## end   gnulib module pthread-rwlock
+
+## begin gnulib module pthread-rwlock-tests
+
+TESTS += test-pthread-rwlock
+check_PROGRAMS += test-pthread-rwlock
+test_pthread_rwlock_LDADD = $(LDADD) @LIBPMULTITHREAD@ @SCHED_YIELD_LIB@ @LIB_SEMAPHORE@
+EXTRA_DIST += test-pthread-rwlock.c atomic-int-posix.h macros.h
+
+## end   gnulib module pthread-rwlock-tests
 
 ## begin gnulib module pthread-thread
 
@@ -1434,6 +2249,14 @@ EXTRA_DIST += test-pthread-thread.c macros.h
 
 ## end   gnulib module pthread-thread-tests
 
+## begin gnulib module pthread_mutex_timedlock
+
+if GL_COND_OBJ_PTHREAD_MUTEX_TIMEDLOCK
+libtests_a_SOURCES += pthread_mutex_timedlock.c
+endif
+
+## end   gnulib module pthread_mutex_timedlock
+
 ## begin gnulib module pthread_sigmask
 
 if GL_COND_OBJ_PTHREAD_SIGMASK
@@ -1444,27 +2267,39 @@ endif
 
 ## begin gnulib module pthread_sigmask-tests
 
-TESTS += test-pthread_sigmask1 test-pthread_sigmask2
+# Work around https://gnats.netbsd.org/cgi-bin/query-pr-single.pl?number=57214
+if !OS_IS_NETBSD
+TESTS += test-pthread_sigmask1
+endif
+TESTS += test-pthread_sigmask2
 check_PROGRAMS += test-pthread_sigmask1 test-pthread_sigmask2
 test_pthread_sigmask1_LDADD = $(LDADD) @PTHREAD_SIGMASK_LIB@
 test_pthread_sigmask2_LDADD = $(LDADD) @PTHREAD_SIGMASK_LIB@ @LIBMULTITHREAD@
-EXTRA_DIST += test-pthread_sigmask1.c test-pthread_sigmask2.c signature.h macros.h
+EXTRA_DIST += test-pthread_sigmask1.c test-pthread_sigmask2.c signature.h virtualbox.h macros.h
 
 ## end   gnulib module pthread_sigmask-tests
 
-## begin gnulib module putenv
+## begin gnulib module putenv-gnu
 
 if GL_COND_OBJ_PUTENV
 libtests_a_SOURCES += putenv.c
 endif
 
-## end   gnulib module putenv
+## end   gnulib module putenv-gnu
+
+## begin gnulib module putenv-gnu-tests
+
+TESTS += test-putenv
+check_PROGRAMS += test-putenv
+EXTRA_DIST += test-putenv.c macros.h signature.h
+
+## end   gnulib module putenv-gnu-tests
 
 ## begin gnulib module quotearg-simple-tests
 
 TESTS += test-quotearg-simple
 check_PROGRAMS += test-quotearg-simple
-test_quotearg_simple_LDADD = $(LDADD) @LIBINTL@ $(MBRTOWC_LIB)
+test_quotearg_simple_LDADD = $(LDADD) $(LIBUNISTRING) @LIBINTL@ $(MBRTOWC_LIB) $(LIBC32CONV)
 EXTRA_DIST += test-quotearg-simple.c test-quotearg.h macros.h zerosize-ptr.h
 
 ## end   gnulib module quotearg-simple-tests
@@ -1476,6 +2311,39 @@ check_PROGRAMS += test-raise
 EXTRA_DIST += test-raise.c signature.h macros.h
 
 ## end   gnulib module raise-tests
+
+## begin gnulib module random
+
+if GL_COND_OBJ_RANDOM
+libtests_a_SOURCES += random.c
+endif
+
+## end   gnulib module random
+
+## begin gnulib module random-tests
+
+TESTS += test-random test-random-mt
+check_PROGRAMS += test-random test-random-mt
+test_random_mt_LDADD = $(LDADD) $(LIBINTL) $(LIBMULTITHREAD) $(YIELD_LIB)
+EXTRA_DIST += test-random.c test-random-mt.c signature.h macros.h
+
+## end   gnulib module random-tests
+
+## begin gnulib module random_r
+
+if GL_COND_OBJ_RANDOM_R
+libtests_a_SOURCES += random_r.c
+endif
+
+## end   gnulib module random_r
+
+## begin gnulib module random_r-tests
+
+TESTS += test-random_r
+check_PROGRAMS += test-random_r
+EXTRA_DIST += test-random_r.c signature.h macros.h
+
+## end   gnulib module random_r-tests
 
 ## begin gnulib module rawmemchr-tests
 
@@ -1493,13 +2361,13 @@ EXTRA_DIST += test-read.c signature.h macros.h
 
 ## end   gnulib module read-tests
 
-## begin gnulib module realloc-gnu-tests
+## begin gnulib module realloc-posix-tests
 
-TESTS += test-realloc-gnu
-check_PROGRAMS += test-realloc-gnu
-EXTRA_DIST += test-realloc-gnu.c macros.h
+TESTS += test-realloc-posix
+check_PROGRAMS += test-realloc-posix
+EXTRA_DIST += test-realloc-posix.c macros.h
 
-## end   gnulib module realloc-gnu-tests
+## end   gnulib module realloc-posix-tests
 
 ## begin gnulib module reallocarray-tests
 
@@ -1518,42 +2386,21 @@ EXTRA_DIST += test-regex.c macros.h
 
 ## end   gnulib module regex-tests
 
-## begin gnulib module sched
+## begin gnulib module sched-h-tests
 
-BUILT_SOURCES += sched.h
+TESTS += test-sched-h
+check_PROGRAMS += test-sched-h
+EXTRA_DIST += test-sched-h.c
 
-# We need the following in order to create a replacement for <sched.h> when
-# the system doesn't have one.
-sched.h: sched.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(WARN_ON_USE_H)
-	$(gl_V_at)$(SED_HEADER_STDOUT) \
-	      -e 's|@''GUARD_PREFIX''@|GL|g' \
-	      -e 's|@''HAVE_SCHED_H''@|$(HAVE_SCHED_H)|g' \
-	      -e 's|@''HAVE_SYS_CDEFS_H''@|$(HAVE_SYS_CDEFS_H)|g' \
-	      -e 's|@''INCLUDE_NEXT''@|$(INCLUDE_NEXT)|g' \
-	      -e 's|@''PRAGMA_SYSTEM_HEADER''@|@PRAGMA_SYSTEM_HEADER@|g' \
-	      -e 's|@''PRAGMA_COLUMNS''@|@PRAGMA_COLUMNS@|g' \
-	      -e 's|@''NEXT_SCHED_H''@|$(NEXT_SCHED_H)|g' \
-	      -e 's|@''HAVE_STRUCT_SCHED_PARAM''@|$(HAVE_STRUCT_SCHED_PARAM)|g' \
-	      -e 's/@''GNULIB_SCHED_YIELD''@/$(GL_GNULIB_SCHED_YIELD)/g' \
-	      -e 's|@''HAVE_SCHED_YIELD''@|$(HAVE_SCHED_YIELD)|g' \
-	      -e 's|@''REPLACE_SCHED_YIELD''@|$(REPLACE_SCHED_YIELD)|g' \
-	      -e '/definitions of _GL_FUNCDECL_RPL/r $(CXXDEFS_H)' \
-	      -e '/definition of _GL_WARN_ON_USE/r $(WARN_ON_USE_H)' \
-	      $(srcdir)/sched.in.h > $@-t
-	$(AM_V_at)mv $@-t $@
-MOSTLYCLEANFILES += sched.h sched.h-t
+## end   gnulib module sched-h-tests
 
-EXTRA_DIST += sched.in.h
+## begin gnulib module sched_yield
 
-## end   gnulib module sched
+if GL_COND_OBJ_SCHED_YIELD
+libtests_a_SOURCES += sched_yield.c
+endif
 
-## begin gnulib module sched-tests
-
-TESTS += test-sched
-check_PROGRAMS += test-sched
-EXTRA_DIST += test-sched.c
-
-## end   gnulib module sched-tests
+## end   gnulib module sched_yield
 
 ## begin gnulib module select
 
@@ -1599,6 +2446,16 @@ endif
 
 ## end   gnulib module setlocale
 
+## begin gnulib module setlocale-fixes
+
+if GL_COND_OBJ_SETLOCALE_FIXES
+libtests_a_SOURCES += setlocale-fixes.c
+endif
+
+EXTRA_DIST += setlocale-fixes.h
+
+## end   gnulib module setlocale-fixes
+
 ## begin gnulib module setlocale-null-tests
 
 TESTS += \
@@ -1616,18 +2473,36 @@ EXTRA_DIST += test-setlocale_null.c test-setlocale_null-mt-one.c test-setlocale_
 
 ## end   gnulib module setlocale-null-tests
 
+## begin gnulib module setlocale-null-unlocked-tests
+
+TESTS += test-setlocale_null-unlocked
+check_PROGRAMS += test-setlocale_null-unlocked
+EXTRA_DIST += test-setlocale_null-unlocked.c
+
+## end   gnulib module setlocale-null-unlocked-tests
+
 ## begin gnulib module setlocale-tests
 
-TESTS += test-setlocale1.sh test-setlocale2.sh
+TESTS += test-setlocale1.sh test-setlocale2.sh test-setlocale-w32
 TESTS_ENVIRONMENT += \
   LOCALE_FR='@LOCALE_FR@' \
   LOCALE_FR_UTF8='@LOCALE_FR_UTF8@' \
   LOCALE_JA='@LOCALE_JA@' \
   LOCALE_ZH_CN='@LOCALE_ZH_CN@'
-check_PROGRAMS += test-setlocale1 test-setlocale2
+check_PROGRAMS += test-setlocale1 test-setlocale2 test-setlocale-w32
 test_setlocale1_LDADD = $(LDADD) @SETLOCALE_LIB@
 test_setlocale2_LDADD = $(LDADD) @SETLOCALE_LIB@
-EXTRA_DIST += test-setlocale1.sh test-setlocale1.c test-setlocale2.sh test-setlocale2.c signature.h macros.h
+test_setlocale_w32_LDADD = $(LDADD) @SETLOCALE_LIB@
+
+if OS_IS_NATIVE_WINDOWS
+TESTS += test-setlocale-w32utf8.sh
+noinst_PROGRAMS += test-setlocale-w32utf8
+test_setlocale_w32utf8_LDADD = $(LDADD) test-setlocale-windows-utf8.res $(SETLOCALE_LIB)
+test-setlocale-windows-utf8.res : $(srcdir)/windows-utf8.rc
+	$(WINDRES) -i $(srcdir)/windows-utf8.rc -o test-setlocale-windows-utf8.res --output-format=coff
+MOSTLYCLEANFILES += test-setlocale-windows-utf8.res
+endif
+EXTRA_DIST += test-setlocale1.sh test-setlocale1.c test-setlocale2.sh test-setlocale2.c test-setlocale-w32.c test-setlocale-w32utf8.sh test-setlocale-w32utf8.c windows-utf8.rc windows-utf8.manifest signature.h macros.h
 
 ## end   gnulib module setlocale-tests
 
@@ -1658,6 +2533,37 @@ EXTRA_DIST += test-signal-h.c
 
 ## end   gnulib module signal-h-tests
 
+## begin gnulib module signbit
+
+if GL_COND_OBJ_SIGNBIT3
+libtests_a_SOURCES += signbitf.c signbitd.c signbitl.c
+endif
+
+EXTRA_DIST += float+.h
+
+## end   gnulib module signbit
+
+## begin gnulib module signbit-tests
+
+TESTS += test-signbit
+check_PROGRAMS += test-signbit
+
+EXTRA_DIST += test-signbit.c minus-zero.h infinity.h macros.h
+
+## end   gnulib module signbit-tests
+
+## begin gnulib module signed-nan
+
+libtests_a_SOURCES += signed-nan.h
+
+## end   gnulib module signed-nan
+
+## begin gnulib module signed-snan
+
+libtests_a_SOURCES += signed-snan.h
+
+## end   gnulib module signed-snan
+
 ## begin gnulib module sigprocmask
 
 if GL_COND_OBJ_SIGPROCMASK
@@ -1668,9 +2574,12 @@ endif
 
 ## begin gnulib module sigprocmask-tests
 
+# Work around https://gnats.netbsd.org/cgi-bin/query-pr-single.pl?number=57213
+if !OS_IS_NETBSD
 TESTS += test-sigprocmask
+endif
 check_PROGRAMS += test-sigprocmask
-EXTRA_DIST += test-sigprocmask.c signature.h macros.h
+EXTRA_DIST += test-sigprocmask.c signature.h virtualbox.h macros.h
 
 ## end   gnulib module sigprocmask-tests
 
@@ -1715,6 +2624,12 @@ check_PROGRAMS += test-sleep
 EXTRA_DIST += test-sleep.c signature.h macros.h
 
 ## end   gnulib module sleep-tests
+
+## begin gnulib module snan
+
+libtests_a_SOURCES += snan.h
+
+## end   gnulib module snan
 
 ## begin gnulib module snippet/_Noreturn
 
@@ -1822,58 +2737,72 @@ EXTRA_DIST += test-stat.h test-stat.c signature.h macros.h
 
 TESTS += test-stat-time
 check_PROGRAMS += test-stat-time
-test_stat_time_LDADD = $(LDADD) $(NANOSLEEP_LIB)
+test_stat_time_LDADD = $(LDADD) $(NANOSLEEP_LIB) @LIBINTL@
 EXTRA_DIST += test-stat-time.c macros.h nap.h
 
 ## end   gnulib module stat-time-tests
 
-## begin gnulib module stdbool-tests
+## begin gnulib module stdckdint-h-tests
 
-TESTS += test-stdbool
-check_PROGRAMS += test-stdbool
-EXTRA_DIST += test-stdbool.c
+TESTS += test-stdckdint-h
+check_PROGRAMS += test-stdckdint-h
+EXTRA_DIST += macros.h test-intprops.c test-stdckdint-h.c
 
-## end   gnulib module stdbool-tests
+## end   gnulib module stdckdint-h-tests
 
-## begin gnulib module stdckdint-tests
+## begin gnulib module stddef-h-tests
 
-TESTS += test-stdckdint
-check_PROGRAMS += test-stdckdint
-EXTRA_DIST += macros.h test-intprops.c test-stdckdint.c
+TESTS += test-stddef-h
+check_PROGRAMS += test-stddef-h
+EXTRA_DIST += test-stddef-h.c
 
-## end   gnulib module stdckdint-tests
+## end   gnulib module stddef-h-tests
 
-## begin gnulib module stddef-tests
+## begin gnulib module stdint-h-tests
 
-TESTS += test-stddef
-check_PROGRAMS += test-stddef
-EXTRA_DIST += test-stddef.c
+TESTS += test-stdint-h
+check_PROGRAMS += test-stdint-h
+EXTRA_DIST += test-stdint-h.c
 
-## end   gnulib module stddef-tests
+## end   gnulib module stdint-h-tests
 
-## begin gnulib module stdint-tests
+## begin gnulib module stdio-h-tests
 
-TESTS += test-stdint
-check_PROGRAMS += test-stdint
-EXTRA_DIST += test-stdint.c
+TESTS += test-stdio-h
+check_PROGRAMS += test-stdio-h
+EXTRA_DIST += test-stdio-h.c macros.h
 
-## end   gnulib module stdint-tests
+## end   gnulib module stdio-h-tests
 
-## begin gnulib module stdio-tests
+## begin gnulib module stdlib-h-tests
 
-TESTS += test-stdio
-check_PROGRAMS += test-stdio
-EXTRA_DIST += test-stdio.c nan.h macros.h
+TESTS += test-stdlib-h
+check_PROGRAMS += test-stdlib-h
+EXTRA_DIST += test-stdlib-h.c test-sys_wait-h.h
 
-## end   gnulib module stdio-tests
+## end   gnulib module stdlib-h-tests
 
-## begin gnulib module stdlib-tests
+## begin gnulib module str_endswith-tests
 
-TESTS += test-stdlib
-check_PROGRAMS += test-stdlib
-EXTRA_DIST += test-stdlib.c test-sys_wait.h
+TESTS += test-str_endswith
+check_PROGRAMS += test-str_endswith
+EXTRA_DIST += test-str_endswith.c macros.h
 
-## end   gnulib module stdlib-tests
+## end   gnulib module str_endswith-tests
+
+## begin gnulib module str_startswith
+
+libtests_a_SOURCES += str_startswith.c
+
+## end   gnulib module str_startswith
+
+## begin gnulib module str_startswith-tests
+
+TESTS += test-str_startswith
+check_PROGRAMS += test-str_startswith
+EXTRA_DIST += test-str_startswith.c macros.h
+
+## end   gnulib module str_startswith-tests
 
 ## begin gnulib module strerror-tests
 
@@ -1900,23 +2829,13 @@ EXTRA_DIST += test-strerror_r.c signature.h macros.h
 
 ## end   gnulib module strerror_r-posix-tests
 
-## begin gnulib module striconv-tests
+## begin gnulib module string-h-tests
 
-TESTS += test-striconv
-check_PROGRAMS += test-striconv
-test_striconv_LDADD = $(LDADD) @LIBICONV@
+TESTS += test-string-h
+check_PROGRAMS += test-string-h
+EXTRA_DIST += test-string-h.c
 
-EXTRA_DIST += test-striconv.c macros.h
-
-## end   gnulib module striconv-tests
-
-## begin gnulib module string-tests
-
-TESTS += test-string
-check_PROGRAMS += test-string
-EXTRA_DIST += test-string.c
-
-## end   gnulib module string-tests
+## end   gnulib module string-h-tests
 
 ## begin gnulib module strnlen-tests
 
@@ -1950,22 +2869,6 @@ EXTRA_DIST += test-strtoll.c signature.h macros.h
 
 ## end   gnulib module strtoll-tests
 
-## begin gnulib module strtoull-tests
-
-TESTS += test-strtoull
-check_PROGRAMS += test-strtoull
-EXTRA_DIST += test-strtoull.c signature.h macros.h
-
-## end   gnulib module strtoull-tests
-
-## begin gnulib module strtoumax-tests
-
-TESTS += test-strtoumax
-check_PROGRAMS += test-strtoumax
-EXTRA_DIST += test-strtoumax.c signature.h macros.h
-
-## end   gnulib module strtoumax-tests
-
 ## begin gnulib module symlink
 
 if GL_COND_OBJ_SYMLINK
@@ -1982,7 +2885,7 @@ EXTRA_DIST += test-symlink.h test-symlink.c signature.h macros.h
 
 ## end   gnulib module symlink-tests
 
-## begin gnulib module sys_ioctl
+## begin gnulib module sys_ioctl-h
 
 BUILT_SOURCES += sys/ioctl.h
 
@@ -2010,17 +2913,17 @@ MOSTLYCLEANDIRS += sys
 
 EXTRA_DIST += sys_ioctl.in.h
 
-## end   gnulib module sys_ioctl
+## end   gnulib module sys_ioctl-h
 
-## begin gnulib module sys_ioctl-tests
+## begin gnulib module sys_ioctl-h-tests
 
-TESTS += test-sys_ioctl
-check_PROGRAMS += test-sys_ioctl
-EXTRA_DIST += test-sys_ioctl.c
+TESTS += test-sys_ioctl-h
+check_PROGRAMS += test-sys_ioctl-h
+EXTRA_DIST += test-sys_ioctl-h.c
 
-## end   gnulib module sys_ioctl-tests
+## end   gnulib module sys_ioctl-h-tests
 
-## begin gnulib module sys_select
+## begin gnulib module sys_select-h
 
 BUILT_SOURCES += sys/select.h
 
@@ -2050,17 +2953,17 @@ MOSTLYCLEANDIRS += sys
 
 EXTRA_DIST += sys_select.in.h
 
-## end   gnulib module sys_select
+## end   gnulib module sys_select-h
 
-## begin gnulib module sys_select-tests
+## begin gnulib module sys_select-h-tests
 
-TESTS += test-sys_select
-check_PROGRAMS += test-sys_select
-EXTRA_DIST += test-sys_select.c signature.h
+TESTS += test-sys_select-h
+check_PROGRAMS += test-sys_select-h
+EXTRA_DIST += test-sys_select-h.c signature.h
 
-## end   gnulib module sys_select-tests
+## end   gnulib module sys_select-h-tests
 
-## begin gnulib module sys_socket
+## begin gnulib module sys_socket-h
 
 BUILT_SOURCES += sys/socket.h
 libtests_a_SOURCES += sys_socket.c
@@ -2108,25 +3011,25 @@ MOSTLYCLEANDIRS += sys
 
 EXTRA_DIST += sys_socket.in.h
 
-## end   gnulib module sys_socket
+## end   gnulib module sys_socket-h
 
-## begin gnulib module sys_socket-tests
+## begin gnulib module sys_socket-h-tests
 
-TESTS += test-sys_socket
-check_PROGRAMS += test-sys_socket
-EXTRA_DIST += test-sys_socket.c
+TESTS += test-sys_socket-h
+check_PROGRAMS += test-sys_socket-h
+EXTRA_DIST += test-sys_socket-h.c macros.h
 
-## end   gnulib module sys_socket-tests
+## end   gnulib module sys_socket-h-tests
 
-## begin gnulib module sys_stat-tests
+## begin gnulib module sys_stat-h-tests
 
-TESTS += test-sys_stat
-check_PROGRAMS += test-sys_stat
-EXTRA_DIST += test-sys_stat.c
+TESTS += test-sys_stat-h
+check_PROGRAMS += test-sys_stat-h
+EXTRA_DIST += test-sys_stat-h.c
 
-## end   gnulib module sys_stat-tests
+## end   gnulib module sys_stat-h-tests
 
-## begin gnulib module sys_time
+## begin gnulib module sys_time-h
 
 BUILT_SOURCES += sys/time.h
 
@@ -2153,28 +3056,29 @@ sys/time.h: sys_time.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(ARG_NONNU
 	      $(srcdir)/sys_time.in.h > $@-t
 	$(AM_V_at)mv $@-t $@
 MOSTLYCLEANFILES += sys/time.h sys/time.h-t
+MOSTLYCLEANDIRS += sys
 
 EXTRA_DIST += sys_time.in.h
 
-## end   gnulib module sys_time
+## end   gnulib module sys_time-h
 
-## begin gnulib module sys_time-tests
+## begin gnulib module sys_time-h-tests
 
-TESTS += test-sys_time
-check_PROGRAMS += test-sys_time
-EXTRA_DIST += test-sys_time.c
+TESTS += test-sys_time-h
+check_PROGRAMS += test-sys_time-h
+EXTRA_DIST += test-sys_time-h.c
 
-## end   gnulib module sys_time-tests
+## end   gnulib module sys_time-h-tests
 
-## begin gnulib module sys_types-tests
+## begin gnulib module sys_types-h-tests
 
-TESTS += test-sys_types
-check_PROGRAMS += test-sys_types
-EXTRA_DIST += test-sys_types.c
+TESTS += test-sys_types-h
+check_PROGRAMS += test-sys_types-h
+EXTRA_DIST += test-sys_types-h.c
 
-## end   gnulib module sys_types-tests
+## end   gnulib module sys_types-h-tests
 
-## begin gnulib module sys_uio
+## begin gnulib module sys_uio-h
 
 BUILT_SOURCES += sys/uio.h
 
@@ -2196,15 +3100,15 @@ MOSTLYCLEANDIRS += sys
 
 EXTRA_DIST += sys_uio.in.h
 
-## end   gnulib module sys_uio
+## end   gnulib module sys_uio-h
 
-## begin gnulib module sys_uio-tests
+## begin gnulib module sys_uio-h-tests
 
-TESTS += test-sys_uio
-check_PROGRAMS += test-sys_uio
-EXTRA_DIST += test-sys_uio.c
+TESTS += test-sys_uio-h
+check_PROGRAMS += test-sys_uio-h
+EXTRA_DIST += test-sys_uio-h.c
 
-## end   gnulib module sys_uio-tests
+## end   gnulib module sys_uio-h-tests
 
 ## begin gnulib module test-framework-sh-tests
 
@@ -2261,17 +3165,161 @@ EXTRA_DIST += test-time.c signature.h macros.h
 
 ## end   gnulib module time-tests
 
-## begin gnulib module trim-tests
+## begin gnulib module uchar-h-tests
 
-TESTS += test-trim1.sh test-trim2.sh test-trim3.sh
-TESTS_ENVIRONMENT += \
-  LOCALE_FR_UTF8='@LOCALE_FR_UTF8@' \
-  LOCALE_ZH_CN='@LOCALE_ZH_CN@'
-check_PROGRAMS += test-trim
-test_trim_LDADD = $(LDADD) $(LIBUNISTRING) @LIBINTL@ $(MBRTOWC_LIB)
-EXTRA_DIST += test-trim1.sh test-trim2.sh test-trim3.sh test-trim.c macros.h
+TESTS += test-uchar-h
+check_PROGRAMS += test-uchar-h
+EXTRA_DIST += test-uchar-h.c
 
-## end   gnulib module trim-tests
+## end   gnulib module uchar-h-tests
+
+## begin gnulib module unicase/tolower-tests
+
+TESTS += test-uc_tolower
+check_PROGRAMS += test-uc_tolower
+test_uc_tolower_SOURCES = unicase/test-uc_tolower.c
+test_uc_tolower_LDADD = $(LDADD) $(LIBUNISTRING)
+EXTRA_DIST += unicase/test-uc_tolower.c unicase/test-mapping-part1.h unicase/test-mapping-part2.h macros.h
+
+## end   gnulib module unicase/tolower-tests
+
+## begin gnulib module unicase/toupper-tests
+
+TESTS += test-uc_toupper
+check_PROGRAMS += test-uc_toupper
+test_uc_toupper_SOURCES = unicase/test-uc_toupper.c
+test_uc_toupper_LDADD = $(LDADD) $(LIBUNISTRING)
+EXTRA_DIST += unicase/test-uc_toupper.c unicase/test-mapping-part1.h unicase/test-mapping-part2.h macros.h
+
+## end   gnulib module unicase/toupper-tests
+
+## begin gnulib module unictype/ctype-alnum-tests
+
+TESTS += test-ctype_alnum
+check_PROGRAMS += test-ctype_alnum
+test_ctype_alnum_SOURCES = unictype/test-ctype_alnum.c
+test_ctype_alnum_LDADD = $(LDADD) $(LIBUNISTRING)
+EXTRA_DIST += unictype/test-ctype_alnum.c unictype/test-predicate-part1.h unictype/test-predicate-part2.h macros.h
+
+## end   gnulib module unictype/ctype-alnum-tests
+
+## begin gnulib module unictype/ctype-alpha-tests
+
+TESTS += test-ctype_alpha
+check_PROGRAMS += test-ctype_alpha
+test_ctype_alpha_SOURCES = unictype/test-ctype_alpha.c
+test_ctype_alpha_LDADD = $(LDADD) $(LIBUNISTRING)
+EXTRA_DIST += unictype/test-ctype_alpha.c unictype/test-predicate-part1.h unictype/test-predicate-part2.h macros.h
+
+## end   gnulib module unictype/ctype-alpha-tests
+
+## begin gnulib module unictype/ctype-blank-tests
+
+TESTS += test-ctype_blank
+check_PROGRAMS += test-ctype_blank
+test_ctype_blank_SOURCES = unictype/test-ctype_blank.c
+test_ctype_blank_LDADD = $(LDADD) $(LIBUNISTRING)
+EXTRA_DIST += unictype/test-ctype_blank.c unictype/test-predicate-part1.h unictype/test-predicate-part2.h macros.h
+
+## end   gnulib module unictype/ctype-blank-tests
+
+## begin gnulib module unictype/ctype-cntrl-tests
+
+TESTS += test-ctype_cntrl
+check_PROGRAMS += test-ctype_cntrl
+test_ctype_cntrl_SOURCES = unictype/test-ctype_cntrl.c
+test_ctype_cntrl_LDADD = $(LDADD) $(LIBUNISTRING)
+EXTRA_DIST += unictype/test-ctype_cntrl.c unictype/test-predicate-part1.h unictype/test-predicate-part2.h macros.h
+
+## end   gnulib module unictype/ctype-cntrl-tests
+
+## begin gnulib module unictype/ctype-digit-tests
+
+TESTS += test-ctype_digit
+check_PROGRAMS += test-ctype_digit
+test_ctype_digit_SOURCES = unictype/test-ctype_digit.c
+test_ctype_digit_LDADD = $(LDADD) $(LIBUNISTRING)
+EXTRA_DIST += unictype/test-ctype_digit.c unictype/test-predicate-part1.h unictype/test-predicate-part2.h macros.h
+
+## end   gnulib module unictype/ctype-digit-tests
+
+## begin gnulib module unictype/ctype-graph-tests
+
+TESTS += test-ctype_graph
+check_PROGRAMS += test-ctype_graph
+test_ctype_graph_SOURCES = unictype/test-ctype_graph.c
+test_ctype_graph_LDADD = $(LDADD) $(LIBUNISTRING)
+EXTRA_DIST += unictype/test-ctype_graph.c unictype/test-predicate-part1.h unictype/test-predicate-part2.h macros.h
+
+## end   gnulib module unictype/ctype-graph-tests
+
+## begin gnulib module unictype/ctype-lower-tests
+
+TESTS += test-ctype_lower
+check_PROGRAMS += test-ctype_lower
+test_ctype_lower_SOURCES = unictype/test-ctype_lower.c
+test_ctype_lower_LDADD = $(LDADD) $(LIBUNISTRING)
+EXTRA_DIST += unictype/test-ctype_lower.c unictype/test-predicate-part1.h unictype/test-predicate-part2.h macros.h
+
+## end   gnulib module unictype/ctype-lower-tests
+
+## begin gnulib module unictype/ctype-print-tests
+
+TESTS += test-ctype_print
+check_PROGRAMS += test-ctype_print
+test_ctype_print_SOURCES = unictype/test-ctype_print.c
+test_ctype_print_LDADD = $(LDADD) $(LIBUNISTRING)
+EXTRA_DIST += unictype/test-ctype_print.c unictype/test-predicate-part1.h unictype/test-predicate-part2.h macros.h
+
+## end   gnulib module unictype/ctype-print-tests
+
+## begin gnulib module unictype/ctype-punct-tests
+
+TESTS += test-ctype_punct
+check_PROGRAMS += test-ctype_punct
+test_ctype_punct_SOURCES = unictype/test-ctype_punct.c
+test_ctype_punct_LDADD = $(LDADD) $(LIBUNISTRING)
+EXTRA_DIST += unictype/test-ctype_punct.c unictype/test-predicate-part1.h unictype/test-predicate-part2.h macros.h
+
+## end   gnulib module unictype/ctype-punct-tests
+
+## begin gnulib module unictype/ctype-space-tests
+
+TESTS += test-ctype_space
+check_PROGRAMS += test-ctype_space
+test_ctype_space_SOURCES = unictype/test-ctype_space.c
+test_ctype_space_LDADD = $(LDADD) $(LIBUNISTRING)
+EXTRA_DIST += unictype/test-ctype_space.c unictype/test-predicate-part1.h unictype/test-predicate-part2.h macros.h
+
+## end   gnulib module unictype/ctype-space-tests
+
+## begin gnulib module unictype/ctype-upper-tests
+
+TESTS += test-ctype_upper
+check_PROGRAMS += test-ctype_upper
+test_ctype_upper_SOURCES = unictype/test-ctype_upper.c
+test_ctype_upper_LDADD = $(LDADD) $(LIBUNISTRING)
+EXTRA_DIST += unictype/test-ctype_upper.c unictype/test-predicate-part1.h unictype/test-predicate-part2.h macros.h
+
+## end   gnulib module unictype/ctype-upper-tests
+
+## begin gnulib module unictype/ctype-xdigit-tests
+
+TESTS += test-ctype_xdigit
+check_PROGRAMS += test-ctype_xdigit
+test_ctype_xdigit_SOURCES = unictype/test-ctype_xdigit.c
+test_ctype_xdigit_LDADD = $(LDADD) $(LIBUNISTRING)
+EXTRA_DIST += unictype/test-ctype_xdigit.c unictype/test-predicate-part1.h unictype/test-predicate-part2.h macros.h
+
+## end   gnulib module unictype/ctype-xdigit-tests
+
+## begin gnulib module unistd-h-tests
+
+TESTS += test-unistd-h
+check_PROGRAMS += test-unistd-h
+EXTRA_DIST += test-unistd-h.c
+
+## end   gnulib module unistd-h-tests
 
 ## begin gnulib module unistd-safer-tests
 
@@ -2281,45 +3329,75 @@ EXTRA_DIST += test-dup-safer.c macros.h
 
 ## end   gnulib module unistd-safer-tests
 
-## begin gnulib module unistd-tests
+## begin gnulib module unistr/u32-chr-tests
 
-TESTS += test-unistd
-check_PROGRAMS += test-unistd
-EXTRA_DIST += test-unistd.c
+TESTS += test-u32-chr
+check_PROGRAMS += test-u32-chr
+test_u32_chr_SOURCES = unistr/test-u32-chr.c
+test_u32_chr_LDADD = $(LDADD) $(LIBUNISTRING)
+EXTRA_DIST += unistr/test-u32-chr.c unistr/test-chr.h zerosize-ptr.h macros.h
 
-## end   gnulib module unistd-tests
+## end   gnulib module unistr/u32-chr-tests
 
-## begin gnulib module unistr/u8-mbtoucr-tests
+## begin gnulib module unistr/u32-cpy-tests
 
-TESTS += test-u8-mbtoucr
-check_PROGRAMS += test-u8-mbtoucr
-test_u8_mbtoucr_SOURCES = unistr/test-u8-mbtoucr.c
-test_u8_mbtoucr_LDADD = $(LDADD) $(LIBUNISTRING)
-EXTRA_DIST += unistr/test-u8-mbtoucr.c macros.h
+TESTS += test-u32-cpy
+check_PROGRAMS += test-u32-cpy
+test_u32_cpy_SOURCES = unistr/test-u32-cpy.c
+test_u32_cpy_LDADD = $(LDADD) $(LIBUNISTRING)
+EXTRA_DIST += unistr/test-u32-cpy.c unistr/test-cpy.h macros.h
 
-## end   gnulib module unistr/u8-mbtoucr-tests
+## end   gnulib module unistr/u32-cpy-tests
 
-## begin gnulib module unistr/u8-uctomb-tests
+## begin gnulib module unistr/u32-pcpy-tests
 
-TESTS += test-u8-uctomb
-check_PROGRAMS += test-u8-uctomb
-test_u8_uctomb_SOURCES = unistr/test-u8-uctomb.c
-test_u8_uctomb_LDADD = $(LDADD) $(LIBUNISTRING)
-EXTRA_DIST += unistr/test-u8-uctomb.c macros.h
+TESTS += test-u32-pcpy
+check_PROGRAMS += test-u32-pcpy
+test_u32_pcpy_SOURCES = unistr/test-u32-pcpy.c
+test_u32_pcpy_LDADD = $(LDADD) $(LIBUNISTRING)
+EXTRA_DIST += unistr/test-u32-pcpy.c unistr/test-pcpy.h macros.h
 
-## end   gnulib module unistr/u8-uctomb-tests
+## end   gnulib module unistr/u32-pcpy-tests
 
-## begin gnulib module uniwidth/width-tests
+## begin gnulib module unistr/u32-set
 
-TESTS += test-uc_width uniwidth/test-uc_width2.sh
-check_PROGRAMS += test-uc_width test-uc_width2
-test_uc_width_SOURCES = uniwidth/test-uc_width.c
-test_uc_width_LDADD = $(LDADD) $(LIBUNISTRING)
-test_uc_width2_SOURCES = uniwidth/test-uc_width2.c
-test_uc_width2_LDADD = $(LDADD) $(LIBUNISTRING)
-EXTRA_DIST += uniwidth/test-uc_width.c uniwidth/test-uc_width2.c uniwidth/test-uc_width2.sh macros.h
+if LIBUNISTRING_COMPILE_UNISTR_U32_SET
+libtests_a_SOURCES += unistr/u32-set.c
+endif
 
-## end   gnulib module uniwidth/width-tests
+EXTRA_DIST += unistr/u-set.h
+
+## end   gnulib module unistr/u32-set
+
+## begin gnulib module unistr/u32-set-tests
+
+TESTS += test-u32-set
+check_PROGRAMS += test-u32-set
+test_u32_set_SOURCES = unistr/test-u32-set.c
+test_u32_set_LDADD = $(LDADD) $(LIBUNISTRING)
+EXTRA_DIST += unistr/test-u32-set.c unistr/test-set.h macros.h
+
+## end   gnulib module unistr/u32-set-tests
+
+## begin gnulib module unistr/u32-strcat-tests
+
+TESTS += test-u32-strcat
+check_PROGRAMS += test-u32-strcat
+test_u32_strcat_SOURCES = unistr/test-u32-strcat.c
+test_u32_strcat_LDADD = $(LDADD) $(LIBUNISTRING)
+EXTRA_DIST += unistr/test-u32-strcat.c unistr/test-strcat.h macros.h
+
+## end   gnulib module unistr/u32-strcat-tests
+
+## begin gnulib module unistr/u32-strlen-tests
+
+TESTS += test-u32-strlen
+check_PROGRAMS += test-u32-strlen
+test_u32_strlen_SOURCES = unistr/test-u32-strlen.c
+test_u32_strlen_LDADD = $(LDADD) $(LIBUNISTRING)
+EXTRA_DIST += unistr/test-u32-strlen.c macros.h
+
+## end   gnulib module unistr/u32-strlen-tests
 
 ## begin gnulib module unsetenv
 
@@ -2350,7 +3428,6 @@ EXTRA_libtests_a_SOURCES += asnprintf.c printf-args.c printf-parse.c vasnprintf.
 
 TESTS += test-vasnprintf
 check_PROGRAMS += test-vasnprintf
-
 EXTRA_DIST += test-vasnprintf.c macros.h
 
 ## end   gnulib module vasnprintf-tests
@@ -2390,29 +3467,36 @@ EXTRA_DIST += test-version-etc.c test-version-etc.sh
 
 ## end   gnulib module version-etc-tests
 
-## begin gnulib module wchar-tests
+## begin gnulib module vsnzprintf
 
-TESTS += test-wchar
-check_PROGRAMS += test-wchar
-EXTRA_DIST += test-wchar.c
+libtests_a_SOURCES += vsnzprintf.c
 
-## end   gnulib module wchar-tests
+## end   gnulib module vsnzprintf
+
+## begin gnulib module wchar-h-tests
+
+TESTS += test-wchar-h
+check_PROGRAMS += test-wchar-h
+EXTRA_DIST += test-wchar-h.c
+
+## end   gnulib module wchar-h-tests
 
 ## begin gnulib module wcrtomb-tests
 
 TESTS += \
   test-wcrtomb.sh \
-  test-wcrtomb-w32-1.sh test-wcrtomb-w32-2.sh test-wcrtomb-w32-3.sh \
-  test-wcrtomb-w32-4.sh test-wcrtomb-w32-5.sh test-wcrtomb-w32-6.sh \
-  test-wcrtomb-w32-7.sh
+  test-wcrtomb-w32-2.sh test-wcrtomb-w32-3.sh test-wcrtomb-w32-4.sh \
+  test-wcrtomb-w32-5.sh test-wcrtomb-w32-6.sh test-wcrtomb-w32-7.sh \
+  test-wcrtomb-w32-8.sh
 TESTS_ENVIRONMENT += \
+  LOCALE_EN_UTF8='@LOCALE_EN_UTF8@' \
   LOCALE_FR='@LOCALE_FR@' \
   LOCALE_FR_UTF8='@LOCALE_FR_UTF8@' \
   LOCALE_JA='@LOCALE_JA@' \
   LOCALE_ZH_CN='@LOCALE_ZH_CN@'
 check_PROGRAMS += test-wcrtomb test-wcrtomb-w32
 test_wcrtomb_LDADD = $(LDADD) $(SETLOCALE_LIB)
-EXTRA_DIST += test-wcrtomb.sh test-wcrtomb.c test-wcrtomb-w32-1.sh test-wcrtomb-w32-2.sh test-wcrtomb-w32-3.sh test-wcrtomb-w32-4.sh test-wcrtomb-w32-5.sh test-wcrtomb-w32-6.sh test-wcrtomb-w32-7.sh test-wcrtomb-w32.c signature.h macros.h
+EXTRA_DIST += test-wcrtomb.sh test-wcrtomb.c test-wcrtomb-w32-2.sh test-wcrtomb-w32-3.sh test-wcrtomb-w32-4.sh test-wcrtomb-w32-5.sh test-wcrtomb-w32-6.sh test-wcrtomb-w32-7.sh test-wcrtomb-w32-8.sh test-wcrtomb-w32.c signature.h macros.h
 
 ## end   gnulib module wcrtomb-tests
 
@@ -2424,14 +3508,39 @@ EXTRA_DIST += test-wctype-h.c macros.h
 
 ## end   gnulib module wctype-h-tests
 
-## begin gnulib module wcwidth-tests
+## begin gnulib module wctype-tests
 
-TESTS += test-wcwidth
-check_PROGRAMS += test-wcwidth
-test_wcwidth_LDADD = $(LDADD) $(SETLOCALE_LIB) $(LIBUNISTRING)
-EXTRA_DIST += test-wcwidth.c signature.h macros.h
+TESTS += test-wctype
+check_PROGRAMS += test-wctype
+EXTRA_DIST += test-wctype.c signature.h macros.h
 
-## end   gnulib module wcwidth-tests
+## end   gnulib module wctype-tests
+
+## begin gnulib module windows-cond
+
+if GL_COND_OBJ_WINDOWS_COND
+libtests_a_SOURCES += windows-cond.c
+endif
+
+EXTRA_DIST += windows-cond.h windows-initguard.h
+
+## end   gnulib module windows-cond
+
+## begin gnulib module windows-mutex-tests
+
+TESTS += test-windows-mutex-type
+check_PROGRAMS += test-windows-mutex-type
+EXTRA_DIST += test-windows-mutex-type.c macros.h
+
+## end   gnulib module windows-mutex-tests
+
+## begin gnulib module windows-recmutex-tests
+
+TESTS += test-windows-recmutex-type
+check_PROGRAMS += test-windows-recmutex-type
+EXTRA_DIST += test-windows-recmutex-type.c macros.h
+
+## end   gnulib module windows-recmutex-tests
 
 ## begin gnulib module windows-thread
 
@@ -2443,6 +3552,52 @@ EXTRA_DIST += windows-thread.h
 
 ## end   gnulib module windows-thread
 
+## begin gnulib module windows-timedmutex
+
+if GL_COND_OBJ_WINDOWS_TIMEDMUTEX
+libtests_a_SOURCES += windows-timedmutex.c
+endif
+
+EXTRA_DIST += windows-initguard.h windows-timedmutex.h
+
+## end   gnulib module windows-timedmutex
+
+## begin gnulib module windows-timedmutex-tests
+
+TESTS += test-windows-timedmutex-type
+check_PROGRAMS += test-windows-timedmutex-type
+EXTRA_DIST += test-windows-timedmutex-type.c macros.h
+
+## end   gnulib module windows-timedmutex-tests
+
+## begin gnulib module windows-timedrecmutex
+
+if GL_COND_OBJ_WINDOWS_TIMEDRECMUTEX
+libtests_a_SOURCES += windows-timedrecmutex.c
+endif
+
+EXTRA_DIST += windows-initguard.h windows-timedrecmutex.h
+
+## end   gnulib module windows-timedrecmutex
+
+## begin gnulib module windows-timedrecmutex-tests
+
+TESTS += test-windows-timedrecmutex-type
+check_PROGRAMS += test-windows-timedrecmutex-type
+EXTRA_DIST += test-windows-timedrecmutex-type.c macros.h
+
+## end   gnulib module windows-timedrecmutex-tests
+
+## begin gnulib module windows-timedrwlock
+
+if GL_COND_OBJ_WINDOWS_TIMEDRWLOCK
+libtests_a_SOURCES += windows-timedrwlock.c
+endif
+
+EXTRA_DIST += windows-initguard.h windows-timedrwlock.h
+
+## end   gnulib module windows-timedrwlock
+
 ## begin gnulib module windows-tls
 
 if GL_COND_OBJ_WINDOWS_TLS
@@ -2453,6 +3608,14 @@ EXTRA_DIST += windows-tls.h
 
 ## end   gnulib module windows-tls
 
+## begin gnulib module wmemchr-tests
+
+TESTS += test-wmemchr
+check_PROGRAMS += test-wmemchr
+EXTRA_DIST += test-wmemchr.c macros.h
+
+## end   gnulib module wmemchr-tests
+
 ## begin gnulib module xalloc-die-tests
 
 TESTS += test-xalloc-die.sh
@@ -2461,6 +3624,22 @@ test_xalloc_die_LDADD = $(LDADD) @LIBINTL@
 EXTRA_DIST += test-xalloc-die.c test-xalloc-die.sh
 
 ## end   gnulib module xalloc-die-tests
+
+## begin gnulib module xconcat-filename
+
+libtests_a_SOURCES += xconcat-filename.c
+
+EXTRA_DIST += concat-filename.h
+
+## end   gnulib module xconcat-filename
+
+## begin gnulib module xgetcwd-lgpl
+
+libtests_a_SOURCES += xgetcwd.c
+
+EXTRA_DIST += xgetcwd.h
+
+## end   gnulib module xgetcwd-lgpl
 
 ## begin gnulib module xsize
 
@@ -2491,7 +3670,7 @@ TESTS += test-xstrtol.sh
 check_PROGRAMS += test-xstrtol test-xstrtoul
 test_xstrtol_LDADD = $(LDADD) @LIBINTL@
 test_xstrtoul_LDADD = $(LDADD) @LIBINTL@
-EXTRA_DIST += test-xstrtol.c test-xstrtoul.c test-xstrtol.sh
+EXTRA_DIST += test-xstrtol.c test-xstrtoul.c test-xstrtol.sh macros.h
 
 ## end   gnulib module xstrtol-tests
 
@@ -2502,6 +3681,12 @@ check_PROGRAMS += test-year2038
 EXTRA_DIST += test-year2038.c
 
 ## end   gnulib module year2038-tests
+
+## begin gnulib module yield
+
+libtests_a_SOURCES += glthread/yield.h
+
+## end   gnulib module yield
 
 all: all-notice
 all-notice:

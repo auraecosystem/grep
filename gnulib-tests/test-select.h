@@ -1,5 +1,5 @@
 /* Test of select() substitute.
-   Copyright (C) 2008-2023 Free Software Foundation, Inc.
+   Copyright (C) 2008-2025 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -38,7 +38,7 @@
 #endif
 
 /* Tell GCC not to warn about the specific edge cases tested here.  */
-#if __GNUC__ >= 13
+#if _GL_GNUC_PREREQ (13, 0)
 # pragma GCC diagnostic ignored "-Wanalyzer-fd-use-without-check"
 #endif
 

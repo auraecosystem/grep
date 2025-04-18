@@ -1,5 +1,5 @@
 /* dfasearch.c - searching subroutines using dfa and regex for grep.
-   Copyright 1992, 1998, 2000, 2007, 2009-2023 Free Software Foundation, Inc.
+   Copyright 1992, 1998, 2000, 2007, 2009-2025 Free Software Foundation, Inc.
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -12,15 +12,13 @@
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program; if not, write to the Free Software
-   Foundation, Inc., 51 Franklin Street - Fifth Floor, Boston, MA
-   02110-1301, USA.  */
+   along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
 
 /* Written August 1992 by Mike Haertel. */
 
 #include <config.h>
 #include "intprops.h"
-#include "search.h"
+#include <search.h>
 #include "die.h"
 #include <error.h>
 
@@ -145,15 +143,15 @@ regex_compile (struct dfa_comp *dc, char const *p, idx_t len,
                bool syntax_only)
 {
   struct re_pattern_buffer pat;
-  pat.buffer = NULL;
+  pat.buffer = nullptr;
   pat.allocated = 0;
 
   /* Do not use a fastmap with -i, to work around glibc Bug#20381.  */
   static_assert (UCHAR_MAX < IDX_MAX);
   idx_t uchar_max = UCHAR_MAX;
-  pat.fastmap = (syntax_only | match_icase) ? NULL : ximalloc (uchar_max + 1);
+  pat.fastmap = syntax_only | match_icase ? nullptr : ximalloc (uchar_max + 1);
 
-  pat.translate = NULL;
+  pat.translate = nullptr;
 
   if (syntax_only)
     re_set_syntax (syntax_bits | RE_NO_SUB);
@@ -227,7 +225,7 @@ GEAcompile (char *pattern, idx_t size, reg_syntax_t syntax_bits,
   char const *prev = pattern;
 
   /* Buffer containing back-reference-free patterns.  */
-  char *buf = NULL;
+  char *buf = nullptr;
   idx_t buflen = 0;
   idx_t bufalloc = 0;
 
@@ -324,13 +322,13 @@ GEAcompile (char *pattern, idx_t size, reg_syntax_t syntax_bits,
       size = total;
     }
   else
-    motif = NULL;
+    motif = nullptr;
 
   dfaparse (pattern, size, dc->dfa);
   kwsmusts (dc);
-  dfacomp (NULL, 0, dc->dfa, 1);
+  dfacomp (nullptr, 0, dc->dfa, 1);
 
-  if (buf != NULL)
+  if (buf)
     {
       if (exact || !dfasupported (dc->dfa))
         {
@@ -424,7 +422,7 @@ EGexecute (void *vdc, char const *buf, idx_t size, idx_t *match_size,
                     goto success;
                   if (mb_start < beg)
                     mb_start = beg;
-                  if (mb_goback (&mb_start, NULL, match, buflim) == 0)
+                  if (mb_goback (&mb_start, nullptr, match, buflim) == 0)
                     goto success;
                   /* The matched line starts in the middle of a multibyte
                      character.  Perform the DFA search starting from the
@@ -440,8 +438,8 @@ EGexecute (void *vdc, char const *buf, idx_t size, idx_t *match_size,
                  potential matches; this is more likely to be fast
                  than falling back to KWset would be.  */
               next_beg = dfaexec (superset, dfa_beg, (char *) end, 0,
-                                  &count, NULL);
-              if (next_beg == NULL || next_beg == end)
+                                  &count, nullptr);
+              if (!next_beg || next_beg == end)
                 continue;
 
               /* Narrow down to the line we've found.  */
@@ -463,7 +461,7 @@ EGexecute (void *vdc, char const *buf, idx_t size, idx_t *match_size,
 
           /* If there's no match, or if we've matched the sentinel,
              we're done.  */
-          if (next_beg == NULL || next_beg == end)
+          if (!next_beg || next_beg == end)
             continue;
 
           /* Narrow down to the line we've found.  */

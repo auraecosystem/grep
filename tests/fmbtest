@@ -1,5 +1,5 @@
 #! /bin/sh
-# Copyright (C) 2001, 2006, 2009-2023 Free Software Foundation, Inc.
+# Copyright (C) 2001, 2006, 2009-2025 Free Software Foundation, Inc.
 #
 # Copying and distribution of this file, with or without modification,
 # are permitted in any medium without royalty provided the copyright
@@ -10,7 +10,7 @@
 cz=cs_CZ.UTF-8
 
 # If cs_CZ.UTF-8 locale doesn't work, skip this test.
-LC_ALL=$cz locale -k LC_CTYPE 2>/dev/null | grep -q charmap.*UTF-8 \
+test "`LC_ALL=$cz locale charmap 2>/dev/null`" = UTF-8 \
   || skip_ this system lacks the $cz locale
 
 # If matching is done in single-byte mode, skip this test too
