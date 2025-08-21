@@ -16,7 +16,9 @@ License: GPL-3+
 Files:
  debian/*
 Copyright:
- 2005-2013 Anibal Monsalve Salazar <anibal@debian.org> and Santiago Ruano Rincón <santiago@debian.org>
+ 2025 Otto Kekäläinen <otto@debian.org>
+ 2009-2025 Santiago Ruano Rincón <santiago@debian.org>
+ 2005-2024 Anibal Monsalve Salazar <anibal@debian.org>
  2003-2004 Ryan M. Golbeck <rmgolbeck@debian.org>
  2003, Jeff Bailey <jbailey@nisa.net>
  2003, Clint Adams <schizo@debian.org>
