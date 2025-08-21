@@ -24,6 +24,136 @@ Copyright:
  1996-2000 Wichert Akkerman <wakkerma@debian.org>
 License: GPL-3+
 
+Files:
+ INSTALL
+ TODO
+Copyright:
+ 1994-1996, 1999-2002, 2004-2017, 2020-2023 Free Software Foundation, Inc.
+License: FSFAP
+
+Files:
+ NEWS
+Copyright:
+ 1994-1996, 1999-2002, 2004-2017, 2020-2023 Free Software Foundation, Inc.
+License: FSFAP or GFDL-1.3+
+
+Files:
+ tests/backref
+Copyright:
+ 2001, 2006, 2009-2023 Free Software Foundation, Inc.
+License: FSFAP
+
+Files:
+ tests/backref-alt
+Copyright:
+ 2015-2023 Free Software Foundation, Inc.
+License: FSFAP
+
+Files:
+ tests/backslash-*
+Copyright:
+ 2020-2023 Free Software Foundation, Inc.
+License: FSFAP
+
+Files:
+ tests/bre*
+ tests/ere*
+ tests/pcre*
+ tests/spencer1*
+ tests/binary-file-matches
+ tests/c-locale
+ tests/dfa-invalid-utf8
+ tests/empty
+ tests/empty-line-mb
+ tests/encoding-error
+ tests/false-match-mb-non-utf8
+ tests/fgrep-longest
+ tests/file
+ tests/fmbtest
+ tests/foad1
+ tests/khadafy
+ tests/multibyte-white-space
+ tests/options
+ tests/proc
+ tests/status
+ tests/triple-backref
+ tests/two-chars
+ tests/two-files
+ tests/version-pcre
+ tests/yesno
+Copyright:
+ 2001, 2006, 2009-2023 Free Software Foundation, Inc.
+License: FSFAP
+
+Files:
+ configure
+Copyright:
+ 1992-1996, 1998-2017, 2020-2023 Free Software Foundation, Inc.
+License: FSFUL
+
+Files:
+ aclocal.m4
+ build-aux/config.rpath
+Copyright:
+ 1996-2023 Free Software Foundation, Inc.
+License: FSFULLR
+
+Files:
+ m4/*.m4
+Copyright:
+ 1996-2023 Free Software Foundation, Inc.
+License: FSFULLR
+
+Files:
+ m4/gettext.m4
+ m4/intl-thread-locale.m4
+ m4/intlmacosx.m4
+ m4/lcmessage.m4
+ m4/nls.m4
+ m4/po.m4
+ m4/progtest.m4
+Copyright:
+ 1992-2023 Free Software Foundation, Inc.
+License: FSFULLR and/or GPL and/or LGPL
+
+Files:
+ build-aux/install-sh
+Copyright:
+ 1994 X Consortium
+License: X11
+
+Files:
+ gnulib-tests/inet_pton.c
+Copyright:
+ 2006, 2008-2023 Free Software Foundation, Inc.
+ 1996, 1999, Internet Software Consortium
+License: ISC or LGPL-2.1+
+
+Files:
+ lib/fts.c
+ lib/fts_.h
+Copyright:
+ 2004-2023 Free Software Foundation, Inc.
+ 1990, 1993, 1994, The Regents of the University of California
+License: BSD-3-clause or GPL-3+
+
+Files:
+ doc/grep.info
+ doc/grep.texi
+Copyright:
+ 1992-2023 Free Software Foundation, Inc.
+License: GFDL-1.3+
+
+Files:
+ gnulib-tests/alloca.c
+Copyright:
+ 2011-2023 Free Software Foundation, Inc.
+License: public-domain
+
+License: GPL
+ On a Debian system, the complete text of the GNU General Public License
+ version 3 can be found in the file /usr/share/common-licenses/GPL-3.
+
 License: GPL-3+
  Copyright (C) 1992, 1997, 1998, 1999, 2000, 2001, 2002, 2004,
  2005, 2006, 2007, 2008, 2009 Free Software Foundation, Inc.
@@ -47,3 +177,111 @@ License: GPL-3+
  .
  On a Debian system you can find a copy of this license in
  /usr/share/common-licenses/GPL-3.
+
+License: GPL-2+
+ On a Debian system, the complete text of the GNU General Public License
+ version 2 can be found in the file /usr/share/common-licenses/GPL-2.
+
+License: LGPL
+ On a Debian system, the complete text of the GNU Lesser General Public
+ License version 3 can be found in the file /usr/share/common-licenses/LGPL-3.
+
+License: LGPL-3+
+ On a Debian system, the complete text of the GNU Lesser General Public
+ License version 3 can be found in the file /usr/share/common-licenses/LGPL-3.
+
+License: LGPL-2.1+
+ On a Debian system, the complete text of the GNU Lesser General Public License
+ version 2.1 can be found in the file /usr/share/common-licenses/LGPL-2.1.
+
+License: LGPL-2+
+ On a Debian system, the complete text of the GNU Lesser General Public
+ License version 2 can be found in the file /usr/share/common-licenses/LGPL-2.
+
+License: GFDL-1.3+
+ On a Debian system, the complete text of the GNU Free Documentation License
+ version 1.3 can be found in the file /usr/share/common-licenses/GFDL-1.3.
+
+License: FSFAP
+ Copying and distribution of this file, with or without modification,
+ are permitted in any medium without royalty provided the copyright
+ notice and this notice are preserved. This file is offered as-is,
+ without warranty of any kind.
+
+License: FSFUL
+ This configure script is free software; the Free Software Foundation
+ gives unlimited permission to copy, distribute and modify it.
+
+License: FSFULLR
+ This file is free software; the Free Software Foundation
+ gives unlimited permission to copy and/or distribute it,
+ with or without modifications, as long as this notice is preserved.
+ .
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY, to the extent permitted by law; without
+ even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+ PARTICULAR PURPOSE.
+
+License: X11
+ Permission is hereby granted, free of charge, to any person obtaining a copy
+ of this software and associated documentation files (the "Software"), to
+ deal in the Software without restriction, including without limitation the
+ rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+ sell copies of the Software, and to permit persons to whom the Software is
+ furnished to do so, subject to the following conditions:
+ .
+ The above copyright notice and this permission notice shall be included in
+ all copies or substantial portions of the Software.
+ .
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE
+ X CONSORTIUM BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN
+ AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ .
+ Except as contained in this notice, the name of the X Consortium shall not be
+ used in advertising or otherwise to promote the sale, use or other dealings in
+ the Software.
+
+License: ISC
+ Permission to use, copy, modify, and/or distribute this software for any
+ purpose with or without fee is hereby granted, provided that the above
+ copyright notice and this permission notice appear in all copies.
+ .
+ THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+ WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+ MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+ ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+ WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+License: BSD-3-clause
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions
+ are met:
+ .
+ 1. Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+ 2. Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in the
+    documentation and/or other materials provided with the distribution.
+ 3. Neither the name of the University nor the names of its contributors
+    may be used to endorse or promote products derived from this software
+    without specific prior written permission.
+ .
+ THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' AND
+ ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ ARE DISCLAIMED.  IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE
+ FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ SUCH DAMAGE.
+
+License: public-domain
+ This work is in the public domain.
