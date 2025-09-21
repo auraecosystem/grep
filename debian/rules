@@ -3,6 +3,18 @@
 
 export DH_VERBOSE=1
 
+# Workaround from the nano package:
+#   https://lists.nongnu.org/archive/html/nano-devel/2024-05/msg00017.html
+# to avoid these errors:
+# ...
+# configure:9031: error: possibly undefined macro: gl_ANYTHREADLIB_EARLY
+#      If this token and others are legitimate, please use m4_pattern_allow.
+#      See the Autoconf documentation.
+# configure:17568: error: possibly undefined macro: gl_PTHREADLIB
+# configure:17681: error: possibly undefined macro: gl_WEAK_SYMBOLS
+#configure:19621: error: possibly undefined macro: gl_TYPE_WINT_T_PREREQ
+export AUTOPOINT := true
+
 ifneq ($(filter nodoc,$(DEB_BUILD_PROFILES)),)
 export MAKEINFO = true
 endif
