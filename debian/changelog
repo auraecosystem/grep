@@ -1,4 +1,4 @@
-grep (3.12-1~exp1) UNRELEASED-experimental; urgency=medium
+grep (3.12-1~exp1) experimental; urgency=medium
 
   * Prevent autopoint from running during autoreconf
   * New upstream version: 3.12
