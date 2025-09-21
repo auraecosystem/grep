@@ -1,12 +1,11 @@
-grep (3.12-1~exp1~1.gbpe388eb) UNRELEASED-experimental; urgency=medium
+grep (3.12-1~exp1) UNRELEASED-experimental; urgency=medium
 
-  ** SNAPSHOT build @e388ebaf81903b2c1e734a27b85d0ddc5ea88a50 **
-
+  * Prevent autopoint from running during autoreconf
   * New upstream version: 3.12
   * Wrap-and-sort debian/ with -ast
   * Remove no longer needed grep-dirfd.patch
 
- -- Santiago Ruano Rincón <santiago@debian.org>  Thu, 17 Apr 2025 22:56:09 -0300
+ -- Santiago Ruano Rincón <santiagorr@riseup.net>  Sat, 20 Sep 2025 23:03:22 -0300
 
 grep (3.11-4) unstable; urgency=low
 
