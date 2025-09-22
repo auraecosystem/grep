@@ -1,3 +1,9 @@
+grep (3.12-1~exp2) experimental; urgency=medium
+
+  * Directly install in /usr, and remove Build-Dep on dh-sequence-movetousr
+
+ -- Santiago Ruano Rincón <santiagorr@riseup.net>  Mon, 22 Sep 2025 15:07:31 -0300
+
 grep (3.12-1~exp1) experimental; urgency=medium
 
   * Prevent autopoint from running during autoreconf
