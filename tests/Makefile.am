@@ -1,5 +1,5 @@
 ## Process this file with automake to create Makefile.in
-# Copyright 1997-1998, 2005-2023 Free Software Foundation, Inc.
+# Copyright 1997-1998, 2005-2025 Free Software Foundation, Inc.
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -41,7 +41,10 @@ AM_CFLAGS = $(WARN_CFLAGS) $(WERROR_CFLAGS)
 
 # Tell the linker to omit references to unused shared libraries.
 AM_LDFLAGS = $(IGNORE_UNUSED_LIBRARIES_CFLAGS)
-LDADD = ../lib/libgreputils.a $(LIBINTL) ../lib/libgreputils.a
+LDADD = ../lib/libgreputils.a $(LIBINTL) ../lib/libgreputils.a \
+  $(HARD_LOCALE_LIB) $(LIBC32CONV) $(LIBCSTACK) \
+  $(LIBSIGSEGV) $(LIBUNISTRING) $(MBRTOWC_LIB) $(SETLOCALE_NULL_LIB) \
+  $(LIBTHREAD)
 
 # The triple-backref test is expected to fail with both the system
 # matcher (i.e., with glibc) and with the included matcher.
@@ -68,6 +71,7 @@ else
 endif
 
 TESTS =						\
+  100k-entries					\
   backref					\
   backref-alt					\
   backref-multibyte-slow			\

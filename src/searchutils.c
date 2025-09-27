@@ -1,5 +1,5 @@
 /* searchutils.c - helper subroutines for grep's matchers.
-   Copyright 1992, 1998, 2000, 2007, 2009-2023 Free Software Foundation, Inc.
+   Copyright 1992, 1998, 2000, 2007, 2009-2025 Free Software Foundation, Inc.
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -12,15 +12,15 @@
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program; if not, write to the Free Software
-   Foundation, Inc., 51 Franklin Street - Fifth Floor, Boston, MA
-   02110-1301, USA.  */
+   along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
 
 #include <config.h>
 
 #define SEARCH_INLINE _GL_EXTERN_INLINE
 #define SYSTEM_INLINE _GL_EXTERN_INLINE
-#include "search.h"
+#include <search.h>
+
+#include <uchar.h>
 
 /* For each byte B, sbwordchar[B] is true if B is a single-byte
    character that is a word constituent, and is false otherwise.  */
@@ -30,7 +30,7 @@ static bool sbwordchar[NCHAR];
 static bool
 wordchar (wint_t wc)
 {
-  return wc == L'_' || iswalnum (wc);
+  return wc == L'_' || c32isalnum (wc);
 }
 
 void
@@ -43,7 +43,7 @@ wordinit (void)
 kwset_t
 kwsinit (bool mb_trans)
 {
-  char *trans = NULL;
+  char *trans = nullptr;
 
   if (match_icase && (MB_CUR_MAX == 1 || mb_trans))
     {
@@ -113,7 +113,7 @@ mb_goback (char const **mb_start, idx_t *mbclen, char const *cur,
 
               if (long_enough)
                 {
-                  mbstate_t mbs = { 0 };
+                  mbstate_t mbs; mbszero (&mbs);
                   ptrdiff_t clen = imbrlen (cur - i, end - (cur - i), &mbs);
                   if (0 <= clen)
                     {
@@ -129,7 +129,7 @@ mb_goback (char const **mb_start, idx_t *mbclen, char const *cur,
     {
       /* In non-UTF-8 encodings, to find character boundaries one must
          in general scan forward from the start of the buffer.  */
-      mbstate_t mbs = { 0 };
+      mbstate_t mbs; mbszero (&mbs);
       ptrdiff_t clen;
 
       do
@@ -162,27 +162,27 @@ mb_goback (char const **mb_start, idx_t *mbclen, char const *cur,
 static idx_t
 wordchars_count (char const *buf, char const *end, bool countall)
 {
-  idx_t n = 0;
-  mbstate_t mbs = { 0 };
-  while (n < end - buf)
+  mbstate_t mbs; mbszero (&mbs);
+  char const *p = buf;
+  while (p < end)
     {
-      unsigned char b = buf[n];
+      unsigned char b = *p;
       if (sbwordchar[b])
-        n++;
+        p++;
       else if (localeinfo.sbclen[b] != -2)
         break;
       else
         {
-          wchar_t wc = 0;
-          size_t wcbytes = mbrtowc (&wc, buf + n, end - buf - n, &mbs);
+          char32_t wc = 0;
+          size_t wcbytes = mbrtoc32 (&wc, p, end - p, &mbs);
           if (!wordchar (wc))
             break;
-          n += wcbytes + !wcbytes;
+          p += wcbytes + !wcbytes;
         }
       if (!countall)
         break;
     }
-  return n;
+  return p - buf;
 }
 
 /* Examine the start of BUF for the longest prefix containing just
@@ -214,6 +214,6 @@ wordchar_prev (char const *buf, char const *cur, char const *end)
   if (! localeinfo.multibyte || localeinfo.using_utf8 & ~(b >> 7))
     return sbwordchar[b];
   char const *p = buf;
-  cur -= mb_goback (&p, NULL, cur, end);
+  cur -= mb_goback (&p, nullptr, cur, end);
   return wordchar_next (cur, end);
 }

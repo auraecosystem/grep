@@ -7,7 +7,6 @@ Uploaders:
 Standards-Version: 4.6.1.1
 Build-Depends:
  debhelper-compat (=13),
- dh-sequence-movetousr,
  gettext,
  libpcre2-dev,
  texinfo <!nodoc>,

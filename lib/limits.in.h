@@ -1,6 +1,6 @@
 /* A GNU-like <limits.h>.
 
-   Copyright 2016-2023 Free Software Foundation, Inc.
+   Copyright 2016-2025 Free Software Foundation, Inc.
 
    This file is free software: you can redistribute it and/or modify
    it under the terms of the GNU Lesser General Public License as
@@ -20,7 +20,7 @@
 #endif
 @PRAGMA_COLUMNS@
 
-#if defined _GL_ALREADY_INCLUDING_LIMITS_H
+#if defined _@GUARD_PREFIX@_ALREADY_INCLUDING_LIMITS_H
 /* Special invocation convention:
    On Haiku/x86_64, we have a sequence of nested includes
    <limits.h> -> <syslimits.h> -> <limits.h>.
@@ -34,12 +34,12 @@
 
 #ifndef _@GUARD_PREFIX@_LIMITS_H
 
-# define _GL_ALREADY_INCLUDING_LIMITS_H
+# define _@GUARD_PREFIX@_ALREADY_INCLUDING_LIMITS_H
 
 /* The include_next requires a split double-inclusion guard.  */
 # @INCLUDE_NEXT@ @NEXT_LIMITS_H@
 
-# undef _GL_ALREADY_INCLUDING_LIMITS_H
+# undef _@GUARD_PREFIX@_ALREADY_INCLUDING_LIMITS_H
 
 #ifndef _@GUARD_PREFIX@_LIMITS_H
 #define _@GUARD_PREFIX@_LIMITS_H
@@ -99,6 +99,11 @@
 # endif
 #endif
 
+/* Assume no multibyte character is longer than 16 bytes.  */
+#ifndef MB_LEN_MAX
+# define MB_LEN_MAX 16
+#endif
+
 /* Macros specified by C23 and by ISO/IEC TS 18661-1:2014.  */
 
 #if (! defined ULLONG_WIDTH                                             \
@@ -125,7 +130,19 @@
 #  define BOOL_WIDTH 1
 #  define BOOL_MAX 1
 # elif ! defined BOOL_MAX
-#  define BOOL_MAX ((((1U << (BOOL_WIDTH - 1)) - 1) << 1) + 1)
+#  define BOOL_MAX 1
+# endif
+#endif
+
+/* Macro specified by POSIX.  */
+
+/* The maximum ssize_t value.  Although it might not be of ssize_t type
+   as it should be, it's too much trouble to fix this minor detail.  */
+#ifndef SSIZE_MAX
+# ifdef _WIN64
+#  define SSIZE_MAX LLONG_MAX
+# else
+#  define SSIZE_MAX LONG_MAX
 # endif
 #endif
 

@@ -1,12 +1,15 @@
-# btowc.m4 serial 13
-dnl Copyright (C) 2008-2023 Free Software Foundation, Inc.
+# btowc.m4
+# serial 15
+dnl Copyright (C) 2008-2025 Free Software Foundation, Inc.
 dnl This file is free software; the Free Software Foundation
 dnl gives unlimited permission to copy and/or distribute it,
 dnl with or without modifications, as long as this notice is preserved.
+dnl This file is offered as-is, without any warranty.
 
 AC_DEFUN([gl_FUNC_BTOWC],
 [
   AC_REQUIRE([gl_WCHAR_H_DEFAULTS])
+  AC_REQUIRE([gt_TYPE_WINT_T])
 
   dnl Check whether <wchar.h> is usable at all, first. Otherwise the test
   dnl program below may lead to an endless loop. See
@@ -40,12 +43,12 @@ int main ()
           [
 changequote(,)dnl
            case "$host_os" in
-                      # Guess no on Cygwin.
-             cygwin*) gl_cv_func_btowc_nul="guessing no" ;;
-                      # Guess yes on native Windows.
-             mingw*)  gl_cv_func_btowc_nul="guessing yes" ;;
-                      # Guess yes otherwise.
-             *)       gl_cv_func_btowc_nul="guessing yes" ;;
+                                # Guess no on Cygwin.
+             cygwin*)           gl_cv_func_btowc_nul="guessing no" ;;
+                                # Guess yes on native Windows.
+             mingw* | windows*) gl_cv_func_btowc_nul="guessing yes" ;;
+                                # Guess yes otherwise.
+             *)                 gl_cv_func_btowc_nul="guessing yes" ;;
            esac
 changequote([,])dnl
           ])
@@ -59,12 +62,12 @@ changequote([,])dnl
         dnl is present.
 changequote(,)dnl
         case "$host_os" in
-                  # Guess no on IRIX.
-          irix*)  gl_cv_func_btowc_eof="guessing no" ;;
-                  # Guess yes on native Windows.
-          mingw*) gl_cv_func_btowc_eof="guessing yes" ;;
-                  # Guess yes otherwise.
-          *)      gl_cv_func_btowc_eof="guessing yes" ;;
+                             # Guess no on IRIX.
+          irix*)             gl_cv_func_btowc_eof="guessing no" ;;
+                             # Guess yes on native Windows.
+          mingw* | windows*) gl_cv_func_btowc_eof="guessing yes" ;;
+                             # Guess yes otherwise.
+          *)                 gl_cv_func_btowc_eof="guessing yes" ;;
         esac
 changequote([,])dnl
         if test $LOCALE_FR != none; then
@@ -116,21 +119,29 @@ int main ()
           [gl_cv_func_btowc_consistent=yes],
           [gl_cv_func_btowc_consistent=no],
           [case "$host_os" in
-                     # Guess no on mingw.
-             mingw*) AC_EGREP_CPP([Problem], [
+               # Guess no on mingw.
+             mingw* | windows*)
+               AC_EGREP_CPP([Problem], [
 #ifdef __MINGW32__
  Problem
 #endif
-                       ],
-                       [gl_cv_func_btowc_consistent="guessing no"],
-                       [gl_cv_func_btowc_consistent="guessing yes"])
-                     ;;
-                     # Guess yes otherwise.
-             *)      gl_cv_func_btowc_consistent="guessing yes" ;;
+                 ],
+                 [gl_cv_func_btowc_consistent="guessing no"],
+                 [gl_cv_func_btowc_consistent="guessing yes"])
+               ;;
+               # Guess yes otherwise.
+             *) gl_cv_func_btowc_consistent="guessing yes" ;;
            esac
           ])
       ])
 
+    if test $GNULIBHEADERS_OVERRIDE_WINT_T = 1; then
+      dnl On mingw/ucrt, we override the return type of btowc().
+      dnl While the original wint_t (= unsigned short) and the overridden wint_t
+      dnl (= unsigned int) are equivalent in function parameters, this is not
+      dnl the case for function return types.
+      REPLACE_BTOWC=1
+    fi
     case "$gl_cv_func_btowc_nul" in
       *yes) ;;
       *) REPLACE_BTOWC=1 ;;

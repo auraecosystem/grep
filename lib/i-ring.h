@@ -1,5 +1,5 @@
 /* definitions for a simple ring buffer
-   Copyright (C) 2006, 2009-2023 Free Software Foundation, Inc.
+   Copyright (C) 2006, 2009-2025 Free Software Foundation, Inc.
 
    This file is free software: you can redistribute it and/or modify
    it under the terms of the GNU Lesser General Public License as
@@ -19,6 +19,11 @@
 #if !_GL_CONFIG_H_INCLUDED
  #error "Please include config.h first."
 #endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 
 enum { I_RING_SIZE = 4 };
 static_assert (1 <= I_RING_SIZE);
@@ -45,3 +50,8 @@ void i_ring_init (I_ring *ir, int ir_default_val);
 int i_ring_push (I_ring *ir, int val);
 int i_ring_pop (I_ring *ir);
 bool i_ring_empty (I_ring const *ir) _GL_ATTRIBUTE_PURE;
+
+
+#ifdef __cplusplus
+}
+#endif

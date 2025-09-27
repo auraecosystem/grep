@@ -4,15 +4,15 @@
 # Vladimir Michl <Vladimir.Michl@seznam.cz>, 1998.
 # Petr Pisar <petr.pisar@atlas.cz>, 2008, 2009, 2010, 2011, 2012, 2013.
 # Petr Pisar <petr.pisar@atlas.cz>, 2014, 2015, 2016, 2018, 2020, 2021.
-# Petr Pisar <petr.pisar@atlas.cz>, 2022, 2023.
+# Petr Pisar <petr.pisar@atlas.cz>, 2022, 2023, 2025.
 #
 # Thanks to Stanislav Brabec <utx@k332.feld.cvut.cz>.
 msgid ""
 msgstr ""
-"Project-Id-Version: grep 3.10.12\n"
+"Project-Id-Version: grep 3.11.68\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2023-05-13 01:14-0700\n"
-"PO-Revision-Date: 2023-04-21 20:48+02:00\n"
+"POT-Creation-Date: 2025-04-10 09:02-0700\n"
+"PO-Revision-Date: 2025-04-07 20:46+02:00\n"
 "Last-Translator: Petr Pisar <petr.pisar@atlas.cz>\n"
 "Language-Team: Czech <translation-team-cs@lists.sourceforge.net>\n"
 "Language: cs\n"
@@ -35,138 +35,136 @@ msgstr "nejednoznačný argument %s u %s"
 msgid "Valid arguments are:"
 msgstr "Platné argumenty jsou:"
 
-#: lib/c-stack.c:186
+#: lib/c-stack.c:190
 msgid "program error"
 msgstr "chyba programu"
 
-#: lib/c-stack.c:187
+#: lib/c-stack.c:191
 msgid "stack overflow"
 msgstr "přetečení zásobníku"
 
-#: lib/closeout.c:121 src/grep.c:1346
+#: lib/closeout.c:121 src/grep.c:1352
 msgid "write error"
 msgstr "chyba při zápisu"
 
-#: lib/dfa.c:897
+#: lib/dfa.c:910
 msgid "unbalanced ["
 msgstr "nevyvážená ["
 
-#: lib/dfa.c:1018
+#: lib/dfa.c:1031
 msgid "invalid character class"
 msgstr "neplatný třída znaků"
 
-#: lib/dfa.c:1146
+#: lib/dfa.c:1159
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr "zápis třídy znaků je [[:space:]], ne [:space:]"
 
-#: lib/dfa.c:1222
+#: lib/dfa.c:1234
 msgid "unfinished \\ escape"
 msgstr "neukončená escape sekvence \\"
 
-#: lib/dfa.c:1332
+#: lib/dfa.c:1344
 msgid "? at start of expression"
 msgstr "? na začátku výrazu"
 
-#: lib/dfa.c:1344
+#: lib/dfa.c:1356
 msgid "* at start of expression"
 msgstr "* na začátku výrazu"
 
-#: lib/dfa.c:1358
+#: lib/dfa.c:1370
 msgid "+ at start of expression"
 msgstr "+ na začátku výrazu"
 
-#: lib/dfa.c:1413
+#: lib/dfa.c:1425
 msgid "{...} at start of expression"
 msgstr "{…} na začátku výrazu"
 
-#: lib/dfa.c:1416
+#: lib/dfa.c:1428
 msgid "invalid content of \\{\\}"
 msgstr "neplatný obsah \\{\\}"
 
-#: lib/dfa.c:1418
+#: lib/dfa.c:1430
 msgid "regular expression too big"
 msgstr "regulární výraz je příliš velký"
 
-#: lib/dfa.c:1568
+#: lib/dfa.c:1580
 msgid "stray \\ before unprintable character"
 msgstr "přebývající \\ před netisknutelným znakem"
 
-#: lib/dfa.c:1570
+#: lib/dfa.c:1582
 msgid "stray \\ before white space"
 msgstr "přebývající \\ před bílým místem"
 
-#: lib/dfa.c:1574
+#: lib/dfa.c:1593
 #, c-format
-msgid "stray \\ before %lc"
-msgstr "přebývající \\ před %lc"
+msgid "stray \\ before %s"
+msgstr "přebývající \\ před %s"
 
-#: lib/dfa.c:1575
+#: lib/dfa.c:1594 lib/dfa.c:1597
 msgid "stray \\"
 msgstr "přebývající \\"
 
-#: lib/dfa.c:1925
+#: lib/dfa.c:1948
 msgid "unbalanced ("
 msgstr "nevyvážená ("
 
 # ? Není zadaná syntaxe
-#: lib/dfa.c:2042
+#: lib/dfa.c:2065
 msgid "no syntax specified"
 msgstr "syntaxe není určena"
 
-#: lib/dfa.c:2053
+#: lib/dfa.c:2076
 msgid "unbalanced )"
 msgstr "nevyvážená )"
 
-#: lib/error.c:193
+#: lib/error.c:208
 msgid "Unknown system error"
 msgstr "Neznámá systémová chyba"
 
-#: lib/getopt.c:278
+#: lib/getopt.c:282
 #, c-format
 msgid "%s: option '%s%s' is ambiguous\n"
 msgstr "%s: přepínač „%s%s“ není jednoznačný\n"
 
-#: lib/getopt.c:284
+#: lib/getopt.c:288
 #, c-format
 msgid "%s: option '%s%s' is ambiguous; possibilities:"
 msgstr "%s: přepínač „%s%s“ není jednoznačný: možnosti:"
 
-#: lib/getopt.c:319
+#: lib/getopt.c:322
 #, c-format
 msgid "%s: unrecognized option '%s%s'\n"
 msgstr "%s: nerozpoznaný přepínač „%s%s“\n"
 
-#: lib/getopt.c:345
+#: lib/getopt.c:348
 #, c-format
 msgid "%s: option '%s%s' doesn't allow an argument\n"
 msgstr "%s: přepínač „%s%s“ musí být zadán bez argumentu\n"
 
-#: lib/getopt.c:360
+#: lib/getopt.c:363
 #, c-format
 msgid "%s: option '%s%s' requires an argument\n"
 msgstr "%s: přepínač „%s%s“ vyžaduje argument\n"
 
-#: lib/getopt.c:621
+#: lib/getopt.c:624
 #, c-format
 msgid "%s: invalid option -- '%c'\n"
 msgstr "%s: neznámý přepínač – „%c“\n"
 
-#: lib/getopt.c:636 lib/getopt.c:682
+#: lib/getopt.c:639 lib/getopt.c:685
 #, c-format
 msgid "%s: option requires an argument -- '%c'\n"
 msgstr "%s: přepínač vyžaduje argument – „%c“\n"
 
-#: lib/obstack.c:337 lib/obstack.c:339 lib/xalloc-die.c:34
+#: lib/obstack.c:320 lib/obstack.c:322 lib/xalloc-die.c:34
 msgid "memory exhausted"
 msgstr "paměť vyčerpána"
 
 #: lib/openat-die.c:38
-#, c-format
 msgid "unable to record current working directory"
 msgstr "nelze zaznamenat aktuální pracovní adresář"
 
 #: lib/openat-die.c:57
-#, c-format
 msgid "failed to return to initial working directory"
 msgstr "návrat do prvotního pracovního adresáře se nezdařil"
 
@@ -441,54 +439,54 @@ msgstr "Domovská stránka programu %s: <%s>\n"
 msgid "General help using GNU software: <%s>\n"
 msgstr "Obecná pomoc s používáním GNU softwaru: <%s>\n"
 
-#: src/dfasearch.c:59
+#: src/dfasearch.c:57
 #, c-format
 msgid "warning: %s"
 msgstr "pozor: %s"
 
-#: src/grep.c:656
+#: src/grep.c:657
 msgid "(standard input)"
 msgstr "(standardní vstup)"
 
-#: src/grep.c:837
+#: src/grep.c:838
 msgid "invalid context length argument"
 msgstr "neplatný argument délky kontextu"
 
-#: src/grep.c:902
+#: src/grep.c:911
 msgid "input is too large to count"
 msgstr "počet vstupních řádků nelze spočítat (je jich hodně)"
 
-#: src/grep.c:1651
+#: src/grep.c:1656
 #, c-format
 msgid "%s: binary file matches"
 msgstr "%s: binární soubor odpovídá"
 
-#: src/grep.c:1689
+#: src/grep.c:1694
 #, c-format
 msgid "%s: warning: recursive directory loop"
 msgstr "%s: pozor: smyčka rekurzivních adresářů"
 
-#: src/grep.c:1909
+#: src/grep.c:1914
 #, c-format
 msgid "%s: input file is also the output"
 msgstr "%s: vstupní soubor je rovněž výstupem"
 
-#: src/grep.c:1971 src/grep.c:1978
+#: src/grep.c:1976 src/grep.c:1983
 #, c-format
 msgid "Usage: %s [OPTION]... PATTERNS [FILE]...\n"
 msgstr "Použití: %s [PŘEPÍNAČ]… VZORKY [SOUBOR]…\n"
 
-#: src/grep.c:1973
+#: src/grep.c:1978
 #, c-format
 msgid "Try '%s --help' for more information.\n"
 msgstr "Více informací získáte příkazem „%s --help“.\n"
 
-#: src/grep.c:1979
+#: src/grep.c:1984
 #, c-format
 msgid "Search for PATTERNS in each FILE.\n"
 msgstr "Každý SOUBOR prohledá na VZORKY.\n"
 
-#: src/grep.c:1980
+#: src/grep.c:1985
 #, c-format
 msgid ""
 "Example: %s -i 'hello world' menu.h main.c\n"
@@ -501,7 +499,7 @@ msgstr ""
 "\n"
 "Výběr a interpretace vzorku:\n"
 
-#: src/grep.c:1985
+#: src/grep.c:1990
 #, c-format
 msgid ""
 "  -E, --extended-regexp     PATTERNS are extended regular expressions\n"
@@ -514,7 +512,7 @@ msgstr ""
 "  -G, --basic-regexp        VZORKY jsou základní regulární výrazy\n"
 "  -P, --perl-regexp         VZORKY jsou regulární výrazy jazyka Perl\n"
 
-#: src/grep.c:1991
+#: src/grep.c:1996
 #, c-format
 msgid ""
 "  -e, --regexp=PATTERNS     use PATTERNS for matching\n"
@@ -537,7 +535,7 @@ msgstr ""
 "  -z, --null-data           řádek končí nulovým bajtem místo znaku nového "
 "řádku\n"
 
-#: src/grep.c:1999
+#: src/grep.c:2004
 #, c-format
 msgid ""
 "\n"
@@ -554,7 +552,7 @@ msgstr ""
 "  -V, --version             vypíše označení verze a skončí\n"
 "      --help                vypíše tuto nápovědu a skončí\n"
 
-#: src/grep.c:2006
+#: src/grep.c:2011
 #, c-format
 msgid ""
 "\n"
@@ -581,7 +579,7 @@ msgstr ""
 "      --label=NÁZEV         použije NÁZEV jako označení standardního\n"
 "                            vstupu na výstupu\n"
 
-#: src/grep.c:2017
+#: src/grep.c:2022
 #, c-format
 msgid ""
 "  -o, --only-matching       show only nonempty parts of lines that match\n"
@@ -594,12 +592,12 @@ msgstr ""
 "řádků\n"
 "  -q, --quiet, --silent     potlačí obvyklý výstup\n"
 "      --binary-files=TYP    definuje typ binárních souborů\n"
-"                            TYP může být: „binary“ (binární), "
-"„text“ (textový)\n"
+"                            TYP může být: „binary“ (binární), „text“ "
+"(textový)\n"
 "                            nebo „without-match“ (bez vyhovění vzorku)\n"
 "  -a, --text                jako --binary-files=text\n"
 
-#: src/grep.c:2024
+#: src/grep.c:2029
 #, c-format
 msgid ""
 "  -I                        equivalent to --binary-files=without-match\n"
@@ -616,14 +614,14 @@ msgstr ""
 "                            „skip“ (přeskočit)\n"
 "  -D, --devices=AKCE        jak zpracovávat zařízení, FIFO (roury) a "
 "sockety,\n"
-"                            AKCE může být: „read“ (číst) nebo "
-"„skip“ (přeskočit)\n"
+"                            AKCE může být: „read“ (číst) nebo „skip“ "
+"(přeskočit)\n"
 "  -r, --recursive           jako --directories=recurse\n"
 "  -R, --dereference-recursive\n"
 "                            obdobně, jen následuje všechny symbolické "
 "odkazy\n"
 
-#: src/grep.c:2033
+#: src/grep.c:2038
 #, c-format
 msgid ""
 "      --include=GLOB        search only files that match GLOB (a file "
@@ -640,7 +638,7 @@ msgstr ""
 "                            ze SOUBORU\n"
 "      --exclude-dir=GLOB    přeskočí adresáře, které vyhovují GLOBU\n"
 
-#: src/grep.c:2040
+#: src/grep.c:2045
 #, c-format
 msgid ""
 "  -L, --files-without-match  print only names of FILEs with no selected "
@@ -659,7 +657,7 @@ msgstr ""
 "  -T, --initial-tab         zarovná začátky řádků tabulátory (je-li třeba)\n"
 "  -Z, --null                vypíše nulový bajt za jménem SOUBORU\n"
 
-#: src/grep.c:2046
+#: src/grep.c:2051
 #, c-format
 msgid ""
 "\n"
@@ -674,7 +672,7 @@ msgstr ""
 "  -A, --after-context=POČET  vypíše POČET řádků za shodou\n"
 "  -C, --context=POČET        vypíše POČET řádků kontextu (před i za shodou)\n"
 
-#: src/grep.c:2053
+#: src/grep.c:2058
 #, c-format
 msgid ""
 "  -NUM                      same as --context=NUM\n"
@@ -700,53 +698,49 @@ msgstr ""
 "  -U, --binary               neodstraňuje znak CR na konci řádku (MSDOS/"
 "Windows)\n"
 
-#: src/grep.c:2062
+#: src/grep.c:2067
 #, c-format
 msgid ""
-"When FILE is '-', read standard input.  With no FILE, read '.' if\n"
-"recursive, '-' otherwise.  With fewer than two FILEs, assume -h.\n"
-"Exit status is 0 if any line is selected, 1 otherwise;\n"
-"if any error occurs and -q is not given, the exit status is 2.\n"
+"When FILE is '-', read standard input.  If no FILE is given, read standard\n"
+"input, but with -r, recursively search the working directory instead.  With\n"
+"fewer than two FILEs, assume -h.  Exit status is 0 if any line is selected,\n"
+"1 otherwise; if any error occurs and -q is not given, the exit status is 2.\n"
 msgstr ""
-"Je-li SOUBOR -, čte standardní vstup. Ne-li SOUBOR zadán, čte „.“,\n"
-"je-li přítomen přepínač -r, jinak čte standardní vstup. Jestliže jsou\n"
-"zadány méně než dva SOUBORY, pak je výchozí přepínač -h.\n"
+"Je-li SOUBOR „-“, čte standardní vstup. Ne-li SOUBOR zadán, čte standardní\n"
+"vstup, avšak je-li přítomen přepínač -r, rekurzivně prohledá pracovní "
+"adresář.\n"
+"Jestliže jsou zadány méně než dva SOUBORY, pak je výchozí přepínač -h.\n"
 "Návratový kód je 0 při nalezení vyhovujícího řádku, jinak 1.\n"
 "Vyskytne-li se chyba a není-li zadán přepínač -q, bude vrácen kód 2.\n"
 
-#: src/grep.c:2104
+#: src/grep.c:2110
 msgid "conflicting matchers specified"
 msgstr "zadány kolidující vzorky"
 
-#: src/grep.c:2111
+#: src/grep.c:2117
 msgid "Perl matching not supported in a --disable-perl-regexp build"
 msgstr ""
 "V programu přeloženém s přepínačem --disable-perl-regexp nejsou perlové "
 "výrazy podporovány"
 
-#: src/grep.c:2113
+#: src/grep.c:2119
 #, c-format
 msgid "invalid matcher %s"
 msgstr "neplatný syntaxe vzorku %s"
 
-#: src/grep.c:2534
+#: src/grep.c:2541
 msgid "unknown devices method"
 msgstr "neznámá metoda obsluhy zařízení"
 
-#: src/grep.c:2576
-#, c-format
-msgid "warning: --unix-byte-offsets (-u) is obsolete"
-msgstr "pozor: přepínač --unix-byte-offsets (-u) je zastaralý"
-
-#: src/grep.c:2688
+#: src/grep.c:2690
 msgid "invalid max count"
 msgstr "neplatný maximální počet"
 
-#: src/grep.c:2746
+#: src/grep.c:2747
 msgid "unknown binary-files type"
 msgstr "neznámý typ binárního souboru"
 
-#: src/grep.c:2831
+#: src/grep.c:2832
 msgid ""
 "Written by Mike Haertel and others; see\n"
 "<https://git.savannah.gnu.org/cgit/grep.git/tree/AUTHORS>."
@@ -754,12 +748,12 @@ msgstr ""
 "Napsal Mike Haertel a další, vizte\n"
 "<https://git.savannah.gnu.org/cgit/grep.git/tree/AUTHORS>."
 
-#: src/grep.c:2937
+#: src/grep.c:2939
 #, c-format
 msgid "warning: GREP_COLOR='%s' is deprecated; use GREP_COLORS='mt=%s'"
 msgstr "pozor: GREP_COLOR='%s' je zastaralé, použijte GREP_COLORS='mt=%s'"
 
-#: src/pcresearch.c:92
+#: src/pcresearch.c:89
 #, c-format
 msgid ""
 "\n"
@@ -768,61 +762,65 @@ msgstr ""
 "\n"
 "grep -P používá PCRE2 %s\n"
 
-#: src/pcresearch.c:169
+#: src/pcresearch.c:167
 msgid "-P supports only unibyte locales on this platform"
 msgstr "-P podporuje na této platformě pouze jednobajtová národní prostředí"
 
-#: src/pcresearch.c:171
+#: src/pcresearch.c:169
 msgid "-P supports only unibyte and UTF-8 locales"
 msgstr "-P podporuje pouze jednobajtová a UTF-8 národní prostředí"
 
-#: src/pcresearch.c:194
+#: src/pcresearch.c:192
 msgid "the -P option only supports a single pattern"
 msgstr "přepínač -P lze být použít pouze s jedním vzorkem"
 
-#: src/pcresearch.c:290
+#: src/pcresearch.c:288
 msgid "exceeded PCRE's line length limit"
 msgstr "překročeno omezení PCRE na délku řádku"
 
-#: src/pcresearch.c:368
+#: src/pcresearch.c:366
 #, c-format
 msgid "%s: memory exhausted"
 msgstr "%s: paměť vyčerpána"
 
 # It corresponds to PCRE2_ERROR_JIT_STACKLIMIT error.
-#: src/pcresearch.c:371
+#: src/pcresearch.c:369
 #, c-format
 msgid "%s: exhausted PCRE JIT stack"
 msgstr "%s: JIT zásobník knihovny PCRE vyčerpán"
 
 # It corresponds to PCRE2_ERROR_MATCHLIMIT error.
-#: src/pcresearch.c:375
+#: src/pcresearch.c:373
 #, c-format
 msgid "%s: exceeded PCRE's backtracking limit"
 msgstr "%s: překročeno omezení PCRE na délku návratu"
 
 # It corresponds to PCRE2_ERROR_DEPTHLIMIT error.
-#: src/pcresearch.c:380
+#: src/pcresearch.c:378
 #, c-format
 msgid "%s: exceeded PCRE's nested backtracking limit"
 msgstr "%s: překročeno omezení PCRE na hloubku návratu ze zanoření"
 
 # It corresponds to PCRE2_ERROR_RECURSELOOP error.
-#: src/pcresearch.c:384
+#: src/pcresearch.c:382
 #, c-format
 msgid "%s: PCRE detected recurse loop"
 msgstr "%s: PCRE objevilo smyčku v zanoření"
 
 # It corresponds to PCRE2_ERROR_HEAPLIMIT error.
-#: src/pcresearch.c:389
+#: src/pcresearch.c:387
 #, c-format
 msgid "%s: exceeded PCRE's heap limit"
 msgstr "%s: překročeno omezení PCRE na velikost haldy"
 
-#: src/pcresearch.c:398
+#: src/pcresearch.c:396
 #, c-format
 msgid "%s: internal PCRE error: %d"
 msgstr "%s: vnitřní chyba PCRE: %d"
+
+#, c-format
+#~ msgid "warning: --unix-byte-offsets (-u) is obsolete"
+#~ msgstr "pozor: přepínač --unix-byte-offsets (-u) je zastaralý"
 
 #~ msgid ""
 #~ "\n"
@@ -1009,8 +1007,8 @@ msgstr "%s: vnitřní chyba PCRE: %d"
 #~ "VZORKU\n"
 #~ "  -q, --quiet, --silent     potlačí obvyklý výstup\n"
 #~ "      --binary-files=TYP    definuje typ binárních souborů\n"
-#~ "                            TYP může být: „binary“ (binární), "
-#~ "„text“ (textový)\n"
+#~ "                            TYP může být: „binary“ (binární), „text“ "
+#~ "(textový)\n"
 #~ "                            nebo „without-match“ (bez vyhovění vzorku)\n"
 #~ "  -a, --text                jako --binary-files=text\n"
 #~ "  -I                        jako --binary-files=without-match\n"
@@ -1019,8 +1017,8 @@ msgstr "%s: vnitřní chyba PCRE: %d"
 #~ "                            „skip“ (přeskočit)\n"
 #~ "  -D, --devices=AKCE        jak zpracovávat zařízení, FIFO (roury) a "
 #~ "sockety,\n"
-#~ "                            AKCE může být: „read“ (číst) nebo "
-#~ "„skip“ (přeskočit)\n"
+#~ "                            AKCE může být: „read“ (číst) nebo „skip“ "
+#~ "(přeskočit)\n"
 #~ "  -R, -r, --recursive       jako --directories=recurse\n"
 #~ "      --include=VZOREK      soubory, které vyhovují vzorku, budou "
 #~ "zpracovány\n"

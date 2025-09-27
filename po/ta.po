@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GNU grep 3.10.12\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2023-05-13 01:14-0700\n"
-"PO-Revision-Date: 2023-04-26 00:29+0100\n"
+"POT-Creation-Date: 2025-04-10 09:02-0700\n"
+"PO-Revision-Date: 2023-05-16 00:08+0100\n"
 "Last-Translator: Arun Isaac <arunisaac@systemreboot.net>\n"
 "Language-Team: Tamil <tamil@systemreboot.net>\n"
 "Language: ta\n"
@@ -33,137 +33,135 @@ msgstr "%2$s க்குத் தெளிவற்ற செயலுரு�
 msgid "Valid arguments are:"
 msgstr "ஏற்கத்தகு செயலுருபுகள்:"
 
-#: lib/c-stack.c:186
+#: lib/c-stack.c:190
 msgid "program error"
 msgstr "நிரல் பிழை"
 
-#: lib/c-stack.c:187
+#: lib/c-stack.c:191
 msgid "stack overflow"
 msgstr "அடுக்கு வழிவு"
 
-#: lib/closeout.c:121 src/grep.c:1346
+#: lib/closeout.c:121 src/grep.c:1352
 msgid "write error"
 msgstr "எழுது பிழை"
 
-#: lib/dfa.c:897
+#: lib/dfa.c:910
 msgid "unbalanced ["
 msgstr "நிறைவுறா ["
 
-#: lib/dfa.c:1018
+#: lib/dfa.c:1031
 msgid "invalid character class"
 msgstr "ஏற்கத்தகா வரியுரு வகுப்பு"
 
-#: lib/dfa.c:1146
+#: lib/dfa.c:1159
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr "வரியுரு வகுப்பை [[:space:]] எனக் குறிப்பிடுக, [:space:] என்றல்ல"
 
-#: lib/dfa.c:1222
+#: lib/dfa.c:1234
 msgid "unfinished \\ escape"
 msgstr "நிறைவுறா \\ விடுவிப்பு"
 
-#: lib/dfa.c:1332
+#: lib/dfa.c:1344
 msgid "? at start of expression"
 msgstr "செங்குறித்தொடர் முன் ?"
 
-#: lib/dfa.c:1344
+#: lib/dfa.c:1356
 msgid "* at start of expression"
 msgstr "செங்குறித்தொடர் முன் *"
 
-#: lib/dfa.c:1358
+#: lib/dfa.c:1370
 msgid "+ at start of expression"
 msgstr "செங்குறித்தொடர் முன் +"
 
-#: lib/dfa.c:1413
+#: lib/dfa.c:1425
 msgid "{...} at start of expression"
 msgstr "செங்குறித்தொடர் முன் {...}"
 
-#: lib/dfa.c:1416
+#: lib/dfa.c:1428
 msgid "invalid content of \\{\\}"
 msgstr "ஏற்கத்தகா நெளி அடைப்பு \\{\\} உள்ளடக்கம்"
 
-#: lib/dfa.c:1418
+#: lib/dfa.c:1430
 msgid "regular expression too big"
 msgstr "செங்குறித்தொடர் அளவிற்கு மிஞ்சியது"
 
-#: lib/dfa.c:1568
+#: lib/dfa.c:1580
 msgid "stray \\ before unprintable character"
 msgstr "எழுத்துவடிவில்லா வரியுரு முன் இடம் தவறிய \\"
 
-#: lib/dfa.c:1570
+#: lib/dfa.c:1582
 msgid "stray \\ before white space"
 msgstr "வெள்ளை இடைவெளி முன் இடம் தவறிய \\"
 
-#: lib/dfa.c:1574
-#, c-format
-msgid "stray \\ before %lc"
+#: lib/dfa.c:1593
+#, fuzzy, c-format
+msgid "stray \\ before %s"
 msgstr "%lc முன் இடம் தவறிய \\"
 
-#: lib/dfa.c:1575
+#: lib/dfa.c:1594 lib/dfa.c:1597
 msgid "stray \\"
 msgstr "இடம் தவறிய \\"
 
-#: lib/dfa.c:1925
+#: lib/dfa.c:1948
 msgid "unbalanced ("
 msgstr "நிறைவுறா ("
 
-#: lib/dfa.c:2042
+#: lib/dfa.c:2065
 msgid "no syntax specified"
 msgstr "தொடரமைப்பு குறிப்பிடப்படவில்லை"
 
-#: lib/dfa.c:2053
+#: lib/dfa.c:2076
 msgid "unbalanced )"
 msgstr "நிறைவுறா )"
 
-#: lib/error.c:193
+#: lib/error.c:208
 msgid "Unknown system error"
 msgstr "அறியப்படாக் கணிப்பொறிப் பிழை"
 
-#: lib/getopt.c:278
+#: lib/getopt.c:282
 #, c-format
 msgid "%s: option '%s%s' is ambiguous\n"
 msgstr "%s: செயல்மாற்றி '%s%s' தெளிவற்றது\n"
 
-#: lib/getopt.c:284
+#: lib/getopt.c:288
 #, c-format
 msgid "%s: option '%s%s' is ambiguous; possibilities:"
 msgstr "%s: செயல்மாற்றி '%s%s' தெளிவற்றது; ஏற்கத்தக்கவை:"
 
-#: lib/getopt.c:319
+#: lib/getopt.c:322
 #, c-format
 msgid "%s: unrecognized option '%s%s'\n"
 msgstr "%s: அறியப்படாச் செயல்மாற்றி '%s%s'\n"
 
-#: lib/getopt.c:345
+#: lib/getopt.c:348
 #, c-format
 msgid "%s: option '%s%s' doesn't allow an argument\n"
 msgstr "%s: செயல்மாற்றி '%s%s' செயலுருபு அற்றது\n"
 
-#: lib/getopt.c:360
+#: lib/getopt.c:363
 #, c-format
 msgid "%s: option '%s%s' requires an argument\n"
 msgstr "%s: '%s%s' செயல்மாற்றிக்குச் செயலுருபு தேவை\n"
 
-#: lib/getopt.c:621
+#: lib/getopt.c:624
 #, c-format
 msgid "%s: invalid option -- '%c'\n"
 msgstr "%s: ஏற்கத்தகா செயல்மாற்றி -- '%c'\n"
 
-#: lib/getopt.c:636 lib/getopt.c:682
+#: lib/getopt.c:639 lib/getopt.c:685
 #, c-format
 msgid "%s: option requires an argument -- '%c'\n"
 msgstr "%s: '%c' செயல்மாற்றிக்குச் செயலுருபு தேவை\n"
 
-#: lib/obstack.c:337 lib/obstack.c:339 lib/xalloc-die.c:34
+#: lib/obstack.c:320 lib/obstack.c:322 lib/xalloc-die.c:34
 msgid "memory exhausted"
 msgstr "நினைவகம் தீர்ந்தது"
 
 #: lib/openat-die.c:38
-#, c-format
 msgid "unable to record current working directory"
 msgstr "பணியடைவைப் பதிக்க இயலவில்லை"
 
 #: lib/openat-die.c:57
-#, c-format
 msgid "failed to return to initial working directory"
 msgstr "முதல் பணியடைவிற்குத் திரும்ப இயலவில்லை"
 
@@ -215,7 +213,7 @@ msgstr "ஏற்கத்தகா செங்குறித்தொடர�
 
 #: lib/regcomp.c:131
 msgid "Invalid collation character"
-msgstr "ஏற்கத்தகா ஒப்பாய்வு உரு"
+msgstr "ஏற்கத்தகா ஒப்பாய்வு வரியுரு"
 
 #: lib/regcomp.c:134
 msgid "Invalid character class name"
@@ -329,7 +327,7 @@ msgid ""
 "Written by %s, %s, %s,\n"
 "and %s.\n"
 msgstr ""
-"எழுதியவர் %s, %s, %s,\n"
+"எழுதியவர் %s, %s, %s\n"
 "மற்றும் %s.\n"
 
 #. TRANSLATORS: Each %s denotes an author name.
@@ -408,7 +406,7 @@ msgid ""
 msgstr ""
 "எழுதியவர் %s, %s, %s,\n"
 "%s, %s, %s, %s,\n"
-"%s, %s மற்றும் பிறர்.\n"
+"%s, %s மற்றும் பலர்.\n"
 
 #. TRANSLATORS: The placeholder indicates the bug-reporting address
 #. for this package.  Please add _another line_ saying
@@ -436,54 +434,54 @@ msgstr "%s வலைத்தளம்: <%s>\n"
 msgid "General help using GNU software: <%s>\n"
 msgstr "GNU மென்பொருள் பயன்பாட்டு உதவிக்கு: <%s>\n"
 
-#: src/dfasearch.c:59
+#: src/dfasearch.c:57
 #, c-format
 msgid "warning: %s"
 msgstr "எச்சரிக்கை: %s"
 
-#: src/grep.c:656
+#: src/grep.c:657
 msgid "(standard input)"
 msgstr "(இயல் உள்ளீடு)"
 
-#: src/grep.c:837
+#: src/grep.c:838
 msgid "invalid context length argument"
 msgstr "ஏற்கத்தகாச் சூழல் மதிப்புரு நீளம்"
 
-#: src/grep.c:902
+#: src/grep.c:911
 msgid "input is too large to count"
 msgstr "கூட்டல் வழிவு"
 
-#: src/grep.c:1651
+#: src/grep.c:1656
 #, c-format
 msgid "%s: binary file matches"
 msgstr "%s: இருமக்கோப்பு பொருந்துகிறது"
 
-#: src/grep.c:1689
+#: src/grep.c:1694
 #, c-format
 msgid "%s: warning: recursive directory loop"
 msgstr "%s: எச்சரிக்கை: தற்சுருண்ட அடைவுச் சுற்று"
 
-#: src/grep.c:1909
+#: src/grep.c:1914
 #, c-format
 msgid "%s: input file is also the output"
 msgstr "%s: உள்ளீடும் வெளியீடும் ஒன்றே"
 
-#: src/grep.c:1971 src/grep.c:1978
+#: src/grep.c:1976 src/grep.c:1983
 #, c-format
 msgid "Usage: %s [OPTION]... PATTERNS [FILE]...\n"
 msgstr "பயன்பாடு: %s [<செயல்மாற்றி>]... <தேடுதொடர்கள்> [<கோப்பு>]...\n"
 
-#: src/grep.c:1973
+#: src/grep.c:1978
 #, c-format
 msgid "Try '%s --help' for more information.\n"
 msgstr "மேலும் விவரத்திற்கு '%s --help' கட்டளையை இயக்குக.\n"
 
-#: src/grep.c:1979
+#: src/grep.c:1984
 #, c-format
 msgid "Search for PATTERNS in each FILE.\n"
 msgstr "ஒவ்வொருக் <கோப்பிலும்> <தேடுதொடர்களைத்> தேடு.\n"
 
-#: src/grep.c:1980
+#: src/grep.c:1985
 #, c-format
 msgid ""
 "Example: %s -i 'hello world' menu.h main.c\n"
@@ -496,7 +494,7 @@ msgstr ""
 "\n"
 "தேடுதொடர்கள் தேர்வும் பொருளும்:\n"
 
-#: src/grep.c:1985
+#: src/grep.c:1990
 #, c-format
 msgid ""
 "  -E, --extended-regexp     PATTERNS are extended regular expressions\n"
@@ -509,7 +507,7 @@ msgstr ""
 "  -G, --basic-regexp         <தேடுதொடர்கள்> அடிப்படை செங்குறித்தொடர்கள்\n"
 "  -P, --perl-regexp          <தேடுதொடர்கள்> Perl செங்குறித்தொடர்கள்\n"
 
-#: src/grep.c:1991
+#: src/grep.c:1996
 #, c-format
 msgid ""
 "  -e, --regexp=PATTERNS     use PATTERNS for matching\n"
@@ -529,7 +527,7 @@ msgstr ""
 "  -z, --null-data                  வரி 0 எண்ணிருமியில் முடிகிறது, புதிய "
 "வரியுருவில் அல்ல\n"
 
-#: src/grep.c:1999
+#: src/grep.c:2004
 #, c-format
 msgid ""
 "\n"
@@ -546,7 +544,7 @@ msgstr ""
 "  -V, --version             பதிப்பு விவரத்தைக் காட்டி வெளியேறு\n"
 "      --help                இவ்வுதவி உரையைக் காட்டி வெளியேறு\n"
 
-#: src/grep.c:2006
+#: src/grep.c:2011
 #, c-format
 msgid ""
 "\n"
@@ -570,7 +568,7 @@ msgstr ""
 "  -h, --no-filename          வெளியீட்டுக்கு முன் கோப்புப் பெயரைக் காட்டாதே\n"
 "      --label=<பெயர்>        <பெயரை> இயல் உள்ளீட்டின் பெயராக பயன்படுத்து\n"
 
-#: src/grep.c:2017
+#: src/grep.c:2022
 #, c-format
 msgid ""
 "  -o, --only-matching       show only nonempty parts of lines that match\n"
@@ -586,7 +584,7 @@ msgstr ""
 "இருக்கலாம்\n"
 "  -a, --text                 --binary-files=text என்பதை ஒத்தது\n"
 
-#: src/grep.c:2024
+#: src/grep.c:2029
 #, c-format
 msgid ""
 "  -I                        equivalent to --binary-files=without-match\n"
@@ -605,7 +603,7 @@ msgstr ""
 "  -r, --recursive               --directories=recurse என்பதை ஒத்தது\n"
 "  -R, --dereference-recursive   -r போன்று, ஆனால் மென்தொடுப்புகளைப் பின் தொடர்\n"
 
-#: src/grep.c:2033
+#: src/grep.c:2038
 #, c-format
 msgid ""
 "      --include=GLOB        search only files that match GLOB (a file "
@@ -624,7 +622,7 @@ msgstr ""
 "      --exclude-dir=<கோப்புப்பெயர்ப் பாங்கு>   அடைவின் பெயர் <கோப்புப்பெயர்ப் பாங்குடன்> "
 "பொருந்தின் அதைத் தேடாதே\n"
 
-#: src/grep.c:2040
+#: src/grep.c:2045
 #, c-format
 msgid ""
 "  -L, --files-without-match  print only names of FILEs with no selected "
@@ -643,7 +641,7 @@ msgstr ""
 "  -T, --initial-tab          தத்தல்களை ஒன்றின் கீழ் ஒன்றமை (தேவைப்படின்)\n"
 "  -Z, --null                 <கோப்புப்> பெயர் பின் 0 எண்ணிருமியை இடு\n"
 
-#: src/grep.c:2046
+#: src/grep.c:2051
 #, c-format
 msgid ""
 "\n"
@@ -658,7 +656,7 @@ msgstr ""
 "  -A, --after-context=<எண்>   பிந்தைய <எண்> வரிகளைக் காட்டு\n"
 "  -C, --context=<எண்>         சூழ்ந்த <எண்> வரிகளைக் காட்டு\n"
 
-#: src/grep.c:2053
+#: src/grep.c:2058
 #, c-format
 msgid ""
 "  -NUM                      same as --context=NUM\n"
@@ -681,13 +679,13 @@ msgstr ""
 "  -U, --binary                    வரி ஈற்றிலுள்ள ஏந்தி மீளல் (CR) வரியுருக்களை "
 "அழிக்காதே (MSDOS/Windows)\n"
 
-#: src/grep.c:2062
-#, c-format
+#: src/grep.c:2067
+#, fuzzy, c-format
 msgid ""
-"When FILE is '-', read standard input.  With no FILE, read '.' if\n"
-"recursive, '-' otherwise.  With fewer than two FILEs, assume -h.\n"
-"Exit status is 0 if any line is selected, 1 otherwise;\n"
-"if any error occurs and -q is not given, the exit status is 2.\n"
+"When FILE is '-', read standard input.  If no FILE is given, read standard\n"
+"input, but with -r, recursively search the working directory instead.  With\n"
+"fewer than two FILEs, assume -h.  Exit status is 0 if any line is selected,\n"
+"1 otherwise; if any error occurs and -q is not given, the exit status is 2.\n"
 msgstr ""
 "<கோப்பு> '-' எனின், இயல் உள்ளீடைப் படி.  <கோப்பு> இல்லின் மீள்சுருளாயின் '.'\n"
 "கோப்பைப் படி; மீள்சுருள் இல்லின் இயல் உள்ளீட்டைப் படி.  ஒரேக் <கோப்பெனின்> -h எனக்\n"
@@ -695,37 +693,32 @@ msgstr ""
 "தேர்ந்தெடுக்கபடவில்லையெனின் வெளியேற்ற நிலை 1; -q கொடுக்கப்பட்டு பிழையுற்றின்\n"
 "வெளியேற்ற நிலை 2.\n"
 
-#: src/grep.c:2104
+#: src/grep.c:2110
 msgid "conflicting matchers specified"
 msgstr "முரணான தேடல் முறைகள்"
 
-#: src/grep.c:2111
+#: src/grep.c:2117
 msgid "Perl matching not supported in a --disable-perl-regexp build"
 msgstr "--disable-perl-regexp கொண்டு பெயர்க்கப்பட்டதால் Perl ஒப்பீடு இல்லை"
 
-#: src/grep.c:2113
+#: src/grep.c:2119
 #, c-format
 msgid "invalid matcher %s"
 msgstr "ஏற்கத்தகாத் தேடல் முறை %s"
 
-#: src/grep.c:2534
+#: src/grep.c:2541
 msgid "unknown devices method"
 msgstr "அறியப்படாக் கருவிக் கையாள் முறை"
 
-#: src/grep.c:2576
-#, c-format
-msgid "warning: --unix-byte-offsets (-u) is obsolete"
-msgstr "எச்சரிக்கை: --unix-byte-offsets (-u) வழக்கொழிந்தது"
-
-#: src/grep.c:2688
+#: src/grep.c:2690
 msgid "invalid max count"
 msgstr "ஏற்கத்தகா வரிகள் எண்ணிக்கை"
 
-#: src/grep.c:2746
+#: src/grep.c:2747
 msgid "unknown binary-files type"
 msgstr "ஏற்கத்தகா இருமக்கோப்பு வகை"
 
-#: src/grep.c:2831
+#: src/grep.c:2832
 msgid ""
 "Written by Mike Haertel and others; see\n"
 "<https://git.savannah.gnu.org/cgit/grep.git/tree/AUTHORS>."
@@ -733,12 +726,12 @@ msgstr ""
 "மைக் ஏர்டெலும் பிறரும் எழுதியது;\n"
 "<https://git.savannah.gnu.org/cgit/grep.git/tree/AUTHORS> காண்க."
 
-#: src/grep.c:2937
+#: src/grep.c:2939
 #, c-format
 msgid "warning: GREP_COLOR='%s' is deprecated; use GREP_COLORS='mt=%s'"
 msgstr "எச்சரிக்கை: GREP_COLOR='%s' வழக்கொழிந்தது; GREP_COLORS='mt=%s' பயன்படுத்துக"
 
-#: src/pcresearch.c:92
+#: src/pcresearch.c:89
 #, c-format
 msgid ""
 "\n"
@@ -748,56 +741,60 @@ msgstr ""
 "\n"
 "grep -P PCRE2 %s பயன்படுத்துகிறது\n"
 
-#: src/pcresearch.c:169
+#: src/pcresearch.c:167
 msgid "-P supports only unibyte locales on this platform"
 msgstr "இத்தளத்தில் -P ஒற்றை எண்ணிருமி வட்டாரங்களில் மட்டுமே இயங்கும்"
 
-#: src/pcresearch.c:171
+#: src/pcresearch.c:169
 msgid "-P supports only unibyte and UTF-8 locales"
 msgstr "-P ஒற்றை எண்ணிருமி வட்டாரங்களிலும் UTF-8 வட்டாரங்களிலும் மட்டுமே இயங்கும்"
 
-#: src/pcresearch.c:194
+#: src/pcresearch.c:192
 msgid "the -P option only supports a single pattern"
 msgstr "-P செயல்மாற்றிக்கு ஒருத் தேடுதொடர் தான் இருக்க வேண்டும்"
 
-#: src/pcresearch.c:290
+#: src/pcresearch.c:288
 msgid "exceeded PCRE's line length limit"
 msgstr "PCRE நிரலகத்தின் வரி நீள வரம்பு மீறப்பட்டது"
 
-#: src/pcresearch.c:368
+#: src/pcresearch.c:366
 #, c-format
 msgid "%s: memory exhausted"
 msgstr "%s: நினைவகம் தீர்ந்தது"
 
-#: src/pcresearch.c:371
+#: src/pcresearch.c:369
 #, c-format
 msgid "%s: exhausted PCRE JIT stack"
 msgstr "%s: PCRE நிரலகத்தின் JIT அடுக்கு தீர்ந்தது"
 
-#: src/pcresearch.c:375
+#: src/pcresearch.c:373
 #, c-format
 msgid "%s: exceeded PCRE's backtracking limit"
 msgstr "%s: PCRE நிரலகத்தின் பின்வாங்கல் வரம்பு மீறப்பட்டது"
 
-#: src/pcresearch.c:380
+#: src/pcresearch.c:378
 #, c-format
 msgid "%s: exceeded PCRE's nested backtracking limit"
 msgstr "%s: PCRE நிரலகத்தின் உள்ளமை பின்வாங்கல் வரம்பு மீறப்பட்டது"
 
-#: src/pcresearch.c:384
+#: src/pcresearch.c:382
 #, c-format
 msgid "%s: PCRE detected recurse loop"
 msgstr "%s: PCRE மீள்சுருள் சுற்று கண்டறியப்பட்டது"
 
-#: src/pcresearch.c:389
+#: src/pcresearch.c:387
 #, c-format
 msgid "%s: exceeded PCRE's heap limit"
 msgstr "%s: PCRE நிரலகத்தின் குவியல் வரம்பு மீறப்பட்டது"
 
-#: src/pcresearch.c:398
+#: src/pcresearch.c:396
 #, c-format
 msgid "%s: internal PCRE error: %d"
 msgstr "%s: PCRE அகப்பிழை: %d"
+
+#, c-format
+#~ msgid "warning: --unix-byte-offsets (-u) is obsolete"
+#~ msgstr "எச்சரிக்கை: --unix-byte-offsets (-u) வழக்கொழிந்தது"
 
 #~ msgid "failed to allocate memory for the PCRE JIT stack"
 #~ msgstr "PCRE JIT அடுக்குக்கு நினைவகத்தில் போதிய இடம் ஒதுக்க இயலவில்லை"

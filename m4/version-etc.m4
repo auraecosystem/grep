@@ -1,8 +1,10 @@
-# version-etc.m4 serial 2
-# Copyright (C) 2009-2023 Free Software Foundation, Inc.
-# This file is free software; the Free Software Foundation
-# gives unlimited permission to copy and/or distribute it,
-# with or without modifications, as long as this notice is preserved.
+# version-etc.m4
+# serial 2
+dnl Copyright (C) 2009-2025 Free Software Foundation, Inc.
+dnl This file is free software; the Free Software Foundation
+dnl gives unlimited permission to copy and/or distribute it,
+dnl with or without modifications, as long as this notice is preserved.
+dnl This file is offered as-is, without any warranty.
 
 dnl $1 - configure flag and define name
 dnl $2 - human readable description
