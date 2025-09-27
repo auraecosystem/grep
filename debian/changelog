@@ -1,3 +1,11 @@
+grep (3.12-1) unstable; urgency=low
+
+  * Upload to unstable
+  * Declare compliance with Standards-Version 4.7.2
+  * Replace old FSF physical address with URL in GPL information
+
+ -- Santiago Ruano Rincón <santiago@debian.org>  Sat, 27 Sep 2025 12:19:29 -0300
+
 grep (3.12-1~exp2) experimental; urgency=medium
 
   * Directly install in /usr, and remove Build-Dep on dh-sequence-movetousr
