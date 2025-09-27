@@ -1,5 +1,5 @@
 /* grep.h - interface to grep driver for searching subroutines.
-   Copyright (C) 1992, 1998, 2001, 2007, 2009-2023 Free Software Foundation,
+   Copyright (C) 1992, 1998, 2001, 2007, 2009-2025 Free Software Foundation,
    Inc.
 
    This program is free software; you can redistribute it and/or modify
@@ -13,9 +13,7 @@
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program; if not, write to the Free Software
-   Foundation, Inc., 51 Franklin Street - Fifth Floor, Boston, MA
-   02110-1301, USA.  */
+   along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
 
 #ifndef GREP_GREP_H
 #define GREP_GREP_H 1

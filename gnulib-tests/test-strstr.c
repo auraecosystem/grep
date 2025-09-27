@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2007-2023 Free Software Foundation, Inc.
+ * Copyright (C) 2004, 2007-2025 Free Software Foundation, Inc.
  * Written by Bruno Haible and Eric Blake
  *
  * This program is free software: you can redistribute it and/or modify
@@ -305,5 +305,5 @@ main (int argc, char *argv[])
     free (haystack);
   }
 
-  return 0;
+  return test_exit_status;
 }

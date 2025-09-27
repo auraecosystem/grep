@@ -1,5 +1,5 @@
 /* Extended regular expression matching and search library.
-   Copyright (C) 2002-2023 Free Software Foundation, Inc.
+   Copyright (C) 2002-2025 Free Software Foundation, Inc.
    This file is part of the GNU C Library.
    Contributed by Isamu Hasegawa <isamu@yamato.ibm.com>.
 
@@ -29,6 +29,7 @@
 #include <locale.h>
 #include <wchar.h>
 #include <wctype.h>
+#include <stdckdint.h>
 #include <stdint.h>
 
 #ifndef _LIBC
@@ -99,10 +100,12 @@
 /* This is for other GNU distributions with internationalized messages.  */
 #if (HAVE_LIBINTL_H && ENABLE_NLS) || defined _LIBC
 # include <libintl.h>
+# undef gettext
 # ifdef _LIBC
-#  undef gettext
 #  define gettext(msgid) \
   __dcgettext (_libc_intl_domainname, msgid, LC_MESSAGES)
+# else
+#  define gettext(msgid) dgettext ("gnulib", msgid)
 # endif
 #else
 # undef gettext
@@ -150,9 +153,6 @@
    as some non-GCC platforms lack them, an issue when this code is
    used in Gnulib.  */
 
-#ifndef SSIZE_MAX
-# define SSIZE_MAX ((ssize_t) (SIZE_MAX / 2))
-#endif
 #ifndef ULONG_WIDTH
 # define ULONG_WIDTH REGEX_UINTEGER_WIDTH (ULONG_MAX)
 /* The number of usable bits in an unsigned integer type with maximum
@@ -437,12 +437,6 @@ typedef struct re_dfa_t re_dfa_t;
 #define re_string_byte_at(pstr,idx) ((pstr)->mbs[idx])
 #define re_string_skip_bytes(pstr,idx) ((pstr)->cur_idx += (idx))
 #define re_string_set_index(pstr,idx) ((pstr)->cur_idx = (idx))
-
-#ifdef _LIBC
-# define MALLOC_0_IS_NONNULL 1
-#elif !defined MALLOC_0_IS_NONNULL
-# define MALLOC_0_IS_NONNULL 0
-#endif
 
 #ifndef MAX
 # define MAX(a,b) ((a) < (b) ? (b) : (a))

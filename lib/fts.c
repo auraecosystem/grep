@@ -1,6 +1,6 @@
 /* Traverse a file hierarchy.
 
-   Copyright (C) 2004-2023 Free Software Foundation, Inc.
+   Copyright (C) 2004-2025 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -981,7 +981,6 @@ next:   tmp = p;
                         fts_load(sp, p);
                         if (! setup_dir(sp)) {
                                 free_dir(sp);
-                                __set_errno (ENOMEM);
                                 return (NULL);
                         }
                         goto check_for_dir;
@@ -1028,10 +1027,7 @@ check_for_dir:
                       sp->fts_dev = p->fts_statp->st_dev;
                     Dprintf (("  entering: %s\n", p->fts_path));
                     if (! enter_dir (sp, p))
-                      {
-                        __set_errno (ENOMEM);
-                        return NULL;
-                      }
+                      return NULL;
                   }
                 return p;
         }
@@ -1348,8 +1344,9 @@ fts_build (register FTS *sp, int type)
                   cur->fts_info = FTS_D;
                 else if (! enter_dir (sp, cur))
                   {
+                    int err = errno;
                     closedir_and_clear (cur->fts_dirp);
-                    __set_errno (ENOMEM);
+                    __set_errno (err);
                     return NULL;
                   }
               }
@@ -1446,6 +1443,13 @@ fts_build (register FTS *sp, int type)
                 __set_errno (0);
                 struct dirent *dp = readdir(cur->fts_dirp);
                 if (dp == NULL) {
+                        /* Some readdir()s do not absorb ENOENT (dir
+                           deleted but open).  This bug was fixed in
+                           glibc 2.3 (2002).  */
+#if ! (2 < __GLIBC__ + (3 <= __GLIBC_MINOR__))
+                        if (errno == ENOENT)
+                          errno = 0;
+#endif
                         if (errno) {
                                 cur->fts_errno = errno;
                                 /* If we've not read any items yet, treat
@@ -1717,7 +1721,7 @@ same_fd (int fd1, int fd2)
   struct stat sb1, sb2;
   return (fstat (fd1, &sb1) == 0
           && fstat (fd2, &sb2) == 0
-          && SAME_INODE (sb1, sb2));
+          && psame_inode (&sb1, &sb2));
 }
 
 static void
@@ -1736,11 +1740,11 @@ fd_ring_print (FTS const *sp, FILE *stream, char const *msg)
     {
       int fd = fd_ring->ir_data[i];
       if (fd < 0)
-        fprintf (stream, "%d: %d:\n", i, fd);
+        fprintf (stream, "%u: %d:\n", i, fd);
       else
         {
           struct devino wd = getdevino (fd);
-          fprintf (stream, "%d: %d: "PRINT_DEVINO"\n", i, fd, wd.dev, wd.ino);
+          fprintf (stream, "%u: %d: "PRINT_DEVINO"\n", i, fd, wd.dev, wd.ino);
         }
       if (i == fd_ring->ir_back)
         break;
@@ -1804,7 +1808,7 @@ fts_stat(FTS *sp, register FTSENT *p, bool follow)
 
         /*
          * If doing a logical walk, or application requested FTS_FOLLOW, do
-         * a stat(2).  If that fails, check for a non-existent symlink.  If
+         * a stat(2).  If that fails, check for a nonexistent symlink.  If
          * fail, set the errno from the stat call.
          */
         int flags = follow ? 0 : AT_SYMLINK_NOFOLLOW;
@@ -1861,13 +1865,13 @@ fts_sort (FTS *sp, FTSENT *head, register size_t nitems)
            run-time representation, and one can convert sp->fts_compar to
            the type qsort expects without problem.  Use the heuristic that
            this is OK if the two pointer types are the same size, and if
-           converting FTSENT ** to long int is the same as converting
-           FTSENT ** to void * and then to long int.  This heuristic isn't
+           converting FTSENT ** to uintptr_t is the same as converting
+           FTSENT ** to void * and then to uintptr_t.  This heuristic isn't
            valid in general but we don't know of any counterexamples.  */
         FTSENT *dummy;
         int (*compare) (void const *, void const *) =
           ((sizeof &dummy == sizeof (void *)
-            && (long int) &dummy == (long int) (void *) &dummy)
+            && (uintptr_t) &dummy == (uintptr_t) (void *) &dummy)
            ? (int (*) (void const *, void const *)) sp->fts_compar
            : fts_compar);
 
@@ -1937,6 +1941,7 @@ internal_function
 fts_lfree (register FTSENT *head)
 {
         register FTSENT *p;
+        int err = errno;
 
         /* Free a linked list of structures. */
         while ((p = head)) {
@@ -1945,6 +1950,8 @@ fts_lfree (register FTSENT *head)
                         closedir (p->fts_dirp);
                 free(p);
         }
+
+        __set_errno (err);
 }
 
 /*

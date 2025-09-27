@@ -1,5 +1,5 @@
 /* Test of error.h functions.
-   Copyright (C) 2023 Free Software Foundation, Inc.
+   Copyright (C) 2023-2025 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -18,7 +18,8 @@
 
 #include <config.h>
 
-#include "error.h"
+/* Specification.  */
+#include <error.h>
 
 #include <errno.h>
 
@@ -31,7 +32,7 @@ print_no_progname (void)
 }
 
 int
-main (int argc, char *argv[])
+main ()
 {
   /* Test error() function with zero STATUS and zero ERRNUM.  */
   error (0, 0, "bummer");
@@ -84,5 +85,5 @@ main (int argc, char *argv[])
   /* Test error() function with nonzero STATUS.  */
   error (4, 0, "fatal error");
 
-  return 0;
+  return test_exit_status;
 }

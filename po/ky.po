@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grep 2.5.3\n"
 "Report-Msgid-Bugs-To: bug-grep@gnu.org\n"
-"POT-Creation-Date: 2023-05-13 01:14-0700\n"
+"POT-Creation-Date: 2025-04-10 09:02-0700\n"
 "PO-Revision-Date: 2007-09-01 17:27+0100\n"
 "Last-Translator: Azilet Beishenaliev <aziletb@gmail.com>\n"
 "Language-Team: Kirghiz <i18n-team-ky-kyrgyz@lists.sourceforge.net>\n"
@@ -34,146 +34,144 @@ msgstr ""
 msgid "Valid arguments are:"
 msgstr ""
 
-#: lib/c-stack.c:186
+#: lib/c-stack.c:190
 msgid "program error"
 msgstr ""
 
-#: lib/c-stack.c:187
+#: lib/c-stack.c:191
 msgid "stack overflow"
 msgstr ""
 
-#: lib/closeout.c:121 src/grep.c:1346
+#: lib/closeout.c:121 src/grep.c:1352
 msgid "write error"
 msgstr ""
 
-#: lib/dfa.c:897
+#: lib/dfa.c:910
 #, fuzzy
 msgid "unbalanced ["
 msgstr "[ - мунун уйкашы жок"
 
-#: lib/dfa.c:1018
+#: lib/dfa.c:1031
 msgid "invalid character class"
 msgstr ""
 
-#: lib/dfa.c:1146
+#: lib/dfa.c:1159
 msgid "character class syntax is [[:space:]], not [:space:]"
 msgstr ""
 
 # escape - кыргызча???
-#: lib/dfa.c:1222
+#: lib/dfa.c:1234
 #, fuzzy
 msgid "unfinished \\ escape"
 msgstr "Бүтпөй калган эскейп \\"
 
-#: lib/dfa.c:1332
+#: lib/dfa.c:1344
 msgid "? at start of expression"
 msgstr ""
 
-#: lib/dfa.c:1344
+#: lib/dfa.c:1356
 msgid "* at start of expression"
 msgstr ""
 
-#: lib/dfa.c:1358
+#: lib/dfa.c:1370
 msgid "+ at start of expression"
 msgstr ""
 
-#: lib/dfa.c:1413
+#: lib/dfa.c:1425
 msgid "{...} at start of expression"
 msgstr ""
 
-#: lib/dfa.c:1416
+#: lib/dfa.c:1428
 #, fuzzy
 msgid "invalid content of \\{\\}"
 msgstr "максимум сан жарабайт"
 
-#: lib/dfa.c:1418
+#: lib/dfa.c:1430
 msgid "regular expression too big"
 msgstr ""
 
-#: lib/dfa.c:1568
+#: lib/dfa.c:1580
 msgid "stray \\ before unprintable character"
 msgstr ""
 
-#: lib/dfa.c:1570
+#: lib/dfa.c:1582
 msgid "stray \\ before white space"
 msgstr ""
 
-#: lib/dfa.c:1574
+#: lib/dfa.c:1593
 #, c-format
-msgid "stray \\ before %lc"
+msgid "stray \\ before %s"
 msgstr ""
 
-#: lib/dfa.c:1575
+#: lib/dfa.c:1594 lib/dfa.c:1597
 msgid "stray \\"
 msgstr ""
 
-#: lib/dfa.c:1925
+#: lib/dfa.c:1948
 #, fuzzy
 msgid "unbalanced ("
 msgstr "( - мунун уйкашы жок"
 
 # кайсы синтаксис? грептин шаблонубу?
-#: lib/dfa.c:2042
+#: lib/dfa.c:2065
 #, fuzzy
 msgid "no syntax specified"
 msgstr "Синтаксис аталган жок"
 
-#: lib/dfa.c:2053
+#: lib/dfa.c:2076
 #, fuzzy
 msgid "unbalanced )"
 msgstr ") - мунун уйкашы жок"
 
-#: lib/error.c:193
+#: lib/error.c:208
 msgid "Unknown system error"
 msgstr "Белгисиз система катасы"
 
-#: lib/getopt.c:278
+#: lib/getopt.c:282
 #, fuzzy, c-format
 msgid "%s: option '%s%s' is ambiguous\n"
 msgstr "%s: `%s' опциясы так эмес\n"
 
-#: lib/getopt.c:284
+#: lib/getopt.c:288
 #, fuzzy, c-format
 msgid "%s: option '%s%s' is ambiguous; possibilities:"
 msgstr "%s: `%s' опциясы так эмес\n"
 
-#: lib/getopt.c:319
+#: lib/getopt.c:322
 #, fuzzy, c-format
 msgid "%s: unrecognized option '%s%s'\n"
 msgstr "%s: бул опция түшүнүксүз `%c%s'\n"
 
-#: lib/getopt.c:345
+#: lib/getopt.c:348
 #, fuzzy, c-format
 msgid "%s: option '%s%s' doesn't allow an argument\n"
 msgstr "%s: `%c%s' опциясы менен аргумент колдонулбайт\n"
 
-#: lib/getopt.c:360
+#: lib/getopt.c:363
 #, fuzzy, c-format
 msgid "%s: option '%s%s' requires an argument\n"
 msgstr "%s: `%s' опциясы менен аргумент болуш керек\n"
 
-#: lib/getopt.c:621
+#: lib/getopt.c:624
 #, fuzzy, c-format
 msgid "%s: invalid option -- '%c'\n"
 msgstr "%s: жараксыз опция -- %c\n"
 
-#: lib/getopt.c:636 lib/getopt.c:682
+#: lib/getopt.c:639 lib/getopt.c:685
 #, fuzzy, c-format
 msgid "%s: option requires an argument -- '%c'\n"
 msgstr "%s: бул опциянын аргументи болуш керек -- %c\n"
 
 # Памятты эмне дейбиз яя? ;)
-#: lib/obstack.c:337 lib/obstack.c:339 lib/xalloc-die.c:34
+#: lib/obstack.c:320 lib/obstack.c:322 lib/xalloc-die.c:34
 msgid "memory exhausted"
 msgstr "память жетпей калды"
 
 #: lib/openat-die.c:38
-#, c-format
 msgid "unable to record current working directory"
 msgstr ""
 
 #: lib/openat-die.c:57
-#, c-format
 msgid "failed to return to initial working directory"
 msgstr ""
 
@@ -429,55 +427,55 @@ msgstr ""
 msgid "General help using GNU software: <%s>\n"
 msgstr ""
 
-#: src/dfasearch.c:59
+#: src/dfasearch.c:57
 #, fuzzy, c-format
 msgid "warning: %s"
 msgstr "эскертүү: %s: %s\n"
 
-#: src/grep.c:656
+#: src/grep.c:657
 msgid "(standard input)"
 msgstr "(стандарт кирүү)"
 
-#: src/grep.c:837
+#: src/grep.c:838
 msgid "invalid context length argument"
 msgstr "контекст узундугу жарабайт"
 
-#: src/grep.c:902
+#: src/grep.c:911
 msgid "input is too large to count"
 msgstr "берилген данныйлардын саны саналбай турганча көп"
 
-#: src/grep.c:1651
+#: src/grep.c:1656
 #, fuzzy, c-format
 msgid "%s: binary file matches"
 msgstr "Экилик форматтагы %s файлы уйкашат\n"
 
-#: src/grep.c:1689
+#: src/grep.c:1694
 #, fuzzy, c-format
 msgid "%s: warning: recursive directory loop"
 msgstr "бирибирине кирген папка айлампасы бар"
 
-#: src/grep.c:1909
+#: src/grep.c:1914
 #, c-format
 msgid "%s: input file is also the output"
 msgstr ""
 
-#: src/grep.c:1971 src/grep.c:1978
+#: src/grep.c:1976 src/grep.c:1983
 #, fuzzy, c-format
 msgid "Usage: %s [OPTION]... PATTERNS [FILE]...\n"
 msgstr "Колдонулушу: %s [ОПЦИЯ]... ШАБЛОН [ФАЙЛ]...\n"
 
-#: src/grep.c:1973
+#: src/grep.c:1978
 #, fuzzy, c-format
 msgid "Try '%s --help' for more information.\n"
 msgstr "Толук маалымат үчүн `%s --help' деп жазгыла.\n"
 
-#: src/grep.c:1979
+#: src/grep.c:1984
 #, fuzzy, c-format
 msgid "Search for PATTERNS in each FILE.\n"
 msgstr "Ар ФАЙЛда же стандарт кирүүдө ШАБЛОНду изде.\n"
 
 # выражение дегендин кыргызчасын жазыш керек
-#: src/grep.c:1980
+#: src/grep.c:1985
 #, fuzzy, c-format
 msgid ""
 "Example: %s -i 'hello world' menu.h main.c\n"
@@ -490,7 +488,7 @@ msgstr ""
 "Регулярдуу выражение тандоо жана мааниси:\n"
 
 # выражение - кыргызчасын жаз!!!!
-#: src/grep.c:1985
+#: src/grep.c:1990
 #, fuzzy, c-format
 msgid ""
 "  -E, --extended-regexp     PATTERNS are extended regular expressions\n"
@@ -504,7 +502,7 @@ msgstr ""
 "  -P, --perl-regexp         ШАБЛОН Perl түрүндөгү регулярдуу выражение\n"
 
 # выражение!!!!
-#: src/grep.c:1991
+#: src/grep.c:1996
 #, fuzzy, c-format
 msgid ""
 "  -e, --regexp=PATTERNS     use PATTERNS for matching\n"
@@ -523,7 +521,7 @@ msgstr ""
 "  -z, --null-data           дата(данный) саптары 0 байты(EOL эмес) менен "
 "бүтөт\n"
 
-#: src/grep.c:1999
+#: src/grep.c:2004
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -541,7 +539,7 @@ msgstr ""
 "      --help                бул жардам маалыматын көрсөтүп бүтүрөт\n"
 "      --mmap                мүмкүнчүлүк болсо mmap кирүүсү колдонулат\n"
 
-#: src/grep.c:2006
+#: src/grep.c:2011
 #, c-format
 msgid ""
 "\n"
@@ -556,7 +554,7 @@ msgid ""
 "prefix\n"
 msgstr ""
 
-#: src/grep.c:2017
+#: src/grep.c:2022
 #, c-format
 msgid ""
 "  -o, --only-matching       show only nonempty parts of lines that match\n"
@@ -566,7 +564,7 @@ msgid ""
 "  -a, --text                equivalent to --binary-files=text\n"
 msgstr ""
 
-#: src/grep.c:2024
+#: src/grep.c:2029
 #, c-format
 msgid ""
 "  -I                        equivalent to --binary-files=without-match\n"
@@ -578,7 +576,7 @@ msgid ""
 "  -R, --dereference-recursive  likewise, but follow all symlinks\n"
 msgstr ""
 
-#: src/grep.c:2033
+#: src/grep.c:2038
 #, c-format
 msgid ""
 "      --include=GLOB        search only files that match GLOB (a file "
@@ -589,7 +587,7 @@ msgid ""
 "      --exclude-dir=GLOB    skip directories that match GLOB\n"
 msgstr ""
 
-#: src/grep.c:2040
+#: src/grep.c:2045
 #, c-format
 msgid ""
 "  -L, --files-without-match  print only names of FILEs with no selected "
@@ -600,7 +598,7 @@ msgid ""
 "  -Z, --null                print 0 byte after FILE name\n"
 msgstr ""
 
-#: src/grep.c:2046
+#: src/grep.c:2051
 #, c-format
 msgid ""
 "\n"
@@ -610,7 +608,7 @@ msgid ""
 "  -C, --context=NUM         print NUM lines of output context\n"
 msgstr ""
 
-#: src/grep.c:2053
+#: src/grep.c:2058
 #, fuzzy, c-format
 msgid ""
 "  -NUM                      same as --context=NUM\n"
@@ -639,118 +637,113 @@ msgstr ""
 "(MSDOS)\n"
 "\n"
 
-#: src/grep.c:2062
+#: src/grep.c:2067
 #, fuzzy, c-format
 msgid ""
-"When FILE is '-', read standard input.  With no FILE, read '.' if\n"
-"recursive, '-' otherwise.  With fewer than two FILEs, assume -h.\n"
-"Exit status is 0 if any line is selected, 1 otherwise;\n"
-"if any error occurs and -q is not given, the exit status is 2.\n"
+"When FILE is '-', read standard input.  If no FILE is given, read standard\n"
+"input, but with -r, recursively search the working directory instead.  With\n"
+"fewer than two FILEs, assume -h.  Exit status is 0 if any line is selected,\n"
+"1 otherwise; if any error occurs and -q is not given, the exit status is 2.\n"
 msgstr ""
 "ФАЙЛ жазылбаса же ФАЙЛ - (тире) болсо, стандарт кирүү колдонулат. Экиден аз "
 "ФАЙЛ берилген болсо -h опциясы бар болот. Эгер сап тандалган болсо бүтүрүү "
 "статусу 0 болот, башка учурда 1; эгерде ката чыкса жана -q опциясы "
 "берилбеген болсо бүтүрүү статусу 2 болот.\n"
 
-#: src/grep.c:2104
+#: src/grep.c:2110
 msgid "conflicting matchers specified"
 msgstr "уйкаштыруучуларда конфликттер табылды"
 
-#: src/grep.c:2111
+#: src/grep.c:2117
 #, fuzzy
 msgid "Perl matching not supported in a --disable-perl-regexp build"
 msgstr ""
 "Бул --disable-perl-regexp опциясы менен жасалган, -P опциясы кошулуу эмес"
 
-#: src/grep.c:2113
+#: src/grep.c:2119
 #, fuzzy, c-format
 msgid "invalid matcher %s"
 msgstr "максимум сан жарабайт"
 
-#: src/grep.c:2534
+#: src/grep.c:2541
 msgid "unknown devices method"
 msgstr "аспап методу белгисиз"
 
-#: src/grep.c:2576
-#, c-format
-msgid "warning: --unix-byte-offsets (-u) is obsolete"
-msgstr ""
-
-#: src/grep.c:2688
+#: src/grep.c:2690
 msgid "invalid max count"
 msgstr "максимум сан жарабайт"
 
-#: src/grep.c:2746
+#: src/grep.c:2747
 msgid "unknown binary-files type"
 msgstr "белгисиз файл түрү"
 
-#: src/grep.c:2831
+#: src/grep.c:2832
 msgid ""
 "Written by Mike Haertel and others; see\n"
 "<https://git.savannah.gnu.org/cgit/grep.git/tree/AUTHORS>."
 msgstr ""
 
-#: src/grep.c:2937
+#: src/grep.c:2939
 #, c-format
 msgid "warning: GREP_COLOR='%s' is deprecated; use GREP_COLORS='mt=%s'"
 msgstr ""
 
-#: src/pcresearch.c:92
+#: src/pcresearch.c:89
 #, c-format
 msgid ""
 "\n"
 "grep -P uses PCRE2 %s\n"
 msgstr ""
 
-#: src/pcresearch.c:169
+#: src/pcresearch.c:167
 msgid "-P supports only unibyte locales on this platform"
 msgstr ""
 
-#: src/pcresearch.c:171
+#: src/pcresearch.c:169
 msgid "-P supports only unibyte and UTF-8 locales"
 msgstr ""
 
-#: src/pcresearch.c:194
+#: src/pcresearch.c:192
 #, fuzzy
 msgid "the -P option only supports a single pattern"
 msgstr "-P опциясы бир гана шаблон ала алат"
 
-#: src/pcresearch.c:290
+#: src/pcresearch.c:288
 msgid "exceeded PCRE's line length limit"
 msgstr ""
 
 # Памятты эмне дейбиз яя? ;)
-#: src/pcresearch.c:368
+#: src/pcresearch.c:366
 #, fuzzy, c-format
 msgid "%s: memory exhausted"
 msgstr "память жетпей калды"
 
-#: src/pcresearch.c:371
+#: src/pcresearch.c:369
 #, c-format
 msgid "%s: exhausted PCRE JIT stack"
 msgstr ""
 
-#: src/pcresearch.c:375
+#: src/pcresearch.c:373
 #, c-format
 msgid "%s: exceeded PCRE's backtracking limit"
 msgstr ""
 
-#: src/pcresearch.c:380
+#: src/pcresearch.c:378
 #, c-format
 msgid "%s: exceeded PCRE's nested backtracking limit"
 msgstr ""
 
-#: src/pcresearch.c:384
+#: src/pcresearch.c:382
 #, c-format
 msgid "%s: PCRE detected recurse loop"
 msgstr ""
 
-#: src/pcresearch.c:389
+#: src/pcresearch.c:387
 #, c-format
 msgid "%s: exceeded PCRE's heap limit"
 msgstr ""
 
-#: src/pcresearch.c:398
+#: src/pcresearch.c:396
 #, c-format
 msgid "%s: internal PCRE error: %d"
 msgstr ""

@@ -1,10 +1,25 @@
-grep (3.11-5~1.gbpbe0243) UNRELEASED; urgency=medium
+grep (3.12-1) unstable; urgency=low
 
-  ** SNAPSHOT build @be0243e401b60bc93a70dde7af0d8bce510e9b24 **
+  * Upload to unstable
+  * Declare compliance with Standards-Version 4.7.2
+  * Replace old FSF physical address with URL in GPL information
 
+ -- Santiago Ruano Rincón <santiago@debian.org>  Sat, 27 Sep 2025 12:19:29 -0300
+
+grep (3.12-1~exp2) experimental; urgency=medium
+
+  * Directly install in /usr, and remove Build-Dep on dh-sequence-movetousr
+
+ -- Santiago Ruano Rincón <santiagorr@riseup.net>  Mon, 22 Sep 2025 15:07:31 -0300
+
+grep (3.12-1~exp1) experimental; urgency=medium
+
+  * Prevent autopoint from running during autoreconf
+  * New upstream version: 3.12
   * Wrap-and-sort debian/ with -ast
+  * Remove no longer needed grep-dirfd.patch
 
- -- Santiago Ruano Rincón <santiago@debian.org>  Wed, 13 Mar 2024 14:31:13 -0300
+ -- Santiago Ruano Rincón <santiagorr@riseup.net>  Sat, 20 Sep 2025 23:03:22 -0300
 
 grep (3.11-4) unstable; urgency=low
 

@@ -1,5 +1,5 @@
 /* Test that stack overflow and SIGSEGV are correctly distinguished.
-   Copyright (C) 2002-2023 Free Software Foundation, Inc.
+   Copyright (C) 2002-2025 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -18,12 +18,28 @@
 
 #include <config.h>
 
+/* On GNU/Hurd, when compiling with -D_FORTIFY_SOURCE=2, avoid an error
+   "*** longjmp causes uninitialized stack frame ***: terminated".
+   Cf. <https://sourceware.org/bugzilla/show_bug.cgi?id=32522>  */
+#ifdef __gnu_hurd__
+# undef _FORTIFY_SOURCE
+# undef __USE_FORTIFY_LEVEL
+#endif
+
 /* Specification.  */
 #include "sigsegv.h"
 
 #include <stdint.h>
 #include <stdio.h>
 #include <limits.h>
+
+/* Skip this test when an address sanitizer is in use.  */
+#ifndef __has_feature
+# define __has_feature(a) 0
+#endif
+#if defined __SANITIZE_ADDRESS__ || __has_feature (address_sanitizer)
+# undef HAVE_STACK_OVERFLOW_RECOVERY
+#endif
 
 #if HAVE_STACK_OVERFLOW_RECOVERY && HAVE_SIGSEGV_RECOVERY
 
@@ -51,7 +67,7 @@ static sigset_t mainsigset;
 
 static volatile int pass = 0;
 static uintptr_t page;
-static volatile int *null_pointer_to_volatile_int /* = NULL */;
+static int *volatile null_pointer /* = NULL */;
 
 static void
 stackoverflow_handler_continuation (void *arg1, void *arg2, void *arg3)
@@ -148,7 +164,7 @@ main ()
   prot_unwritable = PROT_READ;
 # endif
 
-  /* Setup some mmaped memory.  */
+  /* Setup some mmapped memory.  */
   p = mmap_zeromap ((void *) 0x12340000, 0x4000);
   if (p == (void *)(-1))
     {
@@ -185,7 +201,7 @@ main ()
       *(volatile int *) (page + 0x678) = 42;
       break;
     case 3:
-      *null_pointer_to_volatile_int = 42;
+      *null_pointer = 42;
       break;
     case 4:
       break;

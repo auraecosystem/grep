@@ -4,10 +4,9 @@ Priority: required
 Maintainer: Anibal Monsalve Salazar <anibal@debian.org>
 Uploaders:
  Santiago Ruano Rincón <santiago@debian.org>,
-Standards-Version: 4.6.1.1
+Standards-Version: 4.7.2
 Build-Depends:
  debhelper-compat (=13),
- dh-sequence-movetousr,
  gettext,
  libpcre2-dev,
  texinfo <!nodoc>,

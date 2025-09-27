@@ -1,6 +1,6 @@
 /* locale information
 
-   Copyright 2016-2023 Free Software Foundation, Inc.
+   Copyright 2016-2025 Free Software Foundation, Inc.
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -13,14 +13,24 @@
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program; if not, write to the Free Software
-   Foundation, Inc., 51 Franklin Street - Fifth Floor, Boston, MA
-   02110-1301, USA.  */
+   along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
 
 /* Written by Paul Eggert.  */
 
 #include <limits.h>
 #include <wchar.h>
+#if GAWK
+/* Use ISO C 99 API.  */
+# define char32_t wchar_t
+#else
+/* Use ISO C 11 + gnulib API.  */
+# include <uchar.h>
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 
 struct localeinfo
 {
@@ -43,8 +53,8 @@ struct localeinfo
   signed char sbclen[UCHAR_MAX + 1];
 
   /* An array indexed by byte values B that contains the corresponding
-     wide character (if any) for B if sbclen[B] == 1.  WEOF means the
-     byte is not a valid single-byte character, i.e., sbclen[B] == -1
+     32-bit wide character (if any) for B if sbclen[B] == 1.  WEOF means
+     the byte is not a valid single-byte character, i.e., sbclen[B] == -1
      or -2.  */
   wint_t sbctowc[UCHAR_MAX + 1];
 };
@@ -56,4 +66,9 @@ extern void init_localeinfo (struct localeinfo *);
    itself.  This is a generous upper bound.  */
 enum { CASE_FOLDED_BUFSIZE = 32 };
 
-extern int case_folded_counterparts (wint_t, wchar_t[CASE_FOLDED_BUFSIZE]);
+extern int case_folded_counterparts (wint_t, char32_t[CASE_FOLDED_BUFSIZE]);
+
+
+#ifdef __cplusplus
+}
+#endif

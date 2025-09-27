@@ -1,4 +1,500 @@
+2025-04-10  Jim Meyering  <meyering@meta.com>
+
+	version 3.12
+	* NEWS: Record release date.
+
+2025-04-09  Jim Meyering  <meyering@meta.com>
+
+	tests: mb-non-UTF8-perf-Fw: undo previous change
+	* tests/mb-non-UTF8-perf-Fw: Ugh. I misread the code and
+	didn't even test.  Given circumstances and the new timing that's
+	well within the 30-second timeout, I think there's no point
+	in trying to accommodate systems that are so overburdened they
+	trigger this failure. Reported by Grisha Levit.
+
+	tests: mb-non-UTF8-perf-Fw:: avoid false failure on overloaded systems
+	* tests/mb-non-UTF8-perf-Fw: Raise timeout from 1 to 3s
+	to accommodate slow systems.  Reported by Nelson Beebe in
+	https://lists.gnu.org/r/grep-devel/2025-04/msg00027.html
+
+2025-04-08  Jim Meyering  <meyering@meta.com>
+
+	build: fix module name typo
+	* bootstrap.conf (gnulib_modules): Fix module name typo I introduced.
+	s/realloc-gnu-h/realloc-posix/. Reported by Bruno Haible in
+	https://bugs.gnu.org/77654
+
+	build: avoid new bootstrap failure
+	* bootstrap.conf (bootstrap_post_import_hook): Append "|| :", fixing
+	my previous change. Otherwise, bootstrap would fail with this:
+	./bootstrap: bootstrap_post_import_hook failed
+
+2025-04-08  Bruno Haible  <bruno@clisp.org>
+
+	doc: temper a Unicode support claim: it's not quite done
+	* NEWS: clarify that the "Unicode characters outside the Basic
+	Multilingual Plane" item is not quite done.
+
+2025-04-08  Jim Meyering  <meyering@meta.com>
+
+	tests: hash-collision-perf: avoid test hang on GNU/Hurd
+	This test would hang on GNU/Hurd because the perl code we use to measure
+	subsecond duration isn't ported, and that loop would never terminate.
+	* tests/hash-collision-perf: Detect the always-0 small_ms, and skip the test.
+	Reported by Bruno Haible in https://bugs.gnu.org/77613
+
+	grep: avoid regression with -mN and any of -q, -l, -L
+	* src/grep.c (grepbuf): Handle this case: echo x|grep -l -m1 .
+	making it print only the file name, and not the matched line.
+	(main): Set out_quiet also when exit_on_match (-q) is set, so
+	"echo x|grep -q -m1 ." no longer prints the matched line.
+	* tests/max-count-overread: Add those tests, from
+	https://bugs.gnu.org/68989#21
+
+2025-04-06  Jim Meyering  <meyering@meta.com>
+
+	build: avoid using pkg-config's pkg.m4 serial 12
+	* bootstrap.conf (bootstrap_post_import_hook): Add code to ensure we
+	do not use pkg.m4 serial 12. For the record, I've temporarily copied
+	the version of pkg.m4 from grep-3.11 into $(aclocal --print-ac-dir),
+	so that when I run bootstrap, it always gets that serial 11 version.
+	Reported by Bruno Haible in
+	https://lists.gnu.org/r/grep-devel/2025-04/msg00005.html
+
+2025-04-04  Jim Meyering  <meyering@meta.com>
+
+	build: update gnulib to latest
+
+2025-03-27  Jim Meyering  <meyering@meta.com>
+
+	maint: ensure that new "make syntax-check"-run sc_codespell passes
+	* cfg.mk (codespell_ignore_words_list): Ignore some false-positives.
+
+2025-03-25  Jim Meyering  <meyering@meta.com>
+
+	build: use gnulib's new c-strcasecmp module, rather than c-strcase
+	* bootstrap.conf (gnulib_modules): Use new c-strcasecmp module, rather
+	than c-strcase, since grep uses c_strcasecmp and not c_strncasecmp.
+
+	build: update gnulib to latest; and update bootstrap
+
+	grep: remove long-deprecated --unix-byte-offsets (-u) option
+	* src/grep.c (main): Remove vestiges of --unix-byte-offsets (-u).
+	In grep-3.7 (2021-08-14) it became a warning-only no-op.
+	Before then, it was a Windows-only no-op.
+	* NEWS (Changes in behavior): Mention it.
+
+2025-03-21  Paul Eggert  <eggert@cs.ucla.edu>
+
+	doc: update man for groff 1.23.0 and apostrophes
+	* doc/grep.in.1: Merge from groff 1.23.0 tmac/an-ext.tmac.
+	On Groff, fix usage neutral apostrophes;
+	they cannot be reliably fixed in traditional troff.
+
+	doc: use \w@...@ not \w|...|
+	* doc/grep.in.1: Avoid warnings in bleeding-edge groff.
+
+	doc: fix troff typo
+	* doc/grep.in.1: .BR → .B (Bug#77000).
+
+2025-02-08  Jim Meyering  <meyering@meta.com>
+
+	grep: support gnulib-l10n
+	* src/grep.c (main): Call bindtextdomain for gnulib-l10n.
+
+	maint: continue writing base64-encoded checksums to announcement
+	* cfg.mk (announce_gen_args): Set to --cksum-checksums.
+
+2025-02-01  Jim Meyering  <meyering@meta.com>
+
+	build: update gnulib to latest; and update bootstrap
+
+	maint: reflect gnulib module renamings
+	* bootstrap.conf: Some gnulib modules are now deprecated, in
+	favor of new names with a "-h" suffix (and stdbool->bool).
+	Induce this change with the following:
+	  re='inttypes|locale|realloc-gnu|stdckdint|stddef|stdlib|string'
+	  re="$re|sys_stat|unistd"
+	  perl -pi -e 's{^('"$re"')$}{$1-h};s{^stdbool$}{bool}' bootstrap.conf
+
+2025-01-15  Jim Meyering  <meyering@meta.com>
+
+	doc: clarify a --help sentence
+	* src/grep.c (usage): Prompted by a suggestion at
+	https://bugs.gnu.org/75582 by Anton Samokat.
+	* THANKS.in: Add that name.
+
+2025-01-01  Paul Eggert  <eggert@cs.ucla.edu>
+
+	maint: update all copyright dates via "make update-copyright"
+
+	maint: update bootstrap from Gnulib
+	* bootstrap: sync from Gnulib
+
+	build: update gnulib submodule to latest
+
+2024-12-16  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: revert recent \d change
+	I misread the email thread and thought there was consensus
+	for the \d change, but there was wasn’t so revert the change.
+	Also, document the resulting confusion
+	somewhat better than it was documented before.
+	* src/pcresearch.c, tests/pcre-ascii-digits, tests-pcre-utf8-w:
+	Revert recent \d change, restoring the behavior to that of grep 3.11.
+
+	doc: give an example non-ASCII digit
+	* doc/grep.texi: Give ‘٣’ as an example of a non-ASCII digit.
+
+	doc: don’t send “ſ” to PDF
+	* doc/grep.texi: Don’t output “ſ” (U+017F LATIN SMALL LETTER LONG S)
+	to PDF, since pdfTeX can’t handle it.
+
+	doc: more improvements for -P discussion
+	* doc/grep.texi (grep Programs): Also mention git grep
+	and pcre2grep.
+
+2024-12-14  Paul Eggert  <eggert@cs.ucla.edu>
+
+	doc: improve -P discussion
+	* doc/grep.texi (grep Programs): Improve discussion of how grep -P
+	differs from Perl.
+
+	grep: go back to 3.9 -P '\d' behavior
+	Treating \d differently from Perl was more trouble than it was worth.
+	* NEWS, doc/grep.texi (grep Programs): Document this.
+	* src/pcresearch.c (PCRE2_EXTRA_ASCII_BSD):
+	Remove.  All uses removed.
+	* tests/pcre-ascii-digits: Adjust to this change.
+	* tests/pcre-utf8-w: Revert to 3.9.
+
+2024-11-26  Grisha Levit  <grishalevit@gmail.com>
+
+	tests: fix define for glibc-infloop
+	* configure.ac (USE_INCLUDED_REGEX): fix condition for definition.
+	This doesn't affect anything right now since the value is examined
+	only by an unconditionally skipped test.
+
+2024-11-04  Paul Eggert  <eggert@cs.ucla.edu>
+
+	doc: more consistent style for ‘...’
+	Problem reported by Martin Schulte <https://bugs.gnu.org/74205>.
+	* doc/grep.in.1, doc/grep.texi:
+	Use a more consistent style for [OPTION]... and [FILE]... in usage.
+	This doesn’t match what POSIX does but seems to be common in GNU doc.
+	Also, ‘...’ -> ‘@dots{}’ in grep.texi.
+
+2024-11-01  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: fix -q suppression of diagnostics
+	Problem reported by Jan Černohorský (Bug#74159).
+	* src/grep.c (grepbuf): If exit_on_match, set stdout_errno to
+	avoid screwups on buggy OSes.  Also, ignore errseen since it
+	cannot be true here.
+	(main): Do not clear exit_failure if -q is given, as exit status
+	should be zero only if an input line is selected.
+	* tests/write-error-msg: Check that -q suppresses diagnostics
+	of output errors only if a match is found.
+
+2024-09-21  Paul Eggert  <eggert@cs.ucla.edu>
+
+	doc: warn re using ‘grep’ to detect binary files
+	This is in response to a bug report by Rodrigo Jorge
+	<https://bugs.gnu.org/73360>.
+	* doc/grep.texi (File and Directory Selection):
+	Warn that ‘grep’ shouldn’t be used to determine whether
+	a file is binary for other applications’ purposes, as
+	their definition of “binary” may well differ.
+	Improve documentation for discovery of null input.
+
+	grep: avoid huge reads
+	The previous code could call 'read' with a nearly unbounded size
+	if the input had long lines, and this unbounded size persisted
+	from one file to the next once the input buffer grew.
+	This could have bad effects on the CPU's data cache,
+	and also could cause 'grep' to make counterintuitive decisions as
+	to whether a file is binary <https://bugs.gnu.org/73360>.
+	Instead, pick a good read size and stick with it; this is
+	more consistent, and more likely to fit in a cache.
+	* src/grep.c (good_readsize): New static var.
+	(GOOD_READSIZE_MIN): Rename from INITIAL_BUFSIZE.  All uses changed.
+	(fillbuf): Read good_readsize bytes rather than trying to
+	fill the rest of the input buffer.
+	(drain_input): Read good_readsize rather than GOOD_READSIZE_MIN
+	bytes.
+	(main): Initialize good_readsize.
+
+	grep: simplify non-usage of rawmemrchr
+	* src/grep.c (grep): Simplify by not assuming that the
+	code will eventually use a nonexistent rawmemrchr function.
+
+	grep: adjust to safe_read change
+	* src/grep.c (fillbuf): Adjust to Gnulib safe_read API change;
+	it now returns ptrdiff_t, with -1 signifying error.
+
+	maint: port GNULIB_WARN_CFLAGS to gcc 14
+	* configure.ac (GNULIB_WARN_CFLAGS): Add -Wmissing-declarations,
+	-Wmissing-prototypes, -Wmissing-variable-declarations,
+	-Wnull-dereference, -Wsuggest-attribute=cold.
+
+	build: update gnulib submodule to latest
+
+2024-09-08  Jim Meyering  <meyering@meta.com>
+
+	build: update gnulib to latest
+
+2024-09-08  Jim Meyering  <meyering@meta.com>
+
+	maint: placate GCC's -Wunterminated-string-initialization
+	This new GCC warning triggered a false alert. But it's simple,
+	cleaner and just as efficient to use pointers and strlen:
+	* src/pcresearch.c (Pcompile): Declare prefix and suffix
+	variables as pointers to literal strings, rather than as
+	arrays of characters that deliberately omitted the trailing
+	NUL byte, and which provoked these warnings from the very
+	latest GCC:
+
+	pcresearch.c:220:23: error: initializer-string for array of
+	'char' is too long [-Werror=unterminated-string-initialization]
+	220 |  wprefix[10] = "(?<!\\w)(?:", wsuffix[7] = ")(?!\\w)";
+	    |                            ^~~~~~~~~~~~~
+
+2024-09-08  Jim Meyering  <meyering@meta.com>
+
+	maint: modernize GNU GPL license comments
+	To accommodate a new syntax-check rule, ...
+	Make comments that suggested to write to an old FSF Franklin Street
+	address refer to https://www.gnu.org/licenses instead:
+
+	  git grep -l 'if not, write' |xargs \
+	  perl -0777 -pi -e 's{program; if not, write .*? USA\.}{program.  If not, see <https://www.gnu.org/licenses/>.}ms'
+
+2024-07-09  Bruno Haible  <bruno@clisp.org>
+
+	tests: Fix recognition of cs_CZ.UTF-8 locale on FreeBSD.
+	* tests/fmbtest: Use 'locale charmap' to determine the locale's encoding.
+	* tests/foad1: Likewise.
+
+2024-07-04  Collin Funk  <collin.funk1@gmail.com>
+
+	maint: import tests/init.sh from Gnulib during bootstrap
+	* bootstrap.conf (bootstrap_post_import_hook): Use gnulib-tool
+	--copy-file to import tests/init.sh.
+	* tests/init.sh: Remove file.
+	* .gitignore (/tests/init.sh): Add entry.
+
+2024-07-04  Jim Meyering  <meyering@meta.com>
+
+	build: update gnulib to latest and update bootstrap
+
+2024-06-11  Bruno Haible  <bruno@clisp.org>
+
+	maint: Avoid test-mbrlen-1.sh failure on CentOS 7.
+	* configure.ac: Pre-set gl_cv_func_mbrlen_empty_input.
+	* bootstrap.conf (avoided_gnulib_modules): Avoid also mbrlen-tests.
+
+2024-05-21  Paul Eggert  <eggert@cs.ucla.edu>
+
+	doc: fix troff typos
+	* doc/grep.in.1: Fix troff typos found by mandoc and groff.
+	Problem reported by Bjarni Ingi Gislason (bug#71087).
+
+	build: update bootstrap to latest
+
+	build: update gnulib submodule to latest
+
+2024-02-18  Jim Meyering  <meyering@meta.com>
+
+	build: update gnulib to latest
+
+	maint: avoid syntax-check failure: use <>, not "" for system headers
+	* src/dfasearch.c: As above.
+	* src/grep.c: Likewise.
+	* src/kwsearch.c: Likewise.
+	* src/pcresearch.c: Likewise.
+	* src/searchutils.c: Likewise.
+
+2024-02-09  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: fix ‘grep -m2 pattern <file >/dev/null’
+	Problem reported by Grisha Levit <https://bugs.gnu.org/68989>.
+	* src/grep.c (grep, main): Don’t set done_on_match if -m is used.
+	* tests/max-count-overread: Add a test case.
+
+2024-01-28  Paul Eggert  <eggert@cs.ucla.edu>
+
+	Improve doc for range expressions
+	grep currently doesn’t implement rational ranges or any other
+	particular behavior for range expressions outside the C locale.
+	Adjust the documentation to match the behavior more closely.
+	Problem reported by Ronan Pigott in:
+	https://lists.gnu.org/r/grep-devel/2024-01/msg00000.html
+	* doc/grep.texi (Character Classes and Bracket Expressions):
+	Be more careful about terminology.  Don’t say “sorts” because
+	the collation sequence is not the same as the sort order.
+	Don’t make promises about behavior outside the C locale,
+	as the current code might not fulfill them.
+	* doc/grep.in.1: Adjust wording to match.  The old wording
+	was out-of-sync anyway.
+
+2024-01-05  Jim Meyering  <meyering@meta.com>
+
+	maint: update all copyright dates via "make update-copyright"
+
+	build: update gnulib to latest; also update bootstrap and init.sh
+
+2023-09-13  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: prefer nullptr to NULL
+	* bootstrap.conf (gnulib_modules): Add nullptr.
+	All uses of NULL eliminated or changed to nullptr,
+	modernizing us from C89 to C23.
+
+2023-09-11  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: simplify wordchars_count
+	* src/searchutils.c (wordchars_count): Simplify slightly
+	by using a pointer rather than an offset.
+
+	grep: use mbszero
+	* bootstrap.conf (gnulib_modules): Add mbszero.
+	* src/grep.c (buf_has_encoding_errors, contains_encoding_error)
+	(setup_ok_fold, fgrep_icase_available, fgrep_to_grep_pattern)
+	(try_fgrep_pattern):
+	* src/searchutils.c (mb_goback, wordchars_count):
+	Use it.
+
+2023-09-09  Paul Eggert  <eggert@cs.ucla.edu>
+
+	maint: wchar-single, no strtou*
+	* bootstrap.conf (gnulib_modules): Remove strtoull, strtoumax.
+	They are no longer used.  Use wchar-single instead of wchar,
+	since grep does not change locale.
+
+	grep: omit propername, as it’s not used
+	Omit Gnulib’s propername module, as it has not been used since my
+	commit 3c0a36e514237132db711bfef57a74c64592c4e2 dated Thu Dec 20
+	16:35:55 2018 -0800.
+	* bootstrap.conf (avoided_gnulib_modules):
+	Do not avoid mbchar, as it is no longer pulled in by propername.
+	(gnulib_modules): Remove propername.
+	* src/Makefile.am (LDADD):
+	* tests/Makefile.am (LDADD): Remove $(LIBICONV); no longer needed.
+	* src/grep.c: Do not include propername.h.
+
+	maint: prefer mcel
+	* bootstrap.conf (avoided_gnulib_modules):
+	Avoid mbchar, mbuiter, mbuiterf.
+	(gnulib_modules): Add mcel-prefer.
+
+	build: update gnulib submodule to latest
+
+2023-08-20  Jim Meyering  <meyering@meta.com>
+
+	tests: actually package and run the new 100k-entries test
+	* tests/Makefile.am (TESTS): Include the new test file name,
+	100k-entries.
+
+2023-08-05  Paul Eggert  <eggert@cs.ucla.edu>
+
+	doc: clarify -- role
+	This should fix bug#65046 reported by Helmut Waltzmann.
+
+2023-07-21  Jim Meyering  <meyering@meta.com>
+
+	doc: mention the 100,000-entry ENOTSUP bug
+	* NEWS: document the fixed bug.
+	* tests/100k-entries: New file, to test for this.
+	Reported by Vincent Lefevre via Santiago Ruano Rincón in
+	https://bugs.gnu.org/64773
+	Fixed by gnulib commit v0.1-6175-gd4d8abb39e.
+
+2023-07-11  Paul Eggert  <eggert@cs.ucla.edu>
+
+	maint: link with mbrtc32-required libraries
+	Add libraries now suggested by gnulib-tool.
+	* src/Makefile.am (LDADD):
+	* tests/Makefile.am (LDADD):
+	Add $(HARD_LOCALE_LIB), $(LIBC32CONV), $(LIBSIGSEGV),
+	$(LIBUNISTRING), $(MBRTOWC_LIB), $(SETLOCALE_NULL_LIB).
+	* tests/Makefile.am (LDADD):
+	Also add $(LIBCSTACK), $(LIBICONV), $(LIBTHREAD).
+
+2023-07-10  Paul Eggert  <eggert@cs.ucla.edu>
+
+	maint: fix NEWS typo
+
+	maint: sync bootstrap from Gnulib
+
+2023-07-10  Paul Eggert  <eggert@cs.ucla.edu>
+
+	maint: omit obsolescent Autoconf macros
+	* configure.ac: Don’t use the obsolescent macros AC_TYPE_SIZE_T,
+	AC_C_CONST, AC_HEADER_DIRENT, AC_FUNC_CLOSEDIR_VOID.
+
+	maint: remove isascii check
+	* configure.ac (isascii): Stop checking for this function,
+	as it’s not used.
+
+2023-07-10  Paul Eggert  <eggert@cs.ucla.edu>
+
+	grep: switch from wchar_t to char32_t
+	* bootstrap.conf (gnulib_modules): Add c32isalnum, c32rtomb,
+	mbrtoc32-regular.  Remove mbrtowc, wcrtomb, wctob, wctype-h.
+	wctob appears to be stray, as I don’t think was needed before
+	this change either.
+	* src/grep.c: Include uchar.h.
+	(setup_ok_fold, fgrep_icase_charlen):
+	Use char32_t, not wchar_t.
+	* src/search.h: Do not include wctype.h.
+	* src/searchutils.c: Include uchar.h.
+	(wordchar): Use c32isalnum, not iswalnum.
+	(wordchars_count): Use char32_t, not wchar_t.
+
+2023-07-10  Bruno Haible  <bruno@clisp.org>
+
+	build: update gnulib submodule to latest
+	* src/grep.c (setup_ok_fold, fgrep_icase_charlen):
+	Change the element type of the 'folded' array, to match the new
+	signature of case_folded_counterparts.
+
+2023-07-10  Carlo Marcelo Arenas Belón  <carenas@gmail.com>
+
+	grep: dynamically allocate buffer for -P version
+	* src/pcresearch.c (Pprint_version): Allocate version buffer
+	dynamically rather than aborting if a fixed-size buffer
+	is too small.
+
+2023-06-24  Bruno Haible  <bruno@clisp.org>
+
+	build: Ensure that makeinfo ≥ 6.8 checks the @menu structure.
+	See <https://lists.gnu.org/archive/html/bug-texinfo/2023-06/msg00015.html>.
+
+	* doc/Makefile.am (MAKEINFO): New variable.
+	* cfg.mk (_makefile_at_at_check_exceptions): New variable.
+
+2023-06-24  Jim Meyering  <meyering@meta.com>
+
+	build: update gnulib to latest
+
+2023-05-27  Jim Meyering  <meyering@fb.com>
+
+	build: modernize bootstrap prerequsite tools
+	Following Pádraig Brady's example from coreutils, ...
+	* bootstrap.conf: Add an explicit requirement on m4.
+	Add an explicit requirement on texi2pdf -- often packaged separately
+	rather than with makeinfo -- its absence would otherwise induce a
+	failure late in the build process.
+	Replace the rsync dependency with wget,
+	which gnulib changed to in 2018.
+	Also, add an xz requirement and a version for autopoint.
+
 2023-05-13  Jim Meyering  <meyering@meta.com>
+
+	maint: post-release administrivia
+	* NEWS: Add header line for next release.
+	* .prev-version: Record previous version.
+	* cfg.mk (old_NEWS_hash): Auto-update.
 
 	version 3.11
 	* NEWS: Record release date.

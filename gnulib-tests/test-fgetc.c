@@ -1,5 +1,5 @@
 /* Test of fgetc() function.
-   Copyright (C) 2011-2023 Free Software Foundation, Inc.
+   Copyright (C) 2011-2025 Free Software Foundation, Inc.
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -32,7 +32,7 @@ SIGNATURE_CHECK (fgetc, int, (FILE *));
 #include "macros.h"
 
 int
-main (int argc, char **argv)
+main ()
 {
   const char *filename = "test-fgetc.txt";
 
@@ -97,5 +97,5 @@ main (int argc, char **argv)
   /* Clean up.  */
   unlink (filename);
 
-  return 0;
+  return test_exit_status;
 }

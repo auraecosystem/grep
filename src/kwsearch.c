@@ -1,5 +1,5 @@
 /* kwsearch.c - searching subroutines using kwset for grep.
-   Copyright 1992, 1998, 2000, 2007, 2009-2023 Free Software Foundation, Inc.
+   Copyright 1992, 1998, 2000, 2007, 2009-2025 Free Software Foundation, Inc.
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -12,14 +12,12 @@
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program; if not, write to the Free Software
-   Foundation, Inc., 51 Franklin Street - Fifth Floor, Boston, MA
-   02110-1301, USA.  */
+   along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
 
 /* Written August 1992 by Mike Haertel. */
 
 #include <config.h>
-#include "search.h"
+#include <search.h>
 
 /* A compiled -F pattern list.  */
 
@@ -50,7 +48,7 @@ void *
 Fcompile (char *pattern, idx_t size, reg_syntax_t ignored, bool exact)
 {
   kwset_t kwset;
-  char *buf = NULL;
+  char *buf = nullptr;
   idx_t bufalloc = 0;
 
   kwset = kwsinit (true);
@@ -71,7 +69,7 @@ Fcompile (char *pattern, idx_t size, reg_syntax_t ignored, bool exact)
                 {
                   free (buf);
                   bufalloc = len;
-                  buf = xpalloc (NULL, &bufalloc, 2, -1, 1);
+                  buf = xpalloc (nullptr, &bufalloc, 2, -1, 1);
                   buf[0] = eolbyte;
                 }
               memcpy (buf + 1, p, len);
@@ -96,7 +94,7 @@ Fcompile (char *pattern, idx_t size, reg_syntax_t ignored, bool exact)
   kwsearch->words = words;
   kwsearch->pattern = pattern;
   kwsearch->size = size;
-  kwsearch->re = NULL;
+  kwsearch->re = nullptr;
   return kwsearch;
 }
 
@@ -151,7 +149,7 @@ Fexecute (void *vcp, char const *buf, idx_t size, idx_t *match_size,
         goto success_in_beg_and_len;
       if (match_lines)
         {
-          len += start_ptr == NULL;
+          len += !start_ptr;
           goto success_in_beg_and_len;
         }
       if (! match_words)
@@ -199,7 +197,7 @@ Fexecute (void *vcp, char const *buf, idx_t size, idx_t *match_size,
                   end = buf + size;
 
                 if (0 <= EGexecute (kwsearch->re, beg, end - beg,
-                                    match_size, NULL))
+                                    match_size, nullptr))
                   goto success_match_words;
                 beg = end - 1;
                 break;
