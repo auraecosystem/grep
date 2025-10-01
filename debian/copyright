@@ -8,9 +8,10 @@ Files:
  *
 Copyright:
  1992, 1997-2002, 2004-2012 Free Software Foundation, Inc.
- 2004, Stepan Kasal <kasal@ucw.cz>
- 2007, Tony Abou-Assaleh <taa@acm.org>
- 2009-2012, Jim Meyering <jim@meyering.net> and Paolo Bonzini <bonzini@gnu.org>
+ 2004 Stepan Kasal <kasal@ucw.cz>
+ 2007 Tony Abou-Assaleh <taa@acm.org>
+ 2009-2012 Jim Meyering <jim@meyering.net>
+ 2009-2012 Paolo Bonzini <bonzini@gnu.org>
 License: GPL-3+
 
 Files:
@@ -20,8 +21,8 @@ Copyright:
  2009-2025 Santiago Ruano Rincón <santiago@debian.org>
  2005-2024 Anibal Monsalve Salazar <anibal@debian.org>
  2003-2004 Ryan M. Golbeck <rmgolbeck@debian.org>
- 2003, Jeff Bailey <jbailey@nisa.net>
- 2003, Clint Adams <schizo@debian.org>
+ 2003 Jeff Bailey <jbailey@nisa.net>
+ 2003 Clint Adams <schizo@debian.org>
  2001 Robert van der Meulen <rvdm@debian.org>
  1996-2000 Wichert Akkerman <wakkerma@debian.org>
 License: GPL-3+
@@ -41,20 +42,10 @@ License: FSFAP or GFDL-1.3+
 
 Files:
  tests/backref
-Copyright:
- 2001, 2006, 2009-2023 Free Software Foundation, Inc.
-License: FSFAP
-
-Files:
  tests/backref-alt
-Copyright:
- 2015-2023 Free Software Foundation, Inc.
-License: FSFAP
-
-Files:
  tests/backslash-*
 Copyright:
- 2020-2023 Free Software Foundation, Inc.
+ 2001-2023 Free Software Foundation, Inc.
 License: FSFAP
 
 Files:
@@ -96,11 +87,6 @@ License: FSFUL
 Files:
  aclocal.m4
  build-aux/config.rpath
-Copyright:
- 1996-2023 Free Software Foundation, Inc.
-License: FSFULLR
-
-Files:
  m4/*.m4
 Copyright:
  1996-2023 Free Software Foundation, Inc.
@@ -115,8 +101,16 @@ Files:
  m4/po.m4
  m4/progtest.m4
 Copyright:
- 1992-2023 Free Software Foundation, Inc.
+ 1995-2025 Free Software Foundation, Inc.
+ 1995-2000 Ulrich Drepper <drepper@cygnus.com>
+ 2000-2010 Bruno Haible <haible@clisp.cons.org>
 License: FSFULLR and/or GPL and/or LGPL
+Comment:
+ The license for these files is FSFULLR. The "and/or GPL and/or LGPL" part is
+ included to match the output of the licensecheck tool, which detects mentions
+ of these licenses in comments within the file header. These mentions refer
+ to other components of the gettext package and do not apply to this file
+ itself. Note that "and/or" is not a standard license conjunction.
 
 Files:
  build-aux/install-sh
@@ -136,7 +130,7 @@ Files:
  lib/fts_.h
 Copyright:
  2004-2023 Free Software Foundation, Inc.
- 1990, 1993, 1994, The Regents of the University of California
+ 1990, 1993, 1994 The Regents of the University of California
 License: BSD-3-clause or GPL-3+
 
 Files:
@@ -148,15 +142,81 @@ License: GFDL-1.3+
 
 Files:
  gnulib-tests/alloca.c
+ gnulib-tests/windows-utf8.manifest
+ gnulib-tests/windows-utf8.rc
 Copyright:
- 2011-2023 Free Software Foundation, Inc.
+ These files are in the public domain.
 License: public-domain
 
 Files:
  po/Makefile.in.in
 Copyright:
- 1995-1997, 2000-2007, 2009-2010, Ulrich Drepper <drepper@gnu.ai.mit.edu>
+ 1995-1997, 2000-2007, 2009-2010 Ulrich Drepper <drepper@gnu.ai.mit.edu>
 License: GPL
+
+Files:
+ gnulib-tests/arpa_inet.c
+ gnulib-tests/c-strcase.h
+ gnulib-tests/concat-filename.c
+ gnulib-tests/concat-filename.h
+ gnulib-tests/getlocalename_l-unsafe.c
+ gnulib-tests/getlocalename_l-unsafe.h
+ gnulib-tests/glthread/yield.h
+ gnulib-tests/isnan*
+ gnulib-tests/localename-environ.c
+ gnulib-tests/localename-unsafe.c
+ gnulib-tests/math.c
+ gnulib-tests/math.in.h
+ gnulib-tests/nan.h
+ gnulib-tests/pthread-cond.c
+ gnulib-tests/pthread-mutex.c
+ gnulib-tests/pthread-rwlock.c
+ gnulib-tests/pthread_mutex_timedlock.c
+ gnulib-tests/sched_yield.c
+ gnulib-tests/setlocale-fixes.c
+ gnulib-tests/setlocale-fixes.h
+ gnulib-tests/setlocale.c
+ gnulib-tests/signbit*
+ gnulib-tests/signed-nan.h
+ gnulib-tests/signed-snan.h
+ gnulib-tests/snan.h
+ gnulib-tests/struniq.h
+ gnulib-tests/virtualbox.h
+ gnulib-tests/vsnzprintf.c
+ gnulib-tests/windows-cond.*
+ gnulib-tests/windows-initguard.h
+ gnulib-tests/windows-timedmutex.*
+ gnulib-tests/windows-timedrecmutex.*
+ gnulib-tests/windows-timedrwlock.*
+ lib/btoc32.c
+ lib/c32_apply_type_test.c
+ lib/c32_get_type_test.c
+ lib/c32is*
+ lib/c32rtomb.c
+ lib/c32to*
+ lib/glthread/once.c
+ lib/glthread/once.h
+ lib/iswctype-impl.h
+ lib/iswpunct.c
+ lib/mbrtoc32.c
+ lib/mbsrtoc32s-state.c
+ lib/mbsrtoc32s.c
+ lib/mbszero.c
+ lib/mcel.h
+ lib/pthread-once.c
+ lib/setlocale_null-unlocked.c
+ lib/uchar.in.h
+ lib/unicase.in.h
+ lib/unicase/*
+ lib/unictype.in.h
+ lib/unictype/*
+ lib/uninorm.in.h
+ lib/unistr/u-*.h
+ lib/wctype-impl.h
+ lib/wctype.c
+Copyright:
+ 1998-2025 Free Software Foundation, Inc.
+License: LGPL-2.1+
 
 Files:
  gnulib-tests/_Noreturn.h
@@ -168,8 +228,24 @@ Files:
  lib/c++defs.h
  lib/warn-on-use.h
 Copyright:
- 2011-2023 Free Software Foundation, Inc.
+ 1998-2025 Free Software Foundation, Inc.
 License: LGPL-2+
+
+Files:
+ gnulib-tests/c-strncasecmp.c
+ lib/iswctype.c
+ lib/pthread.in.h
+ lib/sched.in.h
+ lib/stdlib.c
+ lib/unistr/u32-chr.c
+ lib/unistr/u32-cpy.c
+ lib/unistr/u32-pcpy.c
+ lib/unistr/u32-strcat.c
+ lib/unistr/u32-strlen.c
+Copyright:
+ 1998-2025 Free Software Foundation, Inc.
+License: LGPL-2.1+
+
 
 Files:
  build-aux/gnupload
@@ -188,7 +264,7 @@ Files:
  m4/stack-direction.m4
 Copyright:
  1992-2023 Free Software Foundation, Inc.
-License: GPL
+License: GPL-2+
 
 Files:
  gnulib-tests/altstack-util.h
@@ -200,14 +276,7 @@ Copyright:
 License: GPL-2+
 
 Files:
- lib/str-kmp.h
-Copyright:
- 2005-2023 Free Software Foundation, Inc.
-License: LGPL-3+
-
-Files:
  gnulib-tests/putenv.c
- gnulib-tests/setlocale.c
  gnulib-tests/symlink.c
 Copyright:
  1991, 1994, 1997-1998, 2000, 2003-2023 Free Software Foundation, Inc.
@@ -215,29 +284,15 @@ License: LGPL-3+
 
 Files:
  lib/fchdir.c
- lib/i-ring.c
- lib/i-ring.h
+ lib/i-ring.*
  lib/mbrlen.c
  lib/mbscasecmp.c
- lib/mbslen.c
- lib/mbsstr.c
- lib/mbuiter.c
- lib/mbuiter.h
  lib/memrchr.c
  lib/obstack.c
- lib/obstack.h
- lib/strtoimax.c
- lib/strtol.c
- lib/strtoll.c
- lib/strtoul.c
- lib/strtoull.c
- lib/strtoumax.c
- lib/version-etc-fsf.c
- lib/version-etc.c
- lib/version-etc.h
+ lib/strto*.c
+ lib/version-etc*
  lib/wctob.c
- lib/xbinary-io.c
- lib/xbinary-io.h
+ lib/xbinary-io.*
 Copyright:
  2006-2023 Free Software Foundation, Inc.
 License: LGPL-3+
@@ -249,7 +304,7 @@ Files:
  lib/stackvma.h
 Copyright:
  1993-2023 Free Software Foundation, Inc.
- 2018, Nylon Chen <nylon7@andestech.com>
+ 2018 Nylon Chen <nylon7@andestech.com>
 License: GPL-2+
 
 Files:
@@ -267,13 +322,10 @@ Files:
  gnulib-tests/float.in.h
  gnulib-tests/fpucw.h
  gnulib-tests/gettimeofday.c
- gnulib-tests/glthread/thread.c
- gnulib-tests/glthread/thread.h
- gnulib-tests/hash-pjw.c
- gnulib-tests/hash-pjw.h
+ gnulib-tests/glthread/thread.*
+ gnulib-tests/hash-pjw.*
  gnulib-tests/imaxtostr.c
- gnulib-tests/inttostr.c
- gnulib-tests/inttostr.h
+ gnulib-tests/inttostr.*
  gnulib-tests/ioctl.c
  gnulib-tests/itold.c
  gnulib-tests/listen.c
@@ -285,15 +337,11 @@ Files:
  gnulib-tests/netinet_in.in.h
  gnulib-tests/offtostr.c
  gnulib-tests/perror.c
- gnulib-tests/printf-args.c
- gnulib-tests/printf-args.h
- gnulib-tests/printf-parse.c
- gnulib-tests/printf-parse.h
+ gnulib-tests/printf-args.*
+ gnulib-tests/printf-parse.*
  gnulib-tests/pselect.c
  gnulib-tests/pthread-thread.c
- gnulib-tests/pthread.in.h
  gnulib-tests/pthread_sigmask.c
- gnulib-tests/sched.in.h
  gnulib-tests/select.c
  gnulib-tests/setenv.c
  gnulib-tests/setsockopt.c
@@ -320,12 +368,9 @@ Files:
  gnulib-tests/vasnprintf.c
  gnulib-tests/vasnprintf.h
  gnulib-tests/w32sock.h
- gnulib-tests/windows-thread.c
- gnulib-tests/windows-thread.h
- gnulib-tests/windows-tls.c
- gnulib-tests/windows-tls.h
- gnulib-tests/xsize.c
- gnulib-tests/xsize.h
+ gnulib-tests/windows-thread.*
+ gnulib-tests/windows-tls.*
+ gnulib-tests/xsize.*
 Copyright:
  2008-2023 Free Software Foundation, Inc.
 License: LGPL-2.1+
@@ -348,7 +393,6 @@ Files:
  lib/c-strcase.h
  lib/c-strcasecmp.c
  lib/c-strcaseeq.h
- lib/c-strncasecmp.c
  lib/calloc.c
  lib/cdefs.h
  lib/cloexec.c
@@ -385,15 +429,7 @@ Files:
  lib/fstat.c
  lib/getcwd-lgpl.c
  lib/getdtablesize.c
- lib/getopt-cdefs.in.h
- lib/getopt-core.h
- lib/getopt-ext.h
- lib/getopt-pfx-core.h
- lib/getopt-pfx-ext.h
- lib/getopt.c
- lib/getopt.in.h
- lib/getopt1.c
- lib/getopt_int.h
+ lib/getopt*
  lib/getpagesize.c
  lib/getprogname.c
  lib/getprogname.h
@@ -407,16 +443,6 @@ Files:
  lib/hash.h
  lib/ialloc.c
  lib/ialloc.h
- lib/iconv.c
- lib/iconv.in.h
- lib/iconv_close.c
- lib/iconv_open-aix.gperf
- lib/iconv_open-hpux.gperf
- lib/iconv_open-irix.gperf
- lib/iconv_open-osf.gperf
- lib/iconv_open-solaris.gperf
- lib/iconv_open-zos.gperf
- lib/iconv_open.c
  lib/idx.h
  lib/ignore-value.h
  lib/intprops-internal.h
@@ -439,19 +465,9 @@ Files:
  lib/lseek.c
  lib/lstat.c
  lib/malloc.c
- lib/malloc/dynarray-skeleton.c
- lib/malloc/dynarray.h
- lib/malloc/dynarray_at_failure.c
- lib/malloc/dynarray_emplace_enlarge.c
- lib/malloc/dynarray_finalize.c
- lib/malloc/dynarray_resize.c
- lib/malloc/dynarray_resize_clear.c
+ lib/malloc/*
  lib/malloca.c
  lib/malloca.h
- lib/mbchar.c
- lib/mbchar.h
- lib/mbiter.c
- lib/mbiter.h
  lib/mbrtowc-impl-utf8.h
  lib/mbrtowc-impl.h
  lib/mbrtowc.c
@@ -521,8 +537,6 @@ Files:
  lib/strerror-override.c
  lib/strerror-override.h
  lib/strerror.c
- lib/striconv.c
- lib/striconv.h
  lib/string.in.h
  lib/stripslash.c
  lib/strnlen.c
@@ -537,15 +551,7 @@ Files:
  lib/unistd.c
  lib/unistd.in.h
  lib/unistr.in.h
- lib/unistr/u8-mbtoucr.c
- lib/unistr/u8-uctomb-aux.c
- lib/unistr/u8-uctomb.c
  lib/unitypes.in.h
- lib/uniwidth.in.h
- lib/uniwidth/cjk.h
- lib/uniwidth/width.c
- lib/uniwidth/width0.h
- lib/uniwidth/width2.h
  lib/verify.h
  lib/wchar.in.h
  lib/wcrtomb.c
@@ -553,7 +559,6 @@ Files:
  lib/wctomb.c
  lib/wctype-h.c
  lib/wctype.in.h
- lib/wcwidth.c
  lib/windows-initguard.h
  lib/windows-mutex.c
  lib/windows-mutex.h
@@ -578,44 +583,64 @@ Copyright:
 License: GPL-3+
 
 Files:
- tests/Coreutils.pm
- tests/CuSkip.pm
- tests/CuTmpdir.pm
+ tests/*.pm
 Copyright:
  1992-2023 Free Software Foundation, Inc.
 License: GPL-3+
+
+Files:
+ gnulib-tests/random.c
+Copyright:
+ 1983, 1993 The Regents of the University of California
+ 2013-2023 Free Software Foundation, Inc.
+License: BSD-3-clause or LGPL-3+
+
+Files:
+ gnulib-tests/random_r.c
+Copyright:
+ 1991, 1993 The Regents of the University of California
+ 2013-2023 Free Software Foundation, Inc.
+License: BSD-3-clause or LGPL-2.1+
+
+Files:
+ lib/obstack.in.h
+Copyright:
+ 1988-2025 Free Software Foundation, Inc.
+License: LGPL-3+
+
+Files:
+ gnulib-tests/str_startswith.c
+ lib/str_endswith.c
+Copyright:
+ 2025 Free Software Foundation, Inc.
+License: LGPL-3+
+
+Files:
+ lib/c32tob.c
+Copyright:
+ 2020-2025 Free Software Foundation, Inc.
+License: LGPL-3+
+
+Files:
+ gnulib-tests/unistr/u-set.h
+ gnulib-tests/unistr/u32-set.c
+Copyright:
+ 2009-2025 Free Software Foundation, Inc.
+License: LGPL-3
 
 License: GPL
  On a Debian system, the complete text of the GNU General Public License
  version 3 can be found in the file /usr/share/common-licenses/GPL-3.
 
 License: GPL-3+
- Copyright (C) 1992, 1997, 1998, 1999, 2000, 2001, 2002, 2004,
- 2005, 2006, 2007, 2008, 2009 Free Software Foundation, Inc.
- .
- This program is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 3, or (at your option)
- any later version.
- .
- This program is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
- .
- You should have received a copy of the GNU General Public License
- along with this program.  If not, see <https://www.gnu.org/licenses/>.
- .
- Comment:
- .
- On a Debian system you can find a copy of this license in
- /usr/share/common-licenses/GPL-3.
+ On a Debian system, the complete text of the GNU General Public License
+ version 3 can be found in the file /usr/share/common-licenses/GPL-3.
 
 License: GPL-2+
  On a Debian system, the complete text of the GNU General Public License
  version 2 can be found in the file /usr/share/common-licenses/GPL-2.
 
-License: LGPL
+License: LGPL-3
  On a Debian system, the complete text of the GNU Lesser General Public
  License version 3 can be found in the file /usr/share/common-licenses/LGPL-3.
 
