@@ -1,3 +1,15 @@
+grep (3.12-2~1.gbp9b9c7f) UNRELEASED; urgency=medium
+
+  ** SNAPSHOT build @9b9c7f3c84643578fddc2b7a5e0f1b3bc71307cc **
+
+  [ Otto Kekäläinen ]
+  * Update copyright file for new upstream version
+
+  [ Santiago Ruano Rincón ]
+  * Enable the licenserecon job in Salsa CI
+
+ -- Santiago Ruano Rincón <santiago@debian.org>  Thu, 09 Oct 2025 00:02:02 -0300
+
 grep (3.12-1) unstable; urgency=low
 
   * Upload to unstable
